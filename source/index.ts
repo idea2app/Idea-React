@@ -6,4 +6,4 @@ export { NameplateProps, Nameplate } from './Nameplate';
 export { Option, FilterInputProps, FilterInput } from './FilterInput';
 export { FilePickerProps, FilePicker } from './FilePicker';
 export { EditorProps, Editor } from './Editor';
-export { parser, EditorHTMLProps, EditorHTML } from './EditorHTML';
+export { EditorHTMLProps, parser, EditorHTML } from './EditorHTML';
