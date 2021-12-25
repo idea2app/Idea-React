@@ -21,8 +21,8 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 ## Scaffolds
 
-1. [MobX](https://ideapp.dev/React-MobX-Bootstrap-ts/)
-2. [Next.js](https://next-bootstrap-ts.vercel.app/)
+1. MobX: [demo][8] & [usage][9]
+2. Next.js: [demo][10] & [usage][11]
 
 [1]: https://reactjs.org/
 [2]: https://www.typescriptlang.org/
@@ -31,3 +31,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 [5]: https://david-dm.org/idea2app/Idea-React
 [6]: https://github.com/idea2app/Idea-React/actions
 [7]: https://nodei.co/npm/idea-react/
+[8]: https://ideapp.dev/React-MobX-Bootstrap-ts/
+[9]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx
+[10]: https://next-bootstrap-ts.vercel.app/
+[11]: https://github.com/idea2app/next-bootstrap-ts/blob/main/pages/component.tsx

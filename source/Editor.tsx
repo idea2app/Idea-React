@@ -1,25 +1,11 @@
-import { PropsWithoutRef, PureComponent } from 'react';
+import { PropsWithoutRef, ComponentClass, PureComponent } from 'react';
 import EditorJS from '@editorjs/editorjs';
 import { createReactEditorJS } from 'react-editor-js';
 
-import List from '@editorjs/list';
-import Code from '@editorjs/code';
-import LinkTool from '@editorjs/link';
-import Image from '@editorjs/image';
-import Header from '@editorjs/header';
-import Quote from '@editorjs/quote';
-
-const ReactEditorJS = createReactEditorJS(),
-    Tools = {
-        list: List,
-        code: Code,
-        linkTool: LinkTool,
-        image: Image,
-        header: Header,
-        quote: Quote
-    };
+const ReactEditorJS = createReactEditorJS();
 
 export type EditorProps = PropsWithoutRef<{
+    tools: Record<string, ComponentClass>;
     name: string;
     defaultValue: string;
 }>;
@@ -28,7 +14,7 @@ interface State {
     value: string;
 }
 
-export default class Editor extends PureComponent<EditorProps, State> {
+export class Editor extends PureComponent<EditorProps, State> {
     private core?: EditorJS;
 
     state: Readonly<State> = { value: '' };
@@ -49,7 +35,7 @@ export default class Editor extends PureComponent<EditorProps, State> {
     };
 
     render() {
-        const { name, defaultValue } = this.props,
+        const { tools, name, defaultValue } = this.props,
             { value } = this.state;
 
         return (
@@ -57,7 +43,7 @@ export default class Editor extends PureComponent<EditorProps, State> {
                 <input type="hidden" name={name} value={value} />
 
                 <ReactEditorJS
-                    tools={Tools}
+                    tools={tools}
                     defaultValue={JSON.parse(defaultValue)}
                     onInitialize={(core: EditorJS) => (this.core = core)}
                 />

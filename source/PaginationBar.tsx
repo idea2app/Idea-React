@@ -7,7 +7,7 @@ export type PaginationBarProps = PropsWithoutRef<{
     pathResolver: (index: number) => string;
 }>;
 
-export default function PaginationBar({
+export function PaginationBar({
     pathResolver,
     total,
     current

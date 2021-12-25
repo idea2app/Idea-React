@@ -22,10 +22,7 @@ interface State {
     values: Option[];
 }
 
-export default class FilterInput extends PureComponent<
-    FilterInputProps,
-    State
-> {
+export class FilterInput extends PureComponent<FilterInputProps, State> {
     state: Readonly<State> = {
         options: [],
         values: []

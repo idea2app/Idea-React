@@ -15,7 +15,7 @@ interface State {
     values: string[];
 }
 
-export default class FilePicker extends PureComponent<FilePickerProps, State> {
+export class FilePicker extends PureComponent<FilePickerProps, State> {
     state: Readonly<State> = {
         values: []
     };
