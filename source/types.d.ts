@@ -5,7 +5,3 @@ declare module '*.less' {
 declare module 'react-editor-js' {
     export const createReactEditorJS: () => any;
 }
-declare module '@editorjs/*' {
-    const plugin: Record<string, any>;
-    export default plugin;
-}
