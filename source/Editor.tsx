@@ -1,5 +1,5 @@
 import { PropsWithoutRef, ComponentClass, PureComponent } from 'react';
-import EditorJS from '@editorjs/editorjs';
+import EditorJs from '@editorjs/editorjs';
 import { createReactEditorJS } from 'react-editor-js';
 
 const ReactEditorJS = createReactEditorJS();
@@ -15,7 +15,7 @@ interface State {
 }
 
 export class Editor extends PureComponent<EditorProps, State> {
-    private core?: EditorJS;
+    private core?: EditorJs;
 
     state: Readonly<State> = { value: '' };
 
@@ -45,7 +45,7 @@ export class Editor extends PureComponent<EditorProps, State> {
                 <ReactEditorJS
                     tools={tools}
                     defaultValue={JSON.parse(defaultValue)}
-                    onInitialize={(core: EditorJS) => (this.core = core)}
+                    onInitialize={(core: EditorJs) => (this.core = core)}
                 />
             </div>
         );
