@@ -7,6 +7,19 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 [![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][7]
 
+## CSS on CDN
+
+```html
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+/>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+/>
+```
+
 ## Components
 
 1. [Time Distance](source/TimeDistance.tsx)
@@ -17,7 +30,9 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 6. [Filter Input](source/FilterInput/index.tsx)
 7. [File Picker](source/FilePicker/index.tsx)
 8. [Editor](source/Editor.tsx)
+    - extra: `npm i @editorjs/editorjs react-editor-js`
 9. [Editor HTML](source/EditorHTML.tsx)
+    - extra: `npm i editorjs-html`
 
 ## Scaffolds
 
