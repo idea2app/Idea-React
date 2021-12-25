@@ -5,3 +5,9 @@ declare module '*.less' {
 declare module 'react-editor-js' {
     export const createReactEditorJS: () => any;
 }
+declare module 'editorjs-html' {
+    export default class Parser {
+        constructor(...data: any[]);
+        parse(data: any);
+    }
+}

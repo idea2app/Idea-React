@@ -1,5 +1,5 @@
-import { PropsWithoutRef } from 'react';
-import Pagination from 'react-bootstrap/Pagination';
+import React, { PropsWithoutRef } from 'react';
+import { Pagination } from 'react-bootstrap';
 
 export type PaginationBarProps = PropsWithoutRef<{
     total: number;

@@ -1,11 +1,11 @@
-import { PropsWithoutRef } from 'react';
-// @ts-ignore
+import React, { PropsWithoutRef } from 'react';
 import EditorJS_HTML from 'editorjs-html';
 
 export const parser = new EditorJS_HTML({
     link: ({ data: { link } }: Record<string, any>) =>
         `<a href="${link}">${link}</a>`
 });
+
 export type EditorHTMLProps = PropsWithoutRef<{
     className?: string;
     data: string;

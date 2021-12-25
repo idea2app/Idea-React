@@ -1,4 +1,4 @@
-import type { PropsWithoutRef } from 'react';
+import React, { PropsWithoutRef } from 'react';
 import { diffTime, TimeData } from 'web-utility';
 
 export type TimeDistanceProps = PropsWithoutRef<{

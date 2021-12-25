@@ -1,9 +1,9 @@
-import debounce from 'lodash.debounce';
-import { KeyboardEvent, PureComponent, createRef } from 'react';
-import Badge from 'react-bootstrap/Badge';
+import { debounce } from 'lodash';
+import React, { KeyboardEvent, PureComponent, createRef } from 'react';
+import { Badge } from 'react-bootstrap';
 
 import { Icon } from '../Icon';
-import * as style from './index.module.less';
+import style from './index.module.less';
 
 export interface Option {
     value?: any;

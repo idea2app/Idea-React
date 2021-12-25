@@ -1,7 +1,7 @@
-import { ChangeEvent, PropsWithoutRef, PureComponent } from 'react';
+import React, { ChangeEvent, PropsWithoutRef, PureComponent } from 'react';
 
 import { Icon } from '../Icon';
-import * as style from './index.module.less';
+import style from './index.module.less';
 
 export type FilePickerProps = PropsWithoutRef<{
     accept: `${string}/${string}`;
