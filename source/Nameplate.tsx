@@ -1,6 +1,6 @@
 import type { PropsWithoutRef } from 'react';
 
-import Avatar from './Avatar';
+import { Avatar } from './Avatar';
 
 export type NameplateProps = PropsWithoutRef<{ avatar: string; name: string }>;
 

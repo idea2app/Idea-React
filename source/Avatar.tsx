@@ -6,7 +6,7 @@ export type AvatarProps = PropsWithoutRef<{
     size?: number;
 }>;
 
-export default function Avatar({
+export function Avatar({
     style,
     src = '/typescript.png',
     size = 3
