@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "jsx": "react-jsx",
+        "skipLibCheck": true,
+        "lib": ["ES2021", "DOM"]
+    },
+    "include": ["source/**/*"],
+    "typedocOptions": {
+        "name": "Idea React",
+        "excludeExternals": true,
+        "excludePrivate": true,
+        "readme": "./ReadMe.md",
+        "out": "docs/"
+    }
+}

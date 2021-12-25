@@ -1,0 +1,81 @@
+{
+    "name": "idea-react",
+    "version": "0.9.0",
+    "license": "LGPL-3.0",
+    "author": "shiy2008@gmail.com",
+    "description": "A React advanced components library based on TypeScript & Bootstrap, built by idea2app remote developers team.",
+    "keywords": [
+        "react",
+        "component",
+        "typescript",
+        "bootstrap"
+    ],
+    "homepage": "https://ideapp.dev/Idea-React/",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/idea2app/Idea-React.git"
+    },
+    "bugs": {
+        "url": "https://github.com/idea2app/Idea-React/issues"
+    },
+    "source": "source/index.ts",
+    "types": "dist/index.d.ts",
+    "main": "dist/index.js",
+    "module": "dist/index.esm.js",
+    "dependencies": {
+        "@editorjs/code": "^2.7.0",
+        "@editorjs/editorjs": "^2.22.2",
+        "@editorjs/header": "^2.6.2",
+        "@editorjs/image": "^2.6.2",
+        "@editorjs/link": "^2.3.1",
+        "@editorjs/list": "^1.6.2",
+        "@editorjs/paragraph": "^2.8.0",
+        "@editorjs/quote": "^2.4.0",
+        "@swc/helpers": "^0.3.2",
+        "classnames": "^2.3.1",
+        "editorjs-html": "^3.4.2",
+        "lodash.debounce": "^4.0.8",
+        "react": "17.0.2",
+        "react-bootstrap": "^2.0.4",
+        "react-dom": "17.0.2",
+        "react-editor-js": "^2.0.3",
+        "regenerator-runtime": "^0.13.9",
+        "web-utility": "^2.9.6"
+    },
+    "devDependencies": {
+        "@parcel/packager-ts": "^2.0.1",
+        "@parcel/transformer-less": "^2.0.1",
+        "@parcel/transformer-typescript-types": "^2.0.1",
+        "@types/lodash.debounce": "^4.0.6",
+        "husky": "^7.0.4",
+        "lint-staged": "^12.1.4",
+        "open-cli": "^7.0.1",
+        "parcel": "^2.0.1",
+        "prettier": "^2.5.1",
+        "typedoc": "^0.22.10",
+        "typedoc-plugin-mdn-links": "^1.0.4",
+        "typescript": "~4.4.4"
+    },
+    "prettier": {
+        "singleQuote": true,
+        "trailingComma": "none",
+        "arrowParens": "avoid",
+        "tabWidth": 4
+    },
+    "lint-staged": {
+        "*.{md,less,json,yml,ts,tsx}": "prettier --write"
+    },
+    "browserslist": "> 0.5%, last 2 versions, not dead",
+    "targets": {
+        "main": {
+            "optimize": true
+        }
+    },
+    "scripts": {
+        "prepare": "husky install",
+        "test": "lint-staged",
+        "build": "rm -rf dist/ docs/  &&  typedoc source/  &&  parcel build",
+        "start": "typedoc source/  &&  open-cli docs/index.html",
+        "prepublishOnly": "npm test  &&  npm run build"
+    }
+}
