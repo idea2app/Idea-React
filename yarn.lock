@@ -1862,6 +1862,11 @@ electron-to-chromium@^1.4.17:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.28.tgz#fef0e92e281df6d568f482d8d53c34ca5374de48"
   integrity sha512-Gzbf0wUtKfyPaqf0Plz+Ctinf9eQIzxEqBHwSvbGfeOm9GMNdLxyu1dNiCUfM+x6r4BE0xUJNh3Nmg9gfAtTmg==
 
+element-internals-polyfill@^1.0.0:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/element-internals-polyfill/-/element-internals-polyfill-1.0.3.tgz#ac0e9fcd40b8fb85aa31a53d5b01051321554724"
+  integrity sha512-SIH0Dj6Ss4OlQF/5C6bHNDAeHkQbFbWYBvTKVpOXhnPTXgB9MPhzKtqFj6KghMGeFZ1YdOwAXtZMxIcBApbC7w==
+
 emoji-regex@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"
@@ -4348,12 +4353,13 @@ warning@^4.0.0, warning@^4.0.3:
   dependencies:
     loose-envify "^1.0.0"
 
-web-utility@^3.4.2:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/web-utility/-/web-utility-3.4.2.tgz#6ef8ccefb9678442968ff2f9d2ef0587ff587b23"
-  integrity sha512-GQnH4NIM+ZHf38RT8Y6Vo43Id0fhAVrKYOrB6qsyBRZEYx7HbqoFrb1LvkRCjBrUo0jJheInKuw3HfsQuPZdwA==
+web-utility@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/web-utility/-/web-utility-3.5.0.tgz#c1f165c8a9679af66dc61f0848d98c93bdbcc548"
+  integrity sha512-F/k/LtnLJboyuQciNFhbsiz6M0PFTjI3Q7lZ/Oaj49758iuR/WEiAnJDQ/uFdlOtVntIZL22WvSynljBXglc8A==
   dependencies:
     "@swc/helpers" "^0.3.3"
+    element-internals-polyfill "^1.0.0"
     regenerator-runtime "^0.13.9"
 
 which-boxed-primitive@^1.0.2:
