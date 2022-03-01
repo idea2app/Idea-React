@@ -1,0 +1,39 @@
+import { sleep } from 'web-utility';
+import classNames from 'classnames';
+import React, { PropsWithoutRef, RefCallback, PureComponent } from 'react';
+
+export type TypeEchoProps = PropsWithoutRef<{
+    className?: string;
+    text: string;
+    intervals?: number;
+}>;
+type State = { echoed: string };
+
+export class TypeEcho extends PureComponent<TypeEchoProps, State> {
+    state: Readonly<State> = { echoed: '' };
+
+    init: RefCallback<HTMLPreElement> = node =>
+        node &&
+        new IntersectionObserver(async ([{ isIntersecting }]) => {
+            if (!isIntersecting) return;
+
+            const { text, intervals = 150 } = this.props;
+
+            for (const char of text) {
+                await sleep(intervals / 1000);
+
+                this.setState({ echoed: this.state.echoed + char });
+            }
+        }).observe(node);
+
+    render() {
+        const { className, text } = this.props,
+            { echoed } = this.state;
+
+        return (
+            <pre className={classNames('text-wrap', className)} ref={this.init}>
+                {echoed + (echoed === text ? '' : '_')}
+            </pre>
+        );
+    }
+}

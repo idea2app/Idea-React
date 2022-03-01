@@ -16,7 +16,11 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+/>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
 />
 ```
 
@@ -27,12 +31,17 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 3. [Icon](source/Icon.tsx)
 4. [Avatar](source/Avatar.tsx)
 5. [Nameplate](source/Nameplate.tsx)
-6. [Filter Input](source/FilterInput/index.tsx)
-7. [File Picker](source/FilePicker/index.tsx)
-8. [Editor](source/Editor.tsx)
+6. [TypeEcho](source/TypeEcho.tsx)
+7. [Filter Input](source/FilterInput/index.tsx)
+8. [File Picker](source/FilePicker/index.tsx)
+9. [Editor](source/Editor.tsx)
     - extra: `npm i @editorjs/editorjs react-editor-js`
-9. [Editor HTML](source/EditorHTML.tsx)
+10. [Editor HTML](source/EditorHTML.tsx)
     - extra: `npm i editorjs-html`
+
+## Utilities
+
+1. [`animate()`](source/animate.ts)
 
 ## Scaffolds
 
