@@ -8,10 +8,10 @@ interface IdeaDialogProps<T> {
     onHide?: () => void;
     size?: 'sm' | 'lg' | 'xl';
     formId?: string;
-    okText?: string;
-    okFun?: () => void;
+    confirmText?: string;
+    onConfirm?: () => any;
     cancelText?: string;
-    cancelFun?: () => void;
+    onCancel?: () => any;
 }
 
 export default function IdeaDialog<T>({
@@ -19,10 +19,10 @@ export default function IdeaDialog<T>({
     children,
     formId,
     onHide,
-    okText,
-    okFun,
+    confirmText,
+    onConfirm,
     cancelText,
-    cancelFun,
+    onCancel,
     ...rest
 }: PropsWithChildren<IdeaDialogProps<T>>) {
     return (
@@ -31,21 +31,21 @@ export default function IdeaDialog<T>({
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{children}</Modal.Body>
-            {(okText || cancelText) && (
+            {(confirmText || cancelText) && (
                 <Modal.Footer>
                     {cancelText && (
                         <Button
                             variant="secondary"
                             type="reset"
                             form={formId}
-                            onClick={cancelFun}
+                            onClick={onCancel}
                         >
                             {cancelText}
                         </Button>
                     )}
-                    {okText && (
+                    {confirmText && (
                         <Button variant="primary" type="submit" form={formId}>
-                            {okText}
+                            {confirmText}
                         </Button>
                     )}
                 </Modal.Footer>

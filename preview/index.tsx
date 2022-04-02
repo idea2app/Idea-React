@@ -49,9 +49,9 @@ export class App extends Component {
                     title="查看"
                     size="lg"
                     show={showDialog}
-                    okText="确定"
+                    confirmText="确定"
                     cancelText="取消"
-                    cancelFun={() => this.setState({ showDialog: false })}
+                    onCancel={() => this.setState({ showDialog: false })}
                 >
                     <IdeaInfo data={info} rows={this.ideaInfoRows} />
                 </IdeaDialog>
