@@ -18,7 +18,7 @@ export interface IdeaFormItem<T> {
     pattern?: string;
 }
 
-export interface IdeaFormProps<T extends Base> {
+export interface IdeaFormProps<T> {
     id?: string;
     rows: IdeaFormItem<T>[];
     data: T;
@@ -30,7 +30,7 @@ export interface IdeaFormProps<T extends Base> {
     onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
-export default function IdeaForm<T>({
+export default function IdeaForm<T extends Base>({
     rows,
     data,
     labelWidth = 2,
