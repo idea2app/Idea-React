@@ -3,8 +3,10 @@ import { Button, Container } from 'react-bootstrap';
 import { render } from 'react-dom';
 import IdeaDialog from '../source/IdeaDialog';
 import IdeaInfo, { IdeaInfoItem } from '../source/IdeaInfo';
+import { Container } from "react-bootstrap";
+import IdeaTable, { Base, Column } from "../source/IdeaTable";
 
-interface User {
+interface User extends Base {
     name: string;
     link: string;
 }
@@ -22,6 +24,7 @@ export class App extends Component {
         {
             label: '链接',
             key: 'link',
+            width: 300,
             render: ({ link }) => (
                 <a href={link} target="_blank">
                     {link}
@@ -36,6 +39,14 @@ export class App extends Component {
             name: 'lingli',
             link: 'https://baidu.com'
         };
+        const list: User[] = [{
+              name: 'lingli',
+              link: 'https://baidu.com'
+          },
+          {
+              name: 'xxx',
+              link: 'https://ideapp.dev'
+        }];
 
         return (
             <Container className="my-3" fluid="md">
@@ -55,9 +66,12 @@ export class App extends Component {
                 >
                     <IdeaInfo data={info} rows={this.ideaInfoRows} />
                 </IdeaDialog>
+        
+                <h2 className="mt-3">IdeaTable</h2>
+                <IdeaTable list={list} columns={this.columns} className="small border">暂无数据 -(o﹏o)-， 请添加数据噢</IdeaTable>
             </Container>
         );
     }
 }
 
-render(<App />, document.querySelector('#app'));
+render(<App />, document.querySelector("#app"));

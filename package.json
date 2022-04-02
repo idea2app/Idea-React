@@ -38,11 +38,13 @@
     "devDependencies": {
         "@editorjs/editorjs": "^2.23.2",
         "@types/lodash": "^4.14.179",
+        "@types/react-dom": "^17.0.14",
         "husky": "^7.0.4",
         "less": "^4.1.2",
         "lint-staged": "^12.3.4",
         "microbundle": "^0.14.2",
         "open-cli": "^7.0.1",
+        "parcel": "^2.4.1",
         "prettier": "^2.5.1",
         "typedoc": "^0.22.12",
         "typedoc-plugin-mdn-links": "^1.0.5",
