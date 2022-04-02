@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import { Base } from './IdeaTable';
 
 export interface IdeaFormItem<T> {
     label: string;
@@ -17,7 +18,7 @@ export interface IdeaFormItem<T> {
     pattern?: string;
 }
 
-export interface IdeaFormProps<T> {
+export interface IdeaFormProps<T extends Base> {
     id?: string;
     rows: IdeaFormItem<T>[];
     data: T;
