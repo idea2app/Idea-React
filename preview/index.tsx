@@ -111,9 +111,11 @@ export class App extends Component {
                 <div className="py-2 px-3 border mt-3">
                     <h2 className="mt-3">IdeaForm</h2>
                     <IdeaForm
+                        submitText="submit"
+                        resetText="reset"
                         data={info}
                         rows={this.formRows}
-                        onSubmit={() => {}}
+                        onSubmit={console.log}
                     />
                 </div>
 
@@ -136,14 +138,13 @@ export class App extends Component {
                     >
                         <IdeaForm
                             id="admin-user-edit"
-                            rows={this.formRows}
-                            data={info}
-                            labelWidth={4}
-                            controlWidth={8}
                             className="w-100 border-top-0"
                             controlClassName="w-100"
-                            showFooter={false}
-                            onSubmit={() => {}}
+                            labelCols={4}
+                            controlCols={8}
+                            rows={this.formRows}
+                            data={info}
+                            onSubmit={console.log}
                         />
                     </IdeaDialog>
                 </div>

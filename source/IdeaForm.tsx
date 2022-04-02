@@ -13,7 +13,7 @@ export interface IdeaFormItem<T> {
     disabled?: boolean;
     show?: boolean;
     render?: (params?: T) => ReactNode;
-    onChange?: (event: ChangeEvent) => void;
+    onChange?: (event: ChangeEvent) => any;
     tip?: string;
     pattern?: string;
 }
@@ -22,22 +22,25 @@ export interface IdeaFormProps<T> {
     id?: string;
     rows: IdeaFormItem<T>[];
     data: T;
-    labelWidth?: number;
-    controlWidth?: number;
+    labelCols?: number;
+    controlCols?: number;
     className?: string;
     controlClassName?: string;
-    showFooter?: boolean;
+    submitText?: string;
     onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
+    resetText?: string;
+    onReset?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
 export default function IdeaForm<T extends Base>({
     rows,
     data,
-    labelWidth = 2,
-    controlWidth = 10,
+    labelCols = 2,
+    controlCols = 10,
     className,
     controlClassName = 'w-50',
-    showFooter = true,
+    submitText = '',
+    resetText = '',
     ...other
 }: IdeaFormProps<T>) {
     return (
@@ -52,7 +55,7 @@ export default function IdeaForm<T extends Base>({
             )}
             {...other}
         >
-            <input type="hidden" name="objectId" value={data.id} />
+            <input type="hidden" name="id" value={data.id} />
             {rows.map(
                 ({
                     label,
@@ -72,26 +75,28 @@ export default function IdeaForm<T extends Base>({
                         >
                             <Form.Label
                                 column="sm"
-                                sm={labelWidth}
-                                className="text-right"
+                                sm={labelCols}
+                                className="text-end"
                             >
                                 {required && (
-                                    <span className="text-danger mr-1">*</span>
+                                    <span className="text-danger me-1">*</span>
                                 )}
                                 {label}：
                             </Form.Label>
 
-                            <Col sm={controlWidth}>
+                            <Col sm={controlCols}>
                                 {render?.(data) || (
                                     <Form.Control
                                         className={controlClassName}
                                         size="sm"
                                         name={key}
-                                        required={required}
-                                        disabled={disabled}
-                                        pattern={pattern}
                                         defaultValue={data[key]}
-                                        onChange={onChange}
+                                        {...{
+                                            required,
+                                            disabled,
+                                            pattern,
+                                            onChange
+                                        }}
                                     />
                                 )}
                                 {tip && (
@@ -103,12 +108,15 @@ export default function IdeaForm<T extends Base>({
                         </Form.Group>
                     )
             )}
-            {showFooter && (
+            {(submitText || resetText) && (
                 <Form.Group as={Row} className="mt-5 text-left">
                     <Col sm={{ offset: 2 }}>
-                        <Button type="submit" className="mr-3">
-                            提 交
-                        </Button>
+                        {submitText && (
+                            <Button type="submit" className="me-3">
+                                {submitText}
+                            </Button>
+                        )}
+                        {resetText && <Button type="reset">{resetText}</Button>}
                     </Col>
                 </Form.Group>
             )}
