@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Button, Container } from "react-bootstrap";
-import { render } from "react-dom";
-import IdeaDialog from "../source/IdeaDialog";
-import IdeaInfo, { IdeaInfoItem } from "../source/IdeaInfo";
+import React, { Component } from 'react';
+import { Button, Container } from 'react-bootstrap';
+import { render } from 'react-dom';
+import IdeaDialog from '../source/IdeaDialog';
+import IdeaInfo, { IdeaInfoItem } from '../source/IdeaInfo';
 
 interface User {
     name: string;
@@ -10,10 +10,9 @@ interface User {
 }
 
 export class App extends Component {
-
     state = {
         showDialog: false
-    }
+    };
 
     ideaInfoRows: IdeaInfoItem<User>[] = [
         {
@@ -28,7 +27,7 @@ export class App extends Component {
                     {link}
                 </a>
             )
-        },
+        }
     ];
 
     render() {
@@ -43,19 +42,22 @@ export class App extends Component {
                 <h1>Extra components</h1>
 
                 <h2 className="mt-3">IdeaInfo && IdeaDialog</h2>
-                <Button onClick={() => this.setState({ showDialog: true })}>显示弹窗</Button>
+                <Button onClick={() => this.setState({ showDialog: true })}>
+                    显示弹窗
+                </Button>
                 <IdeaDialog
                     title="查看"
                     size="lg"
                     show={showDialog}
-                    onHide={() => this.setState({ showDialog: false })}
-                    formId="admin-user-edit"
+                    okText="确定"
+                    cancelText="取消"
+                    cancelFun={() => this.setState({ showDialog: false })}
                 >
                     <IdeaInfo data={info} rows={this.ideaInfoRows} />
                 </IdeaDialog>
-            </Container >
-        )
+            </Container>
+        );
     }
 }
 
-render(<App />, document.querySelector("#app"));
+render(<App />, document.querySelector('#app'));

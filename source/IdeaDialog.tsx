@@ -8,7 +8,10 @@ interface IdeaDialogProps<T> {
     onHide?: () => void;
     size?: 'sm' | 'lg' | 'xl';
     formId?: string;
-    showFooter?: boolean
+    okText?: string;
+    okFun?: () => void;
+    cancelText?: string;
+    cancelFun?: () => void;
 }
 
 export default function IdeaDialog<T>({
@@ -16,7 +19,10 @@ export default function IdeaDialog<T>({
     children,
     formId,
     onHide,
-    showFooter = true,
+    okText,
+    okFun,
+    cancelText,
+    cancelFun,
     ...rest
 }: PropsWithChildren<IdeaDialogProps<T>>) {
     return (
@@ -24,13 +30,26 @@ export default function IdeaDialog<T>({
             <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                {children}
-            </Modal.Body>
-            {showFooter && <Modal.Footer>
-                <Button variant="secondary" type="reset" form={formId} onClick={onHide} >取消</Button>
-                <Button variant="primary" type="submit" form={formId}>确定</Button>
-            </Modal.Footer>}
+            <Modal.Body>{children}</Modal.Body>
+            {(okText || cancelText) && (
+                <Modal.Footer>
+                    {cancelText && (
+                        <Button
+                            variant="secondary"
+                            type="reset"
+                            form={formId}
+                            onClick={cancelFun}
+                        >
+                            {cancelText}
+                        </Button>
+                    )}
+                    {okText && (
+                        <Button variant="primary" type="submit" form={formId}>
+                            {okText}
+                        </Button>
+                    )}
+                </Modal.Footer>
+            )}
         </Modal>
     );
 }
