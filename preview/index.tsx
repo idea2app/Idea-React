@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import { render } from "react-dom";
-import IdeaTable, { Column } from "../source/IdeaTable";
+import IdeaTable, { Base, Column } from "../source/IdeaTable";
 
-interface User {
+interface User extends Base {
     name: string;
     link: string;
 }
@@ -33,7 +33,7 @@ export class App extends Component {
         },
         {
             name: 'xxx',
-            link: 'https://idea2app.com'
+            link: 'https://ideapp.dev'
         }];
 
         return (
@@ -41,7 +41,7 @@ export class App extends Component {
                 <h1>Extra components</h1>
 
                 <h2 className="mt-3">IdeaTable</h2>
-                <IdeaTable list={list} columns={this.columns} />
+                <IdeaTable list={list} columns={this.columns} className="small border">暂无数据 -(o﹏o)-， 请添加数据噢</IdeaTable>
             </Container>
         )
     }

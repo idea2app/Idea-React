@@ -1,6 +1,9 @@
 import React, { PureComponent, ReactNode } from 'react';
 import Table from 'react-bootstrap/Table';
 
+export interface Base {
+    objectId?: number | string;
+}
 export interface Column<T> {
     label: string;
     key?: string;
@@ -8,19 +11,19 @@ export interface Column<T> {
     width?: number;
 }
 
-export interface IdeaTableProps<T> {
+export interface IdeaTableProps<T extends Base> {
     list: T[];
     columns: Column<T>[];
+    className?: string
 }
 
-export default class IdeaTable<T> extends PureComponent<
+export default class IdeaTable<T extends Base> extends PureComponent<
     IdeaTableProps<T>
 > {
     renderRow = (row: T, index: number) => {
         const { columns = [] } = this.props;
 
         return (
-            // @ts-ignore
             <tr key={row?.objectId} className="text-center">
                 {columns.map(({ key, render, width }) => {
                     let value = '';
@@ -43,14 +46,13 @@ export default class IdeaTable<T> extends PureComponent<
     };
 
     render() {
-        const { list = [], columns = [] } = this.props;
+        const { list = [], columns = [], children, className } = this.props;
 
         return (
             <Table
-                className="small border-left border-right border-bottom"
+                className={`text-break ${className}`}
                 hover
                 responsive
-                style={{ wordBreak: 'break-all' }}
             >
                 <thead>
                     <tr className="text-center text-nowrap">
@@ -59,17 +61,17 @@ export default class IdeaTable<T> extends PureComponent<
                         ))}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className='border-top'>
                     {list.length > 0 ? (
                         list.map(this.renderRow)
                     ) : (
                         <tr>
                             <td
-                                colSpan={20}
-                                rowSpan={23}
+                                colSpan={columns.length}
+                                rowSpan={columns.length}
                                 align="center"
                                 className="p-5"
-                            >{`暂无数据 -(>﹏<)， 请添加数据噢`}</td>
+                            >{children}</td>
                         </tr>
                     )}
                 </tbody>
