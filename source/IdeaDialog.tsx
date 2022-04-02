@@ -5,7 +5,6 @@ import Modal from 'react-bootstrap/Modal';
 interface IdeaDialogProps<T> {
     title: string;
     show: boolean;
-    onHide?: () => void;
     size?: 'sm' | 'lg' | 'xl';
     formId?: string;
     confirmText?: string;
@@ -18,7 +17,6 @@ export default function IdeaDialog<T>({
     title,
     children,
     formId,
-    onHide,
     confirmText,
     onConfirm,
     cancelText,
@@ -26,7 +24,7 @@ export default function IdeaDialog<T>({
     ...rest
 }: PropsWithChildren<IdeaDialogProps<T>>) {
     return (
-        <Modal {...rest} onHide={onHide}>
+        <Modal {...rest} onHide={onCancel}>
             <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
