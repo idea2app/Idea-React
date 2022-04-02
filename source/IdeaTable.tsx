@@ -1,8 +1,9 @@
+import classNames from 'classnames';
 import React, { PureComponent, ReactNode } from 'react';
 import Table from 'react-bootstrap/Table';
 
 export interface Base {
-    objectId?: number | string;
+    id: number | string;
 }
 export interface Column<T> {
     label: string;
@@ -14,7 +15,7 @@ export interface Column<T> {
 export interface IdeaTableProps<T extends Base> {
     list: T[];
     columns: Column<T>[];
-    className?: string
+    className?: string;
 }
 
 export default class IdeaTable<T extends Base> extends PureComponent<
@@ -24,7 +25,7 @@ export default class IdeaTable<T extends Base> extends PureComponent<
         const { columns = [] } = this.props;
 
         return (
-            <tr key={row?.objectId} className="text-center">
+            <tr key={row?.id} className="text-center">
                 {columns.map(({ key, render, width }) => {
                     let value = '';
 
@@ -50,7 +51,7 @@ export default class IdeaTable<T extends Base> extends PureComponent<
 
         return (
             <Table
-                className={`text-break ${className}`}
+                className={classNames('text-break', className)}
                 hover
                 responsive
             >
@@ -61,17 +62,18 @@ export default class IdeaTable<T extends Base> extends PureComponent<
                         ))}
                     </tr>
                 </thead>
-                <tbody className='border-top'>
+                <tbody className="border-top">
                     {list.length > 0 ? (
                         list.map(this.renderRow)
                     ) : (
                         <tr>
                             <td
                                 colSpan={columns.length}
-                                rowSpan={columns.length}
                                 align="center"
                                 className="p-5"
-                            >{children}</td>
+                            >
+                                {children}
+                            </td>
                         </tr>
                     )}
                 </tbody>
