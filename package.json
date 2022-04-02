@@ -63,6 +63,7 @@
         "make": "microbundle --name IdeaReact --css-modules true --jsx React.createElement --external classnames,lodash,web-utility,react,react-dom,react-bootstrap,@editorjs/editorjs,react-editor-js,editorjs-html",
         "build": "rm -rf dist/ docs/  &&  typedoc source/  &&  npm run make",
         "start": "typedoc source/  &&  open-cli docs/index.html",
-        "prepublishOnly": "npm test  &&  npm run build"
+        "prepublishOnly": "npm test  &&  npm run build",
+        "preview": "parcel preview/index.html"
     }
 }
