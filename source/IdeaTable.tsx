@@ -16,6 +16,8 @@ export interface IdeaTableProps<T extends Base> {
     list: T[];
     columns: Column<T>[];
     className?: string;
+    noneNode?: ReactNode;
+    loadingNode?: ReactNode;
 }
 
 export default class IdeaTable<T extends Base> extends PureComponent<
@@ -47,7 +49,14 @@ export default class IdeaTable<T extends Base> extends PureComponent<
     };
 
     render() {
-        const { list = [], columns = [], children, className } = this.props;
+        const {
+            list = [],
+            columns = [],
+            children,
+            className,
+            noneNode = '暂无数据',
+            loadingNode
+        } = this.props;
 
         return (
             <Table
@@ -63,7 +72,9 @@ export default class IdeaTable<T extends Base> extends PureComponent<
                     </tr>
                 </thead>
                 <tbody className="border-top">
-                    {list.length > 0 ? (
+                    {loadingNode ? (
+                        loadingNode
+                    ) : list.length > 0 ? (
                         list.map(this.renderRow)
                     ) : (
                         <tr>
@@ -72,7 +83,7 @@ export default class IdeaTable<T extends Base> extends PureComponent<
                                 align="center"
                                 className="p-5"
                             >
-                                {children}
+                                {noneNode}
                             </td>
                         </tr>
                     )}
