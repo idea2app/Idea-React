@@ -1,8 +1,4 @@
 .upload {
-    display: flex;
-    flex-wrap: wrap;
-    border-radius: 0.5rem;
-
     .delete-icon {
         right: 0.8rem;
         top: 0.8rem;
@@ -18,27 +14,12 @@
     .file {
         width: 8rem;
         height: 8rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 0.5rem;
-        border: 2px dashed lightgray;
-        position: relative;
-        overflow: hidden;
 
         &::before {
             content: '+';
             font-size: 5rem;
             color: lightgray;
             margin-top: -1rem;
-        }
-        input[type='file'] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
         }
     }
 }

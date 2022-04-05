@@ -1,16 +1,13 @@
 import classNames from 'classnames';
 import React, { PropsWithoutRef } from 'react';
-import Pagination, { PaginationProps } from 'react-bootstrap/Pagination';
+import { Pagination, PaginationProps } from 'react-bootstrap';
 
-export type PaginationBarProps = PropsWithoutRef<
-    PaginationProps & {
-        currentPage?: number;
-        pageCount: number;
-        count?: number;
-        className?: string;
-        onChange(index: number): any;
-    }
->;
+export interface PaginationBarProps extends PaginationProps {
+    currentPage?: number;
+    pageCount: number;
+    count?: number;
+    onChange(index: number): any;
+}
 
 export function PaginationBar({
     currentPage = 1,
@@ -23,10 +20,10 @@ export function PaginationBar({
     return !pageCount ? null : (
         <Pagination
             className={classNames(
-                className,
                 'd-flex',
                 'justify-content-end',
-                'align-items-center'
+                'align-items-center',
+                className
             )}
             {...props}
         >
@@ -51,7 +48,7 @@ export function PaginationBar({
                     {pageCount}
                 </Pagination.Item>
             )}
-            {count && <span className="mx-3 fs14">总共{count}条</span>}
+            {count && <span className="mx-3 fs14">Total {count} rows</span>}
         </Pagination>
     );
 }

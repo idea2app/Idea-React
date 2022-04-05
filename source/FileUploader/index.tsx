@@ -63,7 +63,7 @@ export class FileUploader extends Component<
         const { file, isImage, fileName } = this.state;
 
         return (
-            <div className={classNames(styles.upload)}>
+            <div className={styles.upload}>
                 <div className="position-relative">
                     {file ? (
                         isImage ? (
@@ -74,28 +74,26 @@ export class FileUploader extends Component<
                                 />
                             </a>
                         ) : (
-                            <div
-                                className={`${styles.summary} border rounded mr-3 mt-2 d-flex justify-content-center align-items-center flex-column p-2 overflow-hidden`}
-                            >
+                            <div className="border rounded mr-3 mt-2 p-2 d-flex justify-content-center align-items-center flex-column">
                                 <Icon name="file-earmark" size={2} />
-                                <div>
-                                    {fileName.length > 30
-                                        ? `${fileName.slice(0, 30)}...`
-                                        : fileName}
+                                <div
+                                    className={`${styles.summary} text-truncate`}
+                                >
+                                    {fileName}
                                 </div>
                             </div>
                         )
                     ) : (
                         <div
-                            className={`${styles.file} mt-2 d-flex justify-content-center align-items-center border rounded position-relative overflow-hidden`}
+                            className={`${styles.file} border rounded mt-2 d-flex justify-content-center align-items-center position-relative`}
                         />
                     )}
                     {!disabled && (
                         <Form.Control
+                            className="position-absolute top-0 start-0 opacity-0"
                             type="file"
                             name={name}
                             onChange={this.change}
-                            className="position-absolute"
                         />
                     )}
                 </div>

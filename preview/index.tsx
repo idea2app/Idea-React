@@ -1,27 +1,66 @@
-import React, { Component } from 'react';
-import { Button, Container, Form } from 'react-bootstrap';
+import classNames from 'classnames';
+import React, { PropsWithChildren, PureComponent } from 'react';
 import { render } from 'react-dom';
-import { Avatar } from '../source/Avatar';
-import { FilePicker } from '../source/FilePicker';
-import { FileUploader } from '../source/FileUploader';
-import { FilterInput } from '../source/FilterInput';
-import { Icon } from '../source/Icon';
-import IdeaDialog from '../source/IdeaDialog';
-import IdeaForm, { IdeaFormItem } from '../source/IdeaForm';
-import IdeaInfo, { IdeaInfoItem } from '../source/IdeaInfo';
-import IdeaTable, { Base } from '../source/IdeaTable';
-import { MultipleFileUploader } from '../source/MultipleFileUploader';
-import { Nameplate } from '../source/Nameplate';
-import { PaginationBar } from '../source/PaginationBar';
-import { TableSpinner } from '../source/TableSpinner';
-import { TimeDistance } from '../source/TimeDistance';
+import { Container, Button, Form } from 'react-bootstrap';
+import {
+    TimeDistance,
+    PaginationBar,
+    Icon,
+    Avatar,
+    Nameplate,
+    TableSpinner,
+    FilterInput,
+    FilePicker,
+    FileUploader,
+    MultipleFileUploader,
+    Base,
+    IdeaTable,
+    IdeaInfoItem,
+    IdeaInfo,
+    IdeaDialog,
+    IdeaFormItem,
+    IdeaForm
+} from '../source';
 
 interface User extends Base {
     name: string;
     link: string;
 }
 
-export class App extends Component {
+type SectionProps = PropsWithChildren<{
+    className?: string;
+    title: string;
+}>;
+
+function Section({ className, title, children }: SectionProps) {
+    return (
+        <section
+            className={classNames(
+                'border',
+                'bg-white',
+                'mt-3',
+                'p-3',
+                className
+            )}
+        >
+            <h3>{title}</h3>
+
+            {children}
+        </section>
+    );
+}
+
+function SubSection({ className, title, children }: SectionProps) {
+    return (
+        <>
+            <h4 className={classNames('h6', className)}>{title}</h4>
+
+            {children}
+        </>
+    );
+}
+
+export class App extends PureComponent {
     state = {
         showDialog: false,
         showFormDialog: false,
@@ -92,90 +131,90 @@ export class App extends Component {
                 <Container className="py-5" fluid="md">
                     <h1>Extra components</h1>
 
-                    <section className="p-3 border mt-3 bg-white">
-                        <h3>Time Distance</h3>
+                    <Section title="Time Distance">
                         <TimeDistance date="1989-06-04" />
-                    </section>
+                    </Section>
 
-                    <section className="p-3 border mt-3 bg-white">
-                        <h3>Icon</h3>
+                    <Section title="Icon">
                         <Icon name="trash" size={2} className="text-danger" />
-                    </section>
+                    </Section>
 
-                    <section className="p-3 border mt-3 bg-white">
-                        <h3>Avatar</h3>
+                    <Section title="Avatar">
                         <Avatar src="https://github.com/idea2app.png" />
-                    </section>
+                    </Section>
 
-                    <section className="p-3 border mt-3 bg-white">
-                        <h3>Nameplate</h3>
+                    <Section title="Nameplate">
                         <Nameplate
                             name="idea2app"
                             avatar="https://github.com/idea2app.png"
                         />
-                    </section>
+                    </Section>
 
-                    <section className="p-3 border mt-3 bg-white">
-                        <h3>Filter Input</h3>
+                    <Section title="Filter Input">
                         <FilterInput name="tags" />
-                    </section>
+                    </Section>
 
-                    <section className="p-3 border mt-3 bg-white">
-                        <h3>FilePicker</h3>
+                    <Section title="FilePicker">
+                        <SubSection title="Single image upload 1">
+                            <FilePicker accept="image/*" name="images" />
+                        </SubSection>
 
-                        <h6>one image upload-1</h6>
-                        <FilePicker accept="image/*" name="images" />
+                        <SubSection title="Single image upload 2">
+                            <FileUploader
+                                name="cover"
+                                value="http://xydlinger.cn/medias/banner/5.jpg"
+                                onChange={console.log}
+                            />
+                        </SubSection>
 
-                        <h6 className="mt-3">one image upload-2</h6>
-                        <FileUploader
-                            name="cover"
-                            value="http://xydlinger.cn/medias/banner/5.jpg"
-                            onChange={console.log}
-                        />
+                        <SubSection
+                            className="mt-3"
+                            title="Multiple images upload"
+                        >
+                            <p className="text-success small">
+                                用法注释：先通过上传接口拿到链接，然后显示所有链接
+                            </p>
+                            <MultipleFileUploader
+                                name="photos"
+                                value={[
+                                    'http://xydlinger.cn/medias/banner/5.jpg',
+                                    'http://xydlinger.cn/medias/banner/2.jpg'
+                                ]}
+                                onChange={console.log}
+                                onDeleteOne={console.log}
+                            />
+                        </SubSection>
+                    </Section>
 
-                        <h6 className="mt-3">multiple images upload</h6>
-                        <p className="text-success small">
-                            用法注释：先通过上传接口拿到链接，然后显示所有链接
-                        </p>
-                        <MultipleFileUploader
-                            name="photos"
-                            value={[
-                                'http://xydlinger.cn/medias/banner/5.jpg',
-                                'http://xydlinger.cn/medias/banner/2.jpg'
-                            ]}
-                            onChange={files => console.log(files)}
-                            onDeleteOne={index => console.log(index)}
-                        />
-                    </section>
+                    <Section title="IdeaTable">
+                        <SubSection title="TableSpinner">
+                            <IdeaTable
+                                className="small border"
+                                noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
+                                loadingNode={<TableSpinner colSpan={2} />}
+                                list={list}
+                                columns={this.columns}
+                            />
+                        </SubSection>
+                        <SubSection title="有数据时">
+                            <IdeaTable
+                                className="small border"
+                                noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
+                                list={list}
+                                columns={this.columns}
+                            />
+                        </SubSection>
+                        <SubSection title="无数据时">
+                            <IdeaTable
+                                className="small border"
+                                noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
+                                list={[]}
+                                columns={this.columns}
+                            />
+                        </SubSection>
+                    </Section>
 
-                    <section className="p-3 border mt-3 bg-white">
-                        <h3 className="mt-3">IdeaTable</h3>
-                        <h6>TableSpinner</h6>
-                        <IdeaTable
-                            className="small border"
-                            noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
-                            list={list}
-                            columns={this.columns}
-                            loadingNode={<TableSpinner colSpan={2} />}
-                        />
-                        <h6>有数据时</h6>
-                        <IdeaTable
-                            className="small border"
-                            noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
-                            list={list}
-                            columns={this.columns}
-                        />
-                        <h6>无数据时</h6>
-                        <IdeaTable
-                            className="small border"
-                            noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
-                            list={[]}
-                            columns={this.columns}
-                        />
-                    </section>
-
-                    <section className="p-3 border mt-3 bg-white">
-                        <h3>Pagination Bar</h3>
+                    <Section title="Pagination Bar">
                         <PaginationBar
                             className="my-3 justify-content-end"
                             size="sm"
@@ -184,10 +223,9 @@ export class App extends Component {
                             count={42}
                             onChange={pageIndex => this.setState({ pageIndex })}
                         />
-                    </section>
+                    </Section>
 
-                    <section className="p-3 border mt-3 bg-white">
-                        <h3 className="mt-3">IdeaInfo && IdeaDialog</h3>
+                    <Section title="IdeaInfo & IdeaDialog">
                         <Button
                             onClick={() => this.setState({ showDialog: true })}
                         >
@@ -196,19 +234,18 @@ export class App extends Component {
                         <IdeaDialog
                             title="查看"
                             size="lg"
-                            show={showDialog}
                             confirmText="确定"
                             cancelText="取消"
+                            show={showDialog}
                             onCancel={() =>
                                 this.setState({ showDialog: false })
                             }
                         >
                             <IdeaInfo data={info} rows={this.columns} />
                         </IdeaDialog>
-                    </section>
+                    </Section>
 
-                    <section className="p-3 border mt-3 bg-white">
-                        <h3>IdeaForm</h3>
+                    <Section title="IdeaForm">
                         <IdeaForm
                             submitText="submit"
                             resetText="reset"
@@ -216,10 +253,9 @@ export class App extends Component {
                             rows={this.formRows}
                             onSubmit={console.log}
                         />
-                    </section>
+                    </Section>
 
-                    <section className="p-3 border mt-3 bg-white">
-                        <h3>IdeaForm & IdeaDialog</h3>
+                    <Section title="IdeaForm & IdeaDialog">
                         <Button
                             onClick={() =>
                                 this.setState({ showFormDialog: true })
@@ -228,14 +264,14 @@ export class App extends Component {
                             显示Form弹窗
                         </Button>
                         <IdeaDialog
+                            formId="admin-user-edit"
                             title="编辑"
-                            show={showFormDialog}
                             confirmText="确定"
                             cancelText="取消"
+                            show={showFormDialog}
                             onCancel={() =>
                                 this.setState({ showFormDialog: false })
                             }
-                            formId="admin-user-edit"
                         >
                             <IdeaForm
                                 id="admin-user-edit"
@@ -248,7 +284,7 @@ export class App extends Component {
                                 onSubmit={console.log}
                             />
                         </IdeaDialog>
-                    </section>
+                    </Section>
                 </Container>
             </div>
         );
