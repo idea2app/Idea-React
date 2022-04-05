@@ -5,6 +5,8 @@ import IdeaDialog from '../source/IdeaDialog';
 import IdeaForm, { IdeaFormItem } from '../source/IdeaForm';
 import IdeaInfo, { IdeaInfoItem } from '../source/IdeaInfo';
 import IdeaTable, { Base } from '../source/IdeaTable';
+import Loading from '../source/Loading';
+import Map from '../source/Map';
 
 interface User extends Base {
     name: string;
@@ -14,7 +16,9 @@ interface User extends Base {
 export class App extends Component {
     state = {
         showDialog: false,
-        showFormDialog: false
+        showFormDialog: false,
+        mapAddressName: '',
+        showLoading: false
     };
 
     columns: IdeaInfoItem<User>[] = [
@@ -57,7 +61,8 @@ export class App extends Component {
     ];
 
     render() {
-        const { showDialog, showFormDialog } = this.state;
+        const { showDialog, showFormDialog, mapAddressName, showLoading } =
+            this.state;
         const info: User = {
             id: '1',
             name: 'lingli',
@@ -148,6 +153,34 @@ export class App extends Component {
                         />
                     </IdeaDialog>
                 </div>
+
+                <section className="p-3 border mt-3">
+                    <h3>Map Select</h3>
+                    <Map
+                        onChange={({ name }) =>
+                            this.setState({ mapAddressName: name })
+                        }
+                    >
+                        <Button>选择</Button>
+                        <span className="ps-3">{mapAddressName}</span>
+                    </Map>
+                </section>
+
+                <section className="p-3 border mt-3">
+                    <h3>Loading</h3>
+                    <Button
+                        onClick={() => {
+                            this.setState({ showLoading: true });
+                            setTimeout(() => {
+                                this.setState({ showLoading: false });
+                            }, 1500);
+                        }}
+                        style={{ zIndex: '1040' }}
+                    >
+                        显示
+                    </Button>
+                    {showLoading && <Loading>加载中...</Loading>}
+                </section>
             </Container>
         );
     }
