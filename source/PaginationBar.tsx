@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { PropsWithoutRef } from 'react';
 import Pagination, { PaginationProps } from 'react-bootstrap/Pagination';
 
@@ -6,8 +7,8 @@ export type PaginationBarProps = PropsWithoutRef<
         currentPage?: number;
         pageCount: number;
         count?: number;
-        className: string;
-        onChange(index: number): void;
+        className?: string;
+        onChange(index: number): any;
     }
 >;
 
@@ -21,7 +22,12 @@ export function PaginationBar({
 }: PaginationBarProps) {
     return !pageCount ? null : (
         <Pagination
-            className={`d-flex justify-content-end align-items-center ${className}`}
+            className={classNames(
+                className,
+                'd-flex',
+                'justify-content-end',
+                'align-items-center'
+            )}
             {...props}
         >
             {currentPage > 1 && (

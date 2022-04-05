@@ -1,11 +1,7 @@
 .upload {
-    display: flex;
-    flex-wrap: wrap;
-    border-radius: 0.5rem;
-
-    .delete-icon {
-        right: 0.8rem;
-        top: 0.5rem;
+    .close {
+        top: 0;
+        right: 0.25rem;
     }
 
     .image {
@@ -18,36 +14,20 @@
     .summary {
         width: 8rem;
         height: 8rem;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
         word-break: break-all;
         text-overflow: ellipsis;
-        padding: 20px;
-        overflow: hidden;
     }
 
     input[type='file'] {
-        position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
         opacity: 0;
         cursor: pointer;
     }
 
     .file {
         width: 8rem;
-        height: 10rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 0.5rem;
-        border: 2px dashed #ddd;
-        position: relative;
-        overflow: hidden;
+        height: 8rem;
 
         &::before {
             content: '+';

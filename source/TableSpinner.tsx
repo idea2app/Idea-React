@@ -6,7 +6,7 @@ export function TableSpinner({
 }: PropsWithoutRef<{ colSpan: number }>) {
     return (
         <tr>
-            <td className="text-center" colSpan={colSpan}>
+            <td className="text-center p-4" colSpan={colSpan}>
                 <Spinner animation="border" variant="primary" />
             </td>
         </tr>

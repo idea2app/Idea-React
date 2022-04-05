@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { render } from 'react-dom';
 import { Avatar } from '../source/Avatar';
-import { Back } from '../source/Back';
 import { FilePicker } from '../source/FilePicker';
 import { FileUploader } from '../source/FileUploader';
 import { FilterInput } from '../source/FilterInput';
@@ -93,40 +92,35 @@ export class App extends Component {
                 <Container className="py-5" fluid="md">
                     <h1>Extra components</h1>
 
-                    <div className="p-3 border mt-3 bg-white">
+                    <section className="p-3 border mt-3 bg-white">
                         <h3>Time Distance</h3>
                         <TimeDistance date="1989-06-04" />
-                    </div>
+                    </section>
 
-                    <div className="p-3 border mt-3 bg-white">
+                    <section className="p-3 border mt-3 bg-white">
                         <h3>Icon</h3>
                         <Icon name="trash" size={2} className="text-danger" />
-                    </div>
+                    </section>
 
-                    <div className="p-3 border mt-3 bg-white">
+                    <section className="p-3 border mt-3 bg-white">
                         <h3>Avatar</h3>
                         <Avatar src="https://github.com/idea2app.png" />
-                    </div>
+                    </section>
 
-                    <div className="p-3 border mt-3 bg-white">
+                    <section className="p-3 border mt-3 bg-white">
                         <h3>Nameplate</h3>
                         <Nameplate
                             name="idea2app"
                             avatar="https://github.com/idea2app.png"
                         />
-                    </div>
+                    </section>
 
-                    <div className="p-3 border mt-3 bg-white">
-                        <h3>Back</h3>
-                        <Back>返回</Back>
-                    </div>
-
-                    <div className="p-3 border mt-3 bg-white">
+                    <section className="p-3 border mt-3 bg-white">
                         <h3>Filter Input</h3>
                         <FilterInput name="tags" />
-                    </div>
+                    </section>
 
-                    <div className="p-3 border mt-3 bg-white">
+                    <section className="p-3 border mt-3 bg-white">
                         <h3>FilePicker</h3>
 
                         <h6>one image upload-1</h6>
@@ -136,14 +130,12 @@ export class App extends Component {
                         <FileUploader
                             name="cover"
                             value="http://xydlinger.cn/medias/banner/5.jpg"
-                            onChange={file => console.log(file)}
+                            onChange={console.log}
                         />
 
                         <h6 className="mt-3">multiple images upload</h6>
-                        <p className="text-success">
-                            <small>
-                                用法注释：先通过上传接口拿到链接，然后显示所有链接
-                            </small>
+                        <p className="text-success small">
+                            用法注释：先通过上传接口拿到链接，然后显示所有链接
                         </p>
                         <MultipleFileUploader
                             name="photos"
@@ -151,12 +143,12 @@ export class App extends Component {
                                 'http://xydlinger.cn/medias/banner/5.jpg',
                                 'http://xydlinger.cn/medias/banner/2.jpg'
                             ]}
-                            onChange={(files: FileList) => console.log(files)}
-                            onDeleteOne={(index: number) => console.log(index)}
+                            onChange={files => console.log(files)}
+                            onDeleteOne={index => console.log(index)}
                         />
-                    </div>
+                    </section>
 
-                    <div className="p-3 border mt-3 bg-white">
+                    <section className="p-3 border mt-3 bg-white">
                         <h3 className="mt-3">IdeaTable</h3>
                         <h6>TableSpinner</h6>
                         <IdeaTable
@@ -180,9 +172,9 @@ export class App extends Component {
                             list={[]}
                             columns={this.columns}
                         />
-                    </div>
+                    </section>
 
-                    <div className="p-3 border mt-3 bg-white">
+                    <section className="p-3 border mt-3 bg-white">
                         <h3>Pagination Bar</h3>
                         <PaginationBar
                             className="my-3 justify-content-end"
@@ -190,13 +182,11 @@ export class App extends Component {
                             pageCount={5}
                             currentPage={pageIndex}
                             count={42}
-                            onChange={page =>
-                                this.setState({ pageIndex: page })
-                            }
+                            onChange={pageIndex => this.setState({ pageIndex })}
                         />
-                    </div>
+                    </section>
 
-                    <div className="p-3 border mt-3 bg-white">
+                    <section className="p-3 border mt-3 bg-white">
                         <h3 className="mt-3">IdeaInfo && IdeaDialog</h3>
                         <Button
                             onClick={() => this.setState({ showDialog: true })}
@@ -215,9 +205,9 @@ export class App extends Component {
                         >
                             <IdeaInfo data={info} rows={this.columns} />
                         </IdeaDialog>
-                    </div>
+                    </section>
 
-                    <div className="p-3 border mt-3 bg-white">
+                    <section className="p-3 border mt-3 bg-white">
                         <h3>IdeaForm</h3>
                         <IdeaForm
                             submitText="submit"
@@ -226,9 +216,9 @@ export class App extends Component {
                             rows={this.formRows}
                             onSubmit={console.log}
                         />
-                    </div>
+                    </section>
 
-                    <div className="p-3 border mt-3 bg-white">
+                    <section className="p-3 border mt-3 bg-white">
                         <h3>IdeaForm & IdeaDialog</h3>
                         <Button
                             onClick={() =>
@@ -258,7 +248,7 @@ export class App extends Component {
                                 onSubmit={console.log}
                             />
                         </IdeaDialog>
-                    </div>
+                    </section>
                 </Container>
             </div>
         );
