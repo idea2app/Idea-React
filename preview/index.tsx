@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 import IdeaDialog from '../source/IdeaDialog';
 import IdeaForm, { IdeaFormItem } from '../source/IdeaForm';
 import IdeaInfo, { IdeaInfoItem } from '../source/IdeaInfo';
+import IdeaPopover from '../source/IdeaPopover';
 import IdeaTable, { Base } from '../source/IdeaTable';
 
 interface User extends Base {
@@ -147,6 +148,20 @@ export class App extends Component {
                             onSubmit={console.log}
                         />
                     </IdeaDialog>
+                </div>
+
+                <div className="p-3 border mt-3">
+                    <h2>IdeaPopover</h2>
+                    <IdeaPopover getData={console.log} title="view info">
+                        <Button>查看</Button>
+                        <IdeaTable
+                            list={list}
+                            columns={this.columns}
+                            className="small border"
+                        >
+                            暂无数据 -(o﹏o)-， 请添加数据噢
+                        </IdeaTable>
+                    </IdeaPopover>
                 </div>
             </Container>
         );
