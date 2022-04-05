@@ -36,9 +36,17 @@
         "react-editor-js": "^2.0.0"
     },
     "devDependencies": {
+        "@babel/core": "^7.17.8",
         "@editorjs/editorjs": "^2.23.2",
+        "@storybook/addon-actions": "^6.4.20",
+        "@storybook/addon-essentials": "^6.4.20",
+        "@storybook/addon-interactions": "^6.4.20",
+        "@storybook/addon-links": "^6.4.20",
+        "@storybook/react": "^6.4.20",
+        "@storybook/testing-library": "^0.0.9",
         "@types/lodash": "^4.14.179",
         "@types/react-dom": "^17.0.14",
+        "babel-loader": "^8.2.4",
         "husky": "^7.0.4",
         "less": "^4.1.2",
         "lint-staged": "^12.3.4",
@@ -66,6 +74,8 @@
         "build": "rm -rf dist/ docs/  &&  typedoc source/  &&  npm run make",
         "start": "typedoc source/  &&  open-cli docs/index.html",
         "prepublishOnly": "npm test  &&  npm run build",
-        "preview": "parcel preview/index.html"
+        "preview": "parcel preview/index.html",
+        "storybook": "start-storybook -p 6006",
+        "build-storybook": "build-storybook"
     }
 }
