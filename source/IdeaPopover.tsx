@@ -16,11 +16,11 @@ export default class IdeaPopover extends PureComponent<
     IdeaPopoverProps,
     State
 > {
-    popoverRef = createRef();
+    popoverRef = createRef<HTMLDivElement>();
 
     state = {
         showPopover: false,
-        popoverTarget: {} as EventTarget
+        popoverTarget: {} as HTMLDivElement
     };
 
     handleClick = async (event: React.MouseEvent) => {
