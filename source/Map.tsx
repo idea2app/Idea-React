@@ -9,10 +9,11 @@ export interface MapData {
     location?: string;
 }
 
-export default class Map extends PureComponent<
-    { onChange: (data: MapData) => void },
-    { open: boolean }
-> {
+export interface MapProps {
+    onChange: (data: MapData) => any;
+}
+
+export class Map extends PureComponent<MapProps, { open: boolean }> {
     state = {
         open: false
     };
@@ -60,14 +61,10 @@ export default class Map extends PureComponent<
                     <iframe
                         id="getAddress"
                         src="https://m.amap.com/picker/?key=ffebcf5feb145551bf438b57c08b4b53"
-                        style={{
-                            width: '100%',
-                            height: '50rem',
-                            zIndex: 22222,
-                            background: '#fff'
-                        }}
+                        className="bg-white w-100"
+                        style={{ height: '50rem' }}
                         onLoad={this.loadIframe}
-                    ></iframe>
+                    />
                 </Modal.Body>
             </Modal>
         );

@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React, { PropsWithChildren, PureComponent } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { render } from 'react-dom';
+import { sleep } from 'web-utility';
 import {
     Avatar,
     Base,
@@ -309,11 +310,10 @@ export class App extends PureComponent {
 
                     <Section title="Loading">
                         <Button
-                            onClick={() => {
+                            onClick={async () => {
                                 this.setState({ showLoading: true });
-                                setTimeout(() => {
-                                    this.setState({ showLoading: false });
-                                }, 1500);
+                                await sleep(1);
+                                this.setState({ showLoading: false });
                             }}
                             style={{ zIndex: '1040' }}
                         >
