@@ -15,6 +15,7 @@ export * from './IdeaTable';
 export * from './IdeaInfo';
 export * from './IdeaDialog';
 export * from './IdeaForm';
+export * from './IdeaPopover';
 export * from './Loading';
 export * from './Map';
 

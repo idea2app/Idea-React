@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import React, { PropsWithChildren, PureComponent } from 'react';
+import React, { PropsWithChildren, PureComponent, ReactNode } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { render } from 'react-dom';
+import reactElementToJSXString from 'react-element-to-jsx-string';
 import { sleep } from 'web-utility';
 import {
     Avatar,
@@ -15,6 +16,7 @@ import {
     IdeaFormItem,
     IdeaInfo,
     IdeaInfoItem,
+    IdeaPopover,
     IdeaTable,
     Loading,
     Map,
@@ -46,7 +48,7 @@ function Section({ className, title, children }: SectionProps) {
                 className
             )}
         >
-            <h3>{title}</h3>
+            <h2 className="h3">{title}</h2>
 
             {children}
         </section>
@@ -56,10 +58,18 @@ function Section({ className, title, children }: SectionProps) {
 function SubSection({ className, title, children }: SectionProps) {
     return (
         <>
-            <h4 className={classNames('h6', className)}>{title}</h4>
+            <h3 className={classNames('h5', className)}>{title}</h3>
 
             {children}
         </>
+    );
+}
+
+function formateCode(code: string) {
+    return (
+        <pre>
+            <code className="language-jsx">{code.trim()}</code>
+        </pre>
     );
 }
 
@@ -111,6 +121,15 @@ export class App extends PureComponent {
         }
     ];
 
+    renderCode(code: ReactNode) {
+        return (
+            <>
+                {code}
+                {formateCode(reactElementToJSXString(code))}
+            </>
+        );
+    }
+
     render() {
         const {
             showDialog,
@@ -143,39 +162,54 @@ export class App extends PureComponent {
                     <h1>Extra components</h1>
 
                     <Section title="Time Distance">
-                        <TimeDistance date="1989-06-04" />
+                        {this.renderCode(<TimeDistance date="1989-06-04" />)}
                     </Section>
 
                     <Section title="Icon">
-                        <Icon name="trash" size={2} className="text-danger" />
+                        {this.renderCode(
+                            <Icon
+                                name="trash"
+                                size={2}
+                                className="text-danger"
+                            />
+                        )}
                     </Section>
 
                     <Section title="Avatar">
-                        <Avatar src="https://github.com/idea2app.png" />
+                        {this.renderCode(
+                            <Avatar src="https://github.com/idea2app.png" />
+                        )}
                     </Section>
 
                     <Section title="Nameplate">
-                        <Nameplate
-                            name="idea2app"
-                            avatar="https://github.com/idea2app.png"
-                        />
+                        {this.renderCode(
+                            <Nameplate
+                                name="idea2app"
+                                avatar="https://github.com/idea2app.png"
+                            />
+                        )}
                     </Section>
 
                     <Section title="Filter Input">
-                        <FilterInput name="tags" />
+                        <p className="text-danger">注：暂有bug</p>
+                        {this.renderCode(<FilterInput name="tags" />)}
                     </Section>
 
                     <Section title="FilePicker">
                         <SubSection title="Single image upload 1">
-                            <FilePicker accept="image/*" name="images" />
+                            {this.renderCode(
+                                <FilePicker accept="image/*" name="images" />
+                            )}
                         </SubSection>
 
                         <SubSection title="Single image upload 2">
-                            <FileUploader
-                                name="cover"
-                                value="http://xydlinger.cn/medias/banner/5.jpg"
-                                onChange={console.log}
-                            />
+                            {this.renderCode(
+                                <FileUploader
+                                    name="cover"
+                                    value="http://xydlinger.cn/medias/banner/5.jpg"
+                                    onChange={console.log}
+                                />
+                            )}
                         </SubSection>
 
                         <SubSection
@@ -185,141 +219,186 @@ export class App extends PureComponent {
                             <p className="text-success small">
                                 用法注释：先通过上传接口拿到链接，然后显示所有链接
                             </p>
-                            <MultipleFileUploader
-                                name="photos"
-                                value={[
-                                    'http://xydlinger.cn/medias/banner/5.jpg',
-                                    'http://xydlinger.cn/medias/banner/2.jpg'
-                                ]}
-                                onChange={console.log}
-                                onDeleteOne={console.log}
-                            />
+                            {this.renderCode(
+                                <MultipleFileUploader
+                                    name="photos"
+                                    value={[
+                                        'http://xydlinger.cn/medias/banner/5.jpg',
+                                        'http://xydlinger.cn/medias/banner/2.jpg'
+                                    ]}
+                                    onChange={console.log}
+                                    onDeleteOne={console.log}
+                                />
+                            )}
                         </SubSection>
                     </Section>
 
                     <Section title="IdeaTable">
                         <SubSection title="TableSpinner">
-                            <IdeaTable
-                                className="small border"
-                                noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
-                                loadingNode={<TableSpinner colSpan={2} />}
-                                list={list}
-                                columns={this.columns}
-                            />
+                            {this.renderCode(
+                                <IdeaTable
+                                    className="small border"
+                                    noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
+                                    loadingNode={<TableSpinner colSpan={2} />}
+                                    list={list}
+                                    columns={this.columns}
+                                />
+                            )}
                         </SubSection>
                         <SubSection title="有数据时">
-                            <IdeaTable
-                                className="small border"
-                                noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
-                                list={list}
-                                columns={this.columns}
-                            />
+                            {this.renderCode(
+                                <IdeaTable
+                                    className="small border"
+                                    noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
+                                    list={list}
+                                    columns={this.columns}
+                                />
+                            )}
                         </SubSection>
                         <SubSection title="无数据时">
-                            <IdeaTable
-                                className="small border"
-                                noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
-                                list={[]}
-                                columns={this.columns}
-                            />
+                            {this.renderCode(
+                                <IdeaTable
+                                    className="small border"
+                                    noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
+                                    list={[]}
+                                    columns={this.columns}
+                                />
+                            )}
                         </SubSection>
                     </Section>
 
                     <Section title="Pagination Bar">
-                        <PaginationBar
-                            className="my-3 justify-content-end"
-                            size="sm"
-                            pageCount={5}
-                            currentPage={pageIndex}
-                            count={42}
-                            onChange={pageIndex => this.setState({ pageIndex })}
-                        />
+                        {this.renderCode(
+                            <PaginationBar
+                                className="my-3 justify-content-end"
+                                size="sm"
+                                pageCount={5}
+                                currentPage={pageIndex}
+                                count={42}
+                                onChange={pageIndex =>
+                                    this.setState({ pageIndex })
+                                }
+                            />
+                        )}
                     </Section>
 
                     <Section title="IdeaInfo & IdeaDialog">
-                        <Button
-                            onClick={() => this.setState({ showDialog: true })}
-                        >
-                            显示Info弹窗
-                        </Button>
-                        <IdeaDialog
-                            title="查看"
-                            size="lg"
-                            confirmText="确定"
-                            cancelText="取消"
-                            show={showDialog}
-                            onCancel={() =>
-                                this.setState({ showDialog: false })
-                            }
-                        >
-                            <IdeaInfo data={info} rows={this.columns} />
-                        </IdeaDialog>
+                        {this.renderCode(
+                            <>
+                                <Button
+                                    onClick={() =>
+                                        this.setState({ showDialog: true })
+                                    }
+                                >
+                                    显示Info弹窗
+                                </Button>
+                                <IdeaDialog
+                                    title="查看"
+                                    size="lg"
+                                    confirmText="确定"
+                                    cancelText="取消"
+                                    show={showDialog}
+                                    onCancel={() =>
+                                        this.setState({ showDialog: false })
+                                    }
+                                >
+                                    <IdeaInfo data={info} rows={this.columns} />
+                                </IdeaDialog>
+                            </>
+                        )}
                     </Section>
 
                     <Section title="IdeaForm">
-                        <IdeaForm
-                            submitText="submit"
-                            resetText="reset"
-                            data={info}
-                            rows={this.formRows}
-                            onSubmit={console.log}
-                        />
+                        {this.renderCode(
+                            <IdeaForm
+                                submitText="submit"
+                                resetText="reset"
+                                data={info}
+                                rows={this.formRows}
+                                onSubmit={console.log}
+                            />
+                        )}
                     </Section>
 
                     <Section title="IdeaForm & IdeaDialog">
-                        <Button
-                            onClick={() =>
-                                this.setState({ showFormDialog: true })
-                            }
-                        >
-                            显示Form弹窗
-                        </Button>
-                        <IdeaDialog
-                            formId="admin-user-edit"
-                            title="编辑"
-                            confirmText="确定"
-                            cancelText="取消"
-                            show={showFormDialog}
-                            onCancel={() =>
-                                this.setState({ showFormDialog: false })
-                            }
-                        >
-                            <IdeaForm
-                                id="admin-user-edit"
-                                className="w-100 border-top-0"
-                                controlClassName="w-100"
-                                labelCols={4}
-                                controlCols={8}
-                                rows={this.formRows}
-                                data={info}
-                                onSubmit={console.log}
-                            />
-                        </IdeaDialog>
+                        {this.renderCode(
+                            <>
+                                <Button
+                                    onClick={() =>
+                                        this.setState({ showFormDialog: true })
+                                    }
+                                >
+                                    显示Form弹窗
+                                </Button>
+                                <IdeaDialog
+                                    formId="admin-user-edit"
+                                    title="编辑"
+                                    confirmText="确定"
+                                    cancelText="取消"
+                                    show={showFormDialog}
+                                    onCancel={() =>
+                                        this.setState({ showFormDialog: false })
+                                    }
+                                >
+                                    <IdeaForm
+                                        id="admin-user-edit"
+                                        className="w-100 border-top-0"
+                                        controlClassName="w-100"
+                                        labelCols={4}
+                                        controlCols={8}
+                                        rows={this.formRows}
+                                        data={info}
+                                        onSubmit={console.log}
+                                    />
+                                </IdeaDialog>
+                            </>
+                        )}
+                    </Section>
+
+                    <Section title="IdeaPopover">
+                        {this.renderCode(
+                            <IdeaPopover onShow={console.log} title="view info">
+                                <Button>查看</Button>
+                                <IdeaTable
+                                    list={list}
+                                    columns={this.columns}
+                                    className="small border"
+                                >
+                                    暂无数据 -(o﹏o)-， 请添加数据噢
+                                </IdeaTable>
+                            </IdeaPopover>
+                        )}
                     </Section>
 
                     <Section title="Map Select">
-                        <Map
-                            onChange={({ name }) =>
-                                this.setState({ mapAddressName: name })
-                            }
-                        >
-                            <Button>选择</Button>
-                            <span className="ps-3">{mapAddressName}</span>
-                        </Map>
+                        {this.renderCode(
+                            <Map
+                                onChange={({ name }) =>
+                                    this.setState({ mapAddressName: name })
+                                }
+                            >
+                                <Button>选择</Button>
+                                <span className="ps-3">{mapAddressName}</span>
+                            </Map>
+                        )}
                     </Section>
 
                     <Section title="Loading">
-                        <Button
-                            onClick={async () => {
-                                this.setState({ showLoading: true });
-                                await sleep(1);
-                                this.setState({ showLoading: false });
-                            }}
-                            style={{ zIndex: '1040' }}
-                        >
-                            显示
-                        </Button>
-                        {showLoading && <Loading>加载中...</Loading>}
+                        {this.renderCode(
+                            <>
+                                <Button
+                                    onClick={async () => {
+                                        this.setState({ showLoading: true });
+                                        await sleep(1);
+                                        this.setState({ showLoading: false });
+                                    }}
+                                    style={{ zIndex: '1040' }}
+                                >
+                                    显示
+                                </Button>
+                                {showLoading && <Loading>加载中...</Loading>}
+                            </>
+                        )}
                     </Section>
                 </Container>
             </div>
