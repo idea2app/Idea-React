@@ -1,12 +1,12 @@
 import classNames from 'classnames';
-import React, { PropsWithoutRef } from 'react';
+import React from 'react';
 import { Pagination, PaginationProps } from 'react-bootstrap';
 
-export interface PaginationBarProps extends PaginationProps {
+export interface PaginationBarProps extends Omit<PaginationProps, 'onChange'> {
     currentPage?: number;
     pageCount: number;
     count?: number;
-    onChange(index: number): any;
+    onChange: (index: number) => any;
 }
 
 export function PaginationBar({
