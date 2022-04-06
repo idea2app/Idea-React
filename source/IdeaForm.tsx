@@ -1,38 +1,36 @@
 import classNames from 'classnames';
-import React, { ChangeEvent, FormEvent, ReactNode } from 'react';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
+import React, { ReactNode, ChangeEvent, FormEvent } from 'react';
+import { Button, Col, Form, Row } from 'react-bootstrap';
+
 import { Base } from './IdeaTable';
 
 export interface IdeaFormItem<T> {
-    label: string;
     key?: string;
+    label: string;
     required?: boolean;
     disabled?: boolean;
+    pattern?: string;
+    tip?: string;
     show?: boolean;
     render?: (params?: T) => ReactNode;
     onChange?: (event: ChangeEvent) => any;
-    tip?: string;
-    pattern?: string;
 }
 
 export interface IdeaFormProps<T> {
     id?: string;
-    rows: IdeaFormItem<T>[];
-    data: T;
-    labelCols?: number;
-    controlCols?: number;
     className?: string;
     controlClassName?: string;
+    labelCols?: number;
+    controlCols?: number;
     submitText?: string;
     onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
     resetText?: string;
     onReset?: (event: FormEvent<HTMLFormElement>) => void;
+    rows: IdeaFormItem<T>[];
+    data: T;
 }
 
-export default function IdeaForm<T extends Base>({
+export function IdeaForm<T extends Base>({
     rows,
     data,
     labelCols = 2,
@@ -56,6 +54,7 @@ export default function IdeaForm<T extends Base>({
             {...other}
         >
             <input type="hidden" name="id" value={data.id} />
+
             {rows.map(
                 ({
                     label,
@@ -74,9 +73,9 @@ export default function IdeaForm<T extends Base>({
                             key={`${label}-${key}`}
                         >
                             <Form.Label
+                                className="text-end"
                                 column="sm"
                                 sm={labelCols}
-                                className="text-end"
                             >
                                 {required && (
                                     <span className="text-danger me-1">*</span>

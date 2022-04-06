@@ -1,21 +1,71 @@
-import React, { Component } from 'react';
-import { Button, Container, Form } from 'react-bootstrap';
+import classNames from 'classnames';
+import React, { PropsWithChildren, PureComponent } from 'react';
 import { render } from 'react-dom';
-import IdeaDialog from '../source/IdeaDialog';
-import IdeaForm, { IdeaFormItem } from '../source/IdeaForm';
-import IdeaInfo, { IdeaInfoItem } from '../source/IdeaInfo';
-import IdeaPopover from '../source/IdeaPopover';
-import IdeaTable, { Base } from '../source/IdeaTable';
+import { Container, Button, Form } from 'react-bootstrap';
+import {
+    TimeDistance,
+    PaginationBar,
+    Icon,
+    Avatar,
+    Nameplate,
+    TableSpinner,
+    FilterInput,
+    FilePicker,
+    FileUploader,
+    MultipleFileUploader,
+    Base,
+    IdeaTable,
+    IdeaInfoItem,
+    IdeaInfo,
+    IdeaDialog,
+    IdeaFormItem,
+    IdeaForm,
+    IdeaPopover
+} from '../source';
 
 interface User extends Base {
     name: string;
     link: string;
 }
 
-export class App extends Component {
+type SectionProps = PropsWithChildren<{
+    className?: string;
+    title: string;
+}>;
+
+function Section({ className, title, children }: SectionProps) {
+    return (
+        <section
+            className={classNames(
+                'border',
+                'bg-white',
+                'mt-3',
+                'p-3',
+                className
+            )}
+        >
+            <h3>{title}</h3>
+
+            {children}
+        </section>
+    );
+}
+
+function SubSection({ className, title, children }: SectionProps) {
+    return (
+        <>
+            <h4 className={classNames('h6', className)}>{title}</h4>
+
+            {children}
+        </>
+    );
+}
+
+export class App extends PureComponent {
     state = {
         showDialog: false,
-        showFormDialog: false
+        showFormDialog: false,
+        pageIndex: 1
     };
 
     columns: IdeaInfoItem<User>[] = [
@@ -58,7 +108,7 @@ export class App extends Component {
     ];
 
     render() {
-        const { showDialog, showFormDialog } = this.state;
+        const { showDialog, showFormDialog, pageIndex } = this.state;
         const info: User = {
             id: '1',
             name: 'lingli',
@@ -78,92 +128,179 @@ export class App extends Component {
         ];
 
         return (
-            <Container className="my-3" fluid="md">
-                <h1>Extra components</h1>
+            <div className="bg-light">
+                <Container className="py-5" fluid="md">
+                    <h1>Extra components</h1>
 
-                <div className="py-2 px-3 border">
-                    <h3 className="mt-3">IdeaTable</h3>
-                    <IdeaTable
-                        list={list}
-                        columns={this.columns}
-                        className="small border"
-                    >
-                        暂无数据 -(o﹏o)-， 请添加数据噢
-                    </IdeaTable>
-                </div>
+                    <Section title="Time Distance">
+                        <TimeDistance date="1989-06-04" />
+                    </Section>
 
-                <div className="py-2 px-3 border mt-3">
-                    <h3 className="mt-3">IdeaInfo && IdeaDialog</h3>
-                    <Button onClick={() => this.setState({ showDialog: true })}>
-                        显示Info弹窗
-                    </Button>
-                    <IdeaDialog
-                        title="查看"
-                        size="lg"
-                        show={showDialog}
-                        confirmText="确定"
-                        cancelText="取消"
-                        onCancel={() => this.setState({ showDialog: false })}
-                    >
-                        <IdeaInfo data={info} rows={this.columns} />
-                    </IdeaDialog>
-                </div>
+                    <Section title="Icon">
+                        <Icon name="trash" size={2} className="text-danger" />
+                    </Section>
 
-                <div className="py-2 px-3 border mt-3">
-                    <h2 className="mt-3">IdeaForm</h2>
-                    <IdeaForm
-                        submitText="submit"
-                        resetText="reset"
-                        data={info}
-                        rows={this.formRows}
-                        onSubmit={console.log}
-                    />
-                </div>
+                    <Section title="Avatar">
+                        <Avatar src="https://github.com/idea2app.png" />
+                    </Section>
 
-                <div className="py-2 px-3 border mt-3">
-                    <h2 className="mt-3">IdeaForm & IdeaDialog</h2>
-                    <Button
-                        onClick={() => this.setState({ showFormDialog: true })}
-                    >
-                        显示Form弹窗
-                    </Button>
-                    <IdeaDialog
-                        title="编辑"
-                        show={showFormDialog}
-                        confirmText="确定"
-                        cancelText="取消"
-                        onCancel={() =>
-                            this.setState({ showFormDialog: false })
-                        }
-                        formId="admin-user-edit"
-                    >
+                    <Section title="Nameplate">
+                        <Nameplate
+                            name="idea2app"
+                            avatar="https://github.com/idea2app.png"
+                        />
+                    </Section>
+
+                    <Section title="Filter Input">
+                        <FilterInput name="tags" />
+                    </Section>
+
+                    <Section title="FilePicker">
+                        <SubSection title="Single image upload 1">
+                            <FilePicker accept="image/*" name="images" />
+                        </SubSection>
+
+                        <SubSection title="Single image upload 2">
+                            <FileUploader
+                                name="cover"
+                                value="http://xydlinger.cn/medias/banner/5.jpg"
+                                onChange={console.log}
+                            />
+                        </SubSection>
+
+                        <SubSection
+                            className="mt-3"
+                            title="Multiple images upload"
+                        >
+                            <p className="text-success small">
+                                用法注释：先通过上传接口拿到链接，然后显示所有链接
+                            </p>
+                            <MultipleFileUploader
+                                name="photos"
+                                value={[
+                                    'http://xydlinger.cn/medias/banner/5.jpg',
+                                    'http://xydlinger.cn/medias/banner/2.jpg'
+                                ]}
+                                onChange={console.log}
+                                onDeleteOne={console.log}
+                            />
+                        </SubSection>
+                    </Section>
+
+                    <Section title="IdeaTable">
+                        <SubSection title="TableSpinner">
+                            <IdeaTable
+                                className="small border"
+                                noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
+                                loadingNode={<TableSpinner colSpan={2} />}
+                                list={list}
+                                columns={this.columns}
+                            />
+                        </SubSection>
+                        <SubSection title="有数据时">
+                            <IdeaTable
+                                className="small border"
+                                noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
+                                list={list}
+                                columns={this.columns}
+                            />
+                        </SubSection>
+                        <SubSection title="无数据时">
+                            <IdeaTable
+                                className="small border"
+                                noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
+                                list={[]}
+                                columns={this.columns}
+                            />
+                        </SubSection>
+                    </Section>
+
+                    <Section title="Pagination Bar">
+                        <PaginationBar
+                            className="my-3 justify-content-end"
+                            size="sm"
+                            pageCount={5}
+                            currentPage={pageIndex}
+                            count={42}
+                            onChange={pageIndex => this.setState({ pageIndex })}
+                        />
+                    </Section>
+
+                    <Section title="IdeaInfo & IdeaDialog">
+                        <Button
+                            onClick={() => this.setState({ showDialog: true })}
+                        >
+                            显示Info弹窗
+                        </Button>
+                        <IdeaDialog
+                            title="查看"
+                            size="lg"
+                            confirmText="确定"
+                            cancelText="取消"
+                            show={showDialog}
+                            onCancel={() =>
+                                this.setState({ showDialog: false })
+                            }
+                        >
+                            <IdeaInfo data={info} rows={this.columns} />
+                        </IdeaDialog>
+                    </Section>
+
+                    <Section title="IdeaForm">
                         <IdeaForm
-                            id="admin-user-edit"
-                            className="w-100 border-top-0"
-                            controlClassName="w-100"
-                            labelCols={4}
-                            controlCols={8}
-                            rows={this.formRows}
+                            submitText="submit"
+                            resetText="reset"
                             data={info}
+                            rows={this.formRows}
                             onSubmit={console.log}
                         />
-                    </IdeaDialog>
-                </div>
+                    </Section>
 
-                <div className="p-3 border mt-3">
-                    <h2>IdeaPopover</h2>
-                    <IdeaPopover getData={console.log} title="view info">
-                        <Button>查看</Button>
-                        <IdeaTable
-                            list={list}
-                            columns={this.columns}
-                            className="small border"
+                    <Section title="IdeaForm & IdeaDialog">
+                        <Button
+                            onClick={() =>
+                                this.setState({ showFormDialog: true })
+                            }
                         >
-                            暂无数据 -(o﹏o)-， 请添加数据噢
-                        </IdeaTable>
-                    </IdeaPopover>
-                </div>
-            </Container>
+                            显示Form弹窗
+                        </Button>
+                        <IdeaDialog
+                            formId="admin-user-edit"
+                            title="编辑"
+                            confirmText="确定"
+                            cancelText="取消"
+                            show={showFormDialog}
+                            onCancel={() =>
+                                this.setState({ showFormDialog: false })
+                            }
+                        >
+                            <IdeaForm
+                                id="admin-user-edit"
+                                className="w-100 border-top-0"
+                                controlClassName="w-100"
+                                labelCols={4}
+                                controlCols={8}
+                                rows={this.formRows}
+                                data={info}
+                                onSubmit={console.log}
+                            />
+                        </IdeaDialog>
+                    </Section>
+
+                    <Section title="IdeaPopover">
+                        <IdeaPopover getData={console.log} title="view info">
+                            <Button>查看</Button>
+                            <IdeaTable
+                                list={list}
+                                columns={this.columns}
+                                className="small border"
+                            >
+                                暂无数据 -(o﹏o)-， 请添加数据噢
+                            </IdeaTable>
+                        </IdeaPopover>
+                    </Section>
+                </Container>
+            </div>
         );
     }
 }
