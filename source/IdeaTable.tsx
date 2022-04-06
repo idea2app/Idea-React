@@ -1,24 +1,27 @@
 import classNames from 'classnames';
-import React, { PureComponent, ReactNode } from 'react';
-import Table from 'react-bootstrap/Table';
+import React, { ReactNode, PureComponent } from 'react';
+import { Table } from 'react-bootstrap';
 
 export interface Base {
     id: number | string;
 }
+
 export interface Column<T> {
-    label: string;
     key?: string;
-    render?: (params: T, index?: number) => ReactNode;
+    label: string;
     width?: number;
+    render?: (params: T, index?: number) => ReactNode;
 }
 
 export interface IdeaTableProps<T extends Base> {
-    list: T[];
-    columns: Column<T>[];
     className?: string;
+    noneNode?: ReactNode;
+    loadingNode?: ReactNode;
+    columns: Column<T>[];
+    list: T[];
 }
 
-export default class IdeaTable<T extends Base> extends PureComponent<
+export class IdeaTable<T extends Base> extends PureComponent<
     IdeaTableProps<T>
 > {
     renderRow = (row: T, index: number) => {
@@ -47,7 +50,14 @@ export default class IdeaTable<T extends Base> extends PureComponent<
     };
 
     render() {
-        const { list = [], columns = [], children, className } = this.props;
+        const {
+            list = [],
+            columns = [],
+            children,
+            className,
+            noneNode = 'No data',
+            loadingNode
+        } = this.props;
 
         return (
             <Table
@@ -63,16 +73,18 @@ export default class IdeaTable<T extends Base> extends PureComponent<
                     </tr>
                 </thead>
                 <tbody className="border-top">
-                    {list.length > 0 ? (
+                    {loadingNode ? (
+                        loadingNode
+                    ) : list.length > 0 ? (
                         list.map(this.renderRow)
                     ) : (
                         <tr>
                             <td
-                                colSpan={columns.length}
-                                align="center"
                                 className="p-5"
+                                align="center"
+                                colSpan={columns.length}
                             >
-                                {children}
+                                {noneNode}
                             </td>
                         </tr>
                     )}

@@ -1,40 +1,54 @@
+import classNames from 'classnames';
 import React, { PropsWithoutRef } from 'react';
-import { Pagination } from 'react-bootstrap';
+import { Pagination, PaginationProps } from 'react-bootstrap';
 
-export type PaginationBarProps = PropsWithoutRef<{
-    total: number;
-    current: number;
-    pathResolver: (index: number) => string;
-}>;
+export interface PaginationBarProps extends PaginationProps {
+    currentPage?: number;
+    pageCount: number;
+    count?: number;
+    onChange(index: number): any;
+}
 
 export function PaginationBar({
-    pathResolver,
-    total,
-    current
+    currentPage = 1,
+    pageCount,
+    count,
+    onChange,
+    className,
+    ...props
 }: PaginationBarProps) {
-    return !total ? null : (
-        <Pagination className="justify-content-center">
-            {current > 1 && (
-                <Pagination.Item href={pathResolver(1)}>1</Pagination.Item>
+    return !pageCount ? null : (
+        <Pagination
+            className={classNames(
+                'd-flex',
+                'justify-content-end',
+                'align-items-center',
+                className
             )}
-            {current > 3 && <Pagination.Ellipsis />}
-            {current > 2 && (
-                <Pagination.Item href={pathResolver(current - 1)}>
-                    {current - 1}
+            {...props}
+        >
+            {currentPage > 1 && (
+                <Pagination.Item onClick={() => onChange(1)}>1</Pagination.Item>
+            )}
+            {currentPage > 3 && <Pagination.Ellipsis />}
+            {currentPage > 2 && (
+                <Pagination.Item onClick={() => onChange(currentPage - 1)}>
+                    {currentPage - 1}
                 </Pagination.Item>
             )}
-            <Pagination.Item active>{current}</Pagination.Item>
-            {current + 1 < total && (
-                <Pagination.Item href={pathResolver(current + 1)}>
-                    {current + 1}
+            <Pagination.Item active>{currentPage}</Pagination.Item>
+            {pageCount - currentPage > 1 && (
+                <Pagination.Item onClick={() => onChange(currentPage + 1)}>
+                    {currentPage + 1}
                 </Pagination.Item>
             )}
-            {current + 2 < total && <Pagination.Ellipsis />}
-            {current < total && (
-                <Pagination.Item href={pathResolver(total)}>
-                    {total}
+            {pageCount - currentPage > 2 && <Pagination.Ellipsis />}
+            {currentPage < pageCount && (
+                <Pagination.Item onClick={() => onChange(pageCount)}>
+                    {pageCount}
                 </Pagination.Item>
             )}
+            {count && <span className="mx-3 fs14">Total {count} rows</span>}
         </Pagination>
     );
 }

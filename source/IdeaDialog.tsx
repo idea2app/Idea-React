@@ -1,8 +1,7 @@
 import React, { PropsWithChildren } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { Button, Modal } from 'react-bootstrap';
 
-interface IdeaDialogProps<T> {
+export type IdeaDialogProps = PropsWithChildren<{
     title: string;
     show: boolean;
     size?: 'sm' | 'lg' | 'xl';
@@ -11,9 +10,9 @@ interface IdeaDialogProps<T> {
     onConfirm?: () => any;
     cancelText?: string;
     onCancel?: () => any;
-}
+}>;
 
-export default function IdeaDialog<T>({
+export const IdeaDialog = ({
     title,
     children,
     formId,
@@ -22,32 +21,31 @@ export default function IdeaDialog<T>({
     cancelText,
     onCancel,
     ...rest
-}: PropsWithChildren<IdeaDialogProps<T>>) {
-    return (
-        <Modal {...rest} onHide={onCancel}>
-            <Modal.Header closeButton>
-                <Modal.Title>{title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{children}</Modal.Body>
-            {(confirmText || cancelText) && (
-                <Modal.Footer>
-                    {cancelText && (
-                        <Button
-                            variant="secondary"
-                            type="reset"
-                            form={formId}
-                            onClick={onCancel}
-                        >
-                            {cancelText}
-                        </Button>
-                    )}
-                    {confirmText && (
-                        <Button variant="primary" type="submit" form={formId}>
-                            {confirmText}
-                        </Button>
-                    )}
-                </Modal.Footer>
-            )}
-        </Modal>
-    );
-}
+}: IdeaDialogProps) => (
+    <Modal {...rest} onHide={onCancel}>
+        <Modal.Header closeButton>
+            <Modal.Title>{title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{children}</Modal.Body>
+
+        {(confirmText || cancelText) && (
+            <Modal.Footer>
+                {cancelText && (
+                    <Button
+                        variant="secondary"
+                        type="reset"
+                        form={formId}
+                        onClick={onCancel}
+                    >
+                        {cancelText}
+                    </Button>
+                )}
+                {confirmText && (
+                    <Button variant="primary" type="submit" form={formId}>
+                        {confirmText}
+                    </Button>
+                )}
+            </Modal.Footer>
+        )}
+    </Modal>
+);
