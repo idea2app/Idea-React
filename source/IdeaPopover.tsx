@@ -7,15 +7,12 @@ interface State {
     popoverTarget: EventTarget;
 }
 
-type IdeaPopoverProps = PropsWithChildren<{
-    getData: Function;
+export type IdeaPopoverProps = PropsWithChildren<{
+    onShow?: () => any;
     title: string;
 }>;
 
-export default class IdeaPopover extends PureComponent<
-    IdeaPopoverProps,
-    State
-> {
+export class IdeaPopover extends PureComponent<IdeaPopoverProps, State> {
     popoverRef = createRef<HTMLDivElement>();
 
     state = {
@@ -24,23 +21,23 @@ export default class IdeaPopover extends PureComponent<
     };
 
     handleClick = async (event: React.MouseEvent) => {
+        const { showPopover } = this.state;
+
         this.setState({
             popoverTarget: event.target
         });
-        if (!this.state.showPopover) await this.props.getData();
+        if (!showPopover) this.props.onShow?.();
 
-        this.setState({
-            showPopover: !this.state.showPopover
-        });
+        this.setState({ showPopover: !showPopover });
     };
 
     render() {
         const { showPopover, popoverTarget } = this.state;
-        const { title } = this.props;
+        const { title, children } = this.props;
 
         return (
             <div ref={this.popoverRef}>
-                <div onClick={this.handleClick}>{this.props.children?.[0]}</div>
+                <div onClick={this.handleClick}>{children?.[0]}</div>
 
                 <Overlay
                     show={showPopover}
@@ -50,7 +47,7 @@ export default class IdeaPopover extends PureComponent<
                 >
                     <Popover id="popover-contained">
                         <Popover.Header as="h3">{title}</Popover.Header>
-                        <Popover.Body>{this.props.children?.[1]}</Popover.Body>
+                        <Popover.Body>{children?.[1]}</Popover.Body>
                     </Popover>
                 </Overlay>
             </div>

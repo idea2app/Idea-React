@@ -288,7 +288,7 @@ export class App extends PureComponent {
                     </Section>
 
                     <Section title="IdeaPopover">
-                        <IdeaPopover getData={console.log} title="view info">
+                        <IdeaPopover onShow={console.log} title="view info">
                             <Button>查看</Button>
                             <IdeaTable
                                 list={list}
