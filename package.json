@@ -23,20 +23,19 @@
     "main": "dist/index.umd.js",
     "module": "dist/index.js",
     "dependencies": {
+        "@editorjs/paragraph": "^2.8.0",
         "classnames": "^2.3.1",
+        "editorjs-html": "^3.4.2",
         "lodash": "^4.17.21",
         "react": "17.0.2",
         "react-bootstrap": "^2.2.2",
         "react-dom": "17.0.2",
+        "react-editor-js": "^2.0.6",
         "web-utility": "^3.5.0"
-    },
-    "peerDependencies": {
-        "@editorjs/editorjs": "^2.0.0",
-        "editorjs-html": "^3.0.0",
-        "react-editor-js": "^2.0.0"
     },
     "devDependencies": {
         "@editorjs/editorjs": "^2.23.2",
+        "@parcel/transformer-less": "2.4.1",
         "@types/lodash": "^4.14.179",
         "@types/react-dom": "^17.0.14",
         "husky": "^7.0.4",

@@ -1,26 +1,29 @@
 import classNames from 'classnames';
 import React, { PropsWithChildren, PureComponent } from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
 import { render } from 'react-dom';
-import { Container, Button, Form } from 'react-bootstrap';
+import { sleep } from 'web-utility';
 import {
-    TimeDistance,
-    PaginationBar,
-    Icon,
     Avatar,
-    Nameplate,
-    TableSpinner,
-    FilterInput,
+    Base,
     FilePicker,
     FileUploader,
-    MultipleFileUploader,
-    Base,
-    IdeaTable,
-    IdeaInfoItem,
-    IdeaInfo,
+    FilterInput,
+    Icon,
     IdeaDialog,
-    IdeaFormItem,
     IdeaForm,
-    IdeaPopover
+    IdeaFormItem,
+    IdeaInfo,
+    IdeaInfoItem,
+    IdeaPopover,
+    IdeaTable,
+    Loading,
+    Map,
+    MultipleFileUploader,
+    Nameplate,
+    PaginationBar,
+    TableSpinner,
+    TimeDistance
 } from '../source';
 
 interface User extends Base {
@@ -65,7 +68,9 @@ export class App extends PureComponent {
     state = {
         showDialog: false,
         showFormDialog: false,
-        pageIndex: 1
+        pageIndex: 1,
+        mapAddressName: '',
+        showLoading: false
     };
 
     columns: IdeaInfoItem<User>[] = [
@@ -108,7 +113,13 @@ export class App extends PureComponent {
     ];
 
     render() {
-        const { showDialog, showFormDialog, pageIndex } = this.state;
+        const {
+            showDialog,
+            showFormDialog,
+            pageIndex,
+            mapAddressName,
+            showLoading
+        } = this.state;
         const info: User = {
             id: '1',
             name: 'lingli',
@@ -298,6 +309,31 @@ export class App extends PureComponent {
                                 暂无数据 -(o﹏o)-， 请添加数据噢
                             </IdeaTable>
                         </IdeaPopover>
+                    </Section>
+
+                    <Section title="Map Select">
+                        <Map
+                            onChange={({ name }) =>
+                                this.setState({ mapAddressName: name })
+                            }
+                        >
+                            <Button>选择</Button>
+                            <span className="ps-3">{mapAddressName}</span>
+                        </Map>
+                    </Section>
+
+                    <Section title="Loading">
+                        <Button
+                            onClick={async () => {
+                                this.setState({ showLoading: true });
+                                await sleep(1);
+                                this.setState({ showLoading: false });
+                            }}
+                            style={{ zIndex: '1040' }}
+                        >
+                            显示
+                        </Button>
+                        {showLoading && <Loading>加载中...</Loading>}
                     </Section>
                 </Container>
             </div>
