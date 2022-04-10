@@ -7,6 +7,9 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 [![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][7]
 
+-   API document: https://ideapp.dev/Idea-React/
+-   Preview site: https://idea-react.vercel.app/
+
 ## CSS on CDN
 
 ```html
