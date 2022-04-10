@@ -24,6 +24,8 @@ export interface IdeaTableProps<T extends Base> {
 export class IdeaTable<T extends Base> extends PureComponent<
     IdeaTableProps<T>
 > {
+    static displayName = 'IdeaTable';
+
     renderRow = (row: T, index: number) => {
         const { columns = [] } = this.props;
 
@@ -53,7 +55,6 @@ export class IdeaTable<T extends Base> extends PureComponent<
         const {
             list = [],
             columns = [],
-            children,
             className,
             noneNode = 'No data',
             loadingNode

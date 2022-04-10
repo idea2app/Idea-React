@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Form, Image } from 'react-bootstrap';
 
 import { Icon } from '../Icon';
@@ -11,12 +11,12 @@ export interface MultipleFileUploaderProps {
     onDeleteOne: Function;
 }
 
-export const MultipleFileUploader = ({
+export const MultipleFileUploader: FC<MultipleFileUploaderProps> = ({
     name,
     onDeleteOne,
     value = [],
     onChange
-}: MultipleFileUploaderProps) => (
+}) => (
     <div className={`${styles.upload} rounded d-flex flex-wrap`}>
         {value.map((item, index) => (
             <div className="position-relative" key={index}>
@@ -47,3 +47,5 @@ export const MultipleFileUploader = ({
         </div>
     </div>
 );
+
+MultipleFileUploader.displayName = 'MultipleFileUploader';

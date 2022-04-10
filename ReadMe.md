@@ -3,7 +3,7 @@
 A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstrap][3], built by **[idea2app][4] remote developers team**.
 
 [![NPM Dependency](https://david-dm.org/idea2app/Idea-React.svg)][5]
-[![CI & CD](https://github.com/idea2app/Idea-React/workflows/CI%20&%20CD/badge.svg)][6]
+[![CI & CD](https://github.com/idea2app/Idea-React/actions/workflows/main.yml/badge.svg)][6]
 
 [![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][7]
 
@@ -22,6 +22,10 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
 />
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/prismjs@1.27.0/themes/prism.min.css"
+/>
 ```
 
 ## Components
@@ -31,17 +35,28 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 3. [Icon](source/Icon.tsx)
 4. [Avatar](source/Avatar.tsx)
 5. [Nameplate](source/Nameplate.tsx)
-6. [TypeEcho](source/TypeEcho.tsx)
+6. [Type Echo](source/TypeEcho.tsx)
 7. [Filter Input](source/FilterInput/index.tsx)
 8. [File Picker](source/FilePicker/index.tsx)
-9. [Editor](source/Editor.tsx)
-    - extra: `npm i @editorjs/editorjs react-editor-js`
-10. [Editor HTML](source/EditorHTML.tsx)
-    - extra: `npm i editorjs-html`
+9. [File Uploader](source/FileUploader/)
+10. [Multiple File Uploader](source/MultipleFileUploader/)
+11. [Code Block](source/CodeBlock.tsx)
+12. [Editor](source/Editor.tsx)
+13. [Editor HTML](source/EditorHTML.tsx)
+14. [Address Picker](source/AddressPicker.tsx)
+15. [Idea Info](source/IdeaInfo.tsx)
+16. [Idea Table](source/IdeaTable.tsx)
+17. [Table Spinner](source/TableSpinner.tsx)
+18. [Loading](source/Loading.tsx)
+19. [Pagination Bar](source/PaginationBar.tsx)
+20. [Idea Form](source/IdeaForm.tsx)
+21. [Idea Popover](source/IdeaPopover.tsx)
+22. [Idea Dialog](source/IdeaDialog.tsx)
 
 ## Utilities
 
-1. [`animate()`](source/animate.ts)
+1. [`text2color`](source/color.ts)
+2. [`animate()`](source/animate.ts)
 
 ## Scaffolds
 
@@ -53,7 +68,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 [3]: https://getbootstrap.com/
 [4]: https://ideapp.dev/
 [5]: https://david-dm.org/idea2app/Idea-React
-[6]: https://github.com/idea2app/Idea-React/actions
+[6]: https://github.com/idea2app/Idea-React/actions/workflows/main.yml
 [7]: https://nodei.co/npm/idea-react/
 [8]: https://ideapp.dev/React-MobX-Bootstrap-ts/
 [9]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx

@@ -13,6 +13,8 @@ export type IdeaPopoverProps = PropsWithChildren<{
 }>;
 
 export class IdeaPopover extends PureComponent<IdeaPopoverProps, State> {
+    static displayName = 'IdeaPopover';
+
     popoverRef = createRef<HTMLDivElement>();
 
     state = {
