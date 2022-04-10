@@ -22,7 +22,9 @@ jobs:
                   yarn
 
             - name: Build
-              run: yarn build
+              run: |
+                  cd preview
+                  yarn build
 
             - uses: amondnet/vercel-action@v20
               if: ${{ env.VERCEL_TOKEN && env.VERCEL_ORG_ID && env.VERCEL_PROJECT_ID }}
