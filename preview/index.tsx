@@ -165,7 +165,7 @@ export class App extends PureComponent {
                             {this.renderCode(
                                 <FileUploader
                                     name="cover"
-                                    value="http://xydlinger.cn/medias/banner/5.jpg"
+                                    value="https://github.com/lingziyb.png"
                                     onChange={console.log}
                                 />
                             )}
@@ -182,8 +182,8 @@ export class App extends PureComponent {
                                 <MultipleFileUploader
                                     name="photos"
                                     value={[
-                                        'http://xydlinger.cn/medias/banner/5.jpg',
-                                        'http://xydlinger.cn/medias/banner/2.jpg'
+                                        'https://github.com/lingziyb.png',
+                                        'https://github.com/TechQuery.png'
                                     ]}
                                     onChange={console.log}
                                     onDeleteOne={console.log}
