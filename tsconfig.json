@@ -2,6 +2,7 @@
     "compilerOptions": {
         "target": "ES5",
         "esModuleInterop": true,
+        "downlevelIteration": true,
         "jsx": "react",
         "skipLibCheck": true,
         "lib": ["ES2021", "DOM"]

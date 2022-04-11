@@ -1,4 +1,4 @@
-import React, { PropsWithoutRef } from 'react';
+import React, { FC, PropsWithoutRef } from 'react';
 import EditorJS_HTML from 'editorjs-html';
 
 export const parser = new EditorJS_HTML({
@@ -11,10 +11,12 @@ export type EditorHTMLProps = PropsWithoutRef<{
     data: string;
 }>;
 
-export function EditorHTML({ className, data }: EditorHTMLProps) {
+export const EditorHTML: FC<EditorHTMLProps> = ({ className, data }) => {
     const __html = parser.parse(JSON.parse(data)).join('');
 
     return (
         <article className={className} dangerouslySetInnerHTML={{ __html }} />
     );
-}
+};
+
+EditorHTML.displayName = 'EditorHTML';

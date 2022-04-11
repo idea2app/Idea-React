@@ -16,6 +16,8 @@ interface State {
 }
 
 export class FilePicker extends PureComponent<FilePickerProps, State> {
+    static displayName = 'FilePicker';
+
     state: Readonly<State> = {
         values: []
     };

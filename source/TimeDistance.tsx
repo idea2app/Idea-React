@@ -1,4 +1,4 @@
-import React, { PropsWithoutRef } from 'react';
+import React, { FC, PropsWithoutRef } from 'react';
 import { diffTime, TimeData } from 'web-utility';
 
 export type TimeDistanceProps = PropsWithoutRef<{
@@ -20,13 +20,13 @@ const UnitWords = {
     Y: 'year(s)'
 };
 
-export function TimeDistance({
+export const TimeDistance: FC<TimeDistanceProps> = ({
     className,
     date,
     unitWords = UnitWords,
     beforeWord = ' before',
     afterWord = ' after'
-}: TimeDistanceProps) {
+}) => {
     date = new Date(date);
 
     const { distance, unit } = diffTime(date);
@@ -41,4 +41,6 @@ export function TimeDistance({
             {distance < 0 ? beforeWord : afterWord}
         </time>
     );
-}
+};
+
+TimeDistance.displayName = 'TimeDistance';

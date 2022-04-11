@@ -1,8 +1,6 @@
-import classNames from 'classnames';
-import React, { PropsWithChildren, PureComponent, ReactNode } from 'react';
+import React, { PureComponent, ReactNode } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { render } from 'react-dom';
-import reactElementToJSXString from 'react-element-to-jsx-string';
 import { sleep } from 'web-utility';
 import {
     Avatar,
@@ -19,58 +17,19 @@ import {
     IdeaPopover,
     IdeaTable,
     Loading,
-    Map,
+    CodeBlock,
+    AddressPicker,
     MultipleFileUploader,
     Nameplate,
     PaginationBar,
     TableSpinner,
     TimeDistance
 } from '../source';
+import { Section, SubSection } from './utility';
 
 interface User extends Base {
     name: string;
     link: string;
-}
-
-type SectionProps = PropsWithChildren<{
-    className?: string;
-    title: string;
-}>;
-
-function Section({ className, title, children }: SectionProps) {
-    return (
-        <section
-            className={classNames(
-                'border',
-                'bg-white',
-                'mt-3',
-                'p-3',
-                className
-            )}
-        >
-            <h2 className="h3">{title}</h2>
-
-            {children}
-        </section>
-    );
-}
-
-function SubSection({ className, title, children }: SectionProps) {
-    return (
-        <>
-            <h3 className={classNames('h5', className)}>{title}</h3>
-
-            {children}
-        </>
-    );
-}
-
-function formateCode(code: string) {
-    return (
-        <pre>
-            <code className="language-jsx">{code.trim()}</code>
-        </pre>
-    );
 }
 
 export class App extends PureComponent {
@@ -125,7 +84,7 @@ export class App extends PureComponent {
         return (
             <>
                 {code}
-                {formateCode(reactElementToJSXString(code))}
+                <CodeBlock language="tsx">{code}</CodeBlock>
             </>
         );
     }
@@ -159,7 +118,7 @@ export class App extends PureComponent {
         return (
             <div className="bg-light">
                 <Container className="py-5" fluid="md">
-                    <h1>Extra components</h1>
+                    <h1>Idea React components</h1>
 
                     <Section title="Time Distance">
                         {this.renderCode(<TimeDistance date="1989-06-04" />)}
@@ -206,7 +165,7 @@ export class App extends PureComponent {
                             {this.renderCode(
                                 <FileUploader
                                     name="cover"
-                                    value="http://xydlinger.cn/medias/banner/5.jpg"
+                                    value="https://github.com/lingziyb.png"
                                     onChange={console.log}
                                 />
                             )}
@@ -223,8 +182,8 @@ export class App extends PureComponent {
                                 <MultipleFileUploader
                                     name="photos"
                                     value={[
-                                        'http://xydlinger.cn/medias/banner/5.jpg',
-                                        'http://xydlinger.cn/medias/banner/2.jpg'
+                                        'https://github.com/lingziyb.png',
+                                        'https://github.com/TechQuery.png'
                                     ]}
                                     onChange={console.log}
                                     onDeleteOne={console.log}
@@ -360,26 +319,25 @@ export class App extends PureComponent {
                             <IdeaPopover onShow={console.log} title="view info">
                                 <Button>查看</Button>
                                 <IdeaTable
+                                    className="small border"
+                                    noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
                                     list={list}
                                     columns={this.columns}
-                                    className="small border"
-                                >
-                                    暂无数据 -(o﹏o)-， 请添加数据噢
-                                </IdeaTable>
+                                />
                             </IdeaPopover>
                         )}
                     </Section>
 
                     <Section title="Map Select">
                         {this.renderCode(
-                            <Map
+                            <AddressPicker
                                 onChange={({ name }) =>
                                     this.setState({ mapAddressName: name })
                                 }
                             >
                                 <Button>选择</Button>
                                 <span className="ps-3">{mapAddressName}</span>
-                            </Map>
+                            </AddressPicker>
                         )}
                     </Section>
 

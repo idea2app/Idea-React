@@ -1,4 +1,4 @@
-import React, { CSSProperties, PropsWithoutRef } from 'react';
+import React, { CSSProperties, FC, PropsWithoutRef } from 'react';
 
 export type AvatarProps = PropsWithoutRef<{
     style?: CSSProperties;
@@ -6,21 +6,21 @@ export type AvatarProps = PropsWithoutRef<{
     size?: number;
 }>;
 
-export function Avatar({
+export const Avatar: FC<AvatarProps> = ({
     style,
     src = '/typescript.png',
     size = 3
-}: AvatarProps) {
-    return (
-        <img
-            className="rounded-circle"
-            style={{
-                width: `${size}rem`,
-                height: `${size}rem`,
-                objectFit: 'cover',
-                ...style
-            }}
-            src={src}
-        />
-    );
-}
+}) => (
+    <img
+        className="rounded-circle"
+        style={{
+            width: `${size}rem`,
+            height: `${size}rem`,
+            objectFit: 'cover',
+            ...style
+        }}
+        src={src}
+    />
+);
+
+Avatar.displayName = 'Avatar';

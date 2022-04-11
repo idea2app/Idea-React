@@ -10,12 +10,16 @@ export type TypeEchoProps = PropsWithoutRef<{
 type State = { echoed: string };
 
 export class TypeEcho extends PureComponent<TypeEchoProps, State> {
+    static displayName = 'TypeEcho';
+
     state: Readonly<State> = { echoed: '' };
 
     init: RefCallback<HTMLPreElement> = node =>
         node &&
-        new IntersectionObserver(async ([{ isIntersecting }]) => {
+        new IntersectionObserver(async ([{ isIntersecting }], observer) => {
             if (!isIntersecting) return;
+
+            observer.disconnect();
 
             const { text, intervals = 150 } = this.props;
 

@@ -1,14 +1,14 @@
-import React, { PropsWithoutRef } from 'react';
-import Spinner from 'react-bootstrap/Spinner';
+import React, { FC, PropsWithoutRef } from 'react';
+import { Spinner } from 'react-bootstrap';
 
-export function TableSpinner({
-    colSpan
-}: PropsWithoutRef<{ colSpan: number }>) {
-    return (
-        <tr>
-            <td className="text-center p-4" colSpan={colSpan}>
-                <Spinner animation="border" variant="primary" />
-            </td>
-        </tr>
-    );
-}
+export type TableSpinnerProps = PropsWithoutRef<{ colSpan: number }>;
+
+export const TableSpinner: FC<TableSpinnerProps> = ({ colSpan }) => (
+    <tr>
+        <td className="text-center p-4" colSpan={colSpan}>
+            <Spinner animation="border" variant="primary" />
+        </td>
+    </tr>
+);
+
+TableSpinner.displayName = 'TableSpinner';

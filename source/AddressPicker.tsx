@@ -1,4 +1,4 @@
-import React, { PureComponent, SyntheticEvent } from 'react';
+import React, { PropsWithChildren, PureComponent, SyntheticEvent } from 'react';
 import { Modal } from 'react-bootstrap';
 
 export interface MapData {
@@ -9,11 +9,16 @@ export interface MapData {
     location?: string;
 }
 
-export interface MapProps {
+export type AddressPickerProps = PropsWithChildren<{
     onChange: (data: MapData) => any;
-}
+}>;
 
-export class Map extends PureComponent<MapProps, { open: boolean }> {
+export class AddressPicker extends PureComponent<
+    AddressPickerProps,
+    { open: boolean }
+> {
+    static displayName = 'AddressPicker';
+
     state = {
         open: false
     };
@@ -55,7 +60,7 @@ export class Map extends PureComponent<MapProps, { open: boolean }> {
                 onHide={() => this.setState({ open: false })}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>地图选址</Modal.Title>
+                    <Modal.Title>Address Picker</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <iframe

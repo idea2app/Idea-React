@@ -15,6 +15,8 @@ interface State {
 }
 
 export class Editor extends PureComponent<EditorProps, State> {
+    static displayName = 'Editor';
+
     private core?: EditorJS;
 
     state: Readonly<State> = { value: '' };

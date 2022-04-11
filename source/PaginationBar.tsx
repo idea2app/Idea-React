@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { FC } from 'react';
 import { Pagination, PaginationProps } from 'react-bootstrap';
 
 export interface PaginationBarProps extends Omit<PaginationProps, 'onChange'> {
@@ -9,15 +9,15 @@ export interface PaginationBarProps extends Omit<PaginationProps, 'onChange'> {
     onChange: (index: number) => any;
 }
 
-export function PaginationBar({
+export const PaginationBar: FC<PaginationBarProps> = ({
     currentPage = 1,
     pageCount,
     count,
     onChange,
     className,
     ...props
-}: PaginationBarProps) {
-    return !pageCount ? null : (
+}) =>
+    !pageCount ? null : (
         <Pagination
             className={classNames(
                 'd-flex',
@@ -51,4 +51,5 @@ export function PaginationBar({
             {count && <span className="mx-3 fs14">Total {count} rows</span>}
         </Pagination>
     );
-}
+
+PaginationBar.displayName = 'PaginationBar';
