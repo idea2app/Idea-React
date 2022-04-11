@@ -7,11 +7,13 @@
     },
     "devDependencies": {
         "@parcel/transformer-less": "2.4.1",
+        "koapache": "^2.2.1",
         "parcel": "^2.4.1"
     },
     "browserslist": "> 0.5%, last 2 versions, not dead",
     "scripts": {
-        "start": "parcel index.html",
-        "build": "parcel build index.html"
+        "dev": "parcel index.html",
+        "build": "rm -rf dist/  &&  parcel build index.html",
+        "start": "npm run build  &&  web-server dist/ -p 3000"
     }
 }
