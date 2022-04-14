@@ -24,7 +24,7 @@ export const IdeaInfo = <T,>({
     <Form className={classNames('p-5', className)} {...other}>
         {rows.map(({ label, key, render, labelCol }) => (
             <Form.Group as={Row} className="mb-3" key={`${label}-${key}`}>
-                <Form.Label className="text-end" column="sm" sm={2}>
+                <Form.Label className="text-end" column="sm" sm={labelCol}>
                     {label}：
                 </Form.Label>
                 <Col className="align-self-center" sm={12 - labelCol}>
