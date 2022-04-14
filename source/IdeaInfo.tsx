@@ -4,7 +4,7 @@ import { Row, Col, Form } from 'react-bootstrap';
 
 export interface IdeaInfoItem<T> {
     label: string;
-    labelCol: number;
+    labelCol?: number;
     key?: string;
     render?: (params: T) => ReactNode;
 }
