@@ -17,6 +17,8 @@ export * from './IdeaDialog';
 export * from './IdeaForm';
 export * from './IdeaPopover';
 export * from './Loading';
-export * from './Map';
+export * from './CodeBlock';
+export * from './AddressPicker';
 
+export * from './color';
 export * from './animate';

@@ -23,6 +23,8 @@ interface State {
 }
 
 export class FilterInput extends PureComponent<FilterInputProps, State> {
+    static displayName = 'FilterInput';
+
     state: Readonly<State> = {
         options: [],
         values: []

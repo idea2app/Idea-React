@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, PropsWithRef } from 'react';
+import React, { HTMLAttributes, FC, PropsWithRef } from 'react';
 import classNames from 'classnames';
 
 export type IconProps = PropsWithRef<
@@ -7,18 +7,18 @@ export type IconProps = PropsWithRef<
         size?: number;
     }
 >;
-export function Icon({
+export const Icon: FC<IconProps> = ({
     className,
     style,
     name,
-    size = 1,
+    size,
     ...props
-}: IconProps) {
-    return (
-        <i
-            className={classNames(`bi-${name}`, className)}
-            style={{ fontSize: `${size}rem`, ...style }}
-            {...props}
-        />
-    );
-}
+}) => (
+    <i
+        className={classNames(`bi-${name}`, className)}
+        style={{ fontSize: size && `${size}rem`, ...style }}
+        {...props}
+    />
+);
+
+Icon.displayName = 'Icon';

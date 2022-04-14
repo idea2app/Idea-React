@@ -1,0 +1,19 @@
+{
+    "name": "@idea2app/idea-react-preview",
+    "private": true,
+    "dependencies": {
+        "classnames": "^2.3.1",
+        "web-utility": "^3.6.1"
+    },
+    "devDependencies": {
+        "@parcel/transformer-less": "2.4.1",
+        "koapache": "^2.2.1",
+        "parcel": "^2.4.1"
+    },
+    "browserslist": "> 0.5%, last 2 versions, not dead",
+    "scripts": {
+        "dev": "parcel index.html",
+        "build": "rm -rf dist/  &&  parcel build index.html",
+        "start": "npm run build  &&  web-server dist/ -p 3000"
+    }
+}

@@ -30,6 +30,8 @@ export class FileUploader extends Component<
     FileUploaderProps,
     FileUploaderState
 > {
+    static displayName = 'FileUploader';
+
     state = {
         file: '',
         fileName: '',
