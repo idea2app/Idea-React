@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
-import { Row, Col, Form } from 'react-bootstrap';
+import { Col, Form, Row } from 'react-bootstrap';
 
 export interface IdeaInfoItem<T> {
     label: string;
+    labelCol: number;
     key?: string;
     render?: (params: T) => ReactNode;
 }
@@ -22,12 +23,12 @@ export function IdeaInfo<T>({
 }: IdeaInfoProps<T>) {
     return (
         <Form className={classNames('p-5', className)} {...other}>
-            {rows.map(({ label, key, render }) => (
+            {rows.map(({ label, key, render, labelCol }) => (
                 <Form.Group as={Row} className="mb-3" key={`${label}-${key}`}>
                     <Form.Label className="text-end" column="sm" sm={2}>
                         {label}：
                     </Form.Label>
-                    <Col className="align-self-center" sm={10}>
+                    <Col className="align-self-center" sm={12 - labelCol}>
                         {render?.(data) || data?.[key]}
                     </Col>
                 </Form.Group>
