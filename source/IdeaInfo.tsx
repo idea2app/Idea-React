@@ -1,6 +1,5 @@
-import classNames from 'classnames';
-import React, { ReactNode, FC } from 'react';
-import { Row, Col, Form } from 'react-bootstrap';
+import React, { FC, ReactNode } from 'react';
+import { Col, Form, Row } from 'react-bootstrap';
 
 export interface IdeaInfoItem<T> {
     label: string;
@@ -15,13 +14,8 @@ export interface IdeaInfoProps<T> {
     data: T;
 }
 
-export const IdeaInfo = <T,>({
-    className,
-    rows,
-    data,
-    ...other
-}: IdeaInfoProps<T>) => (
-    <Form className={classNames('p-5', className)} {...other}>
+export const IdeaInfo = <T,>({ rows, data, ...other }: IdeaInfoProps<T>) => (
+    <Form {...other}>
         {rows.map(({ label, key, render, labelCol }) => (
             <Form.Group as={Row} className="mb-3" key={`${label}-${key}`}>
                 <Form.Label className="text-end" column="sm" sm={labelCol}>

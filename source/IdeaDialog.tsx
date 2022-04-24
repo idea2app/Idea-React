@@ -5,6 +5,7 @@ export type IdeaDialogProps = PropsWithChildren<{
     title: string;
     show: boolean;
     size?: 'sm' | 'lg' | 'xl';
+    className?: string;
     formId?: string;
     confirmText?: string;
     onConfirm?: () => any;
@@ -13,8 +14,8 @@ export type IdeaDialogProps = PropsWithChildren<{
 }>;
 
 export const IdeaDialog: FC<IdeaDialogProps> = ({
-    title,
     children,
+    title,
     formId,
     confirmText,
     onConfirm,
@@ -41,7 +42,12 @@ export const IdeaDialog: FC<IdeaDialogProps> = ({
                     </Button>
                 )}
                 {confirmText && (
-                    <Button variant="primary" type="submit" form={formId}>
+                    <Button
+                        variant="primary"
+                        type="submit"
+                        form={formId}
+                        onClick={onConfirm}
+                    >
                         {confirmText}
                     </Button>
                 )}

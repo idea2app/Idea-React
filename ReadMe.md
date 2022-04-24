@@ -61,6 +61,28 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 1. [`text2color`](source/color.ts)
 2. [`animate()`](source/animate.ts)
 
+## publish tag version code
+
+1. update version in package.json file
+
+2. add git tag
+
+```shell
+git tag vx.xx.x  #0.22.4
+```
+
+3. view tag
+
+```shell
+git tag
+```
+
+4. publish tag version code
+
+```shell
+git push origin master --tags  #push all branch and tags on master
+```
+
 ## Scaffolds
 
 1. MobX: [demo][8] & [usage][9]
