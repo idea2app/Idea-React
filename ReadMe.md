@@ -77,3 +77,12 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 [9]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx
 [10]: https://next-bootstrap-ts.vercel.app/
 [11]: https://github.com/idea2app/next-bootstrap-ts/blob/main/pages/component.tsx
+
+## 发布 tag 线上版
+
+-   改 version
+    git tag vx.xx.x(0.22.4)
+-   查看 tag 版本
+    git tag
+-   发布版本
+    git push origin vx.xx.x
