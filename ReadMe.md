@@ -8,7 +8,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 [![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][7]
 
 -   API document: https://ideapp.dev/Idea-React/
--   Preview site: https://idea-react.vercel.app/
+-   Preview site: https://idea-react-stevending1st.vercel.app/
 
 ## CSS on CDN
 
@@ -27,7 +27,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/prismjs@1.27.0/themes/prism.min.css"
+    href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.min.css"
 />
 ```
 
@@ -61,32 +61,34 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 1. [`text2color`](source/color.ts)
 2. [`animate()`](source/animate.ts)
 
-## publish tag version code
+## Scaffolds
 
-1. update version in package.json file
+1. MobX: [demo][8] & [usage][9]
+2. Next.js: [demo][10] & [usage][11]
 
-2. add git tag
+## Development
+
+### Publish
+
+1. update `version` in `package.json` file
+
+2. add Git tag
 
 ```shell
-git tag vx.xx.x  #0.22.4
+git tag vx.xx.x  # 0.22.4
 ```
 
-3. view tag
+3. review tag
 
 ```shell
 git tag
 ```
 
-4. publish tag version code
+4. publish code with tag version
 
 ```shell
-git push origin master --tags  #push all branch and tags on master
+git push origin master --tags  # push all branches and tags on master
 ```
-
-## Scaffolds
-
-1. MobX: [demo][8] & [usage][9]
-2. Next.js: [demo][10] & [usage][11]
 
 [1]: https://reactjs.org/
 [2]: https://www.typescriptlang.org/

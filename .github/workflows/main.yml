@@ -27,7 +27,6 @@ jobs:
                   force_orphan: true
             - name: Deploy preview
               uses: amondnet/vercel-action@v20
-              if: ${{ env.VERCEL_TOKEN && env.VERCEL_ORG_ID && env.VERCEL_PROJECT_ID }}
               with:
                   vercel-token: ${{ secrets.VERCEL_TOKEN }}
                   github-token: ${{ secrets.GITHUB_TOKEN }}
