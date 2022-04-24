@@ -80,9 +80,14 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 ## 发布 tag 线上版
 
--   改 version
-    git tag vx.xx.x(0.22.4)
--   查看 tag 版本
-    git tag
--   发布版本
-    git push origin vx.xx.x
+1. 改 version
+
+    > `git tag vx.xx.x(0.22.4)`
+
+2. 查看 tag 版本
+
+    > `git tag`
+
+3. 发布版本
+
+    > `git push origin vx.xx.x`
