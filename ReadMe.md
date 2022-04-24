@@ -67,20 +67,20 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 2. add git tag
 
-```javascript
-git tag vx.xx.x  //0.22.4
+```shell
+git tag vx.xx.x  #0.22.4
 ```
 
 3. view tag
 
-```javascript
+```shell
 git tag
 ```
 
 4. publish tag version code
 
-```javascript
-git push origin master --tags  // 推送 master 分支的所有提交及其 tag
+```shell
+git push origin master --tags  #push all branch and tags on master
 ```
 
 ## Scaffolds
