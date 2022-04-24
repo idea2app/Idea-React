@@ -61,6 +61,28 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 1. [`text2color`](source/color.ts)
 2. [`animate()`](source/animate.ts)
 
+## publish tag version code
+
+1. update version in package.json file
+
+2. add git tag
+
+```javascript
+git tag vx.xx.x  //0.22.4
+```
+
+3. view tag
+
+```javascript
+git tag
+```
+
+4. publish tag version code
+
+```javascript
+git push origin master --tags  // 推送 master 分支的所有提交及其 tag
+```
+
 ## Scaffolds
 
 1. MobX: [demo][8] & [usage][9]
@@ -77,17 +99,3 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 [9]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx
 [10]: https://next-bootstrap-ts.vercel.app/
 [11]: https://github.com/idea2app/next-bootstrap-ts/blob/main/pages/component.tsx
-
-## 发布 tag 线上版
-
-1. 改 version
-
-    > `git tag vx.xx.x(0.22.4)`
-
-2. 查看 tag 版本
-
-    > `git tag`
-
-3. 发布版本
-
-    > `git push origin vx.xx.x`
