@@ -1,6 +1,5 @@
 import React, { createRef, PropsWithChildren, PureComponent } from 'react';
-import Overlay from 'react-bootstrap/Overlay';
-import Popover from 'react-bootstrap/Popover';
+import { Overlay, Popover } from 'react-bootstrap';
 
 interface State {
     showPopover: boolean;

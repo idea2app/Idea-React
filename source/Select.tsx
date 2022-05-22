@@ -7,7 +7,7 @@ import React, {
     PropsWithChildren,
     FC
 } from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, DropdownButtonProps } from 'react-bootstrap';
 
 export type OptionProps = PropsWithChildren<{
     value?: string;
@@ -19,14 +19,18 @@ export const Option: FC<OptionProps> = ({ value, children }) => (
 
 Option.displayName = 'Option';
 
-export type SelectProps = PropsWithChildren<{
-    className?: string;
-    value?: string;
-    onChange?: (value: string) => any;
-}>;
+export type SelectProps = PropsWithChildren<
+    Pick<DropdownButtonProps, 'variant' | 'menuVariant'> & {
+        className?: string;
+        value?: string;
+        onChange?: (value: string) => any;
+    }
+>;
 
 export const Select: FC<SelectProps> = ({
     className,
+    variant,
+    menuVariant,
     children,
     value,
     onChange
@@ -57,15 +61,15 @@ export const Select: FC<SelectProps> = ({
                     'd-flex',
                     'justify-content-between',
                     'align-items-center',
-                    'bg-white',
-                    'text-dark',
+                    !variant && 'bg-white text-dark',
                     className
                 )}
+                variant={variant}
             >
                 <div>{current?.props.children}</div>
             </Dropdown.Toggle>
 
-            <Dropdown.Menu>{children}</Dropdown.Menu>
+            <Dropdown.Menu variant={menuVariant}>{children}</Dropdown.Menu>
         </Dropdown>
     );
 };
