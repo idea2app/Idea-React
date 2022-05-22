@@ -5,6 +5,7 @@ export * from './Avatar';
 export * from './Nameplate';
 export * from './TableSpinner';
 export * from './TypeEcho';
+export * from './Select';
 export * from './FilterInput';
 export * from './FilePicker';
 export * from './FileUploader';

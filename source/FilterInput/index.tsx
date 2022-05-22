@@ -5,7 +5,7 @@ import { Badge } from 'react-bootstrap';
 import { Icon } from '../Icon';
 import style from './index.module.less';
 
-export interface Option {
+export interface OptionItem {
     value?: any;
     label: string;
 }
@@ -13,13 +13,13 @@ export interface Option {
 export interface FilterInputProps {
     name: string;
     required?: boolean;
-    defaultValue?: Option[];
-    loadOptions?: (input: string) => Promise<Option[]>;
+    defaultValue?: OptionItem[];
+    loadOptions?: (input: string) => Promise<OptionItem[]>;
 }
 
 interface State {
-    options: Option[];
-    values: Option[];
+    options: OptionItem[];
+    values: OptionItem[];
 }
 
 export class FilterInput extends PureComponent<FilterInputProps, State> {
@@ -47,7 +47,7 @@ export class FilterInput extends PureComponent<FilterInputProps, State> {
             this.setState({ values });
     }
 
-    addOne(value: Option) {
+    addOne(value: OptionItem) {
         const { values } = this.state;
 
         this.setState({ options: [], values: [...values, value] });

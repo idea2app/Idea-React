@@ -5,6 +5,8 @@ import { sleep } from 'web-utility';
 import {
     Avatar,
     Base,
+    Select,
+    Option,
     FilePicker,
     FileUploader,
     FilterInput,
@@ -32,13 +34,41 @@ interface User extends Base {
     link: string;
 }
 
-export class App extends PureComponent {
-    state = {
+const info: User = {
+        id: '1',
+        name: 'lingli',
+        link: 'https://baidu.com'
+    },
+    list: User[] = [
+        {
+            id: '1',
+            name: 'lingli',
+            link: 'https://baidu.com'
+        },
+        {
+            id: '2',
+            name: 'xxx',
+            link: 'https://ideapp.dev'
+        }
+    ];
+
+interface State {
+    pageIndex: number;
+    selectValue: string;
+    showLoading: boolean;
+    showDialog: boolean;
+    showFormDialog: boolean;
+    mapAddressName: string;
+}
+
+export class App extends PureComponent<{}, State> {
+    state: Readonly<State> = {
+        pageIndex: 1,
+        selectValue: '0',
+        showLoading: false,
         showDialog: false,
         showFormDialog: false,
-        pageIndex: 1,
-        mapAddressName: '',
-        showLoading: false
+        mapAddressName: ''
     };
 
     columns: IdeaInfoItem<User>[] = [
@@ -91,29 +121,13 @@ export class App extends PureComponent {
 
     render() {
         const {
+            pageIndex,
+            selectValue,
+            showLoading,
             showDialog,
             showFormDialog,
-            pageIndex,
-            mapAddressName,
-            showLoading
+            mapAddressName
         } = this.state;
-        const info: User = {
-            id: '1',
-            name: 'lingli',
-            link: 'https://baidu.com'
-        };
-        const list: User[] = [
-            {
-                id: '1',
-                name: 'lingli',
-                link: 'https://baidu.com'
-            },
-            {
-                id: '2',
-                name: 'xxx',
-                link: 'https://ideapp.dev'
-            }
-        ];
 
         return (
             <div className="bg-light">
@@ -146,6 +160,26 @@ export class App extends PureComponent {
                                 name="idea2app"
                                 avatar="https://github.com/idea2app.png"
                             />
+                        )}
+                    </Section>
+
+                    <Section title="Select">
+                        {this.renderCode(
+                            <Select
+                                value={selectValue}
+                                onChange={value =>
+                                    this.setState({ selectValue: value })
+                                }
+                            >
+                                <Option value="0">
+                                    <Icon className="me-2" name="heart" />
+                                    idea2app
+                                </Option>
+                                <Option value="1">
+                                    <Icon className="me-2" name="bootstrap" />
+                                    freeCodeCamp
+                                </Option>
+                            </Select>
                         )}
                     </Section>
 

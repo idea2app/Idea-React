@@ -39,22 +39,23 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 4. [Avatar](source/Avatar.tsx)
 5. [Nameplate](source/Nameplate.tsx)
 6. [Type Echo](source/TypeEcho.tsx)
-7. [Filter Input](source/FilterInput/index.tsx)
-8. [File Picker](source/FilePicker/index.tsx)
-9. [File Uploader](source/FileUploader/)
-10. [Multiple File Uploader](source/MultipleFileUploader/)
-11. [Code Block](source/CodeBlock.tsx)
-12. [Editor](source/Editor.tsx)
-13. [Editor HTML](source/EditorHTML.tsx)
-14. [Address Picker](source/AddressPicker.tsx)
-15. [Idea Info](source/IdeaInfo.tsx)
-16. [Idea Table](source/IdeaTable.tsx)
-17. [Table Spinner](source/TableSpinner.tsx)
-18. [Loading](source/Loading.tsx)
-19. [Pagination Bar](source/PaginationBar.tsx)
-20. [Idea Form](source/IdeaForm.tsx)
-21. [Idea Popover](source/IdeaPopover.tsx)
-22. [Idea Dialog](source/IdeaDialog.tsx)
+7. [Select](source/Select.tsx)
+8. [Filter Input](source/FilterInput/index.tsx)
+9. [File Picker](source/FilePicker/index.tsx)
+10. [File Uploader](source/FileUploader/)
+11. [Multiple File Uploader](source/MultipleFileUploader/)
+12. [Code Block](source/CodeBlock.tsx)
+13. [Editor](source/Editor.tsx)
+14. [Editor HTML](source/EditorHTML.tsx)
+15. [Address Picker](source/AddressPicker.tsx)
+16. [Idea Info](source/IdeaInfo.tsx)
+17. [Idea Table](source/IdeaTable.tsx)
+18. [Table Spinner](source/TableSpinner.tsx)
+19. [Loading](source/Loading.tsx)
+20. [Pagination Bar](source/PaginationBar.tsx)
+21. [Idea Form](source/IdeaForm.tsx)
+22. [Idea Popover](source/IdeaPopover.tsx)
+23. [Idea Dialog](source/IdeaDialog.tsx)
 
 ## Utilities
 
@@ -75,7 +76,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 2. add Git tag
 
 ```shell
-git tag vx.xx.x  # 0.22.4
+git tag vx.xx.x  # 0.23.0
 ```
 
 3. review tag
