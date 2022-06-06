@@ -11,14 +11,16 @@ export interface Column<T> {
 
 export interface IdeaTableProps<T> {
     className?: string;
-    rowKey?: string | ((params: T) => string | number);
+    rowKey?: keyof T | ((params: T) => string | number);
     noneNode?: ReactNode;
     loadingNode?: ReactNode;
     columns: Column<T>[];
     list: T[];
 }
 
-export class IdeaTable<T> extends PureComponent<IdeaTableProps<T>> {
+export class IdeaTable<T extends Record<string, any>> extends PureComponent<
+    IdeaTableProps<T>
+> {
     static displayName = 'IdeaTable';
 
     renderRow = (row: T, index: number) => {
@@ -27,7 +29,7 @@ export class IdeaTable<T> extends PureComponent<IdeaTableProps<T>> {
 
         return (
             <tr
-                key={typeof rowKey === 'string' ? row[rowKey] : rowKey?.(row)}
+                key={typeof rowKey !== 'function' ? row[rowKey] : rowKey(row)}
                 className="text-center"
             >
                 {columns.map(({ key, render, width }) => {
