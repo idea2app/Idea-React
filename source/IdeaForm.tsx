@@ -2,7 +2,9 @@ import classNames from 'classnames';
 import React, { ReactNode, ChangeEvent, FormEvent, FC } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 
-import { Base } from './IdeaTable';
+export interface Base {
+    id: number | string;
+}
 
 export interface IdeaFormItem<T> {
     key?: string;
@@ -79,7 +81,7 @@ export const IdeaForm = <T extends Base>({
                             {required && (
                                 <span className="text-danger me-1">*</span>
                             )}
-                            {label}：
+                            {label}:
                         </Form.Label>
 
                         <Col sm={controlCols}>

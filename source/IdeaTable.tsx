@@ -2,10 +2,6 @@ import classNames from 'classnames';
 import React, { ReactNode, PureComponent } from 'react';
 import { Table } from 'react-bootstrap';
 
-export interface Base {
-    id: number | string;
-}
-
 export interface Column<T> {
     key?: string;
     label: string;
@@ -13,24 +9,29 @@ export interface Column<T> {
     render?: (params: T, index?: number) => ReactNode;
 }
 
-export interface IdeaTableProps<T extends Base> {
+export interface IdeaTableProps<T> {
     className?: string;
+    rowKey?: keyof T | ((params: T) => string | number);
     noneNode?: ReactNode;
     loadingNode?: ReactNode;
     columns: Column<T>[];
     list: T[];
 }
 
-export class IdeaTable<T extends Base> extends PureComponent<
+export class IdeaTable<T extends Record<string, any>> extends PureComponent<
     IdeaTableProps<T>
 > {
     static displayName = 'IdeaTable';
 
     renderRow = (row: T, index: number) => {
-        const { columns = [] } = this.props;
+        const { columns = [], rowKey = (params: T) => JSON.stringify(params) } =
+            this.props;
 
         return (
-            <tr key={row?.id} className="text-center">
+            <tr
+                key={typeof rowKey !== 'function' ? row[rowKey] : rowKey(row)}
+                className="text-center"
+            >
                 {columns.map(({ key, render, width }) => {
                     let value = '';
 

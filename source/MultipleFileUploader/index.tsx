@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Form, Image } from 'react-bootstrap';
 
 import { Icon } from '../Icon';
-import styles from './index.module.less';
+import * as styles from './index.module.less';
 
 export interface MultipleFileUploaderProps {
     name?: string;

@@ -2,7 +2,7 @@ import React, { ChangeEvent, Component } from 'react';
 import { Form, Image } from 'react-bootstrap';
 
 import { Icon } from '../Icon';
-import styles from './index.module.less';
+import * as styles from './index.module.less';
 
 interface FileUploaderProps {
     value?: string;

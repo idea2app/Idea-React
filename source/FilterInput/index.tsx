@@ -3,7 +3,7 @@ import React, { KeyboardEvent, PureComponent, createRef } from 'react';
 import { Badge } from 'react-bootstrap';
 
 import { Icon } from '../Icon';
-import style from './index.module.less';
+import * as style from './index.module.less';
 
 export interface OptionItem {
     value?: any;
