@@ -22,12 +22,12 @@ export class IdeaTable<T> extends PureComponent<IdeaTableProps<T>> {
     static displayName = 'IdeaTable';
 
     renderRow = (row: T, index: number) => {
-        const { columns = [], rowKey = (params: T) => params.toString() } =
+        const { columns = [], rowKey = (params: T) => JSON.stringify(params) } =
             this.props;
 
         return (
             <tr
-                key={typeof rowKey === 'string' ? rowKey : rowKey(row)}
+                key={typeof rowKey === 'string' ? row[rowKey] : rowKey?.(row)}
                 className="text-center"
             >
                 {columns.map(({ key, render, width }) => {
