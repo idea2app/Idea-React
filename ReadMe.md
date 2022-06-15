@@ -19,7 +19,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"
@@ -39,23 +39,24 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 4. [Avatar](source/Avatar.tsx)
 5. [Nameplate](source/Nameplate.tsx)
 6. [Type Echo](source/TypeEcho.tsx)
-7. [Select](source/Select.tsx)
-8. [Filter Input](source/FilterInput/index.tsx)
-9. [File Picker](source/FilePicker/index.tsx)
-10. [File Uploader](source/FileUploader/)
-11. [Multiple File Uploader](source/MultipleFileUploader/)
-12. [Code Block](source/CodeBlock.tsx)
-13. [Editor](source/Editor.tsx)
-14. [Editor HTML](source/EditorHTML.tsx)
-15. [Address Picker](source/AddressPicker.tsx)
-16. [Idea Info](source/IdeaInfo.tsx)
-17. [Idea Table](source/IdeaTable.tsx)
-18. [Table Spinner](source/TableSpinner.tsx)
-19. [Loading](source/Loading.tsx)
-20. [Pagination Bar](source/PaginationBar.tsx)
-21. [Idea Form](source/IdeaForm.tsx)
-22. [Idea Popover](source/IdeaPopover.tsx)
-23. [Idea Dialog](source/IdeaDialog.tsx)
+7. [Click Boundary](source/ClickBoundary.tsx)
+8. [Select](source/Select.tsx)
+9. [Filter Input](source/FilterInput/index.tsx)
+10. [File Picker](source/FilePicker/index.tsx)
+11. [File Uploader](source/FileUploader/)
+12. [Multiple File Uploader](source/MultipleFileUploader/)
+13. [Code Block](source/CodeBlock.tsx)
+14. [Editor](source/Editor.tsx)
+15. [Editor HTML](source/EditorHTML.tsx)
+16. [Address Picker](source/AddressPicker.tsx)
+17. [Idea Info](source/IdeaInfo.tsx)
+18. [Idea Table](source/IdeaTable.tsx)
+19. [Table Spinner](source/TableSpinner.tsx)
+20. [Loading](source/Loading.tsx)
+21. [Pagination Bar](source/PaginationBar.tsx)
+22. [Idea Form](source/IdeaForm.tsx)
+23. [Idea Popover](source/IdeaPopover.tsx)
+24. [Idea Dialog](source/IdeaDialog.tsx)
 
 ## Utilities
 
