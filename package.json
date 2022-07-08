@@ -1,6 +1,6 @@
 {
     "name": "idea-react",
-    "version": "0.25.0",
+    "version": "0.26.0",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "A React advanced components library based on TypeScript & Bootstrap, built by idea2app remote developers team.",

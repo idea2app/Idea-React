@@ -6,6 +6,7 @@ export * from './Nameplate';
 export * from './TableSpinner';
 export * from './TypeEcho';
 export * from './ClickBoundary';
+export * from './ScrollBoundary';
 export * from './SpinnerButton';
 export * from './Select';
 export * from './FilterInput';
