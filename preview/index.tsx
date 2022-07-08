@@ -5,6 +5,7 @@ import { sleep } from 'web-utility';
 import {
     Avatar,
     Base,
+    SpinnerButton,
     Select,
     Option,
     FilePicker,
@@ -160,6 +161,25 @@ export class App extends PureComponent<{}, State> {
                                 name="idea2app"
                                 avatar="https://github.com/idea2app.png"
                             />
+                        )}
+                    </Section>
+
+                    <Section title="Spinner Button">
+                        {this.renderCode(
+                            <>
+                                <SpinnerButton
+                                    className="me-3"
+                                    animation="border"
+                                    loading
+                                />
+                                <SpinnerButton
+                                    animation="grow"
+                                    type="submit"
+                                    loading
+                                >
+                                    Submit
+                                </SpinnerButton>
+                            </>
                         )}
                     </Section>
 
