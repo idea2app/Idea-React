@@ -1,7 +1,8 @@
 node_modules/
 package-lock.json
+yarn.lock
 dist/
-preview/yarn.lock
+preview/pnpm-lock.yaml
 docs/
 .parcel-cache
 .vercel

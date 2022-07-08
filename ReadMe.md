@@ -15,19 +15,19 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 ```html
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+    href="https://unpkg.com/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
+    href="https://unpkg.com/animate.css@4.1.1/animate.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.min.css"
+    href="https://unpkg.com/prismjs@1.28.0/themes/prism.min.css"
 />
 ```
 
@@ -40,23 +40,24 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 5. [Nameplate](source/Nameplate.tsx)
 6. [Type Echo](source/TypeEcho.tsx)
 7. [Click Boundary](source/ClickBoundary.tsx)
-8. [Select](source/Select.tsx)
-9. [Filter Input](source/FilterInput/index.tsx)
-10. [File Picker](source/FilePicker/index.tsx)
-11. [File Uploader](source/FileUploader/)
-12. [Multiple File Uploader](source/MultipleFileUploader/)
-13. [Code Block](source/CodeBlock.tsx)
-14. [Editor](source/Editor.tsx)
-15. [Editor HTML](source/EditorHTML.tsx)
-16. [Address Picker](source/AddressPicker.tsx)
-17. [Idea Info](source/IdeaInfo.tsx)
-18. [Idea Table](source/IdeaTable.tsx)
-19. [Table Spinner](source/TableSpinner.tsx)
-20. [Loading](source/Loading.tsx)
-21. [Pagination Bar](source/PaginationBar.tsx)
-22. [Idea Form](source/IdeaForm.tsx)
-23. [Idea Popover](source/IdeaPopover.tsx)
-24. [Idea Dialog](source/IdeaDialog.tsx)
+8. [Spinner Button](source/SpinnerButton.tsx)
+9. [Select](source/Select.tsx)
+10. [Filter Input](source/FilterInput/index.tsx)
+11. [File Picker](source/FilePicker/index.tsx)
+12. [File Uploader](source/FileUploader/)
+13. [Multiple File Uploader](source/MultipleFileUploader/)
+14. [Code Block](source/CodeBlock.tsx)
+15. [Editor](source/Editor.tsx)
+16. [Editor HTML](source/EditorHTML.tsx)
+17. [Address Picker](source/AddressPicker.tsx)
+18. [Idea Info](source/IdeaInfo.tsx)
+19. [Idea Table](source/IdeaTable.tsx)
+20. [Table Spinner](source/TableSpinner.tsx)
+21. [Loading](source/Loading.tsx)
+22. [Pagination Bar](source/PaginationBar.tsx)
+23. [Idea Form](source/IdeaForm.tsx)
+24. [Idea Popover](source/IdeaPopover.tsx)
+25. [Idea Dialog](source/IdeaDialog.tsx)
 
 ## Utilities
 

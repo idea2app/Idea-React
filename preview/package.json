@@ -3,12 +3,12 @@
     "private": true,
     "dependencies": {
         "classnames": "^2.3.1",
-        "web-utility": "^3.6.3"
+        "web-utility": "^3.7.4"
     },
     "devDependencies": {
-        "@parcel/transformer-less": "^2.5.0",
+        "@parcel/transformer-less": "^2.6.2",
         "koapache": "^2.2.1",
-        "parcel": "^2.5.0"
+        "parcel": "^2.6.2"
     },
     "browserslist": "> 0.5%, last 2 versions, not dead",
     "scripts": {

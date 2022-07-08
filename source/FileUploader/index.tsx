@@ -4,7 +4,7 @@ import { Form, Image } from 'react-bootstrap';
 import { Icon } from '../Icon';
 import * as styles from './index.module.less';
 
-interface FileUploaderProps {
+export interface FileUploaderProps {
     value?: string;
     name: string;
     disabled?: boolean;
