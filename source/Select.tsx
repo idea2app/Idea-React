@@ -1,12 +1,12 @@
 import { makeArray } from 'web-utility';
 import classNames from 'classnames';
 import React, {
+    CSSProperties,
+    PropsWithChildren,
     ReactNode,
     ReactElement,
-    isValidElement,
-    PropsWithChildren,
     FC,
-    CSSProperties
+    isValidElement
 } from 'react';
 import { Dropdown, DropdownButtonProps } from 'react-bootstrap';
 
@@ -24,14 +24,12 @@ export const Option: FC<OptionProps> = ({ value, children, ...props }) => (
 
 Option.displayName = 'Option';
 
-export type SelectProps = PropsWithChildren<
-    Pick<DropdownButtonProps, 'variant' | 'menuVariant'> & {
-        className?: string;
-        style?: CSSProperties;
-        value?: string;
-        onChange?: (value: string) => any;
-    }
->;
+export interface SelectProps
+    extends OptionProps,
+        Pick<DropdownButtonProps, 'variant' | 'menuVariant'> {
+    onChange?: (value: string) => any;
+    valueRender?: (value: string) => ReactNode;
+}
 
 export const Select: FC<SelectProps> = ({
     className,
@@ -40,14 +38,17 @@ export const Select: FC<SelectProps> = ({
     menuVariant,
     children,
     value,
-    onChange
+    onChange,
+    valueRender
 }) => {
-    const current = (makeArray(children) as ReactNode[]).find(
-        node =>
-            isValidElement<OptionProps>(node) &&
-            node.type === Option &&
-            node.props.value === value
-    ) as ReactElement<OptionProps, typeof Option>;
+    const current = (makeArray(children) as ReactNode[])
+        .flat(Infinity)
+        .find(
+            node =>
+                isValidElement<OptionProps>(node) &&
+                node.type === Option &&
+                node.props.value === value
+        ) as ReactElement<OptionProps, typeof Option>;
 
     return (
         <Dropdown
@@ -73,7 +74,11 @@ export const Select: FC<SelectProps> = ({
                 )}
                 {...{ style, variant }}
             >
-                <div>{current?.props.children}</div>
+                {valueRender?.(value) || (
+                    <div className={current?.props.className}>
+                        {current?.props.children}
+                    </div>
+                )}
             </Dropdown.Toggle>
 
             <Dropdown.Menu variant={menuVariant}>{children}</Dropdown.Menu>

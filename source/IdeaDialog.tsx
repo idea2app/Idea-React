@@ -1,7 +1,10 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
-export type IdeaDialogProps = PropsWithChildren<{
+import { SpinnerButtonProps, SpinnerButton } from './SpinnerButton';
+
+export interface IdeaDialogProps
+    extends Partial<Pick<SpinnerButtonProps, 'animation' | 'loading'>> {
     title: string;
     show: boolean;
     size?: 'sm' | 'lg' | 'xl';
@@ -11,7 +14,7 @@ export type IdeaDialogProps = PropsWithChildren<{
     onConfirm?: () => any;
     cancelText?: string;
     onCancel?: () => any;
-}>;
+}
 
 export const IdeaDialog: FC<IdeaDialogProps> = ({
     children,
@@ -21,6 +24,8 @@ export const IdeaDialog: FC<IdeaDialogProps> = ({
     onConfirm,
     cancelText,
     onCancel,
+    animation = 'border',
+    loading,
     ...rest
 }) => (
     <Modal {...rest} onHide={onCancel}>
@@ -36,20 +41,23 @@ export const IdeaDialog: FC<IdeaDialogProps> = ({
                         variant="secondary"
                         type="reset"
                         form={formId}
+                        disabled={loading}
                         onClick={onCancel}
                     >
                         {cancelText}
                     </Button>
                 )}
                 {confirmText && (
-                    <Button
+                    <SpinnerButton
                         variant="primary"
                         type="submit"
                         form={formId}
+                        animation={animation}
+                        loading={loading}
                         onClick={onConfirm}
                     >
                         {confirmText}
-                    </Button>
+                    </SpinnerButton>
                 )}
             </Modal.Footer>
         )}
