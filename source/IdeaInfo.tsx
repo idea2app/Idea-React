@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from 'react';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Row, Col, Form } from 'react-bootstrap';
 
 export interface IdeaInfoItem<T> {
-    label: string;
+    label: ReactNode | ((field: IdeaInfoItem<T>) => ReactNode);
     labelCol?: number;
     key?: string;
     render?: (params: T) => ReactNode;
@@ -16,16 +16,27 @@ export interface IdeaInfoProps<T> {
 
 export const IdeaInfo = <T,>({ rows, data, ...other }: IdeaInfoProps<T>) => (
     <Form {...other}>
-        {rows.map(({ label, key, render, labelCol }) => (
-            <Form.Group as={Row} className="mb-3" key={`${label}-${key}`}>
-                <Form.Label className="text-end" column="sm" sm={labelCol}>
-                    {label}：
-                </Form.Label>
-                <Col className="align-self-center" sm={12 - labelCol}>
-                    {render?.(data) || data?.[key]}
-                </Col>
-            </Form.Group>
-        ))}
+        {rows.map(({ label, key, render, labelCol, ...field }, index) => {
+            label =
+                typeof label !== 'function'
+                    ? label
+                    : label({ label, key, render, labelCol, ...field });
+
+            return (
+                <Form.Group
+                    as={Row}
+                    className="mb-3"
+                    key={key || `field-${index}`}
+                >
+                    <Form.Label className="text-end" column="sm" sm={labelCol}>
+                        {label}
+                    </Form.Label>
+                    <Col className="align-self-center" sm={12 - labelCol}>
+                        {render?.(data) || data?.[key]}
+                    </Col>
+                </Form.Group>
+            );
+        })}
     </Form>
 );
 

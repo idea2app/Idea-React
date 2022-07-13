@@ -18,6 +18,7 @@ import {
     IdeaInfo,
     IdeaInfoItem,
     IdeaPopover,
+    Column,
     IdeaTable,
     Loading,
     CodeBlock,
@@ -62,6 +63,8 @@ interface State {
     mapAddressName: string;
 }
 
+type UnionColumn<T> = Column<T> & IdeaInfoItem<T>;
+
 export class App extends PureComponent<{}, State> {
     state: Readonly<State> = {
         pageIndex: 1,
@@ -72,9 +75,13 @@ export class App extends PureComponent<{}, State> {
         mapAddressName: ''
     };
 
-    columns: IdeaInfoItem<User>[] = [
+    columns: UnionColumn<User>[] = [
         {
-            label: '姓名',
+            label: () => (
+                <>
+                    姓名 <Icon name="sort-alpha-up" />
+                </>
+            ),
             key: 'name'
         },
         {
@@ -295,7 +302,7 @@ export class App extends PureComponent<{}, State> {
                         )}
                     </Section>
 
-                    <Section title="IdeaInfo & IdeaDialog">
+                    <Section title="IdeaInfo &amp; IdeaDialog">
                         {this.renderCode(
                             <>
                                 <Button
@@ -333,7 +340,7 @@ export class App extends PureComponent<{}, State> {
                         )}
                     </Section>
 
-                    <Section title="IdeaForm & IdeaDialog">
+                    <Section title="IdeaForm &amp; IdeaDialog">
                         {this.renderCode(
                             <>
                                 <Button
