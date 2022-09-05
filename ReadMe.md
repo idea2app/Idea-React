@@ -15,11 +15,11 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 ```html
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@5.2.0/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+    href="https://unpkg.com/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"
@@ -27,7 +27,11 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/prismjs@1.28.0/themes/prism.min.css"
+    href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css"
+/>
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/idea-react@0.26.8/dist/index.umd.css"
 />
 ```
 
@@ -79,7 +83,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 2. add Git tag
 
 ```shell
-git tag vx.xx.x  # 0.23.0
+git tag vx.xx.x  # such as v0.23.0
 ```
 
 3. review tag

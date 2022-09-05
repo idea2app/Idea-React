@@ -10,10 +10,11 @@ export interface SpinnerButtonProps
 export const SpinnerButton: FC<SpinnerButtonProps> = ({
     animation,
     loading,
+    disabled,
     children,
     ...props
 }) => (
-    <Button {...props} disabled={loading}>
+    <Button {...props} disabled={loading || disabled}>
         {loading && (
             <>
                 <Spinner

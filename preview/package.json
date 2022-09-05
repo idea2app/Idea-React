@@ -3,16 +3,16 @@
     "private": true,
     "dependencies": {
         "classnames": "^2.3.1",
-        "web-utility": "^3.7.4"
+        "web-utility": "^3.9.2"
     },
     "devDependencies": {
-        "@parcel/transformer-less": "^2.6.2",
+        "@parcel/transformer-less": "^2.7.0",
         "koapache": "^2.2.1",
-        "parcel": "^2.6.2"
+        "parcel": "^2.7.0"
     },
     "browserslist": "> 0.5%, last 2 versions, not dead",
     "scripts": {
-        "dev": "parcel index.html",
+        "dev": "parcel index.html --open",
         "build": "rm -rf dist/  &&  parcel build index.html",
         "start": "npm run build  &&  web-server dist/ -p 3000"
     }

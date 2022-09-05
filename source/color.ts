@@ -1,4 +1,8 @@
-export const VariantColors = [
+import { Color } from 'react-bootstrap/esm/types';
+
+export type VariantColor = Exclude<Color, 'white' | 'muted'>;
+
+export const VariantColors: VariantColor[] = [
     'primary',
     'secondary',
     'success',
@@ -7,10 +11,15 @@ export const VariantColors = [
     'info',
     'dark',
     'light'
-] as const;
+];
 
-export function text2color(raw: string) {
-    const sum = [...raw].reduce((sum, char) => sum + char.charCodeAt(0), 0);
+export function text2color(raw: string, excludeColors: VariantColor[] = []) {
+    const colors = excludeColors[0]
+            ? VariantColors.filter(
+                  color => !excludeColors.find(c => c === color)
+              )
+            : VariantColors,
+        sum = [...raw].reduce((sum, char) => sum + char.charCodeAt(0), 0);
 
-    return VariantColors[sum % VariantColors.length];
+    return colors[sum % colors.length];
 }
