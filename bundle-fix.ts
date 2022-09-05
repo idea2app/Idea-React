@@ -21,8 +21,6 @@ const CJS_pattern = /require\(('|").+?('|")\)/;
 
         code = code.replace(CSS_pattern, '').trim();
 
-        if (isCJS) code = code.replace(/import(".+?")/g, 'require($1)');
-
         await promises.writeFile(file, code);
 
         console.log(`[fixed] ${file}`);
