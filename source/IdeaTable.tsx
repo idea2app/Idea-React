@@ -114,8 +114,7 @@ export class IdeaTable<T extends Record<string, any>> extends PureComponent<
                     ) : (
                         <tr>
                             <td
-                                className="p-5"
-                                align="center"
+                                className="p-5 text-center"
                                 colSpan={columns.length}
                             >
                                 {noneNode}

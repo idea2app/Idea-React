@@ -8,6 +8,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
+
             - uses: pnpm/action-setup@v2
               with:
                   version: 7
@@ -18,18 +19,21 @@ jobs:
                   cache: pnpm
             - name: Install Dependencies
               run: pnpm i --frozen-lockfile
+
             - name: Build & Publish
               run: npm publish
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
             - name: Update document
               uses: peaceiris/actions-gh-pages@v3
               with:
                   publish_dir: ./docs
                   personal_token: ${{ secrets.GITHUB_TOKEN }}
                   force_orphan: true
+
             - name: Deploy preview
-              uses: amondnet/vercel-action@v20
+              uses: amondnet/vercel-action@v25
               with:
                   vercel-token: ${{ secrets.VERCEL_TOKEN }}
                   github-token: ${{ secrets.GITHUB_TOKEN }}
