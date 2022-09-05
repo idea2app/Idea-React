@@ -1,6 +1,6 @@
 {
     "name": "idea-react",
-    "version": "0.26.8",
+    "version": "0.26.9",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "A React advanced components library based on TypeScript & Bootstrap, built by idea2app remote developers team.",
@@ -75,7 +75,7 @@
     "scripts": {
         "prepare": "husky install",
         "test": "lint-staged",
-        "make": "parcel build --no-source-maps  &&  ts-node bundle-fix",
+        "make": "parcel build --no-source-maps  &&  ts-node bundle-fix dist/index.js dist/index.umd.js",
         "build": "rm -rf dist/ docs/  &&  typedoc source/  &&  npm run make",
         "start": "typedoc source/  &&  open-cli docs/index.html",
         "prepublishOnly": "npm test  &&  npm run build",
