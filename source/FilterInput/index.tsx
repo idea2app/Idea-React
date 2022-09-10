@@ -1,5 +1,5 @@
 import { debounce } from 'lodash';
-import React, { KeyboardEvent, PureComponent, createRef } from 'react';
+import { KeyboardEvent, PureComponent, createRef } from 'react';
 import { Badge } from 'react-bootstrap';
 
 import { Icon } from '../Icon';

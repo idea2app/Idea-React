@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ReactNode, PureComponent } from 'react';
+import { ReactNode, PureComponent } from 'react';
 import { TableProps, Table } from 'react-bootstrap';
 
 export interface Column<T> {

@@ -1,6 +1,6 @@
 import { makeArray } from 'web-utility';
 import classNames from 'classnames';
-import React, {
+import {
     CSSProperties,
     PropsWithChildren,
     ReactNode,

@@ -1,4 +1,4 @@
-import React, { FC, PropsWithoutRef } from 'react';
+import { FC, PropsWithoutRef } from 'react';
 
 import { Avatar } from './Avatar';
 

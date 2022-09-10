@@ -1,4 +1,4 @@
-import React, { FC, PropsWithoutRef } from 'react';
+import { FC, PropsWithoutRef } from 'react';
 import EditorJS_HTML from 'editorjs-html';
 
 export const parser = new EditorJS_HTML({

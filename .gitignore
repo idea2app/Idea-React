@@ -5,4 +5,5 @@ dist/
 preview/pnpm-lock.yaml
 docs/
 .parcel-cache
+.vscode/settings.json
 .vercel

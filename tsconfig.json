@@ -3,7 +3,7 @@
         "target": "ES5",
         "esModuleInterop": true,
         "downlevelIteration": true,
-        "jsx": "react",
+        "jsx": "react-jsx",
         "skipLibCheck": true,
         "lib": ["ES2021", "DOM"]
     },

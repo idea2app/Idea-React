@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, PureComponent, SyntheticEvent } from 'react';
+import { PropsWithChildren, PureComponent, SyntheticEvent } from 'react';
 import { Modal } from 'react-bootstrap';
 
 export interface MapData {
