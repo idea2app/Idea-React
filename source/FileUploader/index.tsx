@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component } from 'react';
+import { ChangeEvent, Component } from 'react';
 import { Form, Image } from 'react-bootstrap';
 
 import { Icon } from '../Icon';

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import reactElementToJSXString from 'react-element-to-jsx-string';
 import { highlight, languages } from 'prismjs';
 

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ReactNode, ChangeEvent, FormEvent, FC } from 'react';
+import { ReactNode, ChangeEvent, FormEvent, FC } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 
 export interface Base {

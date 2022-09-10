@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, FC, PropsWithRef } from 'react';
+import { HTMLAttributes, FC, PropsWithRef } from 'react';
 import classNames from 'classnames';
 
 export type IconProps = PropsWithRef<

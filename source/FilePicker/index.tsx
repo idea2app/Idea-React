@@ -1,4 +1,4 @@
-import React, { ChangeEvent, PropsWithoutRef, PureComponent } from 'react';
+import { ChangeEvent, PropsWithoutRef, PureComponent } from 'react';
 
 import { Icon } from '../Icon';
 import * as style from './index.module.less';

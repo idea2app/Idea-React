@@ -3,7 +3,7 @@
     "private": true,
     "dependencies": {
         "classnames": "^2.3.1",
-        "web-utility": "^3.9.2"
+        "web-utility": "^3.9.4"
     },
     "devDependencies": {
         "@parcel/transformer-less": "^2.7.0",

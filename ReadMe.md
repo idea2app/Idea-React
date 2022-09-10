@@ -15,7 +15,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 ```html
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@5.2.1/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
@@ -31,7 +31,11 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/idea-react@0.26.8/dist/index.umd.css"
+    href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+/>
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/idea-react@0.27.0/dist/index.umd.css"
 />
 ```
 
@@ -54,15 +58,16 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 15. [Code Block](source/CodeBlock.tsx)
 16. [Editor](source/Editor.tsx)
 17. [Editor HTML](source/EditorHTML.tsx)
-18. [Address Picker](source/AddressPicker.tsx)
-19. [Idea Info](source/IdeaInfo.tsx)
-20. [Idea Table](source/IdeaTable.tsx)
-21. [Table Spinner](source/TableSpinner.tsx)
-22. [Loading](source/Loading.tsx)
-23. [Pagination Bar](source/PaginationBar.tsx)
-24. [Idea Form](source/IdeaForm.tsx)
-25. [Idea Popover](source/IdeaPopover.tsx)
-26. [Idea Dialog](source/IdeaDialog.tsx)
+18. [Open Map](source/OpenMap.tsx)
+19. [Address Picker](source/AddressPicker.tsx)
+20. [Idea Info](source/IdeaInfo.tsx)
+21. [Idea Table](source/IdeaTable.tsx)
+22. [Table Spinner](source/TableSpinner.tsx)
+23. [Loading](source/Loading.tsx)
+24. [Pagination Bar](source/PaginationBar.tsx)
+25. [Idea Form](source/IdeaForm.tsx)
+26. [Idea Popover](source/IdeaPopover.tsx)
+27. [Idea Dialog](source/IdeaDialog.tsx)
 
 ## Utilities
 

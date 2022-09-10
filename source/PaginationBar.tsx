@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Pagination, PaginationProps } from 'react-bootstrap';
 
 export interface PaginationBarProps extends Omit<PaginationProps, 'onChange'> {

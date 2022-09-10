@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { CSSProperties, FC, PropsWithoutRef } from 'react';
+import { CSSProperties, FC, PropsWithoutRef } from 'react';
 
 export type AvatarProps = PropsWithoutRef<{
     style?: CSSProperties;

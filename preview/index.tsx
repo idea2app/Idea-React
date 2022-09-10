@@ -22,6 +22,7 @@ import {
     IdeaTable,
     Loading,
     CodeBlock,
+    OpenMap,
     AddressPicker,
     MultipleFileUploader,
     Nameplate,
@@ -386,6 +387,12 @@ export class App extends PureComponent<{}, State> {
                                     columns={this.columns}
                                 />
                             </IdeaPopover>
+                        )}
+                    </Section>
+
+                    <Section title="Open Map">
+                        {this.renderCode(
+                            <OpenMap center={[34.32, 108.55]} zoom={4} />
                         )}
                     </Section>
 

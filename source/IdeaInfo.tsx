@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import { Row, Col, Form } from 'react-bootstrap';
 
 export interface IdeaInfoItem<T> {

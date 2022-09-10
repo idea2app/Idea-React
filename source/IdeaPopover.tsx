@@ -1,4 +1,4 @@
-import React, { createRef, PropsWithChildren, PureComponent } from 'react';
+import { createRef, PropsWithChildren, PureComponent } from 'react';
 import { Overlay, Popover } from 'react-bootstrap';
 
 interface State {
