@@ -10,7 +10,51 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 -   API document: https://ideapp.dev/Idea-React/
 -   Preview site: https://idea-react-stevending1st.vercel.app/
 
-## CSS on CDN
+## Content
+
+### Components
+
+1. [Time Distance](source/TimeDistance.tsx)
+2. [Pagination Bar](source/PaginationBar.tsx)
+3. [Icon](source/Icon.tsx)
+4. [Avatar](source/Avatar.tsx)
+5. [Nameplate](source/Nameplate.tsx)
+6. [Type Echo](source/TypeEcho.tsx)
+7. [Click Boundary](source/ClickBoundary.tsx)
+8. [Scroll Boundary](source/ScrollBoundary.tsx)
+9. [Spinner Button](source/SpinnerButton.tsx)
+10. [Select](source/Select.tsx)
+11. [Filter Input](source/FilterInput/index.tsx)
+12. [File Picker](source/FilePicker/index.tsx)
+13. [File Uploader](source/FileUploader/)
+14. [Multiple File Uploader](source/MultipleFileUploader/)
+15. [Code Block](source/CodeBlock.tsx)
+16. [Editor](source/Editor.tsx)
+17. [Editor HTML](source/EditorHTML.tsx)
+18. [Open Map](source/OpenMap/index.tsx)
+19. [Address Picker](source/AddressPicker.tsx)
+20. [Idea Info](source/IdeaInfo.tsx)
+21. [Idea Table](source/IdeaTable.tsx)
+22. [Table Spinner](source/TableSpinner.tsx)
+23. [Loading](source/Loading.tsx)
+24. [Pagination Bar](source/PaginationBar.tsx)
+25. [Idea Form](source/IdeaForm.tsx)
+26. [Idea Popover](source/IdeaPopover.tsx)
+27. [Idea Dialog](source/IdeaDialog.tsx)
+
+### Utilities
+
+1. [`text2color`](source/color.ts)
+2. [`animate()`](source/animate.ts)
+
+## Usage
+
+### Scaffolds
+
+1. MobX: [demo][8] & [usage][9]
+2. Next.js: [demo][10] & [usage][11]
+
+### CSS on CDN
 
 ```html
 <link
@@ -35,49 +79,50 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/idea-react@0.27.0/dist/index.umd.css"
+    href="https://unpkg.com/idea-react@0.27.6/dist/index.umd.css"
 />
 ```
 
-## Components
+### Open Map
 
-1. [Time Distance](source/TimeDistance.tsx)
-2. [Pagination Bar](source/PaginationBar.tsx)
-3. [Icon](source/Icon.tsx)
-4. [Avatar](source/Avatar.tsx)
-5. [Nameplate](source/Nameplate.tsx)
-6. [Type Echo](source/TypeEcho.tsx)
-7. [Click Boundary](source/ClickBoundary.tsx)
-8. [Scroll Boundary](source/ScrollBoundary.tsx)
-9. [Spinner Button](source/SpinnerButton.tsx)
-10. [Select](source/Select.tsx)
-11. [Filter Input](source/FilterInput/index.tsx)
-12. [File Picker](source/FilePicker/index.tsx)
-13. [File Uploader](source/FileUploader/)
-14. [Multiple File Uploader](source/MultipleFileUploader/)
-15. [Code Block](source/CodeBlock.tsx)
-16. [Editor](source/Editor.tsx)
-17. [Editor HTML](source/EditorHTML.tsx)
-18. [Open Map](source/OpenMap.tsx)
-19. [Address Picker](source/AddressPicker.tsx)
-20. [Idea Info](source/IdeaInfo.tsx)
-21. [Idea Table](source/IdeaTable.tsx)
-22. [Table Spinner](source/TableSpinner.tsx)
-23. [Loading](source/Loading.tsx)
-24. [Pagination Bar](source/PaginationBar.tsx)
-25. [Idea Form](source/IdeaForm.tsx)
-26. [Idea Popover](source/IdeaPopover.tsx)
-27. [Idea Dialog](source/IdeaDialog.tsx)
+#### Common example
 
-## Utilities
+[China map in China Open-source Map project][12]
 
-1. [`text2color`](source/color.ts)
-2. [`animate()`](source/animate.ts)
+```tsx
+import { FC } from 'react';
+import { OpenMap, OpenMapProps } from 'idea-react';
 
-## Scaffolds
+const ChinaMap: FC<OpenMapProps> = props => (
+    <OpenMap center={[34.32, 108.55]} zoom={4} {...props} />
+);
+export default ChinaMap;
+```
 
-1. MobX: [demo][8] & [usage][9]
-2. Next.js: [demo][10] & [usage][11]
+#### Use in Next.js
+
+```tsx
+import dynamic from 'next/dynamic';
+
+const ChinaMap = dynamic(() => import('../../components/ChinaMap'), {
+    ssr: false
+});
+
+export default function ExampleMap() {
+    return (
+        <ChinaMap
+            markers={[
+                { position: [34.32, 108.55], tooltip: 'Geo Center of China' }
+            ]}
+            onMarkerClick={console.log}
+        />
+    );
+}
+```
+
+#### Cloud API
+
+[Show an address location in a city][13]
 
 ## Development
 
@@ -114,3 +159,5 @@ git push origin master --tags  # push all branches and tags on master
 [9]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx
 [10]: https://next-bootstrap-ts.vercel.app/
 [11]: https://github.com/idea2app/next-bootstrap-ts/blob/main/pages/component.tsx
+[12]: https://github.com/kaiyuanshe/kaiyuanshe.github.io/blob/04d6311a6bd7f131e214034801a42f5044c87133/components/ChinaMap.tsx
+[13]: https://github.com/kaiyuanshe/OpenHackathon-Web/blob/main/components/LocationMap.tsx

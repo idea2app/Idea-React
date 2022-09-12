@@ -2,5 +2,6 @@
 /*.ts
 docs/
 preview/
+.vscode/settings.json
 .husky/
 .github/
