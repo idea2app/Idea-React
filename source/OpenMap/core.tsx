@@ -26,14 +26,19 @@ export interface MarkerMeta extends Pick<MarkerProps, 'position'> {
 }
 
 export interface OpenMapProps
-    extends Pick<MapContainerProps, 'center' | 'zoom'>,
+    extends Pick<MapContainerProps, 'className' | 'style' | 'center' | 'zoom'>,
         MapEvent<'Marker'> {
     markers?: MarkerMeta[];
 }
 
-export class OpenMap extends PureComponent<OpenMapProps> {
-    static displayName = 'OpenMap';
-
+/**
+ * Don't forget to load LeafLet's CSS file, such as:
+ *
+ * ```html
+ * <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" />
+ * ```
+ */
+export default class OpenMap extends PureComponent<OpenMapProps> {
     get eventHandlerMap() {
         return Object.entries(this.props).reduce((map, [key, value]) => {
             const [_, type, event] = key.match(/^on([A-Z][a-z]+)(.+)/) || [];
@@ -55,7 +60,7 @@ export class OpenMap extends PureComponent<OpenMapProps> {
                     className="mx-1"
                     href="https://www.openstreetmap.org/copyright"
                 >
-                    OpenMap
+                    OpenStreetMap
                 </a>
                 contributors
             </>
@@ -63,11 +68,11 @@ export class OpenMap extends PureComponent<OpenMapProps> {
     }
 
     render() {
-        const { center, zoom, markers, children } = this.props,
+        const { className = 'h-100', markers, children, ...props } = this.props,
             { eventHandlerMap } = this;
 
         return (
-            <MapContainer {...{ center, zoom }} style={{ height: '100%' }}>
+            <MapContainer {...props} className={className}>
                 <TileLayer
                     attribution={this.renderAttribution()}
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
