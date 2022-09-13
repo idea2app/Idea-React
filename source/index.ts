@@ -23,7 +23,6 @@ export * from './IdeaPopover';
 export * from './Loading';
 export * from './CodeBlock';
 export * from './OpenMap';
-export * from './AddressPicker';
 
 export * from './color';
 export * from './animate';

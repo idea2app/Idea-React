@@ -32,15 +32,14 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 16. [Editor](source/Editor.tsx)
 17. [Editor HTML](source/EditorHTML.tsx)
 18. [Open Map](source/OpenMap/index.tsx)
-19. [Address Picker](source/AddressPicker.tsx)
-20. [Idea Info](source/IdeaInfo.tsx)
-21. [Idea Table](source/IdeaTable.tsx)
-22. [Table Spinner](source/TableSpinner.tsx)
-23. [Loading](source/Loading.tsx)
-24. [Pagination Bar](source/PaginationBar.tsx)
-25. [Idea Form](source/IdeaForm.tsx)
-26. [Idea Popover](source/IdeaPopover.tsx)
-27. [Idea Dialog](source/IdeaDialog.tsx)
+19. [Idea Info](source/IdeaInfo.tsx)
+20. [Idea Table](source/IdeaTable.tsx)
+21. [Table Spinner](source/TableSpinner.tsx)
+22. [Loading](source/Loading.tsx)
+23. [Pagination Bar](source/PaginationBar.tsx)
+24. [Idea Form](source/IdeaForm.tsx)
+25. [Idea Popover](source/IdeaPopover.tsx)
+26. [Idea Dialog](source/IdeaDialog.tsx)
 
 ### Utilities
 
@@ -93,36 +92,32 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 import { FC } from 'react';
 import { OpenMap, OpenMapProps } from 'idea-react';
 
-const ChinaMap: FC<OpenMapProps> = props => (
+export const ChinaMap: FC<OpenMapProps> = props => (
     <OpenMap center={[34.32, 108.55]} zoom={4} {...props} />
 );
-export default ChinaMap;
 ```
 
 #### Use in Next.js
 
 ```tsx
-import dynamic from 'next/dynamic';
-
-const ChinaMap = dynamic(() => import('../../components/ChinaMap'), {
-    ssr: false
-});
+import ChinaMap from '../../components/ChinaMap';
 
 export default function ExampleMap() {
     return (
-        <ChinaMap
-            markers={[
-                { position: [34.32, 108.55], tooltip: 'Geo Center of China' }
-            ]}
-            onMarkerClick={console.log}
-        />
+        typeof window !== 'undefined' && (
+            <ChinaMap
+                markers={[
+                    {
+                        position: [34.32, 108.55],
+                        tooltip: 'Geo Center of China'
+                    }
+                ]}
+                onMarkerClick={console.log}
+            />
+        )
     );
 }
 ```
-
-#### Cloud API
-
-[Show an address location in a city][13]
 
 ## Development
 
@@ -160,4 +155,3 @@ git push origin master --tags  # push all branches and tags on master
 [10]: https://next-bootstrap-ts.vercel.app/
 [11]: https://github.com/idea2app/next-bootstrap-ts/blob/main/pages/component.tsx
 [12]: https://github.com/kaiyuanshe/kaiyuanshe.github.io/blob/04d6311a6bd7f131e214034801a42f5044c87133/components/ChinaMap.tsx
-[13]: https://github.com/kaiyuanshe/OpenHackathon-Web/blob/main/components/LocationMap.tsx
