@@ -2,7 +2,7 @@
     "name": "@idea2app/idea-react-preview",
     "private": true,
     "dependencies": {
-        "classnames": "^2.3.1",
+        "classnames": "^2.3.2",
         "web-utility": "^3.9.4"
     },
     "devDependencies": {
@@ -12,8 +12,9 @@
     },
     "browserslist": "> 0.5%, last 2 versions, not dead",
     "scripts": {
-        "dev": "parcel index.html --open",
-        "build": "rm -rf dist/  &&  parcel build index.html",
+        "clean": "rm -rf .parcel-cache/ dist/",
+        "dev": "npm run clean  &&  parcel index.html --open",
+        "build": "npm run clean  &&  parcel build index.html",
         "start": "npm run build  &&  web-server dist/ -p 3000"
     }
 }

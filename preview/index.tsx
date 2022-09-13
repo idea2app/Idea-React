@@ -23,7 +23,6 @@ import {
     Loading,
     CodeBlock,
     OpenMap,
-    AddressPicker,
     MultipleFileUploader,
     Nameplate,
     PaginationBar,
@@ -73,7 +72,7 @@ export class App extends PureComponent<{}, State> {
         showLoading: false,
         showDialog: false,
         showFormDialog: false,
-        mapAddressName: ''
+        mapAddressName: '成都市'
     };
 
     columns: UnionColumn<User>[] = [
@@ -390,22 +389,32 @@ export class App extends PureComponent<{}, State> {
                         )}
                     </Section>
 
-                    <Section title="Open Map">
+                    <Section title="Open Map - Basic">
                         {this.renderCode(
                             <OpenMap center={[34.32, 108.55]} zoom={4} />
                         )}
                     </Section>
 
-                    <Section title="Map Select">
+                    <Section title="Open Map - Display Address">
                         {this.renderCode(
-                            <AddressPicker
-                                onChange={({ name }) =>
-                                    this.setState({ mapAddressName: name })
+                            <OpenMap
+                                zoom={10}
+                                title="天府之国"
+                                address="成都市"
+                            />
+                        )}
+                    </Section>
+
+                    <Section title="Open Map - Pick Address">
+                        {this.renderCode(
+                            <OpenMap
+                                center={[30.66, 104.06]}
+                                zoom={10}
+                                address={mapAddressName}
+                                onChange={({ address }) =>
+                                    this.setState({ mapAddressName: address })
                                 }
-                            >
-                                <Button>选择</Button>
-                                <span className="ps-3">{mapAddressName}</span>
-                            </AddressPicker>
+                            />
                         )}
                     </Section>
 

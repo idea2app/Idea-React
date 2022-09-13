@@ -1,9 +1,15 @@
 import { FC, Suspense, lazy } from 'react';
 
 import { Loading } from '../Loading';
-import { OpenMapProps } from './core';
+import type { OpenMapProps } from './core';
 
-export * from './model';
+export type {
+    CoordinateValue,
+    Location,
+    PossibleLocation as SearchItem,
+    AddressLocation as ReverseItem
+} from './model';
+
 export type {
     LeafLetComponent,
     MapEvent,
