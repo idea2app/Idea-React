@@ -14,7 +14,7 @@ export interface IdeaFormItem<T> {
     pattern?: string;
     tip?: string;
     show?: boolean;
-    render?: (params?: T) => ReactNode;
+    render?: (params: T) => ReactNode;
     onChange?: (event: ChangeEvent) => any;
 }
 
@@ -67,7 +67,7 @@ export const IdeaForm = <T extends Base>({
                 tip,
                 pattern
             }) =>
-                (key || render?.()) && (
+                (key || render?.(data)) && (
                     <Form.Group
                         as={Row}
                         className="mb-3"

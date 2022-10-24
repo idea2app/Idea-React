@@ -318,6 +318,7 @@ export class App extends PureComponent<{}, State> {
                                     confirmText="确定"
                                     cancelText="取消"
                                     show={showDialog}
+                                    centered
                                     onCancel={() =>
                                         this.setState({ showDialog: false })
                                     }
@@ -356,6 +357,8 @@ export class App extends PureComponent<{}, State> {
                                     confirmText="确定"
                                     cancelText="取消"
                                     show={showFormDialog}
+                                    centered
+                                    fullscreen="lg-down"
                                     onCancel={() =>
                                         this.setState({ showFormDialog: false })
                                     }
