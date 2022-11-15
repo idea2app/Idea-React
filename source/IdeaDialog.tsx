@@ -1,14 +1,23 @@
 import { FC } from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, ModalProps } from 'react-bootstrap';
 
 import { SpinnerButtonProps, SpinnerButton } from './SpinnerButton';
 
 export interface IdeaDialogProps
-    extends Partial<Pick<SpinnerButtonProps, 'animation' | 'loading'>> {
+    extends Partial<
+        Pick<SpinnerButtonProps, 'animation' | 'loading'> &
+            Pick<
+                ModalProps,
+                | 'className'
+                | 'show'
+                | 'size'
+                | 'fullscreen'
+                | 'centered'
+                | 'scrollable'
+                | 'contentClassName'
+            >
+    > {
     title: string;
-    show: boolean;
-    size?: 'sm' | 'lg' | 'xl';
-    className?: string;
     formId?: string;
     confirmText?: string;
     onConfirm?: () => any;
