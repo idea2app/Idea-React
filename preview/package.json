@@ -3,18 +3,18 @@
     "private": true,
     "dependencies": {
         "classnames": "^2.3.2",
-        "web-utility": "^3.9.4"
+        "web-utility": "^3.9.9"
     },
     "devDependencies": {
-        "@parcel/transformer-less": "^2.7.0",
+        "@parcel/transformer-less": "^2.8.0",
         "koapache": "^2.2.1",
-        "parcel": "^2.7.0"
+        "parcel": "^2.8.0"
     },
     "browserslist": "> 0.5%, last 2 versions, not dead",
     "scripts": {
         "clean": "rm -rf .parcel-cache/ dist/",
         "dev": "npm run clean  &&  parcel index.html --open",
         "build": "npm run clean  &&  parcel build index.html",
-        "start": "npm run build  &&  web-server dist/ -p 3000"
+        "start": "npm run build  &&  web-server dist/ -p 1234"
     }
 }

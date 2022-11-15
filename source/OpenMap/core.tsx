@@ -1,7 +1,7 @@
 import { CamelEventName } from 'web-utility';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
-import { PureComponent } from 'react';
+import { PureComponent, ReactNode } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { LeafletEventHandlerFnMap, LeafletMouseEventHandlerFn } from 'leaflet';
 import {
@@ -33,6 +33,8 @@ export interface OpenMapProps
     extends Pick<MapContainerProps, 'className' | 'style' | 'center' | 'zoom'>,
         MapEvent<'TileLayer'>,
         MapEvent<'Marker'> {
+    tileLayerURL?: string;
+    attribution?: ReactNode;
     markers?: MarkerMeta[];
     title?: string;
     address?: string;
@@ -142,13 +144,17 @@ export default class OpenMap extends PureComponent<OpenMapProps> {
         return renderToStaticMarkup(
             <>
                 &copy;
-                <a
-                    className="mx-1"
-                    href="https://www.openstreetmap.org/copyright"
-                >
-                    OpenStreetMap
-                </a>
-                contributors
+                {this.props.attribution || (
+                    <>
+                        <a
+                            className="mx-1"
+                            href="https://www.openstreetmap.org/copyright"
+                        >
+                            OpenStreetMap
+                        </a>
+                        contributors
+                    </>
+                )}
             </>
         );
     }
@@ -157,6 +163,7 @@ export default class OpenMap extends PureComponent<OpenMapProps> {
         const { center, markers, eventHandlerMap } = this,
             {
                 className = 'h-100',
+                tileLayerURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 center: _,
                 zoom,
                 markers: __,
@@ -177,7 +184,7 @@ export default class OpenMap extends PureComponent<OpenMapProps> {
             >
                 <TileLayer
                     attribution={this.renderAttribution()}
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    url={tileLayerURL}
                     eventHandlers={eventHandlerMap.TileLayer}
                 />
                 {markers.map(({ position, tooltip, popup }) => (
