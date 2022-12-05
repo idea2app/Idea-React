@@ -14,6 +14,7 @@ import {
     Popup
 } from 'react-leaflet';
 
+import { MapExposer, MapExposerProps } from './utility';
 import { OpenMapModel } from './model';
 
 export type LeafLetComponent = 'TileLayer' | 'Marker';
@@ -32,9 +33,11 @@ export interface MarkerMeta extends Pick<MarkerProps, 'position'> {
 export interface OpenMapProps
     extends Pick<MapContainerProps, 'className' | 'style' | 'center' | 'zoom'>,
         MapEvent<'TileLayer'>,
-        MapEvent<'Marker'> {
+        MapEvent<'Marker'>,
+        Partial<MapExposerProps> {
     tileLayerURL?: string;
     attribution?: ReactNode;
+    renderTileLayer?: (eventHandlers: LeafletEventHandlerFnMap) => ReactNode;
     markers?: MarkerMeta[];
     title?: string;
     address?: string;
@@ -159,11 +162,26 @@ export default class OpenMap extends PureComponent<OpenMapProps> {
         );
     }
 
+    renderTileLayer = (eventHandlers: LeafletEventHandlerFnMap) => {
+        const URL =
+            this.props.tileLayerURL ||
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+        return (
+            <TileLayer
+                attribution={this.renderAttribution()}
+                url={URL}
+                eventHandlers={eventHandlers}
+            />
+        );
+    };
+
     render() {
         const { center, markers, eventHandlerMap } = this,
             {
                 className = 'h-100',
-                tileLayerURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                mapRef,
+                renderTileLayer = this.renderTileLayer,
                 center: _,
                 zoom,
                 markers: __,
@@ -182,11 +200,10 @@ export default class OpenMap extends PureComponent<OpenMapProps> {
                     onChange && (map => map.on('click', this.changeAddress))
                 }
             >
-                <TileLayer
-                    attribution={this.renderAttribution()}
-                    url={tileLayerURL}
-                    eventHandlers={eventHandlerMap.TileLayer}
-                />
+                {mapRef && <MapExposer mapRef={mapRef} />}
+
+                {renderTileLayer(eventHandlerMap.TileLayer)}
+
                 {markers.map(({ position, tooltip, popup }) => (
                     <Marker
                         key={position + ''}

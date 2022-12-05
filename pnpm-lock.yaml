@@ -1,15 +1,15 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@editorjs/editorjs': ^2.25.0
-  '@editorjs/paragraph': ^2.8.0
+  '@editorjs/editorjs': ^2.26.0
+  '@editorjs/paragraph': ^2.9.0
   '@parcel/packager-ts': ~2.6.2
   '@parcel/transformer-less': ~2.6.2
   '@parcel/transformer-typescript-types': ~2.6.2
-  '@swc/helpers': ^0.4.12
+  '@swc/helpers': ^0.4.14
   '@types/leaflet': ^1.9.0
-  '@types/lodash': ^4.14.189
-  '@types/node': ^16.18.3
+  '@types/lodash': ^4.14.191
+  '@types/node': ^16.18.4
   '@types/prismjs': ^1.26.0
   '@types/react': ^17.0.52
   '@types/react-dom': ^17.0.18
@@ -17,15 +17,15 @@ specifiers:
   editorjs-html: ^3.4.2
   husky: ^8.0.2
   koajax: ^0.8.3
-  leaflet: ^1.9.2
+  leaflet: ^1.9.3
   less: ^4.1.3
-  lint-staged: ^13.0.3
+  lint-staged: ^13.0.4
   lodash: ^4.17.21
   mobx: ^5.15.7
   mobx-react: ^6.3.1
   open-cli: ^7.1.0
   parcel: ~2.6.2
-  prettier: ^2.7.1
+  prettier: ^2.8.0
   prismjs: ^1.29.0
   process: ^0.11.10
   react: ^17.0.2
@@ -41,14 +41,13 @@ specifiers:
   web-utility: ^3.9.9
 
 dependencies:
-  '@editorjs/editorjs': 2.25.0
-  '@editorjs/paragraph': 2.8.0
-  '@swc/helpers': 0.4.12
-  '@types/leaflet': 1.9.0
+  '@editorjs/editorjs': 2.26.0
+  '@editorjs/paragraph': 2.9.0
+  '@swc/helpers': 0.4.14
   classnames: 2.3.2
   editorjs-html: 3.4.2
   koajax: 0.8.3_typescript@4.7.4
-  leaflet: 1.9.2
+  leaflet: 1.9.3
   lodash: 4.17.21
   mobx: 5.15.7
   mobx-react: 6.3.1_hhkghttxnhy2fe22wf4styxgna
@@ -56,28 +55,29 @@ dependencies:
   react: 17.0.2
   react-bootstrap: 2.6.0_gzv7pa6nrbev3fs6gyzn7sadkq
   react-dom: 17.0.2_react@17.0.2
-  react-editor-js: 2.1.0_5nqabvyy7cdfyepattmhvo7ray
+  react-editor-js: 2.1.0_7upvtybrtpbatlcd4abgvsiouu
   react-element-to-jsx-string: 15.0.0_sfoxds7t5ydpegc3knd667wn6m
-  react-leaflet: 3.2.5_myoalt2qegmhvac3qx3wpc3ki4
+  react-leaflet: 3.2.5_edkpibxfdppewbyunodyehmvmq
   web-utility: 3.9.9_typescript@4.7.4
 
 devDependencies:
   '@parcel/packager-ts': 2.6.2
   '@parcel/transformer-less': 2.6.2
   '@parcel/transformer-typescript-types': 2.6.2_typescript@4.7.4
-  '@types/lodash': 4.14.189
-  '@types/node': 16.18.3
+  '@types/leaflet': 1.9.0
+  '@types/lodash': 4.14.191
+  '@types/node': 16.18.4
   '@types/prismjs': 1.26.0
   '@types/react': 17.0.52
   '@types/react-dom': 17.0.18
   husky: 8.0.2
   less: 4.1.3
-  lint-staged: 13.0.3
+  lint-staged: 13.0.4
   open-cli: 7.1.0
   parcel: 2.6.2
-  prettier: 2.7.1
+  prettier: 2.8.0
   process: 0.11.10
-  ts-node: 10.9.1_jyxu4bw6aqgjw6ykt6t6hx4o6e
+  ts-node: 10.9.1_whtibn5pgotzyorjevfphpwbgm
   typedoc: 0.23.21_typescript@4.7.4
   typedoc-plugin-mdn-links: 2.0.0_typedoc@0.23.21
   typescript: 4.7.4
@@ -116,6 +116,10 @@ packages:
     resolution: {integrity: sha512-4iri8i1AqYHJE2DstZYkyEprg6Pq6sKx3xn5FpySk9sNhH7qN2LLlHJCfDTZRILNwQNPD7mATWM0TBui7uC1pA==}
     dev: false
 
+  /@codexteam/icons/0.0.4:
+    resolution: {integrity: sha512-V8N/TY2TGyas4wLrPIFq7bcow68b3gu8DfDt1+rrHPtXxcexadKauRJL6eQgfG7Z0LCrN4boLRawR4S9gjIh/Q==}
+    dev: false
+
   /@cspotcode/source-map-support/0.8.1:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
@@ -123,16 +127,20 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
 
-  /@editorjs/editorjs/2.25.0:
-    resolution: {integrity: sha512-TEu7h7EPh6Lx2VGIM1jVn2dky23TbpVJBd3AGvXcam1lyHuJwZ1iydbsQGF9pFkHSCiaQptTfIjZ8Y24v47Wag==}
+  /@editorjs/editorjs/2.26.0:
+    resolution: {integrity: sha512-0yrpvrUkvl5zNbo7OhBmd2YzbXtBwyfca9zzMGTogGHSGsLeEWmuuv5SxBH67N53jmKr1ctOFkOK9DfnPg8EAg==}
     dependencies:
+      '@codexteam/icons': 0.0.4
       codex-notifier: 1.1.2
       codex-tooltip: 1.0.5
+      html-janitor: 2.0.4
       nanoid: 3.3.4
     dev: false
 
-  /@editorjs/paragraph/2.8.0:
-    resolution: {integrity: sha512-z6w5ZR0ru3p/IjxJW/tb7OcSnVttkZukQMIsnBMX1FIKc1BNdr7NwM1YoCyTl4OnC90YfL0xgES6/20/W267pw==}
+  /@editorjs/paragraph/2.9.0:
+    resolution: {integrity: sha512-lI6x1eiqFx2X3KmMak6gBlimFqXhG35fQpXMxzrjIphNLr4uPsXhVbyMPimPoLUnS9rM6Q00vptXmP2QNDd0zg==}
+    dependencies:
+      '@codexteam/icons': 0.0.4
     dev: false
 
   /@jridgewell/gen-mapping/0.3.2:
@@ -826,7 +834,7 @@ packages:
       '@parcel/source-map': 2.1.1
       '@parcel/utils': 2.6.2
       '@parcel/workers': 2.6.2_@parcel+core@2.6.2
-      '@swc/helpers': 0.4.12
+      '@swc/helpers': 0.4.14
       browserslist: 4.21.1
       detect-libc: 1.0.3
       nullthrows: 1.1.1
@@ -1016,50 +1024,50 @@ packages:
       react: 17.0.2
     dev: false
 
-  /@react-editor-js/client/2.1.0_5nqabvyy7cdfyepattmhvo7ray:
+  /@react-editor-js/client/2.1.0_7upvtybrtpbatlcd4abgvsiouu:
     resolution: {integrity: sha512-X/OwqY2KKUUVIy24zvubHTI4qhiVIWMxGlU/Bc6tkf9gcsWgQjPvn75DwrQ5SIGBOYpSBcHY01JX0RRtJHRumw==}
     peerDependencies:
       '@editorjs/editorjs': '*'
       '@editorjs/paragraph': '*'
       react: '*'
     dependencies:
-      '@editorjs/editorjs': 2.25.0
-      '@editorjs/paragraph': 2.8.0
-      '@react-editor-js/core': 2.1.0_fl4niolhxzsbo25nzu6o3el3ri
+      '@editorjs/editorjs': 2.26.0
+      '@editorjs/paragraph': 2.9.0
+      '@react-editor-js/core': 2.1.0_oomic6hugqth6j7hau5vwsylda
       react: 17.0.2
     dev: false
 
-  /@react-editor-js/core/2.1.0_fl4niolhxzsbo25nzu6o3el3ri:
+  /@react-editor-js/core/2.1.0_oomic6hugqth6j7hau5vwsylda:
     resolution: {integrity: sha512-6h98D5g2RatdCDQRW/+N+eiMtjoq0n1n02m8oA7FrlEzEaOUyV+J+rmtmRS8OexLVOiNeWaSPDpVJ3MNiVLq8Q==}
     peerDependencies:
       '@editorjs/editorjs': '*'
       react: '*'
     dependencies:
-      '@editorjs/editorjs': 2.25.0
+      '@editorjs/editorjs': 2.26.0
       react: 17.0.2
     dev: false
 
-  /@react-editor-js/server/2.1.0_5nqabvyy7cdfyepattmhvo7ray:
+  /@react-editor-js/server/2.1.0_7upvtybrtpbatlcd4abgvsiouu:
     resolution: {integrity: sha512-RnTbCmzCHbjcjPNKhr9FaehItHgAZyd47Lq+iIGynFqWSsrwGy46LgOXSvb50DYbwDyT0GtxaXBIk6aiFki1Dg==}
     peerDependencies:
       '@editorjs/editorjs': '*'
       '@editorjs/paragraph': '*'
       react: '*'
     dependencies:
-      '@editorjs/editorjs': 2.25.0
-      '@editorjs/paragraph': 2.8.0
-      '@react-editor-js/core': 2.1.0_fl4niolhxzsbo25nzu6o3el3ri
+      '@editorjs/editorjs': 2.26.0
+      '@editorjs/paragraph': 2.9.0
+      '@react-editor-js/core': 2.1.0_oomic6hugqth6j7hau5vwsylda
       react: 17.0.2
     dev: false
 
-  /@react-leaflet/core/1.1.1_myoalt2qegmhvac3qx3wpc3ki4:
+  /@react-leaflet/core/1.1.1_edkpibxfdppewbyunodyehmvmq:
     resolution: {integrity: sha512-7PGLWa9MZ5x/cWy8EH2VzI4T8q5WpuHbixzCDXqixP/WyqwIrg5NDUPgYuFnB4IEIZF+6nA265mYzswFo/h1Pw==}
     peerDependencies:
       leaflet: ^1.7.1
       react: ^17.0.1
       react-dom: ^17.0.1
     dependencies:
-      leaflet: 1.9.2
+      leaflet: 1.9.3
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
     dev: false
@@ -1092,8 +1100,8 @@ packages:
       warning: 4.0.3
     dev: false
 
-  /@swc/helpers/0.4.12:
-    resolution: {integrity: sha512-R6RmwS9Dld5lNvwKlPn62+piU+WDG1sMfsnfJioXCciyko/gZ0DQ4Mqglhq1iGU1nQ/RcGkAwfMH+elMSkJH3Q==}
+  /@swc/helpers/0.4.14:
+    resolution: {integrity: sha512-4C7nX/dvpzB7za4Ql9K81xK3HPxCpHMgwTZVyf+9JQ6VUbn9jjZVN7/Nkdz/Ugzs2CSjqnL/UPXroiVBVHUWUw==}
     dependencies:
       tslib: 2.4.0
 
@@ -1124,24 +1132,24 @@ packages:
 
   /@types/geojson/7946.0.10:
     resolution: {integrity: sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==}
-    dev: false
+    dev: true
 
   /@types/leaflet/1.9.0:
     resolution: {integrity: sha512-7LeOSj7EloC5UcyOMo+1kc3S1UT3MjJxwqsMT1d2PTyvQz53w0Y0oSSk9nwZnOZubCmBvpSNGceucxiq+ZPEUw==}
     dependencies:
       '@types/geojson': 7946.0.10
-    dev: false
+    dev: true
 
-  /@types/lodash/4.14.189:
-    resolution: {integrity: sha512-kb9/98N6X8gyME9Cf7YaqIMvYGnBSWqEci6tiettE6iJWH1XdJz/PO8LB0GtLCG7x8dU3KWhZT+lA1a35127tA==}
+  /@types/lodash/4.14.191:
+    resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
     dev: true
 
   /@types/minimist/1.2.2:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
     dev: true
 
-  /@types/node/16.18.3:
-    resolution: {integrity: sha512-jh6m0QUhIRcZpNv7Z/rpN+ZWXOicUUQbSoWks7Htkbb9IjFQj4kzcX/xFCkjstCj5flMsN8FiSvt+q+Tcs4Llg==}
+  /@types/node/16.18.4:
+    resolution: {integrity: sha512-9qGjJ5GyShZjUfx2ArBIGM+xExdfLvvaCyQR0t6yRXKPcWCVYF/WemtX/uIU3r7FYECXRXkIiw2Vnhn6y8d+pw==}
     dev: true
 
   /@types/normalize-package-data/2.4.1:
@@ -1433,8 +1441,8 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
-  /commander/9.3.0:
-    resolution: {integrity: sha512-hv95iU5uXPbK83mjrJKuZyFM/LBAoCV/XhVGkS5Je6tl7sxr6A0ITMw5WoRV46/UaJ46Nllm3Xt7IaJhXTIkzw==}
+  /commander/9.4.1:
+    resolution: {integrity: sha512-5EEkTNyHNGFPD2H+c/dXXfQZYa/scCKasxWcXJaWnNJ99pnQN9Vnmqow+p+PlFPE63Q6mThaZws1T+HxfpgtPw==}
     engines: {node: ^12.20.0 || >=14}
     dev: true
 
@@ -1771,6 +1779,10 @@ packages:
       lru-cache: 6.0.0
     dev: true
 
+  /html-janitor/2.0.4:
+    resolution: {integrity: sha512-92J5h9jNZRk30PMHapjHEJfkrBWKCOy0bq3oW2pBungky6lzYSoboBGPMvxl1XRKB2q+kniQmsLsPbdpY7RM2g==}
+    dev: false
+
   /htmlnano/2.0.2_svgo@2.8.0:
     resolution: {integrity: sha512-+ZrQFS4Ub+zd+/fWwfvoYCEGNEa0/zrpys6CyXxvZDwtL7Pl+pOtRkiujyvBQ7Lmfp7/iEPxtOFgxWA16Gkj3w==}
     peerDependencies:
@@ -1970,7 +1982,7 @@ packages:
     peerDependencies:
       jsdom: ^20.0.0
     dependencies:
-      '@swc/helpers': 0.4.12
+      '@swc/helpers': 0.4.14
       iterable-observer: 1.0.0-rc.1
       regenerator-runtime: 0.13.9
       web-utility: 3.9.9_typescript@4.7.4
@@ -1978,8 +1990,8 @@ packages:
       - typescript
     dev: false
 
-  /leaflet/1.9.2:
-    resolution: {integrity: sha512-Kc77HQvWO+y9y2oIs3dn5h5sy2kr3j41ewdqCMEUA4N89lgfUUfOBy7wnnHEstDpefiGFObq12FdopGRMx4J7g==}
+  /leaflet/1.9.3:
+    resolution: {integrity: sha512-iB2cR9vAkDOu5l3HAay2obcUHZ7xwUBBjph8+PGtmW/2lYhbLizWtG7nTeYht36WfOslixQF9D/uSIzhZgGMfQ==}
     dev: false
 
   /less/4.1.3:
@@ -2090,8 +2102,8 @@ packages:
       lightningcss-win32-x64-msvc: 1.16.1
     dev: true
 
-  /lilconfig/2.0.5:
-    resolution: {integrity: sha512-xaYmXZtTHPAw5m+xLN8ab9C+3a8YmV3asNSPOATITbtwrfbwaLJj8h66H1WMIpALCkqsIzK3h7oQ+PdX+LQ9Eg==}
+  /lilconfig/2.0.6:
+    resolution: {integrity: sha512-9JROoBW7pobfsx+Sq2JsASvCo6Pfo6WWoUW79HuB1BCoBXD4PLWJPqDF6fNj67pqBYTbAHkE57M1kS/+L1neOg==}
     engines: {node: '>=10'}
     dev: true
 
@@ -2099,32 +2111,32 @@ packages:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
     dev: true
 
-  /lint-staged/13.0.3:
-    resolution: {integrity: sha512-9hmrwSCFroTSYLjflGI8Uk+GWAwMB4OlpU4bMJEAT5d/llQwtYKoim4bLOyLCuWFAhWEupE0vkIFqtw/WIsPug==}
+  /lint-staged/13.0.4:
+    resolution: {integrity: sha512-HxlHCXoYRsq9QCby5wFozmZW00hMs/9e3l+/dz6Qr8Kle4UH0kJTdABAbqhzG+3pcG6QjL9kz7NgGBfph+a5dw==}
     engines: {node: ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
       cli-truncate: 3.1.0
       colorette: 2.0.19
-      commander: 9.3.0
+      commander: 9.4.1
       debug: 4.3.4
       execa: 6.1.0
-      lilconfig: 2.0.5
-      listr2: 4.0.5
+      lilconfig: 2.0.6
+      listr2: 5.0.6
       micromatch: 4.0.5
       normalize-path: 3.0.0
       object-inspect: 1.12.2
       pidtree: 0.6.0
       string-argv: 0.3.1
-      yaml: 2.1.1
+      yaml: 2.1.3
     transitivePeerDependencies:
       - enquirer
       - supports-color
     dev: true
 
-  /listr2/4.0.5:
-    resolution: {integrity: sha512-juGHV1doQdpNT3GSTs9IUN43QJb7KHdF9uqg7Vufs/tG9VTzpFphqF4pm/ICdAABGQxsyNn9CiYA3StkI6jpwA==}
-    engines: {node: '>=12'}
+  /listr2/5.0.6:
+    resolution: {integrity: sha512-u60KxKBy1BR2uLJNTWNptzWQ1ob/gjMzIJPZffAENzpZqbMZ/5PrXXOomDcevIS/+IB7s1mmCEtSlT2qHWMqag==}
+    engines: {node: ^14.13.1 || >=16.0.0}
     peerDependencies:
       enquirer: '>= 2.3.0 < 3'
     peerDependenciesMeta:
@@ -2136,7 +2148,7 @@ packages:
       log-update: 4.0.0
       p-map: 4.0.0
       rfdc: 1.3.0
-      rxjs: 7.5.5
+      rxjs: 7.5.7
       through: 2.3.8
       wrap-ansi: 7.0.0
     dev: true
@@ -2649,8 +2661,8 @@ packages:
       posthtml-render: 3.0.0
     dev: true
 
-  /prettier/2.7.1:
-    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
+  /prettier/2.8.0:
+    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -2731,12 +2743,12 @@ packages:
       scheduler: 0.20.2
     dev: false
 
-  /react-editor-js/2.1.0_5nqabvyy7cdfyepattmhvo7ray:
+  /react-editor-js/2.1.0_7upvtybrtpbatlcd4abgvsiouu:
     resolution: {integrity: sha512-unI9D2pTH/2gBenc6LgCXJm8iqnrzB71CHgfjQmaB+lGR0Njx+ZXydgUQm1VofMmvF6vcCNVDE1Eb47zQbm14g==}
     dependencies:
-      '@react-editor-js/client': 2.1.0_5nqabvyy7cdfyepattmhvo7ray
-      '@react-editor-js/core': 2.1.0_fl4niolhxzsbo25nzu6o3el3ri
-      '@react-editor-js/server': 2.1.0_5nqabvyy7cdfyepattmhvo7ray
+      '@react-editor-js/client': 2.1.0_7upvtybrtpbatlcd4abgvsiouu
+      '@react-editor-js/core': 2.1.0_oomic6hugqth6j7hau5vwsylda
+      '@react-editor-js/server': 2.1.0_7upvtybrtpbatlcd4abgvsiouu
     transitivePeerDependencies:
       - '@editorjs/editorjs'
       - '@editorjs/paragraph'
@@ -2768,15 +2780,15 @@ packages:
     resolution: {integrity: sha512-Fl7FuabXsJnV5Q1qIOQwx/sagGF18kogb4gpfcG4gjLBWO0WDiiz1ko/ExayuxE7InyQkBLkxRFG5oxY6Uu3Kg==}
     dev: false
 
-  /react-leaflet/3.2.5_myoalt2qegmhvac3qx3wpc3ki4:
+  /react-leaflet/3.2.5_edkpibxfdppewbyunodyehmvmq:
     resolution: {integrity: sha512-Z3KZ+4SijsRbbrt2I1a3ZDY6+V6Pm91eYTdxTN18G6IOkFRsJo1BuSPLFnyFrlF3WDjQFPEcTPkEgD1VEeAoBg==}
     peerDependencies:
       leaflet: ^1.7.1
       react: ^17.0.1
       react-dom: ^17.0.1
     dependencies:
-      '@react-leaflet/core': 1.1.1_myoalt2qegmhvac3qx3wpc3ki4
-      leaflet: 1.9.2
+      '@react-leaflet/core': 1.1.1_edkpibxfdppewbyunodyehmvmq
+      leaflet: 1.9.3
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
     dev: false
@@ -2879,8 +2891,8 @@ packages:
     resolution: {integrity: sha512-V2hovdzFbOi77/WajaSMXk2OLm+xNIeQdMMuB7icj7bk6zi2F8GGAxigcnDFpJHbNyNcgyJDiP+8nOrY5cZGrA==}
     dev: true
 
-  /rxjs/7.5.5:
-    resolution: {integrity: sha512-sy+H0pQofO95VDmFLzyaw9xNJU4KTRSwQIGM6+iG3SypAtCiLDzpeG8sJrNCWn2Up9km+KhkvTdbkrdy+yzZdw==}
+  /rxjs/7.5.7:
+    resolution: {integrity: sha512-z9MzKh/UcOqB3i20H6rtrlaE/CgjLOvheWK/9ILrbhROGTweAi1BaFsTT9FbwZi5Trr1qNRs+MXkhmR06awzQA==}
     dependencies:
       tslib: 2.4.0
     dev: true
@@ -3158,7 +3170,7 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /ts-node/10.9.1_jyxu4bw6aqgjw6ykt6t6hx4o6e:
+  /ts-node/10.9.1_whtibn5pgotzyorjevfphpwbgm:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -3177,7 +3189,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 16.18.3
+      '@types/node': 16.18.4
       acorn: 8.7.1
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -3316,7 +3328,7 @@ packages:
     peerDependencies:
       typescript: ^4.1.0
     dependencies:
-      '@swc/helpers': 0.4.12
+      '@swc/helpers': 0.4.14
       element-internals-polyfill: 1.1.16
       regenerator-runtime: 0.13.10
       typescript: 4.7.4
@@ -3361,8 +3373,8 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
-  /yaml/2.1.1:
-    resolution: {integrity: sha512-o96x3OPo8GjWeSLF+wOAbrPfhFOGY0W00GNaxCDv+9hkcDJEnev1yh8S7pgHF0ik6zc8sQLuL8hjHjJULZp8bw==}
+  /yaml/2.1.3:
+    resolution: {integrity: sha512-AacA8nRULjKMX2DvWvOAdBZMOfQlypSFkjcOcu9FalllIDJ1kvlREzcdIZmidQUqqeMv7jorHjq2HlLv/+c2lg==}
     engines: {node: '>= 14'}
     dev: true
 
