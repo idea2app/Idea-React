@@ -8,8 +8,6 @@ import {
     SpinnerButton,
     Select,
     Option,
-    FilePicker,
-    FileUploader,
     FilterInput,
     Icon,
     IdeaDialog,
@@ -23,9 +21,7 @@ import {
     Loading,
     CodeBlock,
     OpenMap,
-    MultipleFileUploader,
     Nameplate,
-    PaginationBar,
     TableSpinner,
     TimeDistance
 } from '../source';
@@ -50,7 +46,7 @@ const info: User = {
         {
             id: '2',
             name: 'xxx',
-            link: 'https://ideapp.dev'
+            link: 'https://idea2.app'
         }
     ];
 
@@ -215,44 +211,6 @@ export class App extends PureComponent<{}, State> {
                         {this.renderCode(<FilterInput name="tags" />)}
                     </Section>
 
-                    <Section title="FilePicker">
-                        <SubSection title="Single image upload 1">
-                            {this.renderCode(
-                                <FilePicker accept="image/*" name="images" />
-                            )}
-                        </SubSection>
-
-                        <SubSection title="Single image upload 2">
-                            {this.renderCode(
-                                <FileUploader
-                                    name="cover"
-                                    value="https://github.com/lingziyb.png"
-                                    onChange={console.log}
-                                />
-                            )}
-                        </SubSection>
-
-                        <SubSection
-                            className="mt-3"
-                            title="Multiple images upload"
-                        >
-                            <p className="text-success small">
-                                用法注释：先通过上传接口拿到链接，然后显示所有链接
-                            </p>
-                            {this.renderCode(
-                                <MultipleFileUploader
-                                    name="photos"
-                                    value={[
-                                        'https://github.com/lingziyb.png',
-                                        'https://github.com/TechQuery.png'
-                                    ]}
-                                    onChange={console.log}
-                                    onDeleteOne={console.log}
-                                />
-                            )}
-                        </SubSection>
-                    </Section>
-
                     <Section title="IdeaTable">
                         <SubSection title="TableSpinner">
                             {this.renderCode(
@@ -285,21 +243,6 @@ export class App extends PureComponent<{}, State> {
                                 />
                             )}
                         </SubSection>
-                    </Section>
-
-                    <Section title="Pagination Bar">
-                        {this.renderCode(
-                            <PaginationBar
-                                className="my-3 justify-content-end"
-                                size="sm"
-                                pageCount={5}
-                                currentPage={pageIndex}
-                                count={42}
-                                onChange={pageIndex =>
-                                    this.setState({ pageIndex })
-                                }
-                            />
-                        )}
                     </Section>
 
                     <Section title="IdeaInfo &amp; IdeaDialog">
