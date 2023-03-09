@@ -1,54 +1,22 @@
 import React, { PureComponent, ReactNode } from 'react';
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button, Container, Image } from 'react-bootstrap';
 import { render } from 'react-dom';
 import { sleep } from 'web-utility';
 import {
     Avatar,
-    Base,
-    SpinnerButton,
-    Select,
-    Option,
-    FilterInput,
+    CodeBlock,
     Icon,
     IdeaDialog,
-    IdeaForm,
-    IdeaFormItem,
-    IdeaInfo,
-    IdeaInfoItem,
     IdeaPopover,
-    Column,
-    IdeaTable,
     Loading,
-    CodeBlock,
-    OpenMap,
     Nameplate,
-    TableSpinner,
+    OpenMap,
+    Option,
+    Select,
+    SpinnerButton,
     TimeDistance
 } from '../source';
-import { Section, SubSection } from './utility';
-
-interface User extends Base {
-    name: string;
-    link: string;
-}
-
-const info: User = {
-        id: '1',
-        name: 'lingli',
-        link: 'https://baidu.com'
-    },
-    list: User[] = [
-        {
-            id: '1',
-            name: 'lingli',
-            link: 'https://baidu.com'
-        },
-        {
-            id: '2',
-            name: 'xxx',
-            link: 'https://idea2.app'
-        }
-    ];
+import { Section } from './utility';
 
 interface State {
     pageIndex: number;
@@ -58,8 +26,6 @@ interface State {
     showFormDialog: boolean;
     mapAddressName: string;
 }
-
-type UnionColumn<T> = Column<T> & IdeaInfoItem<T>;
 
 export class App extends PureComponent<{}, State> {
     state: Readonly<State> = {
@@ -71,49 +37,6 @@ export class App extends PureComponent<{}, State> {
         mapAddressName: '成都市'
     };
 
-    columns: UnionColumn<User>[] = [
-        {
-            label: () => (
-                <>
-                    姓名 <Icon name="sort-alpha-up" />
-                </>
-            ),
-            key: 'name'
-        },
-        {
-            label: '链接',
-            key: 'link',
-            render: ({ link }) => (
-                <a href={link} target="_blank">
-                    {link}
-                </a>
-            )
-        }
-    ];
-
-    formRows: IdeaFormItem<User>[] = [
-        {
-            label: '课程标题',
-            key: 'title'
-        },
-        {
-            label: '作者',
-            key: 'author'
-        },
-        {
-            label: '课程链接',
-            key: 'link',
-            render: ({ link }) => (
-                <Form.Control
-                    size="sm"
-                    name="link"
-                    required
-                    defaultValue={link}
-                />
-            )
-        }
-    ];
-
     renderCode(code: ReactNode) {
         return (
             <>
@@ -124,14 +47,8 @@ export class App extends PureComponent<{}, State> {
     }
 
     render() {
-        const {
-            pageIndex,
-            selectValue,
-            showLoading,
-            showDialog,
-            showFormDialog,
-            mapAddressName
-        } = this.state;
+        const { selectValue, showLoading, showDialog, mapAddressName } =
+            this.state;
 
         return (
             <div className="bg-light">
@@ -206,46 +123,7 @@ export class App extends PureComponent<{}, State> {
                         )}
                     </Section>
 
-                    <Section title="Filter Input">
-                        <p className="text-danger">注：暂有bug</p>
-                        {this.renderCode(<FilterInput name="tags" />)}
-                    </Section>
-
-                    <Section title="IdeaTable">
-                        <SubSection title="TableSpinner">
-                            {this.renderCode(
-                                <IdeaTable
-                                    className="small border"
-                                    noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
-                                    loadingNode={<TableSpinner colSpan={2} />}
-                                    list={list}
-                                    columns={this.columns}
-                                />
-                            )}
-                        </SubSection>
-                        <SubSection title="有数据时">
-                            {this.renderCode(
-                                <IdeaTable
-                                    className="small border"
-                                    noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
-                                    list={list}
-                                    columns={this.columns}
-                                />
-                            )}
-                        </SubSection>
-                        <SubSection title="无数据时">
-                            {this.renderCode(
-                                <IdeaTable
-                                    className="small border"
-                                    noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
-                                    list={[]}
-                                    columns={this.columns}
-                                />
-                            )}
-                        </SubSection>
-                    </Section>
-
-                    <Section title="IdeaInfo &amp; IdeaDialog">
+                    <Section title="IdeaDialog">
                         {this.renderCode(
                             <>
                                 <Button
@@ -253,7 +131,7 @@ export class App extends PureComponent<{}, State> {
                                         this.setState({ showDialog: true })
                                     }
                                 >
-                                    显示Info弹窗
+                                    显示弹窗
                                 </Button>
                                 <IdeaDialog
                                     title="查看"
@@ -266,56 +144,7 @@ export class App extends PureComponent<{}, State> {
                                         this.setState({ showDialog: false })
                                     }
                                 >
-                                    <IdeaInfo data={info} rows={this.columns} />
-                                </IdeaDialog>
-                            </>
-                        )}
-                    </Section>
-
-                    <Section title="IdeaForm">
-                        {this.renderCode(
-                            <IdeaForm
-                                submitText="submit"
-                                resetText="reset"
-                                data={info}
-                                rows={this.formRows}
-                                onSubmit={console.log}
-                            />
-                        )}
-                    </Section>
-
-                    <Section title="IdeaForm &amp; IdeaDialog">
-                        {this.renderCode(
-                            <>
-                                <Button
-                                    onClick={() =>
-                                        this.setState({ showFormDialog: true })
-                                    }
-                                >
-                                    显示Form弹窗
-                                </Button>
-                                <IdeaDialog
-                                    formId="admin-user-edit"
-                                    title="编辑"
-                                    confirmText="确定"
-                                    cancelText="取消"
-                                    show={showFormDialog}
-                                    centered
-                                    fullscreen="lg-down"
-                                    onCancel={() =>
-                                        this.setState({ showFormDialog: false })
-                                    }
-                                >
-                                    <IdeaForm
-                                        id="admin-user-edit"
-                                        className="w-100 border-top-0"
-                                        controlClassName="w-100"
-                                        labelCols={4}
-                                        controlCols={8}
-                                        rows={this.formRows}
-                                        data={info}
-                                        onSubmit={console.log}
-                                    />
+                                    <Image src="https://github.com/idea2app.png" />
                                 </IdeaDialog>
                             </>
                         )}
@@ -325,12 +154,8 @@ export class App extends PureComponent<{}, State> {
                         {this.renderCode(
                             <IdeaPopover onShow={console.log} title="view info">
                                 <Button>查看</Button>
-                                <IdeaTable
-                                    className="small border"
-                                    noneNode="暂无数据 -(o﹏o)-， 请添加数据噢"
-                                    list={list}
-                                    columns={this.columns}
-                                />
+
+                                <Image src="https://github.com/idea2app.png" />
                             </IdeaPopover>
                         )}
                     </Section>

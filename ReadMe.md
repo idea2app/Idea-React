@@ -22,18 +22,14 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 6. [Click Boundary](source/ClickBoundary.tsx)
 7. [Spinner Button](source/SpinnerButton.tsx)
 8. [Select](source/Select.tsx)
-9. [Filter Input](source/FilterInput/index.tsx)
-10. [Code Block](source/CodeBlock.tsx)
-11. [Editor](source/Editor.tsx)
-12. [Editor HTML](source/EditorHTML.tsx)
-13. [Open Map](source/OpenMap/index.tsx)
-14. [Idea Info](source/IdeaInfo.tsx)
-15. [Idea Table](source/IdeaTable.tsx)
-16. [Table Spinner](source/TableSpinner.tsx)
-17. [Loading](source/Loading.tsx)
-18. [Idea Form](source/IdeaForm.tsx)
-19. [Idea Popover](source/IdeaPopover.tsx)
-20. [Idea Dialog](source/IdeaDialog.tsx)
+9. [Code Block](source/CodeBlock.tsx)
+10. [Editor](source/Editor.tsx)
+11. [Editor HTML](source/EditorHTML.tsx)
+12. [Open Map](source/OpenMap/index.tsx)
+13. [Table Spinner](source/TableSpinner.tsx)
+14. [Loading](source/Loading.tsx)
+15. [Idea Popover](source/IdeaPopover.tsx)
+16. [Idea Dialog](source/IdeaDialog.tsx)
 
 #### Data components
 
@@ -76,7 +72,7 @@ Table, List & Form components around Data models, have been migrated to https://
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/idea-react@0.27.11/dist/index.umd.css"
+    href="https://unpkg.com/idea-react@1.0.0/dist/index.umd.css"
 />
 ```
 
