@@ -7,3 +7,5 @@ docs/
 .parcel-cache
 .vscode/settings.json
 .vercel
+
+storybook-static/

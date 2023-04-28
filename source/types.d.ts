@@ -11,3 +11,5 @@ declare module 'editorjs-html' {
         parse(data: any);
     }
 }
+
+declare module '*.png';

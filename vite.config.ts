@@ -24,7 +24,6 @@ export default defineConfig(({ mode }) => {
         },
         plugins: [
             react({
-                include: /\.(mdx|js|jsx|ts|tsx)$/,
                 babel: {
                     configFile: true
                 }
@@ -44,6 +43,11 @@ export default defineConfig(({ mode }) => {
                         'react-dom': 'react-dom'
                     }
                 }
+            }
+        },
+        server: {
+            hmr: {
+                overlay: false
             }
         },
         define: {

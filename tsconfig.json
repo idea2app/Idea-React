@@ -8,7 +8,7 @@
         "skipLibCheck": true,
         "lib": ["ES2021", "DOM"]
     },
-    "include": ["source/**/*"],
+    "include": ["source/**/*", "stories/**/*"],
     "typedocOptions": {
         "name": "Idea React",
         "excludeExternals": true,
