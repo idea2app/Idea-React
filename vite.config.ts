@@ -25,15 +25,21 @@ export default defineConfig(({ mode }) => {
         plugins: [
             react({
                 babel: {
-                    configFile: true
+                    plugins: [
+                        ['@babel/plugin-proposal-decorators', { legacy: true }],
+                        [
+                            '@babel/plugin-proposal-class-properties',
+                            { loose: true }
+                        ]
+                    ]
                 }
             })
         ],
         build: {
             lib: {
                 entry: resolve(__dirname, 'source/index.ts'),
-                name: 'ReactComponents',
-                fileName: format => `react-components.${format}.js`
+                name: 'Idea-React',
+                fileName: format => `index.${format}.js`
             },
             rollupOptions: {
                 external: ['react', 'react-dom'],
