@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Avatar } from '../source';
+import { Avatar } from '../source/Avatar';
 
 import defaultURL from './assets/default-avatar.png';
 
