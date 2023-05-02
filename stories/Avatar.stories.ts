@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Avatar } from '../source/Avatar';
+import { Avatar } from '../source';
 
 import defaultURL from './assets/default-avatar.png';
 
@@ -9,14 +9,7 @@ const meta: Meta<typeof Avatar> = {
     title: 'Idea-React/Avatar',
     component: Avatar,
     // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
-    tags: ['autodocs'],
-    // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-    argTypes: {
-        style: { control: 'object' },
-        className: { control: 'text' },
-        src: { control: 'text' },
-        size: { type: 'number' }
-    }
+    tags: ['autodocs']
 };
 
 export default meta;

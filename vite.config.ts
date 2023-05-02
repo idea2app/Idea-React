@@ -42,11 +42,28 @@ export default defineConfig(({ mode }) => {
                 fileName: format => `index.${format}.js`
             },
             rollupOptions: {
-                external: ['react', 'react-dom'],
+                external: [
+                    '@editorjs/editorjs',
+                    '@editorjs/paragraph',
+                    'editorjs-html',
+                    'mobx',
+                    'mobx-react',
+                    'react',
+                    'react-bootstrap',
+                    'react-dom',
+                    'react-editor-js'
+                ],
                 output: {
                     globals: {
+                        '@editorjs/editorjs': '@editorjs/editorjs',
+                        '@editorjs/paragraph': '@editorjs/paragraph',
+                        'editorjs-html': 'editorjs-html',
+                        mobx: 'mobx',
+                        'mobx-react': 'mobx-react',
                         react: 'React',
-                        'react-dom': 'react-dom'
+                        'react-bootstrap': 'react-bootstrap',
+                        'react-dom': 'react-dom',
+                        'react-editor-js': 'react-editor-js'
                     }
                 }
             }
