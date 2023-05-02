@@ -21,7 +21,7 @@
     "source": "source/index.ts",
     "types": "dist/index.d.ts",
     "main": "dist/index.umd.js",
-    "module": "dist/index.js",
+    "module": "dist/index.es.js",
     "dependencies": {
         "koajax": "^0.8.3",
         "lodash": "^4.17.21",
