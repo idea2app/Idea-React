@@ -52,11 +52,11 @@ Table, List & Form components around Data models, have been migrated to https://
 ```html
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+    href="https://unpkg.com/bootstrap-icons@1.10.4/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"
@@ -69,10 +69,6 @@ Table, List & Form components around Data models, have been migrated to https://
 <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-/>
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/idea-react@1.0.0/dist/index.umd.css"
 />
 ```
 
