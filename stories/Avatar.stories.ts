@@ -13,6 +13,7 @@ const meta: Meta<typeof Avatar> = {
 };
 
 export default meta;
+
 type Story = StoryObj<typeof Avatar>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

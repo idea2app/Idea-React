@@ -54,9 +54,6 @@ devDependencies:
   '@storybook/testing-library':
     specifier: 0.0.14-next.2
     version: 0.0.14-next.2
-  '@swc/helpers':
-    specifier: ^0.4.14
-    version: 0.4.14
   '@types/leaflet':
     specifier: ^1.9.0
     version: 1.9.0
@@ -3452,6 +3449,7 @@ packages:
     resolution: {integrity: sha512-4C7nX/dvpzB7za4Ql9K81xK3HPxCpHMgwTZVyf+9JQ6VUbn9jjZVN7/Nkdz/Ugzs2CSjqnL/UPXroiVBVHUWUw==}
     dependencies:
       tslib: 2.4.0
+    dev: false
 
   /@testing-library/dom@8.20.0:
     resolution: {integrity: sha512-d9ULIT+a4EXLX3UU8FBjauG9NnsZHkHztXoIcTsOKoOw030fyjheN9svkTULjJxtYag9DZz5Jz5qkWZDPxTFwA==}
