@@ -55,15 +55,15 @@ export default defineConfig(({ mode }) => {
                 ],
                 output: {
                     globals: {
-                        '@editorjs/editorjs': '@editorjs/editorjs',
-                        '@editorjs/paragraph': '@editorjs/paragraph',
-                        'editorjs-html': 'editorjs-html',
+                        '@editorjs/editorjs': 'EditorJS',
+                        '@editorjs/paragraph': 'Paragraph',
+                        'editorjs-html': 'edjsHTML',
                         mobx: 'mobx',
-                        'mobx-react': 'mobx-react',
+                        'mobx-react': 'mobxReact',
                         react: 'React',
-                        'react-bootstrap': 'react-bootstrap',
-                        'react-dom': 'react-dom',
-                        'react-editor-js': 'react-editor-js'
+                        'react-bootstrap': 'ReactBootstrap',
+                        'react-dom': 'ReactDOM',
+                        'react-editor-js': 'createReactEditorJS'
                     }
                 }
             }
