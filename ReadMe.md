@@ -7,7 +7,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 [![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][7]
 
--   API document: https://ideapp.dev/Idea-React/
+-   API document: https://idea2app.github.io/Idea-React/
 -   Preview site: https://idea-react-stevending1st.vercel.app/
 
 ## Content
@@ -15,31 +15,25 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 ### Components
 
 1. [Time Distance](source/TimeDistance.tsx)
-2. [Pagination Bar](source/PaginationBar.tsx)
-3. [Icon](source/Icon.tsx)
-4. [Avatar](source/Avatar.tsx)
-5. [Nameplate](source/Nameplate.tsx)
-6. [Type Echo](source/TypeEcho.tsx)
-7. [Click Boundary](source/ClickBoundary.tsx)
-8. [Scroll Boundary](source/ScrollBoundary.tsx)
-9. [Spinner Button](source/SpinnerButton.tsx)
-10. [Select](source/Select.tsx)
-11. [Filter Input](source/FilterInput/index.tsx)
-12. [File Picker](source/FilePicker/index.tsx)
-13. [File Uploader](source/FileUploader/)
-14. [Multiple File Uploader](source/MultipleFileUploader/)
-15. [Code Block](source/CodeBlock.tsx)
-16. [Editor](source/Editor.tsx)
-17. [Editor HTML](source/EditorHTML.tsx)
-18. [Open Map](source/OpenMap/index.tsx)
-19. [Idea Info](source/IdeaInfo.tsx)
-20. [Idea Table](source/IdeaTable.tsx)
-21. [Table Spinner](source/TableSpinner.tsx)
-22. [Loading](source/Loading.tsx)
-23. [Pagination Bar](source/PaginationBar.tsx)
-24. [Idea Form](source/IdeaForm.tsx)
-25. [Idea Popover](source/IdeaPopover.tsx)
-26. [Idea Dialog](source/IdeaDialog.tsx)
+2. [Icon](source/Icon.tsx)
+3. [Avatar](source/Avatar.tsx)
+4. [Nameplate](source/Nameplate.tsx)
+5. [Type Echo](source/TypeEcho.tsx)
+6. [Click Boundary](source/ClickBoundary.tsx)
+7. [Spinner Button](source/SpinnerButton.tsx)
+8. [Select](source/Select.tsx)
+9. [Code Block](source/CodeBlock.tsx)
+10. [Editor](source/Editor.tsx)
+11. [Editor HTML](source/EditorHTML.tsx)
+12. [Open Map](source/OpenMap/index.tsx)
+13. [Table Spinner](source/TableSpinner.tsx)
+14. [Loading](source/Loading.tsx)
+15. [Idea Popover](source/IdeaPopover.tsx)
+16. [Idea Dialog](source/IdeaDialog.tsx)
+
+#### Data components
+
+Table, List & Form components around Data models, have been migrated to https://github.com/idea2app/MobX-RESTful-table, since Idea-React v1.0.0.
 
 ### Utilities
 
@@ -142,11 +136,11 @@ git push origin master --tags  # push all branches and tags on master
 [1]: https://reactjs.org/
 [2]: https://www.typescriptlang.org/
 [3]: https://getbootstrap.com/
-[4]: https://ideapp.dev/
+[4]: https://idea2app.github.io/
 [5]: https://david-dm.org/idea2app/Idea-React
 [6]: https://github.com/idea2app/Idea-React/actions/workflows/main.yml
 [7]: https://nodei.co/npm/idea-react/
-[8]: https://ideapp.dev/React-MobX-Bootstrap-ts/
+[8]: https://idea2app.github.io/React-MobX-Bootstrap-ts/
 [9]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx
 [10]: https://next-bootstrap-ts.vercel.app/
 [11]: https://github.com/idea2app/next-bootstrap-ts/blob/main/pages/component.tsx

@@ -1,7 +1,7 @@
 {
     "name": "idea-react",
-    "version": "0.27.11",
-    "license": "LGPL-3.0",
+    "version": "1.0.0-beta.1",
+    "license": "LGPL-2.1",
     "author": "shiy2008@gmail.com",
     "description": "A React advanced components library based on TypeScript & Bootstrap, built by idea2app remote developers team.",
     "keywords": [
@@ -10,7 +10,7 @@
         "typescript",
         "bootstrap"
     ],
-    "homepage": "https://ideapp.dev/Idea-React/",
+    "homepage": "https://idea2app.github.io/Idea-React/",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/idea2app/Idea-React.git"
