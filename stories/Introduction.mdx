@@ -1,4 +1,8 @@
-# Idea React
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# Welcome to Idea-React
 
 A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstrap][3], built by **[idea2app][4] remote developers team**.
 
@@ -6,41 +10,6 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 [![CI & CD](https://github.com/idea2app/Idea-React/actions/workflows/main.yml/badge.svg)][6]
 
 [![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][7]
-
--   API document: https://idea2app.github.io/Idea-React/
--   Preview site: https://idea-react-stevending1st.vercel.app/
-
-## Content
-
-### Components
-
-1. [Time Distance](source/TimeDistance.tsx)
-2. [Icon](source/Icon.tsx)
-3. [Avatar](source/Avatar.tsx)
-4. [Nameplate](source/Nameplate.tsx)
-5. [Type Echo](source/TypeEcho.tsx)
-6. [Click Boundary](source/ClickBoundary.tsx)
-7. [Spinner Button](source/SpinnerButton.tsx)
-8. [Select](source/Select.tsx)
-9. [Code Block](source/CodeBlock.tsx)
-10. [Editor](source/Editor.tsx)
-11. [Editor HTML](source/EditorHTML.tsx)
-12. [Open Map](source/OpenMap/index.tsx)
-13. [Table Spinner](source/TableSpinner.tsx)
-14. [Loading](source/Loading.tsx)
-15. [Idea Popover](source/IdeaPopover.tsx)
-16. [Idea Dialog](source/IdeaDialog.tsx)
-
-#### Data components
-
-Table, List & Form components around Data models, have been migrated to https://github.com/idea2app/MobX-RESTful-table, since Idea-React v1.0.0.
-
-### Utilities
-
-1. [`text2color`](source/color.ts)
-2. [`animate()`](source/animate.ts)
-
-## Usage
 
 ### Scaffolds
 
@@ -52,11 +21,11 @@ Table, List & Form components around Data models, have been migrated to https://
 ```html
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap-icons@1.10.4/font/bootstrap-icons.css"
+    href="https://unpkg.com/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"
@@ -68,7 +37,11 @@ Table, List & Form components around Data models, have been migrated to https://
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+/>
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/idea-react@0.27.11/dist/index.umd.css"
 />
 ```
 
@@ -133,14 +106,19 @@ git tag
 git push origin master --tags  # push all branches and tags on master
 ```
 
+<div className="tip-wrapper">
+  <span className="tip">Tip</span>Edit the Markdown in{' '}
+  <code>stories/Introduction.stories.mdx</code>
+</div>
+
 [1]: https://reactjs.org/
 [2]: https://www.typescriptlang.org/
 [3]: https://getbootstrap.com/
-[4]: https://idea2app.github.io/
+[4]: https://ideapp.dev/
 [5]: https://david-dm.org/idea2app/Idea-React
 [6]: https://github.com/idea2app/Idea-React/actions/workflows/main.yml
 [7]: https://nodei.co/npm/idea-react/
-[8]: https://idea2app.github.io/React-MobX-Bootstrap-ts/
+[8]: https://ideapp.dev/React-MobX-Bootstrap-ts/
 [9]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx
 [10]: https://next-bootstrap-ts.vercel.app/
 [11]: https://github.com/idea2app/next-bootstrap-ts/blob/main/pages/component.tsx
