@@ -58,11 +58,11 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 ```html
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+    href="https://unpkg.com/bootstrap-icons@1.10.4/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"
@@ -74,11 +74,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-/>
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/idea-react@0.27.11/dist/index.umd.css"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
 />
 ```
 
