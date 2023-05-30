@@ -29,8 +29,8 @@ export const Primary: Story = {
                 key="999999"
                 value={selectValue}
                 onChange={item => {
-                    onChange?.(item);
                     setValue(item);
+                    onChange?.(item);
                 }}
                 {...otherArgs}
             >

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
 import { IdeaDialog } from '../source/IdeaDialog';
-import { useState } from 'react';
 
 const meta: Meta<typeof IdeaDialog> = {
     title: 'Idea-React/IdeaDialog',
@@ -14,9 +14,9 @@ export default meta;
 type Story = StoryObj<typeof IdeaDialog>;
 
 export const Primary: Story = {
-    render: args => {
-        const { children, onCancel, ...otherArgs } = args,
-            [showDialog, setShowDialog] = useState<boolean>(false);
+    render: ({ children, onCancel, ...otherArgs }) => {
+        const [showDialog, setShowDialog] = useState(false);
+
         return (
             <>
                 <button onClick={() => setShowDialog(true)}> view </button>

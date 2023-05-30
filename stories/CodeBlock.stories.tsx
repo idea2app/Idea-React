@@ -13,10 +13,9 @@ export default meta;
 type Story = StoryObj<typeof CodeBlock>;
 
 export const Primary: Story = {
-    render: args => {
-        const { language, children } = args;
-        return <CodeBlock language={language}>{children}</CodeBlock>;
-    },
+    render: ({ language, children }) => (
+        <CodeBlock language={language}>{children}</CodeBlock>
+    ),
     args: {
         language: 'html',
         children: <button>Idea-React</button>

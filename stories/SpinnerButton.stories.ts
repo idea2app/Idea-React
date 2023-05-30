@@ -7,8 +7,8 @@ const meta: Meta<typeof SpinnerButton> = {
     component: SpinnerButton,
     tags: ['autodocs'],
     argTypes: {
-        disabled: { control: 'boolean' },
-        animation: { control: 'select', options: ['border', 'grow'] }
+        animation: { control: 'select', options: ['border', 'grow'] },
+        disabled: { control: 'boolean' }
     },
     args: {
         animation: 'border'
@@ -36,8 +36,8 @@ export const Loading: Story = {
 export const GrowLoading: Story = {
     args: {
         ...Primary.args,
-        loading: true,
-        animation: 'grow'
+        animation: 'grow',
+        loading: true
     }
 };
 

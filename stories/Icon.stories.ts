@@ -44,7 +44,6 @@ export const WithClass: Story = {
 export const WithStyle: Story = {
     args: {
         ...Primary.args,
-        style: { border: '4px double #32a1ce' },
-        onClick: () => console.log('Hello World')
+        style: { border: '4px double #32a1ce' }
     }
 };
