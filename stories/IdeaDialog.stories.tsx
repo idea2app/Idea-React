@@ -14,17 +14,17 @@ export default meta;
 type Story = StoryObj<typeof IdeaDialog>;
 
 export const Primary: Story = {
-    render: ({ children, onCancel, ...otherArgs }) => {
+    render: ({ children, ...otherArgs }) => {
         const [showDialog, setShowDialog] = useState(false);
 
         return (
             <>
                 <button onClick={() => setShowDialog(true)}> view </button>
                 <IdeaDialog
-                    show={showDialog}
                     centered
-                    onCancel={() => setShowDialog(false)}
                     {...otherArgs}
+                    show={showDialog}
+                    onCancel={() => setShowDialog(false)}
                 >
                     {children}
                 </IdeaDialog>

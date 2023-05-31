@@ -1,0 +1,16 @@
+{
+    "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["simple-import-sort", "import", "@typescript-eslint"],
+    "rules": {
+        "no-unused-vars": "off",
+        "no-duplicate-imports": "error",
+        "prefer-const": ["error", { "destructuring": "all" }],
+        "import/no-useless-path-segments": "error",
+        "simple-import-sort/exports": "error",
+        "simple-import-sort/imports": "error",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-non-null-assertion": "warn"
+    }
+}

@@ -1,6 +1,7 @@
 import type { StorybookConfig } from "@storybook/react-vite";
-import prettierConfig from "./prettier.config";
 import path from "path";
+
+import prettierConfig from "./prettier.config";
 
 const config: StorybookConfig = {
   stories: ["../stories/**/*.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],

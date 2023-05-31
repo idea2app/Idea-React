@@ -1,4 +1,4 @@
-import { PropsWithChildren, PureComponent, createRef } from 'react';
+import { createRef, PropsWithChildren, PureComponent } from 'react';
 
 export type ClickBoundaryProps = PropsWithChildren<{
     className?: string;

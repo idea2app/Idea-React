@@ -1,6 +1,6 @@
+import { highlight, languages } from 'prismjs';
 import { PropsWithChildren } from 'react';
 import reactElementToJSXString from 'react-element-to-jsx-string';
-import { highlight, languages } from 'prismjs';
 
 export type CodeBlockProps = PropsWithChildren<{ language: string }>;
 

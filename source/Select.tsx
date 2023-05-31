@@ -1,14 +1,14 @@
-import { makeArray } from 'web-utility';
 import classNames from 'classnames';
 import {
     CSSProperties,
-    PropsWithChildren,
-    ReactNode,
-    ReactElement,
     FC,
-    isValidElement
+    isValidElement,
+    PropsWithChildren,
+    ReactElement,
+    ReactNode
 } from 'react';
 import { Dropdown, DropdownButtonProps } from 'react-bootstrap';
+import { makeArray } from 'web-utility';
 
 export type OptionProps = PropsWithChildren<{
     className?: string;

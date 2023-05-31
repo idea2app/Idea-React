@@ -1,6 +1,6 @@
-import { sleep } from 'web-utility';
 import classNames from 'classnames';
-import { PropsWithoutRef, RefCallback, PureComponent } from 'react';
+import { PropsWithoutRef, PureComponent, RefCallback } from 'react';
+import { sleep } from 'web-utility';
 
 export type TypeEchoProps = PropsWithoutRef<{
     className?: string;

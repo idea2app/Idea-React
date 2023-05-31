@@ -1,5 +1,5 @@
-import { FC, PropsWithoutRef } from 'react';
 import EditorJS_HTML from 'editorjs-html';
+import { FC, PropsWithoutRef } from 'react';
 
 export const parser = new EditorJS_HTML({
     link: ({ data: { link } }: Record<string, any>) =>

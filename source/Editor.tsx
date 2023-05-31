@@ -1,5 +1,5 @@
-import { PropsWithoutRef, ComponentClass, PureComponent } from 'react';
 import EditorJS from '@editorjs/editorjs';
+import { ComponentClass, PropsWithoutRef, PureComponent } from 'react';
 import { createReactEditorJS } from 'react-editor-js';
 
 const ReactEditorJS = createReactEditorJS();
