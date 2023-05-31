@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Button, Modal, ModalProps } from 'react-bootstrap';
 
-import { SpinnerButtonProps, SpinnerButton } from './SpinnerButton';
+import { SpinnerButton, SpinnerButtonProps } from './SpinnerButton';
 
 export interface IdeaDialogProps
     extends Partial<

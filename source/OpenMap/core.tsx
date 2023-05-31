@@ -1,21 +1,21 @@
-import { CamelEventName } from 'web-utility';
+import { LeafletEventHandlerFnMap, LeafletMouseEventHandlerFn } from 'leaflet';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { PureComponent, ReactNode } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { LeafletEventHandlerFnMap, LeafletMouseEventHandlerFn } from 'leaflet';
 import {
-    MapContainerProps,
     MapContainer,
-    TileLayer,
-    MarkerProps,
+    MapContainerProps,
     Marker,
-    Tooltip,
-    Popup
+    MarkerProps,
+    Popup,
+    TileLayer,
+    Tooltip
 } from 'react-leaflet';
+import { CamelEventName } from 'web-utility';
 
-import { MapExposer, MapExposerProps } from './utility';
 import { OpenMapModel } from './model';
+import { MapExposer, MapExposerProps } from './utility';
 
 export type LeafLetComponent = 'TileLayer' | 'Marker';
 

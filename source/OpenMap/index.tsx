@@ -1,14 +1,7 @@
-import { FC, Suspense, lazy } from 'react';
+import { FC, lazy, Suspense } from 'react';
 
 import { Loading } from '../Loading';
 import type { OpenMapProps } from './core';
-
-export type {
-    CoordinateValue,
-    Location,
-    PossibleLocation as SearchItem,
-    AddressLocation as ReverseItem
-} from './model';
 
 export type {
     LeafLetComponent,
@@ -16,6 +9,12 @@ export type {
     MarkerMeta,
     OpenMapProps
 } from './core';
+export type {
+    CoordinateValue,
+    Location,
+    AddressLocation as ReverseItem,
+    PossibleLocation as SearchItem
+} from './model';
 
 const Map = lazy(() => import('./core'));
 

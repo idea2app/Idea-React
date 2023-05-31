@@ -1,6 +1,6 @@
-import { buildURLData } from 'web-utility';
-import { observable } from 'mobx';
 import { HTTPClient } from 'koajax';
+import { observable } from 'mobx';
+import { buildURLData } from 'web-utility';
 
 export type CoordinateValue = `${number}.${number}`;
 

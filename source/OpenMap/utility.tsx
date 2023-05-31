@@ -1,5 +1,5 @@
-import { RefCallback, useEffect } from 'react';
 import { Map } from 'leaflet';
+import { RefCallback, useEffect } from 'react';
 import { useMap } from 'react-leaflet';
 
 export interface MapExposerProps {
