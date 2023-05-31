@@ -14,6 +14,7 @@ export default meta;
 type Story = StoryObj<typeof IdeaDialog>;
 
 export const Primary: Story = {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     render: ({ children, onCancel, ...otherArgs }) => {
         const [showDialog, setShowDialog] = useState(false);
 
