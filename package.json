@@ -94,7 +94,8 @@
         "tabWidth": 4
     },
     "lint-staged": {
-        "*.{md,less,json,yml,ts,tsx}": "prettier --write"
+        "*.{md,less,json,yml,ts,tsx}": "prettier --write",
+        "*.{js,jsx,ts,tsx}": "eslint --fix"
     },
     "browserslist": "> 0.5%, last 2 versions, not dead",
     "targets": {
