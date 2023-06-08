@@ -1,76 +1,33 @@
+import { Defer } from 'iterable-observer';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
 import { FC } from 'react';
-import { Button, Modal, ModalProps } from 'react-bootstrap';
 
-import { SpinnerButton, SpinnerButtonProps } from './SpinnerButton';
-
-export interface IdeaDialogProps
-    extends Partial<
-        Pick<SpinnerButtonProps, 'animation' | 'loading'> &
-            Pick<
-                ModalProps,
-                | 'className'
-                | 'show'
-                | 'size'
-                | 'fullscreen'
-                | 'centered'
-                | 'scrollable'
-                | 'contentClassName'
-            >
-    > {
-    title: string;
-    formId?: string;
-    confirmText?: string;
-    onConfirm?: () => any;
-    cancelText?: string;
-    onCancel?: () => any;
+export class DialogClose extends Error {
+    constructor(message = 'Dialog closed') {
+        super(message);
+    }
 }
 
-export const IdeaDialog: FC<IdeaDialogProps> = ({
-    children,
-    title,
-    formId,
-    confirmText,
-    onConfirm,
-    cancelText,
-    onCancel,
-    animation = 'border',
-    loading,
-    ...rest
-}) => (
-    <Modal {...rest} onHide={onCancel}>
-        <Modal.Header closeButton>
-            <Modal.Title>{title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{children}</Modal.Body>
+export interface DialogProps<T = any> {
+    defer?: Defer<T>;
+}
 
-        {(confirmText || cancelText) && (
-            <Modal.Footer>
-                {cancelText && (
-                    <Button
-                        variant="secondary"
-                        type="reset"
-                        form={formId}
-                        disabled={loading}
-                        onClick={onCancel}
-                    >
-                        {cancelText}
-                    </Button>
-                )}
-                {confirmText && (
-                    <SpinnerButton
-                        variant="primary"
-                        type="submit"
-                        form={formId}
-                        animation={animation}
-                        loading={loading}
-                        onClick={onConfirm}
-                    >
-                        {confirmText}
-                    </SpinnerButton>
-                )}
-            </Modal.Footer>
-        )}
-    </Modal>
-);
+export class Dialog<T = any> {
+    @observable
+    defer?: Defer<T>;
 
-IdeaDialog.displayName = 'IdeaDialog';
+    Component: FC;
+
+    constructor(Factory: FC<DialogProps<T>>) {
+        this.Component = observer(() => <Factory defer={this.defer} />);
+    }
+
+    open() {
+        this.defer = new Defer();
+
+        this.defer.promise.finally(() => (this.defer = undefined));
+
+        return this.defer.promise;
+    }
+}
