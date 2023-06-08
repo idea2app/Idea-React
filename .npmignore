@@ -1,7 +1,11 @@
-.parcel-cache/
+.eslintrc.json
 /*.ts
 docs/
 preview/
+api-extractor.json
+stories/
+.storybook/
+storybook-static/
 .vscode/settings.json
 .husky/
 .github/

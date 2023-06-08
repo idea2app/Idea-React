@@ -24,8 +24,6 @@ interface State {
     pageIndex: number;
     selectValue: string;
     showLoading: boolean;
-    showDialog: boolean;
-    showFormDialog: boolean;
     mapAddressName: string;
 }
 
@@ -34,8 +32,6 @@ export class App extends PureComponent<{}, State> {
         pageIndex: 1,
         selectValue: '0',
         showLoading: false,
-        showDialog: false,
-        showFormDialog: false,
         mapAddressName: '成都市'
     };
 
@@ -75,8 +71,7 @@ export class App extends PureComponent<{}, State> {
     };
 
     render() {
-        const { selectValue, showLoading, showDialog, mapAddressName } =
-            this.state;
+        const { selectValue, showLoading, mapAddressName } = this.state;
 
         return (
             <div className="bg-light">

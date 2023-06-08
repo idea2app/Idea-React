@@ -28,8 +28,8 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 12. [Open Map](source/OpenMap/index.tsx)
 13. [Table Spinner](source/TableSpinner.tsx)
 14. [Loading](source/Loading.tsx)
-15. [Idea Popover](source/IdeaPopover.tsx)
-16. [Idea Dialog](source/IdeaDialog.tsx)
+15. [Overlay Box](source/OverlayBox.tsx)
+16. [Dialog](source/Dialog.tsx)
 
 #### Data components
 
