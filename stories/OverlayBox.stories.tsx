@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { OverlayBox } from '../source/IdeaPopover';
+import { OverlayBox } from '../source/OverlayBox';
 
 const meta: Meta<typeof OverlayBox> = {
     title: 'Idea-React/OverlayBox',

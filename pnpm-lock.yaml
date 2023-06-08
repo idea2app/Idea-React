@@ -20,6 +20,9 @@ dependencies:
   editorjs-html:
     specifier: ^3.4.2
     version: 3.4.2
+  iterable-observer:
+    specifier: ^1.0.0
+    version: 1.0.0
   koajax:
     specifier: ^0.8.4
     version: 0.8.4(jsdom@21.1.2)(typescript@5.1.3)
@@ -7364,8 +7367,10 @@ packages:
       istanbul-lib-report: 3.0.0
     dev: true
 
-  /iterable-observer@1.0.0-rc.1:
-    resolution: {integrity: sha512-mIztAg3zss799h7YtoBQr8tH7sj9iGRZInc7be7bBYpA+sE4YzIO9p66cPLtUmMprBvVjWtkR6apHgsd2FSmwg==}
+  /iterable-observer@1.0.0:
+    resolution: {integrity: sha512-DV9Cuh50EKRQ87V1L92E8R/rrEeowO78a86VDzvG350khRhjNAvkQMLxZ/02MOvoJeMl7NqU0Y4Y9z6xLOjS7g==}
+    dependencies:
+      '@swc/helpers': 0.4.14
     dev: false
 
   /jackspeak@2.1.0:
@@ -7635,7 +7640,7 @@ packages:
       jsdom: ^21.0.0
     dependencies:
       '@swc/helpers': 0.4.14
-      iterable-observer: 1.0.0-rc.1
+      iterable-observer: 1.0.0
       jsdom: 21.1.2
       regenerator-runtime: 0.13.11
       web-utility: 4.0.0(typescript@5.1.3)

@@ -1,17 +1,19 @@
 import React, { PureComponent, ReactNode } from 'react';
-import { Button, Container, Image } from 'react-bootstrap';
+import { Button, Container, Image, Modal } from 'react-bootstrap';
 import { render } from 'react-dom';
 import { sleep } from 'web-utility';
+
 import {
     Avatar,
     CodeBlock,
+    Dialog,
+    DialogClose,
     Icon,
-    IdeaDialog,
-    IdeaPopover,
     Loading,
     Nameplate,
     OpenMap,
     Option,
+    OverlayBox,
     Select,
     SpinnerButton,
     TimeDistance
@@ -45,6 +47,32 @@ export class App extends PureComponent<{}, State> {
             </>
         );
     }
+
+    inputDialog = new Dialog<Record<'a' | 'b', number>>(({ defer }) => (
+        <Modal show={!!defer} onHide={() => defer?.reject(new DialogClose())}>
+            <Modal.Header>Dialog</Modal.Header>
+            <Modal.Body
+                as="form"
+                onSubmit={event => {
+                    event.preventDefault();
+
+                    defer?.resolve({ a: 1, b: 2 });
+                }}
+            >
+                <Button type="submit">√</Button>
+            </Modal.Body>
+        </Modal>
+    ));
+
+    someLogic = async () => {
+        try {
+            const data = await this.inputDialog.open();
+
+            alert(JSON.stringify(data, null, 4));
+        } catch (error) {
+            if (error instanceof DialogClose) console.warn(error.message);
+        }
+    };
 
     render() {
         const { selectValue, showLoading, showDialog, mapAddressName } =
@@ -126,37 +154,26 @@ export class App extends PureComponent<{}, State> {
                     <Section title="IdeaDialog">
                         {this.renderCode(
                             <>
-                                <Button
-                                    onClick={() =>
-                                        this.setState({ showDialog: true })
-                                    }
-                                >
+                                <Button onClick={this.someLogic}>
                                     显示弹窗
                                 </Button>
-                                <IdeaDialog
-                                    title="查看"
-                                    size="lg"
-                                    confirmText="确定"
-                                    cancelText="取消"
-                                    show={showDialog}
-                                    centered
-                                    onCancel={() =>
-                                        this.setState({ showDialog: false })
-                                    }
-                                >
-                                    <Image src="https://github.com/idea2app.png" />
-                                </IdeaDialog>
+
+                                <this.inputDialog.Component />
                             </>
                         )}
                     </Section>
 
                     <Section title="IdeaPopover">
                         {this.renderCode(
-                            <IdeaPopover onShow={console.log} title="view info">
+                            <OverlayBox
+                                trigger="click"
+                                title="view info"
+                                detail={
+                                    <Image src="https://github.com/idea2app.png" />
+                                }
+                            >
                                 <Button>查看</Button>
-
-                                <Image src="https://github.com/idea2app.png" />
-                            </IdeaPopover>
+                            </OverlayBox>
                         )}
                     </Section>
 
