@@ -8,7 +8,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 [![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][7]
 
 -   API document: https://idea2app.github.io/Idea-React/
--   Preview site: https://idea-react-stevending1st.vercel.app/
+-   Preview site: https://idea-react.vercel.app/
 
 ## Content
 
@@ -52,7 +52,7 @@ Table, List & Form components around Data models, have been migrated to https://
 ```html
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"

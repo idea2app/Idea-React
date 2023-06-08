@@ -1,26 +1,52 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { IdeaPopover } from '../source/IdeaPopover';
+import { OverlayBox } from '../source/IdeaPopover';
 
-const meta: Meta<typeof IdeaPopover> = {
-    title: 'Idea-React/IdeaPopover',
-    component: IdeaPopover,
+const meta: Meta<typeof OverlayBox> = {
+    title: 'Idea-React/OverlayBox',
+    component: OverlayBox,
     tags: ['autodocs']
 };
 
 export default meta;
 
-type Story = StoryObj<typeof IdeaPopover>;
+type Story = StoryObj<typeof OverlayBox>;
 
-export const Primary: Story = {
+export const Tooltip: Story = {
     render: args => (
-        <IdeaPopover {...args}>
-            <button>view</button>
-            This is the content of popover.
-        </IdeaPopover>
+        <OverlayBox {...args}>
+            <button>Tooltip</button>
+        </OverlayBox>
+    ),
+    args: {
+        title: 'Tooltip content',
+        placement: 'bottom'
+    }
+};
+
+export const Popover: Story = {
+    render: args => (
+        <OverlayBox {...args}>
+            <button>Popover</button>
+        </OverlayBox>
     ),
     args: {
         title: 'Popover Title',
-        onShow: console.log
+        detail: 'This is the content of popover.',
+        placement: 'bottom'
+    }
+};
+
+export const PopoverClick: Story = {
+    render: args => (
+        <OverlayBox {...args}>
+            <button>click to Popover</button>
+        </OverlayBox>
+    ),
+    args: {
+        title: 'Popover Title',
+        detail: 'This is the content of popover.',
+        placement: 'bottom',
+        trigger: 'click'
     }
 };
