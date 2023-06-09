@@ -72,6 +72,71 @@ Table, List & Form components around Data models, have been migrated to https://
 />
 ```
 
+### Dialog
+
+```tsx
+import { formToJSON } from 'web-utility';
+import { PureComponent } from 'react';
+import { Button, Form, Modal } from 'react-bootstrap';
+import { Dialog, DialogClose } from 'idea-react';
+
+export class ExamplePage extends PureComponent {
+    inputDialog = new Dialog<Record<'a' | 'b', number>>(({ defer }) => (
+        <Modal show={!!defer} onHide={() => defer?.reject(new DialogClose())}>
+            <Modal.Header>Dialog</Modal.Header>
+            <Modal.Body>
+                <Form
+                    id="input-dialog"
+                    onSubmit={event => {
+                        event.preventDefault();
+
+                        defer?.resolve(formToJSON(event.currentTarget));
+                    }}
+                    onReset={() => defer?.reject(new DialogClose())}
+                >
+                    <Form.Group>
+                        <Form.Label>A</Form.Label>
+                        <Form.Control type="number" name="a" />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>B</Form.Label>
+                        <Form.Control type="number" name="b" />
+                    </Form.Group>
+                </Form>
+            </Modal.Body>
+            <Modal.Footer className="d-flex justify-content-end gap-3">
+                <Button form="input-dialog" type="submit">
+                    √
+                </Button>
+                <Button form="input-dialog" type="reset" variant="danger">
+                    ×
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    ));
+
+    someLogic = async () => {
+        try {
+            const data = await this.inputDialog.open();
+
+            alert(JSON.stringify(data, null, 4));
+        } catch (error) {
+            if (error instanceof DialogClose) console.warn(error.message);
+        }
+    };
+
+    render() {
+        return (
+            <>
+                <Button onClick={this.someLogic}>open Dialog</Button>
+
+                <this.inputDialog.Component />
+            </>
+        );
+    }
+}
+```
+
 ### Open Map
 
 #### Common example

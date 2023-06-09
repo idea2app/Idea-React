@@ -1,7 +1,7 @@
 import React, { PureComponent, ReactNode } from 'react';
-import { Button, Container, Image, Modal } from 'react-bootstrap';
+import { Button, Container, Form, Image, Modal } from 'react-bootstrap';
 import { render } from 'react-dom';
-import { sleep } from 'web-utility';
+import { formToJSON, sleep } from 'web-utility';
 
 import {
     Avatar,
@@ -47,16 +47,34 @@ export class App extends PureComponent<{}, State> {
     inputDialog = new Dialog<Record<'a' | 'b', number>>(({ defer }) => (
         <Modal show={!!defer} onHide={() => defer?.reject(new DialogClose())}>
             <Modal.Header>Dialog</Modal.Header>
-            <Modal.Body
-                as="form"
-                onSubmit={event => {
-                    event.preventDefault();
+            <Modal.Body>
+                <Form
+                    id="input-dialog"
+                    onSubmit={event => {
+                        event.preventDefault();
 
-                    defer?.resolve({ a: 1, b: 2 });
-                }}
-            >
-                <Button type="submit">√</Button>
+                        defer?.resolve(formToJSON(event.currentTarget));
+                    }}
+                    onReset={() => defer?.reject(new DialogClose())}
+                >
+                    <Form.Group>
+                        <Form.Label>A</Form.Label>
+                        <Form.Control type="number" name="a" />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>B</Form.Label>
+                        <Form.Control type="number" name="b" />
+                    </Form.Group>
+                </Form>
             </Modal.Body>
+            <Modal.Footer className="d-flex justify-content-end gap-3">
+                <Button form="input-dialog" type="submit">
+                    √
+                </Button>
+                <Button form="input-dialog" type="reset" variant="danger">
+                    ×
+                </Button>
+            </Modal.Footer>
         </Modal>
     ));
 
