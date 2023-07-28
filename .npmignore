@@ -1,5 +1,6 @@
 .eslintrc.json
-/*.ts
+vite.config.ts
+.parcel-cache/
 docs/
 preview/
 api-extractor.json

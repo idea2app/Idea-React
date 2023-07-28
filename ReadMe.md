@@ -23,13 +23,14 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 7. [Spinner Button](source/SpinnerButton.tsx)
 8. [Select](source/Select.tsx)
 9. [Code Block](source/CodeBlock.tsx)
-10. [Editor](source/Editor.tsx)
-11. [Editor HTML](source/EditorHTML.tsx)
-12. [Open Map](source/OpenMap/index.tsx)
-13. [Table Spinner](source/TableSpinner.tsx)
-14. [Loading](source/Loading.tsx)
-15. [Overlay Box](source/OverlayBox.tsx)
-16. [Dialog](source/Dialog.tsx)
+10. [Page Nav](source/PageNav.tsx)
+11. [Editor](source/Editor.tsx)
+12. [Editor HTML](source/EditorHTML.tsx)
+13. [Open Map](source/OpenMap/index.tsx)
+14. [Table Spinner](source/TableSpinner.tsx)
+15. [Loading](source/Loading.tsx)
+16. [Overlay Box](source/OverlayBox.tsx)
+17. [Dialog](source/Dialog.tsx)
 
 #### Data components
 
@@ -52,11 +53,11 @@ Table, List & Form components around Data models, have been migrated to https://
 ```html
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap-icons@1.10.4/font/bootstrap-icons.css"
+    href="https://unpkg.com/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"

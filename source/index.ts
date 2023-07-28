@@ -11,6 +11,7 @@ export * from './Loading';
 export * from './Nameplate';
 export * from './OpenMap';
 export * from './OverlayBox';
+export * from './PageNav';
 export * from './Select';
 export * from './SpinnerButton';
 export * from './TableSpinner';

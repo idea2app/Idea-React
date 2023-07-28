@@ -1,28 +1,24 @@
 import classNames from 'classnames';
-import { CSSProperties, FC, PropsWithoutRef } from 'react';
+import { FC, ImgHTMLAttributes } from 'react';
 
-export type AvatarProps = PropsWithoutRef<{
-    style?: CSSProperties;
-    className?: string;
-    src?: string;
+export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
     size?: number;
-}>;
+}
 
 export const Avatar: FC<AvatarProps> = ({
-    style,
     className,
-    src = '/typescript.png',
-    size = 3
+    style,
+    size = 3,
+    ...props
 }) => (
     <img
-        className={classNames(className, 'rounded-circle')}
+        className={classNames('object-fit-cover rounded-circle', className)}
         style={{
             width: `${size}rem`,
             height: `${size}rem`,
-            objectFit: 'cover',
             ...style
         }}
-        src={src}
+        {...props}
     />
 );
 
