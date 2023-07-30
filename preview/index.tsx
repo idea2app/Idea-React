@@ -18,6 +18,7 @@ import {
     DialogClose,
     Icon,
     Loading,
+    MonthCalendar,
     Nameplate,
     OpenMap,
     Option,
@@ -168,6 +169,15 @@ export class App extends PureComponent<{}, State> {
                     )}
                 </Section>
 
+                <Section title="Month Calendar">
+                    {this.renderCode(
+                        <MonthCalendar
+                            value={[{ date: new Date(), content: 'Hello!' }]}
+                            onChange={console.log}
+                        />
+                    )}
+                </Section>
+
                 <Section title="IdeaDialog">
                     {this.renderCode(
                         <>
@@ -192,7 +202,7 @@ export class App extends PureComponent<{}, State> {
                     )}
                 </Section>
 
-                <Section title="Time Distance">
+                <Section title="Page Nav">
                     <CodeBlock language="tsx">
                         <PageNav />
                     </CodeBlock>

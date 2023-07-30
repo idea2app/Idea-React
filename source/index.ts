@@ -8,6 +8,7 @@ export * from './Editor';
 export * from './EditorHTML';
 export * from './Icon';
 export * from './Loading';
+export * from './MonthCalendar';
 export * from './Nameplate';
 export * from './OpenMap';
 export * from './OverlayBox';
