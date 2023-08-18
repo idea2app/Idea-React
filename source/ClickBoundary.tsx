@@ -1,10 +1,12 @@
-import { createRef, PropsWithChildren, PureComponent } from 'react';
+import { createRef,DetailedHTMLProps, PropsWithChildren, PureComponent } from 'react';
 
-export type ClickBoundaryProps = PropsWithChildren<{
-    className?: string;
-    onInnerClick?: (event: MouseEvent) => any;
-    onOuterClick?: (event: MouseEvent) => any;
-}>;
+export type ClickBoundaryProps = PropsWithChildren<
+    {
+        className?: string;
+        onInnerClick?: (event: MouseEvent) => any;
+        onOuterClick?: (event: MouseEvent) => any;
+    } & DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+>;
 
 export class ClickBoundary extends PureComponent<ClickBoundaryProps> {
     root = createRef<HTMLDivElement>();
@@ -26,10 +28,10 @@ export class ClickBoundary extends PureComponent<ClickBoundaryProps> {
     }
 
     render() {
-        const { className, children } = this.props;
+        const { className, children, ...otherDivProps } = this.props;
 
         return (
-            <div className={className} ref={this.root}>
+            <div className={className} ref={this.root} {...otherDivProps}>
                 {children}
             </div>
         );
