@@ -2,7 +2,7 @@
 
 A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstrap][3], built by **[idea2app][4] remote developers team**.
 
-[![NPM Dependency](https://david-dm.org/idea2app/Idea-React.svg)][5]
+[![NPM Dependency](https://img.shields.io/librariesio/github/idea2app/Idea-React.svg)][5]
 [![CI & CD](https://github.com/idea2app/Idea-React/actions/workflows/main.yml/badge.svg)][6]
 
 [![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][7]
@@ -204,7 +204,7 @@ git push origin master --tags  # push all branches and tags on master
 [2]: https://www.typescriptlang.org/
 [3]: https://getbootstrap.com/
 [4]: https://idea2app.github.io/
-[5]: https://david-dm.org/idea2app/Idea-React
+[5]: https://libraries.io/npm/idea-react
 [6]: https://github.com/idea2app/Idea-React/actions/workflows/main.yml
 [7]: https://nodei.co/npm/idea-react/
 [8]: https://idea2app.github.io/React-MobX-Bootstrap-ts/

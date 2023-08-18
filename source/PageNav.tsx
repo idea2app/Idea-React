@@ -2,7 +2,7 @@ import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { PureComponent } from 'react';
 import { Nav, NavProps } from 'react-bootstrap';
-import { uniqueID } from 'web-utility';
+import { scrollTo, uniqueID } from 'web-utility';
 
 const HeadingSelector =
     Array.from(new Array(6), (_, index) => `h${++index}`) + '';
@@ -61,9 +61,15 @@ export class PageNav extends PureComponent<PageNavProps> {
         globalThis.removeEventListener?.('scroll', this.updateScrollY);
     }
 
+    scrollTo = (meta: HeadingMeta) => () => {
+        setTimeout(() => scrollTo(`[id="${meta.id}"]`));
+
+        this.props.onItemClick?.(meta);
+    };
+
     renderLink = ({ id, level, text, top }: HeadingMeta) => {
         const { currentActiveId } = this,
-            { depth = Infinity, onItemClick } = this.props;
+            { depth = Infinity } = this.props;
 
         return (
             level <= depth && (
@@ -71,7 +77,7 @@ export class PageNav extends PureComponent<PageNavProps> {
                     <Nav.Link
                         href={`#${id}`}
                         active={currentActiveId === id}
-                        onClick={() => onItemClick?.({ id, level, text, top })}
+                        onClick={this.scrollTo({ id, level, text, top })}
                     >
                         {text}
                     </Nav.Link>
