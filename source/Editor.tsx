@@ -1,53 +1,43 @@
-import EditorJS from '@editorjs/editorjs';
-import { ComponentClass, PropsWithoutRef, PureComponent } from 'react';
+import { EditorCore, WrapperProps } from '@react-editor-js/core';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+import { InputHTMLAttributes, PropsWithoutRef, PureComponent } from 'react';
 import { createReactEditorJS } from 'react-editor-js';
 
 const ReactEditorJS = createReactEditorJS();
 
-export type EditorProps = PropsWithoutRef<{
-    tools: Record<string, ComponentClass>;
-    name: string;
-    defaultValue: string;
-}>;
+export type EditorProps = PropsWithoutRef<
+    WrapperProps &
+        Pick<InputHTMLAttributes<HTMLInputElement>, 'name' | 'required'>
+>;
 
-interface State {
-    value: string;
-}
-
-export class Editor extends PureComponent<EditorProps, State> {
+@observer
+export class Editor extends PureComponent<EditorProps> {
     static displayName = 'Editor';
 
-    private core?: EditorJS;
+    private core?: EditorCore;
 
-    state: Readonly<State> = { value: '' };
+    @observable
+    innerValue = this.props.defaultValue;
 
-    static getDerivedStateFromProps(
-        { defaultValue }: EditorProps,
-        { value }: State
-    ): State {
-        return { value: defaultValue && !value ? defaultValue : value };
-    }
-
-    save = async () => {
-        if (!this.core) return;
-
-        const data = await this.core.save();
-
-        this.setState({ value: JSON.stringify(data) });
-    };
+    save = async () => this.core && (this.innerValue = await this.core.save());
 
     render() {
-        const { tools, name, defaultValue } = this.props,
-            { value } = this.state;
+        const { name, required, children, ...editorProps } = this.props,
+            { innerValue } = this;
 
         return (
             <div className="form-control" tabIndex={-1} onBlur={this.save}>
-                <input type="hidden" name={name} value={value} />
-
+                <input
+                    hidden
+                    {...{ name, required }}
+                    value={JSON.stringify(innerValue)}
+                />
                 <ReactEditorJS
-                    tools={tools}
-                    defaultValue={JSON.parse(defaultValue)}
-                    onInitialize={(core: EditorJS) => (this.core = core)}
+                    {...editorProps}
+                    onInitialize={core =>
+                        editorProps.onInitialize((this.core = core))
+                    }
                 />
             </div>
         );
