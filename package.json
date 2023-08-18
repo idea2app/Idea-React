@@ -1,7 +1,7 @@
 {
     "name": "idea-react",
-    "version": "1.0.0-rc.12",
-    "license": "LGPL-2.1",
+    "version": "1.0.0-rc.14",
+    "license": "LGPL-3.0-or-later",
     "author": "shiy2008@gmail.com",
     "description": "A React advanced components library based on TypeScript & Bootstrap, built by idea2app remote developers team.",
     "keywords": [
@@ -25,6 +25,7 @@
     "dependencies": {
         "@editorjs/editorjs": "^2.27.2",
         "@editorjs/paragraph": "^2.10.0",
+        "@react-editor-js/core": "^2.1.0",
         "@swc/helpers": "^0.5.1",
         "@types/leaflet": "^1.9.3",
         "classnames": "^2.3.2",

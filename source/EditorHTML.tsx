@@ -1,18 +1,19 @@
-import EditorJS_HTML from 'editorjs-html';
+import { OutputData } from '@editorjs/editorjs';
+import createParser from 'editorjs-html';
 import { FC, PropsWithoutRef } from 'react';
 
-export const parser = new EditorJS_HTML({
+export const parser = createParser({
     link: ({ data: { link } }: Record<string, any>) =>
         `<a href="${link}">${link}</a>`
 });
 
 export type EditorHTMLProps = PropsWithoutRef<{
     className?: string;
-    data: string;
+    data: OutputData;
 }>;
 
 export const EditorHTML: FC<EditorHTMLProps> = ({ className, data }) => {
-    const __html = parser.parse(JSON.parse(data)).join('');
+    const __html = parser.parse(data).join('');
 
     return (
         <article className={className} dangerouslySetInnerHTML={{ __html }} />
