@@ -1,4 +1,10 @@
-import { createRef, DetailedHTMLProps, HTMLAttributes, PropsWithChildren, PureComponent } from 'react';
+import {
+    createRef,
+    DetailedHTMLProps,
+    HTMLAttributes,
+    PropsWithChildren,
+    PureComponent
+} from 'react';
 
 export type ClickBoundaryProps = PropsWithChildren<
     {
@@ -27,7 +33,8 @@ export class ClickBoundary extends PureComponent<ClickBoundaryProps> {
     }
 
     render() {
-        const { children, ...props } = this.props;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { children, onInnerClick, onOuterClick, ...props } = this.props;
 
         return (
             <div ref={this.root} {...props}>
