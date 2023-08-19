@@ -33,7 +33,6 @@ export class ClickBoundary extends PureComponent<ClickBoundaryProps> {
     }
 
     render() {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { children, onInnerClick, onOuterClick, ...props } = this.props;
 
         return (
