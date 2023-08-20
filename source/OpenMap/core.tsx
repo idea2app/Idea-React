@@ -1,5 +1,5 @@
 import { LeafletEventHandlerFnMap, LeafletMouseEventHandlerFn } from 'leaflet';
-import { computed } from 'mobx';
+import { computed, makeObservable } from 'mobx';
 import { observer } from 'mobx-react';
 import { PureComponent, ReactNode } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -53,19 +53,28 @@ export interface OpenMapProps
  */
 @observer
 export default class OpenMap extends PureComponent<OpenMapProps> {
+    constructor(props: OpenMapProps) {
+        super(props);
+        makeObservable?.(this);
+    }
+
     store = new OpenMapModel();
 
     get eventHandlerMap() {
-        return Object.entries(this.props).reduce((map, [key, value]) => {
-            const [_, type, event] = key.match(/^on([A-Z][a-z]+)(.+)/) || [];
+        return Object.entries(this.props).reduce(
+            (map, [key, value]) => {
+                const [_, type, event] =
+                    key.match(/^on([A-Z][a-z]+)(.+)/) || [];
 
-            if (type)
-                (map[type as LeafLetComponent] ||= {})[
-                    event.toLowerCase() as keyof LeafletEventHandlerFnMap
-                ] = value as (...data: any[]) => any;
+                if (type)
+                    (map[type as LeafLetComponent] ||= {})[
+                        event.toLowerCase() as keyof LeafletEventHandlerFnMap
+                    ] = value as (...data: any[]) => any;
 
-            return map;
-        }, {} as Record<LeafLetComponent, LeafletEventHandlerFnMap>);
+                return map;
+            },
+            {} as Record<LeafLetComponent, LeafletEventHandlerFnMap>
+        );
     }
 
     @computed

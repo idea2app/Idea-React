@@ -1,5 +1,5 @@
 import { EditorCore, WrapperProps } from '@react-editor-js/core';
-import { observable } from 'mobx';
+import { makeObservable, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { InputHTMLAttributes, PropsWithoutRef, PureComponent } from 'react';
 import { createReactEditorJS } from 'react-editor-js';
@@ -14,6 +14,11 @@ export type EditorProps = PropsWithoutRef<
 @observer
 export class Editor extends PureComponent<EditorProps> {
     static displayName = 'Editor';
+
+    constructor(props: EditorProps) {
+        super(props);
+        makeObservable?.(this);
+    }
 
     private core?: EditorCore;
 
@@ -35,9 +40,10 @@ export class Editor extends PureComponent<EditorProps> {
                 />
                 <ReactEditorJS
                     {...editorProps}
-                    onInitialize={core =>
-                        editorProps.onInitialize((this.core = core))
-                    }
+                    onInitialize={core => {
+                        this.core = core;
+                        editorProps.onInitialize?.(core);
+                    }}
                 />
             </div>
         );
