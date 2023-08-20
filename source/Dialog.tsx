@@ -1,5 +1,5 @@
 import { Defer } from 'iterable-observer';
-import { observable } from 'mobx';
+import { makeObservable, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { FC } from 'react';
 
@@ -15,11 +15,13 @@ export interface DialogProps<T = any> {
 
 export class Dialog<T = any> {
     @observable
-    defer?: Defer<T>;
+    defer?: Defer<T> = undefined;
 
     Component: FC;
 
     constructor(Factory: FC<DialogProps<T>>) {
+        makeObservable?.(this);
+
         this.Component = observer(() => <Factory defer={this.defer} />);
     }
 

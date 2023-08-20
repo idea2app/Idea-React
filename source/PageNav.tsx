@@ -1,4 +1,4 @@
-import { computed, observable } from 'mobx';
+import { computed, makeObservable, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { PureComponent } from 'react';
 import { Nav, NavProps } from 'react-bootstrap';
@@ -18,6 +18,11 @@ export interface PageNavProps extends NavProps {
 @observer
 export class PageNav extends PureComponent<PageNavProps> {
     static displayName = 'PageNav';
+
+    constructor(props: PageNavProps) {
+        super(props);
+        makeObservable?.(this);
+    }
 
     @observable
     list: HeadingMeta[] = [];

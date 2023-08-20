@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { computed, observable } from 'mobx';
+import { computed, makeObservable, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { PureComponent, ReactNode } from 'react';
 import { Button, Table, TableProps } from 'react-bootstrap';
@@ -9,7 +9,8 @@ import {
     Day,
     formatDate,
     splitArray,
-    TimeData} from 'web-utility';
+    TimeData
+} from 'web-utility';
 
 interface DateData {
     date: TimeData;
@@ -28,6 +29,11 @@ export interface MonthCalendarProps extends Omit<TableProps, 'onChange'> {
 @observer
 export class MonthCalendar extends PureComponent<MonthCalendarProps> {
     static displayName = 'MonthCalendar';
+
+    constructor(props: MonthCalendarProps) {
+        super(props);
+        makeObservable?.(this);
+    }
 
     @observable
     currentDate = new Date();
