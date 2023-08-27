@@ -1,5 +1,5 @@
 import { HTTPClient } from 'koajax';
-import { makeObservable, observable } from 'mobx';
+import * as MobX from 'mobx';
 import { buildURLData } from 'web-utility';
 
 export type CoordinateValue = `${number}.${number}`;
@@ -48,7 +48,7 @@ export interface AddressLocation extends Location {
 
 export class OpenMapModel {
     constructor() {
-        makeObservable?.(this);
+        MobX.makeObservable?.(this);
     }
 
     nominatimClient = new HTTPClient({
@@ -56,10 +56,10 @@ export class OpenMapModel {
         responseType: 'json'
     });
 
-    @observable
+    @MobX.observable
     searchList: PossibleLocation[] = [];
 
-    @observable
+    @MobX.observable
     reversedAddress: AddressLocation = {} as AddressLocation;
 
     /**

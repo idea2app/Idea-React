@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { computed, makeObservable, observable } from 'mobx';
+import * as MobX from 'mobx';
 import { observer } from 'mobx-react';
 import { PureComponent, ReactNode } from 'react';
 import { Button, Table, TableProps } from 'react-bootstrap';
@@ -32,13 +32,13 @@ export class MonthCalendar extends PureComponent<MonthCalendarProps> {
 
     constructor(props: MonthCalendarProps) {
         super(props);
-        makeObservable?.(this);
+        MobX.makeObservable?.(this);
     }
 
-    @observable
+    @MobX.observable
     currentDate = new Date();
 
-    @computed
+    @MobX.computed
     get dateGrid() {
         let startDate = new Date(this.currentDate);
         startDate.setDate(1);

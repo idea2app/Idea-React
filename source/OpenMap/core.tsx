@@ -1,6 +1,7 @@
 import { LeafletEventHandlerFnMap, LeafletMouseEventHandlerFn } from 'leaflet';
 import { computed, makeObservable } from 'mobx';
 import { observer } from 'mobx-react';
+import { observePropsState } from 'mobx-react-helper';
 import { PureComponent, ReactNode } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import {
@@ -52,16 +53,19 @@ export interface OpenMapProps
  * ```
  */
 @observer
+@observePropsState
 export default class OpenMap extends PureComponent<OpenMapProps> {
     constructor(props: OpenMapProps) {
         super(props);
         makeObservable?.(this);
     }
 
+    declare observedProps: OpenMapProps;
     store = new OpenMapModel();
 
+    @computed
     get eventHandlerMap() {
-        return Object.entries(this.props).reduce(
+        return Object.entries(this.observedProps).reduce(
             (map, [key, value]) => {
                 const [_, type, event] =
                     key.match(/^on([A-Z][a-z]+)(.+)/) || [];
@@ -86,12 +90,12 @@ export default class OpenMap extends PureComponent<OpenMapProps> {
 
     @computed
     get center() {
-        return this.position || this.props.center;
+        return this.position || this.observedProps.center;
     }
 
     @computed
     get markers() {
-        const { markers = [], address, title = address } = this.props,
+        const { markers = [], address, title = address } = this.observedProps,
             { position } = this;
 
         return [
