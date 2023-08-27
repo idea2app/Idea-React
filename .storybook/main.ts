@@ -29,29 +29,6 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
-  babel: ({ plugins, ...config }) => {
-    plugins ||= [];
-
-    const PluginTypescript = [
-      "@babel/plugin-transform-typescript",
-      { allowDeclareFields: true },
-    ] as const;
-
-    for (const [index, plugin] of plugins.entries())
-      if (plugin instanceof Array && plugin[0] === PluginTypescript[0]) {
-        const [name, option] = plugin;
-
-        plugins[index] = [name, { ...option, ...PluginTypescript[1] }];
-
-        return { ...config, plugins };
-      } else if (plugin === PluginTypescript[0]) {
-        plugins[index] = PluginTypescript;
-
-        return { ...config, plugins };
-      }
-
-    return { ...config, plugins: [PluginTypescript, ...plugins] };
-  },
 };
 
 export default config;
