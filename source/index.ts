@@ -10,7 +10,6 @@ export * from './Icon';
 export * from './Loading';
 export * from './MonthCalendar';
 export * from './Nameplate';
-export * from './OpenMap';
 export * from './OverlayBox';
 export * from './PageNav';
 export * from './Select';

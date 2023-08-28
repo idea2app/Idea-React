@@ -48,8 +48,6 @@ export default defineConfig(({ mode }) => {
                     'classnames',
                     'editorjs-html',
                     'iterable-observer',
-                    'koajax',
-                    'leaflet',
                     'lodash',
                     'mobx',
                     'mobx-react',
@@ -59,7 +57,6 @@ export default defineConfig(({ mode }) => {
                     'react-dom',
                     'react-editor-js',
                     'react-element-to-jsx-string',
-                    'react-leaflet',
                     'web-utility'
                 ],
                 output: {
@@ -69,8 +66,6 @@ export default defineConfig(({ mode }) => {
                         classnames: 'classNames',
                         'editorjs-html': 'edjsHTML',
                         'iterable-observer': 'IterableObserver',
-                        koajax: 'KoAJAX',
-                        leaflet: 'leaflet',
                         lodash: '_',
                         mobx: 'mobx',
                         'mobx-react': 'mobxReact',
