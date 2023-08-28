@@ -2,13 +2,15 @@
 
 A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstrap][3], built by **[idea2app][4] remote developers team**.
 
-[![NPM Dependency](https://img.shields.io/librariesio/github/idea2app/Idea-React.svg)][5]
-[![CI & CD](https://github.com/idea2app/Idea-React/actions/workflows/main.yml/badge.svg)][6]
+[![MobX compatibility](https://img.shields.io/badge/Compatible-1?logo=mobx&label=MobX%204%2F5%2F6)][5]
+[![NPM Dependency](https://img.shields.io/librariesio/github/idea2app/Idea-React.svg)][6]
+[![CI & CD](https://github.com/idea2app/Idea-React/actions/workflows/main.yml/badge.svg)][7]
 
-[![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][7]
+[![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][8]
 
 -   API document: https://idea2app.github.io/Idea-React/
--   Preview site: https://idea-react.vercel.app/
+-   Preview site: https://idea2app.github.io/Idea-React/preview/
+-   Storybook playground: https://idea-react.vercel.app/
 
 ## Content
 
@@ -27,15 +29,18 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 11. [Page Nav](source/PageNav.tsx)
 12. [Editor](source/Editor.tsx)
 13. [Editor HTML](source/EditorHTML.tsx)
-14. [Open Map](source/OpenMap/index.tsx)
-15. [Table Spinner](source/TableSpinner.tsx)
-16. [Loading](source/Loading.tsx)
-17. [Overlay Box](source/OverlayBox.tsx)
-18. [Dialog](source/Dialog.tsx)
+14. [Table Spinner](source/TableSpinner.tsx)
+15. [Loading](source/Loading.tsx)
+16. [Overlay Box](source/OverlayBox.tsx)
+17. [Dialog](source/Dialog.tsx)
 
 #### Data components
 
 Table, List & Form components around Data models, have been migrated to https://github.com/idea2app/MobX-RESTful-table, since Idea-React v1.0.0.
+
+#### Map components
+
+Open Map component & model, have been migrated to https://github.com/idea2app/OpenMap, since Idea-React v1.0.0.
 
 ### Utilities
 
@@ -46,8 +51,8 @@ Table, List & Form components around Data models, have been migrated to https://
 
 ### Scaffolds
 
-1. MobX: [demo][8] & [usage][9]
-2. Next.js: [demo][10] & [usage][11]
+1. MobX: [demo][9] & [usage][10]
+2. Next.js: [demo][11] & [usage][12]
 
 ### CSS on CDN
 
@@ -67,10 +72,6 @@ Table, List & Form components around Data models, have been migrated to https://
 <link
     rel="stylesheet"
     href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css"
-/>
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
 />
 ```
 
@@ -139,43 +140,6 @@ export class ExamplePage extends PureComponent {
 }
 ```
 
-### Open Map
-
-#### Common example
-
-[China map in China Open-source Map project][12]
-
-```tsx
-import { FC } from 'react';
-import { OpenMap, OpenMapProps } from 'idea-react';
-
-export const ChinaMap: FC<OpenMapProps> = props => (
-    <OpenMap center={[34.32, 108.55]} zoom={4} {...props} />
-);
-```
-
-#### Use in Next.js
-
-```tsx
-import ChinaMap from '../../components/ChinaMap';
-
-export default function ExampleMap() {
-    return (
-        typeof window !== 'undefined' && (
-            <ChinaMap
-                markers={[
-                    {
-                        position: [34.32, 108.55],
-                        tooltip: 'Geo Center of China'
-                    }
-                ]}
-                onMarkerClick={console.log}
-            />
-        )
-    );
-}
-```
-
 ## Development
 
 ### Publish
@@ -204,11 +168,11 @@ git push origin master --tags  # push all branches and tags on master
 [2]: https://www.typescriptlang.org/
 [3]: https://getbootstrap.com/
 [4]: https://idea2app.github.io/
-[5]: https://libraries.io/npm/idea-react
-[6]: https://github.com/idea2app/Idea-React/actions/workflows/main.yml
-[7]: https://nodei.co/npm/idea-react/
-[8]: https://idea2app.github.io/React-MobX-Bootstrap-ts/
-[9]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx
-[10]: https://next-bootstrap-ts.vercel.app/
-[11]: https://github.com/idea2app/next-bootstrap-ts/blob/main/pages/component.tsx
-[12]: https://github.com/kaiyuanshe/kaiyuanshe.github.io/blob/04d6311a6bd7f131e214034801a42f5044c87133/components/ChinaMap.tsx
+[5]: https://mobx.js.org/
+[6]: https://libraries.io/npm/idea-react
+[7]: https://github.com/idea2app/Idea-React/actions/workflows/main.yml
+[8]: https://nodei.co/npm/idea-react/
+[9]: https://idea2app.github.io/React-MobX-Bootstrap-ts/
+[10]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx
+[11]: https://next-bootstrap-ts.vercel.app/
+[12]: https://github.com/idea2app/next-bootstrap-ts/blob/main/pages/component.tsx

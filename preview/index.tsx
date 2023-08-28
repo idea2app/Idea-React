@@ -1,4 +1,6 @@
-import React, { PureComponent, ReactNode } from 'react';
+import { configure, makeObservable, observable } from 'mobx';
+import { observer } from 'mobx-react';
+import { PureComponent, ReactNode } from 'react';
 import {
     Button,
     Col,
@@ -20,7 +22,6 @@ import {
     Loading,
     MonthCalendar,
     Nameplate,
-    OpenMap,
     Option,
     OverlayBox,
     PageNav,
@@ -30,20 +31,23 @@ import {
 } from '../source';
 import { Section } from './utility';
 
-interface State {
-    pageIndex: number;
-    selectValue: string;
-    showLoading: boolean;
-    mapAddressName: string;
-}
+configure({ enforceActions: 'never' });
 
-export class App extends PureComponent<{}, State> {
-    state: Readonly<State> = {
-        pageIndex: 1,
-        selectValue: '0',
-        showLoading: false,
-        mapAddressName: '成都市'
-    };
+@observer
+export class App extends PureComponent {
+    constructor(props: {}) {
+        super(props);
+        makeObservable(this);
+    }
+
+    @observable
+    pageIndex = 1;
+
+    @observable
+    selectValue = '0';
+
+    @observable
+    showLoading = false;
 
     renderCode(code: ReactNode) {
         return (
@@ -99,11 +103,11 @@ export class App extends PureComponent<{}, State> {
     };
 
     renderContent() {
-        const { selectValue, showLoading, mapAddressName } = this.state;
+        const { selectValue, showLoading } = this;
 
         return (
             <>
-                <h1>Idea React components</h1>
+                <h1 id="top">Idea React components</h1>
 
                 <Section title="Time Distance">
                     {this.renderCode(<TimeDistance date="1989-06-04" />)}
@@ -153,9 +157,7 @@ export class App extends PureComponent<{}, State> {
                     {this.renderCode(
                         <Select
                             value={selectValue}
-                            onChange={value =>
-                                this.setState({ selectValue: value })
-                            }
+                            onChange={value => (this.selectValue = value)}
                         >
                             <Option value="0">
                                 <Icon className="me-2" name="heart" />
@@ -188,7 +190,7 @@ export class App extends PureComponent<{}, State> {
                     )}
                 </Section>
 
-                <Section title="IdeaPopover">
+                <Section title="Overlay Box">
                     {this.renderCode(
                         <OverlayBox
                             trigger="click"
@@ -208,49 +210,14 @@ export class App extends PureComponent<{}, State> {
                     </CodeBlock>
                 </Section>
 
-                <Section title="Open Map - Basic">
-                    {this.renderCode(
-                        <OpenMap
-                            className="vh-100"
-                            center={[34.32, 108.55]}
-                            zoom={4}
-                        />
-                    )}
-                </Section>
-
-                <Section title="Open Map - Display Address">
-                    {this.renderCode(
-                        <OpenMap
-                            className="vh-100"
-                            zoom={10}
-                            title="天府之国"
-                            address="成都市"
-                        />
-                    )}
-                </Section>
-
-                <Section title="Open Map - Pick Address">
-                    {this.renderCode(
-                        <OpenMap
-                            className="vh-100"
-                            center={[30.66, 104.06]}
-                            zoom={10}
-                            address={mapAddressName}
-                            onChange={({ address }) =>
-                                this.setState({ mapAddressName: address })
-                            }
-                        />
-                    )}
-                </Section>
-
                 <Section title="Loading">
                     {this.renderCode(
                         <>
                             <Button
                                 onClick={async () => {
-                                    this.setState({ showLoading: true });
+                                    this.showLoading = true;
                                     await sleep(1);
-                                    this.setState({ showLoading: false });
+                                    this.showLoading = false;
                                 }}
                                 style={{ zIndex: '1040' }}
                             >
