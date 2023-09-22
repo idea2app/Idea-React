@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import * as MobX from 'mobx';
 import { observer } from 'mobx-react';
+import { observePropsState } from 'mobx-react-helper';
 import { PureComponent, ReactNode } from 'react';
 import { Button, Table, TableProps } from 'react-bootstrap';
 import { Color } from 'react-bootstrap/esm/types';
@@ -18,6 +19,7 @@ interface DateData {
 }
 
 export interface MonthCalendarProps extends Omit<TableProps, 'onChange'> {
+    locale?: Navigator['language'];
     headBg?: Color;
     value?: DateData[];
     onChange?: (value: DateData) => any;
@@ -27,12 +29,22 @@ export interface MonthCalendarProps extends Omit<TableProps, 'onChange'> {
  * Re-implement from https://github.com/EasyWebApp/BootCell/blob/3d30027a97fe0a8c4ab8fabc8dfef22aede04de7/source/Calendar/MonthCalendar.tsx
  */
 @observer
+@observePropsState
 export class MonthCalendar extends PureComponent<MonthCalendarProps> {
     static displayName = 'MonthCalendar';
 
     constructor(props: MonthCalendarProps) {
         super(props);
         MobX.makeObservable?.(this);
+    }
+
+    declare observedProps: MonthCalendarProps;
+
+    @MobX.computed
+    get weekFormatter() {
+        const { locale = navigator.language } = this.observedProps;
+
+        return new Intl.DateTimeFormat(locale, { weekday: 'long' });
     }
 
     @MobX.observable
@@ -74,17 +86,19 @@ export class MonthCalendar extends PureComponent<MonthCalendarProps> {
             >
                 {date.getDate()}
 
-                <div>{item?.content}</div>
+                <div className="text-truncate" title={item?.content.toString()}>
+                    {item?.content}
+                </div>
             </td>
         );
     };
 
     render() {
-        const { currentDate, dateGrid } = this,
+        const { weekFormatter, currentDate, dateGrid } = this,
             { headBg = 'primary' } = this.props;
 
         return (
-            <Table>
+            <Table style={{ tableLayout: 'fixed' }}>
                 <caption>
                     <div className="d-flex justify-content-between align-items-center">
                         <Button onClick={() => this.changeMonth(-1)}>
@@ -98,10 +112,18 @@ export class MonthCalendar extends PureComponent<MonthCalendarProps> {
                         </Button>
                     </div>
                 </caption>
-                <thead className={`bg-${headBg}`}>
-                    {dateGrid[0].map((_, index) => (
-                        <tr key={index}></tr>
-                    ))}
+                <thead>
+                    <tr>
+                        {dateGrid[0].map((date, index, { length }) => (
+                            <td
+                                key={index}
+                                className={`bg-${headBg} text-white`}
+                                style={{ width: `calc(100% / ${length})` }}
+                            >
+                                {weekFormatter.format(date)}
+                            </td>
+                        ))}
+                    </tr>
                 </thead>
                 <tbody>
                     {dateGrid.map(days => (
