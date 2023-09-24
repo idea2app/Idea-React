@@ -175,6 +175,7 @@ export class App extends PureComponent {
                     {this.renderCode(
                         <MonthCalendar
                             value={[{ date: new Date(), content: 'Hello!' }]}
+                            onSelect={console.log}
                             onChange={console.log}
                         />
                     )}

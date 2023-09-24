@@ -1,38 +1,53 @@
 import classNames from 'classnames';
 import * as MobX from 'mobx';
 import { observer } from 'mobx-react';
+import { observePropsState } from 'mobx-react-helper';
 import { PureComponent, ReactNode } from 'react';
-import { Button, Table, TableProps } from 'react-bootstrap';
-import { Color } from 'react-bootstrap/esm/types';
+import { Badge, Button, ButtonProps, Table, TableProps } from 'react-bootstrap';
 import {
     changeMonth,
     Day,
     formatDate,
     splitArray,
-    TimeData
-} from 'web-utility';
+    TimeData} from 'web-utility';
 
-interface DateData {
+import { OverlayBox } from './OverlayBox';
+
+export interface DateData {
     date: TimeData;
     content: ReactNode;
 }
 
-export interface MonthCalendarProps extends Omit<TableProps, 'onChange'> {
-    headBg?: Color;
+export interface MonthCalendarProps
+    extends Omit<TableProps, 'onChange' | 'onSelect'>,
+        Pick<ButtonProps, 'variant'> {
+    locale?: Navigator['language'];
     value?: DateData[];
-    onChange?: (value: DateData) => any;
+    onSelect?: (value: DateData) => any;
+    onChange?: (date: Date) => any;
 }
 
 /**
  * Re-implement from https://github.com/EasyWebApp/BootCell/blob/3d30027a97fe0a8c4ab8fabc8dfef22aede04de7/source/Calendar/MonthCalendar.tsx
  */
 @observer
+@observePropsState
 export class MonthCalendar extends PureComponent<MonthCalendarProps> {
     static displayName = 'MonthCalendar';
 
-    constructor(props: MonthCalendarProps) {
-        super(props);
+    constructor({ variant = 'primary', ...props }: MonthCalendarProps) {
+        super({ ...props, variant });
+
         MobX.makeObservable?.(this);
+    }
+
+    declare observedProps: MonthCalendarProps;
+
+    @MobX.computed
+    get weekFormatter() {
+        const { locale = globalThis.navigator?.language } = this.observedProps;
+
+        return new Intl.DateTimeFormat(locale, { weekday: 'long' });
     }
 
     @MobX.observable
@@ -53,12 +68,14 @@ export class MonthCalendar extends PureComponent<MonthCalendarProps> {
 
     changeMonth(delta: number) {
         this.currentDate = changeMonth(this.currentDate, delta);
+
+        this.props.onChange?.(this.currentDate);
     }
 
     renderDate = (date: Date) => {
-        const { value, onChange } = this.props,
+        const { variant, value, onSelect } = this.observedProps,
             dateText = formatDate(date, 'YYYY-MM-DD');
-        const item = value?.find(
+        const list = value?.filter(
             ({ date }) => formatDate(date, 'YYYY-MM-DD') === dateText
         );
 
@@ -70,38 +87,67 @@ export class MonthCalendar extends PureComponent<MonthCalendarProps> {
                         date.getMonth() !== this.currentDate.getMonth(),
                     'fw-bold': dateText === formatDate(new Date(), 'YYYY-MM-DD')
                 })}
-                onClick={() => onChange?.(item)}
             >
-                {date.getDate()}
+                <time className="d-block" dateTime={date.toJSON()}>
+                    {date.getDate()}
+                </time>
 
-                <div>{item?.content}</div>
+                {list?.map(item =>
+                    typeof item.content === 'object' ? (
+                        item.content
+                    ) : (
+                        <OverlayBox key={item.date + ''} title={item.content}>
+                            <Badge
+                                className="text-truncate"
+                                bg={variant}
+                                onClick={() => onSelect?.(item)}
+                            >
+                                {item.content}
+                            </Badge>
+                        </OverlayBox>
+                    )
+                )}
             </td>
         );
     };
 
     render() {
-        const { currentDate, dateGrid } = this,
-            { headBg = 'primary' } = this.props;
+        const { weekFormatter, currentDate, dateGrid } = this,
+            { variant } = this.observedProps;
 
         return (
-            <Table>
+            <Table style={{ tableLayout: 'fixed' }}>
                 <caption>
                     <div className="d-flex justify-content-between align-items-center">
-                        <Button onClick={() => this.changeMonth(-1)}>
+                        <Button
+                            variant={variant}
+                            onClick={() => this.changeMonth(-1)}
+                        >
                             &lt;
                         </Button>
 
                         {formatDate(currentDate, 'YYYY-MM')}
 
-                        <Button onClick={() => this.changeMonth(1)}>
+                        <Button
+                            variant={variant}
+                            onClick={() => this.changeMonth(1)}
+                        >
                             &gt;
                         </Button>
                     </div>
                 </caption>
-                <thead className={`bg-${headBg}`}>
-                    {dateGrid[0].map((_, index) => (
-                        <tr key={index}></tr>
-                    ))}
+                <thead>
+                    <tr>
+                        {dateGrid[0].map((date, index, { length }) => (
+                            <td
+                                key={index}
+                                className={`bg-${variant} text-white`}
+                                style={{ width: `calc(100% / ${length})` }}
+                            >
+                                {weekFormatter.format(date)}
+                            </td>
+                        ))}
+                    </tr>
                 </thead>
                 <tbody>
                     {dateGrid.map(days => (
