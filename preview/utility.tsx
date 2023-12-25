@@ -1,9 +1,18 @@
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-tsx';
+import 'prismjs/components/prism-typescript';
 
-import { FC, HTMLAttributes } from 'react';
+import { FC, HTMLAttributes, PropsWithChildren } from 'react';
+
+import { CodeBlock } from '../source';
+
+export const CodeExample: FC<PropsWithChildren> = ({ children }) => (
+    <>
+        {children}
+        <CodeBlock language="tsx">{children}</CodeBlock>
+    </>
+);
 
 export const Section: FC<HTMLAttributes<HTMLDivElement>> = ({
     className = '',

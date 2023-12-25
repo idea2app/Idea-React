@@ -23,6 +23,7 @@ export class Dialog<T = any> {
         MobX.makeObservable?.(this);
 
         this.Component = observer(() => <Factory defer={this.defer} />);
+        this.Component.displayName = 'DialogComponent';
     }
 
     open() {

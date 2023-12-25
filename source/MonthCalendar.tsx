@@ -2,20 +2,23 @@ import classNames from 'classnames';
 import * as MobX from 'mobx';
 import { observer } from 'mobx-react';
 import { observePropsState } from 'mobx-react-helper';
-import { PureComponent, ReactNode } from 'react';
+import { Component, ReactNode } from 'react';
 import { Badge, Button, ButtonProps, Table, TableProps } from 'react-bootstrap';
 import {
     changeMonth,
     Day,
     formatDate,
     splitArray,
-    TimeData} from 'web-utility';
+    TimeData
+} from 'web-utility';
 
+import { text2color } from './color';
 import { OverlayBox } from './OverlayBox';
 
 export interface DateData {
     date: TimeData;
     content: ReactNode;
+    link?: string;
 }
 
 export interface MonthCalendarProps
@@ -32,12 +35,11 @@ export interface MonthCalendarProps
  */
 @observer
 @observePropsState
-export class MonthCalendar extends PureComponent<MonthCalendarProps> {
+export class MonthCalendar extends Component<MonthCalendarProps> {
     static displayName = 'MonthCalendar';
 
-    constructor({ variant = 'primary', ...props }: MonthCalendarProps) {
-        super({ ...props, variant });
-
+    constructor(props: MonthCalendarProps) {
+        super(props);
         MobX.makeObservable?.(this);
     }
 
@@ -73,7 +75,7 @@ export class MonthCalendar extends PureComponent<MonthCalendarProps> {
     }
 
     renderDate = (date: Date) => {
-        const { variant, value, onSelect } = this.observedProps,
+        const { variant = 'primary', value, onSelect } = this.observedProps,
             dateText = formatDate(date, 'YYYY-MM-DD');
         const list = value?.filter(
             ({ date }) => formatDate(date, 'YYYY-MM-DD') === dateText
@@ -98,8 +100,10 @@ export class MonthCalendar extends PureComponent<MonthCalendarProps> {
                     ) : (
                         <OverlayBox key={item.date + ''} title={item.content}>
                             <Badge
-                                className="text-truncate"
-                                bg={variant}
+                                as="a"
+                                className="d-inline-block text-decoration-none w-100 text-truncate"
+                                bg={text2color(item.content + '', ['light'])}
+                                href={item.link}
                                 onClick={() => onSelect?.(item)}
                             >
                                 {item.content}
@@ -113,10 +117,16 @@ export class MonthCalendar extends PureComponent<MonthCalendarProps> {
 
     render() {
         const { weekFormatter, currentDate, dateGrid } = this,
-            { variant } = this.observedProps;
+            {
+                style,
+                variant = 'primary',
+                onChange,
+                onSelect,
+                ...props
+            } = this.observedProps;
 
         return (
-            <Table style={{ tableLayout: 'fixed' }}>
+            <Table {...props} style={{ tableLayout: 'fixed', ...style }}>
                 <caption>
                     <div className="d-flex justify-content-between align-items-center">
                         <Button
