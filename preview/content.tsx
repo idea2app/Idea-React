@@ -1,4 +1,4 @@
-import { makeObservable, observable } from 'mobx';
+import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { PureComponent } from 'react';
 import { Button, Form, Image, Modal } from 'react-bootstrap';
@@ -18,25 +18,21 @@ import {
     PageNav,
     Select,
     SpinnerButton,
-    TimeDistance
+    TimeDistance,
+    TypeEcho
 } from '../source';
 import { CodeExample, Section } from './utility';
 
 @observer
 export class Content extends PureComponent {
-    constructor(props: {}) {
-        super(props);
-        makeObservable(this);
-    }
+    @observable
+    accessor pageIndex = 1;
 
     @observable
-    pageIndex = 1;
+    accessor selectValue = '0';
 
     @observable
-    selectValue = '0';
-
-    @observable
-    showLoading = false;
+    accessor showLoading = false;
 
     inputDialog = new Dialog<Record<'a' | 'b', number>>(({ defer }) => (
         <Modal show={!!defer} onHide={() => defer?.reject(new DialogClose())}>
@@ -88,6 +84,12 @@ export class Content extends PureComponent {
         return (
             <>
                 <h1 id="top">Idea React components</h1>
+
+                <Section title="TypeEcho">
+                    <CodeExample>
+                        <TypeEcho text="Hello, Idea React!" />
+                    </CodeExample>
+                </Section>
 
                 <Section title="Time Distance">
                     <CodeExample>

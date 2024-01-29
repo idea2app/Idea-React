@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import * as MobX from 'mobx';
+import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { observePropsState } from 'mobx-react-helper';
 import { Component, ReactNode } from 'react';
@@ -38,24 +38,19 @@ export interface MonthCalendarProps
 export class MonthCalendar extends Component<MonthCalendarProps> {
     static displayName = 'MonthCalendar';
 
-    constructor(props: MonthCalendarProps) {
-        super(props);
-        MobX.makeObservable?.(this);
-    }
-
     declare observedProps: MonthCalendarProps;
 
-    @MobX.computed
+    @computed
     get weekFormatter() {
         const { locale = globalThis.navigator?.language } = this.observedProps;
 
         return new Intl.DateTimeFormat(locale, { weekday: 'long' });
     }
 
-    @MobX.observable
-    currentDate = new Date();
+    @observable
+    accessor currentDate = new Date();
 
-    @MobX.computed
+    @computed
     get dateGrid() {
         let startDate = new Date(this.currentDate);
         startDate.setDate(1);

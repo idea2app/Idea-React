@@ -59,11 +59,11 @@ Open Map component & model, have been migrated to https://github.com/idea2app/Op
 ```html
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    href="https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"
@@ -149,7 +149,7 @@ export class ExamplePage extends PureComponent {
 2. add Git tag
 
 ```shell
-git tag vx.xx.x  # such as v0.23.0
+git tag vx.xx.x  # such as v1.0.0
 ```
 
 3. review tag

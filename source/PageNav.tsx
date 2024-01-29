@@ -1,4 +1,4 @@
-import * as MobX from 'mobx';
+import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { PureComponent } from 'react';
 import { Nav, NavProps } from 'react-bootstrap';
@@ -19,18 +19,13 @@ export interface PageNavProps extends NavProps {
 export class PageNav extends PureComponent<PageNavProps> {
     static displayName = 'PageNav';
 
-    constructor(props: PageNavProps) {
-        super(props);
-        MobX.makeObservable?.(this);
-    }
+    @observable
+    accessor list: HeadingMeta[] = [];
 
-    @MobX.observable
-    list: HeadingMeta[] = [];
+    @observable
+    accessor scrollY = 0;
 
-    @MobX.observable
-    scrollY = 0;
-
-    @MobX.computed
+    @computed
     get currentActiveId() {
         const { list, scrollY } = this;
         const index = list.findIndex(({ top }) => top > scrollY);

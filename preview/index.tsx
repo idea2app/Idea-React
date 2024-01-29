@@ -1,4 +1,4 @@
-import { configure, makeObservable, observable } from 'mobx';
+import { configure, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { PureComponent } from 'react';
 import { Button, Col, Collapse, Container, Row } from 'react-bootstrap';
@@ -13,17 +13,16 @@ configure({ enforceActions: 'never' });
 export class App extends PureComponent {
     constructor(props: {}) {
         super(props);
-        makeObservable(this);
 
         this.updateMeta();
         window.addEventListener('resize', this.updateMeta);
     }
 
     @observable
-    screenPortrait = false;
+    accessor screenPortrait = false;
 
     @observable
-    menuOpen = false;
+    accessor menuOpen = false;
 
     updateMeta = () =>
         (this.screenPortrait = window.innerWidth < window.innerHeight);
