@@ -2,7 +2,7 @@
 
 A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstrap][3], built by **[idea2app][4] remote developers team**.
 
-[![MobX compatibility](https://img.shields.io/badge/Compatible-1?logo=mobx&label=MobX%204%2F5%2F6)][5]
+[![MobX compatibility](https://img.shields.io/badge/Compatible-1?logo=mobx&label=MobX%206%2F7)][5]
 [![NPM Dependency](https://img.shields.io/librariesio/github/idea2app/Idea-React.svg)][6]
 [![CI & CD](https://github.com/idea2app/Idea-React/actions/workflows/main.yml/badge.svg)][7]
 
@@ -11,6 +11,13 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 -   API document: https://idea2app.github.io/Idea-React/
 -   Preview site: https://idea2app.github.io/Idea-React/preview/
 -   Storybook playground: https://idea-react.vercel.app/
+
+## Versions
+
+| SemVer |    status    | ES decorator |    MobX     |
+| :----: | :----------: | :----------: | :---------: |
+| `>=2`  | ✅developing |   stage-3    |  `>=6.11`   |
+|  `<2`  | ❌deprecated |   stage-2    | `>=4 <6.11` |
 
 ## Content
 
@@ -73,6 +80,22 @@ Open Map component & model, have been migrated to https://github.com/idea2app/Op
     rel="stylesheet"
     href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css"
 />
+```
+
+### `tsconfig.json`
+
+Compatible with MobX 6/7:
+
+```json
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "moduleResolution": "Node",
+        "useDefineForClassFields": true,
+        "experimentalDecorators": false,
+        "jsx": "react-jsx"
+    }
+}
 ```
 
 ### Dialog
@@ -149,7 +172,7 @@ export class ExamplePage extends PureComponent {
 2. add Git tag
 
 ```shell
-git tag vx.xx.x  # such as v1.0.0
+git tag vx.xx.x  # such as v2.0.0
 ```
 
 3. review tag

@@ -25,11 +25,11 @@ export default defineConfig(({ mode }) => {
         plugins: [
             react({
                 babel: {
+                    presets: [['@babel/preset-env']],
                     plugins: [
-                        ['@babel/plugin-proposal-decorators', { legacy: true }],
                         [
-                            '@babel/plugin-proposal-class-properties',
-                            { loose: true }
+                            '@babel/plugin-proposal-decorators',
+                            { version: '2023-05' }
                         ]
                     ]
                 }
