@@ -25,7 +25,17 @@ export default defineConfig(({ mode }) => {
         plugins: [
             react({
                 babel: {
-                    presets: [['@babel/preset-env']],
+                    presets: [
+                        [
+                            '@babel/preset-typescript',
+                            {
+                                allowDeclareFields: true,
+                                allowNamespaces: true,
+                                allExtensions: true,
+                                isTSX: true
+                            }
+                        ]
+                    ],
                     plugins: [
                         [
                             '@babel/plugin-proposal-decorators',

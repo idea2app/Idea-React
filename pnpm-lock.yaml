@@ -58,9 +58,9 @@ devDependencies:
   '@babel/plugin-proposal-decorators':
     specifier: ^7.23.9
     version: 7.23.9
-  '@babel/preset-env':
-    specifier: ^7.23.9
-    version: 7.23.9(@babel/core@7.23.9)
+  '@babel/preset-typescript':
+    specifier: ^7.23.3
+    version: 7.23.3(@babel/core@7.23.9)
   '@microsoft/api-extractor':
     specifier: ^7.39.4
     version: 7.39.4(@types/node@18.19.10)
@@ -144,7 +144,7 @@ devDependencies:
     version: 9.0.7
   koapache:
     specifier: ^2.2.2
-    version: 2.2.2(@babel/preset-env@7.23.9)(@types/node@18.19.10)
+    version: 2.2.2(@types/node@18.19.10)
   less:
     specifier: ^4.2.0
     version: 4.2.0
@@ -5254,7 +5254,7 @@ packages:
     resolution: {integrity: sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==}
     dev: true
 
-  /@tech_query/node-toolkit@1.2.1(@babel/preset-env@7.23.9)(@types/node@18.19.10):
+  /@tech_query/node-toolkit@1.2.1(@types/node@18.19.10):
     resolution: {integrity: sha512-XFw0EVc8LCcC+CNo+lCxi+5iiPzQyubz41rP4iNuMueN+kjn/KMliaHKLZ5kAnCi+HxmuJPmzrSi6vZtuP07Hg==}
     peerDependencies:
       '@babel/plugin-transform-modules-commonjs': ^7.0.0
@@ -5262,7 +5262,6 @@ packages:
       '@types/node': '>=18'
     dependencies:
       '@babel/core': 7.23.9
-      '@babel/preset-env': 7.23.9(@babel/core@7.23.9)
       '@types/node': 18.19.10
       cross-spawn: 7.0.3
       file-type: 16.5.4
@@ -6535,10 +6534,10 @@ packages:
       delayed-stream: 1.0.0
     dev: true
 
-  /commander-jsx@0.6.9(@babel/preset-env@7.23.9)(@types/node@18.19.10):
+  /commander-jsx@0.6.9(@types/node@18.19.10):
     resolution: {integrity: sha512-E/wSYQhT7kgqd98WW8sdRiM+3i+J9Z30NOBTCdfD88p2k/po4+JEzikqOECKA1OouTqnAuIgdg5aKGbjq5B0jg==}
     dependencies:
-      '@tech_query/node-toolkit': 1.2.1(@babel/preset-env@7.23.9)(@types/node@18.19.10)
+      '@tech_query/node-toolkit': 1.2.1(@types/node@18.19.10)
       tslib: 2.6.2
     transitivePeerDependencies:
       - '@babel/plugin-transform-modules-commonjs'
@@ -8971,14 +8970,14 @@ packages:
       - supports-color
     dev: true
 
-  /koapache@2.2.2(@babel/preset-env@7.23.9)(@types/node@18.19.10):
+  /koapache@2.2.2(@types/node@18.19.10):
     resolution: {integrity: sha512-JJaXaR1h1SieXw06bAxdRkxqmY1pJ2BzlIA673lwBBgKbc1kPd3byxUvy69eONhJ9lcHrR6K6rTOWticAv0oKA==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@koa/cors': 4.0.0
-      '@tech_query/node-toolkit': 1.2.1(@babel/preset-env@7.23.9)(@types/node@18.19.10)
-      commander-jsx: 0.6.9(@babel/preset-env@7.23.9)(@types/node@18.19.10)
+      '@tech_query/node-toolkit': 1.2.1(@types/node@18.19.10)
+      commander-jsx: 0.6.9(@types/node@18.19.10)
       form-data: 4.0.0
       internal-ip: 6.2.0
       koa: 2.15.0

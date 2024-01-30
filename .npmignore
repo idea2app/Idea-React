@@ -7,6 +7,6 @@ api-extractor.json
 stories/
 .storybook/
 storybook-static/
-.vscode/settings.json
+.vscode/
 .husky/
 .github/
