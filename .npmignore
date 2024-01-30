@@ -1,12 +1,12 @@
 .eslintrc.json
 vite.config.ts
-.parcel-cache/
+.parcel*
 docs/
 preview/
 api-extractor.json
 stories/
 .storybook/
 storybook-static/
-.vscode/settings.json
+.vscode/
 .husky/
 .github/

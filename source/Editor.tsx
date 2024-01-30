@@ -1,5 +1,5 @@
 import { EditorCore, WrapperProps } from '@react-editor-js/core';
-import * as MobX from 'mobx';
+import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { InputHTMLAttributes, PropsWithoutRef, PureComponent } from 'react';
 import { createReactEditorJS } from 'react-editor-js';
@@ -15,15 +15,10 @@ export type EditorProps = PropsWithoutRef<
 export class Editor extends PureComponent<EditorProps> {
     static displayName = 'Editor';
 
-    constructor(props: EditorProps) {
-        super(props);
-        MobX.makeObservable?.(this);
-    }
-
     private core?: EditorCore;
 
-    @MobX.observable
-    innerValue = this.props.defaultValue;
+    @observable
+    accessor innerValue = this.props.defaultValue;
 
     save = async () => this.core && (this.innerValue = await this.core.save());
 

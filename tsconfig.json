@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
-        "target": "ES5",
+        "target": "ES6",
+        "moduleResolution": "Node",
         "esModuleInterop": true,
         "downlevelIteration": true,
-        "experimentalDecorators": true,
+        "useDefineForClassFields": true,
         "jsx": "react-jsx",
         "skipLibCheck": true,
-        "lib": ["ES2021", "DOM"]
+        "lib": ["ES2023", "DOM"]
     },
     "include": ["source/**/*", "stories/**/*"],
     "typedocOptions": {

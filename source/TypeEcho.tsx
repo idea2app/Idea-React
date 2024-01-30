@@ -1,4 +1,6 @@
 import classNames from 'classnames';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
 import { PropsWithoutRef, PureComponent, RefCallback } from 'react';
 import { sleep } from 'web-utility';
 
@@ -7,12 +9,13 @@ export type TypeEchoProps = PropsWithoutRef<{
     text: string;
     intervals?: number;
 }>;
-type State = { echoed: string };
 
-export class TypeEcho extends PureComponent<TypeEchoProps, State> {
+@observer
+export class TypeEcho extends PureComponent<TypeEchoProps> {
     static displayName = 'TypeEcho';
 
-    state: Readonly<State> = { echoed: '' };
+    @observable
+    accessor echoed = '';
 
     init: RefCallback<HTMLPreElement> = node =>
         node &&
@@ -26,13 +29,13 @@ export class TypeEcho extends PureComponent<TypeEchoProps, State> {
             for (const char of text) {
                 await sleep(intervals / 1000);
 
-                this.setState({ echoed: this.state.echoed + char });
+                this.echoed += char;
             }
         }).observe(node);
 
     render() {
         const { className, text } = this.props,
-            { echoed } = this.state;
+            { echoed } = this;
 
         return (
             <pre className={classNames('text-wrap', className)} ref={this.init}>
