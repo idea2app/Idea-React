@@ -17,6 +17,7 @@ import {
     OverlayBox,
     PageNav,
     Select,
+    ShareBox,
     SpinnerButton,
     TimeDistance,
     TypeEcho
@@ -164,6 +165,22 @@ export class Content extends PureComponent {
                         <Button onClick={this.someLogic}>显示弹窗</Button>
 
                         <this.inputDialog.Component />
+                    </CodeExample>
+                </Section>
+
+                <Section title="Share Box">
+                    <CodeExample>
+                        <ShareBox
+                            title="idea2app"
+                            text="Every idea of yours is worth our efforts to realize"
+                            url="https://idea2app.cn"
+                        >
+                            <Nameplate
+                                name="idea2app"
+                                avatar="https://github.com/idea2app.png"
+                            />
+                        </ShareBox>
+                        click to share
                     </CodeExample>
                 </Section>
 
