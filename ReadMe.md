@@ -38,8 +38,9 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 13. [Editor HTML](source/EditorHTML.tsx)
 14. [Table Spinner](source/TableSpinner.tsx)
 15. [Loading](source/Loading.tsx)
-16. [Overlay Box](source/OverlayBox.tsx)
-17. [Dialog](source/Dialog.tsx)
+16. [Share Box](source/ShareBox.tsx)
+17. [Overlay Box](source/OverlayBox.tsx)
+18. [Dialog](source/Dialog.tsx)
 
 #### Data components
 

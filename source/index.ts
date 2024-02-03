@@ -13,6 +13,7 @@ export * from './Nameplate';
 export * from './OverlayBox';
 export * from './PageNav';
 export * from './Select';
+export * from './ShareBox';
 export * from './SpinnerButton';
 export * from './TableSpinner';
 export * from './TimeDistance';
