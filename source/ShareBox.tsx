@@ -1,7 +1,7 @@
 import html2canvas from 'html2canvas';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { createRef, MouseEvent, PropsWithChildren, PureComponent } from 'react';
+import { Component,createRef, MouseEvent, PropsWithChildren } from 'react';
 import { Image } from 'react-bootstrap';
 import { blobOf } from 'web-utility';
 
@@ -26,7 +26,7 @@ export async function elementToImage(
 export type ShareBoxProps = PropsWithChildren<ShareData>;
 
 @observer
-export class ShareBox extends PureComponent<ShareBoxProps> {
+export class ShareBox extends Component<ShareBoxProps> {
     static displayName = 'ShareBox';
 
     root = createRef<HTMLDivElement>();

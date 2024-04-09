@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { PropsWithoutRef, PureComponent, RefCallback } from 'react';
+import { Component, PropsWithoutRef, RefCallback } from 'react';
 import { sleep } from 'web-utility';
 
 export type TypeEchoProps = PropsWithoutRef<{
@@ -11,7 +11,7 @@ export type TypeEchoProps = PropsWithoutRef<{
 }>;
 
 @observer
-export class TypeEcho extends PureComponent<TypeEchoProps> {
+export class TypeEcho extends Component<TypeEchoProps> {
     static displayName = 'TypeEcho';
 
     @observable
