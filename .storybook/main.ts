@@ -23,6 +23,9 @@ const config: StorybookConfig = {
     },
     "@storybook/addon-mdx-gfm",
   ],
+  typescript: {
+    reactDocgen: "react-docgen-typescript",
+  },
   framework: {
     name: "@storybook/react-vite",
     options: {},
