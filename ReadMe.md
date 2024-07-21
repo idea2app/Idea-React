@@ -67,7 +67,7 @@ Open Map component & model, have been migrated to https://github.com/idea2app/Op
 ```html
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"

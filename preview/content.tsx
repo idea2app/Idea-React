@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { PureComponent } from 'react';
+import { Component } from 'react';
 import { Button, Form, Image, Modal } from 'react-bootstrap';
 import { formToJSON, sleep } from 'web-utility';
 
@@ -25,7 +25,7 @@ import {
 import { CodeExample, Section } from './utility';
 
 @observer
-export class Content extends PureComponent {
+export class Content extends Component {
     @observable
     accessor pageIndex = 1;
 

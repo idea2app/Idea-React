@@ -1,6 +1,6 @@
 import { configure, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { PureComponent } from 'react';
+import { Component } from 'react';
 import { Button, Col, Collapse, Container, Row } from 'react-bootstrap';
 import { render } from 'react-dom';
 
@@ -10,7 +10,7 @@ import { Content } from './content';
 configure({ enforceActions: 'never' });
 
 @observer
-export class App extends PureComponent {
+export class App extends Component {
     constructor(props: {}) {
         super(props);
 

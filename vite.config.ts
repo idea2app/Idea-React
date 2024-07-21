@@ -45,6 +45,9 @@ export default defineConfig(({ mode }) => {
                 }
             })
         ],
+        resolve: {
+            extensions: ['.mdx', '.ts', '.tsx']
+        },
         build: {
             lib: {
                 entry: resolve(__dirname, 'source/index.ts'),
