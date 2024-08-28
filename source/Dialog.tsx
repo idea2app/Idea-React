@@ -21,7 +21,7 @@ export class Dialog<T = any> {
 
     constructor(Factory: FC<DialogProps<T>>) {
         this.Component = observer(() => <Factory defer={this.defer} />);
-        this.Component.displayName = 'DialogComponent';
+        this.Component.displayName = 'Dialog';
     }
 
     open() {
