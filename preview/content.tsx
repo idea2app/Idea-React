@@ -1,7 +1,8 @@
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { PureComponent } from 'react';
+import { Component, PureComponent } from 'react';
 import { Button, Form, Image, Modal } from 'react-bootstrap';
+import reactElementToJSXString from 'react-element-to-jsx-string';
 import { formToJSON, sleep } from 'web-utility';
 
 import {
@@ -205,21 +206,82 @@ export class Content extends PureComponent {
                 </Section>
 
                 <Section title="Loading">
-                    <CodeExample>
-                        <Button
-                            onClick={async () => {
-                                this.showLoading = true;
-                                await sleep(1);
-                                this.showLoading = false;
-                            }}
-                            style={{ zIndex: '1040' }}
-                        >
-                            显示
-                        </Button>
-                        {showLoading && <Loading>加载中...</Loading>}
+                    <CodeExample
+                        scope={{ LoadingButton, Button }}
+                        code={reactElementToJSXString(
+                            <>
+                                <Button
+                                    onClick={async () => {
+                                        this.showLoading = true;
+                                        await sleep(1);
+                                        this.showLoading = false;
+                                    }}
+                                    style={{ zIndex: '1040' }}
+                                >
+                                    显示
+                                </Button>
+
+                                {showLoading && <Loading>加载中...</Loading>}
+                            </>
+                        )}
+                    >
+                        <SelectExample />
                     </CodeExample>
                 </Section>
             </>
+        );
+    }
+}
+
+@observer
+export class LoadingButton extends Component<{}> {
+    @observable
+    accessor showLoading = false;
+
+    render() {
+        const { showLoading } = this;
+
+        return (
+            <>
+                <Button
+                    onClick={async () => {
+                        this.showLoading = true;
+                        await sleep(1);
+                        this.showLoading = false;
+                    }}
+                    style={{ zIndex: '1040' }}
+                >
+                    显示
+                </Button>
+
+                {showLoading && <Loading>加载中...</Loading>}
+            </>
+        );
+    }
+}
+
+@observer
+export class SelectExample extends Component<{}> {
+    @observable
+    accessor selectValue = '0';
+
+    render() {
+        const { selectValue } = this;
+
+        return (
+            <Select
+                value={selectValue}
+                onChange={value => (this.selectValue = value)}
+            >
+                <Option value="0">
+                    <Icon className="me-2" name="heart" />
+                    idea2app
+                </Option>
+                <Option value="1">
+                    <Icon className="me-2" name="bootstrap" />
+                    freeCodeCamp
+                </Option>
+            </Select>
         );
     }
 }

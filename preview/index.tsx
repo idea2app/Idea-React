@@ -2,7 +2,7 @@ import { configure, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { PureComponent } from 'react';
 import { Button, Col, Collapse, Container, Row } from 'react-bootstrap';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import { Icon, PageNav } from '../source';
 import { Content } from './content';
@@ -68,4 +68,6 @@ export class App extends PureComponent {
     }
 }
 
-render(<App />, document.querySelector('#app'));
+const container = document.getElementById('app');
+const root = createRoot(container);
+root.render(<App />);

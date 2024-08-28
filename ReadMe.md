@@ -10,7 +10,6 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 -   API document: https://idea2app.github.io/Idea-React/
 -   Preview site: https://idea2app.github.io/Idea-React/preview/
--   Storybook playground: https://idea-react.vercel.app/
 
 ## Versions
 
