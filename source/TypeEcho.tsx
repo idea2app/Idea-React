@@ -38,7 +38,7 @@ export class TypeEcho extends PureComponent<TypeEchoProps> {
             { echoed } = this;
 
         return (
-            <pre className={classNames('text-wrap', className)} ref={this.init}>
+            <pre ref={this.init} className={classNames('text-wrap', className)}>
                 {echoed + (echoed === text ? '' : '_')}
             </pre>
         );

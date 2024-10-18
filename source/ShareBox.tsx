@@ -85,9 +85,9 @@ export class ShareBox extends PureComponent<ShareBoxProps> {
                     {imageURI && (
                         <Image
                             className="position-absolute start-0 top-0 w-100 h-100"
-                            fluid
                             src={imageURI}
                             alt="Share Image"
+                            fluid
                             onClick={this.share}
                         />
                     )}
