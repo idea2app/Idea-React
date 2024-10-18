@@ -36,13 +36,13 @@
     --scroll-height: 20px;
     height: var(--scroll-height);
     .scrollContainer {
-        max-height: calc(var(--scroll-height) * 3);
         transform: translateY(
             calc(calc(-100% + var(--scroll-height) + var(--scroll-height)) * 2)
         );
+        max-height: calc(var(--scroll-height) * 3);
         .unScrollItem {
-            line-height: var(--scroll-height);
             max-height: calc(var(--scroll-height) * 2);
+            line-height: var(--scroll-height);
         }
         .scrollItem {
             height: var(--scroll-height);

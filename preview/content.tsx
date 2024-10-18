@@ -226,12 +226,12 @@ export class Content extends Component {
                 <Section title="Loading">
                     <CodeExample>
                         <Button
+                            style={{ zIndex: '1040' }}
                             onClick={async () => {
                                 this.showLoading = true;
                                 await sleep(1);
                                 this.showLoading = false;
                             }}
-                            style={{ zIndex: '1040' }}
                         >
                             显示
                         </Button>
