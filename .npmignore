@@ -1,12 +1,8 @@
-.eslintrc.json
+.*
+eslint.config.mjs
 vite.config.ts
-.parcel*
 docs/
 preview/
 api-extractor.json
 stories/
-.storybook/
 storybook-static/
-.vscode/
-.husky/
-.github/
