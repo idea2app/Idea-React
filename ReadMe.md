@@ -28,19 +28,21 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 3. [Avatar](source/Avatar.tsx)
 4. [Nameplate](source/Nameplate.tsx)
 5. [Type Echo](source/TypeEcho.tsx)
-6. [Click Boundary](source/ClickBoundary.tsx)
-7. [Spinner Button](source/SpinnerButton.tsx)
-8. [Select](source/Select.tsx)
-9. [Month Calendar](source/MonthCalendar.tsx)
-10. [Code Block](source/CodeBlock.tsx)
-11. [Page Nav](source/PageNav.tsx)
-12. [Editor](source/Editor.tsx)
-13. [Editor HTML](source/EditorHTML.tsx)
-14. [Table Spinner](source/TableSpinner.tsx)
-15. [Loading](source/Loading.tsx)
-16. [Share Box](source/ShareBox.tsx)
-17. [Overlay Box](source/OverlayBox.tsx)
-18. [Dialog](source/Dialog.tsx)
+6. [Horizontal Marquee](source/HorizontalMarquee.tsx)
+7. [Vertical Marquee](source/VerticalMarquee.tsx)
+8. [Click Boundary](source/ClickBoundary.tsx)
+9. [Spinner Button](source/SpinnerButton.tsx)
+10. [Select](source/Select.tsx)
+11. [Month Calendar](source/MonthCalendar.tsx)
+12. [Code Block](source/CodeBlock.tsx)
+13. [Page Nav](source/PageNav.tsx)
+14. [Editor](source/Editor.tsx)
+15. [Editor HTML](source/EditorHTML.tsx)
+16. [Table Spinner](source/TableSpinner.tsx)
+17. [Loading](source/Loading.tsx)
+18. [Share Box](source/ShareBox.tsx)
+19. [Overlay Box](source/OverlayBox.tsx)
+20. [Dialog](source/Dialog.tsx)
 
 #### Data components
 
@@ -67,7 +69,7 @@ Open Map component & model, have been migrated to https://github.com/idea2app/Op
 ```html
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
@@ -81,6 +83,7 @@ Open Map component & model, have been migrated to https://github.com/idea2app/Op
     rel="stylesheet"
     href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css"
 />
+<link rel="stylesheet" href="https://unpkg.com/idea-react/dist/index.css" />
 ```
 
 ### `tsconfig.json`
