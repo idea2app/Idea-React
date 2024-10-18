@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { PureComponent } from 'react';
+import { Component } from 'react';
 import { Button, Form, Image, Modal } from 'react-bootstrap';
 import { formToJSON, sleep } from 'web-utility';
 
@@ -9,6 +9,7 @@ import {
     CodeBlock,
     Dialog,
     DialogClose,
+    HorizontalMarquee,
     Icon,
     Loading,
     MonthCalendar,
@@ -20,12 +21,14 @@ import {
     ShareBox,
     SpinnerButton,
     TimeDistance,
-    TypeEcho
+    TypeEcho,
+    UserRankView,
+    VerticalMarquee
 } from '../source';
 import { CodeExample, Section } from './utility';
 
 @observer
-export class Content extends PureComponent {
+export class Content extends Component {
     @observable
     accessor pageIndex = 1;
 
@@ -89,6 +92,22 @@ export class Content extends PureComponent {
                 <Section title="TypeEcho">
                     <CodeExample>
                         <TypeEcho text="Hello, Idea React!" />
+                    </CodeExample>
+                </Section>
+
+                <Section title="Horizontal Marquee">
+                    <CodeExample>
+                        <HorizontalMarquee>
+                            {'idea2app '.repeat(15).trim()}
+                        </HorizontalMarquee>
+                    </CodeExample>
+                </Section>
+
+                <Section title="Vertical Marquee">
+                    <CodeExample>
+                        <VerticalMarquee style={{ height: '10rem' }}>
+                            <img src="https://tech-query.me/medias/featureimages/22.jpg" />
+                        </VerticalMarquee>
                     </CodeExample>
                 </Section>
 
@@ -217,6 +236,27 @@ export class Content extends PureComponent {
                             显示
                         </Button>
                         {showLoading && <Loading>加载中...</Loading>}
+                    </CodeExample>
+                </Section>
+
+                <Section title="User Rank">
+                    <CodeExample>
+                        <UserRankView
+                            title="GitHub"
+                            rank={[
+                                'Five-great',
+                                'TechQuery',
+                                'stevending1st',
+                                'wangrunlin'
+                            ].map((name, index) => ({
+                                id: index + 1,
+                                name,
+                                avatar: `https://github.com/${name}.png`,
+                                website: `https://github.com/${name}`,
+                                score: 100 - index
+                            }))}
+                            linkOf={({ id }) => `/user/${id}`}
+                        />
                     </CodeExample>
                 </Section>
             </>

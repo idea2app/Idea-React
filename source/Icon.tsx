@@ -14,7 +14,7 @@ export const Icon: FC<IconProps> = ({
     size,
     ...props
 }) => (
-    <i
+    <span
         className={classNames(`bi-${name}`, className)}
         style={{ fontSize: size && `${size}rem`, ...style }}
         {...props}
