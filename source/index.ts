@@ -19,4 +19,5 @@ export * from './SpinnerButton';
 export * from './TableSpinner';
 export * from './TimeDistance';
 export * from './TypeEcho';
+export * from './UserRank';
 export * from './VerticalMarquee';

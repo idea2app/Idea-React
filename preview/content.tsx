@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { PureComponent } from 'react';
+import { Component } from 'react';
 import { Button, Form, Image, Modal } from 'react-bootstrap';
 import { formToJSON, sleep } from 'web-utility';
 
@@ -20,12 +20,13 @@ import {
     ShareBox,
     SpinnerButton,
     TimeDistance,
-    TypeEcho
+    TypeEcho,
+    UserRankView
 } from '../source';
 import { CodeExample, Section } from './utility';
 
 @observer
-export class Content extends PureComponent {
+export class Content extends Component {
     @observable
     accessor pageIndex = 1;
 
@@ -217,6 +218,26 @@ export class Content extends PureComponent {
                             显示
                         </Button>
                         {showLoading && <Loading>加载中...</Loading>}
+                    </CodeExample>
+                </Section>
+
+                <Section title="User Rank">
+                    <CodeExample>
+                        <UserRankView
+                            title="GitHub"
+                            value={[
+                                'Five-great',
+                                'TechQuery',
+                                'stevending1st',
+                                'wangrunlin'
+                            ].map((name, index) => ({
+                                id: index + 1,
+                                name,
+                                avatar: `https://github.com/${name}.png`,
+                                website: `https://github.com/${name}`,
+                                score: 100 - index
+                            }))}
+                        />
                     </CodeExample>
                 </Section>
             </>
