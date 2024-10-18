@@ -13,16 +13,17 @@ export interface UserRank extends UserAddressProps {
 
 export interface UserRankViewProps {
     title: string;
-    value: UserRank[];
+    rank: UserRank[];
+    linkOf?: (user: UserRank) => string;
 }
 
 export class UserRankView extends PureComponent<UserRankViewProps> {
-    renderMedal = ({ id, name, avatar, email, website, score }: UserRank) => (
-        <Col as="li" key={id}>
+    renderMedal = (user: UserRank) => (
+        <Col as="li" key={user.id}>
             <div
                 className={`shadow-lg overflow-hidden rounded-circle m-auto ${style.imgBox}`}
             >
-                <Image fluid src={avatar} alt={name} loading="lazy" />
+                <Image fluid src={user.avatar} alt={user.name} loading="lazy" />
             </div>
             <div
                 className={`position-relative overflow-hidden ${style.showBox}`}
@@ -31,23 +32,19 @@ export class UserRankView extends PureComponent<UserRankViewProps> {
                     <i className="d-block overflow-hidden m-auto mb-1 rounded-circle" />
                     <a
                         className="d-block mb-0 stretched-link"
-                        href={`/user/${id}`}
+                        href={this.props.linkOf?.(user) || '#'}
                     >
-                        {name}
+                        {user.name}
                     </a>
-                    <strong>{score}</strong>
+                    <strong>{user.score}</strong>
                 </div>
-                <UserAddress {...{ email, website }} />
+                <UserAddress {...user} />
             </div>
         </Col>
     );
 
-    renderRow = (
-        { id, name, avatar, email, website, score }: UserRank,
-        index: number,
-        { length }: UserRank[]
-    ) => (
-        <tr key={id} className="position-relative">
+    renderRow = (user: UserRank, index: number, { length }: UserRank[]) => (
+        <tr key={user.id} className="position-relative">
             <td className="align-middle">
                 <Badge className="fw-bold fst-italic">
                     {(index + 4 + '').padStart(length, '0')}
@@ -59,27 +56,32 @@ export class UserRankView extends PureComponent<UserRankViewProps> {
                 <div
                     className={`d-inline-block overflow-hidden align-middle rounded-circle ${style.imgBox}`}
                 >
-                    <Image fluid src={avatar} alt={name} loading="lazy" />
+                    <Image
+                        fluid
+                        src={user.avatar}
+                        alt={user.name}
+                        loading="lazy"
+                    />
                 </div>
                 <a
                     className="ms-2 d-inline-block align-middle stretched-link"
                     style={{
                         color: `rgb(248, ${(index + 2) * 15}, ${(index + 2) * 35})`
                     }}
-                    href={`/user/${id}`}
+                    href={this.props.linkOf?.(user) || '#'}
                 >
-                    {name}
+                    {user.name}
                 </a>
             </td>
-            <td className="align-middle">{score}</td>
+            <td className="align-middle">{user.score}</td>
             <td className="align-middle">
-                <UserAddress {...{ email, website }} />
+                <UserAddress {...user} />
             </td>
         </tr>
     );
 
     render() {
-        const { title, value = [] } = this.props;
+        const { title, rank = [] } = this.props;
 
         return (
             <Row className={style.topUserRow}>
@@ -101,7 +103,7 @@ export class UserRankView extends PureComponent<UserRankViewProps> {
                         as="ul"
                         className={`mt-2 g-0 align-items-end text-center ps-0 pt-2 list-unstyled ${style.topUserUl}`}
                     >
-                        {value.slice(0, 3).map(this.renderMedal)}
+                        {rank.slice(0, 3).map(this.renderMedal)}
                     </Row>
                 </Col>
                 <Col xs={12} sm={12} lg={5}>
@@ -109,7 +111,7 @@ export class UserRankView extends PureComponent<UserRankViewProps> {
                         responsive
                         className={`my-3 pt-2 ${style.topUserList}`}
                     >
-                        <tbody>{value.slice(3, 10).map(this.renderRow)}</tbody>
+                        <tbody>{rank.slice(3, 10).map(this.renderRow)}</tbody>
                     </Table>
                 </Col>
             </Row>

@@ -9,6 +9,7 @@ import {
     CodeBlock,
     Dialog,
     DialogClose,
+    HorizontalMarquee,
     Icon,
     Loading,
     MonthCalendar,
@@ -21,7 +22,8 @@ import {
     SpinnerButton,
     TimeDistance,
     TypeEcho,
-    UserRankView
+    UserRankView,
+    VerticalMarquee
 } from '../source';
 import { CodeExample, Section } from './utility';
 
@@ -90,6 +92,22 @@ export class Content extends Component {
                 <Section title="TypeEcho">
                     <CodeExample>
                         <TypeEcho text="Hello, Idea React!" />
+                    </CodeExample>
+                </Section>
+
+                <Section title="Horizontal Marquee">
+                    <CodeExample>
+                        <HorizontalMarquee>
+                            {'idea2app '.repeat(15).trim()}
+                        </HorizontalMarquee>
+                    </CodeExample>
+                </Section>
+
+                <Section title="Vertical Marquee">
+                    <CodeExample>
+                        <VerticalMarquee style={{ height: '10rem' }}>
+                            <img src="https://tech-query.me/medias/featureimages/22.jpg" />
+                        </VerticalMarquee>
                     </CodeExample>
                 </Section>
 
@@ -225,7 +243,7 @@ export class Content extends Component {
                     <CodeExample>
                         <UserRankView
                             title="GitHub"
-                            value={[
+                            rank={[
                                 'Five-great',
                                 'TechQuery',
                                 'stevending1st',
@@ -237,6 +255,7 @@ export class Content extends Component {
                                 website: `https://github.com/${name}`,
                                 score: 100 - index
                             }))}
+                            linkOf={({ id }) => `/user/${id}`}
                         />
                     </CodeExample>
                 </Section>

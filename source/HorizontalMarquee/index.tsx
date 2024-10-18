@@ -1,18 +1,19 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, HTMLAttributes } from 'react';
 
 import * as style from './index.module.less';
 
-export type HorizontalMarqueeProps = PropsWithChildren<
-    Partial<Record<'maxWidth' | 'duration' | 'height', string>>
->;
+export type HorizontalMarqueeProps = HTMLAttributes<HTMLDivElement> &
+    Partial<Record<'maxWidth' | 'duration' | 'height', string>>;
 
 export const HorizontalMarquee: FC<HorizontalMarqueeProps> = ({
+    className = '',
     children,
     maxWidth = '100%',
     duration,
-    height
+    height,
+    ...props
 }) => (
-    <div className="overflow-hidden mw-100">
+    <div className={`overflow-hidden mw-100 ${className}`} {...props}>
         <div
             className={`d-inline-block align-top text-nowrap ${style.scrollWrap}`}
             style={{
