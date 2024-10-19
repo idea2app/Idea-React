@@ -1,17 +1,16 @@
 import classNames from 'classnames';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { PropsWithoutRef, PureComponent, RefCallback } from 'react';
+import { Component, HTMLAttributes, RefCallback } from 'react';
 import { sleep } from 'web-utility';
 
-export type TypeEchoProps = PropsWithoutRef<{
-    className?: string;
+export interface TypeEchoProps extends HTMLAttributes<HTMLPreElement> {
     text: string;
     intervals?: number;
-}>;
+}
 
 @observer
-export class TypeEcho extends PureComponent<TypeEchoProps> {
+export class TypeEcho extends Component<TypeEchoProps> {
     static displayName = 'TypeEcho';
 
     @observable
@@ -34,11 +33,15 @@ export class TypeEcho extends PureComponent<TypeEchoProps> {
         }).observe(node);
 
     render() {
-        const { className, text } = this.props,
+        const { className, text, ...props } = this.props,
             { echoed } = this;
 
         return (
-            <pre ref={this.init} className={classNames('text-wrap', className)}>
+            <pre
+                {...props}
+                ref={this.init}
+                className={classNames('text-wrap', className)}
+            >
                 {echoed + (echoed === text ? '' : '_')}
             </pre>
         );

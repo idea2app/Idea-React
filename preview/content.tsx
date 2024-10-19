@@ -38,7 +38,7 @@ export class Content extends Component {
     @observable
     accessor showLoading = false;
 
-    inputDialog = new Dialog<Record<'a' | 'b', number>>(({ defer }) => (
+    inputDialog = new Dialog<{}, Record<'a' | 'b', number>>(({ defer }) => (
         <Modal show={!!defer} onHide={() => defer?.reject(new DialogClose())}>
             <Modal.Header>Dialog</Modal.Header>
             <Modal.Body>

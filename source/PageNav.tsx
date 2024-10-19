@@ -1,6 +1,6 @@
 import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { PureComponent } from 'react';
+import { Component } from 'react';
 import { Nav, NavProps } from 'react-bootstrap';
 import { scrollTo, uniqueID } from 'web-utility';
 
@@ -16,7 +16,7 @@ export interface PageNavProps extends NavProps {
 }
 
 @observer
-export class PageNav extends PureComponent<PageNavProps> {
+export class PageNav extends Component<PageNavProps> {
     static displayName = 'PageNav';
 
     @observable

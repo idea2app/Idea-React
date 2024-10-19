@@ -1,7 +1,7 @@
 import { EditorCore, WrapperProps } from '@react-editor-js/core';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { InputHTMLAttributes, PropsWithoutRef, PureComponent } from 'react';
+import { Component, InputHTMLAttributes, PropsWithoutRef } from 'react';
 import { createReactEditorJS } from 'react-editor-js';
 
 const ReactEditorJS = createReactEditorJS();
@@ -12,7 +12,7 @@ export type EditorProps = PropsWithoutRef<
 >;
 
 @observer
-export class Editor extends PureComponent<EditorProps> {
+export class Editor extends Component<EditorProps> {
     static displayName = 'Editor';
 
     private core?: EditorCore;
