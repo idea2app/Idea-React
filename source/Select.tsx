@@ -1,20 +1,15 @@
 import classNames from 'classnames';
+import { FC, isValidElement, ReactElement, ReactNode } from 'react';
 import {
-    CSSProperties,
-    FC,
-    isValidElement,
-    PropsWithChildren,
-    ReactElement,
-    ReactNode
-} from 'react';
-import { Dropdown, DropdownButtonProps } from 'react-bootstrap';
+    Dropdown,
+    DropdownButtonProps,
+    DropdownItemProps
+} from 'react-bootstrap';
 import { makeArray } from 'web-utility';
 
-export type OptionProps = PropsWithChildren<{
-    className?: string;
-    style?: CSSProperties;
+export interface OptionProps extends DropdownItemProps {
     value?: string;
-}>;
+}
 
 export const Option: FC<OptionProps> = ({ value, children, ...props }) => (
     <Dropdown.Item {...props} data-value={value}>
@@ -25,7 +20,7 @@ export const Option: FC<OptionProps> = ({ value, children, ...props }) => (
 Option.displayName = 'Option';
 
 export interface SelectProps
-    extends OptionProps,
+    extends Omit<OptionProps, 'onChange'>,
         Pick<DropdownButtonProps, 'variant' | 'menuVariant'> {
     onChange?: (value: string) => any;
     valueRender?: (value: string) => ReactNode;

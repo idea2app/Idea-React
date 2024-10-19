@@ -13,18 +13,25 @@ export interface DialogProps<T = any> {
     defer?: Defer<T>;
 }
 
-export class Dialog<T = any> {
+export class Dialog<I extends object = {}, O = any> {
     @observable
-    accessor defer: Defer<T> | undefined;
+    accessor input = {} as I;
 
-    Component: FC;
+    @observable
+    accessor defer: Defer<O> | undefined;
 
-    constructor(Factory: FC<DialogProps<T>>) {
-        this.Component = observer(() => <Factory defer={this.defer} />);
+    Component: FC<I>;
+
+    constructor(Factory: FC<I & DialogProps<O>>) {
+        this.Component = observer(props => (
+            <Factory {...props} {...this.input} defer={this.defer} />
+        ));
         this.Component.displayName = 'DialogComponent';
     }
 
-    open() {
+    open(input?: I) {
+        if (input) this.input = input;
+
         this.defer = new Defer();
 
         this.defer.promise.finally(() => (this.defer = undefined));
