@@ -20,7 +20,9 @@ import {
     Select,
     ShareBox,
     SpinnerButton,
+    Time,
     TimeDistance,
+    Timeline,
     TypeEcho,
     UserRankView,
     VerticalMarquee
@@ -111,9 +113,42 @@ export class Content extends Component {
                     </CodeExample>
                 </Section>
 
+                <Section title="Time">
+                    <CodeExample>
+                        <Time
+                            dateTime="2022-11-27"
+                            format="YYYY 年 MM 月 DD 日"
+                        />
+                    </CodeExample>
+                </Section>
+
                 <Section title="Time Distance">
                     <CodeExample>
                         <TimeDistance date="1989-06-04" />
+                    </CodeExample>
+                </Section>
+
+                <Section title="Timeline">
+                    <CodeExample>
+                        <div
+                            style={{
+                                background:
+                                    'linear-gradient(to right, rgba(235, 187, 167, 1), rgba(207, 199, 248, 1))'
+                            }}
+                        >
+                            <Timeline
+                                events={[
+                                    { title: 'Discover', time: ['2019-12-01'] },
+                                    { title: 'Deny', time: ['2020-01-02'] },
+                                    {
+                                        title: 'Lock down',
+                                        time: ['2020-01-23']
+                                    },
+                                    { title: 'Open', time: ['2022-12-01'] }
+                                ]}
+                                timeFormat="YYYY-MM-DD"
+                            />
+                        </div>
                     </CodeExample>
                 </Section>
 

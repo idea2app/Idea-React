@@ -24,3 +24,4 @@ export const VerticalMarquee: FC<VerticalMarqueeProps> = ({
         </div>
     </div>
 );
+VerticalMarquee.displayName = 'VerticalMarquee';

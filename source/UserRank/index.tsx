@@ -18,6 +18,8 @@ export interface UserRankViewProps extends RowProps {
 }
 
 export class UserRankView extends PureComponent<UserRankViewProps> {
+    static displayName = 'UserRankView';
+
     renderMedal = (user: UserRank) => (
         <Col key={user.id} as="li">
             <div
