@@ -1,8 +1,8 @@
 import { configure, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { PureComponent } from 'react';
+import { Component } from 'react';
 import { Button, Col, Collapse, Container, Row } from 'react-bootstrap';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import { Icon, PageNav } from '../source';
 import { Content } from './content';
@@ -10,10 +10,8 @@ import { Content } from './content';
 configure({ enforceActions: 'never' });
 
 @observer
-export class App extends PureComponent {
-    constructor(props: {}) {
-        super(props);
-
+export class App extends Component {
+    componentDidMount() {
         this.updateMeta();
         window.addEventListener('resize', this.updateMeta);
     }
@@ -68,4 +66,4 @@ export class App extends PureComponent {
     }
 }
 
-render(<App />, document.querySelector('#app'));
+createRoot(document.querySelector('#app')).render(<App />);

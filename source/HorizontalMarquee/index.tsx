@@ -63,3 +63,5 @@ export const HorizontalMarqueeBox: FC<HorizontalMarqueeProps> = ({
             {children}
         </HorizontalMarquee>
     );
+
+HorizontalMarquee.displayName = 'HorizontalMarquee';
