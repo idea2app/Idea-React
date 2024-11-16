@@ -16,7 +16,7 @@ export const EditorHTML: FC<EditorHTMLProps> = ({ className, data }) => {
     const __html = parser.parse(data).join('');
 
     return (
-        <article className={className} dangerouslySetInnerHTML={{ __html }} />
+        <article dangerouslySetInnerHTML={{ __html }} className={className} />
     );
 };
 

@@ -1,7 +1,7 @@
 import { EditorCore, WrapperProps } from '@react-editor-js/core';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component,InputHTMLAttributes, PropsWithoutRef } from 'react';
+import { Component, InputHTMLAttributes, PropsWithoutRef } from 'react';
 import { createReactEditorJS } from 'react-editor-js';
 
 const ReactEditorJS = createReactEditorJS();

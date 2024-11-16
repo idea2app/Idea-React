@@ -16,8 +16,8 @@ export function CodeBlock({ language, children }: CodeBlockProps) {
     return (
         <pre>
             <code
-                className={`language-${language}`}
                 dangerouslySetInnerHTML={{ __html }}
+                className={`language-${language}`}
             />
         </pre>
     );

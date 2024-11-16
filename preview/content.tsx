@@ -9,6 +9,7 @@ import {
     CodeBlock,
     Dialog,
     DialogClose,
+    HorizontalMarquee,
     Icon,
     Loading,
     MonthCalendar,
@@ -19,8 +20,12 @@ import {
     Select,
     ShareBox,
     SpinnerButton,
+    Time,
     TimeDistance,
-    TypeEcho
+    Timeline,
+    TypeEcho,
+    UserRankView,
+    VerticalMarquee
 } from '../source';
 import { CodeExample, Section } from './utility';
 
@@ -35,7 +40,7 @@ export class Content extends Component {
     @observable
     accessor showLoading = false;
 
-    inputDialog = new Dialog<Record<'a' | 'b', number>>(({ defer }) => (
+    inputDialog = new Dialog<{}, Record<'a' | 'b', number>>(({ defer }) => (
         <Modal show={!!defer} onHide={() => defer?.reject(new DialogClose())}>
             <Modal.Header>Dialog</Modal.Header>
             <Modal.Body>
@@ -92,9 +97,58 @@ export class Content extends Component {
                     </CodeExample>
                 </Section>
 
+                <Section title="Horizontal Marquee">
+                    <CodeExample>
+                        <HorizontalMarquee>
+                            {'idea2app '.repeat(15).trim()}
+                        </HorizontalMarquee>
+                    </CodeExample>
+                </Section>
+
+                <Section title="Vertical Marquee">
+                    <CodeExample>
+                        <VerticalMarquee style={{ height: '10rem' }}>
+                            <img src="https://tech-query.me/medias/featureimages/22.jpg" />
+                        </VerticalMarquee>
+                    </CodeExample>
+                </Section>
+
+                <Section title="Time">
+                    <CodeExample>
+                        <Time
+                            dateTime="2022-11-27"
+                            format="YYYY 年 MM 月 DD 日"
+                        />
+                    </CodeExample>
+                </Section>
+
                 <Section title="Time Distance">
                     <CodeExample>
                         <TimeDistance date="1989-06-04" />
+                    </CodeExample>
+                </Section>
+
+                <Section title="Timeline">
+                    <CodeExample>
+                        <div
+                            style={{
+                                background:
+                                    'linear-gradient(to right, rgba(235, 187, 167, 1), rgba(207, 199, 248, 1))'
+                            }}
+                        >
+                            <Timeline
+                                events={[
+                                    { title: 'Discover', time: ['2019-12-01'] },
+                                    { title: 'Deny', time: ['2020-01-02'] },
+                                    {
+                                        title: 'Lock down',
+                                        time: ['2020-01-23']
+                                    },
+                                    { title: 'Open', time: ['2022-12-01'] }
+                                ]}
+                                timeFormat="YYYY-MM-DD"
+                            />
+                        </div>
                     </CodeExample>
                 </Section>
 
@@ -207,16 +261,37 @@ export class Content extends Component {
                 <Section title="Loading">
                     <CodeExample>
                         <Button
+                            style={{ zIndex: '1040' }}
                             onClick={async () => {
                                 this.showLoading = true;
                                 await sleep(1);
                                 this.showLoading = false;
                             }}
-                            style={{ zIndex: '1040' }}
                         >
                             显示
                         </Button>
                         {showLoading && <Loading>加载中...</Loading>}
+                    </CodeExample>
+                </Section>
+
+                <Section title="User Rank">
+                    <CodeExample>
+                        <UserRankView
+                            title="GitHub"
+                            rank={[
+                                'Five-great',
+                                'TechQuery',
+                                'stevending1st',
+                                'wangrunlin'
+                            ].map((name, index) => ({
+                                id: index + 1,
+                                name,
+                                avatar: `https://github.com/${name}.png`,
+                                website: `https://github.com/${name}`,
+                                score: 100 - index
+                            }))}
+                            linkOf={({ id }) => `/user/${id}`}
+                        />
                     </CodeExample>
                 </Section>
             </>

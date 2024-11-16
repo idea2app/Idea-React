@@ -1,7 +1,7 @@
 import html2canvas from 'html2canvas';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component,createRef, MouseEvent, PropsWithChildren } from 'react';
+import { Component, createRef, HTMLAttributes, MouseEvent } from 'react';
 import { Image } from 'react-bootstrap';
 import { blobOf } from 'web-utility';
 
@@ -23,7 +23,7 @@ export async function elementToImage(
     );
 }
 
-export type ShareBoxProps = PropsWithChildren<ShareData>;
+export type ShareBoxProps = HTMLAttributes<HTMLDivElement> & ShareData;
 
 @observer
 export class ShareBox extends Component<ShareBoxProps> {
@@ -67,7 +67,7 @@ export class ShareBox extends Component<ShareBoxProps> {
     };
 
     render() {
-        const { children } = this.props,
+        const { className = '', children, ...props } = this.props,
             { loading, imageURI } = this;
 
         return (
@@ -75,8 +75,9 @@ export class ShareBox extends Component<ShareBoxProps> {
                 {loading && <Loading />}
 
                 <div
+                    {...props}
                     ref={this.root}
-                    className="position-relative"
+                    className={`position-relative ${className}`}
                     onMouseEnter={imageURI ? undefined : this.generateImage}
                     onTouchStart={imageURI ? undefined : this.generateImage}
                 >
@@ -85,9 +86,9 @@ export class ShareBox extends Component<ShareBoxProps> {
                     {imageURI && (
                         <Image
                             className="position-absolute start-0 top-0 w-100 h-100"
-                            fluid
                             src={imageURI}
                             alt="Share Image"
+                            fluid
                             onClick={this.share}
                         />
                     )}

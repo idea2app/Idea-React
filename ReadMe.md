@@ -23,24 +23,29 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 ### Components
 
-1. [Time Distance](source/TimeDistance.tsx)
-2. [Icon](source/Icon.tsx)
-3. [Avatar](source/Avatar.tsx)
-4. [Nameplate](source/Nameplate.tsx)
-5. [Type Echo](source/TypeEcho.tsx)
-6. [Click Boundary](source/ClickBoundary.tsx)
-7. [Spinner Button](source/SpinnerButton.tsx)
-8. [Select](source/Select.tsx)
-9. [Month Calendar](source/MonthCalendar.tsx)
-10. [Code Block](source/CodeBlock.tsx)
-11. [Page Nav](source/PageNav.tsx)
-12. [Editor](source/Editor.tsx)
-13. [Editor HTML](source/EditorHTML.tsx)
-14. [Table Spinner](source/TableSpinner.tsx)
-15. [Loading](source/Loading.tsx)
-16. [Share Box](source/ShareBox.tsx)
-17. [Overlay Box](source/OverlayBox.tsx)
-18. [Dialog](source/Dialog.tsx)
+1. [Time](source/Time.tsx)
+2. [Time Distance](source/TimeDistance.tsx)
+3. [Timeline](source/Timeline/)
+4. [Icon](source/Icon.tsx)
+5. [Avatar](source/Avatar.tsx)
+6. [Nameplate](source/Nameplate.tsx)
+7. [Type Echo](source/TypeEcho.tsx)
+8. [Horizontal Marquee](source/HorizontalMarquee/)
+9. [Vertical Marquee](source/VerticalMarquee/)
+10. [Click Boundary](source/ClickBoundary.tsx)
+11. [Spinner Button](source/SpinnerButton.tsx)
+12. [Select](source/Select.tsx)
+13. [Month Calendar](source/MonthCalendar.tsx)
+14. [Code Block](source/CodeBlock.tsx)
+15. [Page Nav](source/PageNav.tsx)
+16. [Editor](source/Editor.tsx)
+17. [Editor HTML](source/EditorHTML.tsx)
+18. [Table Spinner](source/TableSpinner.tsx)
+19. [Loading](source/Loading.tsx)
+20. [Share Box](source/ShareBox.tsx)
+21. [Overlay Box](source/OverlayBox.tsx)
+22. [Dialog](source/Dialog.tsx)
+23. [User Rank](source/UserRank/)
 
 #### Data components
 
@@ -81,6 +86,7 @@ Open Map component & model, have been migrated to https://github.com/idea2app/Op
     rel="stylesheet"
     href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css"
 />
+<link rel="stylesheet" href="https://unpkg.com/idea-react/dist/index.css" />
 ```
 
 ### `tsconfig.json`

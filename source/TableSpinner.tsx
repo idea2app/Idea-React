@@ -1,12 +1,22 @@
-import { FC, PropsWithoutRef } from 'react';
-import { Spinner } from 'react-bootstrap';
+import { FC, HTMLAttributes } from 'react';
+import { Spinner, SpinnerProps } from 'react-bootstrap';
 
-export type TableSpinnerProps = PropsWithoutRef<{ colSpan: number }>;
+export interface TableSpinnerProps
+    extends HTMLAttributes<HTMLTableRowElement>,
+        Pick<SpinnerProps, 'animation' | 'variant' | 'size'> {
+    colSpan: number;
+}
 
-export const TableSpinner: FC<TableSpinnerProps> = ({ colSpan }) => (
-    <tr>
+export const TableSpinner: FC<TableSpinnerProps> = ({
+    animation = 'border',
+    variant = 'primary',
+    size,
+    colSpan,
+    ...props
+}) => (
+    <tr {...props}>
         <td className="text-center p-4" colSpan={colSpan}>
-            <Spinner animation="border" variant="primary" />
+            <Spinner {...{ animation, variant, size }} />
         </td>
     </tr>
 );
