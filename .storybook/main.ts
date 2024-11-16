@@ -1,5 +1,6 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import path from "path";
+import remarkGfm from "remark-gfm";
 
 import prettierConfig from "./prettier.config";
 
@@ -21,7 +22,16 @@ const config: StorybookConfig = {
         },
       },
     },
-    "@storybook/addon-mdx-gfm",
+    {
+      name: "@storybook/addon-docs",
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
   ],
   typescript: {
     reactDocgen: "react-docgen-typescript",
