@@ -45,6 +45,24 @@ export default defineConfig(({ mode }) => {
                 }
             })
         ],
+        resolve: {
+            extensions: ['.mdx', '.ts', '.tsx'],
+            alias: [
+                {
+                    find: 'react/jsx-runtime',
+                    replacement: 'react/jsx-runtime.js'
+                },
+                { find: /^(react-dom\/.+)/, replacement: '$1.js' },
+                {
+                    find: 'use-sync-external-store/shim',
+                    replacement: 'use-sync-external-store/shim/index.js'
+                },
+                {
+                    find: /^(@popperjs\/core\/lib\/.+)/,
+                    replacement: '$1.js'
+                }
+            ]
+        },
         build: {
             lib: {
                 entry: resolve(__dirname, 'source/index.ts'),
