@@ -4,7 +4,7 @@ import { TimeData } from 'web-utility';
 
 import { Nameplate, NameplateProps } from '../Nameplate';
 import { Time } from '../Time';
-import styles from './index.module.less';
+import * as styles from './index.module.less';
 
 export interface TimelineEvent {
     title: string;
@@ -36,7 +36,7 @@ export const Timeline: FC<TimelineProps> = ({
                 className={`position-relative ${styles.timelineItem} ${styles.right}`}
             >
                 <Card>
-                    <Card.Body className="p-4 d-flex flex-column gap-3">
+                    <Card.Body className="p-4 d-flex flex-column gap-3 align-items-center">
                         <h3 className="h5 m-0">
                             <a
                                 className="text-decoration-none stretched-link"
@@ -53,7 +53,7 @@ export const Timeline: FC<TimelineProps> = ({
                                 <Time dateTime={time[1]} format={timeFormat} />
                             )}
                         </div>
-                        <ul className="list-unstyled m-0">
+                        <ul className="list-unstyled m-0 d-flex gap-2 flex-wrap justify-content-around">
                             {people?.map(person => (
                                 <li key={person.name}>
                                     <Nameplate {...person} />

@@ -22,7 +22,7 @@ export interface DateData {
 }
 
 export interface MonthCalendarProps
-    extends Omit<TableProps, 'onChange' | 'onSelect'>,
+    extends Omit<TableProps, 'variant' | 'onChange' | 'onSelect'>,
         Pick<ButtonProps, 'variant'> {
     locale?: Navigator['language'];
     value?: DateData[];
