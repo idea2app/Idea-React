@@ -1,9 +1,8 @@
-import type { StorybookConfig } from "@storybook/react-vite";
 import path from "path";
 
 import prettierConfig from "./prettier.config";
 
-const config: StorybookConfig = {
+const config = {
   stories: ["../stories/**/*.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
@@ -23,7 +22,7 @@ const config: StorybookConfig = {
     },
   ],
   framework: {
-    name: "@storybook/react-vite",
+    name: "storybook-react-parcel",
     options: {},
   },
   docs: {

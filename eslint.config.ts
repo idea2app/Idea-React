@@ -1,4 +1,3 @@
-// @ts-check
 import { fixupPluginRules } from '@eslint/compat';
 import eslint from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
@@ -15,7 +14,6 @@ export default tsEslint.config(
     {
         plugins: {
             '@typescript-eslint': tsEslint.plugin,
-            // @ts-expect-error https://github.com/jsx-eslint/eslint-plugin-react/issues/3699
             react: fixupPluginRules(reactPlugin),
             'simple-import-sort': simpleImportSortPlugin
         }

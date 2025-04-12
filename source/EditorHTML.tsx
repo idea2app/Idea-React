@@ -12,12 +12,10 @@ export type EditorHTMLProps = PropsWithoutRef<{
     data: OutputData;
 }>;
 
-export const EditorHTML: FC<EditorHTMLProps> = ({ className, data }) => {
-    const __html = parser.parse(data).join('');
-
-    return (
-        <article dangerouslySetInnerHTML={{ __html }} className={className} />
-    );
-};
-
+export const EditorHTML: FC<EditorHTMLProps> = ({ className, data }) => (
+    <article
+        dangerouslySetInnerHTML={{ __html: parser.parse(data) }}
+        className={className}
+    />
+);
 EditorHTML.displayName = 'EditorHTML';
