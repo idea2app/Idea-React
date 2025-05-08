@@ -4,7 +4,7 @@ import { TimeData } from 'web-utility';
 
 import { Nameplate, NameplateProps } from '../Nameplate';
 import { Time } from '../Time';
-import styles from './index.module.less';
+import * as styles from './index.module.less';
 
 export interface TimelineEvent {
     title: string;
@@ -23,12 +23,7 @@ export interface TimelineProps extends HTMLAttributes<HTMLOListElement> {
 /**
  * @see {@link https://mdbootstrap.com/docs/standard/extended/timeline/#section-timeline-gradient-bg}
  */
-export const Timeline: FC<TimelineProps> = ({
-    className,
-    events,
-    timeFormat,
-    ...props
-}) => (
+export const Timeline: FC<TimelineProps> = ({ className, events, timeFormat, ...props }) => (
     <ol className={`list-unstyled ${styles.timeline} ${className}`} {...props}>
         {events.map(({ title, summary, time, link, people }) => (
             <li
@@ -36,12 +31,9 @@ export const Timeline: FC<TimelineProps> = ({
                 className={`position-relative ${styles.timelineItem} ${styles.right}`}
             >
                 <Card>
-                    <Card.Body className="p-4 d-flex flex-column gap-3">
+                    <Card.Body className="p-4 d-flex flex-column gap-3 align-items-center">
                         <h3 className="h5 m-0">
-                            <a
-                                className="text-decoration-none stretched-link"
-                                href={link}
-                            >
+                            <a className="text-decoration-none stretched-link" href={link}>
                                 {title as string}
                             </a>
                         </h3>
@@ -49,11 +41,9 @@ export const Timeline: FC<TimelineProps> = ({
                             ⏲️
                             <Time dateTime={time[0]} format={timeFormat} />
                             {time[1] && '~'}
-                            {time[1] && (
-                                <Time dateTime={time[1]} format={timeFormat} />
-                            )}
+                            {time[1] && <Time dateTime={time[1]} format={timeFormat} />}
                         </div>
-                        <ul className="list-unstyled m-0">
+                        <ul className="list-unstyled m-0 d-flex gap-2 flex-wrap justify-content-around">
                             {people?.map(person => (
                                 <li key={person.name}>
                                     <Nameplate {...person} />

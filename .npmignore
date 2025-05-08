@@ -1,6 +1,5 @@
 .*
-eslint.config.mjs
-vite.config.ts
+*.config.ts
 docs/
 preview/
 api-extractor.json
