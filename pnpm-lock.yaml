@@ -53,6 +53,9 @@ importers:
       react-editor-js:
         specifier: ^2.1.0
         version: 2.1.0(@editorjs/editorjs@2.30.8)(@editorjs/paragraph@2.11.7)(react@18.3.1)
+      react-element-to-jsx-string:
+        specifier: '>=15'
+        version: 15.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       web-utility:
         specifier: ^4.4.3
         version: 4.4.3(typescript@5.8.3)
@@ -189,9 +192,6 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
-      react-element-to-jsx-string:
-        specifier: ^15.0.0
-        version: 15.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
