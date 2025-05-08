@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "target": "ES6",
+        "module": "ES2020",
         "moduleResolution": "Node",
         "esModuleInterop": true,
         "downlevelIteration": true,
@@ -9,7 +10,7 @@
         "skipLibCheck": true,
         "lib": ["ES2023", "DOM"]
     },
-    "include": ["source/**/*", "stories/**/*"],
+    "include": ["*.ts", "source/**/*", "stories/**/*"],
     "typedocOptions": {
         "name": "Idea React",
         "excludeExternals": true,

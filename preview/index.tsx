@@ -22,27 +22,20 @@ export class App extends Component {
     @observable
     accessor menuOpen = false;
 
-    updateMeta = () =>
-        (this.screenPortrait = window.innerWidth < window.innerHeight);
+    updateMeta = () => (this.screenPortrait = window.innerWidth < 768);
 
     renderMenu() {
         const { screenPortrait, menuOpen } = this;
 
         return (
             <>
-                <Button
-                    className="my-3 d-md-none"
-                    onClick={() => (this.menuOpen = !menuOpen)}
-                >
+                <Button className="my-3 d-md-none" onClick={() => (this.menuOpen = !menuOpen)}>
                     <Icon name="list" />
                 </Button>
                 <Collapse in={screenPortrait ? menuOpen : true}>
-                    <PageNav
-                        className="sticky-top"
-                        onClick={() =>
-                            screenPortrait && (this.menuOpen = false)
-                        }
-                    />
+                    <div className="sticky-top">
+                        <PageNav onClick={() => screenPortrait && (this.menuOpen = false)} />
+                    </div>
                 </Collapse>
             </>
         );
@@ -53,10 +46,10 @@ export class App extends Component {
             <div className="bg-light">
                 <Container className="pb-3 py-md-5" fluid="md">
                     <Row>
-                        <Col xs={12} sm={3} className="sticky-top bg-light">
+                        <Col xs={12} md={3} className="sticky-top bg-light">
                             {this.renderMenu()}
                         </Col>
-                        <Col xs={12} sm={9}>
+                        <Col xs={12} md={9}>
                             <Content />
                         </Col>
                     </Row>

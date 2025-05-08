@@ -1,16 +1,10 @@
 import classNames from 'classnames';
 import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { observePropsState } from 'mobx-react-helper';
-import { Component, ReactNode } from 'react';
+import { ObservedComponent } from 'mobx-react-helper';
+import { ReactNode } from 'react';
 import { Badge, Button, ButtonProps, Table, TableProps } from 'react-bootstrap';
-import {
-    changeMonth,
-    Day,
-    formatDate,
-    splitArray,
-    TimeData
-} from 'web-utility';
+import { changeMonth, Day, formatDate, splitArray, TimeData } from 'web-utility';
 
 import { text2color } from './color';
 import { OverlayBox } from './OverlayBox';
@@ -22,7 +16,7 @@ export interface DateData {
 }
 
 export interface MonthCalendarProps
-    extends Omit<TableProps, 'onChange' | 'onSelect'>,
+    extends Omit<TableProps, 'variant' | 'onChange' | 'onSelect'>,
         Pick<ButtonProps, 'variant'> {
     locale?: Navigator['language'];
     value?: DateData[];
@@ -34,11 +28,8 @@ export interface MonthCalendarProps
  * Re-implement from https://github.com/EasyWebApp/BootCell/blob/3d30027a97fe0a8c4ab8fabc8dfef22aede04de7/source/Calendar/MonthCalendar.tsx
  */
 @observer
-@observePropsState
-export class MonthCalendar extends Component<MonthCalendarProps> {
+export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
     static displayName = 'MonthCalendar';
-
-    declare observedProps: MonthCalendarProps;
 
     @computed
     get weekFormatter() {
@@ -72,16 +63,13 @@ export class MonthCalendar extends Component<MonthCalendarProps> {
     renderDate = (date: Date) => {
         const { variant = 'primary', value, onSelect } = this.observedProps,
             dateText = formatDate(date, 'YYYY-MM-DD');
-        const list = value?.filter(
-            ({ date }) => formatDate(date, 'YYYY-MM-DD') === dateText
-        );
+        const list = value?.filter(({ date }) => formatDate(date, 'YYYY-MM-DD') === dateText);
 
         return (
             <td
                 key={date + ''}
                 className={classNames({
-                    'opacity-50':
-                        date.getMonth() !== this.currentDate.getMonth(),
+                    'opacity-50': date.getMonth() !== this.currentDate.getMonth(),
                     'fw-bold': dateText === formatDate(new Date(), 'YYYY-MM-DD')
                 })}
             >
@@ -112,31 +100,19 @@ export class MonthCalendar extends Component<MonthCalendarProps> {
 
     render() {
         const { weekFormatter, currentDate, dateGrid } = this,
-            {
-                style,
-                variant = 'primary',
-                onChange,
-                onSelect,
-                ...props
-            } = this.observedProps;
+            { style, variant = 'primary', onChange, onSelect, ...props } = this.observedProps;
 
         return (
             <Table {...props} style={{ tableLayout: 'fixed', ...style }}>
                 <caption>
                     <div className="d-flex justify-content-between align-items-center">
-                        <Button
-                            variant={variant}
-                            onClick={() => this.changeMonth(-1)}
-                        >
+                        <Button variant={variant} onClick={() => this.changeMonth(-1)}>
                             &lt;
                         </Button>
 
                         {formatDate(currentDate, 'YYYY-MM')}
 
-                        <Button
-                            variant={variant}
-                            onClick={() => this.changeMonth(1)}
-                        >
+                        <Button variant={variant} onClick={() => this.changeMonth(1)}>
                             &gt;
                         </Button>
                     </div>

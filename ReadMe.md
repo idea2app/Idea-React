@@ -8,9 +8,9 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 [![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][8]
 
--   API document: https://idea2app.github.io/Idea-React/
--   Preview site: https://idea2app.github.io/Idea-React/preview/
--   Storybook playground: https://idea-react.vercel.app/
+- API document: https://idea2app.github.io/Idea-React/
+- Preview site: https://idea2app.github.io/Idea-React/preview/
+- Storybook playground: https://idea-react.vercel.app/
 
 ## Versions
 
@@ -53,7 +53,7 @@ Table, List & Form components around Data models, have been migrated to https://
 
 #### Map components
 
-Open Map component & model, have been migrated to https://github.com/idea2app/OpenMap, since Idea-React v1.0.0.
+Open Map component & model, have been migrated to https://github.com/idea2app/OpenReactMap, since Idea-React v1.0.0.
 
 ### Utilities
 
@@ -70,22 +70,10 @@ Open Map component & model, have been migrated to https://github.com/idea2app/Op
 ### CSS on CDN
 
 ```html
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-/>
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-/>
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/animate.css@4.1.1/animate.min.css"
-/>
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css"
-/>
+<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+<link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism.min.css" />
 <link rel="stylesheet" href="https://unpkg.com/idea-react/dist/index.css" />
 ```
 
@@ -109,11 +97,11 @@ Compatible with MobX 6/7:
 
 ```tsx
 import { formToJSON } from 'web-utility';
-import { PureComponent } from 'react';
+import { Component } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { Dialog, DialogClose } from 'idea-react';
 
-export class ExamplePage extends PureComponent {
+export class ExamplePage extends Component {
     inputDialog = new Dialog<Record<'a' | 'b', number>>(({ defer }) => (
         <Modal show={!!defer} onHide={() => defer?.reject(new DialogClose())}>
             <Modal.Header>Dialog</Modal.Header>
