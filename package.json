@@ -1,6 +1,6 @@
 {
     "name": "idea-react",
-    "version": "2.0.0-rc.11",
+    "version": "2.0.0-rc.12",
     "license": "LGPL-3.0-or-later",
     "author": "shiy2008@gmail.com",
     "description": "A React advanced components library based on TypeScript & Bootstrap, built by idea2app remote developers team.",
@@ -33,7 +33,7 @@
         "lodash": "^4.17.21",
         "mobx": "^6.13.7",
         "mobx-react": "^9.2.0",
-        "mobx-react-helper": "^0.4.0-rc.0",
+        "mobx-react-helper": "^0.4.0",
         "prismjs": "^1.30.0",
         "react-bootstrap": "^2.10.9",
         "react-editor-js": "^2.1.0",

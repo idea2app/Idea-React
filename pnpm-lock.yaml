@@ -42,8 +42,8 @@ importers:
         specifier: ^9.2.0
         version: 9.2.0(mobx@6.13.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       mobx-react-helper:
-        specifier: ^0.4.0-rc.0
-        version: 0.4.0-rc.0(mobx@6.13.7)(react@18.3.1)
+        specifier: ^0.4.0
+        version: 0.4.0(mobx@6.13.7)(react@18.3.1)
       prismjs:
         specifier: ^1.30.0
         version: 1.30.0
@@ -5288,8 +5288,8 @@ packages:
   mlly@1.7.4:
     resolution: {integrity: sha512-qmdSIPC4bDJXgZTCR7XosJiNKySV7O215tsPtDN9iEO/7q/76b/ijtgRu/+epFXSJhijtTCCGp3DWS549P3xKw==}
 
-  mobx-react-helper@0.4.0-rc.0:
-    resolution: {integrity: sha512-nCezq/zb9CTVYUCFOkZQqyshZ9qyJmNUzJIkLzqc7+9M1tagZ994eLSmm5t6aI+KsRg4C3rMrXChwhzrSN7tQQ==}
+  mobx-react-helper@0.4.0:
+    resolution: {integrity: sha512-bp5X/l5H4E/GzTTIMAVwIypkQo8fzbSDYZtPK2KWsNzqoqxWDP0kQ8bxpUGdDQr+Vt5WoX4m3gHZtvcX9FyF/g==}
     peerDependencies:
       mobx: '>=6.11'
       react: '>=16'
@@ -13188,7 +13188,7 @@ snapshots:
       pkg-types: 1.3.1
       ufo: 1.6.1
 
-  mobx-react-helper@0.4.0-rc.0(mobx@6.13.7)(react@18.3.1):
+  mobx-react-helper@0.4.0(mobx@6.13.7)(react@18.3.1):
     dependencies:
       '@swc/helpers': 0.5.17
       lodash.isequalwith: 4.4.0
