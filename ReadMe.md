@@ -176,10 +176,8 @@ export class ExamplePage extends PureComponent {
 
 Some upstream packages have not yet been updated for React 19 or the latest dependencies. The following `pnpm patch` fixes are applied:
 
-|              Package               |                                                                 Reason                                                                 |
-| :--------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
-| `@parcel/resolver-storybook@0.0.0` |           React 19 removed `react-dom/client.js` from package exports; the resolver needs to use `react-dom/client` instead            |
-|       `@mdx-js/react@3.1.0`        | `@parcel/transformer-mdx@2.x` generates `import { mdx } from '@mdx-js/react'`, but the `mdx` export was removed in `@mdx-js/react@2.x` |
+1. `@parcel/resolver-storybook@0.0.0` — React 19 removed `react-dom/client.js` from package exports; the resolver needs to use `react-dom/client` instead
+2. `@mdx-js/react@3.1.0` — `@parcel/transformer-mdx@2.x` generates `import { mdx } from '@mdx-js/react'`, but the `mdx` export was removed in `@mdx-js/react@2.x`
 
 ### Publish
 
