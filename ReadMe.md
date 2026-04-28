@@ -8,9 +8,9 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 [![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][8]
 
--   API document: https://idea2app.github.io/Idea-React/
--   Preview site: https://idea2app.github.io/Idea-React/preview/
--   Storybook playground: https://idea-react.vercel.app/
+- API document: https://idea2app.github.io/Idea-React/
+- Preview site: https://idea2app.github.io/Idea-React/preview/
+- Storybook playground: https://idea-react.vercel.app/
 
 ## Versions
 
@@ -171,6 +171,15 @@ export class ExamplePage extends PureComponent {
 ```
 
 ## Development
+
+### Patches
+
+Some upstream packages have not yet been updated for React 19 or the latest dependencies. The following `pnpm patch` fixes are applied:
+
+|              Package               |                                                                 Reason                                                                 |
+| :--------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
+| `@parcel/resolver-storybook@0.0.0` |           React 19 removed `react-dom/client.js` from package exports; the resolver needs to use `react-dom/client` instead            |
+|       `@mdx-js/react@3.1.0`        | `@parcel/transformer-mdx@2.x` generates `import { mdx } from '@mdx-js/react'`, but the `mdx` export was removed in `@mdx-js/react@2.x` |
 
 ### Publish
 

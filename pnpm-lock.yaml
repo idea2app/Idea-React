@@ -9,7 +9,7 @@ patchedDependencies:
     hash: 58db17dfc769ceece2cbeb0e7363bd6fdb8fa0fee4fc21a11cff3f74c369e268
     path: patches/@mdx-js__react@3.1.0.patch
   '@parcel/resolver-storybook@0.0.0':
-    hash: 0f6d893280f981da127321ad1064b9621c8e02f28d105b053b02bead62b74ff3
+    hash: f966fe131b8be4353e82101dff9d8ae63ccb19bcfdda5fef3081ea077f219e16
     path: patches/@parcel__resolver-storybook@0.0.0.patch
 
 importers:
@@ -5751,7 +5751,7 @@ snapshots:
   '@parcel/config-storybook@0.0.2(@parcel/core@2.14.4(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)(postcss@8.5.3)(typescript@5.8.3)':
     dependencies:
       '@parcel/config-default': 2.14.4(@parcel/core@2.14.4(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)(postcss@8.5.3)(typescript@5.8.3)
-      '@parcel/resolver-storybook': 0.0.0(patch_hash=0f6d893280f981da127321ad1064b9621c8e02f28d105b053b02bead62b74ff3)(@parcel/core@2.14.4(@swc/helpers@0.5.15))
+      '@parcel/resolver-storybook': 0.0.0(patch_hash=f966fe131b8be4353e82101dff9d8ae63ccb19bcfdda5fef3081ea077f219e16)(@parcel/core@2.14.4(@swc/helpers@0.5.15))
       '@parcel/transformer-js': 2.14.4(@parcel/core@2.14.4(@swc/helpers@0.5.15))
       '@parcel/transformer-react-refresh-wrap': 2.14.4(@parcel/core@2.14.4(@swc/helpers@0.5.15))
       '@parcel/transformer-storybook': 0.0.2(@parcel/core@2.14.4(@swc/helpers@0.5.15))
@@ -6096,7 +6096,7 @@ snapshots:
       - '@parcel/core'
       - napi-wasm
 
-  '@parcel/resolver-storybook@0.0.0(patch_hash=0f6d893280f981da127321ad1064b9621c8e02f28d105b053b02bead62b74ff3)(@parcel/core@2.14.4(@swc/helpers@0.5.15))':
+  '@parcel/resolver-storybook@0.0.0(patch_hash=f966fe131b8be4353e82101dff9d8ae63ccb19bcfdda5fef3081ea077f219e16)(@parcel/core@2.14.4(@swc/helpers@0.5.15))':
     dependencies:
       '@parcel/node-resolver-core': 3.5.4(@parcel/core@2.14.4(@swc/helpers@0.5.15))
       '@parcel/plugin': 2.14.4(@parcel/core@2.14.4(@swc/helpers@0.5.15))
