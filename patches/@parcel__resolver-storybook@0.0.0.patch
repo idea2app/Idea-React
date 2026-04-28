@@ -1,13 +1,20 @@
 diff --git a/dist/StorybookResolver.js b/dist/StorybookResolver.js
-index 3e97e9267df366cfbceeae3a03ac3058d1c1cafd..21c32f45219d696cc62de95643fbcf2bf5dc6f46 100644
+index 3e97e9267df366cfbceeae3a03ac3058d1c1cafd..94f8816894f08ed578727a90d028cef663336acf 100644
 --- a/dist/StorybookResolver.js
 +++ b/dist/StorybookResolver.js
-@@ -17,7 +17,7 @@ module.exports = new _plugin.Resolver({
+@@ -17,7 +17,14 @@ module.exports = new _plugin.Resolver({
      async resolve ({ dependency, options, specifier, pipeline, logger }) {
          // Workaround for interop issue
          if (specifier === "react-dom/client") {
 -            let specifier = REACT_MAJOR_VERSION >= 18 ? "react-dom/client.js" : "react-dom/index.js";
-+            let specifier = REACT_MAJOR_VERSION >= 19 ? "react-dom/client" : REACT_MAJOR_VERSION >= 18 ? "react-dom/client.js" : "react-dom/index.js";
++            let specifier;
++            if (REACT_MAJOR_VERSION >= 19) {
++                specifier = "react-dom/client";
++            } else if (REACT_MAJOR_VERSION >= 18) {
++                specifier = "react-dom/client.js";
++            } else {
++                specifier = "react-dom/index.js";
++            }
              return {
                  filePath: __dirname + "/react.js",
                  code: `
