@@ -1,0 +1,12 @@
+diff --git a/index.js b/index.js
+index e686091e3244f2d7d01b3ba740a5a2b306e6c915..b87524c68c5ac17359500f8cb2b985a3c7443cf3 100644
+--- a/index.js
++++ b/index.js
+@@ -1 +1,7 @@
+ export {MDXProvider, useMDXComponents} from './lib/index.js'
++
++// Compatibility shim for @parcel/transformer-mdx@2.x which uses @mdx-js/react@1.x API
++import React from 'react'
++export function mdx(type, props, ...children) {
++    return React.createElement(type, props, ...children)
++}

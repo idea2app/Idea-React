@@ -4,6 +4,14 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@mdx-js/react@3.1.0':
+    hash: 2da412ba0d333aed44de714eef90d0df07fc2fa4031490b6f3ec12960f72d945
+    path: patches/@mdx-js__react@3.1.0.patch
+  '@parcel/resolver-storybook@0.0.0':
+    hash: f966fe131b8be4353e82101dff9d8ae63ccb19bcfdda5fef3081ea077f219e16
+    path: patches/@parcel__resolver-storybook@0.0.0.patch
+
 importers:
 
   .:
@@ -74,7 +82,7 @@ importers:
         version: 9.24.0
       '@mdx-js/react':
         specifier: ^3.1.0
-        version: 3.1.0(@types/react@19.1.0)(react@19.1.0)
+        version: 3.1.0(patch_hash=2da412ba0d333aed44de714eef90d0df07fc2fa4031490b6f3ec12960f72d945)(@types/react@19.1.0)(react@19.1.0)
       '@microsoft/api-extractor':
         specifier: ^7.52.3
         version: 7.52.3(@types/node@22.14.0)
@@ -92,7 +100,7 @@ importers:
         version: 2.14.4(@parcel/core@2.14.4(@swc/helpers@0.5.15))
       '@parcel/transformer-mdx':
         specifier: ~2.13.3
-        version: 2.13.3(@mdx-js/react@3.1.0(@types/react@19.1.0)(react@19.1.0))(@parcel/core@2.14.4(@swc/helpers@0.5.15))
+        version: 2.13.3(@mdx-js/react@3.1.0(patch_hash=2da412ba0d333aed44de714eef90d0df07fc2fa4031490b6f3ec12960f72d945)(@types/react@19.1.0)(react@19.1.0))(@parcel/core@2.14.4(@swc/helpers@0.5.15))
       '@parcel/transformer-typescript-tsc':
         specifier: ~2.14.4
         version: 2.14.4(@parcel/core@2.14.4(@swc/helpers@0.5.15))(typescript@5.8.3)
@@ -1264,36 +1272,42 @@ packages:
     engines: {node: '>= 10.0.0'}
     cpu: [arm]
     os: [linux]
+    libc: [glibc]
 
   '@parcel/watcher-linux-arm-musl@2.5.1':
     resolution: {integrity: sha512-6E+m/Mm1t1yhB8X412stiKFG3XykmgdIOqhjWj+VL8oHkKABfu/gjFj8DvLrYVHSBNC+/u5PeNrujiSQ1zwd1Q==}
     engines: {node: '>= 10.0.0'}
     cpu: [arm]
     os: [linux]
+    libc: [musl]
 
   '@parcel/watcher-linux-arm64-glibc@2.5.1':
     resolution: {integrity: sha512-LrGp+f02yU3BN9A+DGuY3v3bmnFUggAITBGriZHUREfNEzZh/GO06FF5u2kx8x+GBEUYfyTGamol4j3m9ANe8w==}
     engines: {node: '>= 10.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@parcel/watcher-linux-arm64-musl@2.5.1':
     resolution: {integrity: sha512-cFOjABi92pMYRXS7AcQv9/M1YuKRw8SZniCDw0ssQb/noPkRzA+HBDkwmyOJYp5wXcsTrhxO0zq1U11cK9jsFg==}
     engines: {node: '>= 10.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@parcel/watcher-linux-x64-glibc@2.5.1':
     resolution: {integrity: sha512-GcESn8NZySmfwlTsIur+49yDqSny2IhPeZfXunQi48DMugKeZ7uy1FX83pO0X22sHntJ4Ub+9k34XQCX+oHt2A==}
     engines: {node: '>= 10.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@parcel/watcher-linux-x64-musl@2.5.1':
     resolution: {integrity: sha512-n0E2EQbatQ3bXhcH2D1XIAANAcTZkQICBPVaxMeaCVBtOpBZpWJuf7LwyWPSBDITb7In8mqQgJ7gH8CILCURXg==}
     engines: {node: '>= 10.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@parcel/watcher-win32-arm64@2.5.1':
     resolution: {integrity: sha512-RFzklRvmc3PkjKjry3hLF9wD7ppR4AKcWNzH7kXR7GUe0Igb3Nz8fyPwtZCSquGrhU5HhUNDr/mKBqj7tqA2Vw==}
@@ -1661,24 +1675,28 @@ packages:
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@swc/core-linux-arm64-musl@1.11.18':
     resolution: {integrity: sha512-slu0mlP2nucvQalttnapfpqpD/LlM9NHx9g3ofgsLzjObyMEBiX4ZysQ3y65U8Mjw71RNqtLd/ZmvxI6OmLdiQ==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@swc/core-linux-x64-gnu@1.11.18':
     resolution: {integrity: sha512-h9a/8PA25arMCQ9t8CE8rA1s0c77z4kCZZ7dUuUkD88yEXIrARMca1IKR7of+S3slfQrf1Zlq3Ac1Fb1HVJziQ==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@swc/core-linux-x64-musl@1.11.18':
     resolution: {integrity: sha512-0sMDJj5qUGK9QEw4lrxLxkTP/4AoKciqNzXvqbk+J9XuXN2aIv4BsR1Y7z3GwAeMFGsba2lbHLOtJlDsaqIsiA==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@swc/core-win32-arm64-msvc@1.11.18':
     resolution: {integrity: sha512-zGv9HnfgBcKyt54MJRWdwRNu9BuYkAFM7bx+tWtKhd37Ef7ZX20QLs9xXl5wWDXCbsOdRxXIZgXs6PEL+Pzmrw==}
@@ -3466,24 +3484,28 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   lightningcss-linux-arm64-musl@1.29.3:
     resolution: {integrity: sha512-dxakOk66pf7KLS7VRYFO7B8WOJLecE5OPL2YOk52eriFd/yeyxt2Km5H0BjLfElokIaR+qWi33gB8MQLrdAY3A==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   lightningcss-linux-x64-gnu@1.29.3:
     resolution: {integrity: sha512-ySZTNCpbfbK8rqpKJeJR2S0g/8UqqV3QnzcuWvpI60LWxnFN91nxpSSwCbzfOXkzKfar9j5eOuOplf+klKtINg==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   lightningcss-linux-x64-musl@1.29.3:
     resolution: {integrity: sha512-3pVZhIzW09nzi10usAXfIGTTSTYQ141dk88vGFNCgawIzayiIzZQxEcxVtIkdvlEq2YuFsL9Wcj/h61JHHzuFQ==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   lightningcss-win32-arm64-msvc@1.29.3:
     resolution: {integrity: sha512-VRnkAvtIkeWuoBJeGOTrZxsNp4HogXtcaaLm8agmbYtLDOhQdpgxW6NjZZjDXbvGF+eOehGulXZ3C1TiwHY4QQ==}
@@ -5562,7 +5584,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mdx-js/react@3.1.0(@types/react@19.1.0)(react@19.1.0)':
+  '@mdx-js/react@3.1.0(patch_hash=2da412ba0d333aed44de714eef90d0df07fc2fa4031490b6f3ec12960f72d945)(@types/react@19.1.0)(react@19.1.0)':
     dependencies:
       '@types/mdx': 2.0.13
       '@types/react': 19.1.0
@@ -5729,7 +5751,7 @@ snapshots:
   '@parcel/config-storybook@0.0.2(@parcel/core@2.14.4(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)(postcss@8.5.3)(typescript@5.8.3)':
     dependencies:
       '@parcel/config-default': 2.14.4(@parcel/core@2.14.4(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)(postcss@8.5.3)(typescript@5.8.3)
-      '@parcel/resolver-storybook': 0.0.0(@parcel/core@2.14.4(@swc/helpers@0.5.15))
+      '@parcel/resolver-storybook': 0.0.0(patch_hash=f966fe131b8be4353e82101dff9d8ae63ccb19bcfdda5fef3081ea077f219e16)(@parcel/core@2.14.4(@swc/helpers@0.5.15))
       '@parcel/transformer-js': 2.14.4(@parcel/core@2.14.4(@swc/helpers@0.5.15))
       '@parcel/transformer-react-refresh-wrap': 2.14.4(@parcel/core@2.14.4(@swc/helpers@0.5.15))
       '@parcel/transformer-storybook': 0.0.2(@parcel/core@2.14.4(@swc/helpers@0.5.15))
@@ -6074,7 +6096,7 @@ snapshots:
       - '@parcel/core'
       - napi-wasm
 
-  '@parcel/resolver-storybook@0.0.0(@parcel/core@2.14.4(@swc/helpers@0.5.15))':
+  '@parcel/resolver-storybook@0.0.0(patch_hash=f966fe131b8be4353e82101dff9d8ae63ccb19bcfdda5fef3081ea077f219e16)(@parcel/core@2.14.4(@swc/helpers@0.5.15))':
     dependencies:
       '@parcel/node-resolver-core': 3.5.4(@parcel/core@2.14.4(@swc/helpers@0.5.15))
       '@parcel/plugin': 2.14.4(@parcel/core@2.14.4(@swc/helpers@0.5.15))
@@ -6213,10 +6235,10 @@ snapshots:
       - '@parcel/core'
       - napi-wasm
 
-  '@parcel/transformer-mdx@2.13.3(@mdx-js/react@3.1.0(@types/react@19.1.0)(react@19.1.0))(@parcel/core@2.14.4(@swc/helpers@0.5.15))':
+  '@parcel/transformer-mdx@2.13.3(@mdx-js/react@3.1.0(patch_hash=2da412ba0d333aed44de714eef90d0df07fc2fa4031490b6f3ec12960f72d945)(@types/react@19.1.0)(react@19.1.0))(@parcel/core@2.14.4(@swc/helpers@0.5.15))':
     dependencies:
       '@mdx-js/mdx': 1.6.22
-      '@mdx-js/react': 3.1.0(@types/react@19.1.0)(react@19.1.0)
+      '@mdx-js/react': 3.1.0(patch_hash=2da412ba0d333aed44de714eef90d0df07fc2fa4031490b6f3ec12960f72d945)(@types/react@19.1.0)(react@19.1.0)
       '@parcel/plugin': 2.13.3(@parcel/core@2.14.4(@swc/helpers@0.5.15))
     transitivePeerDependencies:
       - '@parcel/core'
@@ -6605,7 +6627,7 @@ snapshots:
 
   '@storybook/addon-docs@8.6.12(@types/react@19.1.0)(storybook@8.6.12(prettier@3.5.3))':
     dependencies:
-      '@mdx-js/react': 3.1.0(@types/react@19.1.0)(react@19.1.0)
+      '@mdx-js/react': 3.1.0(patch_hash=2da412ba0d333aed44de714eef90d0df07fc2fa4031490b6f3ec12960f72d945)(@types/react@19.1.0)(react@19.1.0)
       '@storybook/blocks': 8.6.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.12(prettier@3.5.3))
       '@storybook/csf-plugin': 8.6.12(storybook@8.6.12(prettier@3.5.3))
       '@storybook/react-dom-shim': 8.6.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.12(prettier@3.5.3))

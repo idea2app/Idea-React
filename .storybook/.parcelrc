@@ -1,3 +1,9 @@
 {
-  "extends": "@parcel/config-storybook"
+    "extends": "@parcel/config-storybook",
+    "transformers": {
+        "*.{ts,tsx}": [
+            "@parcel/transformer-typescript-tsc",
+            "@parcel/transformer-react-refresh-wrap"
+        ]
+    }
 }

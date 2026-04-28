@@ -108,7 +108,11 @@
             "esbuild",
             "lmdb",
             "msgpackr-extract"
-        ]
+        ],
+        "patchedDependencies": {
+            "@parcel/resolver-storybook@0.0.0": "patches/@parcel__resolver-storybook@0.0.0.patch",
+            "@mdx-js/react@3.1.0": "patches/@mdx-js__react@3.1.0.patch"
+        }
     },
     "prettier": {
         "singleQuote": true,
