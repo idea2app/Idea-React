@@ -27,7 +27,7 @@ import {
     UserRankView,
     VerticalMarquee
 } from '../source';
-import { CodeExample, Section } from './utility';
+import { CodeExample, LiveTSX, Section } from './utility';
 
 @observer
 export class Content extends Component {
@@ -92,44 +92,39 @@ export class Content extends Component {
                 <h1 id="top">Idea React components</h1>
 
                 <Section title="TypeEcho">
-                    <CodeExample>
+                    <LiveTSX>
                         <TypeEcho text="Hello, Idea React!" />
-                    </CodeExample>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Horizontal Marquee">
-                    <CodeExample>
-                        <HorizontalMarquee>
-                            {'idea2app '.repeat(15).trim()}
-                        </HorizontalMarquee>
-                    </CodeExample>
+                    <LiveTSX>
+                        <HorizontalMarquee>{'idea2app '.repeat(15).trim()}</HorizontalMarquee>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Vertical Marquee">
-                    <CodeExample>
+                    <LiveTSX>
                         <VerticalMarquee style={{ height: '10rem' }}>
                             <img src="https://tech-query.me/medias/featureimages/22.jpg" />
                         </VerticalMarquee>
-                    </CodeExample>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Time">
-                    <CodeExample>
-                        <Time
-                            dateTime="2022-11-27"
-                            format="YYYY 年 MM 月 DD 日"
-                        />
-                    </CodeExample>
+                    <LiveTSX>
+                        <Time dateTime="2022-11-27" format="YYYY 年 MM 月 DD 日" />
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Time Distance">
-                    <CodeExample>
+                    <LiveTSX>
                         <TimeDistance date="1989-06-04" />
-                    </CodeExample>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Timeline">
-                    <CodeExample>
+                    <LiveTSX>
                         <div
                             style={{
                                 background:
@@ -149,49 +144,39 @@ export class Content extends Component {
                                 timeFormat="YYYY-MM-DD"
                             />
                         </div>
-                    </CodeExample>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Icon">
-                    <CodeExample>
+                    <LiveTSX>
                         <Icon name="trash" size={2} className="text-danger" />
-                    </CodeExample>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Avatar">
-                    <CodeExample>
+                    <LiveTSX>
                         <Avatar src="https://github.com/idea2app.png" />
-                    </CodeExample>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Nameplate">
-                    <CodeExample>
-                        <Nameplate
-                            name="idea2app"
-                            avatar="https://github.com/idea2app.png"
-                        />
-                    </CodeExample>
+                    <LiveTSX>
+                        <Nameplate name="idea2app" avatar="https://github.com/idea2app.png" />
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Spinner Button">
-                    <CodeExample>
-                        <SpinnerButton
-                            className="me-3"
-                            animation="border"
-                            loading
-                        />
+                    <LiveTSX>
+                        <SpinnerButton className="me-3" animation="border" loading />
                         <SpinnerButton animation="grow" type="submit" loading>
                             Submit
                         </SpinnerButton>
-                    </CodeExample>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Select">
-                    <CodeExample>
-                        <Select
-                            value={selectValue}
-                            onChange={value => (this.selectValue = value)}
-                        >
+                    <LiveTSX>
+                        <Select value={selectValue} onChange={value => (this.selectValue = value)}>
                             <Option value="0">
                                 <Icon className="me-2" name="heart" />
                                 idea2app
@@ -201,17 +186,17 @@ export class Content extends Component {
                                 freeCodeCamp
                             </Option>
                         </Select>
-                    </CodeExample>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Month Calendar">
-                    <CodeExample>
+                    <LiveTSX>
                         <MonthCalendar
                             value={[{ date: new Date(), content: 'Hello!' }]}
                             onSelect={console.log}
                             onChange={console.log}
                         />
-                    </CodeExample>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="IdeaDialog">
@@ -223,33 +208,28 @@ export class Content extends Component {
                 </Section>
 
                 <Section title="Share Box">
-                    <CodeExample>
+                    <LiveTSX>
                         <ShareBox
                             title="idea2app"
                             text="Every idea of yours is worth our efforts to realize"
                             url="https://idea2app.cn"
                         >
-                            <Nameplate
-                                name="idea2app"
-                                avatar="https://github.com/idea2app.png"
-                            />
+                            <Nameplate name="idea2app" avatar="https://github.com/idea2app.png" />
                         </ShareBox>
                         click to share
-                    </CodeExample>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Overlay Box">
-                    <CodeExample>
+                    <LiveTSX>
                         <OverlayBox
                             trigger="click"
                             title="view info"
-                            detail={
-                                <Image src="https://github.com/idea2app.png" />
-                            }
+                            detail={<Image src="https://github.com/idea2app.png" />}
                         >
                             <Button>查看</Button>
                         </OverlayBox>
-                    </CodeExample>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Page Nav">
@@ -259,7 +239,7 @@ export class Content extends Component {
                 </Section>
 
                 <Section title="Loading">
-                    <CodeExample>
+                    <LiveTSX>
                         <Button
                             style={{ zIndex: '1040' }}
                             onClick={async () => {
@@ -271,28 +251,25 @@ export class Content extends Component {
                             显示
                         </Button>
                         {showLoading && <Loading>加载中...</Loading>}
-                    </CodeExample>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="User Rank">
-                    <CodeExample>
+                    <LiveTSX>
                         <UserRankView
                             title="GitHub"
-                            rank={[
-                                'Five-great',
-                                'TechQuery',
-                                'stevending1st',
-                                'wangrunlin'
-                            ].map((name, index) => ({
-                                id: index + 1,
-                                name,
-                                avatar: `https://github.com/${name}.png`,
-                                website: `https://github.com/${name}`,
-                                score: 100 - index
-                            }))}
+                            rank={['Five-great', 'TechQuery', 'stevending1st', 'wangrunlin'].map(
+                                (name, index) => ({
+                                    id: index + 1,
+                                    name,
+                                    avatar: `https://github.com/${name}.png`,
+                                    website: `https://github.com/${name}`,
+                                    score: 100 - index
+                                })
+                            )}
                             linkOf={({ id }) => `/user/${id}`}
                         />
-                    </CodeExample>
+                    </LiveTSX>
                 </Section>
             </>
         );

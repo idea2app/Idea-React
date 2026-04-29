@@ -1,9 +1,23 @@
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/themes/prism.min.css';
+
 import { FC, HTMLAttributes, isValidElement, PropsWithChildren } from 'react';
 import * as ReactBootstrap from 'react-bootstrap';
 import reactElementToJSXString from 'react-element-to-jsx-string';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
 
+import { CodeBlock } from '../source';
 import * as IdeaReact from '../source';
+
+export const CodeExample: FC<PropsWithChildren> = ({ children }) => (
+    <>
+        {children}
+        <CodeBlock language="tsx">{children}</CodeBlock>
+    </>
+);
 
 // IdeaReact exports take priority over same-named ReactBootstrap exports
 const liveScope: Record<string, unknown> = {
@@ -11,7 +25,7 @@ const liveScope: Record<string, unknown> = {
     ...IdeaReact
 };
 
-export const CodeExample: FC<PropsWithChildren> = ({ children }) => {
+export const LiveTSX: FC<PropsWithChildren> = ({ children }) => {
     const element = isValidElement(children) ? children : <>{children}</>;
     const code = typeof children === 'string' ? children : reactElementToJSXString(element);
 

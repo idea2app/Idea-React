@@ -10,7 +10,7 @@
         "skipLibCheck": true,
         "lib": ["ES2023", "DOM"]
     },
-    "include": ["*.ts", "source/**/*", "stories/**/*"],
+    "include": ["*.ts", "source/**/*"],
     "typedocOptions": {
         "name": "Idea React",
         "excludeExternals": true,
