@@ -2,9 +2,8 @@ import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
 import 'prismjs/components/prism-typescript';
-import 'prismjs/themes/prism.min.css';
 
-import { FC, HTMLAttributes, isValidElement, PropsWithChildren } from 'react';
+import { FC, HTMLAttributes, isValidElement, PropsWithChildren, useEffect } from 'react';
 import * as ReactBootstrap from 'react-bootstrap';
 import reactElementToJSXString from 'react-element-to-jsx-string';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
@@ -12,12 +11,27 @@ import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
 import { CodeBlock } from '../source';
 import * as IdeaReact from '../source';
 
-export const CodeExample: FC<PropsWithChildren> = ({ children }) => (
-    <>
-        {children}
-        <CodeBlock language="tsx">{children}</CodeBlock>
-    </>
-);
+export const CodeExample: FC<PropsWithChildren> = ({ children }) => {
+    useEffect(() => {
+        const id = 'prismjs-theme';
+
+        if (!document.getElementById(id)) {
+            const link = document.createElement('link');
+
+            link.id = id;
+            link.rel = 'stylesheet';
+            link.href = 'https://unpkg.com/prismjs@1.30.0/themes/prism.min.css';
+            document.head.appendChild(link);
+        }
+    }, []);
+
+    return (
+        <>
+            {children}
+            <CodeBlock language="tsx">{children}</CodeBlock>
+        </>
+    );
+};
 
 // IdeaReact exports take priority over same-named ReactBootstrap exports
 const liveScope: Record<string, unknown> = {
