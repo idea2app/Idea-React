@@ -10,7 +10,6 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 - API document: https://idea2app.github.io/Idea-React/
 - Preview site: https://idea2app.github.io/Idea-React/preview/
-- Storybook playground: https://idea-react.vercel.app/
 
 ## Versions
 
@@ -70,8 +69,8 @@ Open Map component & model, have been migrated to https://github.com/idea2app/Op
 ### CSS on CDN
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1.13.1/font/bootstrap-icons.css" />
 <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" />
 <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism.min.css" />
 <link rel="stylesheet" href="https://unpkg.com/idea-react/dist/index.css" />
@@ -189,7 +188,7 @@ git push origin master --tags  # push all branches and tags on master
 [5]: https://mobx.js.org/
 [6]: https://libraries.io/npm/idea-react
 [7]: https://github.com/idea2app/Idea-React/actions/workflows/main.yml
-[8]: https://nodei.co/npm/idea-react/
+[8]: https://npm.im/idea-react/
 [9]: https://idea2app.github.io/React-MobX-Bootstrap-ts/
 [10]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx
 [11]: https://next-bootstrap-ts.vercel.app/
