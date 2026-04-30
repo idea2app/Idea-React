@@ -7,6 +7,7 @@ import { formToJSON, sleep } from 'web-utility';
 import {
     Avatar,
     CodeBlock,
+    Countdown,
     Dialog,
     DialogClose,
     HorizontalMarquee,
@@ -25,7 +26,8 @@ import {
     Timeline,
     TypeEcho,
     UserRankView,
-    VerticalMarquee
+    VerticalMarquee,
+    ZodiacBar
 } from '../source';
 import { CodeExample, LiveTSX, Section } from './utility';
 
@@ -120,6 +122,21 @@ export class Content extends Component {
                 <Section title="Time Distance">
                     <LiveTSX>
                         <TimeDistance date="1989-06-04" />
+                    </LiveTSX>
+                </Section>
+
+                <Section title="Countdown">
+                    <LiveTSX>
+                        <Countdown
+                            className="d-flex gap-3"
+                            units={[
+                                { scale: 24, label: '天' },
+                                { scale: 60, label: '时' },
+                                { scale: 60, label: '分' },
+                                { scale: 1000, label: '秒' }
+                            ]}
+                            endTime={new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)}
+                        />
                     </LiveTSX>
                 </Section>
 
@@ -268,6 +285,16 @@ export class Content extends Component {
                                 })
                             )}
                             linkOf={({ id }) => `/user/${id}`}
+                        />
+                    </LiveTSX>
+                </Section>
+
+                <Section title="Zodiac Bar">
+                    <LiveTSX>
+                        <ZodiacBar
+                            startYear={2018}
+                            endYear={2024}
+                            itemOf={year => ({ title: <div>{year}</div> })}
                         />
                     </LiveTSX>
                 </Section>
