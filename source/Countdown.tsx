@@ -21,6 +21,9 @@ export interface CountdownProps extends HTMLAttributes<HTMLOListElement> {
     onEnd?: (endTime: TimeData) => unknown;
 }
 
+/**
+ * Migrate from https://bootstrap.web-cell.dev/#Calendar/CountDown
+ */
 @observer
 export class Countdown extends ObservedComponent<CountdownProps> {
     static displayName = 'Countdown';
