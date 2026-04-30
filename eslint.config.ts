@@ -58,6 +58,10 @@ export default tsEslint.config(
                 }
             ],
             'react/self-closing-comp': ['error', { component: true, html: true }],
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }
+            ],
             '@typescript-eslint/no-empty-object-type': 'off',
             '@cspell/spellchecker': [
                 'warn',

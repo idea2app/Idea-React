@@ -1,4 +1,3 @@
-import { omit } from 'lodash';
 import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent, reaction } from 'mobx-react-helper';
@@ -18,6 +17,7 @@ interface TimeSection {
 export interface CountdownProps extends HTMLAttributes<HTMLOListElement> {
     units: TimeUnit[];
     endTime: TimeData;
+    itemClassName?: string;
     onEnd?: (endTime: TimeData) => void;
 }
 
@@ -91,17 +91,20 @@ export class Countdown extends ObservedComponent<CountdownProps> {
     }
 
     render() {
-        const { className = '' } = this.props;
-        const props = omit(this.props, ['units', 'endTime', 'onEnd', 'className']);
+        const {
+            className = '',
+            units: _u,
+            endTime: _e,
+            itemClassName = 'd-flex flex-column justify-content-center align-items-center',
+            onEnd: _o,
+            ...props
+        } = this.props;
         const { timeSections } = this;
 
         return (
             <ol className={`list-unstyled m-0 ${className}`} {...props}>
                 {timeSections.map(({ value, label }) => (
-                    <li
-                        key={label}
-                        className="d-flex flex-column justify-content-center align-items-center"
-                    >
+                    <li key={label} className={itemClassName}>
                         <strong>{(value + '').padStart(2, '0')}</strong>
                         <span>{label}</span>
                     </li>

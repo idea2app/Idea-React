@@ -2,7 +2,7 @@ import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component } from 'react';
 import { Button, Form, Image, Modal } from 'react-bootstrap';
-import { formToJSON, sleep } from 'web-utility';
+import { Day, formToJSON, sleep } from 'web-utility';
 
 import {
     Avatar,
@@ -135,7 +135,7 @@ export class Content extends Component {
                                 { scale: 60, label: '分' },
                                 { scale: 1000, label: '秒' }
                             ]}
-                            endTime={new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)}
+                            endTime={Date.now() + 3 * Day}
                         />
                     </LiveTSX>
                 </Section>
@@ -291,11 +291,7 @@ export class Content extends Component {
 
                 <Section title="Zodiac Bar">
                     <LiveTSX>
-                        <ZodiacBar
-                            startYear={2018}
-                            endYear={2024}
-                            itemOf={year => ({ title: <div>{year}</div> })}
-                        />
+                        <ZodiacBar startYear={2018} endYear={2024} />
                     </LiveTSX>
                 </Section>
             </>
