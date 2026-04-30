@@ -38,6 +38,7 @@
         "react-bootstrap": "^2.10.10",
         "react-editor-js": "^2.1.0",
         "react-element-to-jsx-string": ">=15",
+        "react-live": "^4.1.8",
         "web-utility": "^4.6.5"
     },
     "peerDependencies": {
@@ -80,7 +81,6 @@
         "prop-types": "15.8.1",
         "react": "^19.2.5",
         "react-dom": "^19.2.5",
-        "react-live": "^4.1.8",
         "rimraf": "^6.1.3",
         "typedoc": "^0.28.19",
         "typedoc-plugin-mdn-links": "^5.1.1",

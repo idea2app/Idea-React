@@ -9,6 +9,7 @@ export * from './Editor';
 export * from './EditorHTML';
 export * from './HorizontalMarquee';
 export * from './Icon';
+export * from './LiveTSX';
 export * from './Loading';
 export * from './MonthCalendar';
 export * from './Nameplate';

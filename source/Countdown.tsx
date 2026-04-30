@@ -18,7 +18,7 @@ export interface CountdownProps extends HTMLAttributes<HTMLOListElement> {
     units: TimeUnit[];
     endTime: TimeData;
     itemClassName?: string;
-    onEnd?: (endTime: TimeData) => void;
+    onEnd?: (endTime: TimeData) => unknown;
 }
 
 @observer
@@ -93,9 +93,9 @@ export class Countdown extends ObservedComponent<CountdownProps> {
     render() {
         const {
             className = '',
+            itemClassName = 'border rounded px-4 py-3 d-flex flex-column justify-content-center align-items-center',
             units: _u,
             endTime: _e,
-            itemClassName = 'd-flex flex-column justify-content-center align-items-center',
             onEnd: _o,
             ...props
         } = this.props;
