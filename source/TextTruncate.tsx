@@ -2,7 +2,7 @@ import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, createRef, CSSProperties, HTMLAttributes, ReactNode } from 'react';
 
-export interface TextTruncateProps extends HTMLAttributes<HTMLParagraphElement> {
+export interface TextTruncateProps extends HTMLAttributes<HTMLDivElement> {
     rows?: number;
     expandText?: ReactNode;
     collapseText?: ReactNode;
@@ -18,7 +18,7 @@ export class TextTruncate extends Component<TextTruncateProps> {
     @observable
     accessor overflowed = false;
 
-    contentRef = createRef<HTMLSpanElement>();
+    contentRef = createRef<HTMLParagraphElement>();
 
     componentDidMount() {
         this.checkOverflow();
@@ -56,10 +56,10 @@ export class TextTruncate extends Component<TextTruncateProps> {
             WebkitLineClamp: rows
         };
         return (
-            <p {...props}>
-                <span ref={this.contentRef} style={expanded ? undefined : style}>
+            <div {...props}>
+                <p ref={this.contentRef} style={expanded ? undefined : style}>
                     {children}
-                </span>
+                </p>
                 {(overflowed || expanded) && (
                     <button
                         type="button"
@@ -70,7 +70,7 @@ export class TextTruncate extends Component<TextTruncateProps> {
                         {expanded ? collapseText : expandText}
                     </button>
                 )}
-            </p>
+            </div>
         );
     }
 }
