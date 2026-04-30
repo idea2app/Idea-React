@@ -7,13 +7,13 @@ export interface ScrollNavProps extends NavbarProps {
     /**
      * Scroll distance (in pixels) that triggers the navbar to hide when scrolling down.
      * The navbar is always visible while `scrollY` is within this threshold.
-     * @default 0
+     * @defaultValue `0`
      */
     threshold?: number;
     /**
      * Minimum scroll distance (in pixels) required to trigger a visibility change.
      * Helps prevent flickering caused by small jitter movements.
-     * @default 5
+     * @defaultValue `5`
      */
     scrollDelta?: number;
 }
