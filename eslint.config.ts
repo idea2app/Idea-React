@@ -25,7 +25,7 @@ export default tsEslint.config(
     },
     {
         // config with just ignores is the replacement for `.eslintignore`
-        ignores: ['**/node_modules/**', '**/dist/**', '**/.parcel-cache/**']
+        ignores: ['**/node_modules/**', '**/dist/**', '**/.parcel-cache/**', '.github/**']
     },
 
     // extends ...
