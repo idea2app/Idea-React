@@ -20,6 +20,7 @@ export * from './TableSpinner';
 export * from './Time';
 export * from './TimeDistance';
 export * from './Timeline';
+export * from './Toast';
 export * from './TypeEcho';
 export * from './UserRank';
 export * from './VerticalMarquee';
