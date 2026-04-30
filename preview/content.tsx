@@ -1,7 +1,7 @@
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component } from 'react';
-import { Button, Form, Image, Modal } from 'react-bootstrap';
+import { Button, Form, Image, Modal, Navbar } from 'react-bootstrap';
 import { formToJSON, sleep } from 'web-utility';
 
 import {
@@ -17,6 +17,7 @@ import {
     Option,
     OverlayBox,
     PageNav,
+    ScrollNav,
     Select,
     ShareBox,
     SpinnerButton,
@@ -230,6 +231,14 @@ export class Content extends Component {
                             <Button>查看</Button>
                         </OverlayBox>
                     </LiveTSX>
+                </Section>
+
+                <Section title="Scroll Nav">
+                    <CodeBlock language="tsx">
+                        <ScrollNav bg="dark" data-bs-theme="dark" threshold={100}>
+                            <Navbar.Brand href="#">Brand</Navbar.Brand>
+                        </ScrollNav>
+                    </CodeBlock>
                 </Section>
 
                 <Section title="Page Nav">
