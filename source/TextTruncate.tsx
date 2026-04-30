@@ -1,13 +1,11 @@
-import classNames from 'classnames';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component, createRef, HTMLAttributes } from 'react';
-import { Button } from 'react-bootstrap';
+import { Component, createRef, CSSProperties, HTMLAttributes, ReactNode } from 'react';
 
-export interface TextTruncateProps extends HTMLAttributes<HTMLDivElement> {
-    lines?: number;
-    expandText?: string;
-    collapseText?: string;
+export interface TextTruncateProps extends HTMLAttributes<HTMLParagraphElement> {
+    rows?: number;
+    expandText?: ReactNode;
+    collapseText?: ReactNode;
 }
 
 @observer
@@ -20,71 +18,49 @@ export class TextTruncate extends Component<TextTruncateProps> {
     @observable
     accessor overflowed = false;
 
-    contentRef = createRef<HTMLDivElement>();
+    contentRef = createRef<HTMLSpanElement>();
 
     componentDidMount() {
         this.checkOverflow();
     }
 
-    componentDidUpdate(prevProps: TextTruncateProps) {
-        if (
-            !this.expanded &&
-            (prevProps.children !== this.props.children || prevProps.lines !== this.props.lines)
-        ) {
+    componentDidUpdate({ rows, children }: TextTruncateProps) {
+        if (!this.expanded && (children !== this.props.children || rows !== this.props.rows))
             this.checkOverflow();
-        }
     }
 
     checkOverflow = () => {
         const { current } = this.contentRef;
 
-        if (current) {
-            this.overflowed = current.scrollHeight > current.clientHeight;
-        }
+        if (current) this.overflowed = current.scrollHeight > current.clientHeight;
     };
 
     toggle = () => {
         this.expanded = !this.expanded;
 
-        if (!this.expanded) {
-            requestAnimationFrame(this.checkOverflow);
-        }
+        if (!this.expanded) requestAnimationFrame(this.checkOverflow);
     };
 
     render() {
-        const {
-            className,
-            children,
-            lines = 3,
-            expandText = '展开',
-            collapseText = '收起',
-            ...props
-        } = this.props;
+        const { children, rows = 3, expandText = '⏬', collapseText = '⏫', ...props } = this.props;
         const { expanded, overflowed } = this;
-
+        const style: CSSProperties = {
+            overflow: 'hidden',
+            display: '-webkit-box',
+            WebkitBoxOrient: 'vertical',
+            WebkitLineClamp: rows
+        };
         return (
-            <div className={classNames(className)} {...props}>
-                <div
-                    ref={this.contentRef}
-                    style={
-                        expanded
-                            ? undefined
-                            : {
-                                  overflow: 'hidden',
-                                  display: '-webkit-box',
-                                  WebkitBoxOrient: 'vertical',
-                                  WebkitLineClamp: lines
-                              }
-                    }
-                >
+            <p {...props}>
+                <span ref={this.contentRef} style={expanded ? undefined : style}>
                     {children}
-                </div>
+                </span>
                 {(overflowed || expanded) && (
-                    <Button variant="link" className="p-0" onClick={this.toggle}>
+                    <button className="bg-transparent border-0 p-0" onClick={this.toggle}>
                         {expanded ? collapseText : expandText}
-                    </Button>
+                    </button>
                 )}
-            </div>
+            </p>
         );
     }
 }
