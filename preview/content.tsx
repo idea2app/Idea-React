@@ -20,6 +20,7 @@ import {
     Select,
     ShareBox,
     SpinnerButton,
+    TextTruncate,
     Time,
     TimeDistance,
     Timeline,
@@ -94,6 +95,19 @@ export class Content extends Component {
                 <Section title="TypeEcho">
                     <LiveTSX>
                         <TypeEcho text="Hello, Idea React!" />
+                    </LiveTSX>
+                </Section>
+
+                <Section title="Text Truncate">
+                    <LiveTSX>
+                        <TextTruncate lines={3}>
+                            Idea React is a React advanced components library based on TypeScript &
+                            Bootstrap, built by idea2app remote developers team. It provides a set
+                            of reusable, well-designed components that help developers build modern
+                            web applications quickly and efficiently. The library includes
+                            components for common UI patterns such as dialogs, forms, navigation,
+                            and more.
+                        </TextTruncate>
                     </LiveTSX>
                 </Section>
 
