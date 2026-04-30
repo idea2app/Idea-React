@@ -22,11 +22,16 @@ export class TextTruncate extends Component<TextTruncateProps> {
 
     componentDidMount() {
         this.checkOverflow();
+        window.addEventListener('resize', this.checkOverflow);
     }
 
     componentDidUpdate({ rows, children }: TextTruncateProps) {
         if (!this.expanded && (children !== this.props.children || rows !== this.props.rows))
             this.checkOverflow();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.checkOverflow);
     }
 
     checkOverflow = () => {
@@ -56,7 +61,12 @@ export class TextTruncate extends Component<TextTruncateProps> {
                     {children}
                 </span>
                 {(overflowed || expanded) && (
-                    <button className="bg-transparent border-0 p-0" onClick={this.toggle}>
+                    <button
+                        type="button"
+                        className="bg-transparent border-0 p-0"
+                        aria-expanded={expanded}
+                        onClick={this.toggle}
+                    >
                         {expanded ? collapseText : expandText}
                     </button>
                 )}
