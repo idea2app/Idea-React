@@ -19,6 +19,7 @@ export * from './Select';
 export * from './ShareBox';
 export * from './SpinnerButton';
 export * from './TableSpinner';
+export * from './TextTruncate';
 export * from './Time';
 export * from './TimeDistance';
 export * from './Timeline';
