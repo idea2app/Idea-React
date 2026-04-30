@@ -2,11 +2,12 @@ import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component } from 'react';
 import { Button, Form, Image, Modal } from 'react-bootstrap';
-import { formToJSON, sleep } from 'web-utility';
+import { Day, formToJSON, sleep } from 'web-utility';
 
 import {
     Avatar,
     CodeBlock,
+    Countdown,
     Dialog,
     DialogClose,
     HorizontalMarquee,
@@ -26,9 +27,10 @@ import {
     Timeline,
     TypeEcho,
     UserRankView,
-    VerticalMarquee
+    VerticalMarquee,
+    ZodiacBar
 } from '../source';
-import { CodeExample, LiveTSX, Section } from './utility';
+import { CodeExample, LiveExample, Section } from './utility';
 
 @observer
 export class Content extends Component {
@@ -93,9 +95,9 @@ export class Content extends Component {
                 <h1 id="top">Idea React components</h1>
 
                 <Section title="TypeEcho">
-                    <LiveTSX>
+                    <LiveExample>
                         <TypeEcho text="Hello, Idea React!" />
-                    </LiveTSX>
+                    </LiveExample>
                 </Section>
 
                 <Section title="Text Truncate">
@@ -112,33 +114,48 @@ export class Content extends Component {
                 </Section>
 
                 <Section title="Horizontal Marquee">
-                    <LiveTSX>
+                    <LiveExample>
                         <HorizontalMarquee>{'idea2app '.repeat(15).trim()}</HorizontalMarquee>
-                    </LiveTSX>
+                    </LiveExample>
                 </Section>
 
                 <Section title="Vertical Marquee">
-                    <LiveTSX>
+                    <LiveExample>
                         <VerticalMarquee style={{ height: '10rem' }}>
                             <img src="https://tech-query.me/medias/featureimages/22.jpg" />
                         </VerticalMarquee>
-                    </LiveTSX>
+                    </LiveExample>
                 </Section>
 
                 <Section title="Time">
-                    <LiveTSX>
+                    <LiveExample>
                         <Time dateTime="2022-11-27" format="YYYY 年 MM 月 DD 日" />
-                    </LiveTSX>
+                    </LiveExample>
                 </Section>
 
                 <Section title="Time Distance">
-                    <LiveTSX>
+                    <LiveExample>
                         <TimeDistance date="1989-06-04" />
-                    </LiveTSX>
+                    </LiveExample>
+                </Section>
+
+                <Section title="Countdown">
+                    <LiveExample>
+                        <Countdown
+                            className="d-flex gap-3"
+                            units={[
+                                { scale: 24, label: '天' },
+                                { scale: 60, label: '时' },
+                                { scale: 60, label: '分' },
+                                { scale: 1000, label: '秒' }
+                            ]}
+                            endTime={Date.now() + 3 * Day}
+                        />
+                    </LiveExample>
                 </Section>
 
                 <Section title="Timeline">
-                    <LiveTSX>
+                    <LiveExample>
                         <div
                             style={{
                                 background:
@@ -158,38 +175,38 @@ export class Content extends Component {
                                 timeFormat="YYYY-MM-DD"
                             />
                         </div>
-                    </LiveTSX>
+                    </LiveExample>
                 </Section>
 
                 <Section title="Icon">
-                    <LiveTSX>
+                    <LiveExample>
                         <Icon name="trash" size={2} className="text-danger" />
-                    </LiveTSX>
+                    </LiveExample>
                 </Section>
 
                 <Section title="Avatar">
-                    <LiveTSX>
+                    <LiveExample>
                         <Avatar src="https://github.com/idea2app.png" />
-                    </LiveTSX>
+                    </LiveExample>
                 </Section>
 
                 <Section title="Nameplate">
-                    <LiveTSX>
+                    <LiveExample>
                         <Nameplate name="idea2app" avatar="https://github.com/idea2app.png" />
-                    </LiveTSX>
+                    </LiveExample>
                 </Section>
 
                 <Section title="Spinner Button">
-                    <LiveTSX>
+                    <LiveExample>
                         <SpinnerButton className="me-3" animation="border" loading />
                         <SpinnerButton animation="grow" type="submit" loading>
                             Submit
                         </SpinnerButton>
-                    </LiveTSX>
+                    </LiveExample>
                 </Section>
 
                 <Section title="Select">
-                    <LiveTSX>
+                    <LiveExample>
                         <Select value={selectValue} onChange={value => (this.selectValue = value)}>
                             <Option value="0">
                                 <Icon className="me-2" name="heart" />
@@ -200,17 +217,17 @@ export class Content extends Component {
                                 freeCodeCamp
                             </Option>
                         </Select>
-                    </LiveTSX>
+                    </LiveExample>
                 </Section>
 
                 <Section title="Month Calendar">
-                    <LiveTSX>
+                    <LiveExample>
                         <MonthCalendar
                             value={[{ date: new Date(), content: 'Hello!' }]}
                             onSelect={console.log}
                             onChange={console.log}
                         />
-                    </LiveTSX>
+                    </LiveExample>
                 </Section>
 
                 <Section title="IdeaDialog">
@@ -222,7 +239,7 @@ export class Content extends Component {
                 </Section>
 
                 <Section title="Share Box">
-                    <LiveTSX>
+                    <LiveExample>
                         <ShareBox
                             title="idea2app"
                             text="Every idea of yours is worth our efforts to realize"
@@ -231,11 +248,11 @@ export class Content extends Component {
                             <Nameplate name="idea2app" avatar="https://github.com/idea2app.png" />
                         </ShareBox>
                         click to share
-                    </LiveTSX>
+                    </LiveExample>
                 </Section>
 
                 <Section title="Overlay Box">
-                    <LiveTSX>
+                    <CodeExample>
                         <OverlayBox
                             trigger="click"
                             title="view info"
@@ -243,7 +260,7 @@ export class Content extends Component {
                         >
                             <Button>查看</Button>
                         </OverlayBox>
-                    </LiveTSX>
+                    </CodeExample>
                 </Section>
 
                 <Section title="Page Nav">
@@ -253,7 +270,7 @@ export class Content extends Component {
                 </Section>
 
                 <Section title="Loading">
-                    <LiveTSX>
+                    <CodeExample>
                         <Button
                             style={{ zIndex: '1040' }}
                             onClick={async () => {
@@ -265,11 +282,11 @@ export class Content extends Component {
                             显示
                         </Button>
                         {showLoading && <Loading>加载中...</Loading>}
-                    </LiveTSX>
+                    </CodeExample>
                 </Section>
 
                 <Section title="User Rank">
-                    <LiveTSX>
+                    <LiveExample>
                         <UserRankView
                             title="GitHub"
                             rank={['Five-great', 'TechQuery', 'stevending1st', 'wangrunlin'].map(
@@ -283,7 +300,13 @@ export class Content extends Component {
                             )}
                             linkOf={({ id }) => `/user/${id}`}
                         />
-                    </LiveTSX>
+                    </LiveExample>
+                </Section>
+
+                <Section title="Zodiac Bar">
+                    <CodeExample>
+                        <ZodiacBar startYear={2020} endYear={2022} itemOf={title => ({ title })} />
+                    </CodeExample>
                 </Section>
             </>
         );
