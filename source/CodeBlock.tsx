@@ -1,6 +1,11 @@
-import { highlight, languages } from 'prismjs';
 import { FC, HTMLAttributes, isValidElement } from 'react';
 import reactElementToJSXString from 'react-element-to-jsx-string';
+
+import { highlight, languages } from 'prismjs';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
+import 'prismjs/components/prism-typescript';
 
 export interface CodeBlockProps extends HTMLAttributes<HTMLPreElement> {
     language: string;

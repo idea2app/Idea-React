@@ -45,7 +45,26 @@ export default tsEslint.config(
         rules: {
             'arrow-body-style': ['error', 'as-needed'],
             'simple-import-sort/exports': 'error',
-            'simple-import-sort/imports': 'error',
+            'simple-import-sort/imports': [
+                'error',
+                {
+                    groups: [
+                        // Keep the rest close to simple-import-sort defaults.
+                        ['^\\u0000'],
+                        ['^node:'],
+
+                        // External packages except Prism.
+                        ['^(?!prismjs$)@?\\w'],
+
+                        // Prism imports between external and internal packages.
+                        ['^prismjs$', '^\\u0000prismjs/components/'],
+
+                        // Internal absolute imports, then relative imports.
+                        ['^'],
+                        ['^\\.']
+                    ]
+                }
+            ],
             'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
             'react/jsx-no-target-blank': 'warn',
             'react/jsx-sort-props': [
@@ -58,6 +77,10 @@ export default tsEslint.config(
                 }
             ],
             'react/self-closing-comp': ['error', { component: true, html: true }],
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }
+            ],
             '@typescript-eslint/no-empty-object-type': 'off',
             '@cspell/spellchecker': [
                 'warn',

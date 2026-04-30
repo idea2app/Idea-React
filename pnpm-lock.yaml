@@ -56,6 +56,9 @@ importers:
       react-element-to-jsx-string:
         specifier: '>=15'
         version: 17.0.1(react-dom@19.2.5(react@19.2.5))(react-is@16.13.1)(react@19.2.5)
+      react-live:
+        specifier: ^4.1.8
+        version: 4.1.8(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       web-utility:
         specifier: ^4.6.5
         version: 4.6.5(typescript@5.9.3)
@@ -165,9 +168,6 @@ importers:
       react-dom:
         specifier: ^19.2.5
         version: 19.2.5(react@19.2.5)
-      react-live:
-        specifier: ^4.1.8
-        version: 4.1.8(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       rimraf:
         specifier: ^6.1.3
         version: 6.1.3
