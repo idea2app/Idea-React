@@ -1,7 +1,7 @@
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component } from 'react';
-import { Button, Form, Image, Modal, Navbar } from 'react-bootstrap';
+import { Button, Form, Image, Modal } from 'react-bootstrap';
 import { formToJSON, sleep } from 'web-utility';
 
 import {
@@ -234,11 +234,22 @@ export class Content extends Component {
                 </Section>
 
                 <Section title="Scroll Nav">
-                    <CodeBlock language="tsx">
-                        <ScrollNav bg="dark" data-bs-theme="dark" threshold={100}>
-                            <Navbar.Brand href="#">Brand</Navbar.Brand>
+                    <LiveTSX>
+                        <ScrollNav variant="underline">
+                            <Nav.Link href="#" active>
+                                Dashboard
+                            </Nav.Link>
+                            <Nav.Link href="#">Friends</Nav.Link>
+                            <Nav.Link href="#">Explore</Nav.Link>
+                            <Nav.Link href="#">Suggestions</Nav.Link>
+                            <Nav.Link href="#">Messages</Nav.Link>
+                            <Nav.Link href="#">Notifications</Nav.Link>
+                            <Nav.Link href="#">Profile</Nav.Link>
+                            <Nav.Link href="#">Settings</Nav.Link>
+                            <Nav.Link href="#">Help</Nav.Link>
+                            <Nav.Link href="#">Logout</Nav.Link>
                         </ScrollNav>
-                    </CodeBlock>
+                    </LiveTSX>
                 </Section>
 
                 <Section title="Page Nav">

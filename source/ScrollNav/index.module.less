@@ -1,0 +1,33 @@
+.navScroller {
+    overflow-y: hidden;
+}
+
+.scrollerInner {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.scrollButton {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    cursor: pointer;
+    border: none;
+    padding: 0 0.5rem;
+}
+
+.scrollButtonLeft {
+    left: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9), transparent);
+}
+
+.scrollButtonRight {
+    right: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.9), transparent);
+}
