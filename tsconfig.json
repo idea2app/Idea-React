@@ -8,7 +8,7 @@
         "useDefineForClassFields": true,
         "jsx": "react-jsx",
         "skipLibCheck": true,
-        "lib": ["ES2023", "DOM"]
+        "lib": ["ES2024", "DOM"]
     },
     "include": ["*.ts", "source/**/*"],
     "typedocOptions": {

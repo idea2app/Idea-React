@@ -26,6 +26,7 @@ import {
     Time,
     TimeDistance,
     Timeline,
+    Toast,
     TypeEcho,
     UserRankView,
     VerticalMarquee,
@@ -43,6 +44,8 @@ export class Content extends Component {
 
     @observable
     accessor showLoading = false;
+
+    toast = new Toast();
 
     inputDialog = new Dialog<{}, Record<'a' | 'b', number>>(({ defer }) => (
         <Modal show={!!defer} onHide={() => defer?.reject(new DialogClose())}>
@@ -237,6 +240,26 @@ export class Content extends Component {
 
                         <this.inputDialog.Component />
                     </CodeExample>
+                </Section>
+
+                <Section title="Toast">
+                    {/* <CodeExample> */}
+                    <Button
+                        onClick={() =>
+                            this.toast
+                                .open({
+                                    body: 'Hello, Idea React!',
+                                    variant: 'success',
+                                    delay: 0
+                                })
+                                .then(({ id }) => console.log(`Toast ${id} closed`))
+                        }
+                    >
+                        显示 Toast
+                    </Button>
+
+                    <this.toast.Component />
+                    {/* </CodeExample> */}
                 </Section>
 
                 <Section title="Share Box">

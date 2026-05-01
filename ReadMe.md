@@ -48,8 +48,9 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 24. [Share Box](source/ShareBox.tsx)
 25. [Overlay Box](source/OverlayBox.tsx)
 26. [Dialog](source/Dialog.tsx)
-27. [User Rank](source/UserRank/)
-28. [Zodiac Bar](source/ZodiacBar.tsx)
+27. [Toast](source/Toast.tsx)
+28. [User Rank](source/UserRank/)
+29. [Zodiac Bar](source/ZodiacBar.tsx)
 
 #### Data components
 
@@ -156,6 +157,40 @@ export class ExamplePage extends Component {
                 <Button onClick={this.someLogic}>open Dialog</Button>
 
                 <this.inputDialog.Component />
+            </>
+        );
+    }
+}
+```
+
+### Toast
+
+```tsx
+import { Component } from 'react';
+import { Button } from 'react-bootstrap';
+import { Toast } from 'idea-react';
+
+export class ExamplePage extends Component {
+    toast = new Toast();
+
+    render() {
+        return (
+            <>
+                <Button
+                    onClick={() =>
+                        this.toast
+                            .open({
+                                title: 'Notification',
+                                body: 'Hello, world!',
+                                variant: 'success'
+                            })
+                            .then(() => console.log('Toast closed'))
+                    }
+                >
+                    Show Toast
+                </Button>
+
+                <this.toast.Component />
             </>
         );
     }
