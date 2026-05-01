@@ -15,6 +15,7 @@ export * from './MonthCalendar';
 export * from './Nameplate';
 export * from './OverlayBox';
 export * from './PageNav';
+export * from './ScrollNav';
 export * from './Select';
 export * from './ShareBox';
 export * from './SpinnerButton';
