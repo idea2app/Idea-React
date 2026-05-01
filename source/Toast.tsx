@@ -10,11 +10,16 @@ export interface ToastMessage {
     delay?: number;
 }
 
+interface ToastItem extends ToastMessage {
+    id: number;
+    resolve: () => void;
+}
+
 export class Toast {
     private idCounter = 0;
 
     @observable
-    accessor messages: (ToastMessage & { id: number })[] = [];
+    accessor messages: ToastItem[] = [];
 
     Component: FC<Pick<ToastContainerProps, 'position'>>;
 
@@ -38,11 +43,14 @@ export class Toast {
 
     open(message: ToastMessage) {
         const id = ++this.idCounter;
-        this.messages = [...this.messages, { ...message, id }];
-        return id;
+        const { promise, resolve } = Promise.withResolvers<void>();
+        this.messages = [...this.messages, { ...message, id, resolve }];
+        return promise;
     }
 
     close(id: number) {
+        const item = this.messages.find(m => m.id === id);
+        item?.resolve();
         this.messages = this.messages.filter(m => m.id !== id);
     }
 }
