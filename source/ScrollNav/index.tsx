@@ -1,8 +1,9 @@
 import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component, createRef, KeyboardEvent } from 'react';
+import { Component, createRef } from 'react';
 import { Nav, NavProps } from 'react-bootstrap';
 
+import { Icon } from '../Icon';
 import * as style from './index.module.less';
 
 export type ScrollNavProps = NavProps;
@@ -40,22 +41,20 @@ export class ScrollNav extends Component<ScrollNavProps> {
 
     updateScroll = () => {
         const scroller = this.scrollerRef.current;
-        if (!scroller) return;
-
-        this.scrollLeft = scroller.scrollLeft;
-        this.scrollWidth = scroller.scrollWidth;
-        this.clientWidth = scroller.clientWidth;
+        if (scroller) {
+            this.scrollLeft = scroller.scrollLeft;
+            this.scrollWidth = scroller.scrollWidth;
+            this.clientWidth = scroller.clientWidth;
+        }
+        return scroller;
     };
 
-    resizeObserver: ResizeObserver | undefined;
+    private resizeObserver?: ResizeObserver;
 
     componentDidMount() {
-        if (!globalThis.document) return;
-
-        const scroller = this.scrollerRef.current;
+        const scroller = this.updateScroll();
         if (!scroller) return;
 
-        this.updateScroll();
         scroller.addEventListener('scroll', this.updateScroll);
         this.resizeObserver = new ResizeObserver(this.updateScroll);
         this.resizeObserver.observe(scroller);
@@ -73,16 +72,6 @@ export class ScrollNav extends Component<ScrollNavProps> {
         scroller.scrollBy({ left: direction * scroller.clientWidth * 0.8, behavior: 'smooth' });
     };
 
-    handleKeyDown = ({ key, preventDefault }: KeyboardEvent<HTMLDivElement>) => {
-        if (key === 'ArrowLeft') {
-            preventDefault();
-            this.scrollBy(-1)();
-        } else if (key === 'ArrowRight') {
-            preventDefault();
-            this.scrollBy(1)();
-        }
-    };
-
     render() {
         const { canScrollLeft, canScrollRight } = this;
         const { className = '', children, ...props } = this.props;
@@ -96,14 +85,10 @@ export class ScrollNav extends Component<ScrollNavProps> {
                         aria-label="Scroll left"
                         onClick={this.scrollBy(-1)}
                     >
-                        ‹
+                        <Icon name="caret-left-fill" />
                     </button>
                 )}
-                <div
-                    ref={this.scrollerRef}
-                    className={`overflow-x-auto ${style.scrollerInner}`}
-                    onKeyDown={this.handleKeyDown}
-                >
+                <div ref={this.scrollerRef} className={`overflow-x-auto ${style.scrollerInner}`}>
                     <Nav {...props} className="flex-nowrap">
                         {children}
                     </Nav>
@@ -115,7 +100,7 @@ export class ScrollNav extends Component<ScrollNavProps> {
                         aria-label="Scroll right"
                         onClick={this.scrollBy(1)}
                     >
-                        ›
+                        <Icon name="caret-right-fill" />
                     </button>
                 )}
             </div>
