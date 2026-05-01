@@ -211,21 +211,23 @@ export class Content extends Component {
                 </Section>
 
                 <Section title="Toast">
-                    <CodeExample>
-                        <Button
-                            onClick={() =>
-                                this.toast.open({
-                                    title: '通知',
+                    {/* <CodeExample> */}
+                    <Button
+                        onClick={() =>
+                            this.toast
+                                .open({
                                     body: 'Hello, Idea React!',
-                                    bg: 'success'
+                                    variant: 'success',
+                                    delay: 0
                                 })
-                            }
-                        >
-                            显示 Toast
-                        </Button>
+                                .then(() => console.log('Toast closed'))
+                        }
+                    >
+                        显示 Toast
+                    </Button>
 
-                        <this.toast.Component />
-                    </CodeExample>
+                    <this.toast.Component />
+                    {/* </CodeExample> */}
                 </Section>
 
                 <Section title="Share Box">

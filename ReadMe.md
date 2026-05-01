@@ -173,11 +173,13 @@ export class ExamplePage extends Component {
             <>
                 <Button
                     onClick={() =>
-                        this.toast.open({
-                            title: 'Notification',
-                            body: 'Hello, world!',
-                            bg: 'success'
-                        })
+                        this.toast
+                            .open({
+                                title: 'Notification',
+                                body: 'Hello, world!',
+                                variant: 'success'
+                            })
+                            .then(() => console.log('Toast closed'))
                     }
                 >
                     Show Toast
