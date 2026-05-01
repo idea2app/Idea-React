@@ -1,15 +1,8 @@
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-tsx';
-import 'prismjs/components/prism-typescript';
-
-import { FC, HTMLAttributes, isValidElement, PropsWithChildren } from 'react';
+import { FC, HTMLAttributes, PropsWithChildren } from 'react';
 import * as ReactBootstrap from 'react-bootstrap';
-import reactElementToJSXString from 'react-element-to-jsx-string';
-import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
 
-import { CodeBlock } from '../source';
 import * as IdeaReact from '../source';
+import { CodeBlock, LiveTSX } from '../source';
 
 export const CodeExample: FC<PropsWithChildren> = ({ children }) => (
     <>
@@ -23,24 +16,9 @@ export const CodeExample: FC<PropsWithChildren> = ({ children }) => (
     </>
 );
 
-// IdeaReact exports take priority over same-named ReactBootstrap exports
-const liveScope: Record<string, unknown> = {
-    ...ReactBootstrap,
-    ...IdeaReact
-};
-
-export const LiveTSX: FC<PropsWithChildren> = ({ children }) => {
-    const element = isValidElement(children) ? children : <>{children}</>;
-    const code = typeof children === 'string' ? children : reactElementToJSXString(element);
-
-    return (
-        <LiveProvider code={code} scope={liveScope} language="tsx">
-            <LivePreview className="mb-3" />
-            <LiveEditor />
-            <LiveError className="text-danger small p-2" />
-        </LiveProvider>
-    );
-};
+export const LiveExample: FC<PropsWithChildren> = ({ children }) => (
+    <LiveTSX scope={{ ...ReactBootstrap, ...IdeaReact }}>{children}</LiveTSX>
+);
 
 export const Section: FC<HTMLAttributes<HTMLDivElement>> = ({
     className = '',
