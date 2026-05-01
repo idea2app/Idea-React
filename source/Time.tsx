@@ -1,7 +1,6 @@
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { ObservedComponent } from 'mobx-react-helper';
-import { TimeHTMLAttributes } from 'react';
+import { Component, TimeHTMLAttributes } from 'react';
 import { formatDate, TimeData } from 'web-utility';
 
 export interface TimeProps extends Omit<TimeHTMLAttributes<HTMLTimeElement>, 'dateTime'> {
@@ -10,24 +9,22 @@ export interface TimeProps extends Omit<TimeHTMLAttributes<HTMLTimeElement>, 'da
 }
 
 @observer
-export class Time extends ObservedComponent<TimeProps> {
+export class Time extends Component<TimeProps> {
     static displayName = 'Time';
 
     @observable
-    accessor mounted = false;
+    accessor timeText = formatDate(this.props.dateTime, this.props.format);
 
     componentDidMount() {
-        super.componentDidMount();
-        this.mounted = true;
+        this.timeText = formatDate(this.props.dateTime, this.props.format);
     }
 
     render() {
-        const { dateTime, format, ...props } = this.props;
-        const date = new Date(dateTime);
+        const { dateTime, ...props } = this.props;
 
         return (
-            <time dateTime={date.toJSON()} {...props}>
-                {this.mounted ? formatDate(dateTime, format) : date.toJSON()}
+            <time dateTime={new Date(dateTime).toJSON()} {...props}>
+                {this.timeText}
             </time>
         );
     }

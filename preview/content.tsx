@@ -129,7 +129,7 @@ export class Content extends Component {
 
                 <Section title="Time">
                     <LiveExample>
-                        <Time dateTime="2022-11-27" format="YYYY 年 MM 月 DD 日" />
+                        <Time dateTime="2022-11-27" format="YYYY 年 MM 月 DD 日 HH:mm" />
                     </LiveExample>
                 </Section>
 
