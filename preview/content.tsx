@@ -252,7 +252,7 @@ export class Content extends Component {
                                     variant: 'success',
                                     delay: 0
                                 })
-                                .then(() => console.log('Toast closed'))
+                                .then(({ id }) => console.log(`Toast ${id} closed`))
                         }
                     >
                         显示 Toast

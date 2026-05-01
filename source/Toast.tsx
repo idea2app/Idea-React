@@ -3,11 +3,12 @@ import { observer } from 'mobx-react';
 import { FC, ReactNode } from 'react';
 import { Toast as BSToast, ToastContainer, ToastContainerProps } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/esm/types';
-import { Timestamp } from 'web-utility';
+import { Timestamp, uniqueID } from 'web-utility';
 
 const LIGHT_TEXT_VARIANTS = new Set<Variant>(['warning', 'info', 'light']);
 
 export interface ToastMessage {
+    id?: string;
     title?: ReactNode;
     body: ReactNode;
     variant?: Variant;
@@ -15,8 +16,9 @@ export interface ToastMessage {
 }
 
 interface ToastItem extends ToastMessage {
-    timestamp: number;
-    resolve: () => void;
+    openedAt: number;
+    closedAt?: number;
+    resolve?: (value: ToastItem) => void;
 }
 
 export class Toast {
@@ -29,22 +31,19 @@ export class Toast {
         </ToastContainer>
     ));
 
-    renderMessage = ({ timestamp, title, body, variant, delay = 3000 }: ToastItem) => {
+    renderMessage = ({ id, openedAt, title, body, variant, delay = 3000 }: ToastItem) => {
         const bodyClassName =
             variant && !LIGHT_TEXT_VARIANTS.has(variant) ? 'text-white' : undefined;
         const showHeader = !!title || delay === 0;
-        const elapsed = this.TimeScalar.distanceOf<Timestamp>(
-            Date.now(),
-            timestamp
-        ).toShortString();
+        const elapsed = this.TimeScalar.distanceOf<Timestamp>(Date.now(), openedAt).toShortString();
 
         return (
             <BSToast
-                key={timestamp}
+                key={id}
                 bg={variant}
                 delay={delay}
                 autohide={delay !== 0}
-                onClose={() => this.close(timestamp)}
+                onClose={() => this.close(id!)}
             >
                 {showHeader && (
                     <BSToast.Header>
@@ -62,17 +61,20 @@ export class Toast {
     }
 
     open(message: ToastMessage) {
-        const timestamp = Date.now();
-        const { promise, resolve } = Promise.withResolvers<void>();
+        const id = uniqueID();
+        const openedAt = Date.now();
+        const { promise, resolve } = Promise.withResolvers<ToastItem>();
 
-        this.messages = [...this.messages, { ...message, timestamp, resolve }];
+        this.messages = [...this.messages, { id, ...message, openedAt, resolve }];
 
         return promise;
     }
 
-    close(timestamp: number) {
-        const item = this.messages.find(message => message.timestamp === timestamp);
-        item?.resolve();
-        this.messages = this.messages.filter(message => message.timestamp !== timestamp);
+    close(id: string) {
+        const { resolve, ...item } = this.messages.find(message => message.id === id) || {};
+
+        resolve?.({ ...item, closedAt: Date.now() } as ToastItem);
+
+        this.messages = this.messages.filter(message => message.id !== id);
     }
 }
