@@ -1,6 +1,6 @@
 import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component, createRef } from 'react';
+import { Component, createRef, KeyboardEvent } from 'react';
 import { Nav, NavProps } from 'react-bootstrap';
 
 import * as style from './index.module.less';
@@ -39,44 +39,48 @@ export class ScrollNav extends Component<ScrollNavProps> {
     }
 
     updateScroll = () => {
-        const el = this.scrollerRef.current;
-        if (!el) return;
+        const scroller = this.scrollerRef.current;
+        if (!scroller) return;
 
-        this.scrollLeft = el.scrollLeft;
-        this.scrollWidth = el.scrollWidth;
-        this.clientWidth = el.clientWidth;
+        this.scrollLeft = scroller.scrollLeft;
+        this.scrollWidth = scroller.scrollWidth;
+        this.clientWidth = scroller.clientWidth;
     };
 
-    resizeTimer: ReturnType<typeof setTimeout> | undefined;
-
-    handleResize = () => {
-        clearTimeout(this.resizeTimer);
-        this.resizeTimer = setTimeout(this.updateScroll, 100);
-    };
+    resizeObserver: ResizeObserver | undefined;
 
     componentDidMount() {
         if (!globalThis.document) return;
 
-        const el = this.scrollerRef.current;
-        if (!el) return;
+        const scroller = this.scrollerRef.current;
+        if (!scroller) return;
 
         this.updateScroll();
-        el.addEventListener('scroll', this.updateScroll);
-        window.addEventListener('resize', this.handleResize);
+        scroller.addEventListener('scroll', this.updateScroll);
+        this.resizeObserver = new ResizeObserver(this.updateScroll);
+        this.resizeObserver.observe(scroller);
     }
 
     componentWillUnmount() {
-        clearTimeout(this.resizeTimer);
-        const el = this.scrollerRef.current;
-        el?.removeEventListener('scroll', this.updateScroll);
-        globalThis.window?.removeEventListener('resize', this.handleResize);
+        this.resizeObserver?.disconnect();
+        this.scrollerRef.current?.removeEventListener('scroll', this.updateScroll);
     }
 
     scrollBy = (direction: -1 | 1) => () => {
-        const el = this.scrollerRef.current;
-        if (!el) return;
+        const scroller = this.scrollerRef.current;
+        if (!scroller) return;
 
-        el.scrollBy({ left: direction * el.clientWidth * 0.8, behavior: 'smooth' });
+        scroller.scrollBy({ left: direction * scroller.clientWidth * 0.8, behavior: 'smooth' });
+    };
+
+    handleKeyDown = ({ key, preventDefault }: KeyboardEvent<HTMLDivElement>) => {
+        if (key === 'ArrowLeft') {
+            preventDefault();
+            this.scrollBy(-1)();
+        } else if (key === 'ArrowRight') {
+            preventDefault();
+            this.scrollBy(1)();
+        }
     };
 
     render() {
@@ -84,18 +88,22 @@ export class ScrollNav extends Component<ScrollNavProps> {
         const { className = '', children, ...props } = this.props;
 
         return (
-            <div className={`position-relative ${style.navScroller} ${className}`}>
+            <div className={`position-relative overflow-y-hidden ${className}`}>
                 {canScrollLeft && (
                     <button
                         type="button"
-                        className={`${style.scrollButton} ${style.scrollButtonLeft}`}
+                        className={`position-absolute top-0 bottom-0 start-0 z-1 border-0 px-2 ${style.scrollButtonLeft}`}
                         aria-label="Scroll left"
                         onClick={this.scrollBy(-1)}
                     >
                         ‹
                     </button>
                 )}
-                <div ref={this.scrollerRef} className={style.scrollerInner}>
+                <div
+                    ref={this.scrollerRef}
+                    className={`overflow-x-auto ${style.scrollerInner}`}
+                    onKeyDown={this.handleKeyDown}
+                >
                     <Nav {...props} className="flex-nowrap">
                         {children}
                     </Nav>
@@ -103,7 +111,7 @@ export class ScrollNav extends Component<ScrollNavProps> {
                 {canScrollRight && (
                     <button
                         type="button"
-                        className={`${style.scrollButton} ${style.scrollButtonRight}`}
+                        className={`position-absolute top-0 bottom-0 end-0 z-1 border-0 px-2 ${style.scrollButtonRight}`}
                         aria-label="Scroll right"
                         onClick={this.scrollBy(1)}
                     >
