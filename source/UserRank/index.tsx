@@ -22,14 +22,10 @@ export class UserRankView extends PureComponent<UserRankViewProps> {
 
     renderMedal = (user: UserRank) => (
         <Col key={user.id} as="li">
-            <div
-                className={`shadow-lg overflow-hidden rounded-circle m-auto ${style.image}`}
-            >
+            <div className={`shadow-lg overflow-hidden rounded-circle m-auto ${style.image}`}>
                 <Image src={user.avatar} alt={user.name} loading="lazy" fluid />
             </div>
-            <div
-                className={`position-relative overflow-hidden ${style.topUser}`}
-            >
+            <div className={`position-relative overflow-hidden ${style.topUser}`}>
                 <div className="position-relative">
                     <i className="d-block overflow-hidden m-auto mb-1 rounded-circle" />
                     <a
@@ -52,18 +48,11 @@ export class UserRankView extends PureComponent<UserRankViewProps> {
                     {(index + 4 + '').padStart((length + '').length, '0')}
                 </Badge>
             </td>
-            <td
-                className={`position-relative mw-50 text-truncate ${style.name}`}
-            >
+            <td className={`position-relative mw-50 text-truncate ${style.name}`}>
                 <div
                     className={`d-inline-block overflow-hidden align-middle rounded-circle ${style.image}`}
                 >
-                    <Image
-                        src={user.avatar}
-                        alt={user.name}
-                        loading="lazy"
-                        fluid
-                    />
+                    <Image src={user.avatar} alt={user.name} loading="lazy" fluid />
                 </div>
                 <a
                     className="ms-2 d-inline-block align-middle stretched-link"
@@ -83,7 +72,7 @@ export class UserRankView extends PureComponent<UserRankViewProps> {
     );
 
     render() {
-        const { className = '', title, rank = [], ...props } = this.props;
+        const { className = '', title, rank = [], linkOf, ...props } = this.props;
 
         return (
             <Row className={`${style.rankBox} ${className}`} {...props}>
@@ -109,10 +98,7 @@ export class UserRankView extends PureComponent<UserRankViewProps> {
                     </Row>
                 </Col>
                 <Col xs={12} sm={12} lg={5}>
-                    <Table
-                        className={`my-3 pt-2 ${style.restUsers}`}
-                        responsive
-                    >
+                    <Table className={`my-3 pt-2 ${style.restUsers}`} responsive>
                         <tbody>{rank.slice(3, 10).map(this.renderRow)}</tbody>
                     </Table>
                 </Col>

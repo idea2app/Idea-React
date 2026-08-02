@@ -29,19 +29,12 @@ export class App extends Component {
 
         return (
             <>
-                <Button
-                    className="my-3 d-md-none"
-                    onClick={() => (this.menuOpen = !menuOpen)}
-                >
+                <Button className="my-3 d-md-none" onClick={() => (this.menuOpen = !menuOpen)}>
                     <Icon name="list" />
                 </Button>
                 <Collapse in={screenPortrait ? menuOpen : true}>
                     <div className="sticky-top">
-                        <PageNav
-                            onClick={() =>
-                                screenPortrait && (this.menuOpen = false)
-                            }
-                        />
+                        <PageNav onClick={() => screenPortrait && (this.menuOpen = false)} />
                     </div>
                 </Collapse>
             </>

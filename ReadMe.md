@@ -26,26 +26,32 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 1. [Time](source/Time.tsx)
 2. [Time Distance](source/TimeDistance.tsx)
 3. [Timeline](source/Timeline/)
-4. [Icon](source/Icon.tsx)
-5. [Avatar](source/Avatar.tsx)
-6. [Nameplate](source/Nameplate.tsx)
-7. [Type Echo](source/TypeEcho.tsx)
-8. [Horizontal Marquee](source/HorizontalMarquee/)
-9. [Vertical Marquee](source/VerticalMarquee/)
-10. [Click Boundary](source/ClickBoundary.tsx)
-11. [Spinner Button](source/SpinnerButton.tsx)
-12. [Select](source/Select.tsx)
-13. [Month Calendar](source/MonthCalendar.tsx)
-14. [Code Block](source/CodeBlock.tsx)
-15. [Page Nav](source/PageNav.tsx)
-16. [Editor](source/Editor.tsx)
-17. [Editor HTML](source/EditorHTML.tsx)
-18. [Table Spinner](source/TableSpinner.tsx)
-19. [Loading](source/Loading.tsx)
-20. [Share Box](source/ShareBox.tsx)
-21. [Overlay Box](source/OverlayBox.tsx)
-22. [Dialog](source/Dialog.tsx)
-23. [User Rank](source/UserRank/)
+4. [Countdown](source/Countdown.tsx)
+5. [Icon](source/Icon.tsx)
+6. [Avatar](source/Avatar.tsx)
+7. [Nameplate](source/Nameplate.tsx)
+8. [Text Truncate](source/TextTruncate.tsx)
+9. [Type Echo](source/TypeEcho.tsx)
+10. [Horizontal Marquee](source/HorizontalMarquee/)
+11. [Vertical Marquee](source/VerticalMarquee/)
+12. [Click Boundary](source/ClickBoundary.tsx)
+13. [Spinner Button](source/SpinnerButton.tsx)
+14. [Select](source/Select.tsx)
+15. [Month Calendar](source/MonthCalendar.tsx)
+16. [Code Block](source/CodeBlock.tsx)
+17. [Live TSX](source/LiveTSX.tsx)
+18. [Scroll Nav](source/ScrollNav/)
+19. [Page Nav](source/PageNav.tsx)
+20. [Editor](source/Editor.tsx)
+21. [Editor HTML](source/EditorHTML.tsx)
+22. [Table Spinner](source/TableSpinner.tsx)
+23. [Loading](source/Loading.tsx)
+24. [Share Box](source/ShareBox.tsx)
+25. [Overlay Box](source/OverlayBox.tsx)
+26. [Dialog](source/Dialog.tsx)
+27. [Toast](source/Toast.tsx)
+28. [User Rank](source/UserRank/)
+29. [Zodiac Bar](source/ZodiacBar.tsx)
 
 #### Data components
 
@@ -53,7 +59,7 @@ Table, List & Form components around Data models, have been migrated to https://
 
 #### Map components
 
-Open Map component & model, have been migrated to https://github.com/idea2app/OpenMap, since Idea-React v1.0.0.
+Open Map component & model, have been migrated to https://github.com/idea2app/OpenReactMap, since Idea-React v1.0.0.
 
 ### Utilities
 
@@ -70,22 +76,10 @@ Open Map component & model, have been migrated to https://github.com/idea2app/Op
 ### CSS on CDN
 
 ```html
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-/>
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-/>
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/animate.css@4.1.1/animate.min.css"
-/>
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css"
-/>
+<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1.13.1/font/bootstrap-icons.css" />
+<link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism.min.css" />
 <link rel="stylesheet" href="https://unpkg.com/idea-react/dist/index.css" />
 ```
 
@@ -109,11 +103,11 @@ Compatible with MobX 6/7:
 
 ```tsx
 import { formToJSON } from 'web-utility';
-import { PureComponent } from 'react';
+import { Component } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { Dialog, DialogClose } from 'idea-react';
 
-export class ExamplePage extends PureComponent {
+export class ExamplePage extends Component {
     inputDialog = new Dialog<Record<'a' | 'b', number>>(({ defer }) => (
         <Modal show={!!defer} onHide={() => defer?.reject(new DialogClose())}>
             <Modal.Header>Dialog</Modal.Header>
@@ -170,6 +164,40 @@ export class ExamplePage extends PureComponent {
 }
 ```
 
+### Toast
+
+```tsx
+import { Component } from 'react';
+import { Button } from 'react-bootstrap';
+import { Toast } from 'idea-react';
+
+export class ExamplePage extends Component {
+    toast = new Toast();
+
+    render() {
+        return (
+            <>
+                <Button
+                    onClick={() =>
+                        this.toast
+                            .open({
+                                title: 'Notification',
+                                body: 'Hello, world!',
+                                variant: 'success'
+                            })
+                            .then(() => console.log('Toast closed'))
+                    }
+                >
+                    Show Toast
+                </Button>
+
+                <this.toast.Component />
+            </>
+        );
+    }
+}
+```
+
 ## Development
 
 ### Patches
@@ -208,7 +236,7 @@ git push origin master --tags  # push all branches and tags on master
 [5]: https://mobx.js.org/
 [6]: https://libraries.io/npm/idea-react
 [7]: https://github.com/idea2app/Idea-React/actions/workflows/main.yml
-[8]: https://nodei.co/npm/idea-react/
+[8]: https://npm.im/idea-react/
 [9]: https://idea2app.github.io/React-MobX-Bootstrap-ts/
 [10]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx
 [11]: https://next-bootstrap-ts.vercel.app/
