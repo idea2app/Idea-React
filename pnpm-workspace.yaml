@@ -1,0 +1,12 @@
+packages:
+    - .
+autoInstallPeers: false
+patchedDependencies:
+    '@parcel/resolver-storybook@0.0.0': 'patches/@parcel__resolver-storybook@0.0.0.patch'
+    '@mdx-js/react@3.1.1': 'patches/@mdx-js__react@3.1.1.patch'
+allowBuilds:
+    '@parcel/watcher': true
+    '@swc/core': true
+    esbuild: true
+    lmdb: true
+    msgpackr-extract: true
