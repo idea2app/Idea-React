@@ -210,7 +210,7 @@ export class Content extends Component {
                 </Section>
 
                 <Section title="Select">
-                    <LiveExample>
+                    <CodeExample>
                         <Select value={selectValue} onChange={value => (this.selectValue = value)}>
                             <Option value="0">
                                 <Icon className="me-2" name="heart" />
@@ -221,7 +221,7 @@ export class Content extends Component {
                                 freeCodeCamp
                             </Option>
                         </Select>
-                    </LiveExample>
+                    </CodeExample>
                 </Section>
 
                 <Section title="Month Calendar">
