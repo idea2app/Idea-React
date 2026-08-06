@@ -1,6 +1,6 @@
 {
     "name": "idea-react",
-    "version": "2.2.3",
+    "version": "2.3.0",
     "license": "LGPL-3.0-or-later",
     "author": "shiy2008@gmail.com",
     "description": "A React advanced components library based on TypeScript & Bootstrap, built by idea2app remote developers team.",
@@ -20,7 +20,12 @@
     },
     "source": "source/index.ts",
     "types": "dist/index.d.ts",
-    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "exports": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.mjs",
+        "default": "./dist/index.mjs"
+    },
     "dependencies": {
         "@editorjs/editorjs": "^2.31.6",
         "@editorjs/paragraph": "^2.11.7",
@@ -105,7 +110,7 @@
     },
     "browserslist": "> 0.5%, last 2 versions, not dead, IE 11",
     "targets": {
-        "main": {
+        "module": {
             "optimize": true
         }
     },
@@ -115,7 +120,7 @@
         "api-extractor": "tsc --project tsconfig.build.json --outDir dist/dts  &&  api-extractor run  &&  rimraf dist/dts",
         "pack-preview": "cd preview/  &&  rimraf ../.parcel-cache dist/  &&  parcel build --public-url=. --dist-dir=../docs/preview/",
         "pack-docs": "rimraf docs/  &&  typedoc source/",
-        "pack-dist": "rimraf .parcel-cache/ dist/  &&  parcel build  &&  sed -i 's/^require(\"\\.\\/index\\.css\");//' dist/index.js  &&  rimraf dist/index.js.map",
+        "pack-dist": "rimraf .parcel-cache/ dist/  &&  parcel build  &&  sed -i 's/import\"\\.\\/index\\.css\";//' dist/index.mjs  &&  rimraf dist/index.mjs.map",
         "start": "npm run pack-docs  &&  npm run pack-preview  &&  web-server docs/ -p 8080 -o",
         "build": "npm run pack-docs  &&  npm run pack-preview  &&  npm run pack-dist  &&  npm run api-extractor",
         "prepublishOnly": "npm test  &&  npm run build",
