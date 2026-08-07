@@ -6,11 +6,6 @@ import { CodeBlock, LiveTSX } from '../source';
 
 export const CodeExample: FC<PropsWithChildren> = ({ children }) => (
     <>
-        <link
-            rel="stylesheet"
-            href="https://unpkg.com/prismjs@1.30.0/themes/prism.min.css"
-            precedence="default"
-        />
         {children}
         <CodeBlock language="tsx">{children}</CodeBlock>
     </>
