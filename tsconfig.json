@@ -13,9 +13,13 @@
     "include": ["*.ts", "source/**/*"],
     "typedocOptions": {
         "name": "Idea React",
+        "includeVersion": true,
         "excludeExternals": true,
         "excludePrivate": true,
+        "plugin": ["typedoc-plugin-mdn-links"],
         "readme": "./ReadMe.md",
-        "plugin": ["typedoc-plugin-mdn-links"]
+        "navigationLinks": {
+            "GitHub": "https://github.com/idea2app/Idea-React"
+        }
     }
 }

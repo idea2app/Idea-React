@@ -96,7 +96,8 @@
         "typedoc-plugin-mdn-links": "^5.1.1",
         "typescript": "~5.9.3",
         "typescript-eslint": "^8.66.0",
-        "unplugin-swc": "^1.5.10"
+        "unplugin-swc": "^1.5.10",
+        "unrun": "^0.3.1"
     },
     "prettier": {
         "singleQuote": true,
