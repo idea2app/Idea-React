@@ -2,7 +2,7 @@
     "compilerOptions": {
         "target": "ES6",
         "module": "ES2020",
-        "moduleResolution": "Node",
+        "moduleResolution": "bundler",
         "esModuleInterop": true,
         "downlevelIteration": true,
         "useDefineForClassFields": true,

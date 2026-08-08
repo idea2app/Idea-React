@@ -4,15 +4,16 @@ import * as ReactBootstrap from 'react-bootstrap';
 import * as IdeaReact from '../source';
 import { CodeBlock, LiveTSX } from '../source';
 
+export const CodeCard: FC<PropsWithChildren> = ({ children }) => (
+    <ReactBootstrap.Card className="mt-3" body>
+        <CodeBlock language="tsx">{children}</CodeBlock>
+    </ReactBootstrap.Card>
+);
+
 export const CodeExample: FC<PropsWithChildren> = ({ children }) => (
     <>
-        <link
-            rel="stylesheet"
-            href="https://unpkg.com/prismjs@1.30.0/themes/prism.min.css"
-            precedence="default"
-        />
         {children}
-        <CodeBlock language="tsx">{children}</CodeBlock>
+        <CodeCard>{children}</CodeCard>
     </>
 );
 
