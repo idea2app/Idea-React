@@ -1,6 +1,6 @@
 {
     "name": "idea-react",
-    "version": "2.3.1",
+    "version": "2.3.2",
     "license": "LGPL-3.0-or-later",
     "author": "shiy2008@gmail.com",
     "description": "A React advanced components library based on TypeScript & Bootstrap, built by idea2app remote developers team.",
@@ -62,6 +62,7 @@
         "@parcel/transformer-typescript-tsc": "~2.16.4",
         "@parcel/transformer-typescript-types": "~2.16.4",
         "@softonus/prettier-plugin-duplicate-remover": "^1.1.2",
+        "@swc/core": "^1.15.47",
         "@tsdown/css": "^0.22.14",
         "@types/lodash": "^4.17.25",
         "@types/node": "^24.13.3",
@@ -94,7 +95,8 @@
         "typedoc": "^0.28.20",
         "typedoc-plugin-mdn-links": "^5.1.1",
         "typescript": "~5.9.3",
-        "typescript-eslint": "^8.66.0"
+        "typescript-eslint": "^8.66.0",
+        "unplugin-swc": "^1.5.10"
     },
     "prettier": {
         "singleQuote": true,
@@ -128,9 +130,8 @@
         "test": "lint-staged",
         "pack-preview": "cd preview/  &&  rimraf ../.parcel-cache dist/  &&  parcel build --public-url=. --dist-dir=../docs/preview/",
         "pack-docs": "rimraf docs/  &&  typedoc source/",
-        "pack-dist": "tsdown source/index.ts --format cjs --format esm --target es2015 --platform browser --minify --dts --clean --logLevel error",
         "start": "npm run pack-docs  &&  npm run pack-preview  &&  web-server docs/ -p 8080 -o",
-        "build": "npm run pack-docs  &&  npm run pack-preview  &&  npm run pack-dist",
+        "build": "npm run pack-docs  &&  npm run pack-preview  &&  tsdown",
         "prepublishOnly": "npm test  &&  npm run build",
         "preview": "cd preview/  &&  rimraf ../.parcel-cache dist/  &&  parcel --open"
     }
