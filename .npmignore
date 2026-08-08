@@ -1,6 +1,5 @@
 .*
-*.config.ts
+*.config.*ts
 pnpm-workspace.yaml
 docs/
 preview/
-api-extractor.json

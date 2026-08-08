@@ -2,7 +2,6 @@ node_modules/
 package-lock.json
 yarn.lock
 dist/
-preview/pnpm-lock.yaml
 docs/
 .parcel-cache
 .vscode/settings.json
