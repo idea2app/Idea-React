@@ -4,10 +4,16 @@ import * as ReactBootstrap from 'react-bootstrap';
 import * as IdeaReact from '../source';
 import { CodeBlock, LiveTSX } from '../source';
 
+export const CodeCard: FC<PropsWithChildren> = ({ children }) => (
+    <ReactBootstrap.Card className="mt-3" body>
+        <CodeBlock language="tsx">{children}</CodeBlock>
+    </ReactBootstrap.Card>
+);
+
 export const CodeExample: FC<PropsWithChildren> = ({ children }) => (
     <>
         {children}
-        <CodeBlock language="tsx">{children}</CodeBlock>
+        <CodeCard>{children}</CodeCard>
     </>
 );
 

@@ -1,12 +1,12 @@
+import js from '@shikijs/langs/javascript';
+import jsx from '@shikijs/langs/jsx';
+import tsx from '@shikijs/langs/tsx';
+import ts from '@shikijs/langs/typescript';
+import githubLight from '@shikijs/themes/github-light';
 import { FC, HTMLAttributes, isValidElement } from 'react';
 import reactElementToJSXString from 'react-element-to-jsx-string';
 import { createHighlighterCoreSync } from 'shiki/core';
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
-import js from 'shiki/langs/javascript.mjs';
-import jsx from 'shiki/langs/jsx.mjs';
-import ts from 'shiki/langs/typescript.mjs';
-import tsx from 'shiki/langs/tsx.mjs';
-import githubLight from 'shiki/themes/github-light.mjs';
 
 const highlighter = createHighlighterCoreSync({
     themes: [githubLight],
@@ -23,10 +23,14 @@ export const CodeBlock: FC<CodeBlockProps> = ({ className = '', language, childr
         typeof children === 'string'
             ? children
             : reactElementToJSXString(isValidElement(children) ? children : <>{children}</>);
-    const __html = highlighter.codeToHtml(sourceCode, { lang: language, theme: 'github-light', structure: 'inline' });
+    const __html = highlighter.codeToHtml(sourceCode, {
+        lang: language,
+        theme: 'github-light',
+        structure: 'inline'
+    });
 
     return (
-        <pre className={`language-${language} ${className}`} {...props}>
+        <pre className={`m-0 language-${language} ${className}`} {...props}>
             <code dangerouslySetInnerHTML={{ __html }} className={`language-${language}`} />
         </pre>
     );

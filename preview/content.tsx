@@ -6,7 +6,6 @@ import { Day, formToJSON, sleep } from 'web-utility';
 
 import {
     Avatar,
-    CodeBlock,
     Countdown,
     Dialog,
     DialogClose,
@@ -32,7 +31,7 @@ import {
     VerticalMarquee,
     ZodiacBar
 } from '../source';
-import { CodeExample, LiveExample, Section } from './utility';
+import { CodeCard, CodeExample, LiveExample, Section } from './utility';
 
 @observer
 export class Content extends Component {
@@ -307,9 +306,9 @@ export class Content extends Component {
                 </Section>
 
                 <Section title="Page Nav">
-                    <CodeBlock language="tsx">
+                    <CodeCard>
                         <PageNav />
-                    </CodeBlock>
+                    </CodeCard>
                 </Section>
 
                 <Section title="Loading">
