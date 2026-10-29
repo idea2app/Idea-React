@@ -1,59 +1,100 @@
-export default function DocumentLayout({ children }) {
-    return (
-        <main className="mx-auto flex max-w-4xl flex-col gap-6 px-6 py-10 [&_h1]:text-4xl [&_h1]:font-semibold [&_h2]:text-2xl [&_h2]:font-semibold [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-slate-100 [&_pre]:p-4 [&_a]:underline">
-            {children}
-        </main>
-    );
-}
+import { Icon } from '../../source/Icon';
+import { MenuItem } from '../../source/Menu';
+import { ColorModeToggle } from '../component/ColorMode';
+import { CopyCommand } from '../component/CopyCommand';
+import { DocumentationAction } from '../component/Documentation/Action';
+import { DocumentationFooter } from '../component/Documentation/Footer';
+import { DocumentationHeader } from '../component/Documentation/Header';
+import { DocumentationHero } from '../component/Documentation/Hero';
+import { DocumentationSearch } from '../component/Documentation/Search';
+import { DropdownMenu } from '../component/DropdownMenu';
+import { footerColumns, navigation, searchEntries, site, versions } from './site';
 
-# Idea React documentation
+<DocumentationHeader
+    links={navigation}
+    versions={versions}
+    version={site.version}
+    search={<DocumentationSearch entries={searchEntries} />}
+    colorMode={<ColorModeToggle />}
+/>
 
-This documentation is written in **MDX** and rendered to static HTML at build time
-with vinext. No Worker or Node.js server is needed to host the exported site.
+<DocumentationHero
+    title="Build React apps with less glue and more possibility"
+    description={
+        <>
+            A TypeScript-first collection of advanced React components, powered by MobX. From
+            dialogs and notifications to live code, editors, and timelines, Idea React brings the
+            building blocks together so you can focus on your application.
+            <br />
+            <a href={site.gettingStarted}>Get to know Idea React.</a>
+        </>
+    }
+    announcement={{ label: 'Idea React 3 is now in alpha', href: versions[0].href }}
+    version={site.version}
+    links={[
+        { label: 'API reference', href: site.docs },
+        { label: 'All releases', href: `${site.repository}/releases` }
+    ]}
+    promotion={
+        <aside
+            className="d-flex align-items-center gap-5 rounded-7 bg-1 p-6 text-start"
+            aria-label="Idea React community"
+        >
+            <div className="flex-shrink-0 fg-accent">
+                <Icon name="code-square" size={2} aria-hidden="true" />
+            </div>
+            <p className="text-sm mb-0 fg-2">
+                Built by the idea2app community.
+                <br />
+                <a href={`${site.repository}/graphs/contributors`}>Meet the contributors</a> and
+                help shape what comes next.
+            </p>
+        </aside>
+    }
+>
+    <CopyCommand command={site.install} />
+    <DropdownMenu
+        toggleProps={{
+            variant: 'solid',
+            theme: 'inverse',
+            size: 'lg',
+            styled: true,
+            className: 'rounded-8 w-100'
+        }}
+        label={
+            <>
+                <Icon name="rocket-takeoff" aria-hidden="true" />
+                For Agents
+            </>
+        }
+    >
+        <MenuItem href={`${site.repository}/blob/master/AGENTS.md`}>Read AGENTS.md</MenuItem>
+        <MenuItem href={`${site.repository}/tree/master/source`}>Explore component source</MenuItem>
+        <MenuItem href={site.docs}>Read API reference</MenuItem>
+    </DropdownMenu>
+    <DocumentationAction href={site.docs} icon="book" label="Read the docs" />
+</DocumentationHero>
 
-## Development
-
-Install workspace dependencies with `pnpm install` from the repository root, then
-start the documentation development server:
-
-```sh
-pnpm --filter @idea-react/document dev
-```
-
-Add documentation routes as `app/<route>/page.mdx`. MDX supports Markdown,
-JSX, and imported React components.
-
-<aside className="rounded-lg border border-orange-200 bg-orange-50 p-4">
-    This callout is JSX embedded in Markdown.
-</aside>
-
-## Static build
-
-```sh
-pnpm --filter @idea-react/document test
-pnpm --filter @idea-react/document build
-pnpm --filter @idea-react/document start
-```
-
-The `test` script checks TypeScript with `tsc --noEmit`; use the build and preview
-to check MDX content and the generated pages.
-
-Publish only the contents of `document/dist/client` to a static host. The build
-includes HTML, JavaScript, CSS, static navigation data, and a 404 page.
-
-## Deployment
-
-The default configuration serves at the domain root. Before deploying under a
-subdirectory, configure `basePath` in `next.config.ts`. For this repository's
-GitHub Pages project URL, use `/Idea-React`.
-
-This documentation workspace is not yet part of the root build or release
-deployment. The existing release workflow still publishes the TypeDoc and preview
-site from `docs`.
-
-Pure static exports cannot use request-time APIs, Server Actions, or on-demand
-image optimization. Dynamic routes must list their paths with
-`generateStaticParams()`.
-
-Learn more about [Idea React](https://github.com/idea2app/Idea-React) and
-[vinext](https://github.com/cloudflare/vinext).
+<DocumentationFooter
+    columns={footerColumns}
+    children={
+        <>
+            <p>
+                Advanced React components by <a href="https://idea2app.github.io/">idea2app</a>,
+                built with the help of{' '}
+                <a href={`${site.repository}/graphs/contributors`}>our contributors</a>.
+            </p>
+            <p>
+                Licensed{' '}
+                <a href="https://spdx.org/licenses/LGPL-3.0-or-later.html">{site.license}</a>.
+                Currently v{site.version}.
+            </p>
+            <p>
+                An independent React adaptation of the{' '}
+                <a href="https://getbootstrap.com/">upstream homepage</a>. Upstream code:{' '}
+                <a href="./BOOTSTRAP-LICENSE.txt">MIT</a>; documentation:{' '}
+                <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </p>
+        </>
+    }
+/>

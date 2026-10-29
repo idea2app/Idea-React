@@ -51,6 +51,11 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 27. [Toast](source/Toast.tsx)
 28. [User Rank](source/UserRank/)
 29. [Zodiac Bar](source/ZodiacBar.tsx)
+30. [Button](source/Button.tsx)
+31. [Badge](source/Badge.tsx)
+32. [Navbar](source/Navbar.tsx)
+33. [Menu](source/Menu.tsx)
+34. [Native Dialog](source/NativeDialog.tsx)
 
 #### Data components
 
@@ -198,6 +203,43 @@ export class ExamplePage extends Component {
 ```
 
 ## Development
+
+### Documentation
+
+The [document workspace](document/README.md) builds a static website with MDX support
+with vinext and Vite. Its homepage adapts the upstream design to Idea React branding,
+version, license, and project links.
+
+```sh
+pnpm install
+pnpm --filter @idea-react/document dev
+```
+
+The [MDX homepage](document/app/page.mdx) consumes the official v6 component wrappers
+in [source/](source/), styled with Bootstrap CSS from unpkg.com.
+Bootstrap utilities handle layout; CSS Modules cover site-specific appearance.
+Site-only header, hero, footer, search, icons, and styles live in
+[document/component/](document/component/), not in the library's public exports.
+Interactive behavior uses MobX models and class components with stage-3 decorators.
+
+```sh
+pnpm test:components
+pnpm exec tsc --project test/tsconfig.json
+pnpm --filter @idea-react/document test
+pnpm --filter @idea-react/document build
+pnpm --filter @idea-react/document start
+```
+
+The documentation `test` script runs TypeScript checks; `test:components` uses
+the native Node.js test runner (Node.js 22.18+) to run the
+public component unit tests in `test/ComponentName.test.tsx`, excluding
+documentation-site-only components. Deploy only `document/dist/client/` to
+a static host, without a Worker or Node.js runtime. Set `basePath` in
+[document/next.config.ts](document/next.config.ts) before building for a subdirectory
+such as `/Idea-React`.
+
+The root build and release deployment still use the legacy TypeDoc and preview
+output in `docs/`. Build and deploy the MDX workspace separately.
 
 ### Publish
 

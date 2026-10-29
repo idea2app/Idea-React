@@ -3,3 +3,5 @@
 pnpm-workspace.yaml
 docs/
 preview/
+document/
+test/

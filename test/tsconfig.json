@@ -1,0 +1,12 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "strict": true,
+        "target": "ES2022",
+        "module": "ES2022",
+        "noEmit": true,
+        "allowImportingTsExtensions": true,
+        "types": ["node"]
+    },
+    "include": ["./**/*.ts", "./**/*.tsx", "./**/*.mts", "../source/style.d.ts"]
+}

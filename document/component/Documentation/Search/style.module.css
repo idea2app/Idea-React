@@ -1,0 +1,14 @@
+.dialog {
+    --bs-dialog-width: 37.5rem;
+    margin-top: 12vh;
+    max-height: 80vh;
+}
+
+@media (min-width: 992px) {
+    .trigger {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 17.5rem;
+    }
+}
