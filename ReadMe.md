@@ -55,7 +55,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 31. [Badge](source/Badge.tsx)
 32. [Navbar](source/Navbar.tsx)
 33. [Menu](source/Menu.tsx)
-34. [Native Dialog](source/NativeDialog.tsx)
+34. [Native Dialog](source/NativeDialog/index.tsx)
 
 #### Data components
 
@@ -240,6 +240,8 @@ such as `/Idea-React`.
 
 The root build and release deployment still use the legacy TypeDoc and preview
 output in `docs/`. Build and deploy the MDX workspace separately.
+The production preview omits source maps to avoid Parcel resolving TypeScript
+CSS Module source paths relative to the preview directory.
 
 ### Publish
 
