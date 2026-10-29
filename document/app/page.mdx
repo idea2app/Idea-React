@@ -1,0 +1,59 @@
+export default function DocumentLayout({ children }) {
+    return (
+        <main className="mx-auto flex max-w-4xl flex-col gap-6 px-6 py-10 [&_h1]:text-4xl [&_h1]:font-semibold [&_h2]:text-2xl [&_h2]:font-semibold [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-slate-100 [&_pre]:p-4 [&_a]:underline">
+            {children}
+        </main>
+    );
+}
+
+# Idea React documentation
+
+This documentation is written in **MDX** and rendered to static HTML at build time
+with vinext. No Worker or Node.js server is needed to host the exported site.
+
+## Development
+
+Install workspace dependencies with `pnpm install` from the repository root, then
+start the documentation development server:
+
+```sh
+pnpm --filter @idea-react/document dev
+```
+
+Add documentation routes as `app/<route>/page.mdx`. MDX supports Markdown,
+JSX, and imported React components.
+
+<aside className="rounded-lg border border-orange-200 bg-orange-50 p-4">
+    This callout is JSX embedded in Markdown.
+</aside>
+
+## Static build
+
+```sh
+pnpm --filter @idea-react/document test
+pnpm --filter @idea-react/document build
+pnpm --filter @idea-react/document start
+```
+
+The `test` script checks TypeScript with `tsc --noEmit`; use the build and preview
+to check MDX content and the generated pages.
+
+Publish only the contents of `document/dist/client` to a static host. The build
+includes HTML, JavaScript, CSS, static navigation data, and a 404 page.
+
+## Deployment
+
+The default configuration serves at the domain root. Before deploying under a
+subdirectory, configure `basePath` in `next.config.ts`. For this repository's
+GitHub Pages project URL, use `/Idea-React`.
+
+This documentation workspace is not yet part of the root build or release
+deployment. The existing release workflow still publishes the TypeDoc and preview
+site from `docs`.
+
+Pure static exports cannot use request-time APIs, Server Actions, or on-demand
+image optimization. Dynamic routes must list their paths with
+`generateStaticParams()`.
+
+Learn more about [Idea React](https://github.com/idea2app/Idea-React) and
+[vinext](https://github.com/cloudflare/vinext).
