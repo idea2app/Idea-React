@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames';
 import { action, computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
@@ -168,7 +170,7 @@ export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
                         {dateGrid[0].map((date, index, { length }) => (
                             <th
                                 key={index}
-                                className={`theme-${theme} fg-contrast`}
+                                className={`theme-${theme} theme-contrast`}
                                 style={{ width: `calc(100% / ${length})` }}
                                 scope="col"
                             >

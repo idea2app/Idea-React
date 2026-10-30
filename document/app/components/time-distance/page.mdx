@@ -1,0 +1,26 @@
+import { TimeDistance } from '../../../../source/TimeDistance';
+
+# Time distance
+
+[`TimeDistance`][1] displays how far a moment is from now, in the largest sensible unit, inside a
+semantic `<time>` element whose `title` holds the exact timestamp.
+
+## Example
+
+<TimeDistance date="2020-01-01T00:00:00" />
+
+## Usage
+
+```tsx
+<TimeDistance
+    date={comment.createdAt}
+    beforeWord=" ago"
+    afterWord=" later"
+    unitWords={{ D: 'day(s)', H: 'hour(s)', m: 'minute(s)' }}
+/>
+```
+
+`unitWords` localizes the unit labels, while `beforeWord` and `afterWord` are appended for past and
+future moments respectively.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/TimeDistance.tsx

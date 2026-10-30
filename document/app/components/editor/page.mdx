@@ -1,0 +1,32 @@
+# Editor
+
+[`Editor`][1] embeds the block-style [Editor.js][2] rich text editor as a Bootstrap form control.
+The editor saves its data into a hidden `<input>`, so it participates in native form submission.
+
+## Usage
+
+Editor.js only runs in the browser, so render the component on the client:
+
+```tsx
+import { Editor } from 'idea-react';
+
+<form method="post">
+    <Editor
+        name="content"
+        required
+        defaultValue={savedDocument}
+        tools={customTools}
+    />
+    <button className="btn-solid theme-primary">Save</button>
+</form>;
+```
+
+The wrapper saves on blur and serializes the latest Editor.js `OutputData` as JSON into the hidden
+input named by `name`. All [react-editor-js props][3], such as `tools` and `onInitialize`, pass
+through to the underlying editor.
+
+Render saved documents with the [Editor HTML](../editor-html/) component.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Editor.tsx
+[2]: https://editorjs.io/
+[3]: https://github.com/Jungwoo-An/react-editor-js

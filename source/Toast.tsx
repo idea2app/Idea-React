@@ -7,8 +7,6 @@ import { Timestamp, uniqueID } from 'web-utility';
 
 import type { ComponentTheme } from './Button';
 
-const LIGHT_TEXT_THEMES = new Set<ComponentTheme>(['warning', 'info', 'light']);
-
 export type ToastPosition =
     | 'top-start'
     | 'top-center'
@@ -63,7 +61,6 @@ export class Toast {
     ));
 
     renderMessage = ({ id, openedAt, title, body, theme, delay = 3000 }: ToastItem) => {
-        const bodyClassName = theme && !LIGHT_TEXT_THEMES.has(theme) ? 'fg-contrast' : undefined;
         const showHeader = !!title || delay === 0;
         const elapsed = this.TimeScalar.distanceOf<Timestamp>(Date.now(), openedAt).toShortString();
 
@@ -81,7 +78,7 @@ export class Toast {
                         />
                     </div>
                 )}
-                <div className={`toast-body ${bodyClassName || ''}`}>{body}</div>
+                <div className="toast-body">{body}</div>
             </div>
         );
     };

@@ -1,0 +1,28 @@
+import { TextTruncate } from '../../../../source/TextTruncate';
+
+# Text truncate
+
+[`TextTruncate`][1] clamps long text to a number of lines and adds an expand/collapse toggle only
+when the content actually overflows.
+
+## Example
+
+<TextTruncate rows={2} className="border rounded p-3">
+    Idea React is a TypeScript-first collection of advanced React components powered by MobX. From
+    dialogs and notifications to live code, editors, and timelines, it brings the building blocks
+    together so you can focus on your application instead of plumbing. This paragraph is long on
+    purpose so the clamp and the expand toggle are visible in the example.
+</TextTruncate>
+
+## Usage
+
+```tsx
+<TextTruncate rows={3} expandText="Show more" collapseText="Show less">
+    {longBiography}
+</TextTruncate>
+```
+
+`rows` sets the visible line count (default `3`). The toggle reports its state through
+`aria-expanded`, and overflow is re-checked on window resize and content changes.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/TextTruncate.tsx

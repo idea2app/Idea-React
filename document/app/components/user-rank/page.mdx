@@ -1,0 +1,31 @@
+import { UserRankView } from '../../../../source/UserRank';
+
+# User rank
+
+[`UserRankView`][1] displays a leaderboard: the top three users on a podium with medals, followed by
+a table of the remaining ranks with avatars, scores, and locations.
+
+## Example
+
+<UserRankView
+    title="Contributors"
+    rank={[
+        { id: 1, name: 'idea2app', avatar: 'https://github.com/idea2app.png', score: 980 },
+        { id: 2, name: 'mdo', avatar: 'https://github.com/mdo.png', score: 870 },
+        { id: 3, name: 'twbs', avatar: 'https://github.com/twbs.png', score: 760 },
+        { id: 4, name: 'octocat', avatar: 'https://github.com/octocat.png', score: 650 },
+        { id: 5, name: 'github', avatar: 'https://github.com/github.png', score: 540 }
+    ]}
+/>
+
+## Usage
+
+```tsx
+<UserRankView title="Weekly ranking" rank={users} linkOf={({ id }) => `/users/${id}`} />
+```
+
+`rank` lists users ordered by score; the first three render as medal cards and ranks 4–10 render as
+table rows. `linkOf` builds the profile link for each user, and address fields from
+`UserAddressProps` display each user's location.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/UserRank/index.tsx

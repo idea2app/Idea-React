@@ -1,3 +1,5 @@
+'use client';
+
 import { HTMLAttributes, PureComponent } from 'react';
 
 import { Badge } from '../Badge';
@@ -48,7 +50,7 @@ export class UserRankView extends PureComponent<UserRankViewProps> {
                     {(index + 4 + '').padStart((length + '').length, '0')}
                 </Badge>
             </td>
-            <td className={`position-relative mw-50 text-truncate ${style.name}`}>
+            <td className={`position-relative text-truncate ${style.name}`}>
                 <div
                     className={`d-inline-block overflow-hidden align-middle rounded-circle ${style.image}`}
                 >
@@ -76,7 +78,7 @@ export class UserRankView extends PureComponent<UserRankViewProps> {
 
         return (
             <div className={`row ${style.rankBox} ${className}`} {...props}>
-                <div className="col-12 col-lg-7">
+                <div className="col-12 lg:col-7">
                     <div className={`shadow rounded-3 ${style.title}`}>
                         <div className={style.medal}>
                             <i className="d-inline-block ms-1 overflow-hidden rounded-circle" />
@@ -96,7 +98,7 @@ export class UserRankView extends PureComponent<UserRankViewProps> {
                         {rank.slice(0, 3).map(this.renderMedal)}
                     </ul>
                 </div>
-                <div className="col-12 col-lg-5">
+                <div className="col-12 lg:col-5">
                     <div className="table-responsive">
                         <table className={`table my-3 pt-2 ${style.restUsers}`}>
                             <tbody>{rank.slice(3, 10).map(this.renderRow)}</tbody>

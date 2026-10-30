@@ -1,0 +1,26 @@
+import { HorizontalMarquee } from '../../../../source/HorizontalMarquee';
+
+# Horizontal marquee
+
+[`HorizontalMarquee`][1] scrolls overflowing content horizontally with a CSS animation, as a modern
+replacement for the deprecated `<marquee>` element.
+
+## Example
+
+<HorizontalMarquee className="border rounded p-2">
+    Idea React · TypeScript-first Bootstrap 6 and React components powered by MobX · built by the
+    idea2app community
+</HorizontalMarquee>
+
+## Behavior
+
+Content narrower than the container stays still; overflowing content scrolls in a loop. The
+animation pauses while hovered so users can read the text.
+
+```tsx
+<HorizontalMarquee>{announcement}</HorizontalMarquee>
+```
+
+See the [Vertical marquee](../vertical-marquee/) for the vertical variant.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/HorizontalMarquee/index.tsx

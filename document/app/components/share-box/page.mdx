@@ -1,0 +1,26 @@
+# Share box
+
+[`ShareBox`][1] captures its children as an image with [html2canvas][2] and shares it through the
+[Web Share API][3]. Tapping the box generates a PNG snapshot; tapping the snapshot opens the native
+share sheet.
+
+## Usage
+
+```tsx
+import { ShareBox } from 'idea-react';
+
+<ShareBox title="My poster" text="Check this out!">
+    <section className="p-4 text-center">
+        <h2>Event poster</h2>
+        <p>Rendered DOM content becomes a shareable image.</p>
+    </section>
+</ShareBox>;
+```
+
+All [`ShareData`][3] fields (`title`, `text`, `url`, `files`) pass to `navigator.share()`. The
+snapshot regenerates on window resize, and a [Loading](../loading/) overlay is shown while the image
+renders.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/ShareBox.tsx
+[2]: https://html2canvas.hertzen.com/
+[3]: https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share

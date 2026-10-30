@@ -1,90 +1,118 @@
 import { PropsWithChildren } from 'react';
 
+import { Icon } from '../../../../source/Icon';
 import nextConfig from '../../../next.config';
+import * as style from './style.module.less';
+import { Toc } from './Toc';
 
-const components = [
-    { label: 'Accordion', slug: 'accordion' },
-    { label: 'Alert', slug: 'alert' },
+type NavLink = Record<'label' | 'slug', string>;
+
+const components: NavLink[] = [
     { label: 'Avatar', slug: 'avatar' },
     { label: 'Badge', slug: 'badge' },
-    { label: 'Breadcrumb', slug: 'breadcrumb' },
     { label: 'Button', slug: 'button' },
-    { label: 'Button group', slug: 'button-group' },
-    { label: 'Card', slug: 'card' },
-    { label: 'Carousel', slug: 'carousel' },
-    { label: 'Close button', slug: 'close-button' },
-    { label: 'Collapse', slug: 'collapse' },
     { label: 'Dialog', slug: 'dialog' },
-    { label: 'Drawer', slug: 'drawer' },
-    { label: 'List group', slug: 'list-group' },
     { label: 'Menu', slug: 'menu' },
-    { label: 'Nav', slug: 'nav' },
-    { label: 'Nav overflow', slug: 'nav-overflow' },
     { label: 'Navbar', slug: 'navbar' },
-    { label: 'Pagination', slug: 'pagination' },
-    { label: 'Placeholder', slug: 'placeholder' },
-    { label: 'Popover', slug: 'overlay-box' },
-    { label: 'Progress', slug: 'progress' },
-    { label: 'Scrollspy', slug: 'scrollspy' },
+    { label: 'Popover & tooltip', slug: 'overlay-box' },
     { label: 'Spinner', slug: 'spinner' },
-    { label: 'Stepper', slug: 'stepper' },
-    { label: 'Tab', slug: 'tab' },
-    { label: 'Toasts', slug: 'toasts' },
-    { label: 'Toggler', slug: 'toggler' },
-    { label: 'Tooltip', slug: 'overlay-box' }
+    { label: 'Toasts', slug: 'toasts' }
 ];
-const localComponents = new Set([
-    'badge',
-    'button',
-    'dialog',
-    'menu',
-    'navbar',
-    'overlay-box',
-    'spinner',
-    'toasts'
-]);
+const extensions: NavLink[] = [
+    { label: 'Click boundary', slug: 'click-boundary' },
+    { label: 'Code block', slug: 'code-block' },
+    { label: 'Countdown', slug: 'countdown' },
+    { label: 'Editor', slug: 'editor' },
+    { label: 'Editor HTML', slug: 'editor-html' },
+    { label: 'Horizontal marquee', slug: 'horizontal-marquee' },
+    { label: 'Icon', slug: 'icon' },
+    { label: 'Live TSX', slug: 'live-tsx' },
+    { label: 'Loading', slug: 'loading' },
+    { label: 'Month calendar', slug: 'month-calendar' },
+    { label: 'Nameplate', slug: 'nameplate' },
+    { label: 'Page nav', slug: 'page-nav' },
+    { label: 'Scroll nav', slug: 'scroll-nav' },
+    { label: 'Select', slug: 'select' },
+    { label: 'Share box', slug: 'share-box' },
+    { label: 'Spinner button', slug: 'spinner-button' },
+    { label: 'Table spinner', slug: 'table-spinner' },
+    { label: 'Text truncate', slug: 'text-truncate' },
+    { label: 'Time', slug: 'time' },
+    { label: 'Time distance', slug: 'time-distance' },
+    { label: 'Timeline', slug: 'timeline' },
+    { label: 'Type echo', slug: 'type-echo' },
+    { label: 'User rank', slug: 'user-rank' },
+    { label: 'Vertical marquee', slug: 'vertical-marquee' },
+    { label: 'Zodiac bar', slug: 'zodiac-bar' }
+];
+const groups = [
+    {
+        label: 'Components',
+        icon: 'menu-button-wide-fill',
+        iconClassName: 'fg-info',
+        href: '',
+        items: components
+    },
+    {
+        label: 'Extensions',
+        icon: 'puzzle-fill',
+        iconClassName: 'fg-accent',
+        href: 'idea-react/',
+        items: extensions
+    }
+];
+const basePath = nextConfig.basePath || '';
 
 export function ComponentsLayout({ children }: PropsWithChildren) {
-    const basePath = nextConfig.basePath || '';
-
     return (
-        <div className="container-xxl py-4">
-            <div className="row g-4">
-                <aside className="col-12 col-lg-3">
+        <div className="container py-4">
+            <div className="row g-5">
+                <aside className="col-12 lg:col-3">
                     <nav
-                        className="position-sticky top-0 overflow-y-auto"
-                        aria-label="Bootstrap component documentation"
+                        className={`d-flex flex-column pb-3 ${style.sidebar}`}
+                        aria-label="Components navigation"
                     >
-                        <a className="nav-link fw-semibold" href={`${basePath}/components/`}>
-                            Components
-                        </a>
-                        <ul className="nav nav-underline flex-column">
-                            {components.map(({ label, slug }) => (
-                                <li key={slug + label} className="nav-item">
+                        {groups.map(({ label, icon, iconClassName, href, items }) => (
+                            <div key={label} className="vstack py-2">
+                                <strong className="d-flex align-items-center gap-1 fw-semibold">
+                                    <Icon
+                                        name={icon}
+                                        className={iconClassName}
+                                        aria-hidden="true"
+                                    />
                                     <a
-                                        className="nav-link py-1"
-                                        href={
-                                            localComponents.has(slug)
-                                                ? `${basePath}/components/${slug}/`
-                                                : `https://getbootstrap.com/docs/6.0/components/${slug}/`
-                                        }
+                                        className="fg-body text-decoration-none"
+                                        href={`${basePath}/components/${href}`}
                                     >
                                         {label}
                                     </a>
-                                </li>
-                            ))}
-                        </ul>
-                        <a
-                            className="nav-link fw-semibold mt-3"
-                            href={`${basePath}/components/idea-react/`}
-                        >
-                            Idea React extensions
-                        </a>
+                                </strong>
+                                <ul className="nav flex-column mt-1">
+                                    {items.map(({ label, slug }) => (
+                                        <li key={label} className="nav-item">
+                                            <a
+                                                className={`nav-link border-0 ${style.sidebarLink}`}
+                                                href={`${basePath}/components/${slug}/`}
+                                            >
+                                                {label}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </nav>
                 </aside>
-                <main id="content" className="col-12 col-lg-9">
-                    {children}
-                </main>
+                <div className="col-12 lg:col-9">
+                    <div className="row g-5">
+                        <main id="content" className="col-12 lg:col-9">
+                            {children}
+                        </main>
+                        <aside className="col-12 lg:col-3 d-none lg:d-block">
+                            <Toc />
+                        </aside>
+                    </div>
+                </div>
             </div>
         </div>
     );

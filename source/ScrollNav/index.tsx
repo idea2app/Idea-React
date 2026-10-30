@@ -1,3 +1,5 @@
+'use client';
+
 import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, createRef, HTMLAttributes } from 'react';

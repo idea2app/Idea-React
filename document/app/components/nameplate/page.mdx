@@ -1,0 +1,24 @@
+import { Nameplate } from '../../../../source/Nameplate';
+
+# Nameplate
+
+[`Nameplate`][1] pairs an [Avatar](../avatar/) with a person's name, for compact author or member
+listings.
+
+## Example
+
+<Nameplate name="idea2app" avatar="https://github.com/idea2app.png" />
+
+## Usage
+
+```tsx
+<ul className="list-unstyled">
+    {members.map(({ name, avatar }) => (
+        <li key={name}>
+            <Nameplate {...{ name, avatar }} />
+        </li>
+    ))}
+</ul>
+```
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Nameplate.tsx

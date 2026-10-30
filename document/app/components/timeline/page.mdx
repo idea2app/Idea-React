@@ -1,0 +1,35 @@
+import { Timeline } from '../../../../source/Timeline';
+
+# Timeline
+
+[`Timeline`][1] presents chronological events as cards along a vertical line, with a title, time
+range, participants, and summary per event.
+
+## Example
+
+<Timeline
+    timeFormat="YYYY-MM-DD"
+    events={[
+        {
+            title: 'Idea React v2',
+            time: ['2023-04-01'],
+            summary: 'Bootstrap 5 components with MobX 6.',
+            link: 'https://github.com/idea2app/Idea-React/releases'
+        },
+        {
+            title: 'Idea React v3 alpha',
+            time: ['2025-10-01'],
+            summary: 'Upgraded to Bootstrap 6 with official component wrappers.',
+            link: 'https://github.com/idea2app/Idea-React/releases',
+            people: [{ name: 'idea2app', avatar: 'https://github.com/idea2app.png' }]
+        }
+    ]}
+/>
+
+## Usage
+
+Each event takes a `title`, a `time` tuple of start and optional end, and optionally a `summary`, a
+`link`, and `people` rendered as [Nameplates](../nameplate/). `timeFormat` controls the
+[Time](../time/) labels.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Timeline/index.tsx

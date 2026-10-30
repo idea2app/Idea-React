@@ -47,7 +47,7 @@ export const DocumentationHeader: FC<DocumentationHeaderProps> = ({
                 </a>
                 <div className="navbar-nav d-none lg:d-flex flex-row align-items-center gap-5">
                     {links.map(({ href, label }) => (
-                        <a key={href} className="nav-link" href={href}>
+                        <a key={label} className="nav-link" href={href}>
                             {label}
                         </a>
                     ))}
@@ -55,7 +55,7 @@ export const DocumentationHeader: FC<DocumentationHeaderProps> = ({
                 <div className="lg:d-none">
                     <DropdownMenu label="Home">
                         {links.map(({ href, label }) => (
-                            <MenuItem key={href} href={href}>
+                            <MenuItem key={label} href={href}>
                                 {label}
                             </MenuItem>
                         ))}
@@ -73,7 +73,7 @@ export const DocumentationHeader: FC<DocumentationHeaderProps> = ({
                 </a>
                 <DropdownMenu label={`v${version}`}>
                     {versions.map(({ href, label }) => (
-                        <MenuItem key={href} href={href}>
+                        <MenuItem key={label} href={href}>
                             {label}
                         </MenuItem>
                     ))}

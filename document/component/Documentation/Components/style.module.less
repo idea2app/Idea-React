@@ -1,0 +1,50 @@
+.sidebar,
+.toc {
+    scrollbar-color: transparent transparent;
+    scrollbar-width: thin;
+    font-size: var(--bs-font-size-sm);
+
+    &:hover,
+    &:focus-within {
+        scrollbar-color: var(--bs-border-color) transparent;
+    }
+}
+
+.sidebar {
+    :global(.nav) {
+        --bs-nav-gap: 0.125rem;
+        --bs-nav-link-justify: flex-start;
+        --bs-nav-link-padding-y: 0.25rem;
+    }
+
+    @media (min-width: 1024px) {
+        position: sticky;
+        top: 1rem;
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+    }
+}
+
+.sidebarLink {
+    margin-inline-start: 0.75rem;
+}
+
+.toc {
+    :global(.nav) {
+        --bs-nav-gap: 0;
+        --bs-nav-link-justify: flex-start;
+        --bs-nav-link-padding-x: 0;
+        --bs-nav-link-padding-y: 0.25rem;
+    }
+
+    :global(.nav-link) {
+        white-space: normal;
+    }
+
+    @media (min-width: 1024px) {
+        position: sticky;
+        top: 1rem;
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+    }
+}

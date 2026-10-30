@@ -17,7 +17,7 @@ it('renders and closes a themed Bootstrap 6 toast', async () => {
     render(<toast.Component position="bottom-center" />);
 
     assert.equal(screen.getByRole('status').className, 'toast show theme-success');
-    assert.equal(screen.getByText('Your changes are saved.').className, 'toast-body fg-contrast');
+    assert.equal(screen.getByText('Your changes are saved.').className, 'toast-body');
 
     fireEvent.click(screen.getByRole('button', { name: 'Close' }));
 

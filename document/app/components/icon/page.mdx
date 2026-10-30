@@ -1,0 +1,27 @@
+import { Icon } from '../../../../source/Icon';
+
+# Icon
+
+[`Icon`][1] renders a [Bootstrap Icons][2] glyph from the icon font. Load the icon font stylesheet
+once, then reference any icon by name.
+
+## Example
+
+<div className="d-flex align-items-center gap-3">
+    <Icon name="rocket-takeoff" />
+    <Icon name="github" size={1.5} />
+    <Icon name="heart-fill" size={2} className="fg-danger" />
+</div>
+
+## Usage
+
+`name` is the icon name without the `bi-` prefix; `size` sets the font size in `rem`. Icons are
+decorative by default, so add an `aria-label` or visually hidden text when an icon conveys meaning
+on its own.
+
+```tsx
+<Icon name="trash" aria-label="Delete" role="img" />
+```
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Icon.tsx
+[2]: https://icons.getbootstrap.com/

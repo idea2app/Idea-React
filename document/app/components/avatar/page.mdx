@@ -1,0 +1,69 @@
+import { Avatar, AvatarStack } from '../../../../source/Avatar';
+
+# Avatar
+
+Avatars represent users or entities with an image or initials as a fallback. The Idea React
+[`Avatar`][1] wrapper follows the [Bootstrap 6 avatar guide][2] with `.avatar`, `.avatar-img`,
+status indicators, and stacks.
+
+## Image
+
+<Avatar src="https://github.com/idea2app.png" alt="idea2app" />
+
+Pass `src` to render an `.avatar-img` image inside the `.avatar` wrapper.
+
+## Initials
+
+<div className="d-flex flex-wrap gap-2">
+    <Avatar>AB</Avatar>
+    <Avatar theme="primary">CD</Avatar>
+    <Avatar theme="success">EF</Avatar>
+    <Avatar subtle theme="primary">
+        GH
+    </Avatar>
+    <Avatar subtle theme="danger">
+        IJ
+    </Avatar>
+</div>
+
+Text children render as initials. `theme` selects the semantic color and `subtle` switches to the
+subtle variant.
+
+## Sizes
+
+<div className="d-flex flex-wrap align-items-center gap-2">
+    <Avatar size="xs" src="https://github.com/idea2app.png" alt="idea2app" />
+    <Avatar size="sm" src="https://github.com/idea2app.png" alt="idea2app" />
+    <Avatar src="https://github.com/idea2app.png" alt="idea2app" />
+    <Avatar size="lg" src="https://github.com/idea2app.png" alt="idea2app" />
+    <Avatar size="xl" src="https://github.com/idea2app.png" alt="idea2app" />
+    <Avatar size={6} src="https://github.com/idea2app.png" alt="idea2app" />
+</div>
+
+`size` accepts the official `xs`, `sm`, `lg`, and `xl` classes; a number sets a custom
+`--bs-avatar-size` in `rem`.
+
+## Status indicator
+
+<div className="d-flex flex-wrap gap-2">
+    <Avatar src="https://github.com/idea2app.png" alt="idea2app" status="online" />
+    <Avatar src="https://github.com/idea2app.png" alt="idea2app" status="offline" />
+    <Avatar src="https://github.com/idea2app.png" alt="idea2app" status="busy" />
+    <Avatar src="https://github.com/idea2app.png" alt="idea2app" status="away" />
+</div>
+
+`status` renders an `.avatar-status` indicator with `role="img"` and an accessible label, since the
+status is conveyed purely through color and shape. Override the announcement with `statusLabel`.
+
+## Avatar stack
+
+<AvatarStack size="lg">
+    <Avatar src="https://github.com/idea2app.png" alt="idea2app" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar src="https://github.com/twbs.png" alt="twbs" />
+</AvatarStack>
+
+`AvatarStack` groups avatars with an overlapping effect; its `size` applies to the whole stack.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Avatar.tsx
+[2]: https://getbootstrap.com/docs/6.0/components/avatar/

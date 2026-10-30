@@ -1,3 +1,5 @@
+'use client';
+
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent, reaction } from 'mobx-react-helper';

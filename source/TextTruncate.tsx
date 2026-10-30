@@ -1,3 +1,5 @@
+'use client';
+
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, createRef, CSSProperties, HTMLAttributes, ReactNode } from 'react';

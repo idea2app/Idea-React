@@ -1,0 +1,32 @@
+import { VerticalMarquee } from '../../../../source/VerticalMarquee';
+
+# Vertical marquee
+
+[`VerticalMarquee`][1] scrolls overflowing content vertically with a CSS animation, suited for
+notice boards and credit rolls.
+
+## Example
+
+<div className="border rounded p-2" style={{ height: '6rem' }}>
+    <VerticalMarquee>
+        <ul className="list-unstyled m-0">
+            <li>🎉 Idea React v3 alpha is out</li>
+            <li>📦 Install with npm i idea-react@next</li>
+            <li>🧩 Bootstrap 6 official component wrappers</li>
+            <li>⚡ Powered by MobX and TypeScript</li>
+        </ul>
+    </VerticalMarquee>
+</div>
+
+## Behavior
+
+Content shorter than the container stays still; overflowing content scrolls upward in a loop and
+pauses on hover. Set the scroll `duration` in seconds to tune the speed.
+
+```tsx
+<VerticalMarquee duration={10}>{notices}</VerticalMarquee>
+```
+
+See the [Horizontal marquee](../horizontal-marquee/) for the horizontal variant.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/VerticalMarquee/index.tsx

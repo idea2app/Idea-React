@@ -1,0 +1,19 @@
+# Loading
+
+[`Loading`][1] shows a full-page loading overlay with a [Spinner](../spinner/) and a message. It
+covers the viewport with a translucent backdrop, so render it only while blocking work is running.
+
+## Usage
+
+```tsx
+import { Loading } from 'idea-react';
+
+{
+    uploading && <Loading>Uploading…</Loading>;
+}
+```
+
+The children replace the default `Loading...` text. For loading states inside a button or a table,
+use the [Spinner button](../spinner-button/) or [Table spinner](../table-spinner/) instead.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Loading.tsx

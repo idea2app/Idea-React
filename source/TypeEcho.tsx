@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
@@ -37,11 +39,7 @@ export class TypeEcho extends Component<TypeEchoProps> {
             { echoed } = this;
 
         return (
-            <pre
-                {...props}
-                ref={this.init}
-                className={classNames('text-wrap', className)}
-            >
+            <pre {...props} ref={this.init} className={classNames('text-wrap', className)}>
                 {echoed + (echoed === text ? '' : '_')}
             </pre>
         );

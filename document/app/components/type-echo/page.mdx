@@ -1,0 +1,21 @@
+import { TypeEcho } from '../../../../source/TypeEcho';
+
+# Type echo
+
+[`TypeEcho`][1] animates text with a typewriter effect, starting when the element scrolls into view
+and showing a cursor until the text completes.
+
+## Example
+
+<TypeEcho text="Build React apps with less glue and more possibility." />
+
+## Usage
+
+```tsx
+<TypeEcho text={slogan} intervals={100} />
+```
+
+`intervals` sets the delay between characters in milliseconds (default `150`). The animation runs
+once per mount, driven by an `IntersectionObserver` so off-screen text does not animate early.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/TypeEcho.tsx
