@@ -1,9 +1,7 @@
 import { action, observable } from 'mobx';
 
 export class ClipboardModel {
-    @observable accessor status: 'idle' | 'copying' | 'copied' | 'error' = 'idle';
-
-    @observable accessor error = '';
+    @observable accessor status: 'idle' | 'copying' | 'copied' = 'idle';
 
     @action
     copied() {
@@ -11,21 +9,19 @@ export class ClipboardModel {
     }
 
     @action
-    failed(error: unknown) {
-        this.status = 'error';
-        this.error = error instanceof Error ? error.message : 'Unable to copy the command.';
+    finishCopy() {
+        if (this.status === 'copying') this.status = 'idle';
     }
 
     @action
     async copy(text: string) {
         this.status = 'copying';
-        this.error = '';
 
         try {
             await navigator.clipboard.writeText(text);
             this.copied();
-        } catch (error) {
-            this.failed(error);
+        } finally {
+            this.finishCopy();
         }
     }
 }

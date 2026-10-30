@@ -1,5 +1,6 @@
 'use client';
 
+import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component } from 'react';
 
@@ -9,19 +10,19 @@ import { ColorModeModel } from './model';
 
 @observer
 export class ColorModeToggle extends Component {
-    model = new ColorModeModel();
-    disposer?: () => void;
+    @observable accessor model: ColorModeModel | undefined;
 
+    @action
     componentDidMount() {
-        this.disposer = this.model.initialize();
+        this.model = new ColorModeModel();
     }
 
     componentWillUnmount() {
-        this.disposer?.();
+        this.model?.dispose();
     }
 
     render() {
-        const { colorScheme, ready, toggleColorScheme } = this.model;
+        const { colorScheme = 'light', ready, toggleColorScheme } = this.model || {};
 
         return (
             <Button

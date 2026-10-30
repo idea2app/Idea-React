@@ -4,7 +4,9 @@ import { PropsWithChildren } from 'react';
 import { ColorModeToggle } from '../component/ColorMode';
 import { DocumentationHeader } from '../component/Documentation/Header';
 import { DocumentationSearch } from '../component/Documentation/Search';
-import { navigation, searchEntries, site, versions } from './site';
+import { ErrorHandler } from '../component/ErrorHandler';
+import nextConfig from '../next.config';
+import { navigation, site, versions } from './site';
 
 export const metadata: Metadata = {
     title: 'Idea React · Advanced components for Bootstrap & React',
@@ -25,11 +27,17 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
                 />
             </head>
             <body>
+                <ErrorHandler />
+
                 <DocumentationHeader
                     links={navigation}
                     versions={versions}
                     version={site.version}
-                    search={<DocumentationSearch entries={searchEntries} />}
+                    search={
+                        <DocumentationSearch
+                            indexUrl={`${nextConfig.basePath || ''}/search-index.json`}
+                        />
+                    }
                     colorMode={<ColorModeToggle />}
                 />
                 {children}

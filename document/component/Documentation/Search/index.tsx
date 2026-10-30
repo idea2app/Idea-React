@@ -6,18 +6,18 @@ import { ChangeEvent, Component, createRef } from 'react';
 import { Button } from '../../../../source/Button';
 import { Icon } from '../../../../source/Icon';
 import { NativeDialog } from '../../../../source/NativeDialog';
-import { DocumentationSearchEntry, DocumentationSearchModel } from './model';
+import { DocumentationSearchModel } from './model';
 import styles from './style.module.less';
 
 export interface DocumentationSearchProps {
-    entries: readonly DocumentationSearchEntry[];
+    indexUrl: string;
 }
 
 @observer
 export class DocumentationSearch extends Component<DocumentationSearchProps> {
     dialog = createRef<NativeDialog>();
     input = createRef<HTMLInputElement>();
-    model = new DocumentationSearchModel(this.props.entries);
+    model = new DocumentationSearchModel(this.props.indexUrl);
 
     componentDidMount() {
         document.addEventListener('keydown', this.handleShortcut);
@@ -27,15 +27,10 @@ export class DocumentationSearch extends Component<DocumentationSearchProps> {
         document.removeEventListener('keydown', this.handleShortcut);
     }
 
-    componentDidUpdate({ entries }: DocumentationSearchProps) {
-        if (entries !== this.props.entries) {
-            this.model.updateEntries(this.props.entries);
-        }
-    }
-
     open = () => {
         this.dialog.current?.show();
         this.input.current?.focus();
+        void this.model.load();
     };
 
     close = () => this.dialog.current?.close();
@@ -45,9 +40,9 @@ export class DocumentationSearch extends Component<DocumentationSearchProps> {
 
     handleShortcut = (event: KeyboardEvent) => {
         const { key, ctrlKey, metaKey } = event;
-        if (key === 'Escape' && this.dialog.current?.open) {
-            return this.dialog.current.close();
-        }
+
+        if (key === 'Escape' && this.dialog.current?.open) return this.dialog.current.close();
+
         if ((ctrlKey || metaKey) && key.toLowerCase() === 'k') {
             event.preventDefault();
             if (!this.dialog.current?.open) this.open();
@@ -75,11 +70,13 @@ export class DocumentationSearch extends Component<DocumentationSearchProps> {
     }
 
     renderResults() {
-        const { results } = this.model;
+        const { results, loading } = this.model;
+
+        if (loading) return <p role="status">Loading search index...</p>;
 
         return (
             <>
-                <ul className="list-unstyled my-5">
+                <ul className="list-unstyled my-5" aria-label="Search results">
                     {results.map(({ href, title, description }) => (
                         <li key={href}>
                             <a

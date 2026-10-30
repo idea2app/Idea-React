@@ -56,10 +56,13 @@ export class Menu extends Component<MenuProps> {
 
     handleOutside = ({ target }: PointerEvent) => {
         const { autoClose = true } = this.props;
-        if (autoClose === false || autoClose === 'inside') return;
-        if (target instanceof Node && !this.root.current?.contains(target)) {
+        if (
+            autoClose !== false &&
+            autoClose !== 'inside' &&
+            target instanceof Node &&
+            !this.root.current?.contains(target)
+        )
             this.setOpen(false);
-        }
     };
 
     items() {
@@ -72,8 +75,10 @@ export class Menu extends Component<MenuProps> {
 
     handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
         this.props.onKeyDown?.(event);
+
         const { key, defaultPrevented } = event;
         if (defaultPrevented) return;
+
         if (key === 'Escape' && this.open) {
             event.preventDefault();
             this.setOpen(false);
@@ -81,12 +86,16 @@ export class Menu extends Component<MenuProps> {
         }
         if (key === 'Tab') return this.setOpen(false);
         if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(key)) return;
+
         event.preventDefault();
         this.setOpen(true);
+
         queueMicrotask(() => {
             const items = this.items();
             const index = items.findIndex(item => item === document.activeElement);
+
             let next = key === 'Home' ? 0 : items.length - 1;
+
             if (key === 'ArrowDown') next = (index + 1) % items.length;
             if (key === 'ArrowUp') next = index <= 0 ? items.length - 1 : index - 1;
             items[next]?.focus();
@@ -96,19 +105,28 @@ export class Menu extends Component<MenuProps> {
     handleBlur = (event: FocusEvent<HTMLDivElement>) => {
         const { onBlur, autoClose = true } = this.props;
         onBlur?.(event);
+
         const { defaultPrevented, currentTarget, relatedTarget } = event;
-        if (defaultPrevented || autoClose === false || autoClose === 'inside') return;
-        if (!currentTarget.contains(relatedTarget)) this.setOpen(false);
+        if (
+            !defaultPrevented &&
+            autoClose !== false &&
+            autoClose !== 'inside' &&
+            !currentTarget.contains(relatedTarget)
+        )
+            this.setOpen(false);
     };
 
     handleToggle = () => this.setOpen(!this.open);
 
     handleSelect = ({ target }: MouseEvent<HTMLDivElement>) => {
         const { autoClose = true } = this.props;
-        if (autoClose === false || autoClose === 'outside') return;
-        if (target instanceof Element && target.closest('a[href], button:not(:disabled)')) {
+        if (
+            autoClose &&
+            autoClose !== 'outside' &&
+            target instanceof Element &&
+            target.closest('a[href], button:not(:disabled)')
+        )
             this.setOpen(false);
-        }
     };
 
     render() {

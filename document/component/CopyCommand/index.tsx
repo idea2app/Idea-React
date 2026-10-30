@@ -19,7 +19,7 @@ export class CopyCommand extends Component<CopyCommandProps> {
 
     render() {
         const { children } = this.props;
-        const { status, error } = this.model;
+        const { status } = this.model;
 
         return (
             <div className="d-flex position-relative align-items-center justify-content-between gap-7 border rounded-8 bg-1 px-5 py-4">
@@ -38,14 +38,6 @@ export class CopyCommand extends Component<CopyCommandProps> {
                 <span className="visually-hidden" role="status">
                     {status === 'copied' ? 'Install command copied' : ''}
                 </span>
-                {error && (
-                    <span
-                        className="position-absolute top-100 start-0 z-3 w-100 border rounded-5 bg-body fg-danger p-3 text-sm"
-                        role="alert"
-                    >
-                        {error}
-                    </span>
-                )}
             </div>
         );
     }

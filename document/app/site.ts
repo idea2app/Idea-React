@@ -1,6 +1,5 @@
 import { license, version } from '../../package.json';
 import type { DocumentationLink } from '../component/Documentation/Header';
-import type { DocumentationSearchEntry } from '../component/Documentation/Search/model';
 
 export const site = {
     version,
@@ -29,39 +28,6 @@ export const versions: DocumentationLink[] = [
         href: 'https://www.npmjs.com/package/idea-react?activeTab=versions'
     },
     { label: 'All releases', href: `${site.repository}/releases` }
-];
-
-export const searchEntries: DocumentationSearchEntry[] = [
-    {
-        title: 'Getting started',
-        href: site.gettingStarted,
-        description: 'Install Idea React, peer dependencies, and styles.'
-    },
-    {
-        title: 'Components',
-        href: `${site.repository}#components`,
-        description: 'Browse the Idea React component collection.'
-    },
-    {
-        title: 'Dialog',
-        href: `${site.repository}#dialog`,
-        description: 'Asynchronous dialog workflows.'
-    },
-    {
-        title: 'Toast',
-        href: `${site.repository}#toast`,
-        description: 'Application notifications.'
-    },
-    {
-        title: 'API reference',
-        href: site.docs,
-        description: 'Components and utility API documentation.'
-    },
-    {
-        title: 'Component examples',
-        href: site.preview,
-        description: 'Interactive examples of Idea React components.'
-    }
 ];
 
 export const footerColumns = [

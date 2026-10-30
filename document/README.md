@@ -12,19 +12,15 @@ pnpm install
 pnpm --filter @idea-react/document dev
 ```
 
-The site supports MDX and uses Bootstrap 6 styles from unpkg.com.
+The site includes MDX pages, Bootstrap styling, theme switching, and local page search.
+Build and preview the site to use the generated search index.
 
 ## Build and deploy
 
 ```sh
-pnpm --filter @idea-react/document test
 pnpm --filter @idea-react/document build
 pnpm --filter @idea-react/document start
 ```
 
-Deploy only `dist/client/` to a static host. Set `basePath` in
-[next.config.ts][1] before building for a subdirectory.
-The repository's root build and release workflow still publish the legacy
-TypeDoc and preview site; this workspace is built and deployed separately.
-
-[1]: next.config.ts
+Deploy `document/dist/client/` to a static host.
+For contributor workflows and deployment configuration, see [AGENTS.md](../AGENTS.md).

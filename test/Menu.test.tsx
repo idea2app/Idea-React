@@ -41,20 +41,15 @@ it('toggles with a real button and closes on selection or outside interaction', 
 
 it('supports keyboard navigation, skips disabled items and restores focus on Escape', async () => {
     render(<Menu label="Explore">{items}</Menu>);
+
     const trigger = screen.getByRole('button', { name: 'Explore' });
-    await act(async () => {
-        fireEvent.keyDown(trigger, { key: 'ArrowDown' });
-    });
+    await act(() => fireEvent.keyDown(trigger, { key: 'ArrowDown' }));
     assert.equal(document.activeElement, screen.getByRole('link', { name: 'Docs' }));
 
-    await act(async () => {
-        fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' });
-    });
+    await act(() => fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' }));
     assert.equal(document.activeElement, screen.getByRole('button', { name: 'Action' }));
 
-    await act(async () => {
-        fireEvent.keyDown(document.activeElement!, { key: 'Home' });
-    });
+    await act(() => fireEvent.keyDown(document.activeElement!, { key: 'Home' }));
     assert.equal(document.activeElement, screen.getByRole('link', { name: 'Docs' }));
 
     fireEvent.keyDown(document.activeElement!, { key: 'Escape' });
@@ -93,10 +88,9 @@ it('honors outside-only and disabled auto-close and removes document listeners',
 
 it('closes on Tab and safely handles an empty menu during keyboard navigation', async () => {
     render(<Menu label="Empty" />);
+
     const trigger = screen.getByRole('button', { name: 'Empty' });
-    await act(async () => {
-        fireEvent.keyDown(trigger, { key: 'ArrowDown' });
-    });
+    await act(() => fireEvent.keyDown(trigger, { key: 'ArrowDown' }));
     assert.equal(trigger.getAttribute('aria-expanded'), 'true');
 
     fireEvent.keyDown(trigger, { key: 'Tab' });

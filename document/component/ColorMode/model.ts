@@ -8,30 +8,35 @@ const matchColorScheme = (color: ColorScheme) =>
     globalThis.matchMedia?.(`(prefers-color-scheme: ${color})`);
 
 export class ColorModeModel {
+    media = matchColorScheme('dark');
+
     @persist()
     @observable
-    accessor colorScheme: ColorScheme = 'light';
+    accessor colorScheme: ColorScheme = this.media?.matches ? 'dark' : 'light';
 
     @observable accessor ready = false;
 
-    @action
-    finishRestore = () => (this.ready = true);
+    disposed = false;
 
     @action
-    initialize() {
-        this.colorScheme = matchColorScheme('dark')?.matches ? 'dark' : 'light';
-        void restore(this, 'System').then(this.finishRestore);
-        const media = matchColorScheme('dark');
-        media?.addEventListener('change', this.handleSystemChange);
-        const disposer = autorun(() => {
-            document.documentElement.dataset.bsTheme = this.colorScheme;
-            setCookie('colorScheme', this.colorScheme);
-        });
-        return () => {
-            disposer();
-            media?.removeEventListener('change', this.handleSystemChange);
-        };
-    }
+    finishRestore = () => {
+        if (this.disposed) return;
+        this.media?.addEventListener('change', this.handleSystemChange);
+        this.ready = true;
+    };
+
+    restored = restore(this, 'ColorMode').then(this.finishRestore);
+
+    disposer = autorun(() => {
+        document.documentElement.dataset.bsTheme = this.colorScheme;
+        setCookie('colorScheme', this.colorScheme);
+    });
+
+    dispose = () => {
+        this.disposed = true;
+        this.disposer();
+        this.media?.removeEventListener('change', this.handleSystemChange);
+    };
 
     @action
     handleSystemChange = ({ matches }: MediaQueryListEvent) =>

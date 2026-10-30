@@ -4,43 +4,25 @@ import { CopyCommand } from '../component/CopyCommand';
 import { DocumentationAction } from '../component/Documentation/Action';
 import { DocumentationFooter } from '../component/Documentation/Footer';
 import { DocumentationHero } from '../component/Documentation/Hero';
+import heroStyles from '../component/Documentation/Hero/style.module.less';
 import { DropdownMenu } from '../component/DropdownMenu';
 import { footerColumns, site, versions } from './site';
 
 <DocumentationHero
     title="Build React apps with less glue and more possibility"
-    description={
-        <>
-            A TypeScript-first collection of advanced React components, powered by MobX. From
-            dialogs and notifications to live code, editors, and timelines, Idea React brings the
-            building blocks together so you can focus on your application.
-            <br />
-            <a href={site.gettingStarted}>Get to know Idea React.</a>
-        </>
-    }
     announcement={{ label: 'Idea React 3 is now in alpha', href: versions[0].href }}
-    version={site.version}
-    links={[
-        { label: 'API reference', href: site.docs },
-        { label: 'All releases', href: `${site.repository}/releases` }
-    ]}
-    promotion={
-        <aside
-            className="d-flex align-items-center gap-5 rounded-7 bg-1 p-6 text-start"
-            aria-label="Idea React community"
-        >
-            <div className="flex-shrink-0 fg-accent">
-                <Icon name="code-square" size={2} aria-hidden="true" />
-            </div>
-            <p className="text-sm mb-0 fg-2">
-                Built by the idea2app community.
-                <br />
-                <a href={`${site.repository}/graphs/contributors`}>Meet the contributors</a> and
-                help shape what comes next.
-            </p>
-        </aside>
-    }
 >
+
+<div className="text-lg fg-2 text-balance">
+
+A TypeScript-first collection of advanced React components, powered by MobX.
+From dialogs and notifications to live code, editors, and timelines, Idea React
+brings the building blocks together so you can focus on your application.
+[Get to know Idea React.][1]
+
+</div>
+
+<div className="d-flex flex-column sm:flex-row flex-wrap justify-content-center align-items-stretch gap-4 my-3 w-100">
     <CopyCommand>{site.install}</CopyCommand>
     <DropdownMenu
         toggleProps={{
@@ -62,21 +44,52 @@ import { footerColumns, site, versions } from './site';
         <MenuItem href={site.docs}>Read API reference</MenuItem>
     </DropdownMenu>
     <DocumentationAction href={site.docs} icon="book" label="Read the docs" />
+</div>
+
+<div className="d-flex flex-wrap justify-content-center align-items-center gap-3 fg-2 text-sm">
+    <span>Currently v{site.version}</span>
+    {[
+        { label: 'API reference', href: site.docs },
+        { label: 'All releases', href: `${site.repository}/releases` }
+    ].map(({ href, label }) => (
+        <a key={href} href={href} className="fg-2">
+            {label}
+        </a>
+    ))}
+</div>
+
+<aside
+    className={`${heroStyles.promotion} mt-7 w-100 d-flex align-items-center gap-5 rounded-7 bg-1 p-6 text-start`}
+    aria-label="Idea React community"
+>
+<div className="flex-shrink-0 fg-accent">
+    <Icon name="code-square" size={2} aria-hidden="true" />
+</div>
+<div className="text-sm fg-2">
+
+Built by the idea2app community.
+[Meet the contributors][2] and help shape what comes next.
+
+</div>
+</aside>
+
 </DocumentationHero>
 
 <DocumentationFooter columns={footerColumns}>
 
-Advanced React components by [idea2app][1], built with the help of <a href={`${site.repository}/graphs/contributors`}>our contributors</a>.
+Advanced React components by [idea2app][3], built with the help of [our contributors][2].
 
 Licensed <a href="https://spdx.org/licenses/LGPL-3.0-or-later.html">{site.license}</a>.
 Currently v{site.version}.
 
-An independent React adaptation of the [upstream website][2].
-Upstream code: [MIT][3]; documentation: [CC BY 3.0][4].
+An independent React adaptation of the [upstream website][4].
+Upstream code: [MIT][5]; documentation: [CC BY 3.0][6].
 
 </DocumentationFooter>
 
-[1]: https://idea2.app/
-[2]: https://getbootstrap.com/
-[3]: ./BOOTSTRAP-LICENSE.txt
-[4]: https://creativecommons.org/licenses/by/3.0/
+[1]: https://github.com/idea2app/Idea-React#usage
+[2]: https://github.com/idea2app/Idea-React/graphs/contributors
+[3]: https://idea2.app/
+[4]: https://getbootstrap.com/
+[5]: ./BOOTSTRAP-LICENSE.txt
+[6]: https://creativecommons.org/licenses/by/3.0/
