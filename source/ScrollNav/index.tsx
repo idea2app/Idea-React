@@ -1,12 +1,11 @@
 import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component, createRef } from 'react';
-import { Nav, NavProps } from 'react-bootstrap';
+import { Component, createRef, HTMLAttributes } from 'react';
 
 import { Icon } from '../Icon';
 import * as style from './index.module.less';
 
-export type ScrollNavProps = NavProps;
+export type ScrollNavProps = HTMLAttributes<HTMLElement>;
 
 /**
  * A horizontal scrolling navigation bar based on Bootstrap's `nav-scroller` pattern.
@@ -89,9 +88,9 @@ export class ScrollNav extends Component<ScrollNavProps> {
                     </button>
                 )}
                 <div ref={this.scrollerRef} className={`overflow-x-auto ${style.scrollerInner}`}>
-                    <Nav {...props} className="flex-nowrap">
+                    <nav {...props} className="nav flex-nowrap">
                         {children}
-                    </Nav>
+                    </nav>
                 </div>
                 {canScrollRight && (
                     <button

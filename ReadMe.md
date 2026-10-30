@@ -86,7 +86,10 @@ For the current alpha release, use `idea-react@next` instead of `idea-react`.
 ### CSS on CDN
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+/>
 <link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1.13.1/font/bootstrap-icons.css" />
 <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" />
 <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism.min.css" />
@@ -114,42 +117,50 @@ Compatible with MobX 6/7:
 ```tsx
 import { formToJSON } from 'web-utility';
 import { Component } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
-import { Dialog, DialogClose } from 'idea-react';
+import { Button, Dialog, DialogClose, NativeDialog } from 'idea-react';
 
 export class ExamplePage extends Component {
     inputDialog = new Dialog<Record<'a' | 'b', number>>(({ defer }) => (
-        <Modal show={!!defer} onHide={() => defer?.reject(new DialogClose())}>
-            <Modal.Header>Dialog</Modal.Header>
-            <Modal.Body>
-                <Form
-                    id="input-dialog"
-                    onSubmit={event => {
-                        event.preventDefault();
+        <NativeDialog
+            open={!!defer}
+            aria-label="Dialog"
+            onClose={() => defer?.reject(new DialogClose())}
+        >
+            <div className="dialog-header">
+                <h2 className="dialog-title">Dialog</h2>
+            </div>
+            <form
+                className="dialog-body d-grid gap-3"
+                id="input-dialog"
+                onSubmit={event => {
+                    event.preventDefault();
 
-                        defer?.resolve(formToJSON(event.currentTarget));
-                    }}
-                    onReset={() => defer?.reject(new DialogClose())}
-                >
-                    <Form.Group>
-                        <Form.Label>A</Form.Label>
-                        <Form.Control type="number" name="a" />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>B</Form.Label>
-                        <Form.Control type="number" name="b" />
-                    </Form.Group>
-                </Form>
-            </Modal.Body>
-            <Modal.Footer className="d-flex justify-content-end gap-3">
+                    defer?.resolve(formToJSON(event.currentTarget));
+                }}
+                onReset={() => defer?.reject(new DialogClose())}
+            >
+                <div>
+                    <label className="form-label" htmlFor="input-a">
+                        A
+                    </label>
+                    <input className="form-control" id="input-a" type="number" name="a" />
+                </div>
+                <div>
+                    <label className="form-label" htmlFor="input-b">
+                        B
+                    </label>
+                    <input className="form-control" id="input-b" type="number" name="b" />
+                </div>
+            </form>
+            <div className="dialog-footer">
                 <Button form="input-dialog" type="submit">
                     √
                 </Button>
-                <Button form="input-dialog" type="reset" variant="danger">
+                <Button form="input-dialog" type="reset" theme="danger">
                     ×
                 </Button>
-            </Modal.Footer>
-        </Modal>
+            </div>
+        </NativeDialog>
     ));
 
     someLogic = async () => {
@@ -178,8 +189,7 @@ export class ExamplePage extends Component {
 
 ```tsx
 import { Component } from 'react';
-import { Button } from 'react-bootstrap';
-import { Toast } from 'idea-react';
+import { Button, Toast } from 'idea-react';
 
 export class ExamplePage extends Component {
     toast = new Toast();
@@ -193,7 +203,7 @@ export class ExamplePage extends Component {
                             .open({
                                 title: 'Notification',
                                 body: 'Hello, world!',
-                                variant: 'success'
+                                theme: 'success'
                             })
                             .then(() => console.log('Toast closed'))
                     }

@@ -4,7 +4,16 @@ import classNames from 'classnames';
 import { ComponentPropsWithRef, FC, MouseEvent } from 'react';
 
 export type ComponentTheme =
-    'primary' | 'accent' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'inverse';
+    | 'primary'
+    | 'accent'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'info'
+    | 'dark'
+    | 'light'
+    | 'inverse';
 
 interface ButtonStyleProps {
     variant?: 'solid' | 'outline' | 'subtle' | 'text';

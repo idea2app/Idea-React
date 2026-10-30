@@ -248,7 +248,7 @@ export class Content extends Component {
                             this.toast
                                 .open({
                                     body: 'Hello, Idea React!',
-                                    variant: 'success',
+                                    theme: 'success',
                                     delay: 0
                                 })
                                 .then(({ id }) => console.log(`Toast ${id} closed`))

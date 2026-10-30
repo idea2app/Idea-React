@@ -2,24 +2,15 @@ import html2canvas from 'html2canvas';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, createRef, HTMLAttributes, MouseEvent } from 'react';
-import { Image } from 'react-bootstrap';
 import { blobOf } from 'web-utility';
 
 import { Loading } from './Loading';
 
-export async function elementToImage(
-    element: HTMLElement,
-    type?: string,
-    quality?: number
-) {
+export async function elementToImage(element: HTMLElement, type?: string, quality?: number) {
     const canvas = await html2canvas(element, { useCORS: true });
 
     return new Promise<string>((resolve, reject) =>
-        canvas.toBlob(
-            blob => (blob ? resolve(URL.createObjectURL(blob)) : reject()),
-            type,
-            quality
-        )
+        canvas.toBlob(blob => (blob ? resolve(URL.createObjectURL(blob)) : reject()), type, quality)
     );
 }
 
@@ -84,11 +75,10 @@ export class ShareBox extends Component<ShareBoxProps> {
                     {children}
 
                     {imageURI && (
-                        <Image
-                            className="position-absolute start-0 top-0 w-100 h-100"
+                        <img
+                            className="img-fluid position-absolute start-0 top-0 w-100 h-100"
                             src={imageURI}
                             alt="Share Image"
-                            fluid
                             onClick={this.share}
                         />
                     )}

@@ -1,11 +1,12 @@
 import classNames from 'classnames';
-import { computed, observable } from 'mobx';
+import { action, computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
-import { ReactNode } from 'react';
-import { Badge, Button, ButtonProps, Table, TableProps } from 'react-bootstrap';
+import { HTMLAttributes, MouseEvent, ReactNode } from 'react';
 import { changeMonth, Day, formatDate, splitArray, TimeData } from 'web-utility';
 
+import { Badge } from './Badge';
+import { Button, type ComponentTheme } from './Button';
 import { text2color } from './color';
 import { OverlayBox } from './OverlayBox';
 
@@ -15,13 +16,15 @@ export interface DateData {
     link?: string;
 }
 
-export interface MonthCalendarProps
-    extends Omit<TableProps, 'variant' | 'onChange' | 'onSelect'>,
-        Pick<ButtonProps, 'variant'> {
+export interface MonthCalendarProps extends Omit<
+    HTMLAttributes<HTMLTableElement>,
+    'onChange' | 'onSelect'
+> {
     locale?: Navigator['language'];
+    theme?: ComponentTheme;
     value?: DateData[];
-    onSelect?: (value: DateData) => any;
-    onChange?: (date: Date) => any;
+    onSelect?: (value: DateData) => void;
+    onChange?: (date: Date) => void;
 }
 
 /**
@@ -54,14 +57,34 @@ export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
         return splitArray(dateList, 7);
     }
 
+    @action
     changeMonth(delta: number) {
         this.currentDate = changeMonth(this.currentDate, delta);
 
         this.props.onChange?.(this.currentDate);
     }
 
+    changePreviousMonth = () => this.changeMonth(-1);
+    changeNextMonth = () => this.changeMonth(1);
+
+    handleCellClick = ({ target, currentTarget }: MouseEvent<HTMLTableCellElement>) => {
+        if (!(target instanceof Element)) return;
+
+        const targetItem = target.closest<HTMLElement>('[data-calendar-index]');
+        if (!targetItem || !currentTarget.contains(targetItem)) return;
+
+        const date = targetItem.dataset.calendarDate;
+        const index = Number(targetItem.dataset.calendarIndex);
+        const items = this.props.value?.filter(
+            ({ date: itemDate }) => formatDate(itemDate, 'YYYY-MM-DD') === date
+        );
+        const item = items?.[index];
+
+        if (item) this.props.onSelect?.(item);
+    };
+
     renderDate = (date: Date) => {
-        const { variant = 'primary', value, onSelect } = this.observedProps,
+        const { value } = this.observedProps,
             dateText = formatDate(date, 'YYYY-MM-DD');
         const list = value?.filter(({ date }) => formatDate(date, 'YYYY-MM-DD') === dateText);
 
@@ -72,25 +95,37 @@ export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
                     'opacity-50': date.getMonth() !== this.currentDate.getMonth(),
                     'fw-bold': dateText === formatDate(new Date(), 'YYYY-MM-DD')
                 })}
+                onClick={this.handleCellClick}
             >
                 <time className="d-block" dateTime={date.toJSON()}>
                     {date.getDate()}
                 </time>
 
-                {list?.map(item =>
+                {list?.map((item, index) =>
                     typeof item.content === 'object' ? (
                         item.content
                     ) : (
-                        <OverlayBox key={item.date + ''} title={item.content}>
-                            <Badge
-                                as="a"
-                                className="d-inline-block text-decoration-none w-100 text-truncate"
-                                bg={text2color(item.content + '', ['light'])}
-                                href={item.link}
-                                onClick={() => onSelect?.(item)}
-                            >
-                                {item.content}
-                            </Badge>
+                        <OverlayBox key={`${dateText}-${index}`} title={item.content}>
+                            {item.link ? (
+                                <Badge
+                                    href={item.link}
+                                    className="d-inline-block text-decoration-none w-100 text-truncate"
+                                    data-calendar-date={dateText}
+                                    data-calendar-index={index}
+                                    theme={text2color(item.content + '', ['light'])}
+                                >
+                                    {item.content}
+                                </Badge>
+                            ) : (
+                                <Badge
+                                    className="d-inline-block text-decoration-none w-100 text-truncate"
+                                    data-calendar-date={dateText}
+                                    data-calendar-index={index}
+                                    theme={text2color(item.content + '', ['light'])}
+                                >
+                                    {item.content}
+                                </Badge>
+                            )}
                         </OverlayBox>
                     )
                 )}
@@ -100,19 +135,30 @@ export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
 
     render() {
         const { weekFormatter, currentDate, dateGrid } = this,
-            { style, variant = 'primary', onChange, onSelect, ...props } = this.observedProps;
+            {
+                className,
+                style,
+                theme = 'primary',
+                onChange: _onChange,
+                onSelect: _onSelect,
+                ...props
+            } = this.observedProps;
 
         return (
-            <Table {...props} style={{ tableLayout: 'fixed', ...style }}>
+            <table
+                {...props}
+                className={`table ${className || ''}`}
+                style={{ tableLayout: 'fixed', ...style }}
+            >
                 <caption>
                     <div className="d-flex justify-content-between align-items-center">
-                        <Button variant={variant} onClick={() => this.changeMonth(-1)}>
+                        <Button theme={theme} onClick={this.changePreviousMonth}>
                             &lt;
                         </Button>
 
                         {formatDate(currentDate, 'YYYY-MM')}
 
-                        <Button variant={variant} onClick={() => this.changeMonth(1)}>
+                        <Button theme={theme} onClick={this.changeNextMonth}>
                             &gt;
                         </Button>
                     </div>
@@ -120,13 +166,14 @@ export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
                 <thead>
                     <tr>
                         {dateGrid[0].map((date, index, { length }) => (
-                            <td
+                            <th
                                 key={index}
-                                className={`bg-${variant} text-white`}
+                                className={`theme-${theme} fg-contrast`}
                                 style={{ width: `calc(100% / ${length})` }}
+                                scope="col"
                             >
                                 {weekFormatter.format(date)}
-                            </td>
+                            </th>
                         ))}
                     </tr>
                 </thead>
@@ -135,7 +182,7 @@ export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
                         <tr key={days[0] + ''}>{days.map(this.renderDate)}</tr>
                     ))}
                 </tbody>
-            </Table>
+            </table>
         );
     }
 }

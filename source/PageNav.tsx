@@ -1,18 +1,15 @@
 import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component } from 'react';
-import { Nav, NavProps } from 'react-bootstrap';
+import { Component, HTMLAttributes } from 'react';
 import { scrollTo, uniqueID } from 'web-utility';
 
-const HeadingSelector =
-    Array.from(new Array(6), (_, index) => `h${++index}`) + '';
+const HeadingSelector = Array.from({ length: 6 }, (_, index) => `h${index + 1}`).join(',');
 
-type HeadingMeta = Record<'id' | 'text', string> &
-    Record<'level' | 'top', number>;
+type HeadingMeta = Record<'id' | 'text', string> & Record<'level' | 'top', number>;
 
-export interface PageNavProps extends NavProps {
+export interface PageNavProps extends HTMLAttributes<HTMLElement> {
     depth?: number;
-    onItemClick?: (item: HeadingMeta) => any;
+    onItemClick?: (item: HeadingMeta) => void;
 }
 
 @observer
@@ -73,30 +70,34 @@ export class PageNav extends Component<PageNavProps> {
 
         return (
             level <= depth && (
-                <Nav.Item key={id} style={{ textIndent: `${level - 1}rem` }}>
-                    <Nav.Link
-                        href={`#${id}`}
-                        active={currentActiveId === id}
-                        onClick={this.scrollTo({ id, level, text, top })}
-                    >
-                        {text}
-                    </Nav.Link>
-                </Nav.Item>
+                <a
+                    key={id}
+                    className={`nav-link${currentActiveId === id ? ' active' : ''}`}
+                    href={`#${id}`}
+                    aria-current={currentActiveId === id ? 'location' : undefined}
+                    style={{ textIndent: `${level - 1}rem` }}
+                    onClick={this.scrollTo({ id, level, text, top })}
+                >
+                    {text}
+                </a>
             )
         );
     };
 
     render() {
         const { list } = this,
-            { style, variant = 'underline', ...props } = this.props;
+            {
+                className = '',
+                depth: _depth,
+                onItemClick: _onItemClick,
+                style,
+                ...props
+            } = this.props;
 
         return (
-            <Nav
-                {...{ ...props, variant }}
-                style={{ flexDirection: 'column', ...style }}
-            >
+            <nav {...props} className={`nav nav-underline flex-column ${className}`} style={style}>
                 {list.map(this.renderLink)}
-            </Nav>
+            </nav>
         );
     }
 }

@@ -1,83 +1,89 @@
 import classNames from 'classnames';
-import { FC, isValidElement, ReactElement, ReactNode } from 'react';
 import {
-    Dropdown,
-    DropdownButtonProps,
-    DropdownItemProps
-} from 'react-bootstrap';
-import { makeArray } from 'web-utility';
+    ButtonHTMLAttributes,
+    Children,
+    FC,
+    isValidElement,
+    MouseEvent,
+    ReactElement,
+    ReactNode
+} from 'react';
 
-export interface OptionProps extends DropdownItemProps {
+import { ButtonProps } from './Button';
+import { Menu } from './Menu';
+
+export interface OptionProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     value?: string;
 }
 
-export const Option: FC<OptionProps> = ({ value, children, ...props }) => (
-    <Dropdown.Item {...props} data-value={value}>
+export const Option: FC<OptionProps> = ({ value, className, children, ...props }) => (
+    <button
+        {...props}
+        type="button"
+        className={classNames('menu-item', className)}
+        data-value={value}
+    >
         {children}
-    </Dropdown.Item>
+    </button>
 );
 
 Option.displayName = 'Option';
 
-export interface SelectProps
-    extends Omit<OptionProps, 'onChange'>,
-        Pick<DropdownButtonProps, 'variant' | 'menuVariant'> {
-    onChange?: (value: string) => any;
+export type SelectProps = Pick<ButtonProps, 'disabled' | 'size' | 'style' | 'theme' | 'variant'> & {
+    align?: 'start' | 'end';
+    className?: string;
+    menuClassName?: string;
+    onChange?: (value: string) => void;
+    value?: string;
     valueRender?: (value: string) => ReactNode;
-}
+    children?: ReactNode;
+};
 
 export const Select: FC<SelectProps> = ({
+    align,
     className,
-    style,
-    variant,
-    menuVariant,
+    menuClassName,
     children,
+    theme = 'primary',
+    variant = 'solid',
+    size,
+    disabled,
+    style,
     value,
     onChange,
     valueRender
 }) => {
-    const current = (makeArray(children) as ReactNode[])
-        .flat(Infinity)
-        .find(
-            node =>
-                isValidElement<OptionProps>(node) &&
-                node.type === Option &&
-                node.props.value === value
-        ) as ReactElement<OptionProps, typeof Option>;
+    const current = Children.toArray(children).find(
+        node =>
+            isValidElement<OptionProps>(node) && node.type === Option && node.props.value === value
+    ) as ReactElement<OptionProps> | undefined;
+    const handleSelect = ({ target }: MouseEvent<HTMLDivElement>) => {
+        if (!(target instanceof Element)) return;
+
+        const option = target.closest<HTMLButtonElement>('[data-value]');
+        if (option) onChange?.(option.dataset.value || '');
+    };
 
     return (
-        <Dropdown
-            onClick={({ target }) => {
-                const option = (target as HTMLElement).closest<HTMLElement>(
-                    '.dropdown-item'
-                );
-                if (!option) return;
-
-                const { value } = option.dataset;
-
-                onChange?.(value);
-            }}
-        >
-            <Dropdown.Toggle
-                className={classNames(
-                    'w-100',
-                    'd-flex',
-                    'justify-content-between',
-                    'align-items-center',
-                    !variant && 'bg-white text-dark',
+        <Menu
+            align={align}
+            menuClassName={menuClassName}
+            label={valueRender?.(value ?? '') ?? current?.props.children}
+            toggleProps={{
+                className: classNames(
+                    'w-100 d-flex justify-content-between align-items-center',
                     className
-                )}
-                {...{ style, variant }}
-            >
-                {valueRender?.(value) || (
-                    <div className={current?.props.className}>
-                        {current?.props.children}
-                    </div>
-                )}
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu variant={menuVariant}>{children}</Dropdown.Menu>
-        </Dropdown>
+                ),
+                theme,
+                variant,
+                size,
+                disabled,
+                style
+            }}
+            onClick={handleSelect}
+        >
+            {children}
+        </Menu>
     );
 };
 

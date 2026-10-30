@@ -57,3 +57,14 @@ it('supports non-modal display and idempotent show/close calls', () => {
     });
     assert.equal(ref.current?.open, false);
 });
+
+it('synchronizes its native state with the open prop', () => {
+    const { container, rerender } = render(<NativeDialog aria-label="Controlled dialog" open />);
+    const dialog = container.querySelector('dialog')!;
+
+    assert.equal(dialog.open, true);
+
+    rerender(<NativeDialog aria-label="Controlled dialog" />);
+
+    assert.equal(dialog.open, false);
+});
