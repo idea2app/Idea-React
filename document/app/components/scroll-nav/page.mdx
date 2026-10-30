@@ -1,5 +1,9 @@
 import { ScrollNav } from '../../../../source/ScrollNav';
 
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="scroll-nav">
+
 # Scroll nav
 
 [`ScrollNav`][1] is a horizontally scrollable navigation bar based on Bootstrap's `nav-scroller`
@@ -36,5 +40,7 @@ pattern. Arrow buttons appear automatically when the items overflow the containe
 The component tracks scroll position and container size with a `ResizeObserver`, showing a left or
 right caret button only when more content is available in that direction. Each click scrolls by 80%
 of the visible width with smooth scrolling.
+
+</ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/ScrollNav/index.tsx

@@ -1,3 +1,7 @@
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="page-nav">
+
 # Page nav
 
 [`PageNav`][1] builds an in-page table of contents from the document's headings, highlights the
@@ -23,5 +27,7 @@ class and `aria-current="location"`.
 - `minDepth` and `depth` bound the included heading levels, e.g. `minDepth={2} depth={3}` lists only
   `h2` and `h3`.
 - `onItemClick` fires with the heading metadata after a link is activated.
+
+</ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/PageNav.tsx

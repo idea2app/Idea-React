@@ -6,9 +6,9 @@ import { PageNav } from '../../../../source/PageNav';
 import * as style from './style.module.less';
 
 export const Toc: FC = () => (
-    <div className={style.toc} aria-label="On this page">
+    <div className={style.toc}>
         <strong className="d-block fw-semibold mb-2">On this page</strong>
 
-        <PageNav rootSelector="#content" minDepth={2} depth={3} />
+        <PageNav rootSelector="#content" minDepth={2} depth={3} aria-label="On this page" />
     </div>
 );

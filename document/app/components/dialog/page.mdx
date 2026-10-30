@@ -1,5 +1,9 @@
 import { NativeDialog } from '../../../../source/NativeDialog';
 
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="dialog">
+
 # Dialog
 
 Bootstrap 6 replaces the previous modal component with the native HTML `<dialog>` element. The
@@ -33,6 +37,8 @@ interaction must not close from that input.
 
 The [`Dialog` model][3] exposes a promise from `open()` and supplies a `defer` object to its
 component. Reject with `DialogClose` when the user cancels.
+
+</ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/NativeDialog/index.tsx
 [2]: https://getbootstrap.com/docs/6.0/components/dialog/

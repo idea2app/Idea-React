@@ -1,5 +1,9 @@
 import { TextTruncate } from '../../../../source/TextTruncate';
 
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="text-truncate">
+
 # Text truncate
 
 [`TextTruncate`][1] clamps long text to a number of lines and adds an expand/collapse toggle only
@@ -24,5 +28,7 @@ when the content actually overflows.
 
 `rows` sets the visible line count (default `3`). The toggle reports its state through
 `aria-expanded`, and overflow is re-checked on window resize and content changes.
+
+</ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/TextTruncate.tsx

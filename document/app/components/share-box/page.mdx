@@ -1,3 +1,7 @@
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="share-box">
+
 # Share box
 
 [`ShareBox`][1] captures its children as an image with [html2canvas][2] and shares it through the
@@ -20,6 +24,8 @@ import { ShareBox } from 'idea-react';
 All [`ShareData`][3] fields (`title`, `text`, `url`, `files`) pass to `navigator.share()`. The
 snapshot regenerates on window resize, and a [Loading](../loading/) overlay is shown while the image
 renders.
+
+</ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/ShareBox.tsx
 [2]: https://html2canvas.hertzen.com/

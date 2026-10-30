@@ -1,5 +1,9 @@
 import { Timeline } from '../../../../source/Timeline';
 
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="timeline">
+
 # Timeline
 
 [`Timeline`][1] presents chronological events as cards along a vertical line, with a title, time
@@ -31,5 +35,7 @@ range, participants, and summary per event.
 Each event takes a `title`, a `time` tuple of start and optional end, and optionally a `summary`, a
 `link`, and `people` rendered as [Nameplates](../nameplate/). `timeFormat` controls the
 [Time](../time/) labels.
+
+</ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Timeline/index.tsx

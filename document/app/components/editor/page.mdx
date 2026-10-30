@@ -1,3 +1,7 @@
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="editor">
+
 # Editor
 
 [`Editor`][1] embeds the block-style [Editor.js][2] rich text editor as a Bootstrap form control.
@@ -11,12 +15,7 @@ Editor.js only runs in the browser, so render the component on the client:
 import { Editor } from 'idea-react';
 
 <form method="post">
-    <Editor
-        name="content"
-        required
-        defaultValue={savedDocument}
-        tools={customTools}
-    />
+    <Editor name="content" required defaultValue={savedDocument} tools={customTools} />
     <button className="btn-solid theme-primary">Save</button>
 </form>;
 ```
@@ -26,6 +25,8 @@ input named by `name`. All [react-editor-js props][3], such as `tools` and `onIn
 through to the underlying editor.
 
 Render saved documents with the [Editor HTML](../editor-html/) component.
+
+</ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Editor.tsx
 [2]: https://editorjs.io/

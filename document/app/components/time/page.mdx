@@ -1,5 +1,9 @@
 import { Time } from '../../../../source/Time';
 
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="time">
+
 # Time
 
 [`Time`][1] renders a date or time value in a semantic `<time>` element with a formatted label and a
@@ -20,6 +24,8 @@ machine-readable `dateTime` attribute.
 whenever either prop changes.
 
 For relative output such as "3 day(s) before", use [Time distance](../time-distance/).
+
+</ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Time.tsx
 [2]: https://web-cell.dev/web-utility/functions/formatDate.html

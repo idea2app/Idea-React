@@ -1,5 +1,9 @@
 import { ZodiacBar } from '../../../../source/ZodiacBar';
 
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="zodiac-bar">
+
 # Zodiac bar
 
 [`ZodiacBar`][1] displays the Chinese zodiac sign for each year in a range, newest first, with an
@@ -25,5 +29,7 @@ optional link and title per year.
 `endYear` defaults to the current year. `itemOf` customizes each item's `title` and `link`, and
 `itemClassName` restyles the year cards. The exported `zodiacOf(year)` helper returns the zodiac
 emoji for any historical year.
+
+</ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/ZodiacBar.tsx

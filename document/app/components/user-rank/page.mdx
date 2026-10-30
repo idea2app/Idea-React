@@ -1,5 +1,9 @@
 import { UserRankView } from '../../../../source/UserRank';
 
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="user-rank">
+
 # User rank
 
 [`UserRankView`][1] displays a leaderboard: the top three users on a podium with medals, followed by
@@ -27,5 +31,7 @@ a table of the remaining ranks with avatars, scores, and locations.
 `rank` lists users ordered by score; the first three render as medal cards and ranks 4–10 render as
 table rows. `linkOf` builds the profile link for each user, and address fields from
 `UserAddressProps` display each user's location.
+
+</ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/UserRank/index.tsx

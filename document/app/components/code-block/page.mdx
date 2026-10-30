@@ -1,5 +1,9 @@
 import { CodeBlock } from '../../../../source/CodeBlock';
 
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="code-block">
+
 # Code block
 
 [`CodeBlock`][1] renders syntax-highlighted code with [Shiki][2]. String children are highlighted
@@ -19,6 +23,8 @@ inline, so the block needs no client-side JavaScript.
 ```tsx
 <CodeBlock language="ts">{`const answer: number = 42;`}</CodeBlock>
 ```
+
+</ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/CodeBlock.tsx
 [2]: https://shiki.style/

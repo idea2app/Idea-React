@@ -1,5 +1,9 @@
 import { EditorHTML } from '../../../../source/EditorHTML';
 
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="editor-html">
+
 # Editor HTML
 
 [`EditorHTML`][1] converts saved [Editor.js][2] block data to HTML with [editorjs-html][3] and
@@ -24,6 +28,8 @@ renders it in an `<article>` element. Use it to display documents produced by th
 
 `data` accepts the `OutputData` object returned by Editor.js. Links are rendered with a built-in
 `link` block parser; extend the exported `parser` for custom block types.
+
+</ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/EditorHTML.tsx
 [2]: https://editorjs.io/
