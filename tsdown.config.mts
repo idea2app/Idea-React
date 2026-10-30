@@ -1,24 +1,11 @@
-import swc from 'unplugin-swc';
 import { defineConfig } from 'tsdown';
+import swc from 'unplugin-swc';
+
+import { swcOptions } from './swc.config.mts';
 
 const SWC = swc.rolldown({
     tsconfigFile: 'tsconfig.json',
-    jsc: {
-        target: 'es2015',
-        externalHelpers: true,
-        parser: {
-            syntax: 'typescript',
-            tsx: true,
-            decorators: true
-        },
-        transform: {
-            decoratorVersion: '2022-03',
-            useDefineForClassFields: true,
-            react: {
-                runtime: 'automatic'
-            }
-        }
-    }
+    ...swcOptions
 });
 
 export default defineConfig({

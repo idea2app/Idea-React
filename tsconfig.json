@@ -8,7 +8,7 @@
         "useDefineForClassFields": true,
         "jsx": "react-jsx",
         "skipLibCheck": true,
-        "lib": ["ES2024", "DOM"]
+        "lib": ["ES2024", "DOM", "DOM.Iterable"]
     },
     "include": ["*.ts", "source/**/*"],
     "typedocOptions": {

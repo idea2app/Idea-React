@@ -2,11 +2,11 @@
 
 A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstrap][3], built by **[idea2app][4] remote developers team**.
 
-[![MobX compatibility](https://img.shields.io/badge/Compatible-1?logo=mobx&label=MobX%206%2F7)][5]
-[![NPM Dependency](https://img.shields.io/librariesio/github/idea2app/Idea-React.svg)][6]
-[![CI & CD](https://github.com/idea2app/Idea-React/actions/workflows/main.yml/badge.svg)][7]
+[![MobX compatibility][5]][6]
+[![NPM Dependency][7]][8]
+[![CI & CD][9]][10]
 
-[![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][8]
+[![NPM][11]][12]
 
 - API document: https://idea2app.github.io/Idea-React/
 - Preview site: https://idea2app.github.io/Idea-React/preview/
@@ -22,35 +22,40 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 ### Components
 
-1. [Time](source/Time.tsx)
-2. [Time Distance](source/TimeDistance.tsx)
-3. [Timeline](source/Timeline/)
-4. [Countdown](source/Countdown.tsx)
-5. [Icon](source/Icon.tsx)
-6. [Avatar](source/Avatar.tsx)
-7. [Nameplate](source/Nameplate.tsx)
-8. [Text Truncate](source/TextTruncate.tsx)
-9. [Type Echo](source/TypeEcho.tsx)
-10. [Horizontal Marquee](source/HorizontalMarquee/)
-11. [Vertical Marquee](source/VerticalMarquee/)
-12. [Click Boundary](source/ClickBoundary.tsx)
-13. [Spinner Button](source/SpinnerButton.tsx)
-14. [Select](source/Select.tsx)
-15. [Month Calendar](source/MonthCalendar.tsx)
-16. [Code Block](source/CodeBlock.tsx)
-17. [Live TSX](source/LiveTSX.tsx)
-18. [Scroll Nav](source/ScrollNav/)
-19. [Page Nav](source/PageNav.tsx)
-20. [Editor](source/Editor.tsx)
-21. [Editor HTML](source/EditorHTML.tsx)
-22. [Table Spinner](source/TableSpinner.tsx)
-23. [Loading](source/Loading.tsx)
-24. [Share Box](source/ShareBox.tsx)
-25. [Overlay Box](source/OverlayBox.tsx)
-26. [Dialog](source/Dialog.tsx)
-27. [Toast](source/Toast.tsx)
-28. [User Rank](source/UserRank/)
-29. [Zodiac Bar](source/ZodiacBar.tsx)
+1. [Button](source/Button.tsx)
+2. [Badge](source/Badge.tsx)
+3. [Navbar](source/Navbar.tsx)
+4. [Menu](source/Menu.tsx)
+5. [Native Dialog](source/NativeDialog/index.tsx)
+6. [Time](source/Time.tsx)
+7. [Time Distance](source/TimeDistance.tsx)
+8. [Timeline](source/Timeline/)
+9. [Countdown](source/Countdown.tsx)
+10. [Icon](source/Icon.tsx)
+11. [Avatar](source/Avatar.tsx)
+12. [Nameplate](source/Nameplate.tsx)
+13. [Text Truncate](source/TextTruncate.tsx)
+14. [Type Echo](source/TypeEcho.tsx)
+15. [Horizontal Marquee](source/HorizontalMarquee/)
+16. [Vertical Marquee](source/VerticalMarquee/)
+17. [Click Boundary](source/ClickBoundary.tsx)
+18. [Spinner Button](source/SpinnerButton.tsx)
+19. [Select](source/Select.tsx)
+20. [Month Calendar](source/MonthCalendar.tsx)
+21. [Code Block](source/CodeBlock.tsx)
+22. [Live TSX](source/LiveTSX.tsx)
+23. [Scroll Nav](source/ScrollNav/)
+24. [Page Nav](source/PageNav.tsx)
+25. [Editor](source/Editor.tsx)
+26. [Editor HTML](source/EditorHTML.tsx)
+27. [Table Spinner](source/TableSpinner.tsx)
+28. [Loading](source/Loading.tsx)
+29. [Share Box](source/ShareBox.tsx)
+30. [Overlay Box](source/OverlayBox.tsx)
+31. [Dialog](source/Dialog.tsx)
+32. [Toast](source/Toast.tsx)
+33. [User Rank](source/UserRank/)
+34. [Zodiac Bar](source/ZodiacBar.tsx)
 
 #### Data components
 
@@ -67,10 +72,16 @@ Open Map component & model, have been migrated to https://github.com/idea2app/Op
 
 ## Usage
 
+```sh
+npm install idea-react mobx mobx-react react react-dom react-element-to-jsx-string
+```
+
+For the current alpha release, use `idea-react@next` instead of `idea-react`.
+
 ### Scaffolds
 
-1. MobX: [demo][9] & [usage][10]
-2. Next.js: [demo][11] & [usage][12]
+1. MobX: [demo][13] & [usage][14]
+2. Next.js: [demo][15] & [usage][16]
 
 ### CSS on CDN
 
@@ -199,37 +210,33 @@ export class ExamplePage extends Component {
 
 ## Development
 
-### Publish
+### Documentation
 
-1. update `version` in `package.json` file
+The [document workspace][17] provides a static website with MDX pages, theme switching,
+and local search, adapting the upstream website to Idea React.
 
-2. add Git tag
-
-```shell
-git tag vx.xx.x  # such as v2.0.0
+```sh
+pnpm install
+pnpm --filter @idea-react/document dev
 ```
 
-3. review tag
-
-```shell
-git tag
-```
-
-4. publish code with tag version
-
-```shell
-git push origin master --tags  # push all branches and tags on master
-```
+For build and deployment quick start, see the document workspace guide above.
+Contributor conventions, validation, and release instructions are in [AGENTS.md](AGENTS.md).
 
 [1]: https://reactjs.org/
 [2]: https://www.typescriptlang.org/
 [3]: https://getbootstrap.com/
-[4]: https://idea2app.github.io/
-[5]: https://mobx.js.org/
-[6]: https://libraries.io/npm/idea-react
-[7]: https://github.com/idea2app/Idea-React/actions/workflows/main.yml
-[8]: https://npm.im/idea-react/
-[9]: https://idea2app.github.io/React-MobX-Bootstrap-ts/
-[10]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx
-[11]: https://next-bootstrap-ts.vercel.app/
-[12]: https://github.com/idea2app/next-bootstrap-ts/blob/main/pages/component.tsx
+[4]: https://idea2.app/
+[5]: https://img.shields.io/badge/Compatible-1?logo=mobx&label=MobX%206%2F7
+[6]: https://mobx.js.org/
+[7]: https://img.shields.io/librariesio/github/idea2app/Idea-React.svg
+[8]: https://libraries.io/npm/idea-react
+[9]: https://github.com/idea2app/Idea-React/actions/workflows/main.yml/badge.svg
+[10]: https://github.com/idea2app/Idea-React/actions/workflows/main.yml
+[11]: https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true
+[12]: https://npm.im/idea-react/
+[13]: https://idea2app.github.io/React-MobX-Bootstrap-ts/
+[14]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx
+[15]: https://next-bootstrap-ts.vercel.app/
+[16]: https://github.com/idea2app/next-bootstrap-ts/blob/main/pages/component.tsx
+[17]: document/README.md

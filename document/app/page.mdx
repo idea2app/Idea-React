@@ -1,59 +1,95 @@
-export default function DocumentLayout({ children }) {
-    return (
-        <main className="mx-auto flex max-w-4xl flex-col gap-6 px-6 py-10 [&_h1]:text-4xl [&_h1]:font-semibold [&_h2]:text-2xl [&_h2]:font-semibold [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-slate-100 [&_pre]:p-4 [&_a]:underline">
-            {children}
-        </main>
-    );
-}
+import { Icon } from '../../source/Icon';
+import { MenuItem } from '../../source/Menu';
+import { CopyCommand } from '../component/CopyCommand';
+import { DocumentationAction } from '../component/Documentation/Action';
+import { DocumentationFooter } from '../component/Documentation/Footer';
+import { DocumentationHero } from '../component/Documentation/Hero';
+import heroStyles from '../component/Documentation/Hero/style.module.less';
+import { DropdownMenu } from '../component/DropdownMenu';
+import { footerColumns, site, versions } from './site';
 
-# Idea React documentation
+<DocumentationHero
+    title="Build React apps with less glue and more possibility"
+    announcement={{ label: 'Idea React 3 is now in alpha', href: versions[0].href }}
+>
 
-This documentation is written in **MDX** and rendered to static HTML at build time
-with vinext. No Worker or Node.js server is needed to host the exported site.
+<div className="text-lg fg-2 text-balance">
 
-## Development
+A TypeScript-first collection of advanced React components, powered by MobX.
+From dialogs and notifications to live code, editors, and timelines, Idea React
+brings the building blocks together so you can focus on your application.
+[Get to know Idea React.][1]
 
-Install workspace dependencies with `pnpm install` from the repository root, then
-start the documentation development server:
+</div>
 
-```sh
-pnpm --filter @idea-react/document dev
-```
+<div className="d-flex flex-column sm:flex-row flex-wrap justify-content-center align-items-stretch gap-4 my-3 w-100">
+    <CopyCommand>{site.install}</CopyCommand>
+    <DropdownMenu
+        toggleProps={{
+            variant: 'solid',
+            theme: 'inverse',
+            size: 'lg',
+            styled: true,
+            className: 'rounded-8 w-100'
+        }}
+        label={
+            <>
+                <Icon name="rocket-takeoff" aria-hidden="true" />
+                For Agents
+            </>
+        }
+    >
+        <MenuItem href={`${site.repository}/blob/main/AGENTS.md`}>Read AGENTS.md</MenuItem>
+        <MenuItem href={`${site.repository}/tree/main/source`}>Explore component source</MenuItem>
+        <MenuItem href={site.docs}>Read API reference</MenuItem>
+    </DropdownMenu>
+    <DocumentationAction href={site.docs} icon="book" label="Read the docs" />
+</div>
 
-Add documentation routes as `app/<route>/page.mdx`. MDX supports Markdown,
-JSX, and imported React components.
+<div className="d-flex flex-wrap justify-content-center align-items-center gap-3 fg-2 text-sm">
+    <span>Currently v{site.version}</span>
+    {[
+        { label: 'API reference', href: site.docs },
+        { label: 'All releases', href: `${site.repository}/releases` }
+    ].map(({ href, label }) => (
+        <a key={href} href={href} className="fg-2">
+            {label}
+        </a>
+    ))}
+</div>
 
-<aside className="rounded-lg border border-orange-200 bg-orange-50 p-4">
-    This callout is JSX embedded in Markdown.
+<aside
+    className={`${heroStyles.promotion} mt-7 w-100 d-flex align-items-center gap-5 rounded-7 bg-1 p-6 text-start`}
+    aria-label="Idea React community"
+>
+<div className="flex-shrink-0 fg-accent">
+    <Icon name="code-square" size={2} aria-hidden="true" />
+</div>
+<div className="text-sm fg-2">
+
+Built by the idea2app community.
+[Meet the contributors][2] and help shape what comes next.
+
+</div>
 </aside>
 
-## Static build
+</DocumentationHero>
 
-```sh
-pnpm --filter @idea-react/document test
-pnpm --filter @idea-react/document build
-pnpm --filter @idea-react/document start
-```
+<DocumentationFooter columns={footerColumns}>
 
-The `test` script checks TypeScript with `tsc --noEmit`; use the build and preview
-to check MDX content and the generated pages.
+Advanced React components by [idea2app][3], built with the help of [our contributors][2].
 
-Publish only the contents of `document/dist/client` to a static host. The build
-includes HTML, JavaScript, CSS, static navigation data, and a 404 page.
+Licensed <a href="https://spdx.org/licenses/LGPL-3.0-or-later.html">{site.license}</a>.
+Currently v{site.version}.
 
-## Deployment
+An independent React adaptation of the [upstream website][4].
+Upstream code: [MIT][5]; documentation: [CC BY 3.0][6].
 
-The default configuration serves at the domain root. Before deploying under a
-subdirectory, configure `basePath` in `next.config.ts`. For this repository's
-GitHub Pages project URL, use `/Idea-React`.
+</DocumentationFooter>
 
-This documentation workspace is not yet part of the root build or release
-deployment. The existing release workflow still publishes the TypeDoc and preview
-site from `docs`.
-
-Pure static exports cannot use request-time APIs, Server Actions, or on-demand
-image optimization. Dynamic routes must list their paths with
-`generateStaticParams()`.
-
-Learn more about [Idea React](https://github.com/idea2app/Idea-React) and
-[vinext](https://github.com/cloudflare/vinext).
+[1]: https://github.com/idea2app/Idea-React#usage
+[2]: https://github.com/idea2app/Idea-React/graphs/contributors
+[3]: https://idea2.app/
+[4]: https://getbootstrap.com/
+[5]: ./BOOTSTRAP-LICENSE.txt
+[6]: https://creativecommons.org/licenses/by/3.0/

@@ -1,0 +1,4 @@
+.hiddenBackdrop {
+    --bs-dialog-backdrop-bg: transparent;
+    --bs-dialog-backdrop-blur: 0;
+}
