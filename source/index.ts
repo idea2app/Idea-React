@@ -23,6 +23,7 @@ export * from './PageNav';
 export * from './ScrollNav';
 export * from './Select';
 export * from './ShareBox';
+export * from './Spinner';
 export * from './SpinnerButton';
 export * from './TableSpinner';
 export * from './TextTruncate';
