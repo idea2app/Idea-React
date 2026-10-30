@@ -6,14 +6,12 @@
         radial-gradient(ellipse at top right, #ffe16b70, transparent 50%),
         radial-gradient(ellipse at center right, #9b64ee70, transparent 50%),
         radial-gradient(ellipse at center left, #f283bd60, transparent 50%);
+
+    @media (min-width: 576px) {
+        min-height: calc(100svh - 4.5rem);
+    }
 }
 
 .promotion {
     max-width: 25rem;
-}
-
-@media (min-width: 576px) {
-    .masthead {
-        min-height: calc(100svh - 4.5rem);
-    }
 }

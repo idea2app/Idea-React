@@ -6,3 +6,7 @@ declare module '*.png' {
     const path: string;
     export default path;
 }
+declare module '*.module.css' {
+    const classes: Readonly<Record<string, string>>;
+    export default classes;
+}

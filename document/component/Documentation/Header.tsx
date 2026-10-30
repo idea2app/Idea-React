@@ -5,21 +5,15 @@ import { MenuItem } from '../../../source/Menu';
 import { Navbar } from '../../../source/Navbar';
 import { DropdownMenu } from '../DropdownMenu';
 
-export interface DocumentationLink {
-    label: string;
-    href: string;
-}
+export type DocumentationLink = Record<'label' | 'href', string>;
 
-export interface DocumentationHeaderProps {
-    links: readonly DocumentationLink[];
-    versions: readonly DocumentationLink[];
+export type DocumentationHeaderProps = Record<
+    'links' | 'versions',
+    readonly DocumentationLink[]
+> & {
     version: string;
-    homeHref?: string;
-    search?: ReactNode;
-    colorMode?: ReactNode;
-    brand?: string;
-    repositoryHref?: string;
-}
+} & Partial<Record<'homeHref' | 'brand' | 'repositoryHref', string>> &
+    Partial<Record<'search' | 'colorMode', ReactNode>>;
 
 export const DocumentationHeader: FC<DocumentationHeaderProps> = ({
     links,

@@ -16,8 +16,10 @@ it('maps solid, subtle, outline, theme, and pill classes without leaking props',
         'badge badge-subtle theme-warning rounded-pill'
     );
     assert.equal(screen.getByText('Alpha').hasAttribute('pill'), false);
+
     rerender(<Badge variant="outline">Alpha</Badge>);
     assert.equal(screen.getByText('Alpha').className, 'badge badge-outline');
+
     rerender(<Badge>Alpha</Badge>);
     assert.equal(screen.getByText('Alpha').className, 'badge');
 });

@@ -8,5 +8,5 @@
         "allowImportingTsExtensions": true,
         "types": ["node"]
     },
-    "include": ["./**/*.ts", "./**/*.tsx", "./**/*.mts", "../source/style.d.ts"]
+    "include": ["./**/*.ts", "./**/*.tsx", "./**/*.mts", "../source/types.d.ts"]
 }

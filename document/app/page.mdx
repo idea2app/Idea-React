@@ -1,22 +1,11 @@
 import { Icon } from '../../source/Icon';
 import { MenuItem } from '../../source/Menu';
-import { ColorModeToggle } from '../component/ColorMode';
 import { CopyCommand } from '../component/CopyCommand';
 import { DocumentationAction } from '../component/Documentation/Action';
 import { DocumentationFooter } from '../component/Documentation/Footer';
-import { DocumentationHeader } from '../component/Documentation/Header';
 import { DocumentationHero } from '../component/Documentation/Hero';
-import { DocumentationSearch } from '../component/Documentation/Search';
 import { DropdownMenu } from '../component/DropdownMenu';
-import { footerColumns, navigation, searchEntries, site, versions } from './site';
-
-<DocumentationHeader
-    links={navigation}
-    versions={versions}
-    version={site.version}
-    search={<DocumentationSearch entries={searchEntries} />}
-    colorMode={<ColorModeToggle />}
-/>
+import { footerColumns, site, versions } from './site';
 
 <DocumentationHero
     title="Build React apps with less glue and more possibility"
@@ -52,7 +41,7 @@ import { footerColumns, navigation, searchEntries, site, versions } from './site
         </aside>
     }
 >
-    <CopyCommand command={site.install} />
+    <CopyCommand>{site.install}</CopyCommand>
     <DropdownMenu
         toggleProps={{
             variant: 'solid',
@@ -68,33 +57,26 @@ import { footerColumns, navigation, searchEntries, site, versions } from './site
             </>
         }
     >
-        <MenuItem href={`${site.repository}/blob/master/AGENTS.md`}>Read AGENTS.md</MenuItem>
-        <MenuItem href={`${site.repository}/tree/master/source`}>Explore component source</MenuItem>
+        <MenuItem href={`${site.repository}/blob/main/AGENTS.md`}>Read AGENTS.md</MenuItem>
+        <MenuItem href={`${site.repository}/tree/main/source`}>Explore component source</MenuItem>
         <MenuItem href={site.docs}>Read API reference</MenuItem>
     </DropdownMenu>
     <DocumentationAction href={site.docs} icon="book" label="Read the docs" />
 </DocumentationHero>
 
-<DocumentationFooter
-    columns={footerColumns}
-    children={
-        <>
-            <p>
-                Advanced React components by <a href="https://idea2app.github.io/">idea2app</a>,
-                built with the help of{' '}
-                <a href={`${site.repository}/graphs/contributors`}>our contributors</a>.
-            </p>
-            <p>
-                Licensed{' '}
-                <a href="https://spdx.org/licenses/LGPL-3.0-or-later.html">{site.license}</a>.
-                Currently v{site.version}.
-            </p>
-            <p>
-                An independent React adaptation of the{' '}
-                <a href="https://getbootstrap.com/">upstream homepage</a>. Upstream code:{' '}
-                <a href="./BOOTSTRAP-LICENSE.txt">MIT</a>; documentation:{' '}
-                <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
-            </p>
-        </>
-    }
-/>
+<DocumentationFooter columns={footerColumns}>
+
+Advanced React components by [idea2app][1], built with the help of <a href={`${site.repository}/graphs/contributors`}>our contributors</a>.
+
+Licensed <a href="https://spdx.org/licenses/LGPL-3.0-or-later.html">{site.license}</a>.
+Currently v{site.version}.
+
+An independent React adaptation of the [upstream website][2].
+Upstream code: [MIT][3]; documentation: [CC BY 3.0][4].
+
+</DocumentationFooter>
+
+[1]: https://idea2.app/
+[2]: https://getbootstrap.com/
+[3]: ./BOOTSTRAP-LICENSE.txt
+[4]: https://creativecommons.org/licenses/by/3.0/

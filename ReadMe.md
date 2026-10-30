@@ -2,11 +2,11 @@
 
 A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstrap][3], built by **[idea2app][4] remote developers team**.
 
-[![MobX compatibility](https://img.shields.io/badge/Compatible-1?logo=mobx&label=MobX%206%2F7)][5]
-[![NPM Dependency](https://img.shields.io/librariesio/github/idea2app/Idea-React.svg)][6]
-[![CI & CD](https://github.com/idea2app/Idea-React/actions/workflows/main.yml/badge.svg)][7]
+[![MobX compatibility][47]][5]
+[![NPM Dependency][48]][6]
+[![CI & CD][49]][7]
 
-[![NPM](https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true)][8]
+[![NPM][50]][8]
 
 - API document: https://idea2app.github.io/Idea-React/
 - Preview site: https://idea2app.github.io/Idea-React/preview/
@@ -22,40 +22,40 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 ### Components
 
-1. [Time](source/Time.tsx)
-2. [Time Distance](source/TimeDistance.tsx)
-3. [Timeline](source/Timeline/)
-4. [Countdown](source/Countdown.tsx)
-5. [Icon](source/Icon.tsx)
-6. [Avatar](source/Avatar.tsx)
-7. [Nameplate](source/Nameplate.tsx)
-8. [Text Truncate](source/TextTruncate.tsx)
-9. [Type Echo](source/TypeEcho.tsx)
-10. [Horizontal Marquee](source/HorizontalMarquee/)
-11. [Vertical Marquee](source/VerticalMarquee/)
-12. [Click Boundary](source/ClickBoundary.tsx)
-13. [Spinner Button](source/SpinnerButton.tsx)
-14. [Select](source/Select.tsx)
-15. [Month Calendar](source/MonthCalendar.tsx)
-16. [Code Block](source/CodeBlock.tsx)
-17. [Live TSX](source/LiveTSX.tsx)
-18. [Scroll Nav](source/ScrollNav/)
-19. [Page Nav](source/PageNav.tsx)
-20. [Editor](source/Editor.tsx)
-21. [Editor HTML](source/EditorHTML.tsx)
-22. [Table Spinner](source/TableSpinner.tsx)
-23. [Loading](source/Loading.tsx)
-24. [Share Box](source/ShareBox.tsx)
-25. [Overlay Box](source/OverlayBox.tsx)
-26. [Dialog](source/Dialog.tsx)
-27. [Toast](source/Toast.tsx)
-28. [User Rank](source/UserRank/)
-29. [Zodiac Bar](source/ZodiacBar.tsx)
-30. [Button](source/Button.tsx)
-31. [Badge](source/Badge.tsx)
-32. [Navbar](source/Navbar.tsx)
-33. [Menu](source/Menu.tsx)
-34. [Native Dialog](source/NativeDialog/index.tsx)
+1. [Button][13]
+2. [Badge][14]
+3. [Navbar][15]
+4. [Menu][16]
+5. [Native Dialog][17]
+6. [Time][18]
+7. [Time Distance][19]
+8. [Timeline][20]
+9. [Countdown][21]
+10. [Icon][22]
+11. [Avatar][23]
+12. [Nameplate][24]
+13. [Text Truncate][25]
+14. [Type Echo][26]
+15. [Horizontal Marquee][27]
+16. [Vertical Marquee][28]
+17. [Click Boundary][29]
+18. [Spinner Button][30]
+19. [Select][31]
+20. [Month Calendar][32]
+21. [Code Block][33]
+22. [Live TSX][34]
+23. [Scroll Nav][35]
+24. [Page Nav][36]
+25. [Editor][37]
+26. [Editor HTML][38]
+27. [Table Spinner][39]
+28. [Loading][40]
+29. [Share Box][41]
+30. [Overlay Box][42]
+31. [Dialog][43]
+32. [Toast][44]
+33. [User Rank][45]
+34. [Zodiac Bar][46]
 
 #### Data components
 
@@ -67,8 +67,8 @@ Open Map component & model, have been migrated to https://github.com/idea2app/Op
 
 ### Utilities
 
-1. [`text2color`](source/color.ts)
-2. [`animate()`](source/animate.ts)
+1. [`text2color`][51]
+2. [`animate()`][52]
 
 ## Usage
 
@@ -206,21 +206,14 @@ export class ExamplePage extends Component {
 
 ### Documentation
 
-The [document workspace](document/README.md) builds a static website with MDX support
-with vinext and Vite. Its homepage adapts the upstream design to Idea React branding,
+The [document workspace][53] builds a static website with MDX support
+with ViNext and Vite. Its pages adapt the upstream website design to Idea React branding,
 version, license, and project links.
 
 ```sh
 pnpm install
 pnpm --filter @idea-react/document dev
 ```
-
-The [MDX homepage](document/app/page.mdx) consumes the official v6 component wrappers
-in [source/](source/), styled with Bootstrap CSS from unpkg.com.
-Bootstrap utilities handle layout; CSS Modules cover site-specific appearance.
-Site-only header, hero, footer, search, icons, and styles live in
-[document/component/](document/component/), not in the library's public exports.
-Interactive behavior uses MobX models and class components with stage-3 decorators.
 
 ```sh
 pnpm test:components
@@ -235,13 +228,11 @@ the native Node.js test runner (Node.js 22.18+) to run the
 public component unit tests in `test/ComponentName.test.tsx`, excluding
 documentation-site-only components. Deploy only `document/dist/client/` to
 a static host, without a Worker or Node.js runtime. Set `basePath` in
-[document/next.config.ts](document/next.config.ts) before building for a subdirectory
+[document/next.config.ts][54] before building for a subdirectory
 such as `/Idea-React`.
 
 The root build and release deployment still use the legacy TypeDoc and preview
 output in `docs/`. Build and deploy the MDX workspace separately.
-The production preview omits source maps to avoid Parcel resolving TypeScript
-CSS Module source paths relative to the preview directory.
 
 ### Publish
 
@@ -268,7 +259,7 @@ git push origin master --tags  # push all branches and tags on master
 [1]: https://reactjs.org/
 [2]: https://www.typescriptlang.org/
 [3]: https://getbootstrap.com/
-[4]: https://idea2app.github.io/
+[4]: https://idea2.app/
 [5]: https://mobx.js.org/
 [6]: https://libraries.io/npm/idea-react
 [7]: https://github.com/idea2app/Idea-React/actions/workflows/main.yml
@@ -277,3 +268,45 @@ git push origin master --tags  # push all branches and tags on master
 [10]: https://github.com/idea2app/React-MobX-Bootstrap-ts/blob/master/src/page/Component.tsx
 [11]: https://next-bootstrap-ts.vercel.app/
 [12]: https://github.com/idea2app/next-bootstrap-ts/blob/main/pages/component.tsx
+[13]: source/Button.tsx
+[14]: source/Badge.tsx
+[15]: source/Navbar.tsx
+[16]: source/Menu.tsx
+[17]: source/NativeDialog/index.tsx
+[18]: source/Time.tsx
+[19]: source/TimeDistance.tsx
+[20]: source/Timeline/
+[21]: source/Countdown.tsx
+[22]: source/Icon.tsx
+[23]: source/Avatar.tsx
+[24]: source/Nameplate.tsx
+[25]: source/TextTruncate.tsx
+[26]: source/TypeEcho.tsx
+[27]: source/HorizontalMarquee/
+[28]: source/VerticalMarquee/
+[29]: source/ClickBoundary.tsx
+[30]: source/SpinnerButton.tsx
+[31]: source/Select.tsx
+[32]: source/MonthCalendar.tsx
+[33]: source/CodeBlock.tsx
+[34]: source/LiveTSX.tsx
+[35]: source/ScrollNav/
+[36]: source/PageNav.tsx
+[37]: source/Editor.tsx
+[38]: source/EditorHTML.tsx
+[39]: source/TableSpinner.tsx
+[40]: source/Loading.tsx
+[41]: source/ShareBox.tsx
+[42]: source/OverlayBox.tsx
+[43]: source/Dialog.tsx
+[44]: source/Toast.tsx
+[45]: source/UserRank/
+[46]: source/ZodiacBar.tsx
+[47]: https://img.shields.io/badge/Compatible-1?logo=mobx&label=MobX%206%2F7
+[48]: https://img.shields.io/librariesio/github/idea2app/Idea-React.svg
+[49]: https://github.com/idea2app/Idea-React/actions/workflows/main.yml/badge.svg
+[50]: https://nodei.co/npm/idea-react.png?downloads=true&downloadRank=true&stars=true
+[51]: source/color.ts
+[52]: source/animate.ts
+[53]: document/README.md
+[54]: document/next.config.ts

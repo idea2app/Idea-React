@@ -1,10 +1,6 @@
 import { action, computed, observable } from 'mobx';
 
-export interface DocumentationSearchEntry {
-    title: string;
-    href: string;
-    description: string;
-}
+export type DocumentationSearchEntry = Record<'title' | 'href' | 'description', string>;
 
 export class DocumentationSearchModel {
     @observable accessor query = '';

@@ -204,6 +204,9 @@ importers:
 
   document:
     dependencies:
+      mobx-restful:
+        specifier: ^2.1.5
+        version: 2.1.5(mobx@7.1.3)(typescript@7.0.2)
       react:
         specifier: ^19.3.0
         version: 19.3.1
@@ -3001,6 +3004,9 @@ packages:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
 
+  idb-keyval@6.3.0:
+    resolution: {integrity: sha512-um+2dgAWmYsu615EXpWVwSmapJhON0G43t3Ka/EVaohzPQXSMqKEqeDK/oIW3Ow+BXaF2PvSc+oBTFp793A5Ow==}
+
   ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
 
@@ -3285,6 +3291,12 @@ packages:
   koa@3.2.1:
     resolution: {integrity: sha512-e7IpWJrnanNUroVK2taAgMxoEZvHLXdQiNjeExSu/DEIWm83jaKGBgb7tLmu2rMYpA027qFB3iLR/k3AVpFRnA==}
     engines: {node: '>= 18'}
+
+  koajax@3.3.1:
+    resolution: {integrity: sha512-rVkV3KmFJXDZ1O0OK//bRjhMVNxfwbZMI+0LZBGpj1jY0fsLOsUATtuBedDbaeU7GDMB5V2dNYqDaIhBKeeHpA==}
+    peerDependencies:
+      core-js: '>=3'
+      jsdom: '>=21'
 
   koapache@3.0.0:
     resolution: {integrity: sha512-fggeJ9IObzrmCIcAqD/QnYsivbzCBWMpg37KpmLeMP6N8KvL7KG+3pAGuHHEeuMoUI2+Hrh/SWS5gGE0htqIlw==}
@@ -3647,6 +3659,11 @@ packages:
     peerDependencies:
       mobx: ^7.0.0
       react: ^18 || ^19
+
+  mobx-restful@2.1.5:
+    resolution: {integrity: sha512-jQyT43r4i/f8+cZPyTBl8jMv8jFsHluFGAfK7ct1BDM/mpLmE6+JJWsY9KqTmXLib20a7ss8spsFkaSUYiSeQg==}
+    peerDependencies:
+      mobx: '>=6.11'
 
   mobx@7.1.3:
     resolution: {integrity: sha512-H2NcS5ylMsqYn7v4WpSdzv5YWPmw5XTV6pG2NvY0qYbh95FXbswZJ7pn7wU0rOtUvRzk+3t4AOX2eircoN+vBg==}
@@ -4760,6 +4777,10 @@ packages:
 
   weak-lru-cache@1.2.2:
     resolution: {integrity: sha512-DEAoo25RfSYMuTGc9vPJzZcZullwIqRDSI9LOy+fkCJPi6hykCnfKaXTuPBDuXAUcqHXyOgFtHNp/kB2FjYHbw==}
+
+  web-streams-polyfill@4.3.0:
+    resolution: {integrity: sha512-/Gnggvj9oSrEvJbDyyPtAnxBt5fGQM2iWOKQNu7ie1OxDgK40iZpyV3TKaRiEzVj1oA1UxKnEy9XPXh6PW3eVw==}
+    engines: {node: '>= 8'}
 
   web-utility@4.8.1:
     resolution: {integrity: sha512-t4Xylnh7wQyh4alossmu7XvLwoknJa5iTwYdZRDL50hxorusWv/bRiX9jxFvs0hFoDg5J1FjnVQ8lZei4w6L6Q==}
@@ -7930,6 +7951,8 @@ snapshots:
       safer-buffer: 2.1.2
     optional: true
 
+  idb-keyval@6.3.0: {}
+
   ieee754@1.2.1: {}
 
   ignore@5.3.2: {}
@@ -8225,6 +8248,16 @@ snapshots:
       statuses: 2.0.2
       type-is: 2.1.0
       vary: 1.1.2
+
+  koajax@3.3.1(typescript@7.0.2):
+    dependencies:
+      '@swc/helpers': 0.5.23
+      regenerator-runtime: 0.14.1
+      web-streams-polyfill: 4.3.0
+      web-utility: 4.8.1(typescript@7.0.2)
+    transitivePeerDependencies:
+      - element-internals-polyfill
+      - typescript
 
   koapache@3.0.0(supports-color@7.2.0)(typescript@5.9.3):
     dependencies:
@@ -8775,6 +8808,20 @@ snapshots:
       mobx: 7.1.3
       mobx-react-lite: 5.1.2(mobx@7.1.3)(react@19.3.1)
       react: 19.3.1
+
+  mobx-restful@2.1.5(mobx@7.1.3)(typescript@7.0.2):
+    dependencies:
+      '@swc/helpers': 0.5.23
+      idb-keyval: 6.3.0
+      koajax: 3.3.1(typescript@7.0.2)
+      mobx: 7.1.3
+      regenerator-runtime: 0.14.1
+      web-utility: 4.8.1(typescript@7.0.2)
+    transitivePeerDependencies:
+      - core-js
+      - element-internals-polyfill
+      - jsdom
+      - typescript
 
   mobx@7.1.3: {}
 
@@ -10045,12 +10092,21 @@ snapshots:
 
   weak-lru-cache@1.2.2: {}
 
+  web-streams-polyfill@4.3.0: {}
+
   web-utility@4.8.1(typescript@5.9.3):
     dependencies:
       '@swc/helpers': 0.5.23
       mime: 4.1.2
       regenerator-runtime: 0.14.1
       typescript: 5.9.3
+
+  web-utility@4.8.1(typescript@7.0.2):
+    dependencies:
+      '@swc/helpers': 0.5.23
+      mime: 4.1.2
+      regenerator-runtime: 0.14.1
+      typescript: 7.0.2
 
   web-vitals@4.2.4: {}
 

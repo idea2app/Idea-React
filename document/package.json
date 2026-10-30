@@ -4,6 +4,7 @@
     "private": true,
     "type": "module",
     "dependencies": {
+        "mobx-restful": "^2.1.5",
         "react": "^19.3.0",
         "react-dom": "^19.3.0",
         "react-server-dom-webpack": "^19.3.1",

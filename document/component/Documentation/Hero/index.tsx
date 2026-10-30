@@ -1,19 +1,18 @@
-import { FC, ReactNode } from 'react';
+import { FC, PropsWithChildren, ReactNode } from 'react';
 
 import { Badge } from '../../../../source/Badge';
 import { Icon } from '../../../../source/Icon';
 import { DocumentationLink } from '../Header';
-import styles from './style.module.css';
+import styles from './style.module.less';
 
-export interface DocumentationHeroProps {
-    title: string;
-    description: ReactNode;
-    announcement: DocumentationLink;
-    version: string;
-    links: readonly DocumentationLink[];
-    children: ReactNode;
-    promotion?: ReactNode;
-}
+export type DocumentationHeroProps = PropsWithChildren<
+    Record<'title' | 'version', string> & {
+        description: ReactNode;
+        announcement: DocumentationLink;
+        links: readonly DocumentationLink[];
+        promotion?: ReactNode;
+    }
+>;
 
 export const DocumentationHero: FC<DocumentationHeroProps> = ({
     title,

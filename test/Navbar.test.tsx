@@ -15,8 +15,10 @@ it('uses official responsive expansion classes on a labelled navigation landmark
         screen.getByRole('navigation', { name: 'Primary' }).className,
         'navbar lg:navbar-expand'
     );
+
     rerender(<Navbar className="custom" expand />);
     assert.equal(screen.getByRole('navigation').className, 'navbar navbar-expand custom');
+
     rerender(<Navbar />);
     assert.equal(screen.getByRole('navigation').className, 'navbar');
 });

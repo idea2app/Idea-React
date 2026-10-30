@@ -21,6 +21,7 @@ it('opens a native modal, closes with Escape and returns focus to its trigger', 
     act(() => ref.current?.show());
     assert.equal(screen.getByRole('dialog', { name: 'Example' }).className, 'dialog');
     assert.equal(ref.current?.open, true);
+
     fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' });
     assert.equal(ref.current?.open, false);
     assert.equal(document.activeElement, trigger);
@@ -35,6 +36,7 @@ it('honors static backdrops and keyboard=false without closing', () => {
     fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' });
     fireEvent.click(screen.getByRole('dialog'), { clientX: -1, clientY: -1 });
     assert.equal(ref.current?.open, true);
+
     rerender(<NativeDialog ref={ref} aria-label="Example" />);
     fireEvent.click(screen.getByRole('dialog'), { clientX: -1, clientY: -1 });
     assert.equal(ref.current?.open, false);
@@ -48,6 +50,7 @@ it('supports non-modal display and idempotent show/close calls', () => {
         ref.current?.show();
     });
     assert.equal(ref.current?.open, true);
+
     act(() => {
         ref.current?.close();
         ref.current?.close();

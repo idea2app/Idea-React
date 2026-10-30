@@ -1,6 +1,6 @@
 import './register.mts';
 
-import { after,afterEach } from 'node:test';
+import { after, afterEach } from 'node:test';
 
 import { Window } from 'happy-dom';
 
@@ -30,9 +30,7 @@ Object.defineProperty(globalThis, 'IS_REACT_ACT_ENVIRONMENT', {
 
 const { cleanup } = await import('@testing-library/react');
 
-afterEach(() => {
-    cleanup();
-});
+afterEach(cleanup);
 
 after(() => browser.happyDOM.close());
 

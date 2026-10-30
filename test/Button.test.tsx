@@ -15,6 +15,7 @@ it('maps official variants, themes, sizes, and native button behavior', () => {
     const button = screen.getByRole('button', { name: 'Save' });
     assert.ok(button.className.includes('btn-outline theme-accent btn-lg'));
     assert.equal(button.getAttribute('type'), 'button');
+
     fireEvent.click(button);
     assert.equal(onClick.mock.callCount(), 1);
 });
@@ -33,10 +34,12 @@ it('preserves submit semantics and disables buttons and links', () => {
     );
     assert.equal(screen.getByText('Submit').getAttribute('type'), 'submit');
     assert.equal(screen.getByText('Submit').hasAttribute('disabled'), true);
+
     const link = screen.getByText('Docs');
     assert.equal(link.getAttribute('href'), null);
     assert.equal(link.getAttribute('aria-disabled'), 'true');
     assert.equal(link.getAttribute('tabindex'), '-1');
+
     fireEvent.click(link);
     assert.equal(onClick.mock.callCount(), 0);
 });

@@ -5,27 +5,25 @@ import { Component } from 'react';
 
 import { Button } from '../../../source/Button';
 import { Icon } from '../../../source/Icon';
-import { ClipboardModel } from './Model';
+import { ClipboardModel } from './model';
 
 export interface CopyCommandProps {
-    command: string;
+    children: string;
 }
 
 @observer
 export class CopyCommand extends Component<CopyCommandProps> {
     model = new ClipboardModel();
 
-    handleCopy = () => {
-        void this.model.copy(this.props.command);
-    };
+    handleCopy = () => void this.model.copy(this.props.children);
 
     render() {
-        const { command } = this.props;
+        const { children } = this.props;
         const { status, error } = this.model;
 
         return (
             <div className="d-flex position-relative align-items-center justify-content-between gap-7 border rounded-8 bg-1 px-5 py-4">
-                <code className="text-sm fg-body text-break">{command}</code>
+                <code className="text-sm fg-body text-break">{children}</code>
                 <Button
                     type="button"
                     variant="text"

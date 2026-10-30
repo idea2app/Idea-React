@@ -1,6 +1,6 @@
 # Idea React website
 
-The Idea React homepage and documentation workspace, built with ViNext and Vite.
+The Idea React documentation website, built with ViNext and Vite to adapt the upstream website.
 It exports static files and needs no Node.js server or Cloudflare Worker.
 
 ## Get started
@@ -12,13 +12,7 @@ pnpm install
 pnpm --filter @idea-react/document dev
 ```
 
-The [homepage](app/page.mdx) uses MDX to keep the page composition shallow.
-MDX is also suitable for non-documentation pages when it simplifies the markup.
-Reusable library components live in [source/](../source/); website-only components
-live in [component/](component/).
-
-Styles use Bootstrap 6 from unpkg.com, with Bootstrap utilities first and CSS
-Modules for site-specific appearance. Tailwind CSS is not used.
+The site supports MDX and uses Bootstrap 6 styles from unpkg.com.
 
 ## Build and deploy
 
@@ -29,6 +23,8 @@ pnpm --filter @idea-react/document start
 ```
 
 Deploy only `dist/client/` to a static host. Set `basePath` in
-[next.config.ts](next.config.ts) before building for a subdirectory.
+[next.config.ts][1] before building for a subdirectory.
 The repository's root build and release workflow still publish the legacy
 TypeDoc and preview site; this workspace is built and deployed separately.
+
+[1]: next.config.ts

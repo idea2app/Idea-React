@@ -1,14 +1,13 @@
-import { FC, ReactNode } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 import { Icon } from '../../../source/Icon';
 import { DocumentationLink } from './Header';
 
-export interface DocumentationFooterProps {
+export type DocumentationFooterProps = PropsWithChildren<{
     columns: readonly { title: string; links: readonly DocumentationLink[] }[];
-    children: ReactNode;
     homeHref?: string;
     brand?: string;
-}
+}>;
 
 export const DocumentationFooter: FC<DocumentationFooterProps> = ({
     columns,

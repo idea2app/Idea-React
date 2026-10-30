@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames';
-import { ComponentPropsWithRef, FC } from 'react';
+import { ComponentPropsWithRef, FC, MouseEvent } from 'react';
 
 export type ComponentTheme =
     'primary' | 'accent' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'inverse';
@@ -20,9 +20,10 @@ type ButtonAttributes = ComponentPropsWithRef<'button'> & { href?: never };
 type ButtonElementAttributes = ButtonAttributes | ButtonLinkAttributes;
 export type ButtonProps = ButtonStyleProps & ButtonElementAttributes;
 
-function isButtonLink(props: ButtonElementAttributes): props is ButtonLinkAttributes {
-    return typeof props.href === 'string';
-}
+const isButtonLink = (props: ButtonElementAttributes): props is ButtonLinkAttributes =>
+    typeof props.href === 'string';
+
+const preventNavigation = (event: MouseEvent<HTMLAnchorElement>) => event.preventDefault();
 
 export const Button: FC<ButtonProps> = ({
     variant,
@@ -43,20 +44,16 @@ export const Button: FC<ButtonProps> = ({
         className
     );
 
-    if (isButtonLink(attributes)) {
-        return (
-            <a
-                {...attributes}
-                className={classes}
-                href={disabled ? undefined : attributes.href}
-                aria-disabled={disabled || undefined}
-                tabIndex={disabled ? -1 : attributes.tabIndex}
-                onClick={disabled ? event => event.preventDefault() : attributes.onClick}
-            />
-        );
-    }
-
-    return (
+    return isButtonLink(attributes) ? (
+        <a
+            {...attributes}
+            className={classes}
+            href={disabled ? undefined : attributes.href}
+            aria-disabled={disabled || undefined}
+            tabIndex={disabled ? -1 : attributes.tabIndex}
+            onClick={disabled ? preventNavigation : attributes.onClick}
+        />
+    ) : (
         <button
             {...attributes}
             type={attributes.type || 'button'}

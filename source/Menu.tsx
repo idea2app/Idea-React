@@ -20,15 +20,6 @@ export const MenuItem: FC<ButtonProps> = ({ className, ...props }) => (
     <Button {...props} className={classNames('menu-item', className)} />
 );
 
-export class MenuModel {
-    @observable accessor open = false;
-
-    @action
-    setOpen(open: boolean) {
-        this.open = open;
-    }
-}
-
 export interface MenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
     label: ReactNode;
     autoClose?: boolean | 'inside' | 'outside';
@@ -43,7 +34,7 @@ export interface MenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
 
 @observer
 export class Menu extends Component<MenuProps> {
-    model = new MenuModel();
+    @observable accessor open = false;
     root = createRef<HTMLDivElement>();
     trigger = createRef<HTMLButtonElement>();
     panel = createRef<HTMLDivElement>();
@@ -56,9 +47,10 @@ export class Menu extends Component<MenuProps> {
         document.removeEventListener('pointerdown', this.handleOutside);
     }
 
+    @action
     setOpen = (open: boolean) => {
-        if (this.model.open === open) return;
-        this.model.setOpen(open);
+        if (this.open === open) return;
+        this.open = open;
         this.props.onOpenChange?.(open);
     };
 
@@ -71,27 +63,23 @@ export class Menu extends Component<MenuProps> {
     };
 
     items() {
-        return Array.from(
-            this.panel.current?.querySelectorAll<HTMLElement>(
+        return [
+            ...(this.panel.current?.querySelectorAll<HTMLElement>(
                 'a[href]:not([aria-disabled="true"]), button:not(:disabled):not([aria-disabled="true"])'
-            ) ?? []
-        ).filter(item => !item.closest('[hidden]'));
+            ) ?? [])
+        ].filter(item => !item.closest('[hidden]'));
     }
 
     handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
         this.props.onKeyDown?.(event);
         const { key, defaultPrevented } = event;
         if (defaultPrevented) return;
-        if (key === 'Escape' && this.model.open) {
+        if (key === 'Escape' && this.open) {
             event.preventDefault();
             this.setOpen(false);
-            this.trigger.current?.focus();
-            return;
+            return this.trigger.current?.focus();
         }
-        if (key === 'Tab') {
-            this.setOpen(false);
-            return;
-        }
+        if (key === 'Tab') return this.setOpen(false);
         if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(key)) return;
         event.preventDefault();
         this.setOpen(true);
@@ -113,9 +101,7 @@ export class Menu extends Component<MenuProps> {
         if (!currentTarget.contains(relatedTarget)) this.setOpen(false);
     };
 
-    handleToggle = () => {
-        this.setOpen(!this.model.open);
-    };
+    handleToggle = () => this.setOpen(!this.open);
 
     handleSelect = ({ target }: MouseEvent<HTMLDivElement>) => {
         const { autoClose = true } = this.props;
@@ -140,7 +126,7 @@ export class Menu extends Component<MenuProps> {
             id,
             ...props
         } = this.props;
-        const { open } = this.model;
+        const { open } = this;
 
         return (
             <div

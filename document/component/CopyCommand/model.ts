@@ -22,9 +22,6 @@ export class ClipboardModel {
         this.error = '';
 
         try {
-            if (!globalThis.navigator?.clipboard) {
-                throw new Error('Clipboard access requires HTTPS or localhost.');
-            }
             await navigator.clipboard.writeText(text);
             this.copied();
         } catch (error) {

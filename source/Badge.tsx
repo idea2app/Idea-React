@@ -14,9 +14,8 @@ type BadgeElementAttributes =
     (ComponentPropsWithRef<'span'> & { href?: never }) | BadgeLinkAttributes;
 export type BadgeProps = BadgeStyleProps & BadgeElementAttributes;
 
-function isBadgeLink(props: BadgeElementAttributes): props is BadgeLinkAttributes {
-    return typeof props.href === 'string';
-}
+const isBadgeLink = (props: BadgeElementAttributes): props is BadgeLinkAttributes =>
+    typeof props.href === 'string';
 
 export const Badge: FC<BadgeProps> = ({ variant = 'solid', theme, pill, className, ...props }) => {
     const classes = classNames(
@@ -27,8 +26,9 @@ export const Badge: FC<BadgeProps> = ({ variant = 'solid', theme, pill, classNam
         className
     );
 
-    if (isBadgeLink(props)) {
-        return <a {...props} className={classes} />;
-    }
-    return <span {...props} className={classes} />;
+    return isBadgeLink(props) ? (
+        <a {...props} className={classes} />
+    ) : (
+        <span {...props} className={classes} />
+    );
 };

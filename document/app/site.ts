@@ -1,6 +1,6 @@
 import { license, version } from '../../package.json';
 import type { DocumentationLink } from '../component/Documentation/Header';
-import type { DocumentationSearchEntry } from '../component/Documentation/Search/Model';
+import type { DocumentationSearchEntry } from '../component/Documentation/Search/model';
 
 export const site = {
     version,
@@ -79,8 +79,8 @@ export const footerColumns = [
         links: [
             { label: 'Getting started', href: site.gettingStarted },
             { label: 'React + MobX', href: 'https://github.com/idea2app/React-MobX-Bootstrap-ts' },
-            { label: 'Next.js starter', href: 'https://github.com/idea2app/next-bootstrap-ts' },
-            { label: 'Source code', href: `${site.repository}/tree/master/source` }
+            { label: 'Next.js starter', href: 'https://github.com/idea2app/Next-Bootstrap-ts' },
+            { label: 'Source code', href: `${site.repository}/tree/main/source` }
         ]
     },
     {
@@ -89,7 +89,7 @@ export const footerColumns = [
             { label: 'Idea React', href: site.repository },
             { label: 'RESTful tables', href: 'https://github.com/idea2app/MobX-RESTful-table' },
             { label: 'OpenReactMap', href: 'https://github.com/idea2app/OpenReactMap' },
-            { label: 'idea2app', href: 'https://idea2app.github.io/' }
+            { label: 'idea2app', href: 'https://idea2.app/' }
         ]
     },
     {
