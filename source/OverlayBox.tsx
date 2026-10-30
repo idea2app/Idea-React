@@ -15,8 +15,13 @@ import {
 } from 'react';
 import { uniqueID } from 'web-utility';
 
+import { OverlayPlacement } from './Overlay';
+import { Popover } from './Popover';
+import { Tooltip } from './Tooltip';
+
+export type { OverlayPlacement };
+
 export type OverlayTrigger = 'click' | 'focus' | 'hover';
-export type OverlayPlacement = 'top' | 'right' | 'bottom' | 'left';
 
 export interface OverlayBoxProps extends Omit<
     HTMLAttributes<HTMLSpanElement>,
@@ -35,13 +40,6 @@ const PLACEMENT_CLASSES: Record<OverlayPlacement, string> = {
     right: 'top-50 start-100 translate-middle-y',
     bottom: 'top-100 start-50 translate-middle-x',
     left: 'top-50 end-100 translate-middle-y'
-};
-
-const PLACEMENT_DIRECTIONS: Record<OverlayPlacement, string> = {
-    top: 'top',
-    right: 'end',
-    bottom: 'bottom',
-    left: 'start'
 };
 
 @observer
@@ -151,7 +149,6 @@ export class OverlayBox extends Component<OverlayBoxProps> {
             ...props
         } = this.props;
         const id = this.open ? this.id : undefined;
-        const direction = PLACEMENT_DIRECTIONS[placement];
         const position = PLACEMENT_CLASSES[placement];
         const trigger = cloneElement(children, {
             'aria-describedby':
@@ -173,26 +170,22 @@ export class OverlayBox extends Component<OverlayBoxProps> {
                 {trigger}
                 {this.open &&
                     (detail ? (
-                        <div
+                        <Popover
                             id={id}
-                            className={`popover show bs-popover-${direction} position-absolute ${position}`}
-                            role="dialog"
-                            data-bs-placement={placement}
+                            className={`position-absolute w-max ${position}`}
+                            title={title}
+                            placement={placement}
                         >
-                            <div className="popover-arrow" />
-                            <div className="popover-header">{title}</div>
-                            <div className="popover-body">{detail}</div>
-                        </div>
+                            {detail}
+                        </Popover>
                     ) : (
-                        <div
+                        <Tooltip
                             id={id}
-                            className={`tooltip show bs-tooltip-${direction} position-absolute ${position}`}
-                            role="tooltip"
-                            data-bs-placement={placement}
+                            className={`position-absolute w-max ${position}`}
+                            placement={placement}
                         >
-                            <div className="tooltip-arrow" />
-                            <div className="tooltip-inner">{title}</div>
-                        </div>
+                            {title}
+                        </Tooltip>
                     ))}
             </span>
         );

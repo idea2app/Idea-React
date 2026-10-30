@@ -27,35 +27,42 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 3. [Navbar](source/Navbar.tsx)
 4. [Menu](source/Menu.tsx)
 5. [Native Dialog](source/NativeDialog/index.tsx)
-6. [Time](source/Time.tsx)
-7. [Time Distance](source/TimeDistance.tsx)
-8. [Timeline](source/Timeline/)
-9. [Countdown](source/Countdown.tsx)
-10. [Icon](source/Icon.tsx)
-11. [Avatar](source/Avatar.tsx)
-12. [Nameplate](source/Nameplate.tsx)
-13. [Text Truncate](source/TextTruncate.tsx)
-14. [Type Echo](source/TypeEcho.tsx)
-15. [Horizontal Marquee](source/HorizontalMarquee/)
-16. [Vertical Marquee](source/VerticalMarquee/)
-17. [Click Boundary](source/ClickBoundary.tsx)
-18. [Spinner Button](source/SpinnerButton.tsx)
-19. [Select](source/Select.tsx)
-20. [Month Calendar](source/MonthCalendar.tsx)
-21. [Code Block](source/CodeBlock.tsx)
-22. [Live TSX](source/LiveTSX.tsx)
-23. [Scroll Nav](source/ScrollNav/)
-24. [Page Nav](source/PageNav.tsx)
-25. [Editor](source/Editor.tsx)
-26. [Editor HTML](source/EditorHTML.tsx)
-27. [Table Spinner](source/TableSpinner.tsx)
-28. [Loading](source/Loading.tsx)
-29. [Share Box](source/ShareBox.tsx)
-30. [Overlay Box](source/OverlayBox.tsx)
-31. [Dialog](source/Dialog.tsx)
-32. [Toast](source/Toast.tsx)
-33. [User Rank](source/UserRank/)
-34. [Zodiac Bar](source/ZodiacBar.tsx)
+6. [Nav](source/Nav.tsx)
+7. [Card](source/Card.tsx)
+8. [Grid](source/Grid.tsx)
+9. [Image](source/Image.tsx)
+10. [Table](source/Table.tsx)
+11. [Popover](source/Popover.tsx)
+12. [Tooltip](source/Tooltip.tsx)
+13. [Time](source/Time.tsx)
+14. [Time Distance](source/TimeDistance.tsx)
+15. [Timeline](source/Timeline/)
+16. [Countdown](source/Countdown.tsx)
+17. [Icon](source/Icon.tsx)
+18. [Avatar](source/Avatar.tsx)
+19. [Nameplate](source/Nameplate.tsx)
+20. [Text Truncate](source/TextTruncate/)
+21. [Type Echo](source/TypeEcho/)
+22. [Horizontal Marquee](source/HorizontalMarquee/)
+23. [Vertical Marquee](source/VerticalMarquee/)
+24. [Click Boundary](source/ClickBoundary.tsx)
+25. [Spinner Button](source/SpinnerButton.tsx)
+26. [Select](source/Select.tsx)
+27. [Month Calendar](source/MonthCalendar.tsx)
+28. [Code Block](source/CodeBlock.tsx)
+29. [Live TSX](source/LiveTSX.tsx)
+30. [Scroll Nav](source/ScrollNav/)
+31. [Page Nav](source/PageNav.tsx)
+32. [Editor](source/Editor.tsx)
+33. [Editor HTML](source/EditorHTML.tsx)
+34. [Table Spinner](source/TableSpinner.tsx)
+35. [Loading](source/Loading.tsx)
+36. [Share Box](source/ShareBox.tsx)
+37. [Overlay Box](source/OverlayBox.tsx)
+38. [Dialog](source/Dialog.tsx)
+39. [Toast](source/Toast.tsx)
+40. [User Rank](source/UserRank/)
+41. [Zodiac Bar](source/ZodiacBar.tsx)
 
 #### Data components
 
@@ -92,7 +99,6 @@ For the current alpha release, use `idea-react@next` instead of `idea-react`.
 />
 <link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1.13.1/font/bootstrap-icons.css" />
 <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" />
-<link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism.min.css" />
 <link rel="stylesheet" href="https://unpkg.com/idea-react/dist/index.css" />
 ```
 
@@ -117,50 +123,42 @@ Compatible with MobX 6/7:
 ```tsx
 import { formToJSON } from 'web-utility';
 import { Component } from 'react';
-import { Button, Dialog, DialogClose, NativeDialog } from 'idea-react';
+import { Button, Form, Modal } from 'react-bootstrap';
+import { Dialog, DialogClose } from 'idea-react';
 
 export class ExamplePage extends Component {
     inputDialog = new Dialog<Record<'a' | 'b', number>>(({ defer }) => (
-        <NativeDialog
-            open={!!defer}
-            aria-label="Dialog"
-            onClose={() => defer?.reject(new DialogClose())}
-        >
-            <div className="dialog-header">
-                <h2 className="dialog-title">Dialog</h2>
-            </div>
-            <form
-                className="dialog-body d-grid gap-3"
-                id="input-dialog"
-                onSubmit={event => {
-                    event.preventDefault();
+        <Modal show={!!defer} onHide={() => defer?.reject(new DialogClose())}>
+            <Modal.Header>Dialog</Modal.Header>
+            <Modal.Body>
+                <Form
+                    id="input-dialog"
+                    onSubmit={event => {
+                        event.preventDefault();
 
-                    defer?.resolve(formToJSON(event.currentTarget));
-                }}
-                onReset={() => defer?.reject(new DialogClose())}
-            >
-                <div>
-                    <label className="form-label" htmlFor="input-a">
-                        A
-                    </label>
-                    <input className="form-control" id="input-a" type="number" name="a" />
-                </div>
-                <div>
-                    <label className="form-label" htmlFor="input-b">
-                        B
-                    </label>
-                    <input className="form-control" id="input-b" type="number" name="b" />
-                </div>
-            </form>
-            <div className="dialog-footer">
+                        defer?.resolve(formToJSON(event.currentTarget));
+                    }}
+                    onReset={() => defer?.reject(new DialogClose())}
+                >
+                    <Form.Group>
+                        <Form.Label>A</Form.Label>
+                        <Form.Control type="number" name="a" />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>B</Form.Label>
+                        <Form.Control type="number" name="b" />
+                    </Form.Group>
+                </Form>
+            </Modal.Body>
+            <Modal.Footer className="d-flex justify-content-end gap-3">
                 <Button form="input-dialog" type="submit">
                     √
                 </Button>
-                <Button form="input-dialog" type="reset" theme="danger">
+                <Button form="input-dialog" type="reset" variant="danger">
                     ×
                 </Button>
-            </div>
-        </NativeDialog>
+            </Modal.Footer>
+        </Modal>
     ));
 
     someLogic = async () => {

@@ -1,12 +1,12 @@
 import { FC } from 'react';
 
 import { Button, ButtonProps } from './Button';
-import { Spinner, SpinnerAnimation } from './Spinner';
+import { Spinner, SpinnerProps } from './Spinner';
 
-export type SpinnerButtonProps = ButtonProps & {
-    animation?: SpinnerAnimation;
-    loading?: boolean;
-};
+export type SpinnerButtonProps = ButtonProps &
+    Pick<SpinnerProps, 'animation'> & {
+        loading?: boolean;
+    };
 
 export const SpinnerButton: FC<SpinnerButtonProps> = ({
     animation,

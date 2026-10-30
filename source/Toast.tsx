@@ -1,8 +1,9 @@
 'use client';
 
+import classNames from 'classnames';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { FC, MouseEvent, ReactNode } from 'react';
+import { ComponentPropsWithRef, FC, MouseEvent, ReactNode } from 'react';
 import { Timestamp, uniqueID } from 'web-utility';
 
 import type { ComponentTheme } from './Button';
@@ -38,36 +39,74 @@ export interface ToastMessage {
     delay?: number;
 }
 
-interface ToastItem extends ToastMessage {
+interface ToastEntry extends ToastMessage {
     openedAt: number;
     closedAt?: number;
     timer?: ReturnType<typeof setTimeout>;
-    resolve?: (value: ToastItem) => void;
+    resolve?: (value: ToastEntry) => void;
 }
+
+export interface ToastContainerProps extends ComponentPropsWithRef<'div'> {
+    position?: ToastPosition;
+}
+
+export const ToastContainer: FC<ToastContainerProps> = ({
+    position = 'top-end',
+    className,
+    'aria-live': ariaLive = 'polite',
+    'aria-atomic': ariaAtomic = false,
+    ...props
+}) => (
+    <div
+        {...props}
+        className={classNames(
+            'toast-container position-fixed p-3',
+            TOAST_POSITION_CLASSES[position],
+            className
+        )}
+        aria-live={ariaLive}
+        aria-atomic={ariaAtomic}
+    />
+);
+
+export interface ToastItemProps extends ComponentPropsWithRef<'div'> {
+    theme?: ComponentTheme;
+}
+
+export const ToastItem: FC<ToastItemProps> = ({ theme, role = 'status', className, ...props }) => (
+    <div
+        {...props}
+        className={classNames('toast show', theme && `theme-${theme}`, className)}
+        role={role}
+    />
+);
+
+export const ToastHeader: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('toast-header', className)} />
+);
+
+export const ToastBody: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('toast-body', className)} />
+);
 
 export class Toast {
     @observable
-    accessor messages: ToastItem[] = [];
+    accessor messages: ToastEntry[] = [];
 
-    Component: FC<{ position?: ToastPosition }> = observer(({ position = 'top-end' }) => (
-        <div
-            className={`toast-container position-fixed p-3 ${TOAST_POSITION_CLASSES[position]}`}
-            aria-live="polite"
-            aria-atomic="false"
-            onClick={this.handleDismiss}
-        >
+    Component: FC<{ position?: ToastPosition }> = observer(({ position }) => (
+        <ToastContainer position={position} onClick={this.handleDismiss}>
             {this.messages.map(this.renderMessage)}
-        </div>
+        </ToastContainer>
     ));
 
-    renderMessage = ({ id, openedAt, title, body, theme, delay = 3000 }: ToastItem) => {
+    renderMessage = ({ id, openedAt, title, body, theme, delay = 3000 }: ToastEntry) => {
         const showHeader = !!title || delay === 0;
         const elapsed = this.TimeScalar.distanceOf<Timestamp>(Date.now(), openedAt).toShortString();
 
         return (
-            <div key={id} className={`toast show${theme ? ` theme-${theme}` : ''}`} role="status">
+            <ToastItem key={id} theme={theme}>
                 {showHeader && (
-                    <div className="toast-header">
+                    <ToastHeader>
                         <strong className="me-auto">{title}</strong>
                         <small>{elapsed}</small>
                         <button
@@ -76,10 +115,10 @@ export class Toast {
                             aria-label="Close"
                             data-toast-dismiss={id}
                         />
-                    </div>
+                    </ToastHeader>
                 )}
-                <div className="toast-body">{body}</div>
-            </div>
+                <ToastBody>{body}</ToastBody>
+            </ToastItem>
         );
     };
 
@@ -98,9 +137,9 @@ export class Toast {
     open(message: ToastMessage) {
         const id = uniqueID();
         const openedAt = Date.now();
-        const { promise, resolve } = Promise.withResolvers<ToastItem>();
+        const { promise, resolve } = Promise.withResolvers<ToastEntry>();
 
-        const item: ToastItem = {
+        const item: ToastEntry = {
             id,
             ...message,
             openedAt,
@@ -123,7 +162,7 @@ export class Toast {
         const { resolve, timer, ...item } = message;
 
         clearTimeout(timer);
-        resolve?.({ ...item, closedAt: Date.now() } as ToastItem);
+        resolve?.({ ...item, closedAt: Date.now() } as ToastEntry);
 
         this.messages = this.messages.filter(message => message.id !== id);
     }

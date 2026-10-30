@@ -1,33 +1,32 @@
 'use client';
 
-import { observable } from 'mobx';
+import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component, createRef, CSSProperties, HTMLAttributes, ReactNode } from 'react';
+import { Component, createRef, CSSProperties, ReactNode } from 'react';
 
-export interface TextTruncateProps extends HTMLAttributes<HTMLDivElement> {
-    rows?: number;
-    expandText?: ReactNode;
-    collapseText?: ReactNode;
+export interface TextTruncateContentProps {
+    rows: number;
+    expandText: ReactNode;
+    collapseText: ReactNode;
+    children: ReactNode;
 }
 
 @observer
-export class TextTruncate extends Component<TextTruncateProps> {
-    static displayName = 'TextTruncate';
-
+export class TextTruncateContent extends Component<TextTruncateContentProps> {
     @observable
     accessor expanded = false;
 
     @observable
     accessor overflowed = false;
 
-    contentRef = createRef<HTMLParagraphElement>();
+    contentRef = createRef<HTMLDivElement>();
 
     componentDidMount() {
         this.checkOverflow();
         window.addEventListener('resize', this.checkOverflow);
     }
 
-    componentDidUpdate({ rows, children }: TextTruncateProps) {
+    componentDidUpdate({ rows, children }: TextTruncateContentProps) {
         if (!this.expanded && (children !== this.props.children || rows !== this.props.rows))
             this.checkOverflow();
     }
@@ -36,12 +35,14 @@ export class TextTruncate extends Component<TextTruncateProps> {
         window.removeEventListener('resize', this.checkOverflow);
     }
 
+    @action
     checkOverflow = () => {
         const { current } = this.contentRef;
 
         if (current) this.overflowed = current.scrollHeight > current.clientHeight;
     };
 
+    @action
     toggle = () => {
         this.expanded = !this.expanded;
 
@@ -49,19 +50,20 @@ export class TextTruncate extends Component<TextTruncateProps> {
     };
 
     render() {
-        const { children, rows = 3, expandText = '⏬', collapseText = '⏫', ...props } = this.props;
+        const { children, rows, expandText, collapseText } = this.props;
         const { expanded, overflowed } = this;
-        const style: CSSProperties = {
+        const clamp: CSSProperties = {
             overflow: 'hidden',
             display: '-webkit-box',
             WebkitBoxOrient: 'vertical',
             WebkitLineClamp: rows
         };
+
         return (
-            <div {...props}>
-                <p ref={this.contentRef} style={expanded ? undefined : style}>
+            <>
+                <div ref={this.contentRef} style={expanded ? undefined : clamp}>
                     {children}
-                </p>
+                </div>
                 {(overflowed || expanded) && (
                     <button
                         type="button"
@@ -72,7 +74,7 @@ export class TextTruncate extends Component<TextTruncateProps> {
                         {expanded ? collapseText : expandText}
                     </button>
                 )}
-            </div>
+            </>
         );
     }
 }

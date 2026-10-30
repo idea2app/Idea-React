@@ -21,7 +21,7 @@ it('shows and dismisses a Bootstrap 6 tooltip from its configured trigger', () =
 
     assert.equal(
         screen.getByRole('tooltip', { name: 'More information' }).className,
-        'tooltip show bs-tooltip-end position-absolute top-50 start-100 translate-middle-y'
+        'tooltip show bs-tooltip-end position-absolute w-max top-50 start-100 translate-middle-y'
     );
     assert.equal(
         trigger.getAttribute('aria-describedby'),

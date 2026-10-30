@@ -1,22 +1,37 @@
 'use client';
 
 import classNames from 'classnames';
-import { observable } from 'mobx';
+import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, HTMLAttributes, RefCallback } from 'react';
 import { sleep } from 'web-utility';
 
-export interface TypeEchoProps extends HTMLAttributes<HTMLPreElement> {
+export interface TypeEchoContentProps extends Omit<HTMLAttributes<HTMLPreElement>, 'children'> {
     text: string;
     intervals?: number;
 }
 
 @observer
-export class TypeEcho extends Component<TypeEchoProps> {
-    static displayName = 'TypeEcho';
-
+export class TypeEchoContent extends Component<TypeEchoContentProps> {
     @observable
     accessor echoed = '';
+
+    @observable
+    accessor started = false;
+
+    componentDidMount() {
+        this.start();
+    }
+
+    @action
+    start = () => {
+        this.started = true;
+    };
+
+    @action
+    echo = (char: string) => {
+        this.echoed += char;
+    };
 
     init: RefCallback<HTMLPreElement> = node =>
         node &&
@@ -30,17 +45,17 @@ export class TypeEcho extends Component<TypeEchoProps> {
             for (const char of text) {
                 await sleep(intervals / 1000);
 
-                this.echoed += char;
+                this.echo(char);
             }
         }).observe(node);
 
     render() {
-        const { className, text, ...props } = this.props,
-            { echoed } = this;
+        const { className, text, intervals: _intervals, ...props } = this.props;
+        const { started, echoed } = this;
 
         return (
             <pre {...props} ref={this.init} className={classNames('text-wrap', className)}>
-                {echoed + (echoed === text ? '' : '_')}
+                {started ? echoed + (echoed === text ? '' : '_') : text}
             </pre>
         );
     }
