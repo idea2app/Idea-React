@@ -1,12 +1,16 @@
+'use client';
+
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import {
+    cloneElement,
     Component,
     createRef,
     FocusEvent,
     HTMLAttributes,
     KeyboardEvent,
     MouseEvent,
+    ReactElement,
     ReactNode
 } from 'react';
 import { uniqueID } from 'web-utility';
@@ -14,7 +18,11 @@ import { uniqueID } from 'web-utility';
 export type OverlayTrigger = 'click' | 'focus' | 'hover';
 export type OverlayPlacement = 'top' | 'right' | 'bottom' | 'left';
 
-export interface OverlayBoxProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'title'> {
+export interface OverlayBoxProps extends Omit<
+    HTMLAttributes<HTMLSpanElement>,
+    'children' | 'title'
+> {
+    children: ReactElement<{ 'aria-describedby'?: string }>;
     title: ReactNode;
     detail?: ReactNode;
     placement?: OverlayPlacement;
@@ -49,6 +57,11 @@ export class OverlayBox extends Component<OverlayBoxProps> {
     @action
     setOpen = (open: boolean) => {
         this.open = open;
+    };
+
+    hide = () => {
+        clearTimeout(this.timer);
+        this.setOpen(false);
     };
 
     setOpenAfterDelay = (open: boolean) => {
@@ -109,14 +122,14 @@ export class OverlayBox extends Component<OverlayBoxProps> {
     };
 
     handleOutside = ({ target }: PointerEvent) => {
-        if (target instanceof Node && !this.root.current?.contains(target)) this.setOpen(false);
+        if (target instanceof Node && !this.root.current?.contains(target)) this.hide();
     };
 
     handleKeyDown = (event: KeyboardEvent<HTMLSpanElement>) => {
         this.props.onKeyDown?.(event);
         if (event.key === 'Escape' && this.open) {
             event.preventDefault();
-            this.setOpen(false);
+            this.hide();
         }
     };
 
@@ -140,13 +153,16 @@ export class OverlayBox extends Component<OverlayBoxProps> {
         const id = this.open ? this.id : undefined;
         const direction = PLACEMENT_DIRECTIONS[placement];
         const position = PLACEMENT_CLASSES[placement];
+        const trigger = cloneElement(children, {
+            'aria-describedby':
+                [children.props['aria-describedby'], id].filter(Boolean).join(' ') || undefined
+        });
 
         return (
             <span
                 {...props}
                 ref={this.root}
                 className={`position-relative d-inline-block ${className}`}
-                aria-describedby={id}
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
                 onFocus={this.handleFocus}
@@ -154,7 +170,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
                 onClick={this.handleClick}
                 onKeyDown={this.handleKeyDown}
             >
-                {children}
+                {trigger}
                 {this.open &&
                     (detail ? (
                         <div

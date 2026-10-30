@@ -1,5 +1,6 @@
 import { license, version } from '../../package.json';
 import type { DocumentationLink } from '../component/Documentation/Header';
+import nextConfig from '../next.config';
 
 export const site = {
     version,
@@ -7,12 +8,14 @@ export const site = {
     repository: 'https://github.com/idea2app/Idea-React',
     install: `npm i idea-react${version.includes('-') ? '@next' : ''}`,
     docs: 'https://idea2app.github.io/Idea-React/',
+    components: `${nextConfig.basePath || ''}/components/`,
     gettingStarted: 'https://github.com/idea2app/Idea-React#usage',
     preview: 'https://idea2app.github.io/Idea-React/preview/'
 };
 
 export const navigation: DocumentationLink[] = [
     { label: 'Docs', href: site.docs },
+    { label: 'Components', href: site.components },
     { label: 'Examples', href: site.preview },
     { label: 'API', href: site.docs },
     { label: 'Community', href: `${site.repository}/issues` }
@@ -36,6 +39,7 @@ export const footerColumns = [
         links: [
             { label: 'Home', href: './' },
             { label: 'Docs', href: site.docs },
+            { label: 'Components', href: site.components },
             { label: 'API reference', href: site.docs },
             { label: 'Examples', href: site.preview }
         ]

@@ -1,0 +1,37 @@
+import { Badge } from '../../../../source/Badge';
+import { Button } from '../../../../source/Button';
+
+# Badge
+
+Badges provide compact status or count labels. Their variants and theme classes follow the
+[Bootstrap 6 badge guide][1], and the Idea React [`Badge`][2] wrapper supports text and links.
+
+## Variants
+
+<div className="d-flex flex-wrap gap-2">
+    <Badge theme="primary">{'Solid'}</Badge>
+    <Badge variant="subtle" theme="primary">
+        {'Subtle'}
+    </Badge>
+    <Badge variant="outline" theme="primary">
+        {'Outline'}
+    </Badge>
+    <Badge pill theme="success">
+        {'Ready'}
+    </Badge>
+</div>
+
+`theme` selects the semantic color; `variant` accepts `solid`, `subtle`, or `outline`. Set `pill`
+for a fully rounded label.
+
+## In context
+
+<Button theme="primary">
+    {'Notifications'} <Badge theme="danger">{'4'}</Badge>
+</Button>
+
+Provide surrounding context for counts so assistive technology users understand what the number
+represents. The badge itself does not announce a different meaning from its text.
+
+[1]: https://getbootstrap.com/docs/6.0/components/badge/
+[2]: https://github.com/idea2app/Idea-React/blob/main/source/Badge.tsx

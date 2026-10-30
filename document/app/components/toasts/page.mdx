@@ -1,0 +1,33 @@
+import { Toast } from '../../../../source/Toast';
+
+# Toasts
+
+Toasts are lightweight notifications that can stack and be positioned with utilities. The
+[`Toast` model][1] manages message lifetimes and returns a promise that resolves when a toast closes.
+This guide adapts the [Bootstrap Toasts documentation][2].
+
+## Create and render a toast
+
+```tsx
+const notifications = new Toast();
+
+notifications.open({
+    title: 'Saved',
+    body: 'Your changes are saved.',
+    theme: 'success',
+    delay: 5000
+});
+
+<notifications.Component position="bottom-end" />;
+```
+
+Use `delay: 0` to keep a message open until it is dismissed. Supported positions include the top,
+middle, and bottom edges, aligned to the start, center, or end.
+
+## Accessibility
+
+The notification container is a polite live region and each toast uses `role="status"`. Use short
+messages, allow enough display time, and avoid placing actions in auto-dismissing notifications.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Toast.tsx
+[2]: https://getbootstrap.com/docs/6.0/components/toasts/

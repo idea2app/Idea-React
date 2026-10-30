@@ -1,0 +1,39 @@
+import { NativeDialog } from '../../../../source/NativeDialog';
+
+# Dialog
+
+Bootstrap 6 replaces the previous modal component with the native HTML `<dialog>` element. The
+[`NativeDialog`][1] wrapper applies Bootstrap's `dialog` classes and manages focus, Escape handling,
+and backdrop clicks. See the [upstream Dialog guide][2] for the full CSS and JavaScript behavior.
+
+## Controlled dialog
+
+The `open` prop synchronizes the native dialog state. The browser's `showModal()` API opens it in the
+top layer with a modal backdrop.
+
+```tsx
+<NativeDialog open={open} aria-labelledby="confirm-title" onClose={onClose}>
+    <div className="dialog-header">
+        <h2 className="dialog-title" id="confirm-title">
+            Confirm changes
+        </h2>
+    </div>
+    <div className="dialog-body">Save your changes?</div>
+    <div className="dialog-footer">
+        <Button onClick={onClose}>Cancel</Button>
+        <Button theme="primary">Save</Button>
+    </div>
+</NativeDialog>
+```
+
+`modal={false}` opens a non-modal dialog. Use `keyboard={false}` or `backdrop="static"` when the
+interaction must not close from that input.
+
+## Promise-based dialogs
+
+The [`Dialog` model][3] exposes a promise from `open()` and supplies a `defer` object to its
+component. Reject with `DialogClose` when the user cancels.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/NativeDialog/index.tsx
+[2]: https://getbootstrap.com/docs/6.0/components/dialog/
+[3]: https://github.com/idea2app/Idea-React/blob/main/source/Dialog.tsx

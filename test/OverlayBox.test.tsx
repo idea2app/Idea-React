@@ -16,14 +16,29 @@ it('shows and dismisses a Bootstrap 6 tooltip from its configured trigger', () =
 
     assert.equal(screen.queryByRole('tooltip'), null);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Details' }));
+    const trigger = screen.getByRole('button', { name: 'Details' });
+    fireEvent.click(trigger);
 
     assert.equal(
         screen.getByRole('tooltip', { name: 'More information' }).className,
         'tooltip show bs-tooltip-end position-absolute top-50 start-100 translate-middle-y'
     );
+    assert.equal(
+        trigger.getAttribute('aria-describedby'),
+        screen.getByRole('tooltip', { name: 'More information' }).id
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: 'Details' }));
+    fireEvent.click(trigger);
+
+    assert.equal(screen.queryByRole('tooltip'), null);
+
+    fireEvent.click(trigger);
+    fireEvent.keyDown(trigger, { key: 'Escape' });
+
+    assert.equal(screen.queryByRole('tooltip'), null);
+
+    fireEvent.click(trigger);
+    fireEvent.pointerDown(document.body);
 
     assert.equal(screen.queryByRole('tooltip'), null);
 });

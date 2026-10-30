@@ -1,0 +1,24 @@
+import { Spinner } from '../../../../source/Spinner';
+
+# Spinner
+
+Bootstrap spinners are HTML and CSS loading indicators; they do not require JavaScript. The
+[`Spinner`][1] wrapper provides border and growing animations, small sizing, and theme classes. This
+guide adapts the [upstream spinner documentation][2].
+
+## Animations
+
+<div className="d-flex align-items-center gap-3">
+    <Spinner role="status" aria-label="Loading" />
+    <Spinner animation="grow" theme="accent" role="status" aria-label="Loading" />
+    <Spinner size="sm" theme="success" role="status" aria-label="Loading" />
+</div>
+
+Use `animation="grow"` for the growing indicator and `size="sm"` for a compact spinner. Since
+spinners use the current text color, theme classes can style their color.
+
+`SpinnerButton`, `TableSpinner`, and `Loading` reuse the same wrapper for component-level and
+full-page loading states.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Spinner.tsx
+[2]: https://getbootstrap.com/docs/6.0/components/spinner/

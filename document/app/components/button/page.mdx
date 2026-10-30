@@ -1,0 +1,53 @@
+import { Button } from '../../../../source/Button';
+import { Icon } from '../../../../source/Icon';
+
+# Button
+
+Bootstrap 6 button variants are combined with theme classes; the Idea React [`Button`][1] wrapper
+also supports links and disabled states. This guide adapts the [upstream Button documentation][2].
+
+## Variants
+
+<div className="d-flex flex-wrap gap-2">
+    <Button theme="primary">{'Solid'}</Button>
+    <Button variant="outline" theme="primary">
+        {'Outline'}
+    </Button>
+    <Button variant="subtle" theme="success">
+        {'Subtle'}
+    </Button>
+    <Button variant="text" theme="secondary">
+        {'Text'}
+    </Button>
+</div>
+
+Use the `theme` property for the semantic color and `variant` for the visual treatment. The default
+variant is `solid`.
+
+## Sizes and icon buttons
+
+Set `size` to `sm` or `lg`. Set `icon` for square icon-only buttons and always provide an accessible
+name.
+
+```tsx
+<Button size="lg" theme="primary">Continue</Button>
+<Button icon theme="primary" aria-label="Open settings">
+    <Icon name="gear" aria-hidden="true" />
+</Button>
+```
+
+## Links and disabled controls
+
+Pass `href` to render an anchor. Set `disabled` to prevent activation and remove disabled links from
+keyboard navigation.
+
+```tsx
+<Button href="/components/" theme="primary">Browse components</Button>
+<Button disabled theme="secondary">Unavailable</Button>
+```
+
+The wrapper emits Bootstrap 6 classes such as `btn-solid` and `theme-primary`, without depending on
+React Bootstrap.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Button.tsx
+[2]: https://getbootstrap.com/docs/6.0/components/button/

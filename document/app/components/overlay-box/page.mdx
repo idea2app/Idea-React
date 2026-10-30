@@ -1,0 +1,29 @@
+import { Button } from '../../../../source/Button';
+import { OverlayBox } from '../../../../source/OverlayBox';
+
+# Popovers and tooltips
+
+[`OverlayBox`][1] composes Bootstrap 6 tooltip or popover markup with React-triggered behavior. It
+supports hover, focus, and click triggers with top, right, bottom, and left placement. Compare the
+[official Popover][2] and [Tooltip][3] guides for Bootstrap's JavaScript plugin options.
+
+## Tooltip
+
+<OverlayBox title="A short explanation">
+    <Button theme="primary">Focus or hover</Button>
+</OverlayBox>
+
+## Popover
+
+Set `detail` to render a popover with a header and body. A click trigger keeps the popover open until
+the trigger is clicked again, the user clicks outside, or Escape is pressed.
+
+<OverlayBox trigger="click" title="More information" detail="Additional context for this action.">
+    <Button variant="outline" theme="primary">
+        Show details
+    </Button>
+</OverlayBox>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/OverlayBox.tsx
+[2]: https://getbootstrap.com/docs/6.0/components/popover/
+[3]: https://getbootstrap.com/docs/6.0/components/tooltip/

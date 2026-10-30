@@ -1,0 +1,26 @@
+import { Menu, MenuItem } from '../../../../source/Menu';
+
+# Menu
+
+Bootstrap 6 menus use `.menu` and `.menu-item` and rely on Floating UI for positioning in its
+JavaScript implementation. Idea React's [`Menu`][1] uses the same class names and adds keyboard
+navigation, focus restoration, and configurable auto-close behavior. See the
+[upstream Menu guide][2] for native Bootstrap markup and positioning.
+
+## Example
+
+<Menu label="Account" toggleProps={{ theme: 'primary' }}>
+    <MenuItem href="/components/">Components</MenuItem>
+    <MenuItem href="https://github.com/idea2app/Idea-React">Source code</MenuItem>
+</Menu>
+
+Use arrow keys to navigate items, Home and End to move to the first or last item, and Escape to
+close the menu and restore focus to its trigger.
+
+## Closing behavior
+
+`autoClose` accepts `true`, `false`, `inside`, or `outside`. Set `align="start"` to align the menu to
+the start edge; the default is `end`.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Menu.tsx
+[2]: https://getbootstrap.com/docs/6.0/components/menu/

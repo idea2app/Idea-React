@@ -1,0 +1,30 @@
+import { Navbar } from '../../../../source/Navbar';
+
+# Navbar
+
+The Idea React [`Navbar`][1] wrapper uses Bootstrap 6 responsive expansion classes. A
+`Navbar` renders a semantic `<nav>` landmark and accepts its standard navigation attributes.
+This guide adapts the [Bootstrap Navbar documentation][2].
+
+## Responsive navigation
+
+Set `expand` to a breakpoint to keep the menu collapsed below that viewport width. The wrapper emits
+the Bootstrap 6 breakpoint-first class, such as `md:navbar-expand`.
+
+<Navbar expand="md" aria-label="Primary navigation" className="gap-3">
+    <a className="navbar-brand" href="/">
+        Idea React
+    </a>
+    <a className="nav-link" href="/components/">
+        Components
+    </a>
+    <a className="nav-link" href="https://github.com/idea2app/Idea-React">
+        GitHub
+    </a>
+</Navbar>
+
+Use `expand` without a value to always expand the navigation. Drawer behavior and responsive
+collapse content should be composed with the corresponding Bootstrap 6 components.
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Navbar.tsx
+[2]: https://getbootstrap.com/docs/6.0/components/navbar/

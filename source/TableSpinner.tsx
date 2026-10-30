@@ -19,7 +19,7 @@ export const TableSpinner: FC<TableSpinnerProps> = ({
 }) => (
     <tr {...props}>
         <td className="text-center p-4" colSpan={colSpan}>
-            <Spinner {...{ animation, theme, size }} />
+            <Spinner {...{ animation, theme, size }} role="status" aria-label="Loading" />
         </td>
     </tr>
 );
