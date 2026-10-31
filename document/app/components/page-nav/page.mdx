@@ -1,0 +1,42 @@
+import { PageNav } from '../../../../source/PageNav';
+
+import { CodeCard } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="page-nav">
+
+# Page nav
+
+[`PageNav`][1] builds an in-page table of contents from the document's headings, highlights the
+section currently in view, and smooth-scrolls on click. The "On this page" panel of this site is
+rendered with it.
+
+## Example
+
+<CodeCard>
+    <PageNav rootSelector="#content" />
+</CodeCard>
+
+## Usage
+
+```tsx
+import { PageNav } from 'idea-react';
+
+<PageNav rootSelector="#content" minDepth={2} depth={3} />;
+```
+
+On mount, the component collects `h1`–`h6` elements, assigns missing `id`s, and renders an anchor
+per heading indented by level. The link whose section is scrolled into view gains the `active`
+class and `aria-current="location"`.
+
+## Scope and depth
+
+- `rootSelector` limits the scan to one container, such as the main article; by default the whole
+  document is scanned.
+- `minDepth` and `depth` bound the included heading levels, e.g. `minDepth={2} depth={3}` lists only
+  `h2` and `h3`.
+- `onItemClick` fires with the heading metadata after a link is activated.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/PageNav.tsx

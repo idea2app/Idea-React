@@ -1,0 +1,38 @@
+import { ZodiacBar } from '../../../../source/ZodiacBar';
+
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="zodiac-bar">
+
+# Zodiac bar
+
+[`ZodiacBar`][1] displays the Chinese zodiac sign for each year in a range, newest first, with an
+optional link and title per year.
+
+## Example
+
+<CodeExample>
+    <ZodiacBar startYear={2020} endYear={2025} />
+</CodeExample>
+
+## Usage
+
+```tsx
+<ZodiacBar
+    startYear={2008}
+    endYear={2026}
+    itemOf={(year, zodiac) => ({
+        title: `${year} ${zodiac}`,
+        link: `/events/${year}`
+    })}
+/>
+```
+
+`endYear` defaults to the current year. `itemOf` customizes each item's `title` and `link`, and
+`itemClassName` restyles the year cards. The exported `zodiacOf(year)` helper returns the zodiac
+emoji for any historical year.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/ZodiacBar.tsx

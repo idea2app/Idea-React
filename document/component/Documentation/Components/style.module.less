@@ -1,0 +1,67 @@
+.sidebar,
+.toc {
+    scrollbar-color: transparent transparent;
+    scrollbar-width: thin;
+    font-size: var(--bs-font-size-sm);
+
+    &:hover,
+    &:focus-within {
+        scrollbar-color: var(--bs-border-color) transparent;
+    }
+}
+.sidebar {
+    :global(.nav) {
+        --bs-nav-gap: 0.125rem;
+        --bs-nav-link-justify: flex-start;
+        --bs-nav-link-padding-y: 0.25rem;
+    }
+    @media (min-width: 1024px) {
+        position: sticky;
+        top: 1rem;
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+    }
+}
+.sidebarLink {
+    margin-inline-start: 0.75rem;
+
+    &:global(.active) {
+        font-weight: 600;
+    }
+}
+.customPopover {
+    --bs-popover-bg: var(--bs-primary-bg);
+    --bs-popover-border-color: var(--bs-primary);
+    --bs-popover-arrow-border: var(--bs-primary);
+    --bs-popover-header-bg: var(--bs-primary);
+    --bs-popover-header-color: var(--bs-fg-white);
+    --bs-popover-body-color: var(--bs-fg-white);
+}
+.customTooltip {
+    --bs-tooltip-bg: var(--bs-primary);
+    --bs-tooltip-color: var(--bs-fg-white);
+}
+.gridRow {
+    :global(.row) > :global([class*='col']) {
+        border: 1px solid var(--bs-border-color);
+        background-color: var(--bs-secondary-bg);
+        padding-block: 0.75rem;
+    }
+}
+.toc {
+    :global(.nav) {
+        --bs-nav-gap: 0;
+        --bs-nav-link-justify: flex-start;
+        --bs-nav-link-padding-x: 0;
+        --bs-nav-link-padding-y: 0.25rem;
+    }
+    :global(.nav-link) {
+        white-space: normal;
+    }
+    @media (min-width: 1024px) {
+        position: sticky;
+        top: 1rem;
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+    }
+}

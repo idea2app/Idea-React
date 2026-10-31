@@ -1,18 +1,19 @@
-import { computed, observable } from 'mobx';
+'use client';
+
+import { action, computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component } from 'react';
-import { Nav, NavProps } from 'react-bootstrap';
+import { Component, HTMLAttributes } from 'react';
 import { scrollTo, uniqueID } from 'web-utility';
 
-const HeadingSelector =
-    Array.from(new Array(6), (_, index) => `h${++index}`) + '';
+const HeadingSelector = Array.from({ length: 6 }, (_, index) => `h${index + 1}`).join(',');
 
-type HeadingMeta = Record<'id' | 'text', string> &
-    Record<'level' | 'top', number>;
+type HeadingMeta = Record<'id' | 'text', string> & Record<'level' | 'top', number>;
 
-export interface PageNavProps extends NavProps {
+export interface PageNavProps extends HTMLAttributes<HTMLElement> {
     depth?: number;
-    onItemClick?: (item: HeadingMeta) => any;
+    minDepth?: number;
+    rootSelector?: string;
+    onItemClick?: (item: HeadingMeta) => void;
 }
 
 @observer
@@ -33,26 +34,42 @@ export class PageNav extends Component<PageNavProps> {
         return list[index - 1]?.id;
     }
 
-    updateScrollY = () => (this.scrollY = window.scrollY);
+    updateScrollY = action(() => (this.scrollY = window.scrollY));
 
     componentDidMount() {
         if (!globalThis.document) return;
 
         window.addEventListener('scroll', this.updateScrollY);
 
+        this.initList();
+    }
+
+    static slugOf(text: string) {
+        const slug = text
+            .toLowerCase()
+            .replace(/\W+/g, '-')
+            .replace(/^-+|-+$/g, '');
+
+        return !slug || document.getElementById(slug) ? uniqueID() : slug;
+    }
+
+    @action
+    initList() {
+        const { rootSelector } = this.props;
+        const root = rootSelector ? document.querySelector(rootSelector) : document;
+
+        if (!root) return;
+
         this.list = Array.from(
-            document.querySelectorAll<HTMLHeadingElement>(HeadingSelector),
+            root.querySelectorAll<HTMLHeadingElement>(HeadingSelector),
             element => {
-                element.id ||= uniqueID();
+                const text = element.textContent.trim();
 
-                const { id, tagName, textContent, offsetTop } = element;
+                element.id ||= PageNav.slugOf(text);
 
-                return {
-                    id,
-                    level: +tagName[1],
-                    text: textContent.trim(),
-                    top: offsetTop
-                };
+                const { id, tagName, offsetTop } = element;
+
+                return { id, level: +tagName[1], text, top: offsetTop };
             }
         );
     }
@@ -69,34 +86,41 @@ export class PageNav extends Component<PageNavProps> {
 
     renderLink = ({ id, level, text, top }: HeadingMeta) => {
         const { currentActiveId } = this,
-            { depth = Infinity } = this.props;
+            { depth = Infinity, minDepth = 1 } = this.props;
 
         return (
+            minDepth <= level &&
             level <= depth && (
-                <Nav.Item key={id} style={{ textIndent: `${level - 1}rem` }}>
-                    <Nav.Link
-                        href={`#${id}`}
-                        active={currentActiveId === id}
-                        onClick={this.scrollTo({ id, level, text, top })}
-                    >
-                        {text}
-                    </Nav.Link>
-                </Nav.Item>
+                <a
+                    key={id}
+                    className={`nav-link${currentActiveId === id ? ' active' : ''}`}
+                    href={`#${id}`}
+                    aria-current={currentActiveId === id ? 'location' : undefined}
+                    style={{ textIndent: `${level - minDepth}rem` }}
+                    onClick={this.scrollTo({ id, level, text, top })}
+                >
+                    {text}
+                </a>
             )
         );
     };
 
     render() {
         const { list } = this,
-            { style, variant = 'underline', ...props } = this.props;
+            {
+                className = '',
+                depth: _depth,
+                minDepth: _minDepth,
+                rootSelector: _rootSelector,
+                onItemClick: _onItemClick,
+                style,
+                ...props
+            } = this.props;
 
         return (
-            <Nav
-                {...{ ...props, variant }}
-                style={{ flexDirection: 'column', ...style }}
-            >
+            <nav {...props} className={`nav nav-underline flex-column ${className}`} style={style}>
                 {list.map(this.renderLink)}
-            </Nav>
+            </nav>
         );
     }
 }

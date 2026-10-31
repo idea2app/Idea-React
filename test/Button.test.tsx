@@ -53,3 +53,22 @@ it('renders a link without button-only attributes', () => {
     assert.equal(screen.getByRole('link').getAttribute('href'), '/docs');
     assert.equal(screen.getByRole('link').hasAttribute('disabled'), false);
 });
+
+it('supports link variants, extra small sizes, and standalone icon buttons', () => {
+    render(
+        <>
+            <Button variant="link" theme="primary" size="xs">
+                Link button
+            </Button>
+            <Button aria-label="Confirm" icon>
+                <span aria-hidden="true" />
+            </Button>
+        </>
+    );
+
+    assert.equal(
+        screen.getByRole('button', { name: 'Link button' }).className,
+        'btn-link theme-primary btn-xs'
+    );
+    assert.equal(screen.getByRole('button', { name: 'Confirm' }).className, 'btn-icon');
+});

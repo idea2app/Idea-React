@@ -13,9 +13,12 @@ import {
 import styles from './style.module.css';
 
 export interface NativeDialogProps extends Omit<DialogHTMLAttributes<HTMLDialogElement>, 'open'> {
+    open?: boolean;
     modal?: boolean;
     keyboard?: boolean;
     backdrop?: boolean | 'static';
+    theme?: 'light' | 'dark';
+    dialog?: boolean;
 }
 
 export class NativeDialog extends Component<NativeDialogProps> {
@@ -24,6 +27,17 @@ export class NativeDialog extends Component<NativeDialogProps> {
 
     get open() {
         return this.element.current?.open ?? false;
+    }
+
+    componentDidMount() {
+        if (this.props.open) this.show();
+    }
+
+    componentDidUpdate({ open }: NativeDialogProps) {
+        if (this.props.open === open) return;
+
+        if (this.props.open) this.show();
+        else this.close();
     }
 
     show = () => {
@@ -74,9 +88,12 @@ export class NativeDialog extends Component<NativeDialogProps> {
 
     render() {
         const {
+            open: _open,
             modal: _modal,
             keyboard: _keyboard,
             backdrop = true,
+            theme,
+            dialog = true,
             className,
             onCancel: _onCancel,
             onClick: _onClick,
@@ -89,11 +106,12 @@ export class NativeDialog extends Component<NativeDialogProps> {
                 {...props}
                 ref={this.element}
                 className={classNames(
-                    'dialog',
+                    dialog && 'dialog',
                     backdrop === false && styles.hiddenBackdrop,
                     className
                 )}
                 data-backdrop={backdrop === false ? 'false' : undefined}
+                data-bs-theme={theme}
                 onCancel={this.handleCancel}
                 onKeyDown={this.handleKeyDown}
                 onClick={this.handleClick}

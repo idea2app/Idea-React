@@ -1,0 +1,358 @@
+import { NativeDialog } from '../../../../source/NativeDialog';
+
+import {
+    DialogDemo,
+    DialogOverlaysDemo,
+    DialogSwapDemo
+} from '../../../component/Documentation/Components/DialogDemo';
+import { DialogModelDemo } from '../../../component/Documentation/Components/DialogModelDemo';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="dialog">
+
+# Dialog
+
+A modern component built on the native `<dialog>` element with built-in accessibility and backdrop
+support that replaces the old Modal component.
+
+Idea React provides the [`NativeDialog` wrapper][1], which applies Bootstrap's `dialog` classes and
+manages native `showModal()` / `show()` calls, Escape handling, backdrop clicks, and focus return. The
+examples below are interactive and adapt the [upstream Dialog documentation][2].
+
+## How it works
+
+The Dialog component leverages the browser's native `<dialog>` element, providing built-in
+accessibility features, focus management, and backdrop handling without the complexity of custom
+implementations.
+
+Key features of the native dialog:
+
+- **Modal or inline** via `showModal()` / `show()` — `modal: true` (default) promotes the dialog to
+  the browser's top layer with a backdrop and focus trapping; `modal: false` renders it inline.
+- **Built-in backdrop** using the `::backdrop` pseudo-element (modal only); set
+  `backdrop: "static"` to lock clicks outside, or `backdrop: false` to hide it.
+- **Escape key handling** closes the dialog by default; set `keyboard: false` to disable.
+- **Accessibility** — focus is trapped inside modal dialogs and returned to the trigger on close,
+  with native `<dialog>` ARIA semantics.
+- **Animated open and close** — circumvent browser restrictions by using a `.hiding` class to keep
+  dialogs in the top layer during close so the exit transition (including `::backdrop`) are animated
+  properly.
+
+Animations respect the `prefers-reduced-motion` setting.
+
+## Example
+
+Toggle a dialog by clicking the button below. The dialog uses the native `showModal()` API for true
+modal behavior.
+
+<DialogDemo label="Open dialog" title="Dialog title" saveLabel="Save changes">
+    This is a native dialog element. It uses the browser's built-in modal behavior for accessibility
+    and focus management.
+</DialogDemo>
+
+The `open` prop controls the browser's native dialog state, and `onClose` keeps React in sync when
+the user closes the dialog with Escape or a backdrop click.
+
+## Without JavaScript
+
+Supported browsers can open and close a dialog with the [Invoker Commands API][3]—no Bootstrap
+JavaScript required. Set `commandfor` to the dialog's `id`, use `command="show-modal"` to open, and
+`command="close"` to dismiss.
+
+The Invoker Commands API is not supported in all browsers. For guaranteed support, control the
+dialog through React state as in the examples above when you need plugin-like options, events, or an
+animated close.
+
+```tsx
+<button type="button" className="btn-solid theme-primary" commandfor="invokerDialog" command="show-modal">
+    Open dialog
+</button>
+
+<NativeDialog id="invokerDialog" aria-label="Invoker Commands">
+    <div className="dialog-header">
+        <h1 className="dialog-title">Invoker Commands</h1>
+        <button type="button" className="btn-close" commandfor="invokerDialog" command="close" aria-label="Close" />
+    </div>
+    <div className="dialog-body">
+        <p>
+            This dialog opens with <code>command="show-modal"</code> and closes with{' '}
+            <code>command="close"</code>. No Bootstrap JavaScript is involved.
+        </p>
+    </div>
+    <div className="dialog-footer">
+        <button type="button" className="btn-solid theme-secondary" commandfor="invokerDialog" command="close">
+            Close
+        </button>
+    </div>
+</NativeDialog>
+```
+
+## Dark dialog
+
+To make a dialog dark, pass `theme="dark"`, which applies `data-bs-theme="dark"` to the dialog
+element.
+
+<DialogDemo label="Open dark dialog" title="Dark dialog title" dark saveLabel="Save changes">
+    This is a native dialog element, only it's set to dark mode. It uses the browser's built-in
+    modal behavior for accessibility and focus management.
+</DialogDemo>
+
+## Static backdrop
+
+When `backdrop` is set to `static`, the dialog will not close when clicking outside of it. Click the
+button below to try it.
+
+<DialogDemo
+    label="Open static backdrop dialog"
+    title="Static backdrop"
+    backdrop="static"
+    saveLabel="Save changes"
+>
+    I will not close if you click outside of me. Use the close button or press Escape.
+</DialogDemo>
+
+## Overlays
+
+Tooltips, popovers, and toasts all work inside dialogs, but require some extra care. Since dialogs
+render in the browser's top layer, overlays appended to `<body>` will appear behind the dialog. The
+React components below render their overlays inside the dialog element, so tooltips and popovers
+stay in the top layer. Toasts already work as long as they're placed in the dialog markup.
+
+Tooltips, popovers, toasts, and menus all work inside modal dialogs. Modal dialogs use `showModal()`,
+which promotes the dialog to the browser's top layer—a special rendering layer above everything else
+on the page.
+
+<DialogOverlaysDemo />
+
+## Animations
+
+### Instant
+
+By default, dialogs animate with a fade on open and close. To disable animations, add
+`.dialog-instant` to the `<dialog>` element.
+
+<DialogDemo
+    label="Instant dialog"
+    title="Instant dialog"
+    className="dialog-instant"
+    saveLabel="Save changes"
+>
+    This dialog doesn't animate and appears instantly on open and close.
+</DialogDemo>
+
+### Slide down
+
+Add `.dialog-slide-down` to the `<dialog>` and it will slide **down** from the top of the viewport
+when opened.
+
+<DialogDemo
+    label="Slide down dialog"
+    title="Slide down dialog"
+    className="dialog-slide-down"
+    saveLabel="Save changes"
+>
+    This dialog slides down from the top of the viewport.
+</DialogDemo>
+
+### Slide up
+
+Add `.dialog-slide-up` to the `<dialog>` and it will slide **up** from the bottom of the viewport
+when opened.
+
+<DialogDemo
+    label="Slide up dialog"
+    title="Slide up dialog"
+    className="dialog-slide-up"
+    saveLabel="Save changes"
+>
+    This dialog slides up from the bottom of the viewport.
+</DialogDemo>
+
+## Scrollable
+
+Create a scrollable dialog that scrolls the dialog body while keeping the header and footer fixed.
+Add `.dialog-scrollable` to the `.dialog` element.
+
+<DialogDemo
+    label="Launch scrollable body dialog"
+    title="Scrollable body"
+    className="dialog-scrollable"
+    saveLabel="Save changes"
+>
+    This is some placeholder content to show the scrolling behavior for dialogs. We use repeated
+    line breaks to demonstrate how content can exceed the dialog's inner height, showing scrolling
+    within the body while the header and footer remain fixed.
+
+    This is some placeholder content to show the scrolling behavior for dialogs. We use repeated
+    line breaks to demonstrate how content can exceed the dialog's inner height, showing scrolling
+    within the body while the header and footer remain fixed.
+
+    This is some placeholder content to show the scrolling behavior for dialogs. We use repeated
+    line breaks to demonstrate how content can exceed the dialog's inner height, showing scrolling
+    within the body while the header and footer remain fixed.
+
+    This is some placeholder content to show the scrolling behavior for dialogs. We use repeated
+    line breaks to demonstrate how content can exceed the dialog's inner height, showing scrolling
+    within the body while the header and footer remain fixed.
+
+    This is some placeholder content to show the scrolling behavior for dialogs. We use repeated
+    line breaks to demonstrate how content can exceed the dialog's inner height, showing scrolling
+    within the body while the header and footer remain fixed.
+
+    This is some placeholder content to show the scrolling behavior for dialogs. We use repeated
+    line breaks to demonstrate how content can exceed the dialog's inner height, showing scrolling
+    within the body while the header and footer remain fixed.
+
+    This is some placeholder content to show the scrolling behavior for dialogs. We use repeated
+    line breaks to demonstrate how content can exceed the dialog's inner height, showing scrolling
+    within the body while the header and footer remain fixed.
+
+    This content should appear at the bottom after you scroll.
+
+</DialogDemo>
+
+## Swapping dialogs
+
+When a toggle trigger is inside an open dialog, clicking it will **swap** dialogs—opening the new one
+before closing the current. This ensures the backdrop stays visible throughout the transition with no
+flash. In React, render each dialog with the same open state and switch which dialog is open.
+
+<DialogSwapDemo />
+
+## Non-modal dialogs
+
+By default, dialogs open as modals using the browser-native `showModal()` method. You can also open
+dialogs as non-modal using `show()` by setting `modal` to `false`. Non-modal dialogs:
+
+- Have no backdrop
+- Don't trap focus
+- Don't block interaction with the rest of the page
+- Don't render in the browser's top layer
+- Still respond to Escape key (if `keyboard: true`)
+
+<DialogDemo label="Open non-modal dialog" title="Non-modal dialog" modal={false}>
+    This dialog doesn't block the page. You can still interact with content behind it.
+</DialogDemo>
+
+Use the `modal` prop to create a non-modal dialog when building with React:
+
+```tsx
+<NativeDialog modal={false} open={open} onClose={close}>
+    …
+</NativeDialog>
+```
+
+## Optional sizes
+
+Dialogs have three optional sizes, available via modifier classes to be placed on a `.dialog`. These
+sizes kick in at certain breakpoints to avoid horizontal scrollbars on narrower viewports.
+
+| Size        | Class        | Dialog max-width |
+| ----------- | ------------ | ---------------- |
+| Small       | `.dialog-sm` | `280px`          |
+| Default     | —            | `500px`          |
+| Large       | `.dialog-lg` | `800px`          |
+| Extra large | `.dialog-xl` | `1140px`         |
+
+<DialogDemo label="Extra large dialog" title="Extra large dialog" className="dialog-xl" hideFooter>
+    This is an extra large dialog using the <code>.dialog-xl</code> class.
+</DialogDemo>
+
+<DialogDemo label="Large dialog" title="Large dialog" className="dialog-lg" hideFooter>
+    This is a large dialog using the <code>.dialog-lg</code> class.
+</DialogDemo>
+
+<DialogDemo label="Default dialog" title="Medium (default) dialog" hideFooter>
+    This is a medium (default) dialog—there's no modifier class for this size.
+</DialogDemo>
+
+<DialogDemo label="Small dialog" title="Small dialog" className="dialog-sm" hideFooter>
+    This is a small dialog using the <code>.dialog-sm</code> class.
+</DialogDemo>
+
+## Fullscreen dialog
+
+Use `.dialog-fullscreen` to make the dialog cover the entire viewport.
+
+<DialogDemo label="Fullscreen dialog" title="Fullscreen dialog" className="dialog-fullscreen">
+    This dialog covers the entire viewport.
+</DialogDemo>
+
+Responsive fullscreen variants are also available. These make the dialog fullscreen only below a
+specific breakpoint.
+
+| Class                         | Fullscreen below |
+| ----------------------------- | ---------------- |
+| `.dialog-fullscreen`          | Always           |
+| `.sm-down:dialog-fullscreen`  | `576px`          |
+| `.md-down:dialog-fullscreen`  | `768px`          |
+| `.lg-down:dialog-fullscreen`  | `1024px`         |
+| `.xl-down:dialog-fullscreen`  | `1280px`         |
+| `.2xl-down:dialog-fullscreen` | `1536px`         |
+
+<DialogDemo
+    label="Fullscreen below lg"
+    title="Fullscreen below lg"
+    className="lg-down:dialog-fullscreen"
+>
+    This dialog is fullscreen below the <code>lg</code> breakpoint.
+</DialogDemo>
+
+## CSS
+
+Dialogs use CSS variables for real-time customization. Dialog sizes are defined in the
+`$dialog-sizes` Sass map, and each size specifies the dialog `width`. See the
+[upstream dialog CSS][2] for the complete variable and Sass reference.
+
+## React behavior
+
+Bootstrap's dialog plugin data attributes map to props on the `NativeDialog` wrapper:
+
+| Prop       | Type                  | Default | Description                                                                                                                                                          |
+| ---------- | --------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `open`     | `boolean`             | `false` | Controls the native dialog state. Updates call `showModal()` / `show()` and `close()`.                                                                               |
+| `modal`    | `boolean`             | `true`  | When `true`, opens with `showModal()` for backdrop, focus trapping, and top-layer rendering. When `false`, opens with `show()` without a backdrop or focus trapping. |
+| `backdrop` | `boolean \| 'static'` | `true`  | For modal dialogs, clicking the backdrop dismisses the dialog. Specify `static` for a backdrop that doesn't close the dialog when clicked.                           |
+| `keyboard` | `boolean`             | `true`  | Closes the dialog when the Escape key is pressed.                                                                                                                    |
+| `theme`    | `'light' \| 'dark'`   | —       | Applies a Bootstrap color mode to the dialog.                                                                                                                        |
+
+Dismissal does not require `data-bs-dismiss`: render a button inside the dialog and set the `open`
+state to `false` in its click handler. Use [`CloseButton`][4] for the standard close icon.
+
+Native `close` and `cancel` events are forwarded as the `onClose` and `onCancel` callbacks. For
+imperative control, keep a ref to `NativeDialog` and call its `show()` and `close()` methods; the
+controlled `open` prop is preferred for React state synchronization.
+
+The [`Dialog` model][5] builds on the wrapper with promise-based dialogs: `open()` returns a promise
+that resolves or rejects when the dialog closes.
+
+## Promise-based dialogs
+
+Create the model with a render function, then `await open()` to collect the result. The example
+below resolves with the submitted numbers and rejects when the dialog is dismissed.
+
+<CodeExample
+    code={`const inputDialog = new Dialog(({ defer }) => (
+    <NativeDialog open={!!defer} onClose={() => defer?.reject(new DialogClose())}>
+        <form onSubmit={submit}>
+            <input className="form-control" name="a" type="number" />
+        </form>
+    </NativeDialog>
+));
+
+const data = await inputDialog.open();`}
+
+>
+
+    <DialogModelDemo />
+
+</CodeExample>
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/NativeDialog/index.tsx
+[2]: https://getbootstrap.com/docs/6.0/components/dialog/
+[3]: https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
+[4]: https://github.com/idea2app/Idea-React/blob/main/source/CloseButton.tsx
+[5]: https://github.com/idea2app/Idea-React/blob/main/source/Dialog.tsx

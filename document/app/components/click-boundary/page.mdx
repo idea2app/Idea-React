@@ -1,0 +1,31 @@
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="click-boundary">
+
+# Click boundary
+
+[`ClickBoundary`][1] wraps its children in a container and tells inner clicks apart from outer
+clicks, which is useful for closing menus, popovers, or other transient surfaces when the user
+clicks elsewhere.
+
+## Usage
+
+```tsx
+<ClickBoundary onInnerClick={() => console.log('inside')} onOuterClick={() => setOpen(false)}>
+    <div className="border rounded p-3">Click inside or outside this box</div>
+</ClickBoundary>
+```
+
+The component listens for `click` events in the capture phase on `window`, so outer clicks are
+detected even when other handlers stop propagation. The listener is removed on unmount.
+
+## Callbacks
+
+- `onInnerClick` fires when the click target is inside the wrapped container.
+- `onOuterClick` fires for every other click in the document.
+
+Both callbacks receive the native `MouseEvent`.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/ClickBoundary.tsx

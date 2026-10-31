@@ -2,6 +2,5 @@
 *.config.*ts
 pnpm-workspace.yaml
 docs/
-preview/
 document/
 test/

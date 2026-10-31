@@ -14,13 +14,11 @@ export const VerticalMarquee: FC<VerticalMarqueeProps> = ({
 }) => (
     <div className={`overflow-hidden ${className}`} {...props}>
         <div
-            className={`d-inline-block mw-100 mh-100 ${style.scrollWrap}`}
+            className={`d-inline-block max-w-100 max-h-100 ${style.scrollWrap}`}
             // @ts-expect-error remove after React 19 released
             style={{ '--duration': duration }}
         >
-            <div className={`d-inline-block ${style.scrollItem}`}>
-                {children}
-            </div>
+            <div className={`d-inline-block ${style.scrollItem}`}>{children}</div>
         </div>
     </div>
 );

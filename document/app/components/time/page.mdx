@@ -1,0 +1,34 @@
+import { Time } from '../../../../source/Time';
+
+import { LiveExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="time">
+
+# Time
+
+[`Time`][1] renders a date or time value in a semantic `<time>` element with a formatted label and a
+machine-readable `dateTime` attribute.
+
+## Example
+
+<LiveExample>
+    <Time dateTime="2026-10-01T08:00:00" format="YYYY-MM-DD HH:mm" />
+</LiveExample>
+
+## Usage
+
+```tsx
+<Time dateTime={article.publishedAt} format="YYYY-MM-DD" />
+```
+
+`dateTime` accepts a `Date`, timestamp, or date string; `format` follows the
+[web-utility `formatDate` tokens][2] such as `YYYY`, `MM`, `DD`, `HH`, and `mm`. The text re-renders
+whenever either prop changes.
+
+For relative output such as "3 day(s) before", use [Time distance](../time-distance/).
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Time.tsx
+[2]: https://web-cell.dev/web-utility/functions/formatDate.html

@@ -1,0 +1,169 @@
+import { Badge } from '../../../../source/Badge';
+import { Button } from '../../../../source/Button';
+
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="badge">
+
+# Badge
+
+Badges are tiny, static display components used for adding context to other elements. They can be used
+as part of navigation, buttons, and more to provide a counter or label. Badges scale to match the size
+of the immediate parent element by using relative font sizing and `em` units.
+
+Idea React provides the [`Badge` wrapper][1] for these examples.
+
+Badges come in three variants: solid (default), subtle, and outline.
+
+<div className="d-flex flex-wrap gap-2">
+    <Badge theme="primary">New</Badge>
+    <Badge variant="subtle" theme="primary">
+        New
+    </Badge>
+    <Badge variant="outline" theme="primary">
+        New
+    </Badge>
+</div>
+
+## Examples
+
+### Headings
+
+Badges adapt to the `font-size` of the parent element.
+
+<h1>
+    Example heading <Badge>New</Badge>
+</h1>
+<h2>
+    Example heading <Badge>New</Badge>
+</h2>
+<h3>
+    Example heading <Badge>New</Badge>
+</h3>
+<h4>
+    Example heading <Badge>New</Badge>
+</h4>
+<h5>
+    Example heading <Badge>New</Badge>
+</h5>
+<h6>
+    Example heading <Badge>New</Badge>
+</h6>
+
+### Buttons
+
+Badges can be used as part of links or buttons to provide a counter.
+
+<Button variant="solid" theme="primary">
+    Notifications <Badge theme="danger">4</Badge>
+</Button>
+
+Note that depending on how they are used, badges may be confusing for users of screen readers and
+similar assistive technologies. While the styling of badges provides a visual cue as to their
+purpose, these users will simply be presented with the content of the badge. Depending on the
+specific situation, these badges may seem like random additional words or numbers at the end of a
+sentence, link, or button.
+
+Unless the context is clear (as with the “Notifications” example, where it is understood that the “4”
+is the number of notifications), consider including additional context with a visually hidden piece
+of additional text.
+
+### Positioned
+
+Use utilities to modify a `.badge` and position it in the corner of a link or button.
+
+<Button variant="solid" theme="primary" className="position-relative">
+    Inbox
+    <Badge
+        pill
+        theme="danger"
+        className="position-absolute top-0 start-100 translate-middle border border-bg"
+    >
+        99+
+        <span className="visually-hidden">unread messages</span>
+    </Badge>
+</Button>
+
+You can also replace the `.badge` class with a few more utilities without a count for a more generic
+indicator.
+
+<Button variant="solid" theme="primary" className="position-relative">
+    Profile
+    <span className="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-bg rounded-circle">
+        <span className="visually-hidden">New alerts</span>
+    </span>
+</Button>
+
+## Variants
+
+Use the contextual `.theme-{color}` classes to apply a semantic theme color to badges.
+
+<div className="d-flex flex-wrap gap-2 mb-3">
+    {[
+        ['primary', 'Primary'],
+        ['accent', 'Accent'],
+        ['secondary', 'Secondary'],
+        ['success', 'Success'],
+        ['danger', 'Danger'],
+        ['warning', 'Warning'],
+        ['info', 'Info'],
+        ['light', 'Light'],
+        ['dark', 'Dark'],
+        ['inverse', 'Inverse']
+    ].map(([theme, title]) => (
+        <Badge key={theme} theme={theme}>
+            {title}
+        </Badge>
+    ))}
+</div>
+
+<div className="d-flex flex-wrap gap-2 mb-3">
+    {[
+        ['primary', 'Primary'],
+        ['accent', 'Accent'],
+        ['secondary', 'Secondary'],
+        ['success', 'Success'],
+        ['danger', 'Danger'],
+        ['warning', 'Warning'],
+        ['info', 'Info'],
+        ['light', 'Light'],
+        ['dark', 'Dark'],
+        ['inverse', 'Inverse']
+    ].map(([theme, title]) => (
+        <Badge key={theme} variant="subtle" theme={theme}>
+            {title}
+        </Badge>
+    ))}
+</div>
+
+<div className="d-flex flex-wrap gap-2">
+    {[
+        ['primary', 'Primary'],
+        ['accent', 'Accent'],
+        ['secondary', 'Secondary'],
+        ['success', 'Success'],
+        ['danger', 'Danger'],
+        ['warning', 'Warning'],
+        ['info', 'Info'],
+        ['light', 'Light'],
+        ['dark', 'Dark'],
+        ['inverse', 'Inverse']
+    ].map(([theme, title]) => (
+        <Badge key={theme} variant="outline" theme={theme}>
+            {title}
+        </Badge>
+    ))}
+</div>
+
+The theme colors above are the same contextual colors used across Bootstrap and Idea React. Make
+sure text and background contrast is sufficient when choosing a theme.
+
+## CSS
+
+Badge colors, padding, and border radius are driven by Bootstrap's badge CSS variables and Sass maps.
+See the [upstream badge CSS][2] for the variable reference.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Badge.tsx
+[2]: https://getbootstrap.com/docs/6.0/components/badge/#css

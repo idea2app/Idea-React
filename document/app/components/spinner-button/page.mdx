@@ -1,0 +1,37 @@
+import { SpinnerButton } from '../../../../source/SpinnerButton';
+
+import { LiveExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="spinner-button">
+
+# Spinner button
+
+[`SpinnerButton`][1] extends [Button](../button/) with a `loading` state that shows an inline
+[Spinner](../spinner/) and disables the button while work is in progress.
+
+## Example
+
+<LiveExample>
+    <div className="d-flex flex-wrap gap-2">
+        <SpinnerButton theme="primary" animation="border" loading />
+        <SpinnerButton theme="primary" animation="grow" type="submit" loading>
+            Submit
+        </SpinnerButton>
+    </div>
+</LiveExample>
+
+## Usage
+
+```tsx
+<SpinnerButton theme="primary" animation="grow" loading={submitting} onClick={submit}>
+    Submit
+</SpinnerButton>
+```
+
+All [Button](../button/) props pass through, and `animation` selects the spinner animation. When the
+button has no children while loading, a visually hidden "Loading..." label keeps it accessible.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/SpinnerButton.tsx

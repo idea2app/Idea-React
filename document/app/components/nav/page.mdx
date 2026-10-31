@@ -1,0 +1,247 @@
+import { Menu, MenuDivider, MenuItem } from '../../../../source/Menu';
+import { Nav, NavLink } from '../../../../source/Nav';
+
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="nav">
+
+# Nav
+
+Add lists of links to your pages with various navigation components—tabs, pills, underline—and plenty
+of options to customize.
+
+Idea React provides the [`Nav` wrapper][1] for these examples. It always renders a semantic `<nav>`
+element, so the examples below use [`NavLink`][1] children directly instead of list items.
+
+## Base nav
+
+Navigation available in Bootstrap share general markup and styles, from the base `.nav` class to the
+active and disabled states. Swap modifier classes to switch between each style.
+
+The base `.nav` component is built with flexbox and provides a strong foundation for building all
+types of navigation components. It includes some style overrides (for working with lists), some link
+padding for larger hit areas, and basic disabled styling.
+
+To convey the active state to assistive technologies, use the `aria-current` attribute—using the
+`page` value for current page, or `true` for the current item in a set.
+
+<Nav aria-label="Base navigation">
+    <NavLink href="#" className="active" aria-current="page">
+        Active
+    </NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink disabled>Disabled</NavLink>
+</Nav>
+
+Where appropriate, you can also use buttons instead of links for the nav items. You can even mix and
+match—for example, by using menus. See [Using menus](#using-menus) below.
+
+## Available styles
+
+Change the style of navs with modifiers and utilities. Mix and match as needed, or build your own.
+
+### Tabs
+
+Add `variant="tabs"` to generate a tabbed interface.
+
+<Nav variant="tabs" aria-label="Tab navigation">
+    <NavLink href="#" className="active" aria-current="page">
+        Active
+    </NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink disabled>Disabled</NavLink>
+</Nav>
+
+### Pills
+
+Use `variant="pills"` for a more themed appearance.
+
+<Nav variant="pills" aria-label="Pill navigation">
+    <NavLink href="#" className="active" aria-current="page">
+        Active
+    </NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink disabled>Disabled</NavLink>
+</Nav>
+
+Pill navigation can also go vertical with the `vertical` prop, which adds `.nav-pills-vertical`.
+
+<Nav variant="pills" vertical aria-label="Vertical pill navigation">
+    <NavLink href="#" className="active" aria-current="page">
+        Active
+    </NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink disabled>Disabled</NavLink>
+</Nav>
+
+### Underline
+
+Use `variant="underline"` for an underlined navigation.
+
+<Nav variant="underline" aria-label="Underline navigation">
+    <NavLink href="#" className="active" aria-current="page">
+        Active
+    </NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink disabled>Disabled</NavLink>
+</Nav>
+
+## Alignment
+
+Change the alignment of your nav with flexbox utilities. By default, navs are horizontal and
+left-aligned, but you can easily modify them to center or right-aligned, and even stack vertically.
+
+### Horizontal
+
+Centered with `.justify-content-center`:
+
+<Nav className="justify-content-center" aria-label="Centered navigation">
+    <NavLink href="#" className="active" aria-current="page">
+        Active
+    </NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink disabled>Disabled</NavLink>
+</Nav>
+
+Right-aligned with `.justify-content-end`:
+
+<Nav className="justify-content-end" aria-label="End-aligned navigation">
+    <NavLink href="#" className="active" aria-current="page">
+        Active
+    </NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink disabled>Disabled</NavLink>
+</Nav>
+
+### Vertical
+
+Stack your navigation by setting the `vertical` prop. With pills the wrapper uses
+`.nav-pills-vertical`; other variants use the `.flex-column` utility.
+
+<Nav vertical aria-label="Vertical navigation">
+    <NavLink href="#" className="active" aria-current="page">
+        Active
+    </NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink disabled>Disabled</NavLink>
+</Nav>
+
+### Fill and justify
+
+Force your nav's contents to extend the full available width with the `fill` or `justified` props.
+To proportionately fill all available space with your nav items, use `fill`. Notice that all
+horizontal space is occupied, but not every nav item has the same width.
+
+<Nav variant="pills" fill aria-label="Filled navigation">
+    <NavLink href="#" className="active" aria-current="page">
+        Active
+    </NavLink>
+    <NavLink href="#">Much longer nav link</NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink disabled>Disabled</NavLink>
+</Nav>
+
+For equal-width elements, use `justified`. All horizontal space will be occupied by nav links, but
+unlike `fill`, every nav link will be the same width.
+
+<Nav variant="pills" justified aria-label="Justified navigation">
+    <NavLink href="#" className="active" aria-current="page">
+        Active
+    </NavLink>
+    <NavLink href="#">Much longer nav link</NavLink>
+    <NavLink href="#">Link</NavLink>
+    <NavLink disabled>Disabled</NavLink>
+</Nav>
+
+## Working with flex utilities
+
+If you need responsive nav variations, consider using a series of flexbox utilities. While more
+verbose, these utilities offer greater customization across responsive breakpoints. In the example
+below, our nav will be stacked on the lowest breakpoint, then adapt to a horizontal layout that fills
+the available width starting from the small breakpoint.
+
+<Nav
+    variant="pills"
+    className="flex-column sm:flex-row sm:d-flex"
+    aria-label="Responsive navigation"
+>
+    <NavLink href="#" className="active sm:flex-fill sm:text-center" aria-current="page">
+        Active
+    </NavLink>
+    <NavLink href="#" className="sm:flex-fill sm:text-center">
+        Longer nav link
+    </NavLink>
+    <NavLink href="#" className="sm:flex-fill sm:text-center">
+        Link
+    </NavLink>
+    <NavLink disabled className="sm:flex-fill sm:text-center">
+        Disabled
+    </NavLink>
+</Nav>
+
+## Regarding accessibility
+
+If you're using navs to provide a navigation bar, wrap a `<nav>` element around the whole
+navigation—the `Nav` wrapper always does. Note that navigation bars, even if visually styled as tabs
+with `variant="tabs"`, should **not** be given `role="tablist"`, `role="tab"` or `role="tabpanel"`
+attributes. These are only appropriate for dynamic tabbed interfaces, as described in the
+[ARIA Authoring Practices Guide tabs pattern][2]. The `aria-current` attribute is not necessary on
+dynamic tabbed interfaces since their JavaScript handles the selected state with `aria-selected`.
+
+## Using menus
+
+Add menus with the [`Menu` wrapper][3] and the `nav-link` toggle class.
+
+### Tabs with menus
+
+<Nav variant="tabs" aria-label="Tab navigation with menu">
+    <NavLink href="#" className="active" aria-current="page">
+        Active
+    </NavLink>
+    <Menu label="Menu" toggleProps={{ className: 'nav-link' }}>
+        <MenuItem href="#">Action</MenuItem>
+        <MenuItem href="#">Another action</MenuItem>
+        <MenuItem href="#">Something else here</MenuItem>
+        <MenuDivider />
+        <MenuItem href="#">Separated link</MenuItem>
+    </Menu>
+    <NavLink href="#">Link</NavLink>
+    <NavLink disabled>Disabled</NavLink>
+</Nav>
+
+### Pills with menus
+
+<Nav variant="pills" aria-label="Pill navigation with menu">
+    <NavLink href="#" className="active" aria-current="page">
+        Active
+    </NavLink>
+    <Menu label="Menu" toggleProps={{ className: 'nav-link' }}>
+        <MenuItem href="#">Action</MenuItem>
+        <MenuItem href="#">Another action</MenuItem>
+        <MenuItem href="#">Something else here</MenuItem>
+        <MenuDivider />
+        <MenuItem href="#">Separated link</MenuItem>
+    </Menu>
+    <NavLink href="#">Link</NavLink>
+    <NavLink disabled>Disabled</NavLink>
+</Nav>
+
+## CSS
+
+Nav styles are driven by Bootstrap's `.nav`, `.nav-tabs`, `.nav-pills`, and `.nav-underline` modifier
+classes. See the [upstream nav CSS][4] for the variable reference.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Nav.tsx
+[2]: https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/
+[3]: https://github.com/idea2app/Idea-React/blob/main/source/Menu.tsx
+[4]: https://getbootstrap.com/docs/6.0/components/nav/#css

@@ -1,0 +1,40 @@
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { SelectDemo } from '../../../component/Documentation/Components/SelectDemo';
+
+<ComponentsLayout active="select">
+
+# Select
+
+[`Select`][1] is an accessible value selector built on the [Menu](../menu/) component: a button
+toggles a keyboard-navigable menu of `Option` items.
+
+## Example
+
+<CodeExample
+    code={`<Select value={value} onChange={setValue}>
+    <Option value="0">idea2app</Option>
+    <Option value="1">freeCodeCamp</Option>
+</Select>`}
+>
+    <SelectDemo />
+</CodeExample>
+
+## Usage
+
+`Select` is controlled: pass the current `value` and update it in `onChange`.
+
+```tsx
+<Select value={framework} onChange={setFramework}>
+    <Option value="react">React</Option>
+    <Option value="vue">Vue</Option>
+</Select>
+```
+
+The toggle shows the selected option's content, or render a custom label with `valueRender`. Button
+styling props such as `theme`, `variant`, `size`, and `disabled` pass through to the toggle, and
+`align` positions the menu.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Select.tsx

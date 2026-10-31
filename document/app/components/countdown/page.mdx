@@ -1,0 +1,50 @@
+import { Countdown } from '../../../../source/Countdown';
+
+import { LiveExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="countdown">
+
+# Countdown
+
+[`Countdown`][1] renders the remaining time to a target moment as a list of time sections, updating
+every second until the end time is reached.
+
+## Example
+
+<LiveExample>
+    <Countdown
+        className="d-flex gap-3"
+        endTime="2035-01-01T00:00:00"
+        units={[
+            { scale: 24, label: 'days' },
+            { scale: 60, label: 'hours' },
+            { scale: 60, label: 'minutes' },
+            { scale: 1000, label: 'seconds' }
+        ]}
+    />
+</LiveExample>
+
+## Units
+
+`units` lists the sections from largest to smallest. Each `scale` is the amount of the next smaller
+unit that makes up one of the current unit, ending at milliseconds.
+
+```tsx
+<Countdown
+    endTime={launchDate}
+    units={[
+        { scale: 24, label: 'days' },
+        { scale: 60, label: 'hours' },
+        { scale: 60, label: 'minutes' },
+        { scale: 1000, label: 'seconds' }
+    ]}
+    onEnd={endTime => console.log('Finished at', endTime)}
+/>
+```
+
+`itemClassName` styles each section, and `onEnd` fires once when the countdown reaches zero.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Countdown.tsx

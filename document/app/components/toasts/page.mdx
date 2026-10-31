@@ -1,0 +1,270 @@
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import {
+    StaticToast,
+    ToastMessageDemo,
+    ToastPlacementDemo
+} from '../../../component/Documentation/Components/ToastDemo';
+
+<ComponentsLayout active="toasts">
+
+# Toasts
+
+Toasts are lightweight notifications designed to mimic the push notifications that have been
+popularized by mobile and desktop operating systems. They're built with flexbox, so they're easy to
+align and position.
+
+The Idea React [`Toast` model][1] manages message lifetimes and renders Bootstrap 6 toast markup
+through `ToastContainer`, `ToastItem`, `ToastHeader`, and `ToastBody`. This guide adapts the
+[Bootstrap Toasts documentation][2].
+
+## Overview
+
+Things to know when using toasts:
+
+- Toasts are opt-in, so nothing is rendered until you call `open()` or render a `ToastItem`.
+- The model hides a toast after its `delay` (3000 ms by default). Pass `delay: 0` to keep it open
+  until it is dismissed.
+- `open()` returns a promise that resolves with the closed message entry.
+- Toast headers use `display: flex`, so margin and flexbox utilities keep their content aligned.
+- The fade animation honors `prefers-reduced-motion`.
+
+```tsx
+const notifications = new Toast();
+
+notifications.open({
+    title: 'Saved',
+    body: 'Your changes are saved.',
+    theme: 'success',
+    delay: 5000
+});
+
+<notifications.Component position="bottom-end" />;
+```
+
+## Examples
+
+### Basic
+
+To encourage extensible and predictable toasts, we recommend a header and body. Toasts are as
+flexible as you need and have very little required markup. At a minimum, a single element contains
+the toasted content, and a dismiss button is strongly encouraged.
+
+<StaticToast body="Hello, world! This is a toast message." />
+
+The static examples on this page stay visible until you close them. The live example below shows the
+default auto-hide behavior.
+
+### Live example
+
+Click the button below to show a toast, positioned with Bootstrap utilities in the lower right
+corner, that has been hidden by default.
+
+<CodeExample
+    code={`const toast = new Toast();
+
+toast.open({
+title: 'Bootstrap',
+body: 'Hello, world! This is a toast message.',
+delay: 5000
+});
+
+<toast.Component position="bottom-end" />`}
+>
+    <ToastMessageDemo />
+</CodeExample>
+
+The `Toast` model keeps messages in its `messages` array and renders them through its `Component`.
+Each new message gets a unique id, a timer, and a promise that resolves when the toast closes.
+
+### Translucent
+
+Toasts are slightly translucent to blend in with what's below them.
+
+<StaticToast body="Hello, world! This is a toast message." />
+
+Add `.toast-translucent` to enhance the translucency with a backdrop blur and saturation filter.
+Set `translucent` on the static demo to apply the class.
+
+<div className="bg-inverse p-3 rounded-3">
+    <StaticToast translucent body="Hello, world! This is a translucent toast message." />
+</div>
+
+### Stacking
+
+You can stack toasts by wrapping them in a toast container, which will vertically add some spacing.
+
+<div className="toast-container position-static">
+    <StaticToast time="just now" body="See? Just like this." />
+    <StaticToast time="2 seconds ago" body="Heads up, toasts will stack automatically" />
+</div>
+
+### Dark toasts
+
+Set a toast to dark mode by adding the `data-bs-theme="dark"` attribute to the `.toast` element or an
+ancestor. The static demo applies it to a wrapper.
+
+<StaticToast dark time="2 seconds ago" body="This toast is in dark mode by default." actions />
+
+### Variants
+
+Toasts can be themed with Bootstrap's theme color utilities. Apply a theme to the entire toast or to
+individual elements within the toast.
+
+<div className="vstack gap-3">
+    <StaticToast
+        theme="primary"
+        time="2 seconds ago"
+        body="This toast is a primary themed toast."
+        actions
+    />
+    <StaticToast
+        theme="accent"
+        time="2 seconds ago"
+        body="This toast is an accent-themed toast."
+        actions
+    />
+</div>
+
+### Custom content
+
+Customize toasts by removing sub-components, tweaking them with utilities, or adding your own
+markup. Here we've created a simpler toast by removing the default `.toast-header`, adding a custom
+hide icon, and using flexbox utilities to adjust the layout.
+
+<StaticToast noHeader body="Hello, world! This is a toast message." />
+
+Alternatively, you can add additional controls and components to toasts.
+
+<StaticToast
+    body={
+        <>
+            This is a custom toast message with additional content like a horizontal rule and
+            buttons.
+            <hr className="my-3" />
+        </>
+    }
+    actions
+/>
+
+### Instant
+
+By default, toasts fade in and out. Add `.toast-instant` to disable the animation. Set `instant` on
+the static demo to apply the class.
+
+<StaticToast instant body="This toast appears and disappears instantly." />
+
+## Placement
+
+Place toasts with custom CSS as you need them. The top right is often used for notifications, as is
+the top middle. If you're only ever going to show one toast at a time, put the positioning styles
+right on the `.toast`.
+
+The `Toast` model accepts a `position` on its `Component`, covering top, middle, and bottom edges
+aligned to the start, center, or end. Choose a placement and show a toast:
+
+<ToastPlacementDemo />
+
+For systems that generate more notifications, wrap them in a toast container so they stack, then
+position the container in the upper right corner.
+
+<div className="position-relative bg-1 rounded-3 p-3" style={{ minHeight: '200px' }}>
+    <div className="toast-container top-0 end-0 p-3">
+        <StaticToast time="just now" body="See? Just like this." />
+        <StaticToast time="2 seconds ago" body="Heads up, toasts will stack automatically" />
+    </div>
+</div>
+
+You can also get fancy with flexbox utilities to align toasts horizontally and vertically.
+
+<div className="d-flex justify-content-center align-items-center bg-1 rounded-3 p-5">
+    <StaticToast body="Hello, world! This is a toast message." />
+</div>
+
+## Accessibility
+
+Toasts are intended to be small interruptions, so wrap them in an `aria-live` region to help screen
+reader users. Changes to live regions are automatically announced without moving focus. The
+`ToastContainer` renders a polite live region with `aria-atomic="true"`, so the entire toast is
+announced as a single unit. Each `ToastItem` uses `role="status"` by default.
+
+The live region must be present before the toast is generated or updated. The model's `Component`
+always renders its container, so the region exists before the first message is opened.
+
+Adapt the role and live level to the content. If a message is important, such as a form error, use
+an assertive alert instead of a toast. The static examples on this page use `role="alert"` and
+`aria-live="assertive"` to demonstrate the upstream markup.
+
+As the content you display changes, update the `delay` so users have enough time to read the toast.
+
+When a toast does not auto-hide, include a close button so users can dismiss it:
+
+<StaticToast body="Hello, world! This is a toast message." />
+
+While it's technically possible to add focusable or actionable controls in a toast, avoid doing so
+for autohiding toasts. Keyboard and assistive technology users may not reach the toast in time. If
+you absolutely need further controls, use a toast with no auto-hide, like the static examples above.
+
+## CSS
+
+### Variables
+
+Toast colors, spacing, and transition timing are defined by CSS variables on `.toast`. See the
+[upstream toast CSS][2] for the complete variable and Sass map reference.
+
+## Usage
+
+Bootstrap initializes toasts through a JavaScript plugin. The React model replaces the plugin with
+an observable collection of messages:
+
+```tsx
+const notifications = new Toast();
+
+const closed = notifications.open({
+    title: 'Saved',
+    body: 'Your changes are saved.',
+    theme: 'success',
+    delay: 5000
+});
+
+render(<notifications.Component position="bottom-end" />);
+
+await closed; // resolves when the toast is dismissed or its timer expires
+```
+
+### Message options
+
+| Field   | Type             | Default | Description                                                 |
+| ------- | ---------------- | ------- | ----------------------------------------------------------- |
+| `title` | `ReactNode`      | —       | Header content. Without a title, the header is hidden.      |
+| `body`  | `ReactNode`      | —       | Required toast body.                                        |
+| `theme` | `ComponentTheme` | —       | Applies a `theme-*` class to the toast.                     |
+| `delay` | `number`         | `3000`  | Milliseconds before hiding. Use `0` to keep the toast open. |
+
+### Methods
+
+| Member      | Description                                                                   |
+| ----------- | ----------------------------------------------------------------------------- |
+| `open`      | Adds a message, starts its timer, and returns a promise for the closed entry. |
+| `close`     | Removes the message by id, clears its timer, and resolves its promise.        |
+| `messages`  | Observable list of active messages.                                           |
+| `Component` | Renders the live region and the active toasts at the given `position`.        |
+
+### Data attributes
+
+| Bootstrap attribute       | React equivalent                                         |
+| ------------------------- | -------------------------------------------------------- |
+| `data-bs-autohide`        | Omit it, or set `delay: 0` to disable auto-hide.         |
+| `data-bs-delay`           | `delay` on the message.                                  |
+| `data-bs-dismiss="toast"` | `CloseButton` with an `onClick` handler, or `close(id)`. |
+
+### Events
+
+The plugin's `show.bs.toast`, `shown.bs.toast`, `hide.bs.toast`, and `hidden.bs.toast` events are
+replaced by the promise returned from `open()`. The resolved entry includes `openedAt` and
+`closedAt` timestamps.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Toast.tsx
+[2]: https://getbootstrap.com/docs/6.0/components/toasts/

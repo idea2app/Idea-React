@@ -1,0 +1,748 @@
+import { Button } from '../../../../source/Button';
+import { Icon } from '../../../../source/Icon';
+import { Image } from '../../../../source/Image';
+import { Menu, MenuDivider, MenuItem } from '../../../../source/Menu';
+import { NavItem, NavLink } from '../../../../source/Nav';
+import { Navbar, NavbarBrand, NavbarNav, NavbarText } from '../../../../source/Navbar';
+
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import {
+    NavbarDemo,
+    NavbarExternalDemo
+} from '../../../component/Documentation/Components/NavbarDemo';
+
+<ComponentsLayout active="navbar">
+
+# Navbar
+
+Create flexible, responsive navigation bars. Includes support for branding, navigation, and a
+built-in drawer for mobile.
+
+The Idea React [`Navbar` wrapper][1] composes the Bootstrap 6 `.navbar` markup into semantic
+React components. This guide adapts the [Bootstrap Navbar documentation][2].
+
+## Example
+
+Here's a navbar that includes most supported sub-components and a responsive right drawer with the
+[`Drawer` wrapper][3]. Use the lower-right corner grip to resize your browser and preview the
+responsive behavior.
+
+<NavbarDemo title="Menu" bodyClassName="mb-2 md:mb-0">
+    <NavbarNav className="nav me-auto">
+        <NavItem>
+            <NavLink href="#" className="active" aria-current="page">
+                Home
+            </NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#">Link</NavLink>
+        </NavItem>
+        <NavItem>
+            <Menu label="Menu" toggleProps={{ className: 'nav-link' }}>
+                <MenuItem href="#">Action</MenuItem>
+                <MenuItem href="#">Another action</MenuItem>
+                <MenuDivider />
+                <MenuItem href="#">Something else here</MenuItem>
+            </Menu>
+        </NavItem>
+        <NavItem>
+            <NavLink disabled>Disabled</NavLink>
+        </NavItem>
+    </NavbarNav>
+    <form className="hstack gap-2" role="search">
+        <input className="form-control" type="search" placeholder="Search" aria-label="Search" />
+        <Button type="submit" variant="solid" theme="secondary" icon aria-label="Search">
+            <Icon name="search" aria-hidden="true" />
+        </Button>
+    </form>
+</NavbarDemo>
+
+## How it works
+
+Here's what you need to know before getting started with the navbar:
+
+- Navbars require a wrapping `.navbar` with a breakpoint-first `navbar-expand` class (for example,
+  `md:navbar-expand`) for responsive collapsing and color scheme classes. Set the `expand` prop to
+  `'md'` to render that class.
+- Navbars and their contents are fluid by default. Change the container to limit their horizontal
+  width in different ways.
+- Use margin, padding, and flex utility classes for controlling spacing and alignment within
+  navbars.
+- Navbars are responsive by default using the drawer component. On small viewports, navigation links
+  slide in from the side as a [Drawer][3].
+- Ensure accessibility by using a `<nav>` element—`Navbar` always renders one—or add
+  `role="navigation"` to a generic element.
+- Indicate the current item with `aria-current="page"` for the current page or `aria-current="true"`
+  for the current item in a set.
+
+The drawer animation honors `prefers-reduced-motion`. Bootstrap's `Callout` for reduced motion
+applies to the React `Drawer` as well.
+
+## Supported content
+
+Navbars come with built-in support for a handful of sub-components. Choose from the following as
+needed:
+
+- `NavbarBrand` for your company, product, or project name.
+- `NavbarNav` for a full-height and lightweight navigation, including support for menus.
+- `NavbarToggler` for use with the drawer and other navigation toggling behaviors.
+- Flex and spacing utilities for any form controls and actions.
+- `NavbarText` for adding vertically centered strings of text.
+
+### Brand
+
+The `.navbar-brand` can be applied to most elements, but an anchor works best, as some elements might
+require utility classes or custom styles. Use `NavbarBrand` for the anchor form.
+
+#### Text
+
+Add your text within an element with the `.navbar-brand` class.
+
+<Navbar className="bg-1 fg-2">
+    <div className="container-fluid">
+        <NavbarBrand href="#">Navbar</NavbarBrand>
+    </div>
+</Navbar>
+
+<Navbar className="bg-1 fg-2">
+    <div className="container-fluid">
+        <span className="navbar-brand mb-0 h1">Navbar</span>
+    </div>
+</Navbar>
+
+#### Image
+
+You can replace the text within the `.navbar-brand` with an image. The `Image` wrapper renders
+Bootstrap's image utilities.
+
+<Navbar className="bg-1 fg-2">
+    <div className="container">
+        <NavbarBrand href="#">
+            <Image
+                src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg"
+                alt="Bootstrap"
+                width={30}
+                height={24}
+            />
+        </NavbarBrand>
+    </div>
+</Navbar>
+
+#### Image and text
+
+You can also make use of some additional utilities to add an image and text at the same time. Note
+the addition of `.d-inline-block` and `.align-text-top` on the image.
+
+<Navbar className="bg-1 fg-2">
+    <div className="container-fluid">
+        <NavbarBrand href="#">
+            <Image
+                src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg"
+                alt="Logo"
+                width={30}
+                height={24}
+                className="d-inline-block align-text-top"
+            />
+            Bootstrap
+        </NavbarBrand>
+    </div>
+</Navbar>
+
+### Nav
+
+Navbar navigation links build on the `.nav` options with their own modifier class and require the
+use of toggler classes for proper responsive styling. **Navigation in navbars will also grow to
+occupy as much horizontal space as possible** to keep your navbar contents securely aligned.
+
+Add the `.active` class on `.nav-link` to indicate the current page. Please note that you should also
+add the `aria-current` attribute on the active `.nav-link`. The [`NavItem` and `NavLink`
+wrappers][4] keep these attributes and the disabled state consistent.
+
+<NavbarDemo expand="sm" brand="Navbar" title="Menu">
+    <NavbarNav>
+        <NavItem>
+            <NavLink href="#" className="active" aria-current="page">
+                Home
+            </NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#">Features</NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#">Pricing</NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink disabled>Disabled</NavLink>
+        </NavItem>
+    </NavbarNav>
+</NavbarDemo>
+
+And because we use classes for our navs, you can avoid the list-based approach entirely if you like.
+
+<NavbarDemo expand="sm" brand="Navbar" title="Menu">
+    <div className="nav nav-pills navbar-nav">
+        <NavLink href="#" className="active" aria-current="page">
+            Home
+        </NavLink>
+        <NavLink href="#">Features</NavLink>
+        <NavLink href="#">Pricing</NavLink>
+        <NavLink disabled>Disabled</NavLink>
+    </div>
+</NavbarDemo>
+
+You can also use menus in your navbar. Menus require a wrapping element for positioning, so be sure
+to use separate and nested elements for `.nav-item` and `.nav-link` as shown below. The [`Menu`
+wrapper][5] manages open state and keyboard navigation for the trigger and panel.
+
+<NavbarDemo expand="lg" brand="Navbar" title="Menu">
+    <NavbarNav>
+        <NavItem>
+            <NavLink href="#" className="active" aria-current="page">
+                Home
+            </NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#">Features</NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#">Pricing</NavLink>
+        </NavItem>
+        <NavItem>
+            <Menu label="Menu link" toggleProps={{ className: 'nav-link' }}>
+                <MenuItem href="#">Action</MenuItem>
+                <MenuItem href="#">Another action</MenuItem>
+                <MenuItem href="#">Something else here</MenuItem>
+            </Menu>
+        </NavItem>
+    </NavbarNav>
+</NavbarDemo>
+
+### Forms
+
+Place various form controls and components within a navbar:
+
+<Navbar className="bg-1 fg-2">
+    <div className="container-fluid">
+        <form className="d-flex" role="search">
+            <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+            />
+            <Button type="submit" variant="outline" theme="success">
+                Search
+            </Button>
+        </form>
+    </div>
+</Navbar>
+
+Immediate child elements of `.navbar` use flex layout and will default to
+`justify-content: space-between`. Use additional flex utilities as needed to adjust this behavior.
+
+<Navbar className="bg-1 fg-2">
+    <div className="container-fluid">
+        <NavbarBrand>Navbar</NavbarBrand>
+        <form className="d-flex" role="search">
+            <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+            />
+            <Button type="submit" variant="outline" theme="success">
+                Search
+            </Button>
+        </form>
+    </div>
+</Navbar>
+
+Input groups work, too. If your navbar is an entire form, or mostly a form, you can use the `<form>`
+element as the container and save some markup.
+
+<Navbar className="bg-1 fg-2">
+    <form className="container-fluid">
+        <div className="input-group">
+            <span className="input-group-text" id="navbarUsername">
+                @
+            </span>
+            <input
+                type="text"
+                className="form-control"
+                placeholder="Username"
+                aria-label="Username"
+                aria-describedby="navbarUsername"
+            />
+        </div>
+    </form>
+</Navbar>
+
+Various buttons are supported as part of these navbar forms, too. This is also a great reminder
+that vertical alignment utilities can be used to align different sized elements.
+
+<Navbar className="bg-1 fg-2">
+    <form className="container-fluid justify-content-start">
+        <Button type="button" variant="outline" theme="success" className="me-2">
+            Main button
+        </Button>
+        <Button type="button" variant="outline" theme="secondary" size="sm">
+            Smaller button
+        </Button>
+    </form>
+</Navbar>
+
+### Text
+
+Navbars may contain bits of text with the help of `.navbar-text`. This class adjusts vertical
+alignment and horizontal spacing for strings of text.
+
+<Navbar className="bg-1 fg-2">
+    <div className="container-fluid">
+        <NavbarText>Navbar text with an inline element</NavbarText>
+    </div>
+</Navbar>
+
+Mix and match with other components and utilities as needed.
+
+<NavbarDemo expand="md" brand="Navbar w/ text" title="Menu">
+    <NavbarNav className="me-auto mb-2 md:mb-0">
+        <NavItem>
+            <NavLink href="#" className="active" aria-current="page">
+                Home
+            </NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#">Features</NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#">Pricing</NavLink>
+        </NavItem>
+    </NavbarNav>
+    <NavbarText>Navbar text with an inline element</NavbarText>
+</NavbarDemo>
+
+## Dark navbar
+
+To make a navbar dark, add `data-bs-theme="dark"` to the `.navbar` element. The `theme` prop renders
+that attribute for you.
+
+<NavbarDemo theme="dark" title="Menu" bodyClassName="mb-2 md:mb-0">
+    <NavbarNav className="nav me-auto">
+        <NavItem>
+            <NavLink href="#" className="active" aria-current="page">
+                Home
+            </NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#">Link</NavLink>
+        </NavItem>
+        <NavItem>
+            <Menu label="Menu" toggleProps={{ className: 'nav-link' }}>
+                <MenuItem href="#">Action</MenuItem>
+                <MenuItem href="#">Another action</MenuItem>
+                <MenuDivider />
+                <MenuItem href="#">Something else here</MenuItem>
+            </Menu>
+        </NavItem>
+        <NavItem>
+            <NavLink disabled>Disabled</NavLink>
+        </NavItem>
+    </NavbarNav>
+    <form className="hstack gap-2" role="search">
+        <input className="form-control" type="search" placeholder="Search" aria-label="Search" />
+        <Button type="submit" variant="solid" theme="secondary" icon aria-label="Search">
+            <Icon name="search" aria-hidden="true" />
+        </Button>
+    </form>
+</NavbarDemo>
+
+## Translucent navbar
+
+Add `.navbar-translucent` to blur and saturate the background of a navbar. This works well for
+navbars positioned over content, such as fixed or sticky navbars.
+
+<Navbar expand="md" theme="dark" className="navbar-translucent">
+    <div className="container-fluid">
+        <NavbarBrand href="#">Navbar</NavbarBrand>
+        <NavbarNav>
+            <NavItem>
+                <NavLink href="#" className="active" aria-current="page">
+                    Home
+                </NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">Features</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">Pricing</NavLink>
+            </NavItem>
+        </NavbarNav>
+    </div>
+</Navbar>
+
+## Color schemes
+
+Navbar themes are easier than ever thanks to Bootstrap's combination of Sass and CSS variables. The
+default is the "light navbar" for use with light background colors, but you can also apply
+`data-bs-theme="dark"` to the `.navbar` parent for dark background colors. Then, customize with
+`.bg-*` and additional utilities.
+
+<div className="vstack gap-2">
+    <NavbarDemo expand="md" className="bg-1" bodyClassName="mb-2 md:mb-0">
+        <NavbarNav className="me-auto mb-2 md:mb-0">
+            <NavItem>
+                <NavLink href="#" className="active" aria-current="page">
+                    Home
+                </NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">Features</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">Pricing</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">About</NavLink>
+            </NavItem>
+        </NavbarNav>
+        <form className="d-flex" role="search">
+            <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+            />
+            <Button type="submit" variant="outline" theme="secondary">
+                Search
+            </Button>
+        </form>
+    </NavbarDemo>
+
+    <NavbarDemo expand="md" theme="dark" className="bg-primary" bodyClassName="mb-2 md:mb-0">
+        <NavbarNav className="me-auto mb-2 md:mb-0">
+            <NavItem>
+                <NavLink href="#" className="active" aria-current="page">
+                    Home
+                </NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">Features</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">Pricing</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">About</NavLink>
+            </NavItem>
+        </NavbarNav>
+        <form className="d-flex" role="search">
+            <input
+                className="form-control me-2"
+                data-bs-theme="light"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+            />
+            <Button type="submit" variant="solid" theme="inverse">
+                Search
+            </Button>
+        </form>
+    </NavbarDemo>
+
+    <NavbarDemo expand="md" theme="light" className="bg-1" bodyClassName="mb-2 md:mb-0">
+        <NavbarNav className="me-auto mb-2 md:mb-0">
+            <NavItem>
+                <NavLink href="#" className="active" aria-current="page">
+                    Home
+                </NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">Features</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">Pricing</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">About</NavLink>
+            </NavItem>
+        </NavbarNav>
+        <form className="d-flex" role="search">
+            <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+            />
+            <Button type="submit" variant="outline" theme="primary">
+                Search
+            </Button>
+        </form>
+    </NavbarDemo>
+
+</div>
+
+```html
+<nav class="navbar" data-bs-theme="dark">
+    <!-- Navbar content -->
+</nav>
+
+<nav class="navbar bg-primary" data-bs-theme="dark">
+    <!-- Navbar content -->
+</nav>
+
+<nav class="navbar bg-1" data-bs-theme="light">
+    <!-- Navbar content -->
+</nav>
+```
+
+## Containers
+
+Although it's not required, you can wrap a navbar in a `.container` to center it on a page—though
+note that an inner container is still required. Or you can add a container inside the `.navbar` to
+only center the contents of a fixed or static top navbar.
+
+<div className="container">
+    <Navbar expand="lg" className="bg-1 fg-2">
+        <div className="container-fluid">
+            <NavbarBrand href="#">Navbar</NavbarBrand>
+        </div>
+    </Navbar>
+</div>
+
+Use any of the responsive containers to change how wide the content in your navbar is presented.
+
+<Navbar expand="lg" className="bg-1 fg-2">
+    <div className="md:container">
+        <NavbarBrand href="#">Navbar</NavbarBrand>
+    </div>
+</Navbar>
+
+## Placement
+
+Use Bootstrap's [position utilities][6] to place navbars in non-static positions. Choose from fixed
+to the top, fixed to the bottom, stickied to the top (scrolls with the page until it reaches the
+top, then stays there), or stickied to the bottom.
+
+Fixed navbars use `position: fixed`, meaning they're pulled from the normal flow of the DOM and may
+require custom CSS (for example, `padding-top` on the `<body>`) to prevent overlap with other
+elements.
+
+```tsx
+<Navbar className="fixed-top">…</Navbar>
+<Navbar className="fixed-bottom">…</Navbar>
+<Navbar className="sticky-top">…</Navbar>
+<Navbar className="sticky-bottom">…</Navbar>
+```
+
+## Responsive behaviors
+
+Navbars can use `NavbarToggler` and breakpoint-first `navbar-expand` classes to determine when their
+content appears in a drawer or inline. In combination with other utilities, you can easily choose
+when to show or hide particular elements.
+
+For navbars that never collapse, add the `navbar-expand` class on the navbar by setting `expand`
+without a breakpoint. For navbars that always show the drawer, omit `expand`.
+
+### Drawer
+
+By default, navbars use the [drawer component][3] for their responsive behavior. This provides a
+modern drawer-style menu that slides in from any side of the screen.
+
+#### Drawer placement
+
+You can customize which side the drawer appears from using drawer placement classes:
+
+- `.drawer-start` - slides in from the left (or right in RTL)
+- `.drawer-end` - slides in from the right (or left in RTL)
+- `.drawer-top` - slides in from the top
+- `.drawer-bottom` - slides in from the bottom
+
+The `placement` prop on `Drawer` and the navbar demos maps to these classes. These examples omit the
+`navbar-expand` class to always show the drawer behavior. Click the toggler to see the drawer slide
+in from different directions.
+
+<NavbarDemo expand={false} brand="Left Drawer" placement="start" title="Menu">
+    <NavbarNav className="me-auto mb-2 md:mb-0">
+        <NavItem>
+            <NavLink href="#" className="active" aria-current="page">
+                Home
+            </NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#">Link</NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink disabled>Disabled</NavLink>
+        </NavItem>
+    </NavbarNav>
+</NavbarDemo>
+
+<NavbarDemo expand={false} brand="Top Drawer" placement="top" title="Menu">
+    <NavbarNav className="me-auto mb-2 md:mb-0">
+        <NavItem>
+            <NavLink href="#" className="active" aria-current="page">
+                Home
+            </NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#">Link</NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink disabled>Disabled</NavLink>
+        </NavItem>
+    </NavbarNav>
+</NavbarDemo>
+
+### Toggler
+
+Navbar togglers are left-aligned by default, but should they follow a sibling element like a
+`.navbar-brand`, they'll automatically be aligned to the far right. Reversing your markup will
+reverse the placement of the toggler.
+
+These examples omit the `navbar-expand` class to always show the collapsed state with the toggler
+visible. Click the toggler to open the drawer.
+
+With no `.navbar-brand` shown (hidden inside the drawer):
+
+<NavbarDemo brand={null} title="Hidden brand" bodyClassName="mb-2 md:mb-0">
+    <NavbarBrand href="#">Hidden brand</NavbarBrand>
+    <NavbarNav className="me-auto mb-2 md:mb-0">
+        <NavItem>
+            <NavLink href="#" className="active" aria-current="page">
+                Home
+            </NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#">Link</NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink disabled>Disabled</NavLink>
+        </NavItem>
+    </NavbarNav>
+    <form className="d-flex" role="search">
+        <input
+            className="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+        />
+        <Button type="submit" variant="outline" theme="success">
+            Search
+        </Button>
+    </form>
+</NavbarDemo>
+
+With a brand name shown on the left and toggler on the right:
+
+<NavbarDemo expand={false} brand="Navbar" bodyClassName="mb-2">
+    <NavbarNav className="me-auto mb-2">
+        <NavItem>
+            <NavLink href="#" className="active" aria-current="page">
+                Home
+            </NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#">Link</NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink disabled>Disabled</NavLink>
+        </NavItem>
+    </NavbarNav>
+    <form className="d-flex" role="search">
+        <input
+            className="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+        />
+        <Button type="submit" variant="outline" theme="success">
+            Search
+        </Button>
+    </form>
+</NavbarDemo>
+
+With a toggler on the left and brand name on the right:
+
+<NavbarDemo expand={false} togglerFirst brand="Navbar" bodyClassName="mb-2">
+    <NavbarNav className="me-auto mb-2">
+        <NavItem>
+            <NavLink href="#" className="active" aria-current="page">
+                Home
+            </NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#">Link</NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink disabled>Disabled</NavLink>
+        </NavItem>
+    </NavbarNav>
+    <form className="d-flex" role="search">
+        <input
+            className="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+        />
+        <Button type="submit" variant="outline" theme="success">
+            Search
+        </Button>
+    </form>
+</NavbarDemo>
+
+### External content
+
+Sometimes you want to use the drawer to trigger a container element for content that structurally
+sits outside of the `.navbar`. Because the React wrapper controls the drawer through state rather
+than `id` matching, the drawer and toggler can be composed anywhere in the same component.
+
+<NavbarExternalDemo />
+
+When you do this, include additional logic to move focus programmatically to the container when it
+is opened. Otherwise, keyboard users and users of assistive technologies will likely have a hard
+time finding the newly revealed content—particularly if the container that was opened comes
+_before_ the toggler in the document's structure.
+
+## CSS
+
+### Variables
+
+Navbar colors, spacing, and toggler dimensions are defined by CSS variables on `.navbar` and
+`.navbar-nav`. See the [upstream navbar CSS][2] for the complete variable and Sass map reference.
+
+### Sass map
+
+Bootstrap reassigns the global `$breakpoints` map to `$navbar-breakpoints` in `scss/_navbar.scss`
+and uses this for the loop that generates the responsive navbar expand/collapse classes. This allows
+you to customize the breakpoints for navbars independently of the global breakpoints.
+
+### Sass loops
+
+Responsive navbar expand/collapse classes (for example, `md:navbar-expand`) are combined with the
+`$navbar-breakpoints` map and generated through a loop in `scss/_navbar.scss`.
+
+## React behavior
+
+Bootstrap toggles the navbar drawer through the `data-bs-toggle="drawer"` plugin. The React components
+manage open state themselves and expose the same markup as props:
+
+| Component       | Prop        | Type                                               | Description                                              |
+| --------------- | ----------- | -------------------------------------------------- | -------------------------------------------------------- |
+| `Navbar`        | `expand`    | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Renders the breakpoint-first `navbar-expand` class.      |
+| `Navbar`        | `theme`     | `'light' \| 'dark'`                                | Sets `data-bs-theme` for the navbar color scheme.        |
+| `NavbarToggler` | `expanded`  | `boolean`                                          | Sets `aria-expanded` while the drawer is open.           |
+| `Drawer`        | `placement` | `'start' \| 'end' \| 'top' \| 'bottom'`            | Chooses the side the drawer slides in from.              |
+| `Drawer`        | `onDismiss` | `() => void`                                       | Called by the close button, backdrop, or <kbd>Esc</kbd>. |
+
+`NavbarDemo` and `NavbarExternalDemo` are documentation-only components that keep the drawer state
+for these examples. In your own application, keep the open state in your component or model and
+pass it to `Drawer` and `NavbarToggler`.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Navbar.tsx
+[2]: https://getbootstrap.com/docs/6.0/components/navbar/
+[3]: https://github.com/idea2app/Idea-React/blob/main/source/Drawer.tsx
+[4]: https://github.com/idea2app/Idea-React/blob/main/source/Nav.tsx
+[5]: https://github.com/idea2app/Idea-React/blob/main/source/Menu.tsx
+[6]: https://getbootstrap.com/docs/6.0/utilities/position/

@@ -9,7 +9,6 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 [![NPM][11]][12]
 
 - API document: https://idea2app.github.io/Idea-React/
-- Preview site: https://idea2app.github.io/Idea-React/preview/
 
 ## Versions
 
@@ -27,35 +26,42 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 3. [Navbar](source/Navbar.tsx)
 4. [Menu](source/Menu.tsx)
 5. [Native Dialog](source/NativeDialog/index.tsx)
-6. [Time](source/Time.tsx)
-7. [Time Distance](source/TimeDistance.tsx)
-8. [Timeline](source/Timeline/)
-9. [Countdown](source/Countdown.tsx)
-10. [Icon](source/Icon.tsx)
-11. [Avatar](source/Avatar.tsx)
-12. [Nameplate](source/Nameplate.tsx)
-13. [Text Truncate](source/TextTruncate.tsx)
-14. [Type Echo](source/TypeEcho.tsx)
-15. [Horizontal Marquee](source/HorizontalMarquee/)
-16. [Vertical Marquee](source/VerticalMarquee/)
-17. [Click Boundary](source/ClickBoundary.tsx)
-18. [Spinner Button](source/SpinnerButton.tsx)
-19. [Select](source/Select.tsx)
-20. [Month Calendar](source/MonthCalendar.tsx)
-21. [Code Block](source/CodeBlock.tsx)
-22. [Live TSX](source/LiveTSX.tsx)
-23. [Scroll Nav](source/ScrollNav/)
-24. [Page Nav](source/PageNav.tsx)
-25. [Editor](source/Editor.tsx)
-26. [Editor HTML](source/EditorHTML.tsx)
-27. [Table Spinner](source/TableSpinner.tsx)
-28. [Loading](source/Loading.tsx)
-29. [Share Box](source/ShareBox.tsx)
-30. [Overlay Box](source/OverlayBox.tsx)
-31. [Dialog](source/Dialog.tsx)
-32. [Toast](source/Toast.tsx)
-33. [User Rank](source/UserRank/)
-34. [Zodiac Bar](source/ZodiacBar.tsx)
+6. [Nav](source/Nav.tsx)
+7. [Card](source/Card.tsx)
+8. [Grid](source/Grid.tsx)
+9. [Image](source/Image.tsx)
+10. [Table](source/Table.tsx)
+11. [Popover](source/Popover.tsx)
+12. [Tooltip](source/Tooltip.tsx)
+13. [Time](source/Time.tsx)
+14. [Time Distance](source/TimeDistance.tsx)
+15. [Timeline](source/Timeline/)
+16. [Countdown](source/Countdown.tsx)
+17. [Icon](source/Icon.tsx)
+18. [Avatar](source/Avatar.tsx)
+19. [Nameplate](source/Nameplate.tsx)
+20. [Text Truncate](source/TextTruncate/)
+21. [Type Echo](source/TypeEcho/)
+22. [Horizontal Marquee](source/HorizontalMarquee/)
+23. [Vertical Marquee](source/VerticalMarquee/)
+24. [Click Boundary](source/ClickBoundary.tsx)
+25. [Spinner Button](source/SpinnerButton.tsx)
+26. [Select](source/Select.tsx)
+27. [Month Calendar](source/MonthCalendar.tsx)
+28. [Code Block](source/CodeBlock.tsx)
+29. [Live TSX](source/LiveTSX.tsx)
+30. [Scroll Nav](source/ScrollNav/)
+31. [Page Nav](source/PageNav.tsx)
+32. [Editor](source/Editor.tsx)
+33. [Editor HTML](source/EditorHTML.tsx)
+34. [Table Spinner](source/TableSpinner.tsx)
+35. [Loading](source/Loading.tsx)
+36. [Share Box](source/ShareBox.tsx)
+37. [Overlay Box](source/OverlayBox.tsx)
+38. [Dialog](source/Dialog.tsx)
+39. [Toast](source/Toast.tsx)
+40. [User Rank](source/UserRank/)
+41. [Zodiac Bar](source/ZodiacBar.tsx)
 
 #### Data components
 
@@ -86,10 +92,12 @@ For the current alpha release, use `idea-react@next` instead of `idea-react`.
 ### CSS on CDN
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+/>
 <link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1.13.1/font/bootstrap-icons.css" />
 <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" />
-<link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism.min.css" />
 <link rel="stylesheet" href="https://unpkg.com/idea-react/dist/index.css" />
 ```
 
@@ -178,8 +186,7 @@ export class ExamplePage extends Component {
 
 ```tsx
 import { Component } from 'react';
-import { Button } from 'react-bootstrap';
-import { Toast } from 'idea-react';
+import { Button, Toast } from 'idea-react';
 
 export class ExamplePage extends Component {
     toast = new Toast();
@@ -193,7 +200,7 @@ export class ExamplePage extends Component {
                             .open({
                                 title: 'Notification',
                                 body: 'Hello, world!',
-                                variant: 'success'
+                                theme: 'success'
                             })
                             .then(() => console.log('Toast closed'))
                     }

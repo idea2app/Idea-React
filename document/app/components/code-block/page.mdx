@@ -1,0 +1,30 @@
+import { CodeBlock } from '../../../../source/CodeBlock';
+
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="code-block">
+
+# Code block
+
+[`CodeBlock`][1] renders syntax-highlighted code with [Shiki][2]. String children are highlighted
+as-is, while React elements are serialized to JSX source first.
+
+## Example
+
+<CodeBlock language="tsx" className="border rounded p-3">
+    {`export const Hello = () => <strong>Hello, Idea React!</strong>;`}
+</CodeBlock>
+
+## Language
+
+`language` accepts `javascript`, `jsx`, `typescript`, or `tsx`. The highlighted markup is injected
+inline, so the block needs no client-side JavaScript.
+
+```tsx
+<CodeBlock language="ts">{`const answer: number = 42;`}</CodeBlock>
+```
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/CodeBlock.tsx
+[2]: https://shiki.style/

@@ -1,0 +1,45 @@
+import { MonthCalendar } from '../../../../source/MonthCalendar';
+
+import { LiveExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="month-calendar">
+
+# Month calendar
+
+[`MonthCalendar`][1] renders an interactive month grid as an accessible table with previous and next
+month controls, localized weekday names, and selectable date entries.
+
+## Example
+
+<LiveExample>
+    <MonthCalendar
+        value={[
+            { date: new Date(), content: '🎉 Today' },
+            { date: new Date(Date.now() + 86400000), content: '📅 Planning' }
+        ]}
+    />
+</LiveExample>
+
+## Usage
+
+`value` lists `DateData` entries whose `content` appears in the matching cell; entries sharing a
+date are grouped in a popover. `onSelect` receives the clicked entry and `onChange` fires when the
+visible month changes.
+
+```tsx
+<MonthCalendar
+    locale="zh-CN"
+    theme="success"
+    value={events}
+    onSelect={({ date, content, link }) => open(link)}
+    onChange={date => loadMonth(date)}
+/>
+```
+
+`locale` controls weekday formatting and defaults to the browser language; `theme` styles the header
+and controls.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/MonthCalendar.tsx

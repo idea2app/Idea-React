@@ -3,7 +3,17 @@ import { it, mock } from 'node:test';
 
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
-import { Menu, MenuItem } from '../source/Menu';
+import {
+    Menu,
+    MenuDivider,
+    MenuHeader,
+    MenuItem,
+    MenuItemContent,
+    MenuItemDescription,
+    MenuPanel,
+    MenuSubmenu,
+    MenuText
+} from '../source/Menu';
 
 const items = (
     <>
@@ -96,4 +106,67 @@ it('closes on Tab and safely handles an empty menu during keyboard navigation', 
     fireEvent.keyDown(trigger, { key: 'Tab' });
     assert.equal(trigger.getAttribute('aria-expanded'), 'false');
     assert.deepEqual(new Menu({ label: 'Unmounted' }).items(), []);
+});
+
+it('renders menu content parts with Bootstrap 6 classes', () => {
+    const { container } = render(
+        <MenuPanel className="show position-static">
+            <MenuHeader>Menu header</MenuHeader>
+            <MenuText>Menu item text</MenuText>
+            <MenuItem>
+                <MenuItemContent>
+                    Publish now
+                    <MenuItemDescription>Make this page visible immediately</MenuItemDescription>
+                </MenuItemContent>
+            </MenuItem>
+            <MenuDivider />
+        </MenuPanel>
+    );
+
+    assert.equal(container.firstElementChild?.className, 'menu show position-static');
+    assert.equal(screen.getByRole('heading', { name: 'Menu header' }).className, 'menu-header');
+    assert.equal(screen.getByText('Menu item text').className, 'menu-text');
+    assert.equal(screen.getByText('Publish now').className, 'menu-item-content');
+    assert.equal(
+        screen.getByText('Make this page visible immediately').className,
+        'menu-item-description'
+    );
+    assert.equal(screen.getByRole('separator').className, 'menu-divider');
+});
+
+it('opens nested submenus with click, hover, and keyboard input', async () => {
+    render(
+        <Menu label="Actions">
+            <MenuSubmenu label="File">
+                <MenuItem href="/new">New</MenuItem>
+            </MenuSubmenu>
+        </Menu>
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Actions' }));
+
+    const trigger = screen.getByRole('button', { name: 'File' });
+    const submenu = trigger.closest('.submenu')!;
+
+    assert.equal(trigger.getAttribute('aria-haspopup'), 'true');
+    assert.equal(trigger.getAttribute('aria-expanded'), 'false');
+
+    fireEvent.mouseEnter(submenu);
+    assert.equal(trigger.getAttribute('aria-expanded'), 'true');
+
+    fireEvent.mouseLeave(submenu);
+    assert.equal(trigger.getAttribute('aria-expanded'), 'false');
+
+    await act(() => fireEvent.keyDown(trigger, { key: 'ArrowRight' }));
+    assert.equal(trigger.getAttribute('aria-expanded'), 'true');
+    assert.equal(document.activeElement, screen.getByRole('link', { name: 'New' }));
+
+    fireEvent.keyDown(document.activeElement!, { key: 'ArrowLeft' });
+    assert.equal(trigger.getAttribute('aria-expanded'), 'false');
+
+    fireEvent.click(trigger);
+    assert.equal(trigger.getAttribute('aria-expanded'), 'true');
+
+    fireEvent.click(trigger);
+    assert.equal(trigger.getAttribute('aria-expanded'), 'false');
 });

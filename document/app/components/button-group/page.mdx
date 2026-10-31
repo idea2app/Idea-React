@@ -1,0 +1,392 @@
+import { Button } from '../../../../source/Button';
+import { ButtonGroup } from '../../../../source/ButtonGroup';
+import { ToggleButton } from '../../../../source/ToggleButton';
+
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="button-group">
+
+# Button group
+
+Group a series of buttons together on a single line or stack them in a vertical column.
+
+Idea React provides the [`ButtonGroup` wrapper][1] for these examples. It renders a `role="group"`
+container and applies `.btn-group`; set `vertical` to render `.btn-group-vertical` instead.
+
+## Examples
+
+Wrap a series of [`Button`][2] components in a `ButtonGroup`.
+
+<ButtonGroup aria-label="Basic example">
+    <Button variant="solid" theme="primary">
+        Left
+    </Button>
+    <Button variant="solid" theme="primary">
+        Middle
+    </Button>
+    <Button variant="solid" theme="primary">
+        Right
+    </Button>
+</ButtonGroup>
+
+Button groups require an appropriate `role` attribute and explicit label to ensure assistive
+technologies like screen readers identify buttons as grouped and announce them. Use `role="group"`
+for button groups or `role="toolbar"` for button toolbars. Then use `aria-label` or
+`aria-labelledby` to label them.
+
+### With links
+
+These classes can also be added to groups of links, as an alternative to the [Nav][3] navigation
+components.
+
+<ButtonGroup aria-label="Link group">
+    <Button href="#" variant="solid" theme="primary" className="active" aria-current="page">
+        Active link
+    </Button>
+    <Button href="#" variant="solid" theme="primary">
+        Link
+    </Button>
+    <Button href="#" variant="solid" theme="primary">
+        Link
+    </Button>
+</ButtonGroup>
+
+### Dividers
+
+Add a divider between buttons by adding the `btn-group-divider` class to the `ButtonGroup`. Most
+useful when used with buttons that have the same theme color and a solid fill.
+
+<div className="d-flex flex-wrap gap-2">
+    <ButtonGroup className="btn-group-divider" aria-label="Divider example">
+        <Button variant="solid" theme="primary">
+            Left
+        </Button>
+        <Button variant="solid" theme="primary" className="active">
+            Active
+        </Button>
+        <Button variant="solid" theme="primary">
+            Right
+        </Button>
+    </ButtonGroup>
+    <ButtonGroup className="btn-group-divider" aria-label="Secondary divider example">
+        <Button variant="solid" theme="secondary">
+            Left
+        </Button>
+        <Button variant="solid" theme="secondary">
+            Right
+        </Button>
+    </ButtonGroup>
+</div>
+
+Works with vertical button groups, too.
+
+<div className="d-flex align-items-start gap-2">
+    <ButtonGroup vertical className="btn-group-divider" aria-label="Vertical divider example">
+        <Button variant="solid" theme="primary">
+            Left
+        </Button>
+        <Button variant="solid" theme="primary" className="active">
+            Active
+        </Button>
+        <Button variant="solid" theme="primary">
+            Right
+        </Button>
+    </ButtonGroup>
+    <ButtonGroup
+        vertical
+        className="btn-group-divider"
+        aria-label="Vertical secondary divider example"
+    >
+        <Button variant="solid" theme="secondary">
+            Left
+        </Button>
+        <Button variant="solid" theme="secondary">
+            Right
+        </Button>
+    </ButtonGroup>
+</div>
+
+## Theme variants
+
+Use the `theme` prop to apply a theme color to a set of buttons.
+
+<ButtonGroup aria-label="Accent theme example">
+    <Button variant="solid" theme="accent">
+        Left
+    </Button>
+    <Button variant="solid" theme="accent">
+        Middle
+    </Button>
+    <Button variant="solid" theme="accent">
+        Right
+    </Button>
+</ButtonGroup>
+
+You can mix and match button variants in a button group.
+
+<ButtonGroup aria-label="Basic mixed styles example">
+    <Button variant="solid" theme="danger">
+        Left
+    </Button>
+    <Button variant="solid" theme="warning">
+        Middle
+    </Button>
+    <Button variant="solid" theme="success">
+        Right
+    </Button>
+</ButtonGroup>
+
+## Style variants
+
+All button styles are supported in button groups. Mix and match with the `btn-group-divider` class
+to add dividers between some styles or just use the button borders in others.
+
+<ButtonGroup className="btn-group-divider" aria-label="Solid example">
+    <Button variant="solid" theme="primary">
+        Left
+    </Button>
+    <Button variant="solid" theme="primary">
+        Middle
+    </Button>
+    <Button variant="solid" theme="primary">
+        Right
+    </Button>
+</ButtonGroup>
+
+<ButtonGroup aria-label="Outlined example">
+    <Button variant="outline" theme="primary">
+        Left
+    </Button>
+    <Button variant="outline" theme="primary">
+        Middle
+    </Button>
+    <Button variant="outline" theme="primary">
+        Right
+    </Button>
+</ButtonGroup>
+
+<ButtonGroup className="btn-group-divider" aria-label="Subtle example">
+    <Button variant="subtle" theme="primary">
+        Left
+    </Button>
+    <Button variant="subtle" theme="primary">
+        Middle
+    </Button>
+    <Button variant="subtle" theme="primary">
+        Right
+    </Button>
+</ButtonGroup>
+
+## Toggle buttons
+
+### Checkbox
+
+Checkbox toggle buttons can be grouped together. Any or all of the buttons can be checked. The
+[`ToggleButton` wrapper][4] renders the label, the visually hidden input, and the button classes.
+
+<ButtonGroup aria-label="Basic checkbox toggle button group">
+    <ToggleButton variant="outline" theme="primary">
+        Check 1
+    </ToggleButton>
+    <ToggleButton variant="outline" theme="primary">
+        Check 2
+    </ToggleButton>
+    <ToggleButton variant="outline" theme="primary">
+        Check 3
+    </ToggleButton>
+</ButtonGroup>
+
+### Radio
+
+By design, radio toggle button groups can only have one button checked at a time.
+
+<ButtonGroup aria-label="Basic radio toggle button group">
+    <ToggleButton type="radio" name="btnradio" variant="outline" theme="primary" defaultChecked>
+        Radio 1
+    </ToggleButton>
+    <ToggleButton type="radio" name="btnradio" variant="outline" theme="primary">
+        Radio 2
+    </ToggleButton>
+    <ToggleButton type="radio" name="btnradio" variant="outline" theme="primary">
+        Radio 3
+    </ToggleButton>
+</ButtonGroup>
+
+## Button toolbar
+
+Combine sets of button groups into button toolbars for more complex components. Use utility classes
+as needed to space out groups, buttons, and more.
+
+<div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <ButtonGroup aria-label="First group">
+        <Button variant="solid" theme="primary">
+            1
+        </Button>
+        <Button variant="solid" theme="primary">
+            2
+        </Button>
+        <Button variant="solid" theme="primary">
+            3
+        </Button>
+        <Button variant="solid" theme="primary">
+            4
+        </Button>
+    </ButtonGroup>
+    <ButtonGroup aria-label="Second group">
+        <Button variant="solid" theme="secondary">
+            5
+        </Button>
+        <Button variant="solid" theme="secondary">
+            6
+        </Button>
+        <Button variant="solid" theme="secondary">
+            7
+        </Button>
+    </ButtonGroup>
+    <ButtonGroup aria-label="Third group">
+        <Button variant="solid" theme="info">
+            8
+        </Button>
+    </ButtonGroup>
+</div>
+
+Feel free to mix input groups with button groups in your toolbars. Similar to the example above,
+you'll likely need some utilities though to space things properly.
+
+<div
+    className="btn-toolbar justify-content-between"
+    role="toolbar"
+    aria-label="Toolbar with input group"
+>
+    <ButtonGroup aria-label="First group">
+        <Button variant="outline" theme="secondary">
+            1
+        </Button>
+        <Button variant="outline" theme="secondary">
+            2
+        </Button>
+        <Button variant="outline" theme="secondary">
+            3
+        </Button>
+        <Button variant="outline" theme="secondary">
+            4
+        </Button>
+    </ButtonGroup>
+    <div className="input-group">
+        <div className="input-group-text" id="btnGroupAddon2">
+            @
+        </div>
+        <input
+            type="text"
+            className="form-control"
+            placeholder="Input group example"
+            aria-label="Input group example"
+            aria-describedby="btnGroupAddon2"
+        />
+    </div>
+</div>
+
+## Sizing
+
+Instead of applying button sizing classes to every button in a group, just add `btn-group-lg`,
+`btn-group-sm`, or `btn-group-xs` to each `ButtonGroup`, including each one when nesting multiple
+groups.
+
+<div className="d-flex flex-column align-items-start gap-3">
+    <ButtonGroup className="btn-group-lg" aria-label="Large button group">
+        <Button variant="outline" theme="primary">
+            Left
+        </Button>
+        <Button variant="outline" theme="primary">
+            Middle
+        </Button>
+        <Button variant="outline" theme="primary">
+            Right
+        </Button>
+    </ButtonGroup>
+    <ButtonGroup aria-label="Default button group">
+        <Button variant="outline" theme="primary">
+            Left
+        </Button>
+        <Button variant="outline" theme="primary">
+            Middle
+        </Button>
+        <Button variant="outline" theme="primary">
+            Right
+        </Button>
+    </ButtonGroup>
+    <ButtonGroup className="btn-group-sm" aria-label="Small button group">
+        <Button variant="outline" theme="primary">
+            Left
+        </Button>
+        <Button variant="outline" theme="primary">
+            Middle
+        </Button>
+        <Button variant="outline" theme="primary">
+            Right
+        </Button>
+    </ButtonGroup>
+    <ButtonGroup className="btn-group-xs" aria-label="Extra small button group">
+        <Button variant="outline" theme="primary">
+            Left
+        </Button>
+        <Button variant="outline" theme="primary">
+            Middle
+        </Button>
+        <Button variant="outline" theme="primary">
+            Right
+        </Button>
+    </ButtonGroup>
+</div>
+
+## Vertical variation
+
+Set the `vertical` prop to make a set of buttons appear vertically stacked rather than horizontally.
+**Split button menus are not supported here.**
+
+<div className="d-flex align-items-start gap-3">
+    <ButtonGroup vertical aria-label="Vertical button group">
+        <Button variant="solid" theme="primary">
+            Button
+        </Button>
+        <Button variant="solid" theme="primary">
+            Button
+        </Button>
+        <Button variant="solid" theme="primary">
+            Button
+        </Button>
+        <Button variant="solid" theme="primary">
+            Button
+        </Button>
+    </ButtonGroup>
+    <ButtonGroup vertical aria-label="Vertical radio toggle button group">
+        <ToggleButton
+            type="radio"
+            name="vbtn-radio"
+            variant="outline"
+            theme="danger"
+            defaultChecked
+        >
+            Radio 1
+        </ToggleButton>
+        <ToggleButton type="radio" name="vbtn-radio" variant="outline" theme="danger">
+            Radio 2
+        </ToggleButton>
+        <ToggleButton type="radio" name="vbtn-radio" variant="outline" theme="danger">
+            Radio 3
+        </ToggleButton>
+    </ButtonGroup>
+</div>
+
+## CSS
+
+Button groups rely on Bootstrap's `.btn-group` and `.btn-group-vertical` classes, with dividers
+drawn by `.btn-group-divider`. See the [upstream button group CSS][5] for the variable reference.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/ButtonGroup.tsx
+[2]: https://github.com/idea2app/Idea-React/blob/main/source/Button.tsx
+[3]: ./nav/
+[4]: https://github.com/idea2app/Idea-React/blob/main/source/ToggleButton.tsx
+[5]: https://getbootstrap.com/docs/6.0/components/button-group/#css

@@ -1,0 +1,59 @@
+import { NavLink } from '../../../../source/Nav';
+import { ScrollNav } from '../../../../source/ScrollNav';
+
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="scroll-nav">
+
+# Scroll nav
+
+[`ScrollNav`][1] is a horizontally scrollable navigation bar based on Bootstrap's `nav-scroller`
+pattern. Arrow buttons appear automatically when the items overflow the container width.
+
+## Example
+
+<CodeExample>
+    <ScrollNav aria-label="Scrollable sections">
+        <NavLink className="text-nowrap active" aria-current="page" href="#example">
+            {'Dashboard'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Friends'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Explore'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Suggestions'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Messages'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Notifications'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Profile'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Settings'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Help'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Logout'}
+        </NavLink>
+    </ScrollNav>
+</CodeExample>
+
+## Behavior
+
+The component tracks scroll position and container size with a `ResizeObserver`, showing a left or
+right caret button only when more content is available in that direction. Each click scrolls by 80%
+of the visible width with smooth scrolling.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/ScrollNav/index.tsx

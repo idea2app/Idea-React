@@ -1,11 +1,12 @@
 import { FC } from 'react';
-import { Button, ButtonProps, Spinner, SpinnerProps } from 'react-bootstrap';
 
-export interface SpinnerButtonProps
-    extends ButtonProps,
-        Pick<SpinnerProps, 'animation'> {
-    loading?: boolean;
-}
+import { Button, ButtonProps } from './Button';
+import { Spinner, SpinnerProps } from './Spinner';
+
+export type SpinnerButtonProps = ButtonProps &
+    Pick<SpinnerProps, 'animation'> & {
+        loading?: boolean;
+    };
 
 export const SpinnerButton: FC<SpinnerButtonProps> = ({
     animation,
@@ -18,16 +19,13 @@ export const SpinnerButton: FC<SpinnerButtonProps> = ({
         {loading && (
             <>
                 <Spinner
-                    as="span"
                     className={children ? 'me-2' : ''}
                     size="sm"
                     animation={animation}
                     role="status"
                     aria-hidden="true"
                 />
-                {!children && (
-                    <span className="visually-hidden">Loading...</span>
-                )}
+                {!children && <span className="visually-hidden">Loading...</span>}
             </>
         )}
         {children}

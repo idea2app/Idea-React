@@ -1,0 +1,456 @@
+import { Button } from '../../../../source/Button';
+import { Icon } from '../../../../source/Icon';
+import { Image } from '../../../../source/Image';
+import { OverlayBox } from '../../../../source/OverlayBox';
+
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import * as style from '../../../component/Documentation/Components/style.module.less';
+
+<ComponentsLayout active="overlay-box">
+
+# Popover and tooltip
+
+Small, contextual overlays for displaying information or custom content.
+
+The Idea React [`OverlayBox` wrapper][1] composes Bootstrap 6 tooltip or popover markup with
+React-triggered behavior. It supports hover, focus, and click triggers with top, right, bottom, and
+left placement. The popover sections adapt the [Bootstrap Popover documentation][2]; the tooltip
+sections adapt the [Bootstrap Tooltip documentation][3].
+
+## Popover
+
+### Overview
+
+Click the button below to show and close a popover.
+
+<OverlayBox
+    trigger="click"
+    title="Popover title"
+    detail="This is the popover content—make it as long as you want."
+>
+    <Button variant="solid" theme="primary">
+        Toggle popover
+    </Button>
+</OverlayBox>
+
+Things to know when using popovers:
+
+- Bootstrap relies on [Floating UI](https://floating-ui.com/) for dynamic positioning. The React
+  wrapper instead positions the panel with Bootstrap's placement utilities inside the trigger's
+  relative wrapper, so there is no positioning library or plugin to initialize.
+- Popovers are rendered wherever `<OverlayBox>` is mounted, next to the trigger. This keeps the
+  content inside dialogs and other focus-managed containers without a `container` option.
+- Set `title` for the popover header and `detail` for the body. Without `detail`, the wrapper renders
+  a tooltip instead.
+- Triggering popovers on hidden elements will not work.
+- Popovers for `.disabled` or `disabled` elements must be triggered on a wrapper element.
+- When triggered from anchors that wrap across multiple lines, add `.text-nowrap` to keep the panel
+  centered on a single line.
+- The wrapper removes the panel and its `aria-describedby` reference when it closes or unmounts.
+- Popovers can be triggered from an element inside a shadow DOM.
+- React escapes text by default. Pass JSX to `title` or `detail` when you intentionally need HTML;
+  there is no separate sanitizer option.
+
+The fade animation honors `prefers-reduced-motion`.
+
+### Examples
+
+#### Live demo
+
+Titles are set via the `title` prop and body content is set via `detail`.
+
+<OverlayBox
+    trigger="click"
+    title="Popover title"
+    detail="And here's some amazing content. It's very engaging. Right?"
+>
+    <Button variant="solid" theme="primary">
+        Toggle popover
+    </Button>
+</OverlayBox>
+
+Use `title` for the popover header, not the native HTML `title` attribute. The wrapper handles the
+accessible association with `aria-describedby`.
+
+#### Image content
+
+Pass JSX to `detail` to place rich content, such as an image, inside the popover.
+
+<CodeExample>
+    <OverlayBox
+        trigger="click"
+        title="view info"
+        detail={<Image src="https://github.com/idea2app.png" alt="idea2app" />}
+    >
+        <Button variant="solid" theme="primary">
+            {'View'}
+        </Button>
+    </OverlayBox>
+</CodeExample>
+
+#### Placement
+
+Set `placement` to change the direction. Four options are available: top, right, bottom, and left.
+Directions are mirrored when using Bootstrap in RTL.
+
+<div className="d-flex flex-wrap gap-2">
+    <OverlayBox trigger="click" placement="left" title="Left popover" detail="Left popover">
+        <Button variant="solid" theme="secondary">
+            Popover on left
+        </Button>
+    </OverlayBox>
+    <OverlayBox trigger="click" placement="top" title="Top popover" detail="Top popover">
+        <Button variant="solid" theme="secondary">
+            Popover on top
+        </Button>
+    </OverlayBox>
+    <OverlayBox trigger="click" placement="bottom" title="Bottom popover" detail="Bottom popover">
+        <Button variant="solid" theme="secondary">
+            Popover on bottom
+        </Button>
+    </OverlayBox>
+    <OverlayBox trigger="click" placement="right" title="Right popover" detail="Right popover">
+        <Button variant="solid" theme="secondary">
+            Popover on right
+        </Button>
+    </OverlayBox>
+</div>
+
+#### Responsive placement
+
+The Bootstrap plugin accepts breakpoint-prefixed placements such as `top md:right lg:bottom`. The
+React wrapper takes a single `placement` value; choose it per viewport in your component or model
+instead of passing a responsive string.
+
+```tsx
+<OverlayBox placement={isWide ? 'right' : 'top'} title="Responsive popover" detail="…">
+    <Button>Open</Button>
+</OverlayBox>
+```
+
+#### Custom container
+
+Bootstrap's `container` option moves the generated markup into another element when parent styles
+interfere with positioning. The React wrapper always renders the panel inside its trigger wrapper,
+so the content stays in the flow of the component—including inside a dialog, where focus is trapped
+and the panel must remain a child of the dialog. If an ancestor clips the panel, adjust that
+ancestor's overflow or move the trigger, rather than reparenting the overlay.
+
+#### Custom popovers
+
+Customize the appearance with the CSS variables on the panel. Set `overlayClassName` to scope the
+overrides, then define the variables on that class:
+
+```css
+.custom-popover {
+    --bs-popover-header-bg: var(--bs-primary);
+    --bs-popover-header-color: var(--bs-fg-white);
+    --bs-popover-body-color: var(--bs-fg-white);
+    --bs-popover-border-color: var(--bs-primary);
+    --bs-popover-arrow-border: var(--bs-primary);
+}
+```
+
+<OverlayBox
+    trigger="click"
+    placement="right"
+    overlayClassName={style.customPopover}
+    title="Custom popover"
+    detail="This popover is themed via CSS variables."
+>
+    <Button variant="solid" theme="secondary">
+        Custom popover
+    </Button>
+</OverlayBox>
+
+#### Dismiss on next click
+
+Use the `focus` trigger to dismiss popovers on the user's next click of an element other than the
+toggle element. **Clicks and focus inside the popover itself do not dismiss it**, so users can select
+text or use controls in the content.
+
+Use an `<a>` element with `tabindex="0"` and `role="button"` rather than a `<button>` for proper
+cross-browser and cross-platform behavior.
+
+<OverlayBox
+    trigger="focus"
+    title="Dismissible popover"
+    detail="And here's some amazing content. It's very engaging. Right?"
+>
+    <a tabIndex={0} role="button" className="btn-solid theme-secondary">
+        Dismissible popover
+    </a>
+</OverlayBox>
+
+A shown popover can also be dismissed by pressing <kbd>Escape</kbd>. A popover shown inside a dialog
+is dismissed on its own: the first <kbd>Escape</kbd> closes the popover and a subsequent one closes
+the dialog.
+
+#### Disabled elements
+
+Elements with the `disabled` attribute aren't interactive, meaning users cannot hover or click them
+to trigger a popover or tooltip. Trigger the popover from a wrapper `<div>` or `<span>`, ideally made
+keyboard-focusable with `tabindex="0"`.
+
+For disabled popover triggers, you may also prefer a `['hover', 'focus']` trigger so the popover
+appears as immediate visual feedback; users may not expect to click a disabled element.
+
+<OverlayBox title="Disabled popover" trigger={['hover', 'focus']}>
+    <span tabIndex={0} className="d-inline-block rounded-3">
+        <Button variant="solid" theme="primary" disabled>
+            Disabled button
+        </Button>
+    </span>
+</OverlayBox>
+
+## Tooltip
+
+### Overview
+
+Hover the button below to see a tooltip. By default, the tooltip appears above its trigger element.
+
+<OverlayBox title="Tooltip on top">
+    <Button variant="solid" theme="primary">
+        Example tooltip
+    </Button>
+</OverlayBox>
+
+Things to know when using tooltips:
+
+- Bootstrap relies on [Floating UI](https://floating-ui.com/) for positioning; the React wrapper
+  uses Bootstrap placement utilities and does not need the plugin.
+- Tooltips are rendered next to the trigger and removed when closed.
+- Provide a title; an empty overlay conveys nothing to users.
+- Triggering tooltips on hidden elements will not work.
+- Tooltips for `.disabled` or `disabled` elements must be triggered on a wrapper element.
+- When triggered from hyperlinks that span multiple lines, add `.text-nowrap` to keep the tip
+  centered.
+- Tooltips can be triggered from an element inside a shadow DOM.
+- The default trigger is both hover and focus, so keyboard users can reach the tooltip.
+
+The fade animation honors `prefers-reduced-motion`.
+
+### Examples
+
+#### Tooltips on links
+
+Hover over the links below to see tooltips:
+
+<div className="fg-3">
+    {'Placeholder text to demonstrate some '}
+    <OverlayBox title="Default tooltip" className="text-nowrap">
+        <a href="#">inline links</a>
+    </OverlayBox>
+    {
+        ' with tooltips. This is now just filler, no killer. Content placed here just to mimic the presence of '
+    }
+    <OverlayBox title="Another tooltip" className="text-nowrap">
+        <a href="#">real text</a>
+    </OverlayBox>
+    {
+        '. And all that just to give you an idea of how tooltips would look when used in real-world situations. So hopefully you have now seen how '
+    }
+    <OverlayBox title="Another one here too" className="text-nowrap">
+        <a href="#">these tooltips on links</a>
+    </OverlayBox>
+    {' can work in practice, once you use them on '}
+    <OverlayBox title="The last tip!" className="text-nowrap">
+        <a href="#">your own</a>
+    </OverlayBox>
+    {' site or project.'}
+</div>
+
+#### Custom tooltips
+
+Customize the appearance with the CSS variables on the tip. Set `overlayClassName` to scope the
+overrides, then define the variables on that class:
+
+```css
+.custom-tooltip {
+    --bs-tooltip-bg: var(--bs-primary);
+    --bs-tooltip-color: var(--bs-fg-white);
+}
+```
+
+<OverlayBox
+    placement="top"
+    overlayClassName={style.customTooltip}
+    title="This top tooltip is themed via CSS variables."
+>
+    <Button variant="solid" theme="secondary">
+        Custom tooltip
+    </Button>
+</OverlayBox>
+
+#### Placement
+
+Set `placement` to change the direction. Hover over the buttons below to see the four tooltip
+directions: top, right, bottom, and left. Directions are mirrored when using Bootstrap in RTL.
+
+<div className="d-flex flex-wrap gap-2">
+    <OverlayBox placement="left" title="Tooltip on left">
+        <Button variant="solid" theme="secondary">
+            Tooltip on left
+        </Button>
+    </OverlayBox>
+    <OverlayBox placement="top" title="Tooltip on top">
+        <Button variant="solid" theme="secondary">
+            Tooltip on top
+        </Button>
+    </OverlayBox>
+    <OverlayBox placement="bottom" title="Tooltip on bottom">
+        <Button variant="solid" theme="secondary">
+            Tooltip on bottom
+        </Button>
+    </OverlayBox>
+    <OverlayBox placement="right" title="Tooltip on right">
+        <Button variant="solid" theme="secondary">
+            Tooltip on right
+        </Button>
+    </OverlayBox>
+</div>
+
+#### Responsive placement
+
+As with popovers, the Bootstrap plugin accepts breakpoint-prefixed placements, while the React
+wrapper takes one `placement` per mounted overlay. Select the value that matches the current layout.
+
+#### Custom HTML
+
+Pass JSX to the `title` prop to control the tooltip markup. React handles escaping and rendering, so
+there is no `html` option.
+
+<OverlayBox
+    title={
+        <>
+            <em>Tooltip</em> <u>with</u> <b>HTML</b>
+        </>
+    }
+>
+    <Button variant="solid" theme="secondary">
+        Tooltip with HTML
+    </Button>
+</OverlayBox>
+
+With an icon:
+
+<OverlayBox title="Default tooltip" className="text-nowrap">
+    <a href="#" aria-label="Hover or focus to see default tooltip">
+        <Icon name="bootstrap" size={3} className="fg-primary" aria-hidden="true" />
+    </a>
+</OverlayBox>
+
+#### Interactive tooltips
+
+Move the pointer onto the tip to reach interactive content inside it, such as a link. The tooltip
+stays open while the pointer is over the trigger or the tip. It hides when the pointer leaves both,
+or when you press <kbd>Escape</kbd>. This helps satisfy the [WCAG 1.4.13 "Content on Hover or
+Focus"][4] success criterion.
+
+<OverlayBox
+    title={
+        <>
+            Read the <a href="https://getbootstrap.com/">full docs</a> for more.
+        </>
+    }
+>
+    <Button variant="solid" theme="primary">
+        Hover, then move onto the tip
+    </Button>
+</OverlayBox>
+
+#### Disabled elements
+
+Elements with the `disabled` attribute aren't interactive, meaning users cannot focus, hover, or
+click them to trigger a tooltip. Trigger the tooltip from a wrapper `<div>` or `<span>`, ideally made
+keyboard-focusable with `tabindex="0"`.
+
+<OverlayBox title="Disabled tooltip" trigger={['hover', 'focus']}>
+    <span tabIndex={0} className="d-inline-block">
+        <Button variant="solid" theme="primary" disabled>
+            Disabled button
+        </Button>
+    </span>
+</OverlayBox>
+
+## Accessibility
+
+Keep popovers and tooltips accessible to keyboard and assistive technology users by only adding
+them to HTML elements that are traditionally keyboard-focusable and interactive, such as links or
+form controls. While other HTML elements can be made focusable with `tabindex="0"`, this can create
+annoying and confusing tab stops for keyboard users. Do not rely solely on `hover` as the trigger,
+because it makes the overlay impossible to reach with a keyboard.
+
+Avoid large amounts of content in a tooltip or popover that uses the same `aria-describedby`
+association: assistive technologies announce the entire content as one continuous stream. Popovers
+do not manage keyboard focus order; if you need interactive content, consider using a
+[`Dialog`][5] instead.
+
+## CSS
+
+### Variables
+
+Tooltips and popovers use local CSS variables for real-time customization. Override them through
+`overlayClassName` or by targeting `.tooltip` and `.popover` in a scoped style. See the upstream
+[popover CSS][2] and [tooltip CSS][3] for the complete variable and Sass map reference.
+
+## Usage
+
+Bootstrap enables popovers and tooltips through a JavaScript plugin. Mount the React component
+instead—there is no instance to initialize, retrieve, or dispose:
+
+```tsx
+<OverlayBox title="Popover title" detail="Popover content">
+    <Button>Toggle popover</Button>
+</OverlayBox>
+```
+
+The wrapper renders the panel, keeps `aria-describedby` in sync, and closes it on outside pointer
+interaction or <kbd>Escape</kbd>.
+
+### Props
+
+| Prop               | Type                                                | Default              | Description                                                                |
+| ------------------ | --------------------------------------------------- | -------------------- | -------------------------------------------------------------------------- |
+| `title`            | `ReactNode`                                         | —                    | Tooltip text or popover header. Required.                                  |
+| `detail`           | `ReactNode`                                         | —                    | Popover body. When omitted, the overlay is a tooltip.                      |
+| `placement`        | `'top' \| 'right' \| 'bottom' \| 'left'`            | `'top'`              | Side of the trigger where the panel appears.                               |
+| `trigger`          | `'click' \| 'focus' \| 'hover'` or an array of them | `['hover', 'focus']` | Interactions that open the panel.                                          |
+| `delay`            | `number \| { show: number; hide: number }`          | `0`                  | Delay in milliseconds before showing or hiding.                            |
+| `overlayClassName` | `string`                                            | —                    | Extra classes for the tooltip or popover panel, useful for scoped theming. |
+
+### Data attributes
+
+The plugin's data attributes map directly to props:
+
+| Bootstrap attribute    | React prop                                                        |
+| ---------------------- | ----------------------------------------------------------------- |
+| `data-bs-title`        | `title`                                                           |
+| `data-bs-content`      | `detail`                                                          |
+| `data-bs-placement`    | `placement` (one value; no responsive prefixes)                   |
+| `data-bs-trigger`      | `trigger` (no `manual`; render the overlay conditionally instead) |
+| `data-bs-custom-class` | `overlayClassName`                                                |
+| `data-bs-html`         | Pass JSX to `title` or `detail`                                   |
+
+### Methods and events
+
+The plugin's `show`, `hide`, `toggle`, `setContent`, and instance methods do not exist in the React
+wrapper. Render `<Popover>` or `<Tooltip>` directly when you need to control visibility or content:
+
+```tsx
+<Popover title="Popover title" placement="top">
+    Popover content
+</Popover>
+```
+
+Likewise, use React state and lifecycle instead of `show.bs.popover`, `shown.bs.tooltip`, and the
+other plugin events.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/OverlayBox.tsx
+[2]: https://getbootstrap.com/docs/6.0/components/popover/
+[3]: https://getbootstrap.com/docs/6.0/components/tooltip/
+[4]: https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html
+[5]: https://github.com/idea2app/Idea-React/blob/main/source/Dialog.tsx

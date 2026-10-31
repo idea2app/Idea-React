@@ -1,0 +1,134 @@
+import { Image } from '../../../../source/Image';
+
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="image">
+
+# Images
+
+Documentation and examples for opting images into responsive behavior (so they never become wider
+than their parent) and add lightweight styles to them—all via classes.
+
+Idea React provides the [`Image` wrapper][1] for these examples. Set `fluid` for `.img-fluid` and
+`thumbnail` for `.img-thumbnail`; all other `<img>` attributes pass through.
+
+## Responsive images
+
+Images in Bootstrap are made responsive with `.img-fluid`. This applies `max-width: 100%;` and
+`height: auto;` to the image so that it scales with the parent width.
+
+<Image
+    fluid
+    src="https://picsum.photos/seed/idea-react-responsive/800/250"
+    alt="Responsive image"
+/>
+
+## Image thumbnails
+
+In addition to our border-radius utilities, you can use `.img-thumbnail` to give an image a rounded
+1px border appearance.
+
+<Image
+    thumbnail
+    src="https://picsum.photos/seed/idea-react-thumbnail/200/200"
+    alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera"
+/>
+
+## Aligning images
+
+Align images with the helper float classes or text alignment classes. `block`-level images can be
+centered using the `.mx-auto` margin utility class.
+
+<div className="clearfix">
+    <Image
+        src="https://picsum.photos/seed/idea-react-start/200/200"
+        alt="Image aligned to the start"
+        width={200}
+        height={200}
+        className="rounded float-start"
+    />
+    <Image
+        src="https://picsum.photos/seed/idea-react-end/200/200"
+        alt="Image aligned to the end"
+        width={200}
+        height={200}
+        className="rounded float-end"
+    />
+</div>
+
+<div className="my-3">
+    <Image
+        src="https://picsum.photos/seed/idea-react-center/200/200"
+        alt="Image centered as a block"
+        width={200}
+        height={200}
+        className="rounded mx-auto d-block"
+    />
+</div>
+
+<div className="text-center">
+    <Image
+        src="https://picsum.photos/seed/idea-react-text-center/200/200"
+        alt="Image centered by its parent's text alignment"
+        width={200}
+        height={200}
+        className="rounded"
+    />
+</div>
+
+## Figures
+
+Anytime you need to display a piece of content—like an image with an optional caption—consider
+using a `<figure>` element. Figures are flex containers in Bootstrap, so you can easily modify the
+layout and alignment with our flex utilities.
+
+Use the included `.figure` and `.figure-caption` classes to provide some baseline styles for the
+HTML5 `<figure>` and `<figcaption>` elements. Images in figures have no explicit size, so be sure to
+add `fluid` to your `Image` to make it responsive.
+
+<figure className="figure">
+    <Image
+        fluid
+        src="https://picsum.photos/seed/idea-react-figure/400/300"
+        alt="A sample image inside a figure"
+        className="rounded-3"
+    />
+    <figcaption className="figure-caption">A caption for the above image.</figcaption>
+</figure>
+
+And with a reverse alignment:
+
+<figure className="figure align-items-end">
+    <Image
+        fluid
+        src="https://picsum.photos/seed/idea-react-figure-reverse/400/300"
+        alt="A sample image inside a reverse-aligned figure"
+        className="rounded-3"
+    />
+    <figcaption className="figure-caption">A caption for the above image.</figcaption>
+</figure>
+
+## Picture
+
+If you are using the `<picture>` element to specify multiple `<source>` elements for a specific
+`<img>`, make sure to add the `.img-*` classes to the `<img>` and not to the `<picture>` tag.
+
+Give the `<img>` an `alt` text that describes the image, or an empty `alt=""` when it's only
+decorative. The `alt="..."` in the example below is a placeholder for that text.
+
+```html
+<picture>
+    <source srcset="..." type="image/svg+xml" />
+    <img src="..." class="img-fluid img-thumbnail" alt="..." />
+</picture>
+```
+
+## CSS
+
+Image thumbnails and figures use Bootstrap's CSS variables and Sass maps. See the
+[upstream images CSS][2] for the variable reference.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Image.tsx
+[2]: https://getbootstrap.com/docs/6.0/content/images/#css
