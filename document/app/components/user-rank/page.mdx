@@ -1,5 +1,6 @@
 import { UserRankView } from '../../../../source/UserRank';
 
+import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="user-rank">
@@ -11,16 +12,18 @@ a table of the remaining ranks with avatars, scores, and locations.
 
 ## Example
 
-<UserRankView
-    title="Contributors"
-    rank={[
-        { id: 1, name: 'idea2app', avatar: 'https://github.com/idea2app.png', score: 980 },
-        { id: 2, name: 'mdo', avatar: 'https://github.com/mdo.png', score: 870 },
-        { id: 3, name: 'twbs', avatar: 'https://github.com/twbs.png', score: 760 },
-        { id: 4, name: 'octocat', avatar: 'https://github.com/octocat.png', score: 650 },
-        { id: 5, name: 'github', avatar: 'https://github.com/github.png', score: 540 }
-    ]}
-/>
+<LiveExample>
+    <UserRankView
+        title="Contributors"
+        rank={[
+            { id: 1, name: 'idea2app', avatar: 'https://github.com/idea2app.png', score: 980 },
+            { id: 2, name: 'mdo', avatar: 'https://github.com/mdo.png', score: 870 },
+            { id: 3, name: 'twbs', avatar: 'https://github.com/twbs.png', score: 760 },
+            { id: 4, name: 'octocat', avatar: 'https://github.com/octocat.png', score: 650 },
+            { id: 5, name: 'github', avatar: 'https://github.com/github.png', score: 540 }
+        ]}
+    />
+</LiveExample>
 
 ## Usage
 

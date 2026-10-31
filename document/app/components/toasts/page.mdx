@@ -1,3 +1,4 @@
+import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 import {
     StaticToast,
@@ -59,7 +60,19 @@ default auto-hide behavior.
 Click the button below to show a toast, positioned with Bootstrap utilities in the lower right
 corner, that has been hidden by default.
 
-<ToastMessageDemo />
+<CodeExample
+    code={`const toast = new Toast();
+
+toast.open({
+title: 'Bootstrap',
+body: 'Hello, world! This is a toast message.',
+delay: 5000
+});
+
+<toast.Component position="bottom-end" />`}
+>
+    <ToastMessageDemo />
+</CodeExample>
 
 The `Toast` model keeps messages in its `messages` array and renders them through its `Component`.
 Each new message gets a unique id, a timer, and a promise that resolves when the toast closes.

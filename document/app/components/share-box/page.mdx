@@ -1,3 +1,4 @@
+import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="share-box">
@@ -7,6 +8,18 @@ import { ComponentsLayout } from '../../../component/Documentation/Components/La
 [`ShareBox`][1] captures its children as an image with [html2canvas][2] and shares it through the
 [Web Share API][3]. Tapping the box generates a PNG snapshot; tapping the snapshot opens the native
 share sheet.
+
+## Example
+
+<LiveExample
+    code={`<ShareBox
+    title="idea2app"
+    text="Every idea of yours is worth our efforts to realize"
+    url="https://idea2app.cn"
+>
+    <Nameplate name="idea2app" avatar="https://github.com/idea2app.png" />
+</ShareBox>`}
+/>
 
 ## Usage
 

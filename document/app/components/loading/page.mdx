@@ -1,4 +1,6 @@
+import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { LoadingDemo } from '../../../component/Documentation/Components/LoadingDemo';
 
 <ComponentsLayout active="loading">
 
@@ -6,6 +8,19 @@ import { ComponentsLayout } from '../../../component/Documentation/Components/La
 
 [`Loading`][1] shows a full-page loading overlay with a [Spinner](../spinner/) and a message. It
 covers the viewport with a translucent backdrop, so render it only while blocking work is running.
+
+## Example
+
+<CodeExample
+    code={`<Button onClick={showLoading}>Show loading</Button>
+
+{loading && <Loading>Loading...</Loading>}`}
+
+>
+
+    <LoadingDemo />
+
+</CodeExample>
 
 ## Usage
 

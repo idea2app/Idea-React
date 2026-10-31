@@ -5,6 +5,8 @@ import {
     DialogOverlaysDemo,
     DialogSwapDemo
 } from '../../../component/Documentation/Components/DialogDemo';
+import { DialogModelDemo } from '../../../component/Documentation/Components/DialogModelDemo';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="dialog">
@@ -324,6 +326,28 @@ controlled `open` prop is preferred for React state synchronization.
 
 The [`Dialog` model][5] builds on the wrapper with promise-based dialogs: `open()` returns a promise
 that resolves or rejects when the dialog closes.
+
+## Promise-based dialogs
+
+Create the model with a render function, then `await open()` to collect the result. The example
+below resolves with the submitted numbers and rejects when the dialog is dismissed.
+
+<CodeExample
+    code={`const inputDialog = new Dialog(({ defer }) => (
+    <NativeDialog open={!!defer} onClose={() => defer?.reject(new DialogClose())}>
+        <form onSubmit={submit}>
+            <input className="form-control" name="a" type="number" />
+        </form>
+    </NativeDialog>
+));
+
+const data = await inputDialog.open();`}
+
+>
+
+    <DialogModelDemo />
+
+</CodeExample>
 
 </ComponentsLayout>
 

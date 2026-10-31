@@ -1,7 +1,9 @@
 import { Button } from '../../../../source/Button';
 import { Icon } from '../../../../source/Icon';
+import { Image } from '../../../../source/Image';
 import { OverlayBox } from '../../../../source/OverlayBox';
 
+import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 import * as style from '../../../component/Documentation/Components/style.module.less';
 
@@ -70,6 +72,22 @@ Titles are set via the `title` prop and body content is set via `detail`.
 
 Use `title` for the popover header, not the native HTML `title` attribute. The wrapper handles the
 accessible association with `aria-describedby`.
+
+#### Image content
+
+Pass JSX to `detail` to place rich content, such as an image, inside the popover.
+
+<CodeExample>
+    <OverlayBox
+        trigger="click"
+        title="view info"
+        detail={<Image src="https://github.com/idea2app.png" alt="idea2app" />}
+    >
+        <Button variant="solid" theme="primary">
+            {'View'}
+        </Button>
+    </OverlayBox>
+</CodeExample>
 
 #### Placement
 

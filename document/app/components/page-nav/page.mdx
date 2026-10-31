@@ -1,3 +1,6 @@
+import { PageNav } from '../../../../source/PageNav';
+
+import { CodeCard } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="page-nav">
@@ -7,6 +10,12 @@ import { ComponentsLayout } from '../../../component/Documentation/Components/La
 [`PageNav`][1] builds an in-page table of contents from the document's headings, highlights the
 section currently in view, and smooth-scrolls on click. The "On this page" panel of this site is
 rendered with it.
+
+## Example
+
+<CodeCard>
+    <PageNav rootSelector="#content" />
+</CodeCard>
 
 ## Usage
 

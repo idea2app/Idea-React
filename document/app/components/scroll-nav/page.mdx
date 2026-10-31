@@ -1,5 +1,7 @@
+import { NavLink } from '../../../../source/Nav';
 import { ScrollNav } from '../../../../source/ScrollNav';
 
+import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="scroll-nav">
@@ -11,29 +13,40 @@ pattern. Arrow buttons appear automatically when the items overflow the containe
 
 ## Example
 
-<ScrollNav aria-label="Scrollable sections">
-    <a className="nav-link text-nowrap" href="#example">
-        Overview
-    </a>
-    <a className="nav-link text-nowrap" href="#example">
-        Getting started
-    </a>
-    <a className="nav-link text-nowrap" href="#example">
-        Components
-    </a>
-    <a className="nav-link text-nowrap" href="#example">
-        Utilities
-    </a>
-    <a className="nav-link text-nowrap" href="#example">
-        Accessibility
-    </a>
-    <a className="nav-link text-nowrap" href="#example">
-        Migration
-    </a>
-    <a className="nav-link text-nowrap" href="#example">
-        About
-    </a>
-</ScrollNav>
+<CodeExample>
+    <ScrollNav aria-label="Scrollable sections">
+        <NavLink className="text-nowrap active" aria-current="page" href="#example">
+            {'Dashboard'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Friends'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Explore'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Suggestions'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Messages'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Notifications'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Profile'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Settings'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Help'}
+        </NavLink>
+        <NavLink className="text-nowrap" href="#example">
+            {'Logout'}
+        </NavLink>
+    </ScrollNav>
+</CodeExample>
 
 ## Behavior
 

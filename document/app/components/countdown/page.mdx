@@ -1,5 +1,6 @@
 import { Countdown } from '../../../../source/Countdown';
 
+import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="countdown">
@@ -11,16 +12,18 @@ every second until the end time is reached.
 
 ## Example
 
-<Countdown
-    className="d-flex gap-3"
-    endTime="2035-01-01T00:00:00"
-    units={[
-        { scale: 24, label: 'days' },
-        { scale: 60, label: 'hours' },
-        { scale: 60, label: 'minutes' },
-        { scale: 1000, label: 'seconds' }
-    ]}
-/>
+<LiveExample>
+    <Countdown
+        className="d-flex gap-3"
+        endTime="2035-01-01T00:00:00"
+        units={[
+            { scale: 24, label: 'days' },
+            { scale: 60, label: 'hours' },
+            { scale: 60, label: 'minutes' },
+            { scale: 1000, label: 'seconds' }
+        ]}
+    />
+</LiveExample>
 
 ## Units
 

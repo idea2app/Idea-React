@@ -1,6 +1,6 @@
-import { Option, Select } from '../../../../source/Select';
-
+import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { SelectDemo } from '../../../component/Documentation/Components/SelectDemo';
 
 <ComponentsLayout active="select">
 
@@ -11,11 +11,14 @@ toggles a keyboard-navigable menu of `Option` items.
 
 ## Example
 
-<Select value="react" aria-label="Framework">
-    <Option value="react">React</Option>
-    <Option value="vue">Vue</Option>
-    <Option value="svelte">Svelte</Option>
-</Select>
+<CodeExample
+    code={`<Select value={value} onChange={setValue}>
+    <Option value="0">idea2app</Option>
+    <Option value="1">freeCodeCamp</Option>
+</Select>`}
+>
+    <SelectDemo />
+</CodeExample>
 
 ## Usage
 

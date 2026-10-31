@@ -1,5 +1,6 @@
 import { MonthCalendar } from '../../../../source/MonthCalendar';
 
+import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="month-calendar">
@@ -11,12 +12,14 @@ month controls, localized weekday names, and selectable date entries.
 
 ## Example
 
-<MonthCalendar
-    value={[
-        { date: new Date(), content: '🎉 Today' },
-        { date: new Date(Date.now() + 86400000), content: '📅 Planning' }
-    ]}
-/>
+<LiveExample>
+    <MonthCalendar
+        value={[
+            { date: new Date(), content: '🎉 Today' },
+            { date: new Date(Date.now() + 86400000), content: '📅 Planning' }
+        ]}
+    />
+</LiveExample>
 
 ## Usage
 

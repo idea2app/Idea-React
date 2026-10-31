@@ -1,5 +1,6 @@
 import { Icon } from '../../../../source/Icon';
 
+import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="icon">
@@ -11,11 +12,13 @@ once, then reference any icon by name.
 
 ## Example
 
-<div className="d-flex align-items-center gap-3">
-    <Icon name="rocket-takeoff" />
-    <Icon name="github" size={1.5} />
-    <Icon name="heart-fill" size={2} className="fg-danger" />
-</div>
+<LiveExample>
+    <div className="d-flex align-items-center gap-3">
+        <Icon name="rocket-takeoff" />
+        <Icon name="github" size={1.5} />
+        <Icon name="heart-fill" size={2} className="fg-danger" />
+    </div>
+</LiveExample>
 
 ## Usage
 

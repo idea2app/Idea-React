@@ -1,5 +1,6 @@
 import { VerticalMarquee } from '../../../../source/VerticalMarquee';
 
+import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="vertical-marquee">
@@ -11,16 +12,18 @@ notice boards and credit rolls.
 
 ## Example
 
-<div className="border rounded p-2" style={{ height: '6rem' }}>
-    <VerticalMarquee>
-        <ul className="list-unstyled m-0">
-            <li>🎉 Idea React v3 alpha is out</li>
-            <li>📦 Install with npm i idea-react@next</li>
-            <li>🧩 Bootstrap 6 official component wrappers</li>
-            <li>⚡ Powered by MobX and TypeScript</li>
-        </ul>
-    </VerticalMarquee>
-</div>
+<LiveExample>
+    <div className="border rounded p-2" style={{ height: '6rem' }}>
+        <VerticalMarquee>
+            <ul className="list-unstyled m-0">
+                <li>🎉 Idea React v3 alpha is out</li>
+                <li>📦 Install with npm i idea-react@next</li>
+                <li>🧩 Bootstrap 6 official component wrappers</li>
+                <li>⚡ Powered by MobX and TypeScript</li>
+            </ul>
+        </VerticalMarquee>
+    </div>
+</LiveExample>
 
 ## Behavior
 

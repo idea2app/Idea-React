@@ -1,5 +1,6 @@
 import { TextTruncate } from '../../../../source/TextTruncate';
 
+import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="text-truncate">
@@ -11,12 +12,14 @@ when the content actually overflows.
 
 ## Example
 
-<TextTruncate rows={2} className="border rounded p-3">
-    Idea React is a TypeScript-first collection of advanced React components powered by MobX. From
-    dialogs and notifications to live code, editors, and timelines, it brings the building blocks
-    together so you can focus on your application instead of plumbing. This paragraph is long on
-    purpose so the clamp and the expand toggle are visible in the example.
-</TextTruncate>
+<LiveExample>
+    <TextTruncate rows={2} className="border rounded p-3">
+        Idea React is a TypeScript-first collection of advanced React components powered by MobX.
+        From dialogs and notifications to live code, editors, and timelines, it brings the building
+        blocks together so you can focus on your application instead of plumbing. This paragraph is
+        long on purpose so the clamp and the expand toggle are visible in the example.
+    </TextTruncate>
+</LiveExample>
 
 ## Usage
 

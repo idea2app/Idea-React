@@ -1,5 +1,6 @@
 import { SpinnerButton } from '../../../../source/SpinnerButton';
 
+import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="spinner-button">
@@ -11,12 +12,14 @@ import { ComponentsLayout } from '../../../component/Documentation/Components/La
 
 ## Example
 
-<div className="d-flex flex-wrap gap-2">
-    <SpinnerButton theme="primary" loading>
-        Saving…
-    </SpinnerButton>
-    <SpinnerButton theme="primary">Save</SpinnerButton>
-</div>
+<LiveExample>
+    <div className="d-flex flex-wrap gap-2">
+        <SpinnerButton theme="primary" animation="border" loading />
+        <SpinnerButton theme="primary" animation="grow" type="submit" loading>
+            Submit
+        </SpinnerButton>
+    </div>
+</LiveExample>
 
 ## Usage
 
