@@ -1,5 +1,6 @@
 'use client';
 
+import classNames from 'classnames';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import {
@@ -8,6 +9,7 @@ import {
     createRef,
     FocusEvent,
     HTMLAttributes,
+    isValidElement,
     KeyboardEvent,
     MouseEvent,
     ReactElement,
@@ -33,6 +35,7 @@ export interface OverlayBoxProps extends Omit<
     placement?: OverlayPlacement;
     trigger?: OverlayTrigger | OverlayTrigger[];
     delay?: number | { show: number; hide: number };
+    overlayClassName?: string;
 }
 
 const PLACEMENT_CLASSES: Record<OverlayPlacement, string> = {
@@ -138,6 +141,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
             placement = 'top',
             trigger: _trigger,
             delay: _delay,
+            overlayClassName,
             children,
             className = '',
             onMouseEnter: _onMouseEnter,
@@ -150,10 +154,14 @@ export class OverlayBox extends Component<OverlayBoxProps> {
         } = this.props;
         const id = this.open ? this.id : undefined;
         const position = PLACEMENT_CLASSES[placement];
-        const trigger = cloneElement(children, {
-            'aria-describedby':
-                [children.props['aria-describedby'], id].filter(Boolean).join(' ') || undefined
-        });
+        const overlayClass = classNames('position-absolute w-max', position, overlayClassName);
+        const trigger = isValidElement(children)
+            ? cloneElement(children, {
+                  'aria-describedby':
+                      [children.props['aria-describedby'], id].filter(Boolean).join(' ') ||
+                      undefined
+              })
+            : children;
 
         return (
             <span
@@ -172,18 +180,14 @@ export class OverlayBox extends Component<OverlayBoxProps> {
                     (detail ? (
                         <Popover
                             id={id}
-                            className={`position-absolute w-max ${position}`}
+                            className={overlayClass}
                             title={title}
                             placement={placement}
                         >
                             {detail}
                         </Popover>
                     ) : (
-                        <Tooltip
-                            id={id}
-                            className={`position-absolute w-max ${position}`}
-                            placement={placement}
-                        >
+                        <Tooltip id={id} className={overlayClass} placement={placement}>
                             {title}
                         </Tooltip>
                     ))}

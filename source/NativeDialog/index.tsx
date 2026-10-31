@@ -17,6 +17,8 @@ export interface NativeDialogProps extends Omit<DialogHTMLAttributes<HTMLDialogE
     modal?: boolean;
     keyboard?: boolean;
     backdrop?: boolean | 'static';
+    theme?: 'light' | 'dark';
+    dialog?: boolean;
 }
 
 export class NativeDialog extends Component<NativeDialogProps> {
@@ -90,6 +92,8 @@ export class NativeDialog extends Component<NativeDialogProps> {
             modal: _modal,
             keyboard: _keyboard,
             backdrop = true,
+            theme,
+            dialog = true,
             className,
             onCancel: _onCancel,
             onClick: _onClick,
@@ -102,11 +106,12 @@ export class NativeDialog extends Component<NativeDialogProps> {
                 {...props}
                 ref={this.element}
                 className={classNames(
-                    'dialog',
+                    dialog && 'dialog',
                     backdrop === false && styles.hiddenBackdrop,
                     className
                 )}
                 data-backdrop={backdrop === false ? 'false' : undefined}
+                data-bs-theme={theme}
                 onCancel={this.handleCancel}
                 onKeyDown={this.handleKeyDown}
                 onClick={this.handleClick}

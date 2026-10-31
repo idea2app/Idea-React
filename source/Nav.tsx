@@ -21,4 +21,32 @@ export const Nav: FC<NavProps> = ({ variant, vertical, fill, justified, classNam
     />
 );
 
+export const NavItem: FC<ComponentPropsWithRef<'li'>> = ({ className, ...props }) => (
+    <li {...props} className={classNames('nav-item', className)} />
+);
+
+export interface NavLinkProps extends ComponentPropsWithRef<'a'> {
+    disabled?: boolean;
+}
+
+export const NavLink: FC<NavLinkProps> = ({
+    disabled,
+    className,
+    href,
+    onClick,
+    tabIndex,
+    ...props
+}) => (
+    <a
+        {...props}
+        href={disabled ? undefined : href}
+        tabIndex={disabled ? -1 : tabIndex}
+        aria-disabled={disabled || undefined}
+        className={classNames('nav-link', { disabled, 'pe-none': disabled }, className)}
+        onClick={disabled ? undefined : onClick}
+    />
+);
+
 Nav.displayName = 'Nav';
+NavItem.displayName = 'NavItem';
+NavLink.displayName = 'NavLink';

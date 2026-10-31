@@ -18,6 +18,7 @@ it('renders and closes a themed Bootstrap 6 toast', async () => {
 
     assert.equal(screen.getByRole('status').className, 'toast show theme-success');
     assert.equal(screen.getByText('Your changes are saved.').className, 'toast-body');
+    assert.equal(document.querySelector('.toast-container')?.getAttribute('aria-atomic'), 'true');
 
     fireEvent.click(screen.getByRole('button', { name: 'Close' }));
 

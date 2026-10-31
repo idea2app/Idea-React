@@ -54,7 +54,7 @@ export const ToastContainer: FC<ToastContainerProps> = ({
     position = 'top-end',
     className,
     'aria-live': ariaLive = 'polite',
-    'aria-atomic': ariaAtomic = false,
+    'aria-atomic': ariaAtomic = true,
     ...props
 }) => (
     <div

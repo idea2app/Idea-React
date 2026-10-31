@@ -1,4 +1,5 @@
 import { Avatar, AvatarStack } from '../../../../source/Avatar';
+import { Image } from '../../../../source/Image';
 
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -6,70 +7,197 @@ import { ComponentsLayout } from '../../../component/Documentation/Components/La
 
 # Avatar
 
-Avatars represent users or entities with an image or initials as a fallback. The Idea React
-[`Avatar`][1] wrapper follows the [Bootstrap 6 avatar guide][2] with `.avatar`, `.avatar-img`,
-status indicators, and stacks.
+Avatars are used to represent users or entities. They can display an image or initials as a fallback.
+Idea React provides the [`Avatar` and `AvatarStack` wrappers][1] for these examples.
 
-## Image
+## Examples
 
-<Avatar src="https://github.com/idea2app.png" alt="idea2app" />
+### Image
 
-Pass `src` to render an `.avatar-img` image inside the `.avatar` wrapper.
+Use `.avatar` with an `.avatar-img` for image-based avatars. The parent `.avatar` element provides an
+easy wrapper for additional avatar features like status indicators and stacks. You’re welcome to use
+the `.avatar-img` class on its own if you only need a single HTML element.
 
-## Initials
+<Avatar src="https://github.com/mdo.png" alt="mdo" />
+
+When used inside the `.avatar` wrapper, the image fills the wrapper and its size is set with
+`--bs-avatar-size`. Used on its own, `.avatar-img` honors its own `width` and `height` instead, so set
+them to your desired size.
+
+<Image className="avatar-img" src="https://github.com/mdo.png" alt="mdo" width={50} height={50} />
+
+### Initials
+
+Use text content inside `.avatar` for initials-based avatars.
 
 <div className="d-flex flex-wrap gap-2">
     <Avatar>AB</Avatar>
     <Avatar theme="primary">CD</Avatar>
-    <Avatar theme="success">EF</Avatar>
-    <Avatar subtle theme="primary">
-        GH
-    </Avatar>
-    <Avatar subtle theme="danger">
-        IJ
-    </Avatar>
+    <Avatar theme="accent">EF</Avatar>
+    <Avatar theme="success">GG</Avatar>
+    <Avatar theme="danger">GH</Avatar>
+    <Avatar theme="warning">IJ</Avatar>
+    <Avatar theme="info">KL</Avatar>
+    <Avatar theme="inverse">MN</Avatar>
+    <Avatar theme="secondary">OP</Avatar>
 </div>
 
-Text children render as initials. `theme` selects the semantic color and `subtle` switches to the
-subtle variant.
+Use `.avatar-subtle` to create a subtle avatar.
+
+<div className="d-flex flex-wrap gap-2">
+    <Avatar>AB</Avatar>
+    <Avatar subtle theme="primary">
+        CD
+    </Avatar>
+    <Avatar subtle theme="accent">
+        EF
+    </Avatar>
+    <Avatar subtle theme="success">
+        GG
+    </Avatar>
+    <Avatar subtle theme="danger">
+        GH
+    </Avatar>
+    <Avatar subtle theme="warning">
+        IJ
+    </Avatar>
+    <Avatar subtle theme="info">
+        KL
+    </Avatar>
+    <Avatar subtle theme="inverse">
+        MN
+    </Avatar>
+    <Avatar subtle theme="secondary">
+        OP
+    </Avatar>
+</div>
 
 ## Sizes
 
+Avatars come in multiple sizes: extra small, small, default, large, and extra large.
+
 <div className="d-flex flex-wrap align-items-center gap-2">
-    <Avatar size="xs" src="https://github.com/idea2app.png" alt="idea2app" />
-    <Avatar size="sm" src="https://github.com/idea2app.png" alt="idea2app" />
-    <Avatar src="https://github.com/idea2app.png" alt="idea2app" />
-    <Avatar size="lg" src="https://github.com/idea2app.png" alt="idea2app" />
-    <Avatar size="xl" src="https://github.com/idea2app.png" alt="idea2app" />
-    <Avatar size={6} src="https://github.com/idea2app.png" alt="idea2app" />
+    <Avatar size="xs" src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar size="sm" src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar size="lg" src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar size="xl" src="https://github.com/mdo.png" alt="mdo" />
 </div>
 
-`size` accepts the official `xs`, `sm`, `lg`, and `xl` classes; a number sets a custom
-`--bs-avatar-size` in `rem`.
+Use a custom size by modifying the `--bs-avatar-size` variable. The `size` prop accepts a number in
+`rem` and applies the variable for you.
+
+<Avatar size={8} src="https://github.com/mdo.png" alt="mdo" />
 
 ## Status indicator
 
+Add a `.avatar-status` element inside the avatar to show a status indicator. Each status has a
+distinct shape and color:
+
+- `.status-online` — green circle
+- `.status-offline` — gray rounded square
+- `.status-busy` — red rounded square
+- `.status-away` — yellow circle
+
+Because the status is conveyed purely through color and shape, give each `.avatar-status` a
+`role="img"` and an `aria-label` (e.g. `Online`) so assistive technologies can announce it. The
+`status` prop renders the indicator and the accessible label automatically.
+
 <div className="d-flex flex-wrap gap-2">
-    <Avatar src="https://github.com/idea2app.png" alt="idea2app" status="online" />
-    <Avatar src="https://github.com/idea2app.png" alt="idea2app" status="offline" />
-    <Avatar src="https://github.com/idea2app.png" alt="idea2app" status="busy" />
-    <Avatar src="https://github.com/idea2app.png" alt="idea2app" status="away" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" status="online" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" status="offline" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" status="busy" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" status="away" />
 </div>
 
-`status` renders an `.avatar-status` indicator with `role="img"` and an accessible label, since the
-status is conveyed purely through color and shape. Override the announcement with `statusLabel`.
+### Status with sizes
+
+The status indicator scales with the avatar size.
+
+<div className="d-flex flex-wrap align-items-center gap-2">
+    <Avatar size="xs" src="https://github.com/mdo.png" alt="mdo" status="online" />
+    <Avatar size="sm" src="https://github.com/mdo.png" alt="mdo" status="online" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" status="online" />
+    <Avatar size="lg" src="https://github.com/mdo.png" alt="mdo" status="online" />
+    <Avatar size="xl" src="https://github.com/mdo.png" alt="mdo" status="online" />
+</div>
 
 ## Avatar stack
 
-<AvatarStack size="lg">
-    <Avatar src="https://github.com/idea2app.png" alt="idea2app" />
+Use `.avatar-stack` to group multiple avatars together with overlapping effect. Avatars are rendered
+in reverse order so the first avatar appears on top. Stacks use a percentage of the avatar size to
+determine how much to overlap stacked avatars.
+
+<AvatarStack>
     <Avatar src="https://github.com/mdo.png" alt="mdo" />
-    <Avatar src="https://github.com/twbs.png" alt="twbs" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" />
 </AvatarStack>
 
-`AvatarStack` groups avatars with an overlapping effect; its `size` applies to the whole stack.
+### Stack with sizes
+
+As a shorthand, size classes are available for `.avatar-stack` and `.avatar`.
+
+<div className="vstack align-items-start gap-3">
+    <AvatarStack size="xs">
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    </AvatarStack>
+
+    <AvatarStack size="sm">
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    </AvatarStack>
+
+    <AvatarStack>
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    </AvatarStack>
+
+    <AvatarStack size="lg">
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    </AvatarStack>
+
+    <AvatarStack size="xl">
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+        <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    </AvatarStack>
+
+</div>
+
+### Stack with count
+
+Combine with initials to show a count of additional users.
+
+<AvatarStack>
+    <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar theme="secondary">+5</Avatar>
+</AvatarStack>
+
+<AvatarStack size="xl">
+    <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar src="https://github.com/mdo.png" alt="mdo" />
+    <Avatar theme="secondary">+5</Avatar>
+</AvatarStack>
+
+## CSS
+
+Avatar sizes and status dimensions are defined by Bootstrap's CSS variables and the `$avatar-sizes`
+Sass map. Each size specifies the avatar size and status size. See the [upstream avatar CSS][2] for
+the variable and map reference.
 
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Avatar.tsx
-[2]: https://getbootstrap.com/docs/6.0/components/avatar/
+[2]: https://getbootstrap.com/docs/6.0/components/avatar/#css

@@ -4,7 +4,7 @@
 
 [Bootstrap][1] 组件更新时，应遵循以下步骤更新本代码库：
 
-1. 拉取 https://github.com/twbs/bootstrap/tree/main/site/src/components 目录下的最新代码
+1. 拉取 https://github.com/twbs/bootstrap/tree/main/site/src/content/docs/components 目录下的最新代码
 2. 将更新的组件文档同步到本库的 `document/app` 目录，可能需要转为 MDX 格式
 3. 根据更新的组件文档，新增或修改本库中的对应组件，并将实现的组件应用回前面的 MDX 文档中
 4. 根据更新的文档和组件，编写 `test` 目录的单元测试，以 `ComponentName.test.tsx` 规范命名文件

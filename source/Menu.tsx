@@ -11,6 +11,7 @@ import {
     HTMLAttributes,
     KeyboardEvent,
     MouseEvent,
+    PropsWithChildren,
     ReactNode
 } from 'react';
 
@@ -19,6 +20,101 @@ import { Button, ButtonProps } from './Button';
 export const MenuItem: FC<ButtonProps> = ({ className, ...props }) => (
     <Button {...props} className={classNames('menu-item', className)} />
 );
+
+export const MenuPanel: FC<HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('menu', className)} />
+);
+
+export const MenuText: FC<HTMLAttributes<HTMLSpanElement>> = ({ className, ...props }) => (
+    <span {...props} className={classNames('menu-text', className)} />
+);
+
+export const MenuHeader: FC<HTMLAttributes<HTMLHeadingElement>> = ({ className, ...props }) => (
+    <h6 {...props} className={classNames('menu-header', className)} />
+);
+
+export const MenuDivider: FC<HTMLAttributes<HTMLHRElement>> = ({ className, ...props }) => (
+    <hr {...props} className={classNames('menu-divider', className)} />
+);
+
+export const MenuItemContent: FC<HTMLAttributes<HTMLSpanElement>> = ({ className, ...props }) => (
+    <span {...props} className={classNames('menu-item-content', className)} />
+);
+
+export const MenuItemDescription: FC<HTMLAttributes<HTMLElement>> = ({ className, ...props }) => (
+    <small {...props} className={classNames('menu-item-description', className)} />
+);
+
+export interface MenuSubmenuProps extends PropsWithChildren {
+    label: ReactNode;
+    className?: string;
+}
+
+@observer
+export class MenuSubmenu extends Component<MenuSubmenuProps> {
+    @observable accessor open = false;
+
+    panel = createRef<HTMLDivElement>();
+
+    @action
+    setOpen = (open: boolean) => {
+        this.open = open;
+    };
+
+    handleClick = () => this.setOpen(!this.open);
+
+    handleMouseEnter = () => this.setOpen(true);
+
+    handleMouseLeave = () => this.setOpen(false);
+
+    handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+        const { key } = event;
+
+        if (key === 'ArrowRight') {
+            event.preventDefault();
+            this.setOpen(true);
+            queueMicrotask(() =>
+                this.panel.current
+                    ?.querySelector<HTMLElement>('a[href], button:not(:disabled)')
+                    ?.focus()
+            );
+        }
+        if (key === 'ArrowLeft' && this.open) {
+            event.preventDefault();
+            this.setOpen(false);
+        }
+    };
+
+    render() {
+        const { label, className, children } = this.props;
+        const { open } = this;
+
+        return (
+            <div
+                className={classNames('submenu', { show: open }, className)}
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
+                onKeyDown={this.handleKeyDown}
+            >
+                <Button
+                    className="menu-item"
+                    aria-haspopup="true"
+                    aria-expanded={open}
+                    onClick={this.handleClick}
+                >
+                    {label}
+                </Button>
+                <div
+                    ref={this.panel}
+                    className={classNames('menu start-100 top-0', { show: open })}
+                    hidden={!open}
+                >
+                    {children}
+                </div>
+            </div>
+        );
+    }
+}
 
 export interface MenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
     label: ReactNode;
@@ -124,6 +220,7 @@ export class Menu extends Component<MenuProps> {
             autoClose &&
             autoClose !== 'outside' &&
             target instanceof Element &&
+            !target.closest('.submenu > .menu-item') &&
             target.closest('a[href], button:not(:disabled)')
         )
             this.setOpen(false);

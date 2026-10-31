@@ -68,3 +68,9 @@ it('synchronizes its native state with the open prop', () => {
 
     assert.equal(dialog.open, false);
 });
+
+it('applies a Bootstrap color mode to the dialog', () => {
+    const { container } = render(<NativeDialog theme="dark" />);
+
+    assert.equal(container.querySelector('dialog')?.dataset.bsTheme, 'dark');
+});

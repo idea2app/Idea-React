@@ -42,3 +42,33 @@ it('shows and dismisses a Bootstrap 6 tooltip from its configured trigger', () =
 
     assert.equal(screen.queryByRole('tooltip'), null);
 });
+
+it('applies a custom overlay class for scoped tooltip and popover theming', () => {
+    render(
+        <>
+            <OverlayBox title="Themed tooltip" trigger="click" overlayClassName="custom-tooltip">
+                <button type="button">Tooltip trigger</button>
+            </OverlayBox>
+            <OverlayBox
+                title="Themed popover"
+                detail="Themed content"
+                trigger="click"
+                overlayClassName="custom-popover"
+            >
+                <button type="button">Popover trigger</button>
+            </OverlayBox>
+        </>
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Tooltip trigger' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Popover trigger' }));
+
+    assert.match(
+        screen.getByRole('tooltip', { name: 'Themed tooltip' }).className,
+        /custom-tooltip/
+    );
+    assert.match(
+        screen.getByRole('tooltip', { name: /Themed popover/ }).className,
+        /custom-popover/
+    );
+});
