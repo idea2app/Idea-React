@@ -41,6 +41,13 @@
     --bs-tooltip-bg: var(--bs-primary);
     --bs-tooltip-color: var(--bs-fg-white);
 }
+.gridRow {
+    :global(.row) > :global([class*='col']) {
+        border: 1px solid var(--bs-border-color);
+        background-color: var(--bs-secondary-bg);
+        padding-block: 0.75rem;
+    }
+}
 .toc {
     :global(.nav) {
         --bs-nav-gap: 0;

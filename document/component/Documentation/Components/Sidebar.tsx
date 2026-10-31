@@ -14,11 +14,19 @@ const components: NavLink[] = [
     { label: 'Avatar', slug: 'avatar' },
     { label: 'Badge', slug: 'badge' },
     { label: 'Button', slug: 'button' },
+    { label: 'Button group', slug: 'button-group' },
+    { label: 'Card', slug: 'card' },
+    { label: 'Close button', slug: 'close-button' },
     { label: 'Dialog', slug: 'dialog' },
+    { label: 'Drawer', slug: 'drawer' },
+    { label: 'Grid', slug: 'grid' },
+    { label: 'Image', slug: 'image' },
     { label: 'Menu', slug: 'menu' },
+    { label: 'Nav', slug: 'nav' },
     { label: 'Navbar', slug: 'navbar' },
     { label: 'Popover & tooltip', slug: 'overlay-box' },
     { label: 'Spinner', slug: 'spinner' },
+    { label: 'Table', slug: 'table' },
     { label: 'Toasts', slug: 'toasts' }
 ];
 const extensions: NavLink[] = [

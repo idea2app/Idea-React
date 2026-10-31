@@ -1,0 +1,881 @@
+import { Button } from '../../../../source/Button';
+import { Card, CardBody, CardText, CardTitle } from '../../../../source/Card';
+import { Col, Container, Row } from '../../../../source/Grid';
+import { Image } from '../../../../source/Image';
+import { Nav, NavLink } from '../../../../source/Nav';
+
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="card">
+
+# Cards
+
+Bootstrap's cards provide a flexible and extensible content container with multiple variants and
+options.
+
+Idea React provides the [`Card`, `CardBody`, `CardTitle`, and `CardText` wrappers][1] for these
+examples. Use other Bootstrap wrappers such as [`Button`][2], [`Image`][3], and [`Nav`][4] inside
+them.
+
+## Example
+
+Cards are flexible and extensible content containers with support for headers and footers, a wide
+variety of content, contextual background colors, and additional display options. **Cards have no
+fixed width to start**, so they'll naturally fill the width of their parent element, or slot into
+your grid columns.
+
+<Card style={{ maxWidth: '320px' }}>
+    <Image
+        src="https://picsum.photos/seed/idea-react-card/400/180"
+        alt="Card image cap"
+        width={400}
+        height={180}
+        className="card-img-top"
+    />
+    <CardBody>
+        <CardTitle>Card title</CardTitle>
+        <CardText>
+            {
+                "Some quick example text to build on the card title and make up the bulk of the card's content."
+            }
+        </CardText>
+        <Button href="#" variant="solid" theme="primary">
+            Go somewhere
+        </Button>
+    </CardBody>
+</Card>
+
+## How it works
+
+Cards are built with as little markup and styles as possible, but still manage to deliver a ton of
+control and customization.
+
+- Cards are flexbox containers, so they offer easy alignment via flexbox utilities and grid column
+  classes.
+
+- `.card` has no default padding, you need `CardBody` for that. Use it as a modifier class or a
+  child element alongside headers, footers, images, and more. This allows greater flexibility with
+  the least amount of overhead.
+
+- Cards have no `margin` by default. Use margin utilities or gap utilities as needed.
+
+- Cards can contain text, images, lists, and most other HTML.
+
+- Choose semantic HTML that fits the content. We use `<div>`s for simplicity's sake in our
+  documentation, but you can also use `<section>`, `<article>`, etc.
+
+## Content types
+
+### Body
+
+The building block of a card is the `.card-body`. Use `CardBody` whenever you need a padded section
+within a card.
+
+<Card>
+    <CardBody>This is some text within a card body.</CardBody>
+</Card>
+
+For simple cards, you can render `card-body` directly on the card element.
+
+<Card className="card-body">This is some text within a card body.</Card>
+
+### Titles, text, and links
+
+Card bodies arrange their direct children in a column and apply a consistent gap, so titles and text
+need no styles of their own. Use these optional classes as content hooks.
+
+- For a title, use `CardTitle` (`.card-title`).
+- For a subtitle, use `.card-subtitle`. It reduces the gap above the subtitle.
+- For text, use `CardText` (`.card-text`).
+
+Use type and color utilities as needed. A color utility on `.card-subtitle` overrides
+`--card-subtitle-color`. Links need no card-specific class.
+
+<Card style={{ maxWidth: '320px' }}>
+    <CardBody>
+        <CardTitle>Example card title</CardTitle>
+        <p className="card-subtitle fg-3">With a card subtitle</p>
+        <CardText>
+            {
+                "Some quick example text to build on the card title and make up the bulk of the card's content."
+            }
+        </CardText>
+        <a href="#">Card link</a>
+    </CardBody>
+</Card>
+
+### Images
+
+Place images anywhere in a card and style as you like.
+
+<Card style={{ width: '18rem' }}>
+    <CardBody>
+        <Image
+            src="https://picsum.photos/seed/idea-react-card-body/400/180"
+            alt="Image cap"
+            width={400}
+            height={180}
+            className="card-img"
+        />
+        <h5 className="mt-2 mb-0">Image within the body</h5>
+        <CardText className="fg-2">
+            {
+                "Some quick example text to build on the card title and make up the bulk of the card's content."
+            }
+        </CardText>
+        <small className="fg-3">Last updated 3 mins ago</small>
+    </CardBody>
+</Card>
+
+Use `.card-img-top` and `.card-img-bottom` to round the top and bottom corners of the image.
+
+<div className="d-flex flex-wrap gap-3">
+    <Card style={{ width: '18rem' }}>
+        <Image
+            src="https://picsum.photos/seed/idea-react-card-top/400/180"
+            alt="Image cap"
+            width={400}
+            height={180}
+            className="card-img-top"
+        />
+        <CardBody>
+            <CardText>
+                {
+                    "Some quick example text to build on the card title and make up the bulk of the card's content."
+                }
+            </CardText>
+        </CardBody>
+    </Card>
+    <Card style={{ width: '18rem' }}>
+        <CardBody>
+            <CardText>
+                {
+                    "Some quick example text to build on the card title and make up the bulk of the card's content."
+                }
+            </CardText>
+        </CardBody>
+        <Image
+            src="https://picsum.photos/seed/idea-react-card-bottom/400/180"
+            alt="Image cap"
+            width={400}
+            height={180}
+            className="card-img-bottom"
+        />
+    </Card>
+</div>
+
+### List groups
+
+When your card only contains a list group—no header, footer, or body—use a `.list-group` on its own.
+A card already draws an outer border, so a default list group inside a card would double that
+border.
+
+<ul className="list-group" style={{ width: '18rem' }}>
+    <li className="list-group-item">An item</li>
+    <li className="list-group-item">A second item</li>
+    <li className="list-group-item">A third item</li>
+</ul>
+
+When you mix a list group with other card sub-components, add `.list-group-flush` to drop the list's
+own outer border.
+
+<Card style={{ width: '18rem' }}>
+    <div className="card-header">Featured</div>
+    <ul className="list-group list-group-flush">
+        <li className="list-group-item">An item</li>
+        <li className="list-group-item">A second item</li>
+        <li className="list-group-item">A third item</li>
+    </ul>
+</Card>
+
+<Card style={{ width: '18rem' }}>
+    <ul className="list-group list-group-flush">
+        <li className="list-group-item">An item</li>
+        <li className="list-group-item">A second item</li>
+        <li className="list-group-item">A third item</li>
+    </ul>
+    <div className="card-footer">Card footer</div>
+</Card>
+
+### Kitchen sink
+
+Mix and match multiple content types to create the card you need, or throw everything in there.
+Shown below are image styles, blocks, text styles, and a list group—all wrapped in a fixed-width
+card.
+
+<Card style={{ width: '18rem' }}>
+    <Image
+        src="https://picsum.photos/seed/idea-react-card-sink/400/180"
+        alt="Image cap"
+        width={400}
+        height={180}
+        className="card-img-top"
+    />
+    <CardBody>
+        <CardTitle>Card title</CardTitle>
+        <CardText>
+            {
+                "Some quick example text to build on the card title and make up the bulk of the card's content."
+            }
+        </CardText>
+    </CardBody>
+    <ul className="list-group list-group-flush">
+        <li className="list-group-item">An item</li>
+        <li className="list-group-item">A second item</li>
+        <li className="list-group-item">A third item</li>
+    </ul>
+    <CardBody className="flex-row gap-4">
+        <a href="#">Card link</a>
+        <a href="#">Another link</a>
+    </CardBody>
+</Card>
+
+### Header and footer
+
+Add an optional header and/or footer within a card.
+
+<Card>
+    <div className="card-header">Featured</div>
+    <CardBody>
+        <CardTitle>Special title treatment</CardTitle>
+        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+        <Button href="#" variant="solid" theme="primary">
+            Go somewhere
+        </Button>
+    </CardBody>
+</Card>
+
+Card headers can be styled by adding `card-header` to heading elements.
+
+<Card>
+    <h5 className="card-header">Featured</h5>
+    <CardBody>
+        <CardTitle>Special title treatment</CardTitle>
+        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+        <Button href="#" variant="solid" theme="primary">
+            Go somewhere
+        </Button>
+    </CardBody>
+</Card>
+
+<Card>
+    <div className="card-header">Quote</div>
+    <CardBody>
+        <figure className="mb-0">
+            <blockquote className="blockquote">
+                <p>A well-known quote, contained in a blockquote element.</p>
+            </blockquote>
+            <figcaption className="blockquote-footer">
+                Someone famous in <cite title="Source Title">Source Title</cite>
+            </figcaption>
+        </figure>
+    </CardBody>
+</Card>
+
+<Card className="text-center">
+    <div className="card-header">Featured</div>
+    <CardBody>
+        <CardTitle>Special title treatment</CardTitle>
+        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+        <Button href="#" variant="solid" theme="primary" className="mx-auto">
+            Go somewhere
+        </Button>
+    </CardBody>
+    <div className="card-footer fg-2">2 days ago</div>
+</Card>
+
+## Width
+
+Cards assume no specific `width` to start, so they'll be 100% wide unless otherwise stated. You can
+change this as needed with custom CSS, grid classes, grid Sass mixins, or utilities.
+
+### Grid
+
+Using the grid, wrap cards in columns and rows as needed.
+
+<Row>
+    <Col sm={6} className="mb-3 sm:mb-0">
+        <Card>
+            <CardBody>
+                <CardTitle>Card title</CardTitle>
+                <CardText>
+                    {'With supporting text below as a natural lead-in to additional content.'}
+                </CardText>
+                <Button href="#" variant="solid" theme="primary">
+                    Go somewhere
+                </Button>
+            </CardBody>
+        </Card>
+    </Col>
+    <Col sm={6}>
+        <Card>
+            <CardBody>
+                <CardTitle>Card title</CardTitle>
+                <CardText>
+                    {'With supporting text below as a natural lead-in to additional content.'}
+                </CardText>
+                <Button href="#" variant="solid" theme="primary">
+                    Go somewhere
+                </Button>
+            </CardBody>
+        </Card>
+    </Col>
+</Row>
+
+### Utilities
+
+Use our handful of available sizing utilities to quickly set a card's width.
+
+<Card className="w-75 mb-3">
+    <CardBody>
+        <CardTitle>Card title</CardTitle>
+        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+        <Button href="#" variant="solid" theme="primary">
+            Button
+        </Button>
+    </CardBody>
+</Card>
+
+<Card className="w-50">
+    <CardBody>
+        <CardTitle>Card title</CardTitle>
+        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+        <Button href="#" variant="solid" theme="primary">
+            Button
+        </Button>
+    </CardBody>
+</Card>
+
+### Custom CSS
+
+Use custom CSS in your stylesheets or as inline styles to set a width.
+
+<Card style={{ width: '18rem' }}>
+    <CardBody>
+        <CardTitle>Card title</CardTitle>
+        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+        <Button href="#" variant="solid" theme="primary">
+            Go somewhere
+        </Button>
+    </CardBody>
+</Card>
+
+## Navigation
+
+Add some navigation to a card's header (or block) with Bootstrap's nav components.
+
+<Card className="text-center">
+    <div className="card-header">
+        <Nav variant="tabs" className="card-header-tabs" aria-label="Card navigation">
+            <NavLink href="#" className="active" aria-current="true">
+                Active
+            </NavLink>
+            <NavLink href="#">Link</NavLink>
+            <NavLink disabled>Disabled</NavLink>
+        </Nav>
+    </div>
+    <CardBody>
+        <CardTitle>Special title treatment</CardTitle>
+        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+        <Button href="#" variant="solid" theme="primary" className="mx-auto">
+            Go somewhere
+        </Button>
+    </CardBody>
+</Card>
+
+This works with pills as well.
+
+<Card className="text-center">
+    <div className="card-header">
+        <Nav variant="pills" aria-label="Card pill navigation">
+            <NavLink href="#" className="active">
+                Active
+            </NavLink>
+            <NavLink href="#">Link</NavLink>
+            <NavLink disabled>Disabled</NavLink>
+        </Nav>
+    </div>
+    <CardBody>
+        <CardTitle>Special title treatment</CardTitle>
+        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+        <Button href="#" variant="solid" theme="primary" className="mx-auto">
+            Go somewhere
+        </Button>
+    </CardBody>
+</Card>
+
+## Images
+
+Cards include a few options for working with images. Choose from appending "image caps" at either
+end of a card, overlaying images with card content, or simply embedding the image in a card.
+
+### Image caps
+
+Similar to headers and footers, cards can include top and bottom "image caps"—images at the top or
+bottom of a card.
+
+<Card className="mb-3">
+    <Image
+        src="https://picsum.photos/seed/idea-react-card-cap-top/400/180"
+        alt="Image cap"
+        width={400}
+        height={180}
+        className="card-img-top"
+    />
+    <CardBody>
+        <CardTitle>Card title</CardTitle>
+        <CardText>
+            {
+                'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
+            }
+        </CardText>
+        <CardText>
+            <small className="fg-2">Last updated 3 mins ago</small>
+        </CardText>
+    </CardBody>
+</Card>
+
+<Card>
+    <CardBody>
+        <CardTitle>Card title</CardTitle>
+        <CardText>
+            {
+                'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
+            }
+        </CardText>
+        <CardText>
+            <small className="fg-2">Last updated 3 mins ago</small>
+        </CardText>
+    </CardBody>
+    <Image
+        src="https://picsum.photos/seed/idea-react-card-cap-bottom/400/180"
+        alt="Image cap"
+        width={400}
+        height={180}
+        className="card-img-bottom"
+    />
+</Card>
+
+### Image overlays
+
+Turn an image into a card background and overlay your card's text. Depending on the image, you may or
+may not need additional styles or utilities.
+
+<Card className="theme-inverse">
+    <Image
+        src="https://picsum.photos/seed/idea-react-card-overlay/1200/500"
+        alt="Card image"
+        width={1200}
+        height={500}
+        className="card-img"
+    />
+    <div className="card-img-overlay">
+        <CardTitle>Card title</CardTitle>
+        <CardText>
+            {
+                'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
+            }
+        </CardText>
+        <CardText>
+            <small>Last updated 3 mins ago</small>
+        </CardText>
+    </div>
+</Card>
+
+Note that content should not be larger than the height of the image. If content is larger than the
+image the content will be displayed outside the image.
+
+## Card row
+
+Use the `.card-row` class to make a card horizontal. For image caps, use the `.card-img-start` or
+`.card-img-end` class to position the image at the (inline) start or end position of the card.
+
+<Card className="card-row" style={{ maxWidth: '540px' }}>
+    <Image
+        src="https://picsum.photos/seed/idea-react-card-row/540/250"
+        alt="Image"
+        width={540}
+        height={250}
+        className="card-img-start"
+    />
+    <CardBody>
+        <CardTitle>Card title</CardTitle>
+        <CardText>
+            {
+                'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
+            }
+        </CardText>
+        <CardText>
+            <small className="fg-2">Last updated 3 mins ago</small>
+        </CardText>
+    </CardBody>
+</Card>
+
+And with the reverse layout:
+
+<Card className="card-row" style={{ maxWidth: '540px' }}>
+    <CardBody>
+        <CardTitle>Card title</CardTitle>
+        <CardText>
+            {
+                'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
+            }
+        </CardText>
+        <CardText>
+            <small className="fg-2">Last updated 3 mins ago</small>
+        </CardText>
+    </CardBody>
+    <Image
+        src="https://picsum.photos/seed/idea-react-card-row-reverse/540/250"
+        alt="Image"
+        width={540}
+        height={250}
+        className="card-img-end"
+    />
+</Card>
+
+## Theme variants
+
+Customize cards by using our theme color utilities. By default, cards use `bg` for their background
+and border colors when applying a theme color. Use `.card-subtle` to swap the background and border
+colors for a more subtle look.
+
+<div
+    className="d-grid gap-4"
+    style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(14rem, 1fr))' }}
+>
+    {[
+        ['primary', 'Primary'],
+        ['accent', 'Accent'],
+        ['secondary', 'Secondary'],
+        ['success', 'Success'],
+        ['danger', 'Danger'],
+        ['warning', 'Warning'],
+        ['info', 'Info'],
+        ['light', 'Light'],
+        ['dark', 'Dark'],
+        ['inverse', 'Inverse']
+    ].map(([theme, title]) => (
+        <Card key={theme} className={`theme-${theme}`}>
+            <div className="card-header">{title}</div>
+            <CardBody>
+                <CardTitle>Card title</CardTitle>
+                <CardText>Card text…</CardText>
+            </CardBody>
+        </Card>
+    ))}
+</div>
+
+<div
+    className="d-grid gap-4"
+    style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(14rem, 1fr))' }}
+>
+    {[
+        ['primary', 'Primary'],
+        ['accent', 'Accent'],
+        ['secondary', 'Secondary'],
+        ['success', 'Success'],
+        ['danger', 'Danger'],
+        ['warning', 'Warning'],
+        ['info', 'Info'],
+        ['light', 'Light'],
+        ['dark', 'Dark'],
+        ['inverse', 'Inverse']
+    ].map(([theme, title]) => (
+        <Card key={theme} className={`card-subtle theme-${theme}`}>
+            <div className="card-header">{title}</div>
+            <CardBody>
+                <CardTitle>Card title</CardTitle>
+                <CardText>Card text…</CardText>
+            </CardBody>
+        </Card>
+    ))}
+</div>
+
+## Translucent cards
+
+Add `.card-translucent` to blur and saturate the background of a card. Header and footer backgrounds
+are also adjusted for a consistent look.
+
+<div className="bg-black p-3">
+    <Card className="card-translucent" style={{ width: '18rem' }}>
+        <CardBody>
+            <CardTitle>Translucent card</CardTitle>
+            <CardText>This card has a translucent background with a backdrop blur effect.</CardText>
+            <Button href="#" variant="solid" theme="primary">
+                Go somewhere
+            </Button>
+        </CardBody>
+    </Card>
+</div>
+
+<div className="bg-black p-3">
+    <Card className="card-translucent" style={{ width: '18rem' }}>
+        <div className="card-header">Featured</div>
+        <CardBody>
+            <CardTitle>Card with header</CardTitle>
+            <CardText>
+                {'Headers and footers are also made translucent to maintain a consistent look.'}
+            </CardText>
+            <Button href="#" variant="solid" theme="primary">
+                Go somewhere
+            </Button>
+        </CardBody>
+        <div className="card-footer fg-2">2 days ago</div>
+    </Card>
+</div>
+
+## Card layout
+
+In addition to styling the content within cards, Bootstrap includes a few options for laying out
+series of cards.
+
+### Card groups
+
+Use card groups to render cards as a single, attached element with equal width and height columns.
+Card groups start off stacked and use `display: flex;` to become attached with uniform dimensions
+starting at the `sm` breakpoint.
+
+This layout uses container queries, so wrap the card group in a query container—add the
+`.contains-inline` utility to a parent element—for the row layout to take effect. Without a query
+container, the cards remain stacked.
+
+<div className="contains-inline">
+    <div className="card-group">
+        <Card>
+            <Image
+                src="https://picsum.photos/seed/idea-react-group-1/400/180"
+                alt="Image cap"
+                width={400}
+                height={180}
+                className="card-img-top"
+            />
+            <CardBody>
+                <CardTitle>Card title</CardTitle>
+                <CardText>
+                    {
+                        'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
+                    }
+                </CardText>
+                <CardText>
+                    <small className="fg-2">Last updated 3 mins ago</small>
+                </CardText>
+            </CardBody>
+        </Card>
+        <Card>
+            <Image
+                src="https://picsum.photos/seed/idea-react-group-2/400/180"
+                alt="Image cap"
+                width={400}
+                height={180}
+                className="card-img-top"
+            />
+            <CardBody>
+                <CardTitle>Card title</CardTitle>
+                <CardText>
+                    {
+                        'This card has supporting text below as a natural lead-in to additional content.'
+                    }
+                </CardText>
+                <CardText>
+                    <small className="fg-2">Last updated 3 mins ago</small>
+                </CardText>
+            </CardBody>
+        </Card>
+        <Card>
+            <Image
+                src="https://picsum.photos/seed/idea-react-group-3/400/180"
+                alt="Image cap"
+                width={400}
+                height={180}
+                className="card-img-top"
+            />
+            <CardBody>
+                <CardTitle>Card title</CardTitle>
+                <CardText>
+                    {
+                        'This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.'
+                    }
+                </CardText>
+                <CardText>
+                    <small className="fg-2">Last updated 3 mins ago</small>
+                </CardText>
+            </CardBody>
+        </Card>
+    </div>
+</div>
+
+When using card groups with footers, their content will automatically line up.
+
+<div className="contains-inline">
+    <div className="card-group">
+        <Card>
+            <CardBody>
+                <CardTitle>Card title</CardTitle>
+                <CardText>
+                    {
+                        'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
+                    }
+                </CardText>
+            </CardBody>
+            <div className="card-footer">
+                <small className="fg-2">Last updated 3 mins ago</small>
+            </div>
+        </Card>
+        <Card>
+            <CardBody>
+                <CardTitle>Card title</CardTitle>
+                <CardText>
+                    {
+                        'This card has supporting text below as a natural lead-in to additional content.'
+                    }
+                </CardText>
+            </CardBody>
+            <div className="card-footer">
+                <small className="fg-2">Last updated 3 mins ago</small>
+            </div>
+        </Card>
+        <Card>
+            <CardBody>
+                <CardTitle>Card title</CardTitle>
+                <CardText>
+                    {
+                        'This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.'
+                    }
+                </CardText>
+            </CardBody>
+            <div className="card-footer">
+                <small className="fg-2">Last updated 3 mins ago</small>
+            </div>
+        </Card>
+    </div>
+</div>
+
+### Grid cards
+
+Use the Bootstrap grid system and its `.row-cols` classes to control how many grid columns (wrapped
+around your cards) you show per row. For example, here's `.row-cols-1` laying out the cards on one
+column, and `.md:row-cols-2` splitting four cards to equal width across multiple rows, from the
+medium breakpoint up.
+
+<Row className="row-cols-1 md:row-cols-2 g-4">
+    {[1, 2, 3, 4].map(index => (
+        <Col key={index}>
+            <Card>
+                <Image
+                    src={`https://picsum.photos/seed/idea-react-grid-${index}/400/140`}
+                    alt="Image cap"
+                    width={400}
+                    height={140}
+                    className="card-img-top"
+                />
+                <CardBody>
+                    <CardTitle>Card title</CardTitle>
+                    <CardText>
+                        {
+                            'This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
+                        }
+                    </CardText>
+                </CardBody>
+            </Card>
+        </Col>
+    ))}
+</Row>
+
+Change it to `.md:row-cols-3` and you'll see the fourth card wrap.
+
+<Row className="row-cols-1 md:row-cols-3 g-4">
+    {[1, 2, 3, 4].map(index => (
+        <Col key={index}>
+            <Card>
+                <Image
+                    src={`https://picsum.photos/seed/idea-react-grid-three-${index}/400/140`}
+                    alt="Image cap"
+                    width={400}
+                    height={140}
+                    className="card-img-top"
+                />
+                <CardBody>
+                    <CardTitle>Card title</CardTitle>
+                    <CardText>
+                        {
+                            'This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
+                        }
+                    </CardText>
+                </CardBody>
+            </Card>
+        </Col>
+    ))}
+</Row>
+
+When you need equal height, add `.h-100` to the cards. If you want equal heights by default, you can
+set `$card-height: 100%` in Sass.
+
+<Row className="row-cols-1 md:row-cols-3 g-4">
+    {[1, 2, 3, 4].map(index => (
+        <Col key={index}>
+            <Card className="h-100">
+                <Image
+                    src={`https://picsum.photos/seed/idea-react-grid-height-${index}/400/140`}
+                    alt="Image cap"
+                    width={400}
+                    height={140}
+                    className="card-img-top"
+                />
+                <CardBody>
+                    <CardTitle>Card title</CardTitle>
+                    <CardText>
+                        {
+                            'This is a longer card with supporting text below as a natural lead-in to additional content.'
+                        }
+                    </CardText>
+                </CardBody>
+            </Card>
+        </Col>
+    ))}
+</Row>
+
+Just like with card groups, card footers will automatically line up.
+
+<Container className="px-0">
+    <Row className="row-cols-1 md:row-cols-3 g-4">
+        {[1, 2, 3].map(index => (
+            <Col key={index}>
+                <Card className="h-100">
+                    <Image
+                        src={`https://picsum.photos/seed/idea-react-grid-footer-${index}/400/180`}
+                        alt="Image cap"
+                        width={400}
+                        height={180}
+                        className="card-img-top"
+                    />
+                    <CardBody>
+                        <CardTitle>Card title</CardTitle>
+                        <CardText>
+                            {
+                                'This is a wider card with supporting text below as a natural lead-in to additional content.'
+                            }
+                        </CardText>
+                    </CardBody>
+                    <div className="card-footer">
+                        <small className="fg-2">Last updated 3 mins ago</small>
+                    </div>
+                </Card>
+            </Col>
+        ))}
+    </Row>
+</Container>
+
+## CSS
+
+Cards use CSS variables for backgrounds, borders, and spacing. Theme variants set the theme tokens
+used by the card, and `.card-subtle`, `.card-translucent`, `.card-row`, and `.card-sheet` variants
+adjust the surface and layout. See the [upstream card CSS][5] for the variable and Sass reference.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Card.tsx
+[2]: https://github.com/idea2app/Idea-React/blob/main/source/Button.tsx
+[3]: https://github.com/idea2app/Idea-React/blob/main/source/Image.tsx
+[4]: https://github.com/idea2app/Idea-React/blob/main/source/Nav.tsx
+[5]: https://getbootstrap.com/docs/6.0/components/card/#css

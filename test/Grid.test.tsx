@@ -5,6 +5,15 @@ import { render } from '@testing-library/react';
 
 import { Col, Container, Row } from '../source/Grid';
 
+it('renders an equal-width column from a breakpoint', () => {
+    const { container } = render(
+        <Row>
+            <Col sm>Equal</Col>
+        </Row>
+    );
+    assert.equal(container.querySelector('.row > div')?.className, 'sm:col');
+});
+
 it('uses Bootstrap 6 container, row, and responsive column classes', () => {
     const { container, rerender } = render(
         <Container className="custom" fluid>

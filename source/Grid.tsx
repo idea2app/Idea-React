@@ -3,6 +3,7 @@ import { ComponentPropsWithRef, FC } from 'react';
 
 export type Breakpoint = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 export type ColSize = number | 'auto';
+export type BreakpointColSize = ColSize | true;
 
 export interface ContainerProps extends ComponentPropsWithRef<'div'> {
     fluid?: boolean;
@@ -25,15 +26,15 @@ export const Row: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) =
 
 export interface ColProps extends ComponentPropsWithRef<'div'> {
     span?: ColSize;
-    sm?: ColSize;
-    md?: ColSize;
-    lg?: ColSize;
-    xl?: ColSize;
-    '2xl'?: ColSize;
+    sm?: BreakpointColSize;
+    md?: BreakpointColSize;
+    lg?: BreakpointColSize;
+    xl?: BreakpointColSize;
+    '2xl'?: BreakpointColSize;
 }
 
 export const Col: FC<ColProps> = ({ span, sm, md, lg, xl, '2xl': xxl, className, ...props }) => {
-    const sizes: [Breakpoint, ColSize | undefined][] = [
+    const sizes: [Breakpoint, BreakpointColSize | undefined][] = [
         ['sm', sm],
         ['md', md],
         ['lg', lg],
@@ -49,7 +50,9 @@ export const Col: FC<ColProps> = ({ span, sm, md, lg, xl, '2xl': xxl, className,
                 !span && !sized && 'col',
                 span !== undefined && `col-${span}`,
                 sizes.map(
-                    ([breakpoint, size]) => size !== undefined && `${breakpoint}:col-${size}`
+                    ([breakpoint, size]) =>
+                        size !== undefined &&
+                        (size === true ? `${breakpoint}:col` : `${breakpoint}:col-${size}`)
                 ),
                 className
             )}
