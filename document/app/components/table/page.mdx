@@ -1,0 +1,1007 @@
+import { Table } from '../../../../source/Table';
+
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="table">
+
+# Tables
+
+Documentation and examples for opt-in styling of tables (given their prevalent use in JavaScript
+plugins) with Bootstrap.
+
+Idea React provides the [`Table` wrapper][1] for these examples. Use the `striped`,
+`stripedColumns`, `hover`, `bordered`, `borderless`, and `small` props for the corresponding
+modifiers, and `responsive` to wrap the table in `.table-responsive` (pass a breakpoint to use the
+responsive variant, for example `responsive="md"`).
+
+## Overview
+
+Due to the widespread use of `<table>` elements across third-party widgets like calendars and date
+pickers, Bootstrap's tables are **opt-in**. Add the base class `.table`—the wrapper does it—then
+extend with our optional modifier classes or custom styles. All table styles are not inherited in
+Bootstrap, meaning any nested tables can be styled independent from the parent.
+
+Using the most basic table markup, here's how `.table`-based tables look in Bootstrap.
+
+<Table>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+## Variants
+
+Use theme-specific color classes to style tables, table rows, or individual cells. These adapt to
+color modes as well.
+
+<Table>
+    <thead>
+        <tr>
+            <th scope="col">Class</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Default</th>
+            <td>Cell</td>
+            <td>Cell</td>
+        </tr>
+        {[
+            ['primary', 'Primary'],
+            ['accent', 'Accent'],
+            ['secondary', 'Secondary'],
+            ['success', 'Success'],
+            ['danger', 'Danger'],
+            ['warning', 'Warning'],
+            ['info', 'Info'],
+            ['light', 'Light'],
+            ['dark', 'Dark'],
+            ['inverse', 'Inverse']
+        ].map(([theme, title]) => (
+            <tr key={theme} className={`theme-${theme}`}>
+                <th scope="row">{title}</th>
+                <td>Cell</td>
+                <td>Cell</td>
+            </tr>
+        ))}
+    </tbody>
+</Table>
+
+## Accented tables
+
+### Striped rows
+
+Use the `striped` prop to add zebra-striping to any table row within the `<tbody>`.
+
+<Table striped>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+### Striped columns
+
+Use the `stripedColumns` prop to add zebra-striping to any table column.
+
+<Table stripedColumns>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+These props can also be combined with table variants:
+
+<Table striped className="theme-success">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+### Hoverable rows
+
+Add the `hover` prop to enable a hover state on table rows within a `<tbody>`.
+
+<Table hover>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+These hoverable rows can also be combined with the striped rows variant:
+
+<Table striped hover>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+### Active tables
+
+Highlight a table row or cell by adding the `.table-active` class.
+
+<Table>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr className="table-active">
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td className="table-active">@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+## How do the variants and accented tables work?
+
+For the accented tables (striped rows, striped columns, hoverable rows, and active tables), we start
+by setting the background of a table cell to `var(--bs-theme-bg-subtle, var(--bs-table-bg))`. The
+table variants are the `.theme-*` classes: each one sets `--bs-theme-bg-subtle` and `--bs-theme-fg`
+on the table, row, or cell it is added to, and the cells inside pick them up. This way, we don't get
+into trouble if semi-transparent colors are used as table backgrounds.
+
+A box shadow is layered on top of any specified `background-color`, and the stripe, active, and hover
+factors mix the theme foreground into the cells. Text colors are generated the same way, and borders
+use `--bs-theme-border` when a theme class sets it, or `--bs-table-border-color` otherwise.
+
+## Table borders
+
+### Bordered tables
+
+Add the `bordered` prop for borders on all sides of the table and cells.
+
+<Table bordered>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+Border color utilities can be added to change colors:
+
+<Table bordered className="border-primary">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+### Tables without borders
+
+Add the `borderless` prop for a table without borders.
+
+<Table borderless>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+## Card-like tables
+
+Need a bordered, rounded table without nesting it in a card? Wrap the table and clip the corners.
+
+### With utilities
+
+Compose border, border radius, and overflow utilities. Drop the table's bottom margin with `.mb-0`.
+
+<div className="border rounded overflow-hidden">
+    <Table striped className="mb-0">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>John</td>
+                <td>Doe</td>
+                <td>@social</td>
+            </tr>
+        </tbody>
+    </Table>
+</div>
+
+### With `.table-card`
+
+Use `.table-card` for the same look. It rounds corners like a card, clips cell backgrounds, and
+removes the last row's bottom border so it does not stack on the wrapper.
+
+<div className="table-card">
+    <Table hover>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>John</td>
+                <td>Doe</td>
+                <td>@social</td>
+            </tr>
+        </tbody>
+    </Table>
+</div>
+
+## Small tables
+
+Add the `small` prop to make any `.table` more compact by cutting all cell `padding` in half.
+
+<Table small>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+## Table group dividers
+
+Add a thicker, darker border between table groups—`<thead>`, `<tbody>`, and `<tfoot>`—with
+`.table-group-divider`. Customize the color by changing the `border-top-color`.
+
+<Table>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody className="table-group-divider">
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+## Vertical alignment
+
+Table cells of `<thead>` are always vertical aligned to the bottom. Table cells in `<tbody>` inherit
+their alignment from `<table>` and are aligned to the top by default. Use the vertical align classes
+to re-align where needed.
+
+<Table responsive className="align-middle">
+    <thead>
+        <tr>
+            <th scope="col" className="w-25">
+                Heading 1
+            </th>
+            <th scope="col" className="w-25">
+                Heading 2
+            </th>
+            <th scope="col" className="w-25">
+                Heading 3
+            </th>
+            <th scope="col" className="w-25">
+                Heading 4
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                This cell inherits <code>vertical-align: middle;</code> from the table
+            </td>
+            <td>
+                This cell inherits <code>vertical-align: middle;</code> from the table
+            </td>
+            <td>
+                This cell inherits <code>vertical-align: middle;</code> from the table
+            </td>
+            <td>
+                This here is some placeholder text, intended to take up quite a bit of vertical
+                space, to demonstrate how the vertical alignment works in the preceding cells.
+            </td>
+        </tr>
+        <tr className="align-bottom">
+            <td>
+                This cell inherits <code>vertical-align: bottom;</code> from the table row
+            </td>
+            <td>
+                This cell inherits <code>vertical-align: bottom;</code> from the table row
+            </td>
+            <td>
+                This cell inherits <code>vertical-align: bottom;</code> from the table row
+            </td>
+            <td>
+                This here is some placeholder text, intended to take up quite a bit of vertical
+                space, to demonstrate how the vertical alignment works in the preceding cells.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                This cell inherits <code>vertical-align: middle;</code> from the table
+            </td>
+            <td>
+                This cell inherits <code>vertical-align: middle;</code> from the table
+            </td>
+            <td className="align-top">This cell is aligned to the top.</td>
+            <td>
+                This here is some placeholder text, intended to take up quite a bit of vertical
+                space, to demonstrate how the vertical alignment works in the preceding cells.
+            </td>
+        </tr>
+    </tbody>
+</Table>
+
+## Nesting
+
+Border styles, active styles, and table variants are not inherited by nested tables.
+
+<Table striped bordered>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <td colSpan={4}>
+                <Table className="mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Header</th>
+                            <th scope="col">Header</th>
+                            <th scope="col">Header</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">A</th>
+                            <td>First</td>
+                            <td>Last</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">B</th>
+                            <td>First</td>
+                            <td>Last</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">C</th>
+                            <td>First</td>
+                            <td>Last</td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+## How nesting works
+
+To prevent _any_ styles from leaking to nested tables, we use the child combinator (`>`) selector in
+our CSS. Since we need to target all the `td`s and `th`s in the `thead`, `tbody`, and `tfoot`, our
+selector would look pretty long without it. As such, we use the rather odd looking
+`.table > :not(caption) > * > *` selector to target all `td`s and `th`s of the `.table`, but none of
+any potential nested tables.
+
+Note that if you add `<tr>`s as direct children of a table, those `<tr>` will be wrapped in a
+`<tbody>` by default, thus making our selectors work as intended.
+
+## Footer
+
+<Table>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>Footer</td>
+            <td>Footer</td>
+            <td>Footer</td>
+            <td>Footer</td>
+        </tr>
+    </tfoot>
+</Table>
+
+## Caption
+
+A `<caption>` functions like a heading for a table. It helps users with screen readers to find a
+table and understand what it's about and decide if they want to read it.
+
+<Table>
+    <caption>List of users</caption>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+You can also put the `<caption>` on the top of the table with `.caption-top`.
+
+<Table className="caption-top">
+    <caption>List of users</caption>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
+
+## Stacked tables
+
+Add `.table-stacked` to convert a table's rows into stacked blocks when space is limited. Each row
+becomes a vertical block with the first cell acting as a bold title and the remaining cells displayed
+as label–value pairs. Labels are generated from `data-cell` attributes on each `<td>`.
+
+Both `.table-stacked` and `.table-responsive` use container queries, so the `responsive` wrapper is
+required as the query container. Use `.md:table-stacked`, `.lg:table-stacked`, etc. to only stack
+below a specific container width. The default `.table-stacked` always stacks.
+
+<Table responsive className="md:table-stacked">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Default</th>
+            <th scope="col">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td data-cell="Name">backdrop</td>
+            <td data-cell="Type">boolean or 'static'</td>
+            <td data-cell="Default">true</td>
+            <td data-cell="Description">
+                Includes a backdrop element. Specify static for a backdrop which doesn't close on
+                click.
+            </td>
+        </tr>
+        <tr>
+            <td data-cell="Name">keyboard</td>
+            <td data-cell="Type">boolean</td>
+            <td data-cell="Default">true</td>
+            <td data-cell="Description">Closes the component when escape key is pressed.</td>
+        </tr>
+        <tr>
+            <td data-cell="Name">focus</td>
+            <td data-cell="Type">boolean</td>
+            <td data-cell="Default">true</td>
+            <td data-cell="Description">Puts the focus on the component when initialized.</td>
+        </tr>
+    </tbody>
+</Table>
+
+## Responsive tables
+
+Responsive tables allow tables to be scrolled horizontally with ease. Make any table responsive
+across all viewports with the `responsive` prop. Or, pick a maximum breakpoint with which to have a
+responsive table up to by using `responsive="sm"`, `responsive="md"`, `responsive="lg"`,
+`responsive="xl"`, or `responsive="2xl"`.
+
+The wrapper also acts as the container query context for stacked tables.
+
+Responsive tables make use of `overflow-y: hidden`, which clips off any content that goes beyond the
+bottom or top edges of the table. In particular, this can clip off menus and other third-party
+widgets.
+
+### Always responsive
+
+Across every breakpoint, use `responsive` for horizontally scrolling tables.
+
+<Table responsive>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+        </tr>
+    </tbody>
+</Table>
+
+### Breakpoint specific
+
+Use `responsive="sm"`, `responsive="md"`, `responsive="lg"`, `responsive="xl"`, or
+`responsive="2xl"` as needed to create responsive tables up to a particular breakpoint. From that
+breakpoint and up, the table will behave normally and not scroll horizontally.
+
+<Table responsive="md">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+        </tr>
+    </tbody>
+</Table>
+
+## CSS
+
+Tables use CSS variables for real-time customization. Since `.table` styles are opt-in, nested
+tables stay independent from their parent. The factor variables (`--table-striped-bg-factor`,
+`--table-active-bg-factor`, and `--table-hover-bg-factor`) determine the contrast in table variants.
+See the [upstream table CSS][2] for the variable and Sass reference.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Table.tsx
+[2]: https://getbootstrap.com/docs/6.0/content/tables/#css

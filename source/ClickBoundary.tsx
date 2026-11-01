@@ -1,3 +1,5 @@
+'use client';
+
 import {
     createRef,
     DetailedHTMLProps,
@@ -8,8 +10,8 @@ import {
 
 export type ClickBoundaryProps = PropsWithChildren<
     {
-        onInnerClick?: (event: MouseEvent) => any;
-        onOuterClick?: (event: MouseEvent) => any;
+        onInnerClick?: (event: MouseEvent) => unknown;
+        onOuterClick?: (event: MouseEvent) => unknown;
     } & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 >;
 
@@ -19,8 +21,7 @@ export class ClickBoundary extends PureComponent<ClickBoundaryProps> {
     switchClick = (event: MouseEvent) => {
         const { onInnerClick, onOuterClick } = this.props;
 
-        if (this.root.current?.contains(event.target as Node))
-            onInnerClick?.(event);
+        if (this.root.current?.contains(event.target as Node)) onInnerClick?.(event);
         else onOuterClick?.(event);
     };
 
@@ -33,7 +34,7 @@ export class ClickBoundary extends PureComponent<ClickBoundaryProps> {
     }
 
     render() {
-        const { children, onInnerClick, onOuterClick, ...props } = this.props;
+        const { children, onInnerClick: _, onOuterClick: __, ...props } = this.props;
 
         return (
             <div ref={this.root} {...props}>

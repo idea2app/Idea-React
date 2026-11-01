@@ -4,7 +4,13 @@ import { it } from 'node:test';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 
-import { NativeDialog } from '../source/NativeDialog';
+import {
+    DialogBody,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    NativeDialog
+} from '../source/NativeDialog';
 
 it('opens a native modal, closes with Escape and returns focus to its trigger', () => {
     const ref = createRef<NativeDialog>();
@@ -56,4 +62,37 @@ it('supports non-modal display and idempotent show/close calls', () => {
         ref.current?.close();
     });
     assert.equal(ref.current?.open, false);
+});
+
+it('synchronizes its native state with the open prop', () => {
+    const { container, rerender } = render(<NativeDialog aria-label="Controlled dialog" open />);
+    const dialog = container.querySelector('dialog')!;
+
+    assert.equal(dialog.open, true);
+
+    rerender(<NativeDialog aria-label="Controlled dialog" />);
+
+    assert.equal(dialog.open, false);
+});
+
+it('applies a Bootstrap color mode to the dialog', () => {
+    const { container } = render(<NativeDialog theme="dark" />);
+
+    assert.equal(container.querySelector('dialog')?.dataset.bsTheme, 'dark');
+});
+
+it('renders Bootstrap 6 dialog parts', () => {
+    const { container } = render(
+        <NativeDialog aria-label="Parts">
+            <DialogHeader className="custom">
+                <DialogTitle>Title</DialogTitle>
+            </DialogHeader>
+            <DialogBody>Body</DialogBody>
+            <DialogFooter>Footer</DialogFooter>
+        </NativeDialog>
+    );
+    assert.equal(container.querySelector('.dialog-header')?.className, 'dialog-header custom');
+    assert.equal(container.querySelector('h1')?.className, 'dialog-title');
+    assert.equal(container.querySelector('.dialog-body')?.tagName, 'DIV');
+    assert.equal(screen.getByText('Footer').className, 'dialog-footer');
 });

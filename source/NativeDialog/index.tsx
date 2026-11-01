@@ -3,8 +3,10 @@
 import classNames from 'classnames';
 import {
     Component,
+    ComponentPropsWithRef,
     createRef,
     DialogHTMLAttributes,
+    FC,
     KeyboardEvent,
     MouseEvent,
     SyntheticEvent
@@ -14,9 +16,28 @@ import styles from './style.module.css';
 
 export interface NativeDialogProps extends Omit<DialogHTMLAttributes<HTMLDialogElement>, 'open'> {
     modal?: boolean;
+    dialog?: boolean;
+    theme?: 'light' | 'dark';
     keyboard?: boolean;
     backdrop?: boolean | 'static';
+    open?: boolean;
 }
+
+export const DialogHeader: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('dialog-header', className)} />
+);
+
+export const DialogTitle: FC<ComponentPropsWithRef<'h1'>> = ({ className, ...props }) => (
+    <h1 {...props} className={classNames('dialog-title', className)} />
+);
+
+export const DialogBody: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('dialog-body', className)} />
+);
+
+export const DialogFooter: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('dialog-footer', className)} />
+);
 
 export class NativeDialog extends Component<NativeDialogProps> {
     element = createRef<HTMLDialogElement>();
@@ -24,6 +45,17 @@ export class NativeDialog extends Component<NativeDialogProps> {
 
     get open() {
         return this.element.current?.open ?? false;
+    }
+
+    componentDidMount() {
+        if (this.props.open) this.show();
+    }
+
+    componentDidUpdate({ open }: NativeDialogProps) {
+        if (this.props.open === open) return;
+
+        if (this.props.open) this.show();
+        else this.close();
     }
 
     show = () => {
@@ -74,9 +106,12 @@ export class NativeDialog extends Component<NativeDialogProps> {
 
     render() {
         const {
+            open: _open,
             modal: _modal,
             keyboard: _keyboard,
             backdrop = true,
+            theme,
+            dialog = true,
             className,
             onCancel: _onCancel,
             onClick: _onClick,
@@ -89,11 +124,12 @@ export class NativeDialog extends Component<NativeDialogProps> {
                 {...props}
                 ref={this.element}
                 className={classNames(
-                    'dialog',
+                    dialog && 'dialog',
                     backdrop === false && styles.hiddenBackdrop,
                     className
                 )}
                 data-backdrop={backdrop === false ? 'false' : undefined}
+                data-bs-theme={theme}
                 onCancel={this.handleCancel}
                 onKeyDown={this.handleKeyDown}
                 onClick={this.handleClick}

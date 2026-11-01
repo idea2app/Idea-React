@@ -1,7 +1,7 @@
 import { FC, HTMLAttributes } from 'react';
-import { Card } from 'react-bootstrap';
 import { TimeData } from 'web-utility';
 
+import { Card, CardBody, CardText, CardTitle } from '../Card';
 import { Nameplate, NameplateProps } from '../Nameplate';
 import { Time } from '../Time';
 import * as styles from './index.module.less';
@@ -31,13 +31,13 @@ export const Timeline: FC<TimelineProps> = ({ className, events, timeFormat, ...
                 className={`position-relative ${styles.timelineItem} ${styles.right}`}
             >
                 <Card>
-                    <Card.Body className="p-4 d-flex flex-column gap-3 align-items-center">
-                        <h3 className="h5 m-0">
+                    <CardBody className="p-4 d-flex flex-column gap-3 align-items-center">
+                        <CardTitle className="h5 m-0">
                             <a className="text-decoration-none stretched-link" href={link}>
                                 {title as string}
                             </a>
-                        </h3>
-                        <div className="small text-muted d-flex gap-2">
+                        </CardTitle>
+                        <div className="small fg-3 d-flex gap-2">
                             ⏲️
                             <Time dateTime={time[0]} format={timeFormat} />
                             {time[1] && '~'}
@@ -50,8 +50,8 @@ export const Timeline: FC<TimelineProps> = ({ className, events, timeFormat, ...
                                 </li>
                             ))}
                         </ul>
-                        <p className="m-0">{summary as string}</p>
-                    </Card.Body>
+                        <CardText className="m-0">{summary as string}</CardText>
+                    </CardBody>
                 </Card>
             </li>
         ))}

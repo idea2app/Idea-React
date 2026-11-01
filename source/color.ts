@@ -1,6 +1,6 @@
-import { Color } from 'react-bootstrap/esm/types';
+import type { ComponentTheme } from './Button';
 
-export type VariantColor = Exclude<Color, 'white' | 'muted'>;
+export type VariantColor = ComponentTheme;
 
 export const VariantColors: VariantColor[] = [
     'primary',
@@ -15,9 +15,7 @@ export const VariantColors: VariantColor[] = [
 
 export function text2color(raw: string, excludeColors: VariantColor[] = []) {
     const colors = excludeColors[0]
-            ? VariantColors.filter(
-                  color => !excludeColors.find(c => c === color)
-              )
+            ? VariantColors.filter(color => !excludeColors.find(c => c === color))
             : VariantColors,
         sum = [...raw].reduce((sum, char) => sum + char.charCodeAt(0), 0);
 

@@ -54,8 +54,7 @@
             i {
                 box-shadow: 0 0 0.5rem 0 #ffd83a;
                 border: 0.1rem solid #ffd83a;
-                background-image: var(--logo-image),
-                    linear-gradient(#ffd83a, #fdeba0);
+                background-image: var(--logo-image), linear-gradient(#ffd83a, #fdeba0);
                 background-position: center;
                 background-size: 1.5rem 1.5rem;
                 background-repeat: no-repeat;
@@ -65,14 +64,12 @@
                 &:first-child {
                     box-shadow: 0 0 0.5rem 0 #d8d8d8;
                     border-color: #d8d8d8;
-                    background-image: var(--logo-image),
-                        linear-gradient(#d8d8d8, #eeeeee);
+                    background-image: var(--logo-image), linear-gradient(#d8d8d8, #eeeeee);
                 }
                 &:last-child {
                     box-shadow: 0 0 0.5rem 0 #fab36e;
                     border-color: #fab36e;
-                    background-image: var(--logo-image),
-                        linear-gradient(#fab36e, #fbe7d3);
+                    background-image: var(--logo-image), linear-gradient(#fab36e, #fbe7d3);
                 }
             }
         }
@@ -98,12 +95,7 @@
                 left: 0;
                 z-index: 1;
                 margin: 0 auto;
-                background-image: linear-gradient(
-                    to right,
-                    #d8d8d8 10%,
-                    #ffd83a 60%,
-                    #fab36e 75%
-                );
+                background-image: linear-gradient(to right, #d8d8d8 10%, #ffd83a 60%, #fab36e 75%);
                 background-clip: text;
                 width: 10rem;
                 content: attr(data-text);
@@ -136,8 +128,7 @@
                         0px 1px 0px #969653,
                         0px 2px 5px rgba(240, 219, 100, 0.4);
                     i {
-                        background-image: var(--logo-image),
-                            linear-gradient(#ffd83a, #fdeba0);
+                        background-image: var(--logo-image), linear-gradient(#ffd83a, #fdeba0);
                         background-position: center;
                         background-size: 2.5rem auto;
                         background-repeat: no-repeat;
@@ -157,11 +148,9 @@
                 .topUser {
                     border-bottom: 1.2rem solid #d8d8d8;
                     color: #d8d8d8;
-                    text-shadow: 0px 1px 0px #d9cdcd 0px 2px 5px
-                        rgba(133, 132, 130, 0.4);
+                    text-shadow: 0px 1px 0px #d9cdcd 0px 2px 5px rgba(133, 132, 130, 0.4);
                     i {
-                        background-image: var(--logo-image),
-                            linear-gradient(#d8d8d8, #eeeeee);
+                        background-image: var(--logo-image), linear-gradient(#d8d8d8, #eeeeee);
                     }
                 }
                 .image {
@@ -179,8 +168,7 @@
                         0px 1px 0px #aa8865,
                         0px 2px 5px rgba(167, 129, 67, 0.4);
                     i {
-                        background-image: var(--logo-image),
-                            linear-gradient(#fab36e, #fbe7d3);
+                        background-image: var(--logo-image), linear-gradient(#fab36e, #fbe7d3);
                     }
                 }
                 .image {
@@ -215,6 +203,7 @@
             cursor: default;
             background-color: transparent;
             .name {
+                max-width: 50%;
                 font-size: 0;
                 &:hover {
                     .image > img {

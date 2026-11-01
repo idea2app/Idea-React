@@ -1,0 +1,389 @@
+import { Badge } from '../../../../source/Badge';
+import { ListGroup, ListGroupItem } from '../../../../source/ListGroup';
+
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="list-group">
+
+# List groups
+
+List groups are a flexible and powerful component for displaying a series of content. Modify and
+extend them to support just about any content within.
+
+Idea React provides the [`ListGroup` and `ListGroupItem` wrappers][1] for these examples. Items
+render a `<li>` by default, an `<a>` when given `href`, and a `<button>` when given `type`.
+
+## Basic example
+
+The most basic list group is an unordered list with list items. Build upon it with the options that
+follow, or with your own CSS as needed.
+
+<ListGroup>
+    <ListGroupItem>An item</ListGroupItem>
+    <ListGroupItem>A second item</ListGroupItem>
+    <ListGroupItem>A third item</ListGroupItem>
+    <ListGroupItem>A fourth item</ListGroupItem>
+    <ListGroupItem>And a fifth one</ListGroupItem>
+</ListGroup>
+
+## Active items
+
+Add `active` to a `ListGroupItem` to indicate the current active selection. The wrapper also sets
+`aria-current="true"` for assistive technologies.
+
+<ListGroup>
+    <ListGroupItem active>An active item</ListGroupItem>
+    <ListGroupItem>A second item</ListGroupItem>
+    <ListGroupItem>A third item</ListGroupItem>
+    <ListGroupItem>A fourth item</ListGroupItem>
+    <ListGroupItem>And a fifth one</ListGroupItem>
+</ListGroup>
+
+## Links and buttons
+
+Pass `href` to render actionable `<a>` items, or `type` to render `<button>` items, and add `action`
+for hover, disabled, and active states. The action class is separate from the base item class so
+list groups built from non-interactive elements do not gain a click affordance.
+
+Set `disabled` to make action items appear disabled and inform assistive technologies. Disabled
+items also receive `.pe-none` (`pointer-events: none`), so they cannot be activated with the
+pointer; links additionally drop their `href` and click handler, while buttons receive the native
+`disabled` attribute. Be sure to **not use the standard `btn` classes here**.
+
+<ListGroup>
+    <ListGroupItem action href="#" active>
+        The current link item
+    </ListGroupItem>
+    <ListGroupItem action href="#">
+        A second link item
+    </ListGroupItem>
+    <ListGroupItem action href="#">
+        A third link item
+    </ListGroupItem>
+    <ListGroupItem action href="#" disabled>
+        A disabled link item
+    </ListGroupItem>
+</ListGroup>
+
+With buttons, you can also make use of the `disabled` attribute instead of the `disabled` class.
+Unlike `<a>`s, `<button>`s support it natively.
+
+<ListGroup>
+    <ListGroupItem action type="button" active>
+        The current button
+    </ListGroupItem>
+    <ListGroupItem action type="button">
+        A second button item
+    </ListGroupItem>
+    <ListGroupItem action type="button">
+        A third button item
+    </ListGroupItem>
+    <ListGroupItem action type="button" disabled>
+        A disabled button item
+    </ListGroupItem>
+</ListGroup>
+
+## Flush
+
+Add `flush` to remove some borders and rounded corners so items render edge-to-edge in a parent
+container, such as a card.
+
+<ListGroup flush>
+    <ListGroupItem>An item</ListGroupItem>
+    <ListGroupItem>A second item</ListGroupItem>
+    <ListGroupItem>A third item</ListGroupItem>
+    <ListGroupItem>A fourth item</ListGroupItem>
+    <ListGroupItem>And a fifth one</ListGroupItem>
+</ListGroup>
+
+## Numbered
+
+Add `numbered` to opt into numbered list group items. Numbers are generated via CSS instead of the
+browser's default `<ol>` styling, which places them better inside list group items and allows for
+more customization.
+
+<ListGroup numbered>
+    <ListGroupItem>A list item</ListGroupItem>
+    <ListGroupItem>A list item</ListGroupItem>
+    <ListGroupItem>A list item</ListGroupItem>
+</ListGroup>
+
+Numbered items work great with custom content as well.
+
+<ListGroup numbered>
+    <ListGroupItem className="d-flex justify-content-between align-items-start">
+        <div className="ms-2 me-auto">
+            <span className="d-block fw-bold">Subheading</span>
+            <span className="d-block">Content for list item</span>
+        </div>
+        <Badge theme="primary">14</Badge>
+    </ListGroupItem>
+    <ListGroupItem className="d-flex justify-content-between align-items-start">
+        <div className="ms-2 me-auto">
+            <span className="d-block fw-bold">Subheading</span>
+            <span className="d-block">Content for list item</span>
+        </div>
+        <Badge theme="primary">14</Badge>
+    </ListGroupItem>
+    <ListGroupItem className="d-flex justify-content-between align-items-start">
+        <div className="ms-2 me-auto">
+            <span className="d-block fw-bold">Subheading</span>
+            <span className="d-block">Content for list item</span>
+        </div>
+        <Badge theme="primary">14</Badge>
+    </ListGroupItem>
+</ListGroup>
+
+## Horizontal
+
+Set `horizontal` to change the layout of list group items from vertical to horizontal across all
+container sizes. Alternatively, pass a breakpoint (`sm`, `md`, `lg`, `xl`, or `2xl`) to make the
+list group horizontal starting at that width.
+
+Responsive variants use [container queries][2], so wrap the list group in a query container with
+the `contains-inline` utility for them to take effect. Horizontal list groups currently cannot be
+combined with `flush`.
+
+<div className="vstack gap-3">
+    <div className="contains-inline">
+        <ListGroup horizontal="sm">
+            <ListGroupItem>An item</ListGroupItem>
+            <ListGroupItem>A second item</ListGroupItem>
+            <ListGroupItem>A third item</ListGroupItem>
+        </ListGroup>
+    </div>
+    <div className="contains-inline">
+        <ListGroup horizontal="md">
+            <ListGroupItem>An item</ListGroupItem>
+            <ListGroupItem>A second item</ListGroupItem>
+            <ListGroupItem>A third item</ListGroupItem>
+        </ListGroup>
+    </div>
+    <div className="contains-inline">
+        <ListGroup horizontal="lg">
+            <ListGroupItem>An item</ListGroupItem>
+            <ListGroupItem>A second item</ListGroupItem>
+            <ListGroupItem>A third item</ListGroupItem>
+        </ListGroup>
+    </div>
+</div>
+
+Want equal-width items when horizontal? Add the `flex-fill` utility to each item.
+
+<div className="contains-inline">
+    <ListGroup horizontal="sm">
+        <ListGroupItem className="flex-fill">An item</ListGroupItem>
+        <ListGroupItem className="flex-fill">A second item</ListGroupItem>
+        <ListGroupItem className="flex-fill">A third item</ListGroupItem>
+    </ListGroup>
+</div>
+
+## Variants
+
+Use the `theme` prop on items to style them with a stateful background and color.
+
+<div className="vstack gap-3">
+    <ListGroup>
+        <ListGroupItem>A simple default list group item</ListGroupItem>
+        {[
+            ['primary', 'Primary'],
+            ['accent', 'Accent'],
+            ['secondary', 'Secondary'],
+            ['success', 'Success'],
+            ['danger', 'Danger'],
+            ['warning', 'Warning'],
+            ['info', 'Info'],
+            ['light', 'Light'],
+            ['dark', 'Dark'],
+            ['inverse', 'Inverse']
+        ].map(([theme, title]) => (
+            <ListGroupItem key={theme} theme={theme}>
+                A simple {theme} list group item
+            </ListGroupItem>
+        ))}
+    </ListGroup>
+</div>
+
+### For links and buttons
+
+Themes also work with `action` items rendered as links or buttons. Notice the hover styles that are
+not present in the non-interactive example above. The `active` state is supported as well.
+
+<div className="vstack gap-3">
+    <ListGroup>
+        <ListGroupItem action href="#">
+            A simple default list group item
+        </ListGroupItem>
+        {[
+            ['primary', 'Primary'],
+            ['accent', 'Accent'],
+            ['secondary', 'Secondary'],
+            ['success', 'Success'],
+            ['danger', 'Danger'],
+            ['warning', 'Warning'],
+            ['info', 'Info'],
+            ['light', 'Light'],
+            ['dark', 'Dark'],
+            ['inverse', 'Inverse']
+        ].map(([theme, title]) => (
+            <ListGroupItem key={theme} action href="#" theme={theme}>
+                A simple {theme} list group item
+            </ListGroupItem>
+        ))}
+    </ListGroup>
+</div>
+
+## With badges
+
+Add [`Badge`][3] elements to any list group item to show unread counts, activity, and more with the
+help of some [flexbox utilities][4].
+
+<ListGroup>
+    <ListGroupItem className="d-flex justify-content-between align-items-center">
+        A list item
+        <Badge theme="primary">14</Badge>
+    </ListGroupItem>
+    <ListGroupItem className="d-flex justify-content-between align-items-center">
+        A second list item
+        <Badge theme="primary">2</Badge>
+    </ListGroupItem>
+    <ListGroupItem className="d-flex justify-content-between align-items-center">
+        A third list item
+        <Badge theme="primary">1</Badge>
+    </ListGroupItem>
+</ListGroup>
+
+## Custom content
+
+Add nearly any HTML within an item, even for linked list groups, with the help of the same flexbox
+utilities.
+
+<ListGroup>
+    <ListGroupItem action href="#" active>
+        <div className="d-flex w-100 justify-content-between">
+            <h5 className="mb-1">List group item heading</h5>
+            <small>3 days ago</small>
+        </div>
+        <p className="mb-1">Some placeholder content in a paragraph.</p>
+        <small>And some small print.</small>
+    </ListGroupItem>
+    <ListGroupItem action href="#">
+        <div className="d-flex w-100 justify-content-between">
+            <h5 className="mb-1">List group item heading</h5>
+            <small className="fg-2">3 days ago</small>
+        </div>
+        <p className="mb-1">Some placeholder content in a paragraph.</p>
+        <small className="fg-2">And some muted small print.</small>
+    </ListGroupItem>
+    <ListGroupItem action href="#">
+        <div className="d-flex w-100 justify-content-between">
+            <h5 className="mb-1">List group item heading</h5>
+            <small className="fg-2">3 days ago</small>
+        </div>
+        <p className="mb-1">Some placeholder content in a paragraph.</p>
+        <small className="fg-2">And some muted small print.</small>
+    </ListGroupItem>
+</ListGroup>
+
+## Checkboxes and radios
+
+Place Bootstrap's checkboxes and radios within list group items and customize as needed. You can use
+them without `<label>`s, but please remember to include an `aria-label` attribute and value for
+accessibility.
+
+<ListGroup>
+    <ListGroupItem>
+        <div className="form-field">
+            <input type="checkbox" id="listGroupCheckbox1" className="check" />
+            <label htmlFor="listGroupCheckbox1">First checkbox</label>
+        </div>
+    </ListGroupItem>
+    <ListGroupItem>
+        <div className="form-field">
+            <input type="checkbox" id="listGroupCheckbox2" className="check" />
+            <label htmlFor="listGroupCheckbox2">Second checkbox</label>
+        </div>
+    </ListGroupItem>
+    <ListGroupItem>
+        <div className="form-field">
+            <input type="checkbox" id="listGroupCheckbox3" className="check" />
+            <label htmlFor="listGroupCheckbox3">Third checkbox</label>
+        </div>
+    </ListGroupItem>
+</ListGroup>
+
+<ListGroup>
+    <ListGroupItem>
+        <div className="form-field">
+            <input
+                type="radio"
+                name="listGroupRadio"
+                id="listGroupRadio1"
+                className="radio"
+                defaultChecked
+            />
+            <label htmlFor="listGroupRadio1">First radio</label>
+        </div>
+    </ListGroupItem>
+    <ListGroupItem>
+        <div className="form-field">
+            <input type="radio" name="listGroupRadio" id="listGroupRadio2" className="radio" />
+            <label htmlFor="listGroupRadio2">Second radio</label>
+        </div>
+    </ListGroupItem>
+    <ListGroupItem>
+        <div className="form-field">
+            <input type="radio" name="listGroupRadio" id="listGroupRadio3" className="radio" />
+            <label htmlFor="listGroupRadio3">Third radio</label>
+        </div>
+    </ListGroupItem>
+</ListGroup>
+
+You can use the `stretched-link` utility on `<label>`s to make the whole list group item clickable.
+
+<ListGroup>
+    <ListGroupItem>
+        <div className="form-field">
+            <input type="checkbox" id="listGroupStretched1" className="check" />
+            <label className="stretched-link" htmlFor="listGroupStretched1">
+                First checkbox
+            </label>
+        </div>
+    </ListGroupItem>
+    <ListGroupItem>
+        <div className="form-field">
+            <input type="checkbox" id="listGroupStretched2" className="check" />
+            <label className="stretched-link" htmlFor="listGroupStretched2">
+                Second checkbox
+            </label>
+        </div>
+    </ListGroupItem>
+    <ListGroupItem>
+        <div className="form-field">
+            <input type="checkbox" id="listGroupStretched3" className="check" />
+            <label className="stretched-link" htmlFor="listGroupStretched3">
+                Third checkbox
+            </label>
+        </div>
+    </ListGroupItem>
+</ListGroup>
+
+## JavaScript behavior
+
+The wrapper covers list group markup and styles. To create tabbable list group panes, pair the
+items with an application-level tab implementation as described in the [upstream list group
+documentation][5].
+
+## CSS
+
+List group colors, borders, and spacing are driven by Bootstrap's `.list-group` CSS variables and
+Sass maps. See the [upstream list group CSS][6] for the variable reference.
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/ListGroup.tsx
+[2]: https://getbootstrap.com/docs/6.0/layout/breakpoints/#container-queries
+[3]: https://github.com/idea2app/Idea-React/blob/main/source/Badge.tsx
+[4]: https://getbootstrap.com/docs/6.0/utilities/flex/
+[5]: https://getbootstrap.com/docs/6.0/components/list-group/
+[6]: https://getbootstrap.com/docs/6.0/components/list-group/#css

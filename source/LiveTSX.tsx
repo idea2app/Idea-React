@@ -12,7 +12,7 @@ export const LiveTSX: FC<LiveTSXProps> = ({ scope, children }) => {
         <LiveProvider code={code} scope={scope} language="tsx">
             <LivePreview className="mb-3" />
             <LiveEditor />
-            <LiveError className="text-danger small p-2" />
+            <LiveError className="fg-danger small p-2" />
         </LiveProvider>
     );
 };

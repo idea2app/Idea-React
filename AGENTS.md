@@ -4,7 +4,7 @@
 
 [Bootstrap][1] 组件更新时，应遵循以下步骤更新本代码库：
 
-1. 拉取 https://github.com/twbs/bootstrap/tree/main/site/src/components 目录下的最新代码
+1. 拉取 https://github.com/twbs/bootstrap/tree/main/site/src/content/docs/components 目录下的最新代码
 2. 将更新的组件文档同步到本库的 `document/app` 目录，可能需要转为 MDX 格式
 3. 根据更新的组件文档，新增或修改本库中的对应组件，并将实现的组件应用回前面的 MDX 文档中
 4. 根据更新的文档和组件，编写 `test` 目录的单元测试，以 `ComponentName.test.tsx` 规范命名文件
@@ -21,17 +21,21 @@ export interface MyComponentProps {
 }
 
 export const MyComponent: FC<MyComponentProps> = ({ message }) => <div>{message}</div>;
+
+MyComponent.displayName = 'MyComponent';
 ```
 
 ### 依赖 State 的组件
 
 ```tsx
-import { observable, action } from 'mobx';
+import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component } from 'react';
 
 @observer
 export class MyComponent extends Component {
+    static displayName = 'MyComponent';
+
     @observable
     accessor count = 0;
 
@@ -49,7 +53,7 @@ export class MyComponent extends Component {
 ### 依赖 Store 的组件
 
 ```tsx
-import { observable, action } from 'mobx';
+import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component } from 'react';
 
@@ -65,6 +69,8 @@ export class MyModel {
 
 @observer
 export class MyComponent extends Component {
+    static displayName = 'MyComponent';
+
     store = new MyModel();
 
     handleIncrement = () => this.store.increment();
@@ -80,10 +86,9 @@ export class MyComponent extends Component {
 ### 依赖事件委托、监听数据变更的组件
 
 ```tsx
-import { observable, action } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent, on, reaction } from 'mobx-react-helper';
-import { Component, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 
 export interface MyComponentProps {
     someKey: string;
@@ -91,6 +96,8 @@ export interface MyComponentProps {
 
 @observer
 export class MyComponent extends ObservedComponent<MyComponentProps> {
+    static displayName = 'MyComponent';
+
     componentDidMount() {
         super.componentDidMount();
         this.init();
@@ -132,6 +139,7 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 只实现用户要求的内容；不要擅自新增页面、组件规格文档、示例或其它功能。
 - 文档站要用到的 [Bootstrap 官方组件][2] 必须先在 `source/` 封装为通用组件，
   再由文档站引用，不是将其专用组件放进组件库。
+- 文档与示例统一引用封装后的组件，MDX 不直接书写 Bootstrap 组件类名，只有展示原始 HTML（如无 JS 示例）时，代码块才保留类名写法。
 - 文档站专用布局、组件、模型和样式放在 `document/component/`，不得从组件库导出或混入发布包。
 - 多个同前缀的文件归入同名文件夹，文件使用 `index.tsx`、`model.ts`、
   `style.module.css` 等短名，并同步调整所有引用。
@@ -145,21 +153,34 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 少量、仅供单个组件使用的状态直接写为类组件实例成员，不必独立状态类。
 - 充分利用类属性初始化状态、恢复 Promise 和订阅 disposer，不将可声明的初始化集中到 `initialize()` 中。浏览器副作用应在客户端挂载后启动，卸载时释放订阅，并防止异步恢复完成后给已销毁实例重新绑定监听。
 - 使用 MobX stage-3 装饰器（如 `@observable accessor`、`@computed`、`@action`）。
-- 已有 `@action` 时不要再套 `runInAction()`。异步方法的 `await` 之后不继承 action
-  边界，后续状态更新应调用独立的 `@action` 方法，不能直接删除包装后裸写状态。
+- 已有 action 边界（`@action` 或 `action()`）时不要再套 `runInAction()`。异步方法的 `await` 之后不继承 action 边界，后续状态更新应调用独立的 action（`@action` 方法或 `action()` 包装的实例方法），不能直接删除包装后裸写状态。
+- 仅把调用转发给模型 action 的事件方法不再加 `@action`，action 边界由模型方法负责。
 - 回调函数的对象参数优先解构；需要把完整事件传给外部回调或保留事件方法调用上下文时，
   可以保留事件对象，在函数体中解构所需字段。
 - 类组件的所有事件回调写成箭头函数形式的类实例方法，直接传给事件属性；
   不在 JSX 中内联事件处理函数，也不在渲染过程中创建事件包装函数。
+- 事件处理器先调用外部 `props` 回调，空行后再执行组件自身逻辑；处理器内的不同步骤之间用空行分组。
 - 类型兼容时直接传入已有函数作为回调，不添加只转发调用的包装函数。
-- 只有返回语句的函数简化为箭头函数表达式；相邻的两个返回分支优先合为三目表达式。
-- 返回前的最后一个语句不影响返回值时，可与 `return` 合并。
+- 返回值不参与逻辑的外部回调类型写作 `(...) => unknown`（如 `onSelect`），不用 `void` 限制返回值，也不写 `any`。
 - 可迭代集合（如 `NodeList`）优先用展开语法；可选查询结果需保留空集合回退。
 - 多个同类型字段使用 `type` 和 `Record` 简写；含子元素的属性优先使用 `PropsWithChildren`。
 - 文本内容优先通过 `children` 传入，不另设重复用途的命名属性。
-- 嵌套较深、行数较长的大型 JSX 功能块提取为类组件渲染方法或无状态函数组件。
+- 嵌套较深、行数较长的大型 JSX 功能块提取为类组件渲染方法或无状态函数组件；类组件的多个渲染片段写成独立的 `renderXxx` 类实例方法，可直接作为 `map` 回调，不在函数组件内嵌套渲染函数或用闭包模拟类。
 - 所有图标通过 [Icon][3] 渲染，不另写图标组件或自绘 SVG；
   使用相应图标字体样式，并保留必要的无障碍标签。
+
+## 代码风格
+
+- 只有返回或赋值一条语句的函数/箭头方法化简为表达式体（含 `action(() => ...)`）； 相邻的两个返回分支优先合为三目表达式，仅用于区分两种返回值的提前 `return` 也改为三目。
+- 返回前的最后一个语句不影响返回值时，可与 `return` 合并。
+- 可空引用上的单个调用或链式操作直接使用可选链，不写单独的 `if (!value) return;` 守卫。
+- 对象字面量与 JSX 中的复杂条件表达式或片段先提取为具名局部变量，保持结构简洁。
+- 可选 props 的默认值写在解构参数中（如 `className = ''`、`rows = 3`），不在表达式里用 `|| ''` 兜底。
+- 向子组件透传时只解构需要特殊处理的 props，其余用 `...this.props` 展开，不逐项转发。
+- 多个组件共享的属性定义在基础模块，组件通过 `extends`、`Omit` 或类型别名复用，不从组件文件再导出基础模块的类型。
+- 组件 Props 优先用 `Pick`/`Omit`/`extends` 复用已有类型，不重复声明；按外观、内容、状态、行为的顺序分组排列。
+- 同一模块的类型与值合并为一条 import，不拆成 `import type` 与 `import` 两条。
+- JSX 中不同逻辑块（如触发器与浮层）之间用空行分隔。
 
 ## 错误处理
 

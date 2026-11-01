@@ -1,25 +1,19 @@
+'use client';
+
 import html2canvas from 'html2canvas';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, createRef, HTMLAttributes, MouseEvent } from 'react';
-import { Image } from 'react-bootstrap';
 import { blobOf } from 'web-utility';
 
+import { Image } from './Image';
 import { Loading } from './Loading';
 
-export async function elementToImage(
-    element: HTMLElement,
-    type?: string,
-    quality?: number
-) {
+export async function elementToImage(element: HTMLElement, type?: string, quality?: number) {
     const canvas = await html2canvas(element, { useCORS: true });
 
     return new Promise<string>((resolve, reject) =>
-        canvas.toBlob(
-            blob => (blob ? resolve(URL.createObjectURL(blob)) : reject()),
-            type,
-            quality
-        )
+        canvas.toBlob(blob => (blob ? resolve(URL.createObjectURL(blob)) : reject()), type, quality)
     );
 }
 

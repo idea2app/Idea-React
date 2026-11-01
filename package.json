@@ -1,6 +1,6 @@
 {
     "name": "idea-react",
-    "version": "3.0.0-alpha.0",
+    "version": "3.0.0-alpha.1",
     "license": "LGPL-3.0-or-later",
     "author": "shiy2008@gmail.com",
     "description": "A React advanced components library based on TypeScript & Bootstrap, built by idea2app remote developers team.",
@@ -40,7 +40,6 @@
         "iterable-observer": "^1.1.1",
         "lodash": "^4.18.1",
         "mobx-react-helper": "^0.5.4",
-        "react-bootstrap": "^2.10.10",
         "react-editor-js": "^2.1.0",
         "react-live": "^5.0.1",
         "shiki": "^4.5.0",
@@ -132,11 +131,9 @@
     "scripts": {
         "prepare": "husky",
         "test": "lint-staged  &&  node --import ./test/setup.mts --test --test-timeout=10000 test/*.test.tsx",
-        "pack-preview": "cd preview/  &&  rimraf ../.parcel-cache dist/  &&  parcel build --public-url=. --dist-dir=../docs/preview/ --no-source-maps",
         "pack-docs": "rimraf docs/  &&  typedoc source/",
-        "start": "npm run pack-docs  &&  npm run pack-preview  &&  web-server docs/ -p 8080 -o",
-        "build": "npm run pack-docs  &&  npm run pack-preview  &&  tsdown",
-        "prepublishOnly": "npm test  &&  npm run build",
-        "preview": "cd preview/  &&  rimraf ../.parcel-cache dist/  &&  parcel"
+        "start": "npm run pack-docs  &&  web-server docs/ -p 8080 -o",
+        "build": "npm run pack-docs  &&  tsdown",
+        "prepublishOnly": "npm test  &&  npm run build"
     }
 }

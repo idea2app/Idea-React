@@ -2,11 +2,10 @@ import { Icon } from '../../source/Icon';
 import { MenuItem } from '../../source/Menu';
 import { CopyCommand } from '../component/CopyCommand';
 import { DocumentationAction } from '../component/Documentation/Action';
-import { DocumentationFooter } from '../component/Documentation/Footer';
 import { DocumentationHero } from '../component/Documentation/Hero';
 import heroStyles from '../component/Documentation/Hero/style.module.less';
 import { DropdownMenu } from '../component/DropdownMenu';
-import { footerColumns, site, versions } from './site';
+import { site, versions } from './site';
 
 <DocumentationHero
     title="Build React apps with less glue and more possibility"
@@ -75,21 +74,5 @@ Built by the idea2app community.
 
 </DocumentationHero>
 
-<DocumentationFooter columns={footerColumns}>
-
-Advanced React components by [idea2app][3], built with the help of [our contributors][2].
-
-Licensed <a href="https://spdx.org/licenses/LGPL-3.0-or-later.html">{site.license}</a>.
-Currently v{site.version}.
-
-An independent React adaptation of the [upstream website][4].
-Upstream code: [MIT][5]; documentation: [CC BY 3.0][6].
-
-</DocumentationFooter>
-
 [1]: https://github.com/idea2app/Idea-React#usage
 [2]: https://github.com/idea2app/Idea-React/graphs/contributors
-[3]: https://idea2.app/
-[4]: https://getbootstrap.com/
-[5]: ./BOOTSTRAP-LICENSE.txt
-[6]: https://creativecommons.org/licenses/by/3.0/

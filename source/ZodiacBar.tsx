@@ -39,7 +39,7 @@ export const ZodiacBar: FC<ZodiacBarProps> = ({
             return (
                 <li key={year} className={itemClassName}>
                     <a className="d-inline-block p-3 text-decoration-none text-center" href={link}>
-                        <div className="fs-1">{zodiac}</div>
+                        <div className="fs-3xl">{zodiac}</div>
 
                         {title}
                     </a>

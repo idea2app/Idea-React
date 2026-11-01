@@ -32,7 +32,7 @@ export const DocumentationFooter: FC<DocumentationFooterProps> = ({
                     <h2 className="text-lg fw-medium mb-3">{title}</h2>
                     <ul className="list-unstyled mb-0">
                         {links.map(({ href, label }) => (
-                            <li key={href} className="mb-3">
+                            <li key={label} className="mb-3">
                                 <a href={href} className="fg-2 text-decoration-none">
                                     {label}
                                 </a>
