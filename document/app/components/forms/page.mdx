@@ -1,19 +1,35 @@
 import {
+    Checkbox,
+    Chip,
+    ChipInput,
+    Combobox,
+    ComboboxOption,
+    DatePicker,
     Form,
+    FormAdornment,
+    FormAdornmentText,
     FormCheck,
     FormControl,
     FormFeedback,
     FormField,
+    FormFieldset,
     FormFloatingLabel,
+    FormGhost,
     FormGroup,
     FormLabel,
+    FormRange,
     FormSelect,
+    FormSwitch,
     FormText,
     FormTextArea,
     InputGroup,
-    InputGroupText
+    InputGroupText,
+    OtpInput,
+    PasswordStrength,
+    Radio
 } from '../../../../source/Form';
 import { Button } from '../../../../source/Button';
+import { Col, Row } from '../../../../source/Grid';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="forms">
@@ -22,10 +38,16 @@ import { ComponentsLayout } from '../../../component/Documentation/Components/La
 
 Use native form elements with the Bootstrap 6 form wrappers. The wrappers apply the current Bootstrap
 classes while preserving the native HTML attributes, events, and browser validation behavior. This
-guide adapts the upstream [form field][1], [form control][2], [input group][3], and
-[floating label][4] documentation.
+guide covers all 17 official Forms sections, including native controls, interactive form
+patterns, layout, and validation.
 
-## Form fields
+## [Overview][1]
+
+`Form` renders a semantic native form and forwards its submit and reset handlers. Browser constraint
+validation and native form submission remain available. Use `FormFieldset` with a `legend` to group
+controls or disable an entire section.
+
+## [Field][2]
 
 Use `FormField` to arrange a label, control, and optional description or feedback. Associate labels
 with controls using `htmlFor` and `id`; connect descriptions with `aria-describedby`.
@@ -42,8 +64,13 @@ with controls using `htmlFor` and `id`; connect descriptions with `aria-describe
     <FormText id="emailHelp">We will never share your email with anyone else.</FormText>
 </FormField>
 
+## [Form control][3]
+
 `FormControl` supports native input attributes and applies `.form-control`. For a textarea, use
 `FormTextArea`; `FormSelect` applies the same control styling to a native select.
+
+The control wrapper also supports `controlSize="sm" | "lg"`, `plaintext`, `ghost`, `caret`, and
+`color`. File, color, date/time, and datalist inputs pass through their native attributes.
 
 <FormField>
     <FormLabel htmlFor="exampleMessage">Message</FormLabel>
@@ -61,32 +88,65 @@ with controls using `htmlFor` and `id`; connect descriptions with `aria-describe
     </FormSelect>
 </FormField>
 
-## Checkboxes and radios
+## [Checkbox][4]
 
-`FormCheck` styles native checkbox and radio inputs. Place it next to its associated `FormLabel`
-inside `FormField` for the two-column layout.
+`Checkbox` and `FormCheck` render native checkbox inputs. Place a check next to its associated
+`FormLabel` inside `FormField` for the two-column layout.
 
 <FormField>
-    <FormCheck id="terms" name="terms" type="checkbox" />
+    <Checkbox id="terms" name="terms" size="sm" theme="primary" />
     <FormLabel htmlFor="terms">Accept the terms and conditions</FormLabel>
 </FormField>
 
-<FormGroup>
-    <FormLabel>Choose a contact method</FormLabel>
+Checkboxes support native checked/disabled/name/value behavior, size and theme classes. The
+`FormCheck` wrapper also supports checkboxes where its `type` is omitted.
+
+## [Radio][5]
+
+`Radio` applies the Bootstrap `.radio` class and preserves native radio-group behavior. Use the same
+`name` for mutually exclusive options.
+
+<FormFieldset>
+    <legend>Choose a contact method</legend>
     <FormField>
-        <FormCheck id="contactEmail" name="contact" type="radio" value="email" defaultChecked />
+        <Radio id="contactEmail" name="contact" value="email" defaultChecked />
         <FormLabel htmlFor="contactEmail">Email</FormLabel>
     </FormField>
     <FormField>
-        <FormCheck id="contactPhone" name="contact" type="radio" value="phone" />
+        <Radio id="contactPhone" name="contact" value="phone" />
         <FormLabel htmlFor="contactPhone">Phone</FormLabel>
     </FormField>
-</FormGroup>
+</FormFieldset>
 
-## Input groups
+Radio controls support native checked/disabled/name/value behavior, size, and theme classes.
+
+## [Switch][6]
+
+`FormSwitch` wraps a native checkbox in the Bootstrap `.switch` label and accepts the input's
+attributes through `inputProps`.
+
+<FormField>
+    <FormSwitch inputProps={{ name: 'enabled', defaultChecked: true }}>
+        Enable notifications
+    </FormSwitch>
+</FormField>
+
+## [Range][7]
+
+`FormRange` renders the `.form-range` wrapper and native range input, supports native min/max/step
+and controlled values, and can request the Bootstrap value bubble with `bubble`.
+
+<FormField>
+    <FormLabel htmlFor="volume">Volume</FormLabel>
+    <FormRange id="volume" name="volume" min={0} max={100} defaultValue={40} bubble />
+</FormField>
+
+## [Input group][8]
 
 Use `InputGroup` with `InputGroupText` to pair a control with a text add-on. Add accessible labels
 outside the group or provide an accessible name directly on the control.
+Groups can also contain buttons, checks, radios, selects, and file inputs. Apply sizing classes to
+the group itself.
 
 <FormField>
     <FormLabel htmlFor="username">Username</FormLabel>
@@ -96,7 +156,7 @@ outside the group or provide an accessible name directly on the control.
     </InputGroup>
 </FormField>
 
-## Floating labels
+## [Floating labels][9]
 
 `FormFloatingLabel` wraps a control and its label. For textual inputs, include a non-empty
 `placeholder`; Bootstrap uses it to determine when the label should float.
@@ -107,38 +167,164 @@ outside the group or provide an accessible name directly on the control.
 </FormFloatingLabel>
 
 Add `always` to keep the floating label raised and the placeholder visible.
+Date/time inputs and selects float automatically; multiple and sized selects are not supported by
+Bootstrap's floating-label styles.
 
-## Validation
+## [Form adorn][10]
 
-Native validation attributes such as `required` remain available. Add `.is-invalid` or `.is-valid`
-through `className` to show server-side validation states and pair them with `FormFeedback`. Associate
-the feedback with its control using `aria-describedby`.
+Use `FormAdornment` as a label around an input and its leading or trailing adornments. `FormGhost`
+provides the minimally styled input; `FormAdornmentText` marks a text unit as decorative.
 
 <FormField>
-    <FormLabel htmlFor="validatedEmail">Email address</FormLabel>
-    <FormControl
-        id="validatedEmail"
-        type="email"
-        className="is-invalid"
-        aria-describedby="emailFeedback"
-    />
-    <FormFeedback id="emailFeedback">Enter a valid email address.</FormFeedback>
+    <FormAdornment htmlFor="price" end>
+        <FormGhost id="price" type="number" placeholder="0.00" aria-label="Price" />
+        <FormAdornmentText aria-hidden="true">USD</FormAdornmentText>
+    </FormAdornment>
 </FormField>
 
-`Form` renders a native `<form>` and forwards its submit and reset handlers. Browser constraint
-validation is enabled by default; add `noValidate` when implementing custom validation.
+Do not place interactive controls inside the wrapping label. Keep decorative adornments hidden from
+assistive technology.
+
+## [Chips][11]
+
+`Chip` renders an interactive, optionally active chip. `ChipInput` provides the Bootstrap
+`.chip-input` container and forwards the options consumed by Bootstrap's chips plugin.
+
+<ChipInput theme="primary" separator="," maxChips={5}>
+    <Chip>React</Chip>
+    <Chip active>TypeScript</Chip>
+    <FormGhost aria-label="Add a tag" placeholder="Add tags…" />
+</ChipInput>
+
+The chips plugin handles adding and removing chips, duplicate policy, limits, and keyboard
+interaction. Include Bootstrap's JavaScript plugin in the consuming application to activate it.
+
+## [Combobox][12]
+
+Use `Combobox` with `ComboboxOption` for a menu-based form selection. `value` is controlled;
+`multiple` enables toggling several values. The wrapper submits selected values under `name` and
+uses the existing `Menu` wrapper for keyboard navigation and dismissal.
+
+<Combobox name="language" value="ts" placeholder="Choose a language">
+    <ComboboxOption value="js">JavaScript</ComboboxOption>
+    <ComboboxOption value="ts">TypeScript</ComboboxOption>
+</Combobox>
+
+Custom option content is supported. Filter options before rendering them to provide live search.
+
+## [Datepicker][13]
+
+`DatePicker` defaults to the native date input, preserving browser date selection, `min`, `max`, and
+form submission. Set `enhanced` to render a text input and Bootstrap datepicker data attributes when
+the consuming application has loaded Bootstrap's datepicker plugin.
+
+<FormField>
+    <FormLabel htmlFor="appointment">Appointment date</FormLabel>
+    <DatePicker id="appointment" name="appointment" min="2026-01-01" />
+</FormField>
+
+Enhanced mode also accepts `inline` and `selectionMode` (`single`, `multiple`, or
+`multiple-ranged`) for the upstream plugin.
+
+## [OTP input][14]
+
+`OtpInput` keeps one accessible text input for autofill and screen readers, while forwarding length,
+character type, masking, and visual grouping options to Bootstrap's OTP plugin.
+
+<FormField>
+    <FormLabel htmlFor="verificationCode">Verification code</FormLabel>
+    <OtpInput id="verificationCode" name="code" length={6} groups={[3, 3]} />
+    <FormText>Enter the six-digit code sent to your device.</FormText>
+</FormField>
+
+The control defaults to `autocomplete="one-time-code"` and a numeric mobile keyboard. Set `type` to
+`alpha` or `alphanumeric`, or `mask` to obscure the displayed value.
+
+## [Password strength][15]
+
+`PasswordStrength` evaluates the supplied password using Bootstrap's eight default criteria and
+renders four segments or a progress bar. Customize the minimum length and level messages.
+
+<PasswordStrength value="Password123!@#$567" />
+
+<PasswordStrength value="Password123!@#$567" variant="bar" />
+
+The meter is controlled by its `value` prop; connect it to your password input state and describe
+password requirements separately for accessibility.
+
+## [Layout][16]
+
+Use `Row` and `Col` for responsive form grids and `FormGroup` for related controls. Controls remain
+native and support Bootstrap spacing and responsive utility classes.
 
 <Form>
+    <Row className="g-3">
+        <Col md={6}>
+            <FormField>
+                <FormLabel htmlFor="firstName">First name</FormLabel>
+                <FormControl id="firstName" name="firstName" />
+            </FormField>
+        </Col>
+        <Col md={6}>
+            <FormField>
+                <FormLabel htmlFor="lastName">Last name</FormLabel>
+                <FormControl id="lastName" name="lastName" />
+            </FormField>
+        </Col>
+    </Row>
+</Form>
+
+Use `FormFieldset` with a `legend` to disable or group native controls semantically:
+
+<FormFieldset disabled>
+    <legend>Unavailable options</legend>
     <FormField>
-        <FormLabel htmlFor="requiredName">Name</FormLabel>
-        <FormControl id="requiredName" required />
+        <Checkbox id="disabledOption" />
+        <FormLabel htmlFor="disabledOption">Not available</FormLabel>
+    </FormField>
+</FormFieldset>
+
+## [Validation][17]
+
+Set `data-bs-validate` on `Form` to opt into Bootstrap's user-interaction validation styles.
+Combine it with `noValidate` to suppress browser tooltips while retaining the constraint validation
+API. Server-side states use `.is-invalid` / `.is-valid` and `FormFeedback`.
+
+<Form data-bs-validate="valid" noValidate>
+    <FormField>
+        <FormLabel htmlFor="validatedEmail">Email address</FormLabel>
+        <FormControl
+            id="validatedEmail"
+            name="email"
+            type="email"
+            required
+            className="is-invalid"
+            aria-describedby="emailFeedback"
+        />
+        <FormFeedback id="emailFeedback">Enter a valid email address.</FormFeedback>
     </FormField>
     <Button type="submit">Submit</Button>
 </Form>
 
+Associate feedback with the control using `aria-describedby`; native `checkValidity()` and
+`setCustomValidity()` remain available.
+
 </ComponentsLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/forms/field/
-[2]: https://getbootstrap.com/docs/6.0/forms/form-control/
-[3]: https://getbootstrap.com/docs/6.0/forms/input-group/
-[4]: https://getbootstrap.com/docs/6.0/forms/floating-labels/
+[1]: https://getbootstrap.com/docs/6.0/forms/overview/
+[2]: https://getbootstrap.com/docs/6.0/forms/field/
+[3]: https://getbootstrap.com/docs/6.0/forms/form-control/
+[4]: https://getbootstrap.com/docs/6.0/forms/checkbox/
+[5]: https://getbootstrap.com/docs/6.0/forms/radio/
+[6]: https://getbootstrap.com/docs/6.0/forms/switch/
+[7]: https://getbootstrap.com/docs/6.0/forms/range/
+[8]: https://getbootstrap.com/docs/6.0/forms/input-group/
+[9]: https://getbootstrap.com/docs/6.0/forms/floating-labels/
+[10]: https://getbootstrap.com/docs/6.0/forms/form-adorn/
+[11]: https://getbootstrap.com/docs/6.0/forms/chips/
+[12]: https://getbootstrap.com/docs/6.0/forms/combobox/
+[13]: https://getbootstrap.com/docs/6.0/forms/datepicker/
+[14]: https://getbootstrap.com/docs/6.0/forms/otp-input/
+[15]: https://getbootstrap.com/docs/6.0/forms/password-strength/
+[16]: https://getbootstrap.com/docs/6.0/forms/layout/
+[17]: https://getbootstrap.com/docs/6.0/forms/validation/
