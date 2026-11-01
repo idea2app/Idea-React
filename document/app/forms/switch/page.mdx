@@ -1,0 +1,71 @@
+import { FormField, FormSwitch } from '../../../../source/Form';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+
+<DocumentationLayout active="switch">
+
+# Switch
+
+`FormSwitch` wraps a native checkbox in the Bootstrap switch label. Input properties are supplied
+through `inputProps`; the label text is passed as children.
+
+## Basic switch
+
+<CodeExample>
+    <FormSwitch inputProps={{ name: 'basicSwitch' }}>Toggle this switch</FormSwitch>
+</CodeExample>
+
+## With form field
+
+<CodeExample>
+    <FormField>
+        <FormSwitch inputProps={{ name: 'notifications', defaultChecked: true }}>
+            Enable notifications
+        </FormSwitch>
+    </FormField>
+</CodeExample>
+
+## Theme colors
+
+Use `theme` to apply a Bootstrap theme class to the switch.
+
+<CodeExample>
+    <FormSwitch theme="primary" inputProps={{ name: 'primarySwitch' }}>
+        Primary switch
+    </FormSwitch>
+</CodeExample>
+
+## Disabled
+
+<CodeExample>
+    <FormSwitch inputProps={{ name: 'disabledSwitch', disabled: true }}>
+        Disabled switch
+    </FormSwitch>
+</CodeExample>
+
+## Sizes
+
+Set `size="sm"` or `"lg"` to select a size variant.
+
+<CodeExample>
+    <>
+        <FormSwitch size="sm" inputProps={{ name: 'smallSwitch' }}>
+            Small switch
+        </FormSwitch>
+        <FormSwitch size="lg" inputProps={{ name: 'largeSwitch' }}>
+            Large switch
+        </FormSwitch>
+    </>
+</CodeExample>
+
+## Custom width
+
+Use Bootstrap width utilities on the wrapper to control the switch label layout.
+
+<CodeExample>
+    <FormSwitch className="w-100" inputProps={{ name: 'wideSwitch' }}>
+        Full-width switch
+    </FormSwitch>
+</CodeExample>
+
+</DocumentationLayout>

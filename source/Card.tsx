@@ -5,6 +5,14 @@ export const Card: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) 
     <div {...props} className={classNames('card', className)} />
 );
 
+export const CardGroup: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('card-group', className)} />
+);
+
+export const CardImageOverlay: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('card-img-overlay', className)} />
+);
+
 export const CardHeader: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
     <div {...props} className={classNames('card-header', className)} />
 );

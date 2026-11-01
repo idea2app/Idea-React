@@ -1,0 +1,117 @@
+import { Chip, ChipInput, FormField, FormGhost, FormLabel } from '../../../../source/Form';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+
+<DocumentationLayout active="chips">
+
+# Chips
+
+`Chip` renders an interactive chip button. `ChipInput` provides the container and data attributes
+for Bootstrap's chips JavaScript plugin.
+
+## Overview
+
+Include Bootstrap's JavaScript bundle to activate adding, removing, keyboard navigation, duplicate
+handling, and maximum-chip behavior. Without the plugin, the wrappers render their native markup.
+
+## Chips
+
+### Themed chips
+
+<CodeExample>
+    <div className="d-flex flex-wrap gap-2">
+        <Chip>Basic chip</Chip>
+        <Chip theme="primary">Themed chip</Chip>
+        <Chip active>Active chip</Chip>
+    </div>
+</CodeExample>
+
+### Active state
+
+`active` sets the selected state and `aria-pressed`. `disabled` prevents interaction.
+
+## Chip input
+
+<CodeExample>
+    <ChipInput theme="primary" separator="," maxChips={5}>
+        <Chip>React</Chip>
+        <Chip active>TypeScript</Chip>
+        <FormGhost aria-label="Add a tag" placeholder="Add tags…" />
+    </ChipInput>
+</CodeExample>
+
+### Theme variants
+
+Set `theme` to use the corresponding theme class.
+
+### Empty state
+
+The plugin inserts and manages its input inside an empty `ChipInput`.
+
+### With label
+
+<CodeExample>
+    <FormField>
+        <FormLabel htmlFor="chipTopics">Topics</FormLabel>
+        <ChipInput id="chipTopics" theme="primary" separator="," />
+    </FormField>
+</CodeExample>
+
+### Disabled
+
+Disable the native input and chips when the form state is read-only.
+
+## Usage
+
+The chips plugin uses data attributes to configure behavior.
+
+### Via data attributes
+
+`separator`, `allowDuplicates`, `maxChips`, and `createOnBlur` are forwarded as Bootstrap data
+attributes on `ChipInput`.
+
+### Via JavaScript
+
+The consuming application can initialize the Bootstrap chips plugin on the rendered `.chip-input`.
+
+### Dependencies
+
+Interactive chip creation and removal require the Bootstrap chips JavaScript plugin.
+
+### Options
+
+The plugin supports separator, duplicate, maximum chip count, and create-on-blur options.
+
+### Methods
+
+The plugin exposes instance lifecycle methods.
+
+### Events
+
+The plugin emits events for chip creation, selection, and removal. See the upstream [chips API
+reference][1] for its complete event list.
+
+## Keyboard behavior
+
+Keyboard behavior is managed by the chips plugin when it is loaded.
+
+### When input is focused
+
+Use the input to type and create a chip with the configured separator or Enter key.
+
+### When a chip is focused
+
+Use keyboard navigation to move between chips and remove the focused chip.
+
+### Mouse selection
+
+The plugin supports pointer selection and removal of chips.
+
+## Accessibility
+
+Provide an accessible name for the chip input. Avoid relying on color alone to communicate selected
+or disabled state.
+
+</DocumentationLayout>
+
+[1]: https://getbootstrap.com/docs/6.0/forms/chips/

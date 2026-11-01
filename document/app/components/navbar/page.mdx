@@ -1,9 +1,11 @@
 import { Button } from '../../../../source/Button';
+import { Container } from '../../../../source/Grid';
 import { Icon } from '../../../../source/Icon';
 import { Image } from '../../../../source/Image';
 import { Menu, MenuDivider, MenuItem } from '../../../../source/Menu';
-import { NavItem, NavLink } from '../../../../source/Nav';
+import { Nav, NavItem, NavLink } from '../../../../source/Nav';
 import { Navbar, NavbarBrand, NavbarNav, NavbarText } from '../../../../source/Navbar';
+import { Form, FormControl, InputGroup, InputGroupText } from '../../../../source/Form';
 import { CodeBlock } from '../../../../source/CodeBlock';
 
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -50,12 +52,12 @@ responsive behavior.
             <NavLink disabled>Disabled</NavLink>
         </NavItem>
     </NavbarNav>
-    <form className="hstack gap-2" role="search">
-        <input className="form-control" type="search" placeholder="Search" aria-label="Search" />
+    <Form className="hstack gap-2" role="search">
+        <FormControl type="search" placeholder="Search" aria-label="Search" />
         <Button type="submit" variant="solid" theme="secondary" icon aria-label="Search">
             <Icon name="search" aria-hidden="true" />
         </Button>
-    </form>
+    </Form>
 </NavbarDemo>
 
 ## How it works
@@ -93,22 +95,25 @@ needed:
 ### Brand
 
 The `.navbar-brand` can be applied to most elements, but an anchor works best, as some elements might
-require utility classes or custom styles. Use `NavbarBrand` for the anchor form.
+require utility classes or custom styles. Use `NavbarBrand` for anchors and set `as="span"` for
+non-link text.
 
 #### Text
 
 Add your text within an element with the `.navbar-brand` class.
 
 <Navbar className="bg-1 fg-2">
-    <div className="container-fluid">
+    <Container fluid>
         <NavbarBrand href="#">Navbar</NavbarBrand>
-    </div>
+    </Container>
 </Navbar>
 
 <Navbar className="bg-1 fg-2">
-    <div className="container-fluid">
-        <span className="navbar-brand mb-0 h1">Navbar</span>
-    </div>
+    <Container fluid>
+        <NavbarBrand as="span" className="mb-0 h1">
+            Navbar
+        </NavbarBrand>
+    </Container>
 </Navbar>
 
 #### Image
@@ -117,7 +122,7 @@ You can replace the text within the `.navbar-brand` with an image. The `Image` w
 Bootstrap's image utilities.
 
 <Navbar className="bg-1 fg-2">
-    <div className="container">
+    <Container>
         <NavbarBrand href="#">
             <Image
                 src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg"
@@ -126,7 +131,7 @@ Bootstrap's image utilities.
                 height={24}
             />
         </NavbarBrand>
-    </div>
+    </Container>
 </Navbar>
 
 #### Image and text
@@ -135,7 +140,7 @@ You can also make use of some additional utilities to add an image and text at t
 the addition of `.d-inline-block` and `.align-text-top` on the image.
 
 <Navbar className="bg-1 fg-2">
-    <div className="container-fluid">
+    <Container fluid>
         <NavbarBrand href="#">
             <Image
                 src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg"
@@ -146,7 +151,7 @@ the addition of `.d-inline-block` and `.align-text-top` on the image.
             />
             Bootstrap
         </NavbarBrand>
-    </div>
+    </Container>
 </Navbar>
 
 ### Nav
@@ -181,14 +186,14 @@ wrappers][4] keep these attributes and the disabled state consistent.
 And because we use classes for our navs, you can avoid the list-based approach entirely if you like.
 
 <NavbarDemo expand="sm" brand="Navbar" title="Menu">
-    <div className="nav nav-pills navbar-nav">
+    <Nav variant="pills" className="navbar-nav">
         <NavLink href="#" className="active" aria-current="page">
             Home
         </NavLink>
         <NavLink href="#">Features</NavLink>
         <NavLink href="#">Pricing</NavLink>
         <NavLink disabled>Disabled</NavLink>
-    </div>
+    </Nav>
 </NavbarDemo>
 
 You can also use menus in your navbar. Menus require a wrapping element for positioning, so be sure
@@ -223,73 +228,60 @@ wrapper][5] manages open state and keyboard navigation for the trigger and panel
 Place various form controls and components within a navbar:
 
 <Navbar className="bg-1 fg-2">
-    <div className="container-fluid">
-        <form className="d-flex" role="search">
-            <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-            />
+    <Container fluid>
+        <Form className="d-flex" role="search">
+            <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
             <Button type="submit" variant="outline" theme="success">
                 Search
             </Button>
-        </form>
-    </div>
+        </Form>
+    </Container>
 </Navbar>
 
 Immediate child elements of `.navbar` use flex layout and will default to
 `justify-content: space-between`. Use additional flex utilities as needed to adjust this behavior.
 
 <Navbar className="bg-1 fg-2">
-    <div className="container-fluid">
+    <Container fluid>
         <NavbarBrand>Navbar</NavbarBrand>
-        <form className="d-flex" role="search">
-            <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-            />
+        <Form className="d-flex" role="search">
+            <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
             <Button type="submit" variant="outline" theme="success">
                 Search
             </Button>
-        </form>
-    </div>
+        </Form>
+    </Container>
 </Navbar>
 
 Input groups work, too. If your navbar is an entire form, or mostly a form, you can use the `<form>`
 element as the container and save some markup.
 
 <Navbar className="bg-1 fg-2">
-    <form className="container-fluid">
-        <div className="input-group">
-            <span className="input-group-text" id="navbarUsername">
-                @
-            </span>
-            <input
+    <Form className="container-fluid">
+        <InputGroup>
+            <InputGroupText id="navbarUsername">@</InputGroupText>
+            <FormControl
                 type="text"
-                className="form-control"
                 placeholder="Username"
                 aria-label="Username"
                 aria-describedby="navbarUsername"
             />
-        </div>
-    </form>
+        </InputGroup>
+    </Form>
 </Navbar>
 
 Various buttons are supported as part of these navbar forms, too. This is also a great reminder
 that vertical alignment utilities can be used to align different sized elements.
 
 <Navbar className="bg-1 fg-2">
-    <form className="container-fluid justify-content-start">
+    <Form className="container-fluid justify-content-start">
         <Button type="button" variant="outline" theme="success" className="me-2">
             Main button
         </Button>
         <Button type="button" variant="outline" theme="secondary" size="sm">
             Smaller button
         </Button>
-    </form>
+    </Form>
 </Navbar>
 
 ### Text
@@ -298,9 +290,9 @@ Navbars may contain bits of text with the help of `.navbar-text`. This class adj
 alignment and horizontal spacing for strings of text.
 
 <Navbar className="bg-1 fg-2">
-    <div className="container-fluid">
+    <Container fluid>
         <NavbarText>Navbar text with an inline element</NavbarText>
-    </div>
+    </Container>
 </Navbar>
 
 Mix and match with other components and utilities as needed.
@@ -349,12 +341,12 @@ that attribute for you.
             <NavLink disabled>Disabled</NavLink>
         </NavItem>
     </NavbarNav>
-    <form className="hstack gap-2" role="search">
-        <input className="form-control" type="search" placeholder="Search" aria-label="Search" />
+    <Form className="hstack gap-2" role="search">
+        <FormControl type="search" placeholder="Search" aria-label="Search" />
         <Button type="submit" variant="solid" theme="secondary" icon aria-label="Search">
             <Icon name="search" aria-hidden="true" />
         </Button>
-    </form>
+    </Form>
 </NavbarDemo>
 
 ## Translucent navbar
@@ -363,7 +355,7 @@ Add `.navbar-translucent` to blur and saturate the background of a navbar. This 
 navbars positioned over content, such as fixed or sticky navbars.
 
 <Navbar expand="md" theme="dark" className="navbar-translucent">
-    <div className="container-fluid">
+    <Container fluid>
         <NavbarBrand href="#">Navbar</NavbarBrand>
         <NavbarNav>
             <NavItem>
@@ -378,7 +370,7 @@ navbars positioned over content, such as fixed or sticky navbars.
                 <NavLink href="#">Pricing</NavLink>
             </NavItem>
         </NavbarNav>
-    </div>
+    </Container>
 </Navbar>
 
 ## Color schemes
@@ -406,9 +398,9 @@ default is the "light navbar" for use with light background colors, but you can 
                 <NavLink href="#">About</NavLink>
             </NavItem>
         </NavbarNav>
-        <form className="d-flex" role="search">
-            <input
-                className="form-control me-2"
+        <Form className="d-flex" role="search">
+            <FormControl
+                className="me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
@@ -416,7 +408,7 @@ default is the "light navbar" for use with light background colors, but you can 
             <Button type="submit" variant="outline" theme="secondary">
                 Search
             </Button>
-        </form>
+        </Form>
     </NavbarDemo>
 
     <NavbarDemo expand="md" theme="dark" className="bg-primary" bodyClassName="mb-2 md:mb-0">
@@ -436,9 +428,9 @@ default is the "light navbar" for use with light background colors, but you can 
                 <NavLink href="#">About</NavLink>
             </NavItem>
         </NavbarNav>
-        <form className="d-flex" role="search">
-            <input
-                className="form-control me-2"
+        <Form className="d-flex" role="search">
+            <FormControl
+                className="me-2"
                 data-bs-theme="light"
                 type="search"
                 placeholder="Search"
@@ -447,7 +439,7 @@ default is the "light navbar" for use with light background colors, but you can 
             <Button type="submit" variant="solid" theme="inverse">
                 Search
             </Button>
-        </form>
+        </Form>
     </NavbarDemo>
 
     <NavbarDemo expand="md" theme="light" className="bg-1" bodyClassName="mb-2 md:mb-0">
@@ -467,9 +459,9 @@ default is the "light navbar" for use with light background colors, but you can 
                 <NavLink href="#">About</NavLink>
             </NavItem>
         </NavbarNav>
-        <form className="d-flex" role="search">
-            <input
-                className="form-control me-2"
+        <Form className="d-flex" role="search">
+            <FormControl
+                className="me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
@@ -477,7 +469,7 @@ default is the "light navbar" for use with light background colors, but you can 
             <Button type="submit" variant="outline" theme="primary">
                 Search
             </Button>
-        </form>
+        </Form>
     </NavbarDemo>
 
 </div>
@@ -502,20 +494,20 @@ Although it's not required, you can wrap a navbar in a `.container` to center it
 note that an inner container is still required. Or you can add a container inside the `.navbar` to
 only center the contents of a fixed or static top navbar.
 
-<div className="container">
+<Container>
     <Navbar expand="lg" className="bg-1 fg-2">
-        <div className="container-fluid">
+        <Container fluid>
             <NavbarBrand href="#">Navbar</NavbarBrand>
-        </div>
+        </Container>
     </Navbar>
-</div>
+</Container>
 
 Use any of the responsive containers to change how wide the content in your navbar is presented.
 
 <Navbar expand="lg" className="bg-1 fg-2">
-    <div className="md:container">
+    <Container breakpoint="md">
         <NavbarBrand href="#">Navbar</NavbarBrand>
-    </div>
+    </Container>
 </Navbar>
 
 ## Placement
@@ -618,17 +610,12 @@ With no `.navbar-brand` shown (hidden inside the drawer):
             <NavLink disabled>Disabled</NavLink>
         </NavItem>
     </NavbarNav>
-    <form className="d-flex" role="search">
-        <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-        />
+    <Form className="d-flex" role="search">
+        <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
         <Button type="submit" variant="outline" theme="success">
             Search
         </Button>
-    </form>
+    </Form>
 </NavbarDemo>
 
 With a brand name shown on the left and toggler on the right:
@@ -647,17 +634,12 @@ With a brand name shown on the left and toggler on the right:
             <NavLink disabled>Disabled</NavLink>
         </NavItem>
     </NavbarNav>
-    <form className="d-flex" role="search">
-        <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-        />
+    <Form className="d-flex" role="search">
+        <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
         <Button type="submit" variant="outline" theme="success">
             Search
         </Button>
-    </form>
+    </Form>
 </NavbarDemo>
 
 With a toggler on the left and brand name on the right:
@@ -676,17 +658,12 @@ With a toggler on the left and brand name on the right:
             <NavLink disabled>Disabled</NavLink>
         </NavItem>
     </NavbarNav>
-    <form className="d-flex" role="search">
-        <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-        />
+    <Form className="d-flex" role="search">
+        <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
         <Button type="submit" variant="outline" theme="success">
             Search
         </Button>
-    </form>
+    </Form>
 </NavbarDemo>
 
 ### External content

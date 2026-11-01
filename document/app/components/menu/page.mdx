@@ -1,6 +1,9 @@
 import { Icon } from '../../../../source/Icon';
 import { Button } from '../../../../source/Button';
-import { Navbar } from '../../../../source/Navbar';
+import { Container } from '../../../../source/Grid';
+import { Navbar, NavbarBrand, NavbarNav } from '../../../../source/Navbar';
+import { NavItem } from '../../../../source/Nav';
+import { Form, FormCheck, FormControl, FormField, FormLabel } from '../../../../source/Form';
 import {
     Menu,
     MenuDivider,
@@ -95,20 +98,18 @@ wrapper element can use the attribute directly.
 And putting it to use in a navbar:
 
 <Navbar theme="dark" className="rounded-3">
-    <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-            Navbar
-        </a>
-        <ul className="navbar-nav">
-            <li className="nav-item" data-bs-theme="dark">
+    <Container fluid>
+        <NavbarBrand href="#">Navbar</NavbarBrand>
+        <NavbarNav>
+            <NavItem data-bs-theme="dark">
                 <Menu label="Menu" toggleProps={{ variant: 'solid', theme: 'secondary' }}>
                     <MenuItem href="#">Action</MenuItem>
                     <MenuItem href="#">Another action</MenuItem>
                     <MenuItem href="#">Something else here</MenuItem>
                 </Menu>
-            </li>
-        </ul>
-    </div>
+            </NavItem>
+        </NavbarNav>
+    </Container>
 </Navbar>
 
 ### Translucent menus
@@ -345,33 +346,19 @@ Put a form within a menu, or make it into a menu, and use margin and padding uti
 negative space you require.
 
 <MenuPanel className="show position-static" style={{ '--bs-menu-min-width': '300px' }}>
-    <form className="d-flex flex-column gap-3 p-3">
-        <div>
-            <label htmlFor="exampleMenuFormEmail1" className="form-label">
-                Email address
-            </label>
-            <input
-                type="email"
-                className="form-control"
-                id="exampleMenuFormEmail1"
-                placeholder="email@example.com"
-            />
-        </div>
-        <div>
-            <label htmlFor="exampleMenuFormPassword1" className="form-label">
-                Password
-            </label>
-            <input
-                type="password"
-                className="form-control"
-                id="exampleMenuFormPassword1"
-                placeholder="Password"
-            />
-        </div>
-        <div className="form-field">
-            <input type="checkbox" id="checkLabel" className="check" />
-            <label htmlFor="checkLabel">Example new checkbox</label>
-        </div>
+    <Form className="d-flex flex-column gap-3 p-3">
+        <FormField>
+            <FormLabel htmlFor="exampleMenuFormEmail1">Email address</FormLabel>
+            <FormControl type="email" id="exampleMenuFormEmail1" placeholder="email@example.com" />
+        </FormField>
+        <FormField>
+            <FormLabel htmlFor="exampleMenuFormPassword1">Password</FormLabel>
+            <FormControl type="password" id="exampleMenuFormPassword1" placeholder="Password" />
+        </FormField>
+        <FormField>
+            <FormCheck id="checkLabel" />
+            <FormLabel htmlFor="checkLabel">Example new checkbox</FormLabel>
+        </FormField>
         <div className="vstack gap-2">
             <Button type="button" variant="solid" theme="primary">
                 Sign in
@@ -383,7 +370,7 @@ negative space you require.
                 Forgot password?
             </a>
         </div>
-    </form>
+    </Form>
 </MenuPanel>
 
 ## Scrollable menus

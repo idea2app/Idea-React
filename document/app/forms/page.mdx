@@ -1,0 +1,50 @@
+import { Form, FormControl, FormField, FormFieldset, FormLabel } from '../../../source/Form';
+import { CodeExample } from '../../component/Documentation/Components/Example';
+import { DocumentationLayout } from '../../component/Documentation/Components/Layout';
+
+<DocumentationLayout active="forms">
+
+# Forms
+
+Idea React's form wrappers are native React components styled with Bootstrap 6 classes. They preserve
+the browser's built-in form behavior and HTML attributes while providing typed props for Bootstrap
+form patterns.
+
+## Basic example
+
+<CodeExample>
+    <Form>
+        <FormField>
+            <FormLabel htmlFor="overviewEmail">Email address</FormLabel>
+            <FormControl id="overviewEmail" type="email" placeholder="name@example.com" />
+        </FormField>
+    </Form>
+</CodeExample>
+
+The [Field guide][1] shows how to compose a label, control, description, and feedback using
+`FormField`, `FormLabel`, and `FormText`.
+
+## Disabled forms
+
+Use the native `disabled` property on individual controls, or group related controls in a disabled
+`FormFieldset`.
+
+<CodeExample>
+    <FormFieldset disabled>
+        <legend>Disabled fieldset</legend>
+        <FormField>
+            <FormLabel htmlFor="overviewDisabled">Disabled input</FormLabel>
+            <FormControl id="overviewDisabled" placeholder="Disabled input" />
+        </FormField>
+    </FormFieldset>
+</CodeExample>
+
+## Accessibility
+
+Associate every control with a visible label using matching `htmlFor` and `id` values. Use
+`aria-describedby` to connect descriptions and validation feedback, and group related options in a
+`FormFieldset` with a `legend`.
+
+</DocumentationLayout>
+
+[1]: ./field/

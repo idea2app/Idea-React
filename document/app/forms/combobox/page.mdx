@@ -1,0 +1,127 @@
+import { Combobox, ComboboxOption, FormField, FormLabel } from '../../../../source/Form';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+
+<DocumentationLayout active="combobox">
+
+# Combobox
+
+`Combobox` uses the library's `Menu` component to present selectable `ComboboxOption` items. Its
+`value` prop is controlled; selected values are submitted as hidden form inputs under `name`.
+
+## Overview
+
+`Combobox` accepts controlled values and renders one or more `ComboboxOption` elements inside the
+library's accessible menu.
+
+## Example
+
+<CodeExample>
+    <FormField>
+        <FormLabel>Language</FormLabel>
+        <Combobox name="language" value="ts" placeholder="Choose a language">
+            <ComboboxOption value="js">JavaScript</ComboboxOption>
+            <ComboboxOption value="ts">TypeScript</ComboboxOption>
+        </Combobox>
+    </FormField>
+</CodeExample>
+
+### Placeholders
+
+Use `placeholder` for the empty state.
+
+### Pre-selected value
+
+Pass the initial selected value to the controlled `value` prop.
+
+### With form field
+
+Wrap the control in `FormField` and provide an accessible name.
+
+## Custom content
+
+Option children may contain custom React content, including text and existing icon wrappers. Keep
+the option's accessible name clear.
+
+### Icons
+
+Use an existing icon component in an option when the icon adds meaning; mark decorative icons
+hidden from assistive technology.
+
+### Descriptions
+
+Include a short description in option content when a label alone is ambiguous.
+
+### Checked icon
+
+Selected options receive the `selected` class and `aria-selected` state.
+
+### All together
+
+Combine a readable name, supporting description, and selected state without using color alone.
+
+## Search menu items
+
+Filter the `ComboboxOption` children before rendering them to provide a searchable option list.
+
+## Groups
+
+Use separate menus or group labels in option content when choices need categorization.
+
+## Multiple select
+
+Set `multiple` and pass a string array to `value`. `onChange` receives the updated selection.
+
+## Sizing
+
+Use `menuClassName` and `className` for sizing and layout.
+
+## Disabled
+
+Set `disabled` to disable the trigger.
+
+## Form submission
+
+Selected values are represented by hidden fields:
+
+```html
+<input type="hidden" name="country" value="us" />
+```
+
+## JavaScript
+
+The component uses the library's interactive `Menu` wrapper for keyboard navigation and dismissal.
+
+### Via data attributes
+
+Option values are exposed as `data-bs-value` attributes for click selection.
+
+### Dependencies
+
+The menu's keyboard and dismissal behavior is supplied by the existing Menu component, not a
+separate Bootstrap plugin.
+
+### Options
+
+Use the controlled `value`, `multiple`, `disabled`, `placeholder`, `menuClassName`, and `onChange`
+props.
+
+### Methods
+
+The component does not expose an imperative Bootstrap JavaScript instance.
+
+### Events
+
+Use `onChange` to receive the new value when an option is selected.
+
+## Accessibility
+
+The trigger has a listbox popup role and an accessible name. Provide a clear placeholder and
+meaningful option labels.
+
+## CSS custom properties
+
+The trigger uses the `.form-control` styling; menu styling is inherited from the existing Menu
+component.
+
+</DocumentationLayout>

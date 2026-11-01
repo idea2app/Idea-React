@@ -26,6 +26,9 @@ importers:
       '@swc/helpers':
         specifier: ^0.5.23
         version: 0.5.23
+      bootstrap:
+        specifier: 6.0.0-alpha.1
+        version: 6.0.0-alpha.1(vanilla-calendar-pro@3.4.0)
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -53,6 +56,9 @@ importers:
       shiki:
         specifier: ^4.5.0
         version: 4.5.0
+      vanilla-calendar-pro:
+        specifier: 3.4.0
+        version: 3.4.0
       web-utility:
         specifier: ^4.8.1
         version: 4.8.1(typescript@5.9.3)
@@ -2155,6 +2161,12 @@ packages:
     resolution: {integrity: sha512-Aqr8mA1kIvyJ3UY5YAY7ib8LSo1DmDMbMnVqGPtsKW1LxaFQFwn9Eb3yvq2fUKJsRvaXjnAV7R5osqETapzNiA==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+
+  bootstrap@6.0.0-alpha.1:
+    resolution: {integrity: sha512-snAWSjKDVdQAyPOtR69Upy247tZq13gw86SMDMZS4wNfBXGNdzbHdIP6GAyaAVJwTX4LjWowY8YYaJkSDv2wGQ==}
+    peerDependencies:
+      '@floating-ui/dom': ^1.7.6
+      vanilla-calendar-pro: ^3.4.0
 
   brace-expansion@1.1.21:
     resolution: {integrity: sha512-9zeA+KLZNNzglF2TPKRQEDyx6Yby7daAkuy8MiPzpXPsYDWi/DRM8jmwUDxokQjYqBpv5DgPiwD4h4ZZSy1Ujw==}
@@ -4625,6 +4637,9 @@ packages:
   utrie@1.0.2:
     resolution: {integrity: sha512-1MLa5ouZiOmQzUbjbu9VmjLzn1QLXBhwpUa7kdLUQK+KQ5KA9I1vk5U4YHe/X2Ch7PYnJfWuWT+VbuxbGwljhw==}
 
+  vanilla-calendar-pro@3.4.0:
+    resolution: {integrity: sha512-HLWjzHOWvMIrjI77tXK5bYzp0s5TeBSrZC247STjcTAdWI7kqEwWT6Xvu20vqdwzF498H1Da8l4WpdgVIGtc1Q==}
+
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
@@ -6855,6 +6870,10 @@ snapshots:
   base64-js@1.5.1: {}
 
   baseline-browser-mapping@2.11.34: {}
+
+  bootstrap@6.0.0-alpha.1(vanilla-calendar-pro@3.4.0):
+    dependencies:
+      vanilla-calendar-pro: 3.4.0
 
   brace-expansion@1.1.21:
     dependencies:
@@ -9964,6 +9983,8 @@ snapshots:
   utrie@1.0.2:
     dependencies:
       base64-arraybuffer: 1.0.2
+
+  vanilla-calendar-pro@3.4.0: {}
 
   vary@1.1.2: {}
 

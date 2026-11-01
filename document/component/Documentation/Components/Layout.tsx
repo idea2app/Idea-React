@@ -1,5 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 
+import { Col, Container, Row } from '../../../../source/Grid';
+import { Navigation } from './Navigation';
 import { Sidebar } from './Sidebar';
 import * as style from './style.module.less';
 import { Toc } from './Toc';
@@ -8,22 +10,28 @@ export interface ComponentsLayoutProps extends PropsWithChildren {
     active?: string;
 }
 
-export const ComponentsLayout: FC<ComponentsLayoutProps> = ({ active, children }) => (
-    <div className="container py-4">
-        <div className="row g-5">
-            <aside className="col-12 lg:col-3">
+export const DocumentationLayout: FC<ComponentsLayoutProps> = ({ active, children }) => (
+    <Container className="py-4 pb-12 lg:pb-4">
+        <Row className="g-5">
+            <aside className="lg:col-3 d-none lg:d-block">
                 <Sidebar active={active} />
             </aside>
-            <div className="col-12 lg:col-9">
-                <div className="row g-5">
+            <Col span={12} lg={9}>
+                <Row className="g-5">
                     <main id="content" className={`col-12 lg:col-9 ${style.content}`}>
                         {children}
                     </main>
-                    <aside className="col-12 lg:col-3 d-none lg:d-block">
+                    <aside className="lg:col-3 d-none lg:d-block">
                         <Toc />
                     </aside>
-                </div>
-            </div>
-        </div>
-    </div>
+                </Row>
+            </Col>
+        </Row>
+
+        <Navigation>
+            <Sidebar active={active} />
+        </Navigation>
+    </Container>
 );
+
+export const ComponentsLayout = DocumentationLayout;

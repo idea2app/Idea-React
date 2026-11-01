@@ -30,6 +30,9 @@ it('renders brand, navigation, text, and toggler sub-components', () => {
     render(
         <Navbar aria-label="Primary">
             <NavbarBrand href="/">Idea React</NavbarBrand>
+            <NavbarBrand as="span" className="mb-0 h1">
+                Navbar
+            </NavbarBrand>
             <NavbarToggler expanded />
             <NavbarNav>
                 <li className="nav-item">
@@ -42,6 +45,7 @@ it('renders brand, navigation, text, and toggler sub-components', () => {
         </Navbar>
     );
     assert.equal(screen.getByRole('link', { name: 'Idea React' }).className, 'navbar-brand');
+    assert.equal(screen.getByText('Navbar').className, 'navbar-brand mb-0 h1');
     assert.equal(
         screen.getByRole('button', { name: 'Toggle navigation' }).className,
         'btn-icon navbar-toggler'

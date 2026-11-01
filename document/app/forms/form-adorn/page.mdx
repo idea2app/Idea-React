@@ -1,0 +1,83 @@
+import {
+    FormAdornment,
+    FormAdornmentText,
+    FormField,
+    FormGhost,
+    FormLabel
+} from '../../../../source/Form';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+
+<DocumentationLayout active="form-adorn">
+
+# Form adorn
+
+`FormAdornment` styles a label containing a minimally styled `FormGhost` input and optional
+decorative text. Keep interactive elements outside this wrapping label.
+
+## How it works
+
+The adornment wrapper accepts `end` and `size` options. `FormAdornmentText` styles text units;
+`FormGhost` renders the input without the usual border and background.
+
+## Example
+
+<CodeExample>
+    <>
+        <FormAdornment>
+            <FormAdornmentText aria-hidden="true">$</FormAdornmentText>
+            <FormGhost aria-label="Price" type="number" placeholder="0.00" />
+        </FormAdornment>
+        <FormAdornment end>
+            <FormGhost aria-label="Amount" type="number" placeholder="0" />
+            <FormAdornmentText aria-hidden="true">USD</FormAdornmentText>
+        </FormAdornment>
+    </>
+</CodeExample>
+
+## With labels
+
+Use `FormAdornment` as the associated label for its control.
+
+<CodeExample>
+    <FormAdornment htmlFor="adornPrice">
+        <FormAdornmentText aria-hidden="true">$</FormAdornmentText>
+        <FormGhost id="adornPrice" type="number" placeholder="0.00" />
+    </FormAdornment>
+</CodeExample>
+
+## With form field
+
+<CodeExample>
+    <FormField>
+        <FormLabel htmlFor="adornQuantity">Quantity</FormLabel>
+        <FormAdornment end>
+            <FormGhost id="adornQuantity" type="number" placeholder="1" />
+            <FormAdornmentText aria-hidden="true">items</FormAdornmentText>
+        </FormAdornment>
+    </FormField>
+</CodeExample>
+
+## Text adornments
+
+Use `FormAdornmentText` for non-interactive prefix or suffix content.
+
+<CodeExample>
+    <FormAdornment>
+        <FormAdornmentText aria-hidden="true">https://</FormAdornmentText>
+        <FormGhost aria-label="Website" placeholder="example.com" />
+    </FormAdornment>
+</CodeExample>
+
+## Sizing
+
+Use `size="sm"` or `"lg"` to select a size variant.
+
+<CodeExample>
+    <FormAdornment size="sm">
+        <FormAdornmentText aria-hidden="true">https://</FormAdornmentText>
+        <FormGhost aria-label="Website" placeholder="example.com" />
+    </FormAdornment>
+</CodeExample>
+
+</DocumentationLayout>

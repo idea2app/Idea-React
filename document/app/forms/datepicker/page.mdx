@@ -1,0 +1,148 @@
+import { DatePicker, FormField, FormLabel } from '../../../../source/Form';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+
+<DocumentationLayout active="datepicker">
+
+# Datepicker
+
+By default, `DatePicker` renders a native `input type="date"`, retaining browser date selection,
+validation, `min`, `max`, and form submission. Set `enhanced` to use Bootstrap's JavaScript
+datepicker, which is initialized automatically by the wrapper.
+
+## Overview
+
+<CodeExample>
+    <FormField>
+        <FormLabel htmlFor="dateDefault">Date</FormLabel>
+        <DatePicker id="dateDefault" name="date" min="2026-01-01" max="2026-12-31" />
+    </FormField>
+</CodeExample>
+
+## How it works
+
+The default native date input follows the platform's picker behavior. Enhanced mode loads Bootstrap's
+datepicker data API on mount and initializes the calendar when the input receives focus.
+
+## Examples
+
+### With form field
+
+Wrap the input in `FormField` and associate its visible label. This example opts into the enhanced
+plugin.
+
+<CodeExample>
+    <FormField>
+        <FormLabel htmlFor="dateEnhanced">Appointment</FormLabel>
+        <DatePicker id="dateEnhanced" name="appointment" enhanced selectionMode="single" />
+    </FormField>
+</CodeExample>
+
+### With icon
+
+Compose a date input with an existing icon and input group when an icon trigger is needed.
+
+### Min & Max dates
+
+Native mode accepts standard ISO date strings for `min` and `max`.
+
+### Multiple dates
+
+Enhanced mode forwards `selectionMode="multiple"` to the plugin. Native mode remains a single date
+input.
+
+<CodeExample>
+    <DatePicker aria-label="Multiple dates" enhanced selectionMode="multiple" />
+</CodeExample>
+
+### Multiple months
+
+The plugin controls how many months are visible; configure this in the consuming application's
+datepicker initialization.
+
+### Date range
+
+<CodeExample>
+    <DatePicker aria-label="Date range" enhanced selectionMode="multiple-ranged" />
+</CodeExample>
+
+### Multi-month date range
+
+The plugin's month-display configuration is controlled by the consuming application.
+
+## Options
+
+### First day of week
+
+Configure locale and first-day-of-week behavior through the datepicker plugin.
+
+### Placement
+
+The Bootstrap plugin chooses a placement based on its configuration and available viewport space.
+
+### Button trigger
+
+The wrapper renders an input; compose it with a separate button when the application needs a custom
+trigger.
+
+### Inline mode
+
+Set `inline` in enhanced mode to request an inline calendar.
+
+### Custom date formatting
+
+Native date values use the browser's standard form value. Use the plugin's options for custom
+display formatting in enhanced mode.
+
+## Dark mode
+
+The picker follows the theme styles provided by the Bootstrap stylesheet.
+
+### Inherited from parent
+
+Place the datepicker inside the appropriate themed container.
+
+### Datepicker-only theme
+
+Use the plugin's theme configuration when only the picker should use a different theme.
+
+## Shadow DOM
+
+Native mode is subject to browser date input support. Enhanced plugin behavior follows its own
+Shadow DOM and styling requirements.
+
+## Usage
+
+### Via data attributes
+
+`enhanced`, `inline`, `selectionMode`, `min`, and `max` are forwarded to Bootstrap's datepicker.
+
+### Via JavaScript
+
+The wrapper loads Bootstrap's data API automatically; the plugin creates instances on focus.
+
+### Dependencies
+
+Native mode has no JavaScript dependency. Enhanced mode uses Bootstrap's datepicker and its
+`vanilla-calendar-pro` dependency, which are included with the Idea React package.
+
+### Options
+
+Native mode forwards input attributes such as `min` and `max`. Enhanced mode maps these bounds to
+the datepicker's `dateMin` and `dateMax` options.
+
+### Advanced configuration
+
+Configure selection mode and inline display through the `selectionMode` and `inline` props.
+
+### Methods
+
+The wrapper manages the plugin instance lifecycle; use Bootstrap's JavaScript API directly for
+imperative methods.
+
+### Events
+
+Date selection events are forwarded by the native input. Use Bootstrap's JavaScript API directly
+when plugin-specific events are required.
+
+</DocumentationLayout>

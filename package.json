@@ -1,6 +1,6 @@
 {
     "name": "idea-react",
-    "version": "3.0.0-alpha.1",
+    "version": "3.0.0-beta.0",
     "license": "LGPL-3.0-or-later",
     "author": "shiy2008@gmail.com",
     "description": "A React advanced components library based on TypeScript & Bootstrap, built by idea2app remote developers team.",
@@ -34,6 +34,7 @@
         "@shikijs/langs": "^4.5.0",
         "@shikijs/themes": "^4.5.0",
         "@swc/helpers": "^0.5.23",
+        "bootstrap": "6.0.0-alpha.1",
         "classnames": "^2.5.1",
         "editorjs-html": "^4.0.5",
         "html2canvas": "^1.4.1",
@@ -43,6 +44,7 @@
         "react-editor-js": "^2.1.0",
         "react-live": "^5.0.1",
         "shiki": "^4.5.0",
+        "vanilla-calendar-pro": "3.4.0",
         "web-utility": "^4.8.1"
     },
     "peerDependencies": {
@@ -130,7 +132,7 @@
     },
     "scripts": {
         "prepare": "husky",
-        "test": "lint-staged  &&  node --import ./test/setup.mts --test --test-timeout=10000 test/*.test.tsx",
+        "test": "lint-staged  &&  node --import ./test/setup.mts --test --test-timeout=10000 \"test/**/*.test.tsx\"",
         "pack-docs": "rimraf docs/  &&  typedoc source/",
         "start": "npm run pack-docs  &&  web-server docs/ -p 8080 -o",
         "build": "npm run pack-docs  &&  tsdown",

@@ -1,0 +1,78 @@
+import { Checkbox, FormCheck, FormField, FormLabel } from '../../../../source/Form';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+
+<DocumentationLayout active="checkbox">
+
+# Checkbox
+
+Use `Checkbox` for a native checkbox input with Bootstrap's `.check` class. `FormCheck` can also
+render a checkbox when its `type` is omitted.
+
+## Basic checkbox
+
+<CodeExample>
+    <FormField>
+        <Checkbox id="checkBasic" name="checkBasic" aria-label="Basic checkbox" />
+    </FormField>
+</CodeExample>
+
+## Indeterminate
+
+Set `indeterminate` to apply the native DOM property and expose the mixed state accessibly.
+
+<CodeExample>
+    <Checkbox aria-label="Select all" indeterminate />
+</CodeExample>
+
+## With form field
+
+<CodeExample>
+    <FormField>
+        <Checkbox id="checkTerms" name="terms" />
+        <FormLabel htmlFor="checkTerms">Accept the terms and conditions</FormLabel>
+    </FormField>
+</CodeExample>
+
+## Description
+
+<CodeExample>
+    <FormField>
+        <FormLabel htmlFor="checkUpdates">Email updates</FormLabel>
+        <Checkbox id="checkUpdates" aria-describedby="checkDescription" />
+        <span id="checkDescription">Receive occasional product news.</span>
+    </FormField>
+</CodeExample>
+
+## Theme colors
+
+Pass a theme name to `theme`.
+
+<CodeExample>
+    <FormField>
+        <Checkbox id="checkPrimary" theme="primary" />
+        <FormLabel htmlFor="checkPrimary">Primary themed checkbox</FormLabel>
+    </FormField>
+</CodeExample>
+
+## Disabled
+
+<CodeExample>
+    <FormField>
+        <Checkbox id="checkDisabled" disabled />
+        <FormLabel htmlFor="checkDisabled">Disabled checkbox</FormLabel>
+    </FormField>
+</CodeExample>
+
+## Sizes
+
+Pass `size="sm"` or `"lg"` to select the corresponding check size class.
+
+<CodeExample>
+    <>
+        <Checkbox aria-label="Small checkbox" size="sm" />
+        <Checkbox aria-label="Large checkbox" size="lg" />
+    </>
+</CodeExample>
+
+</DocumentationLayout>

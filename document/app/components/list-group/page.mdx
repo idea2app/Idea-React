@@ -1,4 +1,5 @@
 import { Badge } from '../../../../source/Badge';
+import { FormCheck, FormField, FormLabel } from '../../../../source/Form';
 import { ListGroup, ListGroupItem } from '../../../../source/ListGroup';
 
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -293,49 +294,43 @@ accessibility.
 
 <ListGroup>
     <ListGroupItem>
-        <div className="form-field">
-            <input type="checkbox" id="listGroupCheckbox1" className="check" />
-            <label htmlFor="listGroupCheckbox1">First checkbox</label>
-        </div>
+        <FormField>
+            <FormCheck id="listGroupCheckbox1" />
+            <FormLabel htmlFor="listGroupCheckbox1">First checkbox</FormLabel>
+        </FormField>
     </ListGroupItem>
     <ListGroupItem>
-        <div className="form-field">
-            <input type="checkbox" id="listGroupCheckbox2" className="check" />
-            <label htmlFor="listGroupCheckbox2">Second checkbox</label>
-        </div>
+        <FormField>
+            <FormCheck id="listGroupCheckbox2" />
+            <FormLabel htmlFor="listGroupCheckbox2">Second checkbox</FormLabel>
+        </FormField>
     </ListGroupItem>
     <ListGroupItem>
-        <div className="form-field">
-            <input type="checkbox" id="listGroupCheckbox3" className="check" />
-            <label htmlFor="listGroupCheckbox3">Third checkbox</label>
-        </div>
+        <FormField>
+            <FormCheck id="listGroupCheckbox3" />
+            <FormLabel htmlFor="listGroupCheckbox3">Third checkbox</FormLabel>
+        </FormField>
     </ListGroupItem>
 </ListGroup>
 
 <ListGroup>
     <ListGroupItem>
-        <div className="form-field">
-            <input
-                type="radio"
-                name="listGroupRadio"
-                id="listGroupRadio1"
-                className="radio"
-                defaultChecked
-            />
-            <label htmlFor="listGroupRadio1">First radio</label>
-        </div>
+        <FormField>
+            <FormCheck type="radio" name="listGroupRadio" id="listGroupRadio1" defaultChecked />
+            <FormLabel htmlFor="listGroupRadio1">First radio</FormLabel>
+        </FormField>
     </ListGroupItem>
     <ListGroupItem>
-        <div className="form-field">
-            <input type="radio" name="listGroupRadio" id="listGroupRadio2" className="radio" />
-            <label htmlFor="listGroupRadio2">Second radio</label>
-        </div>
+        <FormField>
+            <FormCheck type="radio" name="listGroupRadio" id="listGroupRadio2" />
+            <FormLabel htmlFor="listGroupRadio2">Second radio</FormLabel>
+        </FormField>
     </ListGroupItem>
     <ListGroupItem>
-        <div className="form-field">
-            <input type="radio" name="listGroupRadio" id="listGroupRadio3" className="radio" />
-            <label htmlFor="listGroupRadio3">Third radio</label>
-        </div>
+        <FormField>
+            <FormCheck type="radio" name="listGroupRadio" id="listGroupRadio3" />
+            <FormLabel htmlFor="listGroupRadio3">Third radio</FormLabel>
+        </FormField>
     </ListGroupItem>
 </ListGroup>
 
@@ -343,28 +338,28 @@ You can use the `stretched-link` utility on `<label>`s to make the whole list gr
 
 <ListGroup>
     <ListGroupItem>
-        <div className="form-field">
-            <input type="checkbox" id="listGroupStretched1" className="check" />
-            <label className="stretched-link" htmlFor="listGroupStretched1">
+        <FormField>
+            <FormCheck id="listGroupStretched1" />
+            <FormLabel className="stretched-link" htmlFor="listGroupStretched1">
                 First checkbox
-            </label>
-        </div>
+            </FormLabel>
+        </FormField>
     </ListGroupItem>
     <ListGroupItem>
-        <div className="form-field">
-            <input type="checkbox" id="listGroupStretched2" className="check" />
-            <label className="stretched-link" htmlFor="listGroupStretched2">
+        <FormField>
+            <FormCheck id="listGroupStretched2" />
+            <FormLabel className="stretched-link" htmlFor="listGroupStretched2">
                 Second checkbox
-            </label>
-        </div>
+            </FormLabel>
+        </FormField>
     </ListGroupItem>
     <ListGroupItem>
-        <div className="form-field">
-            <input type="checkbox" id="listGroupStretched3" className="check" />
-            <label className="stretched-link" htmlFor="listGroupStretched3">
+        <FormField>
+            <FormCheck id="listGroupStretched3" />
+            <FormLabel className="stretched-link" htmlFor="listGroupStretched3">
                 Third checkbox
-            </label>
-        </div>
+            </FormLabel>
+        </FormField>
     </ListGroupItem>
 </ListGroup>
 
@@ -374,11 +369,6 @@ The wrapper covers list group markup and styles. To create tabbable list group p
 items with an application-level tab implementation as described in the [upstream list group
 documentation][5].
 
-## CSS
-
-List group colors, borders, and spacing are driven by Bootstrap's `.list-group` CSS variables and
-Sass maps. See the [upstream list group CSS][6] for the variable reference.
-
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/ListGroup.tsx
@@ -386,4 +376,3 @@ Sass maps. See the [upstream list group CSS][6] for the variable reference.
 [3]: https://github.com/idea2app/Idea-React/blob/main/source/Badge.tsx
 [4]: https://getbootstrap.com/docs/6.0/utilities/flex/
 [5]: https://getbootstrap.com/docs/6.0/components/list-group/
-[6]: https://getbootstrap.com/docs/6.0/components/list-group/#css

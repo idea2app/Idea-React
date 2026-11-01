@@ -1,47 +1,55 @@
-import { action, autorun, observable } from 'mobx';
+import { action, autorun, computed, observable } from 'mobx';
 import { persist, restore } from 'mobx-restful';
 import { setCookie } from 'web-utility';
 
-export type ColorScheme = 'light' | 'dark';
-
-const matchColorScheme = (color: ColorScheme) =>
-    globalThis.matchMedia?.(`(prefers-color-scheme: ${color})`);
+export type ColorScheme = 'light' | 'dark' | 'auto';
 
 export class ColorModeModel {
-    media = matchColorScheme('dark');
+    media = window.matchMedia('(prefers-color-scheme: dark)');
+
+    @observable
+    accessor systemDark = false;
 
     @persist()
     @observable
-    accessor colorScheme: ColorScheme = this.media?.matches ? 'dark' : 'light';
+    accessor colorScheme: ColorScheme = 'auto';
 
-    @observable accessor ready = false;
+    @computed
+    get resolvedColorScheme() {
+        return this.colorScheme === 'auto'
+            ? this.systemDark
+                ? 'dark'
+                : 'light'
+            : this.colorScheme;
+    }
+
+    @observable
+    accessor ready = false;
 
     disposed = false;
 
     @action
     finishRestore = () => {
         if (this.disposed) return;
-        this.media?.addEventListener('change', this.handleSystemChange);
+        this.systemDark = this.media.matches;
+        this.media.addEventListener('change', this.handleSystemChange);
         this.ready = true;
     };
 
     restored = restore(this, 'ColorMode').then(this.finishRestore);
 
     disposer = autorun(() => {
-        document.documentElement.dataset.bsTheme = this.colorScheme;
-        setCookie('colorScheme', this.colorScheme);
+        document.documentElement.dataset.bsTheme = this.resolvedColorScheme;
+        setCookie('colorScheme', this.resolvedColorScheme);
     });
 
     dispose = () => {
         this.disposed = true;
         this.disposer();
-        this.media?.removeEventListener('change', this.handleSystemChange);
+        this.media.removeEventListener('change', this.handleSystemChange);
     };
 
-    @action
-    handleSystemChange = ({ matches }: MediaQueryListEvent) =>
-        (this.colorScheme = matches ? 'dark' : 'light');
+    handleSystemChange = action(({ matches }: MediaQueryListEvent) => (this.systemDark = matches));
 
-    @action
-    toggleColorScheme = () => (this.colorScheme = this.colorScheme === 'dark' ? 'light' : 'dark');
+    setColorScheme = action((colorScheme: ColorScheme) => (this.colorScheme = colorScheme));
 }

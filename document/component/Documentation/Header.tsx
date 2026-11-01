@@ -34,10 +34,10 @@ export const DocumentationHeader: FC<DocumentationHeaderProps> = ({
         </a>
         <Navbar
             expand="lg"
-            className="d-flex flex-wrap align-items-center justify-content-between gap-5 px-7 py-4"
+            className="d-flex flex-wrap lg:flex-nowrap align-items-center justify-content-between gap-5 px-7 py-4"
             aria-label="Main navigation"
         >
-            <div className="d-flex align-items-center gap-5">
+            <div className="d-flex align-items-center gap-5 flex-shrink-0">
                 <a
                     className="navbar-brand d-inline-flex fg-accent"
                     href={homeHref}
@@ -63,7 +63,7 @@ export const DocumentationHeader: FC<DocumentationHeaderProps> = ({
                 </div>
             </div>
             {search}
-            <div className="d-flex align-items-center gap-5 ms-auto">
+            <div className="d-flex align-items-center gap-5 ms-auto flex-shrink-0">
                 <a
                     className="d-none lg:d-inline-flex fg-2"
                     href={repositoryHref}
@@ -71,7 +71,10 @@ export const DocumentationHeader: FC<DocumentationHeaderProps> = ({
                 >
                     <Icon name="github" aria-hidden="true" />
                 </a>
-                <DropdownMenu label={`v${version}`}>
+                <DropdownMenu
+                    label={`v${version.split('.').slice(0, 2).join('.')}`}
+                    toggleProps={{ variant: 'link', className: 'nav-link px-1 gap-1' }}
+                >
                     {versions.map(({ href, label }) => (
                         <MenuItem key={label} href={href}>
                             {label}
@@ -79,6 +82,7 @@ export const DocumentationHeader: FC<DocumentationHeaderProps> = ({
                     ))}
                 </DropdownMenu>
                 {colorMode}
+                <span id="documentation-navigation-toggle" className="lg:d-none" />
             </div>
         </Navbar>
     </header>

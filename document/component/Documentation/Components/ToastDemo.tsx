@@ -7,6 +7,7 @@ import { ChangeEvent, Component, ReactNode } from 'react';
 
 import { Button, ComponentTheme } from '../../../../source/Button';
 import { CloseButton } from '../../../../source/CloseButton';
+import { FormField, FormLabel, FormSelect } from '../../../../source/Form';
 import { Image } from '../../../../source/Image';
 import { Toast, ToastBody, ToastHeader, ToastItem, ToastPosition } from '../../../../source/Toast';
 
@@ -172,13 +173,11 @@ export class ToastPlacementDemo extends Component {
 
         return (
             <>
-                <div className="mb-3">
-                    <label htmlFor="toastPlacement" className="form-label">
-                        Toast placement
-                    </label>
-                    <select
+                <FormField className="mb-3">
+                    <FormLabel htmlFor="toastPlacement">Toast placement</FormLabel>
+                    <FormSelect
                         id="toastPlacement"
-                        className="form-control mt-2"
+                        className="mt-2"
                         value={position}
                         onChange={this.handlePositionChange}
                     >
@@ -187,8 +186,8 @@ export class ToastPlacementDemo extends Component {
                                 {label}
                             </option>
                         ))}
-                    </select>
-                </div>
+                    </FormSelect>
+                </FormField>
                 <Button variant="solid" theme="secondary" onClick={this.handleShow}>
                     Show toast
                 </Button>

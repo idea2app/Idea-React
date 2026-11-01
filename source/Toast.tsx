@@ -47,7 +47,7 @@ interface ToastEntry extends ToastMessage {
 }
 
 export interface ToastContainerProps extends ComponentPropsWithRef<'div'> {
-    position?: ToastPosition;
+    position?: ToastPosition | 'static';
 }
 
 export const ToastContainer: FC<ToastContainerProps> = ({
@@ -56,18 +56,24 @@ export const ToastContainer: FC<ToastContainerProps> = ({
     'aria-live': ariaLive = 'polite',
     'aria-atomic': ariaAtomic = true,
     ...props
-}) => (
-    <div
-        {...props}
-        className={classNames(
-            'toast-container position-fixed p-3',
-            TOAST_POSITION_CLASSES[position],
-            className
-        )}
-        aria-live={ariaLive}
-        aria-atomic={ariaAtomic}
-    />
-);
+}) => {
+    const isStatic = position === 'static';
+
+    return (
+        <div
+            {...props}
+            className={classNames(
+                'toast-container',
+                !isStatic && 'position-fixed',
+                !isStatic && 'p-3',
+                isStatic ? 'position-static' : TOAST_POSITION_CLASSES[position],
+                className
+            )}
+            aria-live={ariaLive}
+            aria-atomic={ariaAtomic}
+        />
+    );
+};
 
 export interface ToastItemProps extends ComponentPropsWithRef<'div'> {
     theme?: ComponentTheme;
