@@ -1,0 +1,131 @@
+import {
+    FormControl,
+    FormFloatingLabel,
+    FormLabel,
+    FormSelect,
+    FormTextArea,
+    InputGroup,
+    InputGroupText
+} from '../../../../source/Form';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { FormDocsLayout } from '../../../component/Documentation/Forms/Layout';
+
+<FormDocsLayout active="floating-labels">
+
+# Floating labels
+
+`FormFloatingLabel` provides the Bootstrap floating label container. The label follows the control
+in the DOM, and text inputs need a non-empty placeholder.
+
+## Example
+
+<CodeExample>
+    <FormFloatingLabel>
+        <FormControl id="floatingEmail" type="email" placeholder="name@example.com" />
+        <FormLabel htmlFor="floatingEmail">Email address</FormLabel>
+    </FormFloatingLabel>
+</CodeExample>
+
+## Textareas
+
+<CodeExample>
+    <FormFloatingLabel>
+        <FormTextArea id="floatingMessage" placeholder="Message" rows={3} />
+        <FormLabel htmlFor="floatingMessage">Message</FormLabel>
+    </FormFloatingLabel>
+</CodeExample>
+
+## Selects
+
+<CodeExample>
+    <FormFloatingLabel>
+        <FormSelect id="floatingSelect" defaultValue="">
+            <option value="" disabled>
+                Choose one…
+            </option>
+            <option value="one">One</option>
+            <option value="two">Two</option>
+        </FormSelect>
+        <FormLabel htmlFor="floatingSelect">Choose an option</FormLabel>
+    </FormFloatingLabel>
+</CodeExample>
+
+Multiple and sized selects are not supported by Bootstrap's floating-label styles.
+
+## Date and time
+
+Date/time controls float automatically without a placeholder.
+
+<CodeExample>
+    <FormFloatingLabel>
+        <FormControl id="floatingDate" type="date" />
+        <FormLabel htmlFor="floatingDate">Date</FormLabel>
+    </FormFloatingLabel>
+</CodeExample>
+
+## Disabled
+
+Native `disabled` and `readOnly` attributes continue to work.
+
+<CodeExample>
+    <FormFloatingLabel>
+        <FormControl id="floatingDisabled" placeholder="Disabled" disabled />
+        <FormLabel htmlFor="floatingDisabled">Disabled input</FormLabel>
+    </FormFloatingLabel>
+</CodeExample>
+
+## Readonly plaintext
+
+Use `plaintext` with `readOnly` to preserve the floating label while removing the input decoration.
+
+<CodeExample>
+    <FormFloatingLabel>
+        <FormControl
+            id="floatingPlaintext"
+            placeholder="Readonly value"
+            plaintext
+            readOnly
+            value="Value"
+        />
+        <FormLabel htmlFor="floatingPlaintext">Readonly value</FormLabel>
+    </FormFloatingLabel>
+</CodeExample>
+
+## Input groups
+
+<CodeExample>
+    <InputGroup>
+        <InputGroupText>@</InputGroupText>
+        <FormFloatingLabel>
+            <FormControl id="floatingUsername" placeholder="Username" />
+            <FormLabel htmlFor="floatingUsername">Username</FormLabel>
+        </FormFloatingLabel>
+    </InputGroup>
+</CodeExample>
+
+## Layout
+
+Floating labels work with responsive grid utilities and form layout components.
+
+## Always floating
+
+Pass `always` to keep the floating label raised and placeholder visible.
+
+<CodeExample>
+    <FormFloatingLabel always>
+        <FormControl id="floatingAlways" placeholder="Visible placeholder" />
+        <FormLabel htmlFor="floatingAlways">Always floating</FormLabel>
+    </FormFloatingLabel>
+</CodeExample>
+
+## CSS
+
+The loaded Bootstrap stylesheet supplies floating label styles.
+
+### Variables
+
+See the upstream [floating label CSS variables][1].
+
+</FormDocsLayout>
+
+[1]: https://getbootstrap.com/docs/6.0/forms/floating-labels/#css

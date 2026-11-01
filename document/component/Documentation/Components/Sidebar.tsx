@@ -6,7 +6,10 @@ import nextConfig from '../../../next.config';
 import * as style from './style.module.less';
 
 type NavLink = Record<'label' | 'slug', string>;
-type NavGroup = Record<'label' | 'icon' | 'iconClassName' | 'href' | 'slug', string> & {
+type NavGroup = Record<
+    'label' | 'icon' | 'iconClassName' | 'href' | 'itemHref' | 'slug',
+    string
+> & {
     items: readonly NavLink[];
 };
 
@@ -19,7 +22,6 @@ const components: NavLink[] = [
     { label: 'Close button', slug: 'close-button' },
     { label: 'Dialog', slug: 'dialog' },
     { label: 'Drawer', slug: 'drawer' },
-    { label: 'Forms', slug: 'forms' },
     { label: 'Grid', slug: 'grid' },
     { label: 'Image', slug: 'image' },
     { label: 'List group', slug: 'list-group' },
@@ -58,20 +60,50 @@ const extensions: NavLink[] = [
     { label: 'Vertical marquee', slug: 'vertical-marquee' },
     { label: 'Zodiac bar', slug: 'zodiac-bar' }
 ];
+const forms: NavLink[] = [
+    { label: 'Overview', slug: '' },
+    { label: 'Field', slug: 'field' },
+    { label: 'Form control', slug: 'form-control' },
+    { label: 'Checkbox', slug: 'checkbox' },
+    { label: 'Radio', slug: 'radio' },
+    { label: 'Switch', slug: 'switch' },
+    { label: 'Range', slug: 'range' },
+    { label: 'Input group', slug: 'input-group' },
+    { label: 'Floating labels', slug: 'floating-labels' },
+    { label: 'Form adorn', slug: 'form-adorn' },
+    { label: 'Chips', slug: 'chips' },
+    { label: 'Combobox', slug: 'combobox' },
+    { label: 'Datepicker', slug: 'datepicker' },
+    { label: 'OTP input', slug: 'otp-input' },
+    { label: 'Password strength', slug: 'password-strength' },
+    { label: 'Layout', slug: 'layout' },
+    { label: 'Validation', slug: 'validation' }
+];
 const groups: NavGroup[] = [
     {
         label: 'Components',
         icon: 'menu-button-wide-fill',
         iconClassName: 'fg-info',
-        href: '',
+        href: 'components/',
+        itemHref: 'components/',
         slug: 'components',
         items: components
+    },
+    {
+        label: 'Forms',
+        icon: 'ui-checks',
+        iconClassName: 'fg-primary',
+        href: 'forms/',
+        itemHref: 'forms/',
+        slug: 'forms',
+        items: forms
     },
     {
         label: 'Extensions',
         icon: 'puzzle-fill',
         iconClassName: 'fg-accent',
-        href: 'idea-react/',
+        href: 'components/idea-react/',
+        itemHref: 'components/',
         slug: 'idea-react',
         items: extensions
     }
@@ -83,14 +115,14 @@ export interface SidebarProps {
 }
 
 export const Sidebar: FC<SidebarProps> = ({ active }) => (
-    <nav className={`d-flex flex-column pb-3 ${style.sidebar}`} aria-label="Components navigation">
-        {groups.map(({ label, icon, iconClassName, href, slug: groupSlug, items }) => (
+    <nav className={`d-flex flex-column pb-3 ${style.sidebar}`} aria-label="Documentation navigation">
+        {groups.map(({ label, icon, iconClassName, href, itemHref, slug: groupSlug, items }) => (
             <div key={label} className="vstack py-2">
                 <strong className="d-flex align-items-center gap-1 fw-semibold">
                     <Icon name={icon} className={iconClassName} aria-hidden="true" />
                     <a
                         className="fg-body text-decoration-none"
-                        href={`${basePath}/components/${href}`}
+                        href={`${basePath}/${href}`}
                         aria-current={active === groupSlug ? 'page' : undefined}
                     >
                         {label}
@@ -98,7 +130,7 @@ export const Sidebar: FC<SidebarProps> = ({ active }) => (
                 </strong>
                 <ul className="nav flex-column mt-1">
                     {items.map(({ label, slug }) => {
-                        const current = active === slug;
+                        const current = active === slug || (active === groupSlug && !slug);
 
                         return (
                             <li key={label} className="nav-item">
@@ -106,7 +138,7 @@ export const Sidebar: FC<SidebarProps> = ({ active }) => (
                                     className={classNames('nav-link border-0', style.sidebarLink, {
                                         active: current
                                     })}
-                                    href={`${basePath}/components/${slug}/`}
+                                    href={`${basePath}/${itemHref}${slug ? `${slug}/` : ''}`}
                                     aria-current={current ? 'page' : undefined}
                                 >
                                     {label}

@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames';
-import { ComponentPropsWithRef, CSSProperties, FC } from 'react';
+import { ComponentPropsWithRef, CSSProperties, FC, InputEvent } from 'react';
 
 import type { ComponentTheme } from '../Button';
 
@@ -27,6 +27,20 @@ export const FormRange: FC<FormRangeProps> = ({
         Number(max) <= Number(min)
             ? 0
             : Math.max(0, Math.min(1, (currentValue - Number(min)) / (Number(max) - Number(min))));
+    const handleInput = (event: InputEvent<HTMLInputElement>) => {
+        const input = event.currentTarget;
+        const range = Number(input.value);
+
+        input.parentElement?.style.setProperty(
+            '--range-fill',
+            String(
+                Number(max) <= Number(min)
+                    ? 0
+                    : Math.max(0, Math.min(1, (range - Number(min)) / (Number(max) - Number(min))))
+            )
+        );
+        onInput?.(event);
+    };
 
     return (
         <div
@@ -43,26 +57,7 @@ export const FormRange: FC<FormRangeProps> = ({
                 defaultValue={defaultValue}
                 className={classNames('form-range-input', className)}
                 style={style}
-                onInput={event => {
-                    const input = event.currentTarget;
-                    const range = Number(input.value);
-
-                    input.parentElement?.style.setProperty(
-                        '--range-fill',
-                        String(
-                            Number(max) <= Number(min)
-                                ? 0
-                                : Math.max(
-                                      0,
-                                      Math.min(
-                                          1,
-                                          (range - Number(min)) / (Number(max) - Number(min))
-                                      )
-                                  )
-                        )
-                    );
-                    onInput?.(event);
-                }}
+                onInput={handleInput}
             />
         </div>
     );

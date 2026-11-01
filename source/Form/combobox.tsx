@@ -24,10 +24,10 @@ export interface ComboboxProps extends Omit<ComponentPropsWithRef<'div'>, 'onCha
     name: string;
     value: string | string[];
     placeholder?: string;
-    disabled?: boolean;
     multiple?: boolean;
-    onChange?: (value: string | string[]) => unknown;
     menuClassName?: string;
+    disabled?: boolean;
+    onChange?: (value: string | string[]) => unknown;
 }
 
 export const Combobox: FC<ComboboxProps> = ({

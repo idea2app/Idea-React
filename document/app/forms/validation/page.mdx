@@ -1,0 +1,81 @@
+import { Button } from '../../../../source/Button';
+import { Form, FormFeedback, FormField, FormLabel, FormControl } from '../../../../source/Form';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { FormDocsLayout } from '../../../component/Documentation/Forms/Layout';
+
+<FormDocsLayout active="validation">
+
+# Form validation
+
+Native browser constraint validation remains available. Add Bootstrap's `data-bs-validate` to opt
+into its user-interaction styles; the consuming application must include the corresponding
+Bootstrap JavaScript.
+
+## How it works
+
+Use native `required`, `type`, `min`, and related constraints. Set `noValidate` to suppress browser
+tooltips when displaying custom feedback.
+
+## Custom styles
+
+Set `.is-invalid` or `.is-valid` on a control and pair it with `FormFeedback`.
+
+<CodeExample>
+    <Form data-bs-validate="valid" noValidate>
+        <FormField>
+            <FormLabel htmlFor="validationEmail">Email address</FormLabel>
+            <FormControl
+                id="validationEmail"
+                type="email"
+                required
+                className="is-invalid"
+                aria-describedby="validationEmailFeedback"
+            />
+            <FormFeedback id="validationEmailFeedback">Enter a valid email address.</FormFeedback>
+        </FormField>
+        <Button type="submit">Submit</Button>
+    </Form>
+</CodeExample>
+
+## Browser defaults
+
+Without `noValidate`, the browser may display its native validation UI. Call `checkValidity()` or
+`reportValidity()` to query or present constraint validation.
+
+## Server-side
+
+Render validation state from the server response by applying the appropriate valid/invalid class
+and associated feedback text.
+
+## Supported elements
+
+Validation classes can be used on native input, select, and textarea wrappers.
+
+## Tooltips
+
+Use `FormFeedback tooltip` for tooltip-style feedback:
+
+<CodeExample>
+    <FormField>
+        <FormControl aria-label="Tooltip feedback example" className="is-invalid" />
+        <FormFeedback tooltip>Provide a valid value.</FormFeedback>
+    </FormField>
+</CodeExample>
+
+## CSS
+
+Bootstrap supplies validation state styles in its form stylesheet.
+
+### Sass mixins
+
+### Sass maps
+
+### Sass loops
+
+### Customizing
+
+See the upstream [validation CSS reference][1] for state mixins, Sass maps, and customization.
+
+</FormDocsLayout>
+
+[1]: https://getbootstrap.com/docs/6.0/forms/validation/#css

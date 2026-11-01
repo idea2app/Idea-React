@@ -1,0 +1,155 @@
+import {
+    FormControl,
+    FormField,
+    FormGhost,
+    FormLabel,
+    FormSelect,
+    FormText,
+    FormTextArea
+} from '../../../../source/Form';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { FormDocsLayout } from '../../../component/Documentation/Forms/Layout';
+
+<FormDocsLayout active="form-control">
+
+# Form control
+
+`FormControl`, `FormTextArea`, and `FormSelect` apply the Bootstrap form-control styles while
+forwarding native React input attributes.
+
+## With form field
+
+<CodeExample>
+    <FormField>
+        <FormLabel htmlFor="controlEmail">Email address</FormLabel>
+        <FormControl id="controlEmail" name="email" type="email" placeholder="name@example.com" />
+    </FormField>
+</CodeExample>
+
+## Textarea
+
+Use `rows` to set the initial height.
+
+<CodeExample>
+    <FormField>
+        <FormLabel htmlFor="controlMessage">Message</FormLabel>
+        <FormTextArea id="controlMessage" name="message" rows={4} />
+    </FormField>
+</CodeExample>
+
+## Select
+
+`FormSelect` styles native single, multiple, and sized select controls.
+
+<CodeExample>
+    <FormField>
+        <FormLabel htmlFor="controlSelect">Choose an option</FormLabel>
+        <FormSelect id="controlSelect" controlSize="lg" defaultValue="">
+            <option value="" disabled>
+                Choose one…
+            </option>
+            <option value="one">One</option>
+            <option value="two">Two</option>
+        </FormSelect>
+    </FormField>
+</CodeExample>
+
+## Sizes
+
+Pass `controlSize="sm"` or `"lg"` to an input. Use the corresponding class on textareas and selects.
+
+<CodeExample>
+    <>
+        <FormControl aria-label="Small input" controlSize="sm" placeholder="Small input" />
+        <FormControl aria-label="Large input" controlSize="lg" placeholder="Large input" />
+    </>
+</CodeExample>
+
+## Form text
+
+Associate helper text with the control using `aria-describedby`.
+
+<CodeExample>
+    <FormField>
+        <FormLabel htmlFor="controlPassword">Password</FormLabel>
+        <FormControl id="controlPassword" type="password" aria-describedby="passwordHelp" />
+        <FormText id="passwordHelp">At least eight characters.</FormText>
+    </FormField>
+</CodeExample>
+
+## States
+
+Native `disabled` and `readOnly` attributes are forwarded.
+
+<CodeExample>
+    <>
+        <FormControl aria-label="Disabled" disabled placeholder="Disabled input" />
+        <FormControl aria-label="Readonly" readOnly value="Readonly input" />
+    </>
+</CodeExample>
+
+Use `plaintext` to remove the standard input border while preserving control spacing:
+
+<CodeExample>
+    <FormControl aria-label="Plaintext" plaintext readOnly value="Readonly plain text" />
+</CodeExample>
+
+## Types
+
+### Date & Time
+
+Native `type` attributes are forwarded unchanged.
+
+<CodeExample>
+    <FormControl aria-label="Date" type="date" />
+</CodeExample>
+
+### Color
+
+Use the native color input with the optional `color` class variant.
+
+<CodeExample>
+    <FormControl aria-label="Color" type="color" color defaultValue="#563d7c" />
+</CodeExample>
+
+### Datalists
+
+<CodeExample>
+    <>
+        <FormControl aria-label="Browser" list="browserOptions" />
+        <datalist id="browserOptions">
+            <option value="Firefox" />
+            <option value="Chrome" />
+        </datalist>
+    </>
+</CodeExample>
+
+### File
+
+<CodeExample>
+    <FormControl aria-label="Upload file" type="file" />
+</CodeExample>
+
+### Ghost
+
+`FormGhost` provides the borderless input used by Bootstrap adornments and other minimal controls.
+
+<CodeExample>
+    <FormGhost aria-label="Ghost input" placeholder="Search" />
+</CodeExample>
+
+## CSS
+
+The loaded Bootstrap stylesheet supplies the form-control styles.
+
+### Variables
+
+### Root variables
+
+### Sass maps
+
+See the upstream [form control CSS reference][1] for the component and root token tables.
+
+</FormDocsLayout>
+
+[1]: https://getbootstrap.com/docs/6.0/forms/form-control/#css

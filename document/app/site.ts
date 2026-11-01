@@ -9,12 +9,14 @@ export const site = {
     install: `npm i idea-react${version.includes('-') ? '@next' : ''}`,
     docs: 'https://idea2app.github.io/Idea-React/',
     components: `${nextConfig.basePath || ''}/components/`,
+    forms: `${nextConfig.basePath || ''}/forms/`,
     gettingStarted: 'https://github.com/idea2app/Idea-React#usage'
 };
 
 export const navigation: DocumentationLink[] = [
     { label: 'Docs', href: site.docs },
     { label: 'Components', href: site.components },
+    { label: 'Forms', href: site.forms },
     { label: 'API', href: site.docs },
     { label: 'Community', href: `${site.repository}/issues` }
 ];
@@ -38,6 +40,7 @@ export const footerColumns = [
             { label: 'Home', href: './' },
             { label: 'Docs', href: site.docs },
             { label: 'Components', href: site.components },
+            { label: 'Forms', href: site.forms },
             { label: 'API reference', href: site.docs }
         ]
     },

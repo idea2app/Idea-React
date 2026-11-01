@@ -1,7 +1,7 @@
 import { Icon } from '../../../../source/Icon';
 import { Button } from '../../../../source/Button';
 import { Navbar } from '../../../../source/Navbar';
-import { FormCheck, FormControl, FormField, FormLabel } from '../../../../source/Form';
+import { Form, FormCheck, FormControl, FormField, FormLabel } from '../../../../source/Form';
 import {
     Menu,
     MenuDivider,
@@ -346,7 +346,7 @@ Put a form within a menu, or make it into a menu, and use margin and padding uti
 negative space you require.
 
 <MenuPanel className="show position-static" style={{ '--bs-menu-min-width': '300px' }}>
-    <form className="d-flex flex-column gap-3 p-3">
+    <Form className="d-flex flex-column gap-3 p-3">
         <FormField>
             <FormLabel htmlFor="exampleMenuFormEmail1">Email address</FormLabel>
             <FormControl type="email" id="exampleMenuFormEmail1" placeholder="email@example.com" />
@@ -370,7 +370,7 @@ negative space you require.
                 Forgot password?
             </a>
         </div>
-    </form>
+    </Form>
 </MenuPanel>
 
 ## Scrollable menus

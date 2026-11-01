@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 
 import nextConfig from '../../../next.config';
-import { ComponentsLayout } from '../Components/Layout';
+import { DocumentationLayout } from '../Components/Layout';
 
 const pages = [
     ['Overview', ''],
@@ -28,13 +28,13 @@ export interface FormDocsLayoutProps extends PropsWithChildren {
 }
 
 export const FormDocsLayout: FC<FormDocsLayoutProps> = ({ active, children }) => (
-    <ComponentsLayout active="forms">
+    <DocumentationLayout active={active || 'forms'}>
         <nav className="nav nav-pills flex-wrap gap-1 mb-4" aria-label="Forms documentation">
             {pages.map(([label, slug]) => (
                 <a
                     key={label}
                     className={active === slug ? 'nav-link active' : 'nav-link'}
-                    href={`${nextConfig.basePath || ''}/components/forms/${slug ? `${slug}/` : ''}`}
+                    href={`${nextConfig.basePath || ''}/forms/${slug ? `${slug}/` : ''}`}
                     aria-current={active === slug ? 'page' : undefined}
                 >
                     {label}
@@ -51,5 +51,5 @@ export const FormDocsLayout: FC<FormDocsLayoutProps> = ({ active, children }) =>
             </a>
             , licensed under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
         </p>
-    </ComponentsLayout>
+    </DocumentationLayout>
 );

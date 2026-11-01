@@ -8,7 +8,7 @@ export interface ComponentsLayoutProps extends PropsWithChildren {
     active?: string;
 }
 
-export const ComponentsLayout: FC<ComponentsLayoutProps> = ({ active, children }) => (
+export const DocumentationLayout: FC<ComponentsLayoutProps> = ({ active, children }) => (
     <div className="container py-4">
         <div className="row g-5">
             <aside className="col-12 lg:col-3">
@@ -27,3 +27,5 @@ export const ComponentsLayout: FC<ComponentsLayoutProps> = ({ active, children }
         </div>
     </div>
 );
+
+export const ComponentsLayout = DocumentationLayout;

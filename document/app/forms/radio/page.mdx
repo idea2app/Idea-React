@@ -1,0 +1,75 @@
+import { FormField, FormFieldset, FormLabel, Radio } from '../../../../source/Form';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { FormDocsLayout } from '../../../component/Documentation/Forms/Layout';
+
+<FormDocsLayout active="radio">
+
+# Radio
+
+Radio controls are native inputs styled with the `.radio` class. Use a shared `name` for mutually
+exclusive choices.
+
+## Basic radio
+
+<CodeExample>
+    <Radio name="radioBasic" value="one" aria-label="First choice" />
+</CodeExample>
+
+## With form field
+
+<CodeExample>
+    <FormFieldset>
+        <legend>Choose a contact method</legend>
+        <FormField>
+            <Radio id="radioEmail" name="contact" value="email" defaultChecked />
+            <FormLabel htmlFor="radioEmail">Email</FormLabel>
+        </FormField>
+        <FormField>
+            <Radio id="radioPhone" name="contact" value="phone" />
+            <FormLabel htmlFor="radioPhone">Phone</FormLabel>
+        </FormField>
+    </FormFieldset>
+</CodeExample>
+
+## Description
+
+<CodeExample>
+    <FormField>
+        <Radio id="radioDescribed" name="described" aria-describedby="radioHint" />
+        <FormLabel htmlFor="radioDescribed">Option with a description</FormLabel>
+        <span id="radioHint">Choose this option to receive email.</span>
+    </FormField>
+</CodeExample>
+
+## Theme colors
+
+<CodeExample>
+    <Radio name="radioTheme" value="primary" theme="primary" aria-label="Primary option" />
+</CodeExample>
+
+## Disabled
+
+<CodeExample>
+    <Radio name="radioDisabled" disabled aria-label="Disabled option" />
+</CodeExample>
+
+## Sizes
+
+<CodeExample>
+    <>
+        <Radio name="radioSize" size="sm" aria-label="Small option" />
+        <Radio name="radioSize" size="lg" aria-label="Large option" />
+    </>
+</CodeExample>
+
+## CSS
+
+Bootstrap supplies radio styling through its stylesheet.
+
+### Variables
+
+See the upstream [radio CSS variables][1] for their complete reference.
+
+</FormDocsLayout>
+
+[1]: https://getbootstrap.com/docs/6.0/forms/radio/#css
