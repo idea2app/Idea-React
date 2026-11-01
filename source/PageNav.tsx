@@ -2,14 +2,16 @@
 
 import { action, computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component, HTMLAttributes } from 'react';
+import { Component } from 'react';
 import { scrollTo, uniqueID } from 'web-utility';
+
+import { Nav, NavLink, NavProps } from './Nav';
 
 const HeadingSelector = Array.from({ length: 6 }, (_, index) => `h${index + 1}`).join(',');
 
 type HeadingMeta = Record<'id' | 'text', string> & Record<'level' | 'top', number>;
 
-export interface PageNavProps extends HTMLAttributes<HTMLElement> {
+export interface PageNavProps extends NavProps {
     depth?: number;
     minDepth?: number;
     rootSelector?: string;
@@ -91,16 +93,16 @@ export class PageNav extends Component<PageNavProps> {
         return (
             minDepth <= level &&
             level <= depth && (
-                <a
+                <NavLink
                     key={id}
-                    className={`nav-link${currentActiveId === id ? ' active' : ''}`}
+                    className={currentActiveId === id ? ' active' : ''}
+                    style={{ textIndent: `${level - minDepth}rem` }}
                     href={`#${id}`}
                     aria-current={currentActiveId === id ? 'location' : undefined}
-                    style={{ textIndent: `${level - minDepth}rem` }}
                     onClick={this.scrollTo({ id, level, text, top })}
                 >
                     {text}
-                </a>
+                </NavLink>
             )
         );
     };
@@ -108,19 +110,17 @@ export class PageNav extends Component<PageNavProps> {
     render() {
         const { list } = this,
             {
-                className = '',
                 depth: _depth,
                 minDepth: _minDepth,
                 rootSelector: _rootSelector,
                 onItemClick: _onItemClick,
-                style,
                 ...props
             } = this.props;
 
         return (
-            <nav {...props} className={`nav nav-underline flex-column ${className}`} style={style}>
+            <Nav {...props} variant="underline" vertical>
                 {list.map(this.renderLink)}
-            </nav>
+            </Nav>
         );
     }
 }

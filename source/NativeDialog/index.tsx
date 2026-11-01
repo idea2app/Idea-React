@@ -3,8 +3,10 @@
 import classNames from 'classnames';
 import {
     Component,
+    ComponentPropsWithRef,
     createRef,
     DialogHTMLAttributes,
+    FC,
     KeyboardEvent,
     MouseEvent,
     SyntheticEvent
@@ -13,13 +15,29 @@ import {
 import styles from './style.module.css';
 
 export interface NativeDialogProps extends Omit<DialogHTMLAttributes<HTMLDialogElement>, 'open'> {
-    open?: boolean;
     modal?: boolean;
+    dialog?: boolean;
+    theme?: 'light' | 'dark';
     keyboard?: boolean;
     backdrop?: boolean | 'static';
-    theme?: 'light' | 'dark';
-    dialog?: boolean;
+    open?: boolean;
 }
+
+export const DialogHeader: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('dialog-header', className)} />
+);
+
+export const DialogTitle: FC<ComponentPropsWithRef<'h1'>> = ({ className, ...props }) => (
+    <h1 {...props} className={classNames('dialog-title', className)} />
+);
+
+export const DialogBody: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('dialog-body', className)} />
+);
+
+export const DialogFooter: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('dialog-footer', className)} />
+);
 
 export class NativeDialog extends Component<NativeDialogProps> {
     element = createRef<HTMLDialogElement>();

@@ -12,8 +12,7 @@ export class SelectDemo extends Component {
     @observable
     accessor value = '0';
 
-    @action
-    handleChange = (value: string) => (this.value = value);
+    handleChange = action((value: string) => (this.value = value));
 
     render() {
         const { value } = this;

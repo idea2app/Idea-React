@@ -25,57 +25,29 @@ export interface DrawerDemoProps {
 export class DrawerDemo extends Component<DrawerDemoProps> {
     @observable accessor open = false;
 
-    @action
-    show = () => (this.open = true);
+    show = action(() => (this.open = true));
 
-    @action
-    hide = () => (this.open = false);
+    hide = action(() => (this.open = false));
 
     render() {
-        const {
-            label,
-            title,
-            placement,
-            theme,
-            className,
-            bodyClassName,
-            footer,
-            modal,
-            backdrop,
-            keyboard,
-            children
-        } = this.props;
-        const { open } = this;
+        const { label, footer, children } = this.props;
+        const footerNode = footer && (
+            <>
+                <Button variant="solid" theme="secondary" onClick={this.hide}>
+                    Close
+                </Button>
+                <Button variant="solid" theme="primary">
+                    Save changes
+                </Button>
+            </>
+        );
 
         return (
             <>
                 <Button variant="solid" theme="primary" onClick={this.show}>
                     {label}
                 </Button>
-                <Drawer
-                    open={open}
-                    title={title}
-                    placement={placement}
-                    theme={theme}
-                    className={className}
-                    bodyClassName={bodyClassName}
-                    modal={modal}
-                    backdrop={backdrop}
-                    keyboard={keyboard}
-                    footer={
-                        footer && (
-                            <>
-                                <Button variant="solid" theme="secondary" onClick={this.hide}>
-                                    Close
-                                </Button>
-                                <Button variant="solid" theme="primary">
-                                    Save changes
-                                </Button>
-                            </>
-                        )
-                    }
-                    onDismiss={this.hide}
-                >
+                <Drawer {...this.props} footer={footerNode} open={this.open} onDismiss={this.hide}>
                     {children}
                 </Drawer>
             </>

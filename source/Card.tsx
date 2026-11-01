@@ -5,8 +5,16 @@ export const Card: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) 
     <div {...props} className={classNames('card', className)} />
 );
 
+export const CardHeader: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('card-header', className)} />
+);
+
 export const CardBody: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
     <div {...props} className={classNames('card-body', className)} />
+);
+
+export const CardFooter: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('card-footer', className)} />
 );
 
 export const CardTitle: FC<ComponentPropsWithRef<'h3'>> = ({ className, ...props }) => (

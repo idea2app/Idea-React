@@ -31,14 +31,15 @@ export const Option: FC<OptionProps> = ({ value, className, children, ...props }
 
 Option.displayName = 'Option';
 
-export type SelectProps = Pick<ButtonProps, 'disabled' | 'size' | 'style' | 'theme' | 'variant'> & {
+export type SelectProps = Pick<
+    ButtonProps,
+    'className' | 'style' | 'size' | 'theme' | 'variant' | 'disabled' | 'children'
+> & {
     align?: 'start' | 'end';
-    className?: string;
     menuClassName?: string;
-    onChange?: (value: string) => void;
     value?: string;
+    onChange?: (value: string) => void;
     valueRender?: (value: string) => ReactNode;
-    children?: ReactNode;
 };
 
 export const Select: FC<SelectProps> = ({
@@ -59,6 +60,7 @@ export const Select: FC<SelectProps> = ({
         node =>
             isValidElement<OptionProps>(node) && node.type === Option && node.props.value === value
     ) as ReactElement<OptionProps> | undefined;
+
     const handleSelect = ({ target }: MouseEvent<HTMLDivElement>) => {
         if (!(target instanceof Element)) return;
 

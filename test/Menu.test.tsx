@@ -122,7 +122,6 @@ it('renders menu content parts with Bootstrap 6 classes', () => {
             <MenuDivider />
         </MenuPanel>
     );
-
     assert.equal(container.firstElementChild?.className, 'menu show position-static');
     assert.equal(screen.getByRole('heading', { name: 'Menu header' }).className, 'menu-header');
     assert.equal(screen.getByText('Menu item text').className, 'menu-text');
@@ -142,7 +141,6 @@ it('opens nested submenus with click, hover, and keyboard input', async () => {
             </MenuSubmenu>
         </Menu>
     );
-
     fireEvent.click(screen.getByRole('button', { name: 'Actions' }));
 
     const trigger = screen.getByRole('button', { name: 'File' });

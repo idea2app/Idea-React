@@ -18,8 +18,10 @@ A modern component built on the native `<dialog>` element with built-in accessib
 support that replaces the old Modal component.
 
 Idea React provides the [`NativeDialog` wrapper][1], which applies Bootstrap's `dialog` classes and
-manages native `showModal()` / `show()` calls, Escape handling, backdrop clicks, and focus return. The
-examples below are interactive and adapt the [upstream Dialog documentation][2].
+manages native `showModal()` / `show()` calls, Escape handling, backdrop clicks, and focus return.
+The same module exports `DialogHeader`, `DialogTitle`, `DialogBody`, and `DialogFooter` for the
+dialog structure. The examples below are interactive and adapt the
+[upstream Dialog documentation][2].
 
 ## How it works
 
@@ -70,21 +72,21 @@ animated close.
 </button>
 
 <NativeDialog id="invokerDialog" aria-label="Invoker Commands">
-    <div className="dialog-header">
-        <h1 className="dialog-title">Invoker Commands</h1>
+    <DialogHeader>
+        <DialogTitle>Invoker Commands</DialogTitle>
         <button type="button" className="btn-close" commandfor="invokerDialog" command="close" aria-label="Close" />
-    </div>
-    <div className="dialog-body">
+    </DialogHeader>
+    <DialogBody>
         <p>
             This dialog opens with <code>command="show-modal"</code> and closes with{' '}
             <code>command="close"</code>. No Bootstrap JavaScript is involved.
         </p>
-    </div>
-    <div className="dialog-footer">
+    </DialogBody>
+    <DialogFooter>
         <button type="button" className="btn-solid theme-secondary" commandfor="invokerDialog" command="close">
             Close
         </button>
-    </div>
+    </DialogFooter>
 </NativeDialog>`}</CodeBlock>
 
 ## Dark dialog

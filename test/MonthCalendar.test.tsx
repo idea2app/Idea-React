@@ -12,7 +12,6 @@ it('selects the exact item when several events share a calendar date', () => {
         { date, content: 'First event' },
         { date, content: 'Second event' }
     ];
-
     render(<MonthCalendar value={items} onSelect={item => selected.push(item)} />);
 
     fireEvent.click(screen.getByText('Second event'));

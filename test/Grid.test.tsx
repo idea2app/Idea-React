@@ -25,7 +25,6 @@ it('uses Bootstrap 6 container, row, and responsive column classes', () => {
             </Row>
         </Container>
     );
-
     const root = container.firstElementChild as HTMLElement;
 
     assert.equal(root.className, 'container-fluid custom');
@@ -34,8 +33,19 @@ it('uses Bootstrap 6 container, row, and responsive column classes', () => {
         [...root.querySelectorAll('.row > div')].map(column => column.className),
         ['col', 'col-12 lg:col-7']
     );
-
     rerender(<Container breakpoint="lg" />);
 
     assert.equal((container.firstElementChild as HTMLElement).className, 'lg:container');
+});
+
+it('sets row columns from cols and breakpoint props', () => {
+    const { container } = render(
+        <Row cols={1} sm={2} md="auto" className="g-4">
+            <Col>One</Col>
+        </Row>
+    );
+    assert.equal(
+        container.firstElementChild?.className,
+        'row row-cols-1 sm:row-cols-2 md:row-cols-auto g-4'
+    );
 });

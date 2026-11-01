@@ -65,7 +65,6 @@ it('supports link variants, extra small sizes, and standalone icon buttons', () 
             </Button>
         </>
     );
-
     assert.equal(
         screen.getByRole('button', { name: 'Link button' }).className,
         'btn-link theme-primary btn-xs'

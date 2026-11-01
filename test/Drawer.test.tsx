@@ -3,7 +3,7 @@ import { it, mock } from 'node:test';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Drawer } from '../source/Drawer';
+import { Drawer, DrawerHeader, DrawerTitle } from '../source/Drawer';
 
 it('renders a Bootstrap 6 drawer without dialog styles and dismisses from its close button', () => {
     const onDismiss = mock.fn();
@@ -17,11 +17,22 @@ it('renders a Bootstrap 6 drawer without dialog styles and dismisses from its cl
     assert.equal(drawer.className, 'drawer drawer-start');
     assert.equal(drawer.getAttribute('tabindex'), '-1');
     assert.equal((drawer as HTMLDialogElement).open, true);
+    assert.equal(screen.getByRole('heading', { name: 'Menu' }).className, 'drawer-title');
     assert.equal(screen.getByText('Drawer content').parentElement?.className, 'drawer-body mb-2');
 
     fireEvent.click(screen.getByRole('button', { name: 'Close' }));
 
     assert.equal(onDismiss.mock.callCount(), 1);
+});
+
+it('renders exported drawer header and title parts', () => {
+    render(
+        <DrawerHeader className="custom">
+            <DrawerTitle>Title</DrawerTitle>
+        </DrawerHeader>
+    );
+    assert.equal(screen.getByRole('heading', { name: 'Title' }).className, 'drawer-title');
+    assert.equal(screen.getByText('Title').parentElement?.className, 'drawer-header custom');
 });
 
 it('supports a dark color mode and footer content', () => {

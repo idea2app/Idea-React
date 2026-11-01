@@ -73,6 +73,7 @@ export class MenuSubmenu extends Component<MenuSubmenuProps> {
         if (key === 'ArrowRight') {
             event.preventDefault();
             this.setOpen(true);
+
             queueMicrotask(() =>
                 this.panel.current
                     ?.querySelector<HTMLElement>('a[href], button:not(:disabled)')

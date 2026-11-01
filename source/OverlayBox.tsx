@@ -21,21 +21,19 @@ import { OverlayPlacement } from './Overlay';
 import { Popover } from './Popover';
 import { Tooltip } from './Tooltip';
 
-export type { OverlayPlacement };
-
 export type OverlayTrigger = 'click' | 'focus' | 'hover';
 
 export interface OverlayBoxProps extends Omit<
     HTMLAttributes<HTMLSpanElement>,
     'children' | 'title'
 > {
-    children: ReactElement<{ 'aria-describedby'?: string }>;
     title: ReactNode;
     detail?: ReactNode;
     placement?: OverlayPlacement;
     trigger?: OverlayTrigger | OverlayTrigger[];
     delay?: number | { show: number; hide: number };
     overlayClassName?: string;
+    children: ReactElement<{ 'aria-describedby'?: string }>;
 }
 
 const PLACEMENT_CLASSES: Record<OverlayPlacement, string> = {
@@ -63,9 +61,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
     timer?: ReturnType<typeof setTimeout>;
 
     @action
-    setOpen = (open: boolean) => {
-        this.open = open;
-    };
+    setOpen = (open: boolean) => (this.open = open);
 
     hide = () => {
         clearTimeout(this.timer);
@@ -104,28 +100,33 @@ export class OverlayBox extends Component<OverlayBoxProps> {
 
     handleMouseEnter = (event: MouseEvent<HTMLSpanElement>) => {
         this.props.onMouseEnter?.(event);
+
         if (this.hasTrigger('hover')) this.setOpenAfterDelay(true);
     };
 
     handleMouseLeave = (event: MouseEvent<HTMLSpanElement>) => {
         this.props.onMouseLeave?.(event);
+
         if (this.hasTrigger('hover') && !this.root.current?.contains(document.activeElement))
             this.setOpenAfterDelay(false);
     };
 
     handleFocus = (event: FocusEvent<HTMLSpanElement>) => {
         this.props.onFocus?.(event);
+
         if (this.hasTrigger('focus')) this.setOpenAfterDelay(true);
     };
 
     handleBlur = (event: FocusEvent<HTMLSpanElement>) => {
         this.props.onBlur?.(event);
+
         if (this.hasTrigger('focus') && !event.currentTarget.contains(event.relatedTarget))
             this.setOpenAfterDelay(false);
     };
 
     handleClick = (event: MouseEvent<HTMLSpanElement>) => {
         this.props.onClick?.(event);
+
         if (!event.defaultPrevented && this.hasTrigger('click')) this.setOpenAfterDelay(!this.open);
     };
 
@@ -135,6 +136,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
 
     handleKeyDown = (event: KeyboardEvent<HTMLSpanElement>) => {
         this.props.onKeyDown?.(event);
+
         if (event.key === 'Escape' && this.open) {
             event.preventDefault();
             this.hide();
@@ -184,6 +186,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
                 onKeyDown={this.handleKeyDown}
             >
                 {trigger}
+
                 {this.open &&
                     (detail ? (
                         <Popover

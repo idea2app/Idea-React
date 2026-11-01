@@ -20,5 +20,4 @@ export const CloseButton: FC<CloseButtonProps> = ({
         aria-label={ariaLabel}
     />
 );
-
 CloseButton.displayName = 'CloseButton';

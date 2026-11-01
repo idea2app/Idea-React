@@ -12,5 +12,4 @@ export const Image: FC<ImageProps> = ({ fluid, thumbnail, className, ...props })
         className={classNames({ 'img-fluid': fluid, 'img-thumbnail': thumbnail }, className)}
     />
 );
-
 Image.displayName = 'Image';

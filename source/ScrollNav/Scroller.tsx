@@ -64,9 +64,8 @@ export class ScrollNavScroller extends Component<ScrollNavScrollerProps> {
 
     scrollBy = (direction: -1 | 1) => {
         const scroller = this.scrollerRef.current;
-        if (!scroller) return;
 
-        scroller.scrollBy({ left: direction * scroller.clientWidth * 0.8, behavior: 'smooth' });
+        scroller?.scrollBy({ left: direction * scroller.clientWidth * 0.8, behavior: 'smooth' });
     };
 
     scrollBackward = () => this.scrollBy(-1);

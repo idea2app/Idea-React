@@ -1,12 +1,10 @@
 import classNames from 'classnames';
-import { ComponentPropsWithRef, FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
-import { OVERLAY_ARROW_POSITIONS, OVERLAY_DIRECTIONS, OverlayPlacement } from './Overlay';
+import { OVERLAY_ARROW_POSITIONS, OVERLAY_DIRECTIONS, OverlayTriggerProps } from './Overlay';
 
-export interface PopoverProps extends Omit<ComponentPropsWithRef<'div'>, 'title'> {
+export interface PopoverProps extends Omit<OverlayTriggerProps, 'title'> {
     title?: ReactNode;
-    placement?: OverlayPlacement;
-    show?: boolean;
 }
 
 export const Popover: FC<PopoverProps> = ({

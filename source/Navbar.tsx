@@ -4,8 +4,8 @@ import { ComponentPropsWithRef, FC } from 'react';
 import { Button } from './Button';
 
 export interface NavbarProps extends ComponentPropsWithRef<'nav'> {
-    expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
     theme?: 'light' | 'dark';
+    expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 }
 
 export const Navbar: FC<NavbarProps> = ({ expand, theme, className, ...props }) => (

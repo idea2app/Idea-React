@@ -13,6 +13,8 @@ export interface TextTruncateContentProps {
 
 @observer
 export class TextTruncateContent extends Component<TextTruncateContentProps> {
+    static displayName = 'TextTruncateContent';
+
     @observable
     accessor expanded = false;
 
@@ -35,22 +37,20 @@ export class TextTruncateContent extends Component<TextTruncateContentProps> {
         window.removeEventListener('resize', this.checkOverflow);
     }
 
-    @action
-    checkOverflow = () => {
+    checkOverflow = action(() => {
         const { current } = this.contentRef;
 
         if (current) this.overflowed = current.scrollHeight > current.clientHeight;
-    };
+    });
 
-    @action
-    toggle = () => {
+    toggle = action(() => {
         this.expanded = !this.expanded;
 
         if (!this.expanded) requestAnimationFrame(this.checkOverflow);
-    };
+    });
 
     render() {
-        const { children, rows, expandText, collapseText } = this.props;
+        const { children, rows = 3, expandText = '⏬', collapseText } = this.props;
         const { expanded, overflowed } = this;
         const clamp: CSSProperties = {
             overflow: 'hidden',

@@ -1,8 +1,9 @@
 import { RefCallback } from 'react';
 
 export function animate(name: string): RefCallback<Element> {
-    return element =>
-        element &&
+    return element => {
+        if (!element) return;
+
         new IntersectionObserver(([{ isIntersecting, target }], observer) => {
             if (!isIntersecting) return;
 
@@ -17,4 +18,5 @@ export function animate(name: string): RefCallback<Element> {
             );
             observer.disconnect();
         }).observe(element);
+    };
 }

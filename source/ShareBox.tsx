@@ -1,9 +1,12 @@
+'use client';
+
 import html2canvas from 'html2canvas';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, createRef, HTMLAttributes, MouseEvent } from 'react';
 import { blobOf } from 'web-utility';
 
+import { Image } from './Image';
 import { Loading } from './Loading';
 
 export async function elementToImage(element: HTMLElement, type?: string, quality?: number) {
@@ -75,10 +78,11 @@ export class ShareBox extends Component<ShareBoxProps> {
                     {children}
 
                     {imageURI && (
-                        <img
-                            className="img-fluid position-absolute start-0 top-0 w-100 h-100"
+                        <Image
+                            className="position-absolute start-0 top-0 w-100 h-100"
                             src={imageURI}
                             alt="Share Image"
+                            fluid
                             onClick={this.share}
                         />
                     )}

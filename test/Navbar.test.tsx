@@ -41,7 +41,6 @@ it('renders brand, navigation, text, and toggler sub-components', () => {
             <NavbarText>Signed in as Ada</NavbarText>
         </Navbar>
     );
-
     assert.equal(screen.getByRole('link', { name: 'Idea React' }).className, 'navbar-brand');
     assert.equal(
         screen.getByRole('button', { name: 'Toggle navigation' }).className,

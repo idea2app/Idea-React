@@ -4,7 +4,13 @@ import { it } from 'node:test';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 
-import { NativeDialog } from '../source/NativeDialog';
+import {
+    DialogBody,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    NativeDialog
+} from '../source/NativeDialog';
 
 it('opens a native modal, closes with Escape and returns focus to its trigger', () => {
     const ref = createRef<NativeDialog>();
@@ -73,4 +79,20 @@ it('applies a Bootstrap color mode to the dialog', () => {
     const { container } = render(<NativeDialog theme="dark" />);
 
     assert.equal(container.querySelector('dialog')?.dataset.bsTheme, 'dark');
+});
+
+it('renders Bootstrap 6 dialog parts', () => {
+    const { container } = render(
+        <NativeDialog aria-label="Parts">
+            <DialogHeader className="custom">
+                <DialogTitle>Title</DialogTitle>
+            </DialogHeader>
+            <DialogBody>Body</DialogBody>
+            <DialogFooter>Footer</DialogFooter>
+        </NativeDialog>
+    );
+    assert.equal(container.querySelector('.dialog-header')?.className, 'dialog-header custom');
+    assert.equal(container.querySelector('h1')?.className, 'dialog-title');
+    assert.equal(container.querySelector('.dialog-body')?.tagName, 'DIV');
+    assert.equal(screen.getByText('Footer').className, 'dialog-footer');
 });

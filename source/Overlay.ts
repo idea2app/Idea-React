@@ -1,4 +1,11 @@
+import { ComponentPropsWithRef } from 'react';
+
 export type OverlayPlacement = 'top' | 'right' | 'bottom' | 'left';
+
+export interface OverlayTriggerProps extends ComponentPropsWithRef<'div'> {
+    placement?: OverlayPlacement;
+    show?: boolean;
+}
 
 export const OVERLAY_DIRECTIONS: Record<OverlayPlacement, string> = {
     top: 'top',

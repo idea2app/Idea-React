@@ -1,7 +1,15 @@
 import { Button } from '../../../../source/Button';
-import { Card, CardBody, CardText, CardTitle } from '../../../../source/Card';
+import {
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardText,
+    CardTitle
+} from '../../../../source/Card';
 import { Col, Container, Row } from '../../../../source/Grid';
 import { Image } from '../../../../source/Image';
+import { ListGroup, ListGroupItem } from '../../../../source/ListGroup';
 import { Nav, NavLink } from '../../../../source/Nav';
 
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -13,9 +21,9 @@ import { ComponentsLayout } from '../../../component/Documentation/Components/La
 Bootstrap's cards provide a flexible and extensible content container with multiple variants and
 options.
 
-Idea React provides the [`Card`, `CardBody`, `CardTitle`, and `CardText` wrappers][1] for these
-examples. Use other Bootstrap wrappers such as [`Button`][2], [`Image`][3], and [`Nav`][4] inside
-them.
+Idea React provides the [`Card`, `CardHeader`, `CardBody`, `CardTitle`, `CardText`, and
+`CardFooter` wrappers][1] for these examples. Use other Bootstrap wrappers such as [`Button`][2],
+[`Image`][3], [`Nav`][4], and [`ListGroup`][5] inside them.
 
 ## Example
 
@@ -166,35 +174,35 @@ Use `.card-img-top` and `.card-img-bottom` to round the top and bottom corners o
 
 ### List groups
 
-When your card only contains a list group—no header, footer, or body—use a `.list-group` on its own.
+When your card only contains a list group—no header, footer, or body—use a `ListGroup` on its own.
 A card already draws an outer border, so a default list group inside a card would double that
 border.
 
-<ul className="list-group" style={{ width: '18rem' }}>
-    <li className="list-group-item">An item</li>
-    <li className="list-group-item">A second item</li>
-    <li className="list-group-item">A third item</li>
-</ul>
+<ListGroup style={{ width: '18rem' }}>
+    <ListGroupItem>An item</ListGroupItem>
+    <ListGroupItem>A second item</ListGroupItem>
+    <ListGroupItem>A third item</ListGroupItem>
+</ListGroup>
 
-When you mix a list group with other card sub-components, add `.list-group-flush` to drop the list's
-own outer border.
+When you mix a list group with other card sub-components, set `flush` to drop the list's own outer
+border.
 
 <Card style={{ width: '18rem' }}>
-    <div className="card-header">Featured</div>
-    <ul className="list-group list-group-flush">
-        <li className="list-group-item">An item</li>
-        <li className="list-group-item">A second item</li>
-        <li className="list-group-item">A third item</li>
-    </ul>
+    <CardHeader>Featured</CardHeader>
+    <ListGroup flush>
+        <ListGroupItem>An item</ListGroupItem>
+        <ListGroupItem>A second item</ListGroupItem>
+        <ListGroupItem>A third item</ListGroupItem>
+    </ListGroup>
 </Card>
 
 <Card style={{ width: '18rem' }}>
-    <ul className="list-group list-group-flush">
-        <li className="list-group-item">An item</li>
-        <li className="list-group-item">A second item</li>
-        <li className="list-group-item">A third item</li>
-    </ul>
-    <div className="card-footer">Card footer</div>
+    <ListGroup flush>
+        <ListGroupItem>An item</ListGroupItem>
+        <ListGroupItem>A second item</ListGroupItem>
+        <ListGroupItem>A third item</ListGroupItem>
+    </ListGroup>
+    <CardFooter>Card footer</CardFooter>
 </Card>
 
 ### Kitchen sink
@@ -219,11 +227,11 @@ card.
             }
         </CardText>
     </CardBody>
-    <ul className="list-group list-group-flush">
-        <li className="list-group-item">An item</li>
-        <li className="list-group-item">A second item</li>
-        <li className="list-group-item">A third item</li>
-    </ul>
+    <ListGroup flush>
+        <ListGroupItem>An item</ListGroupItem>
+        <ListGroupItem>A second item</ListGroupItem>
+        <ListGroupItem>A third item</ListGroupItem>
+    </ListGroup>
     <CardBody className="flex-row gap-4">
         <a href="#">Card link</a>
         <a href="#">Another link</a>
@@ -235,7 +243,7 @@ card.
 Add an optional header and/or footer within a card.
 
 <Card>
-    <div className="card-header">Featured</div>
+    <CardHeader>Featured</CardHeader>
     <CardBody>
         <CardTitle>Special title treatment</CardTitle>
         <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
@@ -259,7 +267,7 @@ Card headers can be styled by adding `card-header` to heading elements.
 </Card>
 
 <Card>
-    <div className="card-header">Quote</div>
+    <CardHeader>Quote</CardHeader>
     <CardBody>
         <figure className="mb-0">
             <blockquote className="blockquote">
@@ -273,7 +281,7 @@ Card headers can be styled by adding `card-header` to heading elements.
 </Card>
 
 <Card className="text-center">
-    <div className="card-header">Featured</div>
+    <CardHeader>Featured</CardHeader>
     <CardBody>
         <CardTitle>Special title treatment</CardTitle>
         <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
@@ -281,7 +289,7 @@ Card headers can be styled by adding `card-header` to heading elements.
             Go somewhere
         </Button>
     </CardBody>
-    <div className="card-footer fg-2">2 days ago</div>
+    <CardFooter className="fg-2">2 days ago</CardFooter>
 </Card>
 
 ## Width
@@ -365,7 +373,7 @@ Use custom CSS in your stylesheets or as inline styles to set a width.
 Add some navigation to a card's header (or block) with Bootstrap's nav components.
 
 <Card className="text-center">
-    <div className="card-header">
+    <CardHeader>
         <Nav variant="tabs" className="card-header-tabs" aria-label="Card navigation">
             <NavLink href="#" className="active" aria-current="true">
                 Active
@@ -373,7 +381,7 @@ Add some navigation to a card's header (or block) with Bootstrap's nav component
             <NavLink href="#">Link</NavLink>
             <NavLink disabled>Disabled</NavLink>
         </Nav>
-    </div>
+    </CardHeader>
     <CardBody>
         <CardTitle>Special title treatment</CardTitle>
         <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
@@ -386,7 +394,7 @@ Add some navigation to a card's header (or block) with Bootstrap's nav component
 This works with pills as well.
 
 <Card className="text-center">
-    <div className="card-header">
+    <CardHeader>
         <Nav variant="pills" aria-label="Card pill navigation">
             <NavLink href="#" className="active">
                 Active
@@ -394,7 +402,7 @@ This works with pills as well.
             <NavLink href="#">Link</NavLink>
             <NavLink disabled>Disabled</NavLink>
         </Nav>
-    </div>
+    </CardHeader>
     <CardBody>
         <CardTitle>Special title treatment</CardTitle>
         <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
@@ -557,7 +565,7 @@ colors for a more subtle look.
         ['inverse', 'Inverse']
     ].map(([theme, title]) => (
         <Card key={theme} className={`theme-${theme}`}>
-            <div className="card-header">{title}</div>
+            <CardHeader>{title}</CardHeader>
             <CardBody>
                 <CardTitle>Card title</CardTitle>
                 <CardText>Card text…</CardText>
@@ -583,7 +591,7 @@ colors for a more subtle look.
         ['inverse', 'Inverse']
     ].map(([theme, title]) => (
         <Card key={theme} className={`card-subtle theme-${theme}`}>
-            <div className="card-header">{title}</div>
+            <CardHeader>{title}</CardHeader>
             <CardBody>
                 <CardTitle>Card title</CardTitle>
                 <CardText>Card text…</CardText>
@@ -611,7 +619,7 @@ are also adjusted for a consistent look.
 
 <div className="bg-black p-3">
     <Card className="card-translucent" style={{ width: '18rem' }}>
-        <div className="card-header">Featured</div>
+        <CardHeader>Featured</CardHeader>
         <CardBody>
             <CardTitle>Card with header</CardTitle>
             <CardText>
@@ -621,7 +629,7 @@ are also adjusted for a consistent look.
                 Go somewhere
             </Button>
         </CardBody>
-        <div className="card-footer fg-2">2 days ago</div>
+        <CardFooter className="fg-2">2 days ago</CardFooter>
     </Card>
 </div>
 
@@ -718,9 +726,9 @@ When using card groups with footers, their content will automatically line up.
                     }
                 </CardText>
             </CardBody>
-            <div className="card-footer">
+            <CardFooter>
                 <small className="fg-2">Last updated 3 mins ago</small>
-            </div>
+            </CardFooter>
         </Card>
         <Card>
             <CardBody>
@@ -731,9 +739,9 @@ When using card groups with footers, their content will automatically line up.
                     }
                 </CardText>
             </CardBody>
-            <div className="card-footer">
+            <CardFooter>
                 <small className="fg-2">Last updated 3 mins ago</small>
-            </div>
+            </CardFooter>
         </Card>
         <Card>
             <CardBody>
@@ -744,21 +752,20 @@ When using card groups with footers, their content will automatically line up.
                     }
                 </CardText>
             </CardBody>
-            <div className="card-footer">
+            <CardFooter>
                 <small className="fg-2">Last updated 3 mins ago</small>
-            </div>
+            </CardFooter>
         </Card>
     </div>
 </div>
 
 ### Grid cards
 
-Use the Bootstrap grid system and its `.row-cols` classes to control how many grid columns (wrapped
-around your cards) you show per row. For example, here's `.row-cols-1` laying out the cards on one
-column, and `.md:row-cols-2` splitting four cards to equal width across multiple rows, from the
-medium breakpoint up.
+Use the Bootstrap grid system and the `Row` `cols` props to control how many grid columns (wrapped
+around your cards) you show per row. For example, `cols={1}` lays out the cards on one column, and
+`md={2}` splits four cards to equal width across multiple rows, from the medium breakpoint up.
 
-<Row className="row-cols-1 md:row-cols-2 g-4">
+<Row cols={1} md={2} className="g-4">
     {[1, 2, 3, 4].map(index => (
         <Col key={index}>
             <Card>
@@ -782,9 +789,9 @@ medium breakpoint up.
     ))}
 </Row>
 
-Change it to `.md:row-cols-3` and you'll see the fourth card wrap.
+Change it to `md={3}` and you'll see the fourth card wrap.
 
-<Row className="row-cols-1 md:row-cols-3 g-4">
+<Row cols={1} md={3} className="g-4">
     {[1, 2, 3, 4].map(index => (
         <Col key={index}>
             <Card>
@@ -811,7 +818,7 @@ Change it to `.md:row-cols-3` and you'll see the fourth card wrap.
 When you need equal height, add `.h-100` to the cards. If you want equal heights by default, you can
 set `$card-height: 100%` in Sass.
 
-<Row className="row-cols-1 md:row-cols-3 g-4">
+<Row cols={1} md={3} className="g-4">
     {[1, 2, 3, 4].map(index => (
         <Col key={index}>
             <Card className="h-100">
@@ -838,7 +845,7 @@ set `$card-height: 100%` in Sass.
 Just like with card groups, card footers will automatically line up.
 
 <Container className="px-0">
-    <Row className="row-cols-1 md:row-cols-3 g-4">
+    <Row cols={1} md={3} className="g-4">
         {[1, 2, 3].map(index => (
             <Col key={index}>
                 <Card className="h-100">
@@ -857,9 +864,9 @@ Just like with card groups, card footers will automatically line up.
                             }
                         </CardText>
                     </CardBody>
-                    <div className="card-footer">
+                    <CardFooter>
                         <small className="fg-2">Last updated 3 mins ago</small>
-                    </div>
+                    </CardFooter>
                 </Card>
             </Col>
         ))}
@@ -870,7 +877,7 @@ Just like with card groups, card footers will automatically line up.
 
 Cards use CSS variables for backgrounds, borders, and spacing. Theme variants set the theme tokens
 used by the card, and `.card-subtle`, `.card-translucent`, `.card-row`, and `.card-sheet` variants
-adjust the surface and layout. See the [upstream card CSS][5] for the variable and Sass reference.
+adjust the surface and layout. See the [upstream card CSS][6] for the variable and Sass reference.
 
 </ComponentsLayout>
 
@@ -878,4 +885,5 @@ adjust the surface and layout. See the [upstream card CSS][5] for the variable a
 [2]: https://github.com/idea2app/Idea-React/blob/main/source/Button.tsx
 [3]: https://github.com/idea2app/Idea-React/blob/main/source/Image.tsx
 [4]: https://github.com/idea2app/Idea-React/blob/main/source/Nav.tsx
-[5]: https://getbootstrap.com/docs/6.0/components/card/#css
+[5]: https://github.com/idea2app/Idea-React/blob/main/source/ListGroup.tsx
+[6]: https://getbootstrap.com/docs/6.0/components/card/#css

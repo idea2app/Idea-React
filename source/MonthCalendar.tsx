@@ -25,7 +25,7 @@ export interface MonthCalendarProps extends Omit<
     locale?: Navigator['language'];
     theme?: ComponentTheme;
     value?: DateData[];
-    onSelect?: (value: DateData) => void;
+    onSelect?: (value: DateData) => unknown;
     onChange?: (date: Date) => void;
 }
 
@@ -108,26 +108,15 @@ export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
                         item.content
                     ) : (
                         <OverlayBox key={`${dateText}-${index}`} title={item.content}>
-                            {item.link ? (
-                                <Badge
-                                    href={item.link}
-                                    className="d-inline-block text-decoration-none w-100 text-truncate"
-                                    data-calendar-date={dateText}
-                                    data-calendar-index={index}
-                                    theme={text2color(item.content + '', ['light'])}
-                                >
-                                    {item.content}
-                                </Badge>
-                            ) : (
-                                <Badge
-                                    className="d-inline-block text-decoration-none w-100 text-truncate"
-                                    data-calendar-date={dateText}
-                                    data-calendar-index={index}
-                                    theme={text2color(item.content + '', ['light'])}
-                                >
-                                    {item.content}
-                                </Badge>
-                            )}
+                            <Badge
+                                className="d-inline-block text-decoration-none w-100 text-truncate"
+                                theme={text2color(item.content + '', ['light'])}
+                                data-calendar-date={dateText}
+                                data-calendar-index={index}
+                                href={item.link}
+                            >
+                                {item.content}
+                            </Badge>
                         </OverlayBox>
                     )
                 )}
@@ -138,7 +127,7 @@ export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
     render() {
         const { weekFormatter, currentDate, dateGrid } = this,
             {
-                className,
+                className = '',
                 style,
                 theme = 'primary',
                 onChange: _onChange,
@@ -149,7 +138,7 @@ export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
         return (
             <table
                 {...props}
-                className={`table ${className || ''}`}
+                className={`table ${className}`}
                 style={{ tableLayout: 'fixed', ...style }}
             >
                 <caption>

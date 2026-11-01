@@ -13,7 +13,6 @@ it('renders and closes a themed Bootstrap 6 toast', async () => {
         theme: 'success',
         delay: 0
     });
-
     render(<toast.Component position="bottom-center" />);
 
     assert.equal(screen.getByRole('status').className, 'toast show theme-success');

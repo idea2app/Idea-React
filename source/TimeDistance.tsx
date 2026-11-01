@@ -8,7 +8,7 @@ export interface TimeDistanceProps extends HTMLAttributes<HTMLTimeElement> {
     afterWord?: string;
 }
 
-const UnitWords = {
+const UnitWords: Record<string, string> = {
     ms: 'millisecond(s)',
     s: 'second(s)',
     m: 'minute(s)',

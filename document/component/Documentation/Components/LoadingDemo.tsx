@@ -13,11 +13,9 @@ export class LoadingDemo extends Component {
     @observable
     accessor loading = false;
 
-    @action
-    show = () => (this.loading = true);
+    show = action(() => (this.loading = true));
 
-    @action
-    hide = () => (this.loading = false);
+    hide = action(() => (this.loading = false));
 
     handleClick = async () => {
         this.show();

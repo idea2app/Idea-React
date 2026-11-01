@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { Card, CardBody, CardText, CardTitle } from '../source/Card';
+import { Card, CardBody, CardFooter, CardHeader, CardText, CardTitle } from '../source/Card';
 
 it('renders official Bootstrap 6 card parts', () => {
     render(
@@ -14,7 +14,6 @@ it('renders official Bootstrap 6 card parts', () => {
             </CardBody>
         </Card>
     );
-
     assert.equal(screen.getByText('Title').className, 'card-title');
     assert.equal(screen.getByText('Body').className, 'card-text');
 
@@ -22,4 +21,15 @@ it('renders official Bootstrap 6 card parts', () => {
 
     assert.equal(card?.className, 'card custom');
     assert.equal(card?.firstElementChild?.className, 'card-body');
+});
+
+it('renders Bootstrap 6 card headers and footers', () => {
+    render(
+        <Card>
+            <CardHeader className="custom">Header</CardHeader>
+            <CardFooter>Footer</CardFooter>
+        </Card>
+    );
+    assert.equal(screen.getByText('Header').className, 'card-header custom');
+    assert.equal(screen.getByText('Footer').className, 'card-footer');
 });

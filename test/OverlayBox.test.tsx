@@ -11,7 +11,6 @@ it('shows and dismisses a Bootstrap 6 tooltip from its configured trigger', () =
             <button type="button">Details</button>
         </OverlayBox>
     );
-
     fireEvent.focus(screen.getByRole('button', { name: 'Details' }));
 
     assert.equal(screen.queryByRole('tooltip'), null);
@@ -27,7 +26,6 @@ it('shows and dismisses a Bootstrap 6 tooltip from its configured trigger', () =
         trigger.getAttribute('aria-describedby'),
         screen.getByRole('tooltip', { name: 'More information' }).id
     );
-
     fireEvent.click(trigger);
 
     assert.equal(screen.queryByRole('tooltip'), null);
@@ -59,7 +57,6 @@ it('applies a custom overlay class for scoped tooltip and popover theming', () =
             </OverlayBox>
         </>
     );
-
     fireEvent.click(screen.getByRole('button', { name: 'Tooltip trigger' }));
     fireEvent.click(screen.getByRole('button', { name: 'Popover trigger' }));
 

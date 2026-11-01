@@ -17,5 +17,12 @@ export const ButtonGroup: FC<ButtonGroupProps> = ({
         className={classNames(vertical ? 'btn-group-vertical' : 'btn-group', className)}
     />
 );
-
 ButtonGroup.displayName = 'ButtonGroup';
+
+export const ButtonToolbar: FC<ComponentPropsWithRef<'div'>> = ({
+    className,
+    role = 'toolbar',
+    ...props
+}) => <div role={role} {...props} className={classNames('btn-toolbar', className)} />;
+
+ButtonToolbar.displayName = 'ButtonToolbar';

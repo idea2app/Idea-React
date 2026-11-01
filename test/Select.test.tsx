@@ -14,7 +14,6 @@ it('renders Bootstrap 6 menu options and reports the selected value', () => {
             <Option value="second">Second option</Option>
         </Select>
     );
-
     fireEvent.click(screen.getByRole('button', { name: 'First option' }));
     fireEvent.click(screen.getByRole('button', { name: 'Second option' }));
 

@@ -15,7 +15,6 @@ it('uses Bootstrap 6 table variants and responsive wrapper', () => {
             </tbody>
         </Table>
     );
-
     const table = screen.getByRole('table');
 
     assert.equal(table.className, 'table table-striped table-hover table-bordered table-sm custom');

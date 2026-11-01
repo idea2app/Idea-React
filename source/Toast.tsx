@@ -138,17 +138,13 @@ export class Toast {
         const id = uniqueID();
         const openedAt = Date.now();
         const { promise, resolve } = Promise.withResolvers<ToastEntry>();
+        const timer =
+            message.delay === 0
+                ? undefined
+                : setTimeout(() => this.close(id), message.delay ?? 3000);
 
-        const item: ToastEntry = {
-            id,
-            ...message,
-            openedAt,
-            resolve,
-            timer:
-                message.delay === 0
-                    ? undefined
-                    : setTimeout(() => this.close(id), message.delay ?? 3000)
-        };
+        const item: ToastEntry = { id, ...message, openedAt, resolve, timer };
+
         this.messages = [...this.messages, item];
 
         return promise;

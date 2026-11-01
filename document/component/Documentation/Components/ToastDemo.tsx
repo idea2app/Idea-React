@@ -5,12 +5,10 @@ import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { ChangeEvent, Component, ReactNode } from 'react';
 
-import type { ComponentTheme } from '../../../../source/Button';
-import { Button } from '../../../../source/Button';
+import { Button, ComponentTheme } from '../../../../source/Button';
 import { CloseButton } from '../../../../source/CloseButton';
 import { Image } from '../../../../source/Image';
-import type { ToastPosition } from '../../../../source/Toast';
-import { Toast, ToastBody, ToastHeader, ToastItem } from '../../../../source/Toast';
+import { Toast, ToastBody, ToastHeader, ToastItem, ToastPosition } from '../../../../source/Toast';
 
 export interface StaticToastProps {
     title?: ReactNode;
@@ -29,8 +27,7 @@ export interface StaticToastProps {
 export class StaticToast extends Component<StaticToastProps> {
     @observable accessor visible = true;
 
-    @action
-    hide = () => (this.visible = false);
+    hide = action(() => (this.visible = false));
 
     renderToast() {
         const { title = 'Bootstrap', time = '11 mins ago', body, actions, dark } = this.props;
@@ -116,7 +113,6 @@ export interface ToastMessageDemoProps {
 export class ToastMessageDemo extends Component<ToastMessageDemoProps> {
     toast = new Toast();
 
-    @action
     handleClick = () => {
         const {
             title = 'Bootstrap',
@@ -159,11 +155,11 @@ export class ToastPlacementDemo extends Component {
 
     @observable accessor position: ToastPosition = 'top-end';
 
-    @action
-    handlePositionChange = ({ target }: ChangeEvent<HTMLSelectElement>) =>
-        (this.position = target.value as ToastPosition);
+    handlePositionChange = action(
+        ({ target }: ChangeEvent<HTMLSelectElement>) =>
+            (this.position = target.value as ToastPosition)
+    );
 
-    @action
     handleShow = () =>
         this.toast.open({
             title: 'Bootstrap',

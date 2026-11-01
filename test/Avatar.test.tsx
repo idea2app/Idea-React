@@ -19,7 +19,6 @@ it('renders an official Bootstrap 6 image avatar with size and theme classes', (
             AB
         </Avatar>
     );
-
     assert.equal(
         container.querySelector('.avatar')!.className,
         'avatar theme-primary avatar-subtle'
@@ -49,7 +48,6 @@ it('announces a status indicator with an accessible label', () => {
             statusLabel="In a call"
         />
     );
-
     assert.equal(
         screen.getByRole('img', { name: 'In a call' }).className,
         'avatar-status status-busy'

@@ -13,7 +13,8 @@ twelve column system, six default responsive tiers, Sass variables and mixins, a
 predefined classes.
 
 Idea React provides the [`Container`, `Row`, and `Col` wrappers][1] for these examples. Pass `fluid`
-or `breakpoint` to `Container`, and use the `span`, `sm`, `md`, `lg`, `xl`, and `2xl` props on `Col`.
+or `breakpoint` to `Container`, use the `cols` and breakpoint props on `Row`, and use the `span`,
+`sm`, `md`, `lg`, `xl`, and `2xl` props on `Col`.
 
 ## Example
 
@@ -286,12 +287,12 @@ each tier as needed. See the example below for a better idea of how it all works
 
 Use the responsive `.row-cols-*` classes to quickly set the number of columns that best render your
 content and layout. Whereas normal `.col-*` classes apply to the individual columns (e.g.,
-`.md:col-4`), the row columns classes are set on the parent `Row` as a shortcut. With
-`.row-cols-auto` you can give the columns their natural width.
+`.md:col-4`), the row columns classes are set on the parent `Row` as a shortcut; pass `cols`, `sm`,
+`md`, `lg`, `xl`, or `2xl` to it. With `cols="auto"` you can give the columns their natural width.
 
 <div className={style.gridRow}>
     <Container className="text-center">
-        <Row className="row-cols-2">
+        <Row cols={2}>
             <Col>Column</Col>
             <Col>Column</Col>
             <Col>Column</Col>
@@ -302,7 +303,7 @@ content and layout. Whereas normal `.col-*` classes apply to the individual colu
 
 <div className={style.gridRow}>
     <Container className="text-center">
-        <Row className="row-cols-3">
+        <Row cols={3}>
             <Col>Column</Col>
             <Col>Column</Col>
             <Col>Column</Col>
@@ -313,7 +314,7 @@ content and layout. Whereas normal `.col-*` classes apply to the individual colu
 
 <div className={style.gridRow}>
     <Container className="text-center">
-        <Row className="row-cols-auto">
+        <Row cols="auto">
             <Col>Column</Col>
             <Col>Column</Col>
             <Col>Column</Col>
@@ -324,7 +325,7 @@ content and layout. Whereas normal `.col-*` classes apply to the individual colu
 
 <div className={style.gridRow}>
     <Container className="text-center">
-        <Row className="row-cols-1 sm:row-cols-2 md:row-cols-4">
+        <Row cols={1} sm={2} md={4}>
             <Col>Column</Col>
             <Col>Column</Col>
             <Col>Column</Col>

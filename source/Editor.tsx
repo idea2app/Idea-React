@@ -1,3 +1,5 @@
+'use client';
+
 import { EditorCore, WrapperProps } from '@react-editor-js/core';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
@@ -7,8 +9,7 @@ import { createReactEditorJS } from 'react-editor-js';
 const ReactEditorJS = createReactEditorJS();
 
 export type EditorProps = PropsWithoutRef<
-    WrapperProps &
-        Pick<InputHTMLAttributes<HTMLInputElement>, 'name' | 'required'>
+    WrapperProps & Pick<InputHTMLAttributes<HTMLInputElement>, 'name' | 'required'>
 >;
 
 @observer
@@ -23,16 +24,12 @@ export class Editor extends Component<EditorProps> {
     save = async () => this.core && (this.innerValue = await this.core.save());
 
     render() {
-        const { name, required, children, ...editorProps } = this.props,
+        const { name, required, children: _children, ...editorProps } = this.props,
             { innerValue } = this;
 
         return (
             <div className="form-control" tabIndex={-1} onBlur={this.save}>
-                <input
-                    hidden
-                    {...{ name, required }}
-                    value={JSON.stringify(innerValue)}
-                />
+                <input hidden {...{ name, required }} value={JSON.stringify(innerValue)} />
                 <ReactEditorJS
                     {...editorProps}
                     onInitialize={core => {

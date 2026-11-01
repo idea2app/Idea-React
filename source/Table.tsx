@@ -42,9 +42,9 @@ export const Table: FC<TableProps> = ({
         />
     );
 
-    if (!responsive) return table;
-
-    return (
+    return !responsive ? (
+        table
+    ) : (
         <div
             className={classNames(
                 'table-responsive',

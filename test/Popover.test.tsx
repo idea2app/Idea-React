@@ -11,7 +11,6 @@ it('renders official Bootstrap 6 popover markup', () => {
             More information
         </Popover>
     );
-
     const popover = screen.getByRole('tooltip');
 
     assert.equal(popover.className, 'popover show bs-popover-end custom');

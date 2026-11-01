@@ -17,6 +17,7 @@ export * from './Grid';
 export * from './HorizontalMarquee';
 export * from './Icon';
 export * from './Image';
+export * from './ListGroup';
 export * from './LiveTSX';
 export * from './Loading';
 export * from './Menu';

@@ -1,12 +1,9 @@
 import classNames from 'classnames';
-import { ComponentPropsWithRef, FC } from 'react';
+import { FC } from 'react';
 
-import { OVERLAY_ARROW_POSITIONS, OVERLAY_DIRECTIONS, OverlayPlacement } from './Overlay';
+import { OVERLAY_ARROW_POSITIONS, OVERLAY_DIRECTIONS, OverlayTriggerProps } from './Overlay';
 
-export interface TooltipProps extends ComponentPropsWithRef<'div'> {
-    placement?: OverlayPlacement;
-    show?: boolean;
-}
+export type TooltipProps = OverlayTriggerProps;
 
 export const Tooltip: FC<TooltipProps> = ({
     placement = 'top',

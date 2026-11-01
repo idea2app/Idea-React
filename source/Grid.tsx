@@ -20,9 +20,40 @@ export const Container: FC<ContainerProps> = ({ fluid, breakpoint, className, ..
     />
 );
 
-export const Row: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
-    <div {...props} className={classNames('row', className)} />
-);
+export type RowCols = number | 'auto';
+
+export interface RowProps extends ComponentPropsWithRef<'div'> {
+    cols?: RowCols;
+    sm?: RowCols;
+    md?: RowCols;
+    lg?: RowCols;
+    xl?: RowCols;
+    '2xl'?: RowCols;
+}
+
+export const Row: FC<RowProps> = ({ cols, sm, md, lg, xl, '2xl': xxl, className, ...props }) => {
+    const sizes: [Breakpoint, RowCols | undefined][] = [
+        ['sm', sm],
+        ['md', md],
+        ['lg', lg],
+        ['xl', xl],
+        ['2xl', xxl]
+    ];
+
+    return (
+        <div
+            {...props}
+            className={classNames(
+                'row',
+                cols !== undefined && `row-cols-${cols}`,
+                sizes.map(
+                    ([breakpoint, size]) => size !== undefined && `${breakpoint}:row-cols-${size}`
+                ),
+                className
+            )}
+        />
+    );
+};
 
 export interface ColProps extends ComponentPropsWithRef<'div'> {
     span?: ColSize;

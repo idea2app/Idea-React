@@ -7,7 +7,13 @@ import { Component, ReactNode } from 'react';
 import { Button } from '../../../../source/Button';
 import { CloseButton } from '../../../../source/CloseButton';
 import { Menu, MenuItem } from '../../../../source/Menu';
-import { NativeDialog } from '../../../../source/NativeDialog';
+import {
+    DialogBody,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    NativeDialog
+} from '../../../../source/NativeDialog';
 import { OverlayBox } from '../../../../source/OverlayBox';
 import { Toast } from '../../../../source/Toast';
 
@@ -28,15 +34,9 @@ export interface DialogDemoProps {
 export class DialogDemo extends Component<DialogDemoProps> {
     @observable accessor open = false;
 
-    @action
-    show = () => {
-        this.open = true;
-    };
+    show = action(() => (this.open = true));
 
-    @action
-    hide = () => {
-        this.open = false;
-    };
+    hide = action(() => (this.open = false));
 
     render() {
         const {
@@ -68,13 +68,13 @@ export class DialogDemo extends Component<DialogDemoProps> {
                     theme={dark ? 'dark' : undefined}
                     onClose={this.hide}
                 >
-                    <div className="dialog-header">
-                        <h1 className="dialog-title">{title}</h1>
+                    <DialogHeader>
+                        <DialogTitle>{title}</DialogTitle>
                         <CloseButton onClick={this.hide} />
-                    </div>
-                    <div className="dialog-body">{children}</div>
+                    </DialogHeader>
+                    <DialogBody>{children}</DialogBody>
                     {!hideFooter && (
-                        <div className="dialog-footer">
+                        <DialogFooter>
                             <Button variant="solid" theme="secondary" onClick={this.hide}>
                                 Close
                             </Button>
@@ -83,7 +83,7 @@ export class DialogDemo extends Component<DialogDemoProps> {
                                     {saveLabel}
                                 </Button>
                             )}
-                        </div>
+                        </DialogFooter>
                     )}
                 </NativeDialog>
             </>
@@ -95,15 +95,9 @@ export class DialogDemo extends Component<DialogDemoProps> {
 export class DialogSwapDemo extends Component {
     @observable accessor current: 'first' | 'second' | undefined;
 
-    @action
-    show = (current: 'first' | 'second') => {
-        this.current = current;
-    };
+    show = action((current: 'first' | 'second') => (this.current = current));
 
-    @action
-    hide = () => {
-        this.current = undefined;
-    };
+    hide = action(() => (this.current = undefined));
 
     openFirst = () => this.show('first');
 
@@ -122,48 +116,48 @@ export class DialogSwapDemo extends Component {
                     aria-label="First dialog"
                     onClose={this.hide}
                 >
-                    <div className="dialog-header">
-                        <h1 className="dialog-title">First dialog</h1>
+                    <DialogHeader>
+                        <DialogTitle>First dialog</DialogTitle>
                         <CloseButton onClick={this.hide} />
-                    </div>
-                    <div className="dialog-body">
+                    </DialogHeader>
+                    <DialogBody>
                         <p>
                             Click below to swap to a second dialog. The React state change opens the
                             next dialog while the current one closes.
                         </p>
-                    </div>
-                    <div className="dialog-footer">
+                    </DialogBody>
+                    <DialogFooter>
                         <Button variant="solid" theme="secondary" onClick={this.hide}>
                             Close
                         </Button>
                         <Button variant="solid" theme="primary" onClick={this.openSecond}>
                             Go to second dialog
                         </Button>
-                    </div>
+                    </DialogFooter>
                 </NativeDialog>
                 <NativeDialog
                     open={current === 'second'}
                     aria-label="Second dialog"
                     onClose={this.hide}
                 >
-                    <div className="dialog-header">
-                        <h1 className="dialog-title">Second dialog</h1>
+                    <DialogHeader>
+                        <DialogTitle>Second dialog</DialogTitle>
                         <CloseButton onClick={this.hide} />
-                    </div>
-                    <div className="dialog-body">
+                    </DialogHeader>
+                    <DialogBody>
                         <p>
                             This is the second dialog. You can swap back to the first, or close this
                             one entirely.
                         </p>
-                    </div>
-                    <div className="dialog-footer">
+                    </DialogBody>
+                    <DialogFooter>
                         <Button variant="solid" theme="secondary" onClick={this.hide}>
                             Close
                         </Button>
                         <Button variant="solid" theme="primary" onClick={this.openFirst}>
                             Back to first dialog
                         </Button>
-                    </div>
+                    </DialogFooter>
                 </NativeDialog>
             </>
         );
@@ -176,19 +170,11 @@ export class DialogOverlaysDemo extends Component {
 
     toast = new Toast();
 
-    @action
-    show = () => {
-        this.open = true;
-    };
+    show = action(() => (this.open = true));
 
-    @action
-    hide = () => {
-        this.open = false;
-    };
+    hide = action(() => (this.open = false));
 
-    handleShowToast = () => {
-        this.toast.open({ body: 'Toast inside a dialog!', delay: 0 });
-    };
+    handleShowToast = () => this.toast.open({ body: 'Toast inside a dialog!', delay: 0 });
 
     render() {
         const { open } = this;
@@ -204,11 +190,11 @@ export class DialogOverlaysDemo extends Component {
                     className="not-prose"
                     onClose={this.hide}
                 >
-                    <div className="dialog-header">
-                        <h1 className="dialog-title">Overlays inside dialogs</h1>
+                    <DialogHeader>
+                        <DialogTitle>Overlays inside dialogs</DialogTitle>
                         <CloseButton onClick={this.hide} />
-                    </div>
-                    <div className="dialog-body">
+                    </DialogHeader>
+                    <DialogBody>
                         <p>These components work inside modal dialogs.</p>
                         <div className="d-flex gap-2 flex-wrap">
                             <OverlayBox title="Tooltip inside a dialog!" placement="bottom">
@@ -241,12 +227,12 @@ export class DialogOverlaysDemo extends Component {
                                 <MenuItem href="#">Another action</MenuItem>
                             </Menu>
                         </div>
-                    </div>
-                    <div className="dialog-footer">
+                    </DialogBody>
+                    <DialogFooter>
                         <Button variant="solid" theme="secondary" onClick={this.hide}>
                             Close
                         </Button>
-                    </div>
+                    </DialogFooter>
                     <this.toast.Component position="bottom-end" />
                 </NativeDialog>
             </>

@@ -7,7 +7,13 @@ import { formToJSON } from 'web-utility';
 import { Button } from '../../../../source/Button';
 import { CloseButton } from '../../../../source/CloseButton';
 import { Dialog, DialogClose } from '../../../../source/Dialog';
-import { NativeDialog } from '../../../../source/NativeDialog';
+import {
+    DialogBody,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    NativeDialog
+} from '../../../../source/NativeDialog';
 
 @observer
 export class DialogModelDemo extends Component {
@@ -17,37 +23,48 @@ export class DialogModelDemo extends Component {
             aria-label="Input dialog"
             onClose={() => defer?.reject(new DialogClose())}
         >
-            <div className="dialog-header">
-                <h1 className="dialog-title">Dialog</h1>
+            <DialogHeader>
+                <DialogTitle>Dialog</DialogTitle>
                 <CloseButton onClick={() => defer?.reject(new DialogClose())} />
-            </div>
-            <form
-                id="dialog-model-form"
-                className="dialog-body"
-                onSubmit={this.handleSubmit}
-                onReset={() => defer?.reject(new DialogClose())}
-            >
-                <div className="mb-3">
-                    <label className="form-label" htmlFor="dialog-model-a">
-                        A
-                    </label>
-                    <input className="form-control" id="dialog-model-a" name="a" type="number" />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label" htmlFor="dialog-model-b">
-                        B
-                    </label>
-                    <input className="form-control" id="dialog-model-b" name="b" type="number" />
-                </div>
-            </form>
-            <div className="dialog-footer">
+            </DialogHeader>
+            <DialogBody>
+                <form
+                    id="dialog-model-form"
+                    onSubmit={this.handleSubmit}
+                    onReset={() => defer?.reject(new DialogClose())}
+                >
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="dialog-model-a">
+                            A
+                        </label>
+                        <input
+                            className="form-control"
+                            id="dialog-model-a"
+                            name="a"
+                            type="number"
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="dialog-model-b">
+                            B
+                        </label>
+                        <input
+                            className="form-control"
+                            id="dialog-model-b"
+                            name="b"
+                            type="number"
+                        />
+                    </div>
+                </form>
+            </DialogBody>
+            <DialogFooter>
                 <Button variant="solid" theme="primary" form="dialog-model-form" type="submit">
                     √
                 </Button>
                 <Button variant="solid" theme="danger" form="dialog-model-form" type="reset">
                     ×
                 </Button>
-            </div>
+            </DialogFooter>
         </NativeDialog>
     ));
 

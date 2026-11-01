@@ -23,18 +23,13 @@ export class TypeEchoContent extends Component<TypeEchoContentProps> {
         this.start();
     }
 
-    @action
-    start = () => {
-        this.started = true;
-    };
+    start = action(() => (this.started = true));
 
-    @action
-    echo = (char: string) => {
-        this.echoed += char;
-    };
+    echo = action((char: string) => (this.echoed += char));
 
-    init: RefCallback<HTMLPreElement> = node =>
-        node &&
+    init: RefCallback<HTMLPreElement> = node => {
+        if (!node) return;
+
         new IntersectionObserver(async ([{ isIntersecting }], observer) => {
             if (!isIntersecting) return;
 
@@ -48,6 +43,7 @@ export class TypeEchoContent extends Component<TypeEchoContentProps> {
                 this.echo(char);
             }
         }).observe(node);
+    };
 
     render() {
         const { className, text, intervals: _intervals, ...props } = this.props;

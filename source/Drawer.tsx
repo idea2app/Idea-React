@@ -1,12 +1,28 @@
 'use client';
 
 import classNames from 'classnames';
-import { FC, ReactNode } from 'react';
+import { ComponentPropsWithRef, FC, ReactNode } from 'react';
 
 import { CloseButton } from './CloseButton';
 import { NativeDialog, NativeDialogProps } from './NativeDialog';
 
 export type DrawerPlacement = 'start' | 'end' | 'top' | 'bottom';
+
+export const DrawerHeader: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('drawer-header', className)} />
+);
+
+export const DrawerTitle: FC<ComponentPropsWithRef<'h5'>> = ({ className, ...props }) => (
+    <h5 {...props} className={classNames('drawer-title', className)} />
+);
+
+export const DrawerBody: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('drawer-body', className)} />
+);
+
+export const DrawerFooter: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
+    <div {...props} className={classNames('drawer-footer', className)} />
+);
 
 export interface DrawerProps extends Omit<NativeDialogProps, 'dialog' | 'onClose' | 'title'> {
     title?: ReactNode;
@@ -34,12 +50,12 @@ export const Drawer: FC<DrawerProps> = ({
         className={classNames('drawer', `drawer-${placement}`, className)}
         onClose={onDismiss}
     >
-        <div className="drawer-header">
-            <h5 className="drawer-title">{title}</h5>
+        <DrawerHeader>
+            <DrawerTitle>{title}</DrawerTitle>
             <CloseButton onClick={onDismiss} />
-        </div>
-        <div className={classNames('drawer-body', bodyClassName)}>{children}</div>
-        {footer && <div className="drawer-footer">{footer}</div>}
+        </DrawerHeader>
+        <DrawerBody className={bodyClassName}>{children}</DrawerBody>
+        {footer && <DrawerFooter>{footer}</DrawerFooter>}
     </NativeDialog>
 );
 

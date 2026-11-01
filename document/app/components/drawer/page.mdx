@@ -95,8 +95,8 @@ close.
 </button>
 
 <dialog className="drawer drawer-start" id="invokerDrawer" aria-labelledby="invokerDrawerLabel">
-    <div className="drawer-header">
-        <h5 className="drawer-title" id="invokerDrawerLabel">Invoker Commands</h5>
+    <DrawerHeader>
+        <DrawerTitle id="invokerDrawerLabel">Invoker Commands</DrawerTitle>
         <button
             type="button"
             className="btn-close"
@@ -104,10 +104,10 @@ close.
             command="close"
             aria-label="Close"
         />
-    </div>
-    <div className="drawer-body">
+    </DrawerHeader>
+    <DrawerBody>
         <p>This drawer opens with \`command="show-modal"\` and closes with \`command="close"\`.</p>
-    </div>
+    </DrawerBody>
 </dialog>`}</CodeBlock>
 
 ### Body scrolling
@@ -216,6 +216,8 @@ yourself when the title is not a string.
 The `Drawer` wrapper composes the classes and attributes that the upstream plugin handles:
 
 - `.drawer` and `.drawer-{placement}` on a `<dialog>` element enable drawer behavior.
+- `DrawerHeader`, `DrawerTitle`, `DrawerBody`, and `DrawerFooter` are exported to compose custom
+  drawer markup.
 - The header contains `Drawer`'s `title` and a `CloseButton` that calls `onDismiss`.
 - `footer` renders a `.drawer-footer`; `bodyClassName` extends the `.drawer-body`.
 - Additional classes such as `drawer-instant`, `drawer-translucent`, and `drawer-sheet` pass through

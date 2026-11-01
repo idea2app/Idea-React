@@ -9,12 +9,10 @@ it('uses Bootstrap 6 nav variant, orientation, and fill classes', () => {
     const { rerender } = render(
         <Nav aria-label="Sections" variant="pills" className="custom" vertical fill justified />
     );
-
     assert.equal(
         screen.getByRole('navigation', { name: 'Sections' }).className,
         'nav nav-pills nav-pills-vertical nav-fill nav-justified custom'
     );
-
     rerender(<Nav aria-label="Sections" variant="tabs" vertical />);
 
     assert.equal(
@@ -39,7 +37,6 @@ it('renders navbar-style items and links, including disabled links', () => {
             </NavItem>
         </ul>
     );
-
     for (const item of screen.getAllByRole('listitem')) assert.equal(item.className, 'nav-item');
     assert.equal(screen.getByRole('link', { name: 'Home' }).className, 'nav-link active');
 

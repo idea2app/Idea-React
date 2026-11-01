@@ -23,11 +23,9 @@ export interface NavbarDemoProps {
 export class NavbarDemo extends Component<NavbarDemoProps> {
     @observable accessor open = false;
 
-    @action
-    show = () => (this.open = true);
+    show = action(() => (this.open = true));
 
-    @action
-    hide = () => (this.open = false);
+    hide = action(() => (this.open = false));
 
     render() {
         const {
@@ -69,11 +67,9 @@ export class NavbarDemo extends Component<NavbarDemoProps> {
 export class NavbarExternalDemo extends Component {
     @observable accessor open = false;
 
-    @action
-    show = () => (this.open = true);
+    show = action(() => (this.open = true));
 
-    @action
-    hide = () => (this.open = false);
+    hide = action(() => (this.open = false));
 
     render() {
         const { open } = this;
