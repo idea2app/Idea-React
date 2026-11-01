@@ -102,8 +102,8 @@ outside the group or provide an accessible name directly on the control.
 `placeholder`; Bootstrap uses it to determine when the label should float.
 
 <FormFloatingLabel>
-    <FormControl id="floatingEmail" type="email" placeholder="name@example.com" />
     <FormLabel htmlFor="floatingEmail">Email address</FormLabel>
+    <FormControl id="floatingEmail" type="email" placeholder="name@example.com" />
 </FormFloatingLabel>
 
 Add `always` to keep the floating label raised and the placeholder visible.
@@ -128,7 +128,7 @@ the feedback with its control using `aria-describedby`.
 `Form` renders a native `<form>` and forwards its submit and reset handlers. Browser constraint
 validation is enabled by default; add `noValidate` when implementing custom validation.
 
-<Form onSubmit={event => event.preventDefault()}>
+<Form>
     <FormField>
         <FormLabel htmlFor="requiredName">Name</FormLabel>
         <FormControl id="requiredName" required />

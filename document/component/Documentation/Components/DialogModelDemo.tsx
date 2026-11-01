@@ -7,6 +7,7 @@ import { formToJSON } from 'web-utility';
 import { Button } from '../../../../source/Button';
 import { CloseButton } from '../../../../source/CloseButton';
 import { Dialog, DialogClose } from '../../../../source/Dialog';
+import { FormControl, FormField, FormLabel } from '../../../../source/Form';
 import {
     DialogBody,
     DialogFooter,
@@ -33,28 +34,14 @@ export class DialogModelDemo extends Component {
                     onSubmit={this.handleSubmit}
                     onReset={() => defer?.reject(new DialogClose())}
                 >
-                    <div className="mb-3">
-                        <label className="form-label" htmlFor="dialog-model-a">
-                            A
-                        </label>
-                        <input
-                            className="form-control"
-                            id="dialog-model-a"
-                            name="a"
-                            type="number"
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label" htmlFor="dialog-model-b">
-                            B
-                        </label>
-                        <input
-                            className="form-control"
-                            id="dialog-model-b"
-                            name="b"
-                            type="number"
-                        />
-                    </div>
+                    <FormField className="mb-3">
+                        <FormLabel htmlFor="dialog-model-a">A</FormLabel>
+                        <FormControl id="dialog-model-a" name="a" type="number" />
+                    </FormField>
+                    <FormField className="mb-3">
+                        <FormLabel htmlFor="dialog-model-b">B</FormLabel>
+                        <FormControl id="dialog-model-b" name="b" type="number" />
+                    </FormField>
                 </form>
             </DialogBody>
             <DialogFooter>

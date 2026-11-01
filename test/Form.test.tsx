@@ -58,8 +58,8 @@ it('renders floating labels, input groups, and validation feedback', () => {
     render(
         <>
             <FormFloatingLabel always>
-                <FormControl id="name" placeholder="Name" />
                 <FormLabel htmlFor="name">Name</FormLabel>
+                <FormControl id="name" placeholder="Name" />
             </FormFloatingLabel>
             <InputGroup>
                 <InputGroupText>@</InputGroupText>

@@ -1,6 +1,7 @@
 import { Icon } from '../../../../source/Icon';
 import { Button } from '../../../../source/Button';
 import { Navbar } from '../../../../source/Navbar';
+import { FormCheck, FormControl, FormField, FormLabel } from '../../../../source/Form';
 import {
     Menu,
     MenuDivider,
@@ -346,32 +347,18 @@ negative space you require.
 
 <MenuPanel className="show position-static" style={{ '--bs-menu-min-width': '300px' }}>
     <form className="d-flex flex-column gap-3 p-3">
-        <div>
-            <label htmlFor="exampleMenuFormEmail1" className="form-label">
-                Email address
-            </label>
-            <input
-                type="email"
-                className="form-control"
-                id="exampleMenuFormEmail1"
-                placeholder="email@example.com"
-            />
-        </div>
-        <div>
-            <label htmlFor="exampleMenuFormPassword1" className="form-label">
-                Password
-            </label>
-            <input
-                type="password"
-                className="form-control"
-                id="exampleMenuFormPassword1"
-                placeholder="Password"
-            />
-        </div>
-        <div className="form-field">
-            <input type="checkbox" id="checkLabel" className="check" />
-            <label htmlFor="checkLabel">Example new checkbox</label>
-        </div>
+        <FormField>
+            <FormLabel htmlFor="exampleMenuFormEmail1">Email address</FormLabel>
+            <FormControl type="email" id="exampleMenuFormEmail1" placeholder="email@example.com" />
+        </FormField>
+        <FormField>
+            <FormLabel htmlFor="exampleMenuFormPassword1">Password</FormLabel>
+            <FormControl type="password" id="exampleMenuFormPassword1" placeholder="Password" />
+        </FormField>
+        <FormField>
+            <FormCheck id="checkLabel" />
+            <FormLabel htmlFor="checkLabel">Example new checkbox</FormLabel>
+        </FormField>
         <div className="vstack gap-2">
             <Button type="button" variant="solid" theme="primary">
                 Sign in

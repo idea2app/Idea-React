@@ -1,5 +1,6 @@
 import { Button } from '../../../../source/Button';
 import { ButtonGroup, ButtonToolbar } from '../../../../source/ButtonGroup';
+import { FormControl, InputGroup, InputGroupText } from '../../../../source/Form';
 import { ToggleButton } from '../../../../source/ToggleButton';
 
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -269,18 +270,15 @@ you'll likely need some utilities though to space things properly.
             4
         </Button>
     </ButtonGroup>
-    <div className="input-group">
-        <span className="input-group-text" id="btnGroupAddon2">
-            @
-        </span>
-        <input
+    <InputGroup>
+        <InputGroupText id="btnGroupAddon2">@</InputGroupText>
+        <FormControl
             type="text"
-            className="form-control"
             placeholder="Input group example"
             aria-label="Input group example"
             aria-describedby="btnGroupAddon2"
         />
-    </div>
+    </InputGroup>
 </ButtonToolbar>
 
 ## Sizing

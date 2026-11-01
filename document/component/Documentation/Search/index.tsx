@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { ChangeEvent, Component, createRef } from 'react';
 
 import { Button } from '../../../../source/Button';
+import { FormControl } from '../../../../source/Form';
 import { Icon } from '../../../../source/Icon';
 import { NativeDialog } from '../../../../source/NativeDialog';
 import { DocumentationSearchModel } from './model';
@@ -53,9 +54,9 @@ export class DocumentationSearch extends Component<DocumentationSearchProps> {
         return (
             <div className="d-flex align-items-center gap-4">
                 <Icon name="search" aria-hidden="true" />
-                <input
+                <FormControl
                     ref={this.input}
-                    className="form-control min-w-0"
+                    className="min-w-0"
                     type="search"
                     aria-label="Search documentation"
                     placeholder="Search documentation..."

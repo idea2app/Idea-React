@@ -4,6 +4,7 @@ import { Image } from '../../../../source/Image';
 import { Menu, MenuDivider, MenuItem } from '../../../../source/Menu';
 import { NavItem, NavLink } from '../../../../source/Nav';
 import { Navbar, NavbarBrand, NavbarNav, NavbarText } from '../../../../source/Navbar';
+import { FormControl, InputGroup, InputGroupText } from '../../../../source/Form';
 import { CodeBlock } from '../../../../source/CodeBlock';
 
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -51,7 +52,7 @@ responsive behavior.
         </NavItem>
     </NavbarNav>
     <form className="hstack gap-2" role="search">
-        <input className="form-control" type="search" placeholder="Search" aria-label="Search" />
+        <FormControl type="search" placeholder="Search" aria-label="Search" />
         <Button type="submit" variant="solid" theme="secondary" icon aria-label="Search">
             <Icon name="search" aria-hidden="true" />
         </Button>
@@ -225,12 +226,7 @@ Place various form controls and components within a navbar:
 <Navbar className="bg-1 fg-2">
     <div className="container-fluid">
         <form className="d-flex" role="search">
-            <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-            />
+            <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
             <Button type="submit" variant="outline" theme="success">
                 Search
             </Button>
@@ -245,12 +241,7 @@ Immediate child elements of `.navbar` use flex layout and will default to
     <div className="container-fluid">
         <NavbarBrand>Navbar</NavbarBrand>
         <form className="d-flex" role="search">
-            <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-            />
+            <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
             <Button type="submit" variant="outline" theme="success">
                 Search
             </Button>
@@ -263,18 +254,15 @@ element as the container and save some markup.
 
 <Navbar className="bg-1 fg-2">
     <form className="container-fluid">
-        <div className="input-group">
-            <span className="input-group-text" id="navbarUsername">
-                @
-            </span>
-            <input
+        <InputGroup>
+            <InputGroupText id="navbarUsername">@</InputGroupText>
+            <FormControl
                 type="text"
-                className="form-control"
                 placeholder="Username"
                 aria-label="Username"
                 aria-describedby="navbarUsername"
             />
-        </div>
+        </InputGroup>
     </form>
 </Navbar>
 
@@ -350,7 +338,7 @@ that attribute for you.
         </NavItem>
     </NavbarNav>
     <form className="hstack gap-2" role="search">
-        <input className="form-control" type="search" placeholder="Search" aria-label="Search" />
+        <FormControl type="search" placeholder="Search" aria-label="Search" />
         <Button type="submit" variant="solid" theme="secondary" icon aria-label="Search">
             <Icon name="search" aria-hidden="true" />
         </Button>
@@ -407,8 +395,8 @@ default is the "light navbar" for use with light background colors, but you can 
             </NavItem>
         </NavbarNav>
         <form className="d-flex" role="search">
-            <input
-                className="form-control me-2"
+            <FormControl
+                className="me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
@@ -437,8 +425,8 @@ default is the "light navbar" for use with light background colors, but you can 
             </NavItem>
         </NavbarNav>
         <form className="d-flex" role="search">
-            <input
-                className="form-control me-2"
+            <FormControl
+                className="me-2"
                 data-bs-theme="light"
                 type="search"
                 placeholder="Search"
@@ -468,8 +456,8 @@ default is the "light navbar" for use with light background colors, but you can 
             </NavItem>
         </NavbarNav>
         <form className="d-flex" role="search">
-            <input
-                className="form-control me-2"
+            <FormControl
+                className="me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
@@ -619,12 +607,7 @@ With no `.navbar-brand` shown (hidden inside the drawer):
         </NavItem>
     </NavbarNav>
     <form className="d-flex" role="search">
-        <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-        />
+        <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
         <Button type="submit" variant="outline" theme="success">
             Search
         </Button>
@@ -648,12 +631,7 @@ With a brand name shown on the left and toggler on the right:
         </NavItem>
     </NavbarNav>
     <form className="d-flex" role="search">
-        <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-        />
+        <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
         <Button type="submit" variant="outline" theme="success">
             Search
         </Button>
@@ -677,12 +655,7 @@ With a toggler on the left and brand name on the right:
         </NavItem>
     </NavbarNav>
     <form className="d-flex" role="search">
-        <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-        />
+        <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
         <Button type="submit" variant="outline" theme="success">
             Search
         </Button>
