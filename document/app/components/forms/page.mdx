@@ -1,0 +1,144 @@
+import {
+    Form,
+    FormCheck,
+    FormControl,
+    FormFeedback,
+    FormField,
+    FormFloatingLabel,
+    FormGroup,
+    FormLabel,
+    FormSelect,
+    FormText,
+    FormTextArea,
+    InputGroup,
+    InputGroupText
+} from '../../../../source/Form';
+import { Button } from '../../../../source/Button';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="forms">
+
+# Forms
+
+Use native form elements with the Bootstrap 6 form wrappers. The wrappers apply the current Bootstrap
+classes while preserving the native HTML attributes, events, and browser validation behavior. This
+guide adapts the upstream [form field][1], [form control][2], [input group][3], and
+[floating label][4] documentation.
+
+## Form fields
+
+Use `FormField` to arrange a label, control, and optional description or feedback. Associate labels
+with controls using `htmlFor` and `id`; connect descriptions with `aria-describedby`.
+
+<FormField>
+    <FormLabel htmlFor="exampleEmail">Email address</FormLabel>
+    <FormControl
+        id="exampleEmail"
+        name="email"
+        type="email"
+        placeholder="name@example.com"
+        aria-describedby="emailHelp"
+    />
+    <FormText id="emailHelp">We will never share your email with anyone else.</FormText>
+</FormField>
+
+`FormControl` supports native input attributes and applies `.form-control`. For a textarea, use
+`FormTextArea`; `FormSelect` applies the same control styling to a native select.
+
+<FormField>
+    <FormLabel htmlFor="exampleMessage">Message</FormLabel>
+    <FormTextArea id="exampleMessage" rows={3} />
+</FormField>
+
+<FormField>
+    <FormLabel htmlFor="exampleCountry">Country</FormLabel>
+    <FormSelect id="exampleCountry" defaultValue="">
+        <option value="" disabled>
+            Choose one…
+        </option>
+        <option value="ca">Canada</option>
+        <option value="jp">Japan</option>
+    </FormSelect>
+</FormField>
+
+## Checkboxes and radios
+
+`FormCheck` styles native checkbox and radio inputs. Place it next to its associated `FormLabel`
+inside `FormField` for the two-column layout.
+
+<FormField>
+    <FormCheck id="terms" name="terms" type="checkbox" />
+    <FormLabel htmlFor="terms">Accept the terms and conditions</FormLabel>
+</FormField>
+
+<FormGroup>
+    <FormLabel>Choose a contact method</FormLabel>
+    <FormField>
+        <FormCheck id="contactEmail" name="contact" type="radio" value="email" defaultChecked />
+        <FormLabel htmlFor="contactEmail">Email</FormLabel>
+    </FormField>
+    <FormField>
+        <FormCheck id="contactPhone" name="contact" type="radio" value="phone" />
+        <FormLabel htmlFor="contactPhone">Phone</FormLabel>
+    </FormField>
+</FormGroup>
+
+## Input groups
+
+Use `InputGroup` with `InputGroupText` to pair a control with a text add-on. Add accessible labels
+outside the group or provide an accessible name directly on the control.
+
+<FormField>
+    <FormLabel htmlFor="username">Username</FormLabel>
+    <InputGroup>
+        <InputGroupText>@</InputGroupText>
+        <FormControl id="username" aria-label="Username" />
+    </InputGroup>
+</FormField>
+
+## Floating labels
+
+`FormFloatingLabel` wraps a control and its label. For textual inputs, include a non-empty
+`placeholder`; Bootstrap uses it to determine when the label should float.
+
+<FormFloatingLabel>
+    <FormControl id="floatingEmail" type="email" placeholder="name@example.com" />
+    <FormLabel htmlFor="floatingEmail">Email address</FormLabel>
+</FormFloatingLabel>
+
+Add `always` to keep the floating label raised and the placeholder visible.
+
+## Validation
+
+Native validation attributes such as `required` remain available. Add `.is-invalid` or `.is-valid`
+through `className` to show server-side validation states and pair them with `FormFeedback`. Associate
+the feedback with its control using `aria-describedby`.
+
+<FormField>
+    <FormLabel htmlFor="validatedEmail">Email address</FormLabel>
+    <FormControl
+        id="validatedEmail"
+        type="email"
+        className="is-invalid"
+        aria-describedby="emailFeedback"
+    />
+    <FormFeedback id="emailFeedback">Enter a valid email address.</FormFeedback>
+</FormField>
+
+`Form` renders a native `<form>` and forwards its submit and reset handlers. Browser constraint
+validation is enabled by default; add `noValidate` when implementing custom validation.
+
+<Form onSubmit={event => event.preventDefault()}>
+    <FormField>
+        <FormLabel htmlFor="requiredName">Name</FormLabel>
+        <FormControl id="requiredName" required />
+    </FormField>
+    <Button type="submit">Submit</Button>
+</Form>
+
+</ComponentsLayout>
+
+[1]: https://getbootstrap.com/docs/6.0/forms/field/
+[2]: https://getbootstrap.com/docs/6.0/forms/form-control/
+[3]: https://getbootstrap.com/docs/6.0/forms/input-group/
+[4]: https://getbootstrap.com/docs/6.0/forms/floating-labels/

@@ -19,6 +19,7 @@ const components: NavLink[] = [
     { label: 'Close button', slug: 'close-button' },
     { label: 'Dialog', slug: 'dialog' },
     { label: 'Drawer', slug: 'drawer' },
+    { label: 'Forms', slug: 'forms' },
     { label: 'Grid', slug: 'grid' },
     { label: 'Image', slug: 'image' },
     { label: 'List group', slug: 'list-group' },

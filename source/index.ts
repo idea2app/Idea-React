@@ -13,6 +13,7 @@ export * from './Dialog';
 export * from './Drawer';
 export * from './Editor';
 export * from './EditorHTML';
+export * from './Form';
 export * from './Grid';
 export * from './HorizontalMarquee';
 export * from './Icon';
