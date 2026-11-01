@@ -21,6 +21,7 @@ const components: NavLink[] = [
     { label: 'Drawer', slug: 'drawer' },
     { label: 'Grid', slug: 'grid' },
     { label: 'Image', slug: 'image' },
+    { label: 'List group', slug: 'list-group' },
     { label: 'Menu', slug: 'menu' },
     { label: 'Nav', slug: 'nav' },
     { label: 'Navbar', slug: 'navbar' },

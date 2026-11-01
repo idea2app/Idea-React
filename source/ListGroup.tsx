@@ -33,33 +33,71 @@ export const ListGroup: FC<ListGroupProps> = ({
     />
 );
 
-export interface ListGroupItemProps extends ComponentPropsWithRef<'li'> {
+interface ListGroupItemStyleProps {
     theme?: ComponentTheme;
     action?: boolean;
     active?: boolean;
     disabled?: boolean;
 }
 
+type ListGroupItemLinkAttributes = ComponentPropsWithRef<'a'> & { href: string };
+type ListGroupItemButtonAttributes = ComponentPropsWithRef<'button'> & { href?: never };
+type ListGroupItemAttributes = ComponentPropsWithRef<'li'> & { href?: never; type?: never };
+type ListGroupItemElementAttributes =
+    ListGroupItemLinkAttributes | ListGroupItemButtonAttributes | ListGroupItemAttributes;
+
+export type ListGroupItemProps = ListGroupItemStyleProps & ListGroupItemElementAttributes;
+
+const isLink = (props: ListGroupItemElementAttributes): props is ListGroupItemLinkAttributes =>
+    typeof props.href === 'string';
+
+const isButton = (props: ListGroupItemElementAttributes): props is ListGroupItemButtonAttributes =>
+    typeof props.type === 'string';
+
 export const ListGroupItem: FC<ListGroupItemProps> = ({
+    theme,
     action,
     active,
     disabled,
-    theme,
     className,
     ...props
-}) => (
-    <li
-        {...props}
-        className={classNames(
-            'list-group-item',
-            { 'list-group-item-action': action, active, disabled },
-            theme && `theme-${theme}`,
-            className
-        )}
-        aria-current={active ? 'true' : undefined}
-        aria-disabled={disabled || undefined}
-    />
-);
+}) => {
+    const classes = classNames(
+        'list-group-item',
+        theme && `theme-${theme}`,
+        action && 'list-group-item-action',
+        { active, disabled },
+        disabled && 'pe-none',
+        className
+    );
+
+    return isLink(props) ? (
+        <a
+            {...props}
+            className={classes}
+            href={disabled ? undefined : props.href}
+            aria-current={active ? 'true' : undefined}
+            aria-disabled={disabled || undefined}
+            tabIndex={disabled ? -1 : props.tabIndex}
+            onClick={disabled ? undefined : props.onClick}
+        />
+    ) : isButton(props) ? (
+        <button
+            {...props}
+            type={props.type || 'button'}
+            className={classes}
+            aria-current={active ? 'true' : undefined}
+            disabled={disabled}
+        />
+    ) : (
+        <li
+            {...(props as ListGroupItemAttributes)}
+            className={classes}
+            aria-current={active ? 'true' : undefined}
+            aria-disabled={disabled || undefined}
+        />
+    );
+};
 
 ListGroup.displayName = 'ListGroup';
 ListGroupItem.displayName = 'ListGroupItem';
