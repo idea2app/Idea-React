@@ -13,12 +13,12 @@ The editor saves its data into a hidden `<input>`, so it participates in native 
 
 Editor.js only runs in the browser, so render the component on the client:
 
-<CodeBlock language="tsx">{`import { Editor } from 'idea-react';
+<CodeBlock language="tsx">{`import { Button, Editor, Form } from 'idea-react';
 
-<form method="post">
+<Form method="post">
     <Editor name="content" required defaultValue={savedDocument} tools={customTools} />
-    <button className="btn-solid theme-primary">Save</button>
-</form>;`}</CodeBlock>
+    <Button variant="solid" theme="primary">Save</Button>
+</Form>;`}</CodeBlock>
 
 The wrapper saves on blur and serializes the latest Editor.js `OutputData` as JSON into the hidden
 input named by `name`. All [react-editor-js props][3], such as `tools` and `onInitialize`, pass

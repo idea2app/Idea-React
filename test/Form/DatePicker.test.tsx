@@ -4,7 +4,7 @@ import { it } from 'node:test';
 import { render, screen, waitFor } from '@testing-library/react';
 import { createRef } from 'react';
 
-import { DatePicker } from '../source/Form';
+import { DatePicker } from '../../source/Form';
 
 it('renders a native date control by default', () => {
     const ref = createRef<HTMLInputElement>();

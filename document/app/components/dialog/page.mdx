@@ -334,9 +334,9 @@ below resolves with the submitted numbers and rejects when the dialog is dismiss
 <CodeExample
     code={`const inputDialog = new Dialog(({ defer }) => (
     <NativeDialog open={!!defer} onClose={() => defer?.reject(new DialogClose())}>
-        <form onSubmit={submit}>
-            <input className="form-control" name="a" type="number" />
-        </form>
+        <Form onSubmit={submit}>
+            <FormControl name="a" type="number" />
+        </Form>
     </NativeDialog>
 ));
 

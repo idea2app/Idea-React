@@ -3,7 +3,7 @@ import { it, mock } from 'node:test';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { FormRange } from '../source/Form';
+import { FormRange } from '../../source/Form';
 
 it('updates the track fill and forwards native input events', () => {
     const onInput = mock.fn();

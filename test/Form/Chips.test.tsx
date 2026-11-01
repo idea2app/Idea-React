@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { Chip, ChipInput, FormGhost } from '../source/Form';
+import { Chip, ChipInput, FormGhost } from '../../source/Form';
 
 it('renders chips and chip input options', () => {
     render(
@@ -12,7 +12,6 @@ it('renders chips and chip input options', () => {
             <FormGhost aria-label="Add tag" />
         </ChipInput>
     );
-
     assert.equal(screen.getByText('React').className, 'chip active');
     assert.equal(screen.getByLabelText('Add tag').className, 'form-ghost');
     assert.equal(screen.getByText('React').parentElement?.dataset.bsSeparator, ',');

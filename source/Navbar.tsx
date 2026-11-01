@@ -20,9 +20,19 @@ export const Navbar: FC<NavbarProps> = ({ expand, theme, className, ...props }) 
     />
 );
 
-export const NavbarBrand: FC<ComponentPropsWithRef<'a'>> = ({ className, ...props }) => (
-    <a {...props} className={classNames('navbar-brand', className)} />
-);
+export type NavbarBrandProps =
+    (ComponentPropsWithRef<'a'> & { as?: 'a' }) | (ComponentPropsWithRef<'span'> & { as: 'span' });
+
+export const NavbarBrand: FC<NavbarBrandProps> = props => {
+    if (props.as === 'span') {
+        const { as: _as, className, ...spanProps } = props;
+
+        return <span {...spanProps} className={classNames('navbar-brand', className)} />;
+    }
+    const { as: _as, className, ...anchorProps } = props;
+
+    return <a {...anchorProps} className={classNames('navbar-brand', className)} />;
+};
 
 export const NavbarNav: FC<ComponentPropsWithRef<'ul'>> = ({ className, ...props }) => (
     <ul {...props} className={classNames('navbar-nav', className)} />

@@ -15,10 +15,10 @@ import {
     ComboboxOption
 } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { FormDocsLayout } from '../../../component/Documentation/Forms/Layout';
+import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 import { Col, Row } from '../../../../source/Grid';
 
-<FormDocsLayout active="field">
+<DocumentationLayout active="forms">
 
 # Form field
 
@@ -184,14 +184,4 @@ Native HTML constraints such as `required`, `type`, `min`, and `max` are preserv
 
 Apply `.is-invalid` and render `FormFeedback` for server-returned errors.
 
-## CSS
-
-The field wrappers use Bootstrap styles from the loaded stylesheet.
-
-### Sass
-
-See the upstream [field Sass reference][1] for the complete implementation details.
-
-</FormDocsLayout>
-
-[1]: https://getbootstrap.com/docs/6.0/forms/field/
+</DocumentationLayout>

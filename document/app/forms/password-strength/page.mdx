@@ -6,9 +6,9 @@ import {
     PasswordStrength
 } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { FormDocsLayout } from '../../../component/Documentation/Forms/Layout';
+import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
-<FormDocsLayout active="password-strength">
+<DocumentationLayout active="forms">
 
 # Password strength
 
@@ -125,16 +125,4 @@ active segments without mounting `PasswordStrength`.
 The meter exposes its level using `role="meter"` and ARIA value properties. Describe password
 requirements separately.
 
-## CSS
-
-The loaded Bootstrap stylesheet provides the segmented and bar meter appearance.
-
-### Variables
-
-### Sass list
-
-See the upstream [password strength CSS reference][1].
-
-</FormDocsLayout>
-
-[1]: https://getbootstrap.com/docs/6.0/forms/password-strength/#css
+</DocumentationLayout>

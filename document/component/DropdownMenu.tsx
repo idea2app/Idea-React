@@ -21,7 +21,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
         toggleProps={{
             variant: 'text',
             ...toggleProps,
-            className: `d-flex justify-content-center align-items-center gap-3 h-100 ${toggleProps?.className ?? ''}`
+            className: `d-flex justify-content-center align-items-center gap-1 h-100 ${toggleProps?.className ?? ''}`
         }}
         label={
             <>

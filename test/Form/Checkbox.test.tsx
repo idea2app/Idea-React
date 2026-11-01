@@ -4,7 +4,7 @@ import { it } from 'node:test';
 import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 
-import { Checkbox, FormCheck } from '../source/Form';
+import { Checkbox, FormCheck } from '../../source/Form';
 
 it('sets the native indeterminate property through a prop', () => {
     const ref = createRef<HTMLInputElement>();

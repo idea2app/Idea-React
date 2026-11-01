@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { FormSwitch } from '../source/Form';
+import { FormSwitch } from '../../source/Form';
 
 it('renders a labeled switch with native input props', () => {
     render(
@@ -11,7 +11,6 @@ it('renders a labeled switch with native input props', () => {
             Notifications
         </FormSwitch>
     );
-
     const input = screen.getByLabelText('Notifications') as HTMLInputElement;
 
     assert.equal(input.checked, true);

@@ -1,8 +1,8 @@
 import { Checkbox, FormCheck, FormField, FormLabel } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { FormDocsLayout } from '../../../component/Documentation/Forms/Layout';
+import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
-<FormDocsLayout active="checkbox">
+<DocumentationLayout active="forms">
 
 # Checkbox
 
@@ -21,15 +21,7 @@ render a checkbox when its `type` is omitted.
 
 Set `indeterminate` to apply the native DOM property and expose the mixed state accessibly.
 
-<CodeExample
-    code={`import { Component } from 'react';
-
-class IndeterminateCheckboxExample extends Component {
-    render() {
-        return <Checkbox aria-label="Select all" indeterminate />;
-    }
-}`}
->
+<CodeExample>
     <Checkbox aria-label="Select all" indeterminate />
 </CodeExample>
 
@@ -83,14 +75,4 @@ Pass `size="sm"` or `"lg"` to select the corresponding check size class.
     </>
 </CodeExample>
 
-## CSS
-
-Bootstrap supplies checkbox styling through its stylesheet.
-
-### Variables
-
-See the upstream [checkbox CSS variables][1] for their complete reference.
-
-</FormDocsLayout>
-
-[1]: https://getbootstrap.com/docs/6.0/forms/checkbox/#css
+</DocumentationLayout>

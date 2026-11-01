@@ -1,8 +1,8 @@
 import { Form, FormControl, FormField, FormFieldset, FormLabel } from '../../../source/Form';
 import { CodeExample } from '../../component/Documentation/Components/Example';
-import { FormDocsLayout } from '../../component/Documentation/Forms/Layout';
+import { DocumentationLayout } from '../../component/Documentation/Components/Layout';
 
-<FormDocsLayout active="">
+<DocumentationLayout active="forms">
 
 # Forms
 
@@ -45,15 +45,6 @@ Associate every control with a visible label using matching `htmlFor` and `id` v
 `aria-describedby` to connect descriptions and validation feedback, and group related options in a
 `FormFieldset` with a `legend`.
 
-## CSS
-
-The Bootstrap stylesheet provides the form styles and design tokens used by these wrappers.
-
-### Variables
-
-See the upstream [form CSS variables][1] for the complete variable reference.
-
-</FormDocsLayout>
+</DocumentationLayout>
 
 [1]: ./field/
-[2]: https://getbootstrap.com/docs/6.0/forms/overview/#css

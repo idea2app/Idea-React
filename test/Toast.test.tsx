@@ -3,7 +3,22 @@ import { it } from 'node:test';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Toast } from '../source/Toast';
+import { Toast, ToastContainer } from '../source/Toast';
+
+it('renders toast containers in static or fixed positions', () => {
+    const { rerender } = render(<ToastContainer />);
+
+    assert.equal(
+        document.querySelector('.toast-container')?.className,
+        'toast-container position-fixed p-3 top-0 end-0'
+    );
+    rerender(<ToastContainer position="static" />);
+
+    assert.equal(
+        document.querySelector('.toast-container')?.className,
+        'toast-container position-static'
+    );
+});
 
 it('renders and closes a themed Bootstrap 6 toast', async () => {
     const toast = new Toast();

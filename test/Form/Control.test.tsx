@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { FormControl, FormGhost, FormSelect, FormTextArea } from '../source/Form';
+import { FormControl, FormGhost, FormSelect, FormTextArea } from '../../source/Form';
 
 it('renders styled native controls and preserves native attributes', () => {
     render(
@@ -17,7 +17,6 @@ it('renders styled native controls and preserves native attributes', () => {
             <FormGhost aria-label="Ghost" />
         </>
     );
-
     assert.equal(screen.getByLabelText('Email').className, 'form-control');
     assert.equal(screen.getByLabelText('Email').hasAttribute('required'), true);
     assert.equal(screen.getByLabelText('Country').className, 'form-control form-control-sm');

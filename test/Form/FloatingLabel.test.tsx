@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { FormControl, FormFloatingLabel, FormLabel } from '../source/Form';
+import { FormControl, FormFloatingLabel, FormLabel } from '../../source/Form';
 
 it('renders floating labels with the always-visible variant', () => {
     render(
@@ -12,7 +12,6 @@ it('renders floating labels with the always-visible variant', () => {
             <FormLabel htmlFor="name">Name</FormLabel>
         </FormFloatingLabel>
     );
-
     assert.equal(
         screen.getByLabelText('Name').parentElement?.className,
         'form-floating form-floating-always'

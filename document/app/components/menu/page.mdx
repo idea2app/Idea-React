@@ -1,6 +1,8 @@
 import { Icon } from '../../../../source/Icon';
 import { Button } from '../../../../source/Button';
-import { Navbar } from '../../../../source/Navbar';
+import { Container } from '../../../../source/Grid';
+import { Navbar, NavbarBrand, NavbarNav } from '../../../../source/Navbar';
+import { NavItem } from '../../../../source/Nav';
 import { Form, FormCheck, FormControl, FormField, FormLabel } from '../../../../source/Form';
 import {
     Menu,
@@ -96,20 +98,18 @@ wrapper element can use the attribute directly.
 And putting it to use in a navbar:
 
 <Navbar theme="dark" className="rounded-3">
-    <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-            Navbar
-        </a>
-        <ul className="navbar-nav">
-            <li className="nav-item" data-bs-theme="dark">
+    <Container fluid>
+        <NavbarBrand href="#">Navbar</NavbarBrand>
+        <NavbarNav>
+            <NavItem data-bs-theme="dark">
                 <Menu label="Menu" toggleProps={{ variant: 'solid', theme: 'secondary' }}>
                     <MenuItem href="#">Action</MenuItem>
                     <MenuItem href="#">Another action</MenuItem>
                     <MenuItem href="#">Something else here</MenuItem>
                 </Menu>
-            </li>
-        </ul>
-    </div>
+            </NavItem>
+        </NavbarNav>
+    </Container>
 </Navbar>
 
 ### Translucent menus

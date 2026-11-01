@@ -100,7 +100,7 @@ export class DocumentationSearch extends Component<DocumentationSearchProps> {
         return (
             <>
                 <Button
-                    className={`${styles.trigger} order-3 w-100 d-flex align-items-center gap-3 rounded-7 border bg-1 fg-2 px-4 py-3 text-sm text-start`}
+                    className="order-3 lg:order-0 w-100 lg:w-auto flex-grow-1 min-w-0 d-flex align-items-center gap-3 rounded-7 border bg-1 fg-2 px-4 py-3 text-sm text-start"
                     type="button"
                     onClick={this.open}
                 >

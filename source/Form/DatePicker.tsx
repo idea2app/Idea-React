@@ -29,7 +29,7 @@ class DatePickerComponent extends Component<DatePickerComponentProps> {
 
     componentWillUnmount() {
         this.mounted = false;
-        const instance = this.instance;
+        const { instance } = this;
         this.instance = undefined;
 
         queueMicrotask(() => instance?.dispose());
@@ -40,20 +40,16 @@ class DatePickerComponent extends Component<DatePickerComponentProps> {
 
         const { default: Datepicker } = await import('bootstrap/js/src/datepicker.js');
 
-        if (this.mounted && this.input) {
-            this.instance = Datepicker.getOrCreateInstance(this.input);
-        }
+        if (this.mounted && this.input) this.instance = Datepicker.getOrCreateInstance(this.input);
     };
 
     private setInputRef = (input: HTMLInputElement | null) => {
         this.input = input || undefined;
+
         const { forwardedRef } = this.props;
 
-        if (typeof forwardedRef === 'function') {
-            forwardedRef(input);
-        } else if (forwardedRef) {
-            forwardedRef.current = input;
-        }
+        if (typeof forwardedRef === 'function') forwardedRef(input);
+        else if (forwardedRef) forwardedRef.current = input;
     };
 
     render() {
@@ -72,10 +68,10 @@ class DatePickerComponent extends Component<DatePickerComponentProps> {
             <input
                 {...props}
                 ref={this.setInputRef}
+                className={classNames('form-control', className)}
                 type={enhanced ? 'text' : 'date'}
                 min={min}
                 max={max}
-                className={classNames('form-control', className)}
                 data-bs-toggle={enhanced ? 'datepicker' : undefined}
                 data-bs-date-min={enhanced ? min : undefined}
                 data-bs-date-max={enhanced ? max : undefined}

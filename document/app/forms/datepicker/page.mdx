@@ -1,8 +1,8 @@
 import { DatePicker, FormField, FormLabel } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { FormDocsLayout } from '../../../component/Documentation/Forms/Layout';
+import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
-<FormDocsLayout active="datepicker">
+<DocumentationLayout active="forms">
 
 # Datepicker
 
@@ -111,14 +111,6 @@ Use the plugin's theme configuration when only the picker should use a different
 Native mode is subject to browser date input support. Enhanced plugin behavior follows its own
 Shadow DOM and styling requirements.
 
-## CSS
-
-Native mode uses `.form-control` styling. Enhanced calendar styles come from Bootstrap.
-
-### Variables
-
-See the upstream [datepicker CSS variables][1].
-
 ## Usage
 
 ### Via data attributes
@@ -153,6 +145,4 @@ imperative methods.
 Date selection events are forwarded by the native input. Use Bootstrap's JavaScript API directly
 when plugin-specific events are required.
 
-</FormDocsLayout>
-
-[1]: https://getbootstrap.com/docs/6.0/forms/datepicker/#css
+</DocumentationLayout>

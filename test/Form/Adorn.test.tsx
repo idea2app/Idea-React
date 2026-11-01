@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { FormAdornment, FormAdornmentText, FormGhost } from '../source/Form';
+import { FormAdornment, FormAdornmentText, FormGhost } from '../../source/Form';
 
 it('renders an associated form adornment with a ghost control', () => {
     render(
@@ -12,7 +12,6 @@ it('renders an associated form adornment with a ghost control', () => {
             <FormGhost id="amount" aria-label="Amount" />
         </FormAdornment>
     );
-
     assert.equal(
         screen.getByLabelText('Amount').closest('label')?.className,
         'form-control form-adorn form-adorn-end'

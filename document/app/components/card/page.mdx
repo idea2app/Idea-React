@@ -3,7 +3,9 @@ import {
     Card,
     CardBody,
     CardFooter,
+    CardGroup,
     CardHeader,
+    CardImageOverlay,
     CardText,
     CardTitle
 } from '../../../../source/Card';
@@ -21,9 +23,9 @@ import { ComponentsLayout } from '../../../component/Documentation/Components/La
 Bootstrap's cards provide a flexible and extensible content container with multiple variants and
 options.
 
-Idea React provides the [`Card`, `CardHeader`, `CardBody`, `CardTitle`, `CardText`, and
-`CardFooter` wrappers][1] for these examples. Use other Bootstrap wrappers such as [`Button`][2],
-[`Image`][3], [`Nav`][4], and [`ListGroup`][5] inside them.
+Idea React provides wrappers for [`Card`, `CardGroup`, `CardImageOverlay`, `CardHeader`,
+`CardBody`, `CardTitle`, `CardText`, and `CardFooter`][1]. Use other Bootstrap wrappers such as
+[`Button`][2], [`Image`][3], [`Nav`][4], and [`ListGroup`][5] inside them.
 
 ## Example
 
@@ -466,8 +468,8 @@ bottom of a card.
 
 ### Image overlays
 
-Turn an image into a card background and overlay your card's text. Depending on the image, you may or
-may not need additional styles or utilities.
+Turn an image into a card background and overlay your card's text with `CardImageOverlay`. Depending
+on the image, you may or may not need additional styles or utilities.
 
 <Card className="theme-inverse">
     <Image
@@ -477,7 +479,7 @@ may not need additional styles or utilities.
         height={500}
         className="card-img"
     />
-    <div className="card-img-overlay">
+    <CardImageOverlay>
         <CardTitle>Card title</CardTitle>
         <CardText>
             {
@@ -487,7 +489,7 @@ may not need additional styles or utilities.
         <CardText>
             <small>Last updated 3 mins ago</small>
         </CardText>
-    </div>
+    </CardImageOverlay>
 </Card>
 
 Note that content should not be larger than the height of the image. If content is larger than the
@@ -640,7 +642,7 @@ series of cards.
 
 ### Card groups
 
-Use card groups to render cards as a single, attached element with equal width and height columns.
+Use `CardGroup` to render cards as a single, attached element with equal width and height columns.
 Card groups start off stacked and use `display: flex;` to become attached with uniform dimensions
 starting at the `sm` breakpoint.
 
@@ -649,7 +651,7 @@ This layout uses container queries, so wrap the card group in a query containerâ
 container, the cards remain stacked.
 
 <div className="contains-inline">
-    <div className="card-group">
+    <CardGroup>
         <Card>
             <Image
                 src="https://picsum.photos/seed/idea-react-group-1/400/180"
@@ -710,13 +712,13 @@ container, the cards remain stacked.
                 </CardText>
             </CardBody>
         </Card>
-    </div>
+    </CardGroup>
 </div>
 
 When using card groups with footers, their content will automatically line up.
 
 <div className="contains-inline">
-    <div className="card-group">
+    <CardGroup>
         <Card>
             <CardBody>
                 <CardTitle>Card title</CardTitle>
@@ -756,7 +758,7 @@ When using card groups with footers, their content will automatically line up.
                 <small className="fg-2">Last updated 3 mins ago</small>
             </CardFooter>
         </Card>
-    </div>
+    </CardGroup>
 </div>
 
 ### Grid cards

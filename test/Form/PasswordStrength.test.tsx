@@ -4,7 +4,7 @@ import { it } from 'node:test';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { createRef } from 'react';
 
-import { FormControl, FormField, FormLabel, PasswordStrength } from '../source/Form';
+import { FormControl, FormField, FormLabel, PasswordStrength } from '../../source/Form';
 
 it('uses Bootstrap strength scoring and disposes the plugin instance', async () => {
     const { default: Strength } = await import('bootstrap/js/src/strength.js');

@@ -32,13 +32,11 @@ class CheckboxComponent extends Component<CheckboxComponentProps> {
 
     private setInputRef = (input: HTMLInputElement | null) => {
         this.input = input || undefined;
+
         const { forwardedRef } = this.props;
 
-        if (typeof forwardedRef === 'function') {
-            forwardedRef(input);
-        } else if (forwardedRef) {
-            forwardedRef.current = input;
-        }
+        if (typeof forwardedRef === 'function') forwardedRef(input);
+        else if (forwardedRef) forwardedRef.current = input;
     };
 
     render() {

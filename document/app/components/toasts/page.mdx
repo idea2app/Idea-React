@@ -1,4 +1,5 @@
 import { CodeBlock } from '../../../../source/CodeBlock';
+import { ToastContainer } from '../../../../source/Toast';
 
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -93,11 +94,12 @@ Set `translucent` on the static demo to apply the class.
 ### Stacking
 
 You can stack toasts by wrapping them in a toast container, which will vertically add some spacing.
+Set `position="static"` to keep the container in normal document flow.
 
-<div className="toast-container position-static">
+<ToastContainer position="static">
     <StaticToast time="just now" body="See? Just like this." />
     <StaticToast time="2 seconds ago" body="Heads up, toasts will stack automatically" />
-</div>
+</ToastContainer>
 
 ### Dark toasts
 
@@ -169,10 +171,10 @@ For systems that generate more notifications, wrap them in a toast container so 
 position the container in the upper right corner.
 
 <div className="position-relative bg-1 rounded-3 p-3" style={{ minHeight: '200px' }}>
-    <div className="toast-container top-0 end-0 p-3">
+    <ToastContainer>
         <StaticToast time="just now" body="See? Just like this." />
         <StaticToast time="2 seconds ago" body="Heads up, toasts will stack automatically" />
-    </div>
+    </ToastContainer>
 </div>
 
 You can also get fancy with flexbox utilities to align toasts horizontally and vertically.
@@ -204,13 +206,6 @@ When a toast does not auto-hide, include a close button so users can dismiss it:
 While it's technically possible to add focusable or actionable controls in a toast, avoid doing so
 for autohiding toasts. Keyboard and assistive technology users may not reach the toast in time. If
 you absolutely need further controls, use a toast with no auto-hide, like the static examples above.
-
-## CSS
-
-### Variables
-
-Toast colors, spacing, and transition timing are defined by CSS variables on `.toast`. See the
-[upstream toast CSS][2] for the complete variable and Sass map reference.
 
 ## Usage
 

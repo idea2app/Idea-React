@@ -7,12 +7,12 @@ export type PasswordStrengthLevel = 'weak' | 'fair' | 'good' | 'strong';
 
 export interface PasswordStrengthProps extends ComponentPropsWithoutRef<'div'> {
     input?: string | HTMLInputElement | null;
+    variant?: 'segments' | 'bar';
     minLength?: number;
     messages?: Partial<Record<PasswordStrengthLevel, string>>;
     weights?: Record<string, number>;
     thresholds?: number[];
     scorer?: (password: string) => number;
-    variant?: 'segments' | 'bar';
 }
 
 interface PasswordStrengthComponentProps extends PasswordStrengthProps {
@@ -62,8 +62,8 @@ class PasswordStrengthComponent extends Component<PasswordStrengthComponentProps
         const element = this.meter;
         if (!element) return;
 
-        const { input, minLength, messages, weights, thresholds, scorer } = this.props;
         const { default: Strength } = await import('bootstrap/js/src/strength.js');
+        const { input, minLength, messages, weights, thresholds, scorer } = this.props;
         const config = {
             ...(input !== undefined && { input }),
             ...(minLength !== undefined && { minLength }),
@@ -74,7 +74,6 @@ class PasswordStrengthComponent extends Component<PasswordStrengthComponentProps
             ...(thresholds !== undefined && { thresholds }),
             ...(scorer !== undefined && { scorer })
         };
-
         if (!this.mounted || this.meter !== element) return;
 
         this.instanceElement = element;
@@ -83,7 +82,9 @@ class PasswordStrengthComponent extends Component<PasswordStrengthComponentProps
             typeof input === 'string'
                 ? document.querySelector<HTMLInputElement>(input) || undefined
                 : input ||
-                  element.parentElement?.querySelector<HTMLInputElement>('input[type="password"]') ||
+                  element.parentElement?.querySelector<HTMLInputElement>(
+                      'input[type="password"]'
+                  ) ||
                   undefined;
         this.passwordInput?.addEventListener('input', this.handleInput);
         this.passwordInput?.addEventListener('change', this.handleInput);
@@ -98,6 +99,7 @@ class PasswordStrengthComponent extends Component<PasswordStrengthComponentProps
         element?.setAttribute('aria-valuenow', String(levelIndex));
         element?.setAttribute('aria-valuetext', strength || 'Empty');
     };
+
     private dispose = () => {
         this.passwordInput?.removeEventListener('input', this.handleInput);
         this.passwordInput?.removeEventListener('change', this.handleInput);
@@ -111,11 +113,8 @@ class PasswordStrengthComponent extends Component<PasswordStrengthComponentProps
         this.meter = element || undefined;
         const { forwardedRef } = this.props;
 
-        if (typeof forwardedRef === 'function') {
-            forwardedRef(element);
-        } else if (forwardedRef) {
-            forwardedRef.current = element;
-        }
+        if (typeof forwardedRef === 'function') forwardedRef(element);
+        else if (forwardedRef) forwardedRef.current = element;
     };
 
     render() {

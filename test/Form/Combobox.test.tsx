@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Combobox, ComboboxOption } from '../source/Form';
+import { Combobox, ComboboxOption } from '../../source/Form';
 
 it('updates the controlled value when an option is selected', () => {
     const changed: (string | string[])[] = [];

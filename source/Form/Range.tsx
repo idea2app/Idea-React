@@ -27,18 +27,17 @@ export const FormRange: FC<FormRangeProps> = ({
         Number(max) <= Number(min)
             ? 0
             : Math.max(0, Math.min(1, (currentValue - Number(min)) / (Number(max) - Number(min))));
+
     const handleInput = (event: InputEvent<HTMLInputElement>) => {
         const input = event.currentTarget;
         const range = Number(input.value);
+        const value =
+            Number(max) <= Number(min)
+                ? 0
+                : Math.max(0, Math.min(1, (range - Number(min)) / (Number(max) - Number(min))));
 
-        input.parentElement?.style.setProperty(
-            '--range-fill',
-            String(
-                Number(max) <= Number(min)
-                    ? 0
-                    : Math.max(0, Math.min(1, (range - Number(min)) / (Number(max) - Number(min))))
-            )
-        );
+        input.parentElement?.style.setProperty('--range-fill', value + '');
+
         onInput?.(event);
     };
 

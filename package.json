@@ -132,7 +132,7 @@
     },
     "scripts": {
         "prepare": "husky",
-        "test": "lint-staged  &&  node --import ./test/setup.mts --test --test-timeout=10000 test/*.test.tsx",
+        "test": "lint-staged  &&  node --import ./test/setup.mts --test --test-timeout=10000 \"test/**/*.test.tsx\"",
         "pack-docs": "rimraf docs/  &&  typedoc source/",
         "start": "npm run pack-docs  &&  web-server docs/ -p 8080 -o",
         "build": "npm run pack-docs  &&  tsdown",

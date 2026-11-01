@@ -3,7 +3,14 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { Form, FormField, FormFieldContent, FormFieldset, FormGroup, FormLabel } from '../source/Form';
+import {
+    Form,
+    FormField,
+    FormFieldContent,
+    FormFieldset,
+    FormGroup,
+    FormLabel
+} from '../../source/Form';
 
 it('renders native form structure and field wrappers', () => {
     render(
@@ -20,7 +27,6 @@ it('renders native form structure and field wrappers', () => {
             </FormFieldset>
         </Form>
     );
-
     assert.equal(screen.getByRole('form', { name: 'Profile' }).tagName, 'FORM');
     assert.equal(screen.getByLabelText('Email').parentElement?.className, 'form-field');
     assert.equal(screen.getByTestId('field-content').className, 'form-field-content');

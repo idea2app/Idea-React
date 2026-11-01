@@ -49,6 +49,7 @@ export const Combobox: FC<ComboboxProps> = ({
     );
     const selected = options.filter(option => values.includes(option.props.value));
     const hasSelection = selected.length > 0;
+
     const handleClick: ComponentPropsWithRef<'div'>['onClick'] = ({ target }) => {
         if (!(target instanceof Element)) return;
 
@@ -56,13 +57,13 @@ export const Combobox: FC<ComboboxProps> = ({
         if (!option || !onChange) return;
 
         const next = option.dataset.bsValue || '';
-        onChange(
-            multiple
-                ? values.includes(next)
-                    ? values.filter(item => item !== next)
-                    : [...values, next]
-                : next
-        );
+        const value = multiple
+            ? values.includes(next)
+                ? values.filter(item => item !== next)
+                : [...values, next]
+            : next;
+
+        onChange(value);
     };
 
     return (
