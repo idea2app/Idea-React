@@ -17,6 +17,7 @@ import {
     FormControl,
     FormFeedback,
     FormField,
+    FormFieldContent,
     FormFieldset,
     FormFloatingLabel,
     FormGhost,
@@ -50,7 +51,7 @@ it('renders Bootstrap 6 form field wrappers and native controls', () => {
                 </FormField>
                 <FormField>
                     <FormLabel htmlFor="country">Country</FormLabel>
-                    <FormSelect id="country" defaultValue="ca">
+                    <FormSelect id="country" controlSize="sm" defaultValue="ca">
                         <option value="ca">Canada</option>
                     </FormSelect>
                 </FormField>
@@ -58,6 +59,7 @@ it('renders Bootstrap 6 form field wrappers and native controls', () => {
                     <FormLabel htmlFor="message">Message</FormLabel>
                     <FormTextArea id="message" rows={3} />
                 </FormField>
+                <FormFieldContent data-testid="field-content">Content</FormFieldContent>
             </FormGroup>
         </Form>
     );
@@ -65,9 +67,10 @@ it('renders Bootstrap 6 form field wrappers and native controls', () => {
     assert.equal(screen.getByRole('form', { name: 'Profile' }).tagName, 'FORM');
     assert.equal(screen.getByLabelText('Email').className, 'form-control');
     assert.equal(screen.getByLabelText('Accept terms').className, 'check');
-    assert.equal(screen.getByLabelText('Country').className, 'form-control');
+    assert.equal(screen.getByLabelText('Country').className, 'form-control form-control-sm');
     assert.equal(screen.getByLabelText('Message').tagName, 'TEXTAREA');
     assert.equal(screen.getByText('Use your work email.').className, 'form-text');
+    assert.equal(screen.getByTestId('field-content').className, 'form-field-content');
 });
 
 it('renders floating labels, input groups, and validation feedback', () => {
@@ -77,7 +80,7 @@ it('renders floating labels, input groups, and validation feedback', () => {
                 <FormLabel htmlFor="name">Name</FormLabel>
                 <FormControl id="name" placeholder="Name" />
             </FormFloatingLabel>
-            <InputGroup>
+            <InputGroup size="lg">
                 <InputGroupText>@</InputGroupText>
                 <FormControl aria-label="Username" />
             </InputGroup>
@@ -90,6 +93,7 @@ it('renders floating labels, input groups, and validation feedback', () => {
         screen.getByLabelText('Name').parentElement?.className.includes('form-floating-always')
     );
     assert.equal(screen.getByText('@').className, 'input-group-text');
+    assert.equal(screen.getByText('@').parentElement?.className, 'input-group input-group-lg');
     assert.equal(screen.getByText('Looks good.').className, 'valid-feedback');
     assert.equal(screen.getByText('Required.').className, 'invalid-tooltip');
 });
@@ -176,6 +180,7 @@ it('supports date, range, OTP, and password-strength controls', () => {
                 min={0}
                 max={100}
                 defaultValue={50}
+                theme="primary"
                 bubble
                 onInput={onInput}
             />
@@ -188,6 +193,7 @@ it('supports date, range, OTP, and password-strength controls', () => {
     assert.equal(screen.getByLabelText('Start date').getAttribute('type'), 'date');
     const range = screen.getByLabelText('Volume');
     assert.equal(range.className, 'form-range-input');
+    assert.equal(range.parentElement?.className, 'form-range theme-primary');
     assert.equal(range.parentElement?.getAttribute('data-bs-bubble'), 'true');
     fireEvent.input(range, { target: { value: '75' } });
     assert.equal(range.parentElement?.style.getPropertyValue('--range-fill'), '0.75');

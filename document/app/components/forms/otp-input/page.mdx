@@ -1,0 +1,106 @@
+import { FormField, FormLabel, FormText, OtpInput } from '../../../../../source/Form';
+import { FormDocsLayout } from '../../../../component/Documentation/Forms/Layout';
+
+<FormDocsLayout active="otp-input">
+
+# OTP input
+
+`OtpInput` renders one text input and forwards the visual and behavior options to Bootstrap's OTP
+plugin. A single input preserves browser autofill and screen-reader access.
+
+## Overview
+
+## How it works
+
+The default `length` is provided by the caller; `type` supports numeric, alpha, and alphanumeric
+input. The component defaults to `autocomplete="one-time-code"`.
+
+<FormField>
+    <FormLabel htmlFor="otpCode">Verification code</FormLabel>
+    <OtpInput id="otpCode" name="code" length={6} groups={[3, 3]} />
+    <FormText>Enter the six-digit code sent to your device.</FormText>
+</FormField>
+
+## Connected inputs
+
+Set `connected` to request connected visual slots.
+
+<OtpInput aria-label="Connected PIN" name="pin" length={4} connected />
+
+## Four-digit PIN
+
+<OtpInput aria-label="Four digit PIN" name="fourDigitPin" length={4} connected />
+
+## With separator
+
+Use `groups` and `separator` to control visual grouping.
+
+<OtpInput aria-label="Grouped code" length={6} groups={[3, 3]} separator="-" />
+
+## Sizes
+
+Use `size="sm"` or `"lg"` on the wrapper.
+
+## Alphanumeric and masking
+
+<OtpInput aria-label="Masked code" length={6} type="alphanumeric" mask />
+
+## Disabled
+
+The native `disabled` property is forwarded to the input.
+
+## Validation
+
+Use native `required`, `pattern`, and length constraints to validate the input.
+
+## With form label
+
+Wrap the control with `FormField` and associate the visible label.
+
+## Usage
+
+The Bootstrap OTP JavaScript plugin is required to render the individual visual slots. The fallback
+is one accessible native text input.
+
+### Via data attributes
+
+The wrapper forwards length, input type, mask, grouping, and separator options as data attributes.
+
+### Via JavaScript
+
+The Bootstrap OTP plugin can also be initialized programmatically.
+
+### Dependencies
+
+The interactive OTP slots require Bootstrap's OTP JavaScript plugin.
+
+### Options
+
+`OtpInput` supports length, input type, mask, groups, separator, connected, and size options.
+
+### Methods
+
+The OTP plugin exposes lifecycle methods.
+
+### Events
+
+Plugin-specific events are provided by Bootstrap.
+
+## Accessibility
+
+The single native input keeps the value available to assistive technology and one-time-code
+autofill. Provide a visible label and instructions.
+
+## CSS
+
+The OTP plugin and Bootstrap stylesheet provide the visual input slots.
+
+### Variables
+
+### Sass list
+
+See the upstream [OTP input CSS reference][1].
+
+</FormDocsLayout>
+
+[1]: https://getbootstrap.com/docs/6.0/forms/otp-input/#css

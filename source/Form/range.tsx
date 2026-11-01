@@ -1,0 +1,71 @@
+'use client';
+
+import classNames from 'classnames';
+import { ComponentPropsWithRef, CSSProperties, FC } from 'react';
+
+import type { ComponentTheme } from '../Button';
+
+export type FormRangeProps = Omit<ComponentPropsWithRef<'input'>, 'type'> & {
+    bubble?: boolean;
+    theme?: ComponentTheme;
+};
+
+export const FormRange: FC<FormRangeProps> = ({
+    className,
+    min = 0,
+    max = 100,
+    value,
+    defaultValue,
+    bubble,
+    theme,
+    onInput,
+    style,
+    ...props
+}) => {
+    const currentValue = Number(value ?? defaultValue ?? min);
+    const fill =
+        Number(max) <= Number(min)
+            ? 0
+            : Math.max(0, Math.min(1, (currentValue - Number(min)) / (Number(max) - Number(min))));
+
+    return (
+        <div
+            className={classNames('form-range', theme && `theme-${theme}`)}
+            data-bs-bubble={bubble || undefined}
+            style={{ '--range-fill': fill } as CSSProperties}
+        >
+            <input
+                {...props}
+                type="range"
+                min={min}
+                max={max}
+                value={value}
+                defaultValue={defaultValue}
+                className={classNames('form-range-input', className)}
+                style={style}
+                onInput={event => {
+                    const input = event.currentTarget;
+                    const range = Number(input.value);
+
+                    input.parentElement?.style.setProperty(
+                        '--range-fill',
+                        String(
+                            Number(max) <= Number(min)
+                                ? 0
+                                : Math.max(
+                                      0,
+                                      Math.min(
+                                          1,
+                                          (range - Number(min)) / (Number(max) - Number(min))
+                                      )
+                                  )
+                        )
+                    );
+                    onInput?.(event);
+                }}
+            />
+        </div>
+    );
+};
+
+FormRange.displayName = 'FormRange';

@@ -1,0 +1,148 @@
+import { DatePicker, FormField, FormLabel } from '../../../../../source/Form';
+import { FormDocsLayout } from '../../../../component/Documentation/Forms/Layout';
+
+<FormDocsLayout active="datepicker">
+
+# Datepicker
+
+By default, `DatePicker` renders a native `input type="date"`, retaining browser date selection,
+validation, `min`, `max`, and form submission.
+
+## Overview
+
+<FormField>
+    <FormLabel htmlFor="dateDefault">Date</FormLabel>
+    <DatePicker id="dateDefault" name="date" min="2026-01-01" max="2026-12-31" />
+</FormField>
+
+## How it works
+
+The default native date input follows the platform's picker behavior. Enhanced mode forwards
+Bootstrap datepicker data attributes and requires its JavaScript plugin.
+
+Set `enhanced` to render a text input with Bootstrap's datepicker data attributes. The consuming
+application must load the Bootstrap datepicker plugin to provide the enhanced calendar.
+
+## Examples
+
+### With form field
+
+Wrap the input in `FormField` and associate its visible label. This example opts into the enhanced
+plugin.
+
+<FormField>
+    <FormLabel htmlFor="dateEnhanced">Appointment</FormLabel>
+    <DatePicker id="dateEnhanced" name="appointment" enhanced selectionMode="single" />
+</FormField>
+
+### With icon
+
+Compose a date input with an existing icon and input group when an icon trigger is needed.
+
+### Min & Max dates
+
+Native mode accepts standard ISO date strings for `min` and `max`.
+
+### Multiple dates
+
+Enhanced mode forwards `selectionMode="multiple"` to the plugin. Native mode remains a single date
+input.
+
+<DatePicker aria-label="Multiple dates" enhanced selectionMode="multiple" />
+
+### Multiple months
+
+The plugin controls how many months are visible; configure this in the consuming application's
+datepicker initialization.
+
+### Date range
+
+<DatePicker aria-label="Date range" enhanced selectionMode="multiple-ranged" />
+
+### Multi-month date range
+
+The plugin's month-display configuration is controlled by the consuming application.
+
+## Options
+
+### First day of week
+
+Configure locale and first-day-of-week behavior through the datepicker plugin.
+
+### Placement
+
+The Bootstrap plugin chooses a placement based on its configuration and available viewport space.
+
+### Button trigger
+
+The wrapper renders an input; compose it with a separate button when the application needs a custom
+trigger.
+
+### Inline mode
+
+Set `inline` in enhanced mode to request an inline calendar.
+
+### Custom date formatting
+
+Native date values use the browser's standard form value. Use the plugin's options for custom
+display formatting in enhanced mode.
+
+## Dark mode
+
+The picker follows the theme styles provided by the Bootstrap stylesheet.
+
+### Inherited from parent
+
+Place the datepicker inside the appropriate themed container.
+
+### Datepicker-only theme
+
+Use the plugin's theme configuration when only the picker should use a different theme.
+
+## Shadow DOM
+
+Native mode is subject to browser date input support. Enhanced plugin behavior follows its own
+Shadow DOM and styling requirements.
+
+## CSS
+
+Native mode uses `.form-control` styling. Enhanced calendar styles come from Bootstrap.
+
+### Variables
+
+See the upstream [datepicker CSS variables][1].
+
+## Usage
+
+### Via data attributes
+
+`enhanced`, `inline`, and `selectionMode` are forwarded as data attributes.
+
+### Via JavaScript
+
+The consuming application can initialize the Bootstrap datepicker plugin for enhanced mode.
+
+### Dependencies
+
+Native mode has no JavaScript dependency. Enhanced mode requires Bootstrap's datepicker plugin.
+
+### Options
+
+Native mode forwards input attributes such as `min` and `max`; plugin-specific options are supplied
+by the consuming application.
+
+### Advanced configuration
+
+Configure advanced datepicker behavior through Bootstrap's JavaScript API.
+
+### Methods
+
+Plugin-specific methods are available from the Bootstrap datepicker instance.
+
+### Events
+
+Plugin-specific options, methods, and events are controlled by Bootstrap's JavaScript API.
+
+</FormDocsLayout>
+
+[1]: https://getbootstrap.com/docs/6.0/forms/datepicker/#css
