@@ -1,3 +1,5 @@
+import { CodeBlock } from '../../../../source/CodeBlock';
+
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 import { SelectDemo } from '../../../component/Documentation/Components/SelectDemo';
@@ -24,12 +26,10 @@ toggles a keyboard-navigable menu of `Option` items.
 
 `Select` is controlled: pass the current `value` and update it in `onChange`.
 
-```tsx
-<Select value={framework} onChange={setFramework}>
+<CodeBlock language="tsx">{`<Select value={framework} onChange={setFramework}>
     <Option value="react">React</Option>
     <Option value="vue">Vue</Option>
-</Select>
-```
+</Select>`}</CodeBlock>
 
 The toggle shows the selected option's content, or render a custom label with `valueRender`. Button
 styling props such as `theme`, `variant`, `size`, and `disabled` pass through to the toggle, and

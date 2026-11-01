@@ -1,3 +1,5 @@
+import { CodeBlock } from '../../../../source/CodeBlock';
+
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="click-boundary">
@@ -10,11 +12,9 @@ clicks elsewhere.
 
 ## Usage
 
-```tsx
-<ClickBoundary onInnerClick={() => console.log('inside')} onOuterClick={() => setOpen(false)}>
+<CodeBlock language="tsx">{`<ClickBoundary onInnerClick={() => console.log('inside')} onOuterClick={() => setOpen(false)}>
     <div className="border rounded p-3">Click inside or outside this box</div>
-</ClickBoundary>
-```
+</ClickBoundary>`}</CodeBlock>
 
 The component listens for `click` events in the capture phase on `window`, so outer clicks are
 detected even when other handlers stop propagation. The listener is removed on unmount.

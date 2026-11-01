@@ -6,12 +6,47 @@ import { defineConfig } from 'vite';
 
 import { swcOptions } from '../swc.config.mts';
 
+interface MdastNode {
+    type: string;
+    name?: string | null;
+    children?: MdastNode[];
+}
+
 interface HastNode {
     type: string;
     tagName?: string;
     properties?: Record<string, unknown>;
     children?: HastNode[];
 }
+
+const inlineElements = new Set([
+    'a',
+    'Avatar',
+    'Badge',
+    'Button',
+    'button',
+    'CloseButton',
+    'label',
+    'MenuItem',
+    'MenuItemContent',
+    'NavbarBrand',
+    'NavLink',
+    'Option',
+    'span',
+    'SpinnerButton',
+    'ToggleButton'
+]);
+
+const visit = (node: MdastNode) => {
+    for (const child of node.children || []) {
+        if (child.type === 'mdxJsxFlowElement' && child.children && inlineElements.has(child.name!))
+            child.children = child.children.flatMap(grandChild =>
+                grandChild.type === 'paragraph' ? grandChild.children || [] : [grandChild]
+            );
+        visit(child);
+    }
+};
+const remarkInlineButtonChildren = () => (tree: MdastNode) => visit(tree);
 
 const rehypeBootstrapTable = () => (tree: HastNode) => {
     const visit = (node: HastNode) => {
@@ -37,7 +72,10 @@ const rehypeBootstrapTable = () => (tree: HastNode) => {
 
 export default defineConfig({
     plugins: [
-        mdx({ remarkPlugins: [remarkGfm], rehypePlugins: [rehypeBootstrapTable] }),
+        mdx({
+            remarkPlugins: [remarkGfm, remarkInlineButtonChildren],
+            rehypePlugins: [rehypeBootstrapTable]
+        }),
         swc.vite({
             ...swcOptions,
             tsconfigFile: false

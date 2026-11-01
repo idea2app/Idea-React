@@ -4,6 +4,7 @@ import { Image } from '../../../../source/Image';
 import { Menu, MenuDivider, MenuItem } from '../../../../source/Menu';
 import { NavItem, NavLink } from '../../../../source/Nav';
 import { Navbar, NavbarBrand, NavbarNav, NavbarText } from '../../../../source/Navbar';
+import { CodeBlock } from '../../../../source/CodeBlock';
 
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 import {
@@ -527,12 +528,10 @@ Fixed navbars use `position: fixed`, meaning they're pulled from the normal flow
 require custom CSS (for example, `padding-top` on the `<body>`) to prevent overlap with other
 elements.
 
-```tsx
-<Navbar className="fixed-top">…</Navbar>
+<CodeBlock language="tsx">{`<Navbar className="fixed-top">…</Navbar>
 <Navbar className="fixed-bottom">…</Navbar>
 <Navbar className="sticky-top">…</Navbar>
-<Navbar className="sticky-bottom">…</Navbar>
-```
+<Navbar className="sticky-bottom">…</Navbar>`}</CodeBlock>
 
 ## Responsive behaviors
 

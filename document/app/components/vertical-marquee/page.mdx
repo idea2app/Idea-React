@@ -1,4 +1,5 @@
 import { VerticalMarquee } from '../../../../source/VerticalMarquee';
+import { CodeBlock } from '../../../../source/CodeBlock';
 
 import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -30,9 +31,7 @@ notice boards and credit rolls.
 Content shorter than the container stays still; overflowing content scrolls upward in a loop and
 pauses on hover. Set the scroll `duration` in seconds to tune the speed.
 
-```tsx
-<VerticalMarquee duration={10}>{notices}</VerticalMarquee>
-```
+<CodeBlock language="tsx">{`<VerticalMarquee duration={10}>{notices}</VerticalMarquee>`}</CodeBlock>
 
 See the [Horizontal marquee](../horizontal-marquee/) for the horizontal variant.
 

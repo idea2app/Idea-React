@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef, FC } from 'react';
 
-import { OVERLAY_DIRECTIONS, OverlayPlacement } from './Overlay';
+import { OVERLAY_ARROW_POSITIONS, OVERLAY_DIRECTIONS, OverlayPlacement } from './Overlay';
 
 export interface TooltipProps extends ComponentPropsWithRef<'div'> {
     placement?: OverlayPlacement;
@@ -27,7 +27,7 @@ export const Tooltip: FC<TooltipProps> = ({
         role={role}
         data-bs-placement={placement}
     >
-        <div className="tooltip-arrow" />
+        <div className={classNames('tooltip-arrow', OVERLAY_ARROW_POSITIONS[placement])} />
         <div className="tooltip-inner">{children}</div>
     </div>
 );

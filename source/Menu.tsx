@@ -248,7 +248,7 @@ export class Menu extends Component<MenuProps> {
                 {...props}
                 ref={this.root}
                 id={id}
-                className={classNames('position-relative', className)}
+                className={classNames('d-inline-block position-relative', className)}
                 onKeyDown={this.handleKeyDown}
                 onBlur={this.handleBlur}
             >

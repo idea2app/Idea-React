@@ -1,6 +1,7 @@
-import { FC,PropsWithChildren } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 import { Sidebar } from './Sidebar';
+import * as style from './style.module.less';
 import { Toc } from './Toc';
 
 export interface ComponentsLayoutProps extends PropsWithChildren {
@@ -15,7 +16,7 @@ export const ComponentsLayout: FC<ComponentsLayoutProps> = ({ active, children }
             </aside>
             <div className="col-12 lg:col-9">
                 <div className="row g-5">
-                    <main id="content" className="col-12 lg:col-9">
+                    <main id="content" className={`col-12 lg:col-9 ${style.content}`}>
                         {children}
                     </main>
                     <aside className="col-12 lg:col-3 d-none lg:d-block">

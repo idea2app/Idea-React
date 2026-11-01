@@ -1,3 +1,5 @@
+import { CodeBlock } from '../../../../source/CodeBlock';
+
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 import {
@@ -29,8 +31,7 @@ Things to know when using toasts:
 - Toast headers use `display: flex`, so margin and flexbox utilities keep their content aligned.
 - The fade animation honors `prefers-reduced-motion`.
 
-```tsx
-const notifications = new Toast();
+<CodeBlock language="tsx">{`const notifications = new Toast();
 
 notifications.open({
     title: 'Saved',
@@ -39,8 +40,7 @@ notifications.open({
     delay: 5000
 });
 
-<notifications.Component position="bottom-end" />;
-```
+<notifications.Component position="bottom-end" />;`}</CodeBlock>
 
 ## Examples
 
@@ -217,8 +217,7 @@ Toast colors, spacing, and transition timing are defined by CSS variables on `.t
 Bootstrap initializes toasts through a JavaScript plugin. The React model replaces the plugin with
 an observable collection of messages:
 
-```tsx
-const notifications = new Toast();
+<CodeBlock language="tsx">{`const notifications = new Toast();
 
 const closed = notifications.open({
     title: 'Saved',
@@ -229,8 +228,7 @@ const closed = notifications.open({
 
 render(<notifications.Component position="bottom-end" />);
 
-await closed; // resolves when the toast is dismissed or its timer expires
-```
+await closed; // resolves when the toast is dismissed or its timer expires`}</CodeBlock>
 
 ### Message options
 

@@ -69,6 +69,7 @@ export const Select: FC<SelectProps> = ({
     return (
         <Menu
             align={align}
+            className="w-100"
             menuClassName={menuClassName}
             label={valueRender?.(value ?? '') ?? current?.props.children}
             toggleProps={{

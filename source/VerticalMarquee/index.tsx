@@ -12,7 +12,7 @@ export const VerticalMarquee: FC<VerticalMarqueeProps> = ({
     duration,
     ...props
 }) => (
-    <div className={`overflow-hidden ${className}`} {...props}>
+    <div className={`overflow-hidden h-100 ${className}`} {...props}>
         <div
             className={`d-inline-block max-w-100 max-h-100 ${style.scrollWrap}`}
             // @ts-expect-error remove after React 19 released

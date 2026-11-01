@@ -1,4 +1,5 @@
 import { TextTruncate } from '../../../../source/TextTruncate';
+import { CodeBlock } from '../../../../source/CodeBlock';
 
 import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -23,11 +24,9 @@ when the content actually overflows.
 
 ## Usage
 
-```tsx
-<TextTruncate rows={3} expandText="Show more" collapseText="Show less">
+<CodeBlock language="tsx">{`<TextTruncate rows={3} expandText="Show more" collapseText="Show less">
     {longBiography}
-</TextTruncate>
-```
+</TextTruncate>`}</CodeBlock>
 
 `rows` sets the visible line count (default `3`). The toggle reports its state through
 `aria-expanded`, and overflow is re-checked on window resize and content changes.

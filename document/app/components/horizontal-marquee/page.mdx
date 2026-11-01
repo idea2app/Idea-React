@@ -1,4 +1,5 @@
 import { HorizontalMarquee } from '../../../../source/HorizontalMarquee';
+import { CodeBlock } from '../../../../source/CodeBlock';
 
 import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -24,9 +25,7 @@ replacement for the deprecated `<marquee>` element.
 Content narrower than the container stays still; overflowing content scrolls in a loop. The
 animation pauses while hovered so users can read the text.
 
-```tsx
-<HorizontalMarquee>{announcement}</HorizontalMarquee>
-```
+<CodeBlock language="tsx">{`<HorizontalMarquee>{announcement}</HorizontalMarquee>`}</CodeBlock>
 
 See the [Vertical marquee](../vertical-marquee/) for the vertical variant.
 

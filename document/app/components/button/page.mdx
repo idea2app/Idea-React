@@ -2,6 +2,7 @@ import { Icon } from '../../../../source/Icon';
 import { Button } from '../../../../source/Button';
 import { ButtonGroup } from '../../../../source/ButtonGroup';
 import { ToggleButton } from '../../../../source/ToggleButton';
+import { CodeBlock } from '../../../../source/CodeBlock';
 
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -438,8 +439,7 @@ default state. If you're pre-toggling a button, add the `.active` class **and** 
 toggle. In React, keep both the active class and `aria-pressed` in sync with state instead of relying
 on Bootstrap's `data-bs-toggle="button"` plugin:
 
-```tsx
-const [pressed, setPressed] = useState(false);
+<CodeBlock language="tsx">{`const [pressed, setPressed] = useState(false);
 
 <Button
     variant="solid"
@@ -449,8 +449,7 @@ const [pressed, setPressed] = useState(false);
     onClick={() => setPressed(!pressed)}
 >
     Toggle button
-</Button>;
-```
+</Button>;`}</CodeBlock>
 
 The plugin instance methods (`toggle`, `dispose`, `getInstance`) are not needed with React: update
 state in the event handler and let the render pass derive the class names and ARIA attributes.

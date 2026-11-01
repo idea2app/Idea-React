@@ -2,6 +2,7 @@ import { Button } from '../../../../source/Button';
 import { Icon } from '../../../../source/Icon';
 import { Image } from '../../../../source/Image';
 import { OverlayBox } from '../../../../source/OverlayBox';
+import { CodeBlock } from '../../../../source/CodeBlock';
 
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -123,11 +124,9 @@ The Bootstrap plugin accepts breakpoint-prefixed placements such as `top md:righ
 React wrapper takes a single `placement` value; choose it per viewport in your component or model
 instead of passing a responsive string.
 
-```tsx
-<OverlayBox placement={isWide ? 'right' : 'top'} title="Responsive popover" detail="…">
+<CodeBlock language="tsx">{`<OverlayBox placement={isWide ? 'right' : 'top'} title="Responsive popover" detail="…">
     <Button>Open</Button>
-</OverlayBox>
-```
+</OverlayBox>`}</CodeBlock>
 
 #### Custom container
 
@@ -144,11 +143,11 @@ overrides, then define the variables on that class:
 
 ```css
 .custom-popover {
-    --bs-popover-header-bg: var(--bs-primary);
-    --bs-popover-header-color: var(--bs-fg-white);
-    --bs-popover-body-color: var(--bs-fg-white);
-    --bs-popover-border-color: var(--bs-primary);
-    --bs-popover-arrow-border: var(--bs-primary);
+    --bs-popover-header-bg: var(--bs-primary-bg);
+    --bs-popover-header-color: var(--bs-primary-contrast);
+    --bs-popover-body-color: var(--bs-primary-contrast);
+    --bs-popover-border-color: var(--bs-primary-bg);
+    --bs-popover-arrow-border: var(--bs-primary-bg);
 }
 ```
 
@@ -268,8 +267,8 @@ overrides, then define the variables on that class:
 
 ```css
 .custom-tooltip {
-    --bs-tooltip-bg: var(--bs-primary);
-    --bs-tooltip-color: var(--bs-fg-white);
+    --bs-tooltip-bg: var(--bs-primary-bg);
+    --bs-tooltip-color: var(--bs-primary-contrast);
 }
 ```
 
@@ -400,11 +399,9 @@ Tooltips and popovers use local CSS variables for real-time customization. Overr
 Bootstrap enables popovers and tooltips through a JavaScript plugin. Mount the React component
 instead—there is no instance to initialize, retrieve, or dispose:
 
-```tsx
-<OverlayBox title="Popover title" detail="Popover content">
+<CodeBlock language="tsx">{`<OverlayBox title="Popover title" detail="Popover content">
     <Button>Toggle popover</Button>
-</OverlayBox>
-```
+</OverlayBox>`}</CodeBlock>
 
 The wrapper renders the panel, keeps `aria-describedby` in sync, and closes it on outside pointer
 interaction or <kbd>Escape</kbd>.
@@ -438,11 +435,9 @@ The plugin's data attributes map directly to props:
 The plugin's `show`, `hide`, `toggle`, `setContent`, and instance methods do not exist in the React
 wrapper. Render `<Popover>` or `<Tooltip>` directly when you need to control visibility or content:
 
-```tsx
-<Popover title="Popover title" placement="top">
+<CodeBlock language="tsx">{`<Popover title="Popover title" placement="top">
     Popover content
-</Popover>
-```
+</Popover>`}</CodeBlock>
 
 Likewise, use React state and lifecycle instead of `show.bs.popover`, `shown.bs.tooltip`, and the
 other plugin events.

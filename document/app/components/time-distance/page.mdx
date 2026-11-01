@@ -1,4 +1,5 @@
 import { TimeDistance } from '../../../../source/TimeDistance';
+import { CodeBlock } from '../../../../source/CodeBlock';
 
 import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -18,14 +19,12 @@ semantic `<time>` element whose `title` holds the exact timestamp.
 
 ## Usage
 
-```tsx
-<TimeDistance
+<CodeBlock language="tsx">{`<TimeDistance
     date={comment.createdAt}
     beforeWord=" ago"
     afterWord=" later"
     unitWords={{ D: 'day(s)', H: 'hour(s)', m: 'minute(s)' }}
-/>
-```
+/>`}</CodeBlock>
 
 `unitWords` localizes the unit labels, while `beforeWord` and `afterWord` are appended for past and
 future moments respectively.

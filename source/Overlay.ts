@@ -6,3 +6,10 @@ export const OVERLAY_DIRECTIONS: Record<OverlayPlacement, string> = {
     bottom: 'bottom',
     left: 'start'
 };
+
+export const OVERLAY_ARROW_POSITIONS: Record<OverlayPlacement, string> = {
+    top: 'position-absolute start-50 translate-middle-x',
+    right: 'position-absolute top-50 translate-middle-y',
+    bottom: 'position-absolute start-50 translate-middle-x',
+    left: 'position-absolute top-50 translate-middle-y'
+};

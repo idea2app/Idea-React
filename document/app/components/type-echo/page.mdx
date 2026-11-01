@@ -1,4 +1,5 @@
 import { TypeEcho } from '../../../../source/TypeEcho';
+import { CodeBlock } from '../../../../source/CodeBlock';
 
 import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -18,9 +19,7 @@ and showing a cursor until the text completes.
 
 ## Usage
 
-```tsx
-<TypeEcho text={slogan} intervals={100} />
-```
+<CodeBlock language="tsx">{`<TypeEcho text={slogan} intervals={100} />`}</CodeBlock>
 
 `intervals` sets the delay between characters in milliseconds (default `150`). The animation runs
 once per mount, driven by an `IntersectionObserver` so off-screen text does not animate early.

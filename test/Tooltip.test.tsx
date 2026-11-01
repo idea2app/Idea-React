@@ -12,5 +12,9 @@ it('renders official Bootstrap 6 tooltip markup', () => {
 
     assert.equal(tooltip.className, 'tooltip show bs-tooltip-start');
     assert.equal(tooltip.getAttribute('data-bs-placement'), 'left');
+    assert.equal(
+        tooltip.querySelector('.tooltip-arrow')?.className,
+        'tooltip-arrow position-absolute top-50 translate-middle-y'
+    );
     assert.equal(screen.getByText('Help').className, 'tooltip-inner');
 });

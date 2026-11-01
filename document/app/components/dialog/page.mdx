@@ -1,4 +1,5 @@
 import { NativeDialog } from '../../../../source/NativeDialog';
+import { CodeBlock } from '../../../../source/CodeBlock';
 
 import {
     DialogDemo,
@@ -64,8 +65,7 @@ The Invoker Commands API is not supported in all browsers. For guaranteed suppor
 dialog through React state as in the examples above when you need plugin-like options, events, or an
 animated close.
 
-```tsx
-<button type="button" className="btn-solid theme-primary" commandfor="invokerDialog" command="show-modal">
+<CodeBlock language="tsx">{`<button type="button" className="btn-solid theme-primary" commandfor="invokerDialog" command="show-modal">
     Open dialog
 </button>
 
@@ -85,8 +85,7 @@ animated close.
             Close
         </button>
     </div>
-</NativeDialog>
-```
+</NativeDialog>`}</CodeBlock>
 
 ## Dark dialog
 
@@ -237,11 +236,9 @@ dialogs as non-modal using `show()` by setting `modal` to `false`. Non-modal dia
 
 Use the `modal` prop to create a non-modal dialog when building with React:
 
-```tsx
-<NativeDialog modal={false} open={open} onClose={close}>
+<CodeBlock language="tsx">{`<NativeDialog modal={false} open={open} onClose={close}>
     …
-</NativeDialog>
-```
+</NativeDialog>`}</CodeBlock>
 
 ## Optional sizes
 

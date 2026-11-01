@@ -1,4 +1,5 @@
 import { SpinnerButton } from '../../../../source/SpinnerButton';
+import { CodeBlock } from '../../../../source/CodeBlock';
 
 import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -23,11 +24,9 @@ import { ComponentsLayout } from '../../../component/Documentation/Components/La
 
 ## Usage
 
-```tsx
-<SpinnerButton theme="primary" animation="grow" loading={submitting} onClick={submit}>
+<CodeBlock language="tsx">{`<SpinnerButton theme="primary" animation="grow" loading={submitting} onClick={submit}>
     Submit
-</SpinnerButton>
-```
+</SpinnerButton>`}</CodeBlock>
 
 All [Button](../button/) props pass through, and `animation` selects the spinner animation. When the
 button has no children while loading, a visually hidden "Loading..." label keeps it accessible.

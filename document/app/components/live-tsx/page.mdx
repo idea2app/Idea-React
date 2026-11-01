@@ -1,3 +1,5 @@
+import { CodeBlock } from '../../../../source/CodeBlock';
+
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="live-tsx">
@@ -9,13 +11,11 @@ live preview, a code editor, and any evaluation errors.
 
 ## Usage
 
-```tsx
-import { LiveTSX } from 'idea-react';
+<CodeBlock language="tsx">{`import { LiveTSX } from 'idea-react';
 
 <LiveTSX scope={{ Button }}>
     <Button theme="primary">Edit me live</Button>
-</LiveTSX>;
-```
+</LiveTSX>;`}</CodeBlock>
 
 React element children are serialized to JSX source for the editor; string children are used as the
 code directly. Provide every referenced component or value through `scope`.

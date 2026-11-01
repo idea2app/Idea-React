@@ -1,3 +1,5 @@
+import { CodeBlock } from '../../../../source/CodeBlock';
+
 import { DrawerDemo } from '../../../component/Documentation/Components/DrawerDemo';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -88,8 +90,7 @@ The Invoker Commands API is not supported in all browsers. Pass `open` and `onDi
 drawer through React state as in the examples above when you need consistent behavior or an animated
 close.
 
-```tsx
-<button type="button" className="btn-solid theme-primary" commandfor="invokerDrawer" command="show-modal">
+<CodeBlock language="tsx">{`<button type="button" className="btn-solid theme-primary" commandfor="invokerDrawer" command="show-modal">
     Open drawer
 </button>
 
@@ -105,10 +106,9 @@ close.
         />
     </div>
     <div className="drawer-body">
-        <p>This drawer opens with `command="show-modal"` and closes with `command="close"`.</p>
+        <p>This drawer opens with \`command="show-modal"\` and closes with \`command="close"\`.</p>
     </div>
-</dialog>
-```
+</dialog>`}</CodeBlock>
 
 ### Body scrolling
 

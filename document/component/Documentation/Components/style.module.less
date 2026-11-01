@@ -29,17 +29,22 @@
         font-weight: 600;
     }
 }
+.content {
+    :global([data-bs-theme='dark']) & :global(pre.shiki span) {
+        color: var(--shiki-dark, inherit) !important;
+    }
+}
 .customPopover {
     --bs-popover-bg: var(--bs-primary-bg);
-    --bs-popover-border-color: var(--bs-primary);
-    --bs-popover-arrow-border: var(--bs-primary);
-    --bs-popover-header-bg: var(--bs-primary);
-    --bs-popover-header-color: var(--bs-fg-white);
-    --bs-popover-body-color: var(--bs-fg-white);
+    --bs-popover-border-color: var(--bs-primary-bg);
+    --bs-popover-arrow-border: var(--bs-primary-bg);
+    --bs-popover-header-bg: var(--bs-primary-bg);
+    --bs-popover-header-color: var(--bs-primary-contrast);
+    --bs-popover-body-color: var(--bs-primary-contrast);
 }
 .customTooltip {
-    --bs-tooltip-bg: var(--bs-primary);
-    --bs-tooltip-color: var(--bs-fg-white);
+    --bs-tooltip-bg: var(--bs-primary-bg);
+    --bs-tooltip-color: var(--bs-primary-contrast);
 }
 .gridRow {
     :global(.row) > :global([class*='col']) {

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef, FC, ReactNode } from 'react';
 
-import { OVERLAY_DIRECTIONS, OverlayPlacement } from './Overlay';
+import { OVERLAY_ARROW_POSITIONS, OVERLAY_DIRECTIONS, OverlayPlacement } from './Overlay';
 
 export interface PopoverProps extends Omit<ComponentPropsWithRef<'div'>, 'title'> {
     title?: ReactNode;
@@ -29,7 +29,7 @@ export const Popover: FC<PopoverProps> = ({
         role={role}
         data-bs-placement={placement}
     >
-        <div className="popover-arrow" />
+        <div className={classNames('popover-arrow', OVERLAY_ARROW_POSITIONS[placement])} />
         <h3 className="popover-header">{title}</h3>
         <div className="popover-body">{children}</div>
     </div>

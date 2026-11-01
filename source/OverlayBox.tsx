@@ -45,6 +45,13 @@ const PLACEMENT_CLASSES: Record<OverlayPlacement, string> = {
     left: 'top-50 end-100 translate-middle-y'
 };
 
+const OVERLAY_GAPS: Record<OverlayPlacement, Record<'popover' | 'tooltip', string>> = {
+    top: { popover: 'mb-3', tooltip: 'mb-2' },
+    right: { popover: 'ms-3', tooltip: 'ms-2' },
+    bottom: { popover: 'mt-3', tooltip: 'mt-2' },
+    left: { popover: 'me-3', tooltip: 'me-2' }
+};
+
 @observer
 export class OverlayBox extends Component<OverlayBoxProps> {
     static displayName = 'OverlayBox';
@@ -154,7 +161,8 @@ export class OverlayBox extends Component<OverlayBoxProps> {
         } = this.props;
         const id = this.open ? this.id : undefined;
         const position = PLACEMENT_CLASSES[placement];
-        const overlayClass = classNames('position-absolute w-max', position, overlayClassName);
+        const gap = OVERLAY_GAPS[placement][detail ? 'popover' : 'tooltip'];
+        const overlayClass = classNames('position-absolute w-max', position, gap, overlayClassName);
         const trigger = isValidElement(children)
             ? cloneElement(children, {
                   'aria-describedby':

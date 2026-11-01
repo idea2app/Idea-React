@@ -1,4 +1,5 @@
 import { Countdown } from '../../../../source/Countdown';
+import { CodeBlock } from '../../../../source/CodeBlock';
 
 import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -30,8 +31,7 @@ every second until the end time is reached.
 `units` lists the sections from largest to smallest. Each `scale` is the amount of the next smaller
 unit that makes up one of the current unit, ending at milliseconds.
 
-```tsx
-<Countdown
+<CodeBlock language="tsx">{`<Countdown
     endTime={launchDate}
     units={[
         { scale: 24, label: 'days' },
@@ -40,8 +40,7 @@ unit that makes up one of the current unit, ending at milliseconds.
         { scale: 1000, label: 'seconds' }
     ]}
     onEnd={endTime => console.log('Finished at', endTime)}
-/>
-```
+/>`}</CodeBlock>
 
 `itemClassName` styles each section, and `onEnd` fires once when the countdown reaches zero.
 
