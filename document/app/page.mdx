@@ -40,7 +40,7 @@ brings the building blocks together so you can focus on your application.
     >
         <MenuItem href={`${site.repository}/blob/main/AGENTS.md`}>Read AGENTS.md</MenuItem>
         <MenuItem href={`${site.repository}/tree/main/source`}>Explore component source</MenuItem>
-        <MenuItem href={site.docs}>Read API reference</MenuItem>
+        <MenuItem href={site.api}>Read API reference</MenuItem>
     </DropdownMenu>
     <DocumentationAction href={site.docs} icon="book" label="Read the docs" />
 </div>
@@ -48,7 +48,7 @@ brings the building blocks together so you can focus on your application.
 <div className="d-flex flex-wrap justify-content-center align-items-center gap-3 fg-2 text-sm">
     <span>Currently v{site.version}</span>
     {[
-        { label: 'API reference', href: site.docs },
+        { label: 'API reference', href: site.api },
         { label: 'All releases', href: `${site.repository}/releases` }
     ].map(({ href, label }) => (
         <a key={href} href={href} className="fg-2">
