@@ -3,9 +3,13 @@
 import classNames from 'classnames';
 import { observer } from 'mobx-react';
 import {
+    Children,
+    cloneElement,
     Component,
     ComponentPropsWithRef,
     createRef,
+    FC,
+    isValidElement,
     KeyboardEvent,
     MouseEvent,
     ReactNode
@@ -13,42 +17,65 @@ import {
 
 import { TabModel } from './model';
 
-export interface TabItem {
-    key: string;
+export interface TabProps extends ComponentPropsWithRef<'div'> {
+    eventKey: string;
     label: ReactNode;
-    content: ReactNode;
     disabled?: boolean;
 }
 
-export interface TabProps extends Omit<ComponentPropsWithRef<'div'>, 'onChange' | 'children'> {
+export const Tab: FC<TabProps> = ({
+    eventKey: _eventKey,
+    label: _label,
+    disabled: _disabled,
+    ...props
+}) => <div {...props} />;
+
+Tab.displayName = 'Tab';
+
+export interface TabsProps extends Omit<ComponentPropsWithRef<'div'>, 'onChange'> {
     activeKey?: string;
     defaultActiveKey?: string;
     fade?: boolean;
     id: string;
     onChange?: (key: string) => unknown;
     orientation?: 'horizontal' | 'vertical';
-    tabs: TabItem[];
     variant?: 'tabs' | 'pills' | 'underline' | 'list-group';
 }
 
 @observer
-export class Tab extends Component<TabProps> {
-    static displayName = 'Tab';
+export class Tabs extends Component<TabsProps> {
+    static displayName = 'Tabs';
+
+    get tabs() {
+        return Children.toArray(this.props.children)
+            .filter(child => typeof child !== 'string' || child.trim())
+            .map(child => {
+                // Server component boundaries may wrap Tab in a lazy client reference.
+                if (
+                    !isValidElement<TabProps>(child) ||
+                    typeof child.props.eventKey !== 'string' ||
+                    !('label' in child.props)
+                )
+                    throw new TypeError('Tabs children must be Tab elements.');
+
+                return child;
+            });
+    }
 
     root = createRef<HTMLDivElement>();
 
     store = new TabModel(
         this.props.defaultActiveKey ??
-            this.props.tabs.find(tab => !tab.disabled)?.key ??
-            this.props.tabs[0]?.key ??
+            this.tabs.find(({ props }) => !props.disabled)?.props.eventKey ??
+            this.tabs[0]?.props.eventKey ??
             ''
     );
 
     get activeKey() {
         const key = this.props.activeKey ?? this.store.activeKey;
-        return this.props.tabs.some(tab => tab.key === key && !tab.disabled)
+        return this.tabs.some(({ props }) => props.eventKey === key && !props.disabled)
             ? key
-            : (this.props.tabs.find(tab => !tab.disabled)?.key ?? '');
+            : (this.tabs.find(({ props }) => !props.disabled)?.props.eventKey ?? '');
     }
 
     handleClick = (event: MouseEvent<HTMLDivElement>) => {
@@ -56,25 +83,27 @@ export class Tab extends Component<TabProps> {
         if (event.defaultPrevented) return;
 
         const button = (event.target as Element).closest<HTMLButtonElement>('[data-tab-index]');
-        const tab = button && this.props.tabs[Number(button.dataset.tabIndex)];
+        const tab = button && this.tabs[Number(button.dataset.tabIndex)]?.props;
         if (!tab || tab.disabled) return;
 
-        this.activate(tab.key);
+        this.activate(tab.eventKey);
     };
 
     handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
         this.props.onKeyDown?.(event);
 
+        if (event.defaultPrevented) return;
+
         const button = (event.target as Element).closest<HTMLButtonElement>('[data-tab-index]');
         const index = Number(button?.dataset.tabIndex);
-        const tabs = this.props.tabs;
+        const tabs = this.tabs;
         if (!button || Number.isNaN(index)) return;
 
         const horizontal = this.props.orientation !== 'vertical';
         const previous = horizontal ? event.key === 'ArrowLeft' : event.key === 'ArrowUp';
         const next = horizontal ? event.key === 'ArrowRight' : event.key === 'ArrowDown';
         const enabled = tabs
-            .map((tab, tabIndex) => (tab.disabled ? -1 : tabIndex))
+            .map(({ props }, tabIndex) => (props.disabled ? -1 : tabIndex))
             .filter(tabIndex => tabIndex >= 0);
         const currentPosition = enabled.indexOf(index);
         const destination =
@@ -91,7 +120,7 @@ export class Tab extends Component<TabProps> {
 
         event.preventDefault();
         const tab = tabs[destination];
-        this.activate(tab.key);
+        this.activate(tab.props.eventKey);
         this.root.current
             ?.querySelector<HTMLButtonElement>(`[data-tab-index="${destination}"]`)
             ?.focus();
@@ -108,7 +137,7 @@ export class Tab extends Component<TabProps> {
     panelId = (key: string) => `${this.props.id}-panel-${encodeURIComponent(key)}`;
 
     renderTabs = () => {
-        const { orientation = 'horizontal', tabs, variant = 'tabs' } = this.props;
+        const { orientation = 'horizontal', variant = 'tabs' } = this.props;
         const listGroup = variant === 'list-group';
 
         return (
@@ -127,17 +156,17 @@ export class Tab extends Component<TabProps> {
                 aria-label={this.props['aria-label'] ?? 'Tabs'}
                 aria-orientation={orientation}
             >
-                {tabs.map((tab, index) => {
-                    const active = tab.key === this.activeKey;
+                {this.tabs.map(({ props: tab }, index) => {
+                    const active = tab.eventKey === this.activeKey;
 
                     return (
                         <button
-                            key={tab.key}
-                            id={this.tabId(tab.key)}
+                            key={tab.eventKey}
+                            id={this.tabId(tab.eventKey)}
                             type="button"
                             role="tab"
                             data-tab-index={index}
-                            aria-controls={this.panelId(tab.key)}
+                            aria-controls={this.panelId(tab.eventKey)}
                             aria-selected={active}
                             aria-disabled={tab.disabled || undefined}
                             tabIndex={active ? 0 : -1}
@@ -157,31 +186,29 @@ export class Tab extends Component<TabProps> {
     };
 
     renderPanels = () => {
-        const { fade = true, tabs } = this.props;
+        const { fade = true } = this.props;
 
         return (
             <div className="tab-content">
-                {tabs.map(tab => {
-                    const active = tab.key === this.activeKey;
+                {this.tabs.map(tab => {
+                    const { eventKey, className } = tab.props;
+                    const active = eventKey === this.activeKey;
 
-                    return (
-                        <div
-                            key={tab.key}
-                            id={this.panelId(tab.key)}
-                            role="tabpanel"
-                            aria-labelledby={this.tabId(tab.key)}
-                            aria-hidden={!active}
-                            tabIndex={0}
-                            className={classNames(
-                                'tab-pane',
-                                { active, show: active && fade },
-                                !fade && 'tab-pane-instant'
-                            )}
-                            hidden={!active}
-                        >
-                            {tab.content}
-                        </div>
-                    );
+                    return cloneElement(tab, {
+                        key: eventKey,
+                        id: this.panelId(eventKey),
+                        role: 'tabpanel',
+                        'aria-labelledby': this.tabId(eventKey),
+                        'aria-hidden': !active,
+                        tabIndex: tab.props.tabIndex ?? 0,
+                        className: classNames(
+                            'tab-pane',
+                            { active, show: active && fade },
+                            !fade && 'tab-pane-instant',
+                            className
+                        ),
+                        hidden: !active
+                    });
                 })}
             </div>
         );
@@ -198,7 +225,7 @@ export class Tab extends Component<TabProps> {
             onKeyDown: _onKeyDown,
             id: _id,
             orientation: _orientation,
-            tabs: _tabs,
+            children: _children,
             variant: _variant,
             ...props
         } = this.props;

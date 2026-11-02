@@ -22,12 +22,12 @@ Create flexible, responsive navigation bars. Includes support for branding, navi
 built-in drawer for mobile.
 
 The Idea React [`Navbar` wrapper][1] composes the Bootstrap 6 `.navbar` markup into semantic
-React components. This guide adapts the [Bootstrap Navbar documentation][2].
+React components.
 
 ## Example
 
 Here's a navbar that includes most supported sub-components and a responsive right drawer with the
-[`Drawer` wrapper][3]. Use the lower-right corner grip to resize your browser and preview the
+[`Drawer` wrapper][2]. Use the lower-right corner grip to resize your browser and preview the
 responsive behavior.
 
 <NavbarDemo title="Menu" bodyClassName="mb-2 md:mb-0">
@@ -72,7 +72,7 @@ Here's what you need to know before getting started with the navbar:
 - Use margin, padding, and flex utility classes for controlling spacing and alignment within
   navbars.
 - Navbars are responsive by default using the drawer component. On small viewports, navigation links
-  slide in from the side as a [Drawer][3].
+  slide in from the side as a [Drawer][2].
 - Ensure accessibility by using a `<nav>` element—`Navbar` always renders one—or add
   `role="navigation"` to a generic element.
 - Indicate the current item with `aria-current="page"` for the current page or `aria-current="true"`
@@ -162,7 +162,7 @@ occupy as much horizontal space as possible** to keep your navbar contents secur
 
 Add the `.active` class on `.nav-link` to indicate the current page. Please note that you should also
 add the `aria-current` attribute on the active `.nav-link`.
-The [`NavItem` and `NavLink` wrappers][4] keep these attributes and the disabled state consistent.
+The [`NavItem` and `NavLink` wrappers][3] keep these attributes and the disabled state consistent.
 
 <NavbarDemo expand="sm" brand="Navbar" title="Menu">
     <NavbarNav>
@@ -198,7 +198,7 @@ And because we use classes for our navs, you can avoid the list-based approach e
 
 You can also use menus in your navbar. Menus require a wrapping element for positioning, so be sure
 to use separate and nested elements for `.nav-item` and `.nav-link` as shown below.
-The [`Menu` wrapper][5] manages open state and keyboard navigation for the trigger and panel.
+The [`Menu` wrapper][4] manages open state and keyboard navigation for the trigger and panel.
 
 <NavbarDemo expand="lg" brand="Navbar" title="Menu">
     <NavbarNav>
@@ -512,7 +512,7 @@ Use any of the responsive containers to change how wide the content in your navb
 
 ## Placement
 
-Use Bootstrap's [position utilities][6] to place navbars in non-static positions. Choose from fixed
+Use Bootstrap's [position utilities][5] to place navbars in non-static positions. Choose from fixed
 to the top, fixed to the bottom, stickied to the top (scrolls with the page until it reaches the
 top, then stays there), or stickied to the bottom.
 
@@ -536,7 +536,7 @@ without a breakpoint. For navbars that always show the drawer, omit `expand`.
 
 ### Drawer
 
-By default, navbars use the [drawer component][3] for their responsive behavior. This provides a
+By default, navbars use the [drawer component][2] for their responsive behavior. This provides a
 modern drawer-style menu that slides in from any side of the screen.
 
 #### Drawer placement
@@ -684,7 +684,7 @@ _before_ the toggler in the document's structure.
 ### Variables
 
 Navbar colors, spacing, and toggler dimensions are defined by CSS variables on `.navbar` and
-`.navbar-nav`. See the [upstream navbar CSS][2] for the complete variable and Sass map reference.
+`.navbar-nav`. See the [upstream navbar CSS][6] for the complete variable and Sass map reference.
 
 ### Sass map
 
@@ -714,13 +714,11 @@ manage open state themselves and expose the same markup as props:
 for these examples. In your own application, keep the open state in your component or model and
 pass it to `Drawer` and `NavbarToggler`.
 
-Adapted from [Bootstrap v6.0.0-alpha.1][2], © the Bootstrap authors (MIT license).
-
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Navbar.tsx
-[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/navbar.mdx
-[3]: https://github.com/idea2app/Idea-React/blob/main/source/Drawer.tsx
-[4]: https://github.com/idea2app/Idea-React/blob/main/source/Nav.tsx
-[5]: https://github.com/idea2app/Idea-React/blob/main/source/Menu.tsx
-[6]: https://getbootstrap.com/docs/6.0/utilities/position/
+[2]: https://github.com/idea2app/Idea-React/blob/main/source/Drawer.tsx
+[3]: https://github.com/idea2app/Idea-React/blob/main/source/Nav.tsx
+[4]: https://github.com/idea2app/Idea-React/blob/main/source/Menu.tsx
+[5]: https://getbootstrap.com/docs/6.0/utilities/position/
+[6]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/navbar.mdx

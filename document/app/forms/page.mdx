@@ -1,12 +1,15 @@
 import {
+    Checkbox,
     Form,
     FormControl,
     FormField,
     FormFieldset,
     FormLabel,
     FormLegend,
+    FormSelect,
     FormText
 } from '../../../source/Form';
+import { Button } from '../../../source/Button';
 import { CodeExample } from '../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../component/Documentation/Components/Layout';
 
@@ -14,39 +17,147 @@ import { DocumentationLayout } from '../../component/Documentation/Components/La
 
 # Forms
 
-Idea React wraps native form elements with Bootstrap 6 styling. Native names, values, constraints,
-refs, autocomplete and accessibility attributes pass through.
+Examples and usage guidelines for form control styles, layout options, and custom components for creating a wide variety of forms.
 
-## Quick start
+## Overview
+
+Bootstrap’s form controls expand on [our Rebooted form styles][1] with classes. Idea React components apply these classes for a more consistent rendering across browsers and devices.
+
+For further customization, pass a CSS Module class through `className`. The CSS reference sections show custom property defaults from the published stylesheet; Sass-only build configuration is omitted because this site uses compiled Bootstrap CSS.
+
+Be sure to use an appropriate `type` attribute on all inputs (e.g., `email` for email address or `number` for numerical information) to take advantage of newer input controls like email verification, number selection, and more.
+
+Here’s a quick example to demonstrate Bootstrap’s form styles. Keep reading for documentation on required classes, form layout, and more.
 
 <CodeExample>
-    <Form aria-label="Profile">
-        <FormField>
-            <FormLabel htmlFor="overviewEmail">Email address</FormLabel>
-            <FormControl
-                id="overviewEmail"
-                name="email"
-                type="email"
-                required
-                aria-describedby="overviewHelp"
-            />
-            <FormText id="overviewHelp">We will never share your email.</FormText>
+    <Form>
+        <div className="mb-3">
+            <FormLabel htmlFor="exampleInputEmail1">Email address</FormLabel>
+            <FormControl type="email" id="exampleInputEmail1" aria-describedby="emailHelp" />
+            <FormText id="emailHelp">We’ll never share your email with anyone else.</FormText>
+        </div>
+        <div className="mb-3">
+            <FormLabel htmlFor="exampleInputPassword1">Password</FormLabel>
+            <FormControl type="password" id="exampleInputPassword1" />
+        </div>
+        <FormField className="mb-3">
+            <Checkbox id="exampleCheck1" />
+            <FormLabel htmlFor="exampleCheck1" plain>
+                Check me out
+            </FormLabel>
         </FormField>
-        <FormFieldset disabled className="mt-3">
-            <FormLegend>Unavailable settings</FormLegend>
-            <FormControl aria-label="Unavailable setting" placeholder="Disabled by the fieldset" />
+        <Button type="submit" theme="primary" variant="solid">
+            Submit
+        </Button>
+    </Form>
+</CodeExample>
+
+## Disabled forms
+
+Add the `disabled` boolean attribute on an input to prevent user interactions and make it appear lighter.
+
+```tsx
+<FormControl id="disabledInput" type="text" placeholder="Disabled input here..." disabled />
+```
+
+Add the `disabled` attribute to a `<fieldset>` to disable all the controls within. Browsers treat all native form controls (`<input>`, `<select>`, and `<button>` elements) inside a `<fieldset disabled>` as disabled, preventing both keyboard and mouse interactions on them.
+
+However, if your form also includes custom button-like elements such as `<a class="btn-*">...</a>`, these will only be given a style of `pointer-events: none`, meaning they are still focusable and operable using the keyboard. In this case, you must manually modify these controls by adding `tabindex="-1"` to prevent them from receiving focus and `aria-disabled="disabled"` to signal their state to assistive technologies.
+
+<CodeExample>
+    <Form>
+        <FormFieldset disabled>
+            <FormLegend>Disabled fieldset example</FormLegend>
+            <div className="mb-3">
+                <FormLabel htmlFor="disabledTextInput">Disabled input</FormLabel>
+                <FormControl type="text" id="disabledTextInput" placeholder="Disabled input" />
+            </div>
+            <div className="mb-3">
+                <FormLabel htmlFor="disabledSelect">Disabled select menu</FormLabel>
+                <FormSelect id="disabledSelect">
+                    <option>Disabled select</option>
+                </FormSelect>
+            </div>
+            <FormField className="mb-3">
+                <Checkbox id="disabledFieldsetCheck" disabled />
+                <FormLabel htmlFor="disabledFieldsetCheck" plain>
+                    {' '}
+                    Can’t check this{' '}
+                </FormLabel>
+            </FormField>
+            <Button type="submit" theme="primary" variant="solid">
+                Submit
+            </Button>
         </FormFieldset>
     </Form>
 </CodeExample>
 
-Use `FormField` for labels, descriptions and feedback; `FormGroup` groups related fields.
-`FormFieldset disabled` disables its native descendants. Always provide visible labels or
-accessible names and connect help text with `aria-describedby`. A readonly control remains
-focusable and submitted; a disabled control does not.
+## Accessibility
 
-Adapted from [Bootstrap v6.0.0-alpha.1 Forms][1], © Bootstrap Authors, [MIT licensed][2].
+Ensure that all form controls have an appropriate accessible name so that their purpose can be conveyed to users of assistive technologies. The simplest way to achieve this is to use a `<label>` element, or—in the case of buttons—to include sufficiently descriptive text as part of the `<button>...</button>` content.
+
+For situations where it’s not possible to include a visible `<label>` or appropriate text content, there are alternative ways of still providing an accessible name, such as:
+
+- `<label>` elements hidden using the `.visually-hidden` class
+- Pointing to an existing element that can act as a label using `aria-labelledby`
+- Providing a `title` attribute
+- Explicitly setting the accessible name on an element using `aria-label`
+
+If none of these are present, assistive technologies may resort to using the `placeholder` attribute as a fallback for the accessible name on `<input>` and `<textarea>` elements. The examples in this section provide a few suggested, case-specific approaches.
+
+While using visually hidden content (`.visually-hidden`, `aria-label`, and even `placeholder` content, which disappears once a form field has content) will benefit assistive technology users, a lack of visible label text may still be problematic for certain users. Some form of visible label is generally the best approach, both for accessibility and usability.
+
+## CSS
+
+### Variables
+
+Some form variables are set at the root level to be re-used and extended by individual form components, but you’ll most often see variables set at the form control level. Root variables include `--bs-btn-input-*`, which are shared with [buttons][2], and `--bs-control-*` variables.
+
+```css
+.example {
+    --bs-control-checked-bg: var(--bs-primary-base);
+    --bs-control-checked-border-color: var(--bs-control-checked-bg);
+    --bs-control-active-bg: var(--bs-primary-base);
+    --bs-control-active-border-color: var(--bs-control-active-bg);
+    --bs-control-disabled-bg: var(--bs-bg-3);
+    --bs-control-disabled-opacity: 0.65;
+    --bs-control-transition-duration: 0.15s;
+    --bs-control-transition-timing: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --bs-btn-input-fg: var(--bs-fg-body);
+    --bs-btn-input-bg: var(--bs-bg-body);
+    --bs-btn-input-gap: 0.375rem;
+    --bs-btn-input-min-height: 2.375rem;
+    --bs-btn-input-padding-y: 0.375rem;
+    --bs-btn-input-padding-x: 0.75rem;
+    --bs-btn-input-font-size: var(--bs-body-font-size);
+    --bs-btn-input-font-weight: var(--bs-font-weight-normal);
+    --bs-btn-input-line-height: var(--bs-body-line-height);
+    --bs-btn-input-border-radius: var(--bs-radius-5);
+    --bs-btn-input-xs-gap: var(--bs-spacer-1);
+    --bs-btn-input-xs-min-height: 1.5rem;
+    --bs-btn-input-xs-padding-y: 0.125rem;
+    --bs-btn-input-xs-padding-x: 0.5rem;
+    --bs-btn-input-xs-font-size: var(--bs-font-size-xs);
+    --bs-btn-input-xs-line-height: 1.125;
+    --bs-btn-input-xs-border-radius: var(--bs-radius-5);
+    --bs-btn-input-sm-gap: 0.375rem;
+    --bs-btn-input-sm-min-height: 2rem;
+    --bs-btn-input-sm-padding-y: 0.25rem;
+    --bs-btn-input-sm-padding-x: 0.625rem;
+    --bs-btn-input-sm-font-size: var(--bs-font-size-sm);
+    --bs-btn-input-sm-line-height: var(--bs-line-height-sm);
+    --bs-btn-input-sm-border-radius: var(--bs-radius-5);
+    --bs-btn-input-lg-gap: 0.375rem;
+    --bs-btn-input-lg-min-height: 2.75rem;
+    --bs-btn-input-lg-padding-y: 0.5rem;
+    --bs-btn-input-lg-padding-x: 1rem;
+    --bs-btn-input-lg-font-size: var(--bs-font-size-md);
+    --bs-btn-input-lg-line-height: var(--bs-line-height-md);
+    --bs-btn-input-lg-border-radius: var(--bs-radius-7);
+}
+```
 
 </DocumentationLayout>
 
-[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/overview.mdx
-[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE
+[1]: https://getbootstrap.com/docs/6.0/content/reboot#forms
+[2]: ../components/button/

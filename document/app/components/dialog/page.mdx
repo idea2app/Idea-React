@@ -18,8 +18,7 @@ support that replaces the old Modal component.
 Idea React provides the [`NativeDialog` wrapper][1], which applies Bootstrap's `dialog` classes and
 manages native `showModal()` / `show()` calls, Escape handling, backdrop clicks, and focus return.
 The same module exports `DialogHeader`, `DialogTitle`, `DialogBody`, and `DialogFooter` for the
-dialog structure. The examples below are interactive and adapt the
-[upstream Dialog documentation][2].
+dialog structure. The examples below are interactive.
 
 ## How it works
 
@@ -57,7 +56,7 @@ the user closes the dialog with Escape or a backdrop click.
 
 ## Without JavaScript
 
-Supported browsers can open and close a dialog with the [Invoker Commands API][3]—no Bootstrap
+Supported browsers can open and close a dialog with the [Invoker Commands API][2]—no Bootstrap
 JavaScript required. Set `commandfor` to the dialog's `id`, use `command="show-modal"` to open, and
 `command="close"` to dismiss.
 
@@ -296,7 +295,7 @@ specific breakpoint.
 
 Dialogs use CSS variables for real-time customization. Dialog sizes are defined in the
 `$dialog-sizes` Sass map, and each size specifies the dialog `width`. See the
-[upstream dialog CSS][2] for the complete variable and Sass reference.
+[upstream dialog CSS][3] for the complete variable and Sass reference.
 
 ## React behavior
 
@@ -320,12 +319,10 @@ controlled `open` prop is preferred for React state synchronization.
 The [Dialog model extension][5] builds on the wrapper with promise-based dialogs: `open()` returns a promise
 that resolves or rejects when the dialog closes.
 
-Adapted from [Bootstrap v6.0.0-alpha.1][2], © the Bootstrap authors (MIT license).
-
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/NativeDialog/index.tsx
-[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/dialog.mdx
-[3]: https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
+[2]: https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
+[3]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/dialog.mdx
 [4]: https://github.com/idea2app/Idea-React/blob/main/source/CloseButton.tsx
 [5]: ../../extensions/dialog-model/

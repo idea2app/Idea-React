@@ -5,7 +5,9 @@
 [Bootstrap][1] 组件更新时，应遵循以下步骤更新本代码库：
 
 1. 拉取 https://github.com/twbs/bootstrap/tree/main/site/src/content/docs/components 目录下的最新代码
-2. 将更新的组件文档同步到本库的 `document/app` 目录，可能需要转为 MDX 格式
+2. 将更新的组件文档同步到本库的 `document/app` 目录，可能需要转为 MDX 格式；
+   保留上游正文、章节顺序与示例覆盖范围，用本项目组件重写示例，仅按实际情况删减不适用章节，
+   不将整篇文档大幅改写成 quick start。用户指定版本时以该版本为准。
 3. 根据更新的组件文档，新增或修改本库中的对应组件，并将实现的组件应用回前面的 MDX 文档中
 4. 根据更新的文档和组件，编写 `test` 目录的单元测试，以 `ComponentName.test.tsx` 规范命名文件
 
@@ -197,6 +199,7 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 页面格式以简洁、可读为准：文档可用 MDX，非文档页（包括首页）在能减少缩进时也可用
   MDX，不强制非文档页只能使用 TSX 或 MDX。
 - 跨页面共享的导航栏等结构放在公共布局中，不重复写入单个页面。
+- 上游来源与版权许可说明集中在网站公共页脚，不在各篇组件文档重复。
 - MDX 中的大段静态文本优先使用 Markdown，而非嵌套的 JSX 文本块。
 - 从 `unpkg.com` 引入 Bootstrap CSS，严禁使用 Tailwind CSS 及其插件、配置和工具类。
 - 能用 [Bootstrap 6 CSS 工具类][4] 的样式不写自定义 CSS；

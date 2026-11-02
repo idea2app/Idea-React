@@ -12,36 +12,201 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # Checkbox
 
-`Checkbox` is a native checkbox with theme, size and indeterminate support.
+Highly customizable, native checkbox `<input>` elements for presenting toggleable options.
 
-## Quick start
+## Basic checkbox
+
+`Checkbox` applies the `.check` class directly on its native `<input>`. This does the following:
+
+- Overrides the default `<input>` appearance with themed colors.
+- Renders the `:checked` and indeterminate icons via a CSS `mask` on the input’s `::before` pseudo-element, so the mark inherits the contrast color and no inline SVG is needed. The appropriate icon is shown based on the input’s state.
+
+For folks looking to replace our provided icons, override the `--bs-check-icon-checked` and `--bs-check-icon-indeterminate` CSS variables (or the `--check-icon-*` Sass tokens) with your own `mask-image` URLs.
+
+Labels and layout are handled with additional HTML and CSS.
+
+<CodeExample>
+    <Checkbox id="check" defaultChecked />
+</CodeExample>
+
+## Indeterminate
+
+Checkboxes can utilize the indeterminate pseudo class. There is no available HTML attribute for specifying it; the `indeterminate` prop sets the native JavaScript property.
+
+<CodeExample>
+    <Checkbox id="checkIndeterminate" indeterminate />
+</CodeExample>
+
+## With form field
+
+Wrap `Checkbox` in a `FormField` layout wrapper and add your label. The grid layout places the checkbox and label side by side.
 
 <CodeExample>
     <FormField>
-        <Checkbox id="checkSubscribe" name="subscribe" defaultChecked theme="primary" />
+        <Checkbox id="checkLabel" />
+        <FormLabel htmlFor="checkLabel" plain>
+            Example new checkbox
+        </FormLabel>
+    </FormField>
+</CodeExample>
+
+## Description
+
+Add a description or other content after the label. We recommend wrapping the label and description in a `.form-field-content` to ensure appropriate spacing and alignment.
+
+<CodeExample>
+    <FormField>
+        <Checkbox id="checkDescription" />
         <FormFieldContent>
-            <FormLabel plain htmlFor="checkSubscribe">
-                Subscribe to updates
+            <FormLabel htmlFor="checkDescription" plain>
+                Example new checkbox
             </FormLabel>
-            <FormText>Receive our weekly digest.</FormText>
+            <FormText>Supporting description for the above label.</FormText>
         </FormFieldContent>
     </FormField>
-    <div className="d-flex gap-3 mt-3">
-        <Checkbox aria-label="Mixed selection" indeterminate />
-        <Checkbox aria-label="Small checkbox" size="sm" defaultChecked theme="success" />
-        <Checkbox aria-label="Large checkbox" size="lg" />
-        <Checkbox aria-label="Disabled checkbox" disabled defaultChecked />
+</CodeExample>
+
+## Theme colors
+
+Modify the appearance of checked checkboxes with the `theme` prop. This will set the checked background and border color to the theme color.
+
+<CodeExample>
+    <div className="d-flex flex-column gap-2">
+        <FormField>
+            <Checkbox id="checkprimary" defaultChecked theme="primary" />
+            <FormLabel htmlFor="checkprimary" plain>
+                Example primary checkbox
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Checkbox id="checkaccent" defaultChecked theme="accent" />
+            <FormLabel htmlFor="checkaccent" plain>
+                Example accent checkbox
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Checkbox id="checksecondary" defaultChecked theme="secondary" />
+            <FormLabel htmlFor="checksecondary" plain>
+                Example secondary checkbox
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Checkbox id="checksuccess" defaultChecked theme="success" />
+            <FormLabel htmlFor="checksuccess" plain>
+                Example success checkbox
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Checkbox id="checkdanger" defaultChecked theme="danger" />
+            <FormLabel htmlFor="checkdanger" plain>
+                Example danger checkbox
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Checkbox id="checkwarning" defaultChecked theme="warning" />
+            <FormLabel htmlFor="checkwarning" plain>
+                Example warning checkbox
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Checkbox id="checkinfo" defaultChecked theme="info" />
+            <FormLabel htmlFor="checkinfo" plain>
+                Example info checkbox
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Checkbox id="checkdark" defaultChecked theme="dark" />
+            <FormLabel htmlFor="checkdark" plain>
+                Example dark checkbox
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Checkbox id="checklight" defaultChecked theme="light" />
+            <FormLabel htmlFor="checklight" plain>
+                Example light checkbox
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Checkbox id="checkinverse" defaultChecked theme="inverse" />
+            <FormLabel htmlFor="checkinverse" plain>
+                Example inverse checkbox
+            </FormLabel>
+        </FormField>
     </div>
 </CodeExample>
 
-Use `checked` with `onChange` for controlled state, or `defaultChecked` for native state.
-`indeterminate` updates the native property and announces mixed state. All button theme names
-are accepted. Native `required` and `disabled` work normally; `validation` selects valid or
-invalid feedback styling. `FormCheck` also supports these props.
+## Disabled
 
-Adapted from [Bootstrap v6.0.0-alpha.1 Checkbox][1], © Bootstrap Authors, [MIT licensed][2].
+Add the `disabled` attribute and the associated `<label>`s are automatically styled to match with a lighter color to help indicate the input’s state.
+
+<CodeExample>
+    <div className="vstack gap-2">
+        <FormField>
+            <Checkbox id="checkDisabled" disabled />
+            <FormLabel htmlFor="checkDisabled" plain>
+                Example new checkbox
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Checkbox id="checkDisabledChecked" defaultChecked disabled />
+            <FormLabel htmlFor="checkDisabledChecked" plain>
+                Example new checkbox
+            </FormLabel>
+        </FormField>
+    </div>
+</CodeExample>
+
+## Sizes
+
+Set `size="sm"` or `size="lg"` to make your checkbox appear smaller or larger.
+
+<CodeExample>
+    <div className="d-flex flex-column gap-3">
+        <FormField>
+            <Checkbox id="checkSizeSm" defaultChecked size="sm" />
+            <FormLabel htmlFor="checkSizeSm" plain>
+                Small checkbox
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Checkbox id="checkSizeMd" defaultChecked />
+            <FormLabel htmlFor="checkSizeMd" plain>
+                Default checkbox
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Checkbox id="checkSizeLg" defaultChecked size="lg" />
+            <FormLabel htmlFor="checkSizeLg" plain>
+                Large checkbox
+            </FormLabel>
+        </FormField>
+    </div>
+</CodeExample>
+
+## CSS
+
+### Variables
+
+CSS variables for the checkbox component are built on the Sass variables.
+
+```css
+.example {
+    --bs-check-size: 1.25rem;
+    --bs-check-margin-block: 0.125rem;
+    --bs-check-bg: var(--bs-bg-body);
+    --bs-check-border-color: var(--bs-border-color);
+    --bs-check-border-radius: var(--bs-radius-5);
+    --bs-check-icon-checked: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m5.5 10 3 3 6-6'/%3e%3c/svg%3e");
+    --bs-check-icon-indeterminate: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 10h8'/%3e%3c/svg%3e");
+    --bs-check-checked-bg: var(--bs-control-checked-bg);
+    --bs-check-checked-border-color: var(--bs-control-checked-border-color);
+    --bs-check-indeterminate-bg: var(--bs-control-checked-bg);
+    --bs-check-indeterminate-border-color: var(--bs-control-checked-border-color);
+    --bs-check-active-bg: var(--bs-control-active-bg);
+    --bs-check-active-border-color: var(--bs-control-active-border-color);
+    --bs-check-disabled-bg: var(--bs-control-disabled-bg);
+    --bs-check-disabled-opacity: var(--bs-control-disabled-opacity);
+}
+```
 
 </DocumentationLayout>
-
-[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/checkbox.mdx
-[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

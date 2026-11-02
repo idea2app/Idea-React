@@ -12,36 +12,138 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 <DocumentationLayout active="form-adorn">
 
-# Form adornments
+# Form adorn
 
-Add a leading or trailing icon or text inside a single control border. Use `FormGhost` inside
-`FormAdornment` so the inner input does not add another border.
+Decorate inputs with icons, text, and more using a custom wrapper that easily handles styling and positioning.
 
-## Quick start
+## How it works
+
+Apply both `.form-control` and `.form-adorn` to a wrapper element. `.form-control` provides the border, background, padding, and focus states; `.form-adorn` uses flexbox to position adornments alongside a "ghost input," a form control that has virtually no visual styling. The `.form-ghost` input inside is transparent and inherits styles from the wrapper.
+
+Use a `<label>` for the wrapper. The wrapper looks like an input, so people click the icon, the text, or the padding around them and expect the field to take focus. A `<label>` gives you that for free, because clicking a label focuses the control it labels. No JavaScript is involved.
+
+Mark the adornments with `aria-hidden="true"`. A wrapping `<label>` labels the input, so without it an adornment such as `$` joins the accessible name and a screen reader announces "Amount $" instead of "Amount". An adornment is decorative, so keep it out of the accessibility tree and put anything meaningful in the visible label or in a `.form-text` description.
+
+> An element can have more than one label, so the wrapping `<label>` and a separate `<label for="…">` work together. Do not put a button or another interactive control inside the wrapper — a `<label>` must not contain interactive content.
+
+See the [form control][1] documentation for more information on the `.form-control` and `.form-ghost` classes.
+
+## Example
+
+Wrap an icon and a `.form-ghost` input inside a `<label>` with `.form-control` and `.form-adorn`. Place the adornment before the input in the DOM for start position (left in LTR).
 
 <CodeExample>
-    <FormField>
-        <FormLabel htmlFor="adornSearch">Search</FormLabel>
-        <FormAdornment htmlFor="adornSearch" size="lg">
-            <FormAdornmentIcon name="search" aria-hidden="true" />
-            <FormGhost id="adornSearch" placeholder="Search…" aria-describedby="adornHelp" />
-        </FormAdornment>
-        <FormText id="adornHelp">Search by name.</FormText>
-    </FormField>
-    <FormAdornment htmlFor="adornPrice" end size="sm" className="mt-3">
-        <FormGhost id="adornPrice" aria-label="Price" type="number" />
-        <FormAdornmentText>USD</FormAdornmentText>
+    <FormAdornment>
+        <FormAdornmentIcon name="search" aria-hidden="true" />
+        <FormGhost type="search" placeholder="Search..." />
     </FormAdornment>
 </CodeExample>
 
-`end` places the adornment after the input; `size="sm"` and `"lg"` size the entire field.
-Use `FormAdornmentText` for currencies, units or prefixes and `FormAdornmentIcon` for icons.
-The wrapper can itself supply a label via `htmlFor`, or compose it inside `FormField`.
-Native readonly/disabled state belongs on the input; `validation` can style both wrappers and inputs.
+Use `.form-adorn-end` to position the adornment on the trailing side (keeps DOM order, uses CSS to flip visually):
 
-Adapted from [Bootstrap v6.0.0-alpha.1 Form adorn][1], © Bootstrap Authors, [MIT licensed][2].
+<CodeExample>
+    <FormAdornment end>
+        <FormAdornmentIcon name="envelope" aria-hidden="true" />
+        <FormGhost type="email" placeholder="you@example.com" />
+    </FormAdornment>
+</CodeExample>
+
+## With labels
+
+Add a second label outside the `.form-adorn` wrapper to name the field. Point it at the input with `for`, so the input keeps its name even if you change the wrapper:
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <div>
+            <FormLabel htmlFor="searchInput">Search</FormLabel>
+            <FormAdornment>
+                <FormAdornmentIcon name="search" aria-hidden="true" />
+                <FormGhost type="search" id="searchInput" placeholder="Search..." />
+            </FormAdornment>
+        </div>
+        <div>
+            <FormLabel htmlFor="emailInput">Email address</FormLabel>
+            <FormAdornment end>
+                <FormAdornmentIcon name="envelope" aria-hidden="true" />
+                <FormGhost type="email" id="emailInput" placeholder="you@example.com" />
+            </FormAdornment>
+        </div>
+    </div>
+</CodeExample>
+
+## With form field
+
+Wrap a `.form-adorn` in a `.form-field` to pair it with a label and description text.
+
+<CodeExample>
+    <FormField>
+        <FormLabel htmlFor="adornField">Search</FormLabel>
+        <FormAdornment>
+            <FormAdornmentIcon name="search" aria-hidden="true" />
+            <FormGhost type="search" id="adornField" placeholder="Search..." />
+        </FormAdornment>
+        <FormText>Search across all pages and posts.</FormText>
+    </FormField>
+</CodeExample>
+
+## Text adornments
+
+Use `.form-adorn-text` for currency symbols, units, domain suffixes, and other text-based adornments. Text adornments auto-size to their content.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <FormAdornment>
+            <FormAdornmentText aria-hidden="true">$</FormAdornmentText>
+            <FormGhost type="text" placeholder="0.00" />
+        </FormAdornment>
+        <FormAdornment end>
+            <FormAdornmentText aria-hidden="true">USD</FormAdornmentText>
+            <FormGhost type="text" placeholder="Amount" />
+        </FormAdornment>
+        <FormAdornment>
+            <FormAdornmentText aria-hidden="true">https://</FormAdornmentText>
+            <FormGhost type="text" placeholder="example.com" />
+        </FormAdornment>
+        <FormAdornment end>
+            <FormAdornmentText aria-hidden="true">@example.com</FormAdornmentText>
+            <FormGhost type="text" placeholder="username" />
+        </FormAdornment>
+    </div>
+</CodeExample>
+
+## Sizing
+
+Use `.form-adorn-sm` or `.form-adorn-lg` on the wrapper to adjust sizing.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <FormAdornment size="sm">
+            <FormAdornmentIcon name="search" aria-hidden="true" />
+            <FormGhost type="text" placeholder="Small input" />
+        </FormAdornment>
+        <FormAdornment>
+            <FormAdornmentIcon name="search" aria-hidden="true" />
+            <FormGhost type="text" placeholder="Default input" />
+        </FormAdornment>
+        <FormAdornment size="lg">
+            <FormAdornmentIcon name="search" aria-hidden="true" />
+            <FormGhost type="text" placeholder="Large input" />
+        </FormAdornment>
+    </div>
+</CodeExample>
+
+## CSS
+
+### Variables
+
+```css
+.example {
+    --bs-form-adorn-gap: 0.375rem;
+    --bs-form-adorn-icon-size: 1rem;
+    --bs-form-adorn-icon-color: var(--bs-fg-2);
+}
+```
 
 </DocumentationLayout>
 
-[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/form-adorn.mdx
-[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE
+[1]: ../form-control/

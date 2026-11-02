@@ -1,4 +1,4 @@
-import { FormField, FormLabel, FormText, OTPInput } from '../../../../source/Form';
+import { FormLabel, FormText, OTPInput } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -6,50 +6,165 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # OTP input
 
-One accessible native input is rendered as digit slots. Bootstrap's plugin handles editing,
-formatted paste, SMS autofill, masking and keyboard navigation automatically.
+Collect one-time passwords, PIN codes, and verification codes with a single accessible input rendered as separate digit slots.
 
-## Quick start
+## Overview
+
+OTP (One-Time Password) inputs are a common pattern for two-factor authentication, verification codes, and PIN entry. Bootstrap's OTP input is built around a **single real text field** that is visually rendered as separate digit slots. This keeps the control simple and fully accessible—screen readers, password managers, and SMS autofill all treat it like any other text input—while still giving you the familiar multi-box appearance.
+
+- **One accessible control**: a single `<input>` backs the whole field, so assistive technology announces one field, not one per digit
+- **Browser autofill**: supports `autocomplete="one-time-code"` for SMS/email code autofill
+- **Paste support**: paste a full code—even a formatted one like `123-456`—and the extra characters are stripped automatically
+- **Click to edit**: click any slot to jump to it; typing overwrites that digit in place instead of pushing the others along
+- **Keyboard navigation**: all native text editing (typing, arrows, backspace, delete, selection) works out of the box
+- **Masking and types**: optionally mask the value, and restrict input to numeric, alphanumeric, or alphabetic characters
+
+OTP input is built on [form controls][1] and shares its sizing tokens.
+
+## How it works
+
+Use `OTPInput` with a `length` prop to determine how many slots to render. The plugin hides the real input behind transparent overlay styling and draws one `.otp-slot` per character. Give the input an accessible name with `aria-label` or an associated `<label>`.
 
 <CodeExample>
-    <FormField>
-        <FormLabel htmlFor="otpCode">Verification code</FormLabel>
-        <OTPInput
-            id="otpCode"
-            name="code"
-            length={6}
-            groups={[3, 3]}
-            separator="-"
-            aria-describedby="otpHelp"
-        />
-        <FormText id="otpHelp">Enter the six-digit code sent to your phone.</FormText>
-    </FormField>
-    <OTPInput aria-label="Four-digit PIN" length={4} connected mask size="lg" className="mt-3" />
-    <OTPInput
-        aria-label="Alphanumeric code"
-        length={6}
-        type="alphanumeric"
-        connected
-        defaultValue="ABC123"
-        validation="valid"
-        wrapperClassName="mt-3"
-    />
-    <OTPInput aria-label="Disabled code" length={6} size="sm" disabled wrapperClassName="mt-3" />
+    <OTPInput aria-label="Verification code" length={6} />
 </CodeExample>
 
-`length` controls slot count. Choose `type="numeric"` (default), `"alphanumeric"` or `"alpha"`;
-paste strips unsupported characters. `mask` hides slot contents without disabling SMS autofill.
-`groups` and `separator` add decorative dividers, and `connected` joins slot borders.
+## Connected inputs
 
-Native `value`, `defaultValue`, `onChange`, `disabled`, `required` and refs target the real input.
-`onValueChange` reports sanitized plugin values; `onComplete` reports a filled code.
-`validation` styles the container; `className` styles the input, while `wrapperClassName` styles
-the slot group. Give the input an accessible label and connect help text with `aria-describedby`.
-Slots shrink to fit narrow containers while preserving grouped separators and every digit.
+Set `connected` to merge the slots into a single cohesive field with shared borders.
 
-Adapted from [Bootstrap v6.0.0-alpha.1 OTP input][1], © Bootstrap Authors, [MIT licensed][2].
+<CodeExample>
+    <OTPInput aria-label="Verification code" connected length={6} />
+</CodeExample>
+
+## Four-digit PIN
+
+Set `length` to control the number of slots—use fewer for shorter codes like a 4-digit PIN.
+
+<CodeExample>
+    <OTPInput aria-label="PIN" connected length={4} />
+</CodeExample>
+
+## With separator
+
+Use `groups` with an array of group sizes to split the slots into groups separated by a visual divider—handy for codes like "123-456". The separator is decorative and never becomes part of the value.
+
+<CodeExample>
+    <OTPInput aria-label="Verification code" length={6} groups={[3, 3]} />
+</CodeExample>
+
+## Sizes
+
+Set `size="sm"` or `size="lg"` to change the slot size.
+
+<CodeExample>
+    <OTPInput aria-label="Small verification code" size="sm" length={6} wrapperClassName="mb-3" />
+    <OTPInput aria-label="Large verification code" size="lg" length={6} />
+</CodeExample>
+
+## Alphanumeric and masking
+
+By default only digits are accepted. Set `type` to `alphanumeric` or `alpha` to accept letters, and `mask` to obscure the entered value while keeping it a normal text field (no `type="password"`, so the numeric keyboard and autofill still work).
+
+<CodeExample>
+    <OTPInput
+        aria-label="Alphanumeric code"
+        connected
+        length={6}
+        type="alphanumeric"
+        wrapperClassName="mb-3"
+    />
+    <OTPInput aria-label="Masked code" connected length={6} mask />
+</CodeExample>
+
+## Disabled
+
+Add the `disabled` attribute to the input to prevent interaction.
+
+<CodeExample>
+    <OTPInput aria-label="Verification code" disabled connected length={6} />
+</CodeExample>
+
+## Validation
+
+Set `validation="valid"` or `validation="invalid"` to show validation states.
+
+<CodeExample>
+    <OTPInput
+        defaultValue="123456"
+        aria-label="Verification code"
+        connected
+        length={6}
+        validation="valid"
+        wrapperClassName="mb-3"
+    />
+    <OTPInput
+        defaultValue="123"
+        aria-label="Verification code"
+        connected
+        length={6}
+        validation="invalid"
+    />
+</CodeExample>
+
+## With form label
+
+Associate a `<label>` with the input and add help text with `aria-describedby` for better accessibility.
+
+<CodeExample>
+    <div className="vstack gap-2">
+        <FormLabel htmlFor="otpCode">Verification code</FormLabel>
+        <OTPInput id="otpCode" aria-describedby="otpHelp" length={6} />
+        <FormText id="otpHelp">Enter the 6-digit code sent to your phone.</FormText>
+    </div>
+</CodeExample>
+
+## Usage
+
+`OTPInput` initializes and disposes the plugin automatically. Pass options as props. Use `onValueChange` for edits and `onComplete` when all slots are filled.
+
+### Options
+
+Pass options directly as `OTPInput` props:
+
+| Name        | Type        | Default     | Description                                                                                            |
+| ----------- | ----------- | ----------- | ------------------------------------------------------------------------------------------------------ |
+| `length`    | number      | Required    | Number of slots.                                                                                       |
+| `type`      | string      | `'numeric'` | Allowed characters: `numeric`, `alphanumeric`, or `alpha`. Sets `inputmode` and `pattern` accordingly. |
+| `mask`      | boolean     | `false`     | If `true`, slots display a dot (`•`) instead of the entered character.                                 |
+| `groups`    | array, null | `null`      | Group sizes used to insert separators (e.g. `[3, 3]`).                                                 |
+| `separator` | string      | `'·'`       | Character rendered between groups.                                                                     |
+
+## Accessibility
+
+Because the control is a single text input, it exposes one accessible name, role, and value—so assistive technology announces it as one ordinary text field instead of one edit field per digit. The visual slots are decorative and marked `aria-hidden`, and no per-digit `aria-label`s are needed.
+
+- Give the input a single accessible name with `aria-label` or an associated `<label>`, and add context with `aria-describedby`.
+- The component sets `autocomplete="one-time-code"` and an appropriate `inputmode` so codes can be autofilled and the right mobile keyboard appears. This supports [WCAG 1.3.5 Identify Input Purpose][2].
+- Copy, paste, and autofill are never blocked, which keeps the control compliant with [WCAG 3.3.8 Accessible Authentication (Minimum)][3]—a single input is also what password managers and SMS autofill target reliably.
+- For the verification flow itself, give codes a generous expiry ([WCAG 2.2.1 Timing Adjustable][4]) and avoid forcing users to re-enter a code already provided in the same process ([WCAG 3.3.7 Redundant Entry][5]).
+
+## CSS
+
+### Variables
+
+```css
+.example {
+    --bs-otp-size: var(--bs-btn-input-lg-min-height);
+    --bs-otp-font-size: var(--bs-btn-input-font-size);
+    --bs-otp-gap: 0.5rem;
+    --bs-otp-slot-fg: var(--bs-btn-input-fg);
+    --bs-otp-slot-bg: var(--bs-btn-input-bg);
+    --bs-otp-slot-border-width: var(--bs-border-width);
+    --bs-otp-slot-border-color: var(--bs-border-color);
+    --bs-otp-slot-border-radius: var(--bs-radius-5);
+}
+```
 
 </DocumentationLayout>
 
-[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/otp-input.mdx
-[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE
+[1]: ../form-control/
+[2]: https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html
+[3]: https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html
+[4]: https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html
+[5]: https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html

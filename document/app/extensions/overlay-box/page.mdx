@@ -16,8 +16,7 @@ Small, contextual overlays for displaying information or custom content.
 
 The Idea React [`OverlayBox` wrapper][1] composes Bootstrap 6 tooltip or popover markup with
 React-triggered behavior. It supports hover, focus, and click triggers with top, right, bottom, and
-left placement. The popover sections adapt the [Bootstrap Popover documentation][2]; the tooltip
-sections adapt the [Bootstrap Tooltip documentation][3].
+left placement.
 
 ## Popover
 
@@ -388,7 +387,7 @@ because it makes the overlay impossible to reach with a keyboard.
 Avoid large amounts of content in a tooltip or popover that uses the same `aria-describedby`
 association: assistive technologies announce the entire content as one continuous stream. Popovers
 do not manage keyboard focus order; if you need interactive content, consider using a
-[`Dialog`][5] instead.
+[`Dialog`][2] instead.
 
 ## CSS
 
@@ -396,7 +395,7 @@ do not manage keyboard focus order; if you need interactive content, consider us
 
 Tooltips and popovers use local CSS variables for real-time customization. Override them through
 `overlayClassName` or by targeting `.tooltip` and `.popover` in a scoped style. See the upstream
-[popover CSS][2] and [tooltip CSS][3] for the complete variable and Sass map reference.
+[popover CSS][3] and [tooltip CSS][4] for the complete variable and Sass map reference.
 
 ## Usage
 
@@ -451,7 +450,6 @@ other plugin events.
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/OverlayBox.tsx
-[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/popover.mdx
-[3]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/tooltip.mdx
-[4]: https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html
-[5]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Dialog.tsx
+[2]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Dialog.tsx
+[3]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/popover.mdx
+[4]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/tooltip.mdx

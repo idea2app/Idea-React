@@ -13,7 +13,26 @@ it('renders descriptions and valid or invalid feedback variants', () => {
             <FormFeedback tooltip>Required.</FormFeedback>
         </>
     );
+
     assert.equal(screen.getByText('Helper text').className, 'form-text');
     assert.equal(screen.getByText('Looks good.').className, 'valid-feedback');
-    assert.equal(screen.getByText('Required.').className, 'invalid-tooltip');
+    assert.equal(screen.getByText('Required.').className, 'tooltip invalid-tooltip');
+});
+
+it('provides base tooltip styling for both validation states while forwarding native props', () => {
+    render(
+        <FormFeedback
+            id="valid-tooltip"
+            type="valid"
+            className="position-static"
+            role="status"
+            tooltip
+        >
+            Saved.
+        </FormFeedback>
+    );
+    const feedback = screen.getByRole('status');
+
+    assert.equal(feedback.id, 'valid-tooltip');
+    assert.equal(feedback.className, 'tooltip valid-tooltip position-static');
 });

@@ -14,7 +14,7 @@
         "skipLibCheck": true,
         "incremental": true,
         "noEmit": true,
-        "types": ["vinext/types", "node"],
+        "types": ["vinext/types", "vite/client", "node"],
         "paths": {
             "@/*": ["./*"]
         }

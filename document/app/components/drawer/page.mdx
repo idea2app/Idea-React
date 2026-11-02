@@ -11,12 +11,11 @@ Build hidden sidebars or drawers into your project for navigation, shopping cart
 few classes. Drawer replaces the old Offcanvas component.
 
 Idea React provides the [`Drawer` wrapper][1], which composes the native `<dialog>` element, a
-header with a close button, a body, and an optional footer. The examples below are interactive and
-adapt the [upstream Drawer documentation][2].
+header with a close button, a body, and an optional footer. The examples below are interactive.
 
 ## How it works
 
-Drawer builds on the native `<dialog>` element and the [`NativeDialog` wrapper][3] to manage hidden
+Drawer builds on the native `<dialog>` element and the [`NativeDialog` wrapper][2] to manage hidden
 sidebars. These sidebars, or drawers, can appear from the left, right, top, or bottom edge of the
 viewport.
 
@@ -82,7 +81,7 @@ Add an optional footer for action buttons or other content at the bottom of the 
 
 ### Without JavaScript
 
-Supported browsers can open and close a drawer with the [Invoker Commands API][4]—no JavaScript
+Supported browsers can open and close a drawer with the [Invoker Commands API][3]—no JavaScript
 required. Set `commandfor` to the drawer's `id`, use `command="show-modal"` to open, and
 `command="close"` to dismiss.
 
@@ -245,14 +244,11 @@ Set `open` and `onDismiss` to control the drawer through React state. The native
 
 Drawer styling uses Bootstrap's `.drawer` CSS variables for width, height, padding, background,
 border, radius, shadow, and animation. Backdrop tokens style the native `::backdrop` pseudo-element.
-See the [upstream drawer CSS][5] for the variable and Sass reference.
-
-Adapted from [Bootstrap v6.0.0-alpha.1][2], © the Bootstrap authors (MIT license).
+See the [upstream drawer CSS][4] for the variable and Sass reference.
 
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Drawer.tsx
-[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/drawer.mdx
-[3]: https://github.com/idea2app/Idea-React/blob/main/source/NativeDialog/index.tsx
-[4]: https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
-[5]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/drawer.mdx#css
+[2]: https://github.com/idea2app/Idea-React/blob/main/source/NativeDialog/index.tsx
+[3]: https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
+[4]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/drawer.mdx#css

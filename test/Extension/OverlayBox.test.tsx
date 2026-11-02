@@ -102,12 +102,17 @@ it('portals into a custom container, translates coordinates and preserves intera
     container.scrollLeft = 15;
     container.scrollTop = 25;
     document.body.append(container);
+
     t.after(() => container.remove());
     t.mock.method(HTMLElement.prototype, 'getBoundingClientRect', function (this: HTMLElement) {
-        if (this === container) return rect(40, 20, 300, 200);
-        return this.classList.contains('popover') ? rect(0, 0, 100, 40) : rect(100, 100, 40, 20);
+        return this === container
+            ? rect(40, 20, 300, 200)
+            : this.classList.contains('popover')
+              ? rect(0, 0, 100, 40)
+              : rect(100, 100, 40, 20);
     });
     const descriptor = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetParent');
+
     Object.defineProperty(HTMLElement.prototype, 'offsetParent', {
         configurable: true,
         get(this: HTMLElement) {
@@ -132,6 +137,7 @@ it('portals into a custom container, translates coordinates and preserves intera
     );
     const trigger = screen.getByRole('button', { name: 'Portal trigger' });
     fireEvent.mouseEnter(trigger);
+
     const overlay = screen.getByRole('tooltip');
 
     assert.equal(overlay.parentElement, container);
@@ -162,6 +168,7 @@ it('preserves existing descriptions and dismisses focus-triggered portals only w
     );
     const trigger = screen.getByRole('button', { name: 'Focus trigger' });
     fireEvent.focus(trigger);
+
     const overlay = screen.getByRole('tooltip');
     const action = screen.getByRole('button', { name: 'Portal action' });
 

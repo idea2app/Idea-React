@@ -1,3 +1,4 @@
+import { Icon } from '../../../../source/Extension/Icon';
 import { Button } from '../../../../source/Button';
 import { Container } from '../../../../source/Grid';
 import { Navbar, NavbarBrand, NavbarNav } from '../../../../source/Navbar';
@@ -28,7 +29,7 @@ content.
 
 The Idea React [`Menu` wrapper][1] uses the same `.menu`, `.menu-item`, and `.submenu` class names as
 Bootstrap 6, with React-controlled open state, keyboard navigation, focus restoration, and
-configurable auto-close behavior. These examples adapt the [upstream Menu documentation][2].
+configurable auto-close behavior.
 
 ## Overview
 
@@ -41,9 +42,9 @@ Toggle menus with buttons whenever possible. Here's an example using a Bootstrap
 </Menu>
 
 Menus are toggleable, contextual overlays for displaying lists of links and more. They're toggled by
-clicking, not by hovering; this is [an intentional design decision][3].
+clicking, not by hovering; this is [an intentional design decision][2].
 
-Bootstrap's JavaScript plugin uses [Floating UI][4] for dynamic positioning and viewport detection.
+Bootstrap's JavaScript plugin uses [Floating UI][3] for dynamic positioning and viewport detection.
 The React wrapper measures its trigger and panel, flips and shifts them within the viewport, and
 closes on outside pointer interaction without a positioning dependency.
 
@@ -53,7 +54,7 @@ While `<button>` is the recommended control for a menu toggle, there might be si
 have to use an `<a>` element. If you do, we recommend adding a `role="button"` attribute to
 appropriately convey control's purpose to assistive technologies such as screen readers.
 
-Use [button groups][5] to create split button menus where the menu is displayed when a secondary
+Use [button groups][4] to create split button menus where the menu is displayed when a secondary
 button is clicked.
 
 <div className="d-inline-flex">
@@ -256,7 +257,7 @@ classes used by Bootstrap.
 ### Icons
 
 Add `.menu-item-icon` to an icon element to add an icon slot to menu items. Icons are rendered
-through the [`Icon` component][6].
+through the [`Icon` component][5].
 
 <MenuPanel show className="position-static">
     <MenuItem>
@@ -524,7 +525,7 @@ toggle or items) closes the menu and returns focus to the toggle.
 
 ## Accessibility
 
-The [WAI-ARIA][7] standard defines an actual `role="menu"` widget, but this is specific to
+The [WAI-ARIA][6] standard defines an actual `role="menu"` widget, but this is specific to
 application-like menus which trigger actions or functions. ARIA menus can only contain menu items,
 checkbox menu items, radio button menu items, radio button groups, and sub-menus.
 
@@ -558,7 +559,7 @@ Menus use CSS variables for real-time customization. Menu items include at least
 not set on `.menu`. This allows you to provide a new value while Bootstrap defaults to a fallback
 value: `--bs-menu-item-border-radius`.
 
-See the [upstream menu CSS][2] for the complete variable, Sass map, and selector reference.
+See the [upstream menu CSS][7] for the complete variable, Sass map, and selector reference.
 
 ## React behavior
 
@@ -577,16 +578,12 @@ state itself and exposes the same behaviors as props:
 There is no plugin instance to dispose or retrieve: mount the `Menu` component and let React manage
 its lifecycle. Use `onOpenChange` instead of the `show.bs.menu` and `hide.bs.menu` events.
 
-Adapted from [Bootstrap v6.0.0-alpha.1][2], © the Bootstrap authors (MIT license).
-
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Menu.tsx
-[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/menu.mdx
-[3]: https://markdotto.com/blog/bootstrap-explained-dropdowns/
-[4]: https://floating-ui.com/
-[5]: https://getbootstrap.com/docs/6.0/components/button-group/
-[6]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Icon.tsx
-[7]: https://www.w3.org/TR/wai-aria/
-
-import { Icon } from '../../../../source/Extension/Icon';
+[2]: https://markdotto.com/blog/bootstrap-explained-dropdowns/
+[3]: https://floating-ui.com/
+[4]: https://getbootstrap.com/docs/6.0/components/button-group/
+[5]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Icon.tsx
+[6]: https://www.w3.org/TR/wai-aria/
+[7]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/menu.mdx

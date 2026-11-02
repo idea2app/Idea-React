@@ -1,7 +1,8 @@
+import { Col, Row } from '../../../../source/Grid';
 import {
-    DatePicker,
     FormControl,
     FormFeedback,
+    FormField,
     FormFloatingLabel,
     FormLabel,
     FormSelect,
@@ -11,59 +12,349 @@ import {
 } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import style from '../../../component/Documentation/Forms/style.module.css';
 
 <DocumentationLayout active="floating-labels">
 
 # Floating labels
 
-`FormFloatingLabel` places direct `FormLabel` and native `label` children before controls,
-as required by Bootstrap 6, even when supplied after the control. Text inputs and textareas
-need a nonempty `placeholder` so their empty state can be detected.
+Create beautifully simple form labels that float over your input fields.
 
-## Quick start
+## Example
+
+Wrap a `FormControl` and `FormLabel` pair in `FormFloatingLabel` to enable floating labels with Bootstrap’s textual form fields.
+
+A non-empty `placeholder` attribute is required on each `<input>` as our CSS-only floating label implementation relies on the `:placeholder-shown` pseudo-element to detect when the input is empty. The placeholder stays transparent until the control is focused, then uses the normal placeholder color. Only the `<label>` is shown when the field is empty and unfocused.
+
+Also note that the `<label>` must come first so that screen readers announce it before the field’s value; our CSS reacts to the control’s state with the `:has()` selector.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <FormFloatingLabel>
+            <FormLabel htmlFor="floatingInput" plain>
+                Email address
+            </FormLabel>
+            <FormControl type="email" id="floatingInput" placeholder="name@example.com" />
+        </FormFloatingLabel>
+        <FormFloatingLabel>
+            <FormLabel htmlFor="floatingPassword" plain>
+                Password
+            </FormLabel>
+            <FormControl type="password" id="floatingPassword" placeholder="Password" />
+        </FormFloatingLabel>
+    </div>
+</CodeExample>
+
+When there’s a `defaultValue` (or controlled `value`) already defined, `<label>`s will automatically adjust to their floated position.
 
 <CodeExample>
     <FormFloatingLabel>
-        <FormControl id="floatingEmail" type="email" placeholder="name@example.com" />
-        <FormLabel htmlFor="floatingEmail">Email address</FormLabel>
+        <FormLabel htmlFor="floatingInputValue" plain>
+            Input with value
+        </FormLabel>
+        <FormControl
+            type="email"
+            id="floatingInputValue"
+            placeholder="name@example.com"
+            defaultValue="test@example.com"
+        />
     </FormFloatingLabel>
-    <FormFloatingLabel className="mt-3">
-        <FormTextArea id="floatingMessage" placeholder="Message" rows={3} />
-        <FormLabel htmlFor="floatingMessage">Message</FormLabel>
+</CodeExample>
+
+Form validation styles also work as expected.
+
+<CodeExample>
+    <FormFloatingLabel>
+        <FormLabel htmlFor="floatingInputInvalid" plain>
+            Invalid input
+        </FormLabel>
+        <FormControl
+            type="email"
+            id="floatingInputInvalid"
+            placeholder="name@example.com"
+            defaultValue="test@example.com"
+            validation="invalid"
+        />
     </FormFloatingLabel>
-    <FormFloatingLabel className="mt-3">
-        <FormSelect id="floatingCountry" defaultValue="ca">
-            <option value="ca">Canada</option>
+</CodeExample>
+
+## Textareas
+
+By default, `<textarea>`s with `.form-control` will be the same height as `<input>`s.
+
+<CodeExample>
+    <FormFloatingLabel>
+        <FormLabel htmlFor="floatingTextarea" plain>
+            Comments
+        </FormLabel>
+        <FormTextArea placeholder="Leave a comment here" id="floatingTextarea" />
+    </FormFloatingLabel>
+</CodeExample>
+
+To set a custom height on your `<textarea>`, do not use the `rows` attribute. Instead, override the `--bs-form-floating-height` CSS variable on `FormFloatingLabel` through a CSS module so the label floats correctly at any height.
+
+<CodeExample>
+    <FormFloatingLabel className={style.tallFloating}>
+        <FormLabel htmlFor="floatingTextarea2" plain>
+            Comments
+        </FormLabel>
+        <FormTextArea placeholder="Leave a comment here" id="floatingTextarea2" />
+    </FormFloatingLabel>
+</CodeExample>
+
+## Selects
+
+Select elements work in the same way, but unlike `<input>`s, they’ll always show the `<label>` in its floated state. **Selects with `size` and `multiple` are not supported.**
+
+<CodeExample>
+    <FormFloatingLabel>
+        <FormLabel htmlFor="floatingSelect" plain>
+            Works with selects
+        </FormLabel>
+        <FormSelect
+            id="floatingSelect"
+            aria-label="Floating label select example"
+            defaultValue="Open this select menu"
+        >
+            <option>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
         </FormSelect>
-        <FormLabel htmlFor="floatingCountry">Country</FormLabel>
     </FormFloatingLabel>
-    <FormFloatingLabel always className="mt-3">
-        <DatePicker id="floatingDate" />
-        <FormLabel htmlFor="floatingDate">Date</FormLabel>
-    </FormFloatingLabel>
-    <InputGroup className="mt-3">
+</CodeExample>
+
+## Date and time
+
+Date, time, datetime-local, month, and week inputs also always show the `<label>` in its floated state. These controls do not support placeholders the way textual inputs do, so a `placeholder` attribute is not required (and is ignored by most browsers on these types).
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <FormFloatingLabel>
+            <FormLabel htmlFor="floatingDate" plain>
+                Date
+            </FormLabel>
+            <FormControl type="date" id="floatingDate" />
+        </FormFloatingLabel>
+        <FormFloatingLabel>
+            <FormLabel htmlFor="floatingTime" plain>
+                Time
+            </FormLabel>
+            <FormControl type="time" id="floatingTime" />
+        </FormFloatingLabel>
+    </div>
+</CodeExample>
+
+## Disabled
+
+Add the `disabled` boolean attribute on an input, a textarea or a select to give it a grayed out appearance, remove pointer events, and prevent focusing.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <FormFloatingLabel>
+            <FormLabel htmlFor="floatingInputDisabled" plain>
+                Email address
+            </FormLabel>
+            <FormControl
+                type="email"
+                id="floatingInputDisabled"
+                placeholder="name@example.com"
+                disabled
+            />
+        </FormFloatingLabel>
+        <FormFloatingLabel>
+            <FormLabel htmlFor="floatingTextareaDisabled" plain>
+                Comments
+            </FormLabel>
+            <FormTextArea
+                placeholder="Leave a comment here"
+                id="floatingTextareaDisabled"
+                disabled
+            />
+        </FormFloatingLabel>
+        <FormFloatingLabel className={style.tallFloating}>
+            <FormLabel htmlFor="floatingTextarea2Disabled" plain>
+                Comments
+            </FormLabel>
+            <FormTextArea
+                placeholder="Leave a comment here"
+                id="floatingTextarea2Disabled"
+                disabled
+                defaultValue="Disabled textarea with some text inside"
+            />
+        </FormFloatingLabel>
+        <FormFloatingLabel>
+            <FormLabel htmlFor="floatingSelectDisabled" plain>
+                Works with selects
+            </FormLabel>
+            <FormSelect
+                id="floatingSelectDisabled"
+                aria-label="Floating label disabled select example"
+                disabled
+                defaultValue="Open this select menu"
+            >
+                <option>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </FormSelect>
+        </FormFloatingLabel>
+    </div>
+</CodeExample>
+
+## Readonly plaintext
+
+Floating labels also support `.form-control-plaintext`, which can be helpful for toggling from an editable `<input>` to a plaintext value without affecting the page layout.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <FormFloatingLabel>
+            <FormLabel htmlFor="floatingEmptyPlaintextInput" plain>
+                Empty input
+            </FormLabel>
+            <FormControl
+                type="email"
+                readOnly
+                id="floatingEmptyPlaintextInput"
+                placeholder="name@example.com"
+                plaintext
+            />
+        </FormFloatingLabel>
+        <FormFloatingLabel>
+            <FormLabel htmlFor="floatingPlaintextInput" plain>
+                Input with value
+            </FormLabel>
+            <FormControl
+                type="email"
+                readOnly
+                id="floatingPlaintextInput"
+                placeholder="name@example.com"
+                defaultValue="name@example.com"
+                plaintext
+            />
+        </FormFloatingLabel>
+    </div>
+</CodeExample>
+
+## Input groups
+
+Floating labels also support `.input-group`.
+
+<CodeExample>
+    <InputGroup>
         <InputGroupText>@</InputGroupText>
         <FormFloatingLabel>
-            <FormControl
-                id="floatingUsername"
-                placeholder="Username"
-                validation="invalid"
-                aria-describedby="floatingError"
-            />
-            <FormLabel htmlFor="floatingUsername">Username</FormLabel>
+            <FormLabel htmlFor="floatingInputGroup1" plain>
+                Username
+            </FormLabel>
+            <FormControl type="text" id="floatingInputGroup1" placeholder="Username" />
         </FormFloatingLabel>
-        <FormFeedback id="floatingError">Choose a username.</FormFeedback>
     </InputGroup>
 </CodeExample>
 
-`always` keeps labels floating, useful for date/time and externally populated controls.
-Native `disabled`, `readOnly` and `FormControl plaintext` remain supported. Use ordinary grid
-utilities around the floating wrappers for responsive layouts, and `FormFeedback` for validation.
-Avoid multiple-select and size-expanded select fields inside floating labels.
+When using `.input-group` and `.form-floating` along with form validation, place the `-feedback` outside the `.input-group` inside a `.form-field` wrapper.
 
-Adapted from [Bootstrap v6.0.0-alpha.1 Floating labels][1], © Bootstrap Authors, [MIT licensed][2].
+<CodeExample>
+    <FormField>
+        <InputGroup>
+            <InputGroupText>@</InputGroupText>
+            <FormFloatingLabel>
+                <FormLabel htmlFor="floatingInputGroup2" plain>
+                    Username
+                </FormLabel>
+                <FormControl
+                    type="text"
+                    id="floatingInputGroup2"
+                    placeholder="Username"
+                    required
+                    validation="invalid"
+                />
+            </FormFloatingLabel>
+        </InputGroup>
+        <FormFeedback> Please choose a username. </FormFeedback>
+    </FormField>
+</CodeExample>
+
+## Always floating
+
+Add `.form-floating-always` to keep the label floated and show the placeholder. Use it on the `.form-floating` itself or as a wrapper around one.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <FormFloatingLabel always>
+            <FormLabel htmlFor="alwaysFloatingInput" plain>
+                Email address
+            </FormLabel>
+            <FormControl type="email" id="alwaysFloatingInput" placeholder="name@example.com" />
+        </FormFloatingLabel>
+        <FormFloatingLabel always>
+            <FormLabel htmlFor="alwaysFloatingPassword" plain>
+                Password
+            </FormLabel>
+            <FormControl type="password" id="alwaysFloatingPassword" placeholder="••••••••" />
+        </FormFloatingLabel>
+    </div>
+</CodeExample>
+
+By default, placeholders stay transparent until the control is focused. With `.form-floating-always`, the placeholder stays visible in both states.
+
+## Layout
+
+When working with the Bootstrap grid system, be sure to place form elements within column classes.
+
+<CodeExample>
+    <Row className="g-2">
+        <Col md>
+            <FormFloatingLabel>
+                <FormLabel htmlFor="floatingInputGrid" plain>
+                    Email address
+                </FormLabel>
+                <FormControl
+                    type="email"
+                    id="floatingInputGrid"
+                    placeholder="name@example.com"
+                    defaultValue="mdo@example.com"
+                />
+            </FormFloatingLabel>
+        </Col>
+        <Col md>
+            <FormFloatingLabel>
+                <FormLabel htmlFor="floatingSelectGrid" plain>
+                    Works with selects
+                </FormLabel>
+                <FormSelect id="floatingSelectGrid" defaultValue="Open this select menu">
+                    <option>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </FormSelect>
+            </FormFloatingLabel>
+        </Col>
+    </Row>
+</CodeExample>
+
+## CSS
+
+### Variables
+
+```css
+.example {
+    --bs-form-floating-height: calc(3.75rem + var(--bs-border-width) * 2);
+    --bs-form-floating-line-height: 1.25;
+    --bs-form-floating-padding-x: calc(var(--bs-btn-input-padding-x) * 1.25);
+    --bs-form-floating-padding-y: 1rem;
+    --bs-form-floating-input-padding-t: 1.625rem;
+    --bs-form-floating-input-padding-b: 0.625rem;
+    --bs-form-floating-label-height: 1.5em;
+    --bs-form-floating-label-bg: var(--bs-btn-input-bg);
+    --bs-form-floating-label-disabled-bg: var(--bs-bg-2);
+    --bs-form-floating-label-opacity: 0.65;
+    --bs-form-floating-label-transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+    --bs-form-floating-label-disabled-color: var(--bs-fg-3);
+    --bs-form-floating-transition-property: opacity, transform;
+    --bs-form-floating-transition-duration: 0.1s;
+    --bs-form-floating-transition-timing: ease-in-out;
+}
+```
 
 </DocumentationLayout>
-
-[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/floating-labels.mdx
-[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

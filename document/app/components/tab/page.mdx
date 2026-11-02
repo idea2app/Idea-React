@@ -1,39 +1,31 @@
-import { Tab } from '../../../../source/Tab';
+import { Tab, Tabs } from '../../../../source/Tab';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 
 <ComponentsLayout active="tab">
 
-# Tab
+# Tabs
 
-Switch between related content panels using accessible tab controls. Adapted from
-[Bootstrap v6.0.0-alpha.1 Tab][1].
+Switch between related content panels using accessible tab controls.
 
 ## Nav tabs
 
-Pass keyed `tabs` data with a label and panel `content`. `id` is required so tab and panel
-relationships are unique on the page. The selected tab is controlled with `activeKey`, or initialized
-with `defaultActiveKey`.
+Wrap `Tab` elements in `Tabs`. Each tab has a unique `eventKey`, a navigation `label`, and panel
+content passed through `children`. The container's `id` keeps tab and panel relationships unique
+on the page. Control selection with `activeKey`, or initialize it with `defaultActiveKey`.
 
 <CodeExample>
-    <Tab
-        id="account-tabs"
-        aria-label="Account settings"
-        tabs={[
-            { key: 'overview', label: 'Overview', content: 'Account summary and recent activity.' },
-            {
-                key: 'security',
-                label: 'Security',
-                content: 'Review sign-in and security settings.'
-            },
-            {
-                key: 'disabled',
-                label: 'Disabled',
-                content: 'This panel is unavailable.',
-                disabled: true
-            }
-        ]}
-    />
+    <Tabs id="account-tabs" aria-label="Account settings">
+        <Tab eventKey="overview" label="Overview">
+            Account summary and recent activity.
+        </Tab>
+        <Tab eventKey="security" label="Security">
+            Review sign-in and security settings.
+        </Tab>
+        <Tab eventKey="disabled" label="Disabled" disabled>
+            This panel is unavailable.
+        </Tab>
+    </Tabs>
 </CodeExample>
 
 ## Pills and vertical tabs
@@ -42,17 +34,17 @@ Set `variant="pills"` for pill navigation. Use `orientation="vertical"` to stack
 keys then follow the vertical direction.
 
 <CodeExample>
-    <Tab
-        id="project-tabs"
-        tabs={[
-            { key: 'details', label: 'Details', content: 'Project description and ownership.' },
-            { key: 'activity', label: 'Activity', content: 'Recent project updates.' },
-            { key: 'members', label: 'Members', content: 'People with access to this project.' }
-        ]}
-        variant="pills"
-        orientation="vertical"
-        aria-label="Project sections"
-    />
+    <Tabs id="project-tabs" variant="pills" orientation="vertical" aria-label="Project sections">
+        <Tab eventKey="details" label="Details">
+            Project description and ownership.
+        </Tab>
+        <Tab eventKey="activity" label="Activity">
+            Recent project updates.
+        </Tab>
+        <Tab eventKey="members" label="Members">
+            People with access to this project.
+        </Tab>
+    </Tabs>
 </CodeExample>
 
 ## List groups and instant panels
@@ -61,16 +53,17 @@ keys then follow the vertical direction.
 instant switching.
 
 <CodeExample>
-    <Tab
-        id="project-list-tabs"
-        tabs={[
-            { key: 'details', label: 'Details', content: 'Project description and ownership.' },
-            { key: 'activity', label: 'Activity', content: 'Recent project updates.' },
-            { key: 'members', label: 'Members', content: 'People with access to this project.' }
-        ]}
-        variant="list-group"
-        fade={false}
-    />
+    <Tabs id="project-list-tabs" variant="list-group" fade={false}>
+        <Tab eventKey="details" label="Details">
+            Project description and ownership.
+        </Tab>
+        <Tab eventKey="activity" label="Activity">
+            Recent project updates.
+        </Tab>
+        <Tab eventKey="members" label="Members">
+            People with access to this project.
+        </Tab>
+    </Tabs>
 </CodeExample>
 
 ## Accessibility
@@ -83,8 +76,4 @@ for keyboard users.
 Tab panels should not contain menus: a trigger hidden inside a closed panel is difficult to discover
 and does not fit the standard tabs accessibility pattern.
 
-Adapted from [Bootstrap v6.0.0-alpha.1 Tab][1], copyright The Bootstrap Authors, MIT license.
-
 </ComponentsLayout>
-
-[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/tab.mdx

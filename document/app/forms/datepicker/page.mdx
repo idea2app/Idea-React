@@ -2,11 +2,15 @@ import {
     DatePicker,
     DatePickerButton,
     DatePickerInline,
+    Form,
     FormAdornment,
     FormAdornmentIcon,
+    FormControl,
     FormField,
-    FormLabel
+    FormLabel,
+    FormText
 } from '../../../../source/Form';
+import { Button } from '../../../../source/Button';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -14,62 +18,380 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # Datepicker
 
-`DatePicker` defaults to a native date input. Set `enhanced` to initialize Bootstrap's
-Vanilla Calendar Pro integration automatically. `DatePickerButton` and `DatePickerInline`
-provide button-triggered and always-visible calendars.
+A flexible calendar and date picker popover with support for input or button toggles, range selection, multiple months, and more.
 
-## Quick start
+## Overview
+
+The Bootstrap Datepicker is a wrapper around [Vanilla Calendar Pro][1] that provides a consistent, accessible date selection experience. It supports light/dark themes, input binding, and flexible configuration via React props.
+
+<CodeExample>
+    <FormLabel htmlFor="datepicker1">Datepicker</FormLabel>
+    <DatePicker
+        id="datepicker1"
+        autoComplete="off"
+        placeholder="Choose date…"
+        enhanced
+        className="w-12"
+    />
+</CodeExample>
+
+Note that we’re using a width utility of `.w-12` to ensure the input is wide enough to accommodate the date format and imply some affordance for the expected type of input.
+
+## How it works
+
+- Use `DatePicker enhanced` to enable the datepicker on a native input
+- `enhanced` renders a text input to avoid conflicts with native browser date pickers; without it, `DatePicker` retains the browser’s native date input
+- When focused, the calendar popup appears below the input
+- Selecting a date updates the input value and closes the picker
+- The picker also closes on a click outside it, on <kbd>Escape</kbd>, or when focus moves to an element outside it
+- The picker respects Bootstrap’s color modes (`data-bs-theme`)
+- Configurable with any [Vanilla Calendar Pro option][2] via `options.vcpOptions`
+
+## Examples
+
+### With form field
+
+Use the [form field][3] component to layout and wrap your inputs with a label, description, and validation feedback messages in a vertical stack.
 
 <CodeExample>
     <FormField>
-        <FormLabel htmlFor="datepickerNative">Native date</FormLabel>
-        <DatePicker id="datepickerNative" name="date" min="2026-01-01" max="2026-12-31" />
+        <FormLabel htmlFor="datepicker2">Datepicker field</FormLabel>
+        <DatePicker
+            id="datepicker2"
+            autoComplete="off"
+            placeholder="Choose date…"
+            enhanced
+            className="w-12"
+        />
+        <FormText> We’ll never share your email with anyone else. </FormText>
     </FormField>
-    <FormField className="mt-3">
-        <FormLabel htmlFor="datepickerRange">Date range</FormLabel>
-        <FormAdornment htmlFor="datepickerRange">
-            <FormAdornmentIcon name="calendar-week" aria-hidden="true" />
-            <DatePicker
-                id="datepickerRange"
-                name="range"
-                enhanced
-                ghost
-                selectionMode="multiple-ranged"
-                displayMonthsCount={2}
-                selectedDates={['2026-06-25', '2026-07-08']}
-                firstWeekday={0}
-                placement="center"
-                options={{ locale: 'en-US', dateFormat: { dateStyle: 'medium' } }}
-            />
-        </FormAdornment>
-    </FormField>
-    <DatePickerButton
-        className="mt-3"
-        variant="outline"
-        selectionMode="multiple"
-        leadingIcon="calendar-week"
-    >
-        Select dates
-    </DatePickerButton>
-    <DatePickerInline className="mt-3" datepickerTheme="dark" />
 </CodeExample>
 
-Enhanced mode supports `selectionMode="single"`, `"multiple"` or `"multiple-ranged"`.
-Combine `displayMonthsCount` and `selectedDates` for multi-month ranges. `min` / `max` bound an
-input's dates; the button and inline variants accept `options.dateMin` / `dateMax`.
+### With icon
 
-Use `firstWeekday`, `placement` (`left`, `center`, `right`, `auto`) and `datepickerTheme`.
-`options` accepts every Bootstrap datepicker option, including `locale`, `dateFormat` (Intl
-options or a formatter), `displayElement`, `positionElement` and all `vcpOptions`. Top-level
-settings override equivalent `options` fields. `onDatesChange` receives selected date strings;
-native input events are also preserved. Refs target the input, button or inline container.
+Use the [form adorn component][4] to add a calendar icon alongside the datepicker input. When the input is inside a `.form-adorn` wrapper, the calendar automatically positions relative to the wrapper instead of the input.
 
-The picker inherits the surrounding theme unless overridden. For Shadow DOM, provide compatible
-styles inside the root and use element references for positioning and display options.
+<CodeExample>
+    <FormLabel htmlFor="datepickerIconStart">Select date</FormLabel>
+    <FormAdornment className="w-12">
+        <FormAdornmentIcon name="calendar-week" aria-hidden="true" />
+        <DatePicker
+            id="datepickerIconStart"
+            autoComplete="off"
+            placeholder="Choose date…"
+            enhanced
+            ghost
+        />
+    </FormAdornment>
+</CodeExample>
 
-Adapted from [Bootstrap v6.0.0-alpha.1 Datepicker][1], © Bootstrap Authors, [MIT licensed][2].
+### Min & Max dates
+
+Restrict the selectable date range using the `min` and `max` props.
+
+<CodeExample>
+    <FormLabel htmlFor="datepickerMinMax">Event date (2026 only)</FormLabel>
+    <DatePicker
+        id="datepickerMinMax"
+        autoComplete="off"
+        placeholder="Select a date in 2026"
+        enhanced
+        min="2026-01-01"
+        max="2026-12-31"
+        className="w-12"
+    />
+</CodeExample>
+
+### Multiple dates
+
+Enable multiple date selection with `selectionMode="multiple"`.
+
+<CodeExample>
+    <FormLabel htmlFor="datepicker3">Select multiple dates</FormLabel>
+    <DatePicker
+        id="datepicker3"
+        autoComplete="off"
+        placeholder="Select date range…"
+        enhanced
+        selectionMode="multiple"
+    />
+</CodeExample>
+
+### Multiple months
+
+Display multiple months side-by-side with the `displayMonthsCount` option. This is useful for date range selection where users need to see more context.
+
+<CodeExample>
+    <FormLabel htmlFor="datepickerMultiMonth">Select date range</FormLabel>
+    <DatePicker
+        id="datepickerMultiMonth"
+        autoComplete="off"
+        placeholder="Select start and end dates"
+        enhanced
+        selectionMode="multiple-ranged"
+        displayMonthsCount={2}
+    />
+</CodeExample>
+
+### Date range
+
+Select a range of dates with `selectionMode="multiple-ranged"`. Use `selectedDates` to preselect a date range.
+
+<CodeExample>
+    <FormLabel htmlFor="datepicker4">Select date range</FormLabel>
+    <DatePicker
+        id="datepicker4"
+        autoComplete="off"
+        placeholder="Select start and end dates…"
+        enhanced
+        selectionMode="multiple-ranged"
+        selectedDates={['2026-06-10', '2026-06-18']}
+    />
+</CodeExample>
+
+### Multi-month date range
+
+For selecting date ranges that span multiple months, combine `selectionMode="multiple-ranged"` with `displayMonthsCount={2}` to show two months side-by-side, making it easier for users to select across month boundaries.
+
+<CodeExample>
+    <FormLabel htmlFor="datepickerRangeTwoMonths">Select date range</FormLabel>
+    <DatePicker
+        id="datepickerRangeTwoMonths"
+        autoComplete="off"
+        placeholder="Select start and end dates…"
+        enhanced
+        selectionMode="multiple-ranged"
+        displayMonthsCount={2}
+        selectedDates={['2026-06-25', '2026-07-08']}
+    />
+</CodeExample>
+
+## Options
+
+### First day of week
+
+Set the first day of the week (0 = Sunday, 1 = Monday, etc.) with `firstWeekday`.
+
+<CodeExample>
+    <FormLabel htmlFor="datepicker6">Week starts on Sunday</FormLabel>
+    <DatePicker
+        id="datepicker6"
+        autoComplete="off"
+        placeholder="Select a date"
+        enhanced
+        firstWeekday={0}
+        className="w-12"
+    />
+</CodeExample>
+
+### Placement
+
+Control where the calendar appears relative to the input with `placement`. Options are `left` (default), `center`, `right`, and `auto`.
+
+<CodeExample>
+    <div className="d-flex gap-3">
+        <div>
+            <FormLabel htmlFor="datepickerLeft">Left aligned</FormLabel>
+            <DatePicker
+                id="datepickerLeft"
+                autoComplete="off"
+                placeholder="Left"
+                enhanced
+                placement="left"
+            />
+        </div>
+        <div>
+            <FormLabel htmlFor="datepickerCenter">Center aligned</FormLabel>
+            <DatePicker
+                id="datepickerCenter"
+                autoComplete="off"
+                placeholder="Center"
+                enhanced
+                placement="center"
+            />
+        </div>
+        <div>
+            <FormLabel htmlFor="datepickerRight">Right aligned</FormLabel>
+            <DatePicker
+                id="datepickerRight"
+                autoComplete="off"
+                placeholder="Right"
+                enhanced
+                placement="right"
+            />
+        </div>
+    </div>
+</CodeExample>
+
+### Button trigger
+
+Use `DatePickerButton` instead of an input for use cases like dashboard date filters. Set `leadingIcon` to preserve an icon when the date updates.
+
+<CodeExample>
+    <DatePickerButton type="button" leadingIcon="calendar-week" theme="secondary" variant="outline">
+        Select date
+    </DatePickerButton>
+</CodeExample>
+
+For date range selection (e.g., dashboard time filters), use `selectionMode="multiple-ranged"`. The calendar will close after both start and end dates are selected.
+
+<CodeExample>
+    <DatePickerButton
+        type="button"
+        leadingIcon="calendar-week"
+        selectionMode="multiple-ranged"
+        theme="secondary"
+        variant="outline"
+    >
+        Last 7 days
+    </DatePickerButton>
+</CodeExample>
+
+You can also display the selected date in a separate element using `options.displayElement`:
+
+```tsx
+<DatePickerButton
+    selectionMode="multiple-ranged"
+    options={{ displayElement: "#date-display" }}
+>
+    Choose dates
+</DatePickerButton>
+<span id="date-display" />
+```
+
+### Inline mode
+
+Render the calendar inline (always visible, no popup) with `DatePickerInline`. This is useful for embedding a calendar directly in the page.
+
+<CodeExample>
+    <DatePickerInline />
+</CodeExample>
+
+Inline datepickers with date range selection:
+
+<CodeExample>
+    <DatePickerInline selectionMode="multiple-ranged" />
+</CodeExample>
+
+Multiple months inline:
+
+<CodeExample>
+    <DatePickerInline displayMonthsCount={2} />
+</CodeExample>
+
+To bind to a form field, include a hidden input inside the container. The value will be updated with the selected date(s) in `YYYY-MM-DD` format:
+
+<CodeExample>
+    <Form>
+        <DatePickerInline>
+            <FormControl type="hidden" name="selected_date" />
+        </DatePickerInline>
+        <Button type="submit" theme="primary" variant="solid" className="mt-3">
+            Submit
+        </Button>
+    </Form>
+</CodeExample>
+
+### Custom date formatting
+
+Control how dates are displayed using `options.dateFormat`. Pass an [`Intl.DateTimeFormat` options object][5] or a custom function.
+
+```tsx
+<DatePicker
+    enhanced
+    options={{ dateFormat: { month: "short", day: "numeric", year: "numeric" } }}
+/>
+<DatePicker
+    enhanced
+    options={{ dateFormat: (date, locale) => date.toLocaleDateString(locale, { month: "short", day: "numeric" }) }}
+/>
+```
+
+## Dark mode
+
+The datepicker automatically adapts to Bootstrap’s color modes. When `data-bs-theme="dark"` is set on a parent element or the `<html>` tag, the calendar popup inherits that theme.
+
+### Inherited from parent
+
+When a parent element has a theme, both the input and calendar popup inherit it:
+
+<CodeExample>
+    <div data-bs-theme="dark" className="p-3 bg-body fg-body rounded">
+        <FormLabel htmlFor="datepickerDark">Dark mode datepicker</FormLabel>
+        <DatePicker id="datepickerDark" autoComplete="off" placeholder="Select a date" enhanced />
+    </div>
+</CodeExample>
+
+### Datepicker-only theme
+
+Use `datepickerTheme` to set the datepicker popup’s theme independently of the input. This is useful when you want a light input with a dark datepicker, or vice versa:
+
+<CodeExample>
+    <FormLabel htmlFor="datepickerTheme">Light input, dark datepicker</FormLabel>
+    <DatePicker
+        id="datepickerTheme"
+        autoComplete="off"
+        placeholder="Select a date"
+        enhanced
+        datepickerTheme="dark"
+        className="w-12"
+    />
+</CodeExample>
+
+## CSS
+
+### Variables
+
+```css
+.example {
+    --bs-datepicker-padding: 1rem;
+    --bs-datepicker-bg: var(--bs-bg-body);
+    --bs-datepicker-color: var(--bs-fg-body);
+    --bs-datepicker-border-color: var(--bs-border-color-translucent);
+    --bs-datepicker-border-width: var(--bs-border-width);
+    --bs-datepicker-border-radius: var(--bs-radius-7);
+    --bs-datepicker-box-shadow: var(--bs-box-shadow);
+    --bs-datepicker-font-size: var(--bs-font-size-sm);
+    --bs-datepicker-min-width: 280px;
+    --bs-datepicker-zindex: var(--bs-z-menu);
+    --bs-datepicker-header-font-weight: 600;
+    --bs-datepicker-weekday-color: var(--bs-fg-3);
+    --bs-datepicker-day-hover-bg: var(--bs-bg-1);
+    --bs-datepicker-day-selected-bg: var(--bs-primary-bg);
+    --bs-datepicker-day-selected-color: var(--bs-primary-contrast);
+    --bs-datepicker-day-today-bg: var(--bs-bg-2);
+    --bs-datepicker-day-today-color: var(--bs-fg-1);
+    --bs-datepicker-day-disabled-color: var(--bs-fg-4);
+}
+```
+
+## Usage
+
+`DatePicker enhanced`, `DatePickerButton`, and `DatePickerInline` initialize and dispose the calendar automatically. Pass supported settings as props, plugin settings through `options` and advanced Vanilla Calendar Pro settings through `options.vcpOptions`, and receive selected dates with `onDatesChange`.
+
+### Options
+
+| Name                      | Type                     | Default     | Description                                                                                                       |
+| ------------------------- | ------------------------ | ----------- | ----------------------------------------------------------------------------------------------------------------- |
+| `min` / `options.dateMin` | string, number, Date     | `null`      | Minimum selectable date. Format: `YYYY-MM-DD`                                                                     |
+| `max` / `options.dateMax` | string, number, Date     | `null`      | Maximum selectable date. Format: `YYYY-MM-DD`                                                                     |
+| `options.dateFormat`      | object, function         | `null`      | Date formatting. Pass `Intl.DateTimeFormat` options or a `function(date, locale)`.                                |
+| `options.displayElement`  | string, element, boolean | `null`      | Element to show formatted date. For buttons, defaults to the button itself. Set to `false` to disable.            |
+| `displayMonthsCount`      | number                   | `1`         | Number of months to display side-by-side in the calendar.                                                         |
+| `firstWeekday`            | number                   | `1`         | First day of week (0 = Sunday, 1 = Monday, etc.)                                                                  |
+| `inline`                  | boolean                  | `false`     | Render calendar inline (always visible, no popup).                                                                |
+| `options.locale`          | string                   | `'default'` | Locale for date formatting (e.g., `'en-US'`, `'de-DE'`)                                                           |
+| `options.positionElement` | string, element          | `null`      | Element to position calendar relative to. Auto-detects `.form-adorn` wrapper if present.                          |
+| `selectedDates`           | array                    | `[]`        | Pre-selected dates in `YYYY-MM-DD` format                                                                         |
+| `selectionMode`           | string                   | `'single'`  | Selection mode: `'single'`, `'multiple'`, or `'multiple-ranged'`                                                  |
+| `placement`               | string                   | `'left'`    | Calendar position relative to input: `'left'`, `'center'`, `'right'`, `'auto'`                                    |
+| `datepickerTheme`         | string                   | `null`      | Force datepicker popup theme: `'light'`, `'dark'`, `'auto'`, or `null` to inherit from ancestor `[data-bs-theme]` |
+| `options.vcpOptions`      | object                   | `{}`        | Pass-through object for any [Vanilla Calendar Pro option][2]                                                      |
 
 </DocumentationLayout>
 
-[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/datepicker.mdx
-[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE
+[1]: https://vanilla-calendar.pro/
+[2]: https://vanilla-calendar.pro/docs/reference/settings
+[3]: ../field/
+[4]: ../form-adorn/
+[5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#options

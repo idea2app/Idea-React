@@ -22,7 +22,11 @@ export const FormFeedback: FC<FormFeedbackProps> = ({
 }) => (
     <div
         {...props}
-        className={classNames(tooltip ? `${type}-tooltip` : `${type}-feedback`, className)}
+        className={classNames(
+            tooltip && 'tooltip',
+            tooltip ? `${type}-tooltip` : `${type}-feedback`,
+            className
+        )}
     />
 );
 

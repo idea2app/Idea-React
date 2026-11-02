@@ -1,59 +1,424 @@
 import {
+    Checkbox,
     Form,
     FormControl,
     FormField,
+    FormFieldset,
     FormGroup,
     FormLabel,
-    FormSelect
+    FormLegend,
+    FormSelect,
+    InputGroup,
+    InputGroupText,
+    Radio
 } from '../../../../source/Form';
+import { Col, Row } from '../../../../source/Grid';
+import { Button } from '../../../../source/Button';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
 <DocumentationLayout active="layout">
 
-# Form layout
+# Layout
 
-Use `FormField` for individual controls and `FormGroup` for related choices. Bootstrap's spacing,
-grid, gutter and flex utilities arrange wrappers without additional layout components.
+Give your forms some structure—from inline to horizontal to custom grid implementations—with our form layout options.
 
-## Quick start
+## Forms
+
+Every group of form fields should reside in a `<form>` element. Bootstrap provides no default styling for the `<form>` element, but there are some powerful browser features that are provided by default.
+
+- New to browser forms? Consider reviewing [the MDN form docs][1] for an overview and complete list of available attributes.
+- `<button>`s within a `<form>` default to `type="submit"`, so strive to be specific and always include a `type`.
+
+Since Bootstrap applies `display: block` and `width: 100%` to almost all our form controls, forms will by default stack vertically. Additional classes can be used to vary this layout on a per-form basis.
+
+## Utilities
+
+[Margin utilities][2] are the easiest way to add some structure to forms. They provide basic grouping of labels, controls, optional form text, and form validation messaging. We recommend sticking to `margin-bottom` utilities, and using a single direction throughout the form for consistency.
+
+Feel free to build your forms however you like, with `<fieldset>`s, `<div>`s, or nearly any other element.
 
 <CodeExample>
-    <Form aria-label="Address">
-        <div className="row g-3">
-            <FormField className="md:col-6">
-                <FormLabel htmlFor="layoutCity">City</FormLabel>
-                <FormControl id="layoutCity" name="city" />
-            </FormField>
-            <FormField className="md:col-6">
-                <FormLabel htmlFor="layoutCountry">Country</FormLabel>
-                <FormSelect id="layoutCountry" name="country" defaultValue="ca">
-                    <option value="ca">Canada</option>
-                    <option value="us">United States</option>
-                </FormSelect>
-            </FormField>
-        </div>
-        <FormGroup className="mt-3">
-            <div className="row g-3 align-items-center">
-                <FormLabel column controlSize="sm" htmlFor="layoutEmail" className="sm:col-2">
-                    Email
+    <div className="mb-3">
+        <FormLabel htmlFor="formGroupExampleInput">Example label</FormLabel>
+        <FormControl
+            type="text"
+            id="formGroupExampleInput"
+            placeholder="Example input placeholder"
+        />
+    </div>
+    <div className="mb-3">
+        <FormLabel htmlFor="formGroupExampleInput2">Another label</FormLabel>
+        <FormControl
+            type="text"
+            id="formGroupExampleInput2"
+            placeholder="Another input placeholder"
+        />
+    </div>
+</CodeExample>
+
+## Form grid
+
+More complex forms can be built using our grid classes. Use these for form layouts that require multiple columns, varied widths, and additional alignment options. **Requires the `$enable-grid-classes` Sass variable to be enabled** (on by default).
+
+<CodeExample>
+    <Row>
+        <Col>
+            <FormControl type="text" placeholder="First name" aria-label="First name" />
+        </Col>
+        <Col>
+            <FormControl type="text" placeholder="Last name" aria-label="Last name" />
+        </Col>
+    </Row>
+</CodeExample>
+
+## Gutters
+
+By adding [gutter modifier classes][3], you can have control over the gutter width in as well the inline as block direction. **Also requires the `$enable-grid-classes` Sass variable to be enabled** (on by default).
+
+<CodeExample>
+    <Row className="g-3">
+        <Col>
+            <FormControl type="text" placeholder="First name" aria-label="First name" />
+        </Col>
+        <Col>
+            <FormControl type="text" placeholder="Last name" aria-label="Last name" />
+        </Col>
+    </Row>
+</CodeExample>
+
+More complex layouts can also be created with the grid system.
+
+<CodeExample>
+    <Form className="row g-3">
+        <Col md={6}>
+            <FormLabel htmlFor="inputEmail4">Email</FormLabel>
+            <FormControl type="email" id="inputEmail4" />
+        </Col>
+        <Col md={6}>
+            <FormLabel htmlFor="inputPassword4">Password</FormLabel>
+            <FormControl type="password" id="inputPassword4" />
+        </Col>
+        <Col span={12}>
+            <FormLabel htmlFor="inputAddress">Address</FormLabel>
+            <FormControl type="text" id="inputAddress" placeholder="1234 Main St" />
+        </Col>
+        <Col span={12}>
+            <FormLabel htmlFor="inputAddress2">Address 2</FormLabel>
+            <FormControl type="text" id="inputAddress2" placeholder="Apartment, studio, or floor" />
+        </Col>
+        <Col md={6}>
+            <FormLabel htmlFor="inputCity">City</FormLabel>
+            <FormControl type="text" id="inputCity" />
+        </Col>
+        <Col md={4}>
+            <FormLabel htmlFor="inputState">State</FormLabel>
+            <FormSelect id="inputState" defaultValue="Choose...">
+                <option>Choose...</option>
+                <option>...</option>
+            </FormSelect>
+        </Col>
+        <Col md={2}>
+            <FormLabel htmlFor="inputZip">Zip</FormLabel>
+            <FormControl type="text" id="inputZip" />
+        </Col>
+        <Col span={12}>
+            <FormField>
+                <Checkbox id="gridCheck" />
+                <FormLabel htmlFor="gridCheck" plain>
+                    {' '}
+                    Check me out{' '}
                 </FormLabel>
-                <div className="sm:col-10">
-                    <FormControl id="layoutEmail" type="email" controlSize="sm" />
-                </div>
-            </div>
-        </FormGroup>
+            </FormField>
+        </Col>
+        <Col span={12}>
+            <Button type="submit" theme="primary" variant="solid">
+                Sign in
+            </Button>
+        </Col>
     </Form>
 </CodeExample>
 
-For horizontal forms, `FormLabel column` aligns labels with controls; combine its `controlSize`
-with matching input sizing. Use column utilities to set widths, gutter utilities to control
-spacing, and auto columns or flex wrapping for compact inline forms. Fieldsets and legends
-provide native grouping when the content forms a single accessible choice.
+## Horizontal form
 
-Adapted from [Bootstrap v6.0.0-alpha.1 Layout][1], © Bootstrap Authors, [MIT licensed][2].
+Create horizontal forms with the grid by adding the `.row` class to form groups and using `.{breakpoint}:col-*` classes (e.g. `.sm:col-2`) to specify the width of your labels and controls. Be sure to add `.col-form-label` to your `<label>`s as well so they’re vertically centered with their associated form controls.
+
+At times, you maybe need to use margin or padding utilities to create that perfect alignment you need. For example, we’ve removed the `padding-top` on our stacked radio inputs label to better align the text baseline.
+
+<CodeExample>
+    <Form>
+        <Row className="mb-3">
+            <FormLabel htmlFor="inputEmail3" column className="sm:col-2">
+                Email
+            </FormLabel>
+            <Col sm={10}>
+                <FormControl type="email" id="inputEmail3" />
+            </Col>
+        </Row>
+        <Row className="mb-3">
+            <FormLabel htmlFor="inputPassword3" column className="sm:col-2">
+                Password
+            </FormLabel>
+            <Col sm={10}>
+                <FormControl type="password" id="inputPassword3" />
+            </Col>
+        </Row>
+        <FormFieldset className="row mb-3">
+            <FormLegend column className="sm:col-2 pt-0">
+                Radios
+            </FormLegend>
+            <Col sm={10}>
+                <FormGroup>
+                    <FormField className="mb-1">
+                        <Radio
+                            name="gridRadios"
+                            id="gridRadios1"
+                            defaultValue="option1"
+                            defaultChecked
+                        />
+                        <FormLabel htmlFor="gridRadios1" plain>
+                            {' '}
+                            First radio{' '}
+                        </FormLabel>
+                    </FormField>
+                    <FormField className="mb-1">
+                        <Radio name="gridRadios" id="gridRadios2" defaultValue="option2" />
+                        <FormLabel htmlFor="gridRadios2" plain>
+                            {' '}
+                            Second radio{' '}
+                        </FormLabel>
+                    </FormField>
+                    <FormField>
+                        <Radio name="gridRadios" id="gridRadios3" defaultValue="option3" disabled />
+                        <FormLabel htmlFor="gridRadios3" plain>
+                            {' '}
+                            Third disabled radio{' '}
+                        </FormLabel>
+                    </FormField>
+                </FormGroup>
+            </Col>
+        </FormFieldset>
+        <Row className="mb-3">
+            <Col sm={10} className="sm:offset-2">
+                <FormField>
+                    <Checkbox id="gridCheck1" />
+                    <FormLabel htmlFor="gridCheck1" plain>
+                        {' '}
+                        Example checkbox{' '}
+                    </FormLabel>
+                </FormField>
+            </Col>
+        </Row>
+        <Button type="submit" theme="primary" variant="solid">
+            Sign in
+        </Button>
+    </Form>
+</CodeExample>
+
+### Horizontal form label sizing
+
+Be sure to use `.col-form-label-sm` or `.col-form-label-lg` to your `<label>`s or `<legend>`s to correctly follow the size of `.form-control-lg` and `.form-control-sm`.
+
+<CodeExample>
+    <Row className="mb-3">
+        <FormLabel htmlFor="colFormLabelSm" column controlSize="sm" className="sm:col-2">
+            Email
+        </FormLabel>
+        <Col sm={10}>
+            <FormControl
+                type="email"
+                id="colFormLabelSm"
+                placeholder="col-form-label-sm"
+                controlSize="sm"
+            />
+        </Col>
+    </Row>
+    <Row className="mb-3">
+        <FormLabel htmlFor="colFormLabel" column className="sm:col-2">
+            Email
+        </FormLabel>
+        <Col sm={10}>
+            <FormControl type="email" id="colFormLabel" placeholder="col-form-label" />
+        </Col>
+    </Row>
+    <Row>
+        <FormLabel htmlFor="colFormLabelLg" column controlSize="lg" className="sm:col-2">
+            Email
+        </FormLabel>
+        <Col sm={10}>
+            <FormControl
+                type="email"
+                id="colFormLabelLg"
+                placeholder="col-form-label-lg"
+                controlSize="lg"
+            />
+        </Col>
+    </Row>
+</CodeExample>
+
+## Column sizing
+
+As shown in the previous examples, our grid system allows you to place any number of `.col`s within a `.row`. They’ll split the available width equally between them. You may also pick a subset of your columns to take up more or less space, while the remaining `.col`s equally split the rest, with specific column classes like `.sm:col-7`.
+
+<CodeExample>
+    <Row className="g-3">
+        <Col sm={7}>
+            <FormControl type="text" placeholder="City" aria-label="City" />
+        </Col>
+        <Col sm>
+            <FormControl type="text" placeholder="State" aria-label="State" />
+        </Col>
+        <Col sm>
+            <FormControl type="text" placeholder="Zip" aria-label="Zip" />
+        </Col>
+    </Row>
+</CodeExample>
+
+## Auto-sizing
+
+The example below uses a flexbox utility to vertically center the contents and changes `.col` to `.col-auto` so that your columns only take up as much space as needed. Put another way, the column sizes itself based on the contents.
+
+<CodeExample>
+    <Form className="row gy-2 gx-3 align-items-center">
+        <Col span="auto">
+            <FormLabel htmlFor="autoSizingInput" plain className="visually-hidden">
+                Name
+            </FormLabel>
+            <FormControl type="text" id="autoSizingInput" placeholder="Jane Doe" />
+        </Col>
+        <Col span="auto">
+            <FormLabel htmlFor="autoSizingInputGroup" plain className="visually-hidden">
+                Username
+            </FormLabel>
+            <InputGroup>
+                <InputGroupText>@</InputGroupText>
+                <FormControl type="text" id="autoSizingInputGroup" placeholder="Username" />
+            </InputGroup>
+        </Col>
+        <Col span="auto">
+            <FormLabel htmlFor="autoSizingSelect" plain className="visually-hidden">
+                Preference
+            </FormLabel>
+            <FormSelect id="autoSizingSelect" defaultValue="Choose...">
+                <option>Choose...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </FormSelect>
+        </Col>
+        <Col span="auto">
+            <FormField>
+                <Checkbox id="autoSizingCheck" />
+                <FormLabel htmlFor="autoSizingCheck" plain>
+                    {' '}
+                    Remember me{' '}
+                </FormLabel>
+            </FormField>
+        </Col>
+        <Col span="auto">
+            <Button type="submit" theme="primary" variant="solid">
+                Submit
+            </Button>
+        </Col>
+    </Form>
+</CodeExample>
+
+You can then remix that once again with size-specific column classes.
+
+<CodeExample>
+    <Form className="row gx-3 gy-2 align-items-center">
+        <Col sm={3}>
+            <FormLabel htmlFor="specificSizeInputName" plain className="visually-hidden">
+                Name
+            </FormLabel>
+            <FormControl type="text" id="specificSizeInputName" placeholder="Jane Doe" />
+        </Col>
+        <Col sm={3}>
+            <FormLabel htmlFor="specificSizeInputGroupUsername" plain className="visually-hidden">
+                Username
+            </FormLabel>
+            <InputGroup>
+                <InputGroupText>@</InputGroupText>
+                <FormControl
+                    type="text"
+                    id="specificSizeInputGroupUsername"
+                    placeholder="Username"
+                />
+            </InputGroup>
+        </Col>
+        <Col sm={3}>
+            <FormLabel htmlFor="specificSizeSelect" plain className="visually-hidden">
+                Preference
+            </FormLabel>
+            <FormSelect id="specificSizeSelect" defaultValue="Choose...">
+                <option>Choose...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </FormSelect>
+        </Col>
+        <Col span="auto">
+            <FormField>
+                <Checkbox id="autoSizingCheck2" />
+                <FormLabel htmlFor="autoSizingCheck2" plain>
+                    {' '}
+                    Remember me{' '}
+                </FormLabel>
+            </FormField>
+        </Col>
+        <Col span="auto">
+            <Button type="submit" theme="primary" variant="solid">
+                Submit
+            </Button>
+        </Col>
+    </Form>
+</CodeExample>
+
+## Inline forms
+
+Use the `.row-cols-*` classes to create responsive horizontal layouts. By adding [gutter modifier classes][3], we’ll have gutters in horizontal and vertical directions. On narrow mobile viewports, the `.col-12` helps stack the form controls and more. The `.align-items-center` aligns the form elements to the middle, making checkboxes and labels align properly.
+
+<CodeExample>
+    <Form className="row lg:row-cols-auto g-3 align-items-center">
+        <Col span={12}>
+            <FormLabel htmlFor="inlineFormInputGroupUsername" plain className="visually-hidden">
+                Username
+            </FormLabel>
+            <InputGroup>
+                <InputGroupText>@</InputGroupText>
+                <FormControl type="text" id="inlineFormInputGroupUsername" placeholder="Username" />
+            </InputGroup>
+        </Col>
+        <Col span={12}>
+            <FormLabel htmlFor="inlineFormSelectPref" plain className="visually-hidden">
+                Preference
+            </FormLabel>
+            <FormSelect id="inlineFormSelectPref" defaultValue="Choose...">
+                <option>Choose...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </FormSelect>
+        </Col>
+        <Col span={12}>
+            <FormField>
+                <Checkbox id="inlineFormCheck" />
+                <FormLabel htmlFor="inlineFormCheck" plain>
+                    {' '}
+                    Remember me{' '}
+                </FormLabel>
+            </FormField>
+        </Col>
+        <Col span={12}>
+            <Button type="submit" theme="primary" variant="solid">
+                Submit
+            </Button>
+        </Col>
+    </Form>
+</CodeExample>
 
 </DocumentationLayout>
 
-[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/layout.mdx
-[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE
+[1]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form
+[2]: https://getbootstrap.com/docs/6.0/utilities/margin/
+[3]: https://getbootstrap.com/docs/6.0/layout/gutters/
