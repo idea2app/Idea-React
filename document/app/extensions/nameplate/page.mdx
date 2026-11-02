@@ -1,0 +1,32 @@
+import { Nameplate } from '../../../../source/Extension/Nameplate';
+import { CodeBlock } from '../../../../source/Extension/CodeBlock';
+
+import { LiveExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="nameplate">
+
+# Nameplate
+
+[`Nameplate`][1] pairs an [Avatar](../../components/avatar/) with a person's name, for compact author or member
+listings.
+
+## Example
+
+<LiveExample>
+    <Nameplate name="idea2app" avatar="https://github.com/idea2app.png" />
+</LiveExample>
+
+## Usage
+
+<CodeBlock language="tsx">{`<ul className="list-unstyled">
+    {members.map(({ name, avatar }) => (
+        <li key={name}>
+            <Nameplate {...{ name, avatar }} />
+        </li>
+    ))}
+</ul>`}</CodeBlock>
+
+</ComponentsLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Nameplate.tsx

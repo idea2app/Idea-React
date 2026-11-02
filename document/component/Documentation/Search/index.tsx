@@ -4,8 +4,8 @@ import { observer } from 'mobx-react';
 import { ChangeEvent, Component, createRef } from 'react';
 
 import { Button } from '../../../../source/Button';
+import { Icon } from '../../../../source/Extension/Icon';
 import { FormControl } from '../../../../source/Form';
-import { Icon } from '../../../../source/Icon';
 import { NativeDialog } from '../../../../source/NativeDialog';
 import { DocumentationSearchModel } from './model';
 import styles from './style.module.less';

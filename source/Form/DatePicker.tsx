@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { ComponentPropsWithoutRef, FC, forwardRef, Ref } from 'react';
 
 import { Button, ButtonProps } from '../Button';
-import { Icon } from '../Icon';
+import { Icon } from '../Extension/Icon';
 import { FormPlugin } from './Plugin';
 import { FormValidationProps } from './Primitives';
 

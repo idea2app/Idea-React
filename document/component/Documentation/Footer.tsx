@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { Icon } from '../../../source/Icon';
+import { Icon } from '../../../source/Extension/Icon';
 import { DocumentationLink } from './Header';
 
 export type DocumentationFooterProps = PropsWithChildren<{

@@ -6,7 +6,7 @@ import { Component } from 'react';
 import { sleep } from 'web-utility';
 
 import { Button } from '../../../../source/Button';
-import { Loading } from '../../../../source/Loading';
+import { Loading } from '../../../../source/Extension/Loading';
 
 @observer
 export class LoadingDemo extends Component {

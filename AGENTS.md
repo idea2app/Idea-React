@@ -249,5 +249,5 @@ pnpm build -r
 
 [1]: https://getbootstrap.com/
 [2]: https://getbootstrap.com/docs/6.0/components/
-[3]: source/Icon.tsx
+[3]: source/Extension/Icon.tsx
 [4]: https://getbootstrap.com/docs/6.0/utilities/

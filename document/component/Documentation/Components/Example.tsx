@@ -2,7 +2,7 @@ import { FC, isValidElement, PropsWithChildren, ReactNode } from 'react';
 import reactElementToJSXString from 'react-element-to-jsx-string';
 
 import { Card, CardBody } from '../../../../source/Card';
-import { CodeBlock } from '../../../../source/CodeBlock';
+import { CodeBlock } from '../../../../source/Extension/CodeBlock';
 import { LiveRunner } from './LiveRunner';
 
 const CLIENT_REFERENCE_TAG = Symbol.for('react.client.reference');

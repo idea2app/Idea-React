@@ -16,7 +16,7 @@ import {
     ReactNode
 } from 'react';
 
-import { Icon } from '../Icon';
+import { Icon } from '../Extension/Icon';
 import { Menu, MenuProps } from '../Menu';
 import { Nav, NavProps } from '../Nav';
 import { NavOverflowModel } from './model';

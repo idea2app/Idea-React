@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 import { Component, ComponentPropsWithoutRef, ComponentPropsWithRef, FC, MouseEvent } from 'react';
 
 import { Button, ButtonProps, ComponentTheme } from './Button';
-import { Icon } from './Icon';
+import { Icon } from './Extension/Icon';
 
 export interface AccordionProps extends ComponentPropsWithRef<'div'> {
     theme?: ComponentTheme;

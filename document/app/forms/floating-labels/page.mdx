@@ -16,8 +16,9 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # Floating labels
 
-Place the control before its label inside `FormFloatingLabel`. Text inputs and textareas need a
-nonempty `placeholder` so their empty state can be detected.
+`FormFloatingLabel` places direct `FormLabel` and native `label` children before controls,
+as required by Bootstrap 6, even when supplied after the control. Text inputs and textareas
+need a nonempty `placeholder` so their empty state can be detected.
 
 ## Quick start
 

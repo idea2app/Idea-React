@@ -5,6 +5,39 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import { Button, ButtonInput } from '../source/Button';
 
+it('defaults buttons, links, inputs and toggles to unthemed base styling', () => {
+    render(
+        <>
+            <Button>Button</Button>
+            <Button href="/docs">Link</Button>
+            <ButtonInput value="Input" />
+            <Button toggle>Toggle</Button>
+        </>
+    );
+    for (const name of ['Button', 'Input', 'Toggle'])
+        assert.equal(screen.getByRole('button', { name }).className, 'btn');
+
+    assert.equal(screen.getByRole('link', { name: 'Link' }).className, 'btn');
+});
+
+it('preserves explicit variants and themes for buttons and inputs', () => {
+    render(
+        <>
+            <Button variant="text" theme="secondary">
+                Custom button
+            </Button>
+            <ButtonInput variant="outline" theme="danger" value="Custom input" />
+            <ButtonInput aria-label="Icon input" icon />
+        </>
+    );
+    assert.equal(screen.getByText('Custom button').className, 'btn-text theme-secondary');
+    assert.equal(
+        screen.getByRole('button', { name: 'Custom input' }).className,
+        'btn-outline theme-danger'
+    );
+    assert.equal(screen.getByRole('button', { name: 'Icon input' }).className, 'btn btn-icon');
+});
+
 it('preserves native keyboard events and forwards each synthesized click only once', () => {
     const onClick = mock.fn();
     const onKeyDown = mock.fn();

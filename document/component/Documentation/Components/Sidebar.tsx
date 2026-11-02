@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import { Icon } from '../../../../source/Icon';
+import { Icon } from '../../../../source/Extension/Icon';
 import nextConfig from '../../../next.config';
 import * as style from './style.module.less';
 
@@ -27,6 +27,8 @@ const components: NavLink[] = [
     { label: 'Collapse', slug: 'collapse' },
     { label: 'Dialog', slug: 'dialog' },
     { label: 'Drawer', slug: 'drawer' },
+    { label: 'Grid', slug: 'grid' },
+    { label: 'Image', slug: 'image' },
     { label: 'List group', slug: 'list-group' },
     { label: 'Menu', slug: 'menu' },
     { label: 'Nav', slug: 'nav' },
@@ -40,6 +42,7 @@ const components: NavLink[] = [
     { label: 'Spinner', slug: 'spinner' },
     { label: 'Stepper', slug: 'stepper' },
     { label: 'Tab', slug: 'tab' },
+    { label: 'Table', slug: 'table' },
     { label: 'Toasts', slug: 'toasts' },
     { label: 'Toggler', slug: 'toggler' },
     { label: 'Tooltip', slug: 'tooltip' }
@@ -48,12 +51,11 @@ const extensions: NavLink[] = [
     { label: 'Click boundary', slug: 'click-boundary' },
     { label: 'Code block', slug: 'code-block' },
     { label: 'Countdown', slug: 'countdown' },
+    { label: 'Dialog model', slug: 'dialog-model' },
     { label: 'Editor', slug: 'editor' },
     { label: 'Editor HTML', slug: 'editor-html' },
-    { label: 'Grid', slug: 'grid' },
     { label: 'Horizontal marquee', slug: 'horizontal-marquee' },
     { label: 'Icon', slug: 'icon' },
-    { label: 'Image', slug: 'image' },
     { label: 'Live TSX', slug: 'live-tsx' },
     { label: 'Loading', slug: 'loading' },
     { label: 'Month calendar', slug: 'month-calendar' },
@@ -64,7 +66,6 @@ const extensions: NavLink[] = [
     { label: 'Select', slug: 'select' },
     { label: 'Share box', slug: 'share-box' },
     { label: 'Spinner button', slug: 'spinner-button' },
-    { label: 'Table', slug: 'table' },
     { label: 'Table spinner', slug: 'table-spinner' },
     { label: 'Text truncate', slug: 'text-truncate' },
     { label: 'Time', slug: 'time' },
@@ -117,9 +118,9 @@ const groups: NavGroup[] = [
         label: 'Extensions',
         icon: 'puzzle-fill',
         iconClassName: 'fg-accent',
-        href: 'components/idea-react/',
-        itemHref: 'components/',
-        slug: 'idea-react',
+        href: 'extensions/',
+        itemHref: 'extensions/',
+        slug: 'extensions',
         items: extensions
     }
 ];

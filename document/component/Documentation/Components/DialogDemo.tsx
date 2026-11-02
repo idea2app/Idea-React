@@ -6,6 +6,7 @@ import { Component, ReactNode } from 'react';
 
 import { Button } from '../../../../source/Button';
 import { CloseButton } from '../../../../source/CloseButton';
+import { OverlayBox } from '../../../../source/Extension/OverlayBox';
 import { Menu, MenuItem } from '../../../../source/Menu';
 import {
     DialogBody,
@@ -15,7 +16,6 @@ import {
     NativeDialog,
     NativeDialogProps
 } from '../../../../source/NativeDialog';
-import { OverlayBox } from '../../../../source/OverlayBox';
 import { Toast } from '../../../../source/Toast';
 
 export interface DialogDemoProps extends Omit<NativeDialogProps, 'title'> {

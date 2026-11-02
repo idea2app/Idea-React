@@ -1,12 +1,12 @@
 'use client';
 
-import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component, MouseEvent } from 'react';
+import { Component, ContextType, MouseEvent } from 'react';
 
-import { Icon } from '../../../source/Icon';
+import { Icon } from '../../../source/Extension/Icon';
 import { Menu, MenuItem } from '../../../source/Menu';
-import { ColorModeModel, ColorScheme } from './model';
+import { ColorScheme } from './model';
+import { ColorModeContext } from './Provider';
 
 const modes: { value: ColorScheme; label: string; icon: string }[] = [
     { value: 'light', label: 'Light', icon: 'sun-fill' },
@@ -16,16 +16,9 @@ const modes: { value: ColorScheme; label: string; icon: string }[] = [
 
 @observer
 export class ColorModeToggle extends Component {
-    @observable accessor model: ColorModeModel | undefined;
+    static contextType = ColorModeContext;
 
-    @action
-    componentDidMount() {
-        this.model = new ColorModeModel();
-    }
-
-    componentWillUnmount() {
-        this.model?.dispose();
-    }
+    declare context: ContextType<typeof ColorModeContext>;
 
     handleSelect = ({
         currentTarget: {
@@ -33,11 +26,11 @@ export class ColorModeToggle extends Component {
         }
     }: MouseEvent<HTMLButtonElement>) => {
         if (colorScheme === 'light' || colorScheme === 'dark' || colorScheme === 'auto')
-            this.model?.setColorScheme(colorScheme);
+            this.context?.setColorScheme(colorScheme);
     };
 
     renderMode = ({ value, label, icon }: (typeof modes)[number]) => {
-        const selected = (this.model?.colorScheme ?? 'auto') === value;
+        const selected = (this.context?.colorScheme ?? 'auto') === value;
 
         return (
             <MenuItem
@@ -60,7 +53,7 @@ export class ColorModeToggle extends Component {
     };
 
     render() {
-        const { colorScheme = 'auto', ready } = this.model || {};
+        const { colorScheme = 'auto', ready } = this.context || {};
         const icon = modes.find(({ value }) => value === colorScheme)!.icon;
 
         return (

@@ -4,8 +4,8 @@ import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component } from 'react';
 
-import { Icon } from '../../../../source/Icon';
-import { Option, Select } from '../../../../source/Select';
+import { Icon } from '../../../../source/Extension/Icon';
+import { Option, Select } from '../../../../source/Extension/Select';
 
 @observer
 export class SelectDemo extends Component {

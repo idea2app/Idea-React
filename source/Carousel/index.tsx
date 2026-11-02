@@ -16,7 +16,7 @@ import {
     ReactNode
 } from 'react';
 
-import { Icon } from '../Icon';
+import { Icon } from '../Extension/Icon';
 import { CarouselEnds, CarouselModel } from './model';
 import { CarouselScroll } from './scroll';
 

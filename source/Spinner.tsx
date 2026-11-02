@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { ComponentPropsWithRef, FC } from 'react';
 
 import type { ComponentTheme } from './Button';
-import { Icon, IconProps } from './Icon';
+import { Icon, IconProps } from './Extension/Icon';
 
 export type SpinnerAnimation = 'border' | 'grow';
 

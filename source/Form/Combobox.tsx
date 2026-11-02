@@ -17,7 +17,7 @@ import {
     ReactNode
 } from 'react';
 
-import { Icon } from '../Icon';
+import { Icon } from '../Extension/Icon';
 import { Menu, MenuHeader, MenuItemContent, MenuItemDescription } from '../Menu';
 import { FormValidationProps } from './Primitives';
 

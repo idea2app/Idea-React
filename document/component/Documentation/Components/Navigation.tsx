@@ -7,7 +7,7 @@ import { createPortal } from 'react-dom';
 
 import { Button } from '../../../../source/Button';
 import { Drawer } from '../../../../source/Drawer';
-import { Icon } from '../../../../source/Icon';
+import { Icon } from '../../../../source/Extension/Icon';
 import { Toc } from './Toc';
 
 @observer

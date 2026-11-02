@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
-import { Icon } from '../../source/Icon';
+import { Icon } from '../../source/Extension/Icon';
 import { Menu, MenuProps } from '../../source/Menu';
 
 export interface DropdownMenuProps extends PropsWithChildren, Pick<MenuProps, 'toggleProps'> {

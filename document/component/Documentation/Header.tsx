@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import { Icon } from '../../../source/Icon';
+import { Icon } from '../../../source/Extension/Icon';
 import { MenuItem } from '../../../source/Menu';
 import { Navbar } from '../../../source/Navbar';
 import { DropdownMenu } from '../DropdownMenu';

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef, FC } from 'react';
 
-import { Icon, IconProps } from '../Icon';
+import { Icon, IconProps } from '../Extension/Icon';
 import { FormValidationProps } from './Primitives';
 
 export type FormAdornmentProps = Omit<ComponentPropsWithRef<'label'>, 'htmlFor'> &

@@ -16,8 +16,8 @@ import {
 } from 'react';
 
 import { Button, ButtonProps } from './Button';
+import { Icon, IconProps } from './Extension/Icon';
 import { Breakpoint } from './Grid';
-import { Icon, IconProps } from './Icon';
 import { FloatingOptions, FloatingPosition } from './Overlay';
 
 export type MenuItemProps = ButtonProps & { active?: boolean; selected?: boolean };

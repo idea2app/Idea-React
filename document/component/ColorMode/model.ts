@@ -1,6 +1,6 @@
 import { action, autorun, computed, observable } from 'mobx';
 import { persist, restore } from 'mobx-restful';
-import { setCookie } from 'web-utility';
+import { sleep } from 'web-utility';
 
 export type ColorScheme = 'light' | 'dark' | 'auto';
 
@@ -29,18 +29,29 @@ export class ColorModeModel {
     disposed = false;
 
     @action
-    finishRestore = () => {
+    finishRestore = async () => {
         if (this.disposed) return;
+
         this.systemDark = this.media.matches;
         this.media.addEventListener('change', this.handleSystemChange);
-        this.ready = true;
+        document.documentElement.dataset.bsTheme = this.resolvedColorScheme;
+
+        await sleep(0.25);
+
+        this.markReady();
+    };
+
+    @action
+    markReady = () => {
+        if (!this.disposed) this.ready = true;
     };
 
     restored = restore(this, 'ColorMode').then(this.finishRestore);
 
     disposer = autorun(() => {
+        if (!this.ready) return;
+
         document.documentElement.dataset.bsTheme = this.resolvedColorScheme;
-        setCookie('colorScheme', this.resolvedColorScheme);
     });
 
     dispose = () => {

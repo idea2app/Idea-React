@@ -6,7 +6,7 @@ import { ComponentPropsWithoutRef, ComponentPropsWithRef, FC, forwardRef, Ref } 
 import { renderToStaticMarkup } from 'react-dom/server';
 
 import { ComponentTheme } from '../Button';
-import { Icon, IconProps } from '../Icon';
+import { Icon, IconProps } from '../Extension/Icon';
 import { FormPlugin } from './Plugin';
 import { FormValidationProps } from './Primitives';
 

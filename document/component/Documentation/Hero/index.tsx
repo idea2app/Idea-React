@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 
 import { Badge } from '../../../../source/Badge';
-import { Icon } from '../../../../source/Icon';
+import { Icon } from '../../../../source/Extension/Icon';
 import { DocumentationLink } from '../Header';
 import styles from './style.module.less';
 

@@ -108,6 +108,12 @@ const rehypeBootstrapTable = () => (tree: HastNode) => {
 };
 
 export default defineConfig({
+    css: {
+        lightningcss: {
+            // Preserve light-dark(): Bootstrap's color-scheme rules are loaded separately.
+            exclude: 1 << 20
+        }
+    },
     plugins: [
         mdx({
             remarkPlugins: [remarkGfm, remarkInlineButtonChildren],
