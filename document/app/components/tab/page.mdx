@@ -1,0 +1,90 @@
+import { Tab } from '../../../../source/Tab';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="tab">
+
+# Tab
+
+Switch between related content panels using accessible tab controls. Adapted from
+[Bootstrap v6.0.0-alpha.1 Tab][1].
+
+## Nav tabs
+
+Pass keyed `tabs` data with a label and panel `content`. `id` is required so tab and panel
+relationships are unique on the page. The selected tab is controlled with `activeKey`, or initialized
+with `defaultActiveKey`.
+
+<CodeExample>
+    <Tab
+        id="account-tabs"
+        aria-label="Account settings"
+        tabs={[
+            { key: 'overview', label: 'Overview', content: 'Account summary and recent activity.' },
+            {
+                key: 'security',
+                label: 'Security',
+                content: 'Review sign-in and security settings.'
+            },
+            {
+                key: 'disabled',
+                label: 'Disabled',
+                content: 'This panel is unavailable.',
+                disabled: true
+            }
+        ]}
+    />
+</CodeExample>
+
+## Pills and vertical tabs
+
+Set `variant="pills"` for pill navigation. Use `orientation="vertical"` to stack the tab list; arrow
+keys then follow the vertical direction.
+
+<CodeExample>
+    <Tab
+        id="project-tabs"
+        tabs={[
+            { key: 'details', label: 'Details', content: 'Project description and ownership.' },
+            { key: 'activity', label: 'Activity', content: 'Recent project updates.' },
+            { key: 'members', label: 'Members', content: 'People with access to this project.' }
+        ]}
+        variant="pills"
+        orientation="vertical"
+        aria-label="Project sections"
+    />
+</CodeExample>
+
+## List groups and instant panels
+
+`variant="list-group"` uses list-group styling. Panels fade in by default; set `fade={false}` for
+instant switching.
+
+<CodeExample>
+    <Tab
+        id="project-list-tabs"
+        tabs={[
+            { key: 'details', label: 'Details', content: 'Project description and ownership.' },
+            { key: 'activity', label: 'Activity', content: 'Recent project updates.' },
+            { key: 'members', label: 'Members', content: 'People with access to this project.' }
+        ]}
+        variant="list-group"
+        fade={false}
+    />
+</CodeExample>
+
+## Accessibility
+
+The wrapper renders native buttons with tab, tablist, and tabpanel roles, paired IDs and labels,
+selected state, and roving focus. Use Left/Right for horizontal tabs, Up/Down for vertical tabs, and
+Home/End for the first/last enabled tab. Disabled tabs are skipped. The active panel is focusable
+for keyboard users.
+
+Tab panels should not contain menus: a trigger hidden inside a closed panel is difficult to discover
+and does not fit the standard tabs accessibility pattern.
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Tab][1], copyright The Bootstrap Authors, MIT license.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/tab.mdx

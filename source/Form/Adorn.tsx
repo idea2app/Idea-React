@@ -1,19 +1,30 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef, FC } from 'react';
 
-export type FormAdornmentProps = Omit<ComponentPropsWithRef<'label'>, 'htmlFor'> & {
-    end?: boolean;
-    size?: 'sm' | 'lg';
-    htmlFor?: string;
-};
+import { Icon, IconProps } from '../Icon';
+import { FormValidationProps } from './Primitives';
 
-export const FormAdornment: FC<FormAdornmentProps> = ({ className, end, size, ...props }) => (
+export type FormAdornmentProps = Omit<ComponentPropsWithRef<'label'>, 'htmlFor'> &
+    FormValidationProps & {
+        end?: boolean;
+        size?: 'sm' | 'lg';
+        htmlFor?: string;
+    };
+
+export const FormAdornment: FC<FormAdornmentProps> = ({
+    className,
+    end,
+    size,
+    validation,
+    ...props
+}) => (
     <label
         {...props}
         className={classNames(
             'form-control form-adorn',
             end && 'form-adorn-end',
-            size && `form-adorn-${size}`,
+            size && `form-control-${size}`,
+            validation && `is-${validation}`,
             className
         )}
     />
@@ -29,10 +40,20 @@ export const FormAdornmentText: FC<FormAdornmentTextProps> = ({ className, ...pr
 
 FormAdornmentText.displayName = 'FormAdornmentText';
 
-export type FormGhostProps = ComponentPropsWithRef<'input'>;
+export const FormAdornmentIcon: FC<IconProps> = ({ className, ...props }) => (
+    <Icon {...props} className={classNames('form-adorn-icon', className)} />
+);
 
-export const FormGhost: FC<FormGhostProps> = ({ className, ...props }) => (
-    <input {...props} className={classNames('form-ghost', className)} />
+FormAdornmentIcon.displayName = 'FormAdornmentIcon';
+
+export type FormGhostProps = ComponentPropsWithRef<'input'> & FormValidationProps;
+
+export const FormGhost: FC<FormGhostProps> = ({ className, validation, ...props }) => (
+    <input
+        {...props}
+        aria-invalid={validation ? validation === 'invalid' : props['aria-invalid']}
+        className={classNames('form-ghost', validation && `is-${validation}`, className)}
+    />
 );
 
 FormGhost.displayName = 'FormGhost';

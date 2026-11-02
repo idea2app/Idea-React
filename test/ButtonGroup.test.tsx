@@ -6,6 +6,22 @@ import { render, screen } from '@testing-library/react';
 import { Button } from '../source/Button';
 import { ButtonGroup, ButtonToolbar } from '../source/ButtonGroup';
 
+it('supports shared sizing and dividers for horizontal and vertical groups', () => {
+    const { container, rerender } = render(<ButtonGroup size="xs" divider />);
+
+    assert.equal(
+        container.firstElementChild?.className,
+        'btn-group btn-group-xs btn-group-divider'
+    );
+
+    rerender(<ButtonGroup size="lg" vertical divider />);
+
+    assert.equal(
+        container.firstElementChild?.className,
+        'btn-group-vertical btn-group-lg btn-group-divider'
+    );
+});
+
 it('renders a Bootstrap 6 button group', () => {
     render(
         <ButtonGroup className="custom" aria-label="Actions">

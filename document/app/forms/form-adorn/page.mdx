@@ -1,83 +1,47 @@
 import {
     FormAdornment,
+    FormAdornmentIcon,
     FormAdornmentText,
     FormField,
     FormGhost,
-    FormLabel
+    FormLabel,
+    FormText
 } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
 <DocumentationLayout active="form-adorn">
 
-# Form adorn
+# Form adornments
 
-`FormAdornment` styles a label containing a minimally styled `FormGhost` input and optional
-decorative text. Keep interactive elements outside this wrapping label.
+Add a leading or trailing icon or text inside a single control border. Use `FormGhost` inside
+`FormAdornment` so the inner input does not add another border.
 
-## How it works
-
-The adornment wrapper accepts `end` and `size` options. `FormAdornmentText` styles text units;
-`FormGhost` renders the input without the usual border and background.
-
-## Example
-
-<CodeExample>
-    <>
-        <FormAdornment>
-            <FormAdornmentText aria-hidden="true">$</FormAdornmentText>
-            <FormGhost aria-label="Price" type="number" placeholder="0.00" />
-        </FormAdornment>
-        <FormAdornment end>
-            <FormGhost aria-label="Amount" type="number" placeholder="0" />
-            <FormAdornmentText aria-hidden="true">USD</FormAdornmentText>
-        </FormAdornment>
-    </>
-</CodeExample>
-
-## With labels
-
-Use `FormAdornment` as the associated label for its control.
-
-<CodeExample>
-    <FormAdornment htmlFor="adornPrice">
-        <FormAdornmentText aria-hidden="true">$</FormAdornmentText>
-        <FormGhost id="adornPrice" type="number" placeholder="0.00" />
-    </FormAdornment>
-</CodeExample>
-
-## With form field
+## Quick start
 
 <CodeExample>
     <FormField>
-        <FormLabel htmlFor="adornQuantity">Quantity</FormLabel>
-        <FormAdornment end>
-            <FormGhost id="adornQuantity" type="number" placeholder="1" />
-            <FormAdornmentText aria-hidden="true">items</FormAdornmentText>
+        <FormLabel htmlFor="adornSearch">Search</FormLabel>
+        <FormAdornment htmlFor="adornSearch" size="lg">
+            <FormAdornmentIcon name="search" aria-hidden="true" />
+            <FormGhost id="adornSearch" placeholder="Search…" aria-describedby="adornHelp" />
         </FormAdornment>
+        <FormText id="adornHelp">Search by name.</FormText>
     </FormField>
-</CodeExample>
-
-## Text adornments
-
-Use `FormAdornmentText` for non-interactive prefix or suffix content.
-
-<CodeExample>
-    <FormAdornment>
-        <FormAdornmentText aria-hidden="true">https://</FormAdornmentText>
-        <FormGhost aria-label="Website" placeholder="example.com" />
+    <FormAdornment htmlFor="adornPrice" end size="sm" className="mt-3">
+        <FormGhost id="adornPrice" aria-label="Price" type="number" />
+        <FormAdornmentText>USD</FormAdornmentText>
     </FormAdornment>
 </CodeExample>
 
-## Sizing
+`end` places the adornment after the input; `size="sm"` and `"lg"` size the entire field.
+Use `FormAdornmentText` for currencies, units or prefixes and `FormAdornmentIcon` for icons.
+The wrapper can itself supply a label via `htmlFor`, or compose it inside `FormField`.
+Native readonly/disabled state belongs on the input; `validation` can style both wrappers and inputs.
 
-Use `size="sm"` or `"lg"` to select a size variant.
-
-<CodeExample>
-    <FormAdornment size="sm">
-        <FormAdornmentText aria-hidden="true">https://</FormAdornmentText>
-        <FormGhost aria-label="Website" placeholder="example.com" />
-    </FormAdornment>
-</CodeExample>
+Adapted from [Bootstrap v6.0.0-alpha.1 Form adorn][1], © Bootstrap Authors, [MIT licensed][2].
 
 </DocumentationLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/form-adorn.mdx
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

@@ -1,0 +1,78 @@
+import { Progress, ProgressStack } from '../../../../source/Progress';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="progress">
+
+# Progress
+
+Every progress bar needs an accessible name. `value`, `min`, and `max` determine its width and ARIA
+values. Values outside the range are clamped; invalid or non-finite ranges throw a `RangeError`.
+
+## Quick start and labels
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Progress aria-label="Not started" value={0} />
+        <Progress aria-label="Upload" value={25}>
+            25%
+        </Progress>
+        <Progress aria-label="Processing" value={50} theme="info">
+            50%
+        </Progress>
+        <Progress aria-label="Complete" value={100} theme="success">
+            Complete
+        </Progress>
+    </div>
+</CodeExample>
+
+## Height, backgrounds, and long labels
+
+Set height on the outer component. `barProps` forwards classes, styles, and attributes to the visual
+bar, including width utilities or custom backgrounds. Prefer labels outside very short bars to avoid
+clipping and contrast problems.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Progress aria-label="Thin progress" value={25} style={{ height: 1 }} />
+        <Progress aria-label="Tall progress" value={75} theme="warning" style={{ height: 24 }}>
+            75%
+        </Progress>
+        <Progress
+            aria-label="Custom range"
+            value={15}
+            min={10}
+            max={30}
+            barProps={{ className: 'bg-danger' }}
+        />
+    </div>
+</CodeExample>
+
+## Stacked, striped, and animated
+
+`ProgressStack` puts widths on each segment's outer element, as required by Bootstrap. Each segment
+still has its own accessible name. `animated` enables stripes automatically.
+
+<CodeExample>
+    <ProgressStack>
+        <Progress aria-label="Documents" value={15} theme="primary">
+            15%
+        </Progress>
+        <Progress aria-label="Images" value={30} theme="success">
+            30%
+        </Progress>
+        <Progress aria-label="Video" value={20} theme="info">
+            20%
+        </Progress>
+    </ProgressStack>
+    <div className="vstack gap-3 mt-3">
+        <Progress aria-label="Striped progress" value={50} theme="accent" striped />
+        <Progress aria-label="Active upload" value={75} theme="primary" animated />
+    </div>
+</CodeExample>
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Progress][1], copyright The Bootstrap Authors, MIT license.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/progress.mdx

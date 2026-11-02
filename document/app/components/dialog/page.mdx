@@ -67,14 +67,14 @@ The Invoker Commands API is not supported in all browsers. For guaranteed suppor
 dialog through React state as in the examples above when you need plugin-like options, events, or an
 animated close.
 
-<CodeBlock language="tsx">{`<button type="button" className="btn-solid theme-primary" commandfor="invokerDialog" command="show-modal">
+<CodeBlock language="tsx">{`<Button variant="solid" theme="primary" commandFor="invokerDialog" command="show-modal">
     Open dialog
-</button>
+</Button>
 
 <NativeDialog id="invokerDialog" aria-label="Invoker Commands">
     <DialogHeader>
         <DialogTitle>Invoker Commands</DialogTitle>
-        <button type="button" className="btn-close" commandfor="invokerDialog" command="close" aria-label="Close" />
+        <CloseButton commandFor="invokerDialog" command="close" />
     </DialogHeader>
     <DialogBody>
         <p>
@@ -83,9 +83,9 @@ animated close.
         </p>
     </DialogBody>
     <DialogFooter>
-        <button type="button" className="btn-solid theme-secondary" commandfor="invokerDialog" command="close">
+        <Button variant="solid" theme="secondary" commandFor="invokerDialog" command="close">
             Close
-        </button>
+        </Button>
     </DialogFooter>
 </NativeDialog>`}</CodeBlock>
 
@@ -136,7 +136,7 @@ By default, dialogs animate with a fade on open and close. To disable animations
 <DialogDemo
     label="Instant dialog"
     title="Instant dialog"
-    className="dialog-instant"
+    animation="instant"
     saveLabel="Save changes"
 >
     This dialog doesn't animate and appears instantly on open and close.
@@ -150,7 +150,7 @@ when opened.
 <DialogDemo
     label="Slide down dialog"
     title="Slide down dialog"
-    className="dialog-slide-down"
+    animation="slide-down"
     saveLabel="Save changes"
 >
     This dialog slides down from the top of the viewport.
@@ -164,7 +164,7 @@ when opened.
 <DialogDemo
     label="Slide up dialog"
     title="Slide up dialog"
-    className="dialog-slide-up"
+    animation="slide-up"
     saveLabel="Save changes"
 >
     This dialog slides up from the bottom of the viewport.
@@ -178,7 +178,7 @@ Add `.dialog-scrollable` to the `.dialog` element.
 <DialogDemo
     label="Launch scrollable body dialog"
     title="Scrollable body"
-    className="dialog-scrollable"
+    scrollable
     saveLabel="Save changes"
 >
     This is some placeholder content to show the scrolling behavior for dialogs. We use repeated
@@ -254,11 +254,11 @@ sizes kick in at certain breakpoints to avoid horizontal scrollbars on narrower 
 | Large       | `.dialog-lg` | `800px`          |
 | Extra large | `.dialog-xl` | `1140px`         |
 
-<DialogDemo label="Extra large dialog" title="Extra large dialog" className="dialog-xl" hideFooter>
+<DialogDemo label="Extra large dialog" title="Extra large dialog" size="xl" hideFooter>
     This is an extra large dialog using the <code>.dialog-xl</code> class.
 </DialogDemo>
 
-<DialogDemo label="Large dialog" title="Large dialog" className="dialog-lg" hideFooter>
+<DialogDemo label="Large dialog" title="Large dialog" size="lg" hideFooter>
     This is a large dialog using the <code>.dialog-lg</code> class.
 </DialogDemo>
 
@@ -266,7 +266,7 @@ sizes kick in at certain breakpoints to avoid horizontal scrollbars on narrower 
     This is a medium (default) dialog—there's no modifier class for this size.
 </DialogDemo>
 
-<DialogDemo label="Small dialog" title="Small dialog" className="dialog-sm" hideFooter>
+<DialogDemo label="Small dialog" title="Small dialog" size="sm" hideFooter>
     This is a small dialog using the <code>.dialog-sm</code> class.
 </DialogDemo>
 
@@ -274,7 +274,7 @@ sizes kick in at certain breakpoints to avoid horizontal scrollbars on narrower 
 
 Use `.dialog-fullscreen` to make the dialog cover the entire viewport.
 
-<DialogDemo label="Fullscreen dialog" title="Fullscreen dialog" className="dialog-fullscreen">
+<DialogDemo label="Fullscreen dialog" title="Fullscreen dialog" fullscreen>
     This dialog covers the entire viewport.
 </DialogDemo>
 
@@ -290,11 +290,7 @@ specific breakpoint.
 | `.xl-down:dialog-fullscreen`  | `1280px`         |
 | `.2xl-down:dialog-fullscreen` | `1536px`         |
 
-<DialogDemo
-    label="Fullscreen below lg"
-    title="Fullscreen below lg"
-    className="lg-down:dialog-fullscreen"
->
+<DialogDemo label="Fullscreen below lg" title="Fullscreen below lg" fullscreen="lg">
     This dialog is fullscreen below the <code>lg</code> breakpoint.
 </DialogDemo>
 
@@ -348,10 +344,12 @@ const data = await inputDialog.open();`}
 
 </CodeExample>
 
+Adapted from [Bootstrap v6.0.0-alpha.1][2], © the Bootstrap authors (MIT license).
+
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/NativeDialog/index.tsx
-[2]: https://getbootstrap.com/docs/6.0/components/dialog/
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/dialog.mdx
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
 [4]: https://github.com/idea2app/Idea-React/blob/main/source/CloseButton.tsx
 [5]: https://github.com/idea2app/Idea-React/blob/main/source/Dialog.tsx

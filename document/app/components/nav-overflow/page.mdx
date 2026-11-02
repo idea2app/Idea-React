@@ -1,0 +1,115 @@
+import { Icon } from '../../../../source/Icon';
+import { Menu } from '../../../../source/Menu';
+import { NavLink } from '../../../../source/Nav';
+import { NavOverflow } from '../../../../source/NavOverflow';
+import { Navbar, NavbarBrand } from '../../../../source/Navbar';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="nav-overflow">
+
+# Nav overflow
+
+Keep priority navigation usable in narrow containers. Items that do not fit move into a More menu;
+the wrapper observes its container rather than the viewport. Adapted from
+[Bootstrap v6.0.0-alpha.1 Nav overflow][1].
+
+## Quick start
+
+Wrap `NavLink` items in `NavOverflow`. The `variant` prop supports the standard, pill, tab, and
+underline nav styles.
+
+<CodeExample>
+    <NavOverflow id="primary-overflow" variant="pills" aria-label="Primary navigation">
+        <NavLink href="#overview" className="active">
+            Overview
+        </NavLink>
+        <NavLink href="#products">Products</NavLink>
+        <NavLink href="#services">Services</NavLink>
+        <NavLink href="#reports">Reports</NavLink>
+        <NavLink href="#help">Help</NavLink>
+    </NavOverflow>
+</CodeExample>
+
+## Tabs, underline, and priority items
+
+Use `variant="tabs"` or `variant="underline"` for the corresponding nav style. Mark links with
+`nav-overflow-keep` to keep high-priority items visible even when the rest collapse.
+
+<CodeExample>
+    <NavOverflow id="section-overflow" variant="underline" aria-label="Documentation sections">
+        <NavLink href="#intro" className="nav-overflow-keep">
+            Introduction
+        </NavLink>
+        <NavLink href="#install">Installation</NavLink>
+        <NavLink href="#usage">Usage</NavLink>
+        <NavLink href="#api">API</NavLink>
+    </NavOverflow>
+</CodeExample>
+
+Disabled `NavLink` states are preserved in the overflow menu. The wrapper also accepts nested menu
+components as items, so a menu remains usable when its trigger overflows.
+
+## Navbar and menu integration
+
+Place the wrapper inside a navbar to adapt its links to the available navbar width.
+
+<CodeExample>
+    <Navbar expand className="bg-3 px-3">
+        <NavbarBrand as="span">Idea React</NavbarBrand>
+        <NavOverflow id="navbar-overflow" aria-label="Site navigation">
+            <NavLink href="#components">Components</NavLink>
+            <NavLink href="#guides">Guides</NavLink>
+            <NavLink href="#examples">Examples</NavLink>
+            <NavLink href="#about">About</NavLink>
+        </NavOverflow>
+    </Navbar>
+</CodeExample>
+
+<CodeExample>
+    <NavOverflow id="menu-overflow" variant="pills" aria-label="Product navigation">
+        <NavLink href="#home">Home</NavLink>
+        <Menu label="Products">
+            <NavLink href="#laptops">Laptops</NavLink>
+            <NavLink href="#tablets">Tablets</NavLink>
+        </Menu>
+        <NavLink href="#services">Services</NavLink>
+        <NavLink href="#support" disabled>
+            Unavailable
+        </NavLink>
+    </NavOverflow>
+</CodeExample>
+
+## Toggle options
+
+`moreText` changes the toggle label; set it to `false` for an icon-only toggle with an accessible
+More name. `moreIcon` accepts a React node and `iconPlacement` accepts `start` or `end`.
+`threshold` keeps at least that many items visible. `collapseBelow` accepts a pixel width or a
+Bootstrap breakpoint such as `md` to collapse every non-priority item below that width.
+
+<CodeExample>
+    <NavOverflow
+        id="custom-overflow"
+        moreText="All sections"
+        moreIcon={<Icon name="three-dots" aria-hidden="true" />}
+        iconPlacement="end"
+        threshold={2}
+        collapseBelow="md"
+    >
+        <NavLink href="#one" className="nav-overflow-keep">
+            One
+        </NavLink>
+        <NavLink href="#two">Two</NavLink>
+        <NavLink href="#three">Three</NavLink>
+        <NavLink href="#four">Four</NavLink>
+    </NavOverflow>
+</CodeExample>
+
+Use `menuPlacement` and `menuStrategy="fixed"` when an ancestor clips the menu. Call
+`updateOverflow()` after changing external layout constraints; resize observation runs automatically.
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Nav overflow][1], copyright The Bootstrap Authors, MIT license.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/nav-overflow.mdx

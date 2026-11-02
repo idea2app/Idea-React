@@ -1,5 +1,4 @@
-import { Avatar, AvatarStack } from '../../../../source/Avatar';
-import { Image } from '../../../../source/Image';
+import { Avatar, AvatarImage, AvatarStack } from '../../../../source/Avatar';
 
 import { LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -31,7 +30,7 @@ When used inside the `.avatar` wrapper, the image fills the wrapper and its size
 `--bs-avatar-size`. Used on its own, `.avatar-img` honors its own `width` and `height` instead, so set
 them to your desired size.
 
-<Image className="avatar-img" src="https://github.com/mdo.png" alt="mdo" width={50} height={50} />
+<AvatarImage src="https://github.com/mdo.png" alt="mdo" width={50} height={50} />
 
 ### Initials
 
@@ -204,7 +203,9 @@ Avatar sizes and status dimensions are defined by Bootstrap's CSS variables and 
 Sass map. Each size specifies the avatar size and status size. See the [upstream avatar CSS][2] for
 the variable and map reference.
 
+Adapted from [Bootstrap v6.0.0-alpha.1][2], © the Bootstrap authors (MIT license).
+
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Avatar.tsx
-[2]: https://getbootstrap.com/docs/6.0/components/avatar/#css
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/avatar.mdx

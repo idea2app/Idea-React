@@ -3,7 +3,69 @@ import { it, mock } from 'node:test';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Button } from '../source/Button';
+import { Button, ButtonInput } from '../source/Button';
+
+it('preserves native keyboard events and forwards each synthesized click only once', () => {
+    const onClick = mock.fn();
+    const onKeyDown = mock.fn();
+    const onKeyUp = mock.fn();
+    render(
+        <Button variant="link" onClick={onClick} onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
+            Native activation
+        </Button>
+    );
+    const button = screen.getByRole('button', { name: 'Native activation' });
+
+    for (const key of ['Enter', ' ']) {
+        assert.equal(fireEvent.keyDown(button, { key }), true);
+        assert.equal(fireEvent.keyUp(button, { key }), true);
+
+        assert.equal(onClick.mock.callCount(), key === 'Enter' ? 0 : 1);
+
+        fireEvent.click(button, { detail: 0 });
+    }
+
+    assert.equal(onClick.mock.callCount(), 2);
+    assert.equal(onKeyDown.mock.callCount(), 2);
+    assert.equal(onKeyUp.mock.callCount(), 2);
+});
+
+it('toggles pressed state and lets an external callback cancel the toggle', () => {
+    const { rerender } = render(<Button toggle>Toggle</Button>);
+    const button = screen.getByRole('button', { name: 'Toggle' });
+
+    assert.equal(button.getAttribute('aria-pressed'), 'false');
+
+    fireEvent.click(button);
+
+    assert.equal(button.getAttribute('aria-pressed'), 'true');
+    assert.ok(button.classList.contains('active'));
+
+    rerender(
+        <Button toggle onClick={event => event.preventDefault()}>
+            Toggle
+        </Button>
+    );
+    fireEvent.click(button);
+
+    assert.equal(button.getAttribute('aria-pressed'), 'true');
+});
+
+it('supports controlled active state and native input button tags', () => {
+    const { rerender } = render(<Button active>Pressed</Button>);
+
+    assert.equal(screen.getByRole('button').getAttribute('aria-pressed'), 'true');
+
+    rerender(
+        <ButtonInput type="submit" value="Submit" variant="subtle" theme="primary" size="xs" />
+    );
+
+    assert.equal(
+        screen.getByRole('button', { name: 'Submit' }).className,
+        'btn-subtle theme-primary btn-xs'
+    );
+    assert.equal(screen.getByRole('button').tagName, 'INPUT');
+});
 
 it('maps official variants, themes, sizes, and native button behavior', () => {
     const onClick = mock.fn();

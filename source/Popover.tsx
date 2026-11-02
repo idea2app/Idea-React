@@ -14,6 +14,7 @@ export const Popover: FC<PopoverProps> = ({
     role = 'tooltip',
     className,
     children,
+    arrowStyle,
     ...props
 }) => (
     <div
@@ -25,10 +26,14 @@ export const Popover: FC<PopoverProps> = ({
             className
         )}
         role={role}
+        hidden={!show}
         data-bs-placement={placement}
     >
-        <div className={classNames('popover-arrow', OVERLAY_ARROW_POSITIONS[placement])} />
-        <h3 className="popover-header">{title}</h3>
+        <div
+            style={arrowStyle}
+            className={classNames('popover-arrow', OVERLAY_ARROW_POSITIONS[placement])}
+        />
+        {title != null && <h3 className="popover-header">{title}</h3>}
         <div className="popover-body">{children}</div>
     </div>
 );

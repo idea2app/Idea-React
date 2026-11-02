@@ -1,65 +1,95 @@
-import { Button } from '../../../../source/Button';
-import { Form, FormFeedback, FormField, FormLabel, FormControl } from '../../../../source/Form';
+import {
+    Checkbox,
+    Form,
+    FormControl,
+    FormFeedback,
+    FormField,
+    FormFieldContent,
+    FormLabel,
+    FormSelect
+} from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
 <DocumentationLayout active="validation">
 
-# Form validation
+# Validation
 
-Native browser constraint validation remains available. Add Bootstrap's `data-bs-validate` to opt
-into its user-interaction styles; the consuming application must include the corresponding
-Bootstrap JavaScript.
+Native constraints (`required`, `type`, `min`, `max`, `pattern`) work without additional JavaScript.
+For server feedback, set `validation="valid"` or `"invalid"` and associate messages with
+`aria-describedby`; do not rely on color alone.
 
-## How it works
-
-Use native `required`, `type`, `min`, and related constraints. Set `noValidate` to suppress browser
-tooltips when displaying custom feedback.
-
-## Custom styles
-
-Set `.is-invalid` or `.is-valid` on a control and pair it with `FormFeedback`.
+## Quick start
 
 <CodeExample>
-    <Form data-bs-validate="valid" noValidate>
+    <Form aria-label="Server validation" noValidate>
         <FormField>
-            <FormLabel htmlFor="validationEmail">Email address</FormLabel>
+            <FormLabel htmlFor="validationEmail">Email</FormLabel>
             <FormControl
                 id="validationEmail"
                 type="email"
+                defaultValue="invalid"
+                validation="invalid"
                 required
-                className="is-invalid"
-                aria-describedby="validationEmailFeedback"
+                aria-describedby="validationEmailError"
             />
-            <FormFeedback id="validationEmailFeedback">Enter a valid email address.</FormFeedback>
+            <FormFeedback id="validationEmailError">Enter a valid email address.</FormFeedback>
         </FormField>
-        <Button type="submit">Submit</Button>
+        <FormField className="mt-3">
+            <FormLabel htmlFor="validationCountry">Country</FormLabel>
+            <FormSelect
+                id="validationCountry"
+                validation="valid"
+                defaultValue="ca"
+                aria-describedby="validationCountrySuccess"
+            >
+                <option value="ca">Canada</option>
+            </FormSelect>
+            <FormFeedback id="validationCountrySuccess" type="valid">
+                Looks good.
+            </FormFeedback>
+        </FormField>
+        <FormField className="mt-3">
+            <Checkbox
+                id="validationTerms"
+                validation="invalid"
+                required
+                aria-describedby="validationTermsError"
+            />
+            <FormFieldContent>
+                <FormLabel plain htmlFor="validationTerms">
+                    Accept the terms
+                </FormLabel>
+                <FormFeedback id="validationTermsError">
+                    Please accept before continuing.
+                </FormFeedback>
+            </FormFieldContent>
+        </FormField>
     </Form>
-</CodeExample>
-
-## Browser defaults
-
-Without `noValidate`, the browser may display its native validation UI. Call `checkValidity()` or
-`reportValidity()` to query or present constraint validation.
-
-## Server-side
-
-Render validation state from the server response by applying the appropriate valid/invalid class
-and associated feedback text.
-
-## Supported elements
-
-Validation classes can be used on native input, select, and textarea wrappers.
-
-## Tooltips
-
-Use `FormFeedback tooltip` for tooltip-style feedback:
-
-<CodeExample>
-    <FormField>
-        <FormControl aria-label="Tooltip feedback example" className="is-invalid" />
-        <FormFeedback tooltip>Provide a valid value.</FormFeedback>
+    <FormField className="position-relative mt-3">
+        <FormLabel htmlFor="validationTooltip">Username</FormLabel>
+        <FormControl
+            id="validationTooltip"
+            validation="invalid"
+            aria-describedby="validationTooltipError"
+        />
+        <FormFeedback id="validationTooltipError" tooltip>
+            Choose another username.
+        </FormFeedback>
     </FormField>
 </CodeExample>
 
+For browser-default messages, omit `noValidate`. For custom constraint styling, use a MobX-backed
+form component that calls the form's `checkValidity()` on submit, prevents invalid submissions,
+then passes `validated` to `Form`. `noValidate` suppresses browser messages, not constraint checks.
+
+Validation props also cover textareas, ghost/adorned inputs, radios, switches, ranges, comboboxes,
+chips and OTP wrappers. Put feedback after its related control. Tooltips need a positioned ancestor;
+inline messages are preferable when screen-reader announcement or persistent feedback is important.
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Validation][1], © Bootstrap Authors, [MIT licensed][2].
+
 </DocumentationLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/validation.mdx
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

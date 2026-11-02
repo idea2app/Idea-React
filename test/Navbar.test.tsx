@@ -5,6 +5,18 @@ import { render, screen } from '@testing-library/react';
 
 import { Navbar, NavbarBrand, NavbarNav, NavbarText, NavbarToggler } from '../source/Navbar';
 
+it('supports translucent color modes and navigation variants', () => {
+    render(
+        <Navbar theme="dark" translucent>
+            <NavbarNav variant="pills">Links</NavbarNav>
+        </Navbar>
+    );
+
+    assert.equal(screen.getByRole('navigation').className, 'navbar navbar-translucent');
+    assert.equal(screen.getByRole('navigation').getAttribute('data-bs-theme'), 'dark');
+    assert.equal(screen.getByText('Links').className, 'navbar-nav nav nav-pills');
+});
+
 it('uses official responsive expansion classes on a labelled navigation landmark', () => {
     const { rerender } = render(
         <Navbar expand="lg" aria-label="Primary">

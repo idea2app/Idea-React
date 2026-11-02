@@ -3,7 +3,14 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { Avatar, AvatarStack } from '../source/Avatar';
+import { Avatar, AvatarImage, AvatarStack } from '../source/Avatar';
+
+it('supports standalone images with native image attributes', () => {
+    render(<AvatarImage src="/avatar.png" alt="Profile" width={50} />);
+
+    assert.equal(screen.getByAltText('Profile').className, 'avatar-img');
+    assert.equal(screen.getByAltText('Profile').getAttribute('width'), '50');
+});
 
 it('renders an official Bootstrap 6 image avatar with size and theme classes', () => {
     const { rerender, container } = render(

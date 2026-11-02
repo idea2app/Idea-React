@@ -1,0 +1,93 @@
+import { Button } from '../../../../source/Button';
+import { OverlayBox } from '../../../../source/OverlayBox';
+import { Tooltip } from '../../../../source/Tooltip';
+
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="tooltip">
+
+# Tooltip
+
+Tooltips provide concise contextual information on hover or keyboard focus. The [Tooltip wrapper][1]
+renders Bootstrap 6 content; use [OverlayBox][2] for visibility, positioning, delayed triggers,
+Escape dismissal, and the trigger's `aria-describedby` association.
+
+## Hover and focus
+
+<OverlayBox title="Helpful information">
+    <Button variant="solid" theme="primary">
+        Hover or focus me
+    </Button>
+</OverlayBox>
+
+Do not hide essential instructions exclusively in a tooltip.
+
+## Placement
+
+<div className="d-flex flex-wrap gap-3">
+    {['top', 'right', 'bottom', 'left'].map(placement => (
+        <OverlayBox key={placement} title={`Tooltip on ${placement}`} placement={placement}>
+            <Button variant="solid" theme="secondary">
+                {placement}
+            </Button>
+        </OverlayBox>
+    ))}
+</div>
+
+## Rich and interactive content
+
+React nodes support emphasis and links without HTML injection. The overlay stays within its trigger
+wrapper, so pointer and focus movement into its content remain inside that wrapper.
+
+<OverlayBox
+    title={
+        <span>
+            Read the <a href="https://getbootstrap.com/">Bootstrap guide</a>.
+        </span>
+    }
+    delay={{ show: 100, hide: 150 }}
+>
+    <Button variant="subtle" theme="primary">
+        More information
+    </Button>
+</OverlayBox>
+
+## Disabled elements
+
+Disabled controls do not receive focus. Add a focusable wrapper when the explanation must remain
+available to keyboard users.
+
+<OverlayBox title="Complete the required fields first">
+    <span tabIndex={0} aria-label="Why saving is unavailable">
+        <Button disabled>Save</Button>
+    </span>
+</OverlayBox>
+
+## Standalone markup
+
+<Tooltip className="position-relative d-inline-block" placement="bottom">
+    Standalone tooltip content
+</Tooltip>
+
+`Tooltip` accepts `placement`, `show`, HTML attributes, and React children. `show={false}` hides its
+content from assistive technology too. When rendering it directly, provide the trigger association
+and visibility behavior yourself.
+
+`OverlayBox` automatically flips and shifts content to remain inside the viewport. Set
+`responsivePlacement={{ md: 'right', lg: 'bottom' }}` to change directions at viewport breakpoints.
+Use `offset` for spacing (`8` or `[crossAxis, mainAxis]`), `padding` for the viewport inset,
+and `flip={false}` when the preferred direction must be retained.
+
+`container` accepts a selector, an element, or a function returning an element. It portals the
+overlay without losing focus, hover, outside-click dismissal, or `aria-describedby`. Resize,
+scroll, and content-size changes update positioning; all observers are released on close/unmount.
+
+Adapted from the [Bootstrap 6 Tooltip documentation][3], copyright the Bootstrap authors,
+under the [MIT license][4].
+
+</ComponentsLayout>
+
+[1]: https://idea2app.github.io/Idea-React/modules/Tooltip.html
+[2]: ../overlay-box/
+[3]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/tooltip.mdx
+[4]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

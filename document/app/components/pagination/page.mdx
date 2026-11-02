@@ -1,0 +1,79 @@
+import { Pagination, PageItem, PageLink, PageText } from '../../../../source/Pagination';
+import { Icon } from '../../../../source/Icon';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="pagination">
+
+# Pagination
+
+Use a labeled navigation landmark around the list. `PageItem active` supplies `aria-current="page"`
+to its `PageLink`. Disabled items remove their links from navigation and keyboard focus.
+
+## Quick start
+
+<CodeExample>
+    <nav aria-label="Search result pages">
+        <Pagination theme="primary">
+            <PageItem disabled>
+                <PageLink href="?page=0">Previous</PageLink>
+            </PageItem>
+            <PageItem active>
+                <PageLink href="?page=1">1</PageLink>
+            </PageItem>
+            <PageItem>
+                <PageLink href="?page=2">2</PageLink>
+            </PageItem>
+            <PageItem>
+                <PageText>...</PageText>
+            </PageItem>
+            <PageItem>
+                <PageLink href="?page=3">Next</PageLink>
+            </PageItem>
+        </Pagination>
+    </nav>
+</CodeExample>
+
+## Icons, sizes, and alignment
+
+`size` accepts `sm` or `lg`. `theme` accepts the shared colors, and flex utilities control alignment.
+Use `PageText` for non-interactive current or disabled items. Icon-only links need accessible names.
+
+<CodeExample>
+    <nav aria-label="Article pages">
+        <Pagination size="lg" theme="accent" className="justify-content-center">
+            <PageItem>
+                <PageLink href="?page=1" aria-label="Previous page">
+                    <Icon name="chevron-double-left" aria-hidden="true" />
+                </PageLink>
+            </PageItem>
+            <PageItem active>
+                <PageText>2</PageText>
+            </PageItem>
+            <PageItem>
+                <PageLink href="?page=3" aria-label="Next page">
+                    <Icon name="chevron-double-right" aria-hidden="true" />
+                </PageLink>
+            </PageItem>
+        </Pagination>
+    </nav>
+    <nav aria-label="Compact pages">
+        <Pagination size="sm" className="justify-content-end">
+            <PageItem disabled>
+                <PageText>Previous</PageText>
+            </PageItem>
+            <PageItem active>
+                <PageLink href="?page=1">1</PageLink>
+            </PageItem>
+            <PageItem>
+                <PageLink href="?page=2">2</PageLink>
+            </PageItem>
+        </Pagination>
+    </nav>
+</CodeExample>
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Pagination][1], copyright The Bootstrap Authors, MIT license.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/pagination.mdx

@@ -9,7 +9,8 @@ import {
     FormFieldContent,
     FormFieldset,
     FormGroup,
-    FormLabel
+    FormLabel,
+    FormLegend
 } from '../../source/Form';
 
 it('renders native form structure and field wrappers', () => {
@@ -32,4 +33,47 @@ it('renders native form structure and field wrappers', () => {
     assert.equal(screen.getByTestId('field-content').className, 'form-field-content');
     assert.equal(screen.getByRole('group').tagName, 'FIELDSET');
     assert.equal((screen.getByRole('group') as HTMLFieldSetElement).disabled, true);
+});
+
+it('sizes horizontal labels and fieldset legends consistently with controls', () => {
+    render(
+        <FormFieldset>
+            <FormLegend controlSize="lg" column>
+                Details
+            </FormLegend>
+            <FormLabel controlSize="sm" htmlFor="horizontal" column>
+                Name
+            </FormLabel>
+            <input id="horizontal" />
+        </FormFieldset>
+    );
+
+    assert.equal(screen.getByText('Details').className, 'col-form-label col-form-label-lg');
+    assert.equal(screen.getByText('Name').className, 'col-form-label col-form-label-sm');
+});
+
+it('supports validated forms, grouped cards and ordinary control labels', () => {
+    render(
+        <Form aria-label="Plans" validated noValidate>
+            <FormGroup>
+                <FormLabel>Choose a plan</FormLabel>
+                <FormField card>
+                    <input type="radio" name="plan" id="basic" required defaultChecked />
+                    <FormFieldContent>
+                        <FormLabel htmlFor="basic" plain>
+                            Basic
+                        </FormLabel>
+                    </FormFieldContent>
+                </FormField>
+            </FormGroup>
+        </Form>
+    );
+    const form = screen.getByRole('form') as HTMLFormElement;
+    const radio = screen.getByRole('radio');
+
+    assert.equal(form.className, 'was-validated');
+    assert.equal(form.hasAttribute('novalidate'), true);
+    assert.equal(radio.parentElement?.className, 'form-field form-field-card');
+    assert.equal(screen.getByText('Basic').className, '');
+    assert.equal(form.checkValidity(), true);
 });

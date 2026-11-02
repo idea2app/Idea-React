@@ -6,100 +6,50 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # OTP input
 
-`OTPInput` renders one text input and forwards the visual and behavior options to Bootstrap's OTP
-plugin. A single input preserves browser autofill and screen-reader access.
+One accessible native input is rendered as digit slots. Bootstrap's plugin handles editing,
+formatted paste, SMS autofill, masking and keyboard navigation automatically.
 
-## Overview
-
-## How it works
-
-The default `length` is provided by the caller; `type` supports numeric, alpha, and alphanumeric
-input. The component defaults to `autocomplete="one-time-code"`.
+## Quick start
 
 <CodeExample>
     <FormField>
         <FormLabel htmlFor="otpCode">Verification code</FormLabel>
-        <OTPInput id="otpCode" name="code" length={6} groups={[3, 3]} />
-        <FormText>Enter the six-digit code sent to your device.</FormText>
+        <OTPInput
+            id="otpCode"
+            name="code"
+            length={6}
+            groups={[3, 3]}
+            separator="-"
+            aria-describedby="otpHelp"
+        />
+        <FormText id="otpHelp">Enter the six-digit code sent to your phone.</FormText>
     </FormField>
+    <OTPInput aria-label="Four-digit PIN" length={4} connected mask size="lg" className="mt-3" />
+    <OTPInput
+        aria-label="Alphanumeric code"
+        length={6}
+        type="alphanumeric"
+        connected
+        defaultValue="ABC123"
+        validation="valid"
+        wrapperClassName="mt-3"
+    />
+    <OTPInput aria-label="Disabled code" length={6} size="sm" disabled wrapperClassName="mt-3" />
 </CodeExample>
 
-## Connected inputs
+`length` controls slot count. Choose `type="numeric"` (default), `"alphanumeric"` or `"alpha"`;
+paste strips unsupported characters. `mask` hides slot contents without disabling SMS autofill.
+`groups` and `separator` add decorative dividers, and `connected` joins slot borders.
 
-Set `connected` to request connected visual slots.
+Native `value`, `defaultValue`, `onChange`, `disabled`, `required` and refs target the real input.
+`onValueChange` reports sanitized plugin values; `onComplete` reports a filled code.
+`validation` styles the container; `className` styles the input, while `wrapperClassName` styles
+the slot group. Give the input an accessible label and connect help text with `aria-describedby`.
+Slots shrink to fit narrow containers while preserving grouped separators and every digit.
 
-<CodeExample>
-    <OTPInput aria-label="Connected PIN" name="pin" length={4} connected />
-</CodeExample>
-
-## Four-digit PIN
-
-<CodeExample>
-    <OTPInput aria-label="Four digit PIN" name="fourDigitPin" length={4} connected />
-</CodeExample>
-
-## With separator
-
-Use `groups` and `separator` to control visual grouping.
-
-<CodeExample>
-    <OTPInput aria-label="Grouped code" length={6} groups={[3, 3]} separator="-" />
-</CodeExample>
-
-## Sizes
-
-Use `size="sm"` or `"lg"` on the wrapper.
-
-## Alphanumeric and masking
-
-<CodeExample>
-    <OTPInput aria-label="Masked code" length={6} type="alphanumeric" mask />
-</CodeExample>
-
-## Disabled
-
-The native `disabled` property is forwarded to the input.
-
-## Validation
-
-Use native `required`, `pattern`, and length constraints to validate the input.
-
-## With form label
-
-Wrap the control with `FormField` and associate the visible label.
-
-## Usage
-
-The Bootstrap OTP JavaScript plugin is required to render the individual visual slots. The fallback
-is one accessible native text input.
-
-### Via data attributes
-
-The wrapper forwards length, input type, mask, grouping, and separator options as data attributes.
-
-### Via JavaScript
-
-The Bootstrap OTP plugin can also be initialized programmatically.
-
-### Dependencies
-
-The interactive OTP slots require Bootstrap's OTP JavaScript plugin.
-
-### Options
-
-`OTPInput` supports length, input type, mask, groups, separator, connected, and size options.
-
-### Methods
-
-The OTP plugin exposes lifecycle methods.
-
-### Events
-
-Plugin-specific events are provided by Bootstrap.
-
-## Accessibility
-
-The single native input keeps the value available to assistive technology and one-time-code
-autofill. Provide a visible label and instructions.
+Adapted from [Bootstrap v6.0.0-alpha.1 OTP input][1], © Bootstrap Authors, [MIT licensed][2].
 
 </DocumentationLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/otp-input.mdx
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

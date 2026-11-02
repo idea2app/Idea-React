@@ -1,0 +1,56 @@
+import { Alert, AlertHeading, AlertLink } from '../../../../source/Alert';
+import { Icon } from '../../../../source/Icon';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample, LiveExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="alert">
+
+# Alert
+
+Display contextual feedback with an accessible alert role. The optional `theme` supports every
+shared component color; never rely on color alone to convey meaning.
+
+## Quick start
+
+<CodeExample>
+    <Alert theme="success">
+        <AlertHeading>Changes saved</AlertHeading>
+        <p>
+            You can continue editing or{' '}
+            <AlertLink href="#dismissal">review dismissal options</AlertLink>.
+        </p>
+        <hr />
+        <p className="mb-0">Alerts accept any additional content through children.</p>
+    </Alert>
+    <Alert theme="warning" className="d-flex align-items-center gap-2 mt-3">
+        <Icon name="exclamation-triangle" aria-hidden="true" />
+        <p>Warning: check your connection before continuing.</p>
+    </Alert>
+</CodeExample>
+
+## Dismissal
+
+`dismissible` adds a labeled close button. The alert fades out before removal; `instant` removes it
+without waiting. `onClose` runs before dismissal and `onClosed` after removal. Use `onClosed` to
+restore keyboard focus to an appropriate control, because removing an alert also removes its button.
+
+<LiveExample>
+    <Alert theme="info" dismissible>
+        <p>This notification can be dismissed. Edit the example to restore it.</p>
+    </Alert>
+</LiveExample>
+
+<CodeExample>
+    <Alert theme="secondary" closeLabel="Dismiss notification" dismissible instant>
+        <p>This alert closes immediately.</p>
+    </Alert>
+</CodeExample>
+
+To show a new alert after an action, conditionally render `Alert` from your component's observable
+state. Give a newly created notification a new React key when reusing the same position.
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Alert][1], copyright The Bootstrap Authors, MIT license.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/alert.mdx

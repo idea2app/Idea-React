@@ -26,7 +26,7 @@ To convey the active state to assistive technologies, use the `aria-current` att
 `page` value for current page, or `true` for the current item in a set.
 
 <Nav aria-label="Base navigation">
-    <NavLink href="#" className="active" aria-current="page">
+    <NavLink href="#" active>
         Active
     </NavLink>
     <NavLink href="#">Link</NavLink>
@@ -46,7 +46,7 @@ Change the style of navs with modifiers and utilities. Mix and match as needed, 
 Add `variant="tabs"` to generate a tabbed interface.
 
 <Nav variant="tabs" aria-label="Tab navigation">
-    <NavLink href="#" className="active" aria-current="page">
+    <NavLink href="#" active>
         Active
     </NavLink>
     <NavLink href="#">Link</NavLink>
@@ -59,7 +59,7 @@ Add `variant="tabs"` to generate a tabbed interface.
 Use `variant="pills"` for a more themed appearance.
 
 <Nav variant="pills" aria-label="Pill navigation">
-    <NavLink href="#" className="active" aria-current="page">
+    <NavLink href="#" active>
         Active
     </NavLink>
     <NavLink href="#">Link</NavLink>
@@ -70,7 +70,7 @@ Use `variant="pills"` for a more themed appearance.
 Pill navigation can also go vertical with the `vertical` prop, which adds `.nav-pills-vertical`.
 
 <Nav variant="pills" vertical aria-label="Vertical pill navigation">
-    <NavLink href="#" className="active" aria-current="page">
+    <NavLink href="#" active>
         Active
     </NavLink>
     <NavLink href="#">Link</NavLink>
@@ -83,7 +83,7 @@ Pill navigation can also go vertical with the `vertical` prop, which adds `.nav-
 Use `variant="underline"` for an underlined navigation.
 
 <Nav variant="underline" aria-label="Underline navigation">
-    <NavLink href="#" className="active" aria-current="page">
+    <NavLink href="#" active>
         Active
     </NavLink>
     <NavLink href="#">Link</NavLink>
@@ -101,7 +101,7 @@ left-aligned, but you can easily modify them to center or right-aligned, and eve
 Centered with `.justify-content-center`:
 
 <Nav className="justify-content-center" aria-label="Centered navigation">
-    <NavLink href="#" className="active" aria-current="page">
+    <NavLink href="#" active>
         Active
     </NavLink>
     <NavLink href="#">Link</NavLink>
@@ -112,7 +112,7 @@ Centered with `.justify-content-center`:
 Right-aligned with `.justify-content-end`:
 
 <Nav className="justify-content-end" aria-label="End-aligned navigation">
-    <NavLink href="#" className="active" aria-current="page">
+    <NavLink href="#" active>
         Active
     </NavLink>
     <NavLink href="#">Link</NavLink>
@@ -126,7 +126,7 @@ Stack your navigation by setting the `vertical` prop. With pills the wrapper use
 `.nav-pills-vertical`; other variants use the `.flex-column` utility.
 
 <Nav vertical aria-label="Vertical navigation">
-    <NavLink href="#" className="active" aria-current="page">
+    <NavLink href="#" active>
         Active
     </NavLink>
     <NavLink href="#">Link</NavLink>
@@ -141,7 +141,7 @@ To proportionately fill all available space with your nav items, use `fill`. Not
 horizontal space is occupied, but not every nav item has the same width.
 
 <Nav variant="pills" fill aria-label="Filled navigation">
-    <NavLink href="#" className="active" aria-current="page">
+    <NavLink href="#" active>
         Active
     </NavLink>
     <NavLink href="#">Much longer nav link</NavLink>
@@ -153,7 +153,7 @@ For equal-width elements, use `justified`. All horizontal space will be occupied
 unlike `fill`, every nav link will be the same width.
 
 <Nav variant="pills" justified aria-label="Justified navigation">
-    <NavLink href="#" className="active" aria-current="page">
+    <NavLink href="#" active>
         Active
     </NavLink>
     <NavLink href="#">Much longer nav link</NavLink>
@@ -173,7 +173,7 @@ the available width starting from the small breakpoint.
     className="flex-column sm:flex-row sm:d-flex"
     aria-label="Responsive navigation"
 >
-    <NavLink href="#" className="active sm:flex-fill sm:text-center" aria-current="page">
+    <NavLink href="#" active className="sm:flex-fill sm:text-center">
         Active
     </NavLink>
     <NavLink href="#" className="sm:flex-fill sm:text-center">
@@ -203,10 +203,10 @@ Add menus with the [`Menu` wrapper][3] and the `nav-link` toggle class.
 ### Tabs with menus
 
 <Nav variant="tabs" aria-label="Tab navigation with menu">
-    <NavLink href="#" className="active" aria-current="page">
+    <NavLink href="#" active>
         Active
     </NavLink>
-    <Menu label="Menu" toggleProps={{ className: 'nav-link' }}>
+    <Menu label="Menu" nav>
         <MenuItem href="#">Action</MenuItem>
         <MenuItem href="#">Another action</MenuItem>
         <MenuItem href="#">Something else here</MenuItem>
@@ -220,10 +220,10 @@ Add menus with the [`Menu` wrapper][3] and the `nav-link` toggle class.
 ### Pills with menus
 
 <Nav variant="pills" aria-label="Pill navigation with menu">
-    <NavLink href="#" className="active" aria-current="page">
+    <NavLink href="#" active>
         Active
     </NavLink>
-    <Menu label="Menu" toggleProps={{ className: 'nav-link' }}>
+    <Menu label="Menu" nav>
         <MenuItem href="#">Action</MenuItem>
         <MenuItem href="#">Another action</MenuItem>
         <MenuItem href="#">Something else here</MenuItem>
@@ -234,8 +234,11 @@ Add menus with the [`Menu` wrapper][3] and the `nav-link` toggle class.
     <NavLink disabled>Disabled</NavLink>
 </Nav>
 
+Adapted from [Bootstrap v6.0.0-alpha.1][4], © the Bootstrap authors (MIT license).
+
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Nav.tsx
 [2]: https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/
 [3]: https://github.com/idea2app/Idea-React/blob/main/source/Menu.tsx
+[4]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/nav.mdx

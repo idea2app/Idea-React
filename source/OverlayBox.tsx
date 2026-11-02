@@ -15,9 +15,10 @@ import {
     ReactElement,
     ReactNode
 } from 'react';
+import { createPortal } from 'react-dom';
 import { uniqueID } from 'web-utility';
 
-import { OverlayPlacement } from './Overlay';
+import { FloatingOptions, FloatingPosition, OverlayContainer, OverlayPlacement } from './Overlay';
 import { Popover } from './Popover';
 import { Tooltip } from './Tooltip';
 
@@ -30,25 +31,16 @@ export interface OverlayBoxProps extends Omit<
     title: ReactNode;
     detail?: ReactNode;
     placement?: OverlayPlacement;
+    responsivePlacement?: FloatingOptions['responsivePlacement'];
+    container?: OverlayContainer;
+    offset?: FloatingOptions['offset'];
+    padding?: number;
+    flip?: boolean;
     trigger?: OverlayTrigger | OverlayTrigger[];
     delay?: number | { show: number; hide: number };
     overlayClassName?: string;
     children: ReactElement<{ 'aria-describedby'?: string }>;
 }
-
-const PLACEMENT_CLASSES: Record<OverlayPlacement, string> = {
-    top: 'bottom-100 start-50 translate-middle-x',
-    right: 'top-50 start-100 translate-middle-y',
-    bottom: 'top-100 start-50 translate-middle-x',
-    left: 'top-50 end-100 translate-middle-y'
-};
-
-const OVERLAY_GAPS: Record<OverlayPlacement, Record<'popover' | 'tooltip', string>> = {
-    top: { popover: 'mb-3', tooltip: 'mb-2' },
-    right: { popover: 'ms-3', tooltip: 'ms-2' },
-    bottom: { popover: 'mt-3', tooltip: 'mt-2' },
-    left: { popover: 'me-3', tooltip: 'me-2' }
-};
 
 @observer
 export class OverlayBox extends Component<OverlayBoxProps> {
@@ -58,6 +50,8 @@ export class OverlayBox extends Component<OverlayBoxProps> {
 
     id = uniqueID();
     root = createRef<HTMLSpanElement>();
+    overlay = createRef<HTMLDivElement>();
+    position = new FloatingPosition();
     timer?: ReturnType<typeof setTimeout>;
 
     @action
@@ -82,11 +76,47 @@ export class OverlayBox extends Component<OverlayBoxProps> {
     componentWillUnmount() {
         document.removeEventListener('pointerdown', this.handleOutside);
         clearTimeout(this.timer);
+        this.position.dispose();
     }
 
     componentDidMount() {
         document.addEventListener('pointerdown', this.handleOutside);
     }
+
+    componentDidUpdate(previous: OverlayBoxProps) {
+        const { open, root, overlay, props, position } = this;
+        const {
+            placement = 'top',
+            responsivePlacement,
+            offset = props.detail == null ? 8 : 12,
+            padding,
+            flip,
+            container
+        } = props;
+        if (!open) return position.dispose();
+        if (!root.current || !overlay.current) return;
+        if (
+            position.element !== overlay.current ||
+            previous.placement !== props.placement ||
+            previous.responsivePlacement !== responsivePlacement ||
+            previous.offset !== props.offset ||
+            previous.padding !== padding ||
+            previous.flip !== flip ||
+            previous.container !== container
+        )
+            position.attach(root.current, overlay.current, {
+                placement,
+                responsivePlacement,
+                offset,
+                padding,
+                flip
+            });
+        else position.update();
+    }
+
+    contains = (target: EventTarget | null) =>
+        target instanceof Node &&
+        (!!this.root.current?.contains(target) || !!this.overlay.current?.contains(target));
 
     hasTrigger = (trigger: OverlayTrigger) => {
         const triggers: OverlayTrigger[] = this.props.trigger
@@ -101,43 +131,57 @@ export class OverlayBox extends Component<OverlayBoxProps> {
     handleMouseEnter = (event: MouseEvent<HTMLSpanElement>) => {
         this.props.onMouseEnter?.(event);
 
-        if (this.hasTrigger('hover')) this.setOpenAfterDelay(true);
+        if (!event.defaultPrevented && this.hasTrigger('hover')) this.setOpenAfterDelay(true);
     };
 
     handleMouseLeave = (event: MouseEvent<HTMLSpanElement>) => {
         this.props.onMouseLeave?.(event);
 
-        if (this.hasTrigger('hover') && !this.root.current?.contains(document.activeElement))
+        if (
+            !event.defaultPrevented &&
+            this.hasTrigger('hover') &&
+            !this.contains(event.relatedTarget) &&
+            !this.contains(document.activeElement)
+        )
             this.setOpenAfterDelay(false);
     };
 
     handleFocus = (event: FocusEvent<HTMLSpanElement>) => {
         this.props.onFocus?.(event);
 
-        if (this.hasTrigger('focus')) this.setOpenAfterDelay(true);
+        if (!event.defaultPrevented && this.hasTrigger('focus')) this.setOpenAfterDelay(true);
     };
 
     handleBlur = (event: FocusEvent<HTMLSpanElement>) => {
         this.props.onBlur?.(event);
 
-        if (this.hasTrigger('focus') && !event.currentTarget.contains(event.relatedTarget))
+        if (
+            !event.defaultPrevented &&
+            this.hasTrigger('focus') &&
+            !this.contains(event.relatedTarget)
+        )
             this.setOpenAfterDelay(false);
     };
 
     handleClick = (event: MouseEvent<HTMLSpanElement>) => {
         this.props.onClick?.(event);
 
-        if (!event.defaultPrevented && this.hasTrigger('click')) this.setOpenAfterDelay(!this.open);
+        if (
+            !event.defaultPrevented &&
+            this.hasTrigger('click') &&
+            !(event.target instanceof Node && this.overlay.current?.contains(event.target))
+        )
+            this.setOpenAfterDelay(!this.open);
     };
 
     handleOutside = ({ target }: PointerEvent) => {
-        if (target instanceof Node && !this.root.current?.contains(target)) this.hide();
+        if (target instanceof Node && !this.contains(target)) this.hide();
     };
 
     handleKeyDown = (event: KeyboardEvent<HTMLSpanElement>) => {
         this.props.onKeyDown?.(event);
 
-        if (event.key === 'Escape' && this.open) {
+        if (!event.defaultPrevented && event.key === 'Escape' && this.open) {
             event.preventDefault();
             this.hide();
         }
@@ -148,6 +192,11 @@ export class OverlayBox extends Component<OverlayBoxProps> {
             title,
             detail,
             placement = 'top',
+            responsivePlacement: _responsivePlacement,
+            container,
+            offset: _offset,
+            padding: _padding,
+            flip: _flip,
             trigger: _trigger,
             delay: _delay,
             overlayClassName,
@@ -162,9 +211,44 @@ export class OverlayBox extends Component<OverlayBoxProps> {
             ...props
         } = this.props;
         const id = this.open ? this.id : undefined;
-        const position = PLACEMENT_CLASSES[placement];
-        const gap = OVERLAY_GAPS[placement][detail ? 'popover' : 'tooltip'];
-        const overlayClass = classNames('position-absolute w-max', position, gap, overlayClassName);
+        const direction = this.position.element
+            ? (this.position.placement.split('-')[0] as OverlayPlacement)
+            : placement;
+        const overlayClass = classNames('w-max', overlayClassName);
+        const overlay =
+            detail != null ? (
+                <Popover
+                    ref={this.overlay}
+                    id={id}
+                    style={{ ...this.position.style }}
+                    arrowStyle={{ ...this.position.arrowStyle }}
+                    className={overlayClass}
+                    title={title}
+                    placement={direction}
+                >
+                    {detail}
+                </Popover>
+            ) : (
+                <Tooltip
+                    ref={this.overlay}
+                    id={id}
+                    style={{ ...this.position.style }}
+                    arrowStyle={{ ...this.position.arrowStyle }}
+                    className={overlayClass}
+                    placement={direction}
+                >
+                    {title}
+                </Tooltip>
+            );
+        const target =
+            this.open && container
+                ? typeof container === 'string'
+                    ? document.querySelector<HTMLElement>(container)
+                    : typeof container === 'function'
+                      ? container()
+                      : container
+                : undefined;
+        if (this.open && container && !target) throw new Error('Overlay container was not found');
         const trigger = isValidElement(children)
             ? cloneElement(children, {
                   'aria-describedby':
@@ -187,21 +271,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
             >
                 {trigger}
 
-                {this.open &&
-                    (detail ? (
-                        <Popover
-                            id={id}
-                            className={overlayClass}
-                            title={title}
-                            placement={placement}
-                        >
-                            {detail}
-                        </Popover>
-                    ) : (
-                        <Tooltip id={id} className={overlayClass} placement={placement}>
-                            {title}
-                        </Tooltip>
-                    ))}
+                {this.open && (target ? createPortal(overlay, target) : overlay)}
             </span>
         );
     }

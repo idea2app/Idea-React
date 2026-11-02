@@ -6,11 +6,12 @@ import {
     CardGroup,
     CardHeader,
     CardImageOverlay,
+    CardImage,
+    CardSubtitle,
     CardText,
     CardTitle
 } from '../../../../source/Card';
 import { Col, Container, Row } from '../../../../source/Grid';
-import { Image } from '../../../../source/Image';
 import { ListGroup, ListGroupItem } from '../../../../source/ListGroup';
 import { Nav, NavLink } from '../../../../source/Nav';
 
@@ -23,9 +24,9 @@ import { ComponentsLayout } from '../../../component/Documentation/Components/La
 Bootstrap's cards provide a flexible and extensible content container with multiple variants and
 options.
 
-Idea React provides wrappers for [`Card`, `CardGroup`, `CardImageOverlay`, `CardHeader`,
-`CardBody`, `CardTitle`, `CardText`, and `CardFooter`][1]. Use other Bootstrap wrappers such as
-[`Button`][2], [`Image`][3], [`Nav`][4], and [`ListGroup`][5] inside them.
+Idea React's [card wrappers][1] include `Card`, `CardGroup`, `CardImageOverlay`, `CardHeader`,
+`CardBody`, `CardTitle`, `CardSubtitle`, `CardText`, and `CardFooter`. Compose
+[`Button`][2], [`CardImage`][1], [`Nav`][3], and [`ListGroup`][4] inside them.
 
 ## Example
 
@@ -35,12 +36,12 @@ fixed width to start**, so they'll naturally fill the width of their parent elem
 your grid columns.
 
 <Card style={{ maxWidth: '320px' }}>
-    <Image
+    <CardImage
         src="https://picsum.photos/seed/idea-react-card/400/180"
         alt="Card image cap"
         width={400}
         height={180}
-        className="card-img-top"
+        placement="top"
     />
     <CardBody>
         <CardTitle>Card title</CardTitle>
@@ -87,7 +88,7 @@ within a card.
 
 For simple cards, you can render `card-body` directly on the card element.
 
-<Card className="card-body">This is some text within a card body.</Card>
+<Card body>This is some text within a card body.</Card>
 
 ### Titles, text, and links
 
@@ -104,7 +105,7 @@ Use type and color utilities as needed. A color utility on `.card-subtitle` over
 <Card style={{ maxWidth: '320px' }}>
     <CardBody>
         <CardTitle>Example card title</CardTitle>
-        <p className="card-subtitle fg-3">With a card subtitle</p>
+        <CardSubtitle className="fg-3">With a card subtitle</CardSubtitle>
         <CardText>
             {
                 "Some quick example text to build on the card title and make up the bulk of the card's content."
@@ -120,12 +121,11 @@ Place images anywhere in a card and style as you like.
 
 <Card style={{ width: '18rem' }}>
     <CardBody>
-        <Image
+        <CardImage
             src="https://picsum.photos/seed/idea-react-card-body/400/180"
             alt="Image cap"
             width={400}
             height={180}
-            className="card-img"
         />
         <h5 className="mt-2 mb-0">Image within the body</h5>
         <CardText className="fg-2">
@@ -141,12 +141,12 @@ Use `.card-img-top` and `.card-img-bottom` to round the top and bottom corners o
 
 <div className="d-flex flex-wrap gap-3">
     <Card style={{ width: '18rem' }}>
-        <Image
+        <CardImage
             src="https://picsum.photos/seed/idea-react-card-top/400/180"
             alt="Image cap"
             width={400}
             height={180}
-            className="card-img-top"
+            placement="top"
         />
         <CardBody>
             <CardText>
@@ -164,12 +164,12 @@ Use `.card-img-top` and `.card-img-bottom` to round the top and bottom corners o
                 }
             </CardText>
         </CardBody>
-        <Image
+        <CardImage
             src="https://picsum.photos/seed/idea-react-card-bottom/400/180"
             alt="Image cap"
             width={400}
             height={180}
-            className="card-img-bottom"
+            placement="bottom"
         />
     </Card>
 </div>
@@ -214,12 +214,12 @@ Shown below are image styles, blocks, text styles, and a list group—all wrappe
 card.
 
 <Card style={{ width: '18rem' }}>
-    <Image
+    <CardImage
         src="https://picsum.photos/seed/idea-react-card-sink/400/180"
         alt="Image cap"
         width={400}
         height={180}
-        className="card-img-top"
+        placement="top"
     />
     <CardBody>
         <CardTitle>Card title</CardTitle>
@@ -258,7 +258,7 @@ Add an optional header and/or footer within a card.
 Card headers can be styled by adding `card-header` to heading elements.
 
 <Card>
-    <h5 className="card-header">Featured</h5>
+    <CardHeader>Featured</CardHeader>
     <CardBody>
         <CardTitle>Special title treatment</CardTitle>
         <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
@@ -376,8 +376,8 @@ Add some navigation to a card's header (or block) with Bootstrap's nav component
 
 <Card className="text-center">
     <CardHeader>
-        <Nav variant="tabs" className="card-header-tabs" aria-label="Card navigation">
-            <NavLink href="#" className="active" aria-current="true">
+        <Nav variant="tabs" cardHeader aria-label="Card navigation">
+            <NavLink href="#" active>
                 Active
             </NavLink>
             <NavLink href="#">Link</NavLink>
@@ -398,7 +398,7 @@ This works with pills as well.
 <Card className="text-center">
     <CardHeader>
         <Nav variant="pills" aria-label="Card pill navigation">
-            <NavLink href="#" className="active">
+            <NavLink href="#" active>
                 Active
             </NavLink>
             <NavLink href="#">Link</NavLink>
@@ -425,12 +425,12 @@ Similar to headers and footers, cards can include top and bottom "image caps"—
 bottom of a card.
 
 <Card className="mb-3">
-    <Image
+    <CardImage
         src="https://picsum.photos/seed/idea-react-card-cap-top/400/180"
         alt="Image cap"
         width={400}
         height={180}
-        className="card-img-top"
+        placement="top"
     />
     <CardBody>
         <CardTitle>Card title</CardTitle>
@@ -457,12 +457,12 @@ bottom of a card.
             <small className="fg-2">Last updated 3 mins ago</small>
         </CardText>
     </CardBody>
-    <Image
+    <CardImage
         src="https://picsum.photos/seed/idea-react-card-cap-bottom/400/180"
         alt="Image cap"
         width={400}
         height={180}
-        className="card-img-bottom"
+        placement="bottom"
     />
 </Card>
 
@@ -472,12 +472,11 @@ Turn an image into a card background and overlay your card's text with `CardImag
 on the image, you may or may not need additional styles or utilities.
 
 <Card className="theme-inverse">
-    <Image
+    <CardImage
         src="https://picsum.photos/seed/idea-react-card-overlay/1200/500"
         alt="Card image"
         width={1200}
         height={500}
-        className="card-img"
     />
     <CardImageOverlay>
         <CardTitle>Card title</CardTitle>
@@ -500,13 +499,14 @@ image the content will be displayed outside the image.
 Use the `.card-row` class to make a card horizontal. For image caps, use the `.card-img-start` or
 `.card-img-end` class to position the image at the (inline) start or end position of the card.
 
-<Card className="card-row" style={{ maxWidth: '540px' }}>
-    <Image
+<Card row style={{ maxWidth: '540px' }}>
+    <CardImage
         src="https://picsum.photos/seed/idea-react-card-row/540/250"
         alt="Image"
         width={540}
         height={250}
-        className="card-img-start min-w-0 object-fit-cover"
+        placement="start"
+        className="min-w-0 object-fit-cover"
     />
     <CardBody>
         <CardTitle>Card title</CardTitle>
@@ -523,7 +523,7 @@ Use the `.card-row` class to make a card horizontal. For image caps, use the `.c
 
 And with the reverse layout:
 
-<Card className="card-row" style={{ maxWidth: '540px' }}>
+<Card row style={{ maxWidth: '540px' }}>
     <CardBody>
         <CardTitle>Card title</CardTitle>
         <CardText>
@@ -535,12 +535,13 @@ And with the reverse layout:
             <small className="fg-2">Last updated 3 mins ago</small>
         </CardText>
     </CardBody>
-    <Image
+    <CardImage
         src="https://picsum.photos/seed/idea-react-card-row-reverse/540/250"
         alt="Image"
         width={540}
         height={250}
-        className="card-img-end min-w-0 object-fit-cover"
+        placement="end"
+        className="min-w-0 object-fit-cover"
     />
 </Card>
 
@@ -562,11 +563,9 @@ colors for a more subtle look.
         ['danger', 'Danger'],
         ['warning', 'Warning'],
         ['info', 'Info'],
-        ['light', 'Light'],
-        ['dark', 'Dark'],
         ['inverse', 'Inverse']
     ].map(([theme, title]) => (
-        <Card key={theme} className={`theme-${theme}`}>
+        <Card key={theme} theme={theme}>
             <CardHeader>{title}</CardHeader>
             <CardBody>
                 <CardTitle>Card title</CardTitle>
@@ -588,11 +587,9 @@ colors for a more subtle look.
         ['danger', 'Danger'],
         ['warning', 'Warning'],
         ['info', 'Info'],
-        ['light', 'Light'],
-        ['dark', 'Dark'],
         ['inverse', 'Inverse']
     ].map(([theme, title]) => (
-        <Card key={theme} className={`card-subtle theme-${theme}`}>
+        <Card key={theme} subtle theme={theme}>
             <CardHeader>{title}</CardHeader>
             <CardBody>
                 <CardTitle>Card title</CardTitle>
@@ -608,7 +605,7 @@ Add `.card-translucent` to blur and saturate the background of a card. Header an
 are also adjusted for a consistent look.
 
 <div className="bg-black p-3">
-    <Card className="card-translucent" style={{ width: '18rem' }}>
+    <Card translucent className="max-w-100" style={{ width: '18rem' }}>
         <CardBody>
             <CardTitle>Translucent card</CardTitle>
             <CardText>This card has a translucent background with a backdrop blur effect.</CardText>
@@ -620,7 +617,7 @@ are also adjusted for a consistent look.
 </div>
 
 <div className="bg-black p-3">
-    <Card className="card-translucent" style={{ width: '18rem' }}>
+    <Card translucent className="max-w-100" style={{ width: '18rem' }}>
         <CardHeader>Featured</CardHeader>
         <CardBody>
             <CardTitle>Card with header</CardTitle>
@@ -653,12 +650,12 @@ container, the cards remain stacked.
 <div className="contains-inline">
     <CardGroup>
         <Card>
-            <Image
+            <CardImage
                 src="https://picsum.photos/seed/idea-react-group-1/400/180"
                 alt="Image cap"
                 width={400}
                 height={180}
-                className="card-img-top"
+                placement="top"
             />
             <CardBody>
                 <CardTitle>Card title</CardTitle>
@@ -673,12 +670,12 @@ container, the cards remain stacked.
             </CardBody>
         </Card>
         <Card>
-            <Image
+            <CardImage
                 src="https://picsum.photos/seed/idea-react-group-2/400/180"
                 alt="Image cap"
                 width={400}
                 height={180}
-                className="card-img-top"
+                placement="top"
             />
             <CardBody>
                 <CardTitle>Card title</CardTitle>
@@ -693,12 +690,12 @@ container, the cards remain stacked.
             </CardBody>
         </Card>
         <Card>
-            <Image
+            <CardImage
                 src="https://picsum.photos/seed/idea-react-group-3/400/180"
                 alt="Image cap"
                 width={400}
                 height={180}
-                className="card-img-top"
+                placement="top"
             />
             <CardBody>
                 <CardTitle>Card title</CardTitle>
@@ -771,12 +768,12 @@ around your cards) you show per row. For example, `cols={1}` lays out the cards 
     {[1, 2, 3, 4].map(index => (
         <Col key={index}>
             <Card>
-                <Image
+                <CardImage
                     src={`https://picsum.photos/seed/idea-react-grid-${index}/400/140`}
                     alt="Image cap"
                     width={400}
                     height={140}
-                    className="card-img-top"
+                    placement="top"
                 />
                 <CardBody>
                     <CardTitle>Card title</CardTitle>
@@ -797,12 +794,12 @@ Change it to `md={3}` and you'll see the fourth card wrap.
     {[1, 2, 3, 4].map(index => (
         <Col key={index}>
             <Card>
-                <Image
+                <CardImage
                     src={`https://picsum.photos/seed/idea-react-grid-three-${index}/400/140`}
                     alt="Image cap"
                     width={400}
                     height={140}
-                    className="card-img-top"
+                    placement="top"
                 />
                 <CardBody>
                     <CardTitle>Card title</CardTitle>
@@ -824,12 +821,12 @@ set `$card-height: 100%` in Sass.
     {[1, 2, 3, 4].map(index => (
         <Col key={index}>
             <Card className="h-100">
-                <Image
+                <CardImage
                     src={`https://picsum.photos/seed/idea-react-grid-height-${index}/400/140`}
                     alt="Image cap"
                     width={400}
                     height={140}
-                    className="card-img-top"
+                    placement="top"
                 />
                 <CardBody>
                     <CardTitle>Card title</CardTitle>
@@ -851,12 +848,12 @@ Just like with card groups, card footers will automatically line up.
         {[1, 2, 3].map(index => (
             <Col key={index}>
                 <Card className="h-100">
-                    <Image
+                    <CardImage
                         src={`https://picsum.photos/seed/idea-react-grid-footer-${index}/400/180`}
                         alt="Image cap"
                         width={400}
                         height={180}
-                        className="card-img-top"
+                        placement="top"
                     />
                     <CardBody>
                         <CardTitle>Card title</CardTitle>
@@ -878,14 +875,15 @@ Just like with card groups, card footers will automatically line up.
 ## CSS
 
 Cards use CSS variables for backgrounds, borders, and spacing. Theme variants set the theme tokens
-used by the card, and `.card-subtle`, `.card-translucent`, `.card-row`, and `.card-sheet` variants
-adjust the surface and layout. See the [upstream card CSS][6] for the variable and Sass reference.
+used by the card, and the `subtle`, `translucent`, and `row` props
+adjust the surface and layout. See the [upstream card CSS][5] for the variable and Sass reference.
+
+Adapted from [Bootstrap v6.0.0-alpha.1][5], © the Bootstrap authors (MIT license).
 
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Card.tsx
 [2]: https://github.com/idea2app/Idea-React/blob/main/source/Button.tsx
-[3]: https://github.com/idea2app/Idea-React/blob/main/source/Image.tsx
-[4]: https://github.com/idea2app/Idea-React/blob/main/source/Nav.tsx
-[5]: https://github.com/idea2app/Idea-React/blob/main/source/ListGroup.tsx
-[6]: https://getbootstrap.com/docs/6.0/components/card/#css
+[3]: https://github.com/idea2app/Idea-React/blob/main/source/Nav.tsx
+[4]: https://github.com/idea2app/Idea-React/blob/main/source/ListGroup.tsx
+[5]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/card.mdx

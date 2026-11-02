@@ -1,4 +1,12 @@
-import { Form, FormControl, FormField, FormFieldset, FormLabel } from '../../../source/Form';
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormFieldset,
+    FormLabel,
+    FormLegend,
+    FormText
+} from '../../../source/Form';
 import { CodeExample } from '../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../component/Documentation/Components/Layout';
 
@@ -6,45 +14,39 @@ import { DocumentationLayout } from '../../component/Documentation/Components/La
 
 # Forms
 
-Idea React's form wrappers are native React components styled with Bootstrap 6 classes. They preserve
-the browser's built-in form behavior and HTML attributes while providing typed props for Bootstrap
-form patterns.
+Idea React wraps native form elements with Bootstrap 6 styling. Native names, values, constraints,
+refs, autocomplete and accessibility attributes pass through.
 
-## Basic example
+## Quick start
 
 <CodeExample>
-    <Form>
+    <Form aria-label="Profile">
         <FormField>
             <FormLabel htmlFor="overviewEmail">Email address</FormLabel>
-            <FormControl id="overviewEmail" type="email" placeholder="name@example.com" />
+            <FormControl
+                id="overviewEmail"
+                name="email"
+                type="email"
+                required
+                aria-describedby="overviewHelp"
+            />
+            <FormText id="overviewHelp">We will never share your email.</FormText>
         </FormField>
+        <FormFieldset disabled className="mt-3">
+            <FormLegend>Unavailable settings</FormLegend>
+            <FormControl aria-label="Unavailable setting" placeholder="Disabled by the fieldset" />
+        </FormFieldset>
     </Form>
 </CodeExample>
 
-The [Field guide][1] shows how to compose a label, control, description, and feedback using
-`FormField`, `FormLabel`, and `FormText`.
+Use `FormField` for labels, descriptions and feedback; `FormGroup` groups related fields.
+`FormFieldset disabled` disables its native descendants. Always provide visible labels or
+accessible names and connect help text with `aria-describedby`. A readonly control remains
+focusable and submitted; a disabled control does not.
 
-## Disabled forms
-
-Use the native `disabled` property on individual controls, or group related controls in a disabled
-`FormFieldset`.
-
-<CodeExample>
-    <FormFieldset disabled>
-        <legend>Disabled fieldset</legend>
-        <FormField>
-            <FormLabel htmlFor="overviewDisabled">Disabled input</FormLabel>
-            <FormControl id="overviewDisabled" placeholder="Disabled input" />
-        </FormField>
-    </FormFieldset>
-</CodeExample>
-
-## Accessibility
-
-Associate every control with a visible label using matching `htmlFor` and `id` values. Use
-`aria-describedby` to connect descriptions and validation feedback, and group related options in a
-`FormFieldset` with a `legend`.
+Adapted from [Bootstrap v6.0.0-alpha.1 Forms][1], © Bootstrap Authors, [MIT licensed][2].
 
 </DocumentationLayout>
 
-[1]: ./field/
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/overview.mdx
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

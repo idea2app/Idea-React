@@ -5,6 +5,21 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import { Nav, NavItem, NavLink } from '../source/Nav';
 
+it('supports card header tabs and derives the current page from active links', () => {
+    render(
+        <Nav variant="tabs" cardHeader>
+            <NavLink href="/page" active>
+                Current
+            </NavLink>
+        </Nav>
+    );
+    const link = screen.getByRole('link', { name: 'Current' });
+
+    assert.equal(link.className, 'nav-link active');
+    assert.equal(link.getAttribute('aria-current'), 'page');
+    assert.equal(link.parentElement?.className, 'nav nav-tabs card-header-tabs');
+});
+
 it('uses Bootstrap 6 nav variant, orientation, and fill classes', () => {
     const { rerender } = render(
         <Nav aria-label="Sections" variant="pills" className="custom" vertical fill justified />

@@ -1,0 +1,103 @@
+import {
+    Stepper,
+    StepperButton,
+    StepperItem,
+    StepperLink,
+    StepperNav,
+    StepperOverflow
+} from '../../../../source/Stepper';
+import { Badge } from '../../../../source/Badge';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="stepper">
+
+# Stepper
+
+Use an ordered list for a timeline or wizard. `active` styles completed or current items; distinguish
+the current step with `aria-current="step"` and provide text status rather than relying on color.
+
+## Vertical and rich content
+
+<CodeExample>
+    <Stepper>
+        <StepperItem theme="success" active>
+            <div>
+                <strong>Create account</strong>
+                <p className="mb-0">Your account is ready.</p>
+                <Badge theme="success">Complete</Badge>
+            </div>
+        </StepperItem>
+        <StepperItem theme="primary" aria-current="step" active>
+            <div>
+                <strong>Confirm email</strong>
+                <p className="mb-0">Check your inbox.</p>
+                <Badge variant="subtle" theme="primary">
+                    In progress
+                </Badge>
+            </div>
+        </StepperItem>
+        <StepperItem>Update profile</StepperItem>
+        <StepperItem>Finish</StepperItem>
+    </Stepper>
+</CodeExample>
+
+## Responsive and overflowing
+
+`horizontal` switches orientation immediately. A breakpoint such as `horizontal="sm"` switches based
+on the nearest inline-size container, so add `contains-inline` to a parent. `StepperOverflow` supplies
+that container and scrolling for long horizontal sequences.
+
+<CodeExample>
+    <div className="contains-inline">
+        <Stepper horizontal="sm" className="w-100">
+            <StepperItem active>Create account</StepperItem>
+            <StepperItem active>Confirm email</StepperItem>
+            <StepperItem>Update profile</StepperItem>
+            <StepperItem>Finish</StepperItem>
+        </Stepper>
+    </div>
+    <StepperOverflow className="mt-4">
+        <Stepper horizontal>
+            <StepperItem active>Create account</StepperItem>
+            <StepperItem active>Verify email address</StepperItem>
+            <StepperItem>Complete profile setup</StepperItem>
+            <StepperItem>Add payment method</StepperItem>
+            <StepperItem>Review and confirm</StepperItem>
+            <StepperItem>Finish onboarding</StepperItem>
+        </Stepper>
+    </StepperOverflow>
+</CodeExample>
+
+## Alignment, spacing, and links
+
+Use text alignment utilities on the parent, `w-100` for equally stretched steps, and the
+`--bs-stepper-gap` CSS custom property for spacing. `StepperNav` and `StepperLink` provide
+navigation-based steps without invalid list markup. Use `StepperButton` for actions that change a
+section in the same page; it supports native button attributes such as `disabled`.
+
+<CodeExample>
+    <div className="text-center">
+        <StepperNav aria-label="Checkout" horizontal>
+            <StepperLink href="?step=cart" theme="success" active>
+                Cart
+            </StepperLink>
+            <StepperLink href="?step=address" aria-current="step" active>
+                Address
+            </StepperLink>
+            <StepperLink href="?step=payment">Payment</StepperLink>
+        </StepperNav>
+    </div>
+    <StepperNav aria-label="Setup actions" className="mt-4" horizontal>
+        <StepperButton aria-current="step" active>
+            Current section
+        </StepperButton>
+        <StepperButton disabled>Unavailable section</StepperButton>
+    </StepperNav>
+</CodeExample>
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Stepper][1], copyright The Bootstrap Authors, MIT license.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/stepper.mdx

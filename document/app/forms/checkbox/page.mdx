@@ -1,4 +1,10 @@
-import { Checkbox, FormCheck, FormField, FormLabel } from '../../../../source/Form';
+import {
+    Checkbox,
+    FormField,
+    FormFieldContent,
+    FormLabel,
+    FormText
+} from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -6,73 +12,36 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # Checkbox
 
-Use `Checkbox` for a native checkbox input with Bootstrap's `.check` class. `FormCheck` can also
-render a checkbox when its `type` is omitted.
+`Checkbox` is a native checkbox with theme, size and indeterminate support.
 
-## Basic checkbox
-
-<CodeExample>
-    <FormField>
-        <Checkbox id="checkBasic" name="checkBasic" aria-label="Basic checkbox" />
-    </FormField>
-</CodeExample>
-
-## Indeterminate
-
-Set `indeterminate` to apply the native DOM property and expose the mixed state accessibly.
-
-<CodeExample>
-    <Checkbox aria-label="Select all" indeterminate />
-</CodeExample>
-
-## With form field
+## Quick start
 
 <CodeExample>
     <FormField>
-        <Checkbox id="checkTerms" name="terms" />
-        <FormLabel htmlFor="checkTerms">Accept the terms and conditions</FormLabel>
+        <Checkbox id="checkSubscribe" name="subscribe" defaultChecked theme="primary" />
+        <FormFieldContent>
+            <FormLabel plain htmlFor="checkSubscribe">
+                Subscribe to updates
+            </FormLabel>
+            <FormText>Receive our weekly digest.</FormText>
+        </FormFieldContent>
     </FormField>
-</CodeExample>
-
-## Description
-
-<CodeExample>
-    <FormField>
-        <FormLabel htmlFor="checkUpdates">Email updates</FormLabel>
-        <Checkbox id="checkUpdates" aria-describedby="checkDescription" />
-        <span id="checkDescription">Receive occasional product news.</span>
-    </FormField>
-</CodeExample>
-
-## Theme colors
-
-Pass a theme name to `theme`.
-
-<CodeExample>
-    <FormField>
-        <Checkbox id="checkPrimary" theme="primary" />
-        <FormLabel htmlFor="checkPrimary">Primary themed checkbox</FormLabel>
-    </FormField>
-</CodeExample>
-
-## Disabled
-
-<CodeExample>
-    <FormField>
-        <Checkbox id="checkDisabled" disabled />
-        <FormLabel htmlFor="checkDisabled">Disabled checkbox</FormLabel>
-    </FormField>
-</CodeExample>
-
-## Sizes
-
-Pass `size="sm"` or `"lg"` to select the corresponding check size class.
-
-<CodeExample>
-    <>
-        <Checkbox aria-label="Small checkbox" size="sm" />
+    <div className="d-flex gap-3 mt-3">
+        <Checkbox aria-label="Mixed selection" indeterminate />
+        <Checkbox aria-label="Small checkbox" size="sm" defaultChecked theme="success" />
         <Checkbox aria-label="Large checkbox" size="lg" />
-    </>
+        <Checkbox aria-label="Disabled checkbox" disabled defaultChecked />
+    </div>
 </CodeExample>
+
+Use `checked` with `onChange` for controlled state, or `defaultChecked` for native state.
+`indeterminate` updates the native property and announces mixed state. All button theme names
+are accepted. Native `required` and `disabled` work normally; `validation` selects valid or
+invalid feedback styling. `FormCheck` also supports these props.
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Checkbox][1], © Bootstrap Authors, [MIT licensed][2].
 
 </DocumentationLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/checkbox.mdx
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

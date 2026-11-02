@@ -12,19 +12,15 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    NativeDialog
+    NativeDialog,
+    NativeDialogProps
 } from '../../../../source/NativeDialog';
 import { OverlayBox } from '../../../../source/OverlayBox';
 import { Toast } from '../../../../source/Toast';
 
-export interface DialogDemoProps {
+export interface DialogDemoProps extends Omit<NativeDialogProps, 'title'> {
     label: ReactNode;
     title: ReactNode;
-    children?: ReactNode;
-    className?: string;
-    backdrop?: boolean | 'static';
-    keyboard?: boolean;
-    modal?: boolean;
     dark?: boolean;
     saveLabel?: ReactNode;
     hideFooter?: boolean;
@@ -49,7 +45,8 @@ export class DialogDemo extends Component<DialogDemoProps> {
             modal,
             dark,
             saveLabel,
-            hideFooter
+            hideFooter,
+            ...props
         } = this.props;
         const { open } = this;
 
@@ -59,6 +56,7 @@ export class DialogDemo extends Component<DialogDemoProps> {
                     {label}
                 </Button>
                 <NativeDialog
+                    {...props}
                     open={open}
                     aria-label={typeof title === 'string' ? title : undefined}
                     className={className}

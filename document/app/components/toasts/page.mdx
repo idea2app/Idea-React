@@ -35,10 +35,10 @@ Things to know when using toasts:
 <CodeBlock language="tsx">{`const notifications = new Toast();
 
 notifications.open({
-    title: 'Saved',
-    body: 'Your changes are saved.',
-    theme: 'success',
-    delay: 5000
+title: 'Saved',
+body: 'Your changes are saved.',
+theme: 'success',
+delay: 5000
 });
 
 <notifications.Component position="bottom-end" />;`}</CodeBlock>
@@ -215,10 +215,10 @@ an observable collection of messages:
 <CodeBlock language="tsx">{`const notifications = new Toast();
 
 const closed = notifications.open({
-    title: 'Saved',
-    body: 'Your changes are saved.',
-    theme: 'success',
-    delay: 5000
+title: 'Saved',
+body: 'Your changes are saved.',
+theme: 'success',
+delay: 5000
 });
 
 render(<notifications.Component position="bottom-end" />);
@@ -227,12 +227,16 @@ await closed; // resolves when the toast is dismissed or its timer expires`}</Co
 
 ### Message options
 
-| Field   | Type             | Default | Description                                                 |
-| ------- | ---------------- | ------- | ----------------------------------------------------------- |
-| `title` | `ReactNode`      | —       | Header content. Without a title, the header is hidden.      |
-| `body`  | `ReactNode`      | —       | Required toast body.                                        |
-| `theme` | `ComponentTheme` | —       | Applies a `theme-*` class to the toast.                     |
-| `delay` | `number`         | `3000`  | Milliseconds before hiding. Use `0` to keep the toast open. |
+| Field         | Type             | Default   | Description                                                                          |
+| ------------- | ---------------- | --------- | ------------------------------------------------------------------------------------ |
+| `title`       | `ReactNode`      | —         | Header content. Without a title, the header is hidden.                               |
+| `body`        | `ReactNode`      | —         | Required toast body.                                                                 |
+| `theme`       | `ComponentTheme` | —         | Applies a `theme-*` class to the toast.                                              |
+| `delay`       | `number`         | `3000`    | Milliseconds before hiding. Use `0` to keep the toast open.                          |
+| `id`          | `string`         | generated | Stable message identifier. Reusing an id replaces and resolves the previous message. |
+| `translucent` | `boolean`        | `false`   | Blurs and saturates the backdrop.                                                    |
+| `instant`     | `boolean`        | `false`   | Disables toast animation.                                                            |
+| `role`        | `AriaRole`       | `status`  | Use `alert` for urgent messages; prefer `status` for routine notifications.          |
 
 ### Methods
 
@@ -257,7 +261,9 @@ The plugin's `show.bs.toast`, `shown.bs.toast`, `hide.bs.toast`, and `hidden.bs.
 replaced by the promise returned from `open()`. The resolved entry includes `openedAt` and
 `closedAt` timestamps.
 
+Adapted from [Bootstrap v6.0.0-alpha.1][2], © the Bootstrap authors (MIT license).
+
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Toast.tsx
-[2]: https://getbootstrap.com/docs/6.0/components/toasts/
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/toasts.mdx

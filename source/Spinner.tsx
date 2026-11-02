@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { ComponentPropsWithRef, FC } from 'react';
 
 import type { ComponentTheme } from './Button';
+import { Icon, IconProps } from './Icon';
 
 export type SpinnerAnimation = 'border' | 'grow';
 
@@ -16,10 +17,12 @@ export const Spinner: FC<SpinnerProps> = ({
     size,
     theme,
     className,
+    role = 'status',
     ...props
 }) => (
     <span
         {...props}
+        role={role}
         className={classNames(
             `spinner-${animation}`,
             size && `spinner-${size}`,
@@ -28,3 +31,9 @@ export const Spinner: FC<SpinnerProps> = ({
         )}
     />
 );
+
+export const SpinnerIcon: FC<IconProps> = ({ className, ...props }) => (
+    <Icon {...props} className={classNames('spinner-rotate', className)} />
+);
+
+SpinnerIcon.displayName = 'SpinnerIcon';

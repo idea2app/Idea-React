@@ -1,5 +1,7 @@
 import {
+    DatePicker,
     FormControl,
+    FormFeedback,
     FormFloatingLabel,
     FormLabel,
     FormSelect,
@@ -14,108 +16,53 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # Floating labels
 
-`FormFloatingLabel` provides the Bootstrap floating label container. The label follows the control
-in the DOM, and text inputs need a non-empty placeholder.
+Place the control before its label inside `FormFloatingLabel`. Text inputs and textareas need a
+nonempty `placeholder` so their empty state can be detected.
 
-## Example
+## Quick start
 
 <CodeExample>
     <FormFloatingLabel>
         <FormControl id="floatingEmail" type="email" placeholder="name@example.com" />
         <FormLabel htmlFor="floatingEmail">Email address</FormLabel>
     </FormFloatingLabel>
-</CodeExample>
-
-## Textareas
-
-<CodeExample>
-    <FormFloatingLabel>
+    <FormFloatingLabel className="mt-3">
         <FormTextArea id="floatingMessage" placeholder="Message" rows={3} />
         <FormLabel htmlFor="floatingMessage">Message</FormLabel>
     </FormFloatingLabel>
-</CodeExample>
-
-## Selects
-
-<CodeExample>
-    <FormFloatingLabel>
-        <FormSelect id="floatingSelect" defaultValue="">
-            <option value="" disabled>
-                Choose one…
-            </option>
-            <option value="one">One</option>
-            <option value="two">Two</option>
+    <FormFloatingLabel className="mt-3">
+        <FormSelect id="floatingCountry" defaultValue="ca">
+            <option value="ca">Canada</option>
         </FormSelect>
-        <FormLabel htmlFor="floatingSelect">Choose an option</FormLabel>
+        <FormLabel htmlFor="floatingCountry">Country</FormLabel>
     </FormFloatingLabel>
-</CodeExample>
-
-Multiple and sized selects are not supported by Bootstrap's floating-label styles.
-
-## Date and time
-
-Date/time controls float automatically without a placeholder.
-
-<CodeExample>
-    <FormFloatingLabel>
-        <FormControl id="floatingDate" type="date" />
+    <FormFloatingLabel always className="mt-3">
+        <DatePicker id="floatingDate" />
         <FormLabel htmlFor="floatingDate">Date</FormLabel>
     </FormFloatingLabel>
-</CodeExample>
-
-## Disabled
-
-Native `disabled` and `readOnly` attributes continue to work.
-
-<CodeExample>
-    <FormFloatingLabel>
-        <FormControl id="floatingDisabled" placeholder="Disabled" disabled />
-        <FormLabel htmlFor="floatingDisabled">Disabled input</FormLabel>
-    </FormFloatingLabel>
-</CodeExample>
-
-## Readonly plaintext
-
-Use `plaintext` with `readOnly` to preserve the floating label while removing the input decoration.
-
-<CodeExample>
-    <FormFloatingLabel>
-        <FormControl
-            id="floatingPlaintext"
-            placeholder="Readonly value"
-            plaintext
-            readOnly
-            value="Value"
-        />
-        <FormLabel htmlFor="floatingPlaintext">Readonly value</FormLabel>
-    </FormFloatingLabel>
-</CodeExample>
-
-## Input groups
-
-<CodeExample>
-    <InputGroup>
+    <InputGroup className="mt-3">
         <InputGroupText>@</InputGroupText>
         <FormFloatingLabel>
-            <FormControl id="floatingUsername" placeholder="Username" />
+            <FormControl
+                id="floatingUsername"
+                placeholder="Username"
+                validation="invalid"
+                aria-describedby="floatingError"
+            />
             <FormLabel htmlFor="floatingUsername">Username</FormLabel>
         </FormFloatingLabel>
+        <FormFeedback id="floatingError">Choose a username.</FormFeedback>
     </InputGroup>
 </CodeExample>
 
-## Layout
+`always` keeps labels floating, useful for date/time and externally populated controls.
+Native `disabled`, `readOnly` and `FormControl plaintext` remain supported. Use ordinary grid
+utilities around the floating wrappers for responsive layouts, and `FormFeedback` for validation.
+Avoid multiple-select and size-expanded select fields inside floating labels.
 
-Floating labels work with responsive grid utilities and form layout components.
-
-## Always floating
-
-Pass `always` to keep the floating label raised and placeholder visible.
-
-<CodeExample>
-    <FormFloatingLabel always>
-        <FormControl id="floatingAlways" placeholder="Visible placeholder" />
-        <FormLabel htmlFor="floatingAlways">Always floating</FormLabel>
-    </FormFloatingLabel>
-</CodeExample>
+Adapted from [Bootstrap v6.0.0-alpha.1 Floating labels][1], © Bootstrap Authors, [MIT licensed][2].
 
 </DocumentationLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/floating-labels.mdx
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

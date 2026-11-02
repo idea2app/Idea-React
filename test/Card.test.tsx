@@ -9,10 +9,39 @@ import {
     CardFooter,
     CardGroup,
     CardHeader,
+    CardImage,
     CardImageOverlay,
+    CardSubtitle,
     CardText,
     CardTitle
 } from '../source/Card';
+
+it('renders horizontal, subtle and translucent card variants', () => {
+    const { container } = render(
+        <Card theme="accent" row body subtle translucent>
+            <CardSubtitle>Subtitle</CardSubtitle>
+        </Card>
+    );
+
+    assert.equal(
+        container.firstElementChild?.className,
+        'card card-row card-body card-subtle card-translucent theme-accent'
+    );
+    assert.equal(screen.getByText('Subtitle').className, 'card-subtitle');
+});
+
+it('renders every image cap placement and forwards image attributes', () => {
+    const { container, rerender } = render(<CardImage src="/image.jpg" alt="Card" />);
+
+    assert.equal(container.querySelector('img')?.className, 'card-img');
+    assert.equal(screen.getByAltText('Card').getAttribute('src'), '/image.jpg');
+
+    for (const placement of ['top', 'bottom', 'start', 'end'] as const) {
+        rerender(<CardImage placement={placement} alt="Card" />);
+
+        assert.equal(screen.getByAltText('Card').className, `card-img-${placement}`);
+    }
+});
 
 it('renders official Bootstrap 6 card parts', () => {
     render(

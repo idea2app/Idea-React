@@ -8,12 +8,194 @@ import {
     MenuDivider,
     MenuHeader,
     MenuItem,
+    MenuItemCheck,
     MenuItemContent,
     MenuItemDescription,
+    MenuItemIcon,
     MenuPanel,
     MenuSubmenu,
     MenuText
 } from '../source/Menu';
+
+it('leaves Enter and Space activation to the native button without double toggling', () => {
+    const onOpenChange = mock.fn();
+    render(
+        <Menu
+            label="Keyboard activation"
+            toggleProps={{ variant: 'link' }}
+            onOpenChange={onOpenChange}
+        >
+            <MenuItem>Item</MenuItem>
+        </Menu>
+    );
+    const trigger = screen.getByRole('button', { name: 'Keyboard activation' });
+
+    assert.equal(fireEvent.keyDown(trigger, { key: 'Enter' }), true);
+    assert.equal(trigger.getAttribute('aria-expanded'), 'false');
+
+    fireEvent.click(trigger, { detail: 0 });
+    fireEvent.keyUp(trigger, { key: 'Enter' });
+
+    assert.equal(trigger.getAttribute('aria-expanded'), 'true');
+
+    fireEvent.keyDown(trigger, { key: ' ' });
+    fireEvent.keyUp(trigger, { key: ' ' });
+    fireEvent.click(trigger, { detail: 0 });
+
+    assert.equal(trigger.getAttribute('aria-expanded'), 'false');
+    assert.deepEqual(
+        onOpenChange.mock.calls.map(({ arguments: [open] }) => open),
+        [true, false]
+    );
+});
+
+it('flips and shifts menus at viewport edges and releases geometry observers', t => {
+    const makeRect = (left: number, top: number, width: number, height: number) => ({
+        left,
+        top,
+        width,
+        height,
+        right: left + width,
+        bottom: top + height,
+        x: left,
+        y: top,
+        toJSON: () => ({})
+    });
+
+    it('flips nested submenus away from the right viewport edge', t => {
+        const makeRect = (left: number, top: number, width: number, height: number) => ({
+            left,
+            top,
+            width,
+            height,
+            right: left + width,
+            bottom: top + height,
+            x: left,
+            y: top,
+            toJSON: () => ({})
+        });
+        t.mock.getter(window, 'innerWidth', () => 400);
+        t.mock.method(HTMLElement.prototype, 'getBoundingClientRect', function (this: HTMLElement) {
+            return this.classList.contains('menu')
+                ? makeRect(0, 0, 100, 80)
+                : makeRect(350, 100, 30, 20);
+        });
+        const { container } = render(
+            <Menu label="Parent">
+                <MenuSubmenu label="Nested">
+                    <MenuItem>Nested action</MenuItem>
+                </MenuSubmenu>
+            </Menu>
+        );
+        fireEvent.click(screen.getByRole('button', { name: 'Parent' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Nested' }));
+        const submenu = container.querySelector<HTMLElement>('.submenu > .menu')!;
+
+        assert.equal(submenu.dataset.bsPlacement, 'left-start');
+        assert.equal(submenu.style.left, '248px');
+    });
+    t.mock.getter(window, 'innerWidth', () => 400);
+    t.mock.getter(window, 'innerHeight', () => 300);
+    t.mock.method(HTMLElement.prototype, 'getBoundingClientRect', function (this: HTMLElement) {
+        return this.classList.contains('menu')
+            ? makeRect(0, 0, 120, 80)
+            : makeRect(370, 270, 20, 20);
+    });
+    const disconnect = t.mock.method(window.ResizeObserver.prototype, 'disconnect');
+    const remove = t.mock.method(window, 'removeEventListener');
+    const { container, unmount } = render(
+        <Menu label="Collision" placement="bottom-start" offset={[5, 10]}>
+            <MenuItem>Item</MenuItem>
+        </Menu>
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Collision' }));
+    const panel = container.querySelector<HTMLElement>('.menu')!;
+
+    assert.equal(panel.dataset.bsPlacement, 'top-start');
+    assert.equal(panel.style.left, '272px');
+    assert.equal(panel.style.top, '180px');
+
+    unmount();
+
+    assert.equal(disconnect.mock.callCount(), 1);
+    assert.ok(remove.mock.calls.some(({ arguments: [name] }) => name === 'resize'));
+});
+
+it('supports placement, responsive placement, split toggles and translucent scrolling panels', t => {
+    let matches = false;
+    let listener: (() => unknown) | undefined;
+    const remove = mock.fn();
+    t.mock.method(window, 'matchMedia', () => ({
+        get matches() {
+            return matches;
+        },
+        addEventListener: (_type: string, callback: () => unknown) => {
+            listener = callback;
+        },
+        removeEventListener: remove
+    }));
+    const { container, unmount } = render(
+        <Menu
+            label="Options"
+            placement="top-start"
+            flip={false}
+            responsivePlacement={{ lg: 'right-end' }}
+            theme="dark"
+            split
+            translucent
+            scrollable
+        >
+            <MenuItem active selected>
+                <MenuItemIcon name="copy" />
+                Copy
+                <MenuItemCheck />
+            </MenuItem>
+        </Menu>
+    );
+    const toggle = screen.getByRole('button', { name: 'Options' });
+
+    assert.ok(toggle.classList.contains('menu-toggle-split'));
+    assert.equal(container.firstElementChild?.getAttribute('data-bs-theme'), 'dark');
+
+    fireEvent.click(toggle);
+
+    const item = screen.getByRole('button', { name: 'Copy' });
+    const panel = container.querySelector('.menu')!;
+
+    assert.ok(item.classList.contains('active'));
+    assert.equal(item.getAttribute('aria-pressed'), 'true');
+    assert.ok(panel.classList.contains('bottom-100'));
+    assert.ok(panel.classList.contains('menu-translucent'));
+    assert.ok(panel.classList.contains('menu-scrollable'));
+    assert.ok(item.querySelector('.menu-item-icon'));
+    assert.ok(item.querySelector('.menu-item-check'));
+
+    matches = true;
+    act(() => listener?.());
+
+    assert.ok(panel.classList.contains('start-100'));
+    assert.ok(!panel.classList.contains('bottom-100'));
+    assert.equal(panel.getAttribute('data-bs-placement'), 'right-end');
+
+    unmount();
+
+    assert.equal(remove.mock.callCount(), 1);
+});
+
+it('does not intercept editing keys inside custom forms', () => {
+    render(
+        <Menu label="Options">
+            <input aria-label="Search" />
+        </Menu>
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Options' }));
+    const input = screen.getByRole('textbox', { name: 'Search' });
+    input.focus();
+
+    fireEvent.keyDown(input, { key: 'Home' });
+
+    assert.equal(document.activeElement, input);
+});
 
 const items = (
     <>

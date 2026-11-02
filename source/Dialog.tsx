@@ -1,5 +1,5 @@
 import { Defer } from 'iterable-observer';
-import { observable } from 'mobx';
+import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { FC } from 'react';
 
@@ -9,11 +9,11 @@ export class DialogClose extends Error {
     }
 }
 
-export interface DialogProps<T = any> {
+export interface DialogProps<T = unknown> {
     defer?: Defer<T>;
 }
 
-export class Dialog<I extends object = {}, O = any> {
+export class Dialog<I extends object = {}, O = unknown> {
     @observable
     accessor input = {} as I;
 
@@ -29,13 +29,18 @@ export class Dialog<I extends object = {}, O = any> {
         this.Component.displayName = 'DialogComponent';
     }
 
+    @action
     open(input?: I) {
         if (input) this.input = input;
 
-        this.defer = new Defer();
+        const defer = new Defer<O>();
+        this.defer = defer;
 
-        this.defer.promise.finally(() => (this.defer = undefined));
+        const clear = action(() => {
+            if (this.defer === defer) this.defer = undefined;
+        });
+        defer.promise.then(clear, clear);
 
-        return this.defer.promise;
+        return defer.promise;
     }
 }

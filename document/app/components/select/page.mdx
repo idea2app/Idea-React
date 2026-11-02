@@ -35,6 +35,12 @@ The toggle shows the selected option's content, or render a custom label with `v
 styling props such as `theme`, `variant`, `size`, and `disabled` pass through to the toggle, and
 `align` positions the menu.
 
+Set `placeholder` for an empty selection and `name` to submit the controlled value through a hidden
+native form field. Disabled selectors do not submit values, and disabled options cannot be selected.
+Selected options expose their selected state. For searchable, grouped or multiple choices, use
+the [Combobox][2] form component instead.
+
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Select.tsx
+[2]: ../../forms/combobox/

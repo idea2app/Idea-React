@@ -13,6 +13,8 @@ export interface PasswordStrengthProps extends ComponentPropsWithoutRef<'div'> {
     weights?: Record<string, number>;
     thresholds?: number[];
     scorer?: (password: string) => number;
+    strength?: PasswordStrengthLevel;
+    showText?: boolean;
 }
 
 interface PasswordStrengthComponentProps extends PasswordStrengthProps {
@@ -32,6 +34,7 @@ class PasswordStrengthComponent extends Component<PasswordStrengthComponentProps
     private instanceElement?: HTMLDivElement;
     private passwordInput?: HTMLInputElement;
     private mounted = false;
+    private revision = 0;
 
     componentDidMount() {
         this.mounted = true;
@@ -46,11 +49,13 @@ class PasswordStrengthComponent extends Component<PasswordStrengthComponentProps
             previousProps.weights !== this.props.weights ||
             previousProps.thresholds !== this.props.thresholds ||
             previousProps.scorer !== this.props.scorer ||
-            previousProps.variant !== this.props.variant
+            previousProps.variant !== this.props.variant ||
+            previousProps.strength !== this.props.strength ||
+            previousProps.showText !== this.props.showText
         ) {
             this.dispose();
             this.initialize();
-        }
+        } else if (this.props.strength === undefined) this.handleInput();
     }
 
     componentWillUnmount() {
@@ -59,8 +64,9 @@ class PasswordStrengthComponent extends Component<PasswordStrengthComponentProps
     }
 
     private initialize = async () => {
+        const revision = ++this.revision;
         const element = this.meter;
-        if (!element) return;
+        if (!element || this.props.strength !== undefined) return;
 
         const { default: Strength } = await import('bootstrap/js/src/strength.js');
         const { input, minLength, messages, weights, thresholds, scorer } = this.props;
@@ -74,7 +80,7 @@ class PasswordStrengthComponent extends Component<PasswordStrengthComponentProps
             ...(thresholds !== undefined && { thresholds }),
             ...(scorer !== undefined && { scorer })
         };
-        if (!this.mounted || this.meter !== element) return;
+        if (!this.mounted || this.meter !== element || revision !== this.revision) return;
 
         this.instanceElement = element;
         this.instance = Strength.getOrCreateInstance(element, config);
@@ -101,6 +107,7 @@ class PasswordStrengthComponent extends Component<PasswordStrengthComponentProps
     };
 
     private dispose = () => {
+        this.revision++;
         this.passwordInput?.removeEventListener('input', this.handleInput);
         this.passwordInput?.removeEventListener('change', this.handleInput);
         this.instance?.dispose();
@@ -128,24 +135,43 @@ class PasswordStrengthComponent extends Component<PasswordStrengthComponentProps
             scorer: _scorer,
             forwardedRef: _forwardedRef,
             variant = 'segments',
+            strength,
+            showText = true,
             ...props
         } = this.props;
         const isBar = variant === 'bar';
+        const levelIndex = strength ? levels.indexOf(strength) + 1 : 0;
 
         return (
-            <div
-                {...props}
-                ref={this.setMeterRef}
-                className={classNames(isBar ? 'strength-bar' : 'strength', className)}
-                role="meter"
-                aria-valuemin={0}
-                aria-valuemax={levels.length}
-                aria-valuenow={0}
-                aria-valuetext="Empty"
-            >
-                {!isBar && levels.map(level => <div key={level} className="strength-segment" />)}
-                {!isBar && <span className="strength-text" />}
-            </div>
+            <>
+                <div
+                    {...props}
+                    ref={this.setMeterRef}
+                    className={classNames(isBar ? 'strength-bar' : 'strength', className)}
+                    data-bs-strength={strength}
+                    role="meter"
+                    aria-valuemin={0}
+                    aria-valuemax={levels.length}
+                    aria-valuenow={levelIndex}
+                    aria-valuetext={strength || 'Empty'}
+                >
+                    {!isBar &&
+                        levels.map((level, index) => (
+                            <div
+                                key={level}
+                                className={classNames(
+                                    'strength-segment',
+                                    index < levelIndex && 'active'
+                                )}
+                            />
+                        ))}
+                </div>
+                {showText && (
+                    <span className="strength-text" data-bs-strength={strength}>
+                        {strength && (this.props.messages?.[strength] ?? strength)}
+                    </span>
+                )}
+            </>
         );
     }
 }

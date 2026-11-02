@@ -1,82 +1,59 @@
-import { Form, FormControl, FormField, FormLabel } from '../../../../source/Form';
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormGroup,
+    FormLabel,
+    FormSelect
+} from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
-import { Col, Row } from '../../../../source/Grid';
 
 <DocumentationLayout active="layout">
 
 # Form layout
 
-Use Bootstrap's grid and spacing utilities to lay out controls. `FormField` composes with `Row` and
-`Col`; all control wrappers retain their native form behavior.
+Use `FormField` for individual controls and `FormGroup` for related choices. Bootstrap's spacing,
+grid, gutter and flex utilities arrange wrappers without additional layout components.
 
-## Forms
+## Quick start
 
 <CodeExample>
-    <Form>
-        <Row className="g-3">
-            <Col md={6}>
-                <FormField>
-                    <FormLabel htmlFor="layoutFirst">First name</FormLabel>
-                    <FormControl id="layoutFirst" name="firstName" />
-                </FormField>
-            </Col>
-            <Col md={6}>
-                <FormField>
-                    <FormLabel htmlFor="layoutLast">Last name</FormLabel>
-                    <FormControl id="layoutLast" name="lastName" />
-                </FormField>
-            </Col>
-        </Row>
+    <Form aria-label="Address">
+        <div className="row g-3">
+            <FormField className="md:col-6">
+                <FormLabel htmlFor="layoutCity">City</FormLabel>
+                <FormControl id="layoutCity" name="city" />
+            </FormField>
+            <FormField className="md:col-6">
+                <FormLabel htmlFor="layoutCountry">Country</FormLabel>
+                <FormSelect id="layoutCountry" name="country" defaultValue="ca">
+                    <option value="ca">Canada</option>
+                    <option value="us">United States</option>
+                </FormSelect>
+            </FormField>
+        </div>
+        <FormGroup className="mt-3">
+            <div className="row g-3 align-items-center">
+                <FormLabel column controlSize="sm" htmlFor="layoutEmail" className="sm:col-2">
+                    Email
+                </FormLabel>
+                <div className="sm:col-10">
+                    <FormControl id="layoutEmail" type="email" controlSize="sm" />
+                </div>
+            </div>
+        </FormGroup>
     </Form>
 </CodeExample>
 
-## Utilities
+For horizontal forms, `FormLabel column` aligns labels with controls; combine its `controlSize`
+with matching input sizing. Use column utilities to set widths, gutter utilities to control
+spacing, and auto columns or flex wrapping for compact inline forms. Fieldsets and legends
+provide native grouping when the content forms a single accessible choice.
 
-Use spacing utilities such as `mb-3`, `g-3`, and responsive grid classes to control form layouts.
-
-## Form grid
-
-`Row` and `Col` expose the standard grid. Use responsive `Col` props to adjust layout at
-breakpoints.
-
-## Gutters
-
-Use the grid's `g-*` utilities to set horizontal and vertical gutters.
-
-## Horizontal form
-
-Use grid columns to align labels and controls horizontally.
-
-<CodeExample>
-    <Form>
-        <Row className="mb-3">
-            <Col md={3}>
-                <FormLabel htmlFor="layoutHorizontal">Email</FormLabel>
-            </Col>
-            <Col md={9}>
-                <FormControl id="layoutHorizontal" type="email" />
-            </Col>
-        </Row>
-    </Form>
-</CodeExample>
-
-### Horizontal form label sizing
-
-Set the label column width with the relevant responsive `Col` props.
-
-## Column sizing
-
-Set column widths through the `Col` breakpoint props.
-
-## Auto-sizing
-
-Combine `Row`, `Col`, and flex utilities for compact forms. Keep controls usable at narrow viewport
-widths.
-
-## Inline forms
-
-Use an auto-sized responsive row to align compact controls. Preserve labels or accessible names for
-every input.
+Adapted from [Bootstrap v6.0.0-alpha.1 Layout][1], © Bootstrap Authors, [MIT licensed][2].
 
 </DocumentationLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/layout.mdx
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

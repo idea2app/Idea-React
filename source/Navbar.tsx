@@ -6,13 +6,15 @@ import { Button } from './Button';
 export interface NavbarProps extends ComponentPropsWithRef<'nav'> {
     theme?: 'light' | 'dark';
     expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+    translucent?: boolean;
 }
 
-export const Navbar: FC<NavbarProps> = ({ expand, theme, className, ...props }) => (
+export const Navbar: FC<NavbarProps> = ({ expand, theme, translucent, className, ...props }) => (
     <nav
         {...props}
         className={classNames(
             'navbar',
+            translucent && 'navbar-translucent',
             expand && (expand === true ? 'navbar-expand' : `${expand}:navbar-expand`),
             className
         )}
@@ -34,8 +36,21 @@ export const NavbarBrand: FC<NavbarBrandProps> = props => {
     return <a {...anchorProps} className={classNames('navbar-brand', className)} />;
 };
 
-export const NavbarNav: FC<ComponentPropsWithRef<'ul'>> = ({ className, ...props }) => (
-    <ul {...props} className={classNames('navbar-nav', className)} />
+export interface NavbarNavProps extends ComponentPropsWithRef<'ul'> {
+    variant?: 'tabs' | 'pills' | 'underline';
+    nav?: boolean;
+}
+
+export const NavbarNav: FC<NavbarNavProps> = ({ variant, nav, className, ...props }) => (
+    <ul
+        {...props}
+        className={classNames(
+            'navbar-nav',
+            (nav || variant) && 'nav',
+            variant && `nav-${variant}`,
+            className
+        )}
+    />
 );
 
 export const NavbarText: FC<ComponentPropsWithRef<'span'>> = ({ className, ...props }) => (

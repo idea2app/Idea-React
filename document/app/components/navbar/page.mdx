@@ -31,9 +31,9 @@ Here's a navbar that includes most supported sub-components and a responsive rig
 responsive behavior.
 
 <NavbarDemo title="Menu" bodyClassName="mb-2 md:mb-0">
-    <NavbarNav className="nav me-auto">
+    <NavbarNav nav className="me-auto">
         <NavItem>
-            <NavLink href="#" className="active" aria-current="page">
+            <NavLink href="#" active>
                 Home
             </NavLink>
         </NavItem>
@@ -41,7 +41,7 @@ responsive behavior.
             <NavLink href="#">Link</NavLink>
         </NavItem>
         <NavItem>
-            <Menu label="Menu" toggleProps={{ className: 'nav-link' }}>
+            <Menu label="Menu" nav>
                 <MenuItem href="#">Action</MenuItem>
                 <MenuItem href="#">Another action</MenuItem>
                 <MenuDivider />
@@ -161,13 +161,13 @@ use of toggler classes for proper responsive styling. **Navigation in navbars wi
 occupy as much horizontal space as possible** to keep your navbar contents securely aligned.
 
 Add the `.active` class on `.nav-link` to indicate the current page. Please note that you should also
-add the `aria-current` attribute on the active `.nav-link`. The [`NavItem` and `NavLink`
-wrappers][4] keep these attributes and the disabled state consistent.
+add the `aria-current` attribute on the active `.nav-link`.
+The [`NavItem` and `NavLink` wrappers][4] keep these attributes and the disabled state consistent.
 
 <NavbarDemo expand="sm" brand="Navbar" title="Menu">
     <NavbarNav>
         <NavItem>
-            <NavLink href="#" className="active" aria-current="page">
+            <NavLink href="#" active>
                 Home
             </NavLink>
         </NavItem>
@@ -186,8 +186,8 @@ wrappers][4] keep these attributes and the disabled state consistent.
 And because we use classes for our navs, you can avoid the list-based approach entirely if you like.
 
 <NavbarDemo expand="sm" brand="Navbar" title="Menu">
-    <Nav variant="pills" className="navbar-nav">
-        <NavLink href="#" className="active" aria-current="page">
+    <Nav variant="pills" navbar>
+        <NavLink href="#" active>
             Home
         </NavLink>
         <NavLink href="#">Features</NavLink>
@@ -197,13 +197,13 @@ And because we use classes for our navs, you can avoid the list-based approach e
 </NavbarDemo>
 
 You can also use menus in your navbar. Menus require a wrapping element for positioning, so be sure
-to use separate and nested elements for `.nav-item` and `.nav-link` as shown below. The [`Menu`
-wrapper][5] manages open state and keyboard navigation for the trigger and panel.
+to use separate and nested elements for `.nav-item` and `.nav-link` as shown below.
+The [`Menu` wrapper][5] manages open state and keyboard navigation for the trigger and panel.
 
 <NavbarDemo expand="lg" brand="Navbar" title="Menu">
     <NavbarNav>
         <NavItem>
-            <NavLink href="#" className="active" aria-current="page">
+            <NavLink href="#" active>
                 Home
             </NavLink>
         </NavItem>
@@ -214,7 +214,7 @@ wrapper][5] manages open state and keyboard navigation for the trigger and panel
             <NavLink href="#">Pricing</NavLink>
         </NavItem>
         <NavItem>
-            <Menu label="Menu link" toggleProps={{ className: 'nav-link' }}>
+            <Menu label="Menu link" nav>
                 <MenuItem href="#">Action</MenuItem>
                 <MenuItem href="#">Another action</MenuItem>
                 <MenuItem href="#">Something else here</MenuItem>
@@ -300,7 +300,7 @@ Mix and match with other components and utilities as needed.
 <NavbarDemo expand="md" brand="Navbar w/ text" title="Menu">
     <NavbarNav className="me-auto mb-2 md:mb-0">
         <NavItem>
-            <NavLink href="#" className="active" aria-current="page">
+            <NavLink href="#" active>
                 Home
             </NavLink>
         </NavItem>
@@ -320,9 +320,9 @@ To make a navbar dark, add `data-bs-theme="dark"` to the `.navbar` element. The 
 that attribute for you.
 
 <NavbarDemo theme="dark" title="Menu" bodyClassName="mb-2 md:mb-0">
-    <NavbarNav className="nav me-auto">
+    <NavbarNav nav className="me-auto">
         <NavItem>
-            <NavLink href="#" className="active" aria-current="page">
+            <NavLink href="#" active>
                 Home
             </NavLink>
         </NavItem>
@@ -330,7 +330,7 @@ that attribute for you.
             <NavLink href="#">Link</NavLink>
         </NavItem>
         <NavItem>
-            <Menu label="Menu" toggleProps={{ className: 'nav-link' }}>
+            <Menu label="Menu" nav>
                 <MenuItem href="#">Action</MenuItem>
                 <MenuItem href="#">Another action</MenuItem>
                 <MenuDivider />
@@ -354,12 +354,12 @@ that attribute for you.
 Add `.navbar-translucent` to blur and saturate the background of a navbar. This works well for
 navbars positioned over content, such as fixed or sticky navbars.
 
-<Navbar expand="md" theme="dark" className="navbar-translucent">
+<Navbar expand="md" theme="dark" translucent>
     <Container fluid>
         <NavbarBrand href="#">Navbar</NavbarBrand>
         <NavbarNav>
             <NavItem>
-                <NavLink href="#" className="active" aria-current="page">
+                <NavLink href="#" active>
                     Home
                 </NavLink>
             </NavItem>
@@ -384,7 +384,7 @@ default is the "light navbar" for use with light background colors, but you can 
     <NavbarDemo expand="md" className="bg-1" bodyClassName="mb-2 md:mb-0">
         <NavbarNav className="me-auto mb-2 md:mb-0">
             <NavItem>
-                <NavLink href="#" className="active" aria-current="page">
+                <NavLink href="#" active>
                     Home
                 </NavLink>
             </NavItem>
@@ -414,7 +414,7 @@ default is the "light navbar" for use with light background colors, but you can 
     <NavbarDemo expand="md" theme="dark" className="bg-primary" bodyClassName="mb-2 md:mb-0">
         <NavbarNav className="me-auto mb-2 md:mb-0">
             <NavItem>
-                <NavLink href="#" className="active" aria-current="page">
+                <NavLink href="#" active>
                     Home
                 </NavLink>
             </NavItem>
@@ -445,7 +445,7 @@ default is the "light navbar" for use with light background colors, but you can 
     <NavbarDemo expand="md" theme="light" className="bg-1" bodyClassName="mb-2 md:mb-0">
         <NavbarNav className="me-auto mb-2 md:mb-0">
             <NavItem>
-                <NavLink href="#" className="active" aria-current="page">
+                <NavLink href="#" active>
                     Home
                 </NavLink>
             </NavItem>
@@ -555,7 +555,7 @@ in from different directions.
 <NavbarDemo expand={false} brand="Left Drawer" placement="start" title="Menu">
     <NavbarNav className="me-auto mb-2 md:mb-0">
         <NavItem>
-            <NavLink href="#" className="active" aria-current="page">
+            <NavLink href="#" active>
                 Home
             </NavLink>
         </NavItem>
@@ -571,7 +571,7 @@ in from different directions.
 <NavbarDemo expand={false} brand="Top Drawer" placement="top" title="Menu">
     <NavbarNav className="me-auto mb-2 md:mb-0">
         <NavItem>
-            <NavLink href="#" className="active" aria-current="page">
+            <NavLink href="#" active>
                 Home
             </NavLink>
         </NavItem>
@@ -599,7 +599,7 @@ With no `.navbar-brand` shown (hidden inside the drawer):
     <NavbarBrand href="#">Hidden brand</NavbarBrand>
     <NavbarNav className="me-auto mb-2 md:mb-0">
         <NavItem>
-            <NavLink href="#" className="active" aria-current="page">
+            <NavLink href="#" active>
                 Home
             </NavLink>
         </NavItem>
@@ -623,7 +623,7 @@ With a brand name shown on the left and toggler on the right:
 <NavbarDemo expand={false} brand="Navbar" bodyClassName="mb-2">
     <NavbarNav className="me-auto mb-2">
         <NavItem>
-            <NavLink href="#" className="active" aria-current="page">
+            <NavLink href="#" active>
                 Home
             </NavLink>
         </NavItem>
@@ -647,7 +647,7 @@ With a toggler on the left and brand name on the right:
 <NavbarDemo expand={false} togglerFirst brand="Navbar" bodyClassName="mb-2">
     <NavbarNav className="me-auto mb-2">
         <NavItem>
-            <NavLink href="#" className="active" aria-current="page">
+            <NavLink href="#" active>
                 Home
             </NavLink>
         </NavItem>
@@ -714,10 +714,12 @@ manage open state themselves and expose the same markup as props:
 for these examples. In your own application, keep the open state in your component or model and
 pass it to `Drawer` and `NavbarToggler`.
 
+Adapted from [Bootstrap v6.0.0-alpha.1][2], © the Bootstrap authors (MIT license).
+
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Navbar.tsx
-[2]: https://getbootstrap.com/docs/6.0/components/navbar/
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/navbar.mdx
 [3]: https://github.com/idea2app/Idea-React/blob/main/source/Drawer.tsx
 [4]: https://github.com/idea2app/Idea-React/blob/main/source/Nav.tsx
 [5]: https://github.com/idea2app/Idea-React/blob/main/source/Menu.tsx

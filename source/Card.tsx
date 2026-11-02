@@ -1,8 +1,54 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef, FC } from 'react';
 
-export const Card: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
-    <div {...props} className={classNames('card', className)} />
+import { ComponentTheme } from './Button';
+
+export interface CardProps extends ComponentPropsWithRef<'div'> {
+    row?: boolean;
+    body?: boolean;
+    theme?: ComponentTheme;
+    subtle?: boolean;
+    translucent?: boolean;
+}
+
+export const Card: FC<CardProps> = ({
+    row,
+    body,
+    theme,
+    subtle,
+    translucent,
+    className,
+    ...props
+}) => (
+    <div
+        {...props}
+        className={classNames(
+            'card',
+            {
+                'card-row': row,
+                'card-body': body,
+                'card-subtle': subtle,
+                'card-translucent': translucent
+            },
+            theme && `theme-${theme}`,
+            className
+        )}
+    />
+);
+
+export interface CardImageProps extends ComponentPropsWithRef<'img'> {
+    placement?: 'top' | 'bottom' | 'start' | 'end';
+}
+
+export const CardImage: FC<CardImageProps> = ({ placement, className, ...props }) => (
+    <img
+        {...props}
+        className={classNames(placement ? `card-img-${placement}` : 'card-img', className)}
+    />
+);
+
+export const CardSubtitle: FC<ComponentPropsWithRef<'p'>> = ({ className, ...props }) => (
+    <p {...props} className={classNames('card-subtitle', className)} />
 );
 
 export const CardGroup: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (

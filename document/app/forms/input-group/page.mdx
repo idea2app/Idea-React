@@ -1,14 +1,17 @@
-import { Button } from '../../../../source/Button';
 import {
-    FormCheck,
+    Checkbox,
     FormControl,
     FormField,
     FormLabel,
     FormSelect,
     FormTextArea,
     InputGroup,
+    InputGroupButton,
+    InputGroupIgnore,
+    InputGroupMenu,
     InputGroupText
 } from '../../../../source/Form';
+import { MenuItem } from '../../../../source/Menu';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -16,128 +19,67 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # Input group
 
-Use `InputGroup` to attach text, buttons, and other controls to a form input. Keep the accessible
-label in a surrounding `FormField` or give the control an accessible name.
+Combine controls with text or button addons. Put labels outside the group; size the group, not
+its individual controls.
 
-## Examples
-
-<CodeExample>
-    <InputGroup>
-        <InputGroupText>@</InputGroupText>
-        <FormControl aria-label="Username" placeholder="Username" />
-    </InputGroup>
-</CodeExample>
-
-## With form field
+## Quick start
 
 <CodeExample>
     <FormField>
         <FormLabel htmlFor="groupUsername">Username</FormLabel>
-        <InputGroup>
+        <InputGroup size="lg">
             <InputGroupText>@</InputGroupText>
-            <FormControl id="groupUsername" name="username" />
+            <FormControl id="groupUsername" />
+            <InputGroupButton variant="outline" theme="secondary">
+                Check
+            </InputGroupButton>
         </InputGroup>
     </FormField>
-</CodeExample>
-
-### Buttons
-
-<CodeExample>
-    <InputGroup>
-        <FormControl aria-label="Recipient" placeholder="Recipient" />
-        <Button>Submit</Button>
+    <InputGroup className="mt-3">
+        <InputGroupText>$</InputGroupText>
+        <FormControl aria-label="Amount" type="number" />
+        <InputGroupText>.00</InputGroupText>
+        <InputGroupIgnore>
+            <FormControl aria-label="Hidden metadata" type="hidden" />
+        </InputGroupIgnore>
     </InputGroup>
-</CodeExample>
-
-### Textarea
-
-<CodeExample>
-    <InputGroup>
-        <InputGroupText>Message</InputGroupText>
+    <InputGroup className="mt-3">
+        <InputGroupText>
+            <Checkbox aria-label="Include message" />
+        </InputGroupText>
         <FormTextArea aria-label="Message" rows={2} />
     </InputGroup>
-</CodeExample>
-
-### Select
-
-<CodeExample>
-    <InputGroup>
+    <InputGroup size="sm" className="mt-3">
         <InputGroupText>Country</InputGroupText>
         <FormSelect aria-label="Country" defaultValue="ca">
             <option value="ca">Canada</option>
-            <option value="jp">Japan</option>
         </FormSelect>
+        <InputGroupButton variant="outline">Apply</InputGroupButton>
+    </InputGroup>
+    <InputGroup className="mt-3">
+        <FormControl type="file" aria-label="Upload" />
+        <InputGroupButton variant="outline">Upload</InputGroupButton>
+    </InputGroup>
+    <InputGroup className="mt-3">
+        <InputGroupButton variant="outline">Action</InputGroupButton>
+        <InputGroupMenu label="More" split toggleProps={{ variant: 'outline' }}>
+            <MenuItem>Another action</MenuItem>
+            <MenuItem>Something else</MenuItem>
+        </InputGroupMenu>
+        <FormControl aria-label="Value with segmented actions" />
     </InputGroup>
 </CodeExample>
 
-### File input
+Use `size="sm"` or `"lg"`. Groups support multiple controls, multiple addons, checkboxes and radios.
+`InputGroupButton` accepts all `Button` props and puts addon styling on the button itself.
+`InputGroupIgnore` adds the border-radius exclusion to its single child without another DOM
+wrapper, useful for hidden controls. `InputGroupMenu` reuses Menu keyboard and dismissal behavior,
+placing its button and popup directly inside the group. Combine `split` with `InputGroupButton`
+for segmented actions; omit `split` for a normal dropdown addon.
 
-<CodeExample>
-    <InputGroup>
-        <InputGroupText>Upload</InputGroupText>
-        <FormControl aria-label="Upload a file" type="file" />
-    </InputGroup>
-</CodeExample>
-
-### Checkboxes and radios
-
-<CodeExample>
-    <InputGroup>
-        <InputGroupText>
-            <FormCheck aria-label="Include" />
-        </InputGroupText>
-        <FormControl aria-label="Item" placeholder="Item" />
-    </InputGroup>
-</CodeExample>
-
-### Multiple inputs
-
-Multiple controls can be composed as children.
-
-<CodeExample>
-    <InputGroup>
-        <InputGroupText>Name</InputGroupText>
-        <FormControl aria-label="First name" />
-        <FormControl aria-label="Last name" />
-    </InputGroup>
-</CodeExample>
-
-### Multiple addons
-
-<CodeExample>
-    <InputGroup>
-        <InputGroupText>$</InputGroupText>
-        <InputGroupText>0.00</InputGroupText>
-        <FormControl aria-label="Amount" />
-    </InputGroup>
-</CodeExample>
-
-### Button addons
-
-<CodeExample>
-    <InputGroup>
-        <FormControl aria-label="Search terms" placeholder="Search" />
-        <Button>Search</Button>
-    </InputGroup>
-</CodeExample>
-
-### Buttons with menus
-
-Use the existing `Menu` wrapper alongside an input group when an addon needs a menu. The menu and
-its trigger remain separately accessible controls.
-
-### Segmented buttons
-
-Compose buttons and controls as direct children. Use the existing button group wrapper for
-semantically related button segments.
-
-## Border radius
-
-Bootstrap controls the adjoining border radii based on the order of the children. For groups with
-multiple controls, keep the markup order consistent with the visual order.
-
-## Sizing
-
-Pass `size="sm"` or `"lg"` to `InputGroup` to apply the matching input group size class.
+Adapted from [Bootstrap v6.0.0-alpha.1 Input group][1], © Bootstrap Authors, [MIT licensed][2].
 
 </DocumentationLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/input-group.mdx
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

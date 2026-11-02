@@ -1,4 +1,4 @@
-import { FormField, FormLabel, FormRange } from '../../../../source/Form';
+import { FormField, FormLabel, FormRange, FormText } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -6,119 +6,44 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # Range
 
-`FormRange` wraps a native range input in `.form-range`. The wrapper updates the `--range-fill`
-property as the input changes. The optional value bubble is provided by Bootstrap's JavaScript
-plugin.
+`FormRange` initializes Bootstrap's range plugin for a filled track, optional value bubble and
+datalist tick marks. The wrapper disposes its plugin on unmount.
 
-## Overview
-
-<CodeExample>
-    <FormField>
-        <FormLabel htmlFor="rangeExample">Example range</FormLabel>
-        <FormRange id="rangeExample" defaultValue={50} />
-    </FormField>
-</CodeExample>
-
-## Theme colors
-
-Pass a theme name to the wrapper:
-
-<CodeExample>
-    <FormRange aria-label="Themed range" theme="primary" defaultValue={60} />
-</CodeExample>
-
-## Disabled
-
-<CodeExample>
-    <FormRange aria-label="Disabled range" disabled />
-</CodeExample>
-
-## Min and max
+## Quick start
 
 <CodeExample>
     <FormField>
-        <FormLabel htmlFor="rangeMinMax">Example range</FormLabel>
-        <FormRange id="rangeMinMax" min={10} max={50} defaultValue={20} />
-    </FormField>
-</CodeExample>
-
-## Steps
-
-Use native `step` to set the allowed increments.
-
-<CodeExample>
-    <FormRange aria-label="Range with half steps" min={0} max={10} step={0.5} defaultValue={5} />
-</CodeExample>
-
-## Value bubble
-
-<CodeExample>
-    <FormField>
-        <FormLabel htmlFor="rangeBubble">Brightness</FormLabel>
-        <FormRange id="rangeBubble" name="brightness" bubble defaultValue={40} />
-    </FormField>
-</CodeExample>
-
-## Tick marks
-
-Connect a native `datalist` with the input's `list` attribute.
-
-<CodeExample>
-    <>
-        <FormRange aria-label="Temperature" list="temperatureTicks" min={0} max={100} />
-        <datalist id="temperatureTicks">
-            <option value="0" label="Cold" />
-            <option value="50" label="Warm" />
-            <option value="100" label="Hot" />
+        <FormLabel htmlFor="rangeVolume">Volume</FormLabel>
+        <FormRange
+            id="rangeVolume"
+            name="volume"
+            min={0}
+            max={100}
+            step={0.5}
+            defaultValue={50}
+            bubble
+            theme="primary"
+            list="rangeVolumeTicks"
+            aria-describedby="rangeVolumeHelp"
+        />
+        <datalist id="rangeVolumeTicks">
+            <option value="0" label="Silent" />
+            <option value="25" />
+            <option value="100" label="Loud" />
         </datalist>
-    </>
+        <FormText id="rangeVolumeHelp">Adjust the volume level.</FormText>
+    </FormField>
+    <FormRange aria-label="Disabled range" disabled theme="success" className="mt-3" />
 </CodeExample>
 
-## With form field
+Native `min`, `max`, `step`, `disabled`, `value` and `defaultValue` pass through. Without a value,
+the native midpoint is used. Tick positions can be uneven; option labels appear below them.
+`formatter` customizes bubble text, and `onValueChange` reports numeric plugin updates.
+Use `onInput` or `onChange` for native events and `wrapperClassName` for wrapper layout.
 
-Use `FormField` to associate a visible label and description.
-
-## Usage
-
-Every `.form-range` wrapper updates its track fill from the input value. The value bubble requires
-Bootstrap's range plugin.
-
-### Via data attributes
-
-`bubble` adds `data-bs-bubble` to the wrapper. The input's native `list` attribute and a `datalist`
-provide tick marks.
-
-### Via JavaScript
-
-The range plugin can also be initialized and updated programmatically by the consuming application.
-
-### Dependencies
-
-The JavaScript-powered value bubble and tick marks require Bootstrap's range plugin.
-
-### Options
-
-Native range props such as `min`, `max`, `step`, and `value` are forwarded. The plugin exposes
-the optional value bubble.
-
-### Methods
-
-The range plugin supports programmatic updates and disposal.
-
-### Events
-
-The plugin emits a change event when the range value changes.
-
-## CSS
-
-The Bootstrap stylesheet reads `--range-fill` to render the filled track.
-
-### Variables
-
-### Sass mixins
-
-See the upstream [range CSS and Sass reference][1] for component tokens and mixins.
+Adapted from [Bootstrap v6.0.0-alpha.1 Range][1], © Bootstrap Authors, [MIT licensed][2].
 
 </DocumentationLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/forms/range/#css
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/range.mdx
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

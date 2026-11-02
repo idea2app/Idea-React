@@ -1,5 +1,5 @@
 import { Icon } from '../../../../source/Icon';
-import { Button } from '../../../../source/Button';
+import { Button, ButtonInput } from '../../../../source/Button';
 import { ButtonGroup } from '../../../../source/ButtonGroup';
 import { ToggleButton } from '../../../../source/ToggleButton';
 import { CodeBlock } from '../../../../source/CodeBlock';
@@ -45,8 +45,6 @@ Compare all button variants and styles at once:
         ['danger', 'Danger'],
         ['warning', 'Warning'],
         ['info', 'Info'],
-        ['light', 'Light'],
-        ['dark', 'Dark'],
         ['inverse', 'Inverse']
     ].map(([theme, title]) =>
         ['solid', 'outline', 'subtle', 'text'].map(variant => (
@@ -77,8 +75,6 @@ Link buttons can also be styled with the theme colors.
         ['danger', 'Danger'],
         ['warning', 'Warning'],
         ['info', 'Info'],
-        ['light', 'Light'],
-        ['dark', 'Dark'],
         ['inverse', 'Inverse']
     ].map(([theme, title]) => (
         <Button key={theme} variant="link" theme={theme}>
@@ -101,8 +97,6 @@ This provides a more three-dimensional appearance that can be customized further
         ['danger', 'Danger'],
         ['warning', 'Warning'],
         ['info', 'Info'],
-        ['light', 'Light'],
-        ['dark', 'Dark'],
         ['inverse', 'Inverse']
     ].map(([theme, title]) => (
         <Button key={theme} variant="solid" theme={theme} styled>
@@ -142,9 +136,9 @@ technologies such as screen readers.
     <Button type="submit" variant="solid" theme="primary">
         Button
     </Button>
-    <input className="btn-solid theme-primary" type="button" defaultValue="Input" />
-    <input className="btn-solid theme-primary" type="submit" defaultValue="Submit" />
-    <input className="btn-solid theme-primary" type="reset" defaultValue="Reset" />
+    <ButtonInput variant="solid" theme="primary" type="button" defaultValue="Input" />
+    <ButtonInput variant="solid" theme="primary" type="submit" defaultValue="Submit" />
+    <ButtonInput variant="solid" theme="primary" type="reset" defaultValue="Reset" />
 </div>
 
 Set `href` to render an anchor through the wrapper. React inputs use `defaultValue` instead of a
@@ -326,6 +320,11 @@ right-align the buttons when they're no longer stacked.
 
 ## Toggle buttons
 
+`ToggleButton` wraps a real checkbox or radio. Use `onChange` for the native input event,
+`checked` for controlled values, or `defaultChecked` for uncontrolled values. Input-only
+attributes such as `id`, `aria-describedby`, and `ref` belong in `inputProps`; `size` changes
+the button appearance and `required` participates in native form validation.
+
 Create button-like checkboxes and radio buttons by adding `.btn-check` to a `<label>` element with
 button classes, with a checkbox or radio input nested inside. The input is visually hidden while the
 label provides the button appearance. These toggle buttons can further be grouped in a
@@ -401,58 +400,43 @@ checked" as they are checkboxes under the hood. The JavaScript toggle buttons ar
 
 ### Toggle states
 
-Add the `.active` class and `aria-pressed` to a toggle button. Use `aria-pressed="false"` for the
-default state. If you're pre-toggling a button, add the `.active` class **and** `aria-pressed="true"`.
+Pass `toggle` for an interactive button with internal MobX state. `defaultActive` selects the initial
+state; `active` controls both the active appearance and `aria-pressed` from an external model.
 
 <div className="d-flex flex-wrap gap-2">
-    <Button variant="solid" theme="primary" aria-pressed={false}>
+    <Button variant="solid" theme="primary" toggle>
         Toggle button
     </Button>
-    <Button variant="solid" theme="primary" className="active" aria-pressed={true}>
+    <Button variant="solid" theme="primary" toggle defaultActive>
         Active toggle button
     </Button>
-    <Button variant="solid" theme="primary" disabled aria-pressed={false}>
+    <Button variant="solid" theme="primary" disabled toggle>
         Disabled toggle button
     </Button>
 </div>
 
 <div className="d-flex flex-wrap gap-2">
-    <Button href="#" role="button" variant="solid" theme="primary" aria-pressed={false}>
+    <Button href="#" role="button" variant="solid" theme="primary" toggle>
         Toggle link
     </Button>
-    <Button
-        href="#"
-        role="button"
-        variant="solid"
-        theme="primary"
-        className="active"
-        aria-pressed={true}
-    >
+    <Button href="#" role="button" variant="solid" theme="primary" toggle defaultActive>
         Active toggle link
     </Button>
-    <Button href="#" role="button" variant="solid" theme="primary" disabled aria-pressed={false}>
+    <Button href="#" role="button" variant="solid" theme="primary" disabled toggle>
         Disabled toggle link
     </Button>
 </div>
 
 `aria-pressed` has no default value. A button without it is announced as a plain button, not as a
-toggle. In React, keep both the active class and `aria-pressed` in sync with state instead of relying
-on Bootstrap's `data-bs-toggle="button"` plugin:
+toggle. Use the wrapper's built-in state instead of Bootstrap's JavaScript plugin:
 
-<CodeBlock language="tsx">{`const [pressed, setPressed] = useState(false);
-
-<Button
-    variant="solid"
-    theme="primary"
-    className={pressed ? 'active' : undefined}
-    aria-pressed={pressed}
-    onClick={() => setPressed(!pressed)}
->
+<CodeBlock language="tsx">{`<Button toggle variant="solid" theme="primary">
     Toggle button
-</Button>;`}</CodeBlock>
+</Button>`}</CodeBlock>
 
 The plugin instance methods (`toggle`, `dispose`, `getInstance`) are not needed with React: update
-state in the event handler and let the render pass derive the class names and ARIA attributes.
+`active` from a MobX model for controlled behavior. External `onClick` runs first and may cancel a
+toggle with `event.preventDefault()`.
 
 ## CSS
 
@@ -469,9 +453,11 @@ list controls which selectors receive the base button styles, which is why varia
 
 See the [upstream button CSS][2] for the complete variable and Sass reference.
 
+Adapted from [Bootstrap v6.0.0-alpha.1][2], © the Bootstrap authors (MIT license).
+
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Button.tsx
-[2]: https://getbootstrap.com/docs/6.0/components/button/
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/button.mdx
 [3]: https://github.com/idea2app/Idea-React/blob/main/source/ToggleButton.tsx
 [4]: https://github.com/idea2app/Idea-React/blob/main/source/ButtonGroup.tsx

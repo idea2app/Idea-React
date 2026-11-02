@@ -5,6 +5,23 @@ import { render, screen } from '@testing-library/react';
 
 import { ListGroup, ListGroupItem } from '../source/ListGroup';
 
+it('supports ordered numbered lists and action-only containers', () => {
+    const { container, rerender } = render(<ListGroup as="ol" start={3} numbered />);
+
+    assert.equal(container.firstElementChild?.tagName, 'OL');
+    assert.equal(container.firstElementChild?.getAttribute('start'), '3');
+    assert.equal(container.firstElementChild?.className, 'list-group list-group-numbered');
+
+    rerender(
+        <ListGroup as="div">
+            <ListGroupItem type="button">Action</ListGroupItem>
+        </ListGroup>
+    );
+
+    assert.equal(container.firstElementChild?.tagName, 'DIV');
+    assert.equal(screen.getByRole('button', { name: 'Action' }).tagName, 'BUTTON');
+});
+
 it('renders Bootstrap 6 list groups with variant classes', () => {
     const { container } = render(
         <ListGroup horizontal="md" className="custom" flush numbered>

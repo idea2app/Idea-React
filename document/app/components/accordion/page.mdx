@@ -1,0 +1,90 @@
+import {
+    Accordion,
+    AccordionBody,
+    AccordionHeader,
+    AccordionItem,
+    AccordionToggle
+} from '../../../../source/Accordion';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="accordion">
+
+# Accordion
+
+Native `details` and `summary` elements provide keyboard-accessible disclosure without Bootstrap
+JavaScript. Matching `name` attributes make items exclusive; omit `name` to keep multiple items open.
+Use `open` for the initially expanded item and `onToggle` to observe native changes.
+
+## Quick start
+
+<CodeExample>
+    <Accordion theme="primary">
+        <AccordionItem name="accordion-example" open>
+            <AccordionHeader>First item</AccordionHeader>
+            <AccordionBody>Only one item in this named group can be open.</AccordionBody>
+        </AccordionItem>
+        <AccordionItem name="accordion-example">
+            <AccordionHeader>Second item</AccordionHeader>
+            <AccordionBody>Opening this item closes the first.</AccordionBody>
+        </AccordionItem>
+    </Accordion>
+</CodeExample>
+
+## Compact, flush, and spaced
+
+Use `size="sm"`, `flush`, and `gap` separately or together. `theme` accepts the shared component
+themes. Native CSS transitions respect reduced-motion preferences.
+
+<CodeExample>
+    <Accordion size="sm" flush gap theme="accent">
+        <AccordionItem open>
+            <AccordionHeader icon="plus-lg">Always open independently</AccordionHeader>
+            <AccordionBody>Custom icons use the library Icon component.</AccordionBody>
+        </AccordionItem>
+        <AccordionItem open>
+            <AccordionHeader icon={false}>Without an icon</AccordionHeader>
+            <AccordionBody>Pass icon=false to supply your own header decoration.</AccordionBody>
+        </AccordionItem>
+    </Accordion>
+</CodeExample>
+
+## Expand and collapse all
+
+`AccordionToggle` temporarily removes names while expanding all direct items, then restores the
+exclusive grouping when collapsing them. Nested accordions are left unchanged.
+
+<CodeExample>
+    <AccordionToggle
+        target="#accordion-all"
+        variant="subtle"
+        theme="secondary"
+        size="sm"
+        className="mb-3"
+    >
+        Expand / collapse all
+    </AccordionToggle>
+    <Accordion id="accordion-all">
+        <AccordionItem name="accordion-all-group">
+            <AccordionHeader>Outer item</AccordionHeader>
+            <AccordionBody>
+                <Accordion>
+                    <AccordionItem name="accordion-nested">
+                        <AccordionHeader>Nested item</AccordionHeader>
+                        <AccordionBody>Use a different name for each nested group.</AccordionBody>
+                    </AccordionItem>
+                </Accordion>
+            </AccordionBody>
+        </AccordionItem>
+        <AccordionItem name="accordion-all-group">
+            <AccordionHeader>Another item</AccordionHeader>
+            <AccordionBody>All direct items can be expanded together.</AccordionBody>
+        </AccordionItem>
+    </Accordion>
+</CodeExample>
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Accordion][1], copyright The Bootstrap Authors, MIT license.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/accordion.mdx

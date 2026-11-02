@@ -12,130 +12,49 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 <DocumentationLayout active="form-control">
 
-# Form control
+# Form controls
 
-`FormControl`, `FormTextArea`, and `FormSelect` apply the Bootstrap form-control styles while
-forwarding native React input attributes.
+Styled native inputs, textareas and selects preserve browser validation and form submission.
 
-## With form field
-
-<CodeExample>
-    <FormField>
-        <FormLabel htmlFor="controlEmail">Email address</FormLabel>
-        <FormControl id="controlEmail" name="email" type="email" placeholder="name@example.com" />
-    </FormField>
-</CodeExample>
-
-## Textarea
-
-Use `rows` to set the initial height.
+## Quick start
 
 <CodeExample>
     <FormField>
-        <FormLabel htmlFor="controlMessage">Message</FormLabel>
-        <FormTextArea id="controlMessage" name="message" rows={4} />
+        <FormLabel htmlFor="controlEmail">Email</FormLabel>
+        <FormControl id="controlEmail" type="email" placeholder="name@example.com" required />
+        <FormText>Choose `controlSize="sm"` or `"lg"` for compact or large fields.</FormText>
     </FormField>
+    <FormTextArea aria-label="Message" rows={3} controlSize="lg" className="mt-3" />
+    <FormSelect aria-label="Country" controlSize="sm" defaultValue="ca" className="mt-3">
+        <option value="ca">Canada</option>
+        <option value="us">United States</option>
+    </FormSelect>
+    <FormControl aria-label="Read only" plaintext readOnly value="Readonly text" className="mt-3" />
+    <FormControl aria-label="Color" type="color" color defaultValue="#663399" className="mt-3" />
+    <FormControl aria-label="Files" type="file" multiple controlSize="sm" className="mt-3" />
+    <FormControl
+        aria-label="City"
+        list="controlCities"
+        placeholder="Choose or type a city"
+        className="mt-3"
+    />
+    <datalist id="controlCities">
+        <option value="Paris" />
+        <option value="Tokyo" />
+    </datalist>
+    <FormControl aria-label="Date and time" type="datetime-local" caret className="mt-3" />
+    <FormGhost aria-label="Borderless search" placeholder="Ghost input" className="mt-3" />
 </CodeExample>
 
-## Select
+Use native `type` for email, password, number, search, date, time, month and week.
+`caret` adds a picker affordance; `color` styles color inputs. `disabled`, `readOnly`, `multiple`,
+`size`, `min`, `max`, `step` and `list` retain their native meanings. `FormSelect multiple`
+accepts array values. `validation="valid"` or `"invalid"` sets visual and accessible state;
+associate `FormFeedback` and `FormText` using `aria-describedby`.
 
-`FormSelect` styles native single, multiple, and sized select controls.
-
-<CodeExample>
-    <FormField>
-        <FormLabel htmlFor="controlSelect">Choose an option</FormLabel>
-        <FormSelect id="controlSelect" controlSize="lg" defaultValue="">
-            <option value="" disabled>
-                Choose one…
-            </option>
-            <option value="one">One</option>
-            <option value="two">Two</option>
-        </FormSelect>
-    </FormField>
-</CodeExample>
-
-## Sizes
-
-Pass `controlSize="sm"` or `"lg"` to an input. Use the corresponding class on textareas and selects.
-
-<CodeExample>
-    <>
-        <FormControl aria-label="Small input" controlSize="sm" placeholder="Small input" />
-        <FormControl aria-label="Large input" controlSize="lg" placeholder="Large input" />
-    </>
-</CodeExample>
-
-## Form text
-
-Associate helper text with the control using `aria-describedby`.
-
-<CodeExample>
-    <FormField>
-        <FormLabel htmlFor="controlPassword">Password</FormLabel>
-        <FormControl id="controlPassword" type="password" aria-describedby="passwordHelp" />
-        <FormText id="passwordHelp">At least eight characters.</FormText>
-    </FormField>
-</CodeExample>
-
-## States
-
-Native `disabled` and `readOnly` attributes are forwarded.
-
-<CodeExample>
-    <>
-        <FormControl aria-label="Disabled" disabled placeholder="Disabled input" />
-        <FormControl aria-label="Readonly" readOnly value="Readonly input" />
-    </>
-</CodeExample>
-
-Use `plaintext` to remove the standard input border while preserving control spacing:
-
-<CodeExample>
-    <FormControl aria-label="Plaintext" plaintext readOnly value="Readonly plain text" />
-</CodeExample>
-
-## Types
-
-### Date & Time
-
-Native `type` attributes are forwarded unchanged.
-
-<CodeExample>
-    <FormControl aria-label="Date" type="date" />
-</CodeExample>
-
-### Color
-
-Use the native color input with the optional `color` class variant.
-
-<CodeExample>
-    <FormControl aria-label="Color" type="color" color defaultValue="#563d7c" />
-</CodeExample>
-
-### Datalists
-
-<CodeExample>
-    <>
-        <FormControl aria-label="Browser" list="browserOptions" />
-        <datalist id="browserOptions">
-            <option value="Firefox" />
-            <option value="Chrome" />
-        </datalist>
-    </>
-</CodeExample>
-
-### File
-
-<CodeExample>
-    <FormControl aria-label="Upload file" type="file" />
-</CodeExample>
-
-### Ghost
-
-`FormGhost` provides the borderless input used by Bootstrap adornments and other minimal controls.
-
-<CodeExample>
-    <FormGhost aria-label="Ghost input" placeholder="Search" />
-</CodeExample>
+Adapted from [Bootstrap v6.0.0-alpha.1 Form control][1], © Bootstrap Authors, [MIT licensed][2].
 
 </DocumentationLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/form-control.mdx
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

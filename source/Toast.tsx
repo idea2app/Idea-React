@@ -7,6 +7,7 @@ import { ComponentPropsWithRef, FC, MouseEvent, ReactNode } from 'react';
 import { Timestamp, uniqueID } from 'web-utility';
 
 import type { ComponentTheme } from './Button';
+import { CloseButton } from './CloseButton';
 
 export type ToastPosition =
     | 'top-start'
@@ -31,11 +32,13 @@ const TOAST_POSITION_CLASSES: Record<ToastPosition, string> = {
     'bottom-end': 'bottom-0 end-0'
 };
 
-export interface ToastMessage {
+export interface ToastMessage extends Pick<
+    ToastItemProps,
+    'theme' | 'translucent' | 'instant' | 'role'
+> {
     id?: string;
     title?: ReactNode;
     body: ReactNode;
-    theme?: ComponentTheme;
     delay?: number;
 }
 
@@ -77,12 +80,28 @@ export const ToastContainer: FC<ToastContainerProps> = ({
 
 export interface ToastItemProps extends ComponentPropsWithRef<'div'> {
     theme?: ComponentTheme;
+    show?: boolean;
+    translucent?: boolean;
+    instant?: boolean;
 }
 
-export const ToastItem: FC<ToastItemProps> = ({ theme, role = 'status', className, ...props }) => (
+export const ToastItem: FC<ToastItemProps> = ({
+    theme,
+    show = true,
+    translucent,
+    instant,
+    role = 'status',
+    className,
+    ...props
+}) => (
     <div
         {...props}
-        className={classNames('toast show', theme && `theme-${theme}`, className)}
+        className={classNames(
+            'toast',
+            { show, 'toast-translucent': translucent, 'toast-instant': instant },
+            theme && `theme-${theme}`,
+            className
+        )}
         role={role}
     />
 );
@@ -105,22 +124,33 @@ export class Toast {
         </ToastContainer>
     ));
 
-    renderMessage = ({ id, openedAt, title, body, theme, delay = 3000 }: ToastEntry) => {
+    renderMessage = ({
+        id,
+        openedAt,
+        title,
+        body,
+        theme,
+        translucent,
+        instant,
+        role,
+        delay = 3000
+    }: ToastEntry) => {
         const showHeader = !!title || delay === 0;
         const elapsed = this.TimeScalar.distanceOf<Timestamp>(Date.now(), openedAt).toShortString();
 
         return (
-            <ToastItem key={id} theme={theme}>
+            <ToastItem
+                key={id}
+                theme={theme}
+                translucent={translucent}
+                instant={instant}
+                role={role}
+            >
                 {showHeader && (
                     <ToastHeader>
                         <strong className="me-auto">{title}</strong>
                         <small>{elapsed}</small>
-                        <button
-                            type="button"
-                            className="btn-close"
-                            aria-label="Close"
-                            data-toast-dismiss={id}
-                        />
+                        <CloseButton data-toast-dismiss={id} />
                     </ToastHeader>
                 )}
                 <ToastBody>{body}</ToastBody>
@@ -141,7 +171,9 @@ export class Toast {
 
     @action
     open(message: ToastMessage) {
-        const id = uniqueID();
+        const id = message.id ?? uniqueID();
+        this.close(id);
+
         const openedAt = Date.now();
         const { promise, resolve } = Promise.withResolvers<ToastEntry>();
         const timer =
@@ -149,7 +181,7 @@ export class Toast {
                 ? undefined
                 : setTimeout(() => this.close(id), message.delay ?? 3000);
 
-        const item: ToastEntry = { id, ...message, openedAt, resolve, timer };
+        const item: ToastEntry = { ...message, id, openedAt, resolve, timer };
 
         this.messages = [...this.messages, item];
 

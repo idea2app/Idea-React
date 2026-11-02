@@ -1,7 +1,6 @@
 import { Badge } from '../../../../source/Badge';
 import { Button } from '../../../../source/Button';
-import { Icon } from '../../../../source/Icon';
-import { Spinner } from '../../../../source/Spinner';
+import { Spinner, SpinnerIcon } from '../../../../source/Spinner';
 
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -93,12 +92,15 @@ Or, use custom CSS or inline styles to change the dimensions as needed.
 You can use the `.spinner-rotate` class to rotate a custom SVG spinner. Render icons through the
 [`Icon` wrapper][2] and apply the class.
 
-<Icon name="arrow-repeat" className="spinner-rotate" />
+<SpinnerIcon name="arrow-repeat" role="status" aria-label="Loading" />
 
 `SpinnerButton`, `TableSpinner`, and `Loading` reuse the same wrapper for component-level and
 full-page loading states.
+
+Adapted from [Bootstrap v6.0.0-alpha.1][3], © the Bootstrap authors (MIT license).
 
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Spinner.tsx
 [2]: https://github.com/idea2app/Idea-React/blob/main/source/Icon.tsx
+[3]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/spinner.mdx

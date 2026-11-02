@@ -1,0 +1,159 @@
+import { Carousel, CarouselSlide } from '../../../../source/Carousel';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="carousel">
+
+# Carousel
+
+Present one or more scroll-snapped slides at a time, with accessible controls, indicators, autoplay,
+and custom content. Adapted from [Bootstrap v6.0.0-alpha.1 Carousel][1].
+
+## Quick start
+
+Wrap each slide in `CarouselSlide`. The carousel supplies previous/next controls; indicators are
+optional. Use `aria-label` to name each carousel.
+
+<CodeExample>
+    <Carousel aria-label="Featured stories" indicators>
+        <CarouselSlide>
+            <div className="rounded-4 bg-3 p-5">
+                <h3>Build with Idea React</h3>
+                <p className="mb-0">Slides can contain any React content.</p>
+            </div>
+        </CarouselSlide>
+        <CarouselSlide>
+            <div className="rounded-4 bg-2 p-5">
+                <h3>Compose your own content</h3>
+                <p className="mb-0">Use cards, forms, images, or other components.</p>
+            </div>
+        </CarouselSlide>
+        <CarouselSlide>
+            <div className="rounded-4 bg-3 p-5">
+                <h3>Keep each slide focused</h3>
+                <p className="mb-0">Give each item an appropriate accessible name.</p>
+            </div>
+        </CarouselSlide>
+    </Carousel>
+</CodeExample>
+
+## Controls and indicators
+
+`controlsPlacement` supports `overlay` (default), `top`, and `bottom`. Indicators can be shown at
+the control row with `indicators`. `controls={false}` removes previous and next buttons. Overlay
+controls sit on the slides; top and bottom controls reserve their own rows.
+
+<CodeExample>
+    <Carousel aria-label="Top controls" controlsPlacement="top" indicators>
+        <CarouselSlide>
+            <h3>First slide</h3>
+        </CarouselSlide>
+        <CarouselSlide>
+            <h3>Second slide</h3>
+        </CarouselSlide>
+    </Carousel>
+</CodeExample>
+
+<CodeExample>
+    <Carousel aria-label="Bottom controls" controlsPlacement="bottom">
+        <CarouselSlide>
+            <p>Content can be placed above a separate control row.</p>
+        </CarouselSlide>
+        <CarouselSlide>
+            <p>Use the wrapper's normal children for custom layouts.</p>
+        </CarouselSlide>
+    </Carousel>
+</CodeExample>
+
+<CodeExample>
+    <Carousel aria-label="Overlay controls" controlsPlacement="overlay" indicators>
+        <CarouselSlide>
+            <div className="rounded-4 bg-3 p-5">Overlay slide one</div>
+        </CarouselSlide>
+        <CarouselSlide>
+            <div className="rounded-4 bg-2 p-5">Overlay slide two</div>
+        </CarouselSlide>
+    </Carousel>
+</CodeExample>
+
+## Layout and appearance
+
+Use `fade` for a crossfade and `dark` for dark-surface controls. `items`, `itemsGap`, `itemsPeek`,
+and `center` configure multi-item, spaced, peeking, and centered layouts. Set `items={3}` to show
+three slides, or give each slide its own width for a variable-width layout.
+
+<CodeExample>
+    <Carousel aria-label="Product gallery" items={3} itemsGap="1rem" itemsPeek="2rem" center>
+        <CarouselSlide>
+            <div className="rounded-3 bg-3 p-4">One</div>
+        </CarouselSlide>
+        <CarouselSlide>
+            <div className="rounded-3 bg-2 p-4">Two</div>
+        </CarouselSlide>
+        <CarouselSlide>
+            <div className="rounded-3 bg-3 p-4">Three</div>
+        </CarouselSlide>
+        <CarouselSlide>
+            <div className="rounded-3 bg-2 p-4">Four</div>
+        </CarouselSlide>
+    </Carousel>
+</CodeExample>
+
+<CodeExample>
+    <Carousel aria-label="Variable-width gallery" items={1} itemsGap="1rem" itemsPeek="2rem">
+        <CarouselSlide style={{ width: '18rem' }}>
+            <div className="rounded-3 bg-3 p-4">Compact card</div>
+        </CarouselSlide>
+        <CarouselSlide style={{ width: '28rem' }}>
+            <div className="rounded-3 bg-2 p-4">A wider card</div>
+        </CarouselSlide>
+        <CarouselSlide style={{ width: '20rem' }}>
+            <div className="rounded-3 bg-3 p-4">Another card</div>
+        </CarouselSlide>
+    </Carousel>
+</CodeExample>
+
+<CodeExample>
+    <Carousel aria-label="Fading dark carousel" fade dark indicators>
+        <CarouselSlide>
+            <div className="rounded-4 theme-inverse bg-1 fg-1 p-5">First</div>
+        </CarouselSlide>
+        <CarouselSlide>
+            <div className="rounded-4 theme-inverse bg-2 fg-1 p-5">Second</div>
+        </CarouselSlide>
+    </Carousel>
+</CodeExample>
+
+## Autoplay and end behavior
+
+Autoplay is off by default. When enabled, it pauses while hovered, focused, or while the page is
+hidden; manual navigation stops cycling until the play button is used again. Set a per-slide
+`interval` in milliseconds to override the carousel's `interval`.
+
+`ends` accepts `loop` (default), `wrap`, or `stop`. `stop` disables controls at the first and last
+slide. `loop` continues in the same direction through a temporary, inert slide before returning
+to the original content without a visible reverse jump. `wrap` jumps directly to the opposite end.
+Fade, reduced motion, multi-item, peeking, centered, and variable-width layouts fall back to `wrap`.
+Temporary slides are hidden from assistive technology and do not change the logical slide count.
+Set `pause={false}` to keep autoplay running while
+hovering or focusing the carousel.
+
+<CodeExample>
+    <Carousel aria-label="Automatic announcements" autoplay playPause indicators interval={4000}>
+        <CarouselSlide interval={2000}>
+            <p>Shown for two seconds.</p>
+        </CarouselSlide>
+        <CarouselSlide>
+            <p>Shown for the default interval.</p>
+        </CarouselSlide>
+    </Carousel>
+</CodeExample>
+
+All variants use native scrolling and touch gestures. Keyboard users can move between slides with
+the arrow keys; users of autoplay should always have the visible play/pause control.
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Carousel][1], copyright The Bootstrap Authors, MIT license.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/carousel.mdx

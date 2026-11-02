@@ -1,0 +1,88 @@
+import { Button } from '../../../../source/Button';
+import { OverlayBox } from '../../../../source/OverlayBox';
+import { Popover } from '../../../../source/Popover';
+
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="popover">
+
+# Popover
+
+Popovers display a heading and rich content beside a trigger. Idea React's [Popover wrapper][1]
+renders Bootstrap 6 markup; [OverlayBox][2] supplies React-controlled triggers, delays, dismissal,
+and positioning without Bootstrap's JavaScript plugin.
+
+## Live example
+
+<OverlayBox
+    title="Popover title"
+    detail="Additional information about this action."
+    trigger="click"
+>
+    <Button variant="solid" theme="primary">
+        Toggle popover
+    </Button>
+</OverlayBox>
+
+Click outside the trigger or press Escape to dismiss the popover.
+
+## Placement
+
+<div className="d-flex flex-wrap gap-3">
+    {['top', 'right', 'bottom', 'left'].map(placement => (
+        <OverlayBox
+            key={placement}
+            title={`Popover on ${placement}`}
+            detail="Popover content"
+            placement={placement}
+            trigger="click"
+        >
+            <Button variant="solid" theme="secondary">
+                {placement}
+            </Button>
+        </OverlayBox>
+    ))}
+</div>
+
+## Focus and disabled elements
+
+Use the focus trigger to dismiss when focus leaves. Disabled buttons cannot receive focus:
+wrap one in a focusable element when an explanation must remain accessible.
+
+<OverlayBox title="Unavailable" detail="Complete the form before continuing." trigger="focus">
+    <span tabIndex={0} aria-label="Why this action is unavailable">
+        <Button disabled>Save</Button>
+    </span>
+</OverlayBox>
+
+## Rich content and standalone markup
+
+Use React nodes rather than unsanitized HTML strings. A standalone `Popover` only renders content;
+manage its visibility and position yourself, or use `OverlayBox`.
+
+<Popover title="Custom content" className="position-relative" placement="bottom">
+    Read the <a href="https://getbootstrap.com/docs/6.0/components/popover/">upstream guide</a>.
+</Popover>
+
+Omit `title` for a body-only popover, and set `show={false}` to hide it from both sighted users and
+assistive technology. `className`, `style`, `id`, and ARIA attributes pass through to the container.
+
+`OverlayBox` flips to the opposite side and shifts into the viewport when space is constrained.
+Use `responsivePlacement={{ md: 'right', lg: 'bottom' }}` for breakpoint-specific directions,
+`offset={[0, 12]}` for cross-axis/main-axis spacing, and `padding={8}` for the viewport inset.
+Set `flip={false}` to keep the preferred direction.
+
+By default overlays stay beside their trigger, including inside native dialogs. Set `container`
+to a selector, an element, or a function returning an element to portal elsewhere. Keep a modal
+dialog's overlays inside that dialog so its top-layer and focus semantics are preserved.
+Positioning updates on resize, captured scroll, and trigger/content size changes.
+
+Adapted from the [Bootstrap 6 Popover documentation][3], copyright the Bootstrap authors,
+under the [MIT license][4].
+
+</ComponentsLayout>
+
+[1]: https://idea2app.github.io/Idea-React/modules/Popover.html
+[2]: ../overlay-box/
+[3]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/popover.mdx
+[4]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

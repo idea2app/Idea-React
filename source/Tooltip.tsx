@@ -11,6 +11,7 @@ export const Tooltip: FC<TooltipProps> = ({
     role = 'tooltip',
     className,
     children,
+    arrowStyle,
     ...props
 }) => (
     <div
@@ -22,9 +23,13 @@ export const Tooltip: FC<TooltipProps> = ({
             className
         )}
         role={role}
+        hidden={!show}
         data-bs-placement={placement}
     >
-        <div className={classNames('tooltip-arrow', OVERLAY_ARROW_POSITIONS[placement])} />
+        <div
+            style={arrowStyle}
+            className={classNames('tooltip-arrow', OVERLAY_ARROW_POSITIONS[placement])}
+        />
         <div className="tooltip-inner">{children}</div>
     </div>
 );

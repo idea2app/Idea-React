@@ -42,7 +42,7 @@ These classes can also be added to groups of links, as an alternative to the [Na
 components.
 
 <ButtonGroup aria-label="Link group">
-    <Button href="#" variant="solid" theme="primary" className="active" aria-current="page">
+    <Button href="#" variant="solid" theme="primary" active aria-current="page">
         Active link
     </Button>
     <Button href="#" variant="solid" theme="primary">
@@ -59,18 +59,18 @@ Add a divider between buttons by adding the `btn-group-divider` class to the `Bu
 useful when used with buttons that have the same theme color and a solid fill.
 
 <div className="d-flex flex-wrap gap-2">
-    <ButtonGroup className="btn-group-divider" aria-label="Divider example">
+    <ButtonGroup divider aria-label="Divider example">
         <Button variant="solid" theme="primary">
             Left
         </Button>
-        <Button variant="solid" theme="primary" className="active">
+        <Button variant="solid" theme="primary" active>
             Active
         </Button>
         <Button variant="solid" theme="primary">
             Right
         </Button>
     </ButtonGroup>
-    <ButtonGroup className="btn-group-divider" aria-label="Secondary divider example">
+    <ButtonGroup divider aria-label="Secondary divider example">
         <Button variant="solid" theme="secondary">
             Left
         </Button>
@@ -83,22 +83,18 @@ useful when used with buttons that have the same theme color and a solid fill.
 Works with vertical button groups, too.
 
 <div className="d-flex align-items-start gap-2">
-    <ButtonGroup vertical className="btn-group-divider" aria-label="Vertical divider example">
+    <ButtonGroup vertical divider aria-label="Vertical divider example">
         <Button variant="solid" theme="primary">
             Left
         </Button>
-        <Button variant="solid" theme="primary" className="active">
+        <Button variant="solid" theme="primary" active>
             Active
         </Button>
         <Button variant="solid" theme="primary">
             Right
         </Button>
     </ButtonGroup>
-    <ButtonGroup
-        vertical
-        className="btn-group-divider"
-        aria-label="Vertical secondary divider example"
-    >
+    <ButtonGroup vertical divider aria-label="Vertical secondary divider example">
         <Button variant="solid" theme="secondary">
             Left
         </Button>
@@ -143,7 +139,7 @@ You can mix and match button variants in a button group.
 All button styles are supported in button groups. Mix and match with the `btn-group-divider` class
 to add dividers between some styles or just use the button borders in others.
 
-<ButtonGroup className="btn-group-divider" aria-label="Solid example">
+<ButtonGroup divider aria-label="Solid example">
     <Button variant="solid" theme="primary">
         Left
     </Button>
@@ -167,7 +163,7 @@ to add dividers between some styles or just use the button borders in others.
     </Button>
 </ButtonGroup>
 
-<ButtonGroup className="btn-group-divider" aria-label="Subtle example">
+<ButtonGroup divider aria-label="Subtle example">
     <Button variant="subtle" theme="primary">
         Left
     </Button>
@@ -288,7 +284,7 @@ Instead of applying button sizing classes to every button in a group, just add `
 groups.
 
 <div className="d-flex flex-column align-items-start gap-3">
-    <ButtonGroup className="btn-group-lg" aria-label="Large button group">
+    <ButtonGroup size="lg" aria-label="Large button group">
         <Button variant="outline" theme="primary">
             Left
         </Button>
@@ -310,7 +306,7 @@ groups.
             Right
         </Button>
     </ButtonGroup>
-    <ButtonGroup className="btn-group-sm" aria-label="Small button group">
+    <ButtonGroup size="sm" aria-label="Small button group">
         <Button variant="outline" theme="primary">
             Left
         </Button>
@@ -321,7 +317,7 @@ groups.
             Right
         </Button>
     </ButtonGroup>
-    <ButtonGroup className="btn-group-xs" aria-label="Extra small button group">
+    <ButtonGroup size="xs" aria-label="Extra small button group">
         <Button variant="outline" theme="primary">
             Left
         </Button>
@@ -379,10 +375,12 @@ Button groups rely on Bootstrap's `.btn-group` and `.btn-group-vertical` classes
 drawn by `.btn-group-divider`; `ButtonToolbar` applies `.btn-toolbar`. See the
 [upstream button group CSS][5] for the variable reference.
 
+Adapted from [Bootstrap v6.0.0-alpha.1][5], © the Bootstrap authors (MIT license).
+
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/ButtonGroup.tsx
 [2]: https://github.com/idea2app/Idea-React/blob/main/source/Button.tsx
 [3]: ./nav/
 [4]: https://github.com/idea2app/Idea-React/blob/main/source/ToggleButton.tsx
-[5]: https://getbootstrap.com/docs/6.0/components/button-group/#css
+[5]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/button-group.mdx

@@ -1,0 +1,77 @@
+import { Toggler } from '../../../../source/Toggler';
+import { FormFieldset, FormLabel } from '../../../../source/Form/Primitives';
+import { FormControl } from '../../../../source/Form/Control';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="toggler">
+
+# Toggler
+
+Toggle classes or attributes with a button. `target` accepts any CSS selector; omit it to change the
+button itself. `attribute` defaults to `class`, and `value` supplies the class names or attribute value.
+The `id` attribute cannot be toggled. No Bootstrap JavaScript import is needed.
+Use `as="div"` or `as="span"` for an entire clickable surface; these also support Enter and Space.
+
+## Own classes and existing values
+
+<CodeExample>
+    <Toggler value="fg-danger" className="me-2">
+        Toggle text color
+    </Toggler>
+    <Toggler value="bg-subtle-info" className="bg-subtle-info">
+        Remove / restore background
+    </Toggler>
+    <Toggler as="div" value="fg-danger" className="p-3 border rounded mt-3">
+        Click or use the keyboard to toggle this surface.
+    </Toggler>
+</CodeExample>
+
+## One or multiple targets
+
+Target elements can override `attribute` and `value` using their own `data-bs-attribute` and
+`data-bs-value`. This lets one trigger apply different changes to multiple elements.
+
+<CodeExample>
+    <Toggler target=".toggler-demo-target" variant="solid" theme="primary">
+        Toggle targets
+    </Toggler>
+    <div className="toggler-demo-target p-3 border rounded mt-3" data-bs-value="bg-subtle-info">
+        First target
+    </div>
+    <div className="toggler-demo-target p-3 border rounded mt-3" data-bs-value="bg-subtle-warning">
+        Second target
+    </div>
+</CodeExample>
+
+## Attributes
+
+An attribute matching `value` is removed on the next activation. Boolean HTML attributes, such as
+`hidden` or `disabled`, are true whenever present. ARIA attributes use their string values.
+
+<CodeExample>
+    <Toggler target="#toggler-fieldset" attribute="disabled" value="true">
+        Enable / disable form
+    </Toggler>
+    <FormFieldset id="toggler-fieldset" className="mt-3">
+        <FormLabel htmlFor="toggler-name">Name</FormLabel>
+        <FormControl id="toggler-name" />
+    </FormFieldset>
+    <Toggler target="#toggler-content" attribute="hidden" value="true" className="mt-3">
+        Show / hide content
+    </Toggler>
+    <p id="toggler-content" className="mt-3">
+        Content controlled by the hidden attribute.
+    </p>
+</CodeExample>
+
+`onClick` runs first and may cancel with `preventDefault()`. Each target emits the cancelable native
+`toggle.bs.toggler` event before a change and `toggled.bs.toggler` afterwards. `onToggled` receives the
+resolved target list. Avoid toggling React-controlled attributes; update model state instead when
+React also owns the same value.
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Toggler][1], copyright The Bootstrap Authors, MIT license.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/toggler.mdx

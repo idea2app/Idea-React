@@ -1,187 +1,72 @@
 import {
+    Checkbox,
+    FormControl,
+    FormFeedback,
     FormField,
+    FormFieldContent,
     FormGroup,
     FormLabel,
     FormText,
-    FormControl,
-    FormSelect,
-    FormCheck,
-    FormSwitch,
-    FormFeedback,
-    FormTextArea,
-    FormFieldContent,
-    FormFieldset,
-    Combobox,
-    ComboboxOption
+    Radio
 } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
-import { Col, Row } from '../../../../source/Grid';
 
 <DocumentationLayout active="field">
 
-# Form field
+# Field
 
-The `FormField` wrapper arranges a label, control, optional description, and validation message.
-Associate labels with controls through `htmlFor` and `id`, and descriptions with `aria-describedby`.
+`FormField` lays out any control, label, description and validation feedback. Checkbox, radio and
+switch children automatically use a two-column layout.
 
-## How it works
-
-Use `FormField` for a single control. Use `FormGroup` to group related fields and `FormFieldContent`
-when a control needs an adjacent label or description. The wrappers preserve native control behavior.
-
-## Examples
-
-### Select
-
-<CodeExample>
-    <FormField>
-        <FormLabel htmlFor="fieldCountry">Country</FormLabel>
-        <FormSelect id="fieldCountry" name="country" defaultValue="">
-            <option value="" disabled>
-                Choose one…
-            </option>
-            <option value="ca">Canada</option>
-            <option value="jp">Japan</option>
-        </FormSelect>
-    </FormField>
-</CodeExample>
-
-### Textarea
-
-<CodeExample>
-    <FormField>
-        <FormLabel htmlFor="fieldMessage">Message</FormLabel>
-        <FormTextArea id="fieldMessage" rows={3} />
-    </FormField>
-</CodeExample>
-
-### Checkbox
-
-<CodeExample>
-    <FormField>
-        <FormCheck id="fieldTerms" name="terms" />
-        <FormLabel htmlFor="fieldTerms">Accept the terms</FormLabel>
-    </FormField>
-</CodeExample>
-
-### Radio
-
-<CodeExample>
-    <FormFieldset>
-        <legend>Choose a plan</legend>
-        <FormField>
-            <FormCheck id="fieldBasicPlan" type="radio" name="plan" value="basic" defaultChecked />
-            <FormLabel htmlFor="fieldBasicPlan">Basic</FormLabel>
-        </FormField>
-        <FormField>
-            <FormCheck id="fieldProPlan" type="radio" name="plan" value="pro" />
-            <FormLabel htmlFor="fieldProPlan">Pro</FormLabel>
-        </FormField>
-    </FormFieldset>
-</CodeExample>
-
-### Grouped
-
-<CodeExample>
-    <FormGroup>
-        <FormField>
-            <FormLabel htmlFor="fieldFirst">First name</FormLabel>
-            <FormControl id="fieldFirst" name="firstName" />
-        </FormField>
-        <FormField>
-            <FormLabel htmlFor="fieldLast">Last name</FormLabel>
-            <FormControl id="fieldLast" name="lastName" />
-        </FormField>
-    </FormGroup>
-</CodeExample>
-
-### Group cards
-
-Use the Bootstrap card and grid utilities around field components when options need a larger
-clickable visual target.
-
-<CodeExample>
-    <FormGroup>
-        <Row className="g-3">
-            <Col md={6}>
-                <FormField className="border rounded p-3">
-                    <FormCheck id="fieldCardOne" type="radio" name="card" value="one" />
-                    <FormLabel htmlFor="fieldCardOne">Option one</FormLabel>
-                </FormField>
-            </Col>
-            <Col md={6}>
-                <FormField className="border rounded p-3">
-                    <FormCheck id="fieldCardTwo" type="radio" name="card" value="two" />
-                    <FormLabel htmlFor="fieldCardTwo">Option two</FormLabel>
-                </FormField>
-            </Col>
-        </Row>
-    </FormGroup>
-</CodeExample>
-
-### Switch
-
-<CodeExample>
-    <FormField>
-        <FormSwitch inputProps={{ id: 'fieldNotifications', name: 'notifications' }}>
-            Enable notifications
-        </FormSwitch>
-    </FormField>
-</CodeExample>
-
-### Combobox
-
-Use the menu-backed `Combobox` component for searchable or custom option interfaces.
-
-<CodeExample>
-    <Combobox name="fieldLanguage" value="ts" placeholder="Choose a language">
-        <ComboboxOption value="js">JavaScript</ComboboxOption>
-        <ComboboxOption value="ts">TypeScript</ComboboxOption>
-    </Combobox>
-</CodeExample>
-
-### Description
+## Quick start
 
 <CodeExample>
     <FormField>
         <FormLabel htmlFor="fieldEmail">Email</FormLabel>
-        <FormControl id="fieldEmail" type="email" aria-describedby="fieldEmailHelp fieldEmailError" />
-        <FormText id="fieldEmailHelp">Use your work email address.</FormText>
-        <FormFeedback id="fieldEmailError">Enter a valid email address.</FormFeedback>
+        <FormControl id="fieldEmail" type="email" aria-describedby="fieldHelp" />
+        <FormText id="fieldHelp">Use your work email.</FormText>
     </FormField>
-</CodeExample>
-
-### Validation
-
-Validation can be client-side using native constraints or server-side using the returned state.
-
-## Overhead label
-
-Use `FormFieldContent` to pair a control and an overhead label when a design calls for a different
-label placement.
-
-<CodeExample>
-    <FormField>
+    <FormGroup className="mt-3">
+        <FormLabel>Choose a plan</FormLabel>
+        <FormField card>
+            <Radio id="fieldBasic" name="fieldPlan" defaultChecked />
+            <FormFieldContent>
+                <FormLabel plain htmlFor="fieldBasic">
+                    Basic
+                </FormLabel>
+                <FormText>$9/month — For individuals.</FormText>
+            </FormFieldContent>
+        </FormField>
+        <FormField card>
+            <Radio id="fieldPro" name="fieldPlan" />
+            <FormFieldContent>
+                <FormLabel plain htmlFor="fieldPro">
+                    Pro
+                </FormLabel>
+                <FormText>$29/month — For teams.</FormText>
+            </FormFieldContent>
+        </FormField>
+    </FormGroup>
+    <FormField className="mt-3">
+        <FormLabel>Terms and conditions</FormLabel>
+        <Checkbox id="fieldTerms" validation="invalid" required aria-describedby="fieldError" />
         <FormFieldContent>
-            <FormLabel htmlFor="fieldOverhead">Name</FormLabel>
-            <FormControl id="fieldOverhead" />
+            <FormLabel plain htmlFor="fieldTerms">
+                I agree
+            </FormLabel>
+            <FormFeedback id="fieldError">Please accept the terms.</FormFeedback>
         </FormFieldContent>
     </FormField>
 </CodeExample>
 
-## Descriptions
+Use `FormLabel plain` beside a checkbox, radio or switch. A regular `FormLabel` becomes an overhead
+title. `FormGroup` supplies shared spacing; `FormField card` highlights selectable cards.
+The same wrappers accept selects, textareas, ranges, input groups, adornments, comboboxes and OTPs.
 
-Use `FormText` for help text and reference it from the related input with `aria-describedby`.
-
-## Validation
-
-### Client-side
-
-Native HTML constraints such as `required`, `type`, `min`, and `max` are preserved.
-
-### Server-side
-
-Apply `.is-invalid` and render `FormFeedback` for server-returned errors.
+Adapted from [Bootstrap v6.0.0-alpha.1 Field][1], © Bootstrap Authors, [MIT licensed][2].
 
 </DocumentationLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/forms/field.mdx
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/LICENSE

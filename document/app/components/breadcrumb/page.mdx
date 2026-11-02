@@ -1,0 +1,73 @@
+import {
+    Breadcrumb,
+    BreadcrumbDivider,
+    BreadcrumbItem,
+    BreadcrumbLink
+} from '../../../../source/Breadcrumb';
+import { Icon } from '../../../../source/Icon';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="breadcrumb">
+
+# Breadcrumb
+
+Place the ordered breadcrumb list inside a labeled navigation landmark. Mark the current item with
+`aria-current="page"`; `BreadcrumbLink active` also marks its link as current.
+
+## Quick start
+
+<CodeExample>
+    <nav aria-label="Breadcrumb">
+        <Breadcrumb>
+            <BreadcrumbItem>
+                <BreadcrumbLink href="../../">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbDivider />
+            <BreadcrumbItem>
+                <BreadcrumbLink href="../">Components</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbDivider />
+            <BreadcrumbItem aria-current="page">
+                <BreadcrumbLink href="#" active>
+                    Breadcrumb
+                </BreadcrumbLink>
+            </BreadcrumbItem>
+        </Breadcrumb>
+    </nav>
+</CodeExample>
+
+## Dividers and collapsed paths
+
+Empty dividers use Bootstrap's default chevron. Supply text or an `Icon` for a custom separator.
+Dividers are hidden from assistive technology. An ellipsis link still needs an accessible label.
+
+<CodeExample>
+    <nav aria-label="File location">
+        <Breadcrumb>
+            <BreadcrumbItem>
+                <BreadcrumbLink href="../../">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbDivider>/</BreadcrumbDivider>
+            <BreadcrumbItem>
+                <BreadcrumbLink href="../" aria-label="Parent folders">
+                    <Icon name="three-dots" aria-hidden="true" />
+                </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbDivider>
+                <Icon name="chevron-double-right" aria-hidden="true" />
+            </BreadcrumbDivider>
+            <BreadcrumbItem aria-current="page">
+                <BreadcrumbLink href="#" active>
+                    Documents
+                </BreadcrumbLink>
+            </BreadcrumbItem>
+        </Breadcrumb>
+    </nav>
+</CodeExample>
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Breadcrumb][1], copyright The Bootstrap Authors, MIT license.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/breadcrumb.mdx

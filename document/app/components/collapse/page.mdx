@@ -1,0 +1,83 @@
+import { Collapse, CollapseToggle } from '../../../../source/Collapse';
+import { Card, CardBody } from '../../../../source/Card';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="collapse">
+
+# Collapse
+
+Toggle content visibility with CSS size transitions. Place padding on an inner element, not on
+`Collapse`. `CollapseToggle` accepts a CSS target selector and keeps every matching trigger's
+`aria-expanded` and `aria-controls` synchronized.
+
+## Quick start
+
+<CodeExample>
+    <div className="d-flex gap-2 mb-3">
+        <CollapseToggle target="#collapse-example" variant="solid" theme="primary">
+            Toggle content
+        </CollapseToggle>
+        <CollapseToggle target="#collapse-example" href="#collapse-example">
+            Link trigger
+        </CollapseToggle>
+    </div>
+    <Collapse id="collapse-example">
+        <Card>
+            <CardBody>Multiple triggers can control the same panel.</CardBody>
+        </Card>
+    </Collapse>
+</CodeExample>
+
+## Horizontal and multiple targets
+
+`horizontal` transitions width instead of height. Give its child an explicit width.
+A selector can match multiple panels, and each panel can have its own trigger.
+
+<CodeExample>
+    <div className="d-flex gap-2 mb-3">
+        <CollapseToggle target="#collapse-first">First</CollapseToggle>
+        <CollapseToggle target="#collapse-second">Second</CollapseToggle>
+        <CollapseToggle target=".collapse-demo-panel">Both</CollapseToggle>
+    </div>
+    <div className="d-flex gap-3" style={{ minHeight: 140 }}>
+        <Collapse id="collapse-first" className="collapse-demo-panel" horizontal>
+            <Card style={{ width: 240 }}>
+                <CardBody>First panel</CardBody>
+            </Card>
+        </Collapse>
+        <Collapse id="collapse-second" className="collapse-demo-panel" horizontal>
+            <Card style={{ width: 240 }}>
+                <CardBody>Second panel</CardBody>
+            </Card>
+        </Collapse>
+    </div>
+</CodeExample>
+
+## Exclusive groups and controlled state
+
+Use `parent` to close other open panels in the same container. `defaultOpen` sets uncontrolled initial
+state. For controlled state, pass `open` and update it from `onOpenChange`; the callback requests a
+change without overriding the supplied value. Native `onTransitionEnd` is available for transition
+completion, and transitions respect reduced-motion preferences.
+
+<CodeExample>
+    <div id="collapse-group">
+        <div className="d-flex gap-2 mb-3">
+            <CollapseToggle target="#collapse-group-one">One</CollapseToggle>
+            <CollapseToggle target="#collapse-group-two">Two</CollapseToggle>
+        </div>
+        <Collapse id="collapse-group-one" parent="#collapse-group" defaultOpen>
+            <p>First exclusive panel</p>
+        </Collapse>
+        <Collapse id="collapse-group-two" parent="#collapse-group">
+            <p>Second exclusive panel</p>
+        </Collapse>
+    </div>
+</CodeExample>
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Collapse][1], copyright The Bootstrap Authors, MIT license.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/collapse.mdx

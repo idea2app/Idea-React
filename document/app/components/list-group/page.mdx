@@ -51,7 +51,7 @@ items also receive `.pe-none` (`pointer-events: none`), so they cannot be activa
 pointer; links additionally drop their `href` and click handler, while buttons receive the native
 `disabled` attribute. Be sure to **not use the standard `btn` classes here**.
 
-<ListGroup>
+<ListGroup as="div">
     <ListGroupItem action href="#" active>
         The current link item
     </ListGroupItem>
@@ -69,7 +69,7 @@ pointer; links additionally drop their `href` and click handler, while buttons r
 With buttons, you can also make use of the `disabled` attribute instead of the `disabled` class.
 Unlike `<a>`s, `<button>`s support it natively.
 
-<ListGroup>
+<ListGroup as="div">
     <ListGroupItem action type="button" active>
         The current button
     </ListGroupItem>
@@ -103,7 +103,7 @@ Add `numbered` to opt into numbered list group items. Numbers are generated via 
 browser's default `<ol>` styling, which places them better inside list group items and allows for
 more customization.
 
-<ListGroup numbered>
+<ListGroup as="ol" numbered>
     <ListGroupItem>A list item</ListGroupItem>
     <ListGroupItem>A list item</ListGroupItem>
     <ListGroupItem>A list item</ListGroupItem>
@@ -111,7 +111,7 @@ more customization.
 
 Numbered items work great with custom content as well.
 
-<ListGroup numbered>
+<ListGroup as="ol" numbered>
     <ListGroupItem className="d-flex justify-content-between align-items-start">
         <div className="ms-2 me-auto">
             <span className="d-block fw-bold">Subheading</span>
@@ -194,8 +194,6 @@ Use the `theme` prop on items to style them with a stateful background and color
             ['danger', 'Danger'],
             ['warning', 'Warning'],
             ['info', 'Info'],
-            ['light', 'Light'],
-            ['dark', 'Dark'],
             ['inverse', 'Inverse']
         ].map(([theme, title]) => (
             <ListGroupItem key={theme} theme={theme}>
@@ -211,7 +209,7 @@ Themes also work with `action` items rendered as links or buttons. Notice the ho
 not present in the non-interactive example above. The `active` state is supported as well.
 
 <div className="vstack gap-3">
-    <ListGroup>
+    <ListGroup as="div">
         <ListGroupItem action href="#">
             A simple default list group item
         </ListGroupItem>
@@ -223,8 +221,6 @@ not present in the non-interactive example above. The `active` state is supporte
             ['danger', 'Danger'],
             ['warning', 'Warning'],
             ['info', 'Info'],
-            ['light', 'Light'],
-            ['dark', 'Dark'],
             ['inverse', 'Inverse']
         ].map(([theme, title]) => (
             <ListGroupItem key={theme} action href="#" theme={theme}>
@@ -366,8 +362,9 @@ You can use the `stretched-link` utility on `<label>`s to make the whole list gr
 ## JavaScript behavior
 
 The wrapper covers list group markup and styles. To create tabbable list group panes, pair the
-items with an application-level tab implementation as described in the [upstream list group
-documentation][5].
+items with an application-level tab implementation as described in the [upstream guide][5].
+
+Adapted from [Bootstrap v6.0.0-alpha.1][5], © the Bootstrap authors (MIT license).
 
 </ComponentsLayout>
 
@@ -375,4 +372,4 @@ documentation][5].
 [2]: https://getbootstrap.com/docs/6.0/layout/breakpoints/#container-queries
 [3]: https://github.com/idea2app/Idea-React/blob/main/source/Badge.tsx
 [4]: https://getbootstrap.com/docs/6.0/utilities/flex/
-[5]: https://getbootstrap.com/docs/6.0/components/list-group/
+[5]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/list-group.mdx

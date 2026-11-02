@@ -1,7 +1,9 @@
 'use client';
 
 import classNames from 'classnames';
-import { ComponentPropsWithRef, FC, MouseEvent } from 'react';
+import { action, observable } from 'mobx';
+import { observer } from 'mobx-react';
+import { Component, ComponentPropsWithRef, FC, MouseEvent } from 'react';
 
 export type ComponentTheme =
     | 'primary'
@@ -22,6 +24,9 @@ interface ButtonStyleProps {
     icon?: boolean;
     styled?: boolean;
     disabled?: boolean;
+    active?: boolean;
+    toggle?: boolean;
+    defaultActive?: boolean;
 }
 
 type ButtonLinkAttributes = ComponentPropsWithRef<'a'> & { href: string };
@@ -41,15 +46,36 @@ export const Button: FC<ButtonProps> = ({
     icon,
     styled,
     disabled,
+    active,
+    toggle,
+    defaultActive,
     className,
     ...props
 }) => {
+    if (toggle)
+        return (
+            <StatefulButton
+                buttonProps={{
+                    ...props,
+                    variant,
+                    theme,
+                    size,
+                    icon,
+                    styled,
+                    disabled,
+                    active,
+                    defaultActive,
+                    className
+                }}
+            />
+        );
+
     const attributes: ButtonElementAttributes = props;
     const classes = classNames(
         variant ? `btn-${variant}` : icon ? undefined : 'btn',
         theme && `theme-${theme}`,
         size && `btn-${size}`,
-        { 'btn-icon': icon, 'btn-styled': styled, disabled },
+        { 'btn-icon': icon, 'btn-styled': styled, disabled, active },
         className
     );
 
@@ -59,6 +85,11 @@ export const Button: FC<ButtonProps> = ({
             className={classes}
             href={disabled ? undefined : attributes.href}
             aria-disabled={disabled || undefined}
+            aria-pressed={
+                attributes.role === 'button'
+                    ? (active ?? attributes['aria-pressed'])
+                    : attributes['aria-pressed']
+            }
             tabIndex={disabled ? -1 : attributes.tabIndex}
             onClick={disabled ? preventNavigation : attributes.onClick}
         />
@@ -68,6 +99,66 @@ export const Button: FC<ButtonProps> = ({
             type={attributes.type || 'button'}
             className={classes}
             disabled={disabled}
+            aria-pressed={active ?? attributes['aria-pressed']}
         />
     );
 };
+
+@observer
+class StatefulButton extends Component<{ buttonProps: ButtonProps }> {
+    @observable accessor active = this.props.buttonProps.defaultActive ?? false;
+
+    @action
+    setActive = (active: boolean) => (this.active = active);
+
+    handleClick = (event: MouseEvent<HTMLButtonElement & HTMLAnchorElement>) => {
+        this.props.buttonProps.onClick?.(event);
+
+        if (!event.defaultPrevented)
+            this.setActive(!(this.props.buttonProps.active ?? this.active));
+    };
+
+    render() {
+        return (
+            <Button
+                {...this.props.buttonProps}
+                toggle={false}
+                role={
+                    this.props.buttonProps.role ??
+                    (this.props.buttonProps.href ? 'button' : undefined)
+                }
+                active={this.props.buttonProps.active ?? this.active}
+                onClick={this.handleClick}
+            />
+        );
+    }
+}
+
+export type ButtonInputProps = Omit<ComponentPropsWithRef<'input'>, 'size'> &
+    Omit<ButtonStyleProps, 'toggle' | 'defaultActive'>;
+
+export const ButtonInput: FC<ButtonInputProps> = ({
+    variant,
+    theme,
+    size,
+    icon,
+    styled,
+    active,
+    className,
+    type = 'button',
+    ...props
+}) => (
+    <input
+        {...props}
+        type={type}
+        className={classNames(
+            variant ? `btn-${variant}` : 'btn',
+            theme && `theme-${theme}`,
+            size && `btn-${size}`,
+            { 'btn-icon': icon, 'btn-styled': styled, active },
+            className
+        )}
+    />
+);
+
+ButtonInput.displayName = 'ButtonInput';

@@ -37,11 +37,11 @@ Click the button below to show and close a popover.
 
 Things to know when using popovers:
 
-- Bootstrap relies on [Floating UI](https://floating-ui.com/) for dynamic positioning. The React
-  wrapper instead positions the panel with Bootstrap's placement utilities inside the trigger's
-  relative wrapper, so there is no positioning library or plugin to initialize.
-- Popovers are rendered wherever `<OverlayBox>` is mounted, next to the trigger. This keeps the
-  content inside dialogs and other focus-managed containers without a `container` option.
+- The React wrapper measures its trigger and content, flips to the roomier side, and shifts inside
+  the viewport without a positioning dependency. Resize, scroll and size changes update geometry.
+- By default content stays beside its trigger. Set `container` to a selector, an element, or a
+  function returning an element to portal elsewhere. Keep overlays used inside modal dialogs
+  within the same dialog to preserve top-layer and focus behavior.
 - Set `title` for the popover header and `detail` for the body. Without `detail`, the wrapper renders
   a tooltip instead.
 - Triggering popovers on hidden elements will not work.
@@ -120,21 +120,25 @@ Directions are mirrored when using Bootstrap in RTL.
 
 #### Responsive placement
 
-The Bootstrap plugin accepts breakpoint-prefixed placements such as `top md:right lg:bottom`. The
-React wrapper takes a single `placement` value; choose it per viewport in your component or model
-instead of passing a responsive string.
+Use `placement` for the default direction and `responsivePlacement` for viewport breakpoints.
+The highest matching breakpoint wins.
 
-<CodeBlock language="tsx">{`<OverlayBox placement={isWide ? 'right' : 'top'} title="Responsive popover" detail="…">
+<CodeBlock language="tsx">{`<OverlayBox placement="top" responsivePlacement={{ md: 'right', lg: 'bottom' }} title="Responsive popover" detail="…">
     <Button>Open</Button>
 </OverlayBox>`}</CodeBlock>
 
 #### Custom container
 
-Bootstrap's `container` option moves the generated markup into another element when parent styles
-interfere with positioning. The React wrapper always renders the panel inside its trigger wrapper,
-so the content stays in the flow of the component—including inside a dialog, where focus is trapped
-and the panel must remain a child of the dialog. If an ancestor clips the panel, adjust that
-ancestor's overflow or move the trigger, rather than reparenting the overlay.
+Pass `container="body"` to escape clipping ancestors, or provide an element or a function returning
+one. The wrapper translates viewport measurements into the overlay's positioned ancestor coordinates.
+Pointer and focus movement into portal content remain interactive; outside clicks and Escape dismiss it.
+
+<CodeBlock language="tsx">{`<OverlayBox container="body" offset={[0, 12]} padding={8} title="Portal tooltip">
+    <Button>Hover or focus</Button>
+</OverlayBox>`}</CodeBlock>
+
+`offset` is a main-axis distance or a `[crossAxis, mainAxis]` pair. `padding` sets the viewport inset;
+`flip={false}` retains the preferred side while still shifting within viewport boundaries.
 
 #### Custom popovers
 
@@ -217,8 +221,8 @@ Hover the button below to see a tooltip. By default, the tooltip appears above i
 
 Things to know when using tooltips:
 
-- Bootstrap relies on [Floating UI](https://floating-ui.com/) for positioning; the React wrapper
-  uses Bootstrap placement utilities and does not need the plugin.
+- The React wrapper uses measured positioning with automatic viewport flipping and shifting,
+  so it does not need Bootstrap's JavaScript plugin or Floating UI.
 - Tooltips are rendered next to the trigger and removed when closed.
 - Provide a title; an empty overlay conveys nothing to users.
 - Triggering tooltips on hidden elements will not work.
@@ -312,8 +316,8 @@ directions: top, right, bottom, and left. Directions are mirrored when using Boo
 
 #### Responsive placement
 
-As with popovers, the Bootstrap plugin accepts breakpoint-prefixed placements, while the React
-wrapper takes one `placement` per mounted overlay. Select the value that matches the current layout.
+As with popovers, use `responsivePlacement={{ md: 'right', lg: 'bottom' }}` alongside a base
+`placement`. Changes apply while the tooltip remains open.
 
 #### Custom HTML
 
@@ -425,10 +429,12 @@ The plugin's data attributes map directly to props:
 | ---------------------- | ----------------------------------------------------------------- |
 | `data-bs-title`        | `title`                                                           |
 | `data-bs-content`      | `detail`                                                          |
-| `data-bs-placement`    | `placement` (one value; no responsive prefixes)                   |
+| `data-bs-placement`    | `placement` and a `responsivePlacement` breakpoint map            |
 | `data-bs-trigger`      | `trigger` (no `manual`; render the overlay conditionally instead) |
 | `data-bs-custom-class` | `overlayClassName`                                                |
 | `data-bs-html`         | Pass JSX to `title` or `detail`                                   |
+| `data-bs-container`    | `container`                                                       |
+| `data-bs-offset`       | `offset`                                                          |
 
 ### Methods and events
 
@@ -445,7 +451,7 @@ other plugin events.
 </ComponentsLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/OverlayBox.tsx
-[2]: https://getbootstrap.com/docs/6.0/components/popover/
-[3]: https://getbootstrap.com/docs/6.0/components/tooltip/
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/popover.mdx
+[3]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/tooltip.mdx
 [4]: https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html
 [5]: https://github.com/idea2app/Idea-React/blob/main/source/Dialog.tsx

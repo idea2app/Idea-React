@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { CSSProperties, FC, HTMLAttributes } from 'react';
+import { ComponentPropsWithRef, CSSProperties, FC, HTMLAttributes } from 'react';
 
 import type { ComponentTheme } from './Button';
 
@@ -65,6 +65,12 @@ Avatar.displayName = 'Avatar';
 export interface AvatarStackProps extends HTMLAttributes<HTMLDivElement> {
     size?: AvatarSize;
 }
+
+export const AvatarImage: FC<ComponentPropsWithRef<'img'>> = ({ className, ...props }) => (
+    <img {...props} className={classNames('avatar-img', className)} />
+);
+
+AvatarImage.displayName = 'AvatarImage';
 
 export const AvatarStack: FC<AvatarStackProps> = ({ className, size, children, ...props }) => (
     <div

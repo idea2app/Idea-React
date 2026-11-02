@@ -1,0 +1,142 @@
+import { ListGroup, ListGroupItem } from '../../../../source/ListGroup';
+import { Nav, NavLink } from '../../../../source/Nav';
+import { ScrollSpy } from '../../../../source/ScrollSpy';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="scrollspy">
+
+# Scrollspy
+
+Highlight navigation links as their matching sections cross the top activation line. Adapted from
+[Bootstrap v6.0.0-alpha.1 Scrollspy][1].
+
+## Navbar and nested navigation
+
+Provide a navigation selector with `target`; the wrapper scans its fragment links and matches them
+to section IDs. Use a fixed-height scroll root for an independently scrolling example, or
+`scrollRoot="window"` to observe page scrolling.
+
+<CodeExample>
+    <Nav id="scrollspy-nav" variant="pills" aria-label="Article sections">
+        <NavLink href="#spy-first">First</NavLink>
+        <NavLink href="#spy-second">Second</NavLink>
+        <NavLink href="#spy-third">Third</NavLink>
+    </Nav>
+    <ScrollSpy
+        target="#scrollspy-nav"
+        topMargin="12%"
+        className="overflow-y-auto border rounded-3 p-3"
+        style={{ height: 240 }}
+    >
+        <section id="spy-first">
+            <h3>First section</h3>
+            <p>Active links follow the section that has crossed the activation line.</p>
+        </section>
+        <section id="spy-second">
+            <h3>Second section</h3>
+            <p>The previous link remains active while scrolling between section headings.</p>
+        </section>
+        <section id="spy-third">
+            <h3>Third section</h3>
+            <p>The final section becomes active when the scroll root reaches its end.</p>
+        </section>
+    </ScrollSpy>
+</CodeExample>
+
+Nested links and repeated links to the same section are supported. The matching IDs are resolved
+with `getElementById`, so punctuation in an ID does not require a CSS selector.
+
+<CodeExample>
+    <Nav id="nested-spy-nav" vertical aria-label="Nested sections">
+        <NavLink href="#nested-parent">Parent section</NavLink>
+        <Nav vertical aria-label="Child sections">
+            <NavLink href="#nested-child">Child section</NavLink>
+        </Nav>
+    </Nav>
+    <ScrollSpy
+        target="#nested-spy-nav"
+        topMargin="0px"
+        className="overflow-y-auto border rounded-3 p-3"
+        style={{ height: 180 }}
+    >
+        <section id="nested-parent">
+            <h3>Parent section</h3>
+            <p>Parent links remain active while one of their nested sections is selected.</p>
+        </section>
+        <section id="nested-child">
+            <h3>Child section</h3>
+            <p>The nested link becomes active alongside its parent.</p>
+        </section>
+    </ScrollSpy>
+</CodeExample>
+
+## List groups and simple anchors
+
+Any fragment links work, including links inside a list group or custom navigation.
+
+<CodeExample>
+    <ListGroup id="list-spy-nav">
+        <ListGroupItem href="#list-spy-one">One</ListGroupItem>
+        <ListGroupItem href="#list-spy-two">Two</ListGroupItem>
+        <ListGroupItem href="#list-spy-three">Three</ListGroupItem>
+    </ListGroup>
+    <ScrollSpy
+        target="#list-spy-nav"
+        className="overflow-y-auto border rounded-3 p-3"
+        style={{ height: 220 }}
+    >
+        <h3 id="list-spy-one">Item one</h3>
+        <p>List group links receive the active state in the same way as nav links.</p>
+        <h3 id="list-spy-two">Item two</h3>
+        <p>Scroll the root to update the selected item.</p>
+        <h3 id="list-spy-three">Item three</h3>
+        <p>Plain fragment anchors can be used instead of a list group.</p>
+    </ScrollSpy>
+</CodeExample>
+
+## Activation and options
+
+`topMargin` accepts pixels or a percentage from the top of the scroll root. The default `12%`
+leaves room for a sticky header. Pixel margins are recalculated when the viewport resizes.
+`rootMargin`, when provided, takes precedence and is passed unchanged to IntersectionObserver.
+`threshold` accepts an array of intersection ratios and defaults to `[0]`.
+`smoothScroll` animates link activation, updates
+the URL fragment, and focuses the section. The scroll root receives a tab stop if it does not
+already have one.
+
+Hidden sections are ignored. Call the component's `refresh()` after changing content outside React
+or revealing a hidden region so links and sections are recalculated.
+Selection uses IntersectionObserver, preserving the previous section in gaps and selecting the
+last section when an overflowing scroll root reaches the bottom. Set `debug` to display the red
+activation line and bottom detection zone; the overlay is hidden from assistive technology.
+
+<CodeExample>
+    <Nav id="debug-spy-nav" variant="pills" aria-label="Observer options">
+        <NavLink href="#debug-spy-first">First</NavLink>
+        <NavLink href="#debug-spy-last">Last</NavLink>
+    </Nav>
+    <ScrollSpy
+        target="#debug-spy-nav"
+        rootMargin="0px 0px -75% 0px"
+        threshold={[0, 0.25, 0.5]}
+        debug
+        className="overflow-y-auto border rounded-3 p-3"
+        style={{ height: 200 }}
+    >
+        <section id="debug-spy-first" className="py-5">
+            <h3>Custom activation region</h3>
+            <p>The dashed red line marks the effective observer root's bottom edge.</p>
+        </section>
+        <section id="debug-spy-last" className="py-5">
+            <h3>Bottom detection</h3>
+            <p>The final section remains selected at the end of the scroll root.</p>
+        </section>
+    </ScrollSpy>
+</CodeExample>
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Scrollspy][1], copyright The Bootstrap Authors, MIT license.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/scrollspy.mdx

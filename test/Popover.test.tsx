@@ -22,3 +22,11 @@ it('renders official Bootstrap 6 popover markup', () => {
     assert.equal(screen.getByText('Details').className, 'popover-header');
     assert.equal(screen.getByText('More information').className, 'popover-body');
 });
+
+it('omits empty headers and hides an inactive popover from assistive technology', () => {
+    const { container } = render(<Popover show={false}>Body only</Popover>);
+
+    assert.equal(container.querySelector('.popover-header'), null);
+    assert.equal(screen.queryByRole('tooltip'), null);
+    assert.equal(container.querySelector('.popover')?.hasAttribute('hidden'), true);
+});

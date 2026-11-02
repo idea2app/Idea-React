@@ -1,0 +1,74 @@
+import {
+    Placeholder,
+    PlaceholderAnimation,
+    PlaceholderButton
+} from '../../../../source/Placeholder';
+import { Card, CardBody, CardTitle, CardText } from '../../../../source/Card';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="placeholder">
+
+# Placeholder
+
+Skeletons reserve space while content loads. They are decorative and hidden from assistive
+technology by default; communicate loading separately using a status message and `aria-busy`.
+
+## Loading card
+
+<CodeExample>
+    <Card aria-busy="true">
+        <CardBody>
+            <PlaceholderAnimation>
+                <CardTitle>
+                    <Placeholder width="50%" />
+                </CardTitle>
+                <CardText>
+                    <Placeholder width="70%" /> <Placeholder width="25%" />
+                    <Placeholder width="45%" /> <Placeholder width="40%" />
+                </CardText>
+                <PlaceholderButton variant="solid" theme="primary" className="col-6">
+                    <span className="visually-hidden">Loading</span>
+                </PlaceholderButton>
+            </PlaceholderAnimation>
+            <span role="status" className="visually-hidden">
+                Loading card...
+            </span>
+        </CardBody>
+    </Card>
+</CodeExample>
+
+## Width, color, and size
+
+Set `width`, pass grid or width utilities through `className`, or supply an inline style.
+`theme` changes the background, and `size` accepts `xs`, `sm`, and `lg`.
+
+<CodeExample>
+    <div className="vstack gap-2">
+        <Placeholder size="lg" width="100%" theme="primary" />
+        <Placeholder width="75%" theme="success" />
+        <Placeholder size="sm" className="col-6" />
+        <Placeholder size="xs" style={{ width: '25%' }} />
+    </div>
+</CodeExample>
+
+## Animation and text
+
+Use `PlaceholderAnimation` to animate a group or the `animation` prop on individual skeletons.
+`wave` is the standard animation; `pulse` changes opacity, with `glow` retained as an alias.
+For visible loading text, put it inside the animation wrapper instead of a skeleton.
+
+<CodeExample>
+    <PlaceholderAnimation animation="pulse" className="mt-3">
+        <Placeholder width="100%" />
+    </PlaceholderAnimation>
+    <PlaceholderAnimation className="mt-3">
+        <span className="fg-3">Working on it...</span>
+    </PlaceholderAnimation>
+</CodeExample>
+
+Adapted from [Bootstrap v6.0.0-alpha.1 Placeholder][1], copyright The Bootstrap Authors, MIT license.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/placeholder.mdx

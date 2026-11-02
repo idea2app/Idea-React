@@ -4,12 +4,14 @@ import classNames from 'classnames';
 import { Component, ComponentPropsWithoutRef, forwardRef, Ref } from 'react';
 
 import type { ComponentTheme } from '../Button';
+import { FormValidationProps } from './Primitives';
 
-export type CheckboxProps = Omit<ComponentPropsWithoutRef<'input'>, 'type' | 'size'> & {
-    size?: 'sm' | 'lg';
-    theme?: ComponentTheme;
-    indeterminate?: boolean;
-};
+export type CheckboxProps = Omit<ComponentPropsWithoutRef<'input'>, 'type' | 'size'> &
+    FormValidationProps & {
+        size?: 'sm' | 'lg';
+        theme?: ComponentTheme;
+        indeterminate?: boolean;
+    };
 
 interface CheckboxComponentProps extends CheckboxProps {
     forwardedRef?: Ref<HTMLInputElement>;
@@ -44,6 +46,7 @@ class CheckboxComponent extends Component<CheckboxComponentProps> {
             className,
             size,
             theme,
+            validation,
             indeterminate,
             forwardedRef: _forwardedRef,
             ...props
@@ -54,11 +57,13 @@ class CheckboxComponent extends Component<CheckboxComponentProps> {
                 {...props}
                 ref={this.setInputRef}
                 type="checkbox"
-                aria-checked={indeterminate ? 'mixed' : undefined}
+                aria-invalid={validation ? validation === 'invalid' : props['aria-invalid']}
+                aria-checked={indeterminate ? 'mixed' : props['aria-checked']}
                 className={classNames(
                     'check',
                     size && `check-${size}`,
                     theme && `theme-${theme}`,
+                    validation && `is-${validation}`,
                     className
                 )}
             />
