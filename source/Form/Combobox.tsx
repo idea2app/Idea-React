@@ -304,6 +304,7 @@ export class Combobox extends Component<ComboboxProps> {
             <div {...props} className={classNames('combobox', className)}>
                 <Menu
                     ref={this.menu}
+                    className="w-100"
                     id={id ? `${id}-combobox` : undefined}
                     label={
                         <>
@@ -329,7 +330,7 @@ export class Combobox extends Component<ComboboxProps> {
                             controlSize && `form-control-${controlSize}`,
                             validation && `is-${validation}`
                         ),
-                        variant: 'text',
+                        variant: false,
                         disabled,
                         'aria-haspopup': 'listbox',
                         'aria-label': this.props['aria-label'] ?? placeholder,

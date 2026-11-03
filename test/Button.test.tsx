@@ -38,6 +38,31 @@ it('preserves explicit variants and themes for buttons and inputs', () => {
     assert.equal(screen.getByRole('button', { name: 'Icon input' }).className, 'btn btn-icon');
 });
 
+it('allows composite controls to opt out of button styling without losing behavior', () => {
+    render(
+        <>
+            <Button variant={false} className="form-control">
+                Control
+            </Button>
+            <ButtonInput variant={false} className="form-control" value="Input control" />
+            <Button variant={false} href="/docs" className="custom">
+                Unstyled link
+            </Button>
+            <Button variant={false} toggle>
+                Unstyled toggle
+            </Button>
+        </>
+    );
+
+    assert.equal(screen.getByRole('button', { name: 'Control' }).className, 'form-control');
+    assert.equal(screen.getByRole('button', { name: 'Input control' }).className, 'form-control');
+    assert.equal(screen.getByRole('link').className, 'custom');
+
+    fireEvent.click(screen.getByRole('button', { name: 'Unstyled toggle' }));
+
+    assert.equal(screen.getByRole('button', { name: 'Unstyled toggle' }).className, 'active');
+});
+
 it('preserves native keyboard events and forwards each synthesized click only once', () => {
     const onClick = mock.fn();
     const onKeyDown = mock.fn();

@@ -19,18 +19,19 @@ technology by default; communicate loading separately using a status message and
 <CodeExample>
     <Card aria-busy="true">
         <CardBody>
-            <PlaceholderAnimation>
-                <CardTitle>
-                    <Placeholder width="50%" />
-                </CardTitle>
-                <CardText>
-                    <Placeholder width="70%" /> <Placeholder width="25%" />
-                    <Placeholder width="45%" /> <Placeholder width="40%" />
-                </CardText>
-                <PlaceholderButton variant="solid" theme="primary" className="col-6">
-                    <span className="visually-hidden">Loading</span>
-                </PlaceholderButton>
-            </PlaceholderAnimation>
+            <CardTitle as="h5" aria-hidden="true">
+                <Placeholder width="50%" animation="wave" />
+            </CardTitle>
+            <CardText aria-hidden="true">
+                <Placeholder className="col-7" animation="wave" />
+                <Placeholder className="col-4" animation="wave" />
+                <Placeholder className="col-4" animation="wave" />
+                <Placeholder className="col-6" animation="wave" />
+                <Placeholder className="col-8" animation="wave" />
+            </CardText>
+            <PlaceholderButton variant="solid" theme="primary" className="col-6">
+                <span className="visually-hidden">Loading</span>
+            </PlaceholderButton>
             <span role="status" className="visually-hidden">
                 Loading card...
             </span>

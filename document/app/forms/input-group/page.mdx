@@ -24,6 +24,7 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 Easily extend form controls by adding text, buttons, or button groups on either side of textual inputs, custom selects, and custom file inputs.
 
 Input groups attach add-on elements to a textual input field. Add-ons can be text, buttons, or button groups. Add labels, help text, and validation styles with [form fields][1].
+Pass `htmlFor` to `InputGroupText` to render the add-on itself as a label for its control.
 
 <CodeExample>
     <div className="vstack gap-3">
@@ -100,11 +101,7 @@ Input groups adapt to the height of textarea elements.
 
 <CodeExample>
     <InputGroup className="mb-3">
-        <InputGroupText>
-            <FormLabel plain htmlFor="inputGroupSelect01">
-                Options
-            </FormLabel>
-        </InputGroupText>
+        <InputGroupText htmlFor="inputGroupSelect01">Options</InputGroupText>
         <FormSelect id="inputGroupSelect01" defaultValue="Choose...">
             <option>Choose...</option>
             <option value="1">One</option>
@@ -119,11 +116,7 @@ Input groups adapt to the height of textarea elements.
             <option value="2">Two</option>
             <option value="3">Three</option>
         </FormSelect>
-        <InputGroupText>
-            <FormLabel plain htmlFor="inputGroupSelect02">
-                Options
-            </FormLabel>
-        </InputGroupText>
+        <InputGroupText htmlFor="inputGroupSelect02">Options</InputGroupText>
     </InputGroup>
     <InputGroup className="mb-3">
         <InputGroupButton type="button" theme="secondary" variant="outline">
@@ -161,20 +154,12 @@ Input groups adapt to the height of textarea elements.
 
 <CodeExample>
     <InputGroup className="mb-3">
-        <InputGroupText>
-            <FormLabel plain htmlFor="inputGroupFile01">
-                Upload
-            </FormLabel>
-        </InputGroupText>
+        <InputGroupText htmlFor="inputGroupFile01">Upload</InputGroupText>
         <FormControl type="file" id="inputGroupFile01" />
     </InputGroup>
     <InputGroup className="mb-3">
         <FormControl type="file" id="inputGroupFile02" />
-        <InputGroupText>
-            <FormLabel plain htmlFor="inputGroupFile02">
-                Upload
-            </FormLabel>
-        </InputGroupText>
+        <InputGroupText htmlFor="inputGroupFile02">Upload</InputGroupText>
     </InputGroup>
     <InputGroup className="mb-3">
         <InputGroupButton

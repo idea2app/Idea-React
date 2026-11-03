@@ -53,12 +53,19 @@ it('renders official Bootstrap 6 card parts', () => {
         </Card>
     );
     assert.equal(screen.getByText('Title').className, 'card-title');
+    assert.equal(screen.getByRole('heading', { name: 'Title' }).tagName, 'H4');
     assert.equal(screen.getByText('Body').className, 'card-text');
 
     const card = screen.getByText('Title').closest('.card');
 
     assert.equal(card?.className, 'card custom');
     assert.equal(card?.firstElementChild?.className, 'card-body');
+});
+
+it('allows card titles to retain the heading level of the surrounding example', () => {
+    render(<CardTitle as="h5">Compact title</CardTitle>);
+
+    assert.equal(screen.getByRole('heading', { level: 5 }).className, 'card-title');
 });
 
 it('renders Bootstrap 6 card headers and footers', () => {

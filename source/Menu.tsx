@@ -436,11 +436,16 @@ export class Menu extends Component<MenuProps> {
                 ref={this.root}
                 id={id}
                 data-bs-theme={theme}
-                className={classNames('d-inline-block position-relative', className)}
+                className={classNames(
+                    split ? 'btn-group' : 'd-inline-block',
+                    'position-relative',
+                    className
+                )}
                 onKeyDown={this.handleKeyDown}
                 onBlur={this.handleBlur}
             >
                 <Button
+                    variant={nav ? false : undefined}
                     {...toggleProps}
                     ref={this.trigger}
                     aria-expanded={open}

@@ -14,8 +14,12 @@ it('updates the controlled value when an option is selected', () => {
             <ComboboxOption value="jp">Japan</ComboboxOption>
         </Combobox>
     );
+    const trigger = screen.getByRole('button', { name: 'Choose a country' });
 
-    fireEvent.click(screen.getByRole('button', { name: 'Choose a country' }));
+    assert.equal(trigger.className, 'form-control combobox-toggle');
+    assert.ok(trigger.parentElement?.classList.contains('w-100'));
+
+    fireEvent.click(trigger);
     fireEvent.click(screen.getByRole('option', { name: 'Canada' }));
 
     assert.deepEqual(changed.mock.calls[0].arguments, ['ca']);

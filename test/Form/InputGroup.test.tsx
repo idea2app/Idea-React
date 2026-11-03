@@ -23,6 +23,22 @@ it('renders a sized input group and its addon', () => {
     assert.equal(screen.getByText('@').parentElement?.className, 'input-group input-group-lg');
 });
 
+it('renders a label addon as the styled direct sibling of its control', () => {
+    render(
+        <InputGroup>
+            <InputGroupText htmlFor="addon-value">Value</InputGroupText>
+            <FormControl id="addon-value" />
+        </InputGroup>
+    );
+    const input = screen.getByLabelText('Value');
+    const label = screen.getByText('Value');
+
+    assert.equal(label.tagName, 'LABEL');
+    assert.equal(label.className, 'input-group-text');
+    assert.equal(label.parentElement, input.parentElement);
+    assert.equal(label.nextElementSibling, input);
+});
+
 it('renders direct-child dropdown and segmented menu addons with inherited keyboard behavior', () => {
     render(
         <InputGroup>

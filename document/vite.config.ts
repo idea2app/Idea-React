@@ -35,10 +35,11 @@ const inlineElements = new Set([
     'Avatar',
     'Badge',
     'BreadcrumbLink',
-    'CardSubtitle',
-    'CardTitle',
     'Button',
     'button',
+    'CardTitle',
+    'CardSubtitle',
+    'CardText',
     'ChipDismiss',
     'ChipInputLabel',
     'ChipToken',
@@ -55,6 +56,7 @@ const inlineElements = new Set([
     'FormAdornmentText',
     'FormSwitch',
     'FormText',
+    'FormFeedback',
     'InputGroupText',
     'InputGroupButton',
     'ListGroupItem',
@@ -66,12 +68,17 @@ const inlineElements = new Set([
     'PageLink',
     'PageText',
     'PlaceholderButton',
+    'Popover',
+    'Progress',
     'span',
     'SpinnerButton',
     'StepperButton',
     'StepperLink',
     'ToggleButton',
-    'Toggler'
+    'Toggler',
+    'Tooltip',
+    'th',
+    'td'
 ]);
 
 const visit = (node: MdastNode) => {

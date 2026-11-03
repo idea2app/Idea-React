@@ -34,7 +34,9 @@ Here’s a quick example to demonstrate Bootstrap’s form styles. Keep reading 
         <div className="mb-3">
             <FormLabel htmlFor="exampleInputEmail1">Email address</FormLabel>
             <FormControl type="email" id="exampleInputEmail1" aria-describedby="emailHelp" />
-            <FormText id="emailHelp">We’ll never share your email with anyone else.</FormText>
+            <FormText id="emailHelp" block>
+                We’ll never share your email with anyone else.
+            </FormText>
         </div>
         <div className="mb-3">
             <FormLabel htmlFor="exampleInputPassword1">Password</FormLabel>
@@ -81,8 +83,7 @@ However, if your form also includes custom button-like elements such as `<a clas
             <FormField className="mb-3">
                 <Checkbox id="disabledFieldsetCheck" disabled />
                 <FormLabel htmlFor="disabledFieldsetCheck" plain>
-                    {' '}
-                    Can’t check this{' '}
+                    Can’t check this
                 </FormLabel>
             </FormField>
             <Button type="submit" theme="primary" variant="solid">

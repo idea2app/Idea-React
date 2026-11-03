@@ -97,7 +97,11 @@ class FormRangeComponent extends FormPlugin<FormRangeComponentProps, Range> {
                     value={value}
                     defaultValue={defaultValue}
                     aria-invalid={validation ? validation === 'invalid' : props['aria-invalid']}
-                    className={classNames('form-range-input', className)}
+                    className={classNames(
+                        'form-range-input',
+                        validation && `is-${validation}`,
+                        className
+                    )}
                     style={style}
                 />
             </div>

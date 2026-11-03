@@ -1,6 +1,8 @@
 import { action, observable } from 'mobx';
 
 export class NavOverflowModel {
+    @observable accessor initialized = false;
+
     @observable accessor open = false;
 
     @observable accessor overflowIndices: number[] = [];
@@ -17,6 +19,7 @@ export class NavOverflowModel {
 
     @action
     setOverflowIndices = (indices: number[]) => {
+        this.initialized = true;
         this.overflowIndices = indices;
     };
 }

@@ -3,6 +3,8 @@ import { it, mock } from 'node:test';
 
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
+import { Button } from '../source/Button';
+import { ButtonGroup } from '../source/ButtonGroup';
 import {
     Menu,
     MenuDivider,
@@ -16,6 +18,36 @@ import {
     MenuSubmenu,
     MenuText
 } from '../source/Menu';
+
+it('keeps split triggers inside a nested button group for adjoining border radii', () => {
+    render(
+        <ButtonGroup aria-label="Split action">
+            <Button>Action</Button>
+            <Menu label="Toggle menu" split>
+                <MenuItem>Item</MenuItem>
+            </Menu>
+        </ButtonGroup>
+    );
+    const trigger = screen.getByRole('button', { name: 'Toggle menu' });
+
+    assert.ok(trigger.classList.contains('menu-toggle-split'));
+    assert.ok(trigger.parentElement?.classList.contains('btn-group'));
+    assert.equal(trigger.parentElement?.parentElement, screen.getByRole('group'));
+
+    fireEvent.click(trigger);
+
+    assert.equal(trigger.getAttribute('aria-expanded'), 'true');
+});
+
+it('lets navigation triggers inherit navigation styles instead of button styling', () => {
+    render(
+        <Menu label="Products" nav>
+            <MenuItem href="/products">All products</MenuItem>
+        </Menu>
+    );
+
+    assert.equal(screen.getByRole('button', { name: 'Products' }).className, 'nav-link');
+});
 
 it('leaves Enter and Space activation to the native button without double toggling', () => {
     const onOpenChange = mock.fn();

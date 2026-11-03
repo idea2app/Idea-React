@@ -1,5 +1,6 @@
 import { Icon } from '../../../../source/Extension/Icon';
 import { Button } from '../../../../source/Button';
+import { ButtonGroup } from '../../../../source/ButtonGroup';
 import { Container } from '../../../../source/Grid';
 import { Navbar, NavbarBrand, NavbarNav } from '../../../../source/Navbar';
 import { NavItem } from '../../../../source/Nav';
@@ -57,7 +58,7 @@ appropriately convey control's purpose to assistive technologies such as screen 
 Use [button groups][4] to create split button menus where the menu is displayed when a secondary
 button is clicked.
 
-<div className="d-inline-flex">
+<ButtonGroup aria-label="Split menu">
     <Button variant="solid" theme="secondary">
         Split
     </Button>
@@ -78,7 +79,7 @@ button is clicked.
         <MenuDivider />
         <MenuItem href="#">Separated link</MenuItem>
     </Menu>
-</div>
+</ButtonGroup>
 
 ### Dark menus
 

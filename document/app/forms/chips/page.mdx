@@ -41,14 +41,12 @@ Use `ChipToken` for the standalone tokens shown below, or `Chip` for a button. A
     <div className="d-flex flex-wrap gap-2">
         <ChipToken>Basic chip</ChipToken>
         <ChipToken>
-            <ChipImage src="https://github.com/mdo.png" width={16} height={16} alt="" /> With
-            avatar{' '}
+            <ChipImage src="https://github.com/mdo.png" width={16} height={16} alt="" /> With avatar
         </ChipToken>
         <ChipToken>
-            <ChipIcon name="person-fill" aria-hidden="true" /> With icon{' '}
+            <ChipIcon name="person-fill" aria-hidden="true" /> With icon
         </ChipToken>
         <ChipToken>
-            {' '}
             Dismissible <ChipDismiss type="button" aria-label="Remove" />
         </ChipToken>
     </div>
@@ -154,7 +152,6 @@ Use a form label for better accessibility.
         <FormLabel htmlFor="skillsInputLabel">Skills</FormLabel>
         <ChipInput theme="primary">
             <ChipToken>
-                {' '}
                 React <ChipDismiss type="button" aria-label="Remove" />
             </ChipToken>
             <FormGhost type="text" id="skillsInputLabel" placeholder="Add skill..." />
@@ -170,7 +167,6 @@ Disable the ghost input to prevent adding new chips, and disable the dismiss but
 <CodeExample>
     <ChipInput theme="primary">
         <ChipToken>
-            {' '}
             Read only <ChipDismiss type="button" aria-label="Remove" disabled />
         </ChipToken>
         <FormGhost type="text" placeholder="Disabled..." disabled />

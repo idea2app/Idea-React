@@ -27,11 +27,24 @@ export const InputGroup: FC<InputGroupProps> = ({ className, size, ...props }) =
 
 InputGroup.displayName = 'InputGroup';
 
-export type InputGroupTextProps = ComponentPropsWithRef<'span'>;
+export type InputGroupTextProps =
+    | (ComponentPropsWithRef<'span'> & { htmlFor?: never })
+    | (ComponentPropsWithRef<'label'> & { htmlFor: string });
 
-export const InputGroupText: FC<InputGroupTextProps> = ({ className, ...props }) => (
-    <span {...props} className={classNames('input-group-text', className)} />
-);
+const isLabelAddon = (
+    props: InputGroupTextProps
+): props is ComponentPropsWithRef<'label'> & { htmlFor: string } =>
+    typeof props.htmlFor === 'string';
+
+export const InputGroupText: FC<InputGroupTextProps> = ({ className, ...props }) => {
+    const addonClassName = classNames('input-group-text', className);
+
+    return isLabelAddon(props) ? (
+        <label {...props} className={addonClassName} />
+    ) : (
+        <span {...props} className={addonClassName} />
+    );
+};
 
 InputGroupText.displayName = 'InputGroupText';
 

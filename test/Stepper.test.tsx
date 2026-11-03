@@ -51,7 +51,10 @@ it('renders vertical and responsive horizontal steppers with rich themed items',
         </StepperNav>
     );
 
-    assert.equal(screen.getByRole('button').className, 'stepper-item active');
+    assert.equal(
+        screen.getByRole('button').className,
+        'stepper-item p-0 border-0 bg-transparent active'
+    );
     assert.equal(screen.getByRole('button').getAttribute('type'), 'button');
     assert.equal(screen.getByRole('button').hasAttribute('disabled'), true);
 

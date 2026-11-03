@@ -424,8 +424,7 @@ Validation styles are available for the following form controls and components:
                 validation="invalid"
             />
             <FormFeedback id="validationTextareaFeedback">
-                {' '}
-                Please enter a message in the textarea.{' '}
+                Please enter a message in the textarea.
             </FormFeedback>
         </FormField>
         <FormGroup>
@@ -533,6 +532,7 @@ Validation styles are available for the following form controls and components:
             <FormLabel htmlFor="validationRange">Range</FormLabel>
             <FormRange
                 id="validationRange"
+                validation="invalid"
                 min="0"
                 max="5"
                 required
@@ -589,7 +589,7 @@ Validation styles are available for the following form controls and components:
         </FormField>
         <FormField>
             <FormLabel htmlFor="validationChipInput">Tags</FormLabel>
-            <ChipInput>
+            <ChipInput dismissible={false}>
                 <ChipToken>Example</ChipToken>
                 <FormGhost
                     type="text"

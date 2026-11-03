@@ -64,7 +64,12 @@ export const StepperButton: FC<StepperButtonProps> = ({
     <button
         {...props}
         type={type}
-        className={classNames('stepper-item', { active }, theme && `theme-${theme}`, className)}
+        className={classNames(
+            'stepper-item p-0 border-0 bg-transparent',
+            { active },
+            theme && `theme-${theme}`,
+            className
+        )}
     />
 );
 

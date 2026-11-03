@@ -53,6 +53,8 @@ it('renders bubble, uneven ticks, fractional steps and controlled updates', asyn
     assert.equal(wrapper.querySelectorAll('.form-range-tick').length, 3);
     assert.ok(wrapper.classList.contains('theme-success'));
     assert.ok(wrapper.classList.contains('is-invalid'));
+    assert.ok(input.classList.contains('is-invalid'));
+    assert.equal(input.getAttribute('aria-invalid'), 'true');
     assert.equal(input.getAttribute('step'), '0.5');
 
     rerender(

@@ -87,7 +87,9 @@ export class NavOverflow extends Component<NavOverflowProps> {
         const nav = this.nav.current;
         if (!root || !nav) return;
 
-        const items = [...nav.children] as HTMLElement[];
+        const items = [...nav.children].filter(
+            item => item !== this.toggleButton.current?.parentElement
+        ) as HTMLElement[];
         const widths = items.map(item => item.getBoundingClientRect().width || item.offsetWidth);
         const gap = Number.parseFloat(getComputedStyle(nav).columnGap) || 0;
         const allWidth =
@@ -112,7 +114,7 @@ export class NavOverflow extends Component<NavOverflowProps> {
             for (let index = visible.length - 1; index >= 0; index--) {
                 if (!keep[index]) visible.splice(index, 1);
             }
-        } else if (containerWidth > 0) {
+        } else if (containerWidth > 0 && allWidth > containerWidth) {
             while (visibleWidth + toggleWidth > containerWidth && visible.length > minimum) {
                 const index = visible.findLast(candidate => !keep[candidate]);
                 if (index === undefined) break;
@@ -126,13 +128,12 @@ export class NavOverflow extends Component<NavOverflowProps> {
             .map((_, index) => index)
             .filter(index => !visibleSet.has(index));
         const current = this.store.overflowIndices;
-        if (
+        const changed =
             current.length !== overflowIndices.length ||
-            current.some((index, position) => index !== overflowIndices[position])
-        ) {
-            this.store.setOverflowIndices(overflowIndices);
-            this.props.onOverflowChange?.(overflowIndices.length, visible.length);
-        }
+            current.some((index, position) => index !== overflowIndices[position]);
+
+        if (!this.store.initialized || changed) this.store.setOverflowIndices(overflowIndices);
+        if (changed) this.props.onOverflowChange?.(overflowIndices.length, visible.length);
     };
 
     private getCollapseBelow = () => {
@@ -251,6 +252,7 @@ export class NavOverflow extends Component<NavOverflowProps> {
                 ref={this.root}
                 className={classNames(
                     'nav-overflow d-flex align-items-start position-relative',
+                    this.store.initialized && 'nav-overflow-initialized',
                     className
                 )}
                 onClick={this.handleClick}
@@ -262,45 +264,45 @@ export class NavOverflow extends Component<NavOverflowProps> {
                     fill={fill}
                     justified={justified}
                     aria-label={ariaLabel}
-                    className="flex-nowrap flex-grow-1 overflow-hidden"
+                    className="flex-nowrap flex-grow-1"
                 >
                     {items.map((child, index) => this.renderChild(child, index))}
-                </Nav>
-                <div
-                    className="nav-item dropdown flex-shrink-0"
-                    style={toggleStyle}
-                    data-menu-placement={menuPlacement}
-                >
-                    <button
-                        ref={this.toggleButton}
-                        type="button"
-                        className="nav-link"
-                        aria-haspopup="menu"
-                        aria-expanded={this.store.open}
-                        aria-controls={menuId}
-                        aria-label={text ? undefined : 'More'}
-                        data-overflow-toggle
-                    >
-                        {iconPlacement === 'start' && icon}
-                        {text}
-                        {iconPlacement === 'end' && icon}
-                    </button>
                     <div
-                        id={menuId}
-                        className={classNames(
-                            'menu nav-overflow-menu',
-                            placementClasses,
-                            menuStrategy === 'fixed' && 'position-fixed',
-                            { show: this.store.open && hasOverflow }
-                        )}
-                        role="menu"
-                        hidden={!this.store.open || !hasOverflow}
+                        className="nav-item nav-overflow-item flex-shrink-0"
+                        style={toggleStyle}
+                        data-menu-placement={menuPlacement}
                     >
-                        {this.store.overflowIndices.map(index =>
-                            this.renderChild(items[index], index, true)
-                        )}
+                        <button
+                            ref={this.toggleButton}
+                            type="button"
+                            className="nav-link"
+                            aria-haspopup="menu"
+                            aria-expanded={this.store.open}
+                            aria-controls={menuId}
+                            aria-label={text ? undefined : 'More'}
+                            data-overflow-toggle
+                        >
+                            {iconPlacement === 'start' && icon}
+                            {text}
+                            {iconPlacement === 'end' && icon}
+                        </button>
+                        <div
+                            id={menuId}
+                            className={classNames(
+                                'menu nav-overflow-menu',
+                                placementClasses,
+                                menuStrategy === 'fixed' && 'position-fixed',
+                                { show: this.store.open && hasOverflow }
+                            )}
+                            role="menu"
+                            hidden={!this.store.open || !hasOverflow}
+                        >
+                            {this.store.overflowIndices.map(index =>
+                                this.renderChild(items[index], index, true)
+                            )}
+                        </div>
                     </div>
-                </div>
+                </Nav>
             </div>
         );
     }

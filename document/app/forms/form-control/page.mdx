@@ -228,6 +228,7 @@ And for selects:
 ## Form text
 
 Block-level or inline-level form text can be created using `.form-text`.
+`FormText` is inline by default; set `block` for descriptions that belong on their own line.
 
 > Form text should be explicitly associated with the form control it relates to using the `aria-describedby` attribute. This will ensure that assistive technologies—such as screen readers—will announce this form text when the user focuses or enters the control.
 
@@ -236,10 +237,9 @@ Form text below inputs can be styled with `.form-text`. If a block-level element
 <CodeExample>
     <FormLabel htmlFor="inputPassword5">Password</FormLabel>
     <FormControl type="password" id="inputPassword5" aria-describedby="passwordHelpBlock" />
-    <FormText id="passwordHelpBlock">
-        {' '}
+    <FormText id="passwordHelpBlock" block>
         Your password must be 8-20 characters long, contain letters and numbers, and must not
-        contain spaces, special characters, or emoji.{' '}
+        contain spaces, special characters, or emoji.
     </FormText>
 </CodeExample>
 

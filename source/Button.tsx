@@ -18,7 +18,7 @@ export type ComponentTheme =
     | 'inverse';
 
 interface ButtonStyleProps {
-    variant?: 'solid' | 'outline' | 'subtle' | 'text' | 'link';
+    variant?: 'solid' | 'outline' | 'subtle' | 'text' | 'link' | false;
     theme?: ComponentTheme;
     size?: 'xs' | 'sm' | 'lg';
     icon?: boolean;
@@ -72,7 +72,7 @@ export const Button: FC<ButtonProps> = ({
 
     const attributes: ButtonElementAttributes = props;
     const classes = classNames(
-        variant ? `btn-${variant}` : icon ? undefined : 'btn',
+        variant === false ? undefined : variant ? `btn-${variant}` : icon ? undefined : 'btn',
         theme && `theme-${theme}`,
         size && `btn-${size}`,
         { 'btn-icon': icon, 'btn-styled': styled, disabled, active },
@@ -152,7 +152,7 @@ export const ButtonInput: FC<ButtonInputProps> = ({
         {...props}
         type={type}
         className={classNames(
-            variant ? `btn-${variant}` : 'btn',
+            variant === false ? undefined : variant ? `btn-${variant}` : 'btn',
             theme && `theme-${theme}`,
             size && `btn-${size}`,
             { 'btn-icon': icon, 'btn-styled': styled, active },

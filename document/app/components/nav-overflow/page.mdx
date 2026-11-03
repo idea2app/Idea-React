@@ -1,5 +1,5 @@
 import { Icon } from '../../../../source/Extension/Icon';
-import { Menu } from '../../../../source/Menu';
+import { Menu, MenuItem } from '../../../../source/Menu';
 import { NavLink } from '../../../../source/Nav';
 import { NavOverflow } from '../../../../source/NavOverflow';
 import { Navbar, NavbarBrand } from '../../../../source/Navbar';
@@ -68,9 +68,9 @@ Place the wrapper inside a navbar to adapt its links to the available navbar wid
 <CodeExample>
     <NavOverflow id="menu-overflow" variant="pills" aria-label="Product navigation">
         <NavLink href="#home">Home</NavLink>
-        <Menu label="Products">
-            <NavLink href="#laptops">Laptops</NavLink>
-            <NavLink href="#tablets">Tablets</NavLink>
+        <Menu label="Products" nav>
+            <MenuItem href="#laptops">Laptops</MenuItem>
+            <MenuItem href="#tablets">Tablets</MenuItem>
         </Menu>
         <NavLink href="#services">Services</NavLink>
         <NavLink href="#support" disabled>

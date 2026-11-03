@@ -28,6 +28,9 @@ Idea React's [card wrappers][1] include `Card`, `CardGroup`, `CardImageOverlay`,
 `CardBody`, `CardTitle`, `CardSubtitle`, `CardText`, and `CardFooter`. Compose
 [`Button`][2], [`CardImage`][1], [`Nav`][3], and [`ListGroup`][4] inside them.
 
+`CardTitle` uses an `h4` by default, matching the upstream examples. Set `as` to another heading
+tag when the surrounding content requires a different level.
+
 ## Example
 
 Cards are flexible and extensible content containers with support for headers and footers, a wide
@@ -385,7 +388,7 @@ Add some navigation to a card's header (or block) with Bootstrap's nav component
         </Nav>
     </CardHeader>
     <CardBody>
-        <CardTitle>Special title treatment</CardTitle>
+        <CardTitle as="h5">Special title treatment</CardTitle>
         <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
         <Button href="#" variant="solid" theme="primary" className="mx-auto">
             Go somewhere
@@ -406,7 +409,7 @@ This works with pills as well.
         </Nav>
     </CardHeader>
     <CardBody>
-        <CardTitle>Special title treatment</CardTitle>
+        <CardTitle as="h5">Special title treatment</CardTitle>
         <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
         <Button href="#" variant="solid" theme="primary" className="mx-auto">
             Go somewhere

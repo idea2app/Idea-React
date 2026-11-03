@@ -16,6 +16,36 @@ it('renders safely during server-side rendering', () => {
 
     assert.match(markup, /aria-label="Server navigation"/);
     assert.match(markup, /Server navigation/);
+    assert.doesNotMatch(markup, /nav-overflow-initialized/);
+});
+
+it('reveals initialized navigation and does not reserve a toggle when every link fits', () => {
+    const { container } = render(
+        <NavOverflow id="fitting-links" variant="pills">
+            <NavLink href="/one">One</NavLink>
+            <NavLink href="/two">Two</NavLink>
+        </NavOverflow>
+    );
+    const root = container.firstElementChild as HTMLElement;
+    const navigation = screen.getByRole('navigation');
+    const links = [...navigation.querySelectorAll<HTMLAnchorElement>(':scope > a')];
+    const toggle = root.querySelector<HTMLButtonElement>('[data-overflow-toggle]')!;
+    Object.defineProperty(root, 'clientWidth', { configurable: true, value: 150 });
+    for (const link of links)
+        Object.defineProperty(link, 'offsetWidth', { configurable: true, value: 70 });
+    Object.defineProperty(toggle, 'offsetWidth', { configurable: true, value: 50 });
+
+    fireEvent(window, new Event('resize'));
+
+    assert.ok(root.classList.contains('nav-overflow-initialized'));
+    assert.equal(toggle.closest('.nav'), navigation);
+    assert.ok(navigation.classList.contains('nav-pills'));
+    assert.equal(navigation.classList.contains('overflow-hidden'), false);
+    assert.equal(
+        links.every(link => !link.hasAttribute('aria-hidden')),
+        true
+    );
+    assert.equal(toggle.parentElement?.style.visibility, 'hidden');
 });
 
 it('moves overflowing navigation links into an accessible menu and restores focus on Escape', () => {
@@ -30,7 +60,9 @@ it('moves overflowing navigation links into an accessible menu and restores focu
     );
     const root = container.firstElementChild as HTMLElement;
     const navigation = screen.getByRole('navigation');
-    const links = [...navigation.children] as HTMLElement[];
+    const links = [...navigation.children].filter(
+        child => !child.classList.contains('nav-overflow-item')
+    ) as HTMLElement[];
     const toggle = root.querySelector<HTMLButtonElement>(
         '[data-overflow-toggle]'
     ) as HTMLButtonElement;
@@ -109,7 +141,7 @@ it('collapses all non-priority links below a breakpoint and restores them on res
     );
     const root = container.firstElementChild as HTMLElement;
     const links = [
-        ...screen.getByRole('navigation', { name: 'Compact links' }).children
+        ...screen.getByRole('navigation', { name: 'Compact links' }).querySelectorAll(':scope > a')
     ] as HTMLElement[];
     const toggle = root.querySelector<HTMLButtonElement>(
         '[data-overflow-toggle]'

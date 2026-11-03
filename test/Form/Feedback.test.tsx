@@ -36,3 +36,19 @@ it('provides base tooltip styling for both validation states while forwarding na
     assert.equal(feedback.id, 'valid-tooltip');
     assert.equal(feedback.className, 'tooltip valid-tooltip position-static');
 });
+
+it('preserves inline helper text by default and supports upstream block descriptions', () => {
+    render(
+        <>
+            <FormText>Inline helper</FormText>
+            <FormText id="block-help" className="mb-2" block>
+                Block helper
+            </FormText>
+        </>
+    );
+
+    assert.equal(screen.getByText('Inline helper').className, 'form-text');
+    assert.equal(screen.getByText('Block helper').className, 'form-text d-block mb-2');
+    assert.equal(screen.getByText('Block helper').id, 'block-help');
+    assert.equal(screen.getByText('Block helper').hasAttribute('block'), false);
+});

@@ -1,10 +1,12 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef, FC } from 'react';
 
-export type FormTextProps = ComponentPropsWithRef<'small'>;
+export type FormTextProps = ComponentPropsWithRef<'small'> & {
+    block?: boolean;
+};
 
-export const FormText: FC<FormTextProps> = ({ className, ...props }) => (
-    <small {...props} className={classNames('form-text', className)} />
+export const FormText: FC<FormTextProps> = ({ className, block, ...props }) => (
+    <small {...props} className={classNames('form-text', block && 'd-block', className)} />
 );
 
 FormText.displayName = 'FormText';
