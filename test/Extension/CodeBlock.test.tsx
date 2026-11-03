@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 
 import { CodeBlock } from '../../source/Extension/CodeBlock';
 
-it('emits both highlight palettes without a fixed inline token color', () => {
+it('emits both highlight palettes with dynamic inline token colors', () => {
     const code = 'const answer: number = 42;';
     const { container } = render(
         <CodeBlock language="typescript" className="custom" aria-label="Example">
@@ -21,7 +21,13 @@ it('emits both highlight palettes without a fixed inline token color', () => {
     assert.ok(tokens.length > 0);
     assert.ok(tokens.every(token => token.style.getPropertyValue('--shiki-light')));
     assert.ok(tokens.every(token => token.style.getPropertyValue('--shiki-dark')));
-    assert.ok(tokens.every(token => !token.style.color));
+    assert.ok(
+        tokens.every(token =>
+            token
+                .getAttribute('style')
+                ?.includes('color:light-dark(var(--shiki-light),var(--shiki-dark))')
+        )
+    );
     assert.ok(
         tokens.some(
             token =>

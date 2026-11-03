@@ -1,3 +1,0 @@
-.code :global(span[style]) {
-    color: light-dark(var(--shiki-light), var(--shiki-dark));
-}

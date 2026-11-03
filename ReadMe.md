@@ -76,7 +76,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 ### Extension components
 
 1. [Click Boundary](source/Extension/ClickBoundary.tsx)
-2. [Code Block](source/Extension/CodeBlock/)
+2. [Code Block](source/Extension/CodeBlock.tsx)
 3. [Countdown](source/Extension/Countdown.tsx)
 4. [Dialog](source/Extension/Dialog.tsx)
 5. [Editor](source/Extension/Editor.tsx)

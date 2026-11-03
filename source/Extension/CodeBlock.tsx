@@ -9,8 +9,7 @@ import reactElementToJSXString from 'react-element-to-jsx-string';
 import { createHighlighterCoreSync } from 'shiki/core';
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
 
-import { polymorphic } from '../../Polymorphic';
-import styles from './style.module.css';
+import { polymorphic } from '../Polymorphic';
 
 const highlighter = createHighlighterCoreSync({
     themes: [githubLight, githubDark],
@@ -34,14 +33,18 @@ export const CodeBlock = polymorphic<CodeBlockProps>(
             lang: language,
             themes: { light: 'github-light', dark: 'github-dark' },
             defaultColor: false,
-            structure: 'inline'
+            structure: 'inline',
+            transformers: [
+                {
+                    span({ properties }) {
+                        properties.style = `${properties.style};color:light-dark(var(--shiki-light),var(--shiki-dark))`;
+                    }
+                }
+            ]
         });
 
         const code = (
-            <Root
-                className={`m-0 shiki language-${language} ${styles.code} ${className}`}
-                {...props}
-            >
+            <Root className={`m-0 shiki language-${language} ${className}`} {...props}>
                 <code dangerouslySetInnerHTML={{ __html }} className={`language-${language}`} />
             </Root>
         );
