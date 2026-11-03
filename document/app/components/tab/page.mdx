@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import { Tabs, Tab } from '../../../../source/Tab';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
@@ -16,7 +17,7 @@ The Tab plugin works with [nav components][1] such as `.nav-tabs` and `.nav-pill
 Give `Tabs` a unique `id`, then add `Tab` children with an `eventKey` and `label`. The component creates matching tab controls and content panes, including their accessibility attributes.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <Tabs id="myTab" variant="tabs">
             <Tab eventKey="home" label="Home">
                 <p>
@@ -47,7 +48,7 @@ Give `Tabs` a unique `id`, then add `Tab` children with an `eventKey` and `label
                 </p>
             </Tab>
         </Tabs>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## With buttons
@@ -55,7 +56,7 @@ Give `Tabs` a unique `id`, then add `Tab` children with an `eventKey` and `label
 Tabs should use button controls rather than navigation links. If wrapping the tab list in `<nav>`, don’t add `role="tablist"` directly to that element, as this would override its navigation landmark. `Tabs` puts the tab-list role on an inner `<div>` and generates button controls.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <Tabs id="nav-tab2" variant="tabs">
             <Tab eventKey="home" label="Home">
                 <p>
@@ -86,7 +87,7 @@ Tabs should use button controls rather than navigation links. If wrapping the ta
                 </p>
             </Tab>
         </Tabs>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Pills
@@ -94,7 +95,7 @@ Tabs should use button controls rather than navigation links. If wrapping the ta
 The tabs plugin also works with pills.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <Tabs id="pills-tab" variant="pills">
             <Tab eventKey="home" label="Home">
                 <p>
@@ -125,7 +126,7 @@ The tabs plugin also works with pills.
                 </p>
             </Tab>
         </Tabs>
-    </div>
+    </Stack>
 </CodeExample>
 
 And with vertical pills. Set `orientation="vertical"` to give the tab list the corresponding `aria-orientation` and keyboard behavior.
@@ -180,7 +181,7 @@ And with vertical pills. Set `orientation="vertical"` to give the tab list the c
 The tab plugin also works with [list groups][3]. Add `data-bs-toggle="tab"` to each `.list-group-item` and pair them with `.tab-pane` elements.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <Tabs
             id="list-tab"
             variant="list-group"
@@ -200,7 +201,7 @@ The tab plugin also works with [list groups][3]. Add `data-bs-toggle="tab"` to e
                 <p>{'Some placeholder content in a paragraph relating to "Settings".'}</p>
             </Tab>
         </Tabs>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Accessibility

@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import {
     Checkbox,
     FormControl,
@@ -27,7 +28,7 @@ Input groups attach add-on elements to a textual input field. Add-ons can be tex
 Pass `htmlFor` to `InputGroupText` to render the add-on itself as a label for its control.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <InputGroup>
             <InputGroupText id="basic-addon1">@</InputGroupText>
             <FormControl
@@ -46,7 +47,7 @@ Pass `htmlFor` to `InputGroupText` to render the add-on itself as a label for it
             />
             <InputGroupText id="basic-addon2">@example.com</InputGroupText>
         </InputGroup>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Examples
@@ -219,7 +220,7 @@ Place any checkbox or radio within an input group’s addon instead of text.
 While multiple `<input>`s are supported visually, validation styles are only available for input groups with a single `<input>`.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <InputGroup>
             <FormControl type="text" aria-label="First name" />
             <FormControl type="text" aria-label="Middle name" />
@@ -235,7 +236,7 @@ While multiple `<input>`s are supported visually, validation styles are only ava
             <InputGroupText>@</InputGroupText>
             <FormControl type="text" placeholder="Server" aria-label="Server" />
         </InputGroup>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Multiple addons
@@ -243,7 +244,7 @@ While multiple `<input>`s are supported visually, validation styles are only ava
 Multiple add-ons are supported and can be mixed with checkbox and radio input versions.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <InputGroup>
             <InputGroupText>$</InputGroupText>
             <InputGroupText>0.00</InputGroupText>
@@ -259,13 +260,13 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
             <FormControl type="text" aria-label="Amount (to the nearest dollar)" />
             <InputGroupText>.00</InputGroupText>
         </InputGroup>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Button addons
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <InputGroup>
             <InputGroupButton type="button" id="button-addon1" theme="secondary" variant="outline">
                 Button
@@ -314,13 +315,13 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
                 Button
             </InputGroupButton>
         </InputGroup>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Buttons with menus
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <InputGroup>
             <InputGroupMenu
                 label="Menu"
@@ -376,7 +377,7 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
                 <MenuItem href="#">Separated link</MenuItem>
             </InputGroupMenu>
         </InputGroup>
-    </div>
+    </Stack>
 
 </CodeExample>
 
@@ -457,7 +458,7 @@ Add the relative form sizing classes to the `.input-group` itself and contents w
 **Sizing on the individual input group elements isn’t supported.**
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <InputGroup size="sm">
             <InputGroupText id="inputGroup-sizing-sm">Small</InputGroupText>
             <FormControl
@@ -482,7 +483,7 @@ Add the relative form sizing classes to the `.input-group` itself and contents w
                 aria-describedby="inputGroup-sizing-lg"
             />
         </InputGroup>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## CSS

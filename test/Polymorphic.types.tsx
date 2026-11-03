@@ -18,6 +18,7 @@ import { NativeDialog } from '../source/NativeDialog';
 import { NavLink } from '../source/Nav';
 import { NavbarBrand, NavbarBrandProps } from '../source/Navbar';
 import { polymorphic, PolymorphicClassProps, PolymorphicProps } from '../source/Polymorphic';
+import { Stack } from '../source/Stack';
 import { Toggler, TogglerProps } from '../source/Toggler';
 
 interface RouterLinkProps extends Omit<ComponentPropsWithRef<'a'>, 'href'> {
@@ -61,6 +62,7 @@ export const polymorphicTypeExamples = [
     <Alert as={RequiredTitle} title="Notice" />,
     <NativeDialog ref={createRef<NativeDialog>()} as="dialog" />,
     <Button as={NavLink} href="/docs" active />,
+    <Stack as={RouterLink} to="/docs" direction="horizontal" />,
     <Card ref={createRef<TargetClass>()} as={TargetClass} destination="/docs" />,
     <Alert ref={createRef<Alert<'section'>>()} as="section" />,
     <Carousel ref={createRef<Carousel<'section'>>()} as="section" />,

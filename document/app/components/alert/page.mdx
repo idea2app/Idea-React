@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import { Alert, AlertHeading, AlertLink } from '../../../../source/Alert';
 import { Icon } from '../../../../source/Extension/Icon';
 import { AlertGuideDemo } from '../../../component/Documentation/Components/OverlayGuideDemo';
@@ -25,7 +26,7 @@ Alerts are flex containers that can contain any length of text, as well as an op
 Use any of our `theme` values for color mode adaptive, contextual styling.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <Alert theme="primary">
             <p>A simple primary alert—check it out!</p>
         </Alert>
@@ -50,7 +51,7 @@ Use any of our `theme` values for color mode adaptive, contextual styling.
         <Alert theme="inverse">
             <p>A simple inverse alert—check it out!</p>
         </Alert>
-    </div>
+    </Stack>
 </CodeExample>
 
 Color alone does not convey meaning to assistive technologies. Include visible text or additional visually hidden text to communicate the purpose of the message.
@@ -68,7 +69,7 @@ Click the button below to show an alert (hidden with inline styles to start), th
 Use the `AlertLink` component to quickly provide matching colored links within any alert.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <Alert theme="primary">
             <p>
                 A simple primary alert with{' '}
@@ -122,7 +123,7 @@ Use the `AlertLink` component to quickly provide matching colored links within a
                 like.
             </p>
         </Alert>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## With icons

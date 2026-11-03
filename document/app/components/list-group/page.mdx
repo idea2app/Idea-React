@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import { Badge } from '../../../../source/Badge';
 import { FormField, Checkbox, Radio } from '../../../../source/Form';
 import { ListGroup, ListGroupItem } from '../../../../source/ListGroup';
@@ -189,7 +190,7 @@ The responsive variants use [container queries][1], so wrap the list group in a 
 **ProTip:** Want equal-width list group items when horizontal? Add `.flex-fill` to each list group item.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <div className="contains-inline">
             <ListGroup horizontal>
                 <ListGroupItem>{'An item'}</ListGroupItem>
@@ -249,7 +250,7 @@ The responsive variants use [container queries][1], so wrap the list group in a 
                 <ListGroupItem>{'A third item'}</ListGroupItem>
             </ListGroup>
         </div>
-    </div>
+    </Stack>
 
 </CodeExample>
 

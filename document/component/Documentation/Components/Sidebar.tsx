@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { FC } from 'react';
 
 import { Icon } from '../../../../source/Extension/Icon';
+import { Stack } from '../../../../source/Stack';
 import nextConfig from '../../../next.config';
 import * as style from './style.module.less';
 
@@ -151,7 +152,7 @@ export const Sidebar: FC<SidebarProps> = ({ active }) => (
         aria-label="Documentation navigation"
     >
         {groups.map(({ label, icon, iconClassName, href, itemHref, slug: groupSlug, items }) => (
-            <div key={label} className="vstack py-2">
+            <Stack key={label} className="py-2">
                 <strong className="d-flex align-items-center gap-1 fw-semibold">
                     <Icon name={icon} className={iconClassName} aria-hidden="true" />
                     <a
@@ -181,7 +182,7 @@ export const Sidebar: FC<SidebarProps> = ({ active }) => (
                         );
                     })}
                 </ul>
-            </div>
+            </Stack>
         ))}
     </nav>
 );

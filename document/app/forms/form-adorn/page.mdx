@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import {
     FormAdornment,
     FormAdornmentIcon,
@@ -53,7 +54,7 @@ Use `.form-adorn-end` to position the adornment on the trailing side (keeps DOM 
 Add a second label outside the `.form-adorn` wrapper to name the field. Point it at the input with `for`, so the input keeps its name even if you change the wrapper:
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <div>
             <FormLabel htmlFor="searchInput">Search</FormLabel>
             <FormAdornment>
@@ -68,7 +69,7 @@ Add a second label outside the `.form-adorn` wrapper to name the field. Point it
                 <FormGhost type="email" id="emailInput" placeholder="you@example.com" />
             </FormAdornment>
         </div>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## With form field
@@ -91,7 +92,7 @@ Wrap a `.form-adorn` in a `.form-field` to pair it with a label and description 
 Use `.form-adorn-text` for currency symbols, units, domain suffixes, and other text-based adornments. Text adornments auto-size to their content.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <FormAdornment>
             <FormAdornmentText aria-hidden="true">$</FormAdornmentText>
             <FormGhost type="text" placeholder="0.00" />
@@ -108,7 +109,7 @@ Use `.form-adorn-text` for currency symbols, units, domain suffixes, and other t
             <FormAdornmentText aria-hidden="true">@example.com</FormAdornmentText>
             <FormGhost type="text" placeholder="username" />
         </FormAdornment>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Sizing
@@ -116,7 +117,7 @@ Use `.form-adorn-text` for currency symbols, units, domain suffixes, and other t
 Use `.form-adorn-sm` or `.form-adorn-lg` on the wrapper to adjust sizing.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack className="gap-3">
         <FormAdornment size="sm">
             <FormAdornmentIcon name="search" aria-hidden="true" />
             <FormGhost type="text" placeholder="Small input" />
@@ -129,7 +130,7 @@ Use `.form-adorn-sm` or `.form-adorn-lg` on the wrapper to adjust sizing.
             <FormAdornmentIcon name="search" aria-hidden="true" />
             <FormGhost type="text" placeholder="Large input" />
         </FormAdornment>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## CSS

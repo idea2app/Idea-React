@@ -30,6 +30,7 @@ export * from './Popover';
 export * from './Progress';
 export * from './ScrollSpy';
 export * from './Spinner';
+export * from './Stack';
 export * from './Stepper';
 export * from './Tab';
 export * from './Table';

@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import { FormControl, FormLabel, PasswordStrength } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
@@ -61,7 +62,7 @@ Use `.strength-bar` for a single progress bar that grows with password strength.
 You can use the component without JavaScript for static displays by passing the `strength` prop.
 
 <CodeExample>
-    <div className="vstack gap-3 fg-3">
+    <Stack className="gap-3 fg-3">
         <div>
             <div>Weak</div>
             <PasswordStrength strength="weak" showText={false} />
@@ -78,13 +79,13 @@ You can use the component without JavaScript for static displays by passing the 
             <div>Strong</div>
             <PasswordStrength strength="strong" showText={false} />
         </div>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Static progress bar
 
 <CodeExample>
-    <div className="vstack gap-3 fg-3">
+    <Stack className="gap-3 fg-3">
         <div>
             <div>Weak</div>
             <PasswordStrength variant="bar" strength="weak" showText={false} />
@@ -101,7 +102,7 @@ You can use the component without JavaScript for static displays by passing the 
             <div>Strong</div>
             <PasswordStrength variant="bar" strength="strong" showText={false} />
         </div>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Strength criteria
