@@ -1,0 +1,133 @@
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="vite">
+
+# Bootstrap and Vite
+
+[View the Bootstrap source for this page on GitHub][1]
+
+## What is Vite?
+
+[Vite][2] is a frontend build tool focused on fast development and production
+bundling. The Idea React documentation site uses Vite through ViNext to render its Next-compatible
+routes and statically export the website.
+
+## Setup
+
+This guide uses the existing documentation workspace rather than creating a separate Vite
+application. Node.js and pnpm are prerequisites. From the repository root, install the workspace
+dependencies and start the documentation app:
+
+```sh
+pnpm install -r
+pnpm --filter @idea-react/document dev
+```
+
+The workspace already declares Vite, ViNext, the MDX plugin, SWC integration, and the GFM remark
+plugin. No additional application scaffold or separate Vite installation is needed.
+Unlike the standalone upstream sample, the ViNext app uses file-based routes and a shared root
+layout rather than a hand-authored `src/index.html`.
+
+## Project structure
+
+The documentation workspace keeps routes, site-only components, and the Vite configuration
+separate from the published component package:
+
+```text
+document/
+├── app/
+│   ├── components/
+│   ├── extensions/
+│   ├── forms/
+│   ├── layout.tsx
+│   └── site.ts
+├── component/
+│   └── Documentation/
+├── next.config.ts
+├── package.json
+└── vite.config.ts
+swc.config.mts
+```
+
+## Configure Vite
+
+The [documentation Vite configuration][3] wires together MDX, SWC, and ViNext. The MDX plugins
+support GitHub-flavored Markdown and the documentation site's table and component conventions:
+
+```ts
+plugins: [
+    mdx({
+        remarkPlugins: [remarkGfm, remarkInlineButtonChildren],
+        rehypePlugins: [rehypeBootstrapTable]
+    }),
+    swc.vite({
+        ...swcOptions,
+        tsconfigFile: false
+    }),
+    vinext()
+],
+```
+
+The shared [SWC options][4] enable TypeScript, TSX, automatic React JSX, and MobX's stage-3
+decorators:
+
+```ts
+parser: {
+    syntax: 'typescript',
+    tsx: true,
+    decorators: true
+},
+transform: {
+    decoratorVersion: '2022-03',
+    useDefineForClassFields: true,
+    react: { runtime: 'automatic' }
+}
+```
+
+The workspace provides `dev`, `build`, and `start` scripts. Build the site and preview its static
+export with:
+
+```json
+{
+    "scripts": {
+        "dev": "vite dev",
+        "build": "vite build && node search.mts",
+        "start": "vite preview"
+    }
+}
+```
+
+Run the workspace commands from the repository root:
+
+```sh
+pnpm --filter @idea-react/document build
+pnpm --filter @idea-react/document start
+```
+
+Deploy only `document/dist/client/`. The build also generates the search index after exporting
+the HTML pages. The deploy target does not need a Node.js server or Worker.
+
+## Import Bootstrap
+
+The shared [root layout][5] loads Bootstrap CSS and Bootstrap Icons from unpkg. The documentation
+does not import Sass or Bootstrap's JavaScript bundle; interactive behavior comes from the React
+components.
+
+```html
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+/>
+```
+
+The layout also loads `bootstrap-icons` from unpkg. Use the same Bootstrap version when loading
+stylesheets in another Vite app, or install the npm package and add Sass tooling if your project
+needs to customize Bootstrap Sass.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/main/site/src/content/docs/guides/vite.mdx
+[2]: https://vite.dev/
+[3]: https://github.com/idea2app/Idea-React/blob/main/document/vite.config.ts
+[4]: https://github.com/idea2app/Idea-React/blob/main/swc.config.mts
+[5]: https://github.com/idea2app/Idea-React/blob/main/document/app/layout.tsx

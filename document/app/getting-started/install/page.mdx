@@ -1,0 +1,103 @@
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="install">
+
+# Install
+
+[View the Bootstrap source for this page on GitHub][1]
+
+Install Idea React from an npm ecosystem package manager and load Bootstrap's CSS from either
+jsDelivr or unpkg. The package supplies the React components; the stylesheet supplies their
+Bootstrap design tokens and styles.
+
+## Install
+
+Pull Idea React into a React project with any JavaScript package manager. Its components rely on
+React and MobX; Bootstrap CSS is loaded separately below.
+
+```sh
+npm install idea-react@next react react-dom mobx mobx-react
+```
+
+The equivalent commands for other npm ecosystem package managers are:
+
+```sh
+pnpm add idea-react@next react react-dom mobx mobx-react
+yarn add idea-react@next react react-dom mobx mobx-react
+bun add idea-react@next react react-dom mobx mobx-react
+```
+
+This project currently publishes a prerelease on the `next` dist-tag. Use `idea-react` without
+`@next` after installing the stable release. React and React DOM render the components; MobX and
+MobX React are required by stateful components.
+
+The `CodeBlock` and `LiveTSX` extensions also use `react-element-to-jsx-string`; install that peer
+dependency when using either extension.
+Install Bootstrap as a direct dependency as well if you plan to customize its Sass instead of
+using a CDN stylesheet.
+
+### Using npm
+
+Import components from their public entry points. For example, `Button` is available from the
+dedicated module:
+
+```tsx
+import { Button } from 'idea-react/Button';
+
+export function SaveButton() {
+    return (
+        <Button type="button" variant="solid" theme="primary">
+            Save
+        </Button>
+    );
+}
+```
+
+## CDN
+
+Include Bootstrap's compiled CSS through a CDN when you do not need to customize its Sass. This
+avoids adding Bootstrap as a direct package manager dependency. Idea React components need the
+stylesheet, but do not require Bootstrap's JavaScript bundle.
+
+| Provider      | CSS                      |
+| ------------- | ------------------------ |
+| [jsDelivr][2] | [`bootstrap.min.css`][2] |
+| [unpkg][3]    | [`bootstrap.min.css`][3] |
+
+### Using CDNs
+
+```html
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+    crossorigin="anonymous"
+/>
+```
+
+For the same Bootstrap release on unpkg, use:
+
+```html
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+    crossorigin="anonymous"
+/>
+```
+
+Use the full, version-pinned URL and keep its version aligned with the Bootstrap version used by
+Idea React. The documentation site currently uses unpkg for Bootstrap CSS and Bootstrap Icons; see
+its root layout for the exact links.
+
+When adding an `integrity` attribute, verify it matches the exact file and version served by the
+selected CDN. Otherwise, the browser will reject the stylesheet.
+
+### Alternative CDNs
+
+The two supported CDN providers for these examples are [jsDelivr][2] and [unpkg][3]. Both publish
+the version-pinned Bootstrap files used above.
+
+</ComponentsLayout>
+
+[1]: https://github.com/twbs/bootstrap/blob/main/site/src/content/docs/getting-started/install.mdx
+[2]: https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css
+[3]: https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css
