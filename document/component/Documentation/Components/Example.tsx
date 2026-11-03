@@ -40,7 +40,10 @@ const getDisplayName = (node: ReactNode): string => {
 const toSourceCode = (children: ReactNode) => {
     const element = isValidElement(children) ? children : <>{children}</>;
 
-    return reactElementToJSXString(element, { displayName: getDisplayName });
+    return reactElementToJSXString(element, {
+        displayName: getDisplayName,
+        filterProps: (value: unknown) => value !== undefined
+    });
 };
 
 export interface CodeExampleProps extends PropsWithChildren {

@@ -1,8 +1,8 @@
 import {
     Accordion,
-    AccordionBody,
-    AccordionHeader,
     AccordionItem,
+    AccordionHeader,
+    AccordionBody,
     AccordionToggle
 } from '../../../../source/Accordion';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -12,75 +12,493 @@ import { CodeExample } from '../../../component/Documentation/Components/Example
 
 # Accordion
 
-Native `details` and `summary` elements provide keyboard-accessible disclosure without Bootstrap
-JavaScript. Matching `name` attributes make items exclusive; omit `name` to keep multiple items open.
-Use `open` for the initially expanded item and `onToggle` to observe native changes.
+Build vertically collapsing accordions with native HTML `<details>` and `<summary>` elements.
 
-## Quick start
+The accordion uses native HTML `<details>` and `<summary>` elements, leveraging the `name` attribute to create exclusive accordions where only one item can be open at a time. This approach requires no JavaScript for core functionality and is fully accessible by default.
+
+## Example
+
+Click the accordions below to expand/collapse the accordion content. Each `<details>` element shares the same `name` attribute value, creating an exclusive accordion where opening one item automatically closes the others.
+
+To render an accordion that’s expanded by default, add the `open` attribute to the `<details>` element.
+
+<CodeExample>
+    <Accordion>
+        <AccordionItem name="accordionExample" open>
+            <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the first item’s accordion body.'}</strong>
+                {' It is shown by default because the '}
+                <code>{'open'}</code>
+                {' attribute is present. The native '}
+                <code>{'<details>'}</code>
+                {
+                    ' element handles all the show/hide logic without any JavaScript. You can put any HTML content within the '
+                }
+                <code>{'.accordion-body'}</code>
+                {'. '}
+            </AccordionBody>
+        </AccordionItem>
+
+        <AccordionItem name="accordionExample">
+            <AccordionHeader>{' Accordion Item #2 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the second item’s accordion body.'}</strong>
+                {' The '}
+                <code>{'name'}</code>
+                {
+                    ' attribute groups this with other accordion items. When you open this item, any other open item in the same group will close automatically. '
+                }
+            </AccordionBody>
+        </AccordionItem>
+
+        <AccordionItem name="accordionExample">
+            <AccordionHeader>{' Accordion Item #3 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the third item’s accordion body.'}</strong>
+                {
+                    ' This exclusive accordion behavior is built into the browser—no Bootstrap JavaScript required. Just use matching '
+                }
+                <code>{'name'}</code>
+                {' attributes on your '}
+                <code>{'<details>'}</code>
+                {' elements. '}
+            </AccordionBody>
+        </AccordionItem>
+    </Accordion>
+
+</CodeExample>
+
+The panel height animation needs [`interpolate-size`][1]. Browsers without it open and close the panel at once. See [Transitions][2] to change the timing or to remove it.
+
+> The animation effect depends on the `prefers-reduced-motion` media query. See the [reduced motion accessibility guidance][3].
+
+## Variants
+
+Use the contextual `.theme-{color}` classes to apply a semantic theme color to open accordion items.
 
 <CodeExample>
     <Accordion theme="primary">
-        <AccordionItem name="accordion-example" open>
-            <AccordionHeader>First item</AccordionHeader>
-            <AccordionBody>Only one item in this named group can be open.</AccordionBody>
+        <AccordionItem name="accordionExampleTheme" open>
+            <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the first item’s accordion body.'}</strong>
+                {' It is shown by default because the '}
+                <code>{'open'}</code>
+                {' attribute is present. The native '}
+                <code>{'<details>'}</code>
+                {
+                    ' element handles all the show/hide logic without any JavaScript. You can put any HTML content within the '
+                }
+                <code>{'.accordion-body'}</code>
+                {'. '}
+            </AccordionBody>
         </AccordionItem>
-        <AccordionItem name="accordion-example">
-            <AccordionHeader>Second item</AccordionHeader>
-            <AccordionBody>Opening this item closes the first.</AccordionBody>
+
+        <AccordionItem name="accordionExampleTheme">
+            <AccordionHeader>{' Accordion Item #2 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the second item’s accordion body.'}</strong>
+                {' The '}
+                <code>{'name'}</code>
+                {
+                    ' attribute groups this with other accordion items. When you open this item, any other open item in the same group will close automatically. '
+                }
+            </AccordionBody>
+        </AccordionItem>
+
+        <AccordionItem name="accordionExampleTheme">
+            <AccordionHeader>{' Accordion Item #3 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the third item’s accordion body.'}</strong>
+                {
+                    ' This exclusive accordion behavior is built into the browser—no Bootstrap JavaScript required. Just use matching '
+                }
+                <code>{'name'}</code>
+                {' attributes on your '}
+                <code>{'<details>'}</code>
+                {' elements. '}
+            </AccordionBody>
         </AccordionItem>
     </Accordion>
+
 </CodeExample>
 
-## Compact, flush, and spaced
+## Small
 
-Use `size="sm"`, `flush`, and `gap` separately or together. `theme` accepts the shared component
-themes. Native CSS transitions respect reduced-motion preferences.
+Add `.accordion-sm` to the `.accordion` for a more compact accordion with tighter padding, a smaller border radius, and a smaller font size.
 
 <CodeExample>
-    <Accordion size="sm" flush gap theme="accent">
-        <AccordionItem open>
-            <AccordionHeader icon="plus-lg">Always open independently</AccordionHeader>
-            <AccordionBody>Custom icons use the library Icon component.</AccordionBody>
+    <Accordion size="sm">
+        <AccordionItem name="accordionSmall" open>
+            <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the first item’s accordion body.'}</strong>
+                {' The '}
+                <code>{'.accordion-sm'}</code>
+                {
+                    ' class tightens up the padding, border radius, and font size for a more compact presentation. '
+                }
+            </AccordionBody>
         </AccordionItem>
-        <AccordionItem open>
-            <AccordionHeader icon={false}>Without an icon</AccordionHeader>
-            <AccordionBody>Pass icon=false to supply your own header decoration.</AccordionBody>
+
+        <AccordionItem name="accordionSmall">
+            <AccordionHeader>{' Accordion Item #2 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the second item’s accordion body.'}</strong>
+                {
+                    ' Everything is driven by CSS custom properties, so you can fine-tune the compact sizing to taste. '
+                }
+            </AccordionBody>
+        </AccordionItem>
+
+        <AccordionItem name="accordionSmall">
+            <AccordionHeader>{' Accordion Item #3 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the third item’s accordion body.'}</strong>
+                {' Combine '}
+                <code>{'.accordion-sm'}</code>
+                {' with other variants like '}
+                <code>{'.accordion-flush'}</code>
+                {' as needed. '}
+            </AccordionBody>
         </AccordionItem>
     </Accordion>
+
 </CodeExample>
 
-## Expand and collapse all
+## Flush
 
-`AccordionToggle` temporarily removes names while expanding all direct items, then restores the
-exclusive grouping when collapsing them. Nested accordions are left unchanged.
+Add `.accordion-flush` to remove some borders and rounded corners to render accordions edge-to-edge with their parent container.
+
+<CodeExample>
+    <div className="bg-1">
+        <Accordion flush>
+            <AccordionItem name="accordionFlushExample">
+                <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
+
+                <AccordionBody>
+                    {
+                        'Placeholder content for this accordion, which is intended to demonstrate the '
+                    }
+                    <code>{'.accordion-flush'}</code>
+                    {' class. This is the first item’s accordion body.'}
+                </AccordionBody>
+            </AccordionItem>
+
+            <AccordionItem name="accordionFlushExample">
+                <AccordionHeader>{' Accordion Item #2 '}</AccordionHeader>
+
+                <AccordionBody>
+                    {
+                        'Placeholder content for this accordion, which is intended to demonstrate the '
+                    }
+                    <code>{'.accordion-flush'}</code>
+                    {
+                        ' class. This is the second item’s accordion body. Let’s imagine this being filled with some actual content.'
+                    }
+                </AccordionBody>
+            </AccordionItem>
+
+            <AccordionItem name="accordionFlushExample">
+                <AccordionHeader>{' Accordion Item #3 '}</AccordionHeader>
+
+                <AccordionBody>
+                    {
+                        'Placeholder content for this accordion, which is intended to demonstrate the '
+                    }
+                    <code>{'.accordion-flush'}</code>
+                    {
+                        ' class. This is the third item’s accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.'
+                    }
+                </AccordionBody>
+            </AccordionItem>
+        </Accordion>
+    </div>
+
+</CodeExample>
+
+## Gap
+
+Add `.accordion-gap` to put space between accordion items. Each item is a separate rounded card.
+
+The gap lives on the accordion, not the panel. The panel still animates only its `block-size`, so the open and close transition stays smooth.
+
+<CodeExample>
+    <Accordion gap>
+        <AccordionItem name="accordionGapExample" open>
+            <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the first item’s accordion body.'}</strong>
+                {' The '}
+                <code>{'.accordion-gap'}</code>
+                {
+                    ' class spaces items apart. Each item keeps a full border radius while the panel opens and closes. '
+                }
+            </AccordionBody>
+        </AccordionItem>
+
+        <AccordionItem name="accordionGapExample">
+            <AccordionHeader>{' Accordion Item #2 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the second item’s accordion body.'}</strong>
+                {
+                    ' The gap does not change during the transition, so adjacent items do not jump. '
+                }
+            </AccordionBody>
+        </AccordionItem>
+
+        <AccordionItem name="accordionGapExample">
+            <AccordionHeader>{' Accordion Item #3 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the third item’s accordion body.'}</strong>
+                {' Override '}
+                <code>{'--accordion-gap'}</code>
+                {' to change the space between items. '}
+            </AccordionBody>
+        </AccordionItem>
+    </Accordion>
+
+</CodeExample>
+
+## Always open
+
+Omit the `name` attribute on each `<details>` element to allow multiple accordion items to be open simultaneously.
+
+<CodeExample>
+    <Accordion>
+        <AccordionItem open>
+            <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the first item’s accordion body.'}</strong>
+                {' Without the '}
+                <code>{'name'}</code>
+                {
+                    ' attribute, each accordion item operates independently. You can open multiple items at the same time. '
+                }
+            </AccordionBody>
+        </AccordionItem>
+
+        <AccordionItem>
+            <AccordionHeader>{' Accordion Item #2 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the second item’s accordion body.'}</strong>
+                {' Opening this won’t close the first item because there’s no '}
+                <code>{'name'}</code>
+                {' attribute linking them together. '}
+            </AccordionBody>
+        </AccordionItem>
+
+        <AccordionItem>
+            <AccordionHeader>{' Accordion Item #3 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the third item’s accordion body.'}</strong>
+                {
+                    ' Each item is completely independent—open or close them in any combination you like. '
+                }
+            </AccordionBody>
+        </AccordionItem>
+    </Accordion>
+
+</CodeExample>
+
+## Expand & Collapse all
+
+To enable expanding and collapsing of all accordion items at once, remove the `name` attribute from each `<details>` element using JavaScript. This allows multiple accordion items to be open simultaneously. Restore the `name` attribute when you collapse the items again if you want exclusive behavior back.
 
 <CodeExample>
     <AccordionToggle
-        target="#accordion-all"
+        target="#accordionToggleAll"
         variant="subtle"
-        theme="secondary"
         size="sm"
+        theme="secondary"
+        type="button"
+        aria-expanded="false"
         className="mb-3"
     >
-        Expand / collapse all
+        {'Expand all'}
     </AccordionToggle>
-    <Accordion id="accordion-all">
-        <AccordionItem name="accordion-all-group">
-            <AccordionHeader>Outer item</AccordionHeader>
+
+    <Accordion size="sm" id="accordionExpandCollapse">
+        <AccordionItem name="accordionExpandCollapse" open>
+            <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
+
             <AccordionBody>
-                <Accordion>
-                    <AccordionItem name="accordion-nested">
-                        <AccordionHeader>Nested item</AccordionHeader>
-                        <AccordionBody>Use a different name for each nested group.</AccordionBody>
+                <strong>{'This is the first item’s accordion body.'}</strong>
+                {' Use Expand all to open every item, even when they share a '}
+                <code>{'name'}</code>
+                {'. '}
+            </AccordionBody>
+        </AccordionItem>
+
+        <AccordionItem name="accordionExpandCollapse">
+            <AccordionHeader>{' Accordion Item #2 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the second item’s accordion body.'}</strong>
+                {' Collapse all closes every item and restores exclusive '}
+                <code>{'name'}</code>
+                {' grouping. '}
+            </AccordionBody>
+        </AccordionItem>
+
+        <AccordionItem name="accordionExpandCollapse">
+            <AccordionHeader>{' Accordion Item #3 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the third item’s accordion body.'}</strong>
+                {' If your accordion has no '}
+                <code>{'name'}</code>
+                {', you only need to set '}
+                <code>{'open'}</code>
+                {' on each item. '}
+            </AccordionBody>
+        </AccordionItem>
+    </Accordion>
+
+</CodeExample>
+
+We use the following JavaScript for this demo:
+
+`AccordionToggle` handles the expand/collapse-all action and maintains `aria-expanded` for you.
+
+## Nested
+
+Accordions can be nested inside each other by placing a full `.accordion` within an `.accordion-body`. Use unique `name` attribute values for each level so the parent and child accordions operate independently.
+
+<CodeExample>
+    <Accordion>
+        <AccordionItem name="accordionNested" open>
+            <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the first item’s accordion body.'}</strong>
+                {' It contains a nested accordion below. '}
+                <Accordion className="mt-3">
+                    <AccordionItem name="accordionNestedInner" open>
+                        <AccordionHeader>{' Nested Item #1 '}</AccordionHeader>
+
+                        <AccordionBody>
+                            {' This is the body of the first nested accordion item. '}
+                        </AccordionBody>
+                    </AccordionItem>
+
+                    <AccordionItem name="accordionNestedInner">
+                        <AccordionHeader>{' Nested Item #2 '}</AccordionHeader>
+
+                        <AccordionBody>
+                            {' This is the body of the second nested accordion item. '}
+                        </AccordionBody>
+                    </AccordionItem>
+
+                    <AccordionItem name="accordionNestedInner">
+                        <AccordionHeader>{' Nested Item #3 '}</AccordionHeader>
+
+                        <AccordionBody>
+                            {' This is the body of the third nested accordion item. '}
+                        </AccordionBody>
                     </AccordionItem>
                 </Accordion>
             </AccordionBody>
         </AccordionItem>
-        <AccordionItem name="accordion-all-group">
-            <AccordionHeader>Another item</AccordionHeader>
-            <AccordionBody>All direct items can be expanded together.</AccordionBody>
+
+        <AccordionItem name="accordionNested">
+            <AccordionHeader>{' Accordion Item #2 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the second item’s accordion body.'}</strong>
+                {' It does not contain a nested accordion. '}
+            </AccordionBody>
+        </AccordionItem>
+
+        <AccordionItem name="accordionNested">
+            <AccordionHeader>{' Accordion Item #3 '}</AccordionHeader>
+
+            <AccordionBody>
+                <strong>{'This is the third item’s accordion body.'}</strong>
+                {' It does not contain a nested accordion. '}
+            </AccordionBody>
         </AccordionItem>
     </Accordion>
+
 </CodeExample>
 
+## Accessibility
+
+The native `<details>` and `<summary>` elements provide built-in accessibility:
+
+- Screen readers announce the expanded/collapsed state automatically
+- Keyboard navigation works out of the box (Enter/Space to toggle)
+- The `<summary>` element is focusable by default
+- No ARIA attributes are required as the semantics are built into the elements
+
+## CSS
+
+### Variables
+
+Use CSS custom properties on the component to customize its appearance without recompiling Bootstrap.
+
+```css
+.accordion {
+    --bs-accordion-padding-x: 1.25rem;
+    --bs-accordion-padding-y: 1rem;
+    --bs-accordion-color: var(--bs-fg-body);
+    --bs-accordion-bg: var(--bs-bg-body);
+    --bs-accordion-transition-property: 'color, background-color, border-radius';
+    --bs-accordion-transition-duration: 0.15s;
+    --bs-accordion-transition-timing: ease-in-out;
+    --bs-accordion-panel-transition-property: 'content-visibility, block-size';
+    --bs-accordion-panel-transition-duration: 0.2s;
+    --bs-accordion-panel-transition-timing: ease;
+    --bs-accordion-border-color: var(--bs-border-color);
+    --bs-accordion-border-width: var(--bs-border-width);
+    --bs-accordion-border-radius: var(--bs-accordion-radius, var(--bs-radius-7));
+    --bs-accordion-gap: 0;
+    --bs-accordion-btn-color: var(--bs-fg-2);
+    --bs-accordion-btn-bg: var(--bs-bg-body);
+    --bs-accordion-btn-icon-width: 1rem;
+    --bs-accordion-btn-icon-transform: rotate(-180deg);
+    --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
+    --bs-accordion-active-color: var(--bs-fg-body);
+    --bs-accordion-active-bg: var(--bs-bg-2);
+}
+```
+
+## Customize
+
+### Custom icons
+
+Use the `icon` prop on `AccordionHeader` to choose an Icon font name, or `icon={false}` to remove it.
+
+```tsx
+<AccordionHeader icon="plus-lg">Accordion title</AccordionHeader>
+```
+
+### Events
+
+Use the native `onToggle` prop on `AccordionItem` to respond to open-state changes.
+
+### Programmatic control
+
+Pass the native `open` prop to `AccordionItem` to control its state. `AccordionToggle target="#id"` expands or collapses all items together.
+
 </ComponentsLayout>
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size
+[2]: https://getbootstrap.com/docs/6.0/customize/transitions
+[3]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion

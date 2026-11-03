@@ -1,254 +1,296 @@
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
-
+import { Button } from '../../../../source/Button';
+import { Drawer } from '../../../../source/Drawer';
 import { DrawerDemo } from '../../../component/Documentation/Components/DrawerDemo';
+import { DrawerTriggersGuideDemo } from '../../../component/Documentation/Components/OverlayGuideDemo';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
 
 <ComponentsLayout active="drawer">
 
 # Drawer
 
-Build hidden sidebars or drawers into your project for navigation, shopping carts, and more with a
-few classes. Drawer replaces the old Offcanvas component.
-
-Idea React provides the [`Drawer` wrapper][1], which composes the native `<dialog>` element, a
-header with a close button, a body, and an optional footer. The examples below are interactive.
+Build hidden sidebars or drawers into your project for navigation, shopping carts, and more with React props and the native dialog API. Replaces the old Offcanvas component.
 
 ## How it works
 
-Drawer builds on the native `<dialog>` element and the [`NativeDialog` wrapper][2] to manage hidden
-sidebars. These sidebars, or drawers, can appear from the left, right, top, or bottom edge of the
-viewport.
+Drawer builds on the native `<dialog>` element and our Dialog component to manage hidden sidebars via JavaScript. These sidebars, or drawers, can appear from the left, right, top, or bottom edge of the viewport. Buttons or anchors are used as triggers that are attached to specific elements you toggle, and React state controls the `open` prop.
 
-- **Drawer shares the same base as the Dialog component**, using native `<dialog>` APIs for focus
-  trapping, backdrop, and top-layer rendering.
-- **Use the `<dialog>` element**, not a `<div>`. Due to how CSS handles animations, don't apply
-  `margin` or `translate` directly to `.drawer`—wrap it if you need those.
-- **Modal by default**—opens with `showModal()`, a backdrop, and focus trapping. Pass
-  `scroll` and `backdrop={false}` to open as a non-modal drawer with `show()`: body scrolling
-  stays on, and focus is not trapped.
-- **Built-in backdrop** via `::backdrop` (modal only) closes the drawer on click; set
-  `backdrop="static"` to lock clicks outside, or `backdrop={false}` to hide it.
-- **Escape key handling** closes the drawer by default; set `keyboard={false}` to disable.
-- **Only one drawer can be shown at a time**, because a modal native dialog holds the top layer.
-- **Animated open and close**—drawer slides back out to its placement-specific off-screen position
-  on close, with the `::backdrop` fading alongside it when opened modally. Add `.drawer-instant` to
-  skip animations.
+- **Drawer shares the same base as [our Dialog component][1]**, using native `<dialog>` APIs for focus trapping, backdrop, and top-layer rendering.
+- **Use the `<dialog>` element**, not a `<div>`. The wrapper renders this element. Due to how CSS handles animations, don’t apply `margin` or `translate` directly to `Drawer` — wrap it if you need those.
+- **Modal by default** — opens with `showModal()`, a backdrop, and focus trapping. Set `scroll: true` and `backdrop: false` to open as a non-modal drawer with `show()`: body scrolling stays on, and focus is not trapped.
+- **Built-in backdrop** via `::backdrop` (modal only) closes the drawer on click; set `backdrop: "static"` to lock clicks outside, or `backdrop: false` to hide it.
+- **Escape key handling** closes the drawer by default; set `keyboard: false` to disable.
+- **Dismissal** — the close button, Escape, and backdrop click close the drawer. The React wrapper does not currently implement the upstream swipe-to-dismiss gesture.
+- **Responsive placement** — `responsive="sm"`, `responsive="md"`, and up stay drawer-like below their breakpoint and collapse inline above it, making drawers useful as responsive navbars.
+- **Coordinate open drawers** through application state if only one should be shown at a time; the React wrapper does not use Bootstrap’s data API.
+- **Animated open and close** — drawer slides back out to its placement-specific off-screen position on close, with the `::backdrop` fading alongside it when opened modally. When authoring custom CSS, qualify your `[open]` rules with `:not(.hiding)` so the exit transition can fall through to the base state; pass `animation="instant"` to skip animations.
+
+The animation effect of this component is dependent on the `prefers-reduced-motion` media query.
 
 ## Examples
 
 ### Drawer components
 
-Below is a drawer with a header and a close button. We suggest that you include drawer headers with
-dismiss actions whenever possible, or provide an explicit dismiss action.
+Below is a drawer example that is shown by default (via `open` and `modal={false}`). Drawer includes support for a header with a close button and an optional body class for some initial `padding`. We suggest that you include drawer headers with dismiss actions whenever possible, or provide an explicit dismiss action.
 
-<DrawerDemo label="Open drawer" title="Drawer">
-    Content for the drawer goes here. You can place just about any Bootstrap component or custom
-    elements here.
-</DrawerDemo>
+<CodeExample>
+    <Drawer
+        title="Drawer"
+        placement="start"
+        open
+        modal={false}
+        scroll
+        backdrop={false}
+        className="position-static"
+    >
+        <p>
+            Content for the drawer goes here. You can place just about any Bootstrap component or
+            custom elements here.
+        </p>
+    </Drawer>
+</CodeExample>
 
-### Placement
+### Live demo
 
-There's no default placement for drawer components, so the wrapper defaults to `end` and accepts
-`start`, `end`, `top`, or `bottom`. Try the placements below.
+Use the buttons below to show and hide a drawer element via React state. Both a link and a button can invoke the same action, updating `open`. Use `onDismiss` to synchronize state after the close button, backdrop, or Escape is used.
 
-<div className="d-flex flex-wrap gap-2">
-    <DrawerDemo label="Toggle start drawer" title="Drawer start" placement="start">
-        `drawer-start` places the drawer on the left of the viewport.
-    </DrawerDemo>
-    <DrawerDemo label="Toggle end drawer" title="Drawer end" placement="end">
-        `drawer-end` places the drawer on the right of the viewport.
-    </DrawerDemo>
-    <DrawerDemo label="Toggle top drawer" title="Drawer top" placement="top">
-        `drawer-top` places the drawer on the top of the viewport.
-    </DrawerDemo>
-    <DrawerDemo label="Toggle bottom drawer" title="Drawer bottom" placement="bottom">
-        `drawer-bottom` places the drawer on the bottom of the viewport.
-    </DrawerDemo>
-</div>
-
-- `drawer-start` places drawer on the left of the viewport
-- `drawer-end` places the drawer on the right of the viewport
-- `drawer-top` places the drawer on the top of the viewport
-- `drawer-bottom` places the drawer on the bottom of the viewport
-
-### Footer
-
-Add an optional footer for action buttons or other content at the bottom of the drawer.
-
-<DrawerDemo label="Open drawer with footer" title="Drawer with footer" footer>
-    Content for the drawer goes here. The footer will stick to the bottom.
-</DrawerDemo>
+<CodeExample>
+    <DrawerTriggersGuideDemo />
+</CodeExample>
 
 ### Without JavaScript
 
-Supported browsers can open and close a drawer with the [Invoker Commands API][3]—no JavaScript
-required. Set `commandfor` to the drawer's `id`, use `command="show-modal"` to open, and
-`command="close"` to dismiss.
+Supported browsers can open and close a drawer with the [Invoker Commands API][2]—no Bootstrap JavaScript required. Set `commandFor` to the drawer’s `id`, use `command="show-modal"` to open, and `command="close"` to dismiss.
 
-The Invoker Commands API is not supported in all browsers. Pass `open` and `onDismiss` to control the
-drawer through React state as in the examples above when you need consistent behavior or an animated
-close.
+The Invoker Commands API is not supported in all browsers. For guaranteed support, use React-controlled `open` and `onDismiss`, as in the examples above, when you need wrapper options, callbacks, or animated close.
 
-<CodeBlock language="tsx">{`<Button variant="solid" theme="primary" commandFor="invokerDrawer" command="show-modal">
-    Open drawer
-</Button>
-
-<Drawer id="invokerDrawer" title="Invoker Commands" placement="start">
-    This drawer opens with the Invoker Commands API.
-</Drawer>`}</CodeBlock>
+<CodeExample>
+    <Button
+        variant="solid"
+        theme="primary"
+        {...{ commandfor: 'invokerDrawer', command: 'show-modal' }}
+    >
+        Open drawer
+    </Button>
+    <Drawer id="invokerDrawer" title="Invoker Commands" placement="start">
+        <p>
+            This drawer opens with <code>command="show-modal"</code>.
+        </p>
+        <Button
+            variant="solid"
+            theme="secondary"
+            {...{ commandfor: 'invokerDrawer', command: 'close' }}
+        >
+            Close drawer
+        </Button>
+    </Drawer>
+</CodeExample>
 
 ### Body scrolling
 
-Scrolling the `<body>` element is disabled when a drawer opens modally. Use `scroll` with
-`backdrop={false}` to keep body scrolling and open the drawer as non-modal. Focus moves into the
-drawer, but is not trapped, so the page stays interactive.
+Scrolling the `<body>` element is disabled when a drawer opens modally. Pass `scroll` with `backdrop={false}` to keep body scrolling and open the drawer as non-modal. Focus moves into the drawer, but is not trapped, so the page stays interactive.
 
-<DrawerDemo
-    label="Enable body scrolling"
-    title="Drawer with body scrolling"
-    scroll
-    backdrop={false}
-    placement="start"
->
-    Try scrolling the rest of the page to see this option in action.
-</DrawerDemo>
+<CodeExample>
+    <DrawerDemo
+        label="Enable body scrolling"
+        title="Body scrolling"
+        placement="start"
+        scroll
+        backdrop={false}
+    >
+        Some text as placeholder. In real life you can have the elements you have chosen. Like text,
+        images, lists, etc.
+    </DrawerDemo>
+</CodeExample>
 
 ### Body scrolling & backdrop
 
-Use `scroll` to allow body scrolling while preserving a modal backdrop and focus trapping.
-With `backdrop={false}`, the same option opens a non-modal drawer instead.
+You can also allow `<body>` scrolling while keeping a backdrop. With a backdrop present, the drawer stays modal (`showModal()` and focus trapping) even when `scroll` is `true`.
 
-<DrawerDemo
-    label="Enable both scrolling & backdrop"
-    title="Backdrop with scrolling"
-    scroll
-    placement="start"
->
-    Try scrolling the rest of the page to see this option in action.
-</DrawerDemo>
+<CodeExample>
+    <DrawerDemo
+        label="Enable both scrolling & backdrop"
+        title="Backdrop with scrolling"
+        placement="start"
+        scroll
+    >
+        Some text as placeholder. In real life you can have the elements you have chosen. Like text,
+        images, lists, etc.
+    </DrawerDemo>
+</CodeExample>
 
 ### Static backdrop
 
 When backdrop is set to static, the drawer will not close when clicking outside of it.
 
-<DrawerDemo label="Toggle static drawer" title="Drawer" backdrop="static" placement="start">
-    I will not close if you click outside of me.
-</DrawerDemo>
+<CodeExample>
+    <DrawerDemo
+        label="Toggle static drawer"
+        title="Static backdrop"
+        placement="start"
+        backdrop="static"
+    >
+        I will not close if you click outside of me.
+    </DrawerDemo>
+</CodeExample>
 
 ## Instant drawer
 
-By default, drawers animate with a slide on open and close. To disable animations, add
-`.drawer-instant` to the drawer element.
+By default, drawers animate with a slide on open and close. To disable animations, pass `animation="instant"` to `Drawer`.
 
-<DrawerDemo
-    label="Toggle instant drawer"
-    title="Instant drawer"
-    animation="instant"
-    placement="start"
->
-    This drawer doesn't animate and appears instantly on open and close.
-</DrawerDemo>
+<CodeExample>
+    <DrawerDemo
+        label="Toggle instant drawer"
+        title="Instant drawer"
+        placement="start"
+        animation="instant"
+    >
+        Some text as placeholder. In real life you can have the elements you have chosen. Like text,
+        images, lists, etc.
+    </DrawerDemo>
+</CodeExample>
 
 ## Dark drawer
 
-Change the appearance of drawers with utilities to better match them to different contexts like dark
-navbars. Set `theme="dark"`, which applies `data-bs-theme="dark"` to the drawer, and all nested
-elements within use dark mode.
+Change the appearance of drawers with utilities to better match them to different contexts like dark navbars. Here we pass `theme="dark"` to `Drawer`, and it makes all nested elements within use dark mode.
 
-<DrawerDemo label="Open dark drawer" title="Drawer" theme="dark" placement="start">
-    Place drawer content here.
-</DrawerDemo>
+<CodeExample>
+    <DrawerDemo label="Toggle dark drawer" title="Dark drawer" placement="start" theme="dark">
+        Some text as placeholder. In real life you can have the elements you have chosen. Like text,
+        images, lists, etc.
+    </DrawerDemo>
+</CodeExample>
 
 ## Translucent drawer
 
-Add `.drawer-translucent` to the drawer panel to blur and saturate the background. This makes the
-panel semi-transparent so content behind it shows through.
+Pass `translucent` to the drawer panel to blur and saturate the background. This makes the panel semi-transparent so content behind it shows through.
 
-<DrawerDemo
-    label="Toggle translucent drawer"
-    title="Translucent drawer"
-    translucent
-    placement="start"
->
-    Content for the translucent drawer goes here. The background blurs and saturates whatever is
-    behind it.
-</DrawerDemo>
+<CodeExample>
+    <DrawerDemo
+        label="Toggle translucent drawer"
+        title="Translucent drawer"
+        placement="start"
+        translucent
+    >
+        Some text as placeholder. In real life you can have the elements you have chosen. Like text,
+        images, lists, etc.
+    </DrawerDemo>
+</CodeExample>
 
 ## Sheet
 
-Add `.drawer-sheet` to render the panel flush against the viewport edge. The sheet variant removes
-the drawer's inset, border, border-radius, and box-shadow, so it sits edge-to-edge like a traditional
-offcanvas. It works with any placement.
+Pass `sheet` to render the panel flush against the viewport edge. The sheet variant removes the drawer’s inset, border, border-radius, and box-shadow, so it sits edge-to-edge like a traditional offcanvas. It works with any placement.
 
-<DrawerDemo label="Toggle sheet drawer" title="Sheet drawer" sheet placement="bottom">
-    Content for the sheet drawer goes here. It sits flush to the edge with no inset, border, rounded
-    corners, or shadow.
-</DrawerDemo>
+<CodeExample>
+    <DrawerDemo label="Toggle sheet" title="Drawer sheet" placement="bottom" sheet>
+        Some text as placeholder. In real life you can have the elements you have chosen. Like text,
+        images, lists, etc.
+    </DrawerDemo>
+</CodeExample>
 
 ## Responsive
 
-Set `responsive` to `sm`, `md`, `lg`, `xl`, or `2xl`. Below that viewport breakpoint the panel is a
-toggleable drawer; above it the native dialog is displayed non-modally as ordinary page content.
+Responsive drawers hide content outside the viewport from a specified breakpoint and down. Above that breakpoint, the contents within will behave as usual. For example, `responsive="lg"` hides content in a drawer below the `lg` breakpoint, but shows the content above the `lg` breakpoint. Responsive drawers are available for each breakpoint.
 
-<DrawerDemo
-    label="Open responsive drawer"
-    title="Responsive drawer"
-    responsive="lg"
-    placement="start"
->
-    This content stays visible on large screens.
-</DrawerDemo>
+To make a responsive drawer, set the `responsive` breakpoint prop. The wrapper wires its close button without an explicit target.
 
-## Fullscreen
+<CodeExample>
+    <DrawerDemo
+        label="Toggle responsive drawer"
+        title="Responsive drawer"
+        placement="end"
+        responsive="lg"
+    >
+        This drawer becomes inline content above the lg breakpoint. Resize the browser to see the
+        change.
+    </DrawerDemo>
+</CodeExample>
 
-<DrawerDemo label="Open fullscreen drawer" title="Fullscreen drawer" fullscreen>
-    The drawer covers the viewport.
-</DrawerDemo>
+## Placement
+
+Choose a `placement` for the drawer. Idea React defaults to `"end"`.
+
+- `placement="start"` places drawer on the left of the viewport (shown above)
+- `placement="end"` places drawer on the right of the viewport
+- `placement="top"` places drawer on the top of the viewport
+- `placement="bottom"` places drawer on the bottom of the viewport
+- `fullscreen` covers the entire viewport
+
+Try the top, right, bottom, and fullscreen examples out below.
+
+<CodeExample>
+    <DrawerDemo label="Toggle top drawer" title="Drawer" placement="top">
+        Some text as placeholder. In real life you can have the elements you have chosen. Like text,
+        images, lists, etc.
+    </DrawerDemo>
+</CodeExample>
+
+<CodeExample>
+    <DrawerDemo label="Toggle end drawer" title="Drawer" placement="end">
+        Some text as placeholder. In real life you can have the elements you have chosen. Like text,
+        images, lists, etc.
+    </DrawerDemo>
+</CodeExample>
+
+<CodeExample>
+    <DrawerDemo label="Toggle bottom drawer" title="Drawer" placement="bottom">
+        Some text as placeholder. In real life you can have the elements you have chosen. Like text,
+        images, lists, etc.
+    </DrawerDemo>
+</CodeExample>
+
+<CodeExample>
+    <DrawerDemo label="Toggle fullscreen drawer" title="Fullscreen drawer" fullscreen>
+        Some text as placeholder. In real life you can have the elements you have chosen. Like text,
+        images, lists, etc.
+    </DrawerDemo>
+</CodeExample>
+
+## Footer
+
+Pass optional `footer` content for action buttons or other content at the bottom of the drawer.
+
+<CodeExample>
+    <DrawerDemo label="Toggle drawer with footer" title="Drawer with footer" placement="end" footer>
+        Some text as placeholder. In real life you can have the elements you have chosen. Like text,
+        images, lists, etc.
+    </DrawerDemo>
+</CodeExample>
 
 ## Accessibility
 
-Since the drawer is a native `<dialog>`, it gets the correct `dialog` role. Modal drawers also get
-modal semantics and focus trapping from `showModal()`. Non-modal drawers (`modal={false}` and
-`backdrop={false}`) use `show()` instead, so they do not trap focus or mark the rest of the page as
-inert. The wrapper sets `aria-label` from a string `title`; pass `aria-label` or `aria-labelledby`
-yourself when the title is not a string.
-
-## Usage
-
-The `Drawer` wrapper composes the classes and attributes that the upstream plugin handles:
-
-- `.drawer` and `.drawer-{placement}` on a `<dialog>` element enable drawer behavior.
-- `DrawerHeader`, `DrawerTitle`, `DrawerBody`, and `DrawerFooter` are exported to compose custom
-  drawer markup.
-- The header contains `Drawer`'s `title` and a `CloseButton` that calls `onDismiss`.
-- `footer` renders a `.drawer-footer`; `bodyClassName` extends the `.drawer-body`.
-- Additional classes such as `drawer-instant`, `drawer-translucent`, and `drawer-sheet` pass through
-  `className`.
-
-Set `open` and `onDismiss` to control the drawer through React state. The native dialog keeps
-`onClose` in sync when the user closes the drawer with Escape or a backdrop click.
-
-| Name            | Type                                  | Default | Description                                                                  |
-| --------------- | ------------------------------------- | ------- | ---------------------------------------------------------------------------- |
-| `title`         | `ReactNode`                           |         | Header content; a string also becomes the drawer's `aria-label`.             |
-| `placement`     | `start` \| `end` \| `top` \| `bottom` | `end`   | Edge of the viewport the drawer slides in from.                              |
-| `footer`        | `ReactNode`                           |         | Content rendered in `.drawer-footer`.                                        |
-| `bodyClassName` | `string`                              |         | Extra classes for `.drawer-body`.                                            |
-| `onDismiss`     | `() => void`                          |         | Called when the close button, Escape, or a backdrop click closes the drawer. |
-| `theme`         | `light` \| `dark`                     |         | Sets `data-bs-theme` on the dialog.                                          |
-| `modal`         | `boolean`                             | `true`  | Opens with `showModal()` (focus trap and top layer) or `show()`.             |
-| `backdrop`      | `boolean` \| `static`                 | `true`  | Shows a backdrop; `static` prevents closing when clicking outside.           |
-| `keyboard`      | `boolean`                             | `true`  | Closes the drawer when Escape is pressed.                                    |
+Since the drawer is a native `<dialog>`, it gets the correct `dialog` role. Modal drawers also get modal semantics and focus trapping from `showModal()`. Non-modal drawers (`scroll: true` and `backdrop: false`) use `show()` instead, so they do not trap focus or mark the rest of the page as inert. The wrapper supplies `aria-label` for a string `title`. When supplying custom title markup, provide an accessible `aria-label` or `aria-labelledby`.
 
 ## CSS
 
-Drawer styling uses Bootstrap's `.drawer` CSS variables for width, height, padding, background,
-border, radius, shadow, and animation. Backdrop tokens style the native `::backdrop` pseudo-element.
-See the [upstream drawer CSS][4] for the variable and Sass reference.
+### Variables
+
+Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][3].
+
+| Variable | Default |
+| -------- | ------- |
+
+## Usage
+
+Control `open` with React state and keep it synchronized through `onDismiss`. Native dialog behavior is supplied by `NativeDialog`.
+
+### Options
+
+| Prop         | Default   | Description                                                                                       |
+| ------------ | --------- | ------------------------------------------------------------------------------------------------- |
+| `placement`  | `"end"`   | Position the panel at `start`, `end`, `top`, or `bottom`.                                         |
+| `backdrop`   | `true`    | Close on an outside click; `"static"` prevents outside dismissal, and `false` hides the backdrop. |
+| `keyboard`   | `true`    | Close when Escape is pressed.                                                                     |
+| `scroll`     | `false`   | Allow body scrolling; combine with `backdrop={false}` for a non-modal drawer.                     |
+| `animation`  | `"slide"` | Choose the sliding transition or `"instant"`.                                                     |
+| `responsive` | —         | Display inline above the selected breakpoint.                                                     |
+
+### Events
+
+`onDismiss()` runs when the drawer is dismissed by its close button, Escape, or a backdrop click. Use it to update the controlled `open` value.
 
 </ComponentsLayout>
 
-[1]: https://github.com/idea2app/Idea-React/blob/main/source/Drawer.tsx
-[2]: https://github.com/idea2app/Idea-React/blob/main/source/NativeDialog/index.tsx
-[3]: https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
-[4]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/drawer.mdx#css
+[1]: https://getbootstrap.com/docs/6.0/components/dialog/
+[2]: https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
+[3]: https://getbootstrap.com/docs/6.0/components/drawer/#variables

@@ -1,99 +1,278 @@
+import { Badge } from '../../../../source/Badge';
 import {
     Stepper,
-    StepperButton,
+    StepperNav,
     StepperItem,
     StepperLink,
-    StepperNav,
     StepperOverflow
 } from '../../../../source/Stepper';
-import { Badge } from '../../../../source/Badge';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="stepper">
 
 # Stepper
 
-Use an ordered list for a timeline or wizard. `active` styles completed or current items; distinguish
-the current step with `aria-current="step"` and provide text status rather than relying on color.
+Create timelines, wizards, or step-by-step progress bars. Ideal for shopping carts, sign-up forms, and more.
 
-## Vertical and rich content
+Use `Stepper` and `StepperItem` for ordered steps, `StepperNav` and `StepperLink` for navigation, and
+`StepperOverflow` for scrollable horizontal steps. The `horizontal` prop accepts `true` or a
+breakpoint such as `"sm"`; items accept `active` and `theme`.
 
-<CodeExample>
-    <Stepper>
-        <StepperItem theme="success" active>
-            <div>
-                <strong>Create account</strong>
-                <p className="mb-0">Your account is ready.</p>
-                <Badge theme="success">Complete</Badge>
-            </div>
-        </StepperItem>
-        <StepperItem theme="primary" aria-current="step" active>
-            <div>
-                <strong>Confirm email</strong>
-                <p className="mb-0">Check your inbox.</p>
-                <Badge variant="subtle" theme="primary">
-                    In progress
-                </Badge>
-            </div>
-        </StepperItem>
-        <StepperItem>Update profile</StepperItem>
-        <StepperItem>Finish</StepperItem>
-    </Stepper>
-</CodeExample>
+## Examples
 
-## Responsive and overflowing
+Stepper is built with CSS Grid and `<ol>` elements. By default, steps are displayed vertically. You can transform them into horizontal lists with responsive modifier classes.
 
-`horizontal` switches orientation immediately. A breakpoint such as `horizontal="sm"` switches based
-on the nearest inline-size container, so add `contains-inline` to a parent. `StepperOverflow` supplies
-that container and scrolling for long horizontal sequences.
+### Basic
+
+Here’s a simple example of a vertical stepper.
 
 <CodeExample>
-    <div className="contains-inline">
-        <Stepper horizontal="sm" className="w-100">
+    <div className="d-block overflow-auto">
+        <Stepper>
             <StepperItem active>Create account</StepperItem>
             <StepperItem active>Confirm email</StepperItem>
             <StepperItem>Update profile</StepperItem>
             <StepperItem>Finish</StepperItem>
         </Stepper>
     </div>
-    <StepperOverflow className="mt-4">
-        <Stepper horizontal>
-            <StepperItem active>Create account</StepperItem>
-            <StepperItem active>Verify email address</StepperItem>
-            <StepperItem>Complete profile setup</StepperItem>
-            <StepperItem>Add payment method</StepperItem>
-            <StepperItem>Review and confirm</StepperItem>
-            <StepperItem>Finish onboarding</StepperItem>
-        </Stepper>
-    </StepperOverflow>
 </CodeExample>
 
-## Alignment, spacing, and links
+### Responsive
 
-Use text alignment utilities on the parent, `w-100` for equally stretched steps, and the
-`--bs-stepper-gap` CSS custom property for spacing. `StepperNav` and `StepperLink` provide
-navigation-based steps without invalid list markup. Use `StepperButton` for actions that change a
-section in the same page; it supports native button attributes such as `disabled`.
+Steppers can be made horizontal at specific breakpoints using the `contains-inline` utility on a parent element and by adding the responsive `.stepper-horizontal-{breakpoint}` modifier classes on the stepper. The extra parent element is required when using container queries.
 
 <CodeExample>
-    <div className="text-center">
-        <StepperNav aria-label="Checkout" horizontal>
-            <StepperLink href="?step=cart" theme="success" active>
-                Cart
-            </StepperLink>
-            <StepperLink href="?step=address" aria-current="step" active>
-                Address
-            </StepperLink>
-            <StepperLink href="?step=payment">Payment</StepperLink>
-        </StepperNav>
+    <div className="d-block overflow-auto p-2" style={{ resize: 'horizontal', maxWidth: '100%' }}>
+        <div className="contains-inline">
+            <Stepper horizontal="sm">
+                <StepperItem active>Create account</StepperItem>
+                <StepperItem active>Confirm email</StepperItem>
+                <StepperItem>Update profile</StepperItem>
+                <StepperItem>Finish</StepperItem>
+            </Stepper>
+        </div>
     </div>
-    <StepperNav aria-label="Setup actions" className="mt-4" horizontal>
-        <StepperButton aria-current="step" active>
-            Current section
-        </StepperButton>
-        <StepperButton disabled>Unavailable section</StepperButton>
-    </StepperNav>
 </CodeExample>
 
+### Gap
+
+Customize the gap with styles that override the `--bs-stepper-gap` CSS variable.
+
+<CodeExample>
+    <div className="d-block overflow-auto">
+        <Stepper style={Object.fromEntries([['--bs-stepper-gap', '3rem']])}>
+            <StepperItem active>Create account</StepperItem>
+            <StepperItem active>Confirm email</StepperItem>
+            <StepperItem>Update profile</StepperItem>
+            <StepperItem>Finish</StepperItem>
+        </Stepper>
+    </div>
+</CodeExample>
+
+## Variants
+
+<CodeExample>
+    <div className="d-block overflow-auto">
+        <Stepper horizontal>
+            <StepperItem theme="accent" active>
+                Create account
+            </StepperItem>
+            <StepperItem>Confirm email</StepperItem>
+            <StepperItem theme="success" active>
+                Update profile
+            </StepperItem>
+            <StepperItem theme="danger" active>
+                Finish
+            </StepperItem>
+        </Stepper>
+    </div>
+</CodeExample>
+
+## Overflow
+
+Wrap your horizontal stepper in a `.stepper-overflow` container to enable horizontal scrolling when the stepper overflows its parent. Uses `container-type: inline-size` for container query support as opposed to a viewport-based media query.
+
+<CodeExample>
+    <div className="d-block overflow-auto">
+        <StepperOverflow>
+            <Stepper horizontal>
+                <StepperItem active>Create account</StepperItem>
+                <StepperItem active>Verify email address</StepperItem>
+                <StepperItem>Complete profile setup</StepperItem>
+                <StepperItem>Add payment method</StepperItem>
+                <StepperItem>Review and confirm</StepperItem>
+                <StepperItem>Finish onboarding</StepperItem>
+            </Stepper>
+        </StepperOverflow>
+    </div>
+</CodeExample>
+
+## Complex
+
+Add additional content beyond labels to provide more context within each step, such as descriptions, helper messages, status indicators, or other decorative elements.
+
+<CodeExample>
+    <div className="d-block overflow-auto">
+        <Stepper>
+            <StepperItem active className="align-items-start">
+                <div className="pt-1">
+                    <div className="fw-semibold">Create</div>
+                    <small className="fg-3">Create an account.</small>
+                </div>
+            </StepperItem>
+            <StepperItem active className="align-items-start">
+                <div className="pt-1">
+                    <div className="fw-semibold">Confirm</div>
+                    <small className="fg-3">Confirm your email.</small>
+                </div>
+            </StepperItem>
+            <StepperItem className="align-items-start">
+                <div className="pt-1">
+                    <div className="fw-semibold">Set-up</div>
+                    <small className="fg-3">Configure your profile.</small>
+                </div>
+            </StepperItem>
+            <StepperItem className="align-items-start">
+                <div className="pt-1">
+                    <div className="fw-semibold">Finish</div>
+                    <small className="fg-3">Welcome aboard!</small>
+                </div>
+            </StepperItem>
+        </Stepper>
+    </div>
+</CodeExample>
+
+Mix with other components, like badges, and our theme helpers to create a more unique steppers.
+
+<CodeExample>
+    <div className="d-block overflow-auto">
+        <Stepper horizontal className="w-100">
+            <StepperItem theme="success" active>
+                <div>
+                    <div>Create account</div>
+                    <Badge variant="subtle">Complete</Badge>
+                </div>
+            </StepperItem>
+            <StepperItem theme="success" active>
+                <div>
+                    <div>Confirm email</div>
+                    <Badge variant="subtle">Complete</Badge>
+                </div>
+            </StepperItem>
+            <StepperItem theme="primary" active>
+                <div>
+                    <div>Update profile</div>
+                    <Badge variant="subtle">In-progress</Badge>
+                </div>
+            </StepperItem>
+            <StepperItem theme="secondary">
+                <div>
+                    <div>Finish</div>
+                    <Badge variant="subtle">Pending</Badge>
+                </div>
+            </StepperItem>
+        </Stepper>
+    </div>
+</CodeExample>
+
+## Alignment
+
+Use [text alignment utilities][1] (because we use `display: inline-grid`) to align the steps. The inline grid arrangement allows us to keep the steps equal width and ensures the connecting lines are rendered correctly.
+
+<CodeExample>
+    <div className="d-block overflow-auto">
+        <Stepper horizontal>
+            <StepperItem active>Default stepper</StepperItem>
+            <StepperItem active>Confirm email</StepperItem>
+            <StepperItem>Update profile</StepperItem>
+            <StepperItem>Finish</StepperItem>
+        </Stepper>
+    </div>
+</CodeExample>
+
+<CodeExample>
+    <div className="text-center overflow-auto">
+        <Stepper horizontal>
+            <StepperItem active>Center stepper</StepperItem>
+            <StepperItem active>Confirm email</StepperItem>
+            <StepperItem>Update profile</StepperItem>
+            <StepperItem>Finish</StepperItem>
+        </Stepper>
+    </div>
+</CodeExample>
+
+<CodeExample>
+    <div className="text-end overflow-auto">
+        <Stepper horizontal>
+            <StepperItem active>End stepper</StepperItem>
+            <StepperItem active>Confirm email</StepperItem>
+            <StepperItem>Update profile</StepperItem>
+            <StepperItem>Finish</StepperItem>
+        </Stepper>
+    </div>
+</CodeExample>
+
+Apply `.w-100` to the stepper to make it full width. Stepper items will be stretched to fill the available space. Alignment doesn’t affect full-width steppers.
+
+<CodeExample>
+    <div className="d-block overflow-auto">
+        <Stepper horizontal className="w-100">
+            <StepperItem active>Create account</StepperItem>
+            <StepperItem active>Confirm email</StepperItem>
+            <StepperItem>Update profile</StepperItem>
+            <StepperItem>Finish</StepperItem>
+        </Stepper>
+    </div>
+</CodeExample>
+
+## With anchors
+
+Use anchor elements to build your stepper if it links across multiple pages. Add `role="button"` or use `<button>` elements if you’re linking across sections in the same document.
+
+Consider using our [link utilities][2] for quick color control.
+
+<CodeExample>
+    <div className="d-block overflow-auto">
+        <StepperNav>
+            <StepperLink active href="#" role="button">
+                Create account
+            </StepperLink>
+            <StepperLink active href="#" role="button">
+                Confirm email
+            </StepperLink>
+            <StepperLink theme="secondary" href="#" role="button">
+                Update profile
+            </StepperLink>
+            <StepperLink theme="secondary" href="#" role="button">
+                Finish
+            </StepperLink>
+        </StepperNav>
+    </div>
+</CodeExample>
+
+## CSS
+
+### Variables
+
+Customize the component with the following local CSS variables. Override them through the wrapper’s `style` prop or your own CSS module.
+
+| CSS variable                | Default                      |
+| --------------------------- | ---------------------------- |
+| `--bs-stepper-size`         | `2rem`                       |
+| `--bs-stepper-gap`          | `1rem`                       |
+| `--bs-stepper-font-size`    | `var(--bs-font-size-sm)`     |
+| `--bs-stepper-text-gap`     | `0.5rem`                     |
+| `--bs-stepper-track-size`   | `0.125rem`                   |
+| `--bs-stepper-bg`           | `var(--bs-bg-2)`             |
+| `--bs-stepper-active-color` | `var(--bs-primary-contrast)` |
+| `--bs-stepper-active-bg`    | `var(--bs-primary-bg)`       |
+
+### Overflow wrapper
+
+The `StepperOverflow` wrapper establishes an inline-size query container with horizontal scrolling. The horizontal stepper retains its minimum content width, keeping labels readable when the available space is narrow.
+
 </ComponentsLayout>
+
+[1]: https://getbootstrap.com/docs/6.0/utilities/text-alignment/
+[2]: https://getbootstrap.com/docs/6.0/utilities/link/

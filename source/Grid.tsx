@@ -90,3 +90,7 @@ export const Col: FC<ColProps> = ({ span, sm, md, lg, xl, '2xl': xxl, className,
         />
     );
 };
+
+Container.displayName = 'Container';
+Row.displayName = 'Row';
+Col.displayName = 'Col';

@@ -1,6 +1,4 @@
 import { Toggler } from '../../../../source/Toggler';
-import { FormFieldset, FormLabel } from '../../../../source/Form/Primitives';
-import { FormControl } from '../../../../source/Form/Control';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 
@@ -8,66 +6,118 @@ import { CodeExample } from '../../../component/Documentation/Components/Example
 
 # Toggler
 
-Toggle classes or attributes with a button. `target` accepts any CSS selector; omit it to change the
-button itself. `attribute` defaults to `class`, and `value` supplies the class names or attribute value.
-The `id` attribute cannot be toggled. No Bootstrap JavaScript import is needed.
-Use `as="div"` or `as="span"` for an entire clickable surface; these also support Enter and Space.
+Toggle attributes or classes on click using the `Toggler` component. Works with any attribute except `id`.
 
-## Own classes and existing values
+Toggler is an interactive component that can be used to avoid writing small or one-off JavaScript snippets to create interactive elements. Instead of writing custom JavaScript, use its `attribute`, `value`, and `target` props to toggle attribute values, changes classes, and more on `click` events.
+
+## Examples
+
+### Toggle class
+
+Toggle the class of an element by setting `attribute="class"` and passing the class name as `value`. Without a `target`, the component toggles itself.
 
 <CodeExample>
-    <Toggler value="fg-danger" className="me-2">
-        Toggle text color
-    </Toggler>
-    <Toggler value="bg-subtle-info" className="bg-subtle-info">
-        Remove / restore background
-    </Toggler>
-    <Toggler as="div" value="fg-danger" className="p-3 border rounded mt-3">
-        Click or use the keyboard to toggle this surface.
+    <Toggler as="div" attribute="class" value="fg-danger" className="w-100 p-3 rounded border">
+        {' Click to toggle `fg-danger` '}
     </Toggler>
 </CodeExample>
 
-## One or multiple targets
+### Remove existing
 
-Target elements can override `attribute` and `value` using their own `data-bs-attribute` and
-`data-bs-value`. This lets one trigger apply different changes to multiple elements.
+If the element already has the class specified in `value`, toggling will remove it. Clicking again adds it back.
 
 <CodeExample>
-    <Toggler target=".toggler-demo-target" variant="solid" theme="primary">
-        Toggle targets
+    <Toggler
+        as="div"
+        attribute="class"
+        value="bg-subtle-info"
+        className="w-100 p-3 rounded border bg-subtle-info"
+    >
+        {' Starts with `bg-subtle-info`. Click to remove it. '}
     </Toggler>
-    <div className="toggler-demo-target p-3 border rounded mt-3" data-bs-value="bg-subtle-info">
-        First target
+</CodeExample>
+
+### Target element
+
+Use `target` to toggle the class of another element. Target elements can supply their own `data-bs-attribute` and `data-bs-value` overrides.
+
+<CodeExample>
+    <div className="d-flex gap-2 flex-column align-items-start">
+        <Toggler target="#togglerExample1" variant="solid" theme="primary">
+            {'Toggle'}
+        </Toggler>
+
+        <div
+            id="togglerExample1"
+            data-bs-value="bg-2"
+            data-bs-attribute="class"
+            className="w-100 p-3 rounded border"
+        >
+            {' Use button to change `bg-2` '}
+        </div>
     </div>
-    <div className="toggler-demo-target p-3 border rounded mt-3" data-bs-value="bg-subtle-warning">
-        Second target
-    </div>
+
 </CodeExample>
 
-## Attributes
+### Multiple elements
 
-An attribute matching `value` is removed on the next activation. Boolean HTML attributes, such as
-`hidden` or `disabled`, are true whenever present. ARIA attributes use their string values.
+Use a class name selector in `target` to toggle the class of multiple elements.
 
 <CodeExample>
-    <Toggler target="#toggler-fieldset" attribute="disabled" value="true">
-        Enable / disable form
-    </Toggler>
-    <FormFieldset id="toggler-fieldset" className="mt-3">
-        <FormLabel htmlFor="toggler-name">Name</FormLabel>
-        <FormControl id="toggler-name" />
-    </FormFieldset>
-    <Toggler target="#toggler-content" attribute="hidden" value="true" className="mt-3">
-        Show / hide content
-    </Toggler>
-    <p id="toggler-content" className="mt-3">
-        Content controlled by the hidden attribute.
-    </p>
+    <div className="vstack gap-2">
+        <Toggler
+            target=".togglerExampleClass1"
+            variant="solid"
+            theme="primary"
+            className="align-self-start"
+        >
+            {'Toggle'}
+        </Toggler>
+
+        <div
+            data-bs-value="bg-subtle-info"
+            data-bs-attribute="class"
+            className="w-100 p-3 rounded border togglerExampleClass1"
+        >
+            {' Use button to toggle `bg-subtle-info` '}
+        </div>
+
+        <div
+            data-bs-value="bg-subtle-warning"
+            data-bs-attribute="class"
+            className="w-100 p-3 rounded border togglerExampleClass1"
+        >
+            {' Use button to toggle `bg-subtle-warning` '}
+        </div>
+    </div>
+
 </CodeExample>
 
-`onClick` runs first and may cancel with `preventDefault()`. Each target emits the cancelable native
-`toggle.bs.toggler` event before a change and `toggled.bs.toggler` afterwards. `onToggled` receives the
-resolved target list. Avoid toggling React-controlled attributes; update model state instead when
-React also owns the same value.
+### Toggle attribute
+
+Toggle attributes by setting the `attribute` and `value` props. For example, toggling the `hidden` attribute:
+
+<CodeExample>
+    <Toggler as="div" attribute="hidden" value="true" className="w-100 p-3 rounded border">
+        {' Click to toggle `hidden` attribute '}
+    </Toggler>
+</CodeExample>
+
+You could also use this to toggle the `disabled` attribute on a `fieldset` element to disable all the controls within. Or any other ideas you can think of with attributes.
+
+## Usage
+
+### Options
+
+| Name        | Type                            | Default    | Description                                                                      |
+| ----------- | ------------------------------- | ---------- | -------------------------------------------------------------------------------- |
+| `as`        | `'button'`, `'div'` or `'span'` | `'button'` | Trigger element. Non-button triggers receive a button role and keyboard support. |
+| `target`    | string                          | —          | Selector for affected elements. Omit it to toggle the trigger itself.            |
+| `attribute` | string                          | `'class'`  | Attribute to toggle. Changing `id` is not supported.                             |
+| `value`     | string, number, boolean or null | —          | Class or attribute value to toggle.                                              |
+
+### Events
+
+Use `onToggled(elements)` to respond after the matched elements have been updated.
 
 </ComponentsLayout>

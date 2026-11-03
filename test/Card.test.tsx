@@ -16,6 +16,24 @@ import {
     CardTitle
 } from '../source/Card';
 
+it('preserves card component names in serialized documentation examples', () => {
+    const components = {
+        Card,
+        CardBody,
+        CardFooter,
+        CardGroup,
+        CardHeader,
+        CardImage,
+        CardImageOverlay,
+        CardSubtitle,
+        CardText,
+        CardTitle
+    };
+
+    for (const [name, component] of Object.entries(components))
+        assert.equal(component.displayName, name);
+});
+
 it('renders horizontal, subtle and translucent card variants', () => {
     const { container } = render(
         <Card theme="accent" row body subtle translucent>

@@ -5,6 +5,10 @@ import { render, screen } from '@testing-library/react';
 
 import { Badge } from '../source/Badge';
 
+it('preserves its public name in serialized documentation examples', () => {
+    assert.equal(Badge.displayName, 'Badge');
+});
+
 it('maps solid, subtle, outline, theme, and pill classes without leaking props', () => {
     const { rerender } = render(
         <Badge theme="warning" variant="subtle" pill>

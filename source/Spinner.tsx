@@ -36,4 +36,5 @@ export const SpinnerIcon: FC<IconProps> = ({ className, ...props }) => (
     <Icon {...props} className={classNames('spinner-rotate', className)} />
 );
 
+Spinner.displayName = 'Spinner';
 SpinnerIcon.displayName = 'SpinnerIcon';

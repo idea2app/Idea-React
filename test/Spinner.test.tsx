@@ -5,6 +5,11 @@ import { render, screen } from '@testing-library/react';
 
 import { Spinner, SpinnerIcon } from '../source/Spinner';
 
+it('preserves spinner names in serialized documentation examples', () => {
+    assert.equal(Spinner.displayName, 'Spinner');
+    assert.equal(SpinnerIcon.displayName, 'SpinnerIcon');
+});
+
 it('uses Bootstrap 6 animation, size, and theme classes', () => {
     render(<Spinner animation="grow" size="sm" theme="primary" role="status" />);
 

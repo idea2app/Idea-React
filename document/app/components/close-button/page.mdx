@@ -1,41 +1,63 @@
 import { CloseButton } from '../../../../source/CloseButton';
-
+import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="close-button">
 
 # Close button
 
-A generic close button for dismissing content like dialogs and drawers.
+A generic close button for dismissing content like modals and alerts.
 
-Idea React provides the [`CloseButton` wrapper][1] for these examples. It renders a button with the
-`.btn-close` class and defaults to `type="button"` and `aria-label="Close"`.
+`CloseButton` supplies the close-button styles, a default `type="button"`, and the accessible
+label “Close”. Pass an `onClick` handler when wiring it to your own dismissible content.
 
 ## Example
 
-Provide an option to dismiss or close a component with `.btn-close`. The icon is rendered with a CSS
-`mask-image`, so it inherits the `color` from the `.btn-close` class—no inline SVG required. **Be sure
-to include text for screen readers**, as the wrapper does with its default `aria-label`.
+Provide an option to dismiss or close a component with `.btn-close`. The icon is rendered with a CSS `mask-image`, so it inherits the `color` from the `.btn-close` class—no inline SVG required. **Be sure to include text for screen readers**, as we’ve done with `aria-label`.
 
-<CloseButton />
+<CodeExample>
+    <div className="d-flex flex-wrap gap-2 align-items-center">
+        <CloseButton type="button" aria-label="Close" />
+    </div>
+</CodeExample>
 
 ## Disabled state
 
-Disabled close buttons change their `opacity`. Bootstrap also applies `pointer-events: none` and
-`user-select: none` to prevent hover and active states from triggering.
+Disabled close buttons change their `opacity`. We’ve also applied `pointer-events: none` and `user-select: none` to preventing hover and active states from triggering.
 
-<CloseButton disabled />
+<CodeExample>
+    <div className="d-flex flex-wrap gap-2 align-items-center">
+        <CloseButton type="button" disabled aria-label="Close" />
+    </div>
+</CodeExample>
 
 ## Dark variant
 
-Add `data-bs-theme="dark"` to the close button, or to its parent element, to invert the close button.
-This happens automatically when in dark mode.
+Add `data-bs-theme="dark"` to the `.btn-close`, or to its parent element, to invert the close button. This happens automatically when in dark mode.
 
-<div className="bg-inverse p-3" data-bs-theme="dark">
-    <CloseButton />
-    <CloseButton disabled />
-</div>
+<CodeExample>
+    <div className="bg-inverse">
+        <div data-bs-theme="dark">
+            <CloseButton type="button" aria-label="Close" />
+            <CloseButton type="button" disabled aria-label="Close" />
+        </div>
+    </div>
+</CodeExample>
+
+## CSS
+
+### Variables
+
+Customize the component with the following local CSS variables. Override them through the wrapper’s `style` prop or your own CSS module.
+
+| CSS variable                      | Default          |
+| --------------------------------- | ---------------- |
+| `--bs-btn-close-size`             | `1.25rem`        |
+| `--bs-btn-close-color`            | `inherit`        |
+| `--bs-btn-close-icon`             | `SVG mask image` |
+| `--bs-btn-close-opacity`          | `0.5`            |
+| `--bs-btn-close-hover-opacity`    | `0.75`           |
+| `--bs-btn-close-focus-opacity`    | `0.85`           |
+| `--bs-btn-close-disabled-opacity` | `0.25`           |
 
 </ComponentsLayout>
-
-[1]: https://github.com/idea2app/Idea-React/blob/main/source/CloseButton.tsx

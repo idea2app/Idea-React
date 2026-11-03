@@ -161,4 +161,5 @@ export const ButtonInput: FC<ButtonInputProps> = ({
     />
 );
 
+Button.displayName = 'Button';
 ButtonInput.displayName = 'ButtonInput';

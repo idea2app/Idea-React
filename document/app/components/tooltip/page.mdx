@@ -1,88 +1,277 @@
 import { Button } from '../../../../source/Button';
+import { Icon } from '../../../../source/Extension/Icon';
 import { OverlayBox } from '../../../../source/Extension/OverlayBox';
-import { Tooltip } from '../../../../source/Tooltip';
-
+import styles from '../../../component/Documentation/Components/OverlayGuideDemo/style.module.css';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
 
 <ComponentsLayout active="tooltip">
 
-# Tooltip
+# Tooltips
 
-Tooltips provide concise contextual information on hover or keyboard focus. The [Tooltip wrapper][1]
-renders Bootstrap 6 content; use [OverlayBox][2] for visibility, positioning, delayed triggers,
-Escape dismissal, and the trigger's `aria-describedby` association.
+Custom replacement for browser tooltips—themed with CSS variables and positioned by Idea React’s `OverlayBox`.
 
-## Hover and focus
+## Overview
 
-<OverlayBox title="Helpful information">
-    <Button variant="solid" theme="primary">
-        Hover or focus me
-    </Button>
-</OverlayBox>
+Hover the button below to see a tooltip. By default, the tooltip will appear above their trigger element (the child of `OverlayBox`).
 
-Do not hide essential instructions exclusively in a tooltip.
+<CodeExample>
+    <OverlayBox title="Tooltip on top">
+        <Button variant="solid" theme="secondary">
+            Hover me
+        </Button>
+    </OverlayBox>
+</CodeExample>
 
-## Placement
+Things to know when using tooltips with `OverlayBox`:
 
-<div className="d-flex flex-wrap gap-3">
-    {['top', 'right', 'bottom', 'left'].map(placement => (
-        <OverlayBox key={placement} title={`Tooltip on ${placement}`} placement={placement}>
+- Provide a non-empty `title` so the tooltip has a meaningful accessible description.
+- Specify `container="body"` to avoid rendering problems in more complex components (like our input groups, button groups, etc).
+- Triggering tooltips on hidden elements will not work.
+- Tooltips for `disabled` elements must be triggered on a wrapper element.
+- When triggered from hyperlinks that span multiple lines, tooltips will be centered. Use `white-space: nowrap;` on your `<a>`s to avoid this behavior.
+- Unmount `OverlayBox` together with its trigger so the tooltip and positioning listeners are cleaned up.
+- Tooltips can be triggered thanks to an element inside a shadow DOM.
+
+Got all that? Great, let’s see how they work with some examples.
+
+Pass rich content as React nodes instead of injecting untrusted HTML. React escapes text content by default.
+
+The animation effect of this component is dependent on the `prefers-reduced-motion` media query.
+
+## Examples
+
+### Tooltips on links
+
+Hover over the links below to see tooltips:
+
+<CodeExample>
+    <p className="text-body-secondary">
+        Placeholder text to demonstrate some{' '}
+        <OverlayBox title="Default tooltip">
+            <a href="#tooltips-on-links">inline links</a>
+        </OverlayBox>{' '}
+        with tooltips. This is now just filler, no killer. Content placed here just to mimic the
+        presence of{' '}
+        <OverlayBox title="Another tooltip">
+            <a href="#tooltips-on-links">real text</a>
+        </OverlayBox>
+        . And all that to give you an idea of how tooltips would look when used in real-world
+        situations. So hopefully you’ve now seen how{' '}
+        <OverlayBox title="Another one here too">
+            <a href="#tooltips-on-links">these tooltips on links</a>
+        </OverlayBox>{' '}
+        can work in practice, once you use them on{' '}
+        <OverlayBox title="The last tip!">
+            <a href="#tooltips-on-links">your own</a>
+        </OverlayBox>{' '}
+        site or project.
+    </p>
+</CodeExample>
+
+Use the `title` prop on `OverlayBox`, rather than the native `title` attribute on the trigger, to avoid duplicate browser tooltips.
+
+### Custom tooltips
+
+You can customize the appearance of tooltips using [CSS variables][1]. We pass a CSS module class through `overlayClassName` to scope our custom appearance and use it to override a local CSS variable.
+
+<CodeExample>
+    <OverlayBox
+        title="This top tooltip is themed via CSS variables."
+        overlayClassName={styles.tooltip}
+    >
+        <Button variant="solid" theme="secondary">
+            Custom tooltip
+        </Button>
+    </OverlayBox>
+</CodeExample>
+
+### Placement
+
+Set `placement` to change the direction. Hover over the buttons below to see the four tooltips directions: top, right, bottom, and left. Directions are mirrored when using Bootstrap in RTL.
+
+<CodeExample>
+    <div className="d-flex flex-wrap gap-3">
+        <OverlayBox title="Tooltip on top" placement="top">
             <Button variant="solid" theme="secondary">
-                {placement}
+                Tooltip on top
             </Button>
         </OverlayBox>
-    ))}
-</div>
+        <OverlayBox title="Tooltip on right" placement="right">
+            <Button variant="solid" theme="secondary">
+                Tooltip on right
+            </Button>
+        </OverlayBox>
+        <OverlayBox title="Tooltip on bottom" placement="bottom">
+            <Button variant="solid" theme="secondary">
+                Tooltip on bottom
+            </Button>
+        </OverlayBox>
+        <OverlayBox title="Tooltip on left" placement="left">
+            <Button variant="solid" theme="secondary">
+                Tooltip on left
+            </Button>
+        </OverlayBox>
+    </div>
+</CodeExample>
 
-## Rich and interactive content
+### Responsive placement
 
-React nodes support emphasis and links without HTML injection. The overlay stays within its trigger
-wrapper, so pointer and focus movement into its content remain inside that wrapper.
+Change placement at different breakpoints using `responsivePlacement={{ md: 'right', lg: 'bottom' }}`, where each breakpoint is one of `sm`, `md`, `lg`, `xl`, or `2xl`.
 
-<OverlayBox
-    title={
-        <span>
-            Read the <a href="https://getbootstrap.com/">Bootstrap guide</a>.
+<CodeExample>
+    <div className="d-flex flex-wrap gap-3">
+        <OverlayBox
+            title="Responsive tooltip"
+            placement="top"
+            responsivePlacement={{ md: 'right', lg: 'bottom' }}
+        >
+            <Button variant="solid" theme="secondary">
+                Top → md:right → lg:bottom
+            </Button>
+        </OverlayBox>
+        <OverlayBox title="Responsive tooltip" placement="left" responsivePlacement={{ lg: 'top' }}>
+            <Button variant="solid" theme="secondary">
+                Left → lg:top
+            </Button>
+        </OverlayBox>
+    </div>
+</CodeExample>
+
+Resize your browser to see the tooltip placement change at different breakpoints.
+
+### Custom HTML
+
+And with custom HTML added:
+
+<CodeExample>
+    <OverlayBox
+        title={
+            <>
+                <em>Tooltip</em> <u>with</u> <b>HTML</b>
+            </>
+        }
+    >
+        <Button variant="solid" theme="secondary">
+            Tooltip with HTML
+        </Button>
+    </OverlayBox>
+</CodeExample>
+
+With an icon (rendered through `Icon`):
+
+<CodeExample>
+    <OverlayBox
+        title={
+            <>
+                <Icon name="heart-fill" aria-hidden="true" /> Tooltip with an icon
+            </>
+        }
+    >
+        <Button variant="solid" theme="secondary">
+            Tooltip with icon
+        </Button>
+    </OverlayBox>
+</CodeExample>
+
+### Interactive tooltips
+
+Move the pointer onto the tip to reach interactive content inside it, such as a link. The tooltip stays open while the pointer is over the trigger or the tip. It hides when the pointer leaves both, or when you press the <kbd>Escape</kbd> key. This helps satisfy the [WCAG 1.4.13 “Content on Hover or Focus”][2] success criterion.
+
+<CodeExample>
+    <OverlayBox
+        title={
+            <>
+                Need more details? <a href="#interactive-tooltips">Read the documentation</a>.
+            </>
+        }
+    >
+        <Button variant="solid" theme="secondary">
+            Interactive tooltip
+        </Button>
+    </OverlayBox>
+</CodeExample>
+
+### Disabled elements
+
+Elements with the `disabled` attribute aren’t interactive, meaning users cannot focus, hover, or click them to trigger a tooltip (or popover). As a workaround, you’ll want to trigger the tooltip from a wrapper `<div>` or `<span>`, ideally made keyboard-focusable using `tabindex="0"`.
+
+<CodeExample>
+    <OverlayBox title="Disabled tooltip">
+        <span className="d-inline-block rounded-3" tabIndex={0}>
+            <Button variant="solid" theme="primary" disabled>
+                Disabled button
+            </Button>
         </span>
-    }
-    delay={{ show: 100, hide: 150 }}
->
-    <Button variant="subtle" theme="primary">
-        More information
-    </Button>
-</OverlayBox>
+    </OverlayBox>
+</CodeExample>
 
-## Disabled elements
+## CSS
 
-Disabled controls do not receive focus. Add a focusable wrapper when the explanation must remain
-available to keyboard users.
+### Variables
 
-<OverlayBox title="Complete the required fields first">
-    <span tabIndex={0} aria-label="Why saving is unavailable">
-        <Button disabled>Save</Button>
-    </span>
-</OverlayBox>
+Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][3].
 
-## Standalone markup
+| Variable                           | Default                          |
+| ---------------------------------- | -------------------------------- |
+| `--bs-tooltip-zindex`              | `var(--bs-z-tooltip)`            |
+| `--bs-tooltip-max-width`           | `200px`                          |
+| `--bs-tooltip-padding-x`           | `var(--bs-spacer-3)`             |
+| `--bs-tooltip-padding-y`           | `calc(var(--bs-spacer) * 0.375)` |
+| `--bs-tooltip-font-size`           | `var(--bs-font-size-sm)`         |
+| `--bs-tooltip-color`               | `var(--bs-bg-body)`              |
+| `--bs-tooltip-bg`                  | `var(--bs-fg-body)`              |
+| `--bs-tooltip-border-radius`       | `var(--bs-radius-5)`             |
+| `--bs-tooltip-opacity`             | `0.95`                           |
+| `--bs-tooltip-arrow-width`         | `0.8rem`                         |
+| `--bs-tooltip-arrow-height`        | `0.4rem`                         |
+| `--bs-tooltip-transition-property` | `opacity`                        |
+| `--bs-tooltip-transition-duration` | `0.15s`                          |
+| `--bs-tooltip-transition-timing`   | `linear`                         |
 
-<Tooltip className="position-relative d-inline-block" placement="bottom">
-    Standalone tooltip content
-</Tooltip>
+## Usage
 
-`Tooltip` accepts `placement`, `show`, HTML attributes, and React children. `show={false}` hides its
-content from assistive technology too. When rendering it directly, provide the trigger association
-and visibility behavior yourself.
+### Delegated tooltips
 
-`OverlayBox` automatically flips and shifts content to remain inside the viewport. Set
-`responsivePlacement={{ md: 'right', lg: 'bottom' }}` to change directions at viewport breakpoints.
-Use `offset` for spacing (`8` or `[crossAxis, mainAxis]`), `padding` for the viewport inset,
-and `flip={false}` when the preferred direction must be retained.
+To enable tooltips on many triggers at once—including elements added to the DOM later—render an `OverlayBox` for each trigger in your React list. React mounts and removes the overlays with their triggers; no selector-based plugin initialization is needed.
 
-`container` accepts a selector, an element, or a function returning an element. It portals the
-overlay without losing focus, hover, outside-click dismissal, or `aria-describedby`. Resize,
-scroll, and content-size changes update positioning; all observers are released on close/unmount.
+<CodeExample>
+    <div className="d-flex flex-wrap gap-3">
+        {['First', 'Second', 'Third'].map(label => (
+            <OverlayBox key={label} title={`${label} tooltip`}>
+                <Button variant="solid" theme="secondary">
+                    {label} trigger
+                </Button>
+            </OverlayBox>
+        ))}
+    </div>
+</CodeExample>
+
+### Markup
+
+Wrap the trigger in `OverlayBox` and provide its `title`. It renders the `Tooltip` markup, places it relative to the trigger, and connects it with `aria-describedby`.
+
+**Keep tooltips accessible to keyboard and assistive technology users** by only adding them to HTML elements that are traditionally keyboard-focusable and interactive (such as links or form controls). While other HTML elements can be made focusable by adding `tabIndex={0}`, this can create annoying and confusing tab stops on non-interactive elements for keyboard users, and most assistive technologies currently do not announce tooltips in this situation. Additionally, do not rely solely on `hover` as the trigger for your tooltips as this will make them impossible to trigger for keyboard users.
+
+A shown tooltip can be dismissed by pressing the <kbd>Escape</kbd> key, helping satisfy the [WCAG 1.4.13 “Content on Hover or Focus”][2] success criterion. The tooltip also stays open while the pointer moves onto the tip, so users can reach interactive content inside it. As with dropdown menus, a tooltip shown inside a dialog is dismissed on its own: the first <kbd>Escape</kbd> closes the tooltip and a subsequent one closes the dialog.
+
+### Options
+
+| `OverlayBox` prop     | Default           | Description                                                           |
+| --------------------- | ----------------- | --------------------------------------------------------------------- |
+| `title`               | required          | Tooltip text or rich React content.                                   |
+| `trigger`             | hover and focus   | Choose `"click"`, `"hover"`, `"focus"`, or a combination as an array. |
+| `placement`           | `"top"`           | Preferred direction: `top`, `right`, `bottom`, or `left`.             |
+| `responsivePlacement` | —                 | Override direction at named breakpoints.                              |
+| `container`           | alongside trigger | A selector, DOM element, or callback returning an element.            |
+| `delay`               | `0`               | Show/hide delay in milliseconds, or `{ show: 500, hide: 100 }`.       |
+| `offset`              | `8`               | Distance from the trigger, or a `[crossAxis, mainAxis]` pair.         |
+| `padding`             | `8`               | Viewport inset for overflow avoidance.                                |
+| `flip`                | `true`            | Flip direction when space is constrained.                             |
+| `overlayClassName`    | —                 | Apply a CSS module class to the tooltip.                              |
 
 </ComponentsLayout>
 
-[1]: https://idea2app.github.io/Idea-React/modules/Tooltip.html
-[2]: ../../extensions/overlay-box/
+[1]: #variables
+[2]: https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html
+[3]: https://getbootstrap.com/docs/6.0/components/tooltip/#variables

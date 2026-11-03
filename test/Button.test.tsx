@@ -5,6 +5,11 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import { Button, ButtonInput } from '../source/Button';
 
+it('preserves button names in client-rendered documentation examples', () => {
+    assert.equal(Button.displayName, 'Button');
+    assert.equal(ButtonInput.displayName, 'ButtonInput');
+});
+
 it('defaults buttons, links, inputs and toggles to unthemed base styling', () => {
     render(
         <>

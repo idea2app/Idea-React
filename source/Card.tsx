@@ -82,3 +82,14 @@ export const CardTitle: FC<CardTitleProps> = ({ as: Tag = 'h4', className, ...pr
 export const CardText: FC<ComponentPropsWithRef<'p'>> = ({ className, ...props }) => (
     <p {...props} className={classNames('card-text', className)} />
 );
+
+Card.displayName = 'Card';
+CardImage.displayName = 'CardImage';
+CardSubtitle.displayName = 'CardSubtitle';
+CardGroup.displayName = 'CardGroup';
+CardImageOverlay.displayName = 'CardImageOverlay';
+CardHeader.displayName = 'CardHeader';
+CardBody.displayName = 'CardBody';
+CardFooter.displayName = 'CardFooter';
+CardTitle.displayName = 'CardTitle';
+CardText.displayName = 'CardText';

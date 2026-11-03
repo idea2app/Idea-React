@@ -1,75 +1,469 @@
-import { Pagination, PageItem, PageLink, PageText } from '../../../../source/Pagination';
-import { Icon } from '../../../../source/Extension/Icon';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { Pagination, PageItem, PageLink } from '../../../../source/Pagination';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="pagination">
 
 # Pagination
 
-Use a labeled navigation landmark around the list. `PageItem active` supplies `aria-current="page"`
-to its `PageLink`. Disabled items remove their links from navigation and keyboard focus.
+Documentation and examples for showing pagination to indicate a series of related content exists across multiple pages.
 
-## Quick start
+Compose `Pagination`, `PageItem`, `PageLink`, and `PageText` inside a labelled navigation element.
+`Pagination` accepts `theme` and `size`; links inherit `active` and `disabled` from their `PageItem`.
 
-<CodeExample>
-    <nav aria-label="Search result pages">
-        <Pagination theme="primary">
-            <PageItem disabled>
-                <PageLink href="?page=0">Previous</PageLink>
-            </PageItem>
-            <PageItem active>
-                <PageLink href="?page=1">1</PageLink>
-            </PageItem>
-            <PageItem>
-                <PageLink href="?page=2">2</PageLink>
-            </PageItem>
-            <PageItem>
-                <PageText>...</PageText>
-            </PageItem>
-            <PageItem>
-                <PageLink href="?page=3">Next</PageLink>
-            </PageItem>
-        </Pagination>
-    </nav>
-</CodeExample>
+## Overview
 
-## Icons, sizes, and alignment
+We use a large block of connected links for our pagination, making links hard to miss and easily scalable—all while providing large hit areas. Pagination is built with list HTML elements so screen readers can announce the number of available links. Use a wrapping `<nav>` element to identify it as a navigation section to screen readers and other assistive technologies.
 
-`size` accepts `sm` or `lg`. `theme` accepts the shared colors, and flex utilities control alignment.
-Use `PageText` for non-interactive current or disabled items. Icon-only links need accessible names.
+In addition, as pages likely have more than one such navigation section, it’s advisable to provide a descriptive `aria-label` for the `<nav>` to reflect its purpose. For example, if the pagination component is used to navigate between a set of search results, an appropriate label could be `aria-label="Search results pages"`.
 
 <CodeExample>
-    <nav aria-label="Article pages">
-        <Pagination size="lg" theme="accent" className="justify-content-center">
-            <PageItem>
-                <PageLink href="?page=1" aria-label="Previous page">
-                    <Icon name="chevron-double-left" aria-hidden="true" />
-                </PageLink>
-            </PageItem>
-            <PageItem active>
-                <PageText>2</PageText>
-            </PageItem>
-            <PageItem>
-                <PageLink href="?page=3" aria-label="Next page">
-                    <Icon name="chevron-double-right" aria-hidden="true" />
-                </PageLink>
-            </PageItem>
-        </Pagination>
-    </nav>
-    <nav aria-label="Compact pages">
-        <Pagination size="sm" className="justify-content-end">
-            <PageItem disabled>
-                <PageText>Previous</PageText>
-            </PageItem>
-            <PageItem active>
-                <PageLink href="?page=1">1</PageLink>
-            </PageItem>
-            <PageItem>
-                <PageLink href="?page=2">2</PageLink>
-            </PageItem>
-        </Pagination>
-    </nav>
+    <div className="vstack gap-3">
+        <nav aria-label="Page navigation example">
+            <Pagination>
+                <PageItem>
+                    <PageLink href="#">Previous</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">2</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">Next</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+    </div>
 </CodeExample>
+
+## Working with icons
+
+Looking to use an icon or symbol in place of text for some pagination links? Be sure to provide proper screen reader support with `aria` attributes.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <nav aria-label="Page navigation example">
+            <Pagination>
+                <PageItem>
+                    <PageLink href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">2</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+    </div>
+</CodeExample>
+
+## Active
+
+Add `.active` to indicate a `.page-item` is the one currently being viewed. If using an `<a>` on the current page, `aria-current="page"` should be added for assistive technologies.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <nav aria-label="...">
+            <Pagination>
+                <PageItem>
+                    <PageLink href="#">Previous</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem active>
+                    <PageLink href="#" aria-current="page">
+                        2
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">Next</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+    </div>
+</CodeExample>
+
+If using a non-interactive element, like a `<span>` for the current page, you may omit the `aria-current` attribute.
+
+```html
+<li class="page-item active">
+    <span class="page-link">2</span>
+</li>
+```
+
+## Disabled
+
+Add `.disabled` to a `.page-item` to make it appear un-clickable. While `.disabled` uses `pointer-events: none` to disable the link‘s interactivity, that CSS property is not yet standardized and doesn’t account for keyboard navigation. As such, you should always add `tabindex="-1"` on disabled links and use custom JavaScript to fully disable their functionality.
+
+The `PageItem disabled` example below delegates this behavior to `PageLink`, which removes the
+destination and click handler, supplies `aria-disabled`, and excludes the link from keyboard focus.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <nav aria-label="...">
+            <Pagination>
+                <PageItem disabled>
+                    <PageLink>Previous</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem active>
+                    <PageLink href="#" aria-current="page">
+                        2
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">Next</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+    </div>
+</CodeExample>
+
+And just like active page items, you can swap out the disabled `<a>` for a `<span>` to remove click functionality and prevent keyboard focus while retaining intended styles.
+
+```html
+<li class="page-item disabled">
+    <span class="page-link">Previous</span>
+</li>
+```
+
+## Variants
+
+Add a `.theme-{color}` class to `.pagination` to apply a semantic theme color across the component, including hover, focus, and the active page item.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <nav aria-label="Page navigation example">
+            <Pagination theme="primary">
+                <PageItem>
+                    <PageLink href="#">Previous</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem active>
+                    <PageLink href="#" aria-current="page">
+                        2
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">Next</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+        <nav aria-label="Page navigation example">
+            <Pagination theme="accent">
+                <PageItem>
+                    <PageLink href="#">Previous</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem active>
+                    <PageLink href="#" aria-current="page">
+                        2
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">Next</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+        <nav aria-label="Page navigation example">
+            <Pagination theme="secondary">
+                <PageItem>
+                    <PageLink href="#">Previous</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem active>
+                    <PageLink href="#" aria-current="page">
+                        2
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">Next</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+        <nav aria-label="Page navigation example">
+            <Pagination theme="success">
+                <PageItem>
+                    <PageLink href="#">Previous</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem active>
+                    <PageLink href="#" aria-current="page">
+                        2
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">Next</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+        <nav aria-label="Page navigation example">
+            <Pagination theme="danger">
+                <PageItem>
+                    <PageLink href="#">Previous</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem active>
+                    <PageLink href="#" aria-current="page">
+                        2
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">Next</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+        <nav aria-label="Page navigation example">
+            <Pagination theme="warning">
+                <PageItem>
+                    <PageLink href="#">Previous</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem active>
+                    <PageLink href="#" aria-current="page">
+                        2
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">Next</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+        <nav aria-label="Page navigation example">
+            <Pagination theme="info">
+                <PageItem>
+                    <PageLink href="#">Previous</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem active>
+                    <PageLink href="#" aria-current="page">
+                        2
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">Next</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+        <nav aria-label="Page navigation example">
+            <Pagination theme="inverse">
+                <PageItem>
+                    <PageLink href="#">Previous</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem active>
+                    <PageLink href="#" aria-current="page">
+                        2
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">Next</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+    </div>
+</CodeExample>
+
+## Sizing
+
+Fancy larger or smaller pagination? Add `.pagination-lg` or `.pagination-sm` for additional sizes.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <nav aria-label="...">
+            <Pagination size="lg">
+                <PageItem active>
+                    <PageLink href="#" aria-current="page">
+                        1
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">2</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+        <nav aria-label="...">
+            <Pagination>
+                <PageItem active>
+                    <PageLink href="#" aria-current="page">
+                        1
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">2</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+        <nav aria-label="...">
+            <Pagination size="sm">
+                <PageItem active>
+                    <PageLink href="#" aria-current="page">
+                        1
+                    </PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">2</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+    </div>
+</CodeExample>
+
+## Alignment
+
+Change the alignment of pagination components with [flexbox utilities][1]. For example, with `.justify-content-center`:
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <nav aria-label="Page navigation example">
+            <Pagination className="justify-content-center">
+                <PageItem disabled>
+                    <PageLink>Previous</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">2</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">Next</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+    </div>
+</CodeExample>
+
+Or with `.justify-content-end`:
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <nav aria-label="Page navigation example">
+            <Pagination className="justify-content-end">
+                <PageItem disabled>
+                    <PageLink>Previous</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">1</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">2</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">3</PageLink>
+                </PageItem>
+                <PageItem>
+                    <PageLink href="#">Next</PageLink>
+                </PageItem>
+            </Pagination>
+        </nav>
+    </div>
+</CodeExample>
+
+## CSS
+
+### Variables
+
+Customize the component with the following local CSS variables. Override them through the wrapper’s `style` prop or your own CSS module.
+
+| CSS variable                            | Default                                                |
+| --------------------------------------- | ------------------------------------------------------ |
+| `--bs-pagination-min-height`            | `var(--bs-btn-input-min-height)`                       |
+| `--bs-pagination-padding-x`             | `var(--bs-btn-input-padding-x)`                        |
+| `--bs-pagination-padding-y`             | `var(--bs-btn-input-padding-y)`                        |
+| `--bs-pagination-font-size`             | `var(--bs-btn-input-font-size)`                        |
+| `--bs-pagination-color`                 | `var(--bs-link-color)`                                 |
+| `--bs-pagination-bg`                    | `var(--bs-bg-body)`                                    |
+| `--bs-pagination-border-width`          | `var(--bs-border-width)`                               |
+| `--bs-pagination-border-color`          | `var(--bs-border-color)`                               |
+| `--bs-pagination-border-radius`         | `var(--bs-btn-input-border-radius)`                    |
+| `--bs-pagination-hover-color`           | `var(--bs-link-hover-color)`                           |
+| `--bs-pagination-hover-bg`              | `var(--bs-bg-1)`                                       |
+| `--bs-pagination-hover-border-color`    | `var(--bs-border-color)`                               |
+| `--bs-pagination-active-color`          | `var(--bs-theme-contrast, var(--bs-primary-contrast))` |
+| `--bs-pagination-active-bg`             | `var(--bs-theme-bg, var(--bs-primary-bg))`             |
+| `--bs-pagination-active-border-color`   | `var(--bs-theme-bg, var(--bs-primary-bg))`             |
+| `--bs-pagination-disabled-color`        | `var(--bs-fg-3)`                                       |
+| `--bs-pagination-disabled-bg`           | `var(--bs-bg-2)`                                       |
+| `--bs-pagination-disabled-border-color` | `var(--bs-border-color)`                               |
 
 </ComponentsLayout>
+
+[1]: https://getbootstrap.com/docs/6.0/utilities/flex/
