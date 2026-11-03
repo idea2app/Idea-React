@@ -1,14 +1,19 @@
-import { Button } from '../../../../source/Button';
 import {
-    FormCheck,
+    Checkbox,
     FormControl,
     FormField,
     FormLabel,
     FormSelect,
+    FormText,
     FormTextArea,
     InputGroup,
-    InputGroupText
+    InputGroupButton,
+    InputGroupIgnore,
+    InputGroupMenu,
+    InputGroupText,
+    Radio
 } from '../../../../source/Form';
+import { MenuDivider, MenuItem } from '../../../../source/Menu';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -16,128 +21,487 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # Input group
 
-Use `InputGroup` to attach text, buttons, and other controls to a form input. Keep the accessible
-label in a surrounding `FormField` or give the control an accessible name.
+Easily extend form controls by adding text, buttons, or button groups on either side of textual inputs, custom selects, and custom file inputs.
+
+Input groups attach add-on elements to a textual input field. Add-ons can be text, buttons, or button groups. Add labels, help text, and validation styles with [form fields][1].
+Pass `htmlFor` to `InputGroupText` to render the add-on itself as a label for its control.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <InputGroup>
+            <InputGroupText id="basic-addon1">@</InputGroupText>
+            <FormControl
+                type="text"
+                placeholder="Username"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+            />
+        </InputGroup>
+        <InputGroup>
+            <FormControl
+                type="text"
+                placeholder="Recipient’s username"
+                aria-label="Recipient’s username"
+                aria-describedby="basic-addon2"
+            />
+            <InputGroupText id="basic-addon2">@example.com</InputGroupText>
+        </InputGroup>
+    </div>
+</CodeExample>
 
 ## Examples
 
-<CodeExample>
-    <InputGroup>
-        <InputGroupText>@</InputGroupText>
-        <FormControl aria-label="Username" placeholder="Username" />
-    </InputGroup>
-</CodeExample>
+Place one add-on or button on either side of an input. You may also place one on both sides of an input. Remember to place `<label>`s outside the input group.
 
 ## With form field
 
+Wrap an `.input-group` in a `.form-field` to pair it with a label and description text.
+
 <CodeExample>
     <FormField>
-        <FormLabel htmlFor="groupUsername">Username</FormLabel>
+        <FormLabel htmlFor="inputGroupField">Your vanity URL</FormLabel>
         <InputGroup>
-            <InputGroupText>@</InputGroupText>
-            <FormControl id="groupUsername" name="username" />
+            <InputGroupText>https://example.com/</InputGroupText>
+            <FormControl type="text" id="inputGroupField" placeholder="username" />
         </InputGroup>
+        <FormText>Choose a unique URL for your profile.</FormText>
     </FormField>
 </CodeExample>
 
 ### Buttons
 
+Use [buttons][2] instead of addons for supporting interactive options.
+
 <CodeExample>
     <InputGroup>
-        <FormControl aria-label="Recipient" placeholder="Recipient" />
-        <Button>Submit</Button>
+        <InputGroupButton type="button" id="button-addon" theme="secondary" variant="outline">
+            Button
+        </InputGroupButton>
+        <FormControl
+            type="text"
+            placeholder=""
+            aria-label="Example text with button addon"
+            aria-describedby="button-addon"
+        />
     </InputGroup>
 </CodeExample>
 
 ### Textarea
 
+Input groups adapt to the height of textarea elements.
+
 <CodeExample>
     <InputGroup>
-        <InputGroupText>Message</InputGroupText>
-        <FormTextArea aria-label="Message" rows={2} />
+        <InputGroupText>With textarea</InputGroupText>
+        <FormTextArea aria-label="With textarea" />
     </InputGroup>
 </CodeExample>
 
 ### Select
 
 <CodeExample>
-    <InputGroup>
-        <InputGroupText>Country</InputGroupText>
-        <FormSelect aria-label="Country" defaultValue="ca">
-            <option value="ca">Canada</option>
-            <option value="jp">Japan</option>
+    <InputGroup className="mb-3">
+        <InputGroupText htmlFor="inputGroupSelect01">Options</InputGroupText>
+        <FormSelect id="inputGroupSelect01" defaultValue="Choose...">
+            <option>Choose...</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
         </FormSelect>
+    </InputGroup>
+    <InputGroup className="mb-3">
+        <FormSelect id="inputGroupSelect02" defaultValue="Choose...">
+            <option>Choose...</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </FormSelect>
+        <InputGroupText htmlFor="inputGroupSelect02">Options</InputGroupText>
+    </InputGroup>
+    <InputGroup className="mb-3">
+        <InputGroupButton type="button" theme="secondary" variant="outline">
+            Button
+        </InputGroupButton>
+        <FormSelect
+            id="inputGroupSelect03"
+            aria-label="Example select with button addon"
+            defaultValue="Choose..."
+        >
+            <option>Choose...</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </FormSelect>
+    </InputGroup>
+    <InputGroup>
+        <FormSelect
+            id="inputGroupSelect04"
+            aria-label="Example select with button addon"
+            defaultValue="Choose..."
+        >
+            <option>Choose...</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </FormSelect>
+        <InputGroupButton type="button" theme="secondary" variant="outline">
+            Button
+        </InputGroupButton>
     </InputGroup>
 </CodeExample>
 
 ### File input
 
 <CodeExample>
+    <InputGroup className="mb-3">
+        <InputGroupText htmlFor="inputGroupFile01">Upload</InputGroupText>
+        <FormControl type="file" id="inputGroupFile01" />
+    </InputGroup>
+    <InputGroup className="mb-3">
+        <FormControl type="file" id="inputGroupFile02" />
+        <InputGroupText htmlFor="inputGroupFile02">Upload</InputGroupText>
+    </InputGroup>
+    <InputGroup className="mb-3">
+        <InputGroupButton
+            type="button"
+            id="inputGroupFileAddon03"
+            theme="secondary"
+            variant="outline"
+        >
+            Button
+        </InputGroupButton>
+        <FormControl
+            type="file"
+            id="inputGroupFile03"
+            aria-describedby="inputGroupFileAddon03"
+            aria-label="Upload"
+        />
+    </InputGroup>
     <InputGroup>
-        <InputGroupText>Upload</InputGroupText>
-        <FormControl aria-label="Upload a file" type="file" />
+        <FormControl
+            type="file"
+            id="inputGroupFile04"
+            aria-describedby="inputGroupFileAddon04"
+            aria-label="Upload"
+        />
+        <InputGroupButton
+            type="button"
+            id="inputGroupFileAddon04"
+            theme="secondary"
+            variant="outline"
+        >
+            Button
+        </InputGroupButton>
     </InputGroup>
 </CodeExample>
 
 ### Checkboxes and radios
 
+Place any checkbox or radio within an input group’s addon instead of text.
+
 <CodeExample>
+    <InputGroup className="mb-3">
+        <InputGroupText>
+            <Checkbox aria-label="Checkbox for following text input" />
+        </InputGroupText>
+        <FormControl type="text" aria-label="Text input with checkbox" />
+    </InputGroup>
     <InputGroup>
         <InputGroupText>
-            <FormCheck aria-label="Include" />
+            <Radio aria-label="Radio button for following text input" />
         </InputGroupText>
-        <FormControl aria-label="Item" placeholder="Item" />
+        <FormControl type="text" aria-label="Text input with radio button" />
     </InputGroup>
 </CodeExample>
 
 ### Multiple inputs
 
-Multiple controls can be composed as children.
+While multiple `<input>`s are supported visually, validation styles are only available for input groups with a single `<input>`.
 
 <CodeExample>
-    <InputGroup>
-        <InputGroupText>Name</InputGroupText>
-        <FormControl aria-label="First name" />
-        <FormControl aria-label="Last name" />
-    </InputGroup>
+    <div className="vstack gap-3">
+        <InputGroup>
+            <FormControl type="text" aria-label="First name" />
+            <FormControl type="text" aria-label="Middle name" />
+            <FormControl type="text" aria-label="Last name" />
+        </InputGroup>
+        <InputGroup>
+            <InputGroupText>First and last name</InputGroupText>
+            <FormControl type="text" aria-label="First name" />
+            <FormControl type="text" aria-label="Last name" />
+        </InputGroup>
+        <InputGroup>
+            <FormControl type="text" placeholder="Username" aria-label="Username" />
+            <InputGroupText>@</InputGroupText>
+            <FormControl type="text" placeholder="Server" aria-label="Server" />
+        </InputGroup>
+    </div>
 </CodeExample>
 
 ### Multiple addons
 
+Multiple add-ons are supported and can be mixed with checkbox and radio input versions.
+
 <CodeExample>
-    <InputGroup>
-        <InputGroupText>$</InputGroupText>
-        <InputGroupText>0.00</InputGroupText>
-        <FormControl aria-label="Amount" />
-    </InputGroup>
+    <div className="vstack gap-3">
+        <InputGroup>
+            <InputGroupText>$</InputGroupText>
+            <InputGroupText>0.00</InputGroupText>
+            <FormControl type="text" aria-label="Dollar amount (with dot and two decimal places)" />
+        </InputGroup>
+        <InputGroup>
+            <FormControl type="text" aria-label="Dollar amount (with dot and two decimal places)" />
+            <InputGroupText>$</InputGroupText>
+            <InputGroupText>0.00</InputGroupText>
+        </InputGroup>
+        <InputGroup>
+            <InputGroupText>$</InputGroupText>
+            <FormControl type="text" aria-label="Amount (to the nearest dollar)" />
+            <InputGroupText>.00</InputGroupText>
+        </InputGroup>
+    </div>
 </CodeExample>
 
 ### Button addons
 
 <CodeExample>
-    <InputGroup>
-        <FormControl aria-label="Search terms" placeholder="Search" />
-        <Button>Search</Button>
-    </InputGroup>
+    <div className="vstack gap-3">
+        <InputGroup>
+            <InputGroupButton type="button" id="button-addon1" theme="secondary" variant="outline">
+                Button
+            </InputGroupButton>
+            <FormControl
+                type="text"
+                placeholder=""
+                aria-label="Example text with button addon"
+                aria-describedby="button-addon1"
+            />
+        </InputGroup>
+        <InputGroup className="mb-3">
+            <FormControl
+                type="text"
+                placeholder="Recipient’s username"
+                aria-label="Recipient’s username"
+                aria-describedby="button-addon2"
+            />
+            <InputGroupButton type="button" id="button-addon2" theme="secondary" variant="outline">
+                Button
+            </InputGroupButton>
+        </InputGroup>
+        <InputGroup className="mb-3">
+            <InputGroupButton type="button" theme="secondary" variant="outline">
+                Button
+            </InputGroupButton>
+            <InputGroupButton type="button" theme="secondary" variant="outline">
+                Button
+            </InputGroupButton>
+            <FormControl
+                type="text"
+                placeholder=""
+                aria-label="Example text with two button addons"
+            />
+        </InputGroup>
+        <InputGroup>
+            <FormControl
+                type="text"
+                placeholder="Recipient’s username"
+                aria-label="Recipient’s username with two button addons"
+            />
+            <InputGroupButton type="button" theme="secondary" variant="outline">
+                Button
+            </InputGroupButton>
+            <InputGroupButton type="button" theme="secondary" variant="outline">
+                Button
+            </InputGroupButton>
+        </InputGroup>
+    </div>
 </CodeExample>
 
 ### Buttons with menus
 
-Use the existing `Menu` wrapper alongside an input group when an addon needs a menu. The menu and
-its trigger remain separately accessible controls.
+<CodeExample>
+    <div className="vstack gap-3">
+        <InputGroup>
+            <InputGroupMenu
+                label="Menu"
+                toggleProps={{ variant: 'outline', theme: 'secondary' }}
+                align="start"
+            >
+                <MenuItem href="#">Action</MenuItem>
+                <MenuItem href="#">Another action</MenuItem>
+                <MenuItem href="#">Something else here</MenuItem>
+                <MenuDivider />
+                <MenuItem href="#">Separated link</MenuItem>
+            </InputGroupMenu>
+
+            <FormControl type="text" aria-label="Text input with menu button" />
+        </InputGroup>
+        <InputGroup>
+            <FormControl type="text" aria-label="Text input with menu button" />
+            <InputGroupMenu
+                label="Menu"
+                toggleProps={{ variant: 'outline', theme: 'secondary' }}
+                align="end"
+            >
+                <MenuItem href="#">Action</MenuItem>
+                <MenuItem href="#">Another action</MenuItem>
+                <MenuItem href="#">Something else here</MenuItem>
+                <MenuDivider />
+                <MenuItem href="#">Separated link</MenuItem>
+            </InputGroupMenu>
+        </InputGroup>
+        <InputGroup>
+            <InputGroupMenu
+                label="Menu"
+                toggleProps={{ variant: 'outline', theme: 'secondary' }}
+                align="start"
+            >
+                <MenuItem href="#">Action before</MenuItem>
+                <MenuItem href="#">Another action before</MenuItem>
+                <MenuItem href="#">Something else here</MenuItem>
+                <MenuDivider />
+                <MenuItem href="#">Separated link</MenuItem>
+            </InputGroupMenu>
+
+            <FormControl type="text" aria-label="Text input with 2 menu buttons" />
+            <InputGroupMenu
+                label="Menu"
+                toggleProps={{ variant: 'outline', theme: 'secondary' }}
+                align="end"
+            >
+                <MenuItem href="#">Action</MenuItem>
+                <MenuItem href="#">Another action</MenuItem>
+                <MenuItem href="#">Something else here</MenuItem>
+                <MenuDivider />
+                <MenuItem href="#">Separated link</MenuItem>
+            </InputGroupMenu>
+        </InputGroup>
+    </div>
+
+</CodeExample>
 
 ### Segmented buttons
 
-Compose buttons and controls as direct children. Use the existing button group wrapper for
-semantically related button segments.
+<CodeExample>
+    <InputGroup className="mb-3">
+        <InputGroupButton type="button" theme="secondary" variant="outline">
+            Action
+        </InputGroupButton>
+        <InputGroupMenu
+            label="Toggle Menu"
+            toggleProps={{ variant: 'outline', theme: 'secondary' }}
+            split
+            align="start"
+        >
+            <MenuItem href="#">Action</MenuItem>
+            <MenuItem href="#">Another action</MenuItem>
+            <MenuItem href="#">Something else here</MenuItem>
+            <MenuDivider />
+            <MenuItem href="#">Separated link</MenuItem>
+        </InputGroupMenu>
+
+        <FormControl type="text" aria-label="Text input with segmented menu button" />
+    </InputGroup>
+    <InputGroup>
+        <FormControl type="text" aria-label="Text input with segmented menu button" />
+        <InputGroupButton type="button" theme="secondary" variant="outline">
+            Action
+        </InputGroupButton>
+        <InputGroupMenu
+            label="Toggle Menu"
+            toggleProps={{ variant: 'outline', theme: 'secondary' }}
+            split
+            align="end"
+        >
+            <MenuItem href="#">Action</MenuItem>
+            <MenuItem href="#">Another action</MenuItem>
+            <MenuItem href="#">Something else here</MenuItem>
+            <MenuDivider />
+            <MenuItem href="#">Separated link</MenuItem>
+        </InputGroupMenu>
+    </InputGroup>
+
+</CodeExample>
 
 ## Border radius
 
-Bootstrap controls the adjoining border radii based on the order of the children. For groups with
-multiple controls, keep the markup order consistent with the visual order.
+Sometimes building these components gets complicated, and CSS selectors can only do so much. We’ve accounted for most of the common use cases, but in case you need to provide an extra element and skip the border-radius logic, add the `.input-group-ignore` class to the element.
+
+Consider this extra hidden input example:
+
+<CodeExample>
+    <InputGroup>
+        <InputGroupText id="visible-addon">@</InputGroupText>
+        <FormControl
+            type="text"
+            placeholder="Username"
+            aria-label="Username"
+            aria-describedby="visible-addon"
+        />
+        <InputGroupIgnore>
+            <FormControl
+                type="text"
+                placeholder="Hidden input"
+                aria-label="Hidden input"
+                aria-describedby="visible-addon"
+                className="d-none"
+            />
+        </InputGroupIgnore>
+    </InputGroup>
+</CodeExample>
 
 ## Sizing
 
-Pass `size="sm"` or `"lg"` to `InputGroup` to apply the matching input group size class.
+Add the relative form sizing classes to the `.input-group` itself and contents within will automatically resize—no need for repeating the form control size classes on each element.
+
+**Sizing on the individual input group elements isn’t supported.**
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <InputGroup size="sm">
+            <InputGroupText id="inputGroup-sizing-sm">Small</InputGroupText>
+            <FormControl
+                type="text"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-sm"
+            />
+        </InputGroup>
+        <InputGroup>
+            <InputGroupText id="inputGroup-sizing-default">Default</InputGroupText>
+            <FormControl
+                type="text"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default"
+            />
+        </InputGroup>
+        <InputGroup size="lg">
+            <InputGroupText id="inputGroup-sizing-lg">Large</InputGroupText>
+            <FormControl
+                type="text"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-lg"
+            />
+        </InputGroup>
+    </div>
+</CodeExample>
+
+## CSS
+
+### Variables
+
+```css
+.example {
+    --bs-input-group-addon-padding-y: var(--bs-btn-input-padding-y);
+    --bs-input-group-addon-padding-x: var(--bs-btn-input-padding-x);
+    --bs-input-group-addon-font-size: var(--bs-btn-input-font-size);
+    --bs-input-group-addon-line-height: var(--bs-btn-input-line-height);
+    --bs-input-group-addon-color: var(--bs-fg-body);
+    --bs-input-group-addon-bg: var(--bs-bg-2);
+    --bs-input-group-addon-border-color: var(--bs-border-color);
+}
+```
 
 </DocumentationLayout>
+
+[1]: ../field/
+[2]: ../../components/button/

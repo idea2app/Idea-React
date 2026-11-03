@@ -5,49 +5,55 @@ import { ComponentsLayout } from '../../component/Documentation/Components/Layou
 # Bootstrap components
 
 Bootstrap 6 provides a comprehensive set of responsive interface components. This catalog mirrors
-the upstream component groups and links the wrappers available in Idea React to their local guides.
-Components without a React wrapper link to the [official Bootstrap documentation][1].
+the component groups in [Bootstrap v6.0.0-alpha.1][1]. All upstream component groups have React
+wrappers and local guides, including interactive behavior and the documented visual variants.
 
 ### Built-in wrappers
 
-| Component           | Idea React guide                | Notes                                                |
-| ------------------- | ------------------------------- | ---------------------------------------------------- |
-| Avatar              | [Avatar](./avatar/)             | Image or initials avatars with status and stacks     |
-| Badge               | [Badge](./badge/)               | Themed status labels and counters                    |
-| Button              | [Button](./button/)             | Native buttons and links with themes                 |
-| Button group        | [Button group](./button-group/) | Grouped buttons, toolbars, and toggle groups         |
-| Card                | [Card](./card/)                 | Flexible content containers with headers and footers |
-| Close button        | [Close button](./close-button/) | Dismiss controls for overlays and drawers            |
-| Dialog              | [Dialog](./dialog/)             | Native dialog element and promise-based model        |
-| Drawer              | [Drawer](./drawer/)             | Edge-aligned dialogs for navigation and panels       |
-| Grid                | [Grid](./grid/)                 | Containers, rows, and responsive columns             |
-| Image               | [Image](./image/)               | Responsive images and thumbnails                     |
-| List group          | [List group](./list-group/)     | Stacked content, actions, variants, and layouts      |
-| Menu                | [Menu](./menu/)                 | Keyboard-accessible contextual menus                 |
-| Nav                 | [Nav](./nav/)                   | Tabs, pills, underline, and vertical navigation      |
-| Navbar              | [Navbar](./navbar/)             | Responsive navigation landmark                       |
-| Popover and tooltip | [Overlay box](./overlay-box/)   | Hover, focus, and click triggers                     |
-| Spinner             | [Spinner](./spinner/)           | Border and growing loading indicators                |
-| Table               | [Table](./table/)               | Opt-in table styles, variants, and responsive layout |
-| Toasts              | [Toasts](./toasts/)             | Themed notifications with dismissal                  |
+| Component    | Idea React guide                | Notes                                                          |
+| ------------ | ------------------------------- | -------------------------------------------------------------- |
+| Accordion    | [Accordion](./accordion/)       | Native exclusive, always-open, compact, and nested disclosures |
+| Alert        | [Alert](./alert/)               | Contextual feedback with optional dismissal                    |
+| Avatar       | [Avatar](./avatar/)             | Image or initials avatars with status and stacks               |
+| Badge        | [Badge](./badge/)               | Themed status labels and counters                              |
+| Breadcrumb   | [Breadcrumb](./breadcrumb/)     | Location hierarchy with custom dividers                        |
+| Button       | [Button](./button/)             | Native buttons and links with themes                           |
+| Button group | [Button group](./button-group/) | Grouped buttons, toolbars, and toggle groups                   |
+| Card         | [Card](./card/)                 | Flexible content containers with headers and footers           |
+| Carousel     | [Carousel](./carousel/)         | Slides, indicators, captions, controls, and autoplay           |
+| Close button | [Close button](./close-button/) | Dismiss controls for overlays and drawers                      |
+| Collapse     | [Collapse](./collapse/)         | Vertical or horizontal panels with synchronized triggers       |
+| Dialog       | [Dialog](./dialog/)             | Native dialog element and promise-based model                  |
+| Drawer       | [Drawer](./drawer/)             | Edge-aligned dialogs for navigation and panels                 |
+| List group   | [List group](./list-group/)     | Stacked content, actions, variants, and layouts                |
+| Menu         | [Menu](./menu/)                 | Keyboard-accessible contextual menus                           |
+| Nav          | [Nav](./nav/)                   | Tabs, pills, underline, and vertical navigation                |
+| Nav overflow | [Nav overflow](./nav-overflow/) | Overflow-aware horizontal navigation                           |
+| Navbar       | [Navbar](./navbar/)             | Responsive navigation landmark                                 |
+| Pagination   | [Pagination](./pagination/)     | Themed page links with active and disabled states              |
+| Placeholder  | [Placeholder](./placeholder/)   | Sized, colored, animated loading skeletons                     |
+| Popover      | [Popover](./popover/)           | Rich contextual overlays                                       |
+| Progress     | [Progress](./progress/)         | Accessible, stacked, striped, and animated bars                |
+| Scrollspy    | [Scrollspy](./scrollspy/)       | Active navigation tracking for scrolling sections              |
+| Spinner      | [Spinner](./spinner/)           | Border and growing loading indicators                          |
+| Stepper      | [Stepper](./stepper/)           | Responsive timelines and navigation-based steps                |
+| Tab          | [Tab](./tab/)                   | Keyboard-accessible tabbed panels                              |
+| Toasts       | [Toasts](./toasts/)             | Themed notifications with dismissal                            |
+| Toggler      | [Toggler](./toggler/)           | Class and attribute toggles for one or many targets            |
+| Tooltip      | [Tooltip](./tooltip/)           | Accessible text hints                                          |
 
-### All Bootstrap components
-
-Accordion, Alert, Avatar, Badge, Breadcrumb, Button, Button group, Card, Carousel, Close button,
-Collapse, Dialog, Drawer, List group, Menu, Nav, Nav overflow, Navbar, Pagination,
-Placeholder, Popover, Progress, Scrollspy, Spinner, Stepper, Tab, Toasts, Toggler, and Tooltip.
-
-See the separate [Forms guide](../forms/) for the Bootstrap form components.
+See the separate [Forms guide][2] for the Bootstrap form components.
 
 ### Idea React extensions
 
 Idea React also includes components without a direct Bootstrap equivalent. See the [extension
-catalog][2] for the complete public component list and quick descriptions.
-
-The component guides adapt the corresponding Bootstrap 6 alpha documentation for this library.
-Each guide links to its upstream source.
+catalog][3] for the complete public component list and quick descriptions.
+Additional Bootstrap layout and content wrappers cover [Grid][3], [Image][4], and [Table][5].
 
 </ComponentsLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/components/
-[2]: ./idea-react/
+[1]: https://github.com/twbs/bootstrap/tree/v6.0.0-alpha.1/site/src/content/docs/components
+[2]: ../forms/
+[3]: ./grid/
+[4]: ./image/
+[5]: ./table/

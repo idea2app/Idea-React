@@ -1,4 +1,4 @@
-import { FormField, FormSwitch } from '../../../../source/Form';
+import { FormField, FormLabel, FormSwitch } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -6,66 +6,234 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # Switch
 
-`FormSwitch` wraps a native checkbox in the Bootstrap switch label. Input properties are supplied
-through `inputProps`; the label text is passed as children.
+Custom toggle component built on top of native `<input>` checkbox elements.
 
 ## Basic switch
 
+Switches work by layering an invisible checkbox over the custom switch indicator. This preserves interactivity while giving you a completely customizable layer underneath. `FormSwitch` supplies `role="switch"` on the checkbox. Pass native input attributes through `inputProps`.
+
 <CodeExample>
-    <FormSwitch inputProps={{ name: 'basicSwitch' }}>Toggle this switch</FormSwitch>
+    <FormSwitch inputProps={{ defaultValue: '', id: 'switch' }} />
 </CodeExample>
 
 ## With form field
 
+Wrap `FormSwitch` in a `FormField` layout wrapper and add your label. The grid layout places the switch and label side by side.
+
 <CodeExample>
-    <FormField>
-        <FormSwitch inputProps={{ name: 'notifications', defaultChecked: true }}>
-            Enable notifications
-        </FormSwitch>
-    </FormField>
+    <div className="d-flex flex-column gap-3">
+        <FormField>
+            <FormSwitch inputProps={{ defaultValue: '', id: 'switchMdLabel' }} />
+            <FormLabel htmlFor="switchMdLabel" plain>
+                Default switch
+            </FormLabel>
+        </FormField>
+    </div>
 </CodeExample>
 
 ## Theme colors
 
-Use `theme` to apply a Bootstrap theme class to the switch.
+Modify the appearance of switches by adding the `theme` prop to the `.switch` element. This will set the checked background and border color to the theme color.
 
 <CodeExample>
-    <FormSwitch theme="primary" inputProps={{ name: 'primarySwitch' }}>
-        Primary switch
-    </FormSwitch>
+    <div className="d-flex flex-column gap-2">
+        <FormField>
+            <FormSwitch
+                inputProps={{ defaultValue: '', id: 'switchprimary', defaultChecked: true }}
+                theme="primary"
+            />
+            <FormLabel htmlFor="switchprimary" plain>
+                Example primary switch
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <FormSwitch
+                inputProps={{ defaultValue: '', id: 'switchaccent', defaultChecked: true }}
+                theme="accent"
+            />
+            <FormLabel htmlFor="switchaccent" plain>
+                Example accent switch
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <FormSwitch
+                inputProps={{ defaultValue: '', id: 'switchsecondary', defaultChecked: true }}
+                theme="secondary"
+            />
+            <FormLabel htmlFor="switchsecondary" plain>
+                Example secondary switch
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <FormSwitch
+                inputProps={{ defaultValue: '', id: 'switchsuccess', defaultChecked: true }}
+                theme="success"
+            />
+            <FormLabel htmlFor="switchsuccess" plain>
+                Example success switch
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <FormSwitch
+                inputProps={{ defaultValue: '', id: 'switchdanger', defaultChecked: true }}
+                theme="danger"
+            />
+            <FormLabel htmlFor="switchdanger" plain>
+                Example danger switch
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <FormSwitch
+                inputProps={{ defaultValue: '', id: 'switchwarning', defaultChecked: true }}
+                theme="warning"
+            />
+            <FormLabel htmlFor="switchwarning" plain>
+                Example warning switch
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <FormSwitch
+                inputProps={{ defaultValue: '', id: 'switchinfo', defaultChecked: true }}
+                theme="info"
+            />
+            <FormLabel htmlFor="switchinfo" plain>
+                Example info switch
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <FormSwitch
+                inputProps={{ defaultValue: '', id: 'switchdark', defaultChecked: true }}
+                theme="dark"
+            />
+            <FormLabel htmlFor="switchdark" plain>
+                Example dark switch
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <FormSwitch
+                inputProps={{ defaultValue: '', id: 'switchlight', defaultChecked: true }}
+                theme="light"
+            />
+            <FormLabel htmlFor="switchlight" plain>
+                Example light switch
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <FormSwitch
+                inputProps={{ defaultValue: '', id: 'switchinverse', defaultChecked: true }}
+                theme="inverse"
+            />
+            <FormLabel htmlFor="switchinverse" plain>
+                Example inverse switch
+            </FormLabel>
+        </FormField>
+    </div>
 </CodeExample>
 
 ## Disabled
 
+Add the `disabled` attribute and the associated `<label>`s are automatically styled to match with a lighter color to help indicate the input’s state.
+
 <CodeExample>
-    <FormSwitch inputProps={{ name: 'disabledSwitch', disabled: true }}>
-        Disabled switch
-    </FormSwitch>
+    <div className="vstack gap-2">
+        <FormField>
+            <FormSwitch
+                inputProps={{ defaultValue: '', id: 'switchDisabledLabel', disabled: true }}
+            />
+            <FormLabel htmlFor="switchDisabledLabel" plain>
+                Disabled switch
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <FormSwitch
+                inputProps={{
+                    defaultValue: '',
+                    id: 'switchCheckedDisabledLabel',
+                    disabled: true,
+                    defaultChecked: true
+                }}
+            />
+            <FormLabel htmlFor="switchCheckedDisabledLabel" plain>
+                Disabled checked switch
+            </FormLabel>
+        </FormField>
+    </div>
 </CodeExample>
 
 ## Sizes
 
-Set `size="sm"` or `"lg"` to select a size variant.
+Add a size modifier class to make your switch appear smaller or larger.
 
 <CodeExample>
-    <>
-        <FormSwitch size="sm" inputProps={{ name: 'smallSwitch' }}>
-            Small switch
-        </FormSwitch>
-        <FormSwitch size="lg" inputProps={{ name: 'largeSwitch' }}>
-            Large switch
-        </FormSwitch>
-    </>
+    <div className="d-flex flex-column gap-3">
+        <FormField>
+            <FormSwitch inputProps={{ defaultValue: '', id: 'switchSizeSm' }} size="sm" />
+            <FormLabel htmlFor="switchSizeSm" plain>
+                Small switch
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <FormSwitch inputProps={{ defaultValue: '', id: 'switchSizeMd' }} />
+            <FormLabel htmlFor="switchSizeMd" plain>
+                Default switch
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <FormSwitch inputProps={{ defaultValue: '', id: 'switchSizeLg' }} size="lg" />
+            <FormLabel htmlFor="switchSizeLg" plain>
+                Large switch
+            </FormLabel>
+        </FormField>
+    </div>
 </CodeExample>
 
 ## Custom width
 
-Use Bootstrap width utilities on the wrapper to control the switch label layout.
+Customize your switch for any width and indicator size you need by overriding the CSS variables. For example, for a more modern look, you could widen the switch and indicator.
 
 <CodeExample>
-    <FormSwitch className="w-100" inputProps={{ name: 'wideSwitch' }}>
-        Full-width switch
-    </FormSwitch>
+    <div className="d-flex flex-column gap-3">
+        <FormField>
+            <FormSwitch
+                inputProps={{ defaultValue: '', id: 'switchCustomWidth' }}
+                width="2.75rem"
+                indicatorWidth="1.5rem"
+            />
+            <FormLabel htmlFor="switchCustomWidth" plain>
+                Custom width switch
+            </FormLabel>
+        </FormField>
+    </div>
 </CodeExample>
+
+## CSS
+
+### Variables
+
+```css
+.example {
+    --bs-switch-height: 1.25rem;
+    --bs-switch-width: calc(var(--bs-switch-height) * 1.75);
+    --bs-switch-padding: 0.0625rem;
+    --bs-switch-margin-block: 0.125rem;
+    --bs-switch-transition-duration: var(--bs-control-transition-duration);
+    --bs-switch-transition-timing: var(--bs-control-transition-timing);
+    --bs-switch-bg: var(--bs-bg-3);
+    --bs-switch-border-width: var(--bs-border-width);
+    --bs-switch-border-color: var(--bs-border-color);
+    --bs-switch-indicator-bg: var(--bs-white);
+    --bs-switch-indicator-width: calc(
+        var(--bs-switch-height) - var(--bs-switch-padding) * 2 - var(--bs-switch-border-width) * 2
+    );
+    --bs-switch-indicator-height: calc(
+        var(--bs-switch-height) - var(--bs-switch-padding) * 2 - var(--bs-switch-border-width) * 2
+    );
+    --bs-switch-checked-bg: var(--bs-control-checked-bg);
+    --bs-switch-checked-border-color: var(--bs-switch-checked-bg);
+    --bs-switch-checked-indicator-bg: var(--bs-white);
+    --bs-switch-disabled-bg: var(--bs-control-disabled-bg);
+    --bs-switch-disabled-indicator-bg: var(--bs-fg-3);
+}
+```
 
 </DocumentationLayout>

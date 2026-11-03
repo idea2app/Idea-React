@@ -1,187 +1,318 @@
+import { ValidationForm } from '../../../component/Documentation/Forms/ValidationForm';
 import {
+    Checkbox,
+    Combobox,
+    ComboboxOption,
+    FormControl,
+    FormFeedback,
     FormField,
+    FormFieldContent,
     FormGroup,
     FormLabel,
-    FormText,
-    FormControl,
     FormSelect,
-    FormCheck,
     FormSwitch,
-    FormFeedback,
+    FormText,
     FormTextArea,
-    FormFieldContent,
-    FormFieldset,
-    Combobox,
-    ComboboxOption
+    Radio
 } from '../../../../source/Form';
+import { Button } from '../../../../source/Button';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
-import { Col, Row } from '../../../../source/Grid';
 
 <DocumentationLayout active="field">
 
-# Form field
+# Field
 
-The `FormField` wrapper arranges a label, control, optional description, and validation message.
-Associate labels with controls through `htmlFor` and `id`, and descriptions with `aria-describedby`.
+A universal layout wrapper for form controls that handles label, description, and validation feedback placement with CSS grid.
+
+The Field component provides essential layout, spacing, and functionality for your form input or component of choice. They even scale to support laying out checkboxes, radios, and switches in a two-column layout.
+
+<CodeExample>
+    <FormField>
+        <FormLabel htmlFor="fieldText">Email address</FormLabel>
+        <FormControl type="email" id="fieldText" placeholder="name@example.com" />
+        <FormText> We’ll never share your email with anyone else. </FormText>
+    </FormField>
+</CodeExample>
 
 ## How it works
 
-Use `FormField` for a single control. Use `FormGroup` to group related fields and `FormFieldContent`
-when a control needs an adjacent label or description. The wrappers preserve native control behavior.
+The `.form-field` wrapper uses CSS grid to manage the layout of a form control alongside its label, description, and validation feedback.
+
+- **Default layout** is a single-column grid where everything stacks vertically. Use this for text inputs, selects, textareas, ranges, input groups, and adorned inputs.
+- **Two-column layout** activates automatically via `:has()` when a `.check`, `.radio`, or `.switch` is a direct child. The control pins to column 1 while the label, description, and feedback stack in column 2.
+- **Overhead label** — when a `.form-label` is present alongside a check, radio, or switch, it spans both columns and sits above the control row.
+- **Grouped controls** — nest multiple `.form-field`s inside an outer `.form-field` to group radios, checkboxes, or switches under a shared label with shared description and validation feedback.
 
 ## Examples
 
 ### Select
 
+Works the same way with `<select>` elements.
+
 <CodeExample>
     <FormField>
-        <FormLabel htmlFor="fieldCountry">Country</FormLabel>
-        <FormSelect id="fieldCountry" name="country" defaultValue="">
-            <option value="" disabled>
-                Choose one…
-            </option>
-            <option value="ca">Canada</option>
-            <option value="jp">Japan</option>
+        <FormLabel htmlFor="fieldSelect">Country</FormLabel>
+        <FormSelect id="fieldSelect" defaultValue="Choose one…">
+            <option>Choose one…</option>
+            <option value="1">United States</option>
+            <option value="2">Canada</option>
+            <option value="3">United Kingdom</option>
         </FormSelect>
     </FormField>
 </CodeExample>
 
 ### Textarea
 
+Works the same way with `<textarea>` elements. Descriptions are optional.
+
 <CodeExample>
     <FormField>
-        <FormLabel htmlFor="fieldMessage">Message</FormLabel>
-        <FormTextArea id="fieldMessage" rows={3} />
+        <FormLabel htmlFor="fieldTextarea">Message</FormLabel>
+        <FormTextArea id="fieldTextarea" rows={3} />
+        <FormText> Be sure to include relevant details. </FormText>
     </FormField>
 </CodeExample>
 
 ### Checkbox
 
+When a `.check` is a direct child, the grid switches to a two-column layout with the checkbox in column 1 and the label in column 2.
+
 <CodeExample>
     <FormField>
-        <FormCheck id="fieldTerms" name="terms" />
-        <FormLabel htmlFor="fieldTerms">Accept the terms</FormLabel>
+        <Checkbox id="fieldCheck" />
+        <FormLabel htmlFor="fieldCheck" plain>
+            Remember me
+        </FormLabel>
     </FormField>
 </CodeExample>
 
 ### Radio
 
+Radios use the same two-column layout. Wrap each radio + label pair in its own `.form-field`.
+
 <CodeExample>
-    <FormFieldset>
-        <legend>Choose a plan</legend>
+    <div className="d-flex flex-column gap-2">
         <FormField>
-            <FormCheck id="fieldBasicPlan" type="radio" name="plan" value="basic" defaultChecked />
-            <FormLabel htmlFor="fieldBasicPlan">Basic</FormLabel>
+            <Radio id="fieldRadio1" name="fieldRadioGroup" />
+            <FormLabel htmlFor="fieldRadio1" plain>
+                Option one
+            </FormLabel>
         </FormField>
         <FormField>
-            <FormCheck id="fieldProPlan" type="radio" name="plan" value="pro" />
-            <FormLabel htmlFor="fieldProPlan">Pro</FormLabel>
+            <Radio id="fieldRadio2" name="fieldRadioGroup" />
+            <FormLabel htmlFor="fieldRadio2" plain>
+                Option two
+            </FormLabel>
         </FormField>
-    </FormFieldset>
+    </div>
 </CodeExample>
 
 ### Grouped
 
+Wrap multiple `.form-field`s in a `.form-group` to group related controls under a shared label. The group provides consistent spacing while each inner `.form-field` keeps its own layout.
+
 <CodeExample>
     <FormGroup>
+        <FormLabel>Shipping method</FormLabel>
         <FormField>
-            <FormLabel htmlFor="fieldFirst">First name</FormLabel>
-            <FormControl id="fieldFirst" name="firstName" />
+            <Radio id="fieldGroupRadio1" name="fieldGroupRadio" required />
+            <FormLabel htmlFor="fieldGroupRadio1" plain>
+                Standard
+            </FormLabel>
         </FormField>
         <FormField>
-            <FormLabel htmlFor="fieldLast">Last name</FormLabel>
-            <FormControl id="fieldLast" name="lastName" />
+            <Radio id="fieldGroupRadio2" name="fieldGroupRadio" required />
+            <FormLabel htmlFor="fieldGroupRadio2" plain>
+                Express
+            </FormLabel>
         </FormField>
+        <FormText>Choose your preferred shipping speed.</FormText>
     </FormGroup>
 </CodeExample>
 
 ### Group cards
 
-Use the Bootstrap card and grid utilities around field components when options need a larger
-clickable visual target.
+Add `.form-field-card` to each inner `.form-field` for a card-style treatment that highlights the selected option. Wrap the inner fields in a `.form-group` with tighter spacing for a more compact look.
 
 <CodeExample>
     <FormGroup>
-        <Row className="g-3">
-            <Col md={6}>
-                <FormField className="border rounded p-3">
-                    <FormCheck id="fieldCardOne" type="radio" name="card" value="one" />
-                    <FormLabel htmlFor="fieldCardOne">Option one</FormLabel>
-                </FormField>
-            </Col>
-            <Col md={6}>
-                <FormField className="border rounded p-3">
-                    <FormCheck id="fieldCardTwo" type="radio" name="card" value="two" />
-                    <FormLabel htmlFor="fieldCardTwo">Option two</FormLabel>
-                </FormField>
-            </Col>
-        </Row>
+        <FormLabel>Select a plan</FormLabel>
+        <div className="vstack gap-1">
+            <FormField card>
+                <Radio id="fieldRadioGroup1" name="fieldRadioGrouped" defaultChecked />
+                <FormFieldContent>
+                    <FormLabel htmlFor="fieldRadioGroup1" plain>
+                        Basic
+                    </FormLabel>
+                    <FormText>$9/month — For individuals.</FormText>
+                </FormFieldContent>
+            </FormField>
+            <FormField card>
+                <Radio id="fieldRadioGroup2" name="fieldRadioGrouped" />
+                <FormFieldContent>
+                    <FormLabel htmlFor="fieldRadioGroup2" plain>
+                        Pro
+                    </FormLabel>
+                    <FormText>$29/month — For teams.</FormText>
+                </FormFieldContent>
+            </FormField>
+        </div>
     </FormGroup>
 </CodeExample>
 
 ### Switch
 
+Switches also trigger the two-column grid.
+
 <CodeExample>
     <FormField>
-        <FormSwitch inputProps={{ id: 'fieldNotifications', name: 'notifications' }}>
+        <FormSwitch inputProps={{ id: 'fieldSwitch' }} />
+        <FormLabel htmlFor="fieldSwitch" plain>
             Enable notifications
-        </FormSwitch>
+        </FormLabel>
     </FormField>
 </CodeExample>
 
 ### Combobox
 
-Use the menu-backed `Combobox` component for searchable or custom option interfaces.
-
-<CodeExample>
-    <Combobox name="fieldLanguage" value="ts" placeholder="Choose a language">
-        <ComboboxOption value="js">JavaScript</ComboboxOption>
-        <ComboboxOption value="ts">TypeScript</ComboboxOption>
-    </Combobox>
-</CodeExample>
-
-### Description
+Comboboxes—as well as datepickers, OTPs, and any other form component—are support as well.
 
 <CodeExample>
     <FormField>
-        <FormLabel htmlFor="fieldEmail">Email</FormLabel>
-        <FormControl id="fieldEmail" type="email" aria-describedby="fieldEmailHelp fieldEmailError" />
-        <FormText id="fieldEmailHelp">Use your work email address.</FormText>
-        <FormFeedback id="fieldEmailError">Enter a valid email address.</FormFeedback>
+        <FormLabel plain>Combobox</FormLabel>
+        <Combobox name="option" placeholder="Select an item…">
+            <ComboboxOption value="1">Option one</ComboboxOption>
+            <ComboboxOption value="2">Option two</ComboboxOption>
+            <ComboboxOption value="3">Option three</ComboboxOption>
+        </Combobox>
+
+        <FormText>Choose an item from the menu above.</FormText>
     </FormField>
+
 </CodeExample>
-
-### Validation
-
-Validation can be client-side using native constraints or server-side using the returned state.
 
 ## Overhead label
 
-Use `FormFieldContent` to pair a control and an overhead label when a design calls for a different
-label placement.
+When a check, radio, or switch needs a field title above it, add a `.form-label`. It automatically spans both columns and sits on its own row above the control.
 
 <CodeExample>
     <FormField>
+        <FormLabel>Terms and conditions</FormLabel>
+        <Checkbox id="fieldOverheadCheck" required />
         <FormFieldContent>
-            <FormLabel htmlFor="fieldOverhead">Name</FormLabel>
-            <FormControl id="fieldOverhead" />
+            <FormLabel htmlFor="fieldOverheadCheck" plain>
+                I agree to the terms
+            </FormLabel>
+            <FormText>Please read before agreeing.</FormText>
         </FormFieldContent>
     </FormField>
 </CodeExample>
 
 ## Descriptions
 
-Use `FormText` for help text and reference it from the related input with `aria-describedby`.
+Add a `<small class="form-text">` after the label and wrap it in a `.form-field-content` to ensure appropriate spacing and alignment.
+
+<CodeExample>
+    <div className="d-flex flex-column gap-3">
+        <FormField>
+            <Checkbox id="fieldCheckDesc" />
+            <FormFieldContent>
+                <FormLabel htmlFor="fieldCheckDesc" plain>
+                    Subscribe to updates
+                </FormLabel>
+                <FormText>We’ll send you a weekly digest of what’s new.</FormText>
+            </FormFieldContent>
+        </FormField>
+        <FormField>
+            <Radio id="fieldRadioDesc" name="fieldRadioDesc" />
+            <FormFieldContent>
+                <FormLabel htmlFor="fieldRadioDesc" plain>
+                    Standard shipping
+                </FormLabel>
+                <FormText>Arrives in 5-7 business days.</FormText>
+            </FormFieldContent>
+        </FormField>
+        <FormField>
+            <FormLabel htmlFor="fieldTextDesc">Username</FormLabel>
+            <FormControl type="text" id="fieldTextDesc" />
+            <FormText>Must be 3-20 characters, letters and numbers only.</FormText>
+        </FormField>
+    </div>
+</CodeExample>
 
 ## Validation
 
+Validation feedback (`.invalid-feedback`, `.valid-feedback`) stacks correctly inside `.form-field` for all control types.
+
 ### Client-side
 
-Native HTML constraints such as `required`, `type`, `min`, and `max` are preserved.
+Add `data-bs-validate` to your `<form>` to opt in to `:user-invalid` styling. These pseudo-classes activate after the user interacts with a control. To also show success styling on valid fields, use `data-bs-validate="valid"`. Add `novalidate` to suppress native browser validation tooltips while keeping the constraint validation API available.
+
+<CodeExample>
+    <ValidationForm noValidate data-bs-validate="" className="vstack gap-3">
+        <FormField className="flex-1">
+            <FormLabel htmlFor="fieldValidateEmail">Email address</FormLabel>
+            <FormControl type="email" id="fieldValidateEmail" required />
+            <FormFeedback>Please enter a valid email address.</FormFeedback>
+            <FormFeedback type="valid">Looks good!</FormFeedback>
+        </FormField>
+        <FormField>
+            <Checkbox id="fieldValidateCheck" required />
+            <FormFieldContent>
+                <FormLabel htmlFor="fieldValidateCheck" plain>
+                    Agree to terms and conditions
+                </FormLabel>
+                <FormFeedback>You must agree before submitting.</FormFeedback>
+            </FormFieldContent>
+        </FormField>
+        <Button type="submit" theme="primary" variant="solid" className="align-self-start">
+            Submit
+        </Button>
+    </ValidationForm>
+</CodeExample>
 
 ### Server-side
 
-Apply `.is-invalid` and render `FormFeedback` for server-returned errors.
+Apply `.is-invalid` or `.is-valid` directly to the control for server-side validation. Feedback is visible immediately on page load.
+
+<CodeExample>
+    <FormField className="mb-3">
+        <FormLabel htmlFor="fieldServerEmail">Email address</FormLabel>
+        <FormControl
+            type="email"
+            id="fieldServerEmail"
+            defaultValue="not-an-email"
+            required
+            validation="invalid"
+        />
+        <FormFeedback>Please enter a valid email address.</FormFeedback>
+    </FormField>
+    <FormField className="mb-3">
+        <FormLabel htmlFor="fieldServerName">Full name</FormLabel>
+        <FormControl
+            type="text"
+            id="fieldServerName"
+            defaultValue="Mark Otto"
+            required
+            validation="valid"
+        />
+        <FormFeedback type="valid">Looks good!</FormFeedback>
+    </FormField>
+    <FormField className="mb-3">
+        <Checkbox id="fieldServerCheck" required validation="invalid" />
+        <FormLabel htmlFor="fieldServerCheck" plain>
+            Agree to terms and conditions
+        </FormLabel>
+        <FormFeedback>You must agree before submitting.</FormFeedback>
+    </FormField>
+    <FormField className="mb-3">
+        <FormSwitch inputProps={{ id: 'fieldServerSwitch' }} validation="invalid" />
+        <FormLabel htmlFor="fieldServerSwitch" plain>
+            Accept marketing emails
+        </FormLabel>
+        <FormFeedback>This field is required.</FormFeedback>
+    </FormField>
+</CodeExample>
 
 </DocumentationLayout>

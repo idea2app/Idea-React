@@ -1,7 +1,7 @@
 import { AnchorHTMLAttributes, FC } from 'react';
 
 import { Button } from '../../../source/Button';
-import { Icon, IconProps } from '../../../source/Icon';
+import { Icon, IconProps } from '../../../source/Extension/Icon';
 
 export interface DocumentationActionProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
     href: string;

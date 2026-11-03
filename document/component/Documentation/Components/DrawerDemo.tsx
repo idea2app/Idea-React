@@ -5,20 +5,12 @@ import { observer } from 'mobx-react';
 import { Component, ReactNode } from 'react';
 
 import { Button } from '../../../../source/Button';
-import { Drawer, DrawerPlacement } from '../../../../source/Drawer';
+import { Drawer, DrawerProps } from '../../../../source/Drawer';
 
-export interface DrawerDemoProps {
+export interface DrawerDemoProps extends Omit<DrawerProps, 'footer'> {
     label: ReactNode;
     title: string;
-    placement?: DrawerPlacement;
-    theme?: 'light' | 'dark';
-    className?: string;
-    bodyClassName?: string;
     footer?: boolean;
-    modal?: boolean;
-    backdrop?: boolean | 'static';
-    keyboard?: boolean;
-    children?: ReactNode;
 }
 
 @observer

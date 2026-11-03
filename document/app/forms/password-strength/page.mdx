@@ -1,10 +1,4 @@
-import {
-    FormControl,
-    FormField,
-    FormLabel,
-    FormText,
-    PasswordStrength
-} from '../../../../source/Form';
+import { FormControl, FormLabel, PasswordStrength } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -12,117 +6,202 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # Password strength
 
-`PasswordStrength` initializes Bootstrap's password-strength plugin against a password field in the
-same form field. Bootstrap manages the scoring and updates the segmented or bar meter as the user
-types.
+Provide visual feedback on password strength with segmented meters or progress bars that update as users type.
+
+## Overview
+
+Strength meters help users create secure passwords by providing real-time feedback on password complexity. Bootstrap’s strength component offers:
+
+- **Segmented meter**: Four segments that fill based on strength level
+- **Progress bar variant**: A single bar that grows with strength
+- **Text feedback**: Optional text messages for each strength level
+- **Customizable scoring**: Configure minimum length and scoring criteria
+- **Minimal JavaScript**: Lightweight component following Bootstrap patterns
 
 ## Examples
 
 ### Segmented
 
+The default strength meter uses four segments that fill progressively as password strength increases. The `PasswordStrength` component enables JavaScript behavior automatically.
+
 <CodeExample>
-    <FormField>
-        <FormLabel htmlFor="strengthBasic">Password</FormLabel>
-        <FormControl id="strengthBasic" type="password" />
-        <PasswordStrength />
-    </FormField>
+    <div>
+        <FormLabel htmlFor="password1">Password</FormLabel>
+        <FormControl type="password" id="password1" placeholder="Enter password" />
+        <PasswordStrength input="#password1" showText={false} />
+    </div>
 </CodeExample>
 
 ### With text feedback
 
-Customize the displayed label with `messages`.
+Add a `.strength-text` element to display strength messages.
 
 <CodeExample>
-    <FormField>
-        <FormLabel htmlFor="strengthMessages">Password</FormLabel>
-        <FormControl id="strengthMessages" type="password" />
-        <PasswordStrength messages={{ weak: 'Add more variety' }} />
-    </FormField>
+    <div>
+        <FormLabel htmlFor="password2">Password</FormLabel>
+        <FormControl type="password" id="password2" placeholder="Enter password" />
+        <PasswordStrength input="#password2" showText />
+    </div>
 </CodeExample>
 
 ### Progress bar
 
+Use `.strength-bar` for a single progress bar that grows with password strength.
+
 <CodeExample>
-    <FormField>
-        <FormLabel htmlFor="strengthBar">Password</FormLabel>
-        <FormControl id="strengthBar" type="password" />
-        <PasswordStrength variant="bar" />
-    </FormField>
+    <div>
+        <FormLabel htmlFor="password3">Password</FormLabel>
+        <FormControl type="password" id="password3" placeholder="Enter password" />
+        <PasswordStrength variant="bar" input="#password3" showText={false} />
+    </div>
 </CodeExample>
 
 ### Static segmented
 
-Use `data-bs-strength` directly for a static meter without JavaScript.
+You can use the component without JavaScript for static displays by passing the `strength` prop.
+
+<CodeExample>
+    <div className="vstack gap-3 fg-3">
+        <div>
+            <div>Weak</div>
+            <PasswordStrength strength="weak" showText={false} />
+        </div>
+        <div>
+            <div>Fair</div>
+            <PasswordStrength strength="fair" showText={false} />
+        </div>
+        <div>
+            <div>Good</div>
+            <PasswordStrength strength="good" showText={false} />
+        </div>
+        <div>
+            <div>Strong</div>
+            <PasswordStrength strength="strong" showText={false} />
+        </div>
+    </div>
+</CodeExample>
 
 ### Static progress bar
 
-Static bars use the same `data-bs-strength` values as segmented meters.
+<CodeExample>
+    <div className="vstack gap-3 fg-3">
+        <div>
+            <div>Weak</div>
+            <PasswordStrength variant="bar" strength="weak" showText={false} />
+        </div>
+        <div>
+            <div>Fair</div>
+            <PasswordStrength variant="bar" strength="fair" showText={false} />
+        </div>
+        <div>
+            <div>Good</div>
+            <PasswordStrength variant="bar" strength="good" showText={false} />
+        </div>
+        <div>
+            <div>Strong</div>
+            <PasswordStrength variant="bar" strength="strong" showText={false} />
+        </div>
+    </div>
+</CodeExample>
 
 ## Strength criteria
 
-Bootstrap evaluates minimum length, additional length, lowercase, uppercase, digits, symbols,
-multiple symbols, and a longer total length. The plugin also accepts custom weights, thresholds, or
-a scorer.
+The default scoring algorithm evaluates passwords based on:
+
+| Criteria                            | Points |
+| ----------------------------------- | ------ |
+| Meets minimum length (8 characters) | +1     |
+| 4+ characters over minimum          | +1     |
+| Contains lowercase letters          | +1     |
+| Contains uppercase letters          | +1     |
+| Contains numbers                    | +1     |
+| Contains special characters         | +1     |
+| Multiple special characters         | +1     |
+| 16+ characters                      | +1     |
+
+| Level  | Points |
+| ------ | ------ |
+| Weak   | 1-2    |
+| Fair   | 3-4    |
+| Good   | 5-6    |
+| Strong | 7-8    |
 
 ## Usage
 
-Place the password input and meter inside the same parent. The wrapper finds the sibling password
-field automatically; provide `input` when it is elsewhere. Describe password requirements separately.
-
-<CodeExample>
-    <FormField>
-        <FormLabel htmlFor="strengthPassword">Password</FormLabel>
-        <FormControl id="strengthPassword" type="password" aria-describedby="strengthHelp" />
-        <FormText id="strengthHelp">Use at least eight characters.</FormText>
-        <PasswordStrength />
-    </FormField>
-</CodeExample>
-
-### Via data attributes
-
-Bootstrap updates `data-bs-strength` with the current level as users type.
-
-### Via JavaScript
-
-The wrapper automatically creates and disposes a Bootstrap `Strength` instance.
-
-### Dependencies
-
-The wrapper uses the `Strength` plugin included in the Bootstrap dependency.
+`PasswordStrength` binds to the password field through `input`, or discovers a sibling input. Pass scoring options as props. Use `strength` for a static meter and `showText` for feedback.
 
 ### Options
 
-The wrapper supports the upstream `input`, `minLength`, `messages`, `weights`, `thresholds`, and
-`scorer` options, plus a `variant` for the segmented meter or bar.
+| Name         | Type              | Default                      | Description                                                                                                    |
+| ------------ | ----------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `input`      | string \| element | `null`                       | Selector or element for the password input. If not provided, looks for `input[type="password"]` in the parent. |
+| `minLength`  | number            | `8`                          | Minimum password length for first strength point.                                                              |
+| `messages`   | object            | `{weak, fair, good, strong}` | Custom messages for each strength level.                                                                       |
+| `weights`    | object            | See below                    | Point values for each scoring criterion. Set to `0` to disable a criterion.                                    |
+| `thresholds` | array             | `[2, 4, 6]`                  | Score boundaries for strength levels: `[weak, fair, good]`. Scores above the last value are "strong".          |
+| `scorer`     | function          | `null`                       | Custom scoring function `(password) => number`. Overrides built-in scoring when provided.                      |
 
 #### Default weights
 
-The plugin assigns one point to each criterion by default.
+```js
+{
+  minLength: 1,        // Meets minimum length
+  extraLength: 1,      // 4+ characters over minimum
+  lowercase: 1,        // Contains lowercase letters
+  uppercase: 1,        // Contains uppercase letters
+  numbers: 1,          // Contains numbers
+  special: 1,          // Contains special characters
+  multipleSpecial: 1,  // Multiple special characters
+  longPassword: 1      // 16+ characters
+}
+```
 
 #### Custom weights
 
-Pass `weights` and `thresholds` to customize the criteria and level boundaries.
+```tsx
+<PasswordStrength weights={{ uppercase: 0, special: 2 }} thresholds={[3, 5, 7]} />
+```
 
 #### Custom scorer
 
-Pass a `scorer` function to provide a custom scoring algorithm.
-
-### Methods
-
-Use the Bootstrap `Strength` instance API for imperative evaluation or disposal.
-
-### Events
-
-Bootstrap emits `strengthChange.bs.strength` events when the password's strength changes.
+```tsx
+<PasswordStrength
+    scorer={password => Number(password.length >= 12) * 4 + Number(/[!@#$%]/.test(password)) * 4}
+    thresholds={[2, 4, 6]}
+/>
+```
 
 ## CSS-only usage
 
-For server-rendered static content, set `data-bs-strength` to a level and render the corresponding
-active segments without mounting `PasswordStrength`.
+For simple cases or server-rendered content, you can use the component without JavaScript by passing the `strength` prop.
+
+```tsx
+<PasswordStrength strength="good" />
+```
 
 ## Accessibility
 
-The meter exposes its level using `role="meter"` and ARIA value properties. Describe password
-requirements separately.
+- The strength meter is decorative feedback and should be used alongside clear password requirements text
+- Consider using `aria-describedby` to associate the password input with requirement text
+- Screen reader users benefit from the text feedback option which announces strength changes
+
+## CSS
+
+### Variables
+
+```css
+.example {
+    --bs-strength-height: 0.375rem;
+    --bs-strength-gap: 0.25rem;
+    --bs-strength-margin-top: 0.25rem;
+    --bs-strength-border-radius: var(--bs-radius-pill);
+    --bs-strength-bg: var(--bs-bg-2);
+    --bs-strength-color: var(--bs-bg-2);
+    --bs-strength-weak-color: var(--bs-danger-bg);
+    --bs-strength-fair-color: var(--bs-warning-bg);
+    --bs-strength-good-color: var(--bs-info-bg);
+    --bs-strength-strong-color: var(--bs-success-bg);
+}
+```
 
 </DocumentationLayout>

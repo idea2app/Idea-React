@@ -1,0 +1,189 @@
+import { Button } from '../../../../source/Button';
+import { Card, CardImage, CardBody, CardTitle, CardText } from '../../../../source/Card';
+import {
+    Placeholder,
+    PlaceholderAnimation,
+    PlaceholderButton
+} from '../../../../source/Placeholder';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="placeholder">
+
+# Placeholder
+
+Use loading placeholders (skeleton loaders) for your components or pages to indicate something may still be loading.
+
+Use `Placeholder` for skeleton shapes, `PlaceholderAnimation` to animate a group or text, and
+`PlaceholderButton` for a disabled button-shaped placeholder. Their props generate the component
+styles discussed below.
+
+## About
+
+Placeholders can be used to enhance the experience of your application. They’re built only with HTML and CSS, meaning you don’t need any JavaScript to create them. You will, however, need some custom JavaScript to toggle their visibility. Their appearance, color, and sizing can be easily customized with our utility classes.
+
+## Example
+
+In the example below, we take a typical card component and recreate it with placeholders applied to create a “loading card”. Size and proportions are the same between the two.
+
+<CodeExample>
+    <div className="d-flex justify-content-around flex-wrap gap-3">
+        <Card style={{ width: '18rem' }}>
+            <CardImage
+                placement="top"
+                width="100%"
+                height="180"
+                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22180%22%20viewBox%3D%220%200%20640%20180%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%2320c997%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23fff%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2224%22%3E%3C%2Ftext%3E%3C%2Fsvg%3E"
+                alt=""
+            />
+            <CardBody>
+                <CardTitle as="h5">Card title</CardTitle>
+                <CardText>
+                    Some quick example text to build on the card title and make up the bulk of the
+                    card’s content.
+                </CardText>
+                <Button variant="solid" theme="primary" href="#">
+                    Go somewhere
+                </Button>
+            </CardBody>
+        </Card>
+        <Card style={{ width: '18rem' }} aria-hidden="true">
+            <CardImage
+                placement="top"
+                width="100%"
+                height="180"
+                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22180%22%20viewBox%3D%220%200%20640%20180%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23868e96%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23fff%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2224%22%3E%3C%2Ftext%3E%3C%2Fsvg%3E"
+                alt=""
+            />
+            <CardBody>
+                <PlaceholderAnimation animation="wave">
+                    <CardTitle as="h5">
+                        <Placeholder className="col-6" />
+                    </CardTitle>
+                </PlaceholderAnimation>
+                <PlaceholderAnimation animation="wave">
+                    <CardText>
+                        <Placeholder className="col-7" />
+                        <Placeholder className="col-4" />
+                        <Placeholder className="col-4" />
+                        <Placeholder className="col-6" />
+                        <Placeholder className="col-8" />
+                    </CardText>
+                </PlaceholderAnimation>
+                <PlaceholderButton
+                    variant="solid"
+                    theme="primary"
+                    aria-disabled="true"
+                    href="#"
+                    className="col-6"
+                />
+            </CardBody>
+        </Card>
+    </div>
+</CodeExample>
+
+## How it works
+
+Create placeholders with the `.placeholder` class and a grid column class (e.g., `.col-6`) to set the `width`. They can replace the text inside an element or be added as a modifier class to an existing component.
+
+We apply additional styling to `.btn`s via `::before` to ensure the `height` is respected. You may extend this pattern for other situations as needed, or add a `&nbsp;` within the element to reflect the height when actual text is rendered in its place.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <p aria-hidden="true">
+            <Placeholder className="col-6" />
+        </p>
+        <PlaceholderButton
+            variant="solid"
+            theme="primary"
+            aria-disabled="true"
+            href="#"
+            className="col-4"
+        />
+    </div>
+</CodeExample>
+
+> The use of `aria-hidden="true"` only indicates that the element should be hidden to screen readers. The _loading_ behavior of the placeholder depends on how authors will actually use the placeholder styles, how they plan to update things, etc. Some JavaScript code may be needed to _swap_ the state of the placeholder and inform AT users of the update.
+
+## Width
+
+You can change the `width` through grid column classes, width utilities, or inline styles.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Placeholder className="col-6" />
+        <Placeholder className="w-75" />
+        <Placeholder style={{ width: '25%' }} />
+    </div>
+</CodeExample>
+
+## Color
+
+By default, the `placeholder` uses `currentColor`. This can be overridden with a custom color or utility class.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Placeholder className="col-9" />
+        <Placeholder theme="primary" className="col-6" />
+        <Placeholder theme="accent" className="col-6" />
+        <Placeholder theme="secondary" className="col-6" />
+        <Placeholder theme="success" className="col-6" />
+        <Placeholder theme="danger" className="col-6" />
+        <Placeholder theme="warning" className="col-6" />
+        <Placeholder theme="info" className="col-6" />
+        <Placeholder theme="inverse" className="col-6" />
+    </div>
+</CodeExample>
+
+## Sizing
+
+The size of `.placeholder`s are based on the typographic style of the parent element. Customize them with sizing modifiers: `.placeholder-lg`, `.placeholder-sm`, or `.placeholder-xs`.
+
+<CodeExample>
+    <div className="vstack gap-2">
+        <Placeholder size="lg" className="col-12" />
+        <Placeholder className="col-12" />
+        <Placeholder size="sm" className="col-12" />
+        <Placeholder size="xs" className="col-12" />
+    </div>
+</CodeExample>
+
+## Animation
+
+Use `.placeholder-wave` for the default loading animation. Use `.placeholder-pulse` for an opacity pulse. The old `.placeholder-glow` class remains as a compatibility alias for `.placeholder-pulse`.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <PlaceholderAnimation animation="wave">
+            <Placeholder className="col-12" />
+        </PlaceholderAnimation>
+        <PlaceholderAnimation animation="pulse">
+            <Placeholder className="col-12" />
+        </PlaceholderAnimation>
+    </div>
+</CodeExample>
+
+### Text
+
+Add `.placeholder-wave` to an inline element to apply the loading animation to text.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <PlaceholderAnimation animation="wave" className="fg-3 d-inline">
+            Working on it…
+        </PlaceholderAnimation>
+    </div>
+</CodeExample>
+
+## CSS
+
+### Variables
+
+| CSS variable                        | Default |
+| ----------------------------------- | ------- |
+| `--bs-placeholder-opacity-max`      | `0.18`  |
+| `--bs-placeholder-opacity-min`      | `0.1`   |
+| `--bs-placeholder-wave-opacity-max` | `1`     |
+| `--bs-placeholder-wave-opacity-min` | `0.4`   |
+
+</ComponentsLayout>

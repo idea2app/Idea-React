@@ -6,11 +6,18 @@ import type { Breakpoint } from './Grid';
 
 export type ListGroupHorizontal = boolean | Breakpoint;
 
-export interface ListGroupProps extends ComponentPropsWithRef<'ul'> {
+interface ListGroupStyleProps {
     flush?: boolean;
     numbered?: boolean;
     horizontal?: ListGroupHorizontal;
 }
+
+export type ListGroupProps = ListGroupStyleProps &
+    (
+        | (ComponentPropsWithRef<'ul'> & { as?: 'ul' })
+        | (ComponentPropsWithRef<'ol'> & { as: 'ol' })
+        | (ComponentPropsWithRef<'div'> & { as: 'div' })
+    );
 
 export const ListGroup: FC<ListGroupProps> = ({
     flush,
@@ -18,20 +25,26 @@ export const ListGroup: FC<ListGroupProps> = ({
     horizontal,
     className,
     ...props
-}) => (
-    <ul
-        {...props}
-        className={classNames(
-            'list-group',
-            { 'list-group-flush': flush, 'list-group-numbered': numbered },
-            horizontal &&
-                (horizontal === true
-                    ? 'list-group-horizontal'
-                    : `${horizontal}:list-group-horizontal`),
-            className
-        )}
-    />
-);
+}) => {
+    const classes = classNames(
+        'list-group',
+        { 'list-group-flush': flush, 'list-group-numbered': numbered },
+        horizontal &&
+            (horizontal === true ? 'list-group-horizontal' : `${horizontal}:list-group-horizontal`),
+        className
+    );
+
+    if (props.as === 'ol') {
+        const { as: _as, ...attributes } = props;
+        return <ol {...attributes} className={classes} />;
+    }
+    if (props.as === 'div') {
+        const { as: _as, ...attributes } = props;
+        return <div {...attributes} className={classes} />;
+    }
+    const { as: _as, ...attributes } = props;
+    return <ul {...attributes} className={classes} />;
+};
 
 interface ListGroupItemStyleProps {
     theme?: ComponentTheme;

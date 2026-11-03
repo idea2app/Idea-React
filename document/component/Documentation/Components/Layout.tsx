@@ -3,7 +3,6 @@ import { FC, PropsWithChildren } from 'react';
 import { Col, Container, Row } from '../../../../source/Grid';
 import { Navigation } from './Navigation';
 import { Sidebar } from './Sidebar';
-import * as style from './style.module.less';
 import { Toc } from './Toc';
 
 export interface ComponentsLayoutProps extends PropsWithChildren {
@@ -18,7 +17,7 @@ export const DocumentationLayout: FC<ComponentsLayoutProps> = ({ active, childre
             </aside>
             <Col span={12} lg={9}>
                 <Row className="g-5">
-                    <main id="content" className={`col-12 lg:col-9 ${style.content}`}>
+                    <main id="content" className="col-12 lg:col-9">
                         {children}
                     </main>
                     <aside className="lg:col-3 d-none lg:d-block">

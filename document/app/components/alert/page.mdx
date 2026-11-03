@@ -1,0 +1,225 @@
+import { Alert, AlertHeading, AlertLink } from '../../../../source/Alert';
+import { Icon } from '../../../../source/Extension/Icon';
+import { AlertGuideDemo } from '../../../component/Documentation/Components/OverlayGuideDemo';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="alert">
+
+# Alert
+
+Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.
+
+## Default alert
+
+Alerts are flex containers that can contain any length of text, as well as an optional close button. They’re designed to be used with theme colors, but have neutral fallback colors for when no theme color is applied. For inline dismissal, use the `dismissible` prop. [Custom content][1] is also supported, with additional utilities or markup required.
+
+<CodeExample>
+    <Alert>
+        <p>A simple alert—check it out!</p>
+    </Alert>
+</CodeExample>
+
+## Variants
+
+Use any of our `theme` values for color mode adaptive, contextual styling.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Alert theme="primary">
+            <p>A simple primary alert—check it out!</p>
+        </Alert>
+        <Alert theme="accent">
+            <p>A simple accent alert—check it out!</p>
+        </Alert>
+        <Alert theme="secondary">
+            <p>A simple secondary alert—check it out!</p>
+        </Alert>
+        <Alert theme="success">
+            <p>A simple success alert—check it out!</p>
+        </Alert>
+        <Alert theme="danger">
+            <p>A simple danger alert—check it out!</p>
+        </Alert>
+        <Alert theme="warning">
+            <p>A simple warning alert—check it out!</p>
+        </Alert>
+        <Alert theme="info">
+            <p>A simple info alert—check it out!</p>
+        </Alert>
+        <Alert theme="inverse">
+            <p>A simple inverse alert—check it out!</p>
+        </Alert>
+    </div>
+</CodeExample>
+
+Color alone does not convey meaning to assistive technologies. Include visible text or additional visually hidden text to communicate the purpose of the message.
+
+## Live example
+
+Click the button below to show an alert (hidden with inline styles to start), then dismiss (and destroy) it with the built-in close button.
+
+<CodeExample source="document/component/Documentation/Components/OverlayGuideDemo/index.tsx">
+    <AlertGuideDemo />
+</CodeExample>
+
+## Link color
+
+Use the `AlertLink` component to quickly provide matching colored links within any alert.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Alert theme="primary">
+            <p>
+                A simple primary alert with{' '}
+                <AlertLink href="#link-color">an example link</AlertLink>. Give it a click if you
+                like.
+            </p>
+        </Alert>
+        <Alert theme="accent">
+            <p>
+                A simple accent alert with <AlertLink href="#link-color">an example link</AlertLink>
+                . Give it a click if you like.
+            </p>
+        </Alert>
+        <Alert theme="secondary">
+            <p>
+                A simple secondary alert with{' '}
+                <AlertLink href="#link-color">an example link</AlertLink>. Give it a click if you
+                like.
+            </p>
+        </Alert>
+        <Alert theme="success">
+            <p>
+                A simple success alert with{' '}
+                <AlertLink href="#link-color">an example link</AlertLink>. Give it a click if you
+                like.
+            </p>
+        </Alert>
+        <Alert theme="danger">
+            <p>
+                A simple danger alert with <AlertLink href="#link-color">an example link</AlertLink>
+                . Give it a click if you like.
+            </p>
+        </Alert>
+        <Alert theme="warning">
+            <p>
+                A simple warning alert with{' '}
+                <AlertLink href="#link-color">an example link</AlertLink>. Give it a click if you
+                like.
+            </p>
+        </Alert>
+        <Alert theme="info">
+            <p>
+                A simple info alert with <AlertLink href="#link-color">an example link</AlertLink>.
+                Give it a click if you like.
+            </p>
+        </Alert>
+        <Alert theme="inverse">
+            <p>
+                A simple inverse alert with{' '}
+                <AlertLink href="#link-color">an example link</AlertLink>. Give it a click if you
+                like.
+            </p>
+        </Alert>
+    </div>
+</CodeExample>
+
+## With icons
+
+Similarly, you can use [flexbox utilities][2] and [Bootstrap Icons][3] to create alerts with icons. Depending on your icons and content, you may want to add more utilities or custom styles.
+
+<CodeExample>
+    <Alert theme="primary" className="align-items-center">
+        <Icon name="exclamation-triangle-fill" aria-label="Warning:" />
+        <p>An example alert with an icon</p>
+    </Alert>
+</CodeExample>
+
+## Dismiss
+
+Use the `dismissible` prop to dismiss an alert inline. Here’s how:
+
+- `dismissible` adds a [close button][4] to the alert.
+- Use `onClosed` to synchronize application state after dismissal.
+
+An alert fades out before it is removed. The wrapper adds its exit state for the length of the transition, so no extra classes are needed in your markup. Pass `instant` to remove the alert at once instead. See [Transitions][5] for the tokens that tune the fade.
+
+You can see this in action with a live demo:
+
+<CodeExample>
+    <Alert theme="warning" dismissible>
+        <p>Something’s wrong, check the fields below and try again.</p>
+    </Alert>
+</CodeExample>
+
+When an alert is dismissed, the element is completely removed from the page structure. If a keyboard user dismisses the alert using the close button, their focus will suddenly be lost and, depending on the browser, reset to the start of the page/document. For this reason, we recommend including additional JavaScript that handles the `onClosed` callback and programmatically sets `focus()` to the most appropriate location in the page. If you’re planning to move focus to a non-interactive element that normally does not receive focus, make sure to add `tabindex="-1"` to the element.
+
+## Additional content
+
+For simple vertical layouts, it should be enough to add the `flex-column` class to the alert.
+
+<CodeExample>
+    <Alert theme="success" className="flex-column align-items-stretch">
+        <AlertHeading className="mb-2">Well done!</AlertHeading>
+        <p>
+            Aww yeah, you successfully read this important alert message. This example text is going
+            to run a bit longer so that you can see how spacing within an alert works with this kind
+            of content.
+        </p>
+        <hr className="my-3" />
+        <p>Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+    </Alert>
+</CodeExample>
+
+More complex layouts may require additional HTML within the alert—like when mixing in icons and dismiss buttons.
+
+<CodeExample>
+    <Alert theme="warning" dismissible>
+        <div className="pe-3">
+            <AlertHeading className="mb-2">More complex alert</AlertHeading>
+            <p className="fs-sm mb-0">
+                Aww yeah, you successfully read this important alert message. This example text is
+                going to run a bit longer so that you can see how spacing within an alert works with
+                this kind of content.
+            </p>
+        </div>
+    </Alert>
+</CodeExample>
+
+## CSS
+
+### Variables
+
+Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][6].
+
+| Variable                         | Default                  |
+| -------------------------------- | ------------------------ |
+| `--bs-alert-gap`                 | `var(--bs-spacer-3)`     |
+| `--bs-alert-bg`                  | `var(--bs-bg-1)`         |
+| `--bs-alert-padding-x`           | `var(--bs-spacer)`       |
+| `--bs-alert-padding-y`           | `var(--bs-spacer)`       |
+| `--bs-alert-color`               | `inherit`                |
+| `--bs-alert-border-color`        | `var(--bs-border-color)` |
+| `--bs-alert-border-radius`       | `var(--bs-radius-7)`     |
+| `--bs-alert-link-color`          | `inherit`                |
+| `--bs-alert-transition-property` | `opacity`                |
+| `--bs-alert-transition-duration` | `0.15s`                  |
+| `--bs-alert-transition-timing`   | `linear`                 |
+
+## JavaScript behavior
+
+The React wrapper manages dismissal and removes the alert after its fade transition. Do not initialize a Bootstrap plugin on the same element.
+
+### Events
+
+`onClose` runs when dismissal begins, and `onClosed` runs after the transition and removal. Use `onClosed` to restore keyboard focus to an appropriate control, as in the live example.
+
+</ComponentsLayout>
+
+[1]: #additional-content
+[2]: https://getbootstrap.com/docs/6.0/utilities/flex/
+[3]: https://icons.getbootstrap.com/
+[4]: https://getbootstrap.com/docs/6.0/components/close-button/
+[5]: https://getbootstrap.com/docs/6.0/customize/transitions/
+[6]: https://getbootstrap.com/docs/6.0/components/alert/#variables

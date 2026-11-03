@@ -3,10 +3,14 @@ import { ComponentPropsWithRef, FC } from 'react';
 
 export interface ButtonGroupProps extends ComponentPropsWithRef<'div'> {
     vertical?: boolean;
+    size?: 'xs' | 'sm' | 'lg';
+    divider?: boolean;
 }
 
 export const ButtonGroup: FC<ButtonGroupProps> = ({
     vertical,
+    size,
+    divider,
     role = 'group',
     className,
     ...props
@@ -14,7 +18,12 @@ export const ButtonGroup: FC<ButtonGroupProps> = ({
     <div
         role={role}
         {...props}
-        className={classNames(vertical ? 'btn-group-vertical' : 'btn-group', className)}
+        className={classNames(
+            vertical ? 'btn-group-vertical' : 'btn-group',
+            size && `btn-group-${size}`,
+            divider && 'btn-group-divider',
+            className
+        )}
     />
 );
 ButtonGroup.displayName = 'ButtonGroup';

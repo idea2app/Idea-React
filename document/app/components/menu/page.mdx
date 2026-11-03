@@ -1,309 +1,379 @@
-import { Icon } from '../../../../source/Icon';
 import { Button } from '../../../../source/Button';
+import { ButtonGroup } from '../../../../source/ButtonGroup';
+import { Icon } from '../../../../source/Extension/Icon';
 import { Container } from '../../../../source/Grid';
 import { Navbar, NavbarBrand, NavbarNav } from '../../../../source/Navbar';
-import { NavItem } from '../../../../source/Nav';
-import { Form, FormCheck, FormControl, FormField, FormLabel } from '../../../../source/Form';
+import { Checkbox, FormControl, FormField, FormLabel } from '../../../../source/Form';
 import {
     Menu,
+    MenuItem,
+    MenuPanel,
+    MenuText,
     MenuDivider,
     MenuHeader,
-    MenuItem,
+    MenuItemIcon,
     MenuItemContent,
     MenuItemDescription,
-    MenuPanel,
-    MenuSubmenu,
-    MenuText
+    MenuItemCheck,
+    MenuSubmenu
 } from '../../../../source/Menu';
-
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
 
 <ComponentsLayout active="menu">
 
 # Menu
 
-Toggle contextual menus and custom overlays for lists of buttons, links, forms, and other custom
-content.
-
-The Idea React [`Menu` wrapper][1] uses the same `.menu`, `.menu-item`, and `.submenu` class names as
-Bootstrap 6, with React-controlled open state, keyboard navigation, focus restoration, and
-configurable auto-close behavior. These examples adapt the [upstream Menu documentation][2].
+Toggle contextual menus and custom overlays for lists of buttons, links, forms, and other custom content.
 
 ## Overview
 
-Toggle menus with buttons whenever possible. Here's an example using a Bootstrap button:
+Toggle menus with buttons whenever possible. Here’s an example using an Idea React button:
 
-<Menu label="Toggle menu" toggleProps={{ variant: 'solid', theme: 'primary' }}>
-    <MenuItem href="#">Menu item 1</MenuItem>
-    <MenuItem href="#">Menu item 2</MenuItem>
-    <MenuItem href="#">Menu item 3</MenuItem>
-</Menu>
+<CodeExample>
+    <Menu label="Menu button">
+        <MenuItem href="#menu-items">Action</MenuItem>
+        <MenuItem href="#menu-items">Another action</MenuItem>
+        <MenuItem href="#menu-items">Something else here</MenuItem>
+    </Menu>
+</CodeExample>
 
-Menus are toggleable, contextual overlays for displaying lists of links and more. They're toggled by
-clicking, not by hovering; this is [an intentional design decision][3].
-
-Bootstrap's JavaScript plugin uses [Floating UI][4] for dynamic positioning and viewport detection.
-The React wrapper instead positions its panel with Bootstrap's CSS placement utilities and closes on
-outside pointer interaction.
+Menus are toggleable, contextual overlays for displaying lists of links and more. They’re made interactive by the `Menu` wrapper. Positioning updates when the viewport or trigger geometry changes. They’re toggled by clicking, not by hovering; this is [an intentional design decision][1].
 
 ## Examples
 
-While `<button>` is the recommended control for a menu toggle, there might be situations where you
-have to use an `<a>` element. If you do, we recommend adding a `role="button"` attribute to
-appropriately convey control's purpose to assistive technologies such as screen readers.
+`Menu` uses the recommended `<button>` element for its toggle. Upstream also demonstrates an anchor toggle with `role="button"`; the current wrapper intentionally exposes a button toggle instead.
 
-Use [button groups][5] to create split button menus where the menu is displayed when a secondary
-button is clicked.
+Use [button groups][2] to create split button menus where the menu is displayed when a secondary button is clicked.
 
-<div className="d-inline-flex">
-    <Button variant="solid" theme="secondary">
-        Split
-    </Button>
-    <Menu
-        label={
-            <>
-                <Icon name="chevron-expand" aria-hidden="true" />
-                <span className="visually-hidden">Toggle menu</span>
-            </>
-        }
-        toggleProps={{ variant: 'solid', theme: 'secondary', icon: true }}
-        align="start"
-    >
-        <MenuItem href="#">Action</MenuItem>
-        <MenuItem href="#">Another action</MenuItem>
-        <MenuItem href="#">Something else here</MenuItem>
-        <MenuDivider />
-        <MenuItem href="#">Separated link</MenuItem>
-    </Menu>
-</div>
+<CodeExample>
+    <div className="d-flex flex-wrap gap-3">
+        <Menu label="Menu button">
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+        <ButtonGroup>
+            <Button variant="solid" theme="secondary">
+                Split
+            </Button>
+            <Menu
+                split
+                label={
+                    <>
+                        <Icon name="chevron-expand" aria-hidden="true" />
+                        <span className="visually-hidden">Toggle menu</span>
+                    </>
+                }
+                toggleProps={{ variant: 'solid', theme: 'secondary' }}
+            >
+                <MenuItem href="#menu-items">Action</MenuItem>
+                <MenuItem href="#menu-items">Another action</MenuItem>
+                <MenuItem href="#menu-items">Something else here</MenuItem>
+                <MenuDivider />
+                <MenuItem href="#examples">Separated link</MenuItem>
+            </Menu>
+        </ButtonGroup>
+    </div>
+</CodeExample>
 
 ### Dark menus
 
-Opt into darker menus to match a dark navbar or custom style by adding `data-bs-theme="dark"` onto
-the toggle element or a parent. The `Navbar` wrapper exposes this through its `theme` prop, and any
-wrapper element can use the attribute directly.
+Opt into darker menus to match a dark navbar or custom style by passing `theme="dark"` to `Menu`, or adding `data-bs-theme="dark"` to a parent.
 
-<div data-bs-theme="dark" className="d-inline-flex gap-2">
-    <Menu label="Menu button" toggleProps={{ variant: 'solid', theme: 'secondary' }}>
-        <MenuItem href="#" className="active" aria-current="true">
+<CodeExample>
+    <Menu label="Menu button" theme="dark">
+        <MenuItem active href="#dark-menus">
             Action
         </MenuItem>
-        <MenuItem href="#">Another action</MenuItem>
-        <MenuItem href="#">Something else here</MenuItem>
+        <MenuItem href="#dark-menus">Another action</MenuItem>
+        <MenuItem href="#dark-menus">Something else here</MenuItem>
         <MenuDivider />
-        <MenuItem href="#">Separated link</MenuItem>
+        <MenuItem href="#dark-menus">Separated link</MenuItem>
     </Menu>
-</div>
+</CodeExample>
 
 And putting it to use in a navbar:
 
-<Navbar theme="dark" className="rounded-3">
-    <Container fluid>
-        <NavbarBrand href="#">Navbar</NavbarBrand>
-        <NavbarNav>
-            <NavItem data-bs-theme="dark">
-                <Menu label="Menu" toggleProps={{ variant: 'solid', theme: 'secondary' }}>
-                    <MenuItem href="#">Action</MenuItem>
-                    <MenuItem href="#">Another action</MenuItem>
-                    <MenuItem href="#">Something else here</MenuItem>
-                </Menu>
-            </NavItem>
-        </NavbarNav>
-    </Container>
-</Navbar>
+<CodeExample>
+    <Navbar theme="dark">
+        <Container fluid>
+            <NavbarBrand href="#dark-menus">Navbar</NavbarBrand>
+            <NavbarNav>
+                <li>
+                    <Menu nav label="Menu" theme="dark">
+                        <MenuItem href="#menu-items">Action</MenuItem>
+                        <MenuItem href="#menu-items">Another action</MenuItem>
+                        <MenuItem href="#menu-items">Something else here</MenuItem>
+                    </Menu>
+                </li>
+            </NavbarNav>
+        </Container>
+    </Navbar>
+</CodeExample>
 
 ### Translucent menus
 
-Blur and saturate the background of menus to create a translucent effect with `.menu-translucent`.
-Pass it through `menuClassName`.
+Blur and saturate the background of menus to create a translucent effect with `translucent`.
 
-<Menu
-    label="Menu button"
-    toggleProps={{ variant: 'solid', theme: 'secondary' }}
-    menuClassName="menu-translucent"
->
-    <MenuItem href="#" className="active" aria-current="true">
-        Active menu item
-    </MenuItem>
-    <MenuItem href="#">Menu item</MenuItem>
-    <MenuItem href="#">Menu item</MenuItem>
-    <MenuItem href="#">Menu item</MenuItem>
-    <MenuItem href="#">Menu item</MenuItem>
-    <MenuDivider />
-    <MenuItem href="#" theme="danger">
-        Danger menu item
-    </MenuItem>
-</Menu>
+<CodeExample>
+    <Menu label="Translucent menu" translucent>
+        <MenuItem active href="#translucent-menus">
+            Active menu item
+        </MenuItem>
+        <MenuItem href="#menu-items">Action</MenuItem>
+        <MenuItem href="#menu-items">Another action</MenuItem>
+        <MenuItem href="#menu-items">Something else here</MenuItem>
+        <MenuDivider />
+        <MenuItem theme="danger" href="#translucent-menus">
+            Danger menu item
+        </MenuItem>
+    </Menu>
+</CodeExample>
 
 ## Placement
 
-Bootstrap's menu plugin supports physical placements (`top`, `bottom`, `left`, `right`) and logical
-placements (`start`, `end`) with `-start` and `-end` alignment modifiers. The React wrapper exposes
-the logical axis through the `align` prop: `start` aligns the panel to the start edge and `end` (the
-default) aligns it to the end edge.
+Use `placement` on `Menu` to control where the menu appears.
 
-<Menu label="Aligned to start" align="start" toggleProps={{ variant: 'solid', theme: 'secondary' }}>
-    <MenuItem href="#">Action</MenuItem>
-    <MenuItem href="#">Another action</MenuItem>
-</Menu>
+- **Physical placements:** `top-start`, `top-end`, `bottom-start`, `bottom-end`, `left-start`, `left-end`, `right-start`, `right-end` — fixed directions regardless of text direction.
+- **Edge alignment:** the `-start` and `-end` suffixes select an edge of the trigger. The wrapper does not expose upstream logical `start`/`end` side placements or automatically mirror placement in RTL.
 
-<Menu label="Aligned to end" toggleProps={{ variant: 'solid', theme: 'secondary' }}>
-    <MenuItem href="#">Action</MenuItem>
-    <MenuItem href="#">Another action</MenuItem>
-</Menu>
+Use both a physical direction and an alignment, such as `bottom-start` or `right-end`.
 
-Flip direction and responsive breakpoint placement are handled by the JavaScript plugin through
-Floating UI; use the `align` prop for the two logical alignments in React.
+<CodeExample>
+    <div className="d-flex flex-wrap gap-3">
+        <Menu label="top-start" placement="top-start">
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+        <Menu label="top-end" placement="top-end">
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+        <Menu label="bottom-start" placement="bottom-start">
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+        <Menu label="bottom-end" placement="bottom-end">
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+        <Menu label="left-start" placement="left-start">
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+        <Menu label="left-end" placement="left-end">
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+        <Menu label="right-start" placement="right-start">
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+        <Menu label="right-end" placement="right-end">
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+    </div>
+</CodeExample>
+
+### Responsive
+
+Change placement at different breakpoints using `responsivePlacement={{ md: 'right', lg: 'bottom' }}`, where each breakpoint is one of `sm`, `md`, `lg`, `xl`, or `2xl`. Multiple breakpoints can be combined in the `responsivePlacement` object.
+
+For example, `placement="bottom-start" responsivePlacement={{ md: "bottom-end", lg: "right-start" }}` will:
+
+- Show the menu at `bottom-start` on small screens (default)
+- Switch to `bottom-end` at the `md` breakpoint
+- Switch to `right-start` at the `lg` breakpoint
+
+<CodeExample>
+    <div className="d-flex flex-wrap gap-3">
+        <Menu
+            label="Bottom start → md:bottom-end"
+            placement="bottom-start"
+            responsivePlacement={{ md: 'bottom-end' }}
+        >
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+        <Menu
+            label="Bottom → lg:right"
+            placement="bottom-start"
+            responsivePlacement={{ lg: 'right-start' }}
+        >
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+    </div>
+</CodeExample>
+
+Resize your browser window to see the placement change at different breakpoints.
 
 ## Menu items
 
-You can use `<a>` or `<button>` elements as menu items. The [`MenuItem` wrapper][1] renders a button
-by default and an anchor when `href` is set.
+You can use `<a>` or `<button>` elements as menu items.
 
-We use utility classes to display menus in our docs examples, but they're not required for your own
-use.
+We use utility classes to display menus in our docs examples, but they’re not required for your own use.
 
-<MenuPanel className="show position-static">
-    <MenuItem>Action</MenuItem>
-    <MenuItem>Another action</MenuItem>
-    <MenuItem>Something else here</MenuItem>
-</MenuPanel>
+<CodeExample>
+    <MenuPanel
+        show
+        className="position-static max-w-100"
+        style={{ width: 300, ...{ '--bs-menu-min-width': 'min(300px, 100%)' } }}
+    >
+        <MenuItem>Action</MenuItem>
+        <MenuItem>Another action</MenuItem>
+        <MenuItem>Something else here</MenuItem>
+    </MenuPanel>
+</CodeExample>
 
-You can also create non-interactive menu items with `.menu-text`. Feel free to style further with
-custom CSS or text utilities.
+You can also create non-interactive menu items with `MenuText`. Feel free to style further with custom CSS or text utilities.
 
-<MenuPanel className="show position-static">
-    <MenuText>Menu item text</MenuText>
-    <MenuItem href="#">Action</MenuItem>
-    <MenuItem href="#">Another action</MenuItem>
-    <MenuItem href="#">Something else here</MenuItem>
-</MenuPanel>
+<CodeExample>
+    <MenuPanel
+        show
+        className="position-static max-w-100"
+        style={{ width: 300, ...{ '--bs-menu-min-width': 'min(300px, 100%)' } }}
+    >
+        <MenuText>Menu item text</MenuText>
+        <MenuItem href="#menu-items">Action</MenuItem>
+        <MenuItem href="#menu-items">Another action</MenuItem>
+        <MenuItem href="#menu-items">Something else here</MenuItem>
+    </MenuPanel>
+</CodeExample>
 
 ### Active
 
-Add `.active` to items in the menu to style them as the active selection. To convey the active state
-to assistive technologies, use the `aria-current` attribute—using the `page` value for the current
-page, or `true` for the current item in a set.
+Pass `active` to `MenuItem` to style them as the active selection. To convey the active state to assistive technologies, use the `aria-current` attribute — using the `page` value for the current page, or `true` for the current item in a set.
 
-<MenuPanel className="show position-static">
-    <MenuItem href="#">Regular link</MenuItem>
-    <MenuItem href="#" className="active" aria-current="true">
-        Active link
-    </MenuItem>
-    <MenuItem href="#">Another link</MenuItem>
-</MenuPanel>
+<CodeExample>
+    <MenuPanel
+        show
+        className="position-static max-w-100"
+        style={{ width: 300, ...{ '--bs-menu-min-width': 'min(300px, 100%)' } }}
+    >
+        <MenuItem href="#active">Regular link</MenuItem>
+        <MenuItem active href="#active">
+            Active link
+        </MenuItem>
+        <MenuItem href="#active">Another link</MenuItem>
+    </MenuPanel>
+</CodeExample>
 
 ### Disabled
 
-Add `.disabled` to items in the menu to style them as disabled. The `disabled` prop on `MenuItem`
-also removes anchors from the tab order and marks them with `aria-disabled`.
+Pass `disabled` to `MenuItem` to style them as disabled.
 
-<MenuPanel className="show position-static">
-    <MenuItem href="#">Regular link</MenuItem>
-    <MenuItem href="#" disabled>
-        Disabled link
-    </MenuItem>
-    <MenuItem href="#">Another link</MenuItem>
-</MenuPanel>
+<CodeExample>
+    <MenuPanel
+        show
+        className="position-static max-w-100"
+        style={{ width: 300, ...{ '--bs-menu-min-width': 'min(300px, 100%)' } }}
+    >
+        <MenuItem href="#disabled">Regular link</MenuItem>
+        <MenuItem disabled href="#disabled">
+            Disabled link
+        </MenuItem>
+        <MenuItem href="#disabled">Another link</MenuItem>
+    </MenuPanel>
+</CodeExample>
 
 ### Variants
 
-You can use the `theme` prop to apply a theme color to a menu item; it renders the `theme-` prefix
-classes used by Bootstrap.
+You can use the `theme` prop to apply a theme color to a menu item.
 
-<div className="hstack gap-3 flex-wrap">
-    <MenuPanel className="show position-static">
-        <MenuItem href="#" theme="primary">
-            Primary link
-        </MenuItem>
-        <MenuItem href="#" theme="secondary">
-            Secondary link
-        </MenuItem>
-        <MenuItem href="#" theme="success">
-            Success link
-        </MenuItem>
-        <MenuItem href="#" theme="danger">
-            Danger link
-        </MenuItem>
+<CodeExample>
+    <MenuPanel
+        show
+        className="position-static max-w-100"
+        style={{ width: 300, ...{ '--bs-menu-min-width': 'min(300px, 100%)' } }}
+    >
+        <MenuItem theme="primary">Primary action</MenuItem>
+        <MenuItem theme="success">Success action</MenuItem>
+        <MenuItem theme="danger">Delete</MenuItem>
     </MenuPanel>
-    <MenuPanel className="show position-static">
-        <MenuItem href="#" className="active" theme="primary">
-            Primary link
-        </MenuItem>
-        <MenuItem href="#" className="active" theme="secondary">
-            Secondary link
-        </MenuItem>
-        <MenuItem href="#" className="active" theme="success">
-            Success link
-        </MenuItem>
-        <MenuItem href="#" className="active" theme="danger">
-            Danger link
-        </MenuItem>
-    </MenuPanel>
-</div>
+</CodeExample>
 
 ### Icons
 
-Add `.menu-item-icon` to an icon element to add an icon slot to menu items. Icons are rendered
-through the [`Icon` component][6].
+Use `MenuItemIcon` to add an icon slot to menu items. It renders the shared `Icon` component.
 
-<MenuPanel className="show position-static">
-    <MenuItem>
-        <Icon name="copy" className="menu-item-icon fg-3" aria-hidden="true" />
-        Copy
-    </MenuItem>
-    <MenuItem>
-        <Icon name="scissors" className="menu-item-icon fg-3" aria-hidden="true" />
-        Cut
-    </MenuItem>
-    <MenuDivider />
-    <MenuItem theme="danger">
-        <Icon name="trash" className="menu-item-icon" aria-hidden="true" />
-        Delete
-    </MenuItem>
-</MenuPanel>
+<CodeExample>
+    <MenuPanel
+        show
+        className="position-static max-w-100"
+        style={{ width: 300, ...{ '--bs-menu-min-width': 'min(300px, 100%)' } }}
+    >
+        <MenuItem>
+            <MenuItemIcon name="pencil" />
+            Edit
+        </MenuItem>
+        <MenuItem>
+            <MenuItemIcon name="copy" />
+            Duplicate
+        </MenuItem>
+        <MenuDivider />
+        <MenuItem theme="danger">
+            <MenuItemIcon name="trash" />
+            Delete
+        </MenuItem>
+    </MenuPanel>
+</CodeExample>
 
 ### Descriptions
 
-Use `.menu-item-content` for a flex column layout and `.menu-item-description` for secondary text
-below the main label.
+Use `MenuItemContent` for a flex column layout and `MenuItemDescription` for secondary text below the main label.
 
-<MenuPanel className="show position-static">
-    <MenuItem>
-        <MenuItemContent>
-            Publish now
-            <MenuItemDescription>Make this page visible immediately</MenuItemDescription>
-        </MenuItemContent>
-    </MenuItem>
-    <MenuItem>
-        <MenuItemContent>
-            Schedule
-            <MenuItemDescription>Set a future publish date</MenuItemDescription>
-        </MenuItemContent>
-    </MenuItem>
-</MenuPanel>
+<CodeExample>
+    <MenuPanel
+        show
+        className="position-static max-w-100"
+        style={{ width: 300, ...{ '--bs-menu-min-width': 'min(300px, 100%)' } }}
+    >
+        <MenuItem>
+            <MenuItemIcon name="person" />
+            <MenuItemContent>
+                Profile<MenuItemDescription>View your profile and settings</MenuItemDescription>
+            </MenuItemContent>
+        </MenuItem>
+        <MenuItem>
+            <MenuItemIcon name="gear" />
+            <MenuItemContent>
+                Settings<MenuItemDescription>Manage your preferences</MenuItemDescription>
+            </MenuItemContent>
+        </MenuItem>
+    </MenuPanel>
+</CodeExample>
 
 ### Selected
 
-Add `.selected` to a `.menu-item` to indicate the current selection. Pair it with a
-`.menu-item-check` icon; Bootstrap only reveals the check on selected items.
+Pass `selected` to `MenuItem` to indicate the current selection.
 
-<MenuPanel className="show position-static">
-    <MenuItem className="selected">
-        <MenuItemContent>
-            Selected menu item
-            <MenuItemDescription>Currently visible to users</MenuItemDescription>
-        </MenuItemContent>
-        <Icon name="check" className="menu-item-check" aria-hidden="true" />
-    </MenuItem>
-    <MenuItem>
-        <MenuItemContent>
-            Default menu item
-            <MenuItemDescription>Not yet published</MenuItemDescription>
-        </MenuItemContent>
-        <Icon name="check" className="menu-item-check" aria-hidden="true" />
-    </MenuItem>
-</MenuPanel>
+<CodeExample>
+    <MenuPanel
+        show
+        className="position-static max-w-100"
+        style={{ width: 300, ...{ '--bs-menu-min-width': 'min(300px, 100%)' } }}
+    >
+        <MenuItem selected>
+            <MenuItemCheck />
+            Selected option
+        </MenuItem>
+        <MenuItem>Another option</MenuItem>
+        <MenuItem>Something else</MenuItem>
+    </MenuPanel>
+</CodeExample>
 
 ## Menu content
 
@@ -311,262 +381,261 @@ Add `.selected` to a `.menu-item` to indicate the current selection. Pair it wit
 
 Add a header to label sections of actions in any menu.
 
-<MenuPanel className="show position-static">
-    <MenuItem href="#">Action</MenuItem>
-    <MenuItem href="#">Action</MenuItem>
-    <MenuHeader>Menu header</MenuHeader>
-    <MenuItem href="#">Another action</MenuItem>
-</MenuPanel>
+<CodeExample>
+    <MenuPanel
+        show
+        className="position-static max-w-100"
+        style={{ width: 300, ...{ '--bs-menu-min-width': 'min(300px, 100%)' } }}
+    >
+        <MenuHeader>Menu header</MenuHeader>
+        <MenuItem href="#menu-items">Action</MenuItem>
+        <MenuItem href="#menu-items">Another action</MenuItem>
+        <MenuItem href="#menu-items">Something else here</MenuItem>
+    </MenuPanel>
+</CodeExample>
 
 ### Dividers
 
 Separate groups of related menu items with a divider.
 
-<MenuPanel className="show position-static">
-    <MenuItem href="#">Action</MenuItem>
-    <MenuItem href="#">Another action</MenuItem>
-    <MenuItem href="#">Something else here</MenuItem>
-    <MenuDivider />
-    <MenuItem href="#">Separated link</MenuItem>
-</MenuPanel>
+<CodeExample>
+    <MenuPanel
+        show
+        className="position-static max-w-100"
+        style={{ width: 300, ...{ '--bs-menu-min-width': 'min(300px, 100%)' } }}
+    >
+        <MenuItem href="#menu-items">Action</MenuItem>
+        <MenuItem href="#menu-items">Another action</MenuItem>
+        <MenuItem href="#menu-items">Something else here</MenuItem>
+        <MenuDivider />
+        <MenuItem href="#dividers">Separated link</MenuItem>
+    </MenuPanel>
+</CodeExample>
 
 ### Text
 
-Place any freeform text within a menu with text and use margin and padding utilities. Note that
-you'll likely need additional sizing styles to constrain the menu width.
+Place any freeform text within a menu with text and use [margin][3] and [padding][4] utilities. Note that you’ll likely need additional sizing styles to constrain the menu width.
 
-<MenuPanel className="show position-static p-3 fg-2" style={{ '--bs-menu-min-width': '240px' }}>
-    <p>Some example text that's free-flowing within the menu.</p>
-    <p className="mb-0">And this is more example text.</p>
-</MenuPanel>
+<CodeExample>
+    <MenuPanel
+        show
+        className="position-static max-w-100"
+        style={{ width: 300, ...{ '--bs-menu-min-width': 'min(300px, 100%)' } }}
+    >
+        <div className="p-3 text-body-secondary">
+            <p>Some example text that’s free-flowing within the menu.</p>
+            <p className="mb-0">And this is more example text.</p>
+        </div>
+    </MenuPanel>
+</CodeExample>
 
 ### Forms
 
-Put a form within a menu, or make it into a menu, and use margin and padding utilities to give it the
-negative space you require.
+Put a form within a menu, or make it into a menu, and use [margin][3] and [padding][4] utilities to give it the negative space you require.
 
-<MenuPanel className="show position-static" style={{ '--bs-menu-min-width': '300px' }}>
-    <Form className="d-flex flex-column gap-3 p-3">
-        <FormField>
-            <FormLabel htmlFor="exampleMenuFormEmail1">Email address</FormLabel>
-            <FormControl type="email" id="exampleMenuFormEmail1" placeholder="email@example.com" />
-        </FormField>
-        <FormField>
-            <FormLabel htmlFor="exampleMenuFormPassword1">Password</FormLabel>
-            <FormControl type="password" id="exampleMenuFormPassword1" placeholder="Password" />
-        </FormField>
-        <FormField>
-            <FormCheck id="checkLabel" />
-            <FormLabel htmlFor="checkLabel">Example new checkbox</FormLabel>
-        </FormField>
-        <div className="vstack gap-2">
-            <Button type="button" variant="solid" theme="primary">
+<CodeExample>
+    <MenuPanel
+        show
+        className="position-static max-w-100"
+        style={{ width: 300, ...{ '--bs-menu-min-width': 'min(300px, 100%)' } }}
+    >
+        <form className="p-3">
+            <FormField className="mb-3">
+                <FormLabel htmlFor="menuEmail">Email address</FormLabel>
+                <FormControl id="menuEmail" type="email" placeholder="email@example.com" />
+            </FormField>
+            <FormField className="mb-3">
+                <FormLabel htmlFor="menuPassword">Password</FormLabel>
+                <FormControl id="menuPassword" type="password" placeholder="Password" />
+            </FormField>
+            <FormLabel className="mb-3">
+                <Checkbox /> Remember me
+            </FormLabel>
+            <Button type="submit" variant="solid" theme="primary">
                 Sign in
             </Button>
-            <a className="theme-secondary" href="#">
-                New around here? Sign up
-            </a>
-            <a className="theme-secondary" href="#">
-                Forgot password?
-            </a>
-        </div>
-    </Form>
-</MenuPanel>
+        </form>
+        <MenuDivider />
+        <MenuItem href="#forms">New around here? Sign up</MenuItem>
+        <MenuItem href="#forms">Forgot password?</MenuItem>
+    </MenuPanel>
+</CodeExample>
 
 ## Scrollable menus
 
-Assign `--bs-menu-max-height` and `--bs-menu-overflow-y` custom properties to constrain the menu
-height and enable scrolling.
+Assign `--bs-menu-max-height` and `--bs-menu-overflow-y` custom properties to constrain the menu height and enable scrolling.
 
-<MenuPanel
-    className="show position-static"
-    style={{ '--bs-menu-max-height': '145px', '--bs-menu-overflow-y': 'auto' }}
->
-    <MenuItem>Item 1</MenuItem>
-    <MenuItem>Item 2</MenuItem>
-    <MenuItem>Item 3</MenuItem>
-    <MenuItem>Item 4</MenuItem>
-    <MenuItem>Item 5</MenuItem>
-    <MenuItem>Item 6</MenuItem>
-    <MenuItem>Item 7</MenuItem>
-    <MenuItem>Item 8</MenuItem>
-</MenuPanel>
+<CodeExample>
+    <Menu label="Scrollable menu" scrollable>
+        <MenuItem href="#scrollable-menus">Item 1</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 2</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 3</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 4</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 5</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 6</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 7</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 8</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 9</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 10</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 11</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 12</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 13</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 14</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 15</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 16</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 17</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 18</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 19</MenuItem>
+        <MenuItem href="#scrollable-menus">Item 20</MenuItem>
+    </Menu>
+</CodeExample>
 
-You can also use the `.menu-scrollable` class to make the menu scrollable. This assumes a generally
-safe maximum height of `80dvh` and sets the overflow for you.
-
-<Menu
-    label="Scrollable menu"
-    toggleProps={{ variant: 'solid', theme: 'secondary' }}
-    menuClassName="menu-scrollable"
->
-    <MenuItem>Item 1</MenuItem>
-    <MenuItem>Item 2</MenuItem>
-    <MenuItem>Item 3</MenuItem>
-    <MenuItem>Item 4</MenuItem>
-    <MenuItem>Item 5</MenuItem>
-    <MenuItem>Item 6</MenuItem>
-    <MenuItem>Item 7</MenuItem>
-    <MenuItem>Item 8</MenuItem>
-</Menu>
+You can also pass `scrollable` to make the menu scrollable. This assumes a generally safe maximum height of `80dvh` and sets the overflow for you.
 
 ## Submenus
 
-Create nested menus with the `.submenu` wrapper class. Submenus support hover and click activation,
-keyboard navigation, and viewport-aware positioning. On small screens (below `576px`), submenus
-stack over the parent menu with a back button instead of flying out to the side.
+Create nested menus with `MenuSubmenu`. Submenus support hover and click activation, keyboard navigation, and viewport-aware positioning. Submenus currently fly out to the side; the upstream small-screen stacked layout and back button are not exposed by the React wrapper.
 
-Wrap a `.menu-item` trigger and a nested `.menu` inside a `.submenu` element. The
-[`MenuSubmenu` wrapper][1] renders both, keeps `aria-haspopup` and `aria-expanded` in sync, and
-places the nested panel to the side.
+Pass a `label` and nested menu items to `MenuSubmenu`; it renders and wires the trigger and panel.
 
-<Menu label="Submenus" toggleProps={{ variant: 'solid', theme: 'secondary' }}>
-    <MenuSubmenu label="File">
-        <MenuItem href="#">New</MenuItem>
-        <MenuItem href="#">Open</MenuItem>
-        <MenuItem href="#">Save</MenuItem>
-    </MenuSubmenu>
-    <MenuSubmenu label="Edit">
-        <MenuItem href="#">Cut</MenuItem>
-        <MenuItem href="#">Copy</MenuItem>
-        <MenuItem href="#">Paste</MenuItem>
-    </MenuSubmenu>
-    <MenuSubmenu label="View">
-        <MenuItem href="#">Zoom In</MenuItem>
-        <MenuItem href="#">Zoom Out</MenuItem>
-    </MenuSubmenu>
-    <MenuDivider />
-    <MenuItem href="#">Preferences</MenuItem>
-</Menu>
+<CodeExample>
+    <Menu label="Menu button">
+        <MenuItem href="#menu-items">Action</MenuItem>
+        <MenuItem href="#menu-items">Another action</MenuItem>
+        <MenuItem href="#menu-items">Something else here</MenuItem>
+        <MenuSubmenu label="More options">
+            <MenuItem>Submenu action</MenuItem>
+            <MenuItem>Another action</MenuItem>
+            <MenuItem>Something else</MenuItem>
+        </MenuSubmenu>
+    </Menu>
+</CodeExample>
 
 ### Nested
 
-Submenus can be nested to multiple levels. Each level opens to the side and flips direction when
-there's not enough viewport space.
+Submenus can be nested to multiple levels. Each level opens to the side and flips direction when there’s not enough viewport space.
 
-<Menu label="Multi-level menu" toggleProps={{ variant: 'solid', theme: 'secondary' }}>
-    <MenuItem href="#">Level 1 action</MenuItem>
-    <MenuSubmenu label="Level 1 submenu">
-        <MenuItem href="#">Level 2 action</MenuItem>
-        <MenuSubmenu label="Level 2 submenu">
-            <MenuItem href="#">Level 3 action A</MenuItem>
-            <MenuItem href="#">Level 3 action B</MenuItem>
+<CodeExample>
+    <Menu label="Menu button">
+        <MenuItem>Action</MenuItem>
+        <MenuSubmenu label="More options">
+            <MenuItem>Submenu action</MenuItem>
+            <MenuSubmenu label="Even more">
+                <MenuItem>Deep action</MenuItem>
+                <MenuItem>Another deep action</MenuItem>
+            </MenuSubmenu>
         </MenuSubmenu>
-        <MenuItem href="#">Another level 2</MenuItem>
-    </MenuSubmenu>
-    <MenuItem href="#">Another level 1</MenuItem>
-</Menu>
+    </Menu>
+</CodeExample>
 
 ## Menu options
 
-The Bootstrap plugin accepts `offset`, `reference`, and `boundary` options for positioning. The React
-wrapper keeps menus inside their relative trigger wrapper, so use `align` for logical alignment and
-CSS properties on `menuClassName` for sizing.
+Use `offset` to change the location of the menu. A number sets the distance from the trigger in pixels; `[crossAxis, mainAxis]` sets both axes. `padding` sets the viewport inset and `flip={false}` disables collision flipping. The trigger remains the positioning reference.
+
+<CodeExample>
+    <div className="d-flex flex-wrap gap-3">
+        <Menu label="Offset" offset={[10, 20]}>
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+        <Menu label="No flip" flip={false}>
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+    </div>
+</CodeExample>
 
 ### Auto close behavior
 
-By default, the menu is closed when clicking inside or outside the menu. You can use the `autoClose`
-prop to change this behavior of the menu.
+By default, the menu is closed when clicking inside or outside the menu. You can use the `autoClose` option to change this behavior of the menu.
 
-Regardless of the `autoClose` setting, pressing <kbd>Esc</kbd> while focus is within the menu (its
-toggle or items) closes the menu and returns focus to the toggle.
+Regardless of the `autoClose` setting, pressing <kbd>Esc</kbd> while focus is within the menu (its toggle or items) closes the menu and returns focus to the toggle.
 
-<div className="d-flex flex-wrap gap-2">
-    <Menu label="Default menu" toggleProps={{ variant: 'solid', theme: 'secondary' }}>
-        <MenuItem href="#">Menu item</MenuItem>
-        <MenuItem href="#">Menu item</MenuItem>
-        <MenuItem href="#">Menu item</MenuItem>
-    </Menu>
-    <Menu
-        label="Clickable inside"
-        autoClose="inside"
-        toggleProps={{ variant: 'solid', theme: 'secondary' }}
-    >
-        <MenuItem href="#">Menu item</MenuItem>
-        <MenuItem href="#">Menu item</MenuItem>
-        <MenuItem href="#">Menu item</MenuItem>
-    </Menu>
-    <Menu
-        label="Clickable outside"
-        autoClose="outside"
-        toggleProps={{ variant: 'solid', theme: 'secondary' }}
-    >
-        <MenuItem href="#">Menu item</MenuItem>
-        <MenuItem href="#">Menu item</MenuItem>
-        <MenuItem href="#">Menu item</MenuItem>
-    </Menu>
-    <Menu
-        label="Manual close"
-        autoClose={false}
-        toggleProps={{ variant: 'solid', theme: 'secondary' }}
-    >
-        <MenuItem href="#">Menu item</MenuItem>
-        <MenuItem href="#">Menu item</MenuItem>
-        <MenuItem href="#">Menu item</MenuItem>
-    </Menu>
-</div>
+<CodeExample>
+    <div className="d-flex flex-wrap gap-3">
+        <Menu label="Default" autoClose={true}>
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+        <Menu label="Clickable inside" autoClose={'inside'}>
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+        <Menu label="Clickable outside" autoClose={'outside'}>
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+        <Menu label="Manual close" autoClose={false}>
+            <MenuItem href="#menu-items">Action</MenuItem>
+            <MenuItem href="#menu-items">Another action</MenuItem>
+            <MenuItem href="#menu-items">Something else here</MenuItem>
+        </Menu>
+    </div>
+</CodeExample>
 
 ## Accessibility
 
-The [WAI-ARIA][7] standard defines an actual `role="menu"` widget, but this is specific to
-application-like menus which trigger actions or functions. ARIA menus can only contain menu items,
-checkbox menu items, radio button menu items, radio button groups, and sub-menus.
+The [<abbr title="Web Accessibility Initiative">WAI</abbr> <abbr title="Accessible Rich Internet Applications">ARIA</abbr>][5] standard defines an actual [`role="menu"` widget][6], but this is specific to application-like menus which trigger actions or functions. <abbr title="Accessible Rich Internet Applications">ARIA</abbr> menus can only contain menu items, checkbox menu items, radio button menu items, radio button groups, and sub-menus.
 
-Bootstrap's menus, on the other hand, are designed to be generic and applicable to a variety of
-situations and markup structures. For instance, it is possible to create menus that contain
-additional inputs and form controls, such as search fields or login forms. For this reason, Bootstrap
-does not expect (nor automatically add) any of the `role` and `aria-` attributes required for true
-ARIA menus. Authors will have to include these more specific attributes themselves.
+Idea React’s menus, on the other hand, are designed to be generic and applicable to a variety of situations and markup structures. For instance, it is possible to create menus that contain additional inputs and form controls, such as search fields or login forms. For this reason, Idea React does not expect (nor automatically add) any of the `role` and `aria-` attributes required for true <abbr title="Accessible Rich Internet Applications">ARIA</abbr> menus. Authors will have to include these more specific attributes themselves.
 
-Submenu triggers are an exception. `MenuSubmenu` adds `aria-haspopup="true"` to its trigger and keeps
-`aria-expanded` in sync as the submenu opens and closes. Set `aria-expanded` yourself only if a
-submenu must start open.
+Submenu triggers are an exception. `MenuSubmenu` adds `aria-haspopup="true"` to its trigger, and keeps `aria-expanded` on it in sync as the submenu opens and closes. The wrapper keeps this state in sync automatically.
 
 ### Keyboard navigation
 
-Menus include built-in keyboard support for navigating menu items.
+Menus include built-in keyboard support for navigating menu items. Submenu arrow keys remain physical directions in both LTR and RTL; the wrapper does not implement upstream RTL key reversal.
 
-| Key               | Action                                     |
-| ----------------- | ------------------------------------------ |
-| `↓` / `↑`         | Navigate to next/previous menu item        |
-| `→`               | Enter submenu (or `←` in RTL)              |
-| `←`               | Exit submenu and return to parent (or `→`) |
-| `Enter` / `Space` | Activate focused item or open submenu      |
-| `Esc`             | Close the menu                             |
-| `Home` / `End`    | Jump to first/last menu item               |
-| `Tab`             | Move focus and close the menu              |
+| Key               | Action                                |
+| ----------------- | ------------------------------------- |
+| `↓` / `↑`         | Navigate to next/previous menu item   |
+| `→`               | Enter submenu                         |
+| `←`               | Exit submenu and return to parent     |
+| `Enter` / `Space` | Activate focused item or open submenu |
+| `Esc`             | Close the menu                        |
+| `Home` / `End`    | Jump to first/last menu item          |
+| `Tab`             | Move focus and close the menu         |
 
 ## CSS
 
-Menus use CSS variables for real-time customization. Menu items include at least one variable that is
-not set on `.menu`. This allows you to provide a new value while Bootstrap defaults to a fallback
-value: `--bs-menu-item-border-radius`.
+### Variables
 
-See the [upstream menu CSS][2] for the complete variable, Sass map, and selector reference.
+Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][7].
 
-## React behavior
+| Variable               | Default |
+| ---------------------- | ------- |
+| `--bs-menu-max-height` | `300px` |
+| `--bs-menu-overflow-y` | `auto`  |
 
-Bootstrap toggles menus through the `data-bs-toggle="menu"` plugin. The React wrapper manages open
-state itself and exposes the same behaviors as props:
+## Usage
 
-| Prop            | Type                               | Default | Description                                                                             |
-| --------------- | ---------------------------------- | ------- | --------------------------------------------------------------------------------------- |
-| `label`         | `ReactNode`                        | —       | Content of the toggle button.                                                           |
-| `autoClose`     | `boolean \| 'inside' \| 'outside'` | `true`  | Close on inside and outside clicks, only inside, only outside, or only manually.        |
-| `align`         | `'start' \| 'end'`                 | `'end'` | Align the panel to the start or end edge of the trigger.                                |
-| `menuClassName` | `string`                           | —       | Additional classes for the menu panel, such as `menu-scrollable` or `menu-translucent`. |
-| `toggleProps`   | `ButtonProps`                      | —       | Variant, theme, icon, and other button props for the toggle.                            |
-| `onOpenChange`  | `(open: boolean) => void`          | —       | Called whenever the menu opens or closes.                                               |
+`Menu` manages its own open state, trigger wiring, positioning, and cleanup. Do not initialize Bootstrap’s plugin on the same elements.
 
-There is no plugin instance to dispose or retrieve: mount the `Menu` component and let React manage
-its lifecycle. Use `onOpenChange` instead of the `show.bs.menu` and `hide.bs.menu` events.
+### Options
+
+| Prop                  | Default        | Description                                                                                                               |
+| --------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `autoClose`           | `true`         | Close on inside/outside clicks, only `"inside"`, only `"outside"`, or neither (`false`). Escape still dismisses the menu. |
+| `placement`           | `"bottom-end"` | Preferred side and edge alignment; `align` defaults to `"end"`.                                                           |
+| `responsivePlacement` | —              | Override placement at named breakpoints.                                                                                  |
+| `offset`              | `0`            | Distance from the toggle, or a `[crossAxis, mainAxis]` pair.                                                              |
+| `padding`             | `8`            | Inset from the viewport edge when shifting to avoid overflow.                                                             |
+| `flip`                | `true`         | Flip to another side when the preferred side lacks space.                                                                 |
+
+### Events
+
+`onOpenChange(open)` receives the menu’s new visibility state.
 
 </ComponentsLayout>
 
-[1]: https://github.com/idea2app/Idea-React/blob/main/source/Menu.tsx
-[2]: https://getbootstrap.com/docs/6.0/components/menu/
-[3]: https://markdotto.com/blog/bootstrap-explained-dropdowns/
-[4]: https://floating-ui.com/
-[5]: https://getbootstrap.com/docs/6.0/components/button-group/
-[6]: https://github.com/idea2app/Idea-React/blob/main/source/Icon.tsx
-[7]: https://www.w3.org/TR/wai-aria/
+[1]: https://markdotto.com/blog/bootstrap-explained-dropdowns/
+[2]: https://getbootstrap.com/docs/6.0/components/button-group/
+[3]: https://getbootstrap.com/docs/6.0/utilities/margin/
+[4]: https://getbootstrap.com/docs/6.0/utilities/padding/
+[5]: https://www.w3.org/TR/wai-aria/
+[6]: https://www.w3.org/TR/wai-aria/#menu
+[7]: https://getbootstrap.com/docs/6.0/components/menu/#variables

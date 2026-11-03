@@ -6,7 +6,7 @@ import { formToJSON } from 'web-utility';
 
 import { Button } from '../../../../source/Button';
 import { CloseButton } from '../../../../source/CloseButton';
-import { Dialog, DialogClose } from '../../../../source/Dialog';
+import { Dialog, DialogClose } from '../../../../source/Extension/Dialog';
 import { FormControl, FormField, FormLabel } from '../../../../source/Form';
 import {
     DialogBody,

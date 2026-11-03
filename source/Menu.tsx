@@ -16,13 +16,60 @@ import {
 } from 'react';
 
 import { Button, ButtonProps } from './Button';
+import { Icon, IconProps } from './Extension/Icon';
+import { Breakpoint } from './Grid';
+import { FloatingOptions, FloatingPosition } from './Overlay';
 
-export const MenuItem: FC<ButtonProps> = ({ className, ...props }) => (
-    <Button {...props} className={classNames('menu-item', className)} />
+export type MenuItemProps = ButtonProps & { active?: boolean; selected?: boolean };
+
+export const MenuItem: FC<MenuItemProps> = ({ active, selected, className, ...props }) => (
+    <Button
+        {...props}
+        aria-current={active || (selected && props.href) ? 'true' : props['aria-current']}
+        aria-pressed={props.href ? props['aria-pressed'] : (selected ?? props['aria-pressed'])}
+        className={classNames('menu-item', { active, selected }, className)}
+    />
 );
 
-export const MenuPanel: FC<HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => (
-    <div {...props} className={classNames('menu', className)} />
+export interface MenuPanelProps extends HTMLAttributes<HTMLDivElement> {
+    theme?: 'light' | 'dark';
+    translucent?: boolean;
+    scrollable?: boolean;
+    show?: boolean;
+}
+
+export const MenuPanel: FC<MenuPanelProps> = ({
+    theme,
+    translucent,
+    scrollable,
+    show,
+    className,
+    ...props
+}) => (
+    <div
+        {...props}
+        data-bs-theme={theme}
+        className={classNames(
+            'menu',
+            { show },
+            translucent && 'menu-translucent',
+            scrollable && 'menu-scrollable',
+            className
+        )}
+    />
+);
+
+export const MenuItemIcon: FC<IconProps> = ({ className, ...props }) => (
+    <Icon aria-hidden="true" {...props} className={classNames('menu-item-icon', className)} />
+);
+
+export const MenuItemCheck: FC<Omit<IconProps, 'name'>> = ({ className, ...props }) => (
+    <Icon
+        aria-hidden="true"
+        {...props}
+        name="check"
+        className={classNames('menu-item-check', className)}
+    />
 );
 
 export const MenuText: FC<HTMLAttributes<HTMLSpanElement>> = ({ className, ...props }) => (
@@ -55,11 +102,29 @@ export class MenuSubmenu extends Component<MenuSubmenuProps> {
     @observable accessor open = false;
 
     panel = createRef<HTMLDivElement>();
+    trigger = createRef<HTMLButtonElement>();
+    position = new FloatingPosition();
+
+    componentDidUpdate() {
+        const { position, panel, trigger } = this;
+
+        if (!this.open) return position.dispose();
+        if (!panel.current || !trigger.current) return;
+
+        if (position.element !== panel.current)
+            position.attach(trigger.current, panel.current, {
+                placement: 'right-start',
+                offset: 2
+            });
+        else position.update();
+    }
+
+    componentWillUnmount() {
+        this.position.dispose();
+    }
 
     @action
-    setOpen = (open: boolean) => {
-        this.open = open;
-    };
+    setOpen = (open: boolean) => (this.open = open);
 
     handleClick = () => this.setOpen(!this.open);
 
@@ -72,6 +137,7 @@ export class MenuSubmenu extends Component<MenuSubmenuProps> {
 
         if (key === 'ArrowRight') {
             event.preventDefault();
+            event.stopPropagation();
             this.setOpen(true);
 
             queueMicrotask(() =>
@@ -80,9 +146,12 @@ export class MenuSubmenu extends Component<MenuSubmenuProps> {
                     ?.focus()
             );
         }
-        if (key === 'ArrowLeft' && this.open) {
+        if ((key === 'ArrowLeft' || key === 'Escape') && this.open) {
             event.preventDefault();
+            event.stopPropagation();
+
             this.setOpen(false);
+            this.trigger.current?.focus();
         }
     };
 
@@ -98,6 +167,7 @@ export class MenuSubmenu extends Component<MenuSubmenuProps> {
                 onKeyDown={this.handleKeyDown}
             >
                 <Button
+                    ref={this.trigger}
                     className="menu-item"
                     aria-haspopup="true"
                     aria-expanded={open}
@@ -107,6 +177,8 @@ export class MenuSubmenu extends Component<MenuSubmenuProps> {
                 </Button>
                 <div
                     ref={this.panel}
+                    style={{ ...this.position.style }}
+                    data-bs-placement={this.position.placement}
                     className={classNames('menu start-100 top-0', { show: open })}
                     hidden={!open}
                 >
@@ -122,27 +194,120 @@ export interface MenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
     autoClose?: boolean | 'inside' | 'outside';
     align?: 'start' | 'end';
     menuClassName?: string;
+    placement?: MenuPlacement;
+    responsivePlacement?: Partial<Record<Breakpoint, MenuPlacement>>;
+    theme?: 'light' | 'dark';
+    translucent?: boolean;
+    scrollable?: boolean;
+    split?: boolean;
+    nav?: boolean;
+    offset?: FloatingOptions['offset'];
+    padding?: number;
+    flip?: boolean;
     toggleProps?: Omit<
         Extract<ButtonProps, { href?: never }>,
         'children' | 'onClick' | 'onKeyDown'
     >;
-    onOpenChange?: (open: boolean) => void;
+    onOpenChange?: (open: boolean) => unknown;
 }
+
+export type MenuPlacement =
+    | 'top-start'
+    | 'top-end'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left-start'
+    | 'left-end'
+    | 'right-start'
+    | 'right-end';
+
+const MENU_PLACEMENT_CLASSES: Record<MenuPlacement, string[]> = {
+    'top-start': ['bottom-100', 'start-0'],
+    'top-end': ['bottom-100', 'end-0'],
+    'bottom-start': ['top-100', 'start-0'],
+    'bottom-end': ['top-100', 'end-0'],
+    'left-start': ['end-100', 'top-0'],
+    'left-end': ['end-100', 'bottom-0'],
+    'right-start': ['start-100', 'top-0'],
+    'right-end': ['start-100', 'bottom-0']
+};
+
+const MENU_BREAKPOINT_WIDTHS: Record<Breakpoint, number> = {
+    sm: 576,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
+    '2xl': 1536
+};
 
 @observer
 export class Menu extends Component<MenuProps> {
     @observable accessor open = false;
+    @observable accessor responsiveDirection: MenuPlacement | undefined;
+
     root = createRef<HTMLDivElement>();
     trigger = createRef<HTMLButtonElement>();
     panel = createRef<HTMLDivElement>();
+    media: { query: MediaQueryList; placement: MenuPlacement }[] = [];
+    position = new FloatingPosition();
 
     componentDidMount() {
         document.addEventListener('pointerdown', this.handleOutside);
+        this.observePlacement();
+    }
+
+    componentDidUpdate({ responsivePlacement }: MenuProps) {
+        const { trigger, panel, position, props } = this;
+
+        if (responsivePlacement !== props.responsivePlacement) this.observePlacement();
+
+        if (!this.open) return position.dispose();
+        if (!trigger.current || !panel.current) return;
+
+        const { placement, align, offset, padding, flip } = props;
+
+        const options: FloatingOptions = {
+            placement: this.responsiveDirection ?? placement ?? `bottom-${align ?? 'end'}`,
+            offset,
+            padding,
+            flip
+        };
+        if (position.element !== panel.current)
+            position.attach(trigger.current, panel.current, options);
+        else {
+            position.options = options;
+            position.update();
+        }
     }
 
     componentWillUnmount() {
         document.removeEventListener('pointerdown', this.handleOutside);
+        this.position.dispose();
+
+        for (const { query } of this.media)
+            query.removeEventListener('change', this.handlePlacement);
     }
+
+    observePlacement = () => {
+        for (const { query } of this.media)
+            query.removeEventListener('change', this.handlePlacement);
+
+        this.media = (Object.keys(MENU_BREAKPOINT_WIDTHS) as Breakpoint[]).flatMap(breakpoint => {
+            const placement = this.props.responsivePlacement?.[breakpoint];
+            if (!placement) return [];
+
+            const query = window.matchMedia(`(min-width: ${MENU_BREAKPOINT_WIDTHS[breakpoint]}px)`);
+            query.addEventListener('change', this.handlePlacement);
+            return [{ query, placement }];
+        });
+        this.handlePlacement();
+    };
+
+    @action
+    handlePlacement = () =>
+        (this.responsiveDirection = [...this.media]
+            .reverse()
+            .find(({ query }) => query.matches)?.placement);
 
     @action
     setOpen = (open: boolean) => {
@@ -162,12 +327,12 @@ export class Menu extends Component<MenuProps> {
             this.setOpen(false);
     };
 
-    items() {
+    items(panel: HTMLElement | null = this.panel.current) {
         return [
-            ...(this.panel.current?.querySelectorAll<HTMLElement>(
+            ...(panel?.querySelectorAll<HTMLElement>(
                 'a[href]:not([aria-disabled="true"]), button:not(:disabled):not([aria-disabled="true"])'
             ) ?? [])
-        ].filter(item => !item.closest('[hidden]'));
+        ].filter(item => !item.closest('[hidden]') && item.closest('.menu') === panel);
     }
 
     handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -182,13 +347,23 @@ export class Menu extends Component<MenuProps> {
             return this.trigger.current?.focus();
         }
         if (key === 'Tab') return this.setOpen(false);
+        if (
+            event.target instanceof Element &&
+            event.target.matches('input, textarea, select, [contenteditable="true"]')
+        )
+            return;
+
         if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(key)) return;
 
         event.preventDefault();
         this.setOpen(true);
 
         queueMicrotask(() => {
-            const items = this.items();
+            const panel =
+                event.target instanceof Element
+                    ? event.target.closest<HTMLElement>('.menu')
+                    : undefined;
+            const items = this.items(panel ?? this.panel.current);
             const index = items.findIndex(item => item === document.activeElement);
 
             let next = key === 'Home' ? 0 : items.length - 1;
@@ -215,10 +390,11 @@ export class Menu extends Component<MenuProps> {
 
     handleToggle = () => this.setOpen(!this.open);
 
-    handleSelect = ({ target }: MouseEvent<HTMLDivElement>) => {
+    handleSelect = ({ target, defaultPrevented }: MouseEvent<HTMLDivElement>) => {
         const { autoClose = true } = this.props;
         if (
             autoClose &&
+            !defaultPrevented &&
             autoClose !== 'outside' &&
             target instanceof Element &&
             !target.closest('.submenu > .menu-item') &&
@@ -232,6 +408,16 @@ export class Menu extends Component<MenuProps> {
             label,
             autoClose: _autoClose,
             align = 'end',
+            placement,
+            responsivePlacement: _responsivePlacement,
+            theme,
+            translucent,
+            scrollable,
+            split,
+            nav,
+            offset: _offset,
+            padding: _padding,
+            flip: _flip,
             menuClassName,
             toggleProps,
             onOpenChange: _onOpenChange,
@@ -243,20 +429,39 @@ export class Menu extends Component<MenuProps> {
             ...props
         } = this.props;
         const { open } = this;
+        const preferred = this.responsiveDirection ?? placement;
+        const direction = this.position.element
+            ? (this.position.placement as MenuPlacement)
+            : preferred;
+        const placementClasses = direction
+            ? MENU_PLACEMENT_CLASSES[direction]
+            : ['top-100', align === 'end' ? 'end-0' : 'start-0'];
 
         return (
             <div
                 {...props}
                 ref={this.root}
                 id={id}
-                className={classNames('d-inline-block position-relative', className)}
+                data-bs-theme={theme}
+                className={classNames(
+                    split ? 'btn-group' : 'd-inline-block',
+                    'position-relative',
+                    className
+                )}
                 onKeyDown={this.handleKeyDown}
                 onBlur={this.handleBlur}
             >
                 <Button
+                    variant={nav ? false : undefined}
                     {...toggleProps}
                     ref={this.trigger}
                     aria-expanded={open}
+                    aria-haspopup="true"
+                    className={classNames(
+                        toggleProps?.className,
+                        split && 'menu-toggle-split',
+                        nav && 'nav-link'
+                    )}
                     aria-controls={id ? `${id}-menu` : undefined}
                     onClick={this.handleToggle}
                 >
@@ -265,9 +470,13 @@ export class Menu extends Component<MenuProps> {
                 <div
                     ref={this.panel}
                     id={id ? `${id}-menu` : undefined}
+                    data-bs-placement={direction ?? `bottom-${align}`}
+                    style={{ ...this.position.style }}
                     className={classNames(
-                        'menu top-100',
-                        align === 'end' ? 'end-0' : 'start-0',
+                        'menu',
+                        placementClasses,
+                        translucent && 'menu-translucent',
+                        scrollable && 'menu-scrollable',
                         { show: open },
                         menuClassName
                     )}

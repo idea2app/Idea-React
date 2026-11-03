@@ -1,9 +1,13 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef, FC } from 'react';
 
-export type FormProps = ComponentPropsWithRef<'form'>;
+export type FormProps = ComponentPropsWithRef<'form'> & {
+    validated?: boolean;
+};
 
-export const Form: FC<FormProps> = props => <form {...props} />;
+export const Form: FC<FormProps> = ({ className, validated, ...props }) => (
+    <form {...props} className={classNames(validated && 'was-validated', className)} />
+);
 
 Form.displayName = 'Form';
 
@@ -13,10 +17,12 @@ export const FormFieldset: FC<FormFieldsetProps> = props => <fieldset {...props}
 
 FormFieldset.displayName = 'FormFieldset';
 
-export type FormFieldProps = ComponentPropsWithRef<'div'>;
+export type FormFieldProps = ComponentPropsWithRef<'div'> & {
+    card?: boolean;
+};
 
-export const FormField: FC<FormFieldProps> = ({ className, ...props }) => (
-    <div {...props} className={classNames('form-field', className)} />
+export const FormField: FC<FormFieldProps> = ({ className, card, ...props }) => (
+    <div {...props} className={classNames('form-field', card && 'form-field-card', className)} />
 );
 
 FormField.displayName = 'FormField';
@@ -37,10 +43,46 @@ export const FormFieldContent: FC<FormFieldContentProps> = ({ className, ...prop
 
 FormFieldContent.displayName = 'FormFieldContent';
 
-export type FormLabelProps = ComponentPropsWithRef<'label'>;
+export interface FormValidationProps {
+    validation?: 'valid' | 'invalid';
+}
 
-export const FormLabel: FC<FormLabelProps> = ({ className, ...props }) => (
-    <label {...props} className={classNames('form-label', className)} />
+export type FormLabelProps = ComponentPropsWithRef<'label'> & {
+    plain?: boolean;
+    column?: boolean;
+    controlSize?: 'sm' | 'lg';
+};
+
+export const FormLabel: FC<FormLabelProps> = ({
+    className,
+    plain,
+    column,
+    controlSize,
+    ...props
+}) => (
+    <label
+        {...props}
+        className={classNames(
+            column ? 'col-form-label' : !plain && 'form-label',
+            column && controlSize && `col-form-label-${controlSize}`,
+            className
+        )}
+    />
 );
 
 FormLabel.displayName = 'FormLabel';
+
+export type FormLegendProps = ComponentPropsWithRef<'legend'> &
+    Pick<FormLabelProps, 'column' | 'controlSize'>;
+
+export const FormLegend: FC<FormLegendProps> = ({ className, column, controlSize, ...props }) => (
+    <legend
+        {...props}
+        className={classNames(
+            column && 'col-form-label',
+            column && controlSize && `col-form-label-${controlSize}`,
+            className
+        )}
+    />
+);
+FormLegend.displayName = 'FormLegend';

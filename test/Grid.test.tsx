@@ -5,6 +5,12 @@ import { render } from '@testing-library/react';
 
 import { Col, Container, Row } from '../source/Grid';
 
+it('preserves component names in serialized documentation examples', () => {
+    assert.equal(Container.displayName, 'Container');
+    assert.equal(Row.displayName, 'Row');
+    assert.equal(Col.displayName, 'Col');
+});
+
 it('renders an equal-width column from a breakpoint', () => {
     const { container } = render(
         <Row>

@@ -1,0 +1,12 @@
+.popover {
+    --bs-popover-border-color: var(--bs-purple-500);
+    --bs-popover-header-bg: var(--bs-purple-500);
+    --bs-popover-header-color: var(--bs-white);
+    --bs-popover-body-padding-x: 1rem;
+    --bs-popover-body-padding-y: 0.5rem;
+}
+
+.tooltip {
+    --bs-tooltip-bg: var(--bs-purple-500);
+    --bs-tooltip-color: var(--bs-white);
+}

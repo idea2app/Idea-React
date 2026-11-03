@@ -1,0 +1,207 @@
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbDivider
+} from '../../../../source/Breadcrumb';
+import { Icon } from '../../../../source/Extension/Icon';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="breadcrumb">
+
+# Breadcrumb
+
+Indicate the current page's location within a navigational hierarchy using explicit divider elements.
+
+Compose `Breadcrumb`, `BreadcrumbItem`, `BreadcrumbLink`, and `BreadcrumbDivider` inside a labelled
+navigation element. Use the link’s `active` prop for the current page.
+
+## Example
+
+Use an ordered list with `.breadcrumb-item` for each page and `.breadcrumb-divider` elements between them. Leave a divider empty to use the default chevron icon, or add your own separator content. Add `.active` to the `.breadcrumb-link` of the current page.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <nav aria-label="breadcrumb">
+            <Breadcrumb>
+                <BreadcrumbItem>
+                    <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbDivider />
+                <BreadcrumbItem>
+                    <BreadcrumbLink href="#">Library</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbDivider />
+                <BreadcrumbItem aria-current="page">
+                    <BreadcrumbLink active href="#">
+                        Data
+                    </BreadcrumbLink>
+                </BreadcrumbItem>
+            </Breadcrumb>
+        </nav>
+        <nav aria-label="breadcrumb">
+            <Breadcrumb>
+                <BreadcrumbItem>
+                    <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbDivider />
+                <BreadcrumbItem>
+                    <BreadcrumbLink href="#" aria-label="More pages">
+                        <Icon name="three-dots" aria-hidden />
+                    </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbDivider />
+                <BreadcrumbItem>
+                    <BreadcrumbLink href="#">Documents</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbDivider />
+                <BreadcrumbItem aria-current="page">
+                    <BreadcrumbLink active href="#">
+                        2026
+                    </BreadcrumbLink>
+                </BreadcrumbItem>
+            </Breadcrumb>
+        </nav>
+    </div>
+</CodeExample>
+
+## Dividers
+
+Dividers are added explicitly using `.breadcrumb-divider` elements. An empty divider renders a default chevron, drawn with a CSS [`mask`][1] so it inherits the divider color (including in dark mode). To use a different separator, add your own content—any SVG icon, text character, or custom markup—which overrides the default.
+
+### Default divider
+
+Leave the `.breadcrumb-divider` empty to get the built-in chevron. Customize it globally by overriding the `--bs-breadcrumb-divider-icon`, `--bs-breadcrumb-divider-width`, and `--bs-breadcrumb-divider-height` variables.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <nav aria-label="breadcrumb">
+            <Breadcrumb>
+                <BreadcrumbItem>
+                    <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbDivider />
+                <BreadcrumbItem aria-current="page">
+                    <BreadcrumbLink active href="#">
+                        Library
+                    </BreadcrumbLink>
+                </BreadcrumbItem>
+            </Breadcrumb>
+        </nav>
+    </div>
+</CodeExample>
+
+### SVG dividers
+
+Add an inline SVG inside the divider to override the default with your own crisp, scalable icon. Use `currentColor` for the stroke or fill so it inherits the divider color for easy theming.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <nav aria-label="breadcrumb">
+            <Breadcrumb>
+                <BreadcrumbItem>
+                    <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbDivider>
+                    <Icon name="chevron-double-right" aria-hidden />
+                </BreadcrumbDivider>
+                <BreadcrumbItem aria-current="page">
+                    <BreadcrumbLink active href="#">
+                        Library
+                    </BreadcrumbLink>
+                </BreadcrumbItem>
+            </Breadcrumb>
+        </nav>
+    </div>
+</CodeExample>
+
+### Text dividers
+
+For simple text-based dividers, just add the character directly.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <nav aria-label="breadcrumb">
+            <Breadcrumb>
+                <BreadcrumbItem>
+                    <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbDivider>/</BreadcrumbDivider>
+                <BreadcrumbItem>
+                    <BreadcrumbLink href="#">Library</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbDivider>/</BreadcrumbDivider>
+                <BreadcrumbItem aria-current="page">
+                    <BreadcrumbLink active href="#">
+                        Data
+                    </BreadcrumbLink>
+                </BreadcrumbItem>
+            </Breadcrumb>
+        </nav>
+    </div>
+</CodeExample>
+
+### Custom dividers
+
+Use any content you like—different icons, decorative elements, or themed separators.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <nav aria-label="breadcrumb">
+            <Breadcrumb>
+                <BreadcrumbItem>
+                    <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbDivider>›</BreadcrumbDivider>
+                <BreadcrumbItem>
+                    <BreadcrumbLink href="#">Library</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbDivider>›</BreadcrumbDivider>
+                <BreadcrumbItem aria-current="page">
+                    <BreadcrumbLink active href="#">
+                        Data
+                    </BreadcrumbLink>
+                </BreadcrumbItem>
+            </Breadcrumb>
+        </nav>
+    </div>
+</CodeExample>
+
+## Accessibility
+
+Since breadcrumbs provide navigation, it’s important to follow these practices:
+
+- Add `aria-label="breadcrumb"` to the `<nav>` element to describe the navigation type
+- Add `aria-current="page"` to the `.breadcrumb-item` containing the current page
+- Divider elements are automatically hidden from assistive technology via CSS
+
+For more information, see the [ARIA Authoring Practices Guide breadcrumb pattern][2].
+
+## CSS
+
+### Variables
+
+Customize the component with the following local CSS variables. Override them through the wrapper’s `style` prop or your own CSS module.
+
+| CSS variable                         | Default              |
+| ------------------------------------ | -------------------- |
+| `--bs-breadcrumb-font-size`          | `inherit`            |
+| `--bs-breadcrumb-bg`                 | `transparent`        |
+| `--bs-breadcrumb-border-radius`      | `var(--bs-radius-5)` |
+| `--bs-breadcrumb-divider-color`      | `var(--bs-fg-4)`     |
+| `--bs-breadcrumb-divider-icon`       | `SVG mask image`     |
+| `--bs-breadcrumb-divider-width`      | `0.375rem`           |
+| `--bs-breadcrumb-divider-height`     | `0.75rem`            |
+| `--bs-breadcrumb-link-padding-x`     | `0.75rem`            |
+| `--bs-breadcrumb-link-padding-y`     | `0.25rem`            |
+| `--bs-breadcrumb-link-color`         | `var(--bs-fg-3)`     |
+| `--bs-breadcrumb-link-hover-color`   | `var(--bs-fg-2)`     |
+| `--bs-breadcrumb-link-hover-bg`      | `var(--bs-bg-1)`     |
+| `--bs-breadcrumb-link-active-color`  | `var(--bs-fg-1)`     |
+| `--bs-breadcrumb-link-border-radius` | `var(--bs-radius-7)` |
+
+</ComponentsLayout>
+
+[1]: https://getbootstrap.com/docs/6.0/customize/sass/#mask-icons
+[2]: https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/

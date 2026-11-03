@@ -1,4 +1,11 @@
-import { Combobox, ComboboxOption, FormField, FormLabel } from '../../../../source/Form';
+import {
+    Combobox,
+    ComboboxGroup,
+    ComboboxOption,
+    FormField,
+    FormLabel
+} from '../../../../source/Form';
+import { MenuDivider } from '../../../../source/Menu';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -6,122 +13,304 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # Combobox
 
-`Combobox` uses the library's `Menu` component to present selectable `ComboboxOption` items. Its
-`value` prop is controlled; selected values are submitted as hidden form inputs under `name`.
+A customizable select-like component built with markup-first HTML, powered by the Menu component for positioning and keyboard navigation.
 
 ## Overview
 
-`Combobox` accepts controlled values and renders one or more `ComboboxOption` elements inside the
-library's accessible menu.
+The combobox component provides a styled select experience using a `Combobox` with `ComboboxOption` children — rendered as a toggle button paired with a menu overlay. Unlike traditional select enhancements, the combobox is markup-first: you declare the options as React children. The JavaScript handles show/hide, selection state, form submission via a hidden input, and keyboard navigation.
+
+- Full control over menu item content (icons, descriptions, badges, images — anything)
+- Live search/filtering
+- Check mark indicators for selected items
+- Single and multiple selection modes
+- Full keyboard navigation and accessibility
+- Form submission via auto-created hidden input
 
 ## Example
 
+Use `Combobox` with `ComboboxOption` children. Each selectable option needs a `value` prop.
+
 <CodeExample>
-    <FormField>
-        <FormLabel>Language</FormLabel>
-        <Combobox name="language" value="ts" placeholder="Choose a language">
-            <ComboboxOption value="js">JavaScript</ComboboxOption>
-            <ComboboxOption value="ts">TypeScript</ComboboxOption>
-        </Combobox>
-    </FormField>
+    <Combobox name="option" placeholder="Select an item…">
+        <ComboboxOption value="1">Option one</ComboboxOption>
+        <ComboboxOption value="2">Option two</ComboboxOption>
+        <ComboboxOption value="3">Option three</ComboboxOption>
+    </Combobox>
 </CodeExample>
 
 ### Placeholders
 
-Use `placeholder` for the empty state.
+Set placeholder text with the `placeholder` prop. The `.combobox-value` element shows this text when nothing is selected, styled with `.combobox-placeholder`.
+
+<CodeExample>
+    <Combobox name="country" placeholder="Pick a country…">
+        <ComboboxOption value="us">United States</ComboboxOption>
+        <ComboboxOption value="uk">United Kingdom</ComboboxOption>
+        <ComboboxOption value="ca">Canada</ComboboxOption>
+    </Combobox>
+</CodeExample>
 
 ### Pre-selected value
 
-Pass the initial selected value to the controlled `value` prop.
+Set `defaultValue` on `Combobox` to pre-select an option, or use `value` and `onChange` for controlled selection. The toggle text updates automatically on initialization.
+
+<CodeExample>
+    <Combobox name="role" placeholder="Choose a role…" defaultValue="editor">
+        <ComboboxOption value="admin">Admin</ComboboxOption>
+        <ComboboxOption value="editor">Editor</ComboboxOption>
+        <ComboboxOption value="viewer">Viewer</ComboboxOption>
+    </Combobox>
+</CodeExample>
 
 ### With form field
 
-Wrap the control in `FormField` and provide an accessible name.
+Use the [form field][1] component to layout and wrap your combobox with a label, description, and validation feedback messages in a vertical stack.
+
+<CodeExample>
+    <FormField>
+        <FormLabel htmlFor="exampleCombobox">Combobox</FormLabel>
+        <Combobox id="exampleCombobox" name="country" placeholder="Pick a country…">
+            <ComboboxOption value="us">United States</ComboboxOption>
+            <ComboboxOption value="uk">United Kingdom</ComboboxOption>
+            <ComboboxOption value="ca">Canada</ComboboxOption>
+        </Combobox>
+    </FormField>
+</CodeExample>
 
 ## Custom content
 
-Option children may contain custom React content, including text and existing icon wrappers. Keep
-the option's accessible name clear.
+Since menu items are standard HTML, you can put anything inside them — SVG icons, images, description text, badges, or any other markup.
 
 ### Icons
 
-Use an existing icon component in an option when the icon adds meaning; mark decorative icons
-hidden from assistive technology.
+Set `icon` on `ComboboxOption` for a leading icon, rendered with the library’s `Icon` component.
+
+<CodeExample>
+    <Combobox name="language" placeholder="Choose a language…">
+        <ComboboxOption value="html" icon="file-earmark-code">
+            HTML
+        </ComboboxOption>
+        <ComboboxOption value="css" icon="file-earmark-code">
+            CSS
+        </ComboboxOption>
+        <ComboboxOption value="js" icon="file-earmark-code">
+            JavaScript
+        </ComboboxOption>
+    </Combobox>
+</CodeExample>
 
 ### Descriptions
 
-Include a short description in option content when a label alone is ambiguous.
+Use the `description` prop on `ComboboxOption` for secondary text. The component supplies the flex column layout.
+
+<CodeExample>
+    <Combobox name="role" placeholder="Select a role…">
+        <ComboboxOption value="admin" description="Full access to all resources">
+            Admin
+        </ComboboxOption>
+        <ComboboxOption value="editor" description="Can edit and publish content">
+            Editor
+        </ComboboxOption>
+        <ComboboxOption value="viewer" description="Read-only access">
+            Viewer
+        </ComboboxOption>
+    </Combobox>
+</CodeExample>
 
 ### Checked icon
 
-Selected options receive the `selected` class and `aria-selected` state.
+Set `checkedIcon` on each `ComboboxOption` to show a check mark indicator. It is hidden by default and becomes visible when the option is selected.
+
+<CodeExample>
+    <Combobox name="status" placeholder="Choose a status…" defaultValue="active">
+        <ComboboxOption value="active" description="Visible to users" checkedIcon>
+            Active
+        </ComboboxOption>
+        <ComboboxOption value="draft" description="Not yet published" checkedIcon>
+            Draft
+        </ComboboxOption>
+        <MenuDivider />
+        <ComboboxOption value="archived" checkedIcon>
+            Archived
+        </ComboboxOption>
+    </Combobox>
+</CodeExample>
 
 ### All together
 
-Combine a readable name, supporting description, and selected state without using color alone.
+Combine all three for a rich menu item layout.
+
+<CodeExample>
+    <Combobox name="priority" placeholder="Set priority…">
+        <ComboboxOption value="low" description="No rush" icon="file-earmark-code" checkedIcon>
+            Low
+        </ComboboxOption>
+        <ComboboxOption
+            value="medium"
+            description="Normal priority"
+            icon="file-earmark-code"
+            checkedIcon
+        >
+            Medium
+        </ComboboxOption>
+        <ComboboxOption
+            value="high"
+            description="Needs attention"
+            icon="file-earmark-code"
+            checkedIcon
+        >
+            High
+        </ComboboxOption>
+    </Combobox>
+</CodeExample>
 
 ## Search menu items
 
-Filter the `ComboboxOption` children before rendering them to provide a searchable option list.
+Enable filtering with `search`. The component adds a search input and no-results message before the items; customize them with `searchPlaceholder` and `noResultsText`. Items are filtered by matching their `textContent` against the query.
+
+<CodeExample>
+    <Combobox name="country" placeholder="Select a country…" search>
+        <ComboboxOption value="us">United States</ComboboxOption>
+        <ComboboxOption value="uk">United Kingdom</ComboboxOption>
+        <ComboboxOption value="ca">Canada</ComboboxOption>
+        <ComboboxOption value="au">Australia</ComboboxOption>
+        <ComboboxOption value="de">Germany</ComboboxOption>
+        <ComboboxOption value="fr">France</ComboboxOption>
+        <ComboboxOption value="jp">Japan</ComboboxOption>
+        <ComboboxOption value="br">Brazil</ComboboxOption>
+        <ComboboxOption value="in">India</ComboboxOption>
+        <ComboboxOption value="mx">Mexico</ComboboxOption>
+    </Combobox>
+</CodeExample>
 
 ## Groups
 
-Use separate menus or group labels in option content when choices need categorization.
+Use `ComboboxGroup` with a `label` to create labeled groups within the menu.
+
+<CodeExample>
+    <Combobox name="language" placeholder="Select a language…">
+        <ComboboxGroup label="Frontend">
+            <ComboboxOption value="html">HTML</ComboboxOption>
+            <ComboboxOption value="css">CSS</ComboboxOption>
+            <ComboboxOption value="js">JavaScript</ComboboxOption>
+        </ComboboxGroup>
+        <ComboboxGroup label="Backend">
+            <ComboboxOption value="python">Python</ComboboxOption>
+            <ComboboxOption value="ruby">Ruby</ComboboxOption>
+            <ComboboxOption value="go">Go</ComboboxOption>
+        </ComboboxGroup>
+    </Combobox>
+</CodeExample>
 
 ## Multiple select
 
-Set `multiple` and pass a string array to `value`. `onChange` receives the updated selection.
+Set `multiple` for multi-select behavior. Selected items are toggled on click and the menu stays open. The toggle displays the count when more than one item is selected.
+
+<CodeExample>
+    <Combobox name="skills" placeholder="Select skills…" multiple>
+        <ComboboxOption value="html" checkedIcon>
+            HTML
+        </ComboboxOption>
+        <ComboboxOption value="css" checkedIcon>
+            CSS
+        </ComboboxOption>
+        <ComboboxOption value="js" checkedIcon>
+            JavaScript
+        </ComboboxOption>
+        <ComboboxOption value="python" checkedIcon>
+            Python
+        </ComboboxOption>
+        <ComboboxOption value="ruby" checkedIcon>
+            Ruby
+        </ComboboxOption>
+    </Combobox>
+</CodeExample>
 
 ## Sizing
 
-Use `menuClassName` and `className` for sizing and layout.
+Use `controlSize="sm"` or `controlSize="lg"` to change the toggle button’s size.
+
+<CodeExample>
+    <Combobox controlSize="sm" name="option" placeholder="Small select…">
+        <ComboboxOption value="1">Option one</ComboboxOption>
+        <ComboboxOption value="2">Option two</ComboboxOption>
+    </Combobox>
+
+    <Combobox name="option" placeholder="Default select…">
+        <ComboboxOption value="1">Option one</ComboboxOption>
+        <ComboboxOption value="2">Option two</ComboboxOption>
+    </Combobox>
+
+    <Combobox controlSize="lg" name="option" placeholder="Large select…">
+        <ComboboxOption value="1">Option one</ComboboxOption>
+        <ComboboxOption value="2">Option two</ComboboxOption>
+    </Combobox>
+
+</CodeExample>
 
 ## Disabled
 
-Set `disabled` to disable the trigger.
+Add `disabled` to the toggle button or individual menu items.
+
+<CodeExample>
+    <Combobox disabled name="option" placeholder="Cannot interact…">
+        <ComboboxOption value="1">Option one</ComboboxOption>
+        <ComboboxOption value="2">Option two</ComboboxOption>
+    </Combobox>
+
+    <Combobox name="option" placeholder="Select an option…" className="mt-3">
+        <ComboboxOption value="1">Available</ComboboxOption>
+        <ComboboxOption disabled value="2">
+            Unavailable
+        </ComboboxOption>
+        <ComboboxOption value="3">Available</ComboboxOption>
+    </Combobox>
+
+</CodeExample>
 
 ## Form submission
 
-Selected values are represented by hidden fields:
+The combobox creates a hidden `<input>` for form submission using the required `name` prop. The hidden input’s `name` matches the prop and its `value` updates whenever the selection changes.
 
-```html
-<input type="hidden" name="country" value="us" />
+```tsx
+<Combobox name="country" defaultValue="us">
+    <ComboboxOption value="us">United States</ComboboxOption>
+    <ComboboxOption value="ca">Canada</ComboboxOption>
+</Combobox>
 ```
 
-## JavaScript
+For multiple selection, the component creates one hidden input per selected value, all sharing the same name. Read these values with `FormData.getAll(name)`.
 
-The component uses the library's interactive `Menu` wrapper for keyboard navigation and dismissal.
+## Usage
 
-### Via data attributes
-
-Option values are exposed as `data-bs-value` attributes for click selection.
-
-### Dependencies
-
-The menu's keyboard and dismissal behavior is supplied by the existing Menu component, not a
-separate Bootstrap plugin.
+`Combobox` manages selection with `defaultValue`, or `value` and `onChange` for controlled state. Pass `search`, `searchNormalize`, `multiple`, and sizing options as props; no plugin initialization is needed.
 
 ### Options
 
-Use the controlled `value`, `multiple`, `disabled`, `placeholder`, `menuClassName`, and `onChange`
-props.
+Pass options directly as `Combobox` props. The wrapper manages the menu and form inputs.
 
-### Methods
-
-The component does not expose an imperative Bootstrap JavaScript instance.
-
-### Events
-
-Use `onChange` to receive the new value when an option is selected.
+| Name              | Type    | Default  | Description                                                          |
+| ----------------- | ------- | -------- | -------------------------------------------------------------------- |
+| `multiple`        | boolean | `false`  | Enable multi-select mode. Selections toggle and the menu stays open. |
+| `name`            | string  | Required | Name for the auto-created hidden inputs.                             |
+| `placeholder`     | string  | `''`     | Placeholder text for the toggle.                                     |
+| `search`          | boolean | `false`  | Enable search input in the menu.                                     |
+| `searchNormalize` | boolean | `false`  | Normalize accented characters for search matching.                   |
 
 ## Accessibility
 
-The trigger has a listbox popup role and an accessible name. Provide a clear placeholder and
-meaningful option labels.
+The combobox component follows WAI-ARIA combobox patterns:
+
+- The toggle button has `aria-haspopup="listbox"` and `aria-expanded`.
+- Each `ComboboxOption` receives `role="option"` and `aria-selected` automatically.
+- Full keyboard navigation: Arrow keys, Home, End, Enter, Space, Escape, and Tab.
+- Disabled items have the `disabled` attribute and `aria-disabled="true"`.
 
 ## CSS custom properties
 
-The trigger uses the `.form-control` styling; menu styling is inherited from the existing Menu
-component.
+The combobox uses CSS custom properties prefixed with `--bs-combobox-*` for the toggle, and inherits `--bs-menu-*` properties from the Menu component for the menu overlay. See the [source SCSS][2] for the full list of available tokens.
 
 </DocumentationLayout>
+
+[1]: ../field/
+[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/scss/forms/_combobox.scss

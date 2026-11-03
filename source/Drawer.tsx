@@ -1,9 +1,12 @@
 'use client';
 
 import classNames from 'classnames';
-import { ComponentPropsWithRef, FC, ReactNode } from 'react';
+import { action, observable } from 'mobx';
+import { observer } from 'mobx-react';
+import { Component, ComponentPropsWithRef, createRef, FC, ReactNode } from 'react';
 
 import { CloseButton } from './CloseButton';
+import { Breakpoint } from './Grid';
 import { NativeDialog, NativeDialogProps } from './NativeDialog';
 
 export type DrawerPlacement = 'start' | 'end' | 'top' | 'bottom';
@@ -24,39 +27,133 @@ export const DrawerFooter: FC<ComponentPropsWithRef<'div'>> = ({ className, ...p
     <div {...props} className={classNames('drawer-footer', className)} />
 );
 
-export interface DrawerProps extends Omit<NativeDialogProps, 'dialog' | 'onClose' | 'title'> {
+export interface DrawerProps extends Omit<
+    NativeDialogProps,
+    'dialog' | 'onClose' | 'title' | 'animation' | 'fullscreen'
+> {
     title?: ReactNode;
     placement?: DrawerPlacement;
     footer?: ReactNode;
     bodyClassName?: string;
-    onDismiss?: () => void;
+    sheet?: boolean;
+    translucent?: boolean;
+    responsive?: Breakpoint;
+    fullscreen?: boolean;
+    animation?: 'slide' | 'instant';
+    onDismiss?: () => unknown;
 }
 
-export const Drawer: FC<DrawerProps> = ({
-    title,
-    placement = 'end',
-    footer,
-    bodyClassName,
-    onDismiss,
-    className,
-    children,
-    ...props
-}) => (
-    <NativeDialog
-        {...props}
-        dialog={false}
-        tabIndex={-1}
-        aria-label={typeof title === 'string' ? title : props['aria-label']}
-        className={classNames('drawer', `drawer-${placement}`, className)}
-        onClose={onDismiss}
-    >
-        <DrawerHeader>
-            <DrawerTitle>{title}</DrawerTitle>
-            <CloseButton onClick={onDismiss} />
-        </DrawerHeader>
-        <DrawerBody className={bodyClassName}>{children}</DrawerBody>
-        {footer && <DrawerFooter>{footer}</DrawerFooter>}
-    </NativeDialog>
-);
+const BREAKPOINT_WIDTHS: Record<Breakpoint, number> = {
+    sm: 576,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
+    '2xl': 1536
+};
 
-Drawer.displayName = 'Drawer';
+@observer
+export class Drawer extends Component<DrawerProps> {
+    static displayName = 'Drawer';
+
+    @observable accessor expanded = false;
+
+    dialog = createRef<NativeDialog>();
+    media?: MediaQueryList;
+    dismissed = false;
+
+    componentDidMount() {
+        this.observeBreakpoint();
+    }
+
+    componentDidUpdate({ responsive, open }: DrawerProps) {
+        if (responsive !== this.props.responsive) this.observeBreakpoint();
+
+        if (open !== this.props.open && this.props.open) this.dismissed = false;
+    }
+
+    componentWillUnmount() {
+        this.media?.removeEventListener('change', this.handleBreakpoint);
+    }
+
+    observeBreakpoint = () => {
+        this.media?.removeEventListener('change', this.handleBreakpoint);
+
+        const { responsive } = this.props;
+        this.media = responsive
+            ? window.matchMedia(`(min-width: ${BREAKPOINT_WIDTHS[responsive]}px)`)
+            : undefined;
+        this.handleBreakpoint();
+        this.media?.addEventListener('change', this.handleBreakpoint);
+    };
+
+    @action
+    handleBreakpoint = () => (this.expanded = this.media?.matches ?? false);
+
+    handleDismiss = () => {
+        this.props.onDismiss?.();
+
+        this.dismissed = true;
+        this.dialog.current?.close();
+    };
+
+    handleClose = () => {
+        if (!this.dismissed && !this.expanded) this.props.onDismiss?.();
+
+        this.dismissed = false;
+    };
+
+    render() {
+        const {
+            title,
+            placement = 'end',
+            footer,
+            bodyClassName,
+            onDismiss: _onDismiss,
+            sheet,
+            translucent,
+            responsive,
+            animation = 'slide',
+            fullscreen,
+            open,
+            modal,
+            scroll,
+            backdrop,
+            className,
+            children,
+            ...props
+        } = this.props;
+
+        return (
+            <NativeDialog
+                {...props}
+                ref={this.dialog}
+                open={this.expanded || open}
+                modal={this.expanded ? false : (modal ?? !(scroll && backdrop === false))}
+                scroll={scroll}
+                backdrop={backdrop}
+                dialog={false}
+                tabIndex={-1}
+                aria-label={typeof title === 'string' ? title : props['aria-label']}
+                className={classNames(
+                    responsive ? `${responsive}:drawer` : 'drawer',
+                    `drawer-${placement}`,
+                    {
+                        'drawer-sheet': sheet,
+                        'drawer-translucent': translucent,
+                        'drawer-instant': animation === 'instant',
+                        'drawer-fullscreen': fullscreen === true
+                    },
+                    className
+                )}
+                onClose={this.handleClose}
+            >
+                <DrawerHeader>
+                    <DrawerTitle>{title}</DrawerTitle>
+                    <CloseButton onClick={this.handleDismiss} />
+                </DrawerHeader>
+                <DrawerBody className={bodyClassName}>{children}</DrawerBody>
+                {footer && <DrawerFooter>{footer}</DrawerFooter>}
+            </NativeDialog>
+        );
+    }
+}

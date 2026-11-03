@@ -1,5 +1,6 @@
 export * from './Adorn';
 export * from './Checkbox';
+export * from './ChipInput';
 export * from './Chips';
 export * from './Combobox';
 export * from './Control';

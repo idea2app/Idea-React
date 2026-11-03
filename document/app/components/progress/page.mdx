@@ -1,0 +1,218 @@
+import { Progress, ProgressStack } from '../../../../source/Progress';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="progress">
+
+# Progress
+
+Documentation and examples for using Bootstrap custom progress bars featuring support for stacked bars, animated backgrounds, and text labels.
+
+## How it works
+
+Progress components are built with two HTML elements, some CSS to set the width, and a few attributes. We don’t use [the HTML5 `<progress>` element][1], ensuring you can stack progress bars, animate them, and place text labels over them.
+
+- We use the `.progress` as a wrapper to indicate the max value of the progress bar.
+- The `.progress` wrapper also requires a `role="progressbar"` and `aria` attributes to make it accessible, including an accessible name (using `aria-label`, `aria-labelledby`, or similar).
+- We use the inner `.progress-bar` purely for the visual bar and label.
+- The `.progress-bar` requires an inline style, utility class, or custom CSS to set its width.
+- We provide a special `.progress-stacked` class to create multiple/stacked progress bars.
+
+Put that all together, and you have the following examples.
+
+`Progress` generates both elements and the value attributes from `value`, `min`, and `max`.
+Provide an accessible name; pass labels as children and inner-bar utilities through `barProps`.
+`ProgressStack` uses CSS to place each segment’s calculated width on its outer element.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Progress value={0.0} aria-label="Basic example" />
+        <Progress value={25.0} aria-label="Basic example" />
+        <Progress value={50.0} aria-label="Basic example" />
+        <Progress value={75.0} aria-label="Basic example" />
+        <Progress value={100.0} aria-label="Basic example" />
+    </div>
+</CodeExample>
+
+## Bar sizing
+
+### Width
+
+Bootstrap provides a handful of [utilities for setting width][2]. Depending on your needs, these may help with quickly configuring the width of the `.progress-bar`.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Progress value={75.0} barProps={{ className: 'w-75' }} aria-label="Basic example" />
+    </div>
+</CodeExample>
+
+### Height
+
+You only set a `height` value on the `.progress` container, so if you change that value, the inner `.progress-bar` will automatically resize accordingly.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Progress value={25.0} aria-label="Example 1px high" style={{ height: '1px' }} />
+        <Progress value={25.0} aria-label="Example 20px high" style={{ height: '20px' }} />
+    </div>
+</CodeExample>
+
+## Labels
+
+Add labels to your progress bars by placing text within the `.progress-bar`.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Progress value={25.0} aria-label="Example with label">
+            25%
+        </Progress>
+    </div>
+</CodeExample>
+
+### Long labels
+
+Note that by default, the content inside the `.progress-bar` is controlled with `overflow: hidden`, so it doesn’t bleed out of the bar. If your progress bar is shorter than its label, the content will be capped and may become unreadable. To change this behavior, you can use `.overflow-visible` from the [overflow utilities][3].
+
+> Labels longer than the progress bar within may not be fully accessible using this method because it relies on the text color having the correct contrast ratio with both the `.progress` and `.progress-bar` background colors. Use caution when implementing this example.
+>
+> If the text can overlap the progress bar, we often recommend displaying the label outside of the progress bar for better accessibility.
+
+## Backgrounds
+
+Use background utility classes to change the appearance of individual progress bars.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Progress
+            value={25.0}
+            barProps={{ className: 'bg-success' }}
+            aria-label="Success example"
+        />
+        <Progress value={50.0} barProps={{ className: 'bg-info' }} aria-label="Info example" />
+        <Progress
+            value={75.0}
+            barProps={{ className: 'bg-warning' }}
+            aria-label="Warning example"
+        />
+        <Progress value={100.0} barProps={{ className: 'bg-danger' }} aria-label="Danger example" />
+    </div>
+</CodeExample>
+
+> **Conveying meaning to assistive technologies:** Using color to add meaning only provides a visual indication, which will not be conveyed to users of assistive technologies—such as screen readers. Ensure that information denoted by the color is either obvious from the content itself, or included through alternative means, such as additional text hidden with the `.visually-hidden` utility.
+
+If you’re adding labels to progress bars with a custom background color, make sure to also set an appropriate [text color][4], so the labels remain readable and have sufficient contrast. We recommend using the [theme contrast][5] helper classes.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Progress value={25.0} theme="success" aria-label="Success example">
+            25%
+        </Progress>
+        <Progress value={50.0} theme="info" aria-label="Info example">
+            50%
+        </Progress>
+        <Progress value={75.0} theme="warning" aria-label="Warning example">
+            75%
+        </Progress>
+        <Progress value={100.0} theme="danger" aria-label="Danger example">
+            100%
+        </Progress>
+    </div>
+</CodeExample>
+
+## Multiple bars
+
+You can include multiple progress components inside a container with `.progress-stacked` to create a single stacked progress bar. Note that in this case, the styling to set the visual width of the progress bar _must_ be applied to the `.progress` elements, rather than the `.progress-bar`s.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <ProgressStack>
+            <Progress value={15.0} aria-label="Segment one" style={{ width: '15%' }} />
+            <Progress
+                value={30.0}
+                barProps={{ className: 'bg-success' }}
+                aria-label="Segment two"
+                style={{ width: '30%' }}
+            />
+            <Progress
+                value={20.0}
+                barProps={{ className: 'bg-info' }}
+                aria-label="Segment three"
+                style={{ width: '20%' }}
+            />
+        </ProgressStack>
+    </div>
+</CodeExample>
+
+## Striped
+
+Add `.progress-bar-striped` to any `.progress-bar` to apply a stripe via CSS gradient over the progress bar’s background color.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Progress value={10.0} striped aria-label="Default striped example" />
+        <Progress
+            value={25.0}
+            striped
+            barProps={{ className: 'bg-success' }}
+            aria-label="Success striped example"
+        />
+        <Progress
+            value={50.0}
+            striped
+            barProps={{ className: 'bg-info' }}
+            aria-label="Info striped example"
+        />
+        <Progress
+            value={75.0}
+            striped
+            barProps={{ className: 'bg-warning' }}
+            aria-label="Warning striped example"
+        />
+        <Progress
+            value={100.0}
+            striped
+            barProps={{ className: 'bg-danger' }}
+            aria-label="Danger striped example"
+        />
+    </div>
+</CodeExample>
+
+## Animated stripes
+
+The striped gradient can also be animated. Add `.progress-bar-animated` to `.progress-bar` to animate the stripes right to left via CSS3 animations.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Progress value={75.0} striped animated aria-label="Animated striped example" />
+    </div>
+</CodeExample>
+
+## CSS
+
+### Variables
+
+Customize the component with the following local CSS variables. Override them through the wrapper’s `style` prop or your own CSS module.
+
+| CSS variable                   | Default                                   |
+| ------------------------------ | ----------------------------------------- |
+| `--bs-progress-height`         | `1rem`                                    |
+| `--bs-progress-font-size`      | `var(--bs-font-size-sm)`                  |
+| `--bs-progress-bg`             | `var(--bs-bg-2)`                          |
+| `--bs-progress-border-radius`  | `var(--bs-radius-5)`                      |
+| `--bs-progress-box-shadow`     | `var(--bs-box-shadow-inset)`              |
+| `--bs-progress-bar-color`      | `var(--bs-white)`                         |
+| `--bs-progress-bar-bg`         | `var(--bs-primary-bg)`                    |
+| `--bs-progress-bar-transition` | `width 0.6s ease`                         |
+| `--bs-progress-bar-animation`  | `progress-bar-stripes 1s linear infinite` |
+
+### Keyframes
+
+Used for creating the CSS animations for `.progress-bar-animated`. The animation moves the striped background from one stripe width to zero, producing continuous motion from right to left.
+
+</ComponentsLayout>
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
+[2]: https://getbootstrap.com/docs/6.0/utilities/width/
+[3]: https://getbootstrap.com/docs/6.0/utilities/overflow/
+[4]: https://getbootstrap.com/docs/6.0/utilities/colors#colors
+[5]: https://getbootstrap.com/docs/6.0/utilities/theme#contrast

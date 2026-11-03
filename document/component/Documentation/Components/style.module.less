@@ -29,11 +29,6 @@
         font-weight: 600;
     }
 }
-.content {
-    :global([data-bs-theme='dark']) & :global(pre.shiki span) {
-        color: var(--shiki-dark, inherit) !important;
-    }
-}
 .customPopover {
     --bs-popover-bg: var(--bs-primary-bg);
     --bs-popover-border-color: var(--bs-primary-bg);
@@ -45,6 +40,12 @@
 .customTooltip {
     --bs-tooltip-bg: var(--bs-primary-bg);
     --bs-tooltip-color: var(--bs-primary-contrast);
+}
+.tallFloating {
+    --bs-form-floating-height: 100px;
+}
+.listTabs {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
 }
 .gridRow {
     :global(.row) > :global([class*='col']) {

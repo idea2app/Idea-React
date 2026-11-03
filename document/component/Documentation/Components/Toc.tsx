@@ -2,7 +2,7 @@
 
 import { FC } from 'react';
 
-import { PageNav, PageNavProps } from '../../../../source/PageNav';
+import { PageNav, PageNavProps } from '../../../../source/Extension/PageNav';
 import * as style from './style.module.less';
 
 export const Toc: FC<Pick<PageNavProps, 'onItemClick'>> = props => (

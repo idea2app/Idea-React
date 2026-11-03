@@ -1,0 +1,516 @@
+import { Row, Col } from '../../../../source/Grid';
+import { ListGroup, ListGroupItem } from '../../../../source/ListGroup';
+import { Menu, MenuItem, MenuDivider } from '../../../../source/Menu';
+import { Nav, NavLink } from '../../../../source/Nav';
+import { Navbar, NavbarBrand } from '../../../../source/Navbar';
+import { ScrollSpy } from '../../../../source/ScrollSpy';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="scrollspy">
+
+# Scrollspy
+
+Automatically update Bootstrap navigation or list group components based on scroll position to indicate which link is currently active in the viewport.
+
+## How it works
+
+Scrollspy toggles the `.active` class on anchor (`<a>`) elements when the element with the `id` referenced by the anchor’s `href` is scrolled into view. Scrollspy is best used in conjunction with a Bootstrap [nav component][1] or [list group][2], but it will also work with any anchor elements in the current page. Here’s how it works.
+
+- To start, scrollspy requires two things: a navigation, list group, or a simple set of links, plus a scrollable container. The scrollable container can be the `<body>` or a custom element with a set `height` and `overflow-y: scroll`.
+
+- Use `ScrollSpy` as the scrollable container and set `target="#navId"`, where `navId` is the unique `id` of the associated navigation. The component supplies a focusable `tabIndex={0}` for keyboard access.
+
+- As you scroll the “spied” container, an `.active` class is added and removed from anchor links within the associated navigation. Links must have resolvable `id` targets, otherwise they’re ignored. For example, a `<a href="#home">home</a>` must correspond to something in the DOM like `<div id="home"></div>`
+
+- Target elements that are not visible will be ignored. See the [Non-visible elements][3] section below.
+
+- Target `id`s are matched with `getElementById`, so ids containing special or percent-encoded characters (for example `#item.1`, `#section:overview`, or `#%2Fpath`) resolve correctly.
+
+### Detection
+
+Scrollspy uses an [`IntersectionObserver`][4] to track sections without `scroll-position` polling. Detection is deterministic and driven entirely by an activation line near the top of the scroll container.
+
+- The active section is the deepest one whose top has scrolled past the activation line, like the section you’re currently reading.
+- While scrolling through the gap between two headings, the last activated section stays active until the next one crosses the line.
+- At the very top of the container, before any section crosses the line, the first section stays active.
+- At the very bottom of the container, the last section is activated even if its top never reaches the line (handy for short final sections).
+
+Set where the activation line sits with `topMargin` (a more user-friendly `%` or `px` value from the top of the scroll root, such as `96px` to sit below a stickied navbar), or take full control with the raw IntersectionObserver `rootMargin` string. See [Options][5].
+
+Jump to the [debug overlay][6] section to visualize the activation line in action.
+
+## Examples
+
+### Navbar
+
+Scroll the area below the navbar and watch the active class change. Open the menu and watch the menu items be highlighted as well.
+
+<CodeExample>
+    <Navbar id="navbar-example2" className="bg-1 px-3 mb-3 rounded-2">
+        <NavbarBrand href="#">{'Navbar'}</NavbarBrand>
+
+        <Nav variant="pills">
+            <NavLink href="#scrollspyHeading1">{'First'}</NavLink>
+
+            <NavLink href="#scrollspyHeading2">{'Second'}</NavLink>
+
+            <Menu nav label="Menu">
+                <MenuItem href="#scrollspyHeading3">{'Third'}</MenuItem>
+
+                <MenuItem href="#scrollspyHeading4">{'Fourth'}</MenuItem>
+
+                <MenuDivider />
+
+                <MenuItem href="#scrollspyHeading5">{'Fifth'}</MenuItem>
+            </Menu>
+        </Nav>
+    </Navbar>
+
+    <ScrollSpy
+        style={{ height: '200px' }}
+        target="#navbar-example2"
+        rootMargin="0px 0px -40%"
+        smoothScroll
+        tabIndex={0}
+        className="bg-1 p-3 rounded-2 overflow-y-auto"
+    >
+        <h4 id="scrollspyHeading1">{'First heading'}</h4>
+
+        <p>
+            {
+                'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+            }
+        </p>
+
+        <h4 id="scrollspyHeading2">{'Second heading'}</h4>
+
+        <p>
+            {
+                'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+            }
+        </p>
+
+        <h4 id="scrollspyHeading3">{'Third heading'}</h4>
+
+        <p>
+            {
+                'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+            }
+        </p>
+
+        <h4 id="scrollspyHeading4">{'Fourth heading'}</h4>
+
+        <p>
+            {
+                'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+            }
+        </p>
+
+        <h4 id="scrollspyHeading5">{'Fifth heading'}</h4>
+
+        <p>
+            {
+                'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+            }
+        </p>
+    </ScrollSpy>
+
+</CodeExample>
+
+### Nested nav
+
+Scrollspy also works with nested `.nav`s. If a nested `.nav` is `.active`, its parents will also be `.active`. Scroll the area next to the navbar and watch the active class change.
+
+<CodeExample>
+    <Row>
+        <Col span={4}>
+            <nav
+                id="navbar-example3"
+                className="h-100 flex-column align-items-stretch pe-4 border-end"
+            >
+                <Nav variant="pills" vertical>
+                    <NavLink href="#item-1">{'Item 1'}</NavLink>
+
+                    <Nav variant="pills" vertical>
+                        <NavLink href="#item-1-1" className="ms-3 my-1">
+                            {'Item 1-1'}
+                        </NavLink>
+
+                        <NavLink href="#item-1-2" className="ms-3 my-1">
+                            {'Item 1-2'}
+                        </NavLink>
+                    </Nav>
+
+                    <NavLink href="#item-2">{'Item 2'}</NavLink>
+
+                    <NavLink href="#item-3">{'Item 3'}</NavLink>
+
+                    <Nav variant="pills" vertical>
+                        <NavLink href="#item-3-1" className="ms-3 my-1">
+                            {'Item 3-1'}
+                        </NavLink>
+
+                        <NavLink href="#item-3-2" className="ms-3 my-1">
+                            {'Item 3-2'}
+                        </NavLink>
+                    </Nav>
+                </Nav>
+            </nav>
+        </Col>
+
+        <Col span={8}>
+            <ScrollSpy
+                style={{ height: '350px' }}
+                target="#navbar-example3"
+                smoothScroll
+                tabIndex={0}
+                className="overflow-y-auto"
+            >
+                <div id="item-1">
+                    <h4>{'Item 1'}</h4>
+
+                    <p>
+                        {
+                            'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                        }
+                    </p>
+
+                    <p>
+                        {
+                            'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.'
+                        }
+                    </p>
+                </div>
+
+                <div id="item-1-1">
+                    <h5>{'Item 1-1'}</h5>
+
+                    <p>
+                        {
+                            'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                        }
+                    </p>
+
+                    <p>
+                        {
+                            'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.'
+                        }
+                    </p>
+                </div>
+
+                <div id="item-1-2">
+                    <h5>{'Item 1-2'}</h5>
+
+                    <p>
+                        {
+                            'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                        }
+                    </p>
+
+                    <p>
+                        {
+                            'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.'
+                        }
+                    </p>
+                </div>
+
+                <div id="item-2">
+                    <h4>{'Item 2'}</h4>
+
+                    <p>
+                        {
+                            'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                        }
+                    </p>
+
+                    <p>
+                        {
+                            'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.'
+                        }
+                    </p>
+                </div>
+
+                <div id="item-3">
+                    <h4>{'Item 3'}</h4>
+
+                    <p>
+                        {
+                            'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                        }
+                    </p>
+
+                    <p>
+                        {
+                            'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.'
+                        }
+                    </p>
+                </div>
+
+                <div id="item-3-1">
+                    <h5>{'Item 3-1'}</h5>
+
+                    <p>
+                        {
+                            'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                        }
+                    </p>
+
+                    <p>
+                        {
+                            'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.'
+                        }
+                    </p>
+                </div>
+
+                <div id="item-3-2">
+                    <h5>{'Item 3-2'}</h5>
+
+                    <p>
+                        {
+                            'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                        }
+                    </p>
+
+                    <p>
+                        {
+                            'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.'
+                        }
+                    </p>
+                </div>
+            </ScrollSpy>
+        </Col>
+    </Row>
+
+</CodeExample>
+
+### List group
+
+Scrollspy also works with `.list-group`s. Scroll the area next to the list group and watch the active class change.
+
+<CodeExample>
+    <Row>
+        <Col span={4}>
+            <ListGroup as="div" id="list-example">
+                <ListGroupItem action href="#list-item-1">
+                    {'Item 1'}
+                </ListGroupItem>
+
+                <ListGroupItem action href="#list-item-2">
+                    {'Item 2'}
+                </ListGroupItem>
+
+                <ListGroupItem action href="#list-item-3">
+                    {'Item 3'}
+                </ListGroupItem>
+
+                <ListGroupItem action href="#list-item-4">
+                    {'Item 4'}
+                </ListGroupItem>
+            </ListGroup>
+        </Col>
+
+        <Col span={8}>
+            <ScrollSpy
+                style={{ height: '200px' }}
+                target="#list-example"
+                smoothScroll
+                tabIndex={0}
+                className="overflow-y-auto"
+            >
+                <h4 id="list-item-1">{'Item 1'}</h4>
+
+                <p>
+                    {
+                        'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                    }
+                </p>
+
+                <h4 id="list-item-2">{'Item 2'}</h4>
+
+                <p>
+                    {
+                        'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                    }
+                </p>
+
+                <h4 id="list-item-3">{'Item 3'}</h4>
+
+                <p>
+                    {
+                        'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                    }
+                </p>
+
+                <h4 id="list-item-4">{'Item 4'}</h4>
+
+                <p>
+                    {
+                        'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                    }
+                </p>
+            </ScrollSpy>
+        </Col>
+    </Row>
+
+</CodeExample>
+
+### Simple anchors
+
+Scrollspy is not limited to nav components and list groups, so it will work on any `<a>` anchor elements in the current document. Scroll the area and watch the `.active` class change.
+
+<CodeExample>
+    <Row>
+        <Col span={4}>
+            <div
+                id="simple-list-example"
+                className="d-flex flex-column gap-2 simple-list-example-scrollspy text-center"
+            >
+                <a href="#simple-list-item-1" className="p-1 rounded">
+                    {'Item 1'}
+                </a>
+
+                <a href="#simple-list-item-2" className="p-1 rounded">
+                    {'Item 2'}
+                </a>
+
+                <a href="#simple-list-item-3" className="p-1 rounded">
+                    {'Item 3'}
+                </a>
+
+                <a href="#simple-list-item-4" className="p-1 rounded">
+                    {'Item 4'}
+                </a>
+
+                <a href="#simple-list-item-5" className="p-1 rounded">
+                    {'Item 5'}
+                </a>
+            </div>
+        </Col>
+
+        <Col span={8}>
+            <ScrollSpy
+                style={{ height: '200px' }}
+                target="#simple-list-example"
+                smoothScroll
+                tabIndex={0}
+                className="overflow-y-auto"
+            >
+                <h4 id="simple-list-item-1">{'Item 1'}</h4>
+
+                <p>
+                    {
+                        'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                    }
+                </p>
+
+                <h4 id="simple-list-item-2">{'Item 2'}</h4>
+
+                <p>
+                    {
+                        'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                    }
+                </p>
+
+                <h4 id="simple-list-item-3">{'Item 3'}</h4>
+
+                <p>
+                    {
+                        'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                    }
+                </p>
+
+                <h4 id="simple-list-item-4">{'Item 4'}</h4>
+
+                <p>
+                    {
+                        'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                    }
+                </p>
+
+                <h4 id="simple-list-item-5">{'Item 5'}</h4>
+
+                <p>
+                    {
+                        'This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.'
+                    }
+                </p>
+            </ScrollSpy>
+        </Col>
+    </Row>
+
+</CodeExample>
+
+## Debug overlay
+
+It can be hard to picture exactly where Scrollspy decides a section is active. Enable the `debug` prop to draw red guides over the scroll container and illustrate the behavior.
+
+- **The red dashed line near the top is the activation line.** A section becomes active as its heading scrolls above this line. In this example it sits at `96px`.
+- **The red bottom zone lights up when you reach the bottom of the container.** This is where the last section stays active even if its heading never reaches the activation line.
+
+Scroll the example and watch the highlighted navigation item change as headings cross the line. Guide positions are computed from the same `topMargin`/`rootMargin` [detection][7] math the component uses.
+
+<CodeExample>
+    <Nav id="debug-scrollspy-nav" variant="pills">
+        <NavLink href="#debug-scrollspy-first">First</NavLink>
+        <NavLink href="#debug-scrollspy-last">Last</NavLink>
+    </Nav>
+    <ScrollSpy
+        target="#debug-scrollspy-nav"
+        debug
+        topMargin="96px"
+        className="overflow-y-auto border rounded p-3"
+        style={{ height: 240 }}
+    >
+        <section id="debug-scrollspy-first" className="py-5">
+            <h4>First section</h4>
+            <p>Watch the activation line while scrolling this container.</p>
+        </section>
+        <section id="debug-scrollspy-last" className="py-5">
+            <h4>Last section</h4>
+            <p>The bottom zone selects the final section.</p>
+        </section>
+    </ScrollSpy>
+</CodeExample>
+
+## Non-visible elements
+
+Target elements that aren’t visible will be ignored and their corresponding nav items won’t receive an `.active` class. Scrollspy instances initialized in a non-visible wrapper will ignore all target elements. Use the `refresh` method to check for observable elements once the wrapper becomes visible.
+
+Call the component’s `refresh()` method after revealing content outside React; changes to its props are observed automatically.
+
+## Usage
+
+The component initializes on mount and releases its observers and listeners on unmount. Set `scrollRoot="window"` to observe page scrolling instead of the component's own scrollable element.
+
+### Options
+
+Pass options as React props:
+
+| Name           | Type                   | Default  | Description                                                                                                            |
+| -------------- | ---------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `rootMargin`   | string or null         | `null`   | Advanced IntersectionObserver root margin. When set, it takes precedence over `topMargin`, for example `0px 0px -40%`. |
+| `smoothScroll` | boolean                | `false`  | Smoothly scroll to a clicked target, then update the URL hash and move focus to it.                                    |
+| `target`       | string                 | —        | Selector for the navigation whose links match the observed sections.                                                   |
+| `threshold`    | number[]               | `[0]`    | IntersectionObserver thresholds.                                                                                       |
+| `topMargin`    | string                 | `'12%'`  | Position of the activation line from the top of the scroll root. Accepts percentages or pixels.                        |
+| `scrollRoot`   | `'self'` or `'window'` | `'self'` | Element or viewport scrolling.                                                                                         |
+| `debug`        | boolean                | `false`  | Draw the activation line and bottom-zone guides.                                                                       |
+
+### Methods
+
+Use the instance method `refresh()` after adding, removing, or revealing observed DOM content outside React. Children and relevant prop changes refresh the component automatically.
+
+### Events
+
+Use `onActiveChange(id)` to respond when a different section becomes active.
+
+</ComponentsLayout>
+
+[1]: /components/nav
+[2]: /components/list-group
+[3]: #non-visible-elements
+[4]: https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver
+[5]: #options
+[6]: #debug-overlay
+[7]: #detection

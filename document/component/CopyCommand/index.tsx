@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { Component } from 'react';
 
 import { Button } from '../../../source/Button';
-import { Icon } from '../../../source/Icon';
+import { Icon } from '../../../source/Extension/Icon';
 import { ClipboardModel } from './model';
 
 export interface CopyCommandProps {

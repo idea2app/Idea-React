@@ -1,51 +1,69 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef, FC } from 'react';
 
-import type { ComponentTheme } from '../Button';
+import { ComponentTheme } from '../Button';
+import { Icon, IconProps } from '../Extension/Icon';
 
 export type ChipProps = ComponentPropsWithRef<'button'> & {
     active?: boolean;
     theme?: ComponentTheme;
 };
 
-export const Chip: FC<ChipProps> = ({ className, active, disabled, theme, ...props }) => (
+export const Chip: FC<ChipProps> = ({ className, active, theme, ...props }) => (
     <button
         {...props}
         className={classNames('chip', active && 'active', theme && `theme-${theme}`, className)}
         type="button"
         aria-pressed={active}
-        disabled={disabled}
     />
 );
 
 Chip.displayName = 'Chip';
 
-export type ChipInputProps = ComponentPropsWithRef<'div'> & {
-    theme?: ComponentTheme;
-    separator?: string;
-    allowDuplicates?: boolean;
-    maxChips?: number;
-    createOnBlur?: boolean;
-};
+export const ChipIcon: FC<IconProps> = ({ className, ...props }) => (
+    <Icon {...props} className={classNames('chip-icon', className)} />
+);
 
-export const ChipInput: FC<ChipInputProps> = ({
+ChipIcon.displayName = 'ChipIcon';
+
+export const ChipImage: FC<ComponentPropsWithRef<'img'>> = ({ className, alt = '', ...props }) => (
+    <img {...props} alt={alt} className={classNames('chip-img', className)} />
+);
+
+ChipImage.displayName = 'ChipImage';
+
+export const ChipDismiss: FC<ComponentPropsWithRef<'button'>> = ({
     className,
-    theme,
-    separator,
-    allowDuplicates,
-    maxChips,
-    createOnBlur,
+    children,
+    'aria-label': label = 'Remove',
     ...props
 }) => (
-    <div
+    <button
         {...props}
-        className={classNames('chip-input', theme && `theme-${theme}`, className)}
-        data-bs-chips=""
-        data-bs-separator={separator}
-        data-bs-allow-duplicates={allowDuplicates}
-        data-bs-max-chips={maxChips}
-        data-bs-create-on-blur={createOnBlur}
+        type="button"
+        aria-label={label}
+        className={classNames('chip-dismiss', className)}
+    >
+        {children ?? <Icon name="x-lg" aria-hidden="true" />}
+    </button>
+);
+
+ChipDismiss.displayName = 'ChipDismiss';
+
+export type ChipTokenProps = ComponentPropsWithRef<'span'> & Pick<ChipProps, 'active' | 'theme'>;
+
+export const ChipToken: FC<ChipTokenProps> = ({ className, active, theme, ...props }) => (
+    <span
+        {...props}
+        tabIndex={props.tabIndex ?? 0}
+        className={classNames('chip', active && 'active', theme && `theme-${theme}`, className)}
     />
 );
 
-ChipInput.displayName = 'ChipInput';
+ChipToken.displayName = 'ChipToken';
+
+export const ChipInputLabel: FC<ComponentPropsWithRef<'label'>> = ({ className, ...props }) => (
+    <label {...props} className={classNames('chip-input-label', className)} />
+);
+
+ChipInputLabel.displayName = 'ChipInputLabel';

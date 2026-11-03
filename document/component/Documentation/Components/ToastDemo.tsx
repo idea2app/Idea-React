@@ -1,6 +1,5 @@
 'use client';
 
-import classNames from 'classnames';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { ChangeEvent, Component, ReactNode } from 'react';
@@ -80,10 +79,8 @@ export class StaticToast extends Component<StaticToastProps> {
         const toast = (
             <ToastItem
                 theme={theme}
-                className={classNames({
-                    'toast-translucent': translucent,
-                    'toast-instant': instant
-                })}
+                translucent={translucent}
+                instant={instant}
                 role={live === 'assertive' ? 'alert' : 'status'}
                 aria-live={live}
                 aria-atomic="true"

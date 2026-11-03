@@ -1,9 +1,34 @@
 import assert from 'node:assert/strict';
-import { it } from 'node:test';
+import { it, mock } from 'node:test';
 
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import { ToggleButton } from '../source/ToggleButton';
+
+it('forwards change events, input attributes and button sizing', () => {
+    const onChange = mock.fn();
+    render(
+        <ToggleButton
+            size="sm"
+            inputProps={{ id: 'choice', 'aria-describedby': 'hint' }}
+            required
+            onChange={onChange}
+        >
+            Choice
+        </ToggleButton>
+    );
+    const input = screen.getByRole('checkbox', { name: 'Choice' }) as HTMLInputElement;
+
+    assert.equal(input.id, 'choice');
+    assert.equal(input.required, true);
+    assert.equal(input.getAttribute('aria-describedby'), 'hint');
+    assert.ok(input.parentElement?.classList.contains('btn-sm'));
+
+    fireEvent.click(input);
+
+    assert.equal(onChange.mock.callCount(), 1);
+    assert.equal(input.checked, true);
+});
 
 it('renders a checkbox toggle button', () => {
     render(

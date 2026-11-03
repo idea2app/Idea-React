@@ -1,0 +1,123 @@
+import { Toggler } from '../../../../source/Toggler';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+
+<ComponentsLayout active="toggler">
+
+# Toggler
+
+Toggle attributes or classes on click using the `Toggler` component. Works with any attribute except `id`.
+
+Toggler is an interactive component that can be used to avoid writing small or one-off JavaScript snippets to create interactive elements. Instead of writing custom JavaScript, use its `attribute`, `value`, and `target` props to toggle attribute values, changes classes, and more on `click` events.
+
+## Examples
+
+### Toggle class
+
+Toggle the class of an element by setting `attribute="class"` and passing the class name as `value`. Without a `target`, the component toggles itself.
+
+<CodeExample>
+    <Toggler as="div" className="w-100 p-3 rounded border" attribute="class" value="fg-danger">
+        {' Click to toggle `fg-danger` '}
+    </Toggler>
+</CodeExample>
+
+### Remove existing
+
+If the element already has the class specified in `value`, toggling will remove it. Clicking again adds it back.
+
+<CodeExample>
+    <Toggler
+        as="div"
+        attribute="class"
+        value="bg-subtle-info"
+        className="w-100 p-3 rounded border bg-subtle-info"
+    >
+        {' Starts with `bg-subtle-info`. Click to remove it. '}
+    </Toggler>
+</CodeExample>
+
+### Target element
+
+Use `target` to toggle the class of another element. Target elements can supply their own `data-bs-attribute` and `data-bs-value` overrides.
+
+<CodeExample>
+    <div className="d-flex gap-2 flex-column align-items-start">
+        <Toggler target="#togglerExample1" variant="solid" theme="primary">
+            {'Toggle'}
+        </Toggler>
+
+        <div
+            id="togglerExample1"
+            data-bs-value="bg-2"
+            data-bs-attribute="class"
+            className="w-100 p-3 rounded border"
+        >
+            {' Use button to change `bg-2` '}
+        </div>
+    </div>
+
+</CodeExample>
+
+### Multiple elements
+
+Use a class name selector in `target` to toggle the class of multiple elements.
+
+<CodeExample>
+    <div className="vstack gap-2">
+        <Toggler
+            target=".togglerExampleClass1"
+            variant="solid"
+            theme="primary"
+            className="align-self-start"
+        >
+            {'Toggle'}
+        </Toggler>
+
+        <div
+            data-bs-value="bg-subtle-info"
+            data-bs-attribute="class"
+            className="w-100 p-3 rounded border togglerExampleClass1"
+        >
+            {' Use button to toggle `bg-subtle-info` '}
+        </div>
+
+        <div
+            data-bs-value="bg-subtle-warning"
+            data-bs-attribute="class"
+            className="w-100 p-3 rounded border togglerExampleClass1"
+        >
+            {' Use button to toggle `bg-subtle-warning` '}
+        </div>
+    </div>
+
+</CodeExample>
+
+### Toggle attribute
+
+Toggle attributes by setting the `attribute` and `value` props. For example, toggling the `hidden` attribute:
+
+<CodeExample>
+    <Toggler as="div" className="w-100 p-3 rounded border" attribute="hidden" value="true">
+        {' Click to toggle `hidden` attribute '}
+    </Toggler>
+</CodeExample>
+
+You could also use this to toggle the `disabled` attribute on a `fieldset` element to disable all the controls within. Or any other ideas you can think of with attributes.
+
+## Usage
+
+### Options
+
+| Name        | Type                            | Default    | Description                                                                      |
+| ----------- | ------------------------------- | ---------- | -------------------------------------------------------------------------------- |
+| `as`        | `'button'`, `'div'` or `'span'` | `'button'` | Trigger element. Non-button triggers receive a button role and keyboard support. |
+| `target`    | string                          | —          | Selector for affected elements. Omit it to toggle the trigger itself.            |
+| `attribute` | string                          | `'class'`  | Attribute to toggle. Changing `id` is not supported.                             |
+| `value`     | string, number, boolean or null | —          | Class or attribute value to toggle.                                              |
+
+### Events
+
+Use `onToggled(elements)` to respond after the matched elements have been updated.
+
+</ComponentsLayout>

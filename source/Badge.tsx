@@ -32,3 +32,5 @@ export const Badge: FC<BadgeProps> = ({ variant = 'solid', theme, pill, classNam
         <span {...props} className={classes} />
     );
 };
+
+Badge.displayName = 'Badge';

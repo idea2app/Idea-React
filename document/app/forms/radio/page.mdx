@@ -1,4 +1,4 @@
-import { FormField, FormFieldset, FormLabel, Radio } from '../../../../source/Form';
+import { FormField, FormFieldContent, FormLabel, FormText, Radio } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -6,60 +6,187 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # Radio
 
-Radio controls are native inputs styled with the `.radio` class. Use a shared `name` for mutually
-exclusive choices.
+Highly customizable, native radio `<input>` elements for choosing one option from many.
 
 ## Basic radio
 
+Similar to checkboxes, radios are styled with the `.radio` class. However, there’s no custom SVG as we use pure CSS to style the input and its checked state.
+
 <CodeExample>
-    <Radio name="radioBasic" value="one" aria-label="First choice" />
+    <Radio id="radio" />
 </CodeExample>
 
 ## With form field
 
+Wrap `Radio` in a `FormField` layout wrapper and add your label. The grid layout places the radio and label side by side.
+
 <CodeExample>
-    <FormFieldset>
-        <legend>Choose a contact method</legend>
+    <div className="d-flex flex-column gap-2">
         <FormField>
-            <Radio id="radioEmail" name="contact" value="email" defaultChecked />
-            <FormLabel htmlFor="radioEmail">Email</FormLabel>
+            <Radio name="radios" id="radioLabel" />
+            <FormLabel htmlFor="radioLabel" plain>
+                First example radio
+            </FormLabel>
         </FormField>
         <FormField>
-            <Radio id="radioPhone" name="contact" value="phone" />
-            <FormLabel htmlFor="radioPhone">Phone</FormLabel>
+            <Radio name="radios" id="radioLabel2" />
+            <FormLabel htmlFor="radioLabel2" plain>
+                Second example radio
+            </FormLabel>
         </FormField>
-    </FormFieldset>
+    </div>
 </CodeExample>
 
 ## Description
 
+Add a description or other content after the label. We recommend wrapping the label and description in a `.form-field-content` to ensure appropriate spacing and alignment.
+
 <CodeExample>
     <FormField>
-        <Radio id="radioDescribed" name="described" aria-describedby="radioHint" />
-        <FormLabel htmlFor="radioDescribed">Option with a description</FormLabel>
-        <span id="radioHint">Choose this option to receive email.</span>
+        <Radio id="radioLabelDescription" />
+        <FormFieldContent>
+            <FormLabel htmlFor="radioLabelDescription" plain className="fw-medium">
+                Example new radio
+            </FormLabel>
+            <FormText>Supporting description for the above label.</FormText>
+        </FormFieldContent>
     </FormField>
 </CodeExample>
 
 ## Theme colors
 
+Modify the appearance of checked radios with the `theme` prop. This will set the checked background and border color to the theme color.
+
 <CodeExample>
-    <Radio name="radioTheme" value="primary" theme="primary" aria-label="Primary option" />
+    <div className="d-flex flex-column gap-2">
+        <FormField>
+            <Radio id="radioprimary" defaultChecked theme="primary" />
+            <FormLabel htmlFor="radioprimary" plain>
+                Example primary radio
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Radio id="radioaccent" defaultChecked theme="accent" />
+            <FormLabel htmlFor="radioaccent" plain>
+                Example accent radio
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Radio id="radiosecondary" defaultChecked theme="secondary" />
+            <FormLabel htmlFor="radiosecondary" plain>
+                Example secondary radio
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Radio id="radiosuccess" defaultChecked theme="success" />
+            <FormLabel htmlFor="radiosuccess" plain>
+                Example success radio
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Radio id="radiodanger" defaultChecked theme="danger" />
+            <FormLabel htmlFor="radiodanger" plain>
+                Example danger radio
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Radio id="radiowarning" defaultChecked theme="warning" />
+            <FormLabel htmlFor="radiowarning" plain>
+                Example warning radio
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Radio id="radioinfo" defaultChecked theme="info" />
+            <FormLabel htmlFor="radioinfo" plain>
+                Example info radio
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Radio id="radiodark" defaultChecked theme="dark" />
+            <FormLabel htmlFor="radiodark" plain>
+                Example dark radio
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Radio id="radiolight" defaultChecked theme="light" />
+            <FormLabel htmlFor="radiolight" plain>
+                Example light radio
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Radio id="radioinverse" defaultChecked theme="inverse" />
+            <FormLabel htmlFor="radioinverse" plain>
+                Example inverse radio
+            </FormLabel>
+        </FormField>
+    </div>
 </CodeExample>
 
 ## Disabled
 
+Add the `disabled` attribute and the associated `<label>`s are automatically styled to match with a lighter color to help indicate the input’s state.
+
 <CodeExample>
-    <Radio name="radioDisabled" disabled aria-label="Disabled option" />
+    <div className="vstack gap-2">
+        <FormField>
+            <Radio id="radioDisabled" disabled />
+            <FormLabel htmlFor="radioDisabled" plain>
+                Example new radio
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Radio id="radioCheckedDisabled" disabled defaultChecked />
+            <FormLabel htmlFor="radioCheckedDisabled" plain>
+                Example checked disabled radio
+            </FormLabel>
+        </FormField>
+    </div>
 </CodeExample>
 
 ## Sizes
 
+Set `size="sm"` or `size="lg"` to make your radio appear smaller or larger.
+
 <CodeExample>
-    <>
-        <Radio name="radioSize" size="sm" aria-label="Small option" />
-        <Radio name="radioSize" size="lg" aria-label="Large option" />
-    </>
+    <div className="d-flex flex-column gap-3">
+        <FormField>
+            <Radio id="radioSizeSm" defaultChecked size="sm" />
+            <FormLabel htmlFor="radioSizeSm" plain>
+                Small radio
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Radio id="radioSizeMd" defaultChecked />
+            <FormLabel htmlFor="radioSizeMd" plain>
+                Default radio
+            </FormLabel>
+        </FormField>
+        <FormField>
+            <Radio id="radioSizeLg" defaultChecked size="lg" />
+            <FormLabel htmlFor="radioSizeLg" plain>
+                Large radio
+            </FormLabel>
+        </FormField>
+    </div>
 </CodeExample>
+
+## CSS
+
+### Variables
+
+CSS variables for the radio component are built on the Sass variables.
+
+```css
+.example {
+    --bs-radio-size: 1.25rem;
+    --bs-radio-margin-block: 0.125rem;
+    --bs-radio-bg: var(--bs-bg-body);
+    --bs-radio-border-color: var(--bs-border-color);
+    --bs-radio-checked-bg: var(--bs-control-checked-bg);
+    --bs-radio-checked-border-color: var(--bs-control-checked-border-color);
+    --bs-radio-disabled-bg: var(--bs-control-disabled-bg);
+    --bs-radio-disabled-opacity: var(--bs-control-disabled-opacity);
+}
+```
 
 </DocumentationLayout>

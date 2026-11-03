@@ -1,4 +1,4 @@
-import { FormField, FormLabel, FormRange } from '../../../../source/Form';
+import { FormField, FormLabel, FormRange, FormText } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
 
@@ -6,119 +6,156 @@ import { DocumentationLayout } from '../../../component/Documentation/Components
 
 # Range
 
-`FormRange` wraps a native range input in `.form-range`. The wrapper updates the `--range-fill`
-property as the input changes. The optional value bubble is provided by Bootstrap's JavaScript
-plugin.
+Use our custom range inputs for consistent cross-browser styling with a filled track, value bubble, and tick marks.
 
 ## Overview
 
+The native `<input type="range">` is hard to style and can’t show a filled track in a consistent, cross-browser way using CSS alone—only Firefox offers `::-moz-range-progress`, and CSS can’t read an input’s value. So our range is a small **JavaScript component**: use `FormRange`, which wraps a native range input, and the plugin keeps a `--bs-range-fill` custom property (0–1) in sync, which the CSS uses to draw the fill, the value bubble, and tick marks.
+
+The `.form-range` wrapper owns the component’s tokens, so the input and any decorations inherit them. Each mounted `FormRange` initializes automatically.
+
 <CodeExample>
-    <FormField>
-        <FormLabel htmlFor="rangeExample">Example range</FormLabel>
-        <FormRange id="rangeExample" defaultValue={50} />
-    </FormField>
+    <FormLabel htmlFor="range1">Example range</FormLabel>
+    <FormRange id="range1" />
 </CodeExample>
 
 ## Theme colors
 
-Pass a theme name to the wrapper:
+Modify the appearance of the range by adding the `theme` prop to the `.form-range` wrapper. This will set the track fill and thumb color to the theme color.
 
 <CodeExample>
-    <FormRange aria-label="Themed range" theme="primary" defaultValue={60} />
+    <div className="vstack gap-3">
+        <FormRange aria-label="Example primary range" theme="primary" />
+        <FormRange aria-label="Example accent range" theme="accent" />
+        <FormRange aria-label="Example secondary range" theme="secondary" />
+        <FormRange aria-label="Example success range" theme="success" />
+        <FormRange aria-label="Example danger range" theme="danger" />
+        <FormRange aria-label="Example warning range" theme="warning" />
+        <FormRange aria-label="Example info range" theme="info" />
+        <FormRange aria-label="Example dark range" theme="dark" />
+        <FormRange aria-label="Example light range" theme="light" />
+        <FormRange aria-label="Example inverse range" theme="inverse" />
+    </div>
 </CodeExample>
 
 ## Disabled
 
+Add the `disabled` boolean attribute on the input to give it a grayed out appearance, remove pointer events, and prevent focusing.
+
 <CodeExample>
-    <FormRange aria-label="Disabled range" disabled />
+    <FormLabel htmlFor="disabledRange">Disabled range</FormLabel>
+    <FormRange id="disabledRange" disabled />
 </CodeExample>
 
 ## Min and max
 
+Range inputs have implicit values for `min` and `max`—`0` and `100`, respectively. You may specify new values for those using the `min` and `max` attributes.
+
 <CodeExample>
-    <FormField>
-        <FormLabel htmlFor="rangeMinMax">Example range</FormLabel>
-        <FormRange id="rangeMinMax" min={10} max={50} defaultValue={20} />
-    </FormField>
+    <FormLabel htmlFor="range2">Example range</FormLabel>
+    <FormRange min="0" max="5" id="range2" />
 </CodeExample>
 
 ## Steps
 
-Use native `step` to set the allowed increments.
+By default, range inputs “snap” to integer values. To change this, you can specify a `step` value. In the example below, we double the number of steps by using `step="0.5"`.
 
 <CodeExample>
-    <FormRange aria-label="Range with half steps" min={0} max={10} step={0.5} defaultValue={5} />
+    <FormLabel htmlFor="range3">Example range</FormLabel>
+    <FormRange min="0" max="5" step="0.5" id="range3" />
 </CodeExample>
 
 ## Value bubble
 
+Set `bubble` to show a value bubble that follows the thumb. The bubble reuses our [tooltip][1] styles.
+
 <CodeExample>
-    <FormField>
-        <FormLabel htmlFor="rangeBubble">Brightness</FormLabel>
-        <FormRange id="rangeBubble" name="brightness" bubble defaultValue={40} />
-    </FormField>
+    <FormLabel htmlFor="rangeBubble">Brightness</FormLabel>
+    <FormRange min="0" max="100" defaultValue="60" id="rangeBubble" bubble />
 </CodeExample>
 
 ## Tick marks
 
-Connect a native `datalist` with the input's `list` attribute.
+Link a `<datalist>` to the input with the `list` attribute and the plugin renders a tick mark for each `<option>`, positioned at its value (even when the values are unevenly spaced). An `<option>`’s `label` is shown beneath its tick.
 
 <CodeExample>
-    <>
-        <FormRange aria-label="Temperature" list="temperatureTicks" min={0} max={100} />
-        <datalist id="temperatureTicks">
-            <option value="0" label="Cold" />
-            <option value="50" label="Warm" />
-            <option value="100" label="Hot" />
-        </datalist>
-    </>
+    <FormLabel htmlFor="rangeTicks">Temperature</FormLabel>
+    <FormRange
+        min="0"
+        max="100"
+        step="25"
+        defaultValue="50"
+        list="rangeTicksList"
+        id="rangeTicks"
+    />
+    <datalist id="rangeTicksList">
+        <option label="Cold" value="0" />
+        <option value="25" />
+        <option label="Mild" value="50" />
+        <option value="75" />
+        <option label="Hot" value="100" />
+    </datalist>
 </CodeExample>
 
 ## With form field
 
-Use `FormField` to associate a visible label and description.
+Wrap `FormRange` in `FormField` to pair it with a label and description.
+
+<CodeExample>
+    <FormField>
+        <FormLabel htmlFor="rangeField">Volume</FormLabel>
+        <FormRange id="rangeField" bubble />
+        <FormText>Adjust the volume level.</FormText>
+    </FormField>
+</CodeExample>
 
 ## Usage
 
-Every `.form-range` wrapper updates its track fill from the input value. The value bubble requires
-Bootstrap's range plugin.
+`FormRange` initializes and disposes the plugin automatically. Pass `bubble` and `formatter` as props, and use `onValueChange` for numeric updates. Native `value` and `defaultValue` control the input value.
 
-### Via data attributes
-
-`bubble` adds `data-bs-bubble` to the wrapper. The input's native `list` attribute and a `datalist`
-provide tick marks.
-
-### Via JavaScript
-
-The range plugin can also be initialized and updated programmatically by the consuming application.
-
-### Dependencies
-
-The JavaScript-powered value bubble and tick marks require Bootstrap's range plugin.
+Each `FormRange` is initialized automatically when mounted—the component is JavaScript-driven, so the fill won’t render without the plugin.
 
 ### Options
 
-Native range props such as `min`, `max`, `step`, and `value` are forwarded. The plugin exposes
-the optional value bubble.
-
-### Methods
-
-The range plugin supports programmatic updates and disposal.
-
-### Events
-
-The plugin emits a change event when the range value changes.
+| Name        | Type     | Default | Description                                                  |
+| ----------- | -------- | ------- | ------------------------------------------------------------ |
+| `bubble`    | boolean  | `false` | Show a value bubble above the thumb.                         |
+| `formatter` | function | `null`  | `(value) => string` used for the bubble and tick label text. |
 
 ## CSS
 
-The Bootstrap stylesheet reads `--range-fill` to render the filled track.
-
 ### Variables
 
-### Sass mixins
-
-See the upstream [range CSS and Sass reference][1] for component tokens and mixins.
+```css
+.example {
+    --bs-range-track-width: 100%;
+    --bs-range-track-height: 0.5rem;
+    --bs-range-track-cursor: pointer;
+    --bs-range-track-bg: var(--bs-bg-3);
+    --bs-range-track-border-radius: 1rem;
+    --bs-range-track-fill-bg: var(--bs-theme-bg, var(--bs-primary-base));
+    --bs-range-track-disabled-bg: color-mix(in oklch, var(--bs-bg-4), var(--bs-fg-3));
+    --bs-range-thumb-width: 1rem;
+    --bs-range-thumb-height: var(--bs-range-thumb-width);
+    --bs-range-thumb-bg: var(--bs-theme-bg, var(--bs-primary-base));
+    --bs-range-thumb-border: var(--bs-range-thumb-bg) solid var(--bs-border-color);
+    --bs-range-thumb-border-radius: 1rem;
+    --bs-range-thumb-box-shadow: 0 1px 2px rgb(0 0 0 / 7.5%), 0 2px 4px rgb(0 0 0 / 7.5%);
+    --bs-range-thumb-active-bg: color-mix(
+        in oklch,
+        var(--bs-theme-bg, var(--bs-primary-base)) 70%,
+        var(--bs-bg-body)
+    );
+    --bs-range-thumb-disabled-bg: var(--bs-fg-3);
+    --bs-range-thumb-transition-property: background-color, border-color, box-shadow;
+    --bs-range-thumb-transition-duration: 0.15s;
+    --bs-range-thumb-transition-timing: ease-in-out;
+    --bs-range-tick-width: var(--bs-border-width);
+    --bs-range-tick-height: 0.5rem;
+    --bs-range-tick-bg: var(--bs-border-color);
+}
+```
 
 </DocumentationLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/forms/range/#css
+[1]: ../../components/tooltip/

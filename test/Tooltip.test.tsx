@@ -18,3 +18,10 @@ it('renders official Bootstrap 6 tooltip markup', () => {
     );
     assert.equal(screen.getByText('Help').className, 'tooltip-inner');
 });
+
+it('removes hidden tooltip content from the accessibility tree', () => {
+    const { container } = render(<Tooltip show={false}>Help</Tooltip>);
+
+    assert.equal(screen.queryByRole('tooltip'), null);
+    assert.equal(container.querySelector('.tooltip')?.hasAttribute('hidden'), true);
+});

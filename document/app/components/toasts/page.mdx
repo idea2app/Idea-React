@@ -1,263 +1,229 @@
-import { CodeBlock } from '../../../../source/CodeBlock';
 import { ToastContainer } from '../../../../source/Toast';
-
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 import {
     StaticToast,
     ToastMessageDemo,
     ToastPlacementDemo
 } from '../../../component/Documentation/Components/ToastDemo';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
 
 <ComponentsLayout active="toasts">
 
 # Toasts
 
-Toasts are lightweight notifications designed to mimic the push notifications that have been
-popularized by mobile and desktop operating systems. They're built with flexbox, so they're easy to
-align and position.
+Push notifications to your visitors with a toast, a lightweight and easily customizable alert message.
 
-The Idea React [`Toast` model][1] manages message lifetimes and renders Bootstrap 6 toast markup
-through `ToastContainer`, `ToastItem`, `ToastHeader`, and `ToastBody`. This guide adapts the
-[Bootstrap Toasts documentation][2].
+Toasts are lightweight notifications designed to mimic the push notifications that have been popularized by mobile and desktop operating systems. They’re built with flexbox, so they’re easy to align and position.
 
 ## Overview
 
-Things to know when using toasts:
+Things to know when using the `Toast` model:
 
-- Toasts are opt-in, so nothing is rendered until you call `open()` or render a `ToastItem`.
-- The model hides a toast after its `delay` (3000 ms by default). Pass `delay: 0` to keep it open
-  until it is dismissed.
-- `open()` returns a promise that resolves with the closed message entry.
-- Toast headers use `display: flex`, so margin and flexbox utilities keep their content aligned.
-- The fade animation honors `prefers-reduced-motion`.
+- Toasts are opt-in: create a `Toast` model and mount its `Component` before calling `open()`.
+- Toasts automatically hide after `delay` milliseconds; pass `delay: 0` to keep one visible until it is dismissed.
 
-<CodeBlock language="tsx">{`const notifications = new Toast();
-
-notifications.open({
-    title: 'Saved',
-    body: 'Your changes are saved.',
-    theme: 'success',
-    delay: 5000
-});
-
-<notifications.Component position="bottom-end" />;`}</CodeBlock>
+The animation effect of this component is dependent on the `prefers-reduced-motion` media query.
 
 ## Examples
 
 ### Basic
 
-To encourage extensible and predictable toasts, we recommend a header and body. Toasts are as
-flexible as you need and have very little required markup. At a minimum, a single element contains
-the toasted content, and a dismiss button is strongly encouraged.
+To encourage extensible and predictable toasts, we recommend a header and body. Toast headers use `display: flex`, allowing easy alignment of content thanks to our margin and flexbox utilities.
 
-<StaticToast body="Hello, world! This is a toast message." />
+Toasts are as flexible as you need and have very little required markup. At a minimum, we require a single element to contain your “toasted” content and strongly encourage a dismiss button.
 
-The static examples on this page stay visible until you close them. The live example below shows the
-default auto-hide behavior.
+<CodeExample>
+    <StaticToast body="Hello, world! This is a toast message." />
+</CodeExample>
 
 ### Live example
 
-Click the button below to show a toast, positioned with Bootstrap utilities in the lower right
-corner, that has been hidden by default.
+Click the button below to show a toast (positioned with our utilities in the lower right corner) that has been hidden by default.
 
-<CodeExample
-    code={`const toast = new Toast();
-
-toast.open({
-title: 'Bootstrap',
-body: 'Hello, world! This is a toast message.',
-delay: 5000
-});
-
-<toast.Component position="bottom-end" />`}
->
+<CodeExample source="document/component/Documentation/Components/ToastDemo.tsx">
     <ToastMessageDemo />
 </CodeExample>
 
-The `Toast` model keeps messages in its `messages` array and renders them through its `Component`.
-Each new message gets a unique id, a timer, and a promise that resolves when the toast closes.
-
 ### Translucent
 
-Toasts are slightly translucent to blend in with what's below them.
+Toasts are slightly translucent to blend in with what’s below them.
 
-<StaticToast body="Hello, world! This is a toast message." />
+<CodeExample>
+    <StaticToast body="Hello, world! This is a toast message." />
+</CodeExample>
 
-Add `.toast-translucent` to enhance the translucency with a backdrop blur and saturation filter.
-Set `translucent` on the static demo to apply the class.
+Pass `translucent` to `ToastItem` or `Toast.open()` to enhance the translucency with a backdrop blur and saturation filter.
 
-<div className="bg-inverse p-3 rounded-3">
-    <StaticToast translucent body="Hello, world! This is a translucent toast message." />
-</div>
+<CodeExample>
+    <StaticToast translucent body="Hello, world! This is a toast message." />
+</CodeExample>
 
 ### Stacking
 
 You can stack toasts by wrapping them in a toast container, which will vertically add some spacing.
-Set `position="static"` to keep the container in normal document flow.
 
-<ToastContainer position="static">
-    <StaticToast time="just now" body="See? Just like this." />
-    <StaticToast time="2 seconds ago" body="Heads up, toasts will stack automatically" />
-</ToastContainer>
+<CodeExample>
+    <ToastContainer position="static">
+        <StaticToast body="Hello, world! This is a toast message." />
+        <StaticToast time="2 seconds ago" body="Heads up, toasts will stack automatically" />
+    </ToastContainer>
+</CodeExample>
 
 ### Dark toasts
 
-Set a toast to dark mode by adding the `data-bs-theme="dark"` attribute to the `.toast` element or an
-ancestor. The static demo applies it to a wrapper.
+Set a toast to dark mode by setting `data-bs-theme="dark"` on a parent element.
 
-<StaticToast dark time="2 seconds ago" body="This toast is in dark mode by default." actions />
+<CodeExample>
+    <StaticToast dark body="Hello, world! This is a toast message." />
+</CodeExample>
 
 ### Variants
 
-Toasts can be themed with Bootstrap's theme color utilities. Apply a theme to the entire toast or to
-individual elements within the toast.
+Toasts can be themed with the `theme` prop, based on our [theme color utilities][1]. Apply to the entire toast or individual elements within the toast.
 
-<div className="vstack gap-3">
-    <StaticToast
-        theme="primary"
-        time="2 seconds ago"
-        body="This toast is a primary themed toast."
-        actions
-    />
-    <StaticToast
-        theme="accent"
-        time="2 seconds ago"
-        body="This toast is an accent-themed toast."
-        actions
-    />
-</div>
+<CodeExample>
+    <div className="vstack gap-3">
+        <StaticToast theme="primary" noHeader body="Hello, world! This is a toast message." />
+        <StaticToast theme="accent" noHeader body="Hello, world! This is a toast message." />
+        <StaticToast theme="secondary" noHeader body="Hello, world! This is a toast message." />
+        <StaticToast theme="success" noHeader body="Hello, world! This is a toast message." />
+        <StaticToast theme="danger" noHeader body="Hello, world! This is a toast message." />
+        <StaticToast theme="warning" noHeader body="Hello, world! This is a toast message." />
+        <StaticToast theme="info" noHeader body="Hello, world! This is a toast message." />
+        <StaticToast theme="inverse" noHeader body="Hello, world! This is a toast message." />
+    </div>
+</CodeExample>
 
 ### Custom content
 
-Customize toasts by removing sub-components, tweaking them with utilities, or adding your own
-markup. Here we've created a simpler toast by removing the default `.toast-header`, adding a custom
-hide icon, and using flexbox utilities to adjust the layout.
+Customize your toasts by removing sub-components, tweaking them with [utilities][2], or by adding your own markup. Here we’ve created a simpler toast by removing the default `ToastHeader`, adding a custom hide icon from [Bootstrap Icons][3], and using some [flexbox utilities][4] to adjust the layout.
 
-<StaticToast noHeader body="Hello, world! This is a toast message." />
+<CodeExample>
+    <StaticToast noHeader body="Hello, world! This is a toast message." />
+</CodeExample>
 
-Alternatively, you can add additional controls and components to toasts.
+Alternatively, you can also add additional controls and components to toasts.
 
-<StaticToast
-    body={
-        <>
-            This is a custom toast message with additional content like a horizontal rule and
-            buttons.
-            <hr className="my-3" />
-        </>
-    }
-    actions
-/>
+<CodeExample>
+    <StaticToast actions body="Hello, world! This is a toast message." />
+</CodeExample>
 
 ### Instant
 
-By default, toasts fade in and out. Add `.toast-instant` to disable the animation. Set `instant` on
-the static demo to apply the class.
+By default, toasts fade in and out. To disable the animation, pass `instant` to `ToastItem` or `Toast.open()`. The toast then appears without the CSS transition.
 
-<StaticToast instant body="This toast appears and disappears instantly." />
+<CodeExample>
+    <StaticToast instant body="Hello, world! This is a toast message." />
+</CodeExample>
 
 ## Placement
 
-Place toasts with custom CSS as you need them. The top right is often used for notifications, as is
-the top middle. If you're only ever going to show one toast at a time, put the positioning styles
-right on the `.toast`.
+Place toasts with custom CSS as you need them. The top right is often used for notifications, as is the top middle. Use the `position` prop on `ToastContainer` or `toast.Component` for a standard viewport position. If you’re only ever going to show one toast at a time, put the positioning styles right on `ToastItem`.
 
-The `Toast` model accepts a `position` on its `Component`, covering top, middle, and bottom edges
-aligned to the start, center, or end. Choose a placement and show a toast:
+<CodeExample source="document/component/Documentation/Components/ToastDemo.tsx">
+    <ToastPlacementDemo />
+</CodeExample>
 
-<ToastPlacementDemo />
+For systems that generate more notifications, consider using a wrapping element so they can easily stack.
 
-For systems that generate more notifications, wrap them in a toast container so they stack, then
-position the container in the upper right corner.
+<CodeExample>
+    <div className="position-relative p-3" style={{ minHeight: 180 }}>
+        <ToastContainer position="static" className="ms-auto">
+            <StaticToast body="Hello, world! This is a toast message." />
+        </ToastContainer>
+    </div>
+</CodeExample>
 
-<div className="position-relative bg-1 rounded-3 p-3" style={{ minHeight: '200px' }}>
-    <ToastContainer>
-        <StaticToast time="just now" body="See? Just like this." />
+You can also get fancy with flexbox utilities to align toasts horizontally and/or vertically.
+
+<CodeExample>
+    <ToastContainer position="static" className="mx-auto">
+        <StaticToast body="Hello, world! This is a toast message." />
         <StaticToast time="2 seconds ago" body="Heads up, toasts will stack automatically" />
     </ToastContainer>
-</div>
-
-You can also get fancy with flexbox utilities to align toasts horizontally and vertically.
-
-<div className="d-flex justify-content-center align-items-center bg-1 rounded-3 p-5">
-    <StaticToast body="Hello, world! This is a toast message." />
-</div>
+</CodeExample>
 
 ## Accessibility
 
-Toasts are intended to be small interruptions, so wrap them in an `aria-live` region to help screen
-reader users. Changes to live regions are automatically announced without moving focus. The
-`ToastContainer` renders a polite live region with `aria-atomic="true"`, so the entire toast is
-announced as a single unit. Each `ToastItem` uses `role="status"` by default.
+Toasts are intended to be small interruptions to your visitors or users, so to help those with screen readers and similar assistive technologies, you should wrap your toasts in an [`aria-live` region][5]. Changes to live regions (such as injecting/updating a toast component) are automatically announced by screen readers without needing to move the user’s focus or otherwise interrupt the user. Additionally, include `aria-atomic="true"` to ensure that the entire toast is always announced as a single (atomic) unit, rather than just announcing what was changed (which could lead to problems if you only update part of the toast’s content, or if displaying the same toast content at a later point in time). If the information needed is important for the process, e.g. for a list of errors in a form, then use the [alert component][6] instead of toast.
 
-The live region must be present before the toast is generated or updated. The model's `Component`
-always renders its container, so the region exists before the first message is opened.
+Note that the live region needs to be present in the markup _before_ the toast is generated or updated. If you dynamically generate both at the same time and inject them into the page, they will generally not be announced by assistive technologies.
 
-Adapt the role and live level to the content. If a message is important, such as a form error, use
-an assertive alert instead of a toast. The static examples on this page use `role="alert"` and
-`aria-live="assertive"` to demonstrate the upstream markup.
+You also need to adapt the `role` and `aria-live` level depending on the content. If it’s an important message like an error, use `role="alert" aria-live="assertive"`, otherwise use `role="status" aria-live="polite"` attributes.
 
-As the content you display changes, update the `delay` so users have enough time to read the toast.
+<CodeExample>
+    <ToastContainer position="static" aria-live="polite" aria-atomic="true">
+        <StaticToast live="polite" body="A polite status update with enough time to read." />
+    </ToastContainer>
+</CodeExample>
 
-When a toast does not auto-hide, include a close button so users can dismiss it:
+As the content you’re displaying changes, be sure to update the [`delay` timeout][7] so that users have enough time to read the toast.
 
-<StaticToast body="Hello, world! This is a toast message." />
+When using `delay: 0`, you must add a close button to allow users to dismiss the toast.
 
-While it's technically possible to add focusable or actionable controls in a toast, avoid doing so
-for autohiding toasts. Keyboard and assistive technology users may not reach the toast in time. If
-you absolutely need further controls, use a toast with no auto-hide, like the static examples above.
+<CodeExample source="document/component/Documentation/Components/ToastDemo.tsx">
+    <ToastMessageDemo
+        label="Show persistent toast"
+        delay={0}
+        body="This toast stays visible until you close it."
+    />
+</CodeExample>
+
+While technically it’s possible to add focusable/actionable controls (such as additional buttons or links) in your toast, you should avoid doing this for autohiding toasts. Even if you give the toast a long [`delay` timeout][7], keyboard and assistive technology users may find it difficult to reach the toast in time to take action (since toasts don’t receive focus when they are displayed). If you absolutely must have further controls, we recommend using a toast with `delay: 0`.
+
+## CSS
+
+### Variables
+
+Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][8].
+
+| Variable                         | Default                              |
+| -------------------------------- | ------------------------------------ |
+| `--bs-toast-zindex`              | `var(--bs-z-toast)`                  |
+| `--bs-toast-padding-x`           | `1rem`                               |
+| `--bs-toast-padding-y`           | `0.75rem`                            |
+| `--bs-toast-spacing`             | `1.5rem`                             |
+| `--bs-toast-max-width`           | `350px`                              |
+| `--bs-toast-font-size`           | `var(--bs-font-size-sm)`             |
+| `--bs-toast-bg`                  | `var(--bs-bg-body)`                  |
+| `--bs-toast-border-width`        | `var(--bs-border-width)`             |
+| `--bs-toast-border-color`        | `var(--bs-border-color-translucent)` |
+| `--bs-toast-box-shadow`          | `var(--bs-box-shadow)`               |
+| `--bs-toast-header-color`        | `var(--bs-fg-3)`                     |
+| `--bs-toast-header-bg`           | `var(--bs-bg-1)`                     |
+| `--bs-toast-header-border-color` | `var(--bs-border-color-translucent)` |
+| `--bs-toast-transition-property` | `opacity, display`                   |
+| `--bs-toast-transition-duration` | `0.15s`                              |
+| `--bs-toast-transition-timing`   | `linear`                             |
 
 ## Usage
 
-Bootstrap initializes toasts through a JavaScript plugin. The React model replaces the plugin with
-an observable collection of messages:
+Create a `Toast` model and mount its `Component` to establish the live region before showing notifications. Call `open({ title, body, delay })` to append a toast. The live example above demonstrates this React integration.
 
-<CodeBlock language="tsx">{`const notifications = new Toast();
+### Options
 
-const closed = notifications.open({
-    title: 'Saved',
-    body: 'Your changes are saved.',
-    theme: 'success',
-    delay: 5000
-});
-
-render(<notifications.Component position="bottom-end" />);
-
-await closed; // resolves when the toast is dismissed or its timer expires`}</CodeBlock>
-
-### Message options
-
-| Field   | Type             | Default | Description                                                 |
-| ------- | ---------------- | ------- | ----------------------------------------------------------- |
-| `title` | `ReactNode`      | —       | Header content. Without a title, the header is hidden.      |
-| `body`  | `ReactNode`      | —       | Required toast body.                                        |
-| `theme` | `ComponentTheme` | —       | Applies a `theme-*` class to the toast.                     |
-| `delay` | `number`         | `3000`  | Milliseconds before hiding. Use `0` to keep the toast open. |
+| Message option | Default    | Description                                                                |
+| -------------- | ---------- | -------------------------------------------------------------------------- |
+| `body`         | required   | Toast body as a React node.                                                |
+| `title`        | —          | Optional toast heading.                                                    |
+| `delay`        | `3000`     | Milliseconds before hiding; `0` disables automatic dismissal.              |
+| `id`           | generated  | Supply an ID to replace an existing notification or dismiss it later.      |
+| `role`         | `"status"` | Use `"alert"` for urgent messages and an appropriate live-region priority. |
+| `theme`        | —          | Contextual theme color.                                                    |
+| `translucent`  | `false`    | Blur and saturate the background.                                          |
+| `instant`      | `false`    | Skip the CSS transition.                                                   |
 
 ### Methods
 
-| Member      | Description                                                                   |
-| ----------- | ----------------------------------------------------------------------------- |
-| `open`      | Adds a message, starts its timer, and returns a promise for the closed entry. |
-| `close`     | Removes the message by id, clears its timer, and resolves its promise.        |
-| `messages`  | Observable list of active messages.                                           |
-| `Component` | Renders the live region and the active toasts at the given `position`.        |
-
-### Data attributes
-
-| Bootstrap attribute       | React equivalent                                         |
-| ------------------------- | -------------------------------------------------------- |
-| `data-bs-autohide`        | Omit it, or set `delay: 0` to disable auto-hide.         |
-| `data-bs-delay`           | `delay` on the message.                                  |
-| `data-bs-dismiss="toast"` | `CloseButton` with an `onClick` handler, or `close(id)`. |
-
-### Events
-
-The plugin's `show.bs.toast`, `shown.bs.toast`, `hide.bs.toast`, and `hidden.bs.toast` events are
-replaced by the promise returned from `open()`. The resolved entry includes `openedAt` and
-`closedAt` timestamps.
+`open(message)` returns a promise that resolves when that notification closes. Call `close(id)` to dismiss an individual notification.
 
 </ComponentsLayout>
 
-[1]: https://github.com/idea2app/Idea-React/blob/main/source/Toast.tsx
-[2]: https://getbootstrap.com/docs/6.0/components/toasts/
+[1]: https://getbootstrap.com/docs/6.0/customize/theme/
+[2]: https://getbootstrap.com/docs/6.0/utilities/api/
+[3]: https://icons.getbootstrap.com/
+[4]: https://getbootstrap.com/docs/6.0/utilities/flex/
+[5]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions
+[6]: https://getbootstrap.com/docs/6.0/components/alerts/
+[7]: #accessibility
+[8]: https://getbootstrap.com/docs/6.0/components/toasts/#variables

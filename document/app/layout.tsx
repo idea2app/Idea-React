@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
 import { ColorModeToggle } from '../component/ColorMode';
+import { ColorModeProvider } from '../component/ColorMode/Provider';
 import { DocumentationFooter } from '../component/Documentation/Footer';
 import { DocumentationHeader } from '../component/Documentation/Header';
 import { DocumentationSearch } from '../component/Documentation/Search';
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <head>
                 <link
                     rel="stylesheet"
@@ -30,40 +31,42 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
             <body>
                 <ErrorHandler />
 
-                <DocumentationHeader
-                    links={navigation}
-                    versions={versions}
-                    version={site.version}
-                    search={
-                        <DocumentationSearch
-                            indexUrl={`${nextConfig.basePath || ''}/search-index.json`}
-                        />
-                    }
-                    colorMode={<ColorModeToggle />}
-                />
-                {children}
+                <ColorModeProvider>
+                    <DocumentationHeader
+                        links={navigation}
+                        versions={versions}
+                        version={site.version}
+                        search={
+                            <DocumentationSearch
+                                indexUrl={`${nextConfig.basePath || ''}/search-index.json`}
+                            />
+                        }
+                        colorMode={<ColorModeToggle />}
+                    />
+                    {children}
 
-                <DocumentationFooter columns={footerColumns}>
-                    <p className="mb-3">
-                        Advanced React components by <a href="https://idea2.app/">idea2app</a>,
-                        built with the help of{' '}
-                        <a href={`${site.repository}/graphs/contributors`}>our contributors</a>.
-                    </p>
-                    <p className="mb-3">
-                        Licensed{' '}
-                        <a href="https://spdx.org/licenses/LGPL-3.0-or-later.html">
-                            {site.license}
-                        </a>
-                        . Currently v{site.version}.
-                    </p>
-                    <p className="mb-0">
-                        An independent React adaptation of the{' '}
-                        <a href="https://getbootstrap.com/">upstream website</a>. Upstream code:{' '}
-                        <a href={`${nextConfig.basePath || ''}/BOOTSTRAP-LICENSE.txt`}>MIT</a>;
-                        documentation:{' '}
-                        <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
-                    </p>
-                </DocumentationFooter>
+                    <DocumentationFooter columns={footerColumns}>
+                        <p className="mb-3">
+                            Advanced React components by <a href="https://idea2.app/">idea2app</a>,
+                            built with the help of{' '}
+                            <a href={`${site.repository}/graphs/contributors`}>our contributors</a>.
+                        </p>
+                        <p className="mb-3">
+                            Licensed{' '}
+                            <a href="https://spdx.org/licenses/LGPL-3.0-or-later.html">
+                                {site.license}
+                            </a>
+                            . Currently v{site.version}.
+                        </p>
+                        <p className="mb-0">
+                            An independent React adaptation of the{' '}
+                            <a href="https://getbootstrap.com/">upstream website</a>. Upstream code:{' '}
+                            <a href={`${nextConfig.basePath || ''}/BOOTSTRAP-LICENSE.txt`}>MIT</a>;
+                            documentation:{' '}
+                            <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+                        </p>
+                    </DocumentationFooter>
+                </ColorModeProvider>
             </body>
         </html>
     );

@@ -21,26 +21,64 @@ interface HastNode {
 
 const inlineElements = new Set([
     'a',
+    'p',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'AccordionHeader',
+    'AccordionToggle',
+    'AlertLink',
+    'AlertHeading',
     'Avatar',
     'Badge',
+    'BreadcrumbLink',
     'Button',
     'button',
+    'CardTitle',
+    'CardSubtitle',
+    'CardText',
+    'ChipDismiss',
+    'ChipInputLabel',
+    'ChipToken',
     'CloseButton',
+    'CollapseToggle',
+    'ComboboxOption',
+    'DatePickerButton',
+    'DialogTitle',
+    'DrawerTitle',
     'label',
     'FormLabel',
+    'FormLegend',
     'FormAdornment',
     'FormAdornmentText',
     'FormSwitch',
     'FormText',
+    'FormFeedback',
     'InputGroupText',
+    'InputGroupButton',
+    'ListGroupItem',
     'MenuItem',
     'MenuItemContent',
     'NavbarBrand',
     'NavLink',
     'Option',
+    'PageLink',
+    'PageText',
+    'PlaceholderButton',
+    'Popover',
+    'Progress',
     'span',
     'SpinnerButton',
-    'ToggleButton'
+    'StepperButton',
+    'StepperLink',
+    'ToggleButton',
+    'Toggler',
+    'Tooltip',
+    'th',
+    'td'
 ]);
 
 const visit = (node: MdastNode) => {
@@ -77,6 +115,12 @@ const rehypeBootstrapTable = () => (tree: HastNode) => {
 };
 
 export default defineConfig({
+    css: {
+        lightningcss: {
+            // Preserve light-dark(): Bootstrap's color-scheme rules are loaded separately.
+            exclude: 1 << 20
+        }
+    },
     plugins: [
         mdx({
             remarkPlugins: [remarkGfm, remarkInlineButtonChildren],

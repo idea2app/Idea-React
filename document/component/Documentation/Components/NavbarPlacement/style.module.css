@@ -1,0 +1,5 @@
+.preview {
+    transform: translateZ(0);
+    min-height: 7rem;
+    /* Keep fixed-position examples inside the preview. */
+}

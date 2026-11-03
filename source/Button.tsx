@@ -1,5 +1,3 @@
-'use client';
-
 import classNames from 'classnames';
 import { ComponentPropsWithRef, FC, MouseEvent } from 'react';
 
@@ -16,12 +14,13 @@ export type ComponentTheme =
     | 'inverse';
 
 interface ButtonStyleProps {
-    variant?: 'solid' | 'outline' | 'subtle' | 'text' | 'link';
+    variant?: 'solid' | 'outline' | 'subtle' | 'text' | 'link' | false;
     theme?: ComponentTheme;
     size?: 'xs' | 'sm' | 'lg';
     icon?: boolean;
     styled?: boolean;
     disabled?: boolean;
+    active?: boolean;
 }
 
 type ButtonLinkAttributes = ComponentPropsWithRef<'a'> & { href: string };
@@ -41,15 +40,16 @@ export const Button: FC<ButtonProps> = ({
     icon,
     styled,
     disabled,
+    active,
     className,
     ...props
 }) => {
     const attributes: ButtonElementAttributes = props;
     const classes = classNames(
-        variant ? `btn-${variant}` : icon ? undefined : 'btn',
+        variant === false ? undefined : variant ? `btn-${variant}` : icon ? undefined : 'btn',
         theme && `theme-${theme}`,
         size && `btn-${size}`,
-        { 'btn-icon': icon, 'btn-styled': styled, disabled },
+        { 'btn-icon': icon, 'btn-styled': styled, disabled, active },
         className
     );
 
@@ -59,6 +59,11 @@ export const Button: FC<ButtonProps> = ({
             className={classes}
             href={disabled ? undefined : attributes.href}
             aria-disabled={disabled || undefined}
+            aria-pressed={
+                attributes.role === 'button'
+                    ? (active ?? attributes['aria-pressed'])
+                    : attributes['aria-pressed']
+            }
             tabIndex={disabled ? -1 : attributes.tabIndex}
             onClick={disabled ? preventNavigation : attributes.onClick}
         />
@@ -68,6 +73,36 @@ export const Button: FC<ButtonProps> = ({
             type={attributes.type || 'button'}
             className={classes}
             disabled={disabled}
+            aria-pressed={active ?? attributes['aria-pressed']}
         />
     );
 };
+
+export type ButtonInputProps = Omit<ComponentPropsWithRef<'input'>, 'size'> & ButtonStyleProps;
+
+export const ButtonInput: FC<ButtonInputProps> = ({
+    variant,
+    theme,
+    size,
+    icon,
+    styled,
+    active,
+    className,
+    type = 'button',
+    ...props
+}) => (
+    <input
+        {...props}
+        type={type}
+        className={classNames(
+            variant === false ? undefined : variant ? `btn-${variant}` : 'btn',
+            theme && `theme-${theme}`,
+            size && `btn-${size}`,
+            { 'btn-icon': icon, 'btn-styled': styled, active },
+            className
+        )}
+    />
+);
+
+Button.displayName = 'Button';
+ButtonInput.displayName = 'ButtonInput';

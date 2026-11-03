@@ -1,0 +1,245 @@
+import { Tabs, Tab } from '../../../../source/Tab';
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Documentation/Components/Example';
+import styles from '../../../component/Documentation/Components/style.module.less';
+
+<ComponentsLayout active="tab">
+
+# Tab
+
+Create toggleable content panes using any of our navigation or list group components.
+
+The Tab plugin works with [nav components][1] such as `.nav-tabs` and `.nav-pills`, and with [list groups][2].
+
+## Nav tab
+
+Give `Tabs` a unique `id`, then add `Tab` children with an `eventKey` and `label`. The component creates matching tab controls and content panes, including their accessibility attributes.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Tabs id="myTab" variant="tabs">
+            <Tab eventKey="home" label="Home">
+                <p>
+                    {'This is some placeholder content the '}
+                    <strong>{'Home tab’s'}</strong>
+                    {' associated content.'}
+                </p>
+            </Tab>
+            <Tab eventKey="profile" label="Profile">
+                <p>
+                    {'This is some placeholder content the '}
+                    <strong>{'Profile tab’s'}</strong>
+                    {' associated content.'}
+                </p>
+            </Tab>
+            <Tab eventKey="contact" label="Contact">
+                <p>
+                    {'This is some placeholder content the '}
+                    <strong>{'Contact tab’s'}</strong>
+                    {' associated content.'}
+                </p>
+            </Tab>
+            <Tab eventKey="disabled" label="Disabled" disabled>
+                <p>
+                    {'This is some placeholder content the '}
+                    <strong>{'Disabled tab’s'}</strong>
+                    {' associated content.'}
+                </p>
+            </Tab>
+        </Tabs>
+    </div>
+</CodeExample>
+
+## With buttons
+
+Tabs should use button controls rather than navigation links. If wrapping the tab list in `<nav>`, don’t add `role="tablist"` directly to that element, as this would override its navigation landmark. `Tabs` puts the tab-list role on an inner `<div>` and generates button controls.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Tabs id="nav-tab2" variant="tabs">
+            <Tab eventKey="home" label="Home">
+                <p>
+                    {'This is some placeholder content the '}
+                    <strong>{'Home tab’s'}</strong>
+                    {' associated content.'}
+                </p>
+            </Tab>
+            <Tab eventKey="profile" label="Profile">
+                <p>
+                    {'This is some placeholder content the '}
+                    <strong>{'Profile tab’s'}</strong>
+                    {' associated content.'}
+                </p>
+            </Tab>
+            <Tab eventKey="contact" label="Contact">
+                <p>
+                    {'This is some placeholder content the '}
+                    <strong>{'Contact tab’s'}</strong>
+                    {' associated content.'}
+                </p>
+            </Tab>
+            <Tab eventKey="disabled" label="Disabled" disabled>
+                <p>
+                    {'This is some placeholder content the '}
+                    <strong>{'Disabled tab’s'}</strong>
+                    {' associated content.'}
+                </p>
+            </Tab>
+        </Tabs>
+    </div>
+</CodeExample>
+
+## Pills
+
+The tabs plugin also works with pills.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Tabs id="pills-tab" variant="pills">
+            <Tab eventKey="home" label="Home">
+                <p>
+                    {'This is some placeholder content the '}
+                    <strong>{'Home tab’s'}</strong>
+                    {' associated content.'}
+                </p>
+            </Tab>
+            <Tab eventKey="profile" label="Profile">
+                <p>
+                    {'This is some placeholder content the '}
+                    <strong>{'Profile tab’s'}</strong>
+                    {' associated content.'}
+                </p>
+            </Tab>
+            <Tab eventKey="contact" label="Contact">
+                <p>
+                    {'This is some placeholder content the '}
+                    <strong>{'Contact tab’s'}</strong>
+                    {' associated content.'}
+                </p>
+            </Tab>
+            <Tab eventKey="disabled" label="Disabled" disabled>
+                <p>
+                    {'This is some placeholder content the '}
+                    <strong>{'Disabled tab’s'}</strong>
+                    {' associated content.'}
+                </p>
+            </Tab>
+        </Tabs>
+    </div>
+</CodeExample>
+
+And with vertical pills. Set `orientation="vertical"` to give the tab list the corresponding `aria-orientation` and keyboard behavior.
+
+<CodeExample>
+    <Tabs
+        id="v-pills-tab"
+        variant="pills"
+        orientation="vertical"
+        className="d-flex align-items-start gap-4"
+    >
+        <Tab eventKey="home" label="Home">
+            <p>
+                {'This is some placeholder content the '}
+                <strong>{'Home tab’s'}</strong>
+                {' associated content.'}
+            </p>
+        </Tab>
+        <Tab eventKey="profile" label="Profile">
+            <p>
+                {'This is some placeholder content the '}
+                <strong>{'Profile tab’s'}</strong>
+                {' associated content.'}
+            </p>
+        </Tab>
+        <Tab eventKey="disabled" label="Disabled" disabled>
+            <p>
+                {'This is some placeholder content the '}
+                <strong>{'Disabled tab’s'}</strong>
+                {' associated content.'}
+            </p>
+        </Tab>
+        <Tab eventKey="messages" label="Messages">
+            <p>
+                {'This is some placeholder content the '}
+                <strong>{'Messages tab’s'}</strong>
+                {' associated content.'}
+            </p>
+        </Tab>
+        <Tab eventKey="settings" label="Settings">
+            <p>
+                {'This is some placeholder content the '}
+                <strong>{'Settings tab’s'}</strong>
+                {' associated content.'}
+            </p>
+        </Tab>
+    </Tabs>
+</CodeExample>
+
+## List groups
+
+The tab plugin also works with [list groups][3]. Add `data-bs-toggle="tab"` to each `.list-group-item` and pair them with `.tab-pane` elements.
+
+<CodeExample>
+    <div className="vstack gap-3">
+        <Tabs
+            id="list-tab"
+            variant="list-group"
+            orientation="vertical"
+            className={`d-grid gap-4 ${styles.listTabs}`}
+        >
+            <Tab eventKey="home" label="Home">
+                <p>{'Some placeholder content in a paragraph relating to "Home".'}</p>
+            </Tab>
+            <Tab eventKey="profile" label="Profile">
+                <p>{'Some placeholder content in a paragraph relating to "Profile".'}</p>
+            </Tab>
+            <Tab eventKey="messages" label="Messages">
+                <p>{'Some placeholder content in a paragraph relating to "Messages".'}</p>
+            </Tab>
+            <Tab eventKey="settings" label="Settings">
+                <p>{'Some placeholder content in a paragraph relating to "Settings".'}</p>
+            </Tab>
+        </Tabs>
+    </div>
+</CodeExample>
+
+## Accessibility
+
+Dynamic tabbed interfaces, as described in the [ARIA Authoring Practices Guide tabs pattern][4], require `role="tablist"`, `role="tab"`, `role="tabpanel"`, and additional `aria-` attributes in order to convey their structure, functionality, and current state to users of assistive technologies (such as screen readers). As a best practice, we recommend using `<button>` elements for the tabs, as these are controls that trigger a dynamic change, rather than links that navigate to a new page or location.
+
+In line with the ARIA Authoring Practices pattern, only the currently active tab receives keyboard focus. `Tabs` sets `tabIndex={-1}` on inactive controls. Once the active tab has focus, the cursor keys activate the previous/next tab. The <kbd>Home</kbd> and <kbd>End</kbd> keys activate the first and last enabled tabs, respectively. The component changes the [roving `tabindex`][5] accordingly: horizontal lists use Left/Right, while vertical lists use Up/Down.
+
+> In general, to facilitate keyboard navigation, it’s recommended to make the tab panels themselves focusable as well. `Tabs` supplies `tabIndex={0}` for each panel.
+
+> The tab JavaScript plugin **does not** support tabbed interfaces that contain menus, as these cause both usability and accessibility issues. From a usability perspective, the fact that the currently displayed tab’s trigger element is not immediately visible (as it’s inside the closed menu) can cause confusion. From an accessibility point of view, there is currently no sensible way to map this sort of construct to a standard WAI ARIA pattern, meaning that it cannot be easily made understandable to users of assistive technologies.
+
+## Usage
+
+Use `defaultActiveKey` for the initially selected tab, or `activeKey` with `onChange` for a controlled selection. Disabled tabs cannot be activated and are skipped during keyboard navigation.
+
+### Fade effect
+
+Content panes fade in by default. The pane you leave hides immediately, because two in-flow panes cannot cross-fade without one stacking under the other. Set `fade={false}` to switch the fade off.
+
+```tsx
+<Tabs id="instant-tabs" defaultActiveKey="home" fade={false}>
+    <Tab eventKey="home" label="Home">
+        Home content
+    </Tab>
+    <Tab eventKey="profile" label="Profile">
+        Profile content
+    </Tab>
+</Tabs>
+```
+
+### Events
+
+Use `onChange(eventKey)` to respond to selection changes instead of registering Bootstrap plugin events.
+
+</ComponentsLayout>
+
+[1]: /components/nav
+[2]: /components/list-group#javascript-behavior
+[3]: /components/list-group
+[4]: https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/
+[5]: https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/

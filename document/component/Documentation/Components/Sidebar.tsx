@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import { Icon } from '../../../../source/Icon';
+import { Icon } from '../../../../source/Extension/Icon';
 import nextConfig from '../../../next.config';
 import * as style from './style.module.less';
 
@@ -14,12 +14,17 @@ type NavGroup = Record<
 };
 
 const components: NavLink[] = [
+    { label: 'Accordion', slug: 'accordion' },
+    { label: 'Alert', slug: 'alert' },
     { label: 'Avatar', slug: 'avatar' },
     { label: 'Badge', slug: 'badge' },
+    { label: 'Breadcrumb', slug: 'breadcrumb' },
     { label: 'Button', slug: 'button' },
     { label: 'Button group', slug: 'button-group' },
     { label: 'Card', slug: 'card' },
+    { label: 'Carousel', slug: 'carousel' },
     { label: 'Close button', slug: 'close-button' },
+    { label: 'Collapse', slug: 'collapse' },
     { label: 'Dialog', slug: 'dialog' },
     { label: 'Drawer', slug: 'drawer' },
     { label: 'Grid', slug: 'grid' },
@@ -27,16 +32,26 @@ const components: NavLink[] = [
     { label: 'List group', slug: 'list-group' },
     { label: 'Menu', slug: 'menu' },
     { label: 'Nav', slug: 'nav' },
+    { label: 'Nav overflow', slug: 'nav-overflow' },
     { label: 'Navbar', slug: 'navbar' },
-    { label: 'Popover & tooltip', slug: 'overlay-box' },
+    { label: 'Pagination', slug: 'pagination' },
+    { label: 'Placeholder', slug: 'placeholder' },
+    { label: 'Popover', slug: 'popover' },
+    { label: 'Progress', slug: 'progress' },
+    { label: 'Scrollspy', slug: 'scrollspy' },
     { label: 'Spinner', slug: 'spinner' },
+    { label: 'Stepper', slug: 'stepper' },
+    { label: 'Tab', slug: 'tab' },
     { label: 'Table', slug: 'table' },
-    { label: 'Toasts', slug: 'toasts' }
+    { label: 'Toasts', slug: 'toasts' },
+    { label: 'Toggler', slug: 'toggler' },
+    { label: 'Tooltip', slug: 'tooltip' }
 ];
 const extensions: NavLink[] = [
     { label: 'Click boundary', slug: 'click-boundary' },
     { label: 'Code block', slug: 'code-block' },
     { label: 'Countdown', slug: 'countdown' },
+    { label: 'Dialog model', slug: 'dialog-model' },
     { label: 'Editor', slug: 'editor' },
     { label: 'Editor HTML', slug: 'editor-html' },
     { label: 'Horizontal marquee', slug: 'horizontal-marquee' },
@@ -45,6 +60,7 @@ const extensions: NavLink[] = [
     { label: 'Loading', slug: 'loading' },
     { label: 'Month calendar', slug: 'month-calendar' },
     { label: 'Nameplate', slug: 'nameplate' },
+    { label: 'Overlay box', slug: 'overlay-box' },
     { label: 'Page nav', slug: 'page-nav' },
     { label: 'Scroll nav', slug: 'scroll-nav' },
     { label: 'Select', slug: 'select' },
@@ -102,9 +118,9 @@ const groups: NavGroup[] = [
         label: 'Extensions',
         icon: 'puzzle-fill',
         iconClassName: 'fg-accent',
-        href: 'components/idea-react/',
-        itemHref: 'components/',
-        slug: 'idea-react',
+        href: 'extensions/',
+        itemHref: 'extensions/',
+        slug: 'extensions',
         items: extensions
     }
 ];
@@ -115,7 +131,10 @@ export interface SidebarProps {
 }
 
 export const Sidebar: FC<SidebarProps> = ({ active }) => (
-    <nav className={`d-flex flex-column pb-3 ${style.sidebar}`} aria-label="Documentation navigation">
+    <nav
+        className={`d-flex flex-column pb-3 ${style.sidebar}`}
+        aria-label="Documentation navigation"
+    >
         {groups.map(({ label, icon, iconClassName, href, itemHref, slug: groupSlug, items }) => (
             <div key={label} className="vstack py-2">
                 <strong className="d-flex align-items-center gap-1 fw-semibold">
