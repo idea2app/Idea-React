@@ -8,6 +8,7 @@ import { Timestamp, uniqueID } from 'web-utility';
 
 import type { ComponentTheme } from './Button';
 import { CloseButton } from './CloseButton';
+import { polymorphic } from './Polymorphic';
 
 export type ToastPosition =
     | 'top-start'
@@ -53,30 +54,33 @@ export interface ToastContainerProps extends ComponentPropsWithRef<'div'> {
     position?: ToastPosition | 'static';
 }
 
-export const ToastContainer: FC<ToastContainerProps> = ({
-    position = 'top-end',
-    className,
-    'aria-live': ariaLive = 'polite',
-    'aria-atomic': ariaAtomic = true,
-    ...props
-}) => {
-    const isStatic = position === 'static';
+export const ToastContainer = polymorphic<ToastContainerProps>(
+    ({
+        as: Root = 'div',
+        position = 'top-end',
+        className,
+        'aria-live': ariaLive = 'polite',
+        'aria-atomic': ariaAtomic = true,
+        ...props
+    }) => {
+        const isStatic = position === 'static';
 
-    return (
-        <div
-            {...props}
-            className={classNames(
-                'toast-container',
-                !isStatic && 'position-fixed',
-                !isStatic && 'p-3',
-                isStatic ? 'position-static' : TOAST_POSITION_CLASSES[position],
-                className
-            )}
-            aria-live={ariaLive}
-            aria-atomic={ariaAtomic}
-        />
-    );
-};
+        return (
+            <Root
+                {...props}
+                className={classNames(
+                    'toast-container',
+                    !isStatic && 'position-fixed',
+                    !isStatic && 'p-3',
+                    isStatic ? 'position-static' : TOAST_POSITION_CLASSES[position],
+                    className
+                )}
+                aria-live={ariaLive}
+                aria-atomic={ariaAtomic}
+            />
+        );
+    }
+);
 
 export interface ToastItemProps extends ComponentPropsWithRef<'div'> {
     theme?: ComponentTheme;
@@ -85,33 +89,40 @@ export interface ToastItemProps extends ComponentPropsWithRef<'div'> {
     instant?: boolean;
 }
 
-export const ToastItem: FC<ToastItemProps> = ({
-    theme,
-    show = true,
-    translucent,
-    instant,
-    role = 'status',
-    className,
-    ...props
-}) => (
-    <div
-        {...props}
-        className={classNames(
-            'toast',
-            { show, 'toast-translucent': translucent, 'toast-instant': instant },
-            theme && `theme-${theme}`,
-            className
-        )}
-        role={role}
-    />
+export const ToastItem = polymorphic<ToastItemProps>(
+    ({
+        as: Root = 'div',
+        theme,
+        show = true,
+        translucent,
+        instant,
+        role = 'status',
+        className,
+        ...props
+    }) => (
+        <Root
+            {...props}
+            className={classNames(
+                'toast',
+                { show, 'toast-translucent': translucent, 'toast-instant': instant },
+                theme && `theme-${theme}`,
+                className
+            )}
+            role={role}
+        />
+    )
 );
 
-export const ToastHeader: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
-    <div {...props} className={classNames('toast-header', className)} />
+export const ToastHeader = polymorphic<ComponentPropsWithRef<'div'>>(
+    ({ as: Root = 'div', className, ...props }) => (
+        <Root {...props} className={classNames('toast-header', className)} />
+    )
 );
 
-export const ToastBody: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
-    <div {...props} className={classNames('toast-body', className)} />
+export const ToastBody = polymorphic<ComponentPropsWithRef<'div'>>(
+    ({ as: Root = 'div', className, ...props }) => (
+        <Root {...props} className={classNames('toast-body', className)} />
+    )
 );
 
 export class Toast {
@@ -201,3 +212,11 @@ export class Toast {
         this.messages = this.messages.filter(message => message.id !== id);
     }
 }
+
+ToastContainer.displayName = 'ToastContainer';
+
+ToastItem.displayName = 'ToastItem';
+
+ToastHeader.displayName = 'ToastHeader';
+
+ToastBody.displayName = 'ToastBody';

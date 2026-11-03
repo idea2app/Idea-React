@@ -7,6 +7,7 @@ import {
     cloneElement,
     Component,
     createRef,
+    ElementType,
     FocusEvent,
     HTMLAttributes,
     isValidElement,
@@ -19,6 +20,7 @@ import { createPortal } from 'react-dom';
 import { uniqueID } from 'web-utility';
 
 import { FloatingOptions, FloatingPosition, OverlayContainer, OverlayPlacement } from '../Overlay';
+import { AsProps, PolymorphicClassProps } from '../Polymorphic';
 import { Popover } from '../Popover';
 import { Tooltip } from '../Tooltip';
 
@@ -43,7 +45,15 @@ export interface OverlayBoxProps extends Omit<
 }
 
 @observer
-export class OverlayBox extends Component<OverlayBoxProps> {
+export class OverlayBox<T extends ElementType | undefined = 'span'> extends Component<
+    PolymorphicClassProps<T, OverlayBoxProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, OverlayBoxProps>;
+
+    protected get componentProps(): Readonly<OverlayBoxProps & AsProps> {
+        return this.props;
+    }
+
     static displayName = 'OverlayBox';
 
     @observable accessor open = false;
@@ -65,7 +75,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
     setOpenAfterDelay = (open: boolean) => {
         clearTimeout(this.timer);
 
-        const { delay } = this.props;
+        const { delay } = this.componentProps;
         const timeout = typeof delay === 'number' ? delay : delay?.[open ? 'show' : 'hide'];
 
         if (!timeout) return this.setOpen(open);
@@ -120,23 +130,23 @@ export class OverlayBox extends Component<OverlayBoxProps> {
         (!!this.root.current?.contains(target) || !!this.overlay.current?.contains(target));
 
     hasTrigger = (trigger: OverlayTrigger) => {
-        const triggers: OverlayTrigger[] = this.props.trigger
-            ? Array.isArray(this.props.trigger)
-                ? this.props.trigger
-                : [this.props.trigger]
+        const triggers: OverlayTrigger[] = this.componentProps.trigger
+            ? Array.isArray(this.componentProps.trigger)
+                ? this.componentProps.trigger
+                : [this.componentProps.trigger]
             : ['hover', 'focus'];
 
         return triggers.includes(trigger);
     };
 
     handleMouseEnter = (event: MouseEvent<HTMLSpanElement>) => {
-        this.props.onMouseEnter?.(event);
+        this.componentProps.onMouseEnter?.(event);
 
         if (!event.defaultPrevented && this.hasTrigger('hover')) this.setOpenAfterDelay(true);
     };
 
     handleMouseLeave = (event: MouseEvent<HTMLSpanElement>) => {
-        this.props.onMouseLeave?.(event);
+        this.componentProps.onMouseLeave?.(event);
 
         if (
             !event.defaultPrevented &&
@@ -148,13 +158,13 @@ export class OverlayBox extends Component<OverlayBoxProps> {
     };
 
     handleFocus = (event: FocusEvent<HTMLSpanElement>) => {
-        this.props.onFocus?.(event);
+        this.componentProps.onFocus?.(event);
 
         if (!event.defaultPrevented && this.hasTrigger('focus')) this.setOpenAfterDelay(true);
     };
 
     handleBlur = (event: FocusEvent<HTMLSpanElement>) => {
-        this.props.onBlur?.(event);
+        this.componentProps.onBlur?.(event);
 
         if (
             !event.defaultPrevented &&
@@ -165,7 +175,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
     };
 
     handleClick = (event: MouseEvent<HTMLSpanElement>) => {
-        this.props.onClick?.(event);
+        this.componentProps.onClick?.(event);
 
         if (
             !event.defaultPrevented &&
@@ -180,7 +190,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
     };
 
     handleKeyDown = (event: KeyboardEvent<HTMLSpanElement>) => {
-        this.props.onKeyDown?.(event);
+        this.componentProps.onKeyDown?.(event);
 
         if (!event.defaultPrevented && event.key === 'Escape' && this.open) {
             event.preventDefault();
@@ -189,7 +199,10 @@ export class OverlayBox extends Component<OverlayBoxProps> {
     };
 
     render() {
+        const Root: ElementType = this.componentProps.as ?? 'span';
+
         const {
+            as: _as,
             title,
             detail,
             placement = 'top',
@@ -210,7 +223,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
             onClick: _onClick,
             onKeyDown: _onKeyDown,
             ...props
-        } = this.props;
+        } = this.componentProps;
         const id = this.open ? this.id : undefined;
         const direction = this.position.element
             ? (this.position.placement.split('-')[0] as OverlayPlacement)
@@ -260,7 +273,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
             : children;
 
         return (
-            <span
+            <Root
                 {...props}
                 ref={this.root}
                 className={`position-relative d-inline-block ${className}`}
@@ -274,7 +287,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
                 {trigger}
 
                 {this.open && (target ? createPortal(overlay, target) : overlay)}
-            </span>
+            </Root>
         );
     }
 }

@@ -2,9 +2,10 @@
 
 import classNames from 'classnames';
 import { observer } from 'mobx-react';
-import { Component, ComponentPropsWithRef, createRef, ReactNode } from 'react';
+import { Component, ComponentPropsWithRef, createRef, ElementType, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
+import { AsProps, PolymorphicClassProps } from '../Polymorphic';
 import { ScrollSpyModel } from './model';
 
 export interface ScrollSpyProps extends Omit<
@@ -29,7 +30,15 @@ interface ScrollSpyEntry {
 }
 
 @observer
-export class ScrollSpy extends Component<ScrollSpyProps> {
+export class ScrollSpy<T extends ElementType | undefined = 'div'> extends Component<
+    PolymorphicClassProps<T, ScrollSpyProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, ScrollSpyProps>;
+
+    protected get componentProps(): Readonly<ScrollSpyProps & AsProps> {
+        return this.props;
+    }
+
     static displayName = 'ScrollSpy';
 
     root = createRef<HTMLDivElement>();
@@ -62,16 +71,16 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
 
     componentDidUpdate(previous: ScrollSpyProps) {
         if (
-            previous.children !== this.props.children ||
-            previous.target !== this.props.target ||
-            previous.rootMargin !== this.props.rootMargin ||
-            previous.topMargin !== this.props.topMargin ||
-            previous.threshold !== this.props.threshold ||
-            previous.scrollRoot !== this.props.scrollRoot
+            previous.children !== this.componentProps.children ||
+            previous.target !== this.componentProps.target ||
+            previous.rootMargin !== this.componentProps.rootMargin ||
+            previous.topMargin !== this.componentProps.topMargin ||
+            previous.threshold !== this.componentProps.threshold ||
+            previous.scrollRoot !== this.componentProps.scrollRoot
         )
             this.refresh();
 
-        if (previous.debug !== this.props.debug) this.updateGuides();
+        if (previous.debug !== this.componentProps.debug) this.updateGuides();
     }
 
     componentWillUnmount() {
@@ -89,8 +98,8 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
         const root = this.root.current;
         if (!root) return;
 
-        const navigation = this.props.target
-            ? document.querySelector<HTMLElement>(this.props.target)
+        const navigation = this.componentProps.target
+            ? document.querySelector<HTMLElement>(this.componentProps.target)
             : root;
         const links = [...(navigation?.querySelectorAll<HTMLAnchorElement>('a[href^="#"]') ?? [])];
 
@@ -128,14 +137,13 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
     handleScroll = () => this.updateGuides();
 
     private getRootHeight = () =>
-        this.props.scrollRoot === 'window'
+        this.componentProps.scrollRoot === 'window'
             ? document.documentElement.clientHeight || window.innerHeight
             : (this.root.current?.clientHeight ?? 0);
 
     private getRootMargin = () => {
-        if (this.props.rootMargin != null) return this.props.rootMargin;
-
-        const { topMargin = '12%' } = this.props;
+        if (this.componentProps.rootMargin != null) return this.componentProps.rootMargin;
+        const { topMargin = '12%' } = this.componentProps;
         const value = Number.parseFloat(topMargin) || 0;
         const height = this.getRootHeight();
         const percent = topMargin.endsWith('%') ? value : height ? (value / height) * 100 : 12;
@@ -149,7 +157,7 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
         this.intersecting.clear();
         this.atBottom = false;
 
-        const root = this.props.scrollRoot === 'window' ? null : this.root.current;
+        const root = this.componentProps.scrollRoot === 'window' ? null : this.root.current;
         const observer = new window.IntersectionObserver(
             entries => {
                 if (!this.mounted || this.observer !== observer) return;
@@ -159,7 +167,11 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
                 }
                 this.updateActive();
             },
-            { root, rootMargin: this.getRootMargin(), threshold: this.props.threshold ?? [0] }
+            {
+                root,
+                rootMargin: this.getRootMargin(),
+                threshold: this.componentProps.threshold ?? [0]
+            }
         );
         this.observer = observer;
 
@@ -184,7 +196,7 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
     };
 
     handleNavigationClick = (event: globalThis.MouseEvent) => {
-        if (!this.props.smoothScroll || event.defaultPrevented) return;
+        if (!this.componentProps.smoothScroll || event.defaultPrevented) return;
 
         const link =
             event.target instanceof Element
@@ -195,8 +207,7 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
 
         event.preventDefault();
         const root = this.root.current;
-        const { scrollRoot = 'self' } = this.props;
-
+        const { scrollRoot = 'self' } = this.componentProps;
         if (scrollRoot === 'window')
             window.scrollTo({
                 top: window.scrollY + entry.section.getBoundingClientRect().top,
@@ -231,15 +242,16 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
 
     private updateGuides = () => {
         const root = this.root.current;
-        if (!this.props.debug || !root) return this.store.setGuides(undefined);
+        if (!this.componentProps.debug || !root) return this.store.setGuides(undefined);
 
         const rect = root.getBoundingClientRect();
         const height = this.getRootHeight();
 
         this.store.setGuides({
-            top: this.props.scrollRoot === 'window' ? 0 : rect.top,
-            left: this.props.scrollRoot === 'window' ? 0 : rect.left,
-            width: this.props.scrollRoot === 'window' ? window.innerWidth : root.clientWidth,
+            top: this.componentProps.scrollRoot === 'window' ? 0 : rect.top,
+            left: this.componentProps.scrollRoot === 'window' ? 0 : rect.left,
+            width:
+                this.componentProps.scrollRoot === 'window' ? window.innerWidth : root.clientWidth,
             height,
             line: this.getActivationLine(height),
             atBottom: this.atBottom
@@ -289,12 +301,12 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
         if (current.id === this.store.activeId) return;
 
         this.store.setActiveId(current.id);
-        this.props.onActiveChange?.(current.id);
+        this.componentProps.onActiveChange?.(current.id);
     };
 
     renderDebug = () => {
         const guides = this.store.guides;
-        if (!this.props.debug || !guides) return null;
+        if (!this.componentProps.debug || !guides) return null;
 
         const { top, left, width, height, line, atBottom } = guides;
 
@@ -325,7 +337,10 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
     };
 
     render() {
+        const Root: ElementType = this.componentProps.as ?? 'div';
+
         const {
+            as: _as,
             children,
             className,
             debug: _debug,
@@ -339,18 +354,18 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
             threshold: _threshold,
             topMargin: _topMargin,
             ...props
-        } = this.props;
+        } = this.componentProps;
 
         return (
-            <div
+            <Root
                 {...props}
                 ref={this.root}
                 className={classNames('scrollspy', className)}
                 data-active-id={this.store.activeId || undefined}
-                data-bs-root-margin={this.props.rootMargin ?? undefined}
-                tabIndex={this.props.tabIndex ?? 0}
-                onClick={this.props.onClick}
-                onKeyDown={this.props.onKeyDown}
+                data-bs-root-margin={this.componentProps.rootMargin ?? undefined}
+                tabIndex={this.componentProps.tabIndex ?? 0}
+                onClick={this.componentProps.onClick}
+                onKeyDown={this.componentProps.onKeyDown}
             >
                 {children}
                 <div
@@ -359,7 +374,7 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
                     aria-hidden="true"
                 />
                 {this.renderDebug()}
-            </div>
+            </Root>
         );
     }
 }

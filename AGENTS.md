@@ -183,6 +183,10 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 向子组件透传时只解构需要特殊处理的 props，其余用 `...this.props` 展开，不逐项转发。
 - 多个组件共享的属性定义在基础模块，组件通过 `extends`、`Omit` 或类型别名复用，不从组件文件再导出基础模块的类型。
 - 没有成员声明体的 `interface` 改用 `type` 与交叉类型表达。
+- 单根节点组件复用 `source/Polymorphic.ts` 的泛型与组合机制支持 `as`，透传目标组件属性；
+  片段或多根节点组件不强行添加包装节点，类组件的 `ref` 保持实例语义。
+  类组件显式声明 `declare readonly props: PolymorphicClassProps<T, Props>`，避免 React 的
+  `Readonly` 映射丢失目标属性的联合类型；内部按需使用类型收窄 getter。
 - 组件 Props 优先用 `Pick`/`Omit`/`extends` 复用已有类型，不重复声明；按外观、内容、状态、行为的顺序分组排列。
 - JSX 属性按 `as`、HTML 通用静态属性、组件专属属性、状态属性、回调属性排序；相同键值的 props 可用对象字面量简写后展开。
 - 同一模块的类型与值合并为一条 import，不拆成 `import type` 与 `import` 两条。

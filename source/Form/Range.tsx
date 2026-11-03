@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { ComponentPropsWithoutRef, CSSProperties, forwardRef, Ref } from 'react';
 
 import { ComponentTheme } from '../Button';
+import { AsProps, polymorphic } from '../Polymorphic';
 import { FormPlugin } from './Plugin';
 import { FormValidationProps } from './Primitives';
 
@@ -17,8 +18,8 @@ export type FormRangeProps = Omit<ComponentPropsWithoutRef<'input'>, 'type'> &
         onValueChange?: (value: number) => unknown;
     };
 
-interface FormRangeComponentProps extends FormRangeProps {
-    forwardedRef?: Ref<HTMLInputElement>;
+interface FormRangeComponentProps extends FormRangeProps, AsProps {
+    forwardedRef?: Ref<HTMLElement>;
 }
 
 class FormRangeComponent extends FormPlugin<FormRangeComponentProps, Range> {
@@ -50,8 +51,22 @@ class FormRangeComponent extends FormPlugin<FormRangeComponentProps, Range> {
     private handleValueChange = (event: Event) =>
         this.props.onValueChange?.((event as Event & { value: number }).value);
 
+    private forwardRef = (element: HTMLElement | null) => {
+        const { forwardedRef } = this.props;
+
+        if (typeof forwardedRef === 'function') forwardedRef(element);
+        else if (forwardedRef) forwardedRef.current = element;
+    };
+
+    private setRootRef = (element: HTMLDivElement | null) => {
+        this.element.current = element;
+
+        if (this.props.as) this.forwardRef(element);
+    };
+
     render() {
         const {
+            as: Root = 'div',
             className,
             wrapperClassName,
             min = 0,
@@ -62,7 +77,7 @@ class FormRangeComponent extends FormPlugin<FormRangeComponentProps, Range> {
             theme,
             formatter: _formatter,
             onValueChange: _onValueChange,
-            forwardedRef,
+            forwardedRef: _forwardedRef,
             validation,
             style,
             ...props
@@ -77,8 +92,9 @@ class FormRangeComponent extends FormPlugin<FormRangeComponentProps, Range> {
                   );
 
         return (
-            <div
-                ref={this.element}
+            <Root
+                {...(this.props.as ? props : {})}
+                ref={this.setRootRef}
                 className={classNames(
                     'form-range',
                     theme && `theme-${theme}`,
@@ -89,8 +105,9 @@ class FormRangeComponent extends FormPlugin<FormRangeComponentProps, Range> {
                 style={{ '--bs-range-fill': fill } as CSSProperties}
             >
                 <input
-                    {...props}
-                    ref={forwardedRef}
+                    {...(this.props.as ? {} : props)}
+                    ref={this.props.as ? undefined : this.forwardRef}
+                    name={props.name}
                     type="range"
                     min={min}
                     max={max}
@@ -104,13 +121,15 @@ class FormRangeComponent extends FormPlugin<FormRangeComponentProps, Range> {
                     )}
                     style={style}
                 />
-            </div>
+            </Root>
         );
     }
 }
 
-export const FormRange = forwardRef<HTMLInputElement, FormRangeProps>((props, forwardedRef) => (
-    <FormRangeComponent {...props} forwardedRef={forwardedRef} />
-));
+export const FormRange = polymorphic<FormRangeProps & { ref?: Ref<HTMLInputElement> }>(
+    forwardRef<HTMLInputElement, FormRangeProps & AsProps>((props, forwardedRef) => (
+        <FormRangeComponent {...props} forwardedRef={forwardedRef} />
+    ))
+);
 
 FormRange.displayName = 'FormRange';

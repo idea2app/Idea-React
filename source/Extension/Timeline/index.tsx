@@ -1,7 +1,8 @@
-import { FC, HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import { TimeData } from 'web-utility';
 
 import { Card, CardBody, CardText, CardTitle } from '../../Card';
+import { polymorphic } from '../../Polymorphic';
 import { Nameplate, NameplateProps } from '../Nameplate';
 import { Time } from '../Time';
 import * as styles from './index.module.less';
@@ -23,38 +24,40 @@ export interface TimelineProps extends HTMLAttributes<HTMLOListElement> {
 /**
  * @see {@link https://mdbootstrap.com/docs/standard/extended/timeline/#section-timeline-gradient-bg}
  */
-export const Timeline: FC<TimelineProps> = ({ className, events, timeFormat, ...props }) => (
-    <ol className={`list-unstyled ${styles.timeline} ${className}`} {...props}>
-        {events.map(({ title, summary, time, link, people }) => (
-            <li
-                key={title as string}
-                className={`position-relative ${styles.timelineItem} ${styles.right}`}
-            >
-                <Card>
-                    <CardBody className="p-4 d-flex flex-column gap-3 align-items-center">
-                        <CardTitle className="h5 m-0">
-                            <a className="text-decoration-none stretched-link" href={link}>
-                                {title as string}
-                            </a>
-                        </CardTitle>
-                        <div className="small fg-3 d-flex gap-2">
-                            ⏲️
-                            <Time dateTime={time[0]} format={timeFormat} />
-                            {time[1] && '~'}
-                            {time[1] && <Time dateTime={time[1]} format={timeFormat} />}
-                        </div>
-                        <ul className="list-unstyled m-0 d-flex gap-2 flex-wrap justify-content-around">
-                            {people?.map(person => (
-                                <li key={person.name}>
-                                    <Nameplate {...person} />
-                                </li>
-                            ))}
-                        </ul>
-                        <CardText className="m-0">{summary as string}</CardText>
-                    </CardBody>
-                </Card>
-            </li>
-        ))}
-    </ol>
+export const Timeline = polymorphic<TimelineProps>(
+    ({ as: Root = 'ol', className, events, timeFormat, ...props }) => (
+        <Root className={`list-unstyled ${styles.timeline} ${className}`} {...props}>
+            {events.map(({ title, summary, time, link, people }) => (
+                <li
+                    key={title as string}
+                    className={`position-relative ${styles.timelineItem} ${styles.right}`}
+                >
+                    <Card>
+                        <CardBody className="p-4 d-flex flex-column gap-3 align-items-center">
+                            <CardTitle className="h5 m-0">
+                                <a className="text-decoration-none stretched-link" href={link}>
+                                    {title as string}
+                                </a>
+                            </CardTitle>
+                            <div className="small fg-3 d-flex gap-2">
+                                ⏲️
+                                <Time dateTime={time[0]} format={timeFormat} />
+                                {time[1] && '~'}
+                                {time[1] && <Time dateTime={time[1]} format={timeFormat} />}
+                            </div>
+                            <ul className="list-unstyled m-0 d-flex gap-2 flex-wrap justify-content-around">
+                                {people?.map(person => (
+                                    <li key={person.name}>
+                                        <Nameplate {...person} />
+                                    </li>
+                                ))}
+                            </ul>
+                            <CardText className="m-0">{summary as string}</CardText>
+                        </CardBody>
+                    </Card>
+                </li>
+            ))}
+        </Root>
+    )
 );
 Timeline.displayName = 'Timeline';

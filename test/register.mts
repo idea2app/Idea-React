@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync,readFileSync } from 'node:fs';
 import { registerHooks } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
@@ -17,7 +17,7 @@ registerHooks({
         return nextResolve(specifier, context);
     },
     load(url, context, nextLoad) {
-        if (url.endsWith('.css')) {
+        if (/\.(css|less)$/.test(url)) {
             return { format: 'module', source: 'export default {};', shortCircuit: true };
         }
         if (url.endsWith('.ts') || url.endsWith('.tsx')) {

@@ -2,18 +2,28 @@
 
 import { action, computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component, createRef, ReactNode } from 'react';
+import { Component, createRef, ElementType, ReactNode, Ref } from 'react';
 
+import { AsProps, PolymorphicClassProps } from '../../Polymorphic';
 import { Icon } from '../Icon';
 import * as style from './index.module.less';
 
 export interface ScrollNavScrollerProps {
     className?: string;
     children: ReactNode;
+    rootRef?: Ref<HTMLElement>;
 }
 
 @observer
-export class ScrollNavScroller extends Component<ScrollNavScrollerProps> {
+export class ScrollNavScroller<T extends ElementType | undefined = 'div'> extends Component<
+    PolymorphicClassProps<T, ScrollNavScrollerProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, ScrollNavScrollerProps>;
+
+    protected get componentProps(): Readonly<ScrollNavScrollerProps & AsProps> {
+        return this.props;
+    }
+
     scrollerRef = createRef<HTMLDivElement>();
 
     @observable
@@ -73,11 +83,17 @@ export class ScrollNavScroller extends Component<ScrollNavScrollerProps> {
     scrollForward = () => this.scrollBy(1);
 
     render() {
+        const Root: ElementType = this.componentProps.as ?? 'div';
+
         const { canScrollLeft, canScrollRight } = this;
-        const { className = '', children } = this.props;
+        const { as: _as, className = '', children, rootRef, ...props } = this.componentProps;
 
         return (
-            <div className={`position-relative overflow-y-hidden ${className}`}>
+            <Root
+                {...props}
+                ref={rootRef}
+                className={`position-relative overflow-y-hidden ${className}`}
+            >
                 {canScrollLeft && (
                     <button
                         type="button"
@@ -101,7 +117,7 @@ export class ScrollNavScroller extends Component<ScrollNavScrollerProps> {
                         <Icon name="caret-right-fill" />
                     </button>
                 )}
-            </div>
+            </Root>
         );
     }
 }

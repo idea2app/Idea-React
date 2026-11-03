@@ -14,6 +14,10 @@ Idea React provides the [`Table` wrapper][1] for these examples. Use the `stripe
 modifiers, and `responsive` to wrap the table in `.table-responsive` (pass a breakpoint to use the
 responsive variant, for example `responsive="md"`).
 
+The `as` prop replaces the table root, or the outer wrapper when `responsive` is enabled.
+With an explicit `as`, additional props, `className`, and the ref are forwarded to that root;
+responsive tables retain their inner table and its Bootstrap variants.
+
 ## Overview
 
 Due to the widespread use of `<table>` elements across third-party widgets like calendars and date

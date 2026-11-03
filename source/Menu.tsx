@@ -6,12 +6,11 @@ import { observer } from 'mobx-react';
 import {
     Component,
     createRef,
-    FC,
+    ElementType,
     FocusEvent,
     HTMLAttributes,
     KeyboardEvent,
     MouseEvent,
-    PropsWithChildren,
     ReactNode
 } from 'react';
 
@@ -19,16 +18,20 @@ import { Button, ButtonProps } from './Button';
 import { Icon, IconProps } from './Extension/Icon';
 import { Breakpoint } from './Grid';
 import { FloatingOptions, FloatingPosition } from './Overlay';
+import { AsProps, polymorphic, PolymorphicClassProps } from './Polymorphic';
 
 export type MenuItemProps = ButtonProps & { active?: boolean; selected?: boolean };
 
-export const MenuItem: FC<MenuItemProps> = ({ active, selected, className, ...props }) => (
-    <Button
-        {...props}
-        aria-current={active || (selected && props.href) ? 'true' : props['aria-current']}
-        aria-pressed={props.href ? props['aria-pressed'] : (selected ?? props['aria-pressed'])}
-        className={classNames('menu-item', { active, selected }, className)}
-    />
+export const MenuItem = polymorphic<MenuItemProps>(
+    ({ as: RootAs, active, selected, className, ...props }) => (
+        <Button
+            as={RootAs}
+            {...props}
+            aria-current={active || (selected && props.href) ? 'true' : props['aria-current']}
+            aria-pressed={props.href ? props['aria-pressed'] : (selected ?? props['aria-pressed'])}
+            className={classNames('menu-item', { active, selected }, className)}
+        />
+    )
 );
 
 export interface MenuPanelProps extends HTMLAttributes<HTMLDivElement> {
@@ -38,67 +41,88 @@ export interface MenuPanelProps extends HTMLAttributes<HTMLDivElement> {
     show?: boolean;
 }
 
-export const MenuPanel: FC<MenuPanelProps> = ({
-    theme,
-    translucent,
-    scrollable,
-    show,
-    className,
-    ...props
-}) => (
-    <div
-        {...props}
-        data-bs-theme={theme}
-        className={classNames(
-            'menu',
-            { show },
-            translucent && 'menu-translucent',
-            scrollable && 'menu-scrollable',
-            className
-        )}
-    />
+export const MenuPanel = polymorphic<MenuPanelProps>(
+    ({ as: Root = 'div', theme, translucent, scrollable, show, className, ...props }) => (
+        <Root
+            {...props}
+            data-bs-theme={theme}
+            className={classNames(
+                'menu',
+                { show },
+                translucent && 'menu-translucent',
+                scrollable && 'menu-scrollable',
+                className
+            )}
+        />
+    )
 );
 
-export const MenuItemIcon: FC<IconProps> = ({ className, ...props }) => (
-    <Icon aria-hidden="true" {...props} className={classNames('menu-item-icon', className)} />
-);
-
-export const MenuItemCheck: FC<Omit<IconProps, 'name'>> = ({ className, ...props }) => (
+export const MenuItemIcon = polymorphic<IconProps>(({ as: RootAs, className, ...props }) => (
     <Icon
+        as={RootAs}
         aria-hidden="true"
         {...props}
-        name="check"
-        className={classNames('menu-item-check', className)}
+        className={classNames('menu-item-icon', className)}
     />
+));
+
+export const MenuItemCheck = polymorphic<Omit<IconProps, 'name'>>(
+    ({ as: RootAs, className, ...props }) => (
+        <Icon
+            as={RootAs}
+            aria-hidden="true"
+            {...props}
+            name="check"
+            className={classNames('menu-item-check', className)}
+        />
+    )
 );
 
-export const MenuText: FC<HTMLAttributes<HTMLSpanElement>> = ({ className, ...props }) => (
-    <span {...props} className={classNames('menu-text', className)} />
+export const MenuText = polymorphic<HTMLAttributes<HTMLSpanElement>>(
+    ({ as: Root = 'span', className, ...props }) => (
+        <Root {...props} className={classNames('menu-text', className)} />
+    )
 );
 
-export const MenuHeader: FC<HTMLAttributes<HTMLHeadingElement>> = ({ className, ...props }) => (
-    <h6 {...props} className={classNames('menu-header', className)} />
+export const MenuHeader = polymorphic<HTMLAttributes<HTMLHeadingElement>>(
+    ({ as: Root = 'h6', className, ...props }) => (
+        <Root {...props} className={classNames('menu-header', className)} />
+    )
 );
 
-export const MenuDivider: FC<HTMLAttributes<HTMLHRElement>> = ({ className, ...props }) => (
-    <hr {...props} className={classNames('menu-divider', className)} />
+export const MenuDivider = polymorphic<HTMLAttributes<HTMLHRElement>>(
+    ({ as: Root = 'hr', className, ...props }) => (
+        <Root {...props} className={classNames('menu-divider', className)} />
+    )
 );
 
-export const MenuItemContent: FC<HTMLAttributes<HTMLSpanElement>> = ({ className, ...props }) => (
-    <span {...props} className={classNames('menu-item-content', className)} />
+export const MenuItemContent = polymorphic<HTMLAttributes<HTMLSpanElement>>(
+    ({ as: Root = 'span', className, ...props }) => (
+        <Root {...props} className={classNames('menu-item-content', className)} />
+    )
 );
 
-export const MenuItemDescription: FC<HTMLAttributes<HTMLElement>> = ({ className, ...props }) => (
-    <small {...props} className={classNames('menu-item-description', className)} />
+export const MenuItemDescription = polymorphic<HTMLAttributes<HTMLElement>>(
+    ({ as: Root = 'small', className, ...props }) => (
+        <Root {...props} className={classNames('menu-item-description', className)} />
+    )
 );
 
-export interface MenuSubmenuProps extends PropsWithChildren {
+export interface MenuSubmenuProps extends HTMLAttributes<HTMLDivElement> {
     label: ReactNode;
     className?: string;
 }
 
 @observer
-export class MenuSubmenu extends Component<MenuSubmenuProps> {
+export class MenuSubmenu<T extends ElementType | undefined = 'div'> extends Component<
+    PolymorphicClassProps<T, MenuSubmenuProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, MenuSubmenuProps>;
+
+    protected get componentProps(): Readonly<MenuSubmenuProps & AsProps> {
+        return this.props;
+    }
+
     @observable accessor open = false;
 
     panel = createRef<HTMLDivElement>();
@@ -128,11 +152,23 @@ export class MenuSubmenu extends Component<MenuSubmenuProps> {
 
     handleClick = () => this.setOpen(!this.open);
 
-    handleMouseEnter = () => this.setOpen(true);
+    handleMouseEnter = (event: MouseEvent<HTMLDivElement>) => {
+        this.componentProps.onMouseEnter?.(event);
 
-    handleMouseLeave = () => this.setOpen(false);
+        if (!event.defaultPrevented) this.setOpen(true);
+    };
+
+    handleMouseLeave = (event: MouseEvent<HTMLDivElement>) => {
+        this.componentProps.onMouseLeave?.(event);
+
+        if (!event.defaultPrevented) this.setOpen(false);
+    };
 
     handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+        this.componentProps.onKeyDown?.(event);
+
+        if (event.defaultPrevented) return;
+
         const { key } = event;
 
         if (key === 'ArrowRight') {
@@ -156,11 +192,14 @@ export class MenuSubmenu extends Component<MenuSubmenuProps> {
     };
 
     render() {
-        const { label, className, children } = this.props;
+        const Root: ElementType = this.componentProps.as ?? 'div';
+
+        const { as: _as, label, className, children, ...props } = this.componentProps;
         const { open } = this;
 
         return (
-            <div
+            <Root
+                {...props}
                 className={classNames('submenu', { show: open }, className)}
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
@@ -184,7 +223,7 @@ export class MenuSubmenu extends Component<MenuSubmenuProps> {
                 >
                     {children}
                 </div>
-            </div>
+            </Root>
         );
     }
 }
@@ -241,7 +280,15 @@ const MENU_BREAKPOINT_WIDTHS: Record<Breakpoint, number> = {
 };
 
 @observer
-export class Menu extends Component<MenuProps> {
+export class Menu<T extends ElementType | undefined = 'div'> extends Component<
+    PolymorphicClassProps<T, MenuProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, MenuProps>;
+
+    protected get componentProps(): Readonly<MenuProps & AsProps> {
+        return this.props;
+    }
+
     @observable accessor open = false;
     @observable accessor responsiveDirection: MenuPlacement | undefined;
 
@@ -257,10 +304,9 @@ export class Menu extends Component<MenuProps> {
     }
 
     componentDidUpdate({ responsivePlacement }: MenuProps) {
-        const { trigger, panel, position, props } = this;
-
-        if (responsivePlacement !== props.responsivePlacement) this.observePlacement();
-
+        if (responsivePlacement !== this.componentProps.responsivePlacement)
+            this.observePlacement();
+        const { trigger, panel, position, componentProps: props } = this;
         if (!this.open) return position.dispose();
         if (!trigger.current || !panel.current) return;
 
@@ -293,7 +339,7 @@ export class Menu extends Component<MenuProps> {
             query.removeEventListener('change', this.handlePlacement);
 
         this.media = (Object.keys(MENU_BREAKPOINT_WIDTHS) as Breakpoint[]).flatMap(breakpoint => {
-            const placement = this.props.responsivePlacement?.[breakpoint];
+            const placement = this.componentProps.responsivePlacement?.[breakpoint];
             if (!placement) return [];
 
             const query = window.matchMedia(`(min-width: ${MENU_BREAKPOINT_WIDTHS[breakpoint]}px)`);
@@ -313,11 +359,11 @@ export class Menu extends Component<MenuProps> {
     setOpen = (open: boolean) => {
         if (this.open === open) return;
         this.open = open;
-        this.props.onOpenChange?.(open);
+        this.componentProps.onOpenChange?.(open);
     };
 
     handleOutside = ({ target }: PointerEvent) => {
-        const { autoClose = true } = this.props;
+        const { autoClose = true } = this.componentProps;
         if (
             autoClose !== false &&
             autoClose !== 'inside' &&
@@ -336,7 +382,7 @@ export class Menu extends Component<MenuProps> {
     }
 
     handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-        this.props.onKeyDown?.(event);
+        this.componentProps.onKeyDown?.(event);
 
         const { key, defaultPrevented } = event;
         if (defaultPrevented) return;
@@ -375,7 +421,7 @@ export class Menu extends Component<MenuProps> {
     };
 
     handleBlur = (event: FocusEvent<HTMLDivElement>) => {
-        const { onBlur, autoClose = true } = this.props;
+        const { onBlur, autoClose = true } = this.componentProps;
         onBlur?.(event);
 
         const { defaultPrevented, currentTarget, relatedTarget } = event;
@@ -391,7 +437,7 @@ export class Menu extends Component<MenuProps> {
     handleToggle = () => this.setOpen(!this.open);
 
     handleSelect = ({ target, defaultPrevented }: MouseEvent<HTMLDivElement>) => {
-        const { autoClose = true } = this.props;
+        const { autoClose = true } = this.componentProps;
         if (
             autoClose &&
             !defaultPrevented &&
@@ -404,7 +450,10 @@ export class Menu extends Component<MenuProps> {
     };
 
     render() {
+        const Root: ElementType = this.componentProps.as ?? 'div';
+
         const {
+            as: _as,
             label,
             autoClose: _autoClose,
             align = 'end',
@@ -427,7 +476,7 @@ export class Menu extends Component<MenuProps> {
             className,
             id,
             ...props
-        } = this.props;
+        } = this.componentProps;
         const { open } = this;
         const preferred = this.responsiveDirection ?? placement;
         const direction = this.position.element
@@ -438,7 +487,7 @@ export class Menu extends Component<MenuProps> {
             : ['top-100', align === 'end' ? 'end-0' : 'start-0'];
 
         return (
-            <div
+            <Root
                 {...props}
                 ref={this.root}
                 id={id}
@@ -485,7 +534,25 @@ export class Menu extends Component<MenuProps> {
                 >
                     {children}
                 </div>
-            </div>
+            </Root>
         );
     }
 }
+
+MenuItem.displayName = 'MenuItem';
+
+MenuPanel.displayName = 'MenuPanel';
+
+MenuItemIcon.displayName = 'MenuItemIcon';
+
+MenuItemCheck.displayName = 'MenuItemCheck';
+
+MenuText.displayName = 'MenuText';
+
+MenuHeader.displayName = 'MenuHeader';
+
+MenuDivider.displayName = 'MenuDivider';
+
+MenuItemContent.displayName = 'MenuItemContent';
+
+MenuItemDescription.displayName = 'MenuItemDescription';

@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import { ComponentPropsWithRef, CSSProperties, FC, HTMLAttributes } from 'react';
+import { ComponentPropsWithRef, CSSProperties, HTMLAttributes } from 'react';
 
 import type { ComponentTheme } from './Button';
+import { polymorphic } from './Polymorphic';
 
 export type AvatarSize = 'xs' | 'sm' | 'lg' | 'xl';
 export type AvatarStatus = 'online' | 'offline' | 'busy' | 'away';
@@ -20,44 +21,47 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
     statusLabel?: string;
 }
 
-export const Avatar: FC<AvatarProps> = ({
-    className,
-    style,
-    size,
-    theme,
-    subtle,
-    src,
-    alt,
-    status,
-    statusLabel = status,
-    children,
-    ...props
-}) => (
-    <span
-        className={classNames(
-            'avatar',
-            typeof size === 'string' && `avatar-${size}`,
-            theme && `theme-${theme}`,
-            subtle && 'avatar-subtle',
-            className
-        )}
-        style={
-            typeof size === 'number'
-                ? ({ '--bs-avatar-size': `${size}rem`, ...style } as CSSProperties)
-                : style
-        }
-        {...props}
-    >
-        {src ? <img className="avatar-img" src={src} alt={alt} /> : children}
+export const Avatar = polymorphic<AvatarProps>(
+    ({
+        as: Root = 'span',
+        className,
+        style,
+        size,
+        theme,
+        subtle,
+        src,
+        alt,
+        status,
+        statusLabel = status,
+        children,
+        ...props
+    }) => (
+        <Root
+            className={classNames(
+                'avatar',
+                typeof size === 'string' && `avatar-${size}`,
+                theme && `theme-${theme}`,
+                subtle && 'avatar-subtle',
+                className
+            )}
+            style={
+                typeof size === 'number'
+                    ? ({ '--bs-avatar-size': `${size}rem`, ...style } as CSSProperties)
+                    : style
+            }
+            {...props}
+        >
+            {src ? <img className="avatar-img" src={src} alt={alt} /> : children}
 
-        {status && (
-            <span
-                className={`avatar-status status-${status}`}
-                role="img"
-                aria-label={statusLabel}
-            />
-        )}
-    </span>
+            {status && (
+                <span
+                    className={`avatar-status status-${status}`}
+                    role="img"
+                    aria-label={statusLabel}
+                />
+            )}
+        </Root>
+    )
 );
 
 Avatar.displayName = 'Avatar';
@@ -66,19 +70,23 @@ export interface AvatarStackProps extends HTMLAttributes<HTMLDivElement> {
     size?: AvatarSize;
 }
 
-export const AvatarImage: FC<ComponentPropsWithRef<'img'>> = ({ className, ...props }) => (
-    <img {...props} className={classNames('avatar-img', className)} />
+export const AvatarImage = polymorphic<ComponentPropsWithRef<'img'>>(
+    ({ as: Root = 'img', className, ...props }) => (
+        <Root {...props} className={classNames('avatar-img', className)} />
+    )
 );
 
 AvatarImage.displayName = 'AvatarImage';
 
-export const AvatarStack: FC<AvatarStackProps> = ({ className, size, children, ...props }) => (
-    <div
-        className={classNames('avatar-stack', size && `avatar-stack-${size}`, className)}
-        {...props}
-    >
-        {children}
-    </div>
+export const AvatarStack = polymorphic<AvatarStackProps>(
+    ({ as: Root = 'div', className, size, children, ...props }) => (
+        <Root
+            className={classNames('avatar-stack', size && `avatar-stack-${size}`, className)}
+            {...props}
+        >
+            {children}
+        </Root>
+    )
 );
 
 AvatarStack.displayName = 'AvatarStack';

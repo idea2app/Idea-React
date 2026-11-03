@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { Component, ComponentPropsWithoutRef, forwardRef, Ref } from 'react';
 
 import type { ComponentTheme } from '../Button';
+import { AsProps, polymorphic } from '../Polymorphic';
 import { FormValidationProps } from './Primitives';
 
 export type CheckboxProps = Omit<ComponentPropsWithoutRef<'input'>, 'type' | 'size'> &
@@ -13,7 +14,7 @@ export type CheckboxProps = Omit<ComponentPropsWithoutRef<'input'>, 'type' | 'si
         indeterminate?: boolean;
     };
 
-interface CheckboxComponentProps extends CheckboxProps {
+interface CheckboxComponentProps extends CheckboxProps, AsProps {
     forwardedRef?: Ref<HTMLInputElement>;
 }
 
@@ -43,6 +44,7 @@ class CheckboxComponent extends Component<CheckboxComponentProps> {
 
     render() {
         const {
+            as: Root = 'input',
             className,
             size,
             theme,
@@ -53,7 +55,7 @@ class CheckboxComponent extends Component<CheckboxComponentProps> {
         } = this.props;
 
         return (
-            <input
+            <Root
                 {...props}
                 ref={this.setInputRef}
                 type="checkbox"
@@ -71,8 +73,10 @@ class CheckboxComponent extends Component<CheckboxComponentProps> {
     }
 }
 
-export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, forwardedRef) => (
-    <CheckboxComponent {...props} forwardedRef={forwardedRef} />
-));
+export const Checkbox = polymorphic<CheckboxProps & { ref?: Ref<HTMLInputElement> }>(
+    forwardRef<HTMLInputElement, CheckboxProps & AsProps>((props, forwardedRef) => (
+        <CheckboxComponent {...props} forwardedRef={forwardedRef} />
+    ))
+);
 
 Checkbox.displayName = 'Checkbox';

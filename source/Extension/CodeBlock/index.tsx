@@ -4,11 +4,12 @@ import tsx from '@shikijs/langs/tsx';
 import ts from '@shikijs/langs/typescript';
 import githubDark from '@shikijs/themes/github-dark';
 import githubLight from '@shikijs/themes/github-light';
-import { FC, HTMLAttributes, isValidElement, ReactNode } from 'react';
+import { HTMLAttributes, isValidElement, ReactNode } from 'react';
 import reactElementToJSXString from 'react-element-to-jsx-string';
 import { createHighlighterCoreSync } from 'shiki/core';
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
 
+import { polymorphic } from '../../Polymorphic';
 import styles from './style.module.css';
 
 const highlighter = createHighlighterCoreSync({
@@ -22,37 +23,40 @@ export interface CodeBlockProps extends HTMLAttributes<HTMLPreElement> {
     header?: ReactNode;
 }
 
-export const CodeBlock: FC<CodeBlockProps> = ({
-    className = '',
-    language,
-    header,
-    children,
-    ...props
-}) => {
-    const sourceCode =
-        typeof children === 'string'
-            ? children
-            : reactElementToJSXString(isValidElement(children) ? children : <>{children}</>);
+export const CodeBlock = polymorphic<CodeBlockProps>(
+    ({ as: Root = 'pre', className = '', language, header, children, ...props }) => {
+        const sourceCode =
+            typeof children === 'string'
+                ? children
+                : reactElementToJSXString(isValidElement(children) ? children : <>{children}</>);
 
-    const __html = highlighter.codeToHtml(sourceCode, {
-        lang: language,
-        themes: { light: 'github-light', dark: 'github-dark' },
-        defaultColor: false,
-        structure: 'inline'
-    });
+        const __html = highlighter.codeToHtml(sourceCode, {
+            lang: language,
+            themes: { light: 'github-light', dark: 'github-dark' },
+            defaultColor: false,
+            structure: 'inline'
+        });
 
-    const code = (
-        <pre className={`m-0 shiki language-${language} ${styles.code} ${className}`} {...props}>
-            <code dangerouslySetInnerHTML={{ __html }} className={`language-${language}`} />
-        </pre>
-    );
+        const code = (
+            <Root
+                className={`m-0 shiki language-${language} ${styles.code} ${className}`}
+                {...props}
+            >
+                <code dangerouslySetInnerHTML={{ __html }} className={`language-${language}`} />
+            </Root>
+        );
 
-    return header ? (
-        <figure className="m-0 border rounded overflow-hidden">
-            <figcaption className="px-3 py-2 bg-body-tertiary border-bottom">{header}</figcaption>
-            {code}
-        </figure>
-    ) : (
-        code
-    );
-};
+        return header ? (
+            <figure className="m-0 border rounded overflow-hidden">
+                <figcaption className="px-3 py-2 bg-body-tertiary border-bottom">
+                    {header}
+                </figcaption>
+                {code}
+            </figure>
+        ) : (
+            code
+        );
+    }
+);
+
+CodeBlock.displayName = 'CodeBlock';

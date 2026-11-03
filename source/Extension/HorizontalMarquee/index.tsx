@@ -1,61 +1,85 @@
-import { FC, HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 
+import { polymorphic } from '../../Polymorphic';
 import * as style from './index.module.less';
 
 export type HorizontalMarqueeProps = HTMLAttributes<HTMLDivElement> &
     Partial<Record<'maxWidth' | 'duration' | 'height', string>>;
 
-export const HorizontalMarquee: FC<HorizontalMarqueeProps> = ({
-    className = '',
-    children,
-    maxWidth = '100%',
-    duration,
-    height,
-    ...props
-}) => (
-    <div className={`overflow-hidden max-w-100 ${className}`} {...props}>
-        <div
-            className={`d-inline-block align-top text-nowrap ${style.scrollWrap}`}
-            style={{
-                maxWidth,
-                animationDuration: duration,
-                height,
-                lineHeight: height
-            }}
-        >
+export const HorizontalMarquee = polymorphic<HorizontalMarqueeProps>(
+    ({
+        as: Root = 'div',
+        className = '',
+        children,
+        maxWidth = '100%',
+        duration,
+        height,
+        ...props
+    }) => (
+        <Root className={`overflow-hidden max-w-100 ${className}`} {...props}>
             <div
-                className={`d-inline-block ${style.scrollItem}`}
-                style={{ animationDuration: duration }}
+                className={`d-inline-block align-top text-nowrap ${style.scrollWrap}`}
+                style={{
+                    maxWidth,
+                    animationDuration: duration,
+                    height,
+                    lineHeight: height
+                }}
             >
-                {children}
-            </div>
-        </div>
-    </div>
-);
-
-export const HorizontalMarqueeBox: FC<HorizontalMarqueeProps> = ({
-    children,
-    maxWidth,
-    duration,
-    height
-}) =>
-    height ? (
-        <div
-            className={`overflow-hidden ${style.scrollHeightWrap}`}
-            // @ts-expect-error remove after React 19 released
-            style={{ maxWidth: maxWidth, '--scroll-height': height }}
-        >
-            <div className={`d-inline-block overflow-hidden max-w-100 ${style.scrollContainer}`}>
                 <div
-                    className={`d-block overflow-hidden text-wrap text-break ${style.unScrollItem}`}
+                    className={`d-inline-block ${style.scrollItem}`}
+                    style={{ animationDuration: duration }}
                 >
                     {children}
                 </div>
-                <HorizontalMarquee duration={duration}>{children}</HorizontalMarquee>
             </div>
-        </div>
-    ) : (
-        <HorizontalMarquee {...{ maxWidth, duration, height }}>{children}</HorizontalMarquee>
-    );
+        </Root>
+    )
+);
+
+export const HorizontalMarqueeBox = polymorphic<HorizontalMarqueeProps>(
+    ({
+        as: RootAs,
+        children,
+        className = '',
+        style: rootStyle,
+        maxWidth,
+        duration,
+        height,
+        ...props
+    }) => {
+        const Root = RootAs ?? 'div';
+        return height ? (
+            <Root
+                {...props}
+                className={`overflow-hidden ${style.scrollHeightWrap} ${className}`}
+                style={{ maxWidth, '--scroll-height': height, ...rootStyle }}
+            >
+                <div
+                    className={`d-inline-block overflow-hidden max-w-100 ${style.scrollContainer}`}
+                >
+                    <div
+                        className={`d-block overflow-hidden text-wrap text-break ${style.unScrollItem}`}
+                    >
+                        {children}
+                    </div>
+                    <HorizontalMarquee duration={duration}>{children}</HorizontalMarquee>
+                </div>
+            </Root>
+        ) : (
+            <HorizontalMarquee
+                as={RootAs}
+                {...props}
+                className={className}
+                style={rootStyle}
+                {...{ maxWidth, duration, height }}
+            >
+                {children}
+            </HorizontalMarquee>
+        );
+    }
+);
 
 HorizontalMarquee.displayName = 'HorizontalMarquee';
+
+HorizontalMarqueeBox.displayName = 'HorizontalMarqueeBox';

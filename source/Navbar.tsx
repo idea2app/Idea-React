@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import { ComponentPropsWithRef, FC } from 'react';
+import { ComponentPropsWithRef } from 'react';
 
 import { Button } from './Button';
+import { polymorphic } from './Polymorphic';
 
 export interface NavbarProps extends ComponentPropsWithRef<'nav'> {
     theme?: 'light' | 'dark';
@@ -9,52 +10,53 @@ export interface NavbarProps extends ComponentPropsWithRef<'nav'> {
     translucent?: boolean;
 }
 
-export const Navbar: FC<NavbarProps> = ({ expand, theme, translucent, className, ...props }) => (
-    <nav
-        {...props}
-        className={classNames(
-            'navbar',
-            translucent && 'navbar-translucent',
-            expand && (expand === true ? 'navbar-expand' : `${expand}:navbar-expand`),
-            className
-        )}
-        data-bs-theme={theme}
-    />
+export const Navbar = polymorphic<NavbarProps>(
+    ({ as: Root = 'nav', expand, theme, translucent, className, ...props }) => (
+        <Root
+            {...props}
+            className={classNames(
+                'navbar',
+                translucent && 'navbar-translucent',
+                expand && (expand === true ? 'navbar-expand' : `${expand}:navbar-expand`),
+                className
+            )}
+            data-bs-theme={theme}
+        />
+    )
 );
 
 export type NavbarBrandProps =
     (ComponentPropsWithRef<'a'> & { as?: 'a' }) | (ComponentPropsWithRef<'span'> & { as: 'span' });
 
-export const NavbarBrand: FC<NavbarBrandProps> = props => {
-    if (props.as === 'span') {
-        const { as: _as, className, ...spanProps } = props;
-
-        return <span {...spanProps} className={classNames('navbar-brand', className)} />;
-    }
-    const { as: _as, className, ...anchorProps } = props;
-
-    return <a {...anchorProps} className={classNames('navbar-brand', className)} />;
-};
+export const NavbarBrand = polymorphic<ComponentPropsWithRef<'a'>>(
+    ({ as: Root = 'a', className, ...props }) => (
+        <Root {...props} className={classNames('navbar-brand', className)} />
+    )
+);
 
 export interface NavbarNavProps extends ComponentPropsWithRef<'ul'> {
     variant?: 'tabs' | 'pills' | 'underline';
     nav?: boolean;
 }
 
-export const NavbarNav: FC<NavbarNavProps> = ({ variant, nav, className, ...props }) => (
-    <ul
-        {...props}
-        className={classNames(
-            'navbar-nav',
-            (nav || variant) && 'nav',
-            variant && `nav-${variant}`,
-            className
-        )}
-    />
+export const NavbarNav = polymorphic<NavbarNavProps>(
+    ({ as: Root = 'ul', variant, nav, className, ...props }) => (
+        <Root
+            {...props}
+            className={classNames(
+                'navbar-nav',
+                (nav || variant) && 'nav',
+                variant && `nav-${variant}`,
+                className
+            )}
+        />
+    )
 );
 
-export const NavbarText: FC<ComponentPropsWithRef<'span'>> = ({ className, ...props }) => (
-    <span {...props} className={classNames('navbar-text', className)} />
+export const NavbarText = polymorphic<ComponentPropsWithRef<'span'>>(
+    ({ as: Root = 'span', className, ...props }) => (
+        <Root {...props} className={classNames('navbar-text', className)} />
+    )
 );
 
 export interface NavbarTogglerProps extends Omit<
@@ -64,22 +66,26 @@ export interface NavbarTogglerProps extends Omit<
     expanded?: boolean;
 }
 
-export const NavbarToggler: FC<NavbarTogglerProps> = ({
-    expanded,
-    className,
-    'aria-label': ariaLabel = 'Toggle navigation',
-    ...props
-}) => (
-    <Button
-        {...props}
-        type="button"
-        className={classNames('navbar-toggler', className)}
-        aria-label={ariaLabel}
-        aria-expanded={expanded}
-        icon
-    >
-        <span className="navbar-toggler-icon" aria-hidden="true" />
-    </Button>
+export const NavbarToggler = polymorphic<NavbarTogglerProps>(
+    ({
+        as: RootAs,
+        expanded,
+        className,
+        'aria-label': ariaLabel = 'Toggle navigation',
+        ...props
+    }) => (
+        <Button
+            as={RootAs}
+            {...props}
+            type="button"
+            className={classNames('navbar-toggler', className)}
+            aria-label={ariaLabel}
+            aria-expanded={expanded}
+            icon
+        >
+            <span className="navbar-toggler-icon" aria-hidden="true" />
+        </Button>
+    )
 );
 
 Navbar.displayName = 'Navbar';

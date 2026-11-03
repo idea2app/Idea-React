@@ -3,10 +3,17 @@
 import classNames from 'classnames';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component, ComponentPropsWithoutRef, ComponentPropsWithRef, FC, MouseEvent } from 'react';
+import {
+    Component,
+    ComponentPropsWithoutRef,
+    ComponentPropsWithRef,
+    ElementType,
+    MouseEvent
+} from 'react';
 
 import { Button, ButtonProps, ComponentTheme } from './Button';
 import { Icon } from './Extension/Icon';
+import { AsProps, polymorphic, PolymorphicClassProps } from './Polymorphic';
 
 export interface AccordionProps extends ComponentPropsWithRef<'div'> {
     theme?: ComponentTheme;
@@ -15,41 +22,44 @@ export interface AccordionProps extends ComponentPropsWithRef<'div'> {
     gap?: boolean;
 }
 
-export const Accordion: FC<AccordionProps> = ({ theme, size, flush, gap, className, ...props }) => (
-    <div
-        {...props}
-        className={classNames(
-            'accordion',
-            theme && `theme-${theme}`,
-            size && `accordion-${size}`,
-            { 'accordion-flush': flush, 'accordion-gap': gap },
-            className
-        )}
-    />
+export const Accordion = polymorphic<AccordionProps>(
+    ({ as: Root = 'div', theme, size, flush, gap, className, ...props }) => (
+        <Root
+            {...props}
+            className={classNames(
+                'accordion',
+                theme && `theme-${theme}`,
+                size && `accordion-${size}`,
+                { 'accordion-flush': flush, 'accordion-gap': gap },
+                className
+            )}
+        />
+    )
 );
 
-export const AccordionItem: FC<ComponentPropsWithRef<'details'>> = ({ className, ...props }) => (
-    <details {...props} className={classNames('accordion-item', className)} />
+export const AccordionItem = polymorphic<ComponentPropsWithRef<'details'>>(
+    ({ as: Root = 'details', className, ...props }) => (
+        <Root {...props} className={classNames('accordion-item', className)} />
+    )
 );
 
 export interface AccordionHeaderProps extends ComponentPropsWithRef<'summary'> {
     icon?: string | false;
 }
 
-export const AccordionHeader: FC<AccordionHeaderProps> = ({
-    icon = 'chevron-down',
-    className,
-    children,
-    ...props
-}) => (
-    <summary {...props} className={classNames('accordion-header', className)}>
-        {children}
-        {icon && <Icon name={icon} className="accordion-icon" aria-hidden="true" />}
-    </summary>
+export const AccordionHeader = polymorphic<AccordionHeaderProps>(
+    ({ as: Root = 'summary', icon = 'chevron-down', className, children, ...props }) => (
+        <Root {...props} className={classNames('accordion-header', className)}>
+            {children}
+            {icon && <Icon name={icon} className="accordion-icon" aria-hidden="true" />}
+        </Root>
+    )
 );
 
-export const AccordionBody: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
-    <div {...props} className={classNames('accordion-body', className)} />
+export const AccordionBody = polymorphic<ComponentPropsWithRef<'div'>>(
+    ({ as: Root = 'div', className, ...props }) => (
+        <Root {...props} className={classNames('accordion-body', className)} />
+    )
 );
 
 Accordion.displayName = 'Accordion';
@@ -65,7 +75,15 @@ export interface AccordionToggleProps
 }
 
 @observer
-export class AccordionToggle extends Component<AccordionToggleProps> {
+export class AccordionToggle<T extends ElementType | undefined = 'button'> extends Component<
+    PolymorphicClassProps<T, AccordionToggleProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, AccordionToggleProps>;
+
+    protected get componentProps(): Readonly<AccordionToggleProps & AsProps> {
+        return this.props;
+    }
+
     static displayName = 'AccordionToggle';
 
     @observable accessor expanded = false;
@@ -75,7 +93,7 @@ export class AccordionToggle extends Component<AccordionToggleProps> {
     get items() {
         return [
             ...(document
-                .querySelector(this.props.target)
+                .querySelector(this.componentProps.target)
                 ?.querySelectorAll<HTMLDetailsElement>(':scope > .accordion-item') ?? [])
         ];
     }
@@ -86,7 +104,7 @@ export class AccordionToggle extends Component<AccordionToggleProps> {
     }
 
     componentDidUpdate(previous: AccordionToggleProps) {
-        if (previous.target !== this.props.target) {
+        if (previous.target !== this.componentProps.target) {
             this.restoreNames();
             this.refresh();
         }
@@ -109,7 +127,7 @@ export class AccordionToggle extends Component<AccordionToggleProps> {
     });
 
     handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-        this.props.onClick?.(event);
+        this.componentProps.onClick?.(event);
 
         if (event.defaultPrevented) return;
 
@@ -130,8 +148,15 @@ export class AccordionToggle extends Component<AccordionToggleProps> {
     };
 
     render() {
-        const { target: _target, ...props } = this.props;
+        const { target: _target, ...props } = this.componentProps;
 
-        return <Button {...props} aria-expanded={this.expanded} onClick={this.handleClick} />;
+        return (
+            <Button
+                as={this.componentProps.as}
+                {...props}
+                aria-expanded={this.expanded}
+                onClick={this.handleClick}
+            />
+        );
     }
 }

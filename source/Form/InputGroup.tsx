@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import {
     cloneElement,
     ComponentPropsWithRef,
+    createElement,
     FC,
     FocusEvent,
     KeyboardEventHandler,
@@ -13,16 +14,19 @@ import {
 
 import { Button, ButtonProps } from '../Button';
 import { Menu, MenuProps } from '../Menu';
+import { polymorphic } from '../Polymorphic';
 
 export type InputGroupProps = ComponentPropsWithRef<'div'> & {
     size?: 'sm' | 'lg';
 };
 
-export const InputGroup: FC<InputGroupProps> = ({ className, size, ...props }) => (
-    <div
-        {...props}
-        className={classNames('input-group', size && `input-group-${size}`, className)}
-    />
+export const InputGroup = polymorphic<InputGroupProps>(
+    ({ as: Root = 'div', className, size, ...props }) => (
+        <Root
+            {...props}
+            className={classNames('input-group', size && `input-group-${size}`, className)}
+        />
+    )
 );
 
 InputGroup.displayName = 'InputGroup';
@@ -31,27 +35,22 @@ export type InputGroupTextProps =
     | (ComponentPropsWithRef<'span'> & { htmlFor?: never })
     | (ComponentPropsWithRef<'label'> & { htmlFor: string });
 
-const isLabelAddon = (
-    props: InputGroupTextProps
-): props is ComponentPropsWithRef<'label'> & { htmlFor: string } =>
-    typeof props.htmlFor === 'string';
+export const InputGroupText = polymorphic<InputGroupTextProps>(
+    ({ as: RootAs, className, ...props }) => {
+        const Root = RootAs ?? (typeof props.htmlFor === 'string' ? 'label' : 'span');
 
-export const InputGroupText: FC<InputGroupTextProps> = ({ className, ...props }) => {
-    const addonClassName = classNames('input-group-text', className);
-
-    return isLabelAddon(props) ? (
-        <label {...props} className={addonClassName} />
-    ) : (
-        <span {...props} className={addonClassName} />
-    );
-};
+        return <Root {...props} className={classNames('input-group-text', className)} />;
+    }
+);
 
 InputGroupText.displayName = 'InputGroupText';
 
 export type InputGroupButtonProps = ButtonProps;
 
-export const InputGroupButton: FC<InputGroupButtonProps> = ({ className, ...props }) => (
-    <Button {...props} className={classNames('input-group-btn', className)} />
+export const InputGroupButton = polymorphic<InputGroupButtonProps>(
+    ({ as: RootAs, className, ...props }) => (
+        <Button as={RootAs} {...props} className={classNames('input-group-btn', className)} />
+    )
 );
 
 InputGroupButton.displayName = 'InputGroupButton';
@@ -60,10 +59,15 @@ export interface InputGroupIgnoreProps {
     children: ReactElement<{ className?: string }>;
 }
 
-export const InputGroupIgnore: FC<InputGroupIgnoreProps> = ({ children }) =>
-    cloneElement(children, {
+export const InputGroupIgnore = polymorphic<InputGroupIgnoreProps>(({ as, children, ...props }) => {
+    const attributes = {
+        ...children.props,
+        ...props,
         className: classNames('input-group-ignore', children.props.className)
-    });
+    };
+
+    return as ? createElement(as, attributes) : cloneElement(children, attributes);
+});
 
 InputGroupIgnore.displayName = 'InputGroupIgnore';
 

@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import { ComponentPropsWithRef, FC } from 'react';
+import { ComponentPropsWithRef } from 'react';
 
 import type { ComponentTheme } from './Button';
+import { polymorphic } from './Polymorphic';
 
 interface BadgeStyleProps {
     variant?: 'solid' | 'subtle' | 'outline';
@@ -17,20 +18,19 @@ export type BadgeProps = BadgeStyleProps & BadgeElementAttributes;
 const isBadgeLink = (props: BadgeElementAttributes): props is BadgeLinkAttributes =>
     typeof props.href === 'string';
 
-export const Badge: FC<BadgeProps> = ({ variant = 'solid', theme, pill, className, ...props }) => {
-    const classes = classNames(
-        'badge',
-        variant !== 'solid' && `badge-${variant}`,
-        theme && `theme-${theme}`,
-        { 'rounded-pill': pill },
-        className
-    );
+export const Badge = polymorphic<BadgeProps>(
+    ({ as: RootAs, variant = 'solid', theme, pill, className, ...props }) => {
+        const Root = RootAs ?? (isBadgeLink(props) ? 'a' : 'span');
+        const classes = classNames(
+            'badge',
+            variant !== 'solid' && `badge-${variant}`,
+            theme && `theme-${theme}`,
+            { 'rounded-pill': pill },
+            className
+        );
 
-    return isBadgeLink(props) ? (
-        <a {...props} className={classes} />
-    ) : (
-        <span {...props} className={classes} />
-    );
-};
+        return <Root {...props} className={classes} />;
+    }
+);
 
 Badge.displayName = 'Badge';

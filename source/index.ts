@@ -25,6 +25,7 @@ export * from './NavOverflow';
 export * from './Overlay';
 export * from './Pagination';
 export * from './Placeholder';
+export * from './Polymorphic';
 export * from './Popover';
 export * from './Progress';
 export * from './ScrollSpy';

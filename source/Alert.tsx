@@ -8,13 +8,14 @@ import {
     ComponentPropsWithoutRef,
     ComponentPropsWithRef,
     createRef,
-    FC,
+    ElementType,
     MouseEvent,
     TransitionEvent
 } from 'react';
 
 import { ComponentTheme } from './Button';
 import { CloseButton } from './CloseButton';
+import { AsProps, polymorphic, PolymorphicClassProps } from './Polymorphic';
 
 export interface AlertProps extends ComponentPropsWithoutRef<'div'> {
     theme?: ComponentTheme;
@@ -26,7 +27,15 @@ export interface AlertProps extends ComponentPropsWithoutRef<'div'> {
 }
 
 @observer
-export class Alert extends Component<AlertProps> {
+export class Alert<T extends ElementType | undefined = 'div'> extends Component<
+    PolymorphicClassProps<T, AlertProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, AlertProps>;
+
+    protected get componentProps(): Readonly<AlertProps & AsProps> {
+        return this.props;
+    }
+
     static displayName = 'Alert';
 
     @observable accessor hiding = false;
@@ -39,7 +48,7 @@ export class Alert extends Component<AlertProps> {
     componentDidUpdate() {
         if (this.closed && !this.notified) {
             this.notified = true;
-            this.props.onClosed?.();
+            this.componentProps.onClosed?.();
         }
     }
 
@@ -57,9 +66,9 @@ export class Alert extends Component<AlertProps> {
     close = action(() => {
         if (this.hiding || this.closed) return;
 
-        this.props.onClose?.();
+        this.componentProps.onClose?.();
 
-        if (this.props.instant) return this.finishClose();
+        if (this.componentProps.instant) return this.finishClose();
 
         this.hiding = true;
 
@@ -81,13 +90,16 @@ export class Alert extends Component<AlertProps> {
     };
 
     handleTransitionEnd = (event: TransitionEvent<HTMLDivElement>) => {
-        this.props.onTransitionEnd?.(event);
+        this.componentProps.onTransitionEnd?.(event);
 
         if (event.target === event.currentTarget && this.hiding) this.finishClose();
     };
 
     render() {
+        const Root: ElementType = this.componentProps.as ?? 'div';
+
         const {
+            as: _as,
             theme,
             dismissible,
             instant,
@@ -97,10 +109,10 @@ export class Alert extends Component<AlertProps> {
             className,
             children,
             ...props
-        } = this.props;
+        } = this.componentProps;
 
         return this.closed ? null : (
-            <div
+            <Root
                 {...props}
                 ref={this.root}
                 role={props.role ?? 'alert'}
@@ -121,17 +133,21 @@ export class Alert extends Component<AlertProps> {
                         onClick={this.handleClose}
                     />
                 )}
-            </div>
+            </Root>
         );
     }
 }
 
-export const AlertLink: FC<ComponentPropsWithRef<'a'>> = ({ className, ...props }) => (
-    <a {...props} className={classNames('alert-link', className)} />
+export const AlertLink = polymorphic<ComponentPropsWithRef<'a'>>(
+    ({ as: Root = 'a', className, ...props }) => (
+        <Root {...props} className={classNames('alert-link', className)} />
+    )
 );
 
-export const AlertHeading: FC<ComponentPropsWithRef<'h4'>> = ({ className, ...props }) => (
-    <h4 {...props} className={classNames('alert-heading', className)} />
+export const AlertHeading = polymorphic<ComponentPropsWithRef<'h4'>>(
+    ({ as: Root = 'h4', className, ...props }) => (
+        <Root {...props} className={classNames('alert-heading', className)} />
+    )
 );
 
 AlertLink.displayName = 'AlertLink';

@@ -1,5 +1,7 @@
 import classNames from 'classnames';
-import { ComponentPropsWithRef, FC, MouseEvent } from 'react';
+import { ComponentPropsWithRef, MouseEvent } from 'react';
+
+import { polymorphic } from './Polymorphic';
 
 export type ComponentTheme =
     | 'primary'
@@ -31,77 +33,69 @@ export type ButtonProps = ButtonStyleProps & ButtonElementAttributes;
 const isButtonLink = (props: ButtonElementAttributes): props is ButtonLinkAttributes =>
     typeof props.href === 'string';
 
-const preventNavigation = (event: MouseEvent<HTMLAnchorElement>) => event.preventDefault();
+const preventNavigation = (event: MouseEvent<HTMLElement>) => event.preventDefault();
 
-export const Button: FC<ButtonProps> = ({
-    variant,
-    theme,
-    size,
-    icon,
-    styled,
-    disabled,
-    active,
-    className,
-    ...props
-}) => {
-    const attributes: ButtonElementAttributes = props;
-    const classes = classNames(
-        variant === false ? undefined : variant ? `btn-${variant}` : icon ? undefined : 'btn',
-        theme && `theme-${theme}`,
-        size && `btn-${size}`,
-        { 'btn-icon': icon, 'btn-styled': styled, disabled, active },
-        className
-    );
+export const Button = polymorphic<ButtonProps>(
+    ({ as: RootAs, variant, theme, size, icon, styled, disabled, active, className, ...props }) => {
+        const attributes: ButtonElementAttributes = props;
+        const link = isButtonLink(attributes);
+        const Root = RootAs ?? (link ? 'a' : 'button');
+        const nativeButton = Root === 'button';
+        const classes = classNames(
+            variant === false ? undefined : variant ? `btn-${variant}` : icon ? undefined : 'btn',
+            theme && `theme-${theme}`,
+            size && `btn-${size}`,
+            { 'btn-icon': icon, 'btn-styled': styled, disabled, active },
+            className
+        );
 
-    return isButtonLink(attributes) ? (
-        <a
-            {...attributes}
-            className={classes}
-            href={disabled ? undefined : attributes.href}
-            aria-disabled={disabled || undefined}
-            aria-pressed={
-                attributes.role === 'button'
-                    ? (active ?? attributes['aria-pressed'])
-                    : attributes['aria-pressed']
-            }
-            tabIndex={disabled ? -1 : attributes.tabIndex}
-            onClick={disabled ? preventNavigation : attributes.onClick}
-        />
-    ) : (
-        <button
-            {...attributes}
-            type={attributes.type || 'button'}
-            className={classes}
-            disabled={disabled}
-            aria-pressed={active ?? attributes['aria-pressed']}
-        />
-    );
-};
+        return (
+            <Root
+                {...attributes}
+                className={classes}
+                type={nativeButton ? attributes.type || 'button' : attributes.type}
+                href={disabled ? undefined : attributes.href}
+                disabled={nativeButton || typeof Root !== 'string' ? disabled : undefined}
+                aria-disabled={(!nativeButton && disabled) || undefined}
+                aria-pressed={
+                    !link || attributes.role === 'button'
+                        ? (active ?? attributes['aria-pressed'])
+                        : attributes['aria-pressed']
+                }
+                tabIndex={!nativeButton && disabled ? -1 : attributes.tabIndex}
+                onClick={!nativeButton && disabled ? preventNavigation : attributes.onClick}
+            />
+        );
+    }
+);
 
 export type ButtonInputProps = Omit<ComponentPropsWithRef<'input'>, 'size'> & ButtonStyleProps;
 
-export const ButtonInput: FC<ButtonInputProps> = ({
-    variant,
-    theme,
-    size,
-    icon,
-    styled,
-    active,
-    className,
-    type = 'button',
-    ...props
-}) => (
-    <input
-        {...props}
-        type={type}
-        className={classNames(
-            variant === false ? undefined : variant ? `btn-${variant}` : 'btn',
-            theme && `theme-${theme}`,
-            size && `btn-${size}`,
-            { 'btn-icon': icon, 'btn-styled': styled, active },
-            className
-        )}
-    />
+export const ButtonInput = polymorphic<ButtonInputProps>(
+    ({
+        as: Root = 'input',
+        variant,
+        theme,
+        size,
+        icon,
+        styled,
+        active,
+        className,
+        type = 'button',
+        ...props
+    }) => (
+        <Root
+            {...props}
+            type={type}
+            className={classNames(
+                variant === false ? undefined : variant ? `btn-${variant}` : 'btn',
+                theme && `theme-${theme}`,
+                size && `btn-${size}`,
+                { 'btn-icon': icon, 'btn-styled': styled, active },
+                className
+            )}
+        />
+    )
 );
 
 Button.displayName = 'Button';

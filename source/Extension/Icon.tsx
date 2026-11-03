@@ -1,5 +1,7 @@
 import classNames from 'classnames';
-import { FC, HTMLAttributes, PropsWithRef } from 'react';
+import { HTMLAttributes, PropsWithRef } from 'react';
+
+import { polymorphic } from '../Polymorphic';
 
 export type IconProps = PropsWithRef<
     HTMLAttributes<HTMLSpanElement> & {
@@ -7,12 +9,14 @@ export type IconProps = PropsWithRef<
         size?: number;
     }
 >;
-export const Icon: FC<IconProps> = ({ className, style, name, size, ...props }) => (
-    <span
-        className={classNames(`bi-${name}`, className)}
-        style={{ fontSize: size && `${size}rem`, ...style }}
-        {...props}
-    />
+export const Icon = polymorphic<IconProps>(
+    ({ as: Root = 'span', className, style, name, size, ...props }) => (
+        <Root
+            className={classNames(`bi-${name}`, className)}
+            style={{ fontSize: size && `${size}rem`, ...style }}
+            {...props}
+        />
+    )
 );
 
 Icon.displayName = 'Icon';

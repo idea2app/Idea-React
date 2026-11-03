@@ -7,6 +7,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 
 import { ComponentTheme } from '../Button';
 import { Icon } from '../Extension/Icon';
+import { AsProps, polymorphic } from '../Polymorphic';
 import { FormPlugin } from './Plugin';
 import { FormValidationProps } from './Primitives';
 
@@ -22,7 +23,7 @@ export type ChipInputProps = ComponentPropsWithoutRef<'div'> &
         onValuesChange?: (values: string[]) => unknown;
     };
 
-interface ChipInputComponentProps extends ChipInputProps {
+interface ChipInputComponentProps extends ChipInputProps, AsProps {
     forwardedRef?: Ref<HTMLDivElement>;
 }
 
@@ -84,6 +85,7 @@ class ChipInputComponent extends FormPlugin<ChipInputComponentProps, Pick<Chips,
 
     render() {
         const {
+            as: Root = 'div',
             className,
             theme,
             separator,
@@ -99,7 +101,7 @@ class ChipInputComponent extends FormPlugin<ChipInputComponentProps, Pick<Chips,
         } = this.props;
 
         return (
-            <div
+            <Root
                 {...props}
                 ref={this.setRef}
                 className={classNames(
@@ -118,8 +120,10 @@ class ChipInputComponent extends FormPlugin<ChipInputComponentProps, Pick<Chips,
     }
 }
 
-export const ChipInput = forwardRef<HTMLDivElement, ChipInputProps>((props, forwardedRef) => (
-    <ChipInputComponent {...props} forwardedRef={forwardedRef} />
-));
+export const ChipInput = polymorphic<ChipInputProps & { ref?: Ref<HTMLDivElement> }>(
+    forwardRef<HTMLDivElement, ChipInputProps & AsProps>((props, forwardedRef) => (
+        <ChipInputComponent {...props} forwardedRef={forwardedRef} />
+    ))
+);
 
 ChipInput.displayName = 'ChipInput';
