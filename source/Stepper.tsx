@@ -34,7 +34,7 @@ interface StepStyle {
     theme?: ComponentTheme;
 }
 
-export interface StepperItemProps extends ComponentPropsWithRef<'li'>, StepStyle {}
+export type StepperItemProps = ComponentPropsWithRef<'li'> & StepStyle;
 
 export const StepperItem: FC<StepperItemProps> = ({ active, theme, className, ...props }) => (
     <li
@@ -43,7 +43,7 @@ export const StepperItem: FC<StepperItemProps> = ({ active, theme, className, ..
     />
 );
 
-export interface StepperLinkProps extends ComponentPropsWithRef<'a'>, StepStyle {}
+export type StepperLinkProps = ComponentPropsWithRef<'a'> & StepStyle;
 
 export const StepperLink: FC<StepperLinkProps> = ({ active, theme, className, ...props }) => (
     <a
@@ -52,7 +52,7 @@ export const StepperLink: FC<StepperLinkProps> = ({ active, theme, className, ..
     />
 );
 
-export interface StepperButtonProps extends ComponentPropsWithRef<'button'>, StepStyle {}
+export type StepperButtonProps = ComponentPropsWithRef<'button'> & StepStyle;
 
 export const StepperButton: FC<StepperButtonProps> = ({
     active,

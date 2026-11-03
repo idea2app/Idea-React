@@ -182,6 +182,7 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 可选 props 的默认值写在解构参数中（如 `className = ''`、`rows = 3`），不在表达式里用 `|| ''` 兜底。
 - 向子组件透传时只解构需要特殊处理的 props，其余用 `...this.props` 展开，不逐项转发。
 - 多个组件共享的属性定义在基础模块，组件通过 `extends`、`Omit` 或类型别名复用，不从组件文件再导出基础模块的类型。
+- 没有成员声明体的 `interface` 改用 `type` 与交叉类型表达。
 - 组件 Props 优先用 `Pick`/`Omit`/`extends` 复用已有类型，不重复声明；按外观、内容、状态、行为的顺序分组排列。
 - JSX 属性按 `as`、HTML 通用静态属性、组件专属属性、状态属性、回调属性排序；相同键值的 props 可用对象字面量简写后展开。
 - 同一模块的类型与值合并为一条 import，不拆成 `import type` 与 `import` 两条。
