@@ -52,7 +52,9 @@ export class Select extends Component<SelectProps> {
 
     private handleSelect = ({ target, defaultPrevented }: MouseEvent<HTMLDivElement>) => {
         if (defaultPrevented || this.props.disabled || !(target instanceof Element)) return;
+
         const option = target.closest<HTMLButtonElement>('[data-value]');
+
         if (option && !option.disabled && option.getAttribute('aria-disabled') !== 'true')
             this.props.onChange?.(option.dataset.value ?? '');
     };

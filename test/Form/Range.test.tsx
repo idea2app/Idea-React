@@ -60,7 +60,6 @@ it('renders bubble, uneven ticks, fractional steps and controlled updates', asyn
     rerender(
         <FormRange aria-label="Brightness" value={75} formatter={formatter} readOnly bubble />
     );
-
     await waitFor(() => assert.equal(wrapper.querySelector('.tooltip-inner')?.textContent, '75%'));
 
     unmount();

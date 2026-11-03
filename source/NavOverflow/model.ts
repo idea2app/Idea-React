@@ -8,14 +8,10 @@ export class NavOverflowModel {
     @observable accessor overflowIndices: number[] = [];
 
     @action
-    setOpen = (open: boolean) => {
-        this.open = open;
-    };
+    setOpen = (open: boolean) => (this.open = open);
 
     @action
-    toggle = () => {
-        this.open = !this.open;
-    };
+    toggle = () => (this.open = !this.open);
 
     @action
     setOverflowIndices = (indices: number[]) => {

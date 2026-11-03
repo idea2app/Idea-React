@@ -50,13 +50,7 @@ export const ToggleButton: FC<ToggleButtonProps> = ({
     >
         <input
             {...inputProps}
-            type={type}
-            name={name}
-            value={value}
-            checked={checked}
-            defaultChecked={defaultChecked}
-            disabled={disabled}
-            required={required}
+            {...{ type, name, value, checked, defaultChecked, disabled, required }}
             autoComplete="off"
             onChange={onChange}
         />

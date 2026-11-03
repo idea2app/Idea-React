@@ -1,9 +1,5 @@
-'use client';
-
 import classNames from 'classnames';
-import { action, observable } from 'mobx';
-import { observer } from 'mobx-react';
-import { Component, ComponentPropsWithRef, FC, MouseEvent } from 'react';
+import { ComponentPropsWithRef, FC, MouseEvent } from 'react';
 
 export type ComponentTheme =
     | 'primary'
@@ -25,8 +21,6 @@ interface ButtonStyleProps {
     styled?: boolean;
     disabled?: boolean;
     active?: boolean;
-    toggle?: boolean;
-    defaultActive?: boolean;
 }
 
 type ButtonLinkAttributes = ComponentPropsWithRef<'a'> & { href: string };
@@ -47,29 +41,9 @@ export const Button: FC<ButtonProps> = ({
     styled,
     disabled,
     active,
-    toggle,
-    defaultActive,
     className,
     ...props
 }) => {
-    if (toggle)
-        return (
-            <StatefulButton
-                buttonProps={{
-                    ...props,
-                    variant,
-                    theme,
-                    size,
-                    icon,
-                    styled,
-                    disabled,
-                    active,
-                    defaultActive,
-                    className
-                }}
-            />
-        );
-
     const attributes: ButtonElementAttributes = props;
     const classes = classNames(
         variant === false ? undefined : variant ? `btn-${variant}` : icon ? undefined : 'btn',
@@ -104,38 +78,7 @@ export const Button: FC<ButtonProps> = ({
     );
 };
 
-@observer
-class StatefulButton extends Component<{ buttonProps: ButtonProps }> {
-    @observable accessor active = this.props.buttonProps.defaultActive ?? false;
-
-    @action
-    setActive = (active: boolean) => (this.active = active);
-
-    handleClick = (event: MouseEvent<HTMLButtonElement & HTMLAnchorElement>) => {
-        this.props.buttonProps.onClick?.(event);
-
-        if (!event.defaultPrevented)
-            this.setActive(!(this.props.buttonProps.active ?? this.active));
-    };
-
-    render() {
-        return (
-            <Button
-                {...this.props.buttonProps}
-                toggle={false}
-                role={
-                    this.props.buttonProps.role ??
-                    (this.props.buttonProps.href ? 'button' : undefined)
-                }
-                active={this.props.buttonProps.active ?? this.active}
-                onClick={this.handleClick}
-            />
-        );
-    }
-}
-
-export type ButtonInputProps = Omit<ComponentPropsWithRef<'input'>, 'size'> &
-    Omit<ButtonStyleProps, 'toggle' | 'defaultActive'>;
+export type ButtonInputProps = Omit<ComponentPropsWithRef<'input'>, 'size'> & ButtonStyleProps;
 
 export const ButtonInput: FC<ButtonInputProps> = ({
     variant,

@@ -77,6 +77,7 @@ export class Carousel extends Component<CarouselProps> {
     componentDidMount() {
         this.updateStore();
         if (this.props.autoplay) this.store.play();
+
         document.addEventListener('visibilitychange', this.handleVisibilityChange);
         this.track.current?.addEventListener('scroll', this.handleScroll, { passive: true });
     }
@@ -88,6 +89,7 @@ export class Carousel extends Component<CarouselProps> {
     componentWillUnmount() {
         this.store.dispose();
         this.scroller.dispose();
+
         document.removeEventListener('visibilitychange', this.handleVisibilityChange);
         this.track.current?.removeEventListener('scroll', this.handleScroll);
     }
@@ -105,6 +107,7 @@ export class Carousel extends Component<CarouselProps> {
 
     private updateStore = () => {
         const slides = this.getSlides();
+
         this.store.onChange = this.props.onChange;
         this.store.onNavigate = this.scrollToActive;
         this.store.update(slides.length, this.props.ends ?? 'loop', this.getSlideInterval);
@@ -124,6 +127,7 @@ export class Carousel extends Component<CarouselProps> {
 
     handleBlurCapture = ({ currentTarget, relatedTarget }: React.FocusEvent<HTMLDivElement>) => {
         if (relatedTarget instanceof Node && currentTarget.contains(relatedTarget)) return;
+
         this.store.setHovering(false);
     };
 
@@ -140,12 +144,12 @@ export class Carousel extends Component<CarouselProps> {
                     : closest,
             0
         );
-
         if (index !== this.store.activeIndex) this.store.setIndex(index, true, undefined, true);
     };
 
     handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
         this.props.onKeyDown?.(event);
+
         if (event.defaultPrevented || this.scroller.looping) return;
         if (this.props.keyboard === false || event.altKey || event.ctrlKey || event.metaKey) return;
         if (
@@ -172,12 +176,20 @@ export class Carousel extends Component<CarouselProps> {
                 ? event.target.closest<HTMLButtonElement>('[data-carousel-action]')
                 : null;
         const { carouselAction, index } = button?.dataset ?? {};
-        if (carouselAction === 'previous') this.store.previous(true);
-        else if (carouselAction === 'next') this.store.next(true);
-        else if (carouselAction === 'slide' && index !== undefined)
-            this.store.setIndex(Number(index), true);
-        else if (carouselAction === 'toggle') this.store.toggle();
-        else return;
+
+        switch (carouselAction) {
+            case 'previous':
+                this.store.previous(true);
+                break;
+            case 'next':
+                this.store.next(true);
+                break;
+            case 'slide':
+                if (index !== undefined) this.store.setIndex(Number(index), true);
+                break;
+            case 'toggle':
+                this.store.toggle();
+        }
     };
 
     scrollToActive = (index: number, from: number, direction?: -1 | 1) => {
@@ -207,11 +219,9 @@ export class Carousel extends Component<CarouselProps> {
             !this.props.center &&
             !variableWidth;
 
-        if (crossingEnd && canLoop) {
+        if (crossingEnd && canLoop)
             this.scroller.loop(track, slides[from], destination, direction === 1);
-        } else {
-            this.scroller.navigate(track, destination.offsetLeft, !crossingEnd && !reducedMotion);
-        }
+        else this.scroller.navigate(track, destination.offsetLeft, !crossingEnd && !reducedMotion);
     };
 
     renderSlide = (slide: ReactNode, index: number) => {

@@ -56,6 +56,7 @@ class OTPInputComponent extends FormPlugin<OTPInputComponentProps, OtpInput> {
         const slots = this.element.current?.querySelector('.otp-slots');
 
         slots?.classList.add('min-w-0', 'max-w-100');
+
         for (const slot of slots?.querySelectorAll('.otp-slot') ?? [])
             slot.classList.add('min-w-0');
 

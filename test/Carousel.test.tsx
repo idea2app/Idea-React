@@ -15,8 +15,8 @@ it('renders carousel slides, controls, indicators, and accessible slide state', 
             <CarouselSlide>Third</CarouselSlide>
         </Carousel>
     );
-
     const carousel = screen.getByRole('region', { name: 'Featured' });
+
     assert.ok(carousel.classList.contains('carousel'));
     assert.equal(screen.getAllByRole('button', { name: /^Slide/ }).length, 3);
     assert.equal(screen.getByText('First').getAttribute('aria-hidden'), 'false');
@@ -38,13 +38,13 @@ it('renders safely during server-side rendering', () => {
             <CarouselSlide>Server rendered slide</CarouselSlide>
         </Carousel>
     );
-
     assert.match(markup, /aria-roledescription="carousel"/);
     assert.match(markup, /Server rendered slide/);
 });
 
 it('preserves one slide boundary and metadata for lazy client-component references', async () => {
     const LazySlide = lazy(async () => ({ default: CarouselSlide }));
+
     const { container } = await act(async () =>
         render(
             <Suspense fallback="Loading slides">
@@ -85,6 +85,7 @@ it('syncs its selected slide with native scroll-snap dragging', () => {
     );
     const track = container.querySelector('.carousel-inner') as HTMLElement;
     const [first, second] = [...track.children] as HTMLElement[];
+
     Object.defineProperty(first, 'offsetLeft', { configurable: true, value: 0 });
     Object.defineProperty(second, 'offsetLeft', { configurable: true, value: 100 });
     Object.defineProperty(track, 'scrollLeft', { configurable: true, value: 100 });
@@ -138,13 +139,13 @@ it('pauses autoplay when a visitor selects a slide and can be resumed', () => {
 it('cycles on its interval and clears the pending timer when unmounted', () => {
     mock.timers.enable({ apis: ['setTimeout'] });
     const onChange = mock.fn();
+
     const { unmount } = render(
         <Carousel interval={100} autoplay onChange={onChange}>
             <CarouselSlide>First</CarouselSlide>
             <CarouselSlide>Second</CarouselSlide>
         </Carousel>
     );
-
     act(() => mock.timers.tick(100));
 
     assert.equal(screen.getByText('Second').getAttribute('aria-hidden'), 'false');
@@ -159,6 +160,7 @@ it('cycles on its interval and clears the pending timer when unmounted', () => {
 
 it('loops forward through an inert temporary slide and teleports only after the transition', () => {
     let frame: FrameRequestCallback | undefined;
+
     const request = mock.method(
         window,
         'requestAnimationFrame',
@@ -168,6 +170,7 @@ it('loops forward through an inert temporary slide and teleports only after the 
         }
     );
     const cancel = mock.method(window, 'cancelAnimationFrame');
+
     const { container, unmount } = render(
         <Carousel aria-label="Looping gallery" indicators>
             <CarouselSlide id="original-slide">
@@ -178,9 +181,12 @@ it('loops forward through an inert temporary slide and teleports only after the 
     );
     const track = container.querySelector('.carousel-inner') as HTMLElement;
     const [first, second] = [...track.children] as HTMLElement[];
+
     Object.defineProperty(first, 'offsetLeft', { configurable: true, value: 0 });
     Object.defineProperty(second, 'offsetLeft', { configurable: true, value: 100 });
+
     const cloneNode = first.cloneNode.bind(first);
+
     mock.method(first, 'cloneNode', (deep?: boolean) => {
         const clone = cloneNode(deep) as HTMLElement;
         Object.defineProperty(clone, 'offsetLeft', { configurable: true, value: 200 });
@@ -196,6 +202,7 @@ it('loops forward through an inert temporary slide and teleports only after the 
     fireEvent.click(screen.getByRole('button', { name: 'Next' }));
 
     const clone = track.querySelector<HTMLElement>('[data-carousel-clone]');
+
     assert.equal(clone?.inert, true);
     assert.equal(clone?.getAttribute('aria-hidden'), 'true');
     assert.equal(clone?.querySelector('[id]'), null);
@@ -221,6 +228,7 @@ it('loops forward through an inert temporary slide and teleports only after the 
 it('cancels loop frames and removes the temporary slide when unmounted', () => {
     const request = mock.method(window, 'requestAnimationFrame', () => 123);
     const cancel = mock.method(window, 'cancelAnimationFrame');
+
     const { container, unmount } = render(
         <Carousel>
             <CarouselSlide>First</CarouselSlide>
@@ -242,6 +250,7 @@ it('cancels loop frames and removes the temporary slide when unmounted', () => {
 
 it('loops backward through a prepended slide without changing its logical slide count', () => {
     let frame: FrameRequestCallback | undefined;
+
     const request = mock.method(
         window,
         'requestAnimationFrame',
@@ -258,6 +267,7 @@ it('loops backward through a prepended slide without changing its logical slide 
     );
     const track = container.querySelector('.carousel-inner') as HTMLElement;
     const [first, second] = [...track.children] as HTMLElement[];
+
     for (const slide of [first, second])
         Object.defineProperty(slide, 'offsetLeft', {
             configurable: true,
@@ -289,6 +299,7 @@ it('loops backward through a prepended slide without changing its logical slide 
 
 it('falls back to an immediate wrap when reduced motion is requested', () => {
     const matchMedia = window.matchMedia.bind(window);
+
     const media = mock.method(window, 'matchMedia', (query: string) => {
         const result = matchMedia(query);
         Object.defineProperty(result, 'matches', { value: true });

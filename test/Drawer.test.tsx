@@ -28,6 +28,7 @@ it('renders a Bootstrap 6 drawer without dialog styles and dismisses from its cl
 
 it('supports sheet, translucent, instant and fullscreen drawer shapes', () => {
     render(<Drawer title="Sheet" animation="instant" sheet translucent fullscreen open />);
+
     const drawer = screen.getByRole('dialog', { name: 'Sheet' });
 
     assert.equal(
@@ -39,6 +40,7 @@ it('supports sheet, translucent, instant and fullscreen drawer shapes', () => {
 it('switches responsive drawers between inline content and a closed mobile panel', t => {
     let matches = true;
     let listener: (() => unknown) | undefined;
+
     const remove = mock.fn();
     t.mock.method(window, 'matchMedia', () => ({
         get matches() {

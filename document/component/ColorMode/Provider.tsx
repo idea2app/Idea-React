@@ -28,7 +28,7 @@ export class ColorModeProvider extends Component<PropsWithChildren> {
 
         return (
             <ColorModeContext.Provider value={model}>
-                {pending && <Loading style={{ zIndex: 2147483647 }} role="status" opaque />}
+                {pending && <Loading style={{ zIndex: 2147483647 }} role="status" opacity={100} />}
 
                 <div inert={pending} aria-busy={pending}>
                     {this.props.children}

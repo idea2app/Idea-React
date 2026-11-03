@@ -143,6 +143,8 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
   再由文档站引用，不是将其专用组件放进组件库。
 - 文档与示例统一引用封装后的组件，MDX 不直接书写 Bootstrap 组件类名，只有展示原始 HTML（如无 JS 示例）时，代码块才保留类名写法。
 - 文档站专用布局、组件、模型和样式放在 `document/component/`，不得从组件库导出或混入发布包。
+- 静态展示组件保持服务端可渲染；仅把需要浏览器 API 或交互状态的最小组件边界标记为客户端组件，不用 Context、Model 令整个组件树进入客户端渲染。
+- 每个模块自行导出其定义的公共 API；聚合入口可导出模块，但不从定义模块重复转出其它模块的 API。
 - 多个同前缀的文件归入同名文件夹，文件使用 `index.tsx`、`model.ts`、
   `style.module.css` 等短名，并同步调整所有引用。
 
@@ -181,6 +183,7 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 向子组件透传时只解构需要特殊处理的 props，其余用 `...this.props` 展开，不逐项转发。
 - 多个组件共享的属性定义在基础模块，组件通过 `extends`、`Omit` 或类型别名复用，不从组件文件再导出基础模块的类型。
 - 组件 Props 优先用 `Pick`/`Omit`/`extends` 复用已有类型，不重复声明；按外观、内容、状态、行为的顺序分组排列。
+- JSX 属性按 `as`、HTML 通用静态属性、组件专属属性、状态属性、回调属性排序；相同键值的 props 可用对象字面量简写后展开。
 - 同一模块的类型与值合并为一条 import，不拆成 `import type` 与 `import` 两条。
 - JSX 中不同逻辑块（如触发器与浮层）之间用空行分隔。
 
@@ -204,7 +207,9 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 从 `unpkg.com` 引入 Bootstrap CSS，严禁使用 Tailwind CSS 及其插件、配置和工具类。
 - 能用 [Bootstrap 6 CSS 工具类][4] 的样式不写自定义 CSS；
   剩余样式全部使用 CSS modules，不另建全局自定义样式；需要嵌套的样式使用 LESS modules。
+- 可由 CSS 或 Bootstrap 工具类静态表达的布局、状态与堆叠关系优先用 CSS，避免为此引入客户端状态或 Context、Model。
 - 样式模块的类型声明合入已有的 `source/types.d.ts`，不要另建重复声明文件。
+- 文档示例使用文档专用 Demo 组件时，为 `CodeExample` 提供源码路径；仓库内路径相对于仓库根目录且不以 `/` 开头，外部源码可传绝对 URL。
 - 除 agent 指南外，文档以功能简介与 quick start 为主，只保留使用者必要的安装、使用、启动和部署信息；开发规范、实现约束、测试与发布注意事项集中放在本文件，不把 Read Me 写成规格文档。
 - 代码和目录结构变化时同步更新相关 Markdown，移除失效的路径与描述。
 - Markdown 正文中的链接采用文末数字引用：正文写 `[text][number]`，文末写 `[number]: URL`；图片链接同样使用引用形式。行末链接（如组件列表项）无需改为文末引用，可保留 `[text](URL)`。

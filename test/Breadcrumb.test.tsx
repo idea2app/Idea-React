@@ -30,7 +30,6 @@ it('renders semantic breadcrumb items with default and custom decorative divider
             </Breadcrumb>
         </nav>
     );
-
     assert.equal(screen.getByRole('list').className, 'breadcrumb custom');
     assert.equal(screen.getByRole('link', { name: 'Data' }).getAttribute('aria-current'), 'page');
     assert.equal(screen.getByRole('link', { name: 'Data' }).className, 'breadcrumb-link active');

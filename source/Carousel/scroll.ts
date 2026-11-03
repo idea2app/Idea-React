@@ -17,7 +17,6 @@ export class CarouselScroll {
             track.scrollTo({ left, behavior: 'instant' });
             return;
         }
-
         this.track = track;
         this.snap = track.style.scrollSnapType;
         track.style.scrollSnapType = 'none';
@@ -28,20 +27,25 @@ export class CarouselScroll {
         this.dispose();
         this.track = track;
         this.snap = track.style.scrollSnapType;
+
         const clone = destination.cloneNode(true) as HTMLElement;
         clone.removeAttribute('id');
+
         for (const element of clone.querySelectorAll('[id]')) element.removeAttribute('id');
+
         clone.setAttribute('aria-hidden', 'true');
         clone.inert = true;
         clone.dataset.carouselClone = 'true';
         clone.classList.remove('active');
         this.clone = clone;
         track.style.scrollSnapType = 'none';
+
         if (forward) track.append(clone);
         else track.prepend(clone);
 
         const start = from.offsetLeft;
         const end = clone.offsetLeft;
+
         track.scrollTo({ left: start, behavior: 'instant' });
         this.animate(track, start, end, () => {
             this.dispose();
@@ -51,10 +55,13 @@ export class CarouselScroll {
 
     private animate = (track: HTMLElement, start: number, end: number, complete = this.dispose) => {
         const startedAt = window.performance.now();
+
         const animate = (time: number) => {
             const progress = Math.min(1, (time - startedAt) / 400);
             const eased = 1 - (1 - progress) ** 3;
+
             track.scrollTo({ left: start + (end - start) * eased, behavior: 'instant' });
+
             if (progress < 1) this.frame = window.requestAnimationFrame(animate);
             else complete();
         };

@@ -26,13 +26,13 @@ export class CarouselModel {
     @action
     setIndex = (index: number, userInitiated = false, direction?: -1 | 1, fromScroll = false) => {
         const nextIndex = Math.max(0, Math.min(index, this.count - 1));
+
         if (nextIndex !== this.activeIndex) {
             const from = this.activeIndex;
             this.activeIndex = nextIndex;
             this.onChange?.(nextIndex);
             if (!fromScroll) this.onNavigate?.(nextIndex, from, direction);
         }
-
         if (userInitiated) this.pause();
         else this.schedule();
     };
@@ -43,7 +43,6 @@ export class CarouselModel {
             if (!userInitiated) this.pause();
             return;
         }
-
         this.setIndex(
             this.activeIndex === this.count - 1 ? 0 : this.activeIndex + 1,
             userInitiated,
@@ -57,7 +56,6 @@ export class CarouselModel {
             if (!userInitiated) this.pause();
             return;
         }
-
         this.setIndex(
             this.activeIndex === 0 ? this.count - 1 : this.activeIndex - 1,
             userInitiated,
@@ -105,12 +103,7 @@ export class CarouselModel {
         this.clearTimer();
         if (!this.playing || this.hovering || !this.visible || this.count < 2) return;
 
-        this.timer = setTimeout(
-            () => {
-                this.next();
-            },
-            Math.max(0, this.interval(this.activeIndex))
-        );
+        this.timer = setTimeout(this.next, Math.max(0, this.interval(this.activeIndex)));
     };
 
     private clearTimer = () => {

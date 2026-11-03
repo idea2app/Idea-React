@@ -17,7 +17,6 @@ it('supports ordered numbered lists and action-only containers', () => {
             <ListGroupItem type="button">Action</ListGroupItem>
         </ListGroup>
     );
-
     assert.equal(container.firstElementChild?.tagName, 'DIV');
     assert.equal(screen.getByRole('button', { name: 'Action' }).tagName, 'BUTTON');
 });

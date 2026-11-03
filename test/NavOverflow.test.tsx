@@ -13,9 +13,10 @@ it('renders safely during server-side rendering', () => {
             <NavLink href="/home">Home</NavLink>
         </NavOverflow>
     );
-
     assert.match(markup, /aria-label="Server navigation"/);
     assert.match(markup, /Server navigation/);
+    assert.match(markup, /href="\/home"/);
+    assert.match(markup, /nav-overflow-item flex-shrink-0 position-absolute invisible/);
     assert.doesNotMatch(markup, /nav-overflow-initialized/);
 });
 
@@ -30,6 +31,7 @@ it('reveals initialized navigation and does not reserve a toggle when every link
     const navigation = screen.getByRole('navigation');
     const links = [...navigation.querySelectorAll<HTMLAnchorElement>(':scope > a')];
     const toggle = root.querySelector<HTMLButtonElement>('[data-overflow-toggle]')!;
+
     Object.defineProperty(root, 'clientWidth', { configurable: true, value: 150 });
     for (const link of links)
         Object.defineProperty(link, 'offsetWidth', { configurable: true, value: 70 });
@@ -45,7 +47,8 @@ it('reveals initialized navigation and does not reserve a toggle when every link
         links.every(link => !link.hasAttribute('aria-hidden')),
         true
     );
-    assert.equal(toggle.parentElement?.style.visibility, 'hidden');
+    assert.ok(toggle.parentElement?.classList.contains('position-absolute'));
+    assert.ok(toggle.parentElement?.classList.contains('invisible'));
 });
 
 it('moves overflowing navigation links into an accessible menu and restores focus on Escape', () => {
@@ -60,6 +63,7 @@ it('moves overflowing navigation links into an accessible menu and restores focu
     );
     const root = container.firstElementChild as HTMLElement;
     const navigation = screen.getByRole('navigation');
+
     const links = [...navigation.children].filter(
         child => !child.classList.contains('nav-overflow-item')
     ) as HTMLElement[];
@@ -71,6 +75,7 @@ it('moves overflowing navigation links into an accessible menu and restores focu
     for (const link of links)
         Object.defineProperty(link, 'offsetWidth', { configurable: true, value: 70 });
     Object.defineProperty(toggle, 'offsetWidth', { configurable: true, value: 50 });
+
     fireEvent(window, new Event('resize'));
 
     assert.equal(screen.getByRole('button', { name: 'More' }), toggle);
@@ -87,7 +92,6 @@ it('moves overflowing navigation links into an accessible menu and restores focu
         screen.getByRole('menuitem', { name: 'Products' }).getAttribute('href'),
         '/products'
     );
-
     fireEvent.keyDown(root, { key: 'Escape' });
 
     assert.equal(toggle.getAttribute('aria-expanded'), 'false');
@@ -110,6 +114,7 @@ it('keeps priority items visible and supports custom toggle labels and icon plac
     );
     const root = container.firstElementChild as HTMLElement;
     const navigation = screen.getByRole('navigation');
+
     const [home, about] = [...navigation.children] as HTMLElement[];
     const toggle = root.querySelector<HTMLButtonElement>(
         '[data-overflow-toggle]'
@@ -119,6 +124,7 @@ it('keeps priority items visible and supports custom toggle labels and icon plac
     Object.defineProperty(home, 'offsetWidth', { configurable: true, value: 60 });
     Object.defineProperty(about, 'offsetWidth', { configurable: true, value: 60 });
     Object.defineProperty(toggle, 'offsetWidth', { configurable: true, value: 55 });
+
     fireEvent(window, new Event('resize'));
 
     assert.equal(screen.getByRole('button', { name: 'All links' }), toggle);
@@ -146,6 +152,7 @@ it('collapses all non-priority links below a breakpoint and restores them on res
     const toggle = root.querySelector<HTMLButtonElement>(
         '[data-overflow-toggle]'
     ) as HTMLButtonElement;
+
     Object.defineProperty(root, 'clientWidth', { configurable: true, value: 100 });
     for (const link of links)
         Object.defineProperty(link, 'offsetWidth', { configurable: true, value: 30 });
@@ -158,7 +165,6 @@ it('collapses all non-priority links below a breakpoint and restores them on res
         links.every(link => link.getAttribute('aria-hidden') === 'true'),
         true
     );
-
     Object.defineProperty(root, 'clientWidth', { configurable: true, value: 200 });
     fireEvent(window, new Event('resize'));
 

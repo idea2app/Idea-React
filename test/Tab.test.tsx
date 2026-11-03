@@ -36,9 +36,9 @@ it('activates tabs with clicks and keyboard while maintaining the tab-panel rela
             {tabs}
         </Tabs>
     );
-
     const home = screen.getByRole('tab', { name: 'Home' });
     const profile = screen.getByRole('tab', { name: 'Profile' });
+
     assert.equal(home.getAttribute('aria-controls'), 'account-tabs-panel-home');
     assert.equal(screen.getByRole('tabpanel', { name: 'Home' }).hidden, false);
 
@@ -107,7 +107,6 @@ it('supports list-group styling, instant panes, and controlled selection', () =>
             {tabs}
         </Tabs>
     );
-
     assert.equal(screen.getByRole('tabpanel', { name: 'Contact' }).hidden, false);
 });
 
@@ -155,7 +154,6 @@ it('updates selection from changing children and falls back when the active tab 
             </Tab>
         </Tabs>
     );
-
     assert.equal(
         screen.getByRole('tab', { name: 'Contact' }).getAttribute('aria-selected'),
         'true'
@@ -171,7 +169,6 @@ it('honors canceled clicks and keyboard events before changing selection', () =>
             {tabs}
         </Tabs>
     );
-
     fireEvent.click(screen.getByRole('tab', { name: 'Profile' }));
     fireEvent.keyDown(screen.getByRole('tab', { name: 'Home' }), { key: 'End' });
 
@@ -191,7 +188,6 @@ it('handles empty or fully disabled children without activating a panel', () => 
             </Tab>
         </Tabs>
     );
-
     assert.equal(screen.getByRole('tab').getAttribute('aria-selected'), 'false');
     assert.equal(screen.queryByRole('tabpanel'), null);
 });

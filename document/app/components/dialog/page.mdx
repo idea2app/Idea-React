@@ -39,7 +39,7 @@ The animation effect of this component is dependent on the `prefers-reduced-moti
 
 Toggle a dialog by clicking the button below. The dialog uses the native `showModal()` API for true modal behavior.
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <DialogDemo label="Open dialog" title="Dialog title" saveLabel="Save changes">
         This is a native dialog element. It uses the browser’s built-in modal behavior for
         accessibility and focus management.
@@ -90,7 +90,7 @@ The Invoker Commands API is not supported in all browsers. For guaranteed suppor
 
 To make a dialog dark, pass `theme="dark"` to `NativeDialog`.
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <DialogDemo label="Open dark dialog" title="Dark dialog title" saveLabel="Save changes" dark>
         This is a native dialog element. It uses the browser’s built-in modal behavior for
         accessibility and focus management.
@@ -101,7 +101,7 @@ To make a dialog dark, pass `theme="dark"` to `NativeDialog`.
 
 When `backdrop` is set to `static`, the dialog will not close when clicking outside of it. Click the button below to try it.
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <DialogDemo
         label="Open static backdrop dialog"
         title="Static backdrop"
@@ -118,7 +118,7 @@ Tooltips, popovers, and toasts all work inside dialogs, but require some extra c
 
 Tooltips, popovers, toasts, and menus all work inside modal dialogs. Modal dialogs use `showModal()`, which promotes the dialog to the browser’s top layer -- a special rendering layer above everything else on the page.
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <DialogOverlaysDemo />
 </CodeExample>
 
@@ -128,7 +128,7 @@ Tooltips, popovers, toasts, and menus all work inside modal dialogs. Modal dialo
 
 By default, dialogs animate with a fade on open and close. To disable animations, pass `animation="instant"` to `NativeDialog`.
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <DialogDemo
         label="Instant dialog"
         title="Instant dialog"
@@ -143,7 +143,7 @@ By default, dialogs animate with a fade on open and close. To disable animations
 
 Pass `animation="slide-down"` to `NativeDialog` and it will slide **down** from the top of the viewport when opened.
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <DialogDemo
         label="Slide down dialog"
         title="Slide down dialog"
@@ -158,7 +158,7 @@ Pass `animation="slide-down"` to `NativeDialog` and it will slide **down** from 
 
 Pass `animation="slide-up"` to `NativeDialog` and it will slide **up** from the bottom of the viewport when opened.
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <DialogDemo
         label="Slide up dialog"
         title="Slide up dialog"
@@ -173,7 +173,7 @@ Pass `animation="slide-up"` to `NativeDialog` and it will slide **up** from the 
 
 Create a scrollable dialog that scrolls the dialog body while keeping the header and footer fixed. Pass `scrollable` to `NativeDialog`.
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <DialogDemo
         label="Launch scrollable body dialog"
         title="Scrollable body"
@@ -257,7 +257,7 @@ Create a scrollable dialog that scrolls the dialog body while keeping the header
 
 When a toggle trigger is inside an open dialog, clicking it will **swap** dialogs—opening the new one before closing the current. This ensures the backdrop stays visible throughout the transition with no flash. The React demo coordinates the two `open` props rather than using data-attribute triggers.
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <DialogSwapDemo />
 </CodeExample>
 
@@ -271,7 +271,7 @@ By default, dialogs open as modals using the browser-native `showModal()` method
 - Don’t render in the browser’s top layer
 - Still respond to Escape key (if `keyboard: true`)
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <DialogDemo
         label="Open non-modal dialog"
         title="Non-modal dialog"
@@ -295,7 +295,7 @@ Dialogs have three optional sizes, available via the `size` prop on `NativeDialo
 | Large       | `size="lg"` | `800px`          |
 | Extra large | `size="xl"` | `1140px`         |
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <div className="d-flex flex-wrap gap-3">
         <DialogDemo label="Default dialog" title="Default dialog" saveLabel="Save changes">
             This is a native dialog element. It uses the browser’s built-in modal behavior for
@@ -320,7 +320,7 @@ Dialogs have three optional sizes, available via the `size` prop on `NativeDialo
 
 Pass `fullscreen` to make the dialog cover the entire viewport.
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <DialogDemo
         label="Fullscreen dialog"
         title="Fullscreen dialog"
@@ -343,7 +343,7 @@ Responsive fullscreen variants are also available. These make the dialog fullscr
 | `fullscreen="xl"`  | `1280px`         |
 | `fullscreen="2xl"` | `1536px`         |
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <div className="d-flex flex-wrap gap-3">
         <DialogDemo
             label="Fullscreen below sm"

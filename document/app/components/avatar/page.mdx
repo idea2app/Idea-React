@@ -18,7 +18,7 @@ Avatars are used to represent users or entities. They can display an image or in
 
 ### Image
 
-Use `.avatar` with an `.avatar-img` for image-based avatars. The parent `.avatar` element provides an easy wrapper for additional avatar features like status indicators and stacks. You’re welcome to use the `.avatar-img` class on its own if you only need a single HTML element.
+Use `Avatar` with `AvatarImage` for image-based avatars. The parent `Avatar` element provides an easy wrapper for additional avatar features like status indicators and stacks. You’re welcome to use `AvatarImage` on its own if you only need a single HTML element.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -26,7 +26,7 @@ Use `.avatar` with an `.avatar-img` for image-based avatars. The parent `.avatar
     </div>
 </CodeExample>
 
-When used inside the `.avatar` wrapper, the image fills the wrapper and its size is set with `--bs-avatar-size`. Used on its own, `.avatar-img` honors its own `width` and `height` instead, so set them to your desired size.
+When used inside the `Avatar` wrapper, the image fills the wrapper and its size is set with `--bs-avatar-size`. Used on its own, `AvatarImage` honors its own `width` and `height` instead, so set them to your desired size.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -36,7 +36,7 @@ When used inside the `.avatar` wrapper, the image fills the wrapper and its size
 
 ### Initials
 
-Use text content inside `.avatar` for initials-based avatars.
+Use text content inside `Avatar` for initials-based avatars.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -52,7 +52,7 @@ Use text content inside `.avatar` for initials-based avatars.
     </div>
 </CodeExample>
 
-Use `.avatar-subtle` to create a subtle avatar.
+Set the `subtle` prop to create a subtle avatar.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -108,14 +108,14 @@ Use a custom size by modifying the `--bs-avatar-size` variable. The numeric `siz
 
 ## Status indicator
 
-Add a `.avatar-status` element inside the avatar to show a status indicator. Each status has a distinct shape and color:
+Set the `status` prop to show an indicator inside the avatar. Each status has a distinct shape and color:
 
-- `.status-online` — green circle
-- `.status-offline` — gray rounded square
-- `.status-busy` — red rounded square
-- `.status-away` — yellow circle
+- `online` — green circle
+- `offline` — gray rounded square
+- `busy` — red rounded square
+- `away` — yellow circle
 
-Because the status is conveyed purely through color and shape, give each `.avatar-status` a `role="img"` and an `aria-label` (e.g. `Online`) so assistive technologies can announce it.
+Because the status is conveyed purely through color and shape, provide a `statusLabel` (e.g. `Online`) so assistive technologies can announce it.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -166,7 +166,7 @@ The status indicator scales with the avatar size.
 
 ## Avatar stack
 
-Use `.avatar-stack` to group multiple avatars together with overlapping effect. Avatars are rendered in reverse order so the first avatar appears on top. Stacks use a percentage of the avatar size to determine how much to overlap stacked avatars.
+Use `AvatarStack` to group multiple avatars together with overlapping effect. Avatars are rendered in reverse order so the first avatar appears on top. Stacks use a percentage of the avatar size to determine how much to overlap stacked avatars.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -182,7 +182,7 @@ Use `.avatar-stack` to group multiple avatars together with overlapping effect. 
 
 ### Stack with sizes
 
-As a shorthand, size classes are available for `.avatar-stack` and `.avatar`.
+As a shorthand, `size` props are available for `AvatarStack` and `Avatar`.
 
 <CodeExample>
     <div className="vstack align-items-start gap-3">

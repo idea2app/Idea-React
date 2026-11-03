@@ -16,12 +16,10 @@ it('supports documented animation, scrolling, size and responsive fullscreen sha
     const { container, rerender } = render(
         <NativeDialog size="xl" fullscreen="lg" animation="slide-up" scrollable />
     );
-
     assert.equal(
         container.querySelector('dialog')?.className,
         'dialog dialog-xl lg-down:dialog-fullscreen dialog-scrollable dialog-slide-up'
     );
-
     rerender(<NativeDialog size="sm" animation="instant" fullscreen />);
 
     assert.equal(
@@ -43,6 +41,7 @@ it('opens a native modal, closes with Escape and returns focus to its trigger', 
     const trigger = screen.getByRole('button', { name: 'Open' });
     trigger.focus();
     act(() => ref.current?.show());
+
     assert.equal(screen.getByRole('dialog', { name: 'Example' }).className, 'dialog');
     assert.equal(ref.current?.open, true);
 
@@ -53,10 +52,10 @@ it('opens a native modal, closes with Escape and returns focus to its trigger', 
 
 it('preserves imperative show through unrelated content rerenders', () => {
     const ref = createRef<NativeDialog>();
+
     const { container, rerender } = render(
         <NativeDialog ref={ref}>Initial search results</NativeDialog>
     );
-
     act(() => ref.current?.show());
     rerender(<NativeDialog ref={ref}>Loading search results</NativeDialog>);
 
@@ -167,6 +166,7 @@ it('allows body scrolling explicitly and handles native command or form dismissa
 
 it('keeps animated dialogs open until their exit transition finishes and cancels closing on show', t => {
     t.mock.timers.enable({ apis: ['setTimeout'] });
+
     const ref = createRef<NativeDialog>();
     const { container } = render(
         <NativeDialog

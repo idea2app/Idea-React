@@ -107,8 +107,10 @@ export class MenuSubmenu extends Component<MenuSubmenuProps> {
 
     componentDidUpdate() {
         const { position, panel, trigger } = this;
+
         if (!this.open) return position.dispose();
         if (!panel.current || !trigger.current) return;
+
         if (position.element !== panel.current)
             position.attach(trigger.current, panel.current, {
                 placement: 'right-start',
@@ -122,9 +124,7 @@ export class MenuSubmenu extends Component<MenuSubmenuProps> {
     }
 
     @action
-    setOpen = (open: boolean) => {
-        this.open = open;
-    };
+    setOpen = (open: boolean) => (this.open = open);
 
     handleClick = () => this.setOpen(!this.open);
 
@@ -149,6 +149,7 @@ export class MenuSubmenu extends Component<MenuSubmenuProps> {
         if ((key === 'ArrowLeft' || key === 'Escape') && this.open) {
             event.preventDefault();
             event.stopPropagation();
+
             this.setOpen(false);
             this.trigger.current?.focus();
         }
@@ -256,16 +257,20 @@ export class Menu extends Component<MenuProps> {
     }
 
     componentDidUpdate({ responsivePlacement }: MenuProps) {
-        if (responsivePlacement !== this.props.responsivePlacement) this.observePlacement();
         const { trigger, panel, position, props } = this;
+
+        if (responsivePlacement !== props.responsivePlacement) this.observePlacement();
+
         if (!this.open) return position.dispose();
         if (!trigger.current || !panel.current) return;
+
+        const { placement, align, offset, padding, flip } = props;
+
         const options: FloatingOptions = {
-            placement:
-                this.responsiveDirection ?? props.placement ?? `bottom-${props.align ?? 'end'}`,
-            offset: props.offset,
-            padding: props.padding,
-            flip: props.flip
+            placement: this.responsiveDirection ?? placement ?? `bottom-${align ?? 'end'}`,
+            offset,
+            padding,
+            flip
         };
         if (position.element !== panel.current)
             position.attach(trigger.current, panel.current, options);
@@ -278,18 +283,19 @@ export class Menu extends Component<MenuProps> {
     componentWillUnmount() {
         document.removeEventListener('pointerdown', this.handleOutside);
         this.position.dispose();
-        this.media.forEach(({ query }) =>
-            query.removeEventListener('change', this.handlePlacement)
-        );
+
+        for (const { query } of this.media)
+            query.removeEventListener('change', this.handlePlacement);
     }
 
     observePlacement = () => {
-        this.media.forEach(({ query }) =>
-            query.removeEventListener('change', this.handlePlacement)
-        );
+        for (const { query } of this.media)
+            query.removeEventListener('change', this.handlePlacement);
+
         this.media = (Object.keys(MENU_BREAKPOINT_WIDTHS) as Breakpoint[]).flatMap(breakpoint => {
             const placement = this.props.responsivePlacement?.[breakpoint];
             if (!placement) return [];
+
             const query = window.matchMedia(`(min-width: ${MENU_BREAKPOINT_WIDTHS[breakpoint]}px)`);
             query.addEventListener('change', this.handlePlacement);
             return [{ query, placement }];
@@ -346,6 +352,7 @@ export class Menu extends Component<MenuProps> {
             event.target.matches('input, textarea, select, [contenteditable="true"]')
         )
             return;
+
         if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(key)) return;
 
         event.preventDefault();

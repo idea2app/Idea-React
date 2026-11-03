@@ -41,6 +41,7 @@ it('keeps multiple triggers and multiple horizontal targets synchronized', () =>
 
 it('supports controlled open state, change callbacks, cancellation and parent exclusivity', () => {
     const onOpenChange = mock.fn();
+
     const { rerender } = render(
         <>
             <CollapseToggle target="#controlled">Toggle controlled</CollapseToggle>
@@ -49,7 +50,6 @@ it('supports controlled open state, change callbacks, cancellation and parent ex
             </Collapse>
         </>
     );
-
     fireEvent.click(screen.getByRole('button'));
 
     assert.equal(onOpenChange.mock.calls[0].arguments[0], true);
@@ -79,6 +79,7 @@ it('supports controlled open state, change callbacks, cancellation and parent ex
 
 it('allows consumer click cancellation and releases document listeners on unmount', () => {
     const onOpenChange = mock.fn();
+
     const { unmount } = render(
         <>
             <CollapseToggle target="#cancelled" onClick={event => event.preventDefault()}>
@@ -89,7 +90,6 @@ it('allows consumer click cancellation and releases document listeners on unmoun
             </Collapse>
         </>
     );
-
     fireEvent.click(screen.getByRole('button'));
 
     assert.equal(onOpenChange.mock.callCount(), 0);
@@ -111,7 +111,6 @@ it('does not group unrelated panels when the parent selector matches no containe
             </Collapse>
         </>
     );
-
     assert.equal(screen.getByText('Outside one').className, 'collapse show');
     assert.equal(screen.getByText('Outside two').className, 'collapse show');
 });

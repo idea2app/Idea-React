@@ -1,6 +1,7 @@
 'use client';
 
 import classNames from 'classnames';
+import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import {
     Children,
@@ -14,8 +15,6 @@ import {
     MouseEvent,
     ReactNode
 } from 'react';
-
-import { TabModel } from './model';
 
 export interface TabProps extends ComponentPropsWithRef<'div'> {
     eventKey: string;
@@ -64,15 +63,15 @@ export class Tabs extends Component<TabsProps> {
 
     root = createRef<HTMLDivElement>();
 
-    store = new TabModel(
+    @observable accessor selectedKey =
         this.props.defaultActiveKey ??
             this.tabs.find(({ props }) => !props.disabled)?.props.eventKey ??
             this.tabs[0]?.props.eventKey ??
-            ''
-    );
+            '';
 
     get activeKey() {
-        const key = this.props.activeKey ?? this.store.activeKey;
+        const key = this.props.activeKey ?? this.selectedKey;
+
         return this.tabs.some(({ props }) => props.eventKey === key && !props.disabled)
             ? key
             : (this.tabs.find(({ props }) => !props.disabled)?.props.eventKey ?? '');
@@ -120,16 +119,18 @@ export class Tabs extends Component<TabsProps> {
 
         event.preventDefault();
         const tab = tabs[destination];
+
         this.activate(tab.props.eventKey);
         this.root.current
             ?.querySelector<HTMLButtonElement>(`[data-tab-index="${destination}"]`)
             ?.focus();
     };
 
+    @action
     activate = (key: string) => {
         this.props.onChange?.(key);
 
-        if (this.props.activeKey === undefined) this.store.select(key);
+        if (this.props.activeKey === undefined) this.selectedKey = key;
     };
 
     tabId = (key: string) => `${this.props.id}-tab-${encodeURIComponent(key)}`;

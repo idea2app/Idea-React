@@ -46,8 +46,10 @@ export class FloatingPosition {
         this.reference = reference;
         this.element = element;
         this.options = options;
+
         window.addEventListener('resize', this.update);
         document.addEventListener('scroll', this.update, true);
+
         this.resize = new window.ResizeObserver(this.update);
         this.resize.observe(reference);
         this.resize.observe(element);
@@ -67,6 +69,7 @@ export class FloatingPosition {
     update = () => {
         const { reference, element, options } = this;
         if (!reference || !element) return;
+
         const { responsivePlacement, offset = 0, padding = 8, flip = true } = options;
         const responsive = (Object.keys(BREAKPOINTS) as Breakpoint[])
             .reverse()
@@ -93,6 +96,7 @@ export class FloatingPosition {
                 : side;
         let left = anchor.left + (anchor.width - box.width) / 2;
         let top = anchor.top + (anchor.height - box.height) / 2;
+
         if (actual === 'top' || actual === 'bottom') {
             top = actual === 'top' ? anchor.top - box.height - distance : anchor.bottom + distance;
             if (alignment) left = alignment === 'start' ? anchor.left : anchor.right - box.width;
@@ -104,6 +108,7 @@ export class FloatingPosition {
         }
         left = Math.max(padding, Math.min(left, window.innerWidth - box.width - padding));
         top = Math.max(padding, Math.min(top, window.innerHeight - box.height - padding));
+
         const arrowStyle: CSSProperties =
             actual === 'top' || actual === 'bottom'
                 ? {
@@ -120,6 +125,7 @@ export class FloatingPosition {
                   };
         if (this.arrowStyle.left !== arrowStyle.left || this.arrowStyle.top !== arrowStyle.top)
             this.arrowStyle = arrowStyle;
+
         const parent = element.offsetParent;
         const positionedParent =
             parent instanceof HTMLElement &&
@@ -135,6 +141,7 @@ export class FloatingPosition {
             : window.scrollY;
         const placement: FloatingPlacement = alignment ? `${actual}-${alignment}` : actual;
         if (this.placement !== placement) this.placement = placement;
+
         const maxWidth = Math.max(0, window.innerWidth - padding * 2);
         const maxHeight = Math.max(0, window.innerHeight - padding * 2);
         if (

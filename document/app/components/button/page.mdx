@@ -494,7 +494,7 @@ Additional utilities can be used to adjust the alignment of buttons when horizon
 
 Create button-like checkboxes and radio buttons by adding `.btn-check` to a `<label>` element with button classes, with a checkbox or radio input nested inside. The input is visually hidden while the label provides the button appearance. These toggle buttons can further be grouped in a [button group][1] if needed.
 
-> Visually, these toggle buttons are identical to our [JavaScript toggle buttons][2], but are conveyed differently by assistive technologies. Checkbox toggles will be announced by screen readers as "checked"/"not checked"as they are checkboxes under the hood. The JavaScript toggle buttons are announced as "button"/"button pressed". It’s up to you to decide which approach makes more sense for your use case.
+> Visually, these toggle buttons are identical to our [active-state buttons][2], but are conveyed differently by assistive technologies. Checkbox toggles will be announced by screen readers as "checked"/"not checked" as they are checkboxes under the hood. Active-state buttons are announced as "button"/"button pressed". It’s up to you to decide which approach makes more sense for your use case.
 
 ### Checkboxes
 
@@ -535,25 +535,25 @@ Radios can be checked, unchecked, or disabled. Use radio-based toggle buttons to
     </div>
 </CodeExample>
 
-## Button plugin
+## Active state
 
-Use the `Button` wrapper’s `toggle` prop to create simple on/off toggle buttons without loading Bootstrap’s imperative plugin.
+`Button` does not manage active state. Pass `active` from application state so the application remains the source of truth.
 
-> Visually, these toggle buttons are identical to our [input toggle buttons][3], but are conveyed differently by assistive technologies. Checkbox toggles will be announced by screen readers as "checked"/"not checked"as they are checkboxes under the hood. The JavaScript toggle buttons are announced as "button"/"button pressed". It’s up to you to decide which approach makes more sense for your use case.
+For toggle semantics, `Button` sets `aria-pressed` when `active` is provided. Buttons without `active` remain ordinary buttons.
 
-### Toggle states
+### Toggle buttons
 
-Add `toggle` to toggle a button’s active state. The wrapper maintains `aria-pressed` so assistive technologies announce the control as a toggle button. Use `defaultActive` for an initially pressed button, or `active` for a controlled state.
+Render the active state supplied by your application:
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 overflow-auto">
-        <Button variant="solid" toggle theme="primary" type="button">
-            Toggle button
+        <Button variant="solid" active={false} theme="primary" type="button">
+            Inactive toggle button
         </Button>
-        <Button variant="solid" toggle defaultActive theme="primary" type="button">
+        <Button variant="solid" active theme="primary" type="button">
             Active toggle button
         </Button>
-        <Button variant="solid" toggle theme="primary" type="button" disabled>
+        <Button variant="solid" active={false} theme="primary" type="button" disabled>
             Disabled toggle button
         </Button>
     </div>
@@ -561,27 +561,26 @@ Add `toggle` to toggle a button’s active state. The wrapper maintains `aria-pr
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 overflow-auto">
-        <Button variant="solid" toggle theme="primary" href="#" role="button">
-            Toggle link
+        <Button variant="solid" active={false} theme="primary" href="#" role="button">
+            Inactive link button
         </Button>
-        <Button variant="solid" toggle defaultActive theme="primary" href="#" role="button">
+        <Button variant="solid" active theme="primary" href="#" role="button">
             Active toggle link
         </Button>
         <Button
             variant="solid"
-            toggle
             theme="primary"
             disabled
             aria-disabled="true"
             role="button"
             href="#"
         >
-            Disabled toggle link
+            Disabled link button
         </Button>
     </div>
 </CodeExample>
 
-> `aria-pressed` has no default value in HTML. A button without it is announced as a plain button, not as a toggle. The `toggle` wrapper supplies the correct state from its first render.
+When using links as toggle buttons, set `role="button"` so the `active` prop also supplies `aria-pressed`.
 
 ## CSS
 
@@ -644,5 +643,5 @@ Link buttons use local CSS variables.
 </ComponentsLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/components/button-group/
-[2]: #button-plugin
+[2]: #active-state
 [3]: #toggle-buttons

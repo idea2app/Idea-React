@@ -62,6 +62,7 @@ export class Alert extends Component<AlertProps> {
         if (this.props.instant) return this.finishClose();
 
         this.hiding = true;
+
         const style = getComputedStyle(this.root.current!);
         const durations = style.transitionDuration.split(',').map(Alert.milliseconds);
         const delays = style.transitionDelay.split(',').map(Alert.milliseconds);
@@ -69,7 +70,6 @@ export class Alert extends Component<AlertProps> {
             0,
             ...durations.map((duration, index) => duration + (delays[index % delays.length] || 0))
         );
-
         this.timer = setTimeout(this.finishClose, timeout);
     });
 

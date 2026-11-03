@@ -1,7 +1,5 @@
-'use client';
-
 import classNames from 'classnames';
-import { ComponentPropsWithRef, createContext, FC, useContext } from 'react';
+import { cloneElement, ComponentPropsWithRef, FC, isValidElement } from 'react';
 
 import { ComponentTheme } from './Button';
 
@@ -22,22 +20,33 @@ export const Pagination: FC<PaginationProps> = ({ theme, size, className, ...pro
     />
 );
 
-interface PageState {
-    active?: boolean;
-    disabled?: boolean;
-}
+type PageState = Partial<Record<'active' | 'disabled', boolean>>;
 
-const PageContext = createContext<PageState>({});
+export type PageItemProps = ComponentPropsWithRef<'li'> & PageState;
 
-export interface PageItemProps extends ComponentPropsWithRef<'li'>, PageState {}
+export const PageItem: FC<PageItemProps> = ({
+    active,
+    disabled,
+    className,
+    children,
+    ...props
+}) => {
+    const child =
+        isValidElement<PageLinkProps>(children) && children.type === PageLink
+            ? cloneElement(children, {
+                  active: children.props.active ?? active,
+                  disabled: children.props.disabled ?? disabled
+              })
+            : children;
 
-export const PageItem: FC<PageItemProps> = ({ active, disabled, className, ...props }) => (
-    <PageContext.Provider value={{ active, disabled }}>
-        <li {...props} className={classNames('page-item', { active, disabled }, className)} />
-    </PageContext.Provider>
-);
+    return (
+        <li {...props} className={classNames('page-item', { active, disabled }, className)}>
+            {child}
+        </li>
+    );
+};
 
-export interface PageLinkProps extends ComponentPropsWithRef<'a'>, PageState {}
+export type PageLinkProps = ComponentPropsWithRef<'a'> & PageState;
 
 export const PageLink: FC<PageLinkProps> = ({
     active,
@@ -49,19 +58,26 @@ export const PageLink: FC<PageLinkProps> = ({
     'aria-current': current,
     ...props
 }) => {
-    const state = useContext(PageContext);
-    const isActive = active ?? state.active;
-    const isDisabled = disabled ?? state.disabled;
+    const linkProps = {
+        ...props,
+        className: classNames('page-link', className),
+        tabIndex: disabled ? -1 : tabIndex,
+        'aria-disabled': disabled || undefined,
+        'aria-current': current ?? (active ? 'page' : undefined)
+    };
 
-    return (
+    return href !== undefined ? (
         <a
+            {...linkProps}
+            href={disabled ? undefined : href}
+            onClick={disabled ? undefined : onClick}
+        />
+    ) : (
+        <span
             {...props}
             className={classNames('page-link', className)}
-            href={isDisabled ? undefined : href}
-            tabIndex={isDisabled ? -1 : tabIndex}
-            aria-disabled={isDisabled || undefined}
-            aria-current={current ?? (isActive ? 'page' : undefined)}
-            onClick={isDisabled ? undefined : onClick}
+            aria-disabled={disabled || undefined}
+            aria-current={current ?? (active ? 'page' : undefined)}
         />
     );
 };

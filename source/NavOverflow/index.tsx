@@ -64,10 +64,13 @@ export class NavOverflow extends Component<NavOverflowProps> {
         this.updateOverflow();
         window.addEventListener('resize', this.updateOverflow);
         document.addEventListener('pointerdown', this.handleOutside);
+
         if (typeof ResizeObserver !== 'undefined') {
             this.resizeObserver = new ResizeObserver(this.updateOverflow);
+
             if (this.root.current) this.resizeObserver.observe(this.root.current);
             if (this.nav.current) this.resizeObserver.observe(this.nav.current);
+
             for (const item of this.nav.current?.children ?? []) this.resizeObserver.observe(item);
         }
     }
@@ -111,18 +114,16 @@ export class NavOverflow extends Component<NavOverflowProps> {
         let visibleWidth = allWidth;
 
         if (shouldCollapseAll) {
-            for (let index = visible.length - 1; index >= 0; index--) {
+            for (let index = visible.length - 1; index >= 0; index--)
                 if (!keep[index]) visible.splice(index, 1);
-            }
-        } else if (containerWidth > 0 && allWidth > containerWidth) {
+        } else if (containerWidth > 0 && allWidth > containerWidth)
             while (visibleWidth + toggleWidth > containerWidth && visible.length > minimum) {
                 const index = visible.findLast(candidate => !keep[candidate]);
                 if (index === undefined) break;
+
                 visibleWidth -= widths[index] + (visible.length > 1 ? gap : 0);
                 visible.splice(visible.indexOf(index), 1);
             }
-        }
-
         const visibleSet = new Set(visible);
         const overflowIndices = items
             .map((_, index) => index)
@@ -139,6 +140,7 @@ export class NavOverflow extends Component<NavOverflowProps> {
     private getCollapseBelow = () => {
         const { collapseBelow = 0 } = this.props;
         if (typeof collapseBelow === 'number') return collapseBelow;
+
         const value = getComputedStyle(this.root.current as HTMLElement).getPropertyValue(
             `--bs-breakpoint-${collapseBelow}`
         );
@@ -150,6 +152,7 @@ export class NavOverflow extends Component<NavOverflowProps> {
 
         const target = event.target instanceof Element ? event.target : null;
         if (event.defaultPrevented) return;
+
         if (target?.closest('[data-overflow-toggle]')) this.store.toggle();
         else if (target?.closest('.nav-overflow-menu') && !target.closest('[aria-haspopup="true"]'))
             this.store.setOpen(false);
@@ -165,6 +168,7 @@ export class NavOverflow extends Component<NavOverflowProps> {
         } else if (event.key === 'ArrowDown' && event.target === this.toggleButton.current) {
             event.preventDefault();
             this.store.setOpen(true);
+
             queueMicrotask(() =>
                 this.root.current
                     ?.querySelector<HTMLElement>(
@@ -188,20 +192,15 @@ export class NavOverflow extends Component<NavOverflowProps> {
                 return cloneElement(child as ReactElement<MenuProps>, {
                     className: classNames(child.props.className, 'nav-overflow-submenu')
                 });
-
             return cloneElement(child as ReactElement<OverflowChildProps>, {
                 className: classNames(child.props.className, 'menu-item'),
                 role: 'menuitem'
             });
         }
-
         const hidden = this.store.overflowIndices.includes(index);
 
         return cloneElement(child as ReactElement<OverflowChildProps>, {
-            style: {
-                ...child.props.style,
-                ...(hidden && { position: 'absolute', visibility: 'hidden' })
-            },
+            className: classNames(child.props.className, hidden && 'position-absolute invisible'),
             'aria-hidden': hidden || undefined,
             tabIndex: hidden ? -1 : child.props.tabIndex
         });
@@ -240,9 +239,6 @@ export class NavOverflow extends Component<NavOverflowProps> {
                   : vertical === 'left'
                     ? ['end-100', horizontal === 'end' ? 'bottom-0' : 'top-0']
                     : ['start-100', horizontal === 'end' ? 'bottom-0' : 'top-0'];
-        const toggleStyle = {
-            ...(hasOverflow ? {} : { position: 'absolute', visibility: 'hidden' })
-        } as CSSProperties;
         const icon = moreIcon ?? <Icon name="three-dots" aria-hidden="true" />;
         const text = moreText === false ? null : moreText;
 
@@ -268,8 +264,10 @@ export class NavOverflow extends Component<NavOverflowProps> {
                 >
                     {items.map((child, index) => this.renderChild(child, index))}
                     <div
-                        className="nav-item nav-overflow-item flex-shrink-0"
-                        style={toggleStyle}
+                        className={classNames(
+                            'nav-item nav-overflow-item flex-shrink-0',
+                            !hasOverflow && 'position-absolute invisible'
+                        )}
                         data-menu-placement={menuPlacement}
                     >
                         <button

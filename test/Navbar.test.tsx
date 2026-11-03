@@ -11,7 +11,6 @@ it('supports translucent color modes and navigation variants', () => {
             <NavbarNav variant="pills">Links</NavbarNav>
         </Navbar>
     );
-
     assert.equal(screen.getByRole('navigation').className, 'navbar navbar-translucent');
     assert.equal(screen.getByRole('navigation').getAttribute('data-bs-theme'), 'dark');
     assert.equal(screen.getByText('Links').className, 'navbar-nav nav nav-pills');
@@ -27,7 +26,6 @@ it('uses official responsive expansion classes on a labelled navigation landmark
         screen.getByRole('navigation', { name: 'Primary' }).className,
         'navbar lg:navbar-expand'
     );
-
     rerender(<Navbar className="custom" expand />);
     assert.equal(screen.getByRole('navigation').className, 'navbar navbar-expand custom');
 

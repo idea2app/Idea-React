@@ -6,7 +6,6 @@ import { Component, ComponentPropsWithRef, createRef, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
 import { ScrollSpyModel } from './model';
-import styles from './style.module.css';
 
 export interface ScrollSpyProps extends Omit<
     ComponentPropsWithRef<'div'>,
@@ -54,6 +53,7 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
     componentDidMount() {
         this.mounted = true;
         this.refresh();
+
         this.root.current?.addEventListener('scroll', this.handleScroll, { passive: true });
         window.addEventListener('scroll', this.handleScroll, { passive: true });
         window.addEventListener('resize', this.handleResize);
@@ -70,6 +70,7 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
             previous.scrollRoot !== this.props.scrollRoot
         )
             this.refresh();
+
         if (previous.debug !== this.props.debug) this.updateGuides();
     }
 
@@ -77,6 +78,7 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
         this.mounted = false;
         this.observer?.disconnect();
         this.bottomObserver?.disconnect();
+
         this.root.current?.removeEventListener('scroll', this.handleScroll);
         window.removeEventListener('scroll', this.handleScroll);
         window.removeEventListener('resize', this.handleResize);
@@ -91,23 +93,22 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
             ? document.querySelector<HTMLElement>(this.props.target)
             : root;
         const links = [...(navigation?.querySelectorAll<HTMLAnchorElement>('a[href^="#"]') ?? [])];
+
         this.entries = links.flatMap(link => {
             const hash = link.getAttribute('href')?.slice(1);
             if (!hash) return [];
 
             const id = decodeURIComponent(hash);
             const section = document.getElementById(id);
-            if (
-                !section ||
+
+            return !section ||
                 section.hidden ||
                 section.closest('[hidden]') ||
                 section.getAttribute('aria-hidden') === 'true' ||
                 getComputedStyle(section).display === 'none' ||
                 getComputedStyle(section).visibility === 'hidden'
-            )
-                return [];
-
-            return [{ id, link, section }];
+                ? []
+                : [{ id, link, section }];
         });
         this.entries.sort(
             (first, second) =>
@@ -133,6 +134,7 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
 
     private getRootMargin = () => {
         if (this.props.rootMargin != null) return this.props.rootMargin;
+
         const { topMargin = '12%' } = this.props;
         const value = Number.parseFloat(topMargin) || 0;
         const height = this.getRootHeight();
@@ -146,6 +148,7 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
         this.bottomObserver?.disconnect();
         this.intersecting.clear();
         this.atBottom = false;
+
         const root = this.props.scrollRoot === 'window' ? null : this.root.current;
         const observer = new window.IntersectionObserver(
             entries => {
@@ -159,12 +162,14 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
             { root, rootMargin: this.getRootMargin(), threshold: this.props.threshold ?? [0] }
         );
         this.observer = observer;
+
         for (const section of new Set(this.entries.map(entry => entry.section)))
             observer.observe(section);
 
         const bottomObserver = new window.IntersectionObserver(
             entries => {
                 if (!this.mounted || this.bottomObserver !== bottomObserver) return;
+
                 const scroller = root ?? document.scrollingElement ?? document.documentElement;
                 this.atBottom =
                     Boolean(entries.at(-1)?.isIntersecting) &&
@@ -191,22 +196,27 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
         event.preventDefault();
         const root = this.root.current;
         const { scrollRoot = 'self' } = this.props;
-        if (scrollRoot === 'window') {
+
+        if (scrollRoot === 'window')
             window.scrollTo({
                 top: window.scrollY + entry.section.getBoundingClientRect().top,
                 behavior: 'smooth'
             });
-        } else if (root) {
+        else if (root) {
             const top =
                 root.scrollTop +
                 entry.section.getBoundingClientRect().top -
                 root.getBoundingClientRect().top;
+
             root.scrollTo({ top, behavior: 'smooth' });
         }
         window.history.replaceState(null, '', `#${encodeURIComponent(entry.id)}`);
+
         const temporaryTabIndex = !entry.section.hasAttribute('tabindex');
         if (temporaryTabIndex) entry.section.tabIndex = -1;
+
         entry.section.focus({ preventScroll: true });
+
         if (temporaryTabIndex) entry.section.removeAttribute('tabindex');
         this.updateActive();
     };
@@ -215,6 +225,7 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
         const margins = this.getRootMargin().trim().split(/\s+/);
         const bottom = margins[2] ?? margins[0];
         const parsed = Number.parseFloat(bottom) || 0;
+
         return rootHeight + (bottom.endsWith('%') ? (rootHeight * parsed) / 100 : parsed);
     };
 
@@ -224,6 +235,7 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
 
         const rect = root.getBoundingClientRect();
         const height = this.getRootHeight();
+
         this.store.setGuides({
             top: this.props.scrollRoot === 'window' ? 0 : rect.top,
             left: this.props.scrollRoot === 'window' ? 0 : rect.left,
@@ -249,6 +261,7 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
         );
         let nestedNav = current.link.closest('.nav');
         let parentNav = nestedNav?.parentElement?.closest('.nav');
+
         while (parentNav && parentNav !== this.root.current) {
             const parentEntry = [...this.entries]
                 .reverse()
@@ -267,7 +280,9 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
 
         for (const { link } of this.entries) {
             const active = activeLinks.has(link);
+
             link.classList.toggle('active', active);
+
             if (active) link.setAttribute('aria-current', 'location');
             else link.removeAttribute('aria-current');
         }
@@ -282,16 +297,26 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
         if (!this.props.debug || !guides) return null;
 
         const { top, left, width, height, line, atBottom } = guides;
+
         return createPortal(
             <div
-                className={styles.guides}
-                style={{ top, left, width, height }}
+                className="position-fixed overflow-hidden pe-none"
+                style={{ top, left, width, height, zIndex: 1080 }}
                 aria-hidden="true"
                 data-scrollspy-debug
             >
-                <div className={styles.line} style={{ top: line }} data-scrollspy-line />
                 <div
-                    className={classNames(styles.bottom, { [styles.reached]: atBottom })}
+                    className="position-absolute start-0 end-0 border-top border-danger border-2"
+                    style={{ top: line, borderTopStyle: 'dashed' }}
+                    data-scrollspy-line
+                />
+                <div
+                    className="position-absolute bottom-0 start-0 end-0 border-top border-danger"
+                    style={{
+                        height: 12,
+                        borderTop: '1px solid #dc3545',
+                        background: atBottom ? 'rgb(220 53 69 / 40%)' : 'rgb(220 53 69 / 10%)'
+                    }}
                     data-scrollspy-bottom={atBottom ? 'reached' : 'pending'}
                 />
             </div>,
@@ -328,7 +353,11 @@ export class ScrollSpy extends Component<ScrollSpyProps> {
                 onKeyDown={this.props.onKeyDown}
             >
                 {children}
-                <div ref={this.sentinel} className={styles.sentinel} aria-hidden="true" />
+                <div
+                    ref={this.sentinel}
+                    className="position-relative invisible m-0 border-0 p-0 w-0 h-0"
+                    aria-hidden="true"
+                />
                 {this.renderDebug()}
             </div>
         );

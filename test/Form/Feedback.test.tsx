@@ -13,7 +13,6 @@ it('renders descriptions and valid or invalid feedback variants', () => {
             <FormFeedback tooltip>Required.</FormFeedback>
         </>
     );
-
     assert.equal(screen.getByText('Helper text').className, 'form-text');
     assert.equal(screen.getByText('Looks good.').className, 'valid-feedback');
     assert.equal(screen.getByText('Required.').className, 'tooltip invalid-tooltip');
@@ -46,7 +45,6 @@ it('preserves inline helper text by default and supports upstream block descript
             </FormText>
         </>
     );
-
     assert.equal(screen.getByText('Inline helper').className, 'form-text');
     assert.equal(screen.getByText('Block helper').className, 'form-text d-block mb-2');
     assert.equal(screen.getByText('Block helper').id, 'block-help');

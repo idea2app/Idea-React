@@ -16,7 +16,7 @@ it('wraps sized, colored, animated skeletons and disabled placeholder buttons', 
             </PlaceholderButton>
         </PlaceholderAnimation>
     );
-    const [first, second, third] = [...container.querySelectorAll('span')];
+    const [first, second, third] = container.querySelectorAll('span');
 
     assert.equal(container.firstElementChild?.className, 'placeholder-pulse');
     assert.equal(first.className, 'placeholder placeholder-xs bg-primary custom');

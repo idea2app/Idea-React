@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { before, it, mock } from 'node:test';
+import { setTimeout } from 'node:timers/promises';
 
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { createRef } from 'react';
@@ -26,6 +27,7 @@ it('renders a native date control by default', () => {
 it('supports button and inline calendars with multi-month range and formatting options', async () => {
     const changed = mock.fn();
     const { default: Plugin } = await import('bootstrap/js/src/datepicker.js');
+
     const options = { locale: 'en-US', dateFormat: { year: 'numeric' as const } };
     const ref = createRef<HTMLDivElement>();
     const { unmount } = render(
@@ -66,15 +68,13 @@ it('supports button and inline calendars with multi-month range and formatting o
             '2026-07-08'
         ])
     );
-
     button.dispatchEvent(
         Object.assign(new Event('change.bs.datepicker'), { dates: ['2026-07-09'] })
     );
-
     assert.deepEqual(changed.mock.calls[0].arguments[0], ['2026-07-09']);
 
     unmount();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await setTimeout(0);
 
     assert.equal(Plugin.getInstance(button), null);
     assert.equal(Plugin.getInstance(inline), null);
@@ -82,18 +82,18 @@ it('supports button and inline calendars with multi-month range and formatting o
 
 it('reconfigures enhanced inputs when options change and releases enhanced mode', async () => {
     const { default: Plugin } = await import('bootstrap/js/src/datepicker.js');
+
     const { rerender } = render(<DatePicker aria-label="Date" min="2026-01-01" enhanced />);
     const input = screen.getByLabelText('Date');
 
     await waitFor(() => assert.ok(Plugin.getInstance(input)));
+
     const original = Plugin.getInstance(input);
 
     rerender(<DatePicker aria-label="Date" min="2026-02-01" displayMonthsCount={2} enhanced />);
-
     await waitFor(() =>
         assert.ok(Plugin.getInstance(input) && Plugin.getInstance(input) !== original)
     );
-
     rerender(<DatePicker aria-label="Date" />);
 
     await waitFor(() => assert.equal(Plugin.getInstance(input), null));
@@ -115,7 +115,7 @@ it('initializes and disposes the Bootstrap datepicker in enhanced mode', async (
     await waitFor(() => assert.ok(Datepicker.getInstance(input)));
 
     unmount();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await setTimeout(0);
 
     assert.equal(Boolean(Datepicker.getInstance(input)), false);
 });

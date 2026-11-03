@@ -36,9 +36,8 @@ export class Dialog<I extends object = {}, O = unknown> {
         const defer = new Defer<O>();
         this.defer = defer;
 
-        const clear = action(() => {
-            if (this.defer === defer) this.defer = undefined;
-        });
+        const clear = action(() => this.defer === defer && (this.defer = undefined));
+
         defer.promise.then(clear, clear);
 
         return defer.promise;

@@ -93,6 +93,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
             flip,
             container
         } = props;
+
         if (!open) return position.dispose();
         if (!root.current || !overlay.current) return;
         if (
@@ -249,6 +250,7 @@ export class OverlayBox extends Component<OverlayBoxProps> {
                       : container
                 : undefined;
         if (this.open && container && !target) throw new Error('Overlay container was not found');
+
         const trigger = isValidElement(children)
             ? cloneElement(children, {
                   'aria-describedby':

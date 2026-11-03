@@ -1,11 +1,9 @@
-'use client';
+import './style.module.css';
 
 import classNames from 'classnames';
-import { ComponentPropsWithRef, createContext, FC, useContext } from 'react';
+import { ComponentPropsWithRef, CSSProperties, FC } from 'react';
 
-import { ComponentTheme } from './Button';
-
-const StackedProgress = createContext(false);
+import { ComponentTheme } from '../Button';
 
 export interface ProgressProps extends ComponentPropsWithRef<'div'> {
     value: number;
@@ -33,16 +31,19 @@ export const Progress: FC<ProgressProps> = ({
     if (![value, min, max].every(Number.isFinite) || max <= min)
         throw new RangeError('Progress requires finite values and max greater than min');
 
-    const stacked = useContext(StackedProgress);
     const current = Math.min(max, Math.max(min, value));
     const width = `${((current - min) / (max - min)) * 100}%`;
+    const progressStyle: CSSProperties & { '--_progress-width': string } = {
+        ...style,
+        '--_progress-width': width
+    };
     const { className: barClass, style: barStyle, ...barAttributes } = barProps;
 
     return (
         <div
             {...props}
             className={classNames('progress', className)}
-            style={{ width: stacked ? width : undefined, ...style }}
+            style={progressStyle}
             role="progressbar"
             aria-valuenow={current}
             aria-valuemin={min}
@@ -59,7 +60,7 @@ export const Progress: FC<ProgressProps> = ({
                     },
                     barClass
                 )}
-                style={{ width: stacked ? undefined : width, ...barStyle }}
+                style={barStyle}
             >
                 {children}
             </div>
@@ -68,9 +69,7 @@ export const Progress: FC<ProgressProps> = ({
 };
 
 export const ProgressStack: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
-    <StackedProgress.Provider value>
-        <div {...props} className={classNames('progress-stacked', className)} />
-    </StackedProgress.Provider>
+    <div {...props} className={classNames('progress-stacked', className)} />
 );
 
 Progress.displayName = 'Progress';

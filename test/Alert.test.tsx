@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { it, mock } from 'node:test';
+import { setTimeout } from 'node:timers/promises';
 
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
@@ -27,7 +28,6 @@ it('renders themed alerts with links and additional content and dismisses instan
             </p>
         </Alert>
     );
-
     assert.equal(screen.getByRole('alert').className, 'alert theme-success alert-instant custom');
     assert.equal(screen.getByRole('heading').className, 'alert-heading');
     assert.equal(screen.getByRole('link').className, 'alert-link');
@@ -65,7 +65,7 @@ it('completes zero-duration dismissal without requiring a transition event', asy
     render(<Alert dismissible>Notice</Alert>);
 
     fireEvent.click(screen.getByRole('button', { name: 'Close' }));
-    await act(() => new Promise(resolve => setTimeout(resolve, 10)));
+    await act(() => setTimeout(10));
 
     assert.equal(screen.queryByRole('alert'), null);
 });

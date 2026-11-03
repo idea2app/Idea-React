@@ -16,10 +16,9 @@ it('defaults buttons, links, inputs and toggles to unthemed base styling', () =>
             <Button>Button</Button>
             <Button href="/docs">Link</Button>
             <ButtonInput value="Input" />
-            <Button toggle>Toggle</Button>
         </>
     );
-    for (const name of ['Button', 'Input', 'Toggle'])
+    for (const name of ['Button', 'Input'])
         assert.equal(screen.getByRole('button', { name }).className, 'btn');
 
     assert.equal(screen.getByRole('link', { name: 'Link' }).className, 'btn');
@@ -53,19 +52,19 @@ it('allows composite controls to opt out of button styling without losing behavi
             <Button variant={false} href="/docs" className="custom">
                 Unstyled link
             </Button>
-            <Button variant={false} toggle>
-                Unstyled toggle
+            <Button variant={false} active>
+                Unstyled active button
             </Button>
         </>
     );
-
     assert.equal(screen.getByRole('button', { name: 'Control' }).className, 'form-control');
     assert.equal(screen.getByRole('button', { name: 'Input control' }).className, 'form-control');
     assert.equal(screen.getByRole('link').className, 'custom');
 
-    fireEvent.click(screen.getByRole('button', { name: 'Unstyled toggle' }));
-
-    assert.equal(screen.getByRole('button', { name: 'Unstyled toggle' }).className, 'active');
+    assert.equal(
+        screen.getByRole('button', { name: 'Unstyled active button' }).className,
+        'active'
+    );
 });
 
 it('preserves native keyboard events and forwards each synthesized click only once', () => {
@@ -87,31 +86,9 @@ it('preserves native keyboard events and forwards each synthesized click only on
 
         fireEvent.click(button, { detail: 0 });
     }
-
     assert.equal(onClick.mock.callCount(), 2);
     assert.equal(onKeyDown.mock.callCount(), 2);
     assert.equal(onKeyUp.mock.callCount(), 2);
-});
-
-it('toggles pressed state and lets an external callback cancel the toggle', () => {
-    const { rerender } = render(<Button toggle>Toggle</Button>);
-    const button = screen.getByRole('button', { name: 'Toggle' });
-
-    assert.equal(button.getAttribute('aria-pressed'), 'false');
-
-    fireEvent.click(button);
-
-    assert.equal(button.getAttribute('aria-pressed'), 'true');
-    assert.ok(button.classList.contains('active'));
-
-    rerender(
-        <Button toggle onClick={event => event.preventDefault()}>
-            Toggle
-        </Button>
-    );
-    fireEvent.click(button);
-
-    assert.equal(button.getAttribute('aria-pressed'), 'true');
 });
 
 it('supports controlled active state and native input button tags', () => {
@@ -119,10 +96,13 @@ it('supports controlled active state and native input button tags', () => {
 
     assert.equal(screen.getByRole('button').getAttribute('aria-pressed'), 'true');
 
+    rerender(<Button>Pressed</Button>);
+
+    assert.equal(screen.getByRole('button').getAttribute('aria-pressed'), null);
+
     rerender(
         <ButtonInput type="submit" value="Submit" variant="subtle" theme="primary" size="xs" />
     );
-
     assert.equal(
         screen.getByRole('button', { name: 'Submit' }).className,
         'btn-subtle theme-primary btn-xs'
@@ -138,6 +118,7 @@ it('maps official variants, themes, sizes, and native button behavior', () => {
         </Button>
     );
     const button = screen.getByRole('button', { name: 'Save' });
+
     assert.ok(button.className.includes('btn-outline theme-accent btn-lg'));
     assert.equal(button.getAttribute('type'), 'button');
 

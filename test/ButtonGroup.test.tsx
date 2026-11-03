@@ -13,7 +13,6 @@ it('supports shared sizing and dividers for horizontal and vertical groups', () 
         container.firstElementChild?.className,
         'btn-group btn-group-xs btn-group-divider'
     );
-
     rerender(<ButtonGroup size="lg" vertical divider />);
 
     assert.equal(

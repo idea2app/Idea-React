@@ -1,6 +1,6 @@
 'use client';
 
-import Datepicker, { DatepickerConfig } from 'bootstrap/js/src/datepicker.js';
+import Datepicker, { type DatepickerConfig } from 'bootstrap/js/src/datepicker.js';
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, FC, forwardRef, Ref } from 'react';
 
@@ -66,42 +66,7 @@ class DatePickerComponent extends FormPlugin<
         const { enhanced, kind = 'input' } = this.props;
         if (!enhanced && kind === 'input') return () => ({ dispose: () => undefined });
 
-        const { default: Plugin } = await import('bootstrap/js/src/datepicker.js');
-        class ReactDatepicker extends Plugin {
-            private changingVisibility = false;
-
-            async show() {
-                if (this.changingVisibility) return;
-                this.changingVisibility = true;
-
-                try {
-                    await super.show();
-                } finally {
-                    this.changingVisibility = false;
-                }
-            }
-
-            async hide() {
-                if (this.changingVisibility) return;
-                this.changingVisibility = true;
-
-                try {
-                    await super.hide();
-                } finally {
-                    this.changingVisibility = false;
-                }
-            }
-
-            dispose() {
-                // Calendar Pro normally replaces its trigger with a clone on destroy.
-                // Keep React's original node and its ref/event bindings intact.
-                const element = this._positionElement;
-                const replacement = this._calendar?.context.originalElement;
-
-                super.dispose();
-                replacement?.replaceWith(element);
-            }
-        }
+        const { ReactDatepicker } = await import('./DatePickerPlugin');
         const {
             options,
             inline,

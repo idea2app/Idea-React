@@ -1,12 +1,13 @@
 import { FC, isValidElement, PropsWithChildren, ReactNode } from 'react';
 import reactElementToJSXString from 'react-element-to-jsx-string';
 
-import { Card, CardBody } from '../../../../source/Card';
+import { Card } from '../../../../source/Card';
 import { CodeBlock } from '../../../../source/Extension/CodeBlock';
 import { LiveRunner } from './LiveRunner';
 
 const CLIENT_REFERENCE_TAG = Symbol.for('react.client.reference');
 const WRAPPED_TAGS = new Set([Symbol.for('react.memo'), Symbol.for('react.forward_ref')]);
+const REPOSITORY_SOURCE_BASE = 'https://github.com/idea2app/Idea-React/blob/main/';
 
 interface ComponentType {
     displayName?: string;
@@ -46,28 +47,38 @@ const toSourceCode = (children: ReactNode) => {
     });
 };
 
-export interface CodeExampleProps extends PropsWithChildren {
+export type CodeExampleProps = PropsWithChildren<{
     code?: string;
-}
+    source?: string;
+}>;
 
-export interface LiveExampleProps extends PropsWithChildren {
+export type LiveExampleProps = PropsWithChildren<{
     code?: string;
-}
+}>;
 
-export const CodeCard: FC<PropsWithChildren> = ({ children }) => (
-    <Card className="mt-3">
-        <CardBody>
-            <CodeBlock language="tsx">
-                {typeof children === 'string' ? children : toSourceCode(children)}
-            </CodeBlock>
-        </CardBody>
+const getSourceURL = (source: string) => new URL(source, REPOSITORY_SOURCE_BASE).href;
+
+export const CodeCard: FC<CodeExampleProps> = ({ children, source }) => (
+    <Card className="mt-3" body>
+        <CodeBlock
+            language="tsx"
+            header={
+                source && (
+                    <a href={getSourceURL(source)} target="_blank" rel="noreferrer">
+                        {source}
+                    </a>
+                )
+            }
+        >
+            {typeof children === 'string' ? children : toSourceCode(children)}
+        </CodeBlock>
     </Card>
 );
 
-export const CodeExample: FC<CodeExampleProps> = ({ code, children }) => (
+export const CodeExample: FC<CodeExampleProps> = ({ code, source, children }) => (
     <>
         {children}
-        <CodeCard>{code ?? children}</CodeCard>
+        <CodeCard source={source}>{code ?? children}</CodeCard>
     </>
 );
 

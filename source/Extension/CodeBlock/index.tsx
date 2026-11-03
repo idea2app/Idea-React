@@ -4,7 +4,7 @@ import tsx from '@shikijs/langs/tsx';
 import ts from '@shikijs/langs/typescript';
 import githubDark from '@shikijs/themes/github-dark';
 import githubLight from '@shikijs/themes/github-light';
-import { FC, HTMLAttributes, isValidElement } from 'react';
+import { FC, HTMLAttributes, isValidElement, ReactNode } from 'react';
 import reactElementToJSXString from 'react-element-to-jsx-string';
 import { createHighlighterCoreSync } from 'shiki/core';
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
@@ -19,9 +19,16 @@ const highlighter = createHighlighterCoreSync({
 
 export interface CodeBlockProps extends HTMLAttributes<HTMLPreElement> {
     language: string;
+    header?: ReactNode;
 }
 
-export const CodeBlock: FC<CodeBlockProps> = ({ className = '', language, children, ...props }) => {
+export const CodeBlock: FC<CodeBlockProps> = ({
+    className = '',
+    language,
+    header,
+    children,
+    ...props
+}) => {
     const sourceCode =
         typeof children === 'string'
             ? children
@@ -34,9 +41,18 @@ export const CodeBlock: FC<CodeBlockProps> = ({ className = '', language, childr
         structure: 'inline'
     });
 
-    return (
+    const code = (
         <pre className={`m-0 shiki language-${language} ${styles.code} ${className}`} {...props}>
             <code dangerouslySetInnerHTML={{ __html }} className={`language-${language}`} />
         </pre>
+    );
+
+    return header ? (
+        <figure className="m-0 border rounded overflow-hidden">
+            <figcaption className="px-3 py-2 bg-body-tertiary border-bottom">{header}</figcaption>
+            {code}
+        </figure>
+    ) : (
+        code
     );
 };

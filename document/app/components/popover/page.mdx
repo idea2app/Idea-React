@@ -164,7 +164,7 @@ When you have some styles on a parent element that interfere with a popover, you
 
 Another situation where you’ll want to set an explicit custom `container` are popovers inside a [dialog][1], to make sure that the popover itself is appended to the dialog. This is particularly important for popovers that contain interactive elements – dialogs will trap focus, so unless the popover is a child element of the dialog, users won’t be able to focus or activate these interactive elements.
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
     <DialogDemo id="popoverContainerDialog" label="Popover inside dialog" title="Popover container">
         <OverlayBox
             title="Popover title"

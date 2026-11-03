@@ -85,5 +85,4 @@ export const FormLegend: FC<FormLegendProps> = ({ className, column, controlSize
         )}
     />
 );
-
 FormLegend.displayName = 'FormLegend';

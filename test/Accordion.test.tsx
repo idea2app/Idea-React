@@ -23,7 +23,6 @@ it('renders native exclusive, compact, themed, flush and spaced accordions', () 
             </AccordionItem>
         </Accordion>
     );
-
     assert.equal(
         container.firstElementChild?.className,
         'accordion theme-primary accordion-sm accordion-flush accordion-gap custom'
@@ -37,6 +36,7 @@ it('renders native exclusive, compact, themed, flush and spaced accordions', () 
 
 it('expands and collapses all direct items, preserving nested groups and native names', () => {
     const onClick = mock.fn();
+
     const { container } = render(
         <>
             <AccordionToggle

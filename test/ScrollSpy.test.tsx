@@ -30,6 +30,7 @@ class Observer {
 }
 
 const originalObserver = window.IntersectionObserver;
+
 beforeEach(() => {
     Observer.instances = [];
     window.IntersectionObserver = Observer as unknown as typeof IntersectionObserver;
@@ -44,13 +45,13 @@ it('renders a keyboard-focusable scroll root during server-side rendering', () =
             <section id="server-section">Content</section>
         </ScrollSpy>
     );
-
     assert.match(markup, /tabindex="0"/);
     assert.match(markup, /Content/);
 });
 
 it('activates matching navigation links as sections cross the scroll activation line', () => {
     const onActiveChange = mock.fn();
+
     const { container } = render(
         <>
             <nav id="spy-links" aria-label="Sections">
@@ -66,6 +67,7 @@ it('activates matching navigation links as sections cross the scroll activation 
     const root = container.querySelector('.scrollspy') as HTMLElement;
     const first = screen.getByText('First section');
     const second = screen.getByText('Second section');
+
     Object.defineProperty(root, 'clientHeight', { configurable: true, value: 100 });
     Object.defineProperty(root, 'scrollHeight', { configurable: true, value: 400 });
     Object.defineProperty(root, 'getBoundingClientRect', {
@@ -87,7 +89,6 @@ it('activates matching navigation links as sections cross the scroll activation 
         screen.getByRole('link', { name: 'First' }).getAttribute('aria-current'),
         'location'
     );
-
     Object.defineProperty(first, 'getBoundingClientRect', {
         configurable: true,
         value: () => ({ top: -80, bottom: -60, height: 20, left: 0, right: 100, width: 100 })
@@ -126,7 +127,6 @@ it('refreshes links after content changes and exposes keyboard focus for its scr
             <section id="later">Later section</section>
         </ScrollSpy>
     );
-
     assert.ok(screen.getByRole('link', { name: 'Later' }));
 });
 
@@ -145,7 +145,6 @@ it('keeps parent navigation links active for a selected nested section', () => {
             </ScrollSpy>
         </>
     );
-
     Observer.instances[0].emit(screen.getByText('Child content'), true);
 
     assert.equal(screen.getByRole('link', { name: 'Parent' }).className, 'nav-link active');
@@ -167,6 +166,7 @@ it('smooth-scrolls and focuses a matched section when a link is activated', () =
     const section = screen.getByText('Smooth section');
     const scrollTo = mock.fn();
     const focus = mock.fn(section.focus.bind(section));
+
     Object.defineProperty(root, 'scrollTo', { configurable: true, value: scrollTo });
     Object.defineProperty(section, 'focus', { configurable: true, value: focus });
 
@@ -177,6 +177,7 @@ it('smooth-scrolls and focuses a matched section when a link is activated', () =
     assert.equal(document.activeElement, section);
     assert.equal(section.hasAttribute('tabindex'), false);
     assert.equal(window.location.hash, '#smooth-section');
+
     window.history.replaceState(null, '', '/');
 });
 
@@ -208,6 +209,7 @@ it('derives pixel margins on resize and shows the same activation line in its de
         </ScrollSpy>
     );
     const root = container.firstElementChild as HTMLElement;
+
     Object.defineProperty(root, 'clientHeight', { configurable: true, value: 200 });
     Object.defineProperty(root, 'scrollHeight', { configurable: true, value: 400 });
 
@@ -216,13 +218,13 @@ it('derives pixel margins on resize and shows the same activation line in its de
     const observer = Observer.instances.at(-2) as Observer;
     const bottom = Observer.instances.at(-1) as Observer;
     assert.equal(observer.options.rootMargin, '0px 0px -80% 0px');
+
     const line = document.querySelector<HTMLElement>('[data-scrollspy-line]');
     assert.equal(line?.style.top, '40px');
     assert.equal(
         document.querySelector('[data-scrollspy-debug]')?.getAttribute('aria-hidden'),
         'true'
     );
-
     bottom.emit(root.lastElementChild as Element, true);
 
     assert.equal(

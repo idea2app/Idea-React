@@ -29,7 +29,6 @@ it('preserves card component names in serialized documentation examples', () => 
         CardText,
         CardTitle
     };
-
     for (const [name, component] of Object.entries(components))
         assert.equal(component.displayName, name);
 });
@@ -40,7 +39,6 @@ it('renders horizontal, subtle and translucent card variants', () => {
             <CardSubtitle>Subtitle</CardSubtitle>
         </Card>
     );
-
     assert.equal(
         container.firstElementChild?.className,
         'card card-row card-body card-subtle card-translucent theme-accent'

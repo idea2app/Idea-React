@@ -109,7 +109,16 @@ export class InputGroupMenu extends Menu {
 
 const InputGroupMenuView = observer<FC<InputGroupMenuProps & { owner: InputGroupMenu }>>(
     ({
-        owner,
+        owner: {
+            open,
+            trigger,
+            panel,
+            handleToggle,
+            handleTriggerKeyDown,
+            handleBlur,
+            handlePanelClick,
+            handleKeyDown
+        },
         id,
         label,
         split,
@@ -118,51 +127,47 @@ const InputGroupMenuView = observer<FC<InputGroupMenuProps & { owner: InputGroup
         children,
         align = 'end',
         menuClassName
-    }) => {
-        const { open } = owner;
+    }) => (
+        <>
+            <Button
+                {...toggleProps}
+                ref={trigger}
+                className={classNames(
+                    'input-group-btn',
+                    split && 'menu-toggle-split',
+                    toggleProps?.className,
+                    className
+                )}
+                aria-label={
+                    split
+                        ? (toggleProps?.['aria-label'] ?? 'Toggle menu')
+                        : toggleProps?.['aria-label']
+                }
+                aria-expanded={open}
+                aria-controls={id ? `${id}-menu` : undefined}
+                onClick={handleToggle}
+                onKeyDown={handleTriggerKeyDown}
+                onBlur={handleBlur}
+            >
+                {label}
+            </Button>
 
-        return (
-            <>
-                <Button
-                    {...toggleProps}
-                    ref={owner.trigger}
-                    className={classNames(
-                        'input-group-btn',
-                        split && 'menu-toggle-split',
-                        toggleProps?.className,
-                        className
-                    )}
-                    aria-label={
-                        split
-                            ? (toggleProps?.['aria-label'] ?? 'Toggle menu')
-                            : toggleProps?.['aria-label']
-                    }
-                    aria-expanded={open}
-                    aria-controls={id ? `${id}-menu` : undefined}
-                    onClick={owner.handleToggle}
-                    onKeyDown={owner.handleTriggerKeyDown}
-                    onBlur={owner.handleBlur}
-                >
-                    {label}
-                </Button>
-
-                <div
-                    ref={owner.panel}
-                    id={id ? `${id}-menu` : undefined}
-                    className={classNames(
-                        'menu top-100',
-                        align === 'end' ? 'end-0' : 'start-0',
-                        open && 'show',
-                        menuClassName
-                    )}
-                    hidden={!open}
-                    onClick={owner.handlePanelClick}
-                    onKeyDown={owner.handleKeyDown}
-                    onBlur={owner.handleBlur}
-                >
-                    {children}
-                </div>
-            </>
-        );
-    }
+            <div
+                ref={panel}
+                id={id ? `${id}-menu` : undefined}
+                className={classNames(
+                    'menu top-100',
+                    align === 'end' ? 'end-0' : 'start-0',
+                    open && 'show',
+                    menuClassName
+                )}
+                hidden={!open}
+                onClick={handlePanelClick}
+                onKeyDown={handleKeyDown}
+                onBlur={handleBlur}
+            >
+                {children}
+            </div>
+        </>
+    )
 );

@@ -46,7 +46,6 @@ it('covers native input types, sizing, validation and multiple select attributes
             <FormTextArea aria-label="Large message" controlSize="lg" validation="invalid" />
         </>
     );
-
     assert.equal(screen.getByLabelText('File').className, 'form-control form-control-lg');
     assert.equal(screen.getByLabelText('File').hasAttribute('multiple'), true);
     assert.equal(screen.getByLabelText('Color').className, 'form-control form-control-color');

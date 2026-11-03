@@ -75,7 +75,6 @@ export class NativeDialog extends Component<NativeDialogProps> {
             this.switchingMode = true;
             this.close();
         }
-
         if (this.props.scroll) this.unlockScroll();
         else if (this.open && this.props.modal !== false) this.lockScroll();
 
@@ -89,17 +88,22 @@ export class NativeDialog extends Component<NativeDialogProps> {
         clearTimeout(this.closeTimer);
         this.element.current?.classList.remove('hiding');
         if (this.open) return;
+
         const element = this.element.current;
         if (!element) return;
+
         if (!this.switchingMode && document.activeElement instanceof HTMLElement)
             this.returnFocus = document.activeElement;
+
         if (this.props.modal === false) element.show();
         else element.showModal();
+
         if (this.props.modal !== false && !this.props.scroll) this.lockScroll();
     };
 
     lockScroll = () => {
         const { scrollLocks } = NativeDialog;
+
         if (!scrollLocks.size) {
             NativeDialog.bodyOverflow = document.body.style.overflow;
             document.body.style.overflow = 'hidden';
@@ -109,6 +113,7 @@ export class NativeDialog extends Component<NativeDialogProps> {
 
     unlockScroll = () => {
         const { scrollLocks } = NativeDialog;
+
         if (!scrollLocks.delete(this)) return;
         if (!scrollLocks.size) document.body.style.overflow = NativeDialog.bodyOverflow;
     };
@@ -116,6 +121,7 @@ export class NativeDialog extends Component<NativeDialogProps> {
     close = () => {
         const element = this.element.current;
         if (!this.open || !element || this.switchingMode) return this.finishClose();
+
         const { transitionDuration, transitionDelay } = getComputedStyle(element);
         const durations = transitionDuration.split(',').map(transitionMilliseconds);
         const delays = transitionDelay.split(',').map(transitionMilliseconds);
@@ -123,7 +129,6 @@ export class NativeDialog extends Component<NativeDialogProps> {
             0,
             ...durations.map((value, index) => value + delays[index % delays.length])
         );
-
         if (!duration) return this.finishClose();
         if (element.classList.contains('hiding')) return;
 
@@ -135,7 +140,9 @@ export class NativeDialog extends Component<NativeDialogProps> {
         clearTimeout(this.closeTimer);
         this.element.current?.classList.remove('hiding');
         this.unlockScroll();
+
         if (!this.open) return;
+
         this.element.current?.close();
         this.returnFocus?.focus();
     };
@@ -157,16 +164,20 @@ export class NativeDialog extends Component<NativeDialogProps> {
     handleCancel = (event: SyntheticEvent<HTMLDialogElement>) => {
         const { onCancel, keyboard = true } = this.props;
         onCancel?.(event);
+
         const { defaultPrevented } = event;
         event.preventDefault();
+
         if (keyboard && !defaultPrevented) this.close();
     };
 
     handleKeyDown = (event: KeyboardEvent<HTMLDialogElement>) => {
         const { onKeyDown, keyboard = true } = this.props;
         onKeyDown?.(event);
+
         const { key, defaultPrevented } = event;
         if (key !== 'Escape' || !keyboard || defaultPrevented) return;
+
         event.preventDefault();
         this.close();
     };
@@ -174,8 +185,10 @@ export class NativeDialog extends Component<NativeDialogProps> {
     handleClick = (event: MouseEvent<HTMLDialogElement>) => {
         const { onClick, backdrop = true } = this.props;
         onClick?.(event);
+
         const { defaultPrevented, target, currentTarget, clientX, clientY } = event;
         if (backdrop !== true || defaultPrevented || target !== currentTarget) return;
+
         const { left, right, top, bottom } = currentTarget.getBoundingClientRect();
         if (clientX < left || clientX > right || clientY < top || clientY > bottom) this.close();
     };

@@ -73,7 +73,6 @@ it('wraps menu buttons and excludes feedback from border-radius calculations', (
             </InputGroupIgnore>
         </InputGroup>
     );
-
     assert.ok(screen.getByRole('button').classList.contains('input-group-btn'));
     assert.equal(screen.getByText('Feedback').className, 'input-group-ignore');
 });

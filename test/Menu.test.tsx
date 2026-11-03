@@ -45,7 +45,6 @@ it('lets navigation triggers inherit navigation styles instead of button styling
             <MenuItem href="/products">All products</MenuItem>
         </Menu>
     );
-
     assert.equal(screen.getByRole('button', { name: 'Products' }).className, 'nav-link');
 });
 
@@ -121,6 +120,7 @@ it('flips and shifts menus at viewport edges and releases geometry observers', t
         );
         fireEvent.click(screen.getByRole('button', { name: 'Parent' }));
         fireEvent.click(screen.getByRole('button', { name: 'Nested' }));
+
         const submenu = container.querySelector<HTMLElement>('.submenu > .menu')!;
 
         assert.equal(submenu.dataset.bsPlacement, 'left-start');
@@ -141,6 +141,7 @@ it('flips and shifts menus at viewport edges and releases geometry observers', t
         </Menu>
     );
     fireEvent.click(screen.getByRole('button', { name: 'Collision' }));
+
     const panel = container.querySelector<HTMLElement>('.menu')!;
 
     assert.equal(panel.dataset.bsPlacement, 'top-start');
@@ -156,14 +157,13 @@ it('flips and shifts menus at viewport edges and releases geometry observers', t
 it('supports placement, responsive placement, split toggles and translucent scrolling panels', t => {
     let matches = false;
     let listener: (() => unknown) | undefined;
+
     const remove = mock.fn();
     t.mock.method(window, 'matchMedia', () => ({
         get matches() {
             return matches;
         },
-        addEventListener: (_type: string, callback: () => unknown) => {
-            listener = callback;
-        },
+        addEventListener: (_type: string, callback: () => unknown) => (listener = callback),
         removeEventListener: remove
     }));
     const { container, unmount } = render(
@@ -221,6 +221,7 @@ it('does not intercept editing keys inside custom forms', () => {
         </Menu>
     );
     fireEvent.click(screen.getByRole('button', { name: 'Options' }));
+
     const input = screen.getByRole('textbox', { name: 'Search' });
     input.focus();
 
@@ -239,12 +240,14 @@ const items = (
 
 it('toggles with a real button and closes on selection or outside interaction', () => {
     const onOpenChange = mock.fn();
+
     const { container } = render(
         <Menu id="example" label="Explore" onOpenChange={onOpenChange}>
             {items}
         </Menu>
     );
     const trigger = screen.getByRole('button', { name: 'Explore' });
+
     assert.equal(trigger.getAttribute('aria-controls'), 'example-menu');
 
     fireEvent.click(trigger);
@@ -267,6 +270,7 @@ it('supports keyboard navigation, skips disabled items and restores focus on Esc
     render(<Menu label="Explore">{items}</Menu>);
 
     const trigger = screen.getByRole('button', { name: 'Explore' });
+
     await act(() => fireEvent.keyDown(trigger, { key: 'ArrowDown' }));
     assert.equal(document.activeElement, screen.getByRole('link', { name: 'Docs' }));
 
@@ -291,6 +295,7 @@ it('honors outside-only and disabled auto-close and removes document listeners',
     const trigger = screen.getByRole('button', { name: 'Explore' });
     fireEvent.click(trigger);
     fireEvent.click(screen.getByRole('button', { name: 'Action' }));
+
     assert.equal(trigger.getAttribute('aria-expanded'), 'true');
 
     rerender(
@@ -299,6 +304,7 @@ it('honors outside-only and disabled auto-close and removes document listeners',
         </Menu>
     );
     fireEvent.pointerDown(document.body);
+
     assert.equal(trigger.getAttribute('aria-expanded'), 'true');
 
     unmount();

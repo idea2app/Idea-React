@@ -45,3 +45,16 @@ it('preserves React child serialization and escapes code markup', () => {
     assert.equal(container.querySelector('script'), null);
     assert.equal(container.textContent, '<script>alert("example")</script>');
 });
+
+it('renders an optional code header', () => {
+    const { container } = render(
+        <CodeBlock language="tsx" header={<a href="https://example.com/source.tsx">source.tsx</a>}>
+            const value = 1;
+        </CodeBlock>
+    );
+    assert.equal(
+        screen.getByRole('link', { name: 'source.tsx' }).getAttribute('href'),
+        'https://example.com/source.tsx'
+    );
+    assert.equal(container.querySelector('code')?.textContent, 'const value = 1;');
+});

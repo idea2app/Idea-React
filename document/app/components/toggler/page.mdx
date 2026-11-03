@@ -17,7 +17,7 @@ Toggler is an interactive component that can be used to avoid writing small or o
 Toggle the class of an element by setting `attribute="class"` and passing the class name as `value`. Without a `target`, the component toggles itself.
 
 <CodeExample>
-    <Toggler as="div" attribute="class" value="fg-danger" className="w-100 p-3 rounded border">
+    <Toggler as="div" className="w-100 p-3 rounded border" attribute="class" value="fg-danger">
         {' Click to toggle `fg-danger` '}
     </Toggler>
 </CodeExample>
@@ -98,7 +98,7 @@ Use a class name selector in `target` to toggle the class of multiple elements.
 Toggle attributes by setting the `attribute` and `value` props. For example, toggling the `hidden` attribute:
 
 <CodeExample>
-    <Toggler as="div" attribute="hidden" value="true" className="w-100 p-3 rounded border">
+    <Toggler as="div" className="w-100 p-3 rounded border" attribute="hidden" value="true">
         {' Click to toggle `hidden` attribute '}
     </Toggler>
 </CodeExample>

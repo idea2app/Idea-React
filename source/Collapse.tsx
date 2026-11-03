@@ -157,25 +157,18 @@ export class CollapseToggle extends Component<CollapseToggleProps> {
         if (event.defaultPrevented) return;
 
         event.preventDefault();
+
         for (const target of this.targets) target.dispatchEvent(new Event(TOGGLE));
     };
 
     render() {
-        const { target: _target, ...props } = this.props;
+        const { target: _target, href, ...props } = this.props;
 
-        return props.href !== undefined ? (
+        return (
             <Button
                 {...props}
-                href={props.href}
                 role={props.role ?? 'button'}
-                aria-controls={this.controls || undefined}
-                aria-expanded={this.expanded}
-                onClick={this.handleClick}
-            />
-        ) : (
-            <Button
-                {...props}
-                href={undefined}
+                href={href}
                 aria-controls={this.controls || undefined}
                 aria-expanded={this.expanded}
                 onClick={this.handleClick}

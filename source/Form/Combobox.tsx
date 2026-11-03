@@ -121,6 +121,7 @@ export class Combobox extends Component<ComboboxProps> {
     @observable accessor current = this.props.defaultValue ?? (this.props.multiple ? [] : '');
     @observable accessor visibleOptionCount = 0;
     @observable accessor selectedLabel = '';
+
     private menu = createRef<Menu>();
     private optionObserver?: MutationObserver;
 
@@ -133,6 +134,7 @@ export class Combobox extends Component<ComboboxProps> {
     componentDidMount() {
         this.updateAccessibility();
         this.optionObserver = new MutationObserver(this.updateAccessibility);
+
         const panel = this.menu.current?.panel.current;
 
         if (panel)
@@ -171,14 +173,14 @@ export class Combobox extends Component<ComboboxProps> {
             option.classList.toggle('selected', isSelected);
             option.hidden = !matches;
             option.style.display = matches ? '' : 'none';
+
             if (matches) visible++;
             if (isSelected) selected.push(option.dataset.label ?? option.textContent ?? '');
         }
         for (const group of panel?.querySelectorAll<HTMLElement>('[role="group"]') ?? []) {
             const matches = [...group.querySelectorAll<HTMLButtonElement>('[data-bs-value]')].some(
-                option => !option.hidden
+                ({ hidden }) => !hidden
             );
-
             group.hidden = !matches;
             group.style.display = matches ? '' : 'none';
         }
@@ -198,14 +200,11 @@ export class Combobox extends Component<ComboboxProps> {
     };
 
     @action
-    private setCurrent = (value: string | string[]) => {
-        this.current = value;
-    };
+    private setCurrent = (value: string | string[]) => (this.current = value);
 
     @action
-    private handleSearch = ({ currentTarget: { value } }: ChangeEvent<HTMLInputElement>) => {
-        this.query = value;
-    };
+    private handleSearch = ({ currentTarget: { value } }: ChangeEvent<HTMLInputElement>) =>
+        (this.query = value);
 
     private handleClick = (event: MouseEvent<HTMLDivElement>) => {
         this.props.onClick?.(event);
@@ -240,6 +239,7 @@ export class Combobox extends Component<ComboboxProps> {
 
     private renderChild = (child: ReactNode): ReactNode => {
         if (!isValidElement<{ children?: ReactNode }>(child)) return child;
+
         if (child.type === ComboboxOption) {
             const option = child as ReactElement<ComboboxOptionProps>;
             const selected = this.values.includes(option.props.value);

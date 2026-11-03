@@ -26,13 +26,13 @@ it('renders translucent and instant toast variants without leaking style props',
             Hidden
         </ToastItem>
     );
-
     assert.equal(container.firstElementChild?.className, 'toast toast-translucent toast-instant');
     assert.equal(container.firstElementChild?.hasAttribute('translucent'), false);
 });
 
 it('automatically closes caller-identified messages and resolves their lifetime promise', async t => {
     t.mock.timers.enable({ apis: ['setTimeout'] });
+
     const toast = new Toast();
     const closed = toast.open({
         id: 'notice',
@@ -57,13 +57,13 @@ it('automatically closes caller-identified messages and resolves their lifetime 
 
 it('renders and closes a themed Bootstrap 6 toast', async () => {
     const toast = new Toast();
+
     const closed = toast.open({
         title: 'Saved',
         body: 'Your changes are saved.',
         theme: 'success',
         delay: 0
     });
-
     render(<toast.Component position="bottom-center" />);
 
     assert.equal(screen.getByRole('status').className, 'toast show theme-success');

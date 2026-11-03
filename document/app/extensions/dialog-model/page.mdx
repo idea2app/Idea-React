@@ -15,6 +15,7 @@ Create the model with a render function, then `await open()` to collect the resu
 below resolves with the submitted numbers and rejects when the dialog is dismissed.
 
 <CodeExample
+    source="document/component/Documentation/Components/DialogModelDemo.tsx"
     code={`const inputDialog = new Dialog(({ defer }) => (
     <NativeDialog open={!!defer} onClose={() => defer?.reject(new DialogClose())}>
         <Form onSubmit={submit}>

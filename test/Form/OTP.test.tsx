@@ -33,6 +33,7 @@ it('allows grouped slots to shrink within narrow containers without dropping dig
     await waitFor(() => assert.equal(wrapper.querySelectorAll('.otp-slot').length, 6));
 
     const slots = wrapper.querySelector('.otp-slots')!;
+
     assert.ok(slots.classList.contains('min-w-0'));
     assert.ok(slots.classList.contains('max-w-100'));
     assert.equal(slots.querySelectorAll('.otp-slot.min-w-0').length, 6);

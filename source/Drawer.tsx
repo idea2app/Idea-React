@@ -67,6 +67,7 @@ export class Drawer extends Component<DrawerProps> {
 
     componentDidUpdate({ responsive, open }: DrawerProps) {
         if (responsive !== this.props.responsive) this.observeBreakpoint();
+
         if (open !== this.props.open && this.props.open) this.dismissed = false;
     }
 

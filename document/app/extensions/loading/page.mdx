@@ -14,6 +14,7 @@ covers the viewport with a translucent backdrop, so render it only while blockin
 ## Example
 
 <CodeExample
+    source="document/component/Documentation/Components/LoadingDemo.tsx"
     code={`<Button onClick={showLoading}>Show loading</Button>
 
 {loading && <Loading>Loading...</Loading>}`}
@@ -35,7 +36,7 @@ uploading && <Loading>Uploading…</Loading>;
 The children replace the default `Loading...` text. For loading states inside a button or a table,
 use the [Spinner button](../spinner-button/) or [Table spinner](../table-spinner/) instead.
 
-Set `opaque` for a fully opaque backdrop, such as while restoring persisted application state.
+Set `opacity={100}` for a fully opaque backdrop, such as while restoring persisted application state.
 Keep the covered content `inert` until restoration finishes so keyboard focus cannot enter it.
 
 </ComponentsLayout>

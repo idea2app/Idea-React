@@ -47,7 +47,6 @@ it('sizes horizontal labels and fieldset legends consistently with controls', ()
             <input id="horizontal" />
         </FormFieldset>
     );
-
     assert.equal(screen.getByText('Details').className, 'col-form-label col-form-label-lg');
     assert.equal(screen.getByText('Name').className, 'col-form-label col-form-label-sm');
 });

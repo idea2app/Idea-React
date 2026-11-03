@@ -26,7 +26,6 @@ it('renders vertical and responsive horizontal steppers with rich themed items',
             </Stepper>
         </StepperOverflow>
     );
-
     assert.equal(container.firstElementChild?.className, 'stepper-overflow');
     assert.equal(screen.getByRole('list').className, 'stepper sm:stepper-horizontal w-100');
     assert.equal(screen.getAllByRole('listitem')[0].className, 'stepper-item active theme-success');
@@ -39,7 +38,6 @@ it('renders vertical and responsive horizontal steppers with rich themed items',
             </StepperLink>
         </StepperNav>
     );
-
     assert.equal(screen.getByRole('navigation').className, 'stepper stepper-horizontal');
     assert.equal(screen.getByRole('link').className, 'stepper-item active');
 
@@ -50,7 +48,6 @@ it('renders vertical and responsive horizontal steppers with rich themed items',
             </StepperButton>
         </StepperNav>
     );
-
     assert.equal(
         screen.getByRole('button').className,
         'stepper-item p-0 border-0 bg-transparent active'
@@ -63,6 +60,5 @@ it('renders vertical and responsive horizontal steppers with rich themed items',
             <StepperItem>Vertical</StepperItem>
         </Stepper>
     );
-
     assert.equal(screen.getByRole('list').className, 'stepper');
 });

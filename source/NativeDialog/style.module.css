@@ -2,7 +2,3 @@
     --bs-dialog-backdrop-bg: transparent;
     --bs-dialog-backdrop-blur: 0;
 }
-
-:global(dialog:not([open])) {
-    display: none;
-}

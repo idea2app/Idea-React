@@ -1,0 +1,15 @@
+:global(.progress) {
+    width: 100%;
+}
+
+:global(.progress) > :global(.progress-bar) {
+    width: var(--_progress-width);
+}
+
+:global(.progress-stacked) > :global(.progress) {
+    width: var(--_progress-width);
+}
+
+:global(.progress-stacked) > :global(.progress) > :global(.progress-bar) {
+    width: 100%;
+}

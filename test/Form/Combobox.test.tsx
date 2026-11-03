@@ -30,7 +30,6 @@ it('preserves controlled values while asynchronous choices arrive', () => {
     const { rerender, container } = render(
         <Combobox name="remote" value="loaded" placeholder="Loading" onChange={changed} />
     );
-
     assert.equal(
         container.querySelector<HTMLInputElement>('input[type="hidden"]')?.value,
         'loaded'
@@ -41,7 +40,6 @@ it('preserves controlled values while asynchronous choices arrive', () => {
             <ComboboxOption value="loaded">Loaded option</ComboboxOption>
         </Combobox>
     );
-
     assert.equal(screen.getByRole('button').textContent, 'Loaded option');
     assert.equal(screen.getByRole('button').getAttribute('aria-haspopup'), 'listbox');
     assert.equal(changed.mock.callCount(), 0);
@@ -164,7 +162,6 @@ it('derives multiple labels and selected states from opaque rendered choices', (
             <OpaqueOptions />
         </Combobox>
     );
-
     assert.equal(trigger.textContent, 'First');
 });
 
