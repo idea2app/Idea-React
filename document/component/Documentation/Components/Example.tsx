@@ -52,16 +52,20 @@ export type CodeExampleProps = PropsWithChildren<{
     source?: string;
 }>;
 
+export type CodeCardProps = CodeExampleProps & {
+    language?: string;
+};
+
 export type LiveExampleProps = PropsWithChildren<{
     code?: string;
 }>;
 
 const getSourceURL = (source: string) => new URL(source, REPOSITORY_SOURCE_BASE).href;
 
-export const CodeCard: FC<CodeExampleProps> = ({ children, source }) => (
-    <Card className="mt-3" body>
+export const CodeCard: FC<CodeCardProps> = ({ children, code, language = 'tsx', source }) => (
+    <Card className="my-6" body>
         <CodeBlock
-            language="tsx"
+            language={language}
             header={
                 source && (
                     <a href={getSourceURL(source)} target="_blank" rel="noreferrer">
@@ -70,7 +74,7 @@ export const CodeCard: FC<CodeExampleProps> = ({ children, source }) => (
                 )
             }
         >
-            {typeof children === 'string' ? children : toSourceCode(children)}
+            {code ?? (typeof children === 'string' ? children : toSourceCode(children))}
         </CodeBlock>
     </Card>
 );

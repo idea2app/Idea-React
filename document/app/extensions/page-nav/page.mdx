@@ -1,5 +1,4 @@
 import { PageNav } from '../../../../source/Extension/PageNav';
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
 
 import { CodeCard } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -20,9 +19,9 @@ rendered with it.
 
 ## Usage
 
-<CodeBlock language="tsx">{`import { PageNav } from 'idea-react';
+<CodeCard>{`import { PageNav } from 'idea-react';
 
-<PageNav rootSelector="#content" minDepth={2} depth={3} />;`}</CodeBlock>
+<PageNav rootSelector="#content" minDepth={2} depth={3} />;`}</CodeCard>
 
 On mount, the component collects `h1`–`h6` elements, assigns missing `id`s, and renders an anchor
 per heading indented by level. The link whose section is scrolled into view gains the `active`

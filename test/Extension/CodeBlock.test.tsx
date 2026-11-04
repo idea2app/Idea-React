@@ -52,6 +52,16 @@ it('preserves React child serialization and escapes code markup', () => {
     assert.equal(container.textContent, '<script>alert("example")</script>');
 });
 
+it('highlights languages used by Markdown code fences', () => {
+    for (const language of ['text', 'css', 'html', 'json', 'sh']) {
+        const { container, unmount } = render(
+            <CodeBlock language={language}>const value = 42;</CodeBlock>
+        );
+        assert.equal(container.querySelector('code')?.textContent, 'const value = 42;');
+        unmount();
+    }
+});
+
 it('renders an optional code header', () => {
     const { container } = render(
         <CodeBlock language="tsx" header={<a href="https://example.com/source.tsx">source.tsx</a>}>
@@ -63,4 +73,7 @@ it('renders an optional code header', () => {
         'https://example.com/source.tsx'
     );
     assert.equal(container.querySelector('code')?.textContent, 'const value = 1;');
+    assert.equal(container.querySelector('figure')?.className, 'm-0');
+    assert.equal(container.querySelector('figcaption')?.classList.contains('border-bottom'), true);
+    assert.equal(container.querySelector('figcaption')?.classList.contains('border'), false);
 });

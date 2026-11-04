@@ -7,7 +7,7 @@ export const site = {
     license,
     repository: 'https://github.com/idea2app/Idea-React',
     install: `npm i idea-react${version.includes('-') ? '@next' : ''}`,
-    docs: `${nextConfig.basePath || ''}/components/avatar/`,
+    docs: `${nextConfig.basePath || ''}/guides/install/`,
     api: 'https://idea2app.github.io/Idea-React/',
     components: `${nextConfig.basePath || ''}/components/`,
     forms: `${nextConfig.basePath || ''}/forms/`,

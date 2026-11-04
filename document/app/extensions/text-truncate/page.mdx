@@ -1,7 +1,6 @@
 import { TextTruncate } from '../../../../source/Extension/TextTruncate';
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
 
-import { LiveExample } from '../../../component/Documentation/Components/Example';
+import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="text-truncate">
@@ -24,9 +23,11 @@ when the content actually overflows.
 
 ## Usage
 
-<CodeBlock language="tsx">{`<TextTruncate rows={3} expandText="Show more" collapseText="Show less">
-    {longBiography}
-</TextTruncate>`}</CodeBlock>
+<CodeCard>
+    <TextTruncate rows={3} expandText="Show more" collapseText="Show less">
+        A longer biography can be expanded when it overflows its visible lines.
+    </TextTruncate>
+</CodeCard>
 
 `rows` sets the visible line count (default `3`). The toggle reports its state through
 `aria-expanded`, and overflow is re-checked on window resize and content changes.

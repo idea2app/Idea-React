@@ -1,7 +1,6 @@
 import { Icon } from '../../../../source/Extension/Icon';
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
 
-import { LiveExample } from '../../../component/Documentation/Components/Example';
+import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="icon">
@@ -27,7 +26,9 @@ once, then reference any icon by name.
 decorative by default, so add an `aria-label` or visually hidden text when an icon conveys meaning
 on its own.
 
-<CodeBlock language="tsx">{`<Icon name="trash" aria-label="Delete" role="img" />`}</CodeBlock>
+<CodeCard>
+    <Icon name="trash" aria-label="Delete" role="img" />
+</CodeCard>
 
 </ComponentsLayout>
 

@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'node:url';
+
 import mdx from '@mdx-js/rollup';
 import remarkGfm from 'remark-gfm';
 import swc from 'unplugin-swc';
@@ -9,6 +11,9 @@ import { swcOptions } from '../swc.config.mts';
 interface MdastNode {
     type: string;
     name?: string | null;
+    lang?: string | null;
+    value?: string;
+    attributes?: MdastNode[];
     children?: MdastNode[];
 }
 
@@ -92,6 +97,35 @@ const visit = (node: MdastNode) => {
 };
 const remarkInlineButtonChildren = () => (tree: MdastNode) => visit(tree);
 
+const remarkCodeCards = () => (tree: MdastNode) => {
+    const visit = (node: MdastNode) => {
+        if (!node.children) return;
+
+        node.children = node.children.map(child => {
+            if (child.type === 'code')
+                return {
+                    type: 'mdxJsxFlowElement',
+                    name: 'CodeCard',
+                    attributes: [
+                        {
+                            type: 'mdxJsxAttribute',
+                            name: 'language',
+                            value: child.lang ?? 'text'
+                        },
+                        {
+                            type: 'mdxJsxAttribute',
+                            name: 'code',
+                            value: child.value ?? ''
+                        }
+                    ]
+                };
+            visit(child);
+            return child;
+        });
+    };
+    visit(tree);
+};
+
 const rehypeBootstrapTable = () => (tree: HastNode) => {
     const visit = (node: HastNode) => {
         if (!node.children) return;
@@ -115,6 +149,13 @@ const rehypeBootstrapTable = () => (tree: HastNode) => {
 };
 
 export default defineConfig({
+    resolve: {
+        alias: {
+            '@documentation/MDXComponents': fileURLToPath(
+                new URL('./component/Documentation/MDXComponents.tsx', import.meta.url)
+            )
+        }
+    },
     css: {
         lightningcss: {
             // Preserve light-dark(): Bootstrap's color-scheme rules are loaded separately.
@@ -123,7 +164,8 @@ export default defineConfig({
     },
     plugins: [
         mdx({
-            remarkPlugins: [remarkGfm, remarkInlineButtonChildren],
+            providerImportSource: '@documentation/MDXComponents',
+            remarkPlugins: [remarkGfm, remarkCodeCards, remarkInlineButtonChildren],
             rehypePlugins: [rehypeBootstrapTable]
         }),
         swc.vite({

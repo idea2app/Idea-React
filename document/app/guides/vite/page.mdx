@@ -1,14 +1,19 @@
+import { Image } from '../../../../source/Image';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="vite">
 
 # Bootstrap and Vite
 
-![Bootstrap with Vite][1]
+<Image
+    src="https://getbootstrap.com/docs/6.0/assets/img/guides/bootstrap-vite.png"
+    alt="Bootstrap with Vite"
+    fluid
+/>
 
 ## What is Vite?
 
-[Vite][2] is a frontend build tool focused on a fast development server and optimized production
+[Vite][1] is a frontend build tool focused on a fast development server and optimized production
 bundles. This guide uses Vite with React, TypeScript, and the SWC transform settings used by the
 Idea React documentation site.
 
@@ -127,7 +132,11 @@ pnpm build
 pnpm preview
 ```
 
-![Vite development server][3]
+<Image
+    src="https://getbootstrap.com/docs/6.0/assets/img/guides/vite-dev-server.png"
+    alt="Vite development server"
+    fluid
+/>
 
 ## Import Bootstrap
 
@@ -152,11 +161,12 @@ createRoot(document.getElementById('root')!).render(
 Idea React's React components provide their own behavior, so importing Bootstrap's JavaScript
 bundle is unnecessary.
 
-![Vite app with Idea React styles][4]
+<Image
+    src="https://getbootstrap.com/docs/6.0/assets/img/guides/vite-dev-server-bootstrap.png"
+    alt="Vite app with Idea React styles"
+    fluid
+/>
 
 </ComponentsLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/assets/img/guides/bootstrap-vite.png
-[2]: https://vite.dev/
-[3]: https://getbootstrap.com/docs/6.0/assets/img/guides/vite-dev-server.png
-[4]: https://getbootstrap.com/docs/6.0/assets/img/guides/vite-dev-server-bootstrap.png
+[1]: https://vite.dev/

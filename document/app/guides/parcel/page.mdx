@@ -1,14 +1,19 @@
+import { Image } from '../../../../source/Image';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="parcel">
 
 # Bootstrap and Parcel
 
-![Bootstrap with Parcel][1]
+<Image
+    src="https://getbootstrap.com/docs/6.0/assets/img/guides/bootstrap-parcel.png"
+    alt="Bootstrap with Parcel"
+    fluid
+/>
 
 ## What is Parcel?
 
-[Parcel][2] is a web application bundler designed to simplify development with zero-configuration
+[Parcel][1] is a web application bundler designed to simplify development with zero-configuration
 defaults. It supports the TypeScript and TSX files used by Idea React.
 
 ## Setup
@@ -126,7 +131,11 @@ pnpm dev
 pnpm build
 ```
 
-![Parcel development server][3]
+<Image
+    src="https://getbootstrap.com/docs/6.0/assets/img/guides/parcel-dev-server.png"
+    alt="Parcel development server"
+    fluid
+/>
 
 ## Import Bootstrap
 
@@ -147,10 +156,14 @@ createRoot(document.getElementById('root')!).render(
 Idea React's React components provide their own behavior, so importing Bootstrap's JavaScript
 bundle is unnecessary.
 
-![Parcel development server with Idea React styles][4]
+<Image
+    src="https://getbootstrap.com/docs/6.0/assets/img/guides/parcel-dev-server-bootstrap.png"
+    alt="Parcel development server with Idea React styles"
+    fluid
+/>
 
 For a ready-to-use project scaffold, clone the
-[React, MobX, and Bootstrap template][5] and adapt it to your application:
+[React, MobX, and Bootstrap template][2] and adapt it to your application:
 
 ```sh
 cd my-project
@@ -161,8 +174,5 @@ pnpm install
 
 </ComponentsLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/assets/img/guides/bootstrap-parcel.png
-[2]: https://parceljs.org/
-[3]: https://getbootstrap.com/docs/6.0/assets/img/guides/parcel-dev-server.png
-[4]: https://getbootstrap.com/docs/6.0/assets/img/guides/parcel-dev-server-bootstrap.png
-[5]: https://github.com/idea2app/React-MobX-Bootstrap-ts
+[1]: https://parceljs.org/
+[2]: https://github.com/idea2app/React-MobX-Bootstrap-ts

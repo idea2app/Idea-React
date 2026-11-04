@@ -1,6 +1,6 @@
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
+import { ShareBox } from '../../../../source/Extension/ShareBox';
 
-import { LiveExample } from '../../../component/Documentation/Components/Example';
+import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="share-box">
@@ -25,14 +25,14 @@ share sheet.
 
 ## Usage
 
-<CodeBlock language="tsx">{`import { ShareBox } from 'idea-react';
-
-<ShareBox title="My poster" text="Check this out!">
-    <section className="p-4 text-center">
-        <h2>Event poster</h2>
-        <p>Rendered DOM content becomes a shareable image.</p>
-    </section>
-</ShareBox>;`}</CodeBlock>
+<CodeCard>
+    <ShareBox title="My poster" text="Check this out!">
+        <section className="p-4 text-center">
+            <h2>Event poster</h2>
+            <p>Rendered DOM content becomes a shareable image.</p>
+        </section>
+    </ShareBox>
+</CodeCard>
 
 All [`ShareData`][3] fields (`title`, `text`, `url`, `files`) pass to `navigator.share()`. The
 snapshot regenerates on window resize, and a [Loading](../loading/) overlay is shown while the image

@@ -1,14 +1,19 @@
+import { Image } from '../../../../source/Image';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="webpack">
 
 # Bootstrap and Webpack
 
-![Bootstrap with Webpack][1]
+<Image
+    src="https://getbootstrap.com/docs/6.0/assets/img/guides/bootstrap-webpack.png"
+    alt="Bootstrap with Webpack"
+    fluid
+/>
 
 ## What is Webpack?
 
-[Webpack][2] is a JavaScript module bundler that combines application modules and their
+[Webpack][1] is a JavaScript module bundler that combines application modules and their
 dependencies into browser-ready assets. This guide sets up a React and TypeScript application and
 configures Babel to compile the ECMAScript decorators (stage-3) used by MobX.
 
@@ -128,7 +133,11 @@ Run the local server:
 pnpm start
 ```
 
-![Webpack development server][3]
+<Image
+    src="https://getbootstrap.com/docs/6.0/assets/img/guides/webpack-dev-server.png"
+    alt="Webpack development server"
+    fluid
+/>
 
 ## Import Bootstrap
 
@@ -173,7 +182,11 @@ behavior, so Bootstrap's JavaScript bundle is not needed. Create the production 
 pnpm build
 ```
 
-![Webpack app with Idea React styles][4]
+<Image
+    src="https://getbootstrap.com/docs/6.0/assets/img/guides/webpack-dev-server-bootstrap.png"
+    alt="Webpack app with Idea React styles"
+    fluid
+/>
 
 ## Production optimizations
 
@@ -228,7 +241,4 @@ Bootstrap CSS can contain inline SVG data URIs. If the deployment's Content Secu
 
 </ComponentsLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/assets/img/guides/bootstrap-webpack.png
-[2]: https://webpack.js.org/
-[3]: https://getbootstrap.com/docs/6.0/assets/img/guides/webpack-dev-server.png
-[4]: https://getbootstrap.com/docs/6.0/assets/img/guides/webpack-dev-server-bootstrap.png
+[1]: https://webpack.js.org/

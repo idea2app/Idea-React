@@ -1,5 +1,9 @@
+import css from '@shikijs/langs/css';
+import html from '@shikijs/langs/html';
 import js from '@shikijs/langs/javascript';
+import json from '@shikijs/langs/json';
 import jsx from '@shikijs/langs/jsx';
+import sh from '@shikijs/langs/sh';
 import tsx from '@shikijs/langs/tsx';
 import ts from '@shikijs/langs/typescript';
 import githubDark from '@shikijs/themes/github-dark';
@@ -13,7 +17,7 @@ import { polymorphic } from '../Polymorphic';
 
 const highlighter = createHighlighterCoreSync({
     themes: [githubLight, githubDark],
-    langs: [js, jsx, ts, tsx],
+    langs: [css, html, js, json, jsx, sh, ts, tsx],
     engine: createJavaScriptRegexEngine()
 });
 
@@ -46,8 +50,8 @@ export const CodeBlock = polymorphic<CodeBlockProps>(
         );
 
         return header ? (
-            <figure className="m-0 border rounded overflow-hidden">
-                <figcaption className="px-3 py-2 bg-body-tertiary border-bottom">
+            <figure className="m-0">
+                <figcaption className="px-3 pb-6 mb-6 bg-body-tertiary border-bottom">
                     {header}
                 </figcaption>
                 {code}

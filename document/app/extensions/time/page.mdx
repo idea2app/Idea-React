@@ -1,7 +1,6 @@
 import { Time } from '../../../../source/Extension/Time';
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
 
-import { LiveExample } from '../../../component/Documentation/Components/Example';
+import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="time">
@@ -19,7 +18,9 @@ machine-readable `dateTime` attribute.
 
 ## Usage
 
-<CodeBlock language="tsx">{`<Time dateTime={article.publishedAt} format="YYYY-MM-DD" />`}</CodeBlock>
+<CodeCard>
+    <Time dateTime="2026-10-01" format="YYYY-MM-DD" />
+</CodeCard>
 
 `dateTime` accepts a `Date`, timestamp, or date string; `format` follows the
 [web-utility `formatDate` tokens][2] such as `YYYY`, `MM`, `DD`, `HH`, and `mm`. The text re-renders

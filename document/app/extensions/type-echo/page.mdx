@@ -1,7 +1,6 @@
 import { TypeEcho } from '../../../../source/Extension/TypeEcho';
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
 
-import { LiveExample } from '../../../component/Documentation/Components/Example';
+import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="type-echo">
@@ -19,7 +18,9 @@ and showing a cursor until the text completes.
 
 ## Usage
 
-<CodeBlock language="tsx">{`<TypeEcho text={slogan} intervals={100} />`}</CodeBlock>
+<CodeCard>
+    <TypeEcho text="Build React apps with less glue." intervals={100} />
+</CodeCard>
 
 `intervals` sets the delay between characters in milliseconds (default `150`). The animation runs
 once per mount, driven by an `IntersectionObserver` so off-screen text does not animate early.

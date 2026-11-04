@@ -1,6 +1,4 @@
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
-
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { CodeCard, CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 import { LoadingDemo } from '../../../component/Documentation/Components/LoadingDemo';
 
@@ -27,11 +25,11 @@ covers the viewport with a translucent backdrop, so render it only while blockin
 
 ## Usage
 
-<CodeBlock language="tsx">{`import { Loading } from 'idea-react';
+<CodeCard>{`import { Loading } from 'idea-react';
 
 {
 uploading && <Loading>Uploading…</Loading>;
-}`}</CodeBlock>
+}`}</CodeCard>
 
 The children replace the default `Loading...` text. For loading states inside a button or a table,
 use the [Spinner button](../spinner-button/) or [Table spinner](../table-spinner/) instead.
