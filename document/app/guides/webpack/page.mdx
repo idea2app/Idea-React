@@ -4,22 +4,27 @@ import { ComponentsLayout } from '../../../component/Documentation/Components/La
 
 # Bootstrap and Webpack
 
-[View the Bootstrap source for this page on GitHub][1]
+![Bootstrap with Webpack][1]
 
 ## What is Webpack?
 
-[Webpack][2] is a JavaScript module bundler that processes modules and their
-dependencies to generate static assets. This guide adapts the upstream setup for an Idea React app
-and configures Babel to compile the standard stage-3 decorators used by MobX.
+[Webpack][2] is a JavaScript module bundler that combines application modules and their
+dependencies into browser-ready assets. This guide sets up a React and TypeScript application and
+configures Babel to compile the ECMAScript decorators (stage-3) used by MobX.
 
 ## Setup
 
-Install Idea React's runtime peers, Bootstrap, Webpack, Babel, and the CSS loader chain:
+Create a project folder and initialize its package manifest:
 
 ```sh
 mkdir my-project
 cd my-project
 pnpm init
+```
+
+Install Idea React and its runtime peers, plus Webpack, Babel, and the CSS loader chain:
+
+```sh
 pnpm add idea-react@next react react-dom mobx mobx-react bootstrap
 pnpm add -D webpack webpack-cli webpack-dev-server html-webpack-plugin
 pnpm add -D babel-loader @babel/core @babel/preset-env @babel/preset-react
@@ -27,12 +32,11 @@ pnpm add -D @babel/preset-typescript @babel/plugin-proposal-decorators
 pnpm add -D css-loader style-loader
 ```
 
-For stable releases, install `idea-react` without the `@next` dist-tag. Use `sass`, `sass-loader`,
-`postcss-loader`, and `autoprefixer` as well if you plan to customize Bootstrap's Sass.
+Use `idea-react` without `@next` after a stable release.
 
 ## Project structure
 
-Create a React entry, an HTML template, and Babel and Webpack configuration files:
+Create Babel and Webpack configuration files and a TypeScript React entry point:
 
 ```text
 my-project/
@@ -46,9 +50,8 @@ my-project/
 
 ## Configure Webpack
 
-Use Babel for TypeScript, JSX, and decorators, and use Webpack's CSS loaders for Bootstrap's
-compiled stylesheet. This configuration sets up a development server, an HTML template,
-TypeScript/TSX resolution, and the loader rules. Create `webpack.config.cjs` with:
+Set up the development server, HTML template, TSX transpilation, and CSS loaders in
+`webpack.config.cjs`:
 
 ```js
 const path = require('node:path');
@@ -87,7 +90,7 @@ module.exports = {
 };
 ```
 
-Add development and production scripts to `package.json`:
+Add development and production scripts in `package.json`:
 
 ```json
 {
@@ -98,7 +101,7 @@ Add development and production scripts to `package.json`:
 }
 ```
 
-In `src/index.html`, provide the React mount point:
+Create `src/index.html` with a mount point for React:
 
 ```html
 <!doctype html>
@@ -107,6 +110,11 @@ In `src/index.html`, provide the React mount point:
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Idea React with Webpack</title>
+        <link rel="stylesheet" href="https://unpkg.com/idea-react@next/dist/index.css" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/bootstrap-icons@1.13.2/font/bootstrap-icons.css"
+        />
     </head>
     <body>
         <div id="root"></div>
@@ -114,17 +122,19 @@ In `src/index.html`, provide the React mount point:
 </html>
 ```
 
-Start Webpack's development server:
+Run the local server:
 
 ```sh
 pnpm start
 ```
 
+![Webpack development server][3]
+
 ## Import Bootstrap
 
-Create `babel.config.json` with the [Babel decorators plugin][3] set to the standard proposal.
-The `2023-11` proposal version is stage 3. Keep the decorators plugin before class-field
-transforms; do not enable TypeScript's legacy `experimentalDecorators` mode for this setup.
+Use Babel's decorators plugin to compile the standard decorator syntax supported by TypeScript 5
+and used by MobX. Select the stage-3 `2023-11` proposal version and do not enable TypeScript's
+legacy `experimentalDecorators` mode. Put this in `babel.config.json`:
 
 ```json
 {
@@ -140,15 +150,14 @@ transforms; do not enable TypeScript's legacy `experimentalDecorators` mode for 
 }
 ```
 
-The class-field assumption matches TypeScript's `useDefineForClassFields: true` setting. Install
-Babel 7.24 or newer for the `2023-11` decorators proposal version.
-
-Import Bootstrap's compiled stylesheet and the React components in `src/main.tsx`:
+The class-field assumption preserves the standard field behavior required by MobX decorators.
+The HTML page loads the Idea React stylesheet from the CDN. Import Bootstrap's compiled stylesheet
+and a component from Idea React's public package entry point in `src/main.tsx`:
 
 ```tsx
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createRoot } from 'react-dom/client';
-import { Button } from 'idea-react/Button';
+import { Button } from 'idea-react';
 
 createRoot(document.getElementById('root')!).render(
     <Button type="button" variant="solid" theme="primary">
@@ -157,28 +166,30 @@ createRoot(document.getElementById('root')!).render(
 );
 ```
 
-Create a production bundle with:
+The CSS loader chain handles both stylesheets. Idea React's React wrappers provide component
+behavior, so Bootstrap's JavaScript bundle is not needed. Create the production bundle with:
 
 ```sh
 pnpm build
 ```
 
+![Webpack app with Idea React styles][4]
+
 ## Production optimizations
 
-Depending on your deployment and Content Security Policy, production builds can extract styles
-and data-URI SVGs into static assets.
+Depending on the deployment and Content Security Policy, production builds can extract styles and
+data-URI SVGs into static assets.
 
 ### Extracting CSS
 
-The development `style-loader` injects CSS into the page. To emit a separate stylesheet, install
+`style-loader` inserts CSS into the page at runtime. To emit a separate stylesheet, install
 `mini-css-extract-plugin`:
 
 ```sh
 pnpm add -D mini-css-extract-plugin
 ```
 
-In the production Webpack configuration, add the plugin and replace `style-loader` in the CSS
-rule:
+In the production Webpack configuration, add the plugin and replace `style-loader` in the CSS rule:
 
 ```js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -196,12 +207,13 @@ module.exports = {
 };
 ```
 
-Keep `style-loader` in the development configuration for hot reload.
+Keep `style-loader` in the development configuration. The extraction plugin writes a separate CSS
+asset for production; confirm the generated HTML includes its stylesheet link.
 
 ### Extracting SVG files
 
-Bootstrap CSS can include inline SVG data URIs. If your Content Security Policy blocks `data:`
-images, use Webpack's asset modules to emit those SVGs as files:
+Bootstrap CSS can contain inline SVG data URIs. If the deployment's Content Security Policy blocks
+`data:` images, use Webpack's asset modules to emit those SVGs as files:
 
 ```js
 {
@@ -216,6 +228,7 @@ images, use Webpack's asset modules to emit those SVGs as files:
 
 </ComponentsLayout>
 
-[1]: https://github.com/twbs/bootstrap/blob/main/site/src/content/docs/guides/webpack.mdx
+[1]: https://getbootstrap.com/docs/6.0/assets/img/guides/bootstrap-webpack.png
 [2]: https://webpack.js.org/
-[3]: https://babeljs.io/docs/babel-plugin-proposal-decorators/
+[3]: https://getbootstrap.com/docs/6.0/assets/img/guides/webpack-dev-server.png
+[4]: https://getbootstrap.com/docs/6.0/assets/img/guides/webpack-dev-server-bootstrap.png

@@ -30,5 +30,4 @@ export const ButtonToolbar = polymorphic<ComponentPropsWithRef<'div'>>(
         <Root role={role} {...props} className={classNames('btn-toolbar', className)} />
     )
 );
-
 ButtonToolbar.displayName = 'ButtonToolbar';

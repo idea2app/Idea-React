@@ -143,12 +143,11 @@ export const AlertLink = polymorphic<ComponentPropsWithRef<'a'>>(
         <Root {...props} className={classNames('alert-link', className)} />
     )
 );
+AlertLink.displayName = 'AlertLink';
 
 export const AlertHeading = polymorphic<ComponentPropsWithRef<'h4'>>(
     ({ as: Root = 'h4', className, ...props }) => (
         <Root {...props} className={classNames('alert-heading', className)} />
     )
 );
-
-AlertLink.displayName = 'AlertLink';
 AlertHeading.displayName = 'AlertHeading';

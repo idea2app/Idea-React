@@ -156,5 +156,4 @@ export const OTPInput = polymorphic<OTPInputProps & { ref?: Ref<HTMLInputElement
         <OTPInputComponent {...props} forwardedRef={forwardedRef} />
     ))
 );
-
 OTPInput.displayName = 'OTPInput';

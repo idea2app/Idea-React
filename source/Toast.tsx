@@ -81,6 +81,7 @@ export const ToastContainer = polymorphic<ToastContainerProps>(
         );
     }
 );
+ToastContainer.displayName = 'ToastContainer';
 
 export interface ToastItemProps extends ComponentPropsWithRef<'div'> {
     theme?: ComponentTheme;
@@ -112,18 +113,21 @@ export const ToastItem = polymorphic<ToastItemProps>(
         />
     )
 );
+ToastItem.displayName = 'ToastItem';
 
 export const ToastHeader = polymorphic<ComponentPropsWithRef<'div'>>(
     ({ as: Root = 'div', className, ...props }) => (
         <Root {...props} className={classNames('toast-header', className)} />
     )
 );
+ToastHeader.displayName = 'ToastHeader';
 
 export const ToastBody = polymorphic<ComponentPropsWithRef<'div'>>(
     ({ as: Root = 'div', className, ...props }) => (
         <Root {...props} className={classNames('toast-body', className)} />
     )
 );
+ToastBody.displayName = 'ToastBody';
 
 export class Toast {
     @observable
@@ -212,11 +216,3 @@ export class Toast {
         this.messages = this.messages.filter(message => message.id !== id);
     }
 }
-
-ToastContainer.displayName = 'ToastContainer';
-
-ToastItem.displayName = 'ToastItem';
-
-ToastHeader.displayName = 'ToastHeader';
-
-ToastBody.displayName = 'ToastBody';

@@ -28,7 +28,6 @@ export const InputGroup = polymorphic<InputGroupProps>(
         />
     )
 );
-
 InputGroup.displayName = 'InputGroup';
 
 export type InputGroupTextProps =
@@ -42,7 +41,6 @@ export const InputGroupText = polymorphic<InputGroupTextProps>(
         return <Root {...props} className={classNames('input-group-text', className)} />;
     }
 );
-
 InputGroupText.displayName = 'InputGroupText';
 
 export type InputGroupButtonProps = ButtonProps;
@@ -52,7 +50,6 @@ export const InputGroupButton = polymorphic<InputGroupButtonProps>(
         <Button as={RootAs} {...props} className={classNames('input-group-btn', className)} />
     )
 );
-
 InputGroupButton.displayName = 'InputGroupButton';
 
 export interface InputGroupIgnoreProps {

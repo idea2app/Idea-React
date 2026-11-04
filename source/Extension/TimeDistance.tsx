@@ -42,5 +42,4 @@ export const TimeDistance = polymorphic<TimeDistanceProps>(
         );
     }
 );
-
 TimeDistance.displayName = 'TimeDistance';

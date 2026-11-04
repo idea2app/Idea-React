@@ -131,5 +131,4 @@ export const FormRange = polymorphic<FormRangeProps & { ref?: Ref<HTMLInputEleme
         <FormRangeComponent {...props} forwardedRef={forwardedRef} />
     ))
 );
-
 FormRange.displayName = 'FormRange';

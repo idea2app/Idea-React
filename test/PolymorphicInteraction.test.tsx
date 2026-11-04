@@ -31,7 +31,6 @@ const RouterLink = forwardRef<HTMLAnchorElement, RouterLinkProps>(
         <a {...props} ref={ref} href={to} data-replace={replace || undefined} />
     )
 );
-
 RouterLink.displayName = 'RouterLink';
 
 const CustomInput = forwardRef<

@@ -19,5 +19,4 @@ export const UserAddress = polymorphic<UserAddressProps>(
         </Root>
     )
 );
-
 UserAddress.displayName = 'UserAddress';

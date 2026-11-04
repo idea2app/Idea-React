@@ -28,7 +28,6 @@ export const Radio = polymorphic<RadioProps>(
         />
     )
 );
-
 Radio.displayName = 'Radio';
 
 export type FormCheckProps = CheckboxProps &
@@ -44,5 +43,4 @@ export const FormCheck = polymorphic<FormCheckProps>(
             <Radio as={RootAs} {...props} />
         )
 );
-
 FormCheck.displayName = 'FormCheck';

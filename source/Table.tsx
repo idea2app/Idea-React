@@ -67,5 +67,4 @@ export const Table = polymorphic<TableProps>(
         );
     }
 );
-
 Table.displayName = 'Table';

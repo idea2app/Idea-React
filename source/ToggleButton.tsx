@@ -61,5 +61,4 @@ export const ToggleButton = polymorphic<ToggleButtonProps>(
         </Root>
     )
 );
-
 ToggleButton.displayName = 'ToggleButton';

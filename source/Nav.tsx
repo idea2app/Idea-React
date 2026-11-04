@@ -38,12 +38,14 @@ export const Nav = polymorphic<NavProps>(
         />
     )
 );
+Nav.displayName = 'Nav';
 
 export const NavItem = polymorphic<ComponentPropsWithRef<'li'>>(
     ({ as: Root = 'li', className, ...props }) => (
         <Root {...props} className={classNames('nav-item', className)} />
     )
 );
+NavItem.displayName = 'NavItem';
 
 export interface NavLinkProps extends ComponentPropsWithRef<'a'> {
     disabled?: boolean;
@@ -63,7 +65,4 @@ export const NavLink = polymorphic<NavLinkProps>(
         />
     )
 );
-
-Nav.displayName = 'Nav';
-NavItem.displayName = 'NavItem';
 NavLink.displayName = 'NavLink';

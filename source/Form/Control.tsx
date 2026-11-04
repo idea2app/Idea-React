@@ -44,7 +44,6 @@ export const FormControl = polymorphic<FormControlProps>(
         />
     )
 );
-
 FormControl.displayName = 'FormControl';
 
 export type FormTextAreaProps = ComponentPropsWithRef<'textarea'> &
@@ -66,7 +65,6 @@ export const FormTextArea = polymorphic<FormTextAreaProps>(
         />
     )
 );
-
 FormTextArea.displayName = 'FormTextArea';
 
 export type FormSelectProps = ComponentPropsWithRef<'select'> &
@@ -88,5 +86,4 @@ export const FormSelect = polymorphic<FormSelectProps>(
         />
     )
 );
-
 FormSelect.displayName = 'FormSelect';

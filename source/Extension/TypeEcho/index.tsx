@@ -19,5 +19,4 @@ export const TypeEcho = polymorphic<TypeEchoProps>(
         />
     )
 );
-
 TypeEcho.displayName = 'TypeEcho';

@@ -19,13 +19,13 @@ export interface TogglerProps extends Omit<ButtonHTMLAttributes<HTMLElement>, 'v
 export class Toggler<T extends ElementType | undefined = 'button'> extends Component<
     PolymorphicClassProps<T, TogglerProps>
 > {
+    static displayName = 'Toggler';
+
     declare readonly props: PolymorphicClassProps<T, TogglerProps>;
 
     protected get componentProps(): Readonly<Omit<TogglerProps, 'as'> & AsProps> {
         return this.props;
     }
-
-    static displayName = 'Toggler';
 
     handleClick = (event: MouseEvent<HTMLElement>) => {
         this.componentProps.onClick?.(event);

@@ -35,13 +35,8 @@ export const ScrollNav = polymorphic<ScrollNavProps>(
             <Nav
                 {...(RootAs ? {} : props)}
                 ref={RootAs ? undefined : ref}
-                variant={variant}
-                vertical={vertical}
-                fill={fill}
-                justified={justified}
-                cardHeader={cardHeader}
-                navbar={navbar}
                 className="flex-nowrap"
+                {...{ variant, vertical, fill, justified, cardHeader, navbar }}
             >
                 {children}
             </Nav>

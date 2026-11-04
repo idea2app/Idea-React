@@ -36,5 +36,4 @@ export const Tooltip = polymorphic<TooltipProps>(
         </Root>
     )
 );
-
 Tooltip.displayName = 'Tooltip';

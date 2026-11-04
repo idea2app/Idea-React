@@ -23,6 +23,7 @@ export const Stepper = polymorphic<StepperProps>(
         <Root {...props} className={stepperClasses(horizontal, className)} />
     )
 );
+Stepper.displayName = 'Stepper';
 
 export interface StepperNavProps extends ComponentPropsWithRef<'nav'> {
     horizontal?: StepperProps['horizontal'];
@@ -33,6 +34,7 @@ export const StepperNav = polymorphic<StepperNavProps>(
         <Root {...props} className={stepperClasses(horizontal, className)} />
     )
 );
+StepperNav.displayName = 'StepperNav';
 
 interface StepStyle {
     active?: boolean;
@@ -49,6 +51,7 @@ export const StepperItem = polymorphic<StepperItemProps>(
         />
     )
 );
+StepperItem.displayName = 'StepperItem';
 
 export type StepperLinkProps = ComponentPropsWithRef<'a'> & StepStyle;
 
@@ -60,6 +63,7 @@ export const StepperLink = polymorphic<StepperLinkProps>(
         />
     )
 );
+StepperLink.displayName = 'StepperLink';
 
 export type StepperButtonProps = ComponentPropsWithRef<'button'> & StepStyle;
 
@@ -77,16 +81,11 @@ export const StepperButton = polymorphic<StepperButtonProps>(
         />
     )
 );
+StepperButton.displayName = 'StepperButton';
 
 export const StepperOverflow = polymorphic<ComponentPropsWithRef<'div'>>(
     ({ as: Root = 'div', className, ...props }) => (
         <Root {...props} className={classNames('stepper-overflow', className)} />
     )
 );
-
-Stepper.displayName = 'Stepper';
-StepperNav.displayName = 'StepperNav';
-StepperItem.displayName = 'StepperItem';
-StepperLink.displayName = 'StepperLink';
-StepperButton.displayName = 'StepperButton';
 StepperOverflow.displayName = 'StepperOverflow';

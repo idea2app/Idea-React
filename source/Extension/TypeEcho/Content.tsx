@@ -18,6 +18,8 @@ export interface TypeEchoContentProps extends Omit<HTMLAttributes<HTMLPreElement
 export class TypeEchoContent<T extends ElementType | undefined = 'pre'> extends Component<
     PolymorphicClassProps<T, TypeEchoContentProps>
 > {
+    static displayName = 'TypeEchoContent';
+
     declare readonly props: PolymorphicClassProps<T, TypeEchoContentProps>;
 
     protected get componentProps(): Readonly<TypeEchoContentProps & AsProps> {

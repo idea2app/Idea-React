@@ -27,12 +27,13 @@ export const MenuItem = polymorphic<MenuItemProps>(
         <Button
             as={RootAs}
             {...props}
+            className={classNames('menu-item', { active, selected }, className)}
             aria-current={active || (selected && props.href) ? 'true' : props['aria-current']}
             aria-pressed={props.href ? props['aria-pressed'] : (selected ?? props['aria-pressed'])}
-            className={classNames('menu-item', { active, selected }, className)}
         />
     )
 );
+MenuItem.displayName = 'MenuItem';
 
 export interface MenuPanelProps extends HTMLAttributes<HTMLDivElement> {
     theme?: 'light' | 'dark';
@@ -56,6 +57,7 @@ export const MenuPanel = polymorphic<MenuPanelProps>(
         />
     )
 );
+MenuPanel.displayName = 'MenuPanel';
 
 export const MenuItemIcon = polymorphic<IconProps>(({ as: RootAs, className, ...props }) => (
     <Icon
@@ -65,6 +67,7 @@ export const MenuItemIcon = polymorphic<IconProps>(({ as: RootAs, className, ...
         className={classNames('menu-item-icon', className)}
     />
 ));
+MenuItemIcon.displayName = 'MenuItemIcon';
 
 export const MenuItemCheck = polymorphic<Omit<IconProps, 'name'>>(
     ({ as: RootAs, className, ...props }) => (
@@ -77,36 +80,42 @@ export const MenuItemCheck = polymorphic<Omit<IconProps, 'name'>>(
         />
     )
 );
+MenuItemCheck.displayName = 'MenuItemCheck';
 
 export const MenuText = polymorphic<HTMLAttributes<HTMLSpanElement>>(
     ({ as: Root = 'span', className, ...props }) => (
         <Root {...props} className={classNames('menu-text', className)} />
     )
 );
+MenuText.displayName = 'MenuText';
 
 export const MenuHeader = polymorphic<HTMLAttributes<HTMLHeadingElement>>(
     ({ as: Root = 'h6', className, ...props }) => (
         <Root {...props} className={classNames('menu-header', className)} />
     )
 );
+MenuHeader.displayName = 'MenuHeader';
 
 export const MenuDivider = polymorphic<HTMLAttributes<HTMLHRElement>>(
     ({ as: Root = 'hr', className, ...props }) => (
         <Root {...props} className={classNames('menu-divider', className)} />
     )
 );
+MenuDivider.displayName = 'MenuDivider';
 
 export const MenuItemContent = polymorphic<HTMLAttributes<HTMLSpanElement>>(
     ({ as: Root = 'span', className, ...props }) => (
         <Root {...props} className={classNames('menu-item-content', className)} />
     )
 );
+MenuItemContent.displayName = 'MenuItemContent';
 
 export const MenuItemDescription = polymorphic<HTMLAttributes<HTMLElement>>(
     ({ as: Root = 'small', className, ...props }) => (
         <Root {...props} className={classNames('menu-item-description', className)} />
     )
 );
+MenuItemDescription.displayName = 'MenuItemDescription';
 
 export interface MenuSubmenuProps extends HTMLAttributes<HTMLDivElement> {
     label: ReactNode;
@@ -117,6 +126,8 @@ export interface MenuSubmenuProps extends HTMLAttributes<HTMLDivElement> {
 export class MenuSubmenu<T extends ElementType | undefined = 'div'> extends Component<
     PolymorphicClassProps<T, MenuSubmenuProps>
 > {
+    static displayName = 'MenuSubmenu';
+
     declare readonly props: PolymorphicClassProps<T, MenuSubmenuProps>;
 
     protected get componentProps(): Readonly<MenuSubmenuProps & AsProps> {
@@ -283,6 +294,8 @@ const MENU_BREAKPOINT_WIDTHS: Record<Breakpoint, number> = {
 export class Menu<T extends ElementType | undefined = 'div'> extends Component<
     PolymorphicClassProps<T, MenuProps>
 > {
+    static displayName = 'Menu';
+
     declare readonly props: PolymorphicClassProps<T, MenuProps>;
 
     protected get componentProps(): Readonly<MenuProps & AsProps> {
@@ -538,21 +551,3 @@ export class Menu<T extends ElementType | undefined = 'div'> extends Component<
         );
     }
 }
-
-MenuItem.displayName = 'MenuItem';
-
-MenuPanel.displayName = 'MenuPanel';
-
-MenuItemIcon.displayName = 'MenuItemIcon';
-
-MenuItemCheck.displayName = 'MenuItemCheck';
-
-MenuText.displayName = 'MenuText';
-
-MenuHeader.displayName = 'MenuHeader';
-
-MenuDivider.displayName = 'MenuDivider';
-
-MenuItemContent.displayName = 'MenuItemContent';
-
-MenuItemDescription.displayName = 'MenuItemDescription';

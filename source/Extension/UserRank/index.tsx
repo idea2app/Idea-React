@@ -40,7 +40,6 @@ export const UserRankView = polymorphic<UserRankViewProps>(
                 </div>
             </li>
         );
-
         const renderRow = (user: UserRank, index: number, { length }: UserRank[]) => (
             <tr key={user.id} className="position-relative">
                 <td className="align-middle">
@@ -104,5 +103,4 @@ export const UserRankView = polymorphic<UserRankViewProps>(
         );
     }
 );
-
 UserRankView.displayName = 'UserRankView';

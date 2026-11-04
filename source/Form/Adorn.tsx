@@ -26,7 +26,6 @@ export const FormAdornment = polymorphic<FormAdornmentProps>(
         />
     )
 );
-
 FormAdornment.displayName = 'FormAdornment';
 
 export type FormAdornmentTextProps = ComponentPropsWithRef<'span'>;
@@ -36,7 +35,6 @@ export const FormAdornmentText = polymorphic<FormAdornmentTextProps>(
         <Root {...props} className={classNames('form-adorn-text', className)} />
     )
 );
-
 FormAdornmentText.displayName = 'FormAdornmentText';
 
 export const FormAdornmentIcon = polymorphic<IconProps>(({ as: RootAs, className, ...props }) => (
@@ -56,5 +54,4 @@ export const FormGhost = polymorphic<FormGhostProps>(
         />
     )
 );
-
 FormGhost.displayName = 'FormGhost';

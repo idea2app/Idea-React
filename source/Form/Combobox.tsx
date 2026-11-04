@@ -66,7 +66,6 @@ export const ComboboxOption = polymorphic<ComboboxOptionProps>(
         </Root>
     )
 );
-
 ComboboxOption.displayName = 'ComboboxOption';
 
 export interface ComboboxGroupProps extends ComponentPropsWithRef<'div'> {
@@ -81,7 +80,6 @@ export const ComboboxGroup = polymorphic<ComboboxGroupProps>(
         </Root>
     )
 );
-
 ComboboxGroup.displayName = 'ComboboxGroup';
 
 export interface ComboboxProps

@@ -8,12 +8,14 @@ export const Breadcrumb = polymorphic<ComponentPropsWithRef<'ol'>>(
         <Root {...props} className={classNames('breadcrumb', className)} />
     )
 );
+Breadcrumb.displayName = 'Breadcrumb';
 
 export const BreadcrumbItem = polymorphic<ComponentPropsWithRef<'li'>>(
     ({ as: Root = 'li', ...props }) => (
         <Root {...props} className={classNames('breadcrumb-item', props.className)} />
     )
 );
+BreadcrumbItem.displayName = 'BreadcrumbItem';
 
 export interface BreadcrumbLinkProps extends ComponentPropsWithRef<'a'> {
     active?: boolean;
@@ -34,6 +36,7 @@ export const BreadcrumbLink = polymorphic<BreadcrumbLinkProps>(
         />
     )
 );
+BreadcrumbLink.displayName = 'BreadcrumbLink';
 
 export const BreadcrumbDivider = polymorphic<ComponentPropsWithRef<'li'>>(
     ({ as: Root = 'li', className, ...props }) => (
@@ -44,8 +47,4 @@ export const BreadcrumbDivider = polymorphic<ComponentPropsWithRef<'li'>>(
         />
     )
 );
-
-Breadcrumb.displayName = 'Breadcrumb';
-BreadcrumbItem.displayName = 'BreadcrumbItem';
-BreadcrumbLink.displayName = 'BreadcrumbLink';
 BreadcrumbDivider.displayName = 'BreadcrumbDivider';

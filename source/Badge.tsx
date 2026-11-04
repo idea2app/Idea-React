@@ -13,6 +13,7 @@ interface BadgeStyleProps {
 type BadgeLinkAttributes = ComponentPropsWithRef<'a'> & { href: string };
 type BadgeElementAttributes =
     (ComponentPropsWithRef<'span'> & { href?: never }) | BadgeLinkAttributes;
+
 export type BadgeProps = BadgeStyleProps & BadgeElementAttributes;
 
 const isBadgeLink = (props: BadgeElementAttributes): props is BadgeLinkAttributes =>
@@ -32,5 +33,4 @@ export const Badge = polymorphic<BadgeProps>(
         return <Root {...props} className={classes} />;
     }
 );
-
 Badge.displayName = 'Badge';

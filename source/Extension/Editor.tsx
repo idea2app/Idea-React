@@ -2,27 +2,18 @@
 
 import { EditorCore, WrapperProps } from '@react-editor-js/core';
 import classNames from 'classnames';
-import { observable } from 'mobx';
+import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import {
-    Component,
-    ElementType,
-    FocusEvent,
-    HTMLAttributes,
-    InputHTMLAttributes,
-    PropsWithoutRef
-} from 'react';
+import { Component, ComponentPropsWithRef, ElementType, FocusEvent } from 'react';
 import { createReactEditorJS } from 'react-editor-js';
 
 import { AsProps, PolymorphicClassProps } from '../Polymorphic';
 
 const ReactEditorJS = createReactEditorJS();
 
-export type EditorProps = PropsWithoutRef<
-    WrapperProps &
-        Pick<InputHTMLAttributes<HTMLInputElement>, 'name' | 'required'> &
-        Pick<HTMLAttributes<HTMLDivElement>, 'className' | 'style' | 'tabIndex' | 'onBlur'>
->;
+export type EditorProps = WrapperProps &
+    Pick<ComponentPropsWithRef<'input'>, 'name' | 'required'> &
+    Pick<ComponentPropsWithRef<'div'>, 'className' | 'style' | 'tabIndex' | 'onBlur'>;
 
 @observer
 export class Editor<T extends ElementType | undefined = 'div'> extends Component<
@@ -41,12 +32,12 @@ export class Editor<T extends ElementType | undefined = 'div'> extends Component
     @observable
     accessor innerValue = this.componentProps.defaultValue;
 
-    save = async () => this.core && (this.innerValue = await this.core.save());
+    setInnerValue = action((value: typeof this.innerValue) => (this.innerValue = value));
 
-    handleBlur = (event: FocusEvent<HTMLDivElement>) => {
+    handleBlur = async (event: FocusEvent<HTMLDivElement>) => {
         this.componentProps.onBlur?.(event);
 
-        return this.save();
+        if (this.core) this.setInnerValue(await this.core.save());
     };
 
     initialize = (core: EditorCore) => {

@@ -71,12 +71,11 @@ export const Progress = polymorphic<ProgressProps>(
         );
     }
 );
+Progress.displayName = 'Progress';
 
 export const ProgressStack = polymorphic<ComponentPropsWithRef<'div'>>(
     ({ as: Root = 'div', className, ...props }) => (
         <Root {...props} className={classNames('progress-stacked', className)} />
     )
 );
-
-Progress.displayName = 'Progress';
 ProgressStack.displayName = 'ProgressStack';

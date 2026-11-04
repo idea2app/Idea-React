@@ -62,7 +62,7 @@ Use `.strength-bar` for a single progress bar that grows with password strength.
 You can use the component without JavaScript for static displays by passing the `strength` prop.
 
 <CodeExample>
-    <Stack className="gap-3 fg-3">
+    <Stack gap={3} className="fg-3">
         <div>
             <div>Weak</div>
             <PasswordStrength strength="weak" showText={false} />
@@ -85,7 +85,7 @@ You can use the component without JavaScript for static displays by passing the 
 ### Static progress bar
 
 <CodeExample>
-    <Stack className="gap-3 fg-3">
+    <Stack gap={3} className="fg-3">
         <div>
             <div>Weak</div>
             <PasswordStrength variant="bar" strength="weak" showText={false} />

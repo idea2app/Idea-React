@@ -17,24 +17,28 @@ export const DrawerHeader = polymorphic<ComponentPropsWithRef<'div'>>(
         <Root {...props} className={classNames('drawer-header', className)} />
     )
 );
+DrawerHeader.displayName = 'DrawerHeader';
 
 export const DrawerTitle = polymorphic<ComponentPropsWithRef<'h5'>>(
     ({ as: Root = 'h5', className, ...props }) => (
         <Root {...props} className={classNames('drawer-title', className)} />
     )
 );
+DrawerTitle.displayName = 'DrawerTitle';
 
 export const DrawerBody = polymorphic<ComponentPropsWithRef<'div'>>(
     ({ as: Root = 'div', className, ...props }) => (
         <Root {...props} className={classNames('drawer-body', className)} />
     )
 );
+DrawerBody.displayName = 'DrawerBody';
 
 export const DrawerFooter = polymorphic<ComponentPropsWithRef<'div'>>(
     ({ as: Root = 'div', className, ...props }) => (
         <Root {...props} className={classNames('drawer-footer', className)} />
     )
 );
+DrawerFooter.displayName = 'DrawerFooter';
 
 export interface DrawerProps extends Omit<
     NativeDialogProps,
@@ -176,11 +180,3 @@ export class Drawer<T extends ElementType | undefined = 'dialog'> extends Compon
         );
     }
 }
-
-DrawerHeader.displayName = 'DrawerHeader';
-
-DrawerTitle.displayName = 'DrawerTitle';
-
-DrawerBody.displayName = 'DrawerBody';
-
-DrawerFooter.displayName = 'DrawerFooter';

@@ -113,7 +113,7 @@ Set `validation="valid"` or `validation="invalid"` to show validation states.
 Associate a `<label>` with the input and add help text with `aria-describedby` for better accessibility.
 
 <CodeExample>
-    <Stack className="gap-2">
+    <Stack gap={2}>
         <FormLabel htmlFor="otpCode">Verification code</FormLabel>
         <OTPInput id="otpCode" aria-describedby="otpHelp" length={6} />
         <FormText id="otpHelp">Enter the 6-digit code sent to your phone.</FormText>

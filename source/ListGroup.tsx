@@ -35,6 +35,7 @@ export const ListGroup = polymorphic<ListGroupStyleProps & ComponentPropsWithRef
         return <Root {...props} className={classes} />;
     }
 );
+ListGroup.displayName = 'ListGroup';
 
 interface ListGroupItemStyleProps {
     theme?: ComponentTheme;
@@ -100,6 +101,4 @@ export const ListGroupItem = polymorphic<ListGroupItemProps>(
         );
     }
 );
-
-ListGroup.displayName = 'ListGroup';
 ListGroupItem.displayName = 'ListGroupItem';

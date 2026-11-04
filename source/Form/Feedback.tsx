@@ -12,7 +12,6 @@ export const FormText = polymorphic<FormTextProps>(
         <Root {...props} className={classNames('form-text', block && 'd-block', className)} />
     )
 );
-
 FormText.displayName = 'FormText';
 
 export type FormFeedbackProps = Omit<ComponentPropsWithRef<'div'>, 'type'> & {
@@ -25,12 +24,11 @@ export const FormFeedback = polymorphic<FormFeedbackProps>(
         <Root
             {...props}
             className={classNames(
-                tooltip && 'tooltip',
+                { tooltip },
                 tooltip ? `${type}-tooltip` : `${type}-feedback`,
                 className
             )}
         />
     )
 );
-
 FormFeedback.displayName = 'FormFeedback';

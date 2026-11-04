@@ -8,7 +8,7 @@ import { Stack } from '../source/Stack';
 it('renders a vertical stack by default and preserves layout attributes', () => {
     assert.equal(
         renderToStaticMarkup(
-            <Stack className="gap-3" aria-label="Vertical items">
+            <Stack gap={3} aria-label="Vertical items">
                 <span>First</span>
                 <span>Second</span>
             </Stack>
@@ -20,7 +20,7 @@ it('renders a vertical stack by default and preserves layout attributes', () => 
 it('supports horizontal layout and polymorphic root elements', () => {
     assert.equal(
         renderToStaticMarkup(
-            <Stack as="section" direction="horizontal" className="gap-2">
+            <Stack as="section" direction="horizontal" gap={2}>
                 <span>First</span>
                 <span>Second</span>
             </Stack>

@@ -6,7 +6,7 @@ import githubDark from '@shikijs/themes/github-dark';
 import githubLight from '@shikijs/themes/github-light';
 import { HTMLAttributes, isValidElement, ReactNode } from 'react';
 import reactElementToJSXString from 'react-element-to-jsx-string';
-import { createHighlighterCoreSync } from 'shiki/core';
+import { createHighlighterCoreSync, ShikiTransformer } from 'shiki/core';
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
 
 import { polymorphic } from '../Polymorphic';
@@ -29,20 +29,16 @@ export const CodeBlock = polymorphic<CodeBlockProps>(
                 ? children
                 : reactElementToJSXString(isValidElement(children) ? children : <>{children}</>);
 
+        const span: ShikiTransformer['span'] = ({ properties }) => {
+            properties.style = `${properties.style};color:light-dark(var(--shiki-light),var(--shiki-dark))`;
+        };
         const __html = highlighter.codeToHtml(sourceCode, {
             lang: language,
             themes: { light: 'github-light', dark: 'github-dark' },
             defaultColor: false,
             structure: 'inline',
-            transformers: [
-                {
-                    span({ properties }) {
-                        properties.style = `${properties.style};color:light-dark(var(--shiki-light),var(--shiki-dark))`;
-                    }
-                }
-            ]
+            transformers: [{ span }]
         });
-
         const code = (
             <Root className={`m-0 shiki language-${language} ${className}`} {...props}>
                 <code dangerouslySetInnerHTML={{ __html }} className={`language-${language}`} />
@@ -61,5 +57,4 @@ export const CodeBlock = polymorphic<CodeBlockProps>(
         );
     }
 );
-
 CodeBlock.displayName = 'CodeBlock';

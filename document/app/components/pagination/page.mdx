@@ -19,7 +19,7 @@ We use a large block of connected links for our pagination, making links hard to
 In addition, as pages likely have more than one such navigation section, it’s advisable to provide a descriptive `aria-label` for the `<nav>` to reflect its purpose. For example, if the pagination component is used to navigate between a set of search results, an appropriate label could be `aria-label="Search results pages"`.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <nav aria-label="Page navigation example">
             <Pagination>
                 <PageItem>
@@ -47,7 +47,7 @@ In addition, as pages likely have more than one such navigation section, it’s 
 Looking to use an icon or symbol in place of text for some pagination links? Be sure to provide proper screen reader support with `aria` attributes.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <nav aria-label="Page navigation example">
             <Pagination>
                 <PageItem>
@@ -79,7 +79,7 @@ Looking to use an icon or symbol in place of text for some pagination links? Be 
 Add `.active` to indicate a `.page-item` is the one currently being viewed. If using an `<a>` on the current page, `aria-current="page"` should be added for assistive technologies.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <nav aria-label="...">
             <Pagination>
                 <PageItem>
@@ -120,7 +120,7 @@ The `PageItem disabled` example below delegates this behavior to `PageLink`, whi
 destination and click handler, supplies `aria-disabled`, and excludes the link from keyboard focus.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <nav aria-label="...">
             <Pagination>
                 <PageItem disabled>
@@ -158,7 +158,7 @@ And just like active page items, you can swap out the disabled `<a>` for a `<spa
 Add a `.theme-{color}` class to `.pagination` to apply a semantic theme color across the component, including hover, focus, and the active page item.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <nav aria-label="Page navigation example">
             <Pagination theme="primary">
                 <PageItem>
@@ -335,7 +335,7 @@ Add a `.theme-{color}` class to `.pagination` to apply a semantic theme color ac
 Fancy larger or smaller pagination? Add `.pagination-lg` or `.pagination-sm` for additional sizes.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <nav aria-label="...">
             <Pagination size="lg">
                 <PageItem active>
@@ -389,7 +389,7 @@ Fancy larger or smaller pagination? Add `.pagination-lg` or `.pagination-sm` for
 Change the alignment of pagination components with [flexbox utilities][1]. For example, with `.justify-content-center`:
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <nav aria-label="Page navigation example">
             <Pagination className="justify-content-center">
                 <PageItem disabled>
@@ -415,7 +415,7 @@ Change the alignment of pagination components with [flexbox utilities][1]. For e
 Or with `.justify-content-end`:
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <nav aria-label="Page navigation example">
             <Pagination className="justify-content-end">
                 <PageItem disabled>

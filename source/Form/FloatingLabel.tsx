@@ -26,5 +26,4 @@ export const FormFloatingLabel = polymorphic<FormFloatingLabelProps>(
         );
     }
 );
-
 FormFloatingLabel.displayName = 'FormFloatingLabel';

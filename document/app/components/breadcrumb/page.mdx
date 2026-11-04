@@ -23,7 +23,7 @@ navigation element. Use the link’s `active` prop for the current page.
 Use an ordered list with `.breadcrumb-item` for each page and `.breadcrumb-divider` elements between them. Leave a divider empty to use the default chevron icon, or add your own separator content. Add `.active` to the `.breadcrumb-link` of the current page.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <nav aria-label="breadcrumb">
             <Breadcrumb>
                 <BreadcrumbItem>
@@ -76,7 +76,7 @@ Dividers are added explicitly using `.breadcrumb-divider` elements. An empty div
 Leave the `.breadcrumb-divider` empty to get the built-in chevron. Customize it globally by overriding the `--bs-breadcrumb-divider-icon`, `--bs-breadcrumb-divider-width`, and `--bs-breadcrumb-divider-height` variables.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <nav aria-label="breadcrumb">
             <Breadcrumb>
                 <BreadcrumbItem>
@@ -98,7 +98,7 @@ Leave the `.breadcrumb-divider` empty to get the built-in chevron. Customize it 
 Add an inline SVG inside the divider to override the default with your own crisp, scalable icon. Use `currentColor` for the stroke or fill so it inherits the divider color for easy theming.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <nav aria-label="breadcrumb">
             <Breadcrumb>
                 <BreadcrumbItem>
@@ -122,7 +122,7 @@ Add an inline SVG inside the divider to override the default with your own crisp
 For simple text-based dividers, just add the character directly.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <nav aria-label="breadcrumb">
             <Breadcrumb>
                 <BreadcrumbItem>
@@ -148,7 +148,7 @@ For simple text-based dividers, just add the character directly.
 Use any content you like—different icons, decorative elements, or themed separators.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <nav aria-label="breadcrumb">
             <Breadcrumb>
                 <BreadcrumbItem>

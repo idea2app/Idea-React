@@ -22,6 +22,7 @@ export const Pagination = polymorphic<PaginationProps>(
         />
     )
 );
+Pagination.displayName = 'Pagination';
 
 type PageState = Partial<Record<'active' | 'disabled', boolean>>;
 
@@ -44,6 +45,7 @@ export const PageItem = polymorphic<PageItemProps>(
         );
     }
 );
+PageItem.displayName = 'PageItem';
 
 export type PageLinkProps = ComponentPropsWithRef<'a'> & PageState;
 
@@ -74,14 +76,11 @@ export const PageLink = polymorphic<PageLinkProps>(
         );
     }
 );
+PageLink.displayName = 'PageLink';
 
 export const PageText = polymorphic<ComponentPropsWithRef<'span'>>(
     ({ as: Root = 'span', className, ...props }) => (
         <Root {...props} className={classNames('page-link', className)} />
     )
 );
-
-Pagination.displayName = 'Pagination';
-PageItem.displayName = 'PageItem';
-PageLink.displayName = 'PageLink';
 PageText.displayName = 'PageText';

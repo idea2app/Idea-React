@@ -12,7 +12,6 @@ export const Form = polymorphic<FormProps>(
         <Root {...props} className={classNames(validated && 'was-validated', className)} />
     )
 );
-
 Form.displayName = 'Form';
 
 export type FormFieldsetProps = ComponentPropsWithRef<'fieldset'>;
@@ -35,7 +34,6 @@ export const FormField = polymorphic<FormFieldProps>(
         />
     )
 );
-
 FormField.displayName = 'FormField';
 
 export type FormGroupProps = ComponentPropsWithRef<'div'>;
@@ -45,7 +43,6 @@ export const FormGroup = polymorphic<FormGroupProps>(
         <Root {...props} className={classNames('form-group', className)} />
     )
 );
-
 FormGroup.displayName = 'FormGroup';
 
 export type FormFieldContentProps = ComponentPropsWithRef<'div'>;
@@ -55,7 +52,6 @@ export const FormFieldContent = polymorphic<FormFieldContentProps>(
         <Root {...props} className={classNames('form-field-content', className)} />
     )
 );
-
 FormFieldContent.displayName = 'FormFieldContent';
 
 export interface FormValidationProps {
@@ -80,7 +76,6 @@ export const FormLabel = polymorphic<FormLabelProps>(
         />
     )
 );
-
 FormLabel.displayName = 'FormLabel';
 
 export type FormLegendProps = ComponentPropsWithRef<'legend'> &

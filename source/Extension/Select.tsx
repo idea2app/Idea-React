@@ -32,7 +32,6 @@ export const Option = polymorphic<OptionProps>(
         </Root>
     )
 );
-
 Option.displayName = 'Option';
 
 export type SelectProps = Pick<

@@ -28,7 +28,7 @@ Input groups attach add-on elements to a textual input field. Add-ons can be tex
 Pass `htmlFor` to `InputGroupText` to render the add-on itself as a label for its control.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <InputGroup>
             <InputGroupText id="basic-addon1">@</InputGroupText>
             <FormControl
@@ -220,7 +220,7 @@ Place any checkbox or radio within an input group’s addon instead of text.
 While multiple `<input>`s are supported visually, validation styles are only available for input groups with a single `<input>`.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <InputGroup>
             <FormControl type="text" aria-label="First name" />
             <FormControl type="text" aria-label="Middle name" />
@@ -244,7 +244,7 @@ While multiple `<input>`s are supported visually, validation styles are only ava
 Multiple add-ons are supported and can be mixed with checkbox and radio input versions.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <InputGroup>
             <InputGroupText>$</InputGroupText>
             <InputGroupText>0.00</InputGroupText>
@@ -266,7 +266,7 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
 ### Button addons
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <InputGroup>
             <InputGroupButton type="button" id="button-addon1" theme="secondary" variant="outline">
                 Button
@@ -321,7 +321,7 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
 ### Buttons with menus
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <InputGroup>
             <InputGroupMenu
                 label="Menu"
@@ -458,7 +458,7 @@ Add the relative form sizing classes to the `.input-group` itself and contents w
 **Sizing on the individual input group elements isn’t supported.**
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <InputGroup size="sm">
             <InputGroupText id="inputGroup-sizing-sm">Small</InputGroupText>
             <FormControl

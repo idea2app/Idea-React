@@ -96,21 +96,22 @@ const forms: NavLink[] = [
     { label: 'Layout', slug: 'layout' },
     { label: 'Validation', slug: 'validation' }
 ];
-const gettingStarted: NavLink[] = [
+const guides: NavLink[] = [
     { label: 'Install', slug: 'install' },
     { label: 'Parcel', slug: 'parcel' },
     { label: 'Vite', slug: 'vite' },
-    { label: 'Webpack', slug: 'webpack' }
+    { label: 'Webpack', slug: 'webpack' },
+    { label: 'ViNext', slug: 'vinext' }
 ];
 const groups: NavGroup[] = [
     {
-        label: 'Getting started',
+        label: 'Guides',
         icon: 'rocket-takeoff',
         iconClassName: 'fg-accent',
-        href: 'getting-started/',
-        itemHref: 'getting-started/',
-        slug: 'getting-started',
-        items: gettingStarted
+        href: 'guides/',
+        itemHref: 'guides/',
+        slug: 'guides',
+        items: guides
     },
     {
         label: 'Components',

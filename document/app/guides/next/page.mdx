@@ -1,0 +1,160 @@
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="vinext">
+
+# Next.js with ViNext
+
+Use ViNext to create a Next.js-style React application that runs on Vite. This setup follows the
+documentation site's SWC decorator transform and static-export configuration, with Idea React as
+the component library.
+
+## Setup
+
+Create a project and install Idea React with its React and MobX peers:
+
+```sh
+mkdir my-project
+cd my-project
+pnpm init
+pnpm add idea-react@next react react-dom mobx mobx-react vinext
+pnpm add -D vite unplugin-swc @swc/core typescript @types/react @types/react-dom
+```
+
+Use `idea-react` without `@next` after a stable release.
+
+## Project structure
+
+Create an App Router route, a shared root layout, and Vite and SWC configuration:
+
+```text
+my-project/
+├── app/
+│   ├── layout.tsx
+│   └── page.tsx
+├── next.config.ts
+├── package.json
+├── swc.config.mts
+└── vite.config.ts
+```
+
+## Configure ViNext
+
+Register ViNext and SWC in `vite.config.ts`:
+
+```ts
+import swc from 'unplugin-swc';
+import vinext from 'vinext';
+import { defineConfig } from 'vite';
+
+import { swcOptions } from './swc.config.mts';
+
+export default defineConfig({
+    plugins: [swc.vite({ ...swcOptions, tsconfigFile: false }), vinext()]
+});
+```
+
+SWC compiles the TypeScript, TSX, and ECMAScript decorator (stage-3) used by MobX. This config transforms
+source files; it does not type-check them. Add `swc.config.mts`:
+
+```ts
+export const swcOptions = {
+    jsc: {
+        target: 'es2015',
+        parser: {
+            syntax: 'typescript',
+            tsx: true,
+            decorators: true
+        },
+        transform: {
+            decoratorVersion: '2022-03',
+            useDefineForClassFields: true,
+            react: { runtime: 'automatic' }
+        }
+    }
+};
+```
+
+ViNext reads the Next.js-compatible options from `next.config.ts`. Set `output` to `export` to
+produce a site that can be served without a Node.js process:
+
+```ts
+const nextConfig = {
+    output: 'export',
+    trailingSlash: true
+};
+
+export default nextConfig;
+```
+
+Add development, build, and preview scripts to `package.json`:
+
+```json
+{
+    "scripts": {
+        "dev": "vite dev",
+        "build": "vite build",
+        "start": "vite preview"
+    }
+}
+```
+
+## Create the application
+
+Load Bootstrap CSS, Bootstrap Icons, and the Idea React stylesheet from the shared layout:
+
+```tsx
+import { PropsWithChildren } from 'react';
+
+export default function RootLayout({ children }: PropsWithChildren) {
+    return (
+        <html lang="en">
+            <head>
+                <link
+                    rel="stylesheet"
+                    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="https://unpkg.com/bootstrap-icons@1.13.2/font/bootstrap-icons.css"
+                />
+                <link rel="stylesheet" href="https://unpkg.com/idea-react@next/dist/index.css" />
+            </head>
+            <body>{children}</body>
+        </html>
+    );
+}
+```
+
+Render a library component from `app/page.tsx`:
+
+```tsx
+import { Button, Container } from 'idea-react';
+
+export default function Page() {
+    return (
+        <Container>
+            <h1>Hello, Idea React and ViNext!</h1>
+            <Button type="button" variant="solid" theme="primary">
+                Get started
+            </Button>
+        </Container>
+    );
+}
+```
+
+The React components handle their own behavior, so Bootstrap's JavaScript bundle is not required.
+
+## Build and deploy
+
+Run the app locally, build it, then preview the generated site:
+
+```sh
+pnpm dev
+pnpm build
+pnpm start
+```
+
+Deploy the static files from `dist/client/` to a static host. If the site is served from a
+subdirectory, configure a matching base path and verify that asset and route URLs include it.
+
+</ComponentsLayout>

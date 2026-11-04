@@ -38,24 +38,28 @@ export const DialogHeader = polymorphic<ComponentPropsWithRef<'div'>>(
         <Root {...props} className={classNames('dialog-header', className)} />
     )
 );
+DialogHeader.displayName = 'DialogHeader';
 
 export const DialogTitle = polymorphic<ComponentPropsWithRef<'h1'>>(
     ({ as: Root = 'h1', className, ...props }) => (
         <Root {...props} className={classNames('dialog-title', className)} />
     )
 );
+DialogTitle.displayName = 'DialogTitle';
 
 export const DialogBody = polymorphic<ComponentPropsWithRef<'div'>>(
     ({ as: Root = 'div', className, ...props }) => (
         <Root {...props} className={classNames('dialog-body', className)} />
     )
 );
+DialogBody.displayName = 'DialogBody';
 
 export const DialogFooter = polymorphic<ComponentPropsWithRef<'div'>>(
     ({ as: Root = 'div', className, ...props }) => (
         <Root {...props} className={classNames('dialog-footer', className)} />
     )
 );
+DialogFooter.displayName = 'DialogFooter';
 
 export class NativeDialog<T extends ElementType | undefined = 'dialog'> extends Component<
     PolymorphicClassProps<T, NativeDialogProps>
@@ -259,11 +263,3 @@ export class NativeDialog<T extends ElementType | undefined = 'dialog'> extends 
         );
     }
 }
-
-DialogHeader.displayName = 'DialogHeader';
-
-DialogTitle.displayName = 'DialogTitle';
-
-DialogBody.displayName = 'DialogBody';
-
-DialogFooter.displayName = 'DialogFooter';

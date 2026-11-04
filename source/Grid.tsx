@@ -23,6 +23,7 @@ export const Container = polymorphic<ContainerProps>(
         />
     )
 );
+Container.displayName = 'Container';
 
 export type RowCols = number | 'auto';
 
@@ -61,6 +62,7 @@ export const Row = polymorphic<RowProps>(
         );
     }
 );
+Row.displayName = 'Row';
 
 export interface ColProps extends ComponentPropsWithRef<'div'> {
     span?: ColSize;
@@ -99,7 +101,4 @@ export const Col = polymorphic<ColProps>(
         );
     }
 );
-
-Container.displayName = 'Container';
-Row.displayName = 'Row';
 Col.displayName = 'Col';

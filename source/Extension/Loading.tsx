@@ -27,5 +27,4 @@ export const Loading = polymorphic<LoadingProps>(
         </Root>
     )
 );
-
 Loading.displayName = 'Loading';

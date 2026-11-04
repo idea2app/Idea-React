@@ -58,5 +58,4 @@ export const FormSwitch = polymorphic<FormSwitchProps>(
         </Root>
     )
 );
-
 FormSwitch.displayName = 'FormSwitch';

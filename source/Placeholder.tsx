@@ -37,6 +37,7 @@ export const Placeholder = polymorphic<PlaceholderProps>(
         />
     )
 );
+Placeholder.displayName = 'Placeholder';
 
 export interface PlaceholderAnimationProps extends ComponentPropsWithRef<'div'> {
     animation?: PlaceholderProps['animation'];
@@ -51,6 +52,7 @@ export const PlaceholderAnimation = polymorphic<PlaceholderAnimationProps>(
         />
     )
 );
+PlaceholderAnimation.displayName = 'PlaceholderAnimation';
 
 export type PlaceholderButtonProps = ButtonProps;
 
@@ -65,7 +67,4 @@ export const PlaceholderButton = polymorphic<PlaceholderButtonProps>(
         />
     )
 );
-
-Placeholder.displayName = 'Placeholder';
-PlaceholderAnimation.displayName = 'PlaceholderAnimation';
 PlaceholderButton.displayName = 'PlaceholderButton';

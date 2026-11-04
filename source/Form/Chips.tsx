@@ -14,13 +14,12 @@ export const Chip = polymorphic<ChipProps>(
     ({ as: Root = 'button', className, active, theme, ...props }) => (
         <Root
             {...props}
-            className={classNames('chip', active && 'active', theme && `theme-${theme}`, className)}
+            className={classNames('chip', { active }, theme && `theme-${theme}`, className)}
             type="button"
             aria-pressed={active}
         />
     )
 );
-
 Chip.displayName = 'Chip';
 
 export const ChipIcon = polymorphic<IconProps>(({ as: RootAs, className, ...props }) => (
@@ -49,7 +48,6 @@ export const ChipDismiss = polymorphic<ComponentPropsWithRef<'button'>>(
         </Root>
     )
 );
-
 ChipDismiss.displayName = 'ChipDismiss';
 
 export type ChipTokenProps = ComponentPropsWithRef<'span'> & Pick<ChipProps, 'active' | 'theme'>;
@@ -59,11 +57,10 @@ export const ChipToken = polymorphic<ChipTokenProps>(
         <Root
             {...props}
             tabIndex={props.tabIndex ?? 0}
-            className={classNames('chip', active && 'active', theme && `theme-${theme}`, className)}
+            className={classNames('chip', { active }, theme && `theme-${theme}`, className)}
         />
     )
 );
-
 ChipToken.displayName = 'ChipToken';
 
 export const ChipInputLabel = polymorphic<ComponentPropsWithRef<'label'>>(
@@ -71,5 +68,4 @@ export const ChipInputLabel = polymorphic<ComponentPropsWithRef<'label'>>(
         <Root {...props} className={classNames('chip-input-label', className)} />
     )
 );
-
 ChipInputLabel.displayName = 'ChipInputLabel';

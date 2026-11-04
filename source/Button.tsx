@@ -28,6 +28,7 @@ interface ButtonStyleProps {
 type ButtonLinkAttributes = ComponentPropsWithRef<'a'> & { href: string };
 type ButtonAttributes = ComponentPropsWithRef<'button'> & { href?: never };
 type ButtonElementAttributes = ButtonAttributes | ButtonLinkAttributes;
+
 export type ButtonProps = ButtonStyleProps & ButtonElementAttributes;
 
 const isButtonLink = (props: ButtonElementAttributes): props is ButtonLinkAttributes =>
@@ -68,6 +69,7 @@ export const Button = polymorphic<ButtonProps>(
         );
     }
 );
+Button.displayName = 'Button';
 
 export type ButtonInputProps = Omit<ComponentPropsWithRef<'input'>, 'size'> & ButtonStyleProps;
 
@@ -97,6 +99,4 @@ export const ButtonInput = polymorphic<ButtonInputProps>(
         />
     )
 );
-
-Button.displayName = 'Button';
 ButtonInput.displayName = 'ButtonInput';

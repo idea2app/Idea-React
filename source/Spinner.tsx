@@ -35,12 +35,10 @@ export const Spinner = polymorphic<SpinnerProps>(
         />
     )
 );
+Spinner.displayName = 'Spinner';
 
 export const SpinnerIcon = polymorphic<IconProps>(({ as: RootAs, className, ...props }) => (
     <Icon as={RootAs} {...props} className={classNames('spinner-rotate', className)} />
 ));
 
-Spinner.displayName = 'Spinner';
 SpinnerIcon.displayName = 'SpinnerIcon';
-
-Spinner.displayName = 'Spinner';

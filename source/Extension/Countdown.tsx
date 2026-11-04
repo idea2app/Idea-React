@@ -34,11 +34,7 @@ export class Countdown<T extends ElementType | undefined = 'ol'> extends Observe
 > {
     declare readonly props: PolymorphicClassProps<T, CountdownProps>;
 
-    protected get componentProps(): Readonly<CountdownProps & AsProps> {
-        return this.props;
-    }
-
-    protected get observedComponentProps(): CountdownProps & AsProps {
+    protected get componentProps(): CountdownProps & AsProps {
         return this.observedProps;
     }
 
@@ -55,7 +51,7 @@ export class Countdown<T extends ElementType | undefined = 'ol'> extends Observe
 
     @computed
     get timeSections(): TimeSection[] {
-        const { units } = this.observedComponentProps;
+        const { units } = this.componentProps;
         let { rest } = this;
 
         return units.reduce((list, { label }, index) => {
@@ -97,7 +93,7 @@ export class Countdown<T extends ElementType | undefined = 'ol'> extends Observe
         this.initTimer();
     }
 
-    @reaction(_this => _this.observedComponentProps.endTime)
+    @reaction(_this => _this.componentProps.endTime)
     initTimer() {
         this.stop();
         this.tick();
@@ -110,10 +106,8 @@ export class Countdown<T extends ElementType | undefined = 'ol'> extends Observe
     }
 
     render() {
-        const Root: ElementType = this.componentProps.as ?? 'ol';
-
         const {
-            as: _as,
+            as,
             className = '',
             itemClassName = 'border rounded px-4 py-3 d-flex flex-column justify-content-center align-items-center',
             units: _u,
@@ -121,6 +115,7 @@ export class Countdown<T extends ElementType | undefined = 'ol'> extends Observe
             onEnd: _o,
             ...props
         } = this.componentProps;
+        const Root: ElementType = as ?? 'ol';
         const { timeSections } = this;
 
         return (

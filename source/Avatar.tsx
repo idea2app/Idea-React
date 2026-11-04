@@ -63,7 +63,6 @@ export const Avatar = polymorphic<AvatarProps>(
         </Root>
     )
 );
-
 Avatar.displayName = 'Avatar';
 
 export interface AvatarStackProps extends HTMLAttributes<HTMLDivElement> {
@@ -75,7 +74,6 @@ export const AvatarImage = polymorphic<ComponentPropsWithRef<'img'>>(
         <Root {...props} className={classNames('avatar-img', className)} />
     )
 );
-
 AvatarImage.displayName = 'AvatarImage';
 
 export const AvatarStack = polymorphic<AvatarStackProps>(
@@ -88,5 +86,4 @@ export const AvatarStack = polymorphic<AvatarStackProps>(
         </Root>
     )
 );
-
 AvatarStack.displayName = 'AvatarStack';

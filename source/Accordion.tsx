@@ -36,12 +36,14 @@ export const Accordion = polymorphic<AccordionProps>(
         />
     )
 );
+Accordion.displayName = 'Accordion';
 
 export const AccordionItem = polymorphic<ComponentPropsWithRef<'details'>>(
     ({ as: Root = 'details', className, ...props }) => (
         <Root {...props} className={classNames('accordion-item', className)} />
     )
 );
+AccordionItem.displayName = 'AccordionItem';
 
 export interface AccordionHeaderProps extends ComponentPropsWithRef<'summary'> {
     icon?: string | false;
@@ -55,16 +57,13 @@ export const AccordionHeader = polymorphic<AccordionHeaderProps>(
         </Root>
     )
 );
+AccordionHeader.displayName = 'AccordionHeader';
 
 export const AccordionBody = polymorphic<ComponentPropsWithRef<'div'>>(
     ({ as: Root = 'div', className, ...props }) => (
         <Root {...props} className={classNames('accordion-body', className)} />
     )
 );
-
-Accordion.displayName = 'Accordion';
-AccordionItem.displayName = 'AccordionItem';
-AccordionHeader.displayName = 'AccordionHeader';
 AccordionBody.displayName = 'AccordionBody';
 
 export interface AccordionToggleProps

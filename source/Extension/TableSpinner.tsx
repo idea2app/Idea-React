@@ -19,5 +19,4 @@ export const TableSpinner = polymorphic<TableSpinnerProps>(
         </Root>
     )
 );
-
 TableSpinner.displayName = 'TableSpinner';

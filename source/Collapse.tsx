@@ -206,6 +206,13 @@ export class CollapseToggle<T extends ElementType | undefined = 'button'> extend
         } = this.componentProps;
         const Root: ElementType = RootAs ?? (href ? 'a' : 'button');
         const nativeButton = Root === 'button';
+        const rootClassName = classNames(
+            variant === false ? undefined : variant ? `btn-${variant}` : icon ? undefined : 'btn',
+            theme && `theme-${theme}`,
+            size && `btn-${size}`,
+            { 'btn-icon': icon, 'btn-styled': styled, disabled },
+            className
+        );
 
         return (
             <Root
@@ -215,19 +222,7 @@ export class CollapseToggle<T extends ElementType | undefined = 'button'> extend
                 disabled={nativeButton || typeof Root !== 'string' ? disabled : undefined}
                 aria-disabled={(!nativeButton && disabled) || undefined}
                 tabIndex={!nativeButton && disabled ? -1 : props.tabIndex}
-                className={classNames(
-                    variant === false
-                        ? undefined
-                        : variant
-                          ? `btn-${variant}`
-                          : icon
-                            ? undefined
-                            : 'btn',
-                    theme && `theme-${theme}`,
-                    size && `btn-${size}`,
-                    { 'btn-icon': icon, 'btn-styled': styled, disabled },
-                    className
-                )}
+                className={rootClassName}
                 role={props.role ?? 'button'}
                 aria-controls={this.controls || undefined}
                 aria-expanded={this.expanded}

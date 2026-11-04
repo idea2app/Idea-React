@@ -12,10 +12,11 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 ## Versions
 
-| SemVer |    status    | ES decorator |    MobX     |
-| :----: | :----------: | :----------: | :---------: |
-| `>=2`  | ✅developing |   stage-3    |  `>=6.11`   |
-|  `<2`  | ❌deprecated |   stage-2    | `>=4 <6.11` |
+|  SemVer  |    status    | ES decorator |    MobX     | Bootstrap |
+| :------: | :----------: | :----------: | :---------: | :-------: |
+|  `>=3`   | ✅developing |   stage-3    |  `>=6.11`   |    v6     |
+| `>=2 <3` | ❌deprecated |   stage-3    |  `>=6.11`   |    v5     |
+|   `<2`   | ❌deprecated |   stage-2    | `>=4 <6.11` |    v5     |
 
 ## Content
 
@@ -129,32 +130,6 @@ For the current alpha release, use `idea-react@next` instead of `idea-react`.
 1. MobX: [demo][13] & [usage][14]
 2. Next.js: [demo][15] & [usage][16]
 
-### Polymorphic roots
-
-Components with a single root support `as`, accepting an HTML tag or another React component:
-
-```tsx
-import { ComponentPropsWithRef, FC } from 'react';
-import { Button, Card, PolymorphicProps } from 'idea-react';
-
-const RouterLink: FC<ComponentPropsWithRef<'a'> & { to: string }> = ({ to, ...props }) => (
-    <a {...props} href={to} />
-);
-
-type LinkCardProps = PolymorphicProps<typeof RouterLink, { theme?: 'primary' }>;
-
-<Card as="article">Article content</Card>;
-<Button as={RouterLink} to="/docs" variant="solid" theme="primary">
-    Documentation
-</Button>;
-```
-
-The target's additional props are inferred and forwarded, including required props and compatible
-refs. Component-specific props keep their existing meaning and take precedence on name collisions.
-Without `as`, the default markup and props stay unchanged. Class component refs still refer to the
-component instance. Behavioral components require compatible root elements; custom roots must forward
-their DOM props and refs. Components that render fragments or multiple roots do not support `as`.
-
 ### CSS on CDN
 
 ```html
@@ -162,7 +137,7 @@ their DOM props and refs. Components that render fragments or multiple roots do 
     rel="stylesheet"
     href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
 />
-<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1.13.1/font/bootstrap-icons.css" />
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1.13.2/font/bootstrap-icons.css" />
 <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" />
 <link rel="stylesheet" href="https://unpkg.com/idea-react/dist/index.css" />
 ```
@@ -182,6 +157,33 @@ Compatible with MobX 6/7:
     }
 }
 ```
+
+### Polymorphic roots
+
+Components with a single root support `as`, accepting an HTML tag or another React component:
+
+```tsx
+import { ComponentPropsWithRef, FC } from 'react';
+import { Button, Card, PolymorphicProps } from 'idea-react';
+
+const RouterLink: FC<ComponentPropsWithRef<'a'> & { to: string }> = ({ to, ...props }) => (
+    <a {...props} href={to} />
+);
+
+type LinkCardProps = PolymorphicProps<typeof RouterLink, { theme?: 'primary' }>;
+
+<Card as="article">Article content</Card>;
+
+<Button as={RouterLink} to="/docs" variant="solid" theme="primary">
+    Documentation
+</Button>;
+```
+
+The target's additional props are inferred and forwarded, including required props and compatible
+refs. Component-specific props keep their existing meaning and take precedence on name collisions.
+Without `as`, the default markup and props stay unchanged. Class component refs still refer to the
+component instance. Behavioral components require compatible root elements; custom roots must forward
+their DOM props and refs. Components that render fragments or multiple roots do not support `as`.
 
 ### Dialog
 

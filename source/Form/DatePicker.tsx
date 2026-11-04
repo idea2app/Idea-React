@@ -202,7 +202,6 @@ export const DatePicker = polymorphic<DatePickerProps & { ref?: Ref<HTMLInputEle
         <DatePickerComponent {...props} forwardedRef={forwardedRef} />
     ))
 );
-
 DatePicker.displayName = 'DatePicker';
 
 export const DatePickerButton: PolymorphicComponent<
@@ -247,7 +246,6 @@ export const DatePickerButton: PolymorphicComponent<
         )
     )
 );
-
 DatePickerButton.displayName = 'DatePickerButton';
 
 export const DatePickerInline = polymorphic<DatePickerInlineProps & { ref?: Ref<HTMLDivElement> }>(
@@ -288,5 +286,4 @@ export const DatePickerInline = polymorphic<DatePickerInlineProps & { ref?: Ref<
         )
     )
 );
-
 DatePickerInline.displayName = 'DatePickerInline';

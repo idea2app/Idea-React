@@ -37,7 +37,7 @@ Form control styles are available for most textual inputs (including date and ti
 Use the [form field][1] component to layout and wrap your inputs with a label, description, and validation feedback messages in a vertical stack.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <FormField>
             <FormLabel htmlFor="exampleFormControlInput1">Email address</FormLabel>
             <FormControl
@@ -55,7 +55,7 @@ Use the [form field][1] component to layout and wrap your inputs with a label, d
 Textareas use the same `.form-control` class as inputs. Modify their height by using the `rows` attribute or using custom CSS.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <FormField>
             <FormLabel htmlFor="exampleFormControlTextarea1">Example textarea</FormLabel>
             <FormTextArea id="exampleFormControlTextarea1" />
@@ -126,7 +126,7 @@ As is the `size` attribute:
 Change the size of a form control by using classes like `.form-control-lg` and `.form-control-sm`. This adjusts `height`, `padding`, `font-size`, `line-height`, and `border-radius`.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <div>
             <FormLabel htmlFor="sizesInputSmall">Small input</FormLabel>
             <FormControl
@@ -162,7 +162,7 @@ Change the size of a form control by using classes like `.form-control-lg` and `
 And for textareas:
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <div>
             <FormLabel htmlFor="sizesTextareaSmall">Small textarea</FormLabel>
             <FormTextArea
@@ -195,7 +195,7 @@ And for textareas:
 And for selects:
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <div>
             <FormLabel htmlFor="sizesSelectSmall">Small select</FormLabel>
             <FormSelect id="sizesSelectSmall" controlSize="sm">
@@ -273,7 +273,7 @@ Inline text can use any typical inline HTML element (be it a `<span>`, `<small>`
 Add the `disabled` boolean attribute on an input to give it a grayed out appearance, remove pointer events, and prevent focusing.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <FormControl
             type="text"
             placeholder="Disabled input"
@@ -385,7 +385,7 @@ Nearly all input types are supported, but not all are documented here. Input typ
 No additional classes are needed for date and time inputs. Exact functionality and appearance are dependent on the browser and operating system. However, you can also use [our datepicker component][2] to create a more consistent experience across browsers with JavaScript.
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <FormControl
             type="datetime-local"
             aria-label="Date and time picker"
@@ -428,7 +428,7 @@ Set the `type="color"` and add `.form-control-color` to the `<input>` alongside 
 Sizes are also supported:
 
 <CodeExample>
-    <Stack className="gap-3">
+    <Stack gap={3}>
         <div>
             <FormLabel htmlFor="exampleColorInputLg">Large color picker</FormLabel>
             <FormControl
@@ -496,7 +496,7 @@ You can also combine with the `.form-control-caret` class to add a caret to inpu
 `input[type="file"]` elements are styled with the `::file-selector-button` pseudo element to add a button to the input. You only need to add the `.form-control` class, plus any size modifiers you need.
 
 <CodeExample>
-    <Stack className="gap-5">
+    <Stack gap={5}>
         <FormField>
             <FormLabel htmlFor="formFile">Default file input example</FormLabel>
             <FormControl type="file" id="formFile" />

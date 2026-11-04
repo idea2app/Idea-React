@@ -25,7 +25,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
                 />
                 <link
                     rel="stylesheet"
-                    href="https://unpkg.com/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+                    href="https://unpkg.com/bootstrap-icons@1.13.2/font/bootstrap-icons.css"
                 />
             </head>
             <body>

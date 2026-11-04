@@ -41,5 +41,4 @@ export const Popover = polymorphic<PopoverProps>(
         </Root>
     )
 );
-
 Popover.displayName = 'Popover';

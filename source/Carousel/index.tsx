@@ -17,7 +17,7 @@ import {
 } from 'react';
 
 import { Icon } from '../Extension/Icon';
-import { AsProps, polymorphic, PolymorphicClassProps } from '../Polymorphic';
+import { polymorphic, PolymorphicClassProps } from '../Polymorphic';
 import { CarouselEnds, CarouselModel } from './model';
 import { CarouselScroll } from './scroll';
 
@@ -65,10 +65,6 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 > {
     declare readonly props: PolymorphicClassProps<T, CarouselProps>;
 
-    protected get componentProps(): Readonly<CarouselProps & AsProps> {
-        return this.props;
-    }
-
     static displayName = 'Carousel';
 
     root = createRef<HTMLDivElement>();
@@ -81,7 +77,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
     componentDidMount() {
         this.updateStore();
-        if (this.componentProps.autoplay) this.store.play();
+        if (this.props.autoplay) this.store.play();
         document.addEventListener('visibilitychange', this.handleVisibilityChange);
         this.track.current?.addEventListener('scroll', this.handleScroll, { passive: true });
     }
@@ -98,7 +94,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
         this.track.current?.removeEventListener('scroll', this.handleScroll);
     }
 
-    private getSlides = () => Children.toArray(this.componentProps.children);
+    private getSlides = () => Children.toArray(this.props.children);
 
     private getSlideInterval = (index: number) => {
         const slide = this.getSlides()[index];
@@ -106,26 +102,26 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
             ? slide.props.interval
             : undefined;
 
-        return itemInterval ?? this.componentProps.interval ?? 5000;
+        return itemInterval ?? this.props.interval ?? 5000;
     };
 
     private updateStore = () => {
         const slides = this.getSlides();
-        this.store.onChange = this.componentProps.onChange;
+        this.store.onChange = this.props.onChange;
         this.store.onNavigate = this.scrollToActive;
-        this.store.update(slides.length, this.componentProps.ends ?? 'loop', this.getSlideInterval);
+        this.store.update(slides.length, this.props.ends ?? 'loop', this.getSlideInterval);
     };
 
     handleVisibilityChange = () => this.store.setVisible(!document.hidden);
 
     handleMouseEnter = () => {
-        if (this.componentProps.pause !== false) this.store.setHovering(true);
+        if (this.props.pause !== false) this.store.setHovering(true);
     };
 
     handleMouseLeave = () => this.store.setHovering(false);
 
     handleFocusCapture = () => {
-        if (this.componentProps.pause !== false) this.store.setHovering(true);
+        if (this.props.pause !== false) this.store.setHovering(true);
     };
 
     handleBlurCapture = ({ currentTarget, relatedTarget }: React.FocusEvent<HTMLDivElement>) => {
@@ -151,15 +147,9 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     };
 
     handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-        this.componentProps.onKeyDown?.(event);
+        this.props.onKeyDown?.(event);
         if (event.defaultPrevented || this.scroller.looping) return;
-        if (
-            this.componentProps.keyboard === false ||
-            event.altKey ||
-            event.ctrlKey ||
-            event.metaKey
-        )
-            return;
+        if (this.props.keyboard === false || event.altKey || event.ctrlKey || event.metaKey) return;
         if (
             event.target instanceof HTMLElement &&
             /^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName)
@@ -176,7 +166,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     };
 
     handleClick = (event: MouseEvent<HTMLDivElement>) => {
-        this.componentProps.onClick?.(event);
+        this.props.onClick?.(event);
         if (event.defaultPrevented || this.scroller.looping) return;
 
         const button =
@@ -219,12 +209,12 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
             (direction === 1 && index === 0 && from === slides.length - 1) ||
             (direction === -1 && from === 0 && index === slides.length - 1);
         const canLoop =
-            (this.componentProps.ends ?? 'loop') === 'loop' &&
-            !this.componentProps.fade &&
+            (this.props.ends ?? 'loop') === 'loop' &&
+            !this.props.fade &&
             !reducedMotion &&
             items === 1 &&
             peek === 0 &&
-            !this.componentProps.center &&
+            !this.props.center &&
             !variableWidth;
 
         if (crossingEnd && canLoop)
@@ -245,13 +235,13 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     };
 
     renderControls = () => {
-        const { controls = true, ends = 'loop' } = this.componentProps;
+        const { controls = true, ends = 'loop' } = this.props;
         if (!controls) return null;
 
         const atStart = this.store.activeIndex === 0;
         const atEnd = this.store.activeIndex === this.getSlides().length - 1;
         const buttonClass =
-            this.componentProps.controlsPlacement === 'overlay'
+            this.props.controlsPlacement === 'overlay'
                 ? 'carousel-control-prev'
                 : 'btn btn-subtle theme-secondary';
 
@@ -270,7 +260,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
                 <button
                     type="button"
                     className={
-                        this.componentProps.controlsPlacement === 'overlay'
+                        this.props.controlsPlacement === 'overlay'
                             ? 'carousel-control-next'
                             : 'btn btn-subtle theme-secondary'
                     }
@@ -286,7 +276,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     };
 
     renderIndicators = () =>
-        this.componentProps.indicators && this.getSlides().length > 1 ? (
+        this.props.indicators && this.getSlides().length > 1 ? (
             <div className="carousel-indicators">
                 {this.getSlides().map((_, index) => (
                     <button
@@ -303,7 +293,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
         ) : null;
 
     renderPlayPause = () =>
-        (this.componentProps.playPause || this.componentProps.autoplay) && (
+        (this.props.playPause || this.props.autoplay) && (
             <button
                 type="button"
                 className="btn-icon btn-sm carousel-control-play-pause"
@@ -315,7 +305,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
         );
 
     render() {
-        const Root: ElementType = this.componentProps.as ?? 'div';
+        const Root: ElementType = this.props.as ?? 'div';
 
         const slides = this.getSlides();
         const {
@@ -342,7 +332,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
             playPause: _playPause,
             style,
             ...props
-        } = this.componentProps;
+        } = this.props;
         const placement = controlsPlacement === 'overlay';
         const styleWithItems = {
             ...style,
@@ -371,7 +361,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
                 )}
                 style={styleWithItems}
                 role="region"
-                aria-label={this.componentProps['aria-label'] ?? 'Carousel'}
+                aria-label={this.props['aria-label'] ?? 'Carousel'}
                 aria-roledescription="carousel"
                 onClick={this.handleClick}
                 onKeyDown={this.handleKeyDown}
@@ -385,7 +375,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
                     ref={this.track}
                     className="carousel-inner"
                     tabIndex={0}
-                    aria-label={this.componentProps['aria-label'] ?? 'Carousel slides'}
+                    aria-label={this.props['aria-label'] ?? 'Carousel slides'}
                     onScroll={this.handleScroll}
                 >
                     {slides.map(this.renderSlide)}
@@ -393,7 +383,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
                 {placement && this.renderControls()}
                 {controlsPlacement === 'bottom' && outerControls}
                 {placement &&
-                    (this.componentProps.playPause || this.componentProps.autoplay) &&
+                    (this.props.playPause || this.props.autoplay) &&
                     this.renderPlayPause()}
                 {placement && this.renderIndicators()}
             </Root>

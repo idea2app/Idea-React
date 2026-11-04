@@ -24,6 +24,7 @@ export const Navbar = polymorphic<NavbarProps>(
         />
     )
 );
+Navbar.displayName = 'Navbar';
 
 export type NavbarBrandProps =
     (ComponentPropsWithRef<'a'> & { as?: 'a' }) | (ComponentPropsWithRef<'span'> & { as: 'span' });
@@ -33,6 +34,7 @@ export const NavbarBrand = polymorphic<ComponentPropsWithRef<'a'>>(
         <Root {...props} className={classNames('navbar-brand', className)} />
     )
 );
+NavbarBrand.displayName = 'NavbarBrand';
 
 export interface NavbarNavProps extends ComponentPropsWithRef<'ul'> {
     variant?: 'tabs' | 'pills' | 'underline';
@@ -52,12 +54,14 @@ export const NavbarNav = polymorphic<NavbarNavProps>(
         />
     )
 );
+NavbarNav.displayName = 'NavbarNav';
 
 export const NavbarText = polymorphic<ComponentPropsWithRef<'span'>>(
     ({ as: Root = 'span', className, ...props }) => (
         <Root {...props} className={classNames('navbar-text', className)} />
     )
 );
+NavbarText.displayName = 'NavbarText';
 
 export interface NavbarTogglerProps extends Omit<
     ComponentPropsWithRef<'button'>,
@@ -87,9 +91,4 @@ export const NavbarToggler = polymorphic<NavbarTogglerProps>(
         </Button>
     )
 );
-
-Navbar.displayName = 'Navbar';
-NavbarBrand.displayName = 'NavbarBrand';
-NavbarNav.displayName = 'NavbarNav';
-NavbarText.displayName = 'NavbarText';
 NavbarToggler.displayName = 'NavbarToggler';

@@ -29,7 +29,6 @@ export const Tab = polymorphic<TabProps>(
         <Root {...props} />
     )
 );
-
 Tab.displayName = 'Tab';
 
 export interface TabsProps extends Omit<ComponentPropsWithRef<'div'>, 'onChange'> {
@@ -46,13 +45,13 @@ export interface TabsProps extends Omit<ComponentPropsWithRef<'div'>, 'onChange'
 export class Tabs<T extends ElementType | undefined = 'div'> extends Component<
     PolymorphicClassProps<T, TabsProps>
 > {
+    static displayName = 'Tabs';
+
     declare readonly props: PolymorphicClassProps<T, TabsProps>;
 
     protected get componentProps(): Readonly<TabsProps & AsProps> {
         return this.props;
     }
-
-    static displayName = 'Tabs';
 
     get tabs() {
         return Children.toArray(this.componentProps.children)
@@ -88,10 +87,12 @@ export class Tabs<T extends ElementType | undefined = 'div'> extends Component<
 
     handleClick = (event: MouseEvent<HTMLDivElement>) => {
         this.componentProps.onClick?.(event);
+
         if (event.defaultPrevented) return;
 
         const button = (event.target as Element).closest<HTMLButtonElement>('[data-tab-index]');
         const tab = button && this.tabs[Number(button.dataset.tabIndex)]?.props;
+
         if (!tab || tab.disabled) return;
 
         this.activate(tab.eventKey);
@@ -104,7 +105,7 @@ export class Tabs<T extends ElementType | undefined = 'div'> extends Component<
 
         const button = (event.target as Element).closest<HTMLButtonElement>('[data-tab-index]');
         const index = Number(button?.dataset.tabIndex);
-        const tabs = this.tabs;
+        const { tabs } = this;
         if (!button || Number.isNaN(index)) return;
 
         const horizontal = this.componentProps.orientation !== 'vertical';
