@@ -1,5 +1,6 @@
-import { FC, HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 
+import { polymorphic } from '../Polymorphic';
 import { Spinner, SpinnerProps } from '../Spinner';
 
 export interface TableSpinnerProps
@@ -9,18 +10,13 @@ export interface TableSpinnerProps
     colSpan: number;
 }
 
-export const TableSpinner: FC<TableSpinnerProps> = ({
-    animation = 'border',
-    theme = 'primary',
-    size,
-    colSpan,
-    ...props
-}) => (
-    <tr {...props}>
-        <td className="text-center p-4" colSpan={colSpan}>
-            <Spinner {...{ animation, theme, size }} role="status" aria-label="Loading" />
-        </td>
-    </tr>
+export const TableSpinner = polymorphic<TableSpinnerProps>(
+    ({ as: Root = 'tr', animation = 'border', theme = 'primary', size, colSpan, ...props }) => (
+        <Root {...props}>
+            <td className="text-center p-4" colSpan={colSpan}>
+                <Spinner {...{ animation, theme, size }} role="status" aria-label="Loading" />
+            </td>
+        </Root>
+    )
 );
-
 TableSpinner.displayName = 'TableSpinner';

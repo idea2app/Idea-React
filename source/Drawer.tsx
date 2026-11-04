@@ -3,29 +3,42 @@
 import classNames from 'classnames';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component, ComponentPropsWithRef, createRef, FC, ReactNode } from 'react';
+import { Component, ComponentPropsWithRef, createRef, ElementType, ReactNode } from 'react';
 
 import { CloseButton } from './CloseButton';
 import { Breakpoint } from './Grid';
 import { NativeDialog, NativeDialogProps } from './NativeDialog';
+import { AsProps, polymorphic, PolymorphicClassProps } from './Polymorphic';
 
 export type DrawerPlacement = 'start' | 'end' | 'top' | 'bottom';
 
-export const DrawerHeader: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
-    <div {...props} className={classNames('drawer-header', className)} />
+export const DrawerHeader = polymorphic<ComponentPropsWithRef<'div'>>(
+    ({ as: Root = 'div', className, ...props }) => (
+        <Root {...props} className={classNames('drawer-header', className)} />
+    )
 );
+DrawerHeader.displayName = 'DrawerHeader';
 
-export const DrawerTitle: FC<ComponentPropsWithRef<'h5'>> = ({ className, ...props }) => (
-    <h5 {...props} className={classNames('drawer-title', className)} />
+export const DrawerTitle = polymorphic<ComponentPropsWithRef<'h5'>>(
+    ({ as: Root = 'h5', className, ...props }) => (
+        <Root {...props} className={classNames('drawer-title', className)} />
+    )
 );
+DrawerTitle.displayName = 'DrawerTitle';
 
-export const DrawerBody: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
-    <div {...props} className={classNames('drawer-body', className)} />
+export const DrawerBody = polymorphic<ComponentPropsWithRef<'div'>>(
+    ({ as: Root = 'div', className, ...props }) => (
+        <Root {...props} className={classNames('drawer-body', className)} />
+    )
 );
+DrawerBody.displayName = 'DrawerBody';
 
-export const DrawerFooter: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
-    <div {...props} className={classNames('drawer-footer', className)} />
+export const DrawerFooter = polymorphic<ComponentPropsWithRef<'div'>>(
+    ({ as: Root = 'div', className, ...props }) => (
+        <Root {...props} className={classNames('drawer-footer', className)} />
+    )
 );
+DrawerFooter.displayName = 'DrawerFooter';
 
 export interface DrawerProps extends Omit<
     NativeDialogProps,
@@ -52,12 +65,20 @@ const BREAKPOINT_WIDTHS: Record<Breakpoint, number> = {
 };
 
 @observer
-export class Drawer extends Component<DrawerProps> {
+export class Drawer<T extends ElementType | undefined = 'dialog'> extends Component<
+    PolymorphicClassProps<T, DrawerProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, DrawerProps>;
+
+    protected get componentProps(): Readonly<DrawerProps & AsProps> {
+        return this.props;
+    }
+
     static displayName = 'Drawer';
 
     @observable accessor expanded = false;
 
-    dialog = createRef<NativeDialog>();
+    dialog = createRef<NativeDialog<ElementType>>();
     media?: MediaQueryList;
     dismissed = false;
 
@@ -66,9 +87,9 @@ export class Drawer extends Component<DrawerProps> {
     }
 
     componentDidUpdate({ responsive, open }: DrawerProps) {
-        if (responsive !== this.props.responsive) this.observeBreakpoint();
+        if (responsive !== this.componentProps.responsive) this.observeBreakpoint();
 
-        if (open !== this.props.open && this.props.open) this.dismissed = false;
+        if (open !== this.componentProps.open && this.componentProps.open) this.dismissed = false;
     }
 
     componentWillUnmount() {
@@ -78,7 +99,7 @@ export class Drawer extends Component<DrawerProps> {
     observeBreakpoint = () => {
         this.media?.removeEventListener('change', this.handleBreakpoint);
 
-        const { responsive } = this.props;
+        const { responsive } = this.componentProps;
         this.media = responsive
             ? window.matchMedia(`(min-width: ${BREAKPOINT_WIDTHS[responsive]}px)`)
             : undefined;
@@ -90,20 +111,21 @@ export class Drawer extends Component<DrawerProps> {
     handleBreakpoint = () => (this.expanded = this.media?.matches ?? false);
 
     handleDismiss = () => {
-        this.props.onDismiss?.();
+        this.componentProps.onDismiss?.();
 
         this.dismissed = true;
         this.dialog.current?.close();
     };
 
     handleClose = () => {
-        if (!this.dismissed && !this.expanded) this.props.onDismiss?.();
+        if (!this.dismissed && !this.expanded) this.componentProps.onDismiss?.();
 
         this.dismissed = false;
     };
 
     render() {
         const {
+            as: _as,
             title,
             placement = 'end',
             footer,
@@ -121,10 +143,11 @@ export class Drawer extends Component<DrawerProps> {
             className,
             children,
             ...props
-        } = this.props;
+        } = this.componentProps;
 
         return (
             <NativeDialog
+                as={this.componentProps.as}
                 {...props}
                 ref={this.dialog}
                 open={this.expanded || open}

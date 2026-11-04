@@ -9,7 +9,7 @@ import {
     ComponentPropsWithRef,
     createRef,
     CSSProperties,
-    FC,
+    ElementType,
     isValidElement,
     KeyboardEvent,
     MouseEvent,
@@ -17,6 +17,7 @@ import {
 } from 'react';
 
 import { Icon } from '../Extension/Icon';
+import { polymorphic, PolymorphicClassProps } from '../Polymorphic';
 import { CarouselEnds, CarouselModel } from './model';
 import { CarouselScroll } from './scroll';
 
@@ -25,20 +26,16 @@ export interface CarouselSlideProps extends ComponentPropsWithRef<'div'> {
     active?: boolean;
 }
 
-export const CarouselSlide: FC<CarouselSlideProps> = ({
-    interval,
-    active,
-    className,
-    children,
-    ...props
-}) => (
-    <div
-        {...props}
-        className={classNames('carousel-item', { active }, className)}
-        data-bs-interval={interval}
-    >
-        {children}
-    </div>
+export const CarouselSlide = polymorphic<CarouselSlideProps>(
+    ({ as: Root = 'div', interval, active, className, children, ...props }) => (
+        <Root
+            {...props}
+            className={classNames('carousel-item', { active }, className)}
+            data-bs-interval={interval}
+        >
+            {children}
+        </Root>
+    )
 );
 
 CarouselSlide.displayName = 'CarouselSlide';
@@ -63,7 +60,11 @@ export interface CarouselProps extends Omit<ComponentPropsWithRef<'div'>, 'onCha
 }
 
 @observer
-export class Carousel extends Component<CarouselProps> {
+export class Carousel<T extends ElementType | undefined = 'div'> extends Component<
+    PolymorphicClassProps<T, CarouselProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, CarouselProps>;
+
     static displayName = 'Carousel';
 
     root = createRef<HTMLDivElement>();
@@ -77,7 +78,6 @@ export class Carousel extends Component<CarouselProps> {
     componentDidMount() {
         this.updateStore();
         if (this.props.autoplay) this.store.play();
-
         document.addEventListener('visibilitychange', this.handleVisibilityChange);
         this.track.current?.addEventListener('scroll', this.handleScroll, { passive: true });
     }
@@ -107,7 +107,6 @@ export class Carousel extends Component<CarouselProps> {
 
     private updateStore = () => {
         const slides = this.getSlides();
-
         this.store.onChange = this.props.onChange;
         this.store.onNavigate = this.scrollToActive;
         this.store.update(slides.length, this.props.ends ?? 'loop', this.getSlideInterval);
@@ -149,7 +148,6 @@ export class Carousel extends Component<CarouselProps> {
 
     handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
         this.props.onKeyDown?.(event);
-
         if (event.defaultPrevented || this.scroller.looping) return;
         if (this.props.keyboard === false || event.altKey || event.ctrlKey || event.metaKey) return;
         if (
@@ -307,8 +305,11 @@ export class Carousel extends Component<CarouselProps> {
         );
 
     render() {
+        const Root: ElementType = this.props.as ?? 'div';
+
         const slides = this.getSlides();
         const {
+            as: _as,
             autoplay: _autoplay,
             center,
             children: _children,
@@ -350,7 +351,7 @@ export class Carousel extends Component<CarouselProps> {
         );
 
         return (
-            <div
+            <Root
                 {...props}
                 ref={this.root}
                 className={classNames(
@@ -385,7 +386,7 @@ export class Carousel extends Component<CarouselProps> {
                     (this.props.playPause || this.props.autoplay) &&
                     this.renderPlayPause()}
                 {placement && this.renderIndicators()}
-            </div>
+            </Root>
         );
     }
 }

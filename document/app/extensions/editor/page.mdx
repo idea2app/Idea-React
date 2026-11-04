@@ -1,5 +1,4 @@
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
-
+import { CodeCard } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="editor">
@@ -13,12 +12,12 @@ The editor saves its data into a hidden `<input>`, so it participates in native 
 
 Editor.js only runs in the browser, so render the component on the client:
 
-<CodeBlock language="tsx">{`import { Button, Editor, Form } from 'idea-react';
+<CodeCard>{`import { Button, Editor, Form } from 'idea-react';
 
 <Form method="post">
     <Editor name="content" required defaultValue={savedDocument} tools={customTools} />
     <Button variant="solid" theme="primary">Save</Button>
-</Form>;`}</CodeBlock>
+</Form>;`}</CodeCard>
 
 The wrapper saves on blur and serializes the latest Editor.js `OutputData` as JSON into the hidden
 input named by `name`. All [react-editor-js props][3], such as `tools` and `onInitialize`, pass

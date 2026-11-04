@@ -6,6 +6,7 @@ import { ChangeEvent, Component, createRef } from 'react';
 import { Button } from '../../../../source/Button';
 import { Icon } from '../../../../source/Extension/Icon';
 import { FormControl } from '../../../../source/Form';
+import { MenuItem, MenuItemContent, MenuItemDescription, MenuPanel } from '../../../../source/Menu';
 import { NativeDialog } from '../../../../source/NativeDialog';
 import { DocumentationSearchModel } from './model';
 import styles from './style.module.less';
@@ -77,20 +78,24 @@ export class DocumentationSearch extends Component<DocumentationSearchProps> {
 
         return (
             <>
-                <ul className="list-unstyled my-5" aria-label="Search results">
+                <MenuPanel as="ul" className="list-unstyled my-5" aria-label="Search results">
                     {results.map(({ href, title, description }) => (
                         <li key={href}>
-                            <a
-                                className="menu-item d-grid gap-1 rounded-5 p-4 text-wrap text-decoration-none"
+                            <MenuItem
+                                as="a"
                                 href={href}
+                                variant={false}
+                                className={`d-grid gap-1 rounded-5 p-4 text-wrap text-decoration-none ${styles.resultItem}`}
                                 onClick={this.close}
                             >
-                                <strong>{title}</strong>
-                                <span className="fg-2 text-sm">{description}</span>
-                            </a>
+                                <MenuItemContent as="strong">{title}</MenuItemContent>
+                                <MenuItemDescription className="fg-2 text-sm">
+                                    {description}
+                                </MenuItemDescription>
+                            </MenuItem>
                         </li>
                     ))}
-                </ul>
+                </MenuPanel>
                 {!results.length && <p role="status">No results found.</p>}
             </>
         );

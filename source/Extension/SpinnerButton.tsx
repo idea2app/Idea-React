@@ -1,6 +1,5 @@
-import { FC } from 'react';
-
 import { Button, ButtonProps } from '../Button';
+import { polymorphic } from '../Polymorphic';
 import { Spinner, SpinnerProps } from '../Spinner';
 
 export type SpinnerButtonProps = ButtonProps &
@@ -8,28 +7,24 @@ export type SpinnerButtonProps = ButtonProps &
         loading?: boolean;
     };
 
-export const SpinnerButton: FC<SpinnerButtonProps> = ({
-    animation,
-    loading,
-    disabled,
-    children,
-    ...props
-}) => (
-    <Button {...props} disabled={loading || disabled}>
-        {loading && (
-            <>
-                <Spinner
-                    className={children ? 'me-2' : ''}
-                    size="sm"
-                    animation={animation}
-                    role="status"
-                    aria-hidden="true"
-                />
-                {!children && <span className="visually-hidden">Loading...</span>}
-            </>
-        )}
-        {children}
-    </Button>
+export const SpinnerButton = polymorphic<SpinnerButtonProps>(
+    ({ as: RootAs, animation, loading, disabled, children, ...props }) => (
+        <Button as={RootAs} {...props} disabled={loading || disabled}>
+            {loading && (
+                <>
+                    <Spinner
+                        className={children ? 'me-2' : ''}
+                        size="sm"
+                        animation={animation}
+                        role="status"
+                        aria-hidden="true"
+                    />
+                    {!children && <span className="visually-hidden">Loading...</span>}
+                </>
+            )}
+            {children}
+        </Button>
+    )
 );
 
 SpinnerButton.displayName = 'SpinnerButton';

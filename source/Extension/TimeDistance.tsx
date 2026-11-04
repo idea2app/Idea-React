@@ -1,5 +1,7 @@
-import { FC, HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import { diffTime, TimeData } from 'web-utility';
+
+import { polymorphic } from '../Polymorphic';
 
 export interface TimeDistanceProps extends HTMLAttributes<HTMLTimeElement> {
     date: TimeData;
@@ -19,23 +21,25 @@ const UnitWords: Record<string, string> = {
     Y: 'year(s)'
 };
 
-export const TimeDistance: FC<TimeDistanceProps> = ({
-    date,
-    unitWords = UnitWords,
-    beforeWord = ' before',
-    afterWord = ' after',
-    ...props
-}) => {
-    date = new Date(date);
+export const TimeDistance = polymorphic<TimeDistanceProps>(
+    ({
+        as: Root = 'time',
+        date,
+        unitWords = UnitWords,
+        beforeWord = ' before',
+        afterWord = ' after',
+        ...props
+    }) => {
+        date = new Date(date);
 
-    const { distance, unit } = diffTime(date);
+        const { distance, unit } = diffTime(date);
 
-    return (
-        <time {...props} dateTime={date.toJSON()} title={date.toLocaleString()}>
-            {Math.abs(distance)} {unitWords[unit]}
-            {distance < 0 ? beforeWord : afterWord}
-        </time>
-    );
-};
-
+        return (
+            <Root {...props} dateTime={date.toJSON()} title={date.toLocaleString()}>
+                {Math.abs(distance)} {unitWords[unit]}
+                {distance < 0 ? beforeWord : afterWord}
+            </Root>
+        );
+    }
+);
 TimeDistance.displayName = 'TimeDistance';

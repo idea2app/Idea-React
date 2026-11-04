@@ -1,7 +1,6 @@
 import { ZodiacBar } from '../../../../source/Extension/ZodiacBar';
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
 
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { CodeCard, CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="zodiac-bar">
@@ -19,14 +18,16 @@ optional link and title per year.
 
 ## Usage
 
-<CodeBlock language="tsx">{`<ZodiacBar
-    startYear={2008}
-    endYear={2026}
-    itemOf={(year, zodiac) => ({
-        title: \`\${year} \${zodiac}\`,
-        link: \`/events/\${year}\`
-    })}
-/>`}</CodeBlock>
+<CodeCard>
+    <ZodiacBar
+        startYear={2008}
+        endYear={2026}
+        itemOf={(year, zodiac) => ({
+            title: `${year} ${zodiac}`,
+            link: `/events/${year}`
+        })}
+    />
+</CodeCard>
 
 `endYear` defaults to the current year. `itemOf` customizes each item's `title` and `link`, and
 `itemClassName` restyles the year cards. The exported `zodiacOf(year)` helper returns the zodiac

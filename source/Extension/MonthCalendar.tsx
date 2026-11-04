@@ -4,12 +4,13 @@ import classNames from 'classnames';
 import { action, computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
-import { HTMLAttributes, MouseEvent, ReactNode } from 'react';
+import { ElementType, HTMLAttributes, MouseEvent, ReactNode } from 'react';
 import { changeMonth, Day, formatDate, splitArray, TimeData } from 'web-utility';
 
 import { Badge } from '../Badge';
 import { Button, type ComponentTheme } from '../Button';
 import { text2color } from '../color';
+import { AsProps, PolymorphicClassProps } from '../Polymorphic';
 import { OverlayBox } from './OverlayBox';
 
 export interface DateData {
@@ -33,12 +34,24 @@ export interface MonthCalendarProps extends Omit<
  * Re-implement from https://github.com/EasyWebApp/BootCell/blob/3d30027a97fe0a8c4ab8fabc8dfef22aede04de7/source/Calendar/MonthCalendar.tsx
  */
 @observer
-export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
+export class MonthCalendar<T extends ElementType | undefined = 'table'> extends ObservedComponent<
+    PolymorphicClassProps<T, MonthCalendarProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, MonthCalendarProps>;
+
+    protected get componentProps(): Readonly<MonthCalendarProps & AsProps> {
+        return this.props;
+    }
+
+    protected get observedComponentProps(): MonthCalendarProps & AsProps {
+        return this.observedProps;
+    }
+
     static displayName = 'MonthCalendar';
 
     @computed
     get weekFormatter() {
-        const { locale = globalThis.navigator?.language } = this.observedProps;
+        const { locale = globalThis.navigator?.language } = this.observedComponentProps;
 
         return new Intl.DateTimeFormat(locale, { weekday: 'long' });
     }
@@ -63,7 +76,7 @@ export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
     changeMonth(delta: number) {
         this.currentDate = changeMonth(this.currentDate, delta);
 
-        this.props.onChange?.(this.currentDate);
+        this.componentProps.onChange?.(this.currentDate);
     }
 
     changePreviousMonth = () => this.changeMonth(-1);
@@ -77,16 +90,16 @@ export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
 
         const date = targetItem.dataset.calendarDate;
         const index = Number(targetItem.dataset.calendarIndex);
-        const items = this.props.value?.filter(
+        const items = this.componentProps.value?.filter(
             ({ date: itemDate }) => formatDate(itemDate, 'YYYY-MM-DD') === date
         );
         const item = items?.[index];
 
-        if (item) this.props.onSelect?.(item);
+        if (item) this.componentProps.onSelect?.(item);
     };
 
     renderDate = (date: Date) => {
-        const { value } = this.observedProps,
+        const { value } = this.observedComponentProps,
             dateText = formatDate(date, 'YYYY-MM-DD');
         const list = value?.filter(({ date }) => formatDate(date, 'YYYY-MM-DD') === dateText);
 
@@ -125,18 +138,21 @@ export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
     };
 
     render() {
+        const Root: ElementType = this.componentProps.as ?? 'table';
+
         const { weekFormatter, currentDate, dateGrid } = this,
             {
+                as: _as,
                 className = '',
                 style,
                 theme = 'primary',
                 onChange: _onChange,
                 onSelect: _onSelect,
                 ...props
-            } = this.observedProps;
+            } = this.observedComponentProps;
 
         return (
-            <table
+            <Root
                 {...props}
                 className={`table ${className}`}
                 style={{ tableLayout: 'fixed', ...style }}
@@ -173,7 +189,7 @@ export class MonthCalendar extends ObservedComponent<MonthCalendarProps> {
                         <tr key={days[0] + ''}>{days.map(this.renderDate)}</tr>
                     ))}
                 </tbody>
-            </table>
+            </Root>
         );
     }
 }

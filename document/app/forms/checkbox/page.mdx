@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import {
     Checkbox,
     FormField,
@@ -140,7 +141,7 @@ Modify the appearance of checked checkboxes with the `theme` prop. This will set
 Add the `disabled` attribute and the associated `<label>`s are automatically styled to match with a lighter color to help indicate the input’s state.
 
 <CodeExample>
-    <div className="vstack gap-2">
+    <Stack gap={2}>
         <FormField>
             <Checkbox id="checkDisabled" disabled />
             <FormLabel htmlFor="checkDisabled" plain>
@@ -153,7 +154,7 @@ Add the `disabled` attribute and the associated `<label>`s are automatically sty
                 Example new checkbox
             </FormLabel>
         </FormField>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Sizes

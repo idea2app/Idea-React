@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import { FormField, FormLabel, FormRange, FormText } from '../../../../source/Form';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
@@ -24,7 +25,7 @@ The `.form-range` wrapper owns the component’s tokens, so the input and any de
 Modify the appearance of the range by adding the `theme` prop to the `.form-range` wrapper. This will set the track fill and thumb color to the theme color.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <FormRange aria-label="Example primary range" theme="primary" />
         <FormRange aria-label="Example accent range" theme="accent" />
         <FormRange aria-label="Example secondary range" theme="secondary" />
@@ -35,7 +36,7 @@ Modify the appearance of the range by adding the `theme` prop to the `.form-rang
         <FormRange aria-label="Example dark range" theme="dark" />
         <FormRange aria-label="Example light range" theme="light" />
         <FormRange aria-label="Example inverse range" theme="inverse" />
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Disabled

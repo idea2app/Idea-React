@@ -1,4 +1,6 @@
-import { FC, HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
+
+import { polymorphic } from '../Polymorphic';
 
 export const ZodiacSigns = ['🐵', '🐔', '🐶', '🐷', '🐭', '🐮', '🐯', '🐰', '🐲', '🐍', '🐴', '🐐'];
 
@@ -16,36 +18,42 @@ export interface ZodiacBarProps extends HTMLAttributes<HTMLOListElement> {
     itemOf?: (year: number, zodiac: string) => { link?: string; title?: ReactNode };
 }
 
-export const ZodiacBar: FC<ZodiacBarProps> = ({
-    className = '',
-    itemClassName = 'border rounded px-4 py-3 d-flex flex-column justify-content-center align-items-center',
-    startYear,
-    endYear = new Date().getFullYear(),
-    itemOf,
-    ...props
-}) => (
-    <ol
-        className={`list-unstyled m-0 d-flex flex-wrap justify-content-center gap-3 ${className}`}
-        {...props}
-    >
-        {Array.from({ length: endYear - startYear + 1 }, (_, index) => {
-            const year = endYear - index;
+export const ZodiacBar = polymorphic<ZodiacBarProps>(
+    ({
+        as: Root = 'ol',
+        className = '',
+        itemClassName = 'border rounded px-4 py-3 d-flex flex-column justify-content-center align-items-center',
+        startYear,
+        endYear = new Date().getFullYear(),
+        itemOf,
+        ...props
+    }) => (
+        <Root
+            className={`list-unstyled m-0 d-flex flex-wrap justify-content-center gap-3 ${className}`}
+            {...props}
+        >
+            {Array.from({ length: endYear - startYear + 1 }, (_, index) => {
+                const year = endYear - index;
 
-            if (year === 0) return null;
+                if (year === 0) return null;
 
-            const zodiac = zodiacOf(year);
-            const { link = '#', title } = itemOf?.(year, zodiac) || {};
+                const zodiac = zodiacOf(year);
+                const { link = '#', title } = itemOf?.(year, zodiac) || {};
 
-            return (
-                <li key={year} className={itemClassName}>
-                    <a className="d-inline-block p-3 text-decoration-none text-center" href={link}>
-                        <div className="fs-3xl">{zodiac}</div>
+                return (
+                    <li key={year} className={itemClassName}>
+                        <a
+                            className="d-inline-block p-3 text-decoration-none text-center"
+                            href={link}
+                        >
+                            <div className="fs-3xl">{zodiac}</div>
 
-                        {title}
-                    </a>
-                </li>
-            );
-        })}
-    </ol>
+                            {title}
+                        </a>
+                    </li>
+                );
+            })}
+        </Root>
+    )
 );
 ZodiacBar.displayName = 'ZodiacBar';

@@ -1,0 +1,75 @@
+import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+
+<ComponentsLayout active="install">
+
+# Install
+
+Install Idea React from an NPM ecosystem package manager and load Bootstrap's CSS from either
+[jsDelivr][1] or [unpkg][3].
+
+## Install
+
+Add Idea React and its React and MobX peer dependencies to your project:
+
+```sh
+npm install idea-react@next react react-dom mobx mobx-react
+```
+
+Equivalent commands are available for other NPM ecosystem package managers:
+
+```sh
+pnpm add idea-react@next react react-dom mobx mobx-react
+yarn add idea-react@next react react-dom mobx mobx-react
+bun add idea-react@next react react-dom mobx mobx-react
+```
+
+The current prerelease is published on the `next` dist-tag. After a stable release, install
+`idea-react` without `@next`. React and React DOM render the components; MobX and MobX React are
+required by stateful components. `CodeBlock` and `LiveTSX` also require the
+`react-element-to-jsx-string` peer dependency.
+
+Import components from the package's public entry point:
+
+```tsx
+import { FC } from 'react';
+import { Button } from 'idea-react';
+
+export const SaveButton: FC = () => (
+    <Button type="button" variant="solid" theme="primary">
+        Save
+    </Button>
+);
+```
+
+## CDN
+
+Use the version-pinned Bootstrap stylesheet from either supported CDN provider. Bootstrap's CSS
+provides the design tokens and styles used by Idea React; the component package's stylesheet adds
+its own component styles. Bootstrap's JavaScript bundle is not required.
+
+| Provider      | Stylesheet               |
+| ------------- | ------------------------ |
+| [jsDelivr][1] | [`bootstrap.min.css`][2] |
+| [unpkg][3]    | [`bootstrap.min.css`][4] |
+
+Add Bootstrap, Bootstrap Icons, and Idea React styles to the document `<head>`:
+
+```html
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+/>
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1.13.2/font/bootstrap-icons.css" />
+<link rel="stylesheet" href="https://unpkg.com/idea-react@next/dist/index.css" />
+```
+
+Keep the Bootstrap CSS version aligned with the version supported by Idea React. If you choose
+jsDelivr instead, use the same Bootstrap version and change the stylesheet URL to the jsDelivr
+entry in the table.
+
+</ComponentsLayout>
+
+[1]: https://www.jsdelivr.com/
+[2]: https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css
+[3]: https://unpkg.com/
+[4]: https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css

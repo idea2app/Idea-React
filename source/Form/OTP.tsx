@@ -4,6 +4,7 @@ import type OtpInput from 'bootstrap/js/src/otp-input.js';
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, forwardRef, Ref } from 'react';
 
+import { AsProps, polymorphic } from '../Polymorphic';
 import { FormPlugin } from './Plugin';
 import { FormValidationProps } from './Primitives';
 
@@ -21,8 +22,8 @@ export type OTPInputProps = Omit<ComponentPropsWithoutRef<'input'>, 'type' | 'ma
         onValueChange?: (value: string) => unknown;
     };
 
-interface OTPInputComponentProps extends OTPInputProps {
-    forwardedRef?: Ref<HTMLInputElement>;
+interface OTPInputComponentProps extends OTPInputProps, AsProps {
+    forwardedRef?: Ref<HTMLElement>;
 }
 
 class OTPInputComponent extends FormPlugin<OTPInputComponentProps, OtpInput> {
@@ -76,8 +77,22 @@ class OTPInputComponent extends FormPlugin<OTPInputComponentProps, OtpInput> {
     private handleValueChange = (event: Event) =>
         this.props.onValueChange?.((event as Event & { value: string }).value);
 
+    private forwardRef = (element: HTMLElement | null) => {
+        const { forwardedRef } = this.props;
+
+        if (typeof forwardedRef === 'function') forwardedRef(element);
+        else if (forwardedRef) forwardedRef.current = element;
+    };
+
+    private setRootRef = (element: HTMLDivElement | null) => {
+        this.element.current = element;
+
+        if (this.props.as) this.forwardRef(element);
+    };
+
     render() {
         const {
+            as: Root = 'div',
             className,
             wrapperClassName,
             length,
@@ -90,14 +105,15 @@ class OTPInputComponent extends FormPlugin<OTPInputComponentProps, OtpInput> {
             validation,
             onComplete: _onComplete,
             onValueChange: _onValueChange,
-            forwardedRef,
+            forwardedRef: _forwardedRef,
             autoComplete = 'one-time-code',
             ...props
         } = this.props;
 
         return (
-            <div
-                ref={this.element}
+            <Root
+                {...(this.props.as ? props : {})}
+                ref={this.setRootRef}
                 className={classNames(
                     'otp min-w-0 max-w-100',
                     connected && 'otp-connected',
@@ -113,8 +129,9 @@ class OTPInputComponent extends FormPlugin<OTPInputComponentProps, OtpInput> {
                 data-bs-separator={separator}
             >
                 <input
-                    {...props}
-                    ref={forwardedRef}
+                    {...(this.props.as ? {} : props)}
+                    ref={this.props.as ? undefined : this.forwardRef}
+                    name={props.name}
                     type="text"
                     maxLength={length}
                     autoComplete={autoComplete}
@@ -129,13 +146,14 @@ class OTPInputComponent extends FormPlugin<OTPInputComponentProps, OtpInput> {
                     }
                     className={classNames('otp-input', className)}
                 />
-            </div>
+            </Root>
         );
     }
 }
 
-export const OTPInput = forwardRef<HTMLInputElement, OTPInputProps>((props, forwardedRef) => (
-    <OTPInputComponent {...props} forwardedRef={forwardedRef} />
-));
-
+export const OTPInput = polymorphic<OTPInputProps & { ref?: Ref<HTMLInputElement> }>(
+    forwardRef<HTMLInputElement, OTPInputProps & AsProps>((props, forwardedRef) => (
+        <OTPInputComponent {...props} forwardedRef={forwardedRef} />
+    ))
+);
 OTPInput.displayName = 'OTPInput';

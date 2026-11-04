@@ -1,5 +1,6 @@
-import { FC, HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 
+import { polymorphic } from '../../Polymorphic';
 import { TextTruncateContent } from './Content';
 
 export interface TextTruncateProps extends HTMLAttributes<HTMLDivElement> {
@@ -8,18 +9,21 @@ export interface TextTruncateProps extends HTMLAttributes<HTMLDivElement> {
     collapseText?: ReactNode;
 }
 
-export const TextTruncate: FC<TextTruncateProps> = ({
-    rows = 3,
-    expandText = '⏬',
-    collapseText = '⏫',
-    children,
-    ...props
-}) => (
-    <div {...props}>
-        <TextTruncateContent rows={rows} expandText={expandText} collapseText={collapseText}>
-            {children}
-        </TextTruncateContent>
-    </div>
+export const TextTruncate = polymorphic<TextTruncateProps>(
+    ({
+        as: Root = 'div',
+        rows = 3,
+        expandText = '⏬',
+        collapseText = '⏫',
+        children,
+        ...props
+    }) => (
+        <Root {...props}>
+            <TextTruncateContent rows={rows} expandText={expandText} collapseText={collapseText}>
+                {children}
+            </TextTruncateContent>
+        </Root>
+    )
 );
 
 TextTruncate.displayName = 'TextTruncate';

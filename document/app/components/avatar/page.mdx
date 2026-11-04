@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import { Avatar, AvatarImage, AvatarStack } from '../../../../source/Avatar';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
@@ -185,7 +186,7 @@ Use `AvatarStack` to group multiple avatars together with overlapping effect. Av
 As a shorthand, `size` props are available for `AvatarStack` and `Avatar`.
 
 <CodeExample>
-    <div className="vstack align-items-start gap-3">
+    <Stack gap={3} className="align-items-start">
         <AvatarStack size="xs">
             <Avatar src="https://github.com/mdo.png" alt="mdo" />
             <Avatar src="https://github.com/mdo.png" alt="mdo" />
@@ -211,7 +212,7 @@ As a shorthand, `size` props are available for `AvatarStack` and `Avatar`.
             <Avatar src="https://github.com/mdo.png" alt="mdo" />
             <Avatar src="https://github.com/mdo.png" alt="mdo" />
         </AvatarStack>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Stack with count

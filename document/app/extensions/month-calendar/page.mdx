@@ -1,7 +1,6 @@
 import { MonthCalendar } from '../../../../source/Extension/MonthCalendar';
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
 
-import { LiveExample } from '../../../component/Documentation/Components/Example';
+import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="month-calendar">
@@ -28,13 +27,15 @@ month controls, localized weekday names, and selectable date entries.
 date are grouped in a popover. `onSelect` receives the clicked entry and `onChange` fires when the
 visible month changes.
 
-<CodeBlock language="tsx">{`<MonthCalendar
-    locale="zh-CN"
-    theme="success"
-    value={events}
-    onSelect={({ date, content, link }) => open(link)}
-    onChange={date => loadMonth(date)}
-/>`}</CodeBlock>
+<CodeCard>
+    <MonthCalendar
+        locale="zh-CN"
+        theme="success"
+        value={[{ date: new Date('2026-10-01'), content: 'Event' }]}
+        onSelect={({ link }) => open(link)}
+        onChange={date => loadMonth(date)}
+    />
+</CodeCard>
 
 `locale` controls weekday formatting and defaults to the browser language; `theme` styles the header
 and controls.

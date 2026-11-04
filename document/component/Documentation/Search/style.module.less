@@ -3,3 +3,14 @@
     margin-top: 12vh;
     max-height: 80vh;
 }
+
+.resultItem {
+    &:hover {
+        background-color: color-mix(in srgb, var(--bs-primary-base) 12%, transparent);
+    }
+
+    &:focus-visible {
+        outline: var(--bs-focus-ring-width) solid var(--bs-focus-ring-color);
+        outline-offset: var(--bs-focus-ring-offset);
+    }
+}

@@ -1,8 +1,9 @@
 import classNames from 'classnames';
-import { ComponentPropsWithRef, FC } from 'react';
+import { ComponentPropsWithRef } from 'react';
 
 import { ComponentTheme } from './Button';
 import { Breakpoint } from './Grid';
+import { polymorphic } from './Polymorphic';
 
 export interface StepperProps extends ComponentPropsWithRef<'ol'> {
     horizontal?: boolean | Breakpoint;
@@ -17,17 +18,23 @@ const stepperClasses = (horizontal: StepperProps['horizontal'], className?: stri
         className
     );
 
-export const Stepper: FC<StepperProps> = ({ horizontal, className, ...props }) => (
-    <ol {...props} className={stepperClasses(horizontal, className)} />
+export const Stepper = polymorphic<StepperProps>(
+    ({ as: Root = 'ol', horizontal, className, ...props }) => (
+        <Root {...props} className={stepperClasses(horizontal, className)} />
+    )
 );
+Stepper.displayName = 'Stepper';
 
 export interface StepperNavProps extends ComponentPropsWithRef<'nav'> {
     horizontal?: StepperProps['horizontal'];
 }
 
-export const StepperNav: FC<StepperNavProps> = ({ horizontal, className, ...props }) => (
-    <nav {...props} className={stepperClasses(horizontal, className)} />
+export const StepperNav = polymorphic<StepperNavProps>(
+    ({ as: Root = 'nav', horizontal, className, ...props }) => (
+        <Root {...props} className={stepperClasses(horizontal, className)} />
+    )
 );
+StepperNav.displayName = 'StepperNav';
 
 interface StepStyle {
     active?: boolean;
@@ -36,50 +43,49 @@ interface StepStyle {
 
 export type StepperItemProps = ComponentPropsWithRef<'li'> & StepStyle;
 
-export const StepperItem: FC<StepperItemProps> = ({ active, theme, className, ...props }) => (
-    <li
-        {...props}
-        className={classNames('stepper-item', { active }, theme && `theme-${theme}`, className)}
-    />
+export const StepperItem = polymorphic<StepperItemProps>(
+    ({ as: Root = 'li', active, theme, className, ...props }) => (
+        <Root
+            {...props}
+            className={classNames('stepper-item', { active }, theme && `theme-${theme}`, className)}
+        />
+    )
 );
+StepperItem.displayName = 'StepperItem';
 
 export type StepperLinkProps = ComponentPropsWithRef<'a'> & StepStyle;
 
-export const StepperLink: FC<StepperLinkProps> = ({ active, theme, className, ...props }) => (
-    <a
-        {...props}
-        className={classNames('stepper-item', { active }, theme && `theme-${theme}`, className)}
-    />
+export const StepperLink = polymorphic<StepperLinkProps>(
+    ({ as: Root = 'a', active, theme, className, ...props }) => (
+        <Root
+            {...props}
+            className={classNames('stepper-item', { active }, theme && `theme-${theme}`, className)}
+        />
+    )
 );
+StepperLink.displayName = 'StepperLink';
 
 export type StepperButtonProps = ComponentPropsWithRef<'button'> & StepStyle;
 
-export const StepperButton: FC<StepperButtonProps> = ({
-    active,
-    theme,
-    className,
-    type = 'button',
-    ...props
-}) => (
-    <button
-        {...props}
-        type={type}
-        className={classNames(
-            'stepper-item p-0 border-0 bg-transparent',
-            { active },
-            theme && `theme-${theme}`,
-            className
-        )}
-    />
+export const StepperButton = polymorphic<StepperButtonProps>(
+    ({ as: Root = 'button', active, theme, className, type = 'button', ...props }) => (
+        <Root
+            {...props}
+            type={type}
+            className={classNames(
+                'stepper-item p-0 border-0 bg-transparent',
+                { active },
+                theme && `theme-${theme}`,
+                className
+            )}
+        />
+    )
 );
-
-export const StepperOverflow: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
-    <div {...props} className={classNames('stepper-overflow', className)} />
-);
-
-Stepper.displayName = 'Stepper';
-StepperNav.displayName = 'StepperNav';
-StepperItem.displayName = 'StepperItem';
-StepperLink.displayName = 'StepperLink';
 StepperButton.displayName = 'StepperButton';
+
+export const StepperOverflow = polymorphic<ComponentPropsWithRef<'div'>>(
+    ({ as: Root = 'div', className, ...props }) => (
+        <Root {...props} className={classNames('stepper-overflow', className)} />
+    )
+);
 StepperOverflow.displayName = 'StepperOverflow';

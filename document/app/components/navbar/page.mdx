@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import { Button } from '../../../../source/Button';
 import { Form, FormControl, InputGroup, InputGroupText } from '../../../../source/Form';
 import { Container } from '../../../../source/Grid';
@@ -64,13 +65,13 @@ Here’s a navbar that includes most supported sub-components and a responsive r
             </NavItem>
         </NavbarNav>
 
-        <Form role="search" className="hstack gap-2">
+        <Stack as={Form} role="search" direction="horizontal" gap={2}>
             <FormControl type="search" placeholder="Search" aria-label="Search" />
 
             <Button variant="solid" icon theme="secondary" type="submit">
                 <Icon name="search" aria-hidden />
             </Button>
-        </Form>
+        </Stack>
     </NavbarDemo>
 
 </CodeExample>
@@ -447,13 +448,13 @@ To make a navbar dark, set `theme="dark"` on `Navbar`.
             </NavItem>
         </NavbarNav>
 
-        <Form role="search" className="hstack gap-2">
+        <Stack as={Form} role="search" direction="horizontal" gap={2}>
             <FormControl type="search" placeholder="Search" aria-label="Search" />
 
             <Button variant="solid" icon theme="secondary" type="submit">
                 <Icon name="search" aria-hidden />
             </Button>
-        </Form>
+        </Stack>
     </NavbarDemo>
 
 </CodeExample>

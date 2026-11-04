@@ -10,7 +10,7 @@ import {
     Component,
     ComponentPropsWithRef,
     createRef,
-    FC,
+    ElementType,
     isValidElement,
     MouseEvent,
     ReactElement,
@@ -19,6 +19,7 @@ import {
 
 import { Icon } from '../Extension/Icon';
 import { Menu, MenuHeader, MenuItemContent, MenuItemDescription } from '../Menu';
+import { AsProps, polymorphic, PolymorphicClassProps } from '../Polymorphic';
 import { FormValidationProps } from './Primitives';
 
 export interface ComboboxOptionProps extends ComponentPropsWithRef<'button'> {
@@ -29,53 +30,56 @@ export interface ComboboxOptionProps extends ComponentPropsWithRef<'button'> {
     searchText?: string;
 }
 
-export const ComboboxOption: FC<ComboboxOptionProps> = ({
-    className,
-    value,
-    children,
-    description,
-    icon,
-    checkedIcon,
-    searchText,
-    ...props
-}) => (
-    <button
-        {...props}
-        type="button"
-        role="option"
-        aria-selected={props['aria-selected'] ?? false}
-        className={classNames('menu-item', className)}
-        data-bs-value={value}
-        data-search-text={searchText}
-        data-label={optionText(children)}
-        data-option-hidden={props.hidden || undefined}
-    >
-        {icon && <Icon name={icon} className="menu-item-icon" aria-hidden="true" />}
-        {description ? (
-            <MenuItemContent>
-                {children}
-                <MenuItemDescription>{description}</MenuItemDescription>
-            </MenuItemContent>
-        ) : (
-            children
-        )}
-        {checkedIcon && <Icon name="check-lg" className="menu-item-check" aria-hidden="true" />}
-    </button>
+export const ComboboxOption = polymorphic<ComboboxOptionProps>(
+    ({
+        as: Root = 'button',
+        className,
+        value,
+        children,
+        description,
+        icon,
+        checkedIcon,
+        searchText,
+        ...props
+    }) => (
+        <Root
+            {...props}
+            type="button"
+            role="option"
+            aria-selected={props['aria-selected'] ?? false}
+            className={classNames('menu-item', className)}
+            data-bs-value={value}
+            data-search-text={searchText}
+            data-label={optionText(children)}
+            data-option-hidden={props.hidden || undefined}
+        >
+            {icon && <Icon name={icon} className="menu-item-icon" aria-hidden="true" />}
+            {description ? (
+                <MenuItemContent>
+                    {children}
+                    <MenuItemDescription>{description}</MenuItemDescription>
+                </MenuItemContent>
+            ) : (
+                children
+            )}
+            {checkedIcon && <Icon name="check-lg" className="menu-item-check" aria-hidden="true" />}
+        </Root>
+    )
 );
-
 ComboboxOption.displayName = 'ComboboxOption';
 
 export interface ComboboxGroupProps extends ComponentPropsWithRef<'div'> {
     label: ReactNode;
 }
 
-export const ComboboxGroup: FC<ComboboxGroupProps> = ({ label, children, ...props }) => (
-    <div {...props} role="group" aria-label={typeof label === 'string' ? label : undefined}>
-        <MenuHeader>{label}</MenuHeader>
-        {children}
-    </div>
+export const ComboboxGroup = polymorphic<ComboboxGroupProps>(
+    ({ as: Root = 'div', label, children, ...props }) => (
+        <Root {...props} role="group" aria-label={typeof label === 'string' ? label : undefined}>
+            <MenuHeader>{label}</MenuHeader>
+            {children}
+        </Root>
+    )
 );
-
 ComboboxGroup.displayName = 'ComboboxGroup';
 
 export interface ComboboxProps
@@ -114,11 +118,20 @@ const collectOptions = (children: ReactNode): ReactElement<ComboboxOptionProps>[
     );
 
 @observer
-export class Combobox extends Component<ComboboxProps> {
+export class Combobox<T extends ElementType | undefined = 'div'> extends Component<
+    PolymorphicClassProps<T, ComboboxProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, ComboboxProps>;
+
+    protected get componentProps(): Readonly<ComboboxProps & AsProps> {
+        return this.props;
+    }
+
     static displayName = 'Combobox';
 
     @observable accessor query = '';
-    @observable accessor current = this.props.defaultValue ?? (this.props.multiple ? [] : '');
+    @observable accessor current =
+        this.componentProps.defaultValue ?? (this.componentProps.multiple ? [] : '');
     @observable accessor visibleOptionCount = 0;
     @observable accessor selectedLabel = '';
 
@@ -126,7 +139,7 @@ export class Combobox extends Component<ComboboxProps> {
     private optionObserver?: MutationObserver;
 
     get values() {
-        const value = this.props.value ?? this.current;
+        const value = this.componentProps.value ?? this.current;
 
         return Array.isArray(value) ? value : value ? [value] : [];
     }
@@ -186,15 +199,15 @@ export class Combobox extends Component<ComboboxProps> {
         }
         this.visibleOptionCount = visible;
         this.selectedLabel =
-            this.props.multiple && selected.length > 1
+            this.componentProps.multiple && selected.length > 1
                 ? `${selected.length} selected`
                 : (selected[0] ?? '');
 
         panel?.setAttribute('role', 'listbox');
-        panel?.setAttribute('aria-multiselectable', String(Boolean(this.props.multiple)));
+        panel?.setAttribute('aria-multiselectable', String(Boolean(this.componentProps.multiple)));
         panel?.setAttribute(
             'aria-label',
-            this.props['aria-label'] ?? this.props.placeholder ?? 'Options'
+            this.componentProps['aria-label'] ?? this.componentProps.placeholder ?? 'Options'
         );
         this.menu.current?.trigger.current?.setAttribute('aria-haspopup', 'listbox');
     };
@@ -207,29 +220,32 @@ export class Combobox extends Component<ComboboxProps> {
         (this.query = value);
 
     private handleClick = (event: MouseEvent<HTMLDivElement>) => {
-        this.props.onClick?.(event);
+        this.componentProps.onClick?.(event);
 
         const { target, defaultPrevented } = event;
-        if (defaultPrevented || this.props.disabled || !(target instanceof Element)) return;
+        if (defaultPrevented || this.componentProps.disabled || !(target instanceof Element))
+            return;
 
         const option = target.closest<HTMLButtonElement>('[data-bs-value]');
         if (!option || option.disabled || option.getAttribute('aria-disabled') === 'true') return;
 
         const next = option.dataset.bsValue ?? '';
-        const value = this.props.multiple
+        const value = this.componentProps.multiple
             ? this.values.includes(next)
                 ? this.values.filter(item => item !== next)
                 : [...this.values, next]
             : next;
-        this.props.onChange?.(value);
+        this.componentProps.onChange?.(value);
 
-        if (this.props.value === undefined) this.setCurrent(value);
+        if (this.componentProps.value === undefined) this.setCurrent(value);
     };
 
     private normalize = (value: string) => {
         const text = value.toLocaleLowerCase();
 
-        return this.props.searchNormalize ? text.normalize('NFD').replace(/\p{M}/gu, '') : text;
+        return this.componentProps.searchNormalize
+            ? text.normalize('NFD').replace(/\p{M}/gu, '')
+            : text;
     };
 
     private matches = (option: ReactElement<ComboboxOptionProps>) =>
@@ -263,14 +279,17 @@ export class Combobox extends Component<ComboboxProps> {
         <input
             key={value}
             type="hidden"
-            name={this.props.name}
+            name={this.componentProps.name}
             value={value}
-            disabled={this.props.disabled}
+            disabled={this.componentProps.disabled}
         />
     );
 
     render() {
+        const Root: ElementType = this.componentProps.as ?? 'div';
+
         const {
+            as: _as,
             className,
             id,
             name: _name,
@@ -290,7 +309,7 @@ export class Combobox extends Component<ComboboxProps> {
             noResultsText = 'No results found',
             validation,
             ...props
-        } = this.props;
+        } = this.componentProps;
         const options = collectOptions(children);
         const selected = options.filter(option => this.values.includes(option.props.value));
         const hasSelection = selected.length > 0 || Boolean(this.selectedLabel);
@@ -301,7 +320,7 @@ export class Combobox extends Component<ComboboxProps> {
         const noResults = this.visibleOptionCount === 0;
 
         return (
-            <div {...props} className={classNames('combobox', className)}>
+            <Root {...props} className={classNames('combobox', className)}>
                 <Menu
                     ref={this.menu}
                     className="w-100"
@@ -333,12 +352,12 @@ export class Combobox extends Component<ComboboxProps> {
                         variant: false,
                         disabled,
                         'aria-haspopup': 'listbox',
-                        'aria-label': this.props['aria-label'] ?? placeholder,
-                        'aria-labelledby': this.props['aria-labelledby'],
-                        'aria-describedby': this.props['aria-describedby'],
+                        'aria-label': this.componentProps['aria-label'] ?? placeholder,
+                        'aria-labelledby': this.componentProps['aria-labelledby'],
+                        'aria-describedby': this.componentProps['aria-describedby'],
                         'aria-invalid': validation
                             ? validation === 'invalid'
-                            : this.props['aria-invalid']
+                            : this.componentProps['aria-invalid']
                     }}
                     autoClose={!multiple}
                     menuClassName={classNames(menuClassName, 'combobox-menu')}
@@ -368,7 +387,7 @@ export class Combobox extends Component<ComboboxProps> {
                 {this.values.length || multiple
                     ? this.values.map(this.renderHiddenInput)
                     : this.renderHiddenInput('')}
-            </div>
+            </Root>
         );
     }
 }

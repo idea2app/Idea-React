@@ -3,8 +3,10 @@
 import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent, reaction } from 'mobx-react-helper';
-import { HTMLAttributes } from 'react';
+import { ElementType, HTMLAttributes } from 'react';
 import { Second, TimeData } from 'web-utility';
+
+import { AsProps, PolymorphicClassProps } from '../Polymorphic';
 
 export interface TimeUnit {
     scale: number;
@@ -27,7 +29,15 @@ export interface CountdownProps extends HTMLAttributes<HTMLOListElement> {
  * Migrate from https://bootstrap.web-cell.dev/#Calendar/CountDown
  */
 @observer
-export class Countdown extends ObservedComponent<CountdownProps> {
+export class Countdown<T extends ElementType | undefined = 'ol'> extends ObservedComponent<
+    PolymorphicClassProps<T, CountdownProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, CountdownProps>;
+
+    protected get componentProps(): CountdownProps & AsProps {
+        return this.observedProps;
+    }
+
     static displayName = 'Countdown';
 
     @observable
@@ -36,12 +46,12 @@ export class Countdown extends ObservedComponent<CountdownProps> {
     private timer = 0;
 
     get endTimestamp() {
-        return +new Date(this.props.endTime || Date.now());
+        return +new Date(this.componentProps.endTime || Date.now());
     }
 
     @computed
     get timeSections(): TimeSection[] {
-        const { units } = this.observedProps;
+        const { units } = this.componentProps;
         let { rest } = this;
 
         return units.reduce((list, { label }, index) => {
@@ -59,7 +69,7 @@ export class Countdown extends ObservedComponent<CountdownProps> {
     }
 
     tick = () => {
-        const { onEnd, endTime } = this.props,
+        const { onEnd, endTime } = this.componentProps,
             rest = this.endTimestamp - Date.now();
 
         if (rest > 0) {
@@ -83,7 +93,7 @@ export class Countdown extends ObservedComponent<CountdownProps> {
         this.initTimer();
     }
 
-    @reaction(_this => _this.observedProps.endTime)
+    @reaction(_this => _this.componentProps.endTime)
     initTimer() {
         this.stop();
         this.tick();
@@ -97,24 +107,26 @@ export class Countdown extends ObservedComponent<CountdownProps> {
 
     render() {
         const {
+            as,
             className = '',
             itemClassName = 'border rounded px-4 py-3 d-flex flex-column justify-content-center align-items-center',
             units: _u,
             endTime: _e,
             onEnd: _o,
             ...props
-        } = this.props;
+        } = this.componentProps;
+        const Root: ElementType = as ?? 'ol';
         const { timeSections } = this;
 
         return (
-            <ol className={`list-unstyled m-0 ${className}`} {...props}>
+            <Root className={`list-unstyled m-0 ${className}`} {...props}>
                 {timeSections.map(({ value, label }) => (
                     <li key={label} className={itemClassName}>
                         <strong>{(value + '').padStart(2, '0')}</strong>
                         <span>{label}</span>
                     </li>
                 ))}
-            </ol>
+            </Root>
         );
     }
 }

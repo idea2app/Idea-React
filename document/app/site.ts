@@ -7,11 +7,11 @@ export const site = {
     license,
     repository: 'https://github.com/idea2app/Idea-React',
     install: `npm i idea-react${version.includes('-') ? '@next' : ''}`,
-    docs: `${nextConfig.basePath || ''}/components/avatar/`,
+    docs: `${nextConfig.basePath || ''}/guides/install/`,
     api: 'https://idea2app.github.io/Idea-React/',
     components: `${nextConfig.basePath || ''}/components/`,
     forms: `${nextConfig.basePath || ''}/forms/`,
-    gettingStarted: 'https://github.com/idea2app/Idea-React#usage'
+    guides: `${nextConfig.basePath || ''}/guides/`
 };
 
 export const navigation: DocumentationLink[] = [
@@ -44,7 +44,7 @@ export const footerColumns = [
     {
         title: 'Guides',
         links: [
-            { label: 'Getting started', href: site.gettingStarted },
+            { label: 'Guides', href: site.guides },
             { label: 'React + MobX', href: 'https://github.com/idea2app/React-MobX-Bootstrap-ts' },
             { label: 'Next.js starter', href: 'https://github.com/idea2app/Next-Bootstrap-ts' },
             { label: 'Source code', href: `${site.repository}/tree/main/source` }

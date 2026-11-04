@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import {
     ChipDismiss,
     ChipIcon,
@@ -109,7 +110,7 @@ Type into the input below and press <kbd>Enter</kbd> or <kbd>,</kbd> to add new 
 Set `theme` on `ChipInput` to apply a theme color to all chips within.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <ChipInput theme="primary">
             <ChipToken>Approved</ChipToken>
             <ChipToken>Verified</ChipToken>
@@ -120,7 +121,7 @@ Set `theme` on `ChipInput` to apply a theme color to all chips within.
             <ChipToken>Critical</ChipToken>
             <FormGhost type="text" placeholder="Add issue" />
         </ChipInput>
-    </div>
+    </Stack>
 </CodeExample>
 
 You can also individually apply a theme color to a chip with the chip’s `theme` prop.

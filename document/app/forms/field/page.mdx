@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import { ValidationForm } from '../../../component/Documentation/Forms/ValidationForm';
 import {
     Checkbox,
@@ -138,7 +139,7 @@ Add `.form-field-card` to each inner `.form-field` for a card-style treatment th
 <CodeExample>
     <FormGroup>
         <FormLabel>Select a plan</FormLabel>
-        <div className="vstack gap-1">
+        <Stack gap={1}>
             <FormField card>
                 <Radio id="fieldRadioGroup1" name="fieldRadioGrouped" defaultChecked />
                 <FormFieldContent>
@@ -157,7 +158,7 @@ Add `.form-field-card` to each inner `.form-field` for a card-style treatment th
                     <FormText>$29/month — For teams.</FormText>
                 </FormFieldContent>
             </FormField>
-        </div>
+        </Stack>
     </FormGroup>
 </CodeExample>
 
@@ -250,7 +251,7 @@ Validation feedback (`.invalid-feedback`, `.valid-feedback`) stacks correctly in
 Add `data-bs-validate` to your `<form>` to opt in to `:user-invalid` styling. These pseudo-classes activate after the user interacts with a control. To also show success styling on valid fields, use `data-bs-validate="valid"`. Add `novalidate` to suppress native browser validation tooltips while keeping the constraint validation API available.
 
 <CodeExample>
-    <ValidationForm noValidate data-bs-validate="" className="vstack gap-3">
+    <Stack as={ValidatableForm} noValidate data-bs-validate="" gap={3}>
         <FormField className="flex-1">
             <FormLabel htmlFor="fieldValidateEmail">Email address</FormLabel>
             <FormControl type="email" id="fieldValidateEmail" required />
@@ -269,7 +270,7 @@ Add `data-bs-validate` to your `<form>` to opt in to `:user-invalid` styling. Th
         <Button type="submit" theme="primary" variant="solid" className="align-self-start">
             Submit
         </Button>
-    </ValidationForm>
+    </Stack>
 </CodeExample>
 
 ### Server-side

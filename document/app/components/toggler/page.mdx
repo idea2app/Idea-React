@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import { Toggler } from '../../../../source/Toggler';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
@@ -64,7 +65,7 @@ Use `target` to toggle the class of another element. Target elements can supply 
 Use a class name selector in `target` to toggle the class of multiple elements.
 
 <CodeExample>
-    <div className="vstack gap-2">
+    <Stack gap={2}>
         <Toggler
             target=".togglerExampleClass1"
             variant="solid"
@@ -89,7 +90,7 @@ Use a class name selector in `target` to toggle the class of multiple elements.
         >
             {' Use button to toggle `bg-subtle-warning` '}
         </div>
-    </div>
+    </Stack>
 
 </CodeExample>
 

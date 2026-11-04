@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import { ToastContainer } from '../../../../source/Toast';
 import {
     StaticToast,
@@ -82,7 +83,7 @@ Set a toast to dark mode by setting `data-bs-theme="dark"` on a parent element.
 Toasts can be themed with the `theme` prop, based on our [theme color utilities][1]. Apply to the entire toast or individual elements within the toast.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <StaticToast theme="primary" noHeader body="Hello, world! This is a toast message." />
         <StaticToast theme="accent" noHeader body="Hello, world! This is a toast message." />
         <StaticToast theme="secondary" noHeader body="Hello, world! This is a toast message." />
@@ -91,7 +92,7 @@ Toasts can be themed with the `theme` prop, based on our [theme color utilities]
         <StaticToast theme="warning" noHeader body="Hello, world! This is a toast message." />
         <StaticToast theme="info" noHeader body="Hello, world! This is a toast message." />
         <StaticToast theme="inverse" noHeader body="Hello, world! This is a toast message." />
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Custom content

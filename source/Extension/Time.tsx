@@ -1,15 +1,17 @@
-import { FC, TimeHTMLAttributes } from 'react';
+import { TimeHTMLAttributes } from 'react';
 import { formatDate, TimeData } from 'web-utility';
+
+import { polymorphic } from '../Polymorphic';
 
 export interface TimeProps extends Omit<TimeHTMLAttributes<HTMLTimeElement>, 'dateTime'> {
     dateTime: TimeData;
     format?: string;
 }
 
-export const Time: FC<TimeProps> = ({ dateTime, format, ...props }) => (
-    <time dateTime={new Date(dateTime).toJSON()} {...props}>
+export const Time = polymorphic<TimeProps>(({ as: Root = 'time', dateTime, format, ...props }) => (
+    <Root dateTime={new Date(dateTime).toJSON()} {...props}>
         {formatDate(dateTime, format)}
-    </time>
-);
+    </Root>
+));
 
 Time.displayName = 'Time';

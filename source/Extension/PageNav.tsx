@@ -3,10 +3,11 @@
 import classNames from 'classnames';
 import { action, computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component } from 'react';
+import { Component, ElementType } from 'react';
 import { scrollTo, uniqueID } from 'web-utility';
 
 import { Nav, NavLink, NavProps } from '../Nav';
+import { AsProps, PolymorphicClassProps } from '../Polymorphic';
 
 const HeadingSelector = Array.from({ length: 6 }, (_, index) => `h${index + 1}`).join(',');
 
@@ -20,7 +21,15 @@ export interface PageNavProps extends Omit<NavProps, 'ref'> {
 }
 
 @observer
-export class PageNav extends Component<PageNavProps> {
+export class PageNav<T extends ElementType | undefined = 'nav'> extends Component<
+    PolymorphicClassProps<T, PageNavProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, PageNavProps>;
+
+    protected get componentProps(): Readonly<PageNavProps & AsProps> {
+        return this.props;
+    }
+
     static displayName = 'PageNav';
 
     @observable
@@ -70,7 +79,7 @@ export class PageNav extends Component<PageNavProps> {
 
     @action
     initList() {
-        const { rootSelector } = this.props;
+        const { rootSelector } = this.componentProps;
         const root = rootSelector ? document.querySelector(rootSelector) : document;
 
         if (!root) return;
@@ -98,12 +107,12 @@ export class PageNav extends Component<PageNavProps> {
     scrollTo = (meta: HeadingMeta) => () => {
         setTimeout(() => scrollTo(`[id="${meta.id}"]`));
 
-        this.props.onItemClick?.(meta);
+        this.componentProps.onItemClick?.(meta);
     };
 
     renderLink = ({ id, level, text, top }: HeadingMeta) => {
         const { currentActiveId } = this,
-            { depth = Infinity, minDepth = 1 } = this.props;
+            { depth = Infinity, minDepth = 1 } = this.componentProps;
 
         return (
             minDepth <= level &&
@@ -133,10 +142,10 @@ export class PageNav extends Component<PageNavProps> {
                 rootSelector: _rootSelector,
                 onItemClick: _onItemClick,
                 ...props
-            } = this.props;
+            } = this.componentProps;
 
         return (
-            <Nav {...props} variant="underline" vertical>
+            <Nav as={this.componentProps.as} {...props} variant="underline" vertical>
                 {list.map(this.renderLink)}
             </Nav>
         );

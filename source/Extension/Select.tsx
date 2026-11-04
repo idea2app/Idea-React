@@ -6,7 +6,6 @@ import {
     Children,
     cloneElement,
     Component,
-    FC,
     isValidElement,
     MouseEvent,
     ReactElement,
@@ -15,22 +14,24 @@ import {
 
 import { ButtonProps } from '../Button';
 import { Menu } from '../Menu';
+import { polymorphic } from '../Polymorphic';
 
 export interface OptionProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     value?: string;
 }
 
-export const Option: FC<OptionProps> = ({ value, className, children, ...props }) => (
-    <button
-        {...props}
-        type="button"
-        className={classNames('menu-item', className)}
-        data-value={value}
-    >
-        {children}
-    </button>
+export const Option = polymorphic<OptionProps>(
+    ({ as: Root = 'button', value, className, children, ...props }) => (
+        <Root
+            {...props}
+            type="button"
+            className={classNames('menu-item', className)}
+            data-value={value}
+        >
+            {children}
+        </Root>
+    )
 );
-
 Option.displayName = 'Option';
 
 export type SelectProps = Pick<

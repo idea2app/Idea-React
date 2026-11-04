@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import {
     Form,
     FormControl,
@@ -36,7 +37,7 @@ Form control styles are available for most textual inputs (including date and ti
 Use the [form field][1] component to layout and wrap your inputs with a label, description, and validation feedback messages in a vertical stack.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <FormField>
             <FormLabel htmlFor="exampleFormControlInput1">Email address</FormLabel>
             <FormControl
@@ -46,7 +47,7 @@ Use the [form field][1] component to layout and wrap your inputs with a label, d
             />
             <FormText> We’ll never share your email with anyone else. </FormText>
         </FormField>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Textarea
@@ -54,7 +55,7 @@ Use the [form field][1] component to layout and wrap your inputs with a label, d
 Textareas use the same `.form-control` class as inputs. Modify their height by using the `rows` attribute or using custom CSS.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <FormField>
             <FormLabel htmlFor="exampleFormControlTextarea1">Example textarea</FormLabel>
             <FormTextArea id="exampleFormControlTextarea1" />
@@ -63,7 +64,7 @@ Textareas use the same `.form-control` class as inputs. Modify their height by u
             <FormLabel htmlFor="exampleFormControlTextarea2">Taller textarea</FormLabel>
             <FormTextArea id="exampleFormControlTextarea2" rows={4} />
         </FormField>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Select
@@ -125,7 +126,7 @@ As is the `size` attribute:
 Change the size of a form control by using classes like `.form-control-lg` and `.form-control-sm`. This adjusts `height`, `padding`, `font-size`, `line-height`, and `border-radius`.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <div>
             <FormLabel htmlFor="sizesInputSmall">Small input</FormLabel>
             <FormControl
@@ -155,13 +156,13 @@ Change the size of a form control by using classes like `.form-control-lg` and `
                 controlSize="lg"
             />
         </div>
-    </div>
+    </Stack>
 </CodeExample>
 
 And for textareas:
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <div>
             <FormLabel htmlFor="sizesTextareaSmall">Small textarea</FormLabel>
             <FormTextArea
@@ -188,13 +189,13 @@ And for textareas:
                 controlSize="lg"
             />
         </div>
-    </div>
+    </Stack>
 </CodeExample>
 
 And for selects:
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <div>
             <FormLabel htmlFor="sizesSelectSmall">Small select</FormLabel>
             <FormSelect id="sizesSelectSmall" controlSize="sm">
@@ -222,7 +223,7 @@ And for selects:
                 <option value="3">Three</option>
             </FormSelect>
         </div>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Form text
@@ -272,7 +273,7 @@ Inline text can use any typical inline HTML element (be it a `<span>`, `<small>`
 Add the `disabled` boolean attribute on an input to give it a grayed out appearance, remove pointer events, and prevent focusing.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <FormControl
             type="text"
             placeholder="Disabled input"
@@ -302,7 +303,7 @@ Add the `disabled` boolean attribute on an input to give it a grayed out appeara
             aria-label="Disabled textarea example"
             disabled
         />
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Readonly
@@ -384,7 +385,7 @@ Nearly all input types are supported, but not all are documented here. Input typ
 No additional classes are needed for date and time inputs. Exact functionality and appearance are dependent on the browser and operating system. However, you can also use [our datepicker component][2] to create a more consistent experience across browsers with JavaScript.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <FormControl
             type="datetime-local"
             aria-label="Date and time picker"
@@ -406,7 +407,7 @@ No additional classes are needed for date and time inputs. Exact functionality a
         <FormControl type="time" aria-label="Time picker" defaultValue="13:00" />
         <FormControl type="month" aria-label="Month picker" defaultValue="2026-02" />
         <FormControl type="week" aria-label="Week picker" defaultValue="2026-W09" />
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Color
@@ -427,7 +428,7 @@ Set the `type="color"` and add `.form-control-color` to the `<input>` alongside 
 Sizes are also supported:
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <div>
             <FormLabel htmlFor="exampleColorInputLg">Large color picker</FormLabel>
             <FormControl
@@ -450,7 +451,7 @@ Sizes are also supported:
                 controlSize="sm"
             />
         </div>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Datalists
@@ -495,7 +496,7 @@ You can also combine with the `.form-control-caret` class to add a caret to inpu
 `input[type="file"]` elements are styled with the `::file-selector-button` pseudo element to add a button to the input. You only need to add the `.form-control` class, plus any size modifiers you need.
 
 <CodeExample>
-    <div className="vstack gap-5">
+    <Stack gap={5}>
         <FormField>
             <FormLabel htmlFor="formFile">Default file input example</FormLabel>
             <FormControl type="file" id="formFile" />
@@ -516,7 +517,7 @@ You can also combine with the `.form-control-caret` class to add a caret to inpu
             <FormLabel htmlFor="formFileLg">Large file input example</FormLabel>
             <FormControl id="formFileLg" type="file" controlSize="lg" />
         </FormField>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Ghost

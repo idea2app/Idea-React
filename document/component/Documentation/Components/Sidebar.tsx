@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { FC } from 'react';
 
 import { Icon } from '../../../../source/Extension/Icon';
+import { Stack } from '../../../../source/Stack';
 import nextConfig from '../../../next.config';
 import * as style from './style.module.less';
 
@@ -95,7 +96,23 @@ const forms: NavLink[] = [
     { label: 'Layout', slug: 'layout' },
     { label: 'Validation', slug: 'validation' }
 ];
+const guides: NavLink[] = [
+    { label: 'Install', slug: 'install' },
+    { label: 'Parcel', slug: 'parcel' },
+    { label: 'Vite', slug: 'vite' },
+    { label: 'Webpack', slug: 'webpack' },
+    { label: 'ViNext', slug: 'vinext' }
+];
 const groups: NavGroup[] = [
+    {
+        label: 'Guides',
+        icon: 'rocket-takeoff',
+        iconClassName: 'fg-accent',
+        href: 'guides/',
+        itemHref: 'guides/',
+        slug: 'guides',
+        items: guides
+    },
     {
         label: 'Components',
         icon: 'menu-button-wide-fill',
@@ -136,7 +153,7 @@ export const Sidebar: FC<SidebarProps> = ({ active }) => (
         aria-label="Documentation navigation"
     >
         {groups.map(({ label, icon, iconClassName, href, itemHref, slug: groupSlug, items }) => (
-            <div key={label} className="vstack py-2">
+            <Stack key={label} className="py-2">
                 <strong className="d-flex align-items-center gap-1 fw-semibold">
                     <Icon name={icon} className={iconClassName} aria-hidden="true" />
                     <a
@@ -166,7 +183,7 @@ export const Sidebar: FC<SidebarProps> = ({ active }) => (
                         );
                     })}
                 </ul>
-            </div>
+            </Stack>
         ))}
     </nav>
 );

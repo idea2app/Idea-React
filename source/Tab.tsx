@@ -9,12 +9,14 @@ import {
     Component,
     ComponentPropsWithRef,
     createRef,
-    FC,
+    ElementType,
     isValidElement,
     KeyboardEvent,
     MouseEvent,
     ReactNode
 } from 'react';
+
+import { AsProps, polymorphic, PolymorphicClassProps } from './Polymorphic';
 
 export interface TabProps extends ComponentPropsWithRef<'div'> {
     eventKey: string;
@@ -22,13 +24,11 @@ export interface TabProps extends ComponentPropsWithRef<'div'> {
     disabled?: boolean;
 }
 
-export const Tab: FC<TabProps> = ({
-    eventKey: _eventKey,
-    label: _label,
-    disabled: _disabled,
-    ...props
-}) => <div {...props} />;
-
+export const Tab = polymorphic<TabProps>(
+    ({ as: Root = 'div', eventKey: _eventKey, label: _label, disabled: _disabled, ...props }) => (
+        <Root {...props} />
+    )
+);
 Tab.displayName = 'Tab';
 
 export interface TabsProps extends Omit<ComponentPropsWithRef<'div'>, 'onChange'> {
@@ -42,11 +42,19 @@ export interface TabsProps extends Omit<ComponentPropsWithRef<'div'>, 'onChange'
 }
 
 @observer
-export class Tabs extends Component<TabsProps> {
+export class Tabs<T extends ElementType | undefined = 'div'> extends Component<
+    PolymorphicClassProps<T, TabsProps>
+> {
     static displayName = 'Tabs';
 
+    declare readonly props: PolymorphicClassProps<T, TabsProps>;
+
+    protected get componentProps(): Readonly<TabsProps & AsProps> {
+        return this.props;
+    }
+
     get tabs() {
-        return Children.toArray(this.props.children)
+        return Children.toArray(this.componentProps.children)
             .filter(child => typeof child !== 'string' || child.trim())
             .map(child => {
                 // Server component boundaries may wrap Tab in a lazy client reference.
@@ -64,13 +72,13 @@ export class Tabs extends Component<TabsProps> {
     root = createRef<HTMLDivElement>();
 
     @observable accessor selectedKey =
-        this.props.defaultActiveKey ??
+        this.componentProps.defaultActiveKey ??
             this.tabs.find(({ props }) => !props.disabled)?.props.eventKey ??
             this.tabs[0]?.props.eventKey ??
             '';
 
     get activeKey() {
-        const key = this.props.activeKey ?? this.selectedKey;
+        const key = this.componentProps.activeKey ?? this.selectedKey;
 
         return this.tabs.some(({ props }) => props.eventKey === key && !props.disabled)
             ? key
@@ -78,27 +86,29 @@ export class Tabs extends Component<TabsProps> {
     }
 
     handleClick = (event: MouseEvent<HTMLDivElement>) => {
-        this.props.onClick?.(event);
+        this.componentProps.onClick?.(event);
+
         if (event.defaultPrevented) return;
 
         const button = (event.target as Element).closest<HTMLButtonElement>('[data-tab-index]');
         const tab = button && this.tabs[Number(button.dataset.tabIndex)]?.props;
+
         if (!tab || tab.disabled) return;
 
         this.activate(tab.eventKey);
     };
 
     handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-        this.props.onKeyDown?.(event);
+        this.componentProps.onKeyDown?.(event);
 
         if (event.defaultPrevented) return;
 
         const button = (event.target as Element).closest<HTMLButtonElement>('[data-tab-index]');
         const index = Number(button?.dataset.tabIndex);
-        const tabs = this.tabs;
+        const { tabs } = this;
         if (!button || Number.isNaN(index)) return;
 
-        const horizontal = this.props.orientation !== 'vertical';
+        const horizontal = this.componentProps.orientation !== 'vertical';
         const previous = horizontal ? event.key === 'ArrowLeft' : event.key === 'ArrowUp';
         const next = horizontal ? event.key === 'ArrowRight' : event.key === 'ArrowDown';
         const enabled = tabs
@@ -128,17 +138,17 @@ export class Tabs extends Component<TabsProps> {
 
     @action
     activate = (key: string) => {
-        this.props.onChange?.(key);
+        this.componentProps.onChange?.(key);
 
-        if (this.props.activeKey === undefined) this.selectedKey = key;
+        if (this.componentProps.activeKey === undefined) this.selectedKey = key;
     };
 
-    tabId = (key: string) => `${this.props.id}-tab-${encodeURIComponent(key)}`;
+    tabId = (key: string) => `${this.componentProps.id}-tab-${encodeURIComponent(key)}`;
 
-    panelId = (key: string) => `${this.props.id}-panel-${encodeURIComponent(key)}`;
+    panelId = (key: string) => `${this.componentProps.id}-panel-${encodeURIComponent(key)}`;
 
     renderTabs = () => {
-        const { orientation = 'horizontal', variant = 'tabs' } = this.props;
+        const { orientation = 'horizontal', variant = 'tabs' } = this.componentProps;
         const listGroup = variant === 'list-group';
 
         return (
@@ -154,7 +164,7 @@ export class Tabs extends Component<TabsProps> {
                               : 'flex-column')
                 )}
                 role="tablist"
-                aria-label={this.props['aria-label'] ?? 'Tabs'}
+                aria-label={this.componentProps['aria-label'] ?? 'Tabs'}
                 aria-orientation={orientation}
             >
                 {this.tabs.map(({ props: tab }, index) => {
@@ -187,7 +197,7 @@ export class Tabs extends Component<TabsProps> {
     };
 
     renderPanels = () => {
-        const { fade = true } = this.props;
+        const { fade = true } = this.componentProps;
 
         return (
             <div className="tab-content">
@@ -216,7 +226,10 @@ export class Tabs extends Component<TabsProps> {
     };
 
     render() {
+        const Root: ElementType = this.componentProps.as ?? 'div';
+
         const {
+            as: _as,
             activeKey: _activeKey,
             className,
             defaultActiveKey: _defaultActiveKey,
@@ -229,20 +242,20 @@ export class Tabs extends Component<TabsProps> {
             children: _children,
             variant: _variant,
             ...props
-        } = this.props;
+        } = this.componentProps;
 
         return (
-            <div
+            <Root
                 {...props}
                 ref={this.root}
-                id={this.props.id}
+                id={this.componentProps.id}
                 className={className}
                 onClick={this.handleClick}
                 onKeyDown={this.handleKeyDown}
             >
                 {this.renderTabs()}
                 {this.renderPanels()}
-            </div>
+            </Root>
         );
     }
 }

@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import { ValidationForm } from '../../../component/Documentation/Forms/ValidationForm';
 import {
     Checkbox,
@@ -413,7 +414,7 @@ Validation styles are available for the following form controls and components:
 - Input groups (with feedback in a parent `.form-field`)
 
 <CodeExample>
-    <ValidationForm className="vstack gap-5">
+    <Stack gap={5}>
         <FormField>
             <FormLabel htmlFor="validationTextarea">Textarea</FormLabel>
             <FormTextArea
@@ -603,7 +604,7 @@ Validation styles are available for the following form controls and components:
                 Please add at least one tag
             </FormFeedback>
         </FormField>
-    </ValidationForm>
+    </Stack>
 </CodeExample>
 
 ## Tooltips

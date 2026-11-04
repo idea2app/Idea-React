@@ -1,7 +1,6 @@
 import { Nameplate } from '../../../../source/Extension/Nameplate';
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
 
-import { LiveExample } from '../../../component/Documentation/Components/Example';
+import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="nameplate">
@@ -19,13 +18,13 @@ listings.
 
 ## Usage
 
-<CodeBlock language="tsx">{`<ul className="list-unstyled">
+<CodeCard>{`<ul className="list-unstyled">
     {members.map(({ name, avatar }) => (
         <li key={name}>
             <Nameplate {...{ name, avatar }} />
         </li>
     ))}
-</ul>`}</CodeBlock>
+</ul>`}</CodeCard>
 
 </ComponentsLayout>
 

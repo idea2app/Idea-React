@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import { Button } from '../../../../source/Button';
 import {
     Card,
@@ -29,7 +30,7 @@ Use `body`, `row`, `theme`, `subtle`, and `translucent` props instead of adding 
 Cards are flexible and extensible content containers with support for headers and footers, a wide variety of content, contextual background colors, and additional display options. **Cards have no fixed width to start**, so they’ll naturally fill the width of their parent element, or slot into your grid columns.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="max-w-100 overflow-auto p-2" style={{ resize: 'horizontal' }}>
         <Card style={{ maxWidth: '320px' }}>
             <CardImage
                 placement="top"
@@ -49,7 +50,7 @@ Cards are flexible and extensible content containers with support for headers an
                 </Button>
             </CardBody>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## How it works
@@ -73,19 +74,19 @@ Cards are built with as little markup and styles as possible, but still manage t
 The building block of a card is the `.card-body`. Use it whenever you need a padded section within a card.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card>
             <CardBody>This is some text within a card body.</CardBody>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 For simple cards, you can use the `.card-body` class directly on the card element.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card body>This is some text within a card body.</Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Titles, text, and links
@@ -99,7 +100,7 @@ Card bodies arrange their direct children in a column and apply a consistent gap
 Use type and color utilities as needed. A color utility on `.card-subtitle` overrides `--bs-card-subtitle-color`. Links need no card-specific class.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card style={{ maxWidth: '320px' }}>
             <CardBody>
                 <CardTitle>Example card title</CardTitle>
@@ -111,7 +112,7 @@ Use type and color utilities as needed. A color utility on `.card-subtitle` over
                 <a href="#">Card link</a>
             </CardBody>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Images
@@ -119,7 +120,7 @@ Use type and color utilities as needed. A color utility on `.card-subtitle` over
 Place images anywhere in a card and style as you like.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card style={{ width: '18rem' }}>
             <CardBody>
                 <CardImage
@@ -135,7 +136,7 @@ Place images anywhere in a card and style as you like.
                 <small className="fg-3">Last updated 3 mins ago</small>
             </CardBody>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 Use `.card-img-top` and `.card-img-bottom` to round the top and bottom corners of the image.
@@ -180,19 +181,19 @@ Use `.card-img-top` and `.card-img-bottom` to round the top and bottom corners o
 When your card only contains a list group—no header, footer, or body—use a `.list-group` on its own. A card already draws an outer border, so a default list group inside a card would double that border.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <ListGroup style={{ width: '18rem' }}>
             <ListGroupItem>An item</ListGroupItem>
             <ListGroupItem>A second item</ListGroupItem>
             <ListGroupItem>A third item</ListGroupItem>
         </ListGroup>
-    </div>
+    </Stack>
 </CodeExample>
 
 When you mix a list group with other card sub-components, add `.list-group-flush` to drop the list’s own outer border.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card style={{ width: '18rem' }}>
             <CardHeader>Featured</CardHeader>
             <ListGroup flush>
@@ -201,11 +202,11 @@ When you mix a list group with other card sub-components, add `.list-group-flush
                 <ListGroupItem>A third item</ListGroupItem>
             </ListGroup>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card style={{ width: '18rem' }}>
             <ListGroup flush>
                 <ListGroupItem>An item</ListGroupItem>
@@ -214,7 +215,7 @@ When you mix a list group with other card sub-components, add `.list-group-flush
             </ListGroup>
             <CardFooter>Card footer</CardFooter>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Kitchen sink
@@ -222,7 +223,7 @@ When you mix a list group with other card sub-components, add `.list-group-flush
 Mix and match multiple content types to create the card you need, or throw everything in there. Shown below are image styles, blocks, text styles, and a list group—all wrapped in a fixed-width card.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card style={{ width: '18rem' }}>
             <CardImage
                 placement="top"
@@ -248,7 +249,7 @@ Mix and match multiple content types to create the card you need, or throw every
                 <a href="#">Another link</a>
             </CardBody>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Header and footer
@@ -256,7 +257,7 @@ Mix and match multiple content types to create the card you need, or throw every
 Add an optional header and/or footer within a card.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card>
             <CardHeader>Featured</CardHeader>
             <CardBody>
@@ -269,13 +270,13 @@ Add an optional header and/or footer within a card.
                 </Button>
             </CardBody>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 Card headers can be styled by adding `.card-header` to `<h*>` elements.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card>
             <CardHeader>
                 <h5 className="mb-0">Featured</h5>
@@ -290,11 +291,11 @@ Card headers can be styled by adding `.card-header` to `<h*>` elements.
                 </Button>
             </CardBody>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card>
             <CardHeader>Quote</CardHeader>
             <CardBody>
@@ -309,11 +310,11 @@ Card headers can be styled by adding `.card-header` to `<h*>` elements.
                 </figure>
             </CardBody>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card className="text-center">
             <CardHeader>Featured</CardHeader>
             <CardBody>
@@ -327,7 +328,7 @@ Card headers can be styled by adding `.card-header` to `<h*>` elements.
             </CardBody>
             <CardFooter className="fg-2">2 days ago</CardFooter>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Width
@@ -339,7 +340,7 @@ Cards assume no specific `width` to start, so they’ll be 100% wide unless othe
 Using the grid, wrap cards in columns and rows as needed.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Row>
             <Col sm={6} className="mb-3 sm:mb-0">
                 <Card>
@@ -368,7 +369,7 @@ Using the grid, wrap cards in columns and rows as needed.
                 </Card>
             </Col>
         </Row>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Utilities
@@ -376,7 +377,7 @@ Using the grid, wrap cards in columns and rows as needed.
 Use our handful of [available sizing utilities][5] to quickly set a card’s width.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card className="w-75 mb-3">
             <CardBody>
                 <CardTitle>Card title</CardTitle>
@@ -399,7 +400,7 @@ Use our handful of [available sizing utilities][5] to quickly set a card’s wid
                 </Button>
             </CardBody>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Custom CSS
@@ -407,7 +408,7 @@ Use our handful of [available sizing utilities][5] to quickly set a card’s wid
 Use custom CSS in your stylesheets or as inline styles to set a width.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card style={{ width: '18rem' }}>
             <CardBody>
                 <CardTitle>Card title</CardTitle>
@@ -419,7 +420,7 @@ Use custom CSS in your stylesheets or as inline styles to set a width.
                 </Button>
             </CardBody>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Navigation
@@ -427,7 +428,7 @@ Use custom CSS in your stylesheets or as inline styles to set a width.
 Add some navigation to a card’s header (or block) with Bootstrap’s [nav components][6].
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card className="text-center">
             <CardHeader>
                 <Nav variant="tabs" cardHeader>
@@ -452,14 +453,14 @@ Add some navigation to a card’s header (or block) with Bootstrap’s [nav comp
                 </Button>
             </CardBody>
         </Card>
-    </div>
+    </Stack>
 
 </CodeExample>
 
 This works with `.nav-pills` as well.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card className="text-center">
             <CardHeader>
                 <Nav variant="pills">
@@ -484,7 +485,7 @@ This works with `.nav-pills` as well.
                 </Button>
             </CardBody>
         </Card>
-    </div>
+    </Stack>
 
 </CodeExample>
 
@@ -497,7 +498,7 @@ Cards include a few options for working with images. Choose from appending “im
 Similar to headers and footers, cards can include top and bottom “image caps”—images at the top or bottom of a card.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card className="mb-3">
             <CardImage
                 placement="top"
@@ -536,7 +537,7 @@ Similar to headers and footers, cards can include top and bottom “image caps�
                 alt="Image cap"
             />
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Image overlays
@@ -544,7 +545,7 @@ Similar to headers and footers, cards can include top and bottom “image caps�
 Turn an image into a card background and overlay your card’s text. Depending on the image, you may or may not need additional styles or utilities.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card theme="inverse">
             <CardImage
                 width="100%"
@@ -563,7 +564,7 @@ Turn an image into a card background and overlay your card’s text. Depending o
                 </CardText>
             </CardImageOverlay>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 > Note that content should not be larger than the height of the image. If content is larger than the image the content will be displayed outside the image.
@@ -573,7 +574,7 @@ Turn an image into a card background and overlay your card’s text. Depending o
 Use the `.card-row` class to make a card horizontal. For image caps, use the `.card-img-start` or `.card-img-end` class to position the image at the (inline) start or end position of the card.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card row style={{ maxWidth: '540px' }}>
             <CardImage
                 placement="start"
@@ -593,13 +594,13 @@ Use the `.card-row` class to make a card horizontal. For image caps, use the `.c
                 </CardText>
             </CardBody>
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 And with the reverse layout:
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Card row style={{ maxWidth: '540px' }}>
             <CardBody>
                 <CardTitle>Card title</CardTitle>
@@ -619,7 +620,7 @@ And with the reverse layout:
                 alt="Image"
             />
         </Card>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Theme variants
@@ -797,10 +798,7 @@ Use card groups to render cards as a single, attached element with equal width a
 This layout uses [container queries][7], so wrap the card group in a query container—add the `.contains-inline` utility to a parent element—for the row layout to take effect. Without a query container, the cards remain stacked.
 
 <CodeExample>
-    <div
-        className="vstack gap-3 overflow-auto p-2"
-        style={{ resize: 'horizontal', maxWidth: '100%' }}
-    >
+    <Stack gap={3} className="max-w-100 overflow-auto p-2" style={{ resize: 'horizontal' }}>
         <div className="contains-inline">
             <CardGroup>
                 <Card>
@@ -863,13 +861,13 @@ This layout uses [container queries][7], so wrap the card group in a query conta
                 </Card>
             </CardGroup>
         </div>
-    </div>
+    </Stack>
 </CodeExample>
 
 When using card groups with footers, their content will automatically line up.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <div className="contains-inline">
             <CardGroup>
                 <Card>
@@ -932,7 +930,7 @@ When using card groups with footers, their content will automatically line up.
                 </Card>
             </CardGroup>
         </div>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Grid cards
@@ -940,7 +938,7 @@ When using card groups with footers, their content will automatically line up.
 Use the Bootstrap grid system and its [`.row-cols` classes][8] to control how many grid columns (wrapped around your cards) you show per row. For example, here’s `.row-cols-1` laying out the cards on one column, and `.md:row-cols-2` splitting four cards to equal width across multiple rows, from the medium breakpoint up.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Row cols={1} md={2} className="g-4">
             <Col>
                 <Card>
@@ -1015,13 +1013,13 @@ Use the Bootstrap grid system and its [`.row-cols` classes][8] to control how ma
                 </Card>
             </Col>
         </Row>
-    </div>
+    </Stack>
 </CodeExample>
 
 Change it to `.row-cols-3` and you’ll see the fourth card wrap.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Row cols={1} md={3} className="g-4">
             <Col>
                 <Card>
@@ -1096,13 +1094,13 @@ Change it to `.row-cols-3` and you’ll see the fourth card wrap.
                 </Card>
             </Col>
         </Row>
-    </div>
+    </Stack>
 </CodeExample>
 
 When you need equal height, add `.h-100` to the cards. If you want equal heights by default, set `--bs-card-height: 100%` in your CSS module.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Row cols={1} md={3} className="g-4">
             <Col>
                 <Card className="h-100">
@@ -1174,13 +1172,13 @@ When you need equal height, add `.h-100` to the cards. If you want equal heights
                 </Card>
             </Col>
         </Row>
-    </div>
+    </Stack>
 </CodeExample>
 
 Just like with card groups, card footers will automatically line up.
 
 <CodeExample>
-    <div className="vstack gap-3 overflow-auto">
+    <Stack gap={3} className="overflow-auto">
         <Row cols={1} md={3} className="g-4">
             <Col>
                 <Card className="h-100">
@@ -1247,7 +1245,7 @@ Just like with card groups, card footers will automatically line up.
                 </Card>
             </Col>
         </Row>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## CSS

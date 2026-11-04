@@ -9,6 +9,7 @@ import {
     ComponentPropsWithRef,
     createRef,
     CSSProperties,
+    ElementType,
     isValidElement,
     KeyboardEvent,
     MouseEvent,
@@ -19,6 +20,7 @@ import {
 import { Icon } from '../Extension/Icon';
 import { Menu, MenuProps } from '../Menu';
 import { Nav, NavProps } from '../Nav';
+import { AsProps, PolymorphicClassProps } from '../Polymorphic';
 import { NavOverflowModel } from './model';
 
 interface OverflowChildProps {
@@ -47,7 +49,15 @@ export interface NavOverflowProps
 }
 
 @observer
-export class NavOverflow extends Component<NavOverflowProps> {
+export class NavOverflow<T extends ElementType | undefined = 'div'> extends Component<
+    PolymorphicClassProps<T, NavOverflowProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, NavOverflowProps>;
+
+    protected get componentProps(): Readonly<NavOverflowProps & AsProps> {
+        return this.props;
+    }
+
     static displayName = 'NavOverflow';
 
     root = createRef<HTMLDivElement>();
@@ -109,7 +119,10 @@ export class NavOverflow extends Component<NavOverflowProps> {
         const visible = items.map((_, index) => index);
         const minimum = Math.max(
             0,
-            Math.min(this.props.minimumVisibleItems ?? this.props.threshold ?? 0, items.length)
+            Math.min(
+                this.componentProps.minimumVisibleItems ?? this.componentProps.threshold ?? 0,
+                items.length
+            )
         );
         let visibleWidth = allWidth;
 
@@ -134,11 +147,11 @@ export class NavOverflow extends Component<NavOverflowProps> {
             current.some((index, position) => index !== overflowIndices[position]);
 
         if (!this.store.initialized || changed) this.store.setOverflowIndices(overflowIndices);
-        if (changed) this.props.onOverflowChange?.(overflowIndices.length, visible.length);
+        if (changed) this.componentProps.onOverflowChange?.(overflowIndices.length, visible.length);
     };
 
     private getCollapseBelow = () => {
-        const { collapseBelow = 0 } = this.props;
+        const { collapseBelow = 0 } = this.componentProps;
         if (typeof collapseBelow === 'number') return collapseBelow;
 
         const value = getComputedStyle(this.root.current as HTMLElement).getPropertyValue(
@@ -148,7 +161,7 @@ export class NavOverflow extends Component<NavOverflowProps> {
     };
 
     handleClick = (event: MouseEvent<HTMLDivElement>) => {
-        this.props.onClick?.(event);
+        this.componentProps.onClick?.(event);
 
         const target = event.target instanceof Element ? event.target : null;
         if (event.defaultPrevented) return;
@@ -159,7 +172,7 @@ export class NavOverflow extends Component<NavOverflowProps> {
     };
 
     handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-        this.props.onKeyDown?.(event);
+        this.componentProps.onKeyDown?.(event);
         if (event.defaultPrevented) return;
 
         if (event.key === 'Escape' && this.store.open) {
@@ -207,7 +220,10 @@ export class NavOverflow extends Component<NavOverflowProps> {
     };
 
     render() {
+        const Root: ElementType = this.componentProps.as ?? 'div';
+
         const {
+            as: _as,
             children,
             className,
             collapseBelow: _collapseBelow,
@@ -226,10 +242,10 @@ export class NavOverflow extends Component<NavOverflowProps> {
             'aria-label': ariaLabel,
             variant,
             ...props
-        } = this.props;
+        } = this.componentProps;
         const items = Children.toArray(children);
         const hasOverflow = this.store.overflowIndices.length > 0;
-        const menuId = `${this.props.id}-menu`;
+        const menuId = `${this.componentProps.id}-menu`;
         const [vertical, horizontal] = menuPlacement.split('-');
         const placementClasses =
             vertical === 'top'
@@ -243,7 +259,7 @@ export class NavOverflow extends Component<NavOverflowProps> {
         const text = moreText === false ? null : moreText;
 
         return (
-            <div
+            <Root
                 {...props}
                 ref={this.root}
                 className={classNames(
@@ -301,7 +317,7 @@ export class NavOverflow extends Component<NavOverflowProps> {
                         </div>
                     </div>
                 </Nav>
-            </div>
+            </Root>
         );
     }
 }

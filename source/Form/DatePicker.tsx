@@ -2,10 +2,11 @@
 
 import Datepicker, { type DatepickerConfig } from 'bootstrap/js/src/datepicker.js';
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef, FC, forwardRef, Ref } from 'react';
+import { ComponentPropsWithoutRef, forwardRef, Ref } from 'react';
 
 import { Button, ButtonProps } from '../Button';
 import { Icon } from '../Extension/Icon';
+import { AsProps, polymorphic, PolymorphicComponent } from '../Polymorphic';
 import { FormPlugin } from './Plugin';
 import { FormValidationProps } from './Primitives';
 
@@ -37,7 +38,7 @@ export type DatePickerButtonProps = Extract<ButtonProps, { href?: never }> &
     };
 export type DatePickerInlineProps = ComponentPropsWithoutRef<'div'> & DatePickerSettings;
 
-interface DatePickerComponentProps extends DatePickerProps {
+interface DatePickerComponentProps extends DatePickerProps, AsProps {
     kind?: 'input' | 'button' | 'div';
     hostProps?: DatePickerButtonProps | DatePickerInlineProps;
     leadingIcon?: string;
@@ -120,6 +121,7 @@ class DatePickerComponent extends FormPlugin<
 
     render() {
         const {
+            as,
             className,
             enhanced,
             inline,
@@ -142,6 +144,7 @@ class DatePickerComponent extends FormPlugin<
             forwardedRef: _forwardedRef,
             ...props
         } = this.props;
+        const Root = as ?? (kind === 'div' ? 'div' : 'input');
         const attributes = {
             'data-bs-toggle': enhanced || kind !== 'input' ? 'datepicker' : undefined,
             'data-bs-inline': inline || kind === 'div' || undefined,
@@ -159,7 +162,7 @@ class DatePickerComponent extends FormPlugin<
             const { children, ...buttonProps } = hostProps as ButtonProps;
 
             return (
-                <Button {...buttonProps} {...attributes} ref={this.setRef}>
+                <Button as={as} {...buttonProps} {...attributes} ref={this.setRef}>
                     {leadingIcon && <Icon name={leadingIcon} aria-hidden="true" />}
                     <span data-bs-datepicker-display="">{children}</span>
                 </Button>
@@ -167,7 +170,7 @@ class DatePickerComponent extends FormPlugin<
         }
         if (kind === 'div')
             return (
-                <div
+                <Root
                     {...(hostProps as ComponentPropsWithoutRef<'div'>)}
                     {...attributes}
                     ref={this.setRef}
@@ -175,7 +178,7 @@ class DatePickerComponent extends FormPlugin<
             );
 
         return (
-            <input
+            <Root
                 {...props}
                 {...attributes}
                 ref={this.setRef}
@@ -194,38 +197,20 @@ class DatePickerComponent extends FormPlugin<
     }
 }
 
-export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, forwardedRef) => (
-    <DatePickerComponent {...props} forwardedRef={forwardedRef} />
-));
-
+export const DatePicker = polymorphic<DatePickerProps & { ref?: Ref<HTMLInputElement> }>(
+    forwardRef<HTMLInputElement, DatePickerProps & AsProps>((props, forwardedRef) => (
+        <DatePickerComponent {...props} forwardedRef={forwardedRef} />
+    ))
+);
 DatePicker.displayName = 'DatePicker';
 
-export const DatePickerButton: FC<DatePickerButtonProps> = forwardRef<
-    HTMLButtonElement,
-    DatePickerButtonProps
->(
-    (
-        {
-            options,
-            inline,
-            selectionMode,
-            displayMonthsCount,
-            selectedDates,
-            firstWeekday,
-            placement,
-            datepickerTheme,
-            onDatesChange,
-            leadingIcon,
-            ...hostProps
-        },
-        forwardedRef
-    ) => (
-        <DatePickerComponent
-            kind="button"
-            leadingIcon={leadingIcon}
-            hostProps={hostProps}
-            forwardedRef={forwardedRef}
-            {...{
+export const DatePickerButton: PolymorphicComponent<
+    DatePickerButtonProps & { ref?: Ref<HTMLButtonElement> }
+> = polymorphic(
+    forwardRef<HTMLButtonElement, DatePickerButtonProps & AsProps>(
+        (
+            {
+                as,
                 options,
                 inline,
                 selectionMode,
@@ -234,47 +219,71 @@ export const DatePickerButton: FC<DatePickerButtonProps> = forwardRef<
                 firstWeekday,
                 placement,
                 datepickerTheme,
-                onDatesChange
-            }}
-        />
+                onDatesChange,
+                leadingIcon,
+                ...hostProps
+            },
+            forwardedRef
+        ) => (
+            <DatePickerComponent
+                as={as}
+                kind="button"
+                leadingIcon={leadingIcon}
+                hostProps={hostProps}
+                forwardedRef={forwardedRef}
+                {...{
+                    options,
+                    inline,
+                    selectionMode,
+                    displayMonthsCount,
+                    selectedDates,
+                    firstWeekday,
+                    placement,
+                    datepickerTheme,
+                    onDatesChange
+                }}
+            />
+        )
     )
 );
-
 DatePickerButton.displayName = 'DatePickerButton';
 
-export const DatePickerInline = forwardRef<HTMLDivElement, DatePickerInlineProps>(
-    (
-        {
-            options,
-            selectionMode,
-            displayMonthsCount,
-            selectedDates,
-            firstWeekday,
-            placement,
-            datepickerTheme,
-            onDatesChange,
-            inline = true,
-            ...hostProps
-        },
-        forwardedRef
-    ) => (
-        <DatePickerComponent
-            kind="div"
-            hostProps={hostProps}
-            forwardedRef={forwardedRef}
-            {...{
+export const DatePickerInline = polymorphic<DatePickerInlineProps & { ref?: Ref<HTMLDivElement> }>(
+    forwardRef<HTMLDivElement, DatePickerInlineProps & AsProps>(
+        (
+            {
+                as,
                 options,
-                inline,
                 selectionMode,
                 displayMonthsCount,
                 selectedDates,
                 firstWeekday,
                 placement,
                 datepickerTheme,
-                onDatesChange
-            }}
-        />
+                onDatesChange,
+                inline = true,
+                ...hostProps
+            },
+            forwardedRef
+        ) => (
+            <DatePickerComponent
+                as={as}
+                kind="div"
+                hostProps={hostProps}
+                forwardedRef={forwardedRef}
+                {...{
+                    options,
+                    inline,
+                    selectionMode,
+                    displayMonthsCount,
+                    selectedDates,
+                    firstWeekday,
+                    placement,
+                    datepickerTheme,
+                    onDatesChange
+                }}
+            />
+        )
     )
 );
-
 DatePickerInline.displayName = 'DatePickerInline';

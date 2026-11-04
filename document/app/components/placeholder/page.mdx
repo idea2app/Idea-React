@@ -1,3 +1,4 @@
+import { Stack } from '../../../../source/Stack';
 import { Button } from '../../../../source/Button';
 import { Card, CardImage, CardBody, CardTitle, CardText } from '../../../../source/Card';
 import {
@@ -89,7 +90,7 @@ Create placeholders with the `.placeholder` class and a grid column class (e.g.,
 We apply additional styling to `.btn`s via `::before` to ensure the `height` is respected. You may extend this pattern for other situations as needed, or add a `&nbsp;` within the element to reflect the height when actual text is rendered in its place.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <p aria-hidden="true">
             <Placeholder className="col-6" />
         </p>
@@ -100,7 +101,7 @@ We apply additional styling to `.btn`s via `::before` to ensure the `height` is 
             href="#"
             className="col-4"
         />
-    </div>
+    </Stack>
 </CodeExample>
 
 > The use of `aria-hidden="true"` only indicates that the element should be hidden to screen readers. The _loading_ behavior of the placeholder depends on how authors will actually use the placeholder styles, how they plan to update things, etc. Some JavaScript code may be needed to _swap_ the state of the placeholder and inform AT users of the update.
@@ -110,11 +111,11 @@ We apply additional styling to `.btn`s via `::before` to ensure the `height` is 
 You can change the `width` through grid column classes, width utilities, or inline styles.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <Placeholder className="col-6" />
         <Placeholder className="w-75" />
         <Placeholder style={{ width: '25%' }} />
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Color
@@ -122,7 +123,7 @@ You can change the `width` through grid column classes, width utilities, or inli
 By default, the `placeholder` uses `currentColor`. This can be overridden with a custom color or utility class.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <Placeholder className="col-9" />
         <Placeholder theme="primary" className="col-6" />
         <Placeholder theme="accent" className="col-6" />
@@ -132,7 +133,7 @@ By default, the `placeholder` uses `currentColor`. This can be overridden with a
         <Placeholder theme="warning" className="col-6" />
         <Placeholder theme="info" className="col-6" />
         <Placeholder theme="inverse" className="col-6" />
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Sizing
@@ -140,12 +141,12 @@ By default, the `placeholder` uses `currentColor`. This can be overridden with a
 The size of `.placeholder`s are based on the typographic style of the parent element. Customize them with sizing modifiers: `.placeholder-lg`, `.placeholder-sm`, or `.placeholder-xs`.
 
 <CodeExample>
-    <div className="vstack gap-2">
+    <Stack gap={2}>
         <Placeholder size="lg" className="col-12" />
         <Placeholder className="col-12" />
         <Placeholder size="sm" className="col-12" />
         <Placeholder size="xs" className="col-12" />
-    </div>
+    </Stack>
 </CodeExample>
 
 ## Animation
@@ -153,14 +154,14 @@ The size of `.placeholder`s are based on the typographic style of the parent ele
 Use `.placeholder-wave` for the default loading animation. Use `.placeholder-pulse` for an opacity pulse. The old `.placeholder-glow` class remains as a compatibility alias for `.placeholder-pulse`.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <PlaceholderAnimation animation="wave">
             <Placeholder className="col-12" />
         </PlaceholderAnimation>
         <PlaceholderAnimation animation="pulse">
             <Placeholder className="col-12" />
         </PlaceholderAnimation>
-    </div>
+    </Stack>
 </CodeExample>
 
 ### Text
@@ -168,11 +169,11 @@ Use `.placeholder-wave` for the default loading animation. Use `.placeholder-pul
 Add `.placeholder-wave` to an inline element to apply the loading animation to text.
 
 <CodeExample>
-    <div className="vstack gap-3">
+    <Stack gap={3}>
         <PlaceholderAnimation animation="wave" className="fg-3 d-inline">
             Working on it…
         </PlaceholderAnimation>
-    </div>
+    </Stack>
 </CodeExample>
 
 ## CSS

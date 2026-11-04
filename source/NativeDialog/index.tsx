@@ -6,13 +6,14 @@ import {
     ComponentPropsWithRef,
     createRef,
     DialogHTMLAttributes,
-    FC,
+    ElementType,
     KeyboardEvent,
     MouseEvent,
     SyntheticEvent
 } from 'react';
 
 import { Breakpoint } from '../Grid';
+import { AsProps, polymorphic, PolymorphicClassProps } from '../Polymorphic';
 import styles from './style.module.css';
 
 const transitionMilliseconds = (value: string) =>
@@ -32,24 +33,44 @@ export interface NativeDialogProps extends Omit<DialogHTMLAttributes<HTMLDialogE
     scroll?: boolean;
 }
 
-export const DialogHeader: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
-    <div {...props} className={classNames('dialog-header', className)} />
+export const DialogHeader = polymorphic<ComponentPropsWithRef<'div'>>(
+    ({ as: Root = 'div', className, ...props }) => (
+        <Root {...props} className={classNames('dialog-header', className)} />
+    )
 );
+DialogHeader.displayName = 'DialogHeader';
 
-export const DialogTitle: FC<ComponentPropsWithRef<'h1'>> = ({ className, ...props }) => (
-    <h1 {...props} className={classNames('dialog-title', className)} />
+export const DialogTitle = polymorphic<ComponentPropsWithRef<'h1'>>(
+    ({ as: Root = 'h1', className, ...props }) => (
+        <Root {...props} className={classNames('dialog-title', className)} />
+    )
 );
+DialogTitle.displayName = 'DialogTitle';
 
-export const DialogBody: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
-    <div {...props} className={classNames('dialog-body', className)} />
+export const DialogBody = polymorphic<ComponentPropsWithRef<'div'>>(
+    ({ as: Root = 'div', className, ...props }) => (
+        <Root {...props} className={classNames('dialog-body', className)} />
+    )
 );
+DialogBody.displayName = 'DialogBody';
 
-export const DialogFooter: FC<ComponentPropsWithRef<'div'>> = ({ className, ...props }) => (
-    <div {...props} className={classNames('dialog-footer', className)} />
+export const DialogFooter = polymorphic<ComponentPropsWithRef<'div'>>(
+    ({ as: Root = 'div', className, ...props }) => (
+        <Root {...props} className={classNames('dialog-footer', className)} />
+    )
 );
+DialogFooter.displayName = 'DialogFooter';
 
-export class NativeDialog extends Component<NativeDialogProps> {
-    static scrollLocks = new Set<NativeDialog>();
+export class NativeDialog<T extends ElementType | undefined = 'dialog'> extends Component<
+    PolymorphicClassProps<T, NativeDialogProps>
+> {
+    declare readonly props: PolymorphicClassProps<T, NativeDialogProps>;
+
+    protected get componentProps(): Readonly<NativeDialogProps & AsProps> {
+        return this.props;
+    }
+
+    static scrollLocks = new Set<NativeDialog<ElementType>>();
     static bodyOverflow = '';
 
     element = createRef<HTMLDialogElement>();
@@ -62,25 +83,25 @@ export class NativeDialog extends Component<NativeDialogProps> {
     }
 
     componentDidMount() {
-        if (this.props.open) this.show();
+        if (this.componentProps.open) this.show();
     }
 
     componentDidUpdate({ open, modal, scroll }: NativeDialogProps) {
-        const modeChanged = this.props.modal !== modal;
-        const openChanged = this.props.open !== open;
+        const modeChanged = this.componentProps.modal !== modal;
+        const openChanged = this.componentProps.open !== open;
         const wasOpen = this.open;
-        if (!openChanged && !modeChanged && this.props.scroll === scroll) return;
+        if (!openChanged && !modeChanged && this.componentProps.scroll === scroll) return;
 
-        if (this.open && this.props.modal !== modal) {
+        if (this.open && this.componentProps.modal !== modal) {
             this.switchingMode = true;
             this.close();
         }
-        if (this.props.scroll) this.unlockScroll();
-        else if (this.open && this.props.modal !== false) this.lockScroll();
+        if (this.componentProps.scroll) this.unlockScroll();
+        else if (this.open && this.componentProps.modal !== false) this.lockScroll();
 
         if (!openChanged && !modeChanged) return;
 
-        if (this.props.open || (!openChanged && modeChanged && wasOpen)) this.show();
+        if (this.componentProps.open || (!openChanged && modeChanged && wasOpen)) this.show();
         else this.close();
     }
 
@@ -94,11 +115,9 @@ export class NativeDialog extends Component<NativeDialogProps> {
 
         if (!this.switchingMode && document.activeElement instanceof HTMLElement)
             this.returnFocus = document.activeElement;
-
-        if (this.props.modal === false) element.show();
+        if (this.componentProps.modal === false) element.show();
         else element.showModal();
-
-        if (this.props.modal !== false && !this.props.scroll) this.lockScroll();
+        if (this.componentProps.modal !== false && !this.componentProps.scroll) this.lockScroll();
     };
 
     lockScroll = () => {
@@ -148,7 +167,7 @@ export class NativeDialog extends Component<NativeDialogProps> {
     };
 
     handleClose = (event: SyntheticEvent<HTMLDialogElement>) => {
-        if (!this.switchingMode) this.props.onClose?.(event);
+        if (!this.switchingMode) this.componentProps.onClose?.(event);
 
         if (!this.open) {
             this.unlockScroll();
@@ -162,7 +181,7 @@ export class NativeDialog extends Component<NativeDialogProps> {
     }
 
     handleCancel = (event: SyntheticEvent<HTMLDialogElement>) => {
-        const { onCancel, keyboard = true } = this.props;
+        const { onCancel, keyboard = true } = this.componentProps;
         onCancel?.(event);
 
         const { defaultPrevented } = event;
@@ -172,7 +191,7 @@ export class NativeDialog extends Component<NativeDialogProps> {
     };
 
     handleKeyDown = (event: KeyboardEvent<HTMLDialogElement>) => {
-        const { onKeyDown, keyboard = true } = this.props;
+        const { onKeyDown, keyboard = true } = this.componentProps;
         onKeyDown?.(event);
 
         const { key, defaultPrevented } = event;
@@ -183,7 +202,7 @@ export class NativeDialog extends Component<NativeDialogProps> {
     };
 
     handleClick = (event: MouseEvent<HTMLDialogElement>) => {
-        const { onClick, backdrop = true } = this.props;
+        const { onClick, backdrop = true } = this.componentProps;
         onClick?.(event);
 
         const { defaultPrevented, target, currentTarget, clientX, clientY } = event;
@@ -194,7 +213,10 @@ export class NativeDialog extends Component<NativeDialogProps> {
     };
 
     render() {
+        const Root: ElementType = this.componentProps.as ?? 'dialog';
+
         const {
+            as: _as,
             open: _open,
             modal: _modal,
             keyboard: _keyboard,
@@ -212,10 +234,10 @@ export class NativeDialog extends Component<NativeDialogProps> {
             onKeyDown: _onKeyDown,
             onClose: _onClose,
             ...props
-        } = this.props;
+        } = this.componentProps;
 
         return (
-            <dialog
+            <Root
                 {...props}
                 ref={this.element}
                 className={classNames(

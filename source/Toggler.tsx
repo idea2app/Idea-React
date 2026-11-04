@@ -1,9 +1,10 @@
 'use client';
 
 import classNames from 'classnames';
-import { ButtonHTMLAttributes, Component, KeyboardEvent, MouseEvent } from 'react';
+import { ButtonHTMLAttributes, Component, ElementType, KeyboardEvent, MouseEvent } from 'react';
 
 import { Button, ComponentTheme } from './Button';
+import { AsProps, PolymorphicClassProps } from './Polymorphic';
 
 export interface TogglerProps extends Omit<ButtonHTMLAttributes<HTMLElement>, 'value'> {
     as?: 'button' | 'div' | 'span';
@@ -15,15 +16,23 @@ export interface TogglerProps extends Omit<ButtonHTMLAttributes<HTMLElement>, 'v
     onToggled?: (targets: HTMLElement[]) => unknown;
 }
 
-export class Toggler extends Component<TogglerProps> {
+export class Toggler<T extends ElementType | undefined = 'button'> extends Component<
+    PolymorphicClassProps<T, TogglerProps>
+> {
     static displayName = 'Toggler';
 
+    declare readonly props: PolymorphicClassProps<T, TogglerProps>;
+
+    protected get componentProps(): Readonly<Omit<TogglerProps, 'as'> & AsProps> {
+        return this.props;
+    }
+
     handleClick = (event: MouseEvent<HTMLElement>) => {
-        this.props.onClick?.(event);
+        this.componentProps.onClick?.(event);
 
-        if (event.defaultPrevented || this.props.disabled) return;
+        if (event.defaultPrevented || this.componentProps.disabled) return;
 
-        const { target, attribute = 'class', value, onToggled } = this.props;
+        const { target, attribute = 'class', value, onToggled } = this.componentProps;
         const targets = target
             ? [...document.querySelectorAll<HTMLElement>(target)]
             : [event.currentTarget];
@@ -56,11 +65,11 @@ export class Toggler extends Component<TogglerProps> {
     };
 
     handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-        this.props.onKeyDown?.(event);
+        this.componentProps.onKeyDown?.(event);
 
         if (
             !event.defaultPrevented &&
-            !this.props.disabled &&
+            !this.componentProps.disabled &&
             (event.key === 'Enter' || event.key === ' ')
         ) {
             event.preventDefault();
@@ -79,7 +88,7 @@ export class Toggler extends Component<TogglerProps> {
             variant,
             disabled,
             ...props
-        } = this.props;
+        } = this.componentProps;
 
         return Tag === 'button' ? (
             <Button

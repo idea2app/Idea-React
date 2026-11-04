@@ -1,6 +1,6 @@
 import { TableSpinner } from '../../../../source/Extension/TableSpinner';
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
 
+import { CodeCard } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="table-spinner">
@@ -27,7 +27,7 @@ cell spanning the given number of columns.
 
 ## Usage
 
-<CodeBlock language="tsx">{`<tbody>{loading ? <TableSpinner colSpan={columns.length} /> : rows}</tbody>`}</CodeBlock>
+<CodeCard>{`<tbody>{loading ? <TableSpinner colSpan={columns.length} /> : rows}</tbody>`}</CodeCard>
 
 `colSpan` must match the table's column count; `animation`, `theme`, and `size` style the spinner.
 

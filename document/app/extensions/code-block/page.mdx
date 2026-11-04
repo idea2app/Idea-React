@@ -1,5 +1,4 @@
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
-
+import { CodeCard } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="code-block">
@@ -11,14 +10,12 @@ as-is, while React elements are serialized to JSX source first.
 
 ## Example
 
-<CodeBlock language="tsx" className="border rounded p-3">
-    {`export const Hello = () => <strong>Hello, Idea React!</strong>;`}
-</CodeBlock>
+<CodeCard>{`export const Hello = () => <strong>Hello, Idea React!</strong>;`}</CodeCard>
 
 ## Language
 
-`language` accepts `javascript`, `jsx`, `typescript`, or `tsx`. The highlighted markup is injected
-inline, so the block needs no client-side JavaScript.
+`language` accepts `javascript`, `jsx`, `typescript`, `tsx`, `css`, `html`, `json`, `sh`, or `text`.
+The highlighted markup is injected inline, so the block needs no client-side JavaScript.
 
 ## Color scheme
 
@@ -27,7 +24,7 @@ to follow the system preference. Bootstrap theme containers work automatically, 
 nested containers with a different theme. Changing the scheme updates highlighting without
 rerendering the component.
 
-<CodeBlock language="tsx">{`<CodeBlock language="ts">{\`const answer: number = 42;\`}</CodeBlock>`}</CodeBlock>
+<CodeCard>{`<CodeBlock language="ts">{\`const answer: number = 42;\`}</CodeBlock>`}</CodeCard>
 
 </ComponentsLayout>
 

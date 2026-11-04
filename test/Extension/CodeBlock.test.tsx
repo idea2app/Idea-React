@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 
 import { CodeBlock } from '../../source/Extension/CodeBlock';
 
-it('emits both highlight palettes without a fixed inline token color', () => {
+it('emits both highlight palettes with dynamic inline token colors', () => {
     const code = 'const answer: number = 42;';
     const { container } = render(
         <CodeBlock language="typescript" className="custom" aria-label="Example">
@@ -21,7 +21,13 @@ it('emits both highlight palettes without a fixed inline token color', () => {
     assert.ok(tokens.length > 0);
     assert.ok(tokens.every(token => token.style.getPropertyValue('--shiki-light')));
     assert.ok(tokens.every(token => token.style.getPropertyValue('--shiki-dark')));
-    assert.ok(tokens.every(token => !token.style.color));
+    assert.ok(
+        tokens.every(token =>
+            token
+                .getAttribute('style')
+                ?.includes('color:light-dark(var(--shiki-light),var(--shiki-dark))')
+        )
+    );
     assert.ok(
         tokens.some(
             token =>
@@ -46,6 +52,16 @@ it('preserves React child serialization and escapes code markup', () => {
     assert.equal(container.textContent, '<script>alert("example")</script>');
 });
 
+it('highlights languages used by Markdown code fences', () => {
+    for (const language of ['text', 'css', 'html', 'json', 'sh']) {
+        const { container, unmount } = render(
+            <CodeBlock language={language}>const value = 42;</CodeBlock>
+        );
+        assert.equal(container.querySelector('code')?.textContent, 'const value = 42;');
+        unmount();
+    }
+});
+
 it('renders an optional code header', () => {
     const { container } = render(
         <CodeBlock language="tsx" header={<a href="https://example.com/source.tsx">source.tsx</a>}>
@@ -57,4 +73,7 @@ it('renders an optional code header', () => {
         'https://example.com/source.tsx'
     );
     assert.equal(container.querySelector('code')?.textContent, 'const value = 1;');
+    assert.equal(container.querySelector('figure')?.className, 'm-0');
+    assert.equal(container.querySelector('figcaption')?.classList.contains('border-bottom'), true);
+    assert.equal(container.querySelector('figcaption')?.classList.contains('border'), false);
 });

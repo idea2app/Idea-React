@@ -44,6 +44,25 @@ wrappers and local guides, including interactive behavior and the documented vis
 
 See the separate [Forms guide][2] for the Bootstrap form components.
 
+### Root elements
+
+Single-root components accept `as` to select an HTML tag or another React component:
+
+```tsx
+<Card as="article" aria-label="News">
+    <CardTitle as="h2">Latest news</CardTitle>
+</Card>
+
+<Button as={RouterLink} to="/docs" theme="primary">
+    Documentation
+</Button>
+```
+
+The selected component's additional props are inferred and forwarded, including required props.
+Idea React's own props keep their meaning when names overlap. Custom roots must forward DOM props
+and refs, and preserve the native capabilities required by behavioral components. Class component
+refs still reference the instance. Fragment-root and multiple-root components are excluded.
+
 ### Idea React extensions
 
 Idea React also includes components without a direct Bootstrap equivalent. See the [extension

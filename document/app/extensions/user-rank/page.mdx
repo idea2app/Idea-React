@@ -1,7 +1,6 @@
 import { UserRankView } from '../../../../source/Extension/UserRank';
-import { CodeBlock } from '../../../../source/Extension/CodeBlock';
 
-import { LiveExample } from '../../../component/Documentation/Components/Example';
+import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 
 <ComponentsLayout active="user-rank">
@@ -28,7 +27,9 @@ a table of the remaining ranks with avatars, scores, and locations.
 
 ## Usage
 
-<CodeBlock language="tsx">{`<UserRankView title="Weekly ranking" rank={users} linkOf={({ id }) => \`/users/\${id}\`} />`}</CodeBlock>
+<CodeCard>
+    <UserRankView title="Weekly ranking" rank={[]} linkOf={({ id }) => `/users/${id}`} />
+</CodeCard>
 
 `rank` lists users ordered by score; the first three render as medal cards and ranks 4–10 render as
 table rows. `linkOf` builds the profile link for each user, and address fields from

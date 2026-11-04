@@ -1,19 +1,24 @@
 import classNames from 'classnames';
-import { ComponentPropsWithRef, FC } from 'react';
+import { ComponentPropsWithRef } from 'react';
+
+import { polymorphic } from '../Polymorphic';
 
 export type FormProps = ComponentPropsWithRef<'form'> & {
     validated?: boolean;
 };
 
-export const Form: FC<FormProps> = ({ className, validated, ...props }) => (
-    <form {...props} className={classNames(validated && 'was-validated', className)} />
+export const Form = polymorphic<FormProps>(
+    ({ as: Root = 'form', className, validated, ...props }) => (
+        <Root {...props} className={classNames(validated && 'was-validated', className)} />
+    )
 );
-
 Form.displayName = 'Form';
 
 export type FormFieldsetProps = ComponentPropsWithRef<'fieldset'>;
 
-export const FormFieldset: FC<FormFieldsetProps> = props => <fieldset {...props} />;
+export const FormFieldset = polymorphic<FormFieldsetProps>(
+    ({ as: Root = 'fieldset', ...props }) => <Root {...props} />
+);
 
 FormFieldset.displayName = 'FormFieldset';
 
@@ -21,26 +26,32 @@ export type FormFieldProps = ComponentPropsWithRef<'div'> & {
     card?: boolean;
 };
 
-export const FormField: FC<FormFieldProps> = ({ className, card, ...props }) => (
-    <div {...props} className={classNames('form-field', card && 'form-field-card', className)} />
+export const FormField = polymorphic<FormFieldProps>(
+    ({ as: Root = 'div', className, card, ...props }) => (
+        <Root
+            {...props}
+            className={classNames('form-field', card && 'form-field-card', className)}
+        />
+    )
 );
-
 FormField.displayName = 'FormField';
 
 export type FormGroupProps = ComponentPropsWithRef<'div'>;
 
-export const FormGroup: FC<FormGroupProps> = ({ className, ...props }) => (
-    <div {...props} className={classNames('form-group', className)} />
+export const FormGroup = polymorphic<FormGroupProps>(
+    ({ as: Root = 'div', className, ...props }) => (
+        <Root {...props} className={classNames('form-group', className)} />
+    )
 );
-
 FormGroup.displayName = 'FormGroup';
 
 export type FormFieldContentProps = ComponentPropsWithRef<'div'>;
 
-export const FormFieldContent: FC<FormFieldContentProps> = ({ className, ...props }) => (
-    <div {...props} className={classNames('form-field-content', className)} />
+export const FormFieldContent = polymorphic<FormFieldContentProps>(
+    ({ as: Root = 'div', className, ...props }) => (
+        <Root {...props} className={classNames('form-field-content', className)} />
+    )
 );
-
 FormFieldContent.displayName = 'FormFieldContent';
 
 export interface FormValidationProps {
@@ -53,36 +64,33 @@ export type FormLabelProps = ComponentPropsWithRef<'label'> & {
     controlSize?: 'sm' | 'lg';
 };
 
-export const FormLabel: FC<FormLabelProps> = ({
-    className,
-    plain,
-    column,
-    controlSize,
-    ...props
-}) => (
-    <label
-        {...props}
-        className={classNames(
-            column ? 'col-form-label' : !plain && 'form-label',
-            column && controlSize && `col-form-label-${controlSize}`,
-            className
-        )}
-    />
+export const FormLabel = polymorphic<FormLabelProps>(
+    ({ as: Root = 'label', className, plain, column, controlSize, ...props }) => (
+        <Root
+            {...props}
+            className={classNames(
+                column ? 'col-form-label' : !plain && 'form-label',
+                column && controlSize && `col-form-label-${controlSize}`,
+                className
+            )}
+        />
+    )
 );
-
 FormLabel.displayName = 'FormLabel';
 
 export type FormLegendProps = ComponentPropsWithRef<'legend'> &
     Pick<FormLabelProps, 'column' | 'controlSize'>;
 
-export const FormLegend: FC<FormLegendProps> = ({ className, column, controlSize, ...props }) => (
-    <legend
-        {...props}
-        className={classNames(
-            column && 'col-form-label',
-            column && controlSize && `col-form-label-${controlSize}`,
-            className
-        )}
-    />
+export const FormLegend = polymorphic<FormLegendProps>(
+    ({ as: Root = 'legend', className, column, controlSize, ...props }) => (
+        <Root
+            {...props}
+            className={classNames(
+                column && 'col-form-label',
+                column && controlSize && `col-form-label-${controlSize}`,
+                className
+            )}
+        />
+    )
 );
 FormLegend.displayName = 'FormLegend';
