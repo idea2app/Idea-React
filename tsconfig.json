@@ -4,11 +4,11 @@
         "module": "ES2020",
         "moduleResolution": "bundler",
         "esModuleInterop": true,
-        "downlevelIteration": true,
         "useDefineForClassFields": true,
         "jsx": "react-jsx",
         "skipLibCheck": true,
-        "lib": ["ES2024", "DOM", "DOM.Iterable"]
+        "lib": ["ES2024", "DOM", "DOM.Iterable"],
+        "types": ["node"]
     },
     "include": ["*.ts", "source/**/*"],
     "typedocOptions": {
