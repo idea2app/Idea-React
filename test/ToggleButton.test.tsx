@@ -10,7 +10,9 @@ it('forwards change events, input attributes and button sizing', () => {
     render(
         <ToggleButton
             size="sm"
-            inputProps={{ id: 'choice', 'aria-describedby': 'hint' }}
+            id="choice"
+            autoComplete="email"
+            aria-describedby="hint"
             required
             onChange={onChange}
         >
@@ -20,6 +22,7 @@ it('forwards change events, input attributes and button sizing', () => {
     const input = screen.getByRole('checkbox', { name: 'Choice' }) as HTMLInputElement;
 
     assert.equal(input.id, 'choice');
+    assert.equal(input.autocomplete, 'email');
     assert.equal(input.required, true);
     assert.equal(input.getAttribute('aria-describedby'), 'hint');
     assert.ok(input.parentElement?.classList.contains('btn-sm'));

@@ -8,6 +8,7 @@ import { Icon } from '../../../../source/Extension/Icon';
 import { FormControl } from '../../../../source/Form';
 import { MenuItem, MenuItemContent, MenuItemDescription, MenuPanel } from '../../../../source/Menu';
 import { NativeDialog } from '../../../../source/NativeDialog';
+import { Placeholder, PlaceholderAnimation } from '../../../../source/Placeholder';
 import { DocumentationSearchModel } from './model';
 import styles from './style.module.less';
 
@@ -74,11 +75,24 @@ export class DocumentationSearch extends Component<DocumentationSearchProps> {
     renderResults() {
         const { results, loading } = this.model;
 
-        if (loading) return <p role="status">Loading search index...</p>;
-
-        return (
+        return loading ? (
+            <div className="my-5" role="status">
+                <p className="mb-4">Loading search index...</p>
+                <PlaceholderAnimation animation="wave" className="d-grid gap-3">
+                    <Placeholder as="div" className="w-100" />
+                    <Placeholder as="div" className="w-75" />
+                    <Placeholder as="div" className="w-100" />
+                    <Placeholder as="div" className="w-50" />
+                </PlaceholderAnimation>
+            </div>
+        ) : (
             <>
-                <MenuPanel as="ul" className="list-unstyled my-5" aria-label="Search results">
+                <MenuPanel
+                    as="ul"
+                    className="position-static w-100 list-unstyled my-5"
+                    aria-label="Search results"
+                    show
+                >
                     {results.map(({ href, title, description }) => (
                         <li key={href}>
                             <MenuItem

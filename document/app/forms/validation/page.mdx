@@ -160,7 +160,7 @@ For example, try to submit the form below; our `ValidationForm` wrapper will int
             </FormField>
         </FormGroup>
         <FormField>
-            <FormSwitch inputProps={{ id: 'validationCustomSwitch' }} />
+            <FormSwitch id="validationCustomSwitch" />
             <FormLabel htmlFor="validationCustomSwitch" plain>
                 Subscribe to newsletter
             </FormLabel>
@@ -257,7 +257,7 @@ While these feedback styles cannot be styled with CSS, you can still customize t
             </FormField>
         </FormGroup>
         <FormField>
-            <FormSwitch inputProps={{ id: 'validationDefaultSwitch' }} />
+            <FormSwitch id="validationDefaultSwitch" />
             <FormLabel htmlFor="validationDefaultSwitch" plain>
                 Subscribe to newsletter
             </FormLabel>
@@ -386,7 +386,7 @@ For invalid fields, ensure that the invalid feedback/error message is associated
             </FormField>
         </FormGroup>
         <FormField>
-            <FormSwitch inputProps={{ id: 'validationServerSwitch' }} />
+            <FormSwitch id="validationServerSwitch" />
             <FormLabel htmlFor="validationServerSwitch" plain>
                 Subscribe to newsletter
             </FormLabel>
@@ -483,10 +483,8 @@ Validation styles are available for the following form controls and components:
             <FormLabel>Switch</FormLabel>
             <FormField>
                 <FormSwitch
-                    inputProps={{
-                        id: 'validationFormSwitch',
-                        'aria-describedby': 'validationFormSwitchFeedback'
-                    }}
+                    id="validationFormSwitch"
+                    aria-describedby="validationFormSwitchFeedback"
                     validation="invalid"
                 />
                 <FormFieldContent>
@@ -727,7 +725,7 @@ This example functions the same as the [custom styles example][3]. Click the sub
             </FormField>
         </FormGroup>
         <FormField>
-            <FormSwitch inputProps={{ id: 'validationTooltipSwitch' }} />
+            <FormSwitch id="validationTooltipSwitch" />
             <FormLabel htmlFor="validationTooltipSwitch" plain>
                 Subscribe to newsletter
             </FormLabel>

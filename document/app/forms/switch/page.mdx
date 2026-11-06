@@ -11,10 +11,10 @@ Custom toggle component built on top of native `<input>` checkbox elements.
 
 ## Basic switch
 
-Switches work by layering an invisible checkbox over the custom switch indicator. This preserves interactivity while giving you a completely customizable layer underneath. `FormSwitch` supplies `role="switch"` on the checkbox. Pass native input attributes through `inputProps`.
+Switches work by layering an invisible checkbox over the custom switch indicator. This preserves interactivity while giving you a completely customizable layer underneath. `FormSwitch` supplies `role="switch"` on the checkbox. Pass native input attributes such as `id`, `name`, `disabled`, and `defaultChecked` directly to `FormSwitch`.
 
 <CodeExample>
-    <FormSwitch inputProps={{ defaultValue: '', id: 'switch' }} />
+    <FormSwitch defaultValue="" id="switch" />
 </CodeExample>
 
 ## With form field
@@ -24,7 +24,7 @@ Wrap `FormSwitch` in a `FormField` layout wrapper and add your label. The grid l
 <CodeExample>
     <div className="d-flex flex-column gap-3">
         <FormField>
-            <FormSwitch inputProps={{ defaultValue: '', id: 'switchMdLabel' }} />
+            <FormSwitch defaultValue="" id="switchMdLabel" />
             <FormLabel htmlFor="switchMdLabel" plain>
                 Default switch
             </FormLabel>
@@ -39,91 +39,61 @@ Modify the appearance of switches by adding the `theme` prop to the `.switch` el
 <CodeExample>
     <div className="d-flex flex-column gap-2">
         <FormField>
-            <FormSwitch
-                inputProps={{ defaultValue: '', id: 'switchprimary', defaultChecked: true }}
-                theme="primary"
-            />
+            <FormSwitch defaultValue="" id="switchprimary" defaultChecked theme="primary" />
             <FormLabel htmlFor="switchprimary" plain>
                 Example primary switch
             </FormLabel>
         </FormField>
         <FormField>
-            <FormSwitch
-                inputProps={{ defaultValue: '', id: 'switchaccent', defaultChecked: true }}
-                theme="accent"
-            />
+            <FormSwitch defaultValue="" id="switchaccent" defaultChecked theme="accent" />
             <FormLabel htmlFor="switchaccent" plain>
                 Example accent switch
             </FormLabel>
         </FormField>
         <FormField>
-            <FormSwitch
-                inputProps={{ defaultValue: '', id: 'switchsecondary', defaultChecked: true }}
-                theme="secondary"
-            />
+            <FormSwitch defaultValue="" id="switchsecondary" defaultChecked theme="secondary" />
             <FormLabel htmlFor="switchsecondary" plain>
                 Example secondary switch
             </FormLabel>
         </FormField>
         <FormField>
-            <FormSwitch
-                inputProps={{ defaultValue: '', id: 'switchsuccess', defaultChecked: true }}
-                theme="success"
-            />
+            <FormSwitch defaultValue="" id="switchsuccess" defaultChecked theme="success" />
             <FormLabel htmlFor="switchsuccess" plain>
                 Example success switch
             </FormLabel>
         </FormField>
         <FormField>
-            <FormSwitch
-                inputProps={{ defaultValue: '', id: 'switchdanger', defaultChecked: true }}
-                theme="danger"
-            />
+            <FormSwitch defaultValue="" id="switchdanger" defaultChecked theme="danger" />
             <FormLabel htmlFor="switchdanger" plain>
                 Example danger switch
             </FormLabel>
         </FormField>
         <FormField>
-            <FormSwitch
-                inputProps={{ defaultValue: '', id: 'switchwarning', defaultChecked: true }}
-                theme="warning"
-            />
+            <FormSwitch defaultValue="" id="switchwarning" defaultChecked theme="warning" />
             <FormLabel htmlFor="switchwarning" plain>
                 Example warning switch
             </FormLabel>
         </FormField>
         <FormField>
-            <FormSwitch
-                inputProps={{ defaultValue: '', id: 'switchinfo', defaultChecked: true }}
-                theme="info"
-            />
+            <FormSwitch defaultValue="" id="switchinfo" defaultChecked theme="info" />
             <FormLabel htmlFor="switchinfo" plain>
                 Example info switch
             </FormLabel>
         </FormField>
         <FormField>
-            <FormSwitch
-                inputProps={{ defaultValue: '', id: 'switchdark', defaultChecked: true }}
-                theme="dark"
-            />
+            <FormSwitch defaultValue="" id="switchdark" defaultChecked theme="dark" />
             <FormLabel htmlFor="switchdark" plain>
                 Example dark switch
             </FormLabel>
         </FormField>
         <FormField>
-            <FormSwitch
-                inputProps={{ defaultValue: '', id: 'switchlight', defaultChecked: true }}
-                theme="light"
-            />
+            <FormSwitch defaultValue="" id="switchlight" defaultChecked theme="light" />
             <FormLabel htmlFor="switchlight" plain>
                 Example light switch
             </FormLabel>
         </FormField>
         <FormField>
-            <FormSwitch
-                inputProps={{ defaultValue: '', id: 'switchinverse', defaultChecked: true }}
-                theme="inverse"
-            />
+            <FormSwitch defaultValue="" id="switchinverse" defaultChecked theme="inverse" />
             <FormLabel htmlFor="switchinverse" plain>
                 Example inverse switch
             </FormLabel>
@@ -138,22 +108,13 @@ Add the `disabled` attribute and the associated `<label>`s are automatically sty
 <CodeExample>
     <Stack gap={2}>
         <FormField>
-            <FormSwitch
-                inputProps={{ defaultValue: '', id: 'switchDisabledLabel', disabled: true }}
-            />
+            <FormSwitch defaultValue="" id="switchDisabledLabel" disabled />
             <FormLabel htmlFor="switchDisabledLabel" plain>
                 Disabled switch
             </FormLabel>
         </FormField>
         <FormField>
-            <FormSwitch
-                inputProps={{
-                    defaultValue: '',
-                    id: 'switchCheckedDisabledLabel',
-                    disabled: true,
-                    defaultChecked: true
-                }}
-            />
+            <FormSwitch defaultValue="" id="switchCheckedDisabledLabel" disabled defaultChecked />
             <FormLabel htmlFor="switchCheckedDisabledLabel" plain>
                 Disabled checked switch
             </FormLabel>
@@ -168,19 +129,19 @@ Add a size modifier class to make your switch appear smaller or larger.
 <CodeExample>
     <div className="d-flex flex-column gap-3">
         <FormField>
-            <FormSwitch inputProps={{ defaultValue: '', id: 'switchSizeSm' }} size="sm" />
+            <FormSwitch defaultValue="" id="switchSizeSm" size="sm" />
             <FormLabel htmlFor="switchSizeSm" plain>
                 Small switch
             </FormLabel>
         </FormField>
         <FormField>
-            <FormSwitch inputProps={{ defaultValue: '', id: 'switchSizeMd' }} />
+            <FormSwitch defaultValue="" id="switchSizeMd" />
             <FormLabel htmlFor="switchSizeMd" plain>
                 Default switch
             </FormLabel>
         </FormField>
         <FormField>
-            <FormSwitch inputProps={{ defaultValue: '', id: 'switchSizeLg' }} size="lg" />
+            <FormSwitch defaultValue="" id="switchSizeLg" size="lg" />
             <FormLabel htmlFor="switchSizeLg" plain>
                 Large switch
             </FormLabel>
@@ -196,7 +157,8 @@ Customize your switch for any width and indicator size you need by overriding th
     <div className="d-flex flex-column gap-3">
         <FormField>
             <FormSwitch
-                inputProps={{ defaultValue: '', id: 'switchCustomWidth' }}
+                defaultValue=""
+                id="switchCustomWidth"
                 width="2.75rem"
                 indicatorWidth="1.5rem"
             />

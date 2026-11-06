@@ -168,7 +168,7 @@ Switches also trigger the two-column grid.
 
 <CodeExample>
     <FormField>
-        <FormSwitch inputProps={{ id: 'fieldSwitch' }} />
+        <FormSwitch id="fieldSwitch" />
         <FormLabel htmlFor="fieldSwitch" plain>
             Enable notifications
         </FormLabel>
@@ -308,7 +308,7 @@ Apply `.is-invalid` or `.is-valid` directly to the control for server-side valid
         <FormFeedback>You must agree before submitting.</FormFeedback>
     </FormField>
     <FormField className="mb-3">
-        <FormSwitch inputProps={{ id: 'fieldServerSwitch' }} validation="invalid" />
+        <FormSwitch id="fieldServerSwitch" validation="invalid" />
         <FormLabel htmlFor="fieldServerSwitch" plain>
             Accept marketing emails
         </FormLabel>
