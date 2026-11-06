@@ -38,9 +38,7 @@ export class DocumentationSearchModel {
         try {
             const response = await fetch(this.indexUrl);
             if (!response.ok)
-                throw new Error(
-                    `Unable to load the search index (HTTP ${response.status}). Build the site before previewing search.`
-                );
+                throw new Error(`Unable to load the search index (HTTP ${response.status}).`);
             const entries: unknown = await response.json();
 
             if (!Array.isArray(entries) || !entries.every(isSearchEntry))
@@ -74,8 +72,13 @@ export class DocumentationSearchModel {
 
                 return words.every(word => text.includes(word));
             })
+            .map(entry => ({
+                entry,
+                titleMatches: words.filter(word => entry.title.toLowerCase().includes(word)).length
+            }))
+            .sort((left, right) => right.titleMatches - left.titleMatches)
             .slice(0, 20)
-            .map(({ description, ...entry }) => {
+            .map(({ entry: { description, ...entry } }) => {
                 const match = description.toLowerCase().indexOf(words[0]);
                 const start = Math.max(0, match - 40);
                 return {

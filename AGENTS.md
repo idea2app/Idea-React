@@ -188,6 +188,7 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
   类组件显式声明 `declare readonly props: PolymorphicClassProps<T, Props>`，避免 React 的
   `Readonly` 映射丢失目标属性的联合类型；内部按需使用类型收窄 getter。
 - 用通用组件替换原生元素或已有组件时，使用 `as` 指定原元素/组件，并保留其语义、属性、事件和行为；不因替换标签而丢失原有能力。优先复用组件已有的属性透传，避免重复包装。
+- 表单组件的原生控件属性直接暴露为组件顶层 props，不封装在 `inputProps` 等嵌套对象中。
 - 组件 Props 优先用 `Pick`/`Omit`/`extends` 复用已有类型，不重复声明；按外观、内容、状态、行为的顺序分组排列。
 - JSX 属性按 `as`、HTML 通用静态属性、组件专属属性、状态属性、回调属性排序；相同键值的 props 可用对象字面量简写后展开。
 - 同一模块的类型与值合并为一条 import，不拆成 `import type` 与 `import` 两条。
@@ -224,7 +225,7 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - Markdown 正文中的链接采用文末数字引用：正文写 `[text][number]`，文末写 `[number]: URL`；图片链接同样使用引用形式。行末链接（如组件列表项）无需改为文末引用，可保留 `[text](URL)`。
 - 每篇文档的数字引用按首次出现顺序从 1 连续编号；重复链接复用同一编号，修改后同步整理正文与定义，移除未使用定义，不留跳号、重复或悬空引用。
 - 组件目录优先列出上游标准组件，再列扩展组件。
-- 静态站搜索优先采用最简单可用的方案，自动索引导出内容，不维护手写页面清单，不为索引格式或具体技术额外引入不必要的服务和框架。
+- 静态站搜索优先采用最简单可用的方案，开发与生产共用 MDX 源码索引器并通过同一 JSON 地址加载，不依赖编译后的 HTML，不维护手写页面清单，不为索引格式或具体技术额外引入不必要的服务和框架。
 
 ## 测试与验证
 
@@ -249,7 +250,7 @@ pnpm build -r
 - `test` 使用 Node.js 原生 runner，需要 Node.js 22.18+，并做 TypeScript 检查。Lint 与格式检查针对本次修改文件运行。
 - 根目录 `pnpm build` 构建 TypeDoc、旧预览站与组件发布包；现有根构建、发布部署仍使用 `docs/`，不能将其误当作 ViNext 文档工作区的构建或部署。
 - 文档工作区单独构建，只部署 `document/dist/client/`；部署到子目录前配置 `document/next.config.ts` 的 `basePath`，并验证静态资源、搜索索引和结果链接。
-- 搜索索引在导出 HTML 后生成；验证搜索时先构建，再预览静态产物。
+- 开发模式按请求从当前 MDX 文档生成搜索索引；生产模式用同一索引器生成静态 JSON，生产搜索需构建后预览静态产物。
 - 浏览器验证包括键盘交互、主题恢复、错误弹窗、失败后重试与不同视口；文档站不依赖 Node.js 或 Worker 运行时。
 
 ## 发布维护

@@ -13,7 +13,9 @@ pnpm --filter @idea-react/document dev
 ```
 
 The site includes MDX pages, Bootstrap styling, theme switching, and local page search.
-Build and preview the site to use the generated search index.
+Development and production search use the same MDX source indexer and load `search-index.json`.
+The development server generates it on request; the build writes it to the static output.
+Search ranks title matches before body-only matches.
 
 ## Build and deploy
 

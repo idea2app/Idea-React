@@ -7,6 +7,7 @@ import vinext from 'vinext';
 import { defineConfig } from 'vite';
 
 import { swcOptions } from '../swc.config.mts';
+import { documentationSearch } from './search/index.ts';
 
 interface MdastNode {
     type: string;
@@ -163,6 +164,7 @@ export default defineConfig({
         }
     },
     plugins: [
+        documentationSearch(),
         mdx({
             providerImportSource: '@documentation/MDXComponents',
             remarkPlugins: [remarkGfm, remarkCodeCards, remarkInlineButtonChildren],

@@ -1,32 +1,32 @@
 import classNames from 'classnames';
-import { ComponentPropsWithRef } from 'react';
+import { ComponentPropsWithRef, CSSProperties, Ref } from 'react';
 
 import type { ComponentTheme } from './Button';
+import { splitInputProps } from './Form/inputProps';
 import { polymorphic } from './Polymorphic';
 
-export interface ToggleButtonProps extends Omit<ComponentPropsWithRef<'label'>, 'onChange'> {
-    type?: 'checkbox' | 'radio';
-    variant?: 'solid' | 'outline' | 'subtle' | 'text';
-    theme?: ComponentTheme;
-    name?: string;
-    value?: string;
-    checked?: boolean;
-    defaultChecked?: boolean;
-    disabled?: boolean;
-    required?: boolean;
-    size?: 'xs' | 'sm' | 'lg';
-    inputProps?: Omit<
-        ComponentPropsWithRef<'input'>,
-        'type' | 'name' | 'value' | 'checked' | 'defaultChecked' | 'disabled' | 'required'
-    >;
-    onChange?: ComponentPropsWithRef<'input'>['onChange'];
-}
+type NativeInputProps = Omit<ComponentPropsWithRef<'input'>, 'ref' | 'type' | 'size'>;
+
+export type ToggleButtonProps = Omit<
+    ComponentPropsWithRef<'label'>,
+    keyof NativeInputProps | 'onChange'
+> &
+    NativeInputProps & {
+        type?: 'checkbox' | 'radio';
+        variant?: 'solid' | 'outline' | 'subtle' | 'text';
+        theme?: ComponentTheme;
+        size?: 'xs' | 'sm' | 'lg';
+        inputRef?: Ref<HTMLInputElement>;
+        inputClassName?: string;
+        inputStyle?: CSSProperties;
+    };
 
 export const ToggleButton = polymorphic<ToggleButtonProps>(
     ({
         as: Root = 'label',
         type = 'checkbox',
         variant = 'solid',
+        className,
         theme,
         name,
         value,
@@ -35,30 +35,38 @@ export const ToggleButton = polymorphic<ToggleButtonProps>(
         disabled,
         required,
         size,
-        inputProps,
-        onChange,
-        className,
+        inputRef,
+        inputClassName,
+        inputStyle,
         children,
+        onChange,
         ...props
-    }) => (
-        <Root
-            {...props}
-            className={classNames(
-                'btn-check',
-                `btn-${variant}`,
-                theme && `theme-${theme}`,
-                size && `btn-${size}`,
-                className
-            )}
-        >
-            <input
-                {...inputProps}
-                {...{ type, name, value, checked, defaultChecked, disabled, required }}
-                autoComplete="off"
-                onChange={onChange}
-            />
-            {children}
-        </Root>
-    )
+    }) => {
+        const { inputProps, rootProps } = splitInputProps(props);
+
+        return (
+            <Root
+                {...rootProps}
+                className={classNames(
+                    'btn-check',
+                    `btn-${variant}`,
+                    theme && `theme-${theme}`,
+                    size && `btn-${size}`,
+                    className
+                )}
+            >
+                <input
+                    {...inputProps}
+                    ref={inputRef}
+                    className={inputClassName}
+                    style={inputStyle}
+                    {...{ type, name, value, checked, defaultChecked, disabled, required }}
+                    autoComplete={inputProps.autoComplete ?? 'off'}
+                    onChange={onChange}
+                />
+                {children}
+            </Root>
+        );
+    }
 );
 ToggleButton.displayName = 'ToggleButton';
