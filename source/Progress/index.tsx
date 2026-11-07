@@ -1,5 +1,3 @@
-import './style.module.css';
-
 import classNames from 'classnames';
 import { ComponentPropsWithRef, CSSProperties } from 'react';
 
@@ -36,7 +34,9 @@ export const Progress = polymorphic<ProgressProps>(
 
         const current = Math.min(max, Math.max(min, value));
         const width = `${((current - min) / (max - min)) * 100}%`;
+        // Stacks set the offset to zero and fill each segment's inner bar.
         const progressStyle: CSSProperties & { '--_progress-width': string } = {
+            width: 'min(100%, calc(var(--_progress-width) + var(--_progress-stack-offset, 100%)))',
             ...style,
             '--_progress-width': width
         };
@@ -63,7 +63,7 @@ export const Progress = polymorphic<ProgressProps>(
                         },
                         barClass
                     )}
-                    style={barStyle}
+                    style={{ width: `var(--_progress-bar-width, ${width})`, ...barStyle }}
                 >
                     {children}
                 </div>
@@ -74,8 +74,18 @@ export const Progress = polymorphic<ProgressProps>(
 Progress.displayName = 'Progress';
 
 export const ProgressStack = polymorphic<ComponentPropsWithRef<'div'>>(
-    ({ as: Root = 'div', className, ...props }) => (
-        <Root {...props} className={classNames('progress-stacked', className)} />
+    ({ as: Root = 'div', className, style, ...props }) => (
+        <Root
+            {...props}
+            className={classNames('progress-stacked', className)}
+            style={
+                {
+                    '--_progress-stack-offset': '0%',
+                    '--_progress-bar-width': '100%',
+                    ...style
+                } as CSSProperties
+            }
+        />
     )
 );
 ProgressStack.displayName = 'ProgressStack';

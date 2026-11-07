@@ -42,6 +42,12 @@ export const Button = polymorphic<ButtonProps>(
         const link = isButtonLink(attributes);
         const Root = RootAs ?? (link ? 'a' : 'button');
         const nativeButton = Root === 'button';
+        const onClick =
+            !nativeButton && disabled
+                ? typeof Root === 'string'
+                    ? undefined
+                    : preventNavigation
+                : attributes.onClick;
         const classes = classNames(
             variant === false ? undefined : variant ? `btn-${variant}` : icon ? undefined : 'btn',
             theme && `theme-${theme}`,
@@ -64,7 +70,7 @@ export const Button = polymorphic<ButtonProps>(
                         : attributes['aria-pressed']
                 }
                 tabIndex={!nativeButton && disabled ? -1 : attributes.tabIndex}
-                onClick={!nativeButton && disabled ? preventNavigation : attributes.onClick}
+                onClick={onClick}
             />
         );
     }

@@ -127,19 +127,13 @@ You can include multiple progress components inside a container with `.progress-
 <CodeExample>
     <Stack gap={3}>
         <ProgressStack>
-            <Progress value={15.0} aria-label="Segment one" style={{ width: '15%' }} />
+            <Progress value={15.0} aria-label="Segment one" />
             <Progress
                 value={30.0}
                 barProps={{ className: 'bg-success' }}
                 aria-label="Segment two"
-                style={{ width: '30%' }}
             />
-            <Progress
-                value={20.0}
-                barProps={{ className: 'bg-info' }}
-                aria-label="Segment three"
-                style={{ width: '20%' }}
-            />
+            <Progress value={20.0} barProps={{ className: 'bg-info' }} aria-label="Segment three" />
         </ProgressStack>
     </Stack>
 </CodeExample>

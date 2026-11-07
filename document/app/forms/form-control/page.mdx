@@ -248,19 +248,19 @@ Inline text can use any typical inline HTML element (be it a `<span>`, `<small>`
 
 <CodeExample>
     <Row className="g-3 align-items-center">
-        <Col span="auto">
+        <Col xs="auto">
             <FormLabel htmlFor="inputPassword6" column>
                 Password
             </FormLabel>
         </Col>
-        <Col span="auto">
+        <Col xs="auto">
             <FormControl
                 type="password"
                 id="inputPassword6"
                 aria-describedby="passwordHelpInline"
             />
         </Col>
-        <Col span="auto">
+        <Col xs="auto">
             <FormText id="passwordHelpInline"> Must be 8-20 characters long. </FormText>
         </Col>
     </Row>
@@ -350,7 +350,7 @@ If you want to have `<input readonly>` elements in your form styled as plain tex
 
 <CodeExample>
     <Form className="row g-3">
-        <Col span="auto">
+        <Col xs="auto">
             <FormLabel htmlFor="staticEmail2" plain className="visually-hidden">
                 Email
             </FormLabel>
@@ -362,13 +362,13 @@ If you want to have `<input readonly>` elements in your form styled as plain tex
                 plaintext
             />
         </Col>
-        <Col span="auto">
+        <Col xs="auto">
             <FormLabel htmlFor="inputPassword2" plain className="visually-hidden">
                 Password
             </FormLabel>
             <FormControl type="password" id="inputPassword2" placeholder="Password" />
         </Col>
-        <Col span="auto">
+        <Col xs="auto">
             <Button type="submit" theme="primary" variant="solid" className="mb-3">
                 Confirm identity
             </Button>

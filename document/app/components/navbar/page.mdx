@@ -464,27 +464,36 @@ To make a navbar dark, set `theme="dark"` on `Navbar`.
 Set `translucent` to blur and saturate the background of a navbar. This works well for navbars positioned over content, such as fixed or sticky navbars.
 
 <CodeExample>
-    <Navbar expand="md" theme="dark" translucent>
-        <Container fluid>
-            <NavbarBrand href="#">{'Navbar'}</NavbarBrand>
+    <div className="position-relative overflow-hidden rounded bg-primary text-white">
+        <Navbar expand theme="dark" translucent className="position-absolute top-0 start-0 w-100">
+            <Container fluid>
+                <NavbarBrand href="#">{'Navbar'}</NavbarBrand>
 
-            <NavbarNav>
-                <NavItem>
-                    <NavLink active aria-current="page" href="#">
-                        {'Home'}
-                    </NavLink>
-                </NavItem>
+                <NavbarNav>
+                    <NavItem>
+                        <NavLink active aria-current="page" href="#">
+                            {'Home'}
+                        </NavLink>
+                    </NavItem>
 
-                <NavItem>
-                    <NavLink href="#">{'Features'}</NavLink>
-                </NavItem>
+                    <NavItem>
+                        <NavLink href="#">{'Features'}</NavLink>
+                    </NavItem>
 
-                <NavItem>
-                    <NavLink href="#">{'Pricing'}</NavLink>
-                </NavItem>
-            </NavbarNav>
-        </Container>
-    </Navbar>
+                    <NavItem>
+                        <NavLink href="#">{'Pricing'}</NavLink>
+                    </NavItem>
+                </NavbarNav>
+            </Container>
+        </Navbar>
+
+        <div className="p-5 pt-5">
+            <h3>{'Content behind the navbar'}</h3>
+            <p className="mb-0">
+                {'The translucent navbar blurs and saturates this background content.'}
+            </p>
+        </div>
+    </div>
 
 </CodeExample>
 
@@ -651,7 +660,7 @@ Use any of the responsive containers to change how wide the content in your navb
 
 <CodeExample>
     <Navbar expand="lg" className="bg-1 fg-2">
-        <Container breakpoint="md">
+        <Container fluid="md">
             <NavbarBrand href="#">{'Navbar'}</NavbarBrand>
         </Container>
     </Navbar>

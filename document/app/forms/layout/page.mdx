@@ -99,11 +99,11 @@ More complex layouts can also be created with the grid system.
             <FormLabel htmlFor="inputPassword4">Password</FormLabel>
             <FormControl type="password" id="inputPassword4" />
         </Col>
-        <Col span={12}>
+        <Col xs={12}>
             <FormLabel htmlFor="inputAddress">Address</FormLabel>
             <FormControl type="text" id="inputAddress" placeholder="1234 Main St" />
         </Col>
-        <Col span={12}>
+        <Col xs={12}>
             <FormLabel htmlFor="inputAddress2">Address 2</FormLabel>
             <FormControl type="text" id="inputAddress2" placeholder="Apartment, studio, or floor" />
         </Col>
@@ -122,7 +122,7 @@ More complex layouts can also be created with the grid system.
             <FormLabel htmlFor="inputZip">Zip</FormLabel>
             <FormControl type="text" id="inputZip" />
         </Col>
-        <Col span={12}>
+        <Col xs={12}>
             <FormField>
                 <Checkbox id="gridCheck" />
                 <FormLabel htmlFor="gridCheck" plain>
@@ -130,7 +130,7 @@ More complex layouts can also be created with the grid system.
                 </FormLabel>
             </FormField>
         </Col>
-        <Col span={12}>
+        <Col xs={12}>
             <Button type="submit" theme="primary" variant="solid">
                 Sign in
             </Button>
@@ -275,13 +275,13 @@ The example below uses a flexbox utility to vertically center the contents and c
 
 <CodeExample>
     <Form className="row gy-2 gx-3 align-items-center">
-        <Col span="auto">
+        <Col xs="auto">
             <FormLabel htmlFor="autoSizingInput" plain className="visually-hidden">
                 Name
             </FormLabel>
             <FormControl type="text" id="autoSizingInput" placeholder="Jane Doe" />
         </Col>
-        <Col span="auto">
+        <Col xs="auto">
             <FormLabel htmlFor="autoSizingInputGroup" plain className="visually-hidden">
                 Username
             </FormLabel>
@@ -290,7 +290,7 @@ The example below uses a flexbox utility to vertically center the contents and c
                 <FormControl type="text" id="autoSizingInputGroup" placeholder="Username" />
             </InputGroup>
         </Col>
-        <Col span="auto">
+        <Col xs="auto">
             <FormLabel htmlFor="autoSizingSelect" plain className="visually-hidden">
                 Preference
             </FormLabel>
@@ -301,7 +301,7 @@ The example below uses a flexbox utility to vertically center the contents and c
                 <option value="3">Three</option>
             </FormSelect>
         </Col>
-        <Col span="auto">
+        <Col xs="auto">
             <FormField>
                 <Checkbox id="autoSizingCheck" />
                 <FormLabel htmlFor="autoSizingCheck" plain>
@@ -309,7 +309,7 @@ The example below uses a flexbox utility to vertically center the contents and c
                 </FormLabel>
             </FormField>
         </Col>
-        <Col span="auto">
+        <Col xs="auto">
             <Button type="submit" theme="primary" variant="solid">
                 Submit
             </Button>
@@ -351,7 +351,7 @@ You can then remix that once again with size-specific column classes.
                 <option value="3">Three</option>
             </FormSelect>
         </Col>
-        <Col span="auto">
+        <Col xs="auto">
             <FormField>
                 <Checkbox id="autoSizingCheck2" />
                 <FormLabel htmlFor="autoSizingCheck2" plain>
@@ -359,7 +359,7 @@ You can then remix that once again with size-specific column classes.
                 </FormLabel>
             </FormField>
         </Col>
-        <Col span="auto">
+        <Col xs="auto">
             <Button type="submit" theme="primary" variant="solid">
                 Submit
             </Button>
@@ -373,7 +373,7 @@ Use the `.row-cols-*` classes to create responsive horizontal layouts. By adding
 
 <CodeExample>
     <Form className="row lg:row-cols-auto g-3 align-items-center">
-        <Col span={12}>
+        <Col xs={12}>
             <FormLabel htmlFor="inlineFormInputGroupUsername" plain className="visually-hidden">
                 Username
             </FormLabel>
@@ -382,7 +382,7 @@ Use the `.row-cols-*` classes to create responsive horizontal layouts. By adding
                 <FormControl type="text" id="inlineFormInputGroupUsername" placeholder="Username" />
             </InputGroup>
         </Col>
-        <Col span={12}>
+        <Col xs={12}>
             <FormLabel htmlFor="inlineFormSelectPref" plain className="visually-hidden">
                 Preference
             </FormLabel>
@@ -393,7 +393,7 @@ Use the `.row-cols-*` classes to create responsive horizontal layouts. By adding
                 <option value="3">Three</option>
             </FormSelect>
         </Col>
-        <Col span={12}>
+        <Col xs={12}>
             <FormField>
                 <Checkbox id="inlineFormCheck" />
                 <FormLabel htmlFor="inlineFormCheck" plain>
@@ -401,7 +401,7 @@ Use the `.row-cols-*` classes to create responsive horizontal layouts. By adding
                 </FormLabel>
             </FormField>
         </Col>
-        <Col span={12}>
+        <Col xs={12}>
             <Button type="submit" theme="primary" variant="solid">
                 Submit
             </Button>

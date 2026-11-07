@@ -8,16 +8,15 @@ export type ColSize = number | 'auto';
 export type BreakpointColSize = ColSize | true;
 
 export interface ContainerProps extends ComponentPropsWithRef<'div'> {
-    fluid?: boolean;
-    breakpoint?: Breakpoint;
+    fluid?: boolean | Breakpoint;
 }
 
 export const Container = polymorphic<ContainerProps>(
-    ({ as: Root = 'div', fluid, breakpoint, className, ...props }) => (
+    ({ as: Root = 'div', fluid, className, ...props }) => (
         <Root
             {...props}
             className={classNames(
-                breakpoint ? `${breakpoint}:container` : fluid ? 'container-fluid' : 'container',
+                fluid === true ? 'container-fluid' : fluid ? `${fluid}:container` : 'container',
                 className
             )}
         />
@@ -28,7 +27,7 @@ Container.displayName = 'Container';
 export type RowCols = number | 'auto';
 
 export interface RowProps extends ComponentPropsWithRef<'div'> {
-    cols?: RowCols;
+    xs?: RowCols;
     sm?: RowCols;
     md?: RowCols;
     lg?: RowCols;
@@ -37,7 +36,7 @@ export interface RowProps extends ComponentPropsWithRef<'div'> {
 }
 
 export const Row = polymorphic<RowProps>(
-    ({ as: Root = 'div', cols, sm, md, lg, xl, '2xl': xxl, className, ...props }) => {
+    ({ as: Root = 'div', xs, sm, md, lg, xl, '2xl': xxl, className, ...props }) => {
         const sizes: [Breakpoint, RowCols | undefined][] = [
             ['sm', sm],
             ['md', md],
@@ -51,7 +50,7 @@ export const Row = polymorphic<RowProps>(
                 {...props}
                 className={classNames(
                     'row',
-                    cols !== undefined && `row-cols-${cols}`,
+                    xs !== undefined && `row-cols-${xs}`,
                     sizes.map(
                         ([breakpoint, size]) =>
                             size !== undefined && `${breakpoint}:row-cols-${size}`
@@ -65,7 +64,7 @@ export const Row = polymorphic<RowProps>(
 Row.displayName = 'Row';
 
 export interface ColProps extends ComponentPropsWithRef<'div'> {
-    span?: ColSize;
+    xs?: BreakpointColSize;
     sm?: BreakpointColSize;
     md?: BreakpointColSize;
     lg?: BreakpointColSize;
@@ -74,7 +73,7 @@ export interface ColProps extends ComponentPropsWithRef<'div'> {
 }
 
 export const Col = polymorphic<ColProps>(
-    ({ as: Root = 'div', span, sm, md, lg, xl, '2xl': xxl, className, ...props }) => {
+    ({ as: Root = 'div', xs, sm, md, lg, xl, '2xl': xxl, className, ...props }) => {
         const sizes: [Breakpoint, BreakpointColSize | undefined][] = [
             ['sm', sm],
             ['md', md],
@@ -88,8 +87,10 @@ export const Col = polymorphic<ColProps>(
             <Root
                 {...props}
                 className={classNames(
-                    !span && !sized && 'col',
-                    span !== undefined && `col-${span}`,
+                    {
+                        col: (xs === undefined && !sized) || xs === true,
+                        [`col-${xs}`]: xs !== undefined && xs !== true
+                    },
                     sizes.map(
                         ([breakpoint, size]) =>
                             size !== undefined &&

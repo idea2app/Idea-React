@@ -251,7 +251,7 @@ Validation feedback (`.invalid-feedback`, `.valid-feedback`) stacks correctly in
 Add `data-bs-validate` to your `<form>` to opt in to `:user-invalid` styling. These pseudo-classes activate after the user interacts with a control. To also show success styling on valid fields, use `data-bs-validate="valid"`. Add `novalidate` to suppress native browser validation tooltips while keeping the constraint validation API available.
 
 <CodeExample>
-    <Stack as={ValidatableForm} noValidate data-bs-validate="" gap={3}>
+    <Stack as={ValidationForm} noValidate data-bs-validate="" gap={3}>
         <FormField className="flex-1">
             <FormLabel htmlFor="fieldValidateEmail">Email address</FormLabel>
             <FormControl type="email" id="fieldValidateEmail" required />

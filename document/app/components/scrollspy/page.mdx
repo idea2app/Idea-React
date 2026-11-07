@@ -124,7 +124,7 @@ Scrollspy also works with nested `.nav`s. If a nested `.nav` is `.active`, its p
 
 <CodeExample>
     <Row>
-        <Col span={4}>
+        <Col xs={4}>
             <nav
                 id="navbar-example3"
                 className="h-100 flex-column align-items-stretch pe-4 border-end"
@@ -159,7 +159,7 @@ Scrollspy also works with nested `.nav`s. If a nested `.nav` is `.active`, its p
             </nav>
         </Col>
 
-        <Col span={8}>
+        <Col xs={8}>
             <ScrollSpy
                 style={{ height: '350px' }}
                 target="#navbar-example3"
@@ -290,7 +290,7 @@ Scrollspy also works with `.list-group`s. Scroll the area next to the list group
 
 <CodeExample>
     <Row>
-        <Col span={4}>
+        <Col xs={4}>
             <ListGroup as="div" id="list-example">
                 <ListGroupItem action href="#list-item-1">
                     {'Item 1'}
@@ -310,7 +310,7 @@ Scrollspy also works with `.list-group`s. Scroll the area next to the list group
             </ListGroup>
         </Col>
 
-        <Col span={8}>
+        <Col xs={8}>
             <ScrollSpy
                 style={{ height: '200px' }}
                 target="#list-example"
@@ -361,7 +361,7 @@ Scrollspy is not limited to nav components and list groups, so it will work on a
 
 <CodeExample>
     <Row>
-        <Col span={4}>
+        <Col xs={4}>
             <div
                 id="simple-list-example"
                 className="d-flex flex-column gap-2 simple-list-example-scrollspy text-center"
@@ -388,7 +388,7 @@ Scrollspy is not limited to nav components and list groups, so it will work on a
             </div>
         </Col>
 
-        <Col span={8}>
+        <Col xs={8}>
             <ScrollSpy
                 style={{ height: '200px' }}
                 target="#simple-list-example"

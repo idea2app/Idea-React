@@ -73,7 +73,7 @@ export const UserRankView = polymorphic<UserRankViewProps>(
         return (
             <Container as={RootAs} className={className} {...props}>
                 <Row className={style.rankBox}>
-                    <Col span={12} lg={7}>
+                    <Col xs={12} lg={7}>
                         <div className={`shadow rounded-3 ${style.title}`}>
                             <div className={style.medal}>
                                 <i className="d-inline-block ms-1 overflow-hidden rounded-circle" />
@@ -93,7 +93,7 @@ export const UserRankView = polymorphic<UserRankViewProps>(
                             {rank.slice(0, 3).map(renderMedal)}
                         </ul>
                     </Col>
-                    <Col span={12} lg={5}>
+                    <Col xs={12} lg={5}>
                         <Table className={`my-3 pt-2 ${style.restUsers}`} responsive>
                             <tbody>{rank.slice(3, 10).map(renderRow)}</tbody>
                         </Table>

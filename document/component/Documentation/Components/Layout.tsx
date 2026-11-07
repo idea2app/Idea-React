@@ -15,7 +15,7 @@ export const DocumentationLayout: FC<ComponentsLayoutProps> = ({ active, childre
             <aside className="lg:col-3 d-none lg:d-block">
                 <Sidebar active={active} />
             </aside>
-            <Col span={12} lg={9}>
+            <Col xs={12} lg={9}>
                 <Row className="g-5">
                     <main id="content" className="col-12 lg:col-9">
                         {children}

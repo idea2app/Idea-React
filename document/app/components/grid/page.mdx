@@ -12,9 +12,9 @@ Use our powerful mobile-first flexbox grid to build layouts of all shapes and si
 twelve column system, six default responsive tiers, Sass variables and mixins, and dozens of
 predefined classes.
 
-Idea React provides the [`Container`, `Row`, and `Col` wrappers][1] for these examples. Pass `fluid`
-or `breakpoint` to `Container`, use the `cols` and breakpoint props on `Row`, and use the `span`,
-`sm`, `md`, `lg`, `xl`, and `2xl` props on `Col`.
+Idea React provides the [`Container`, `Row`, and `Col` wrappers][1] for these examples. Set `fluid`
+to `true` for a full-width container or pass a breakpoint to make it responsive. Use the `xs`, `sm`,
+`md`, `lg`, `xl`, and `2xl` props on `Row` and `Col`.
 
 ## Example
 
@@ -176,12 +176,12 @@ inline widths. Note that the other columns will resize no matter the width of th
     <Container className="text-center">
         <Row>
             <Col>1 of 3</Col>
-            <Col span={6}>2 of 3 (wider)</Col>
+            <Col xs={6}>2 of 3 (wider)</Col>
             <Col>3 of 3</Col>
         </Row>
         <Row>
             <Col>1 of 3</Col>
-            <Col span={5}>2 of 3 (wider)</Col>
+            <Col xs={5}>2 of 3 (wider)</Col>
             <Col>3 of 3</Col>
         </Row>
     </Container>
@@ -215,7 +215,7 @@ however you see fit.
 
 ### All breakpoints
 
-For grids that are the same from the smallest of devices to the largest, use the `span` prop or leave
+For grids that are the same from the smallest of devices to the largest, use the `xs` prop or leave
 it out for an equal-width column.
 
 <div className={style.gridRow}>
@@ -227,8 +227,8 @@ it out for an equal-width column.
             <Col>col</Col>
         </Row>
         <Row>
-            <Col span={8}>col-8</Col>
-            <Col span={4}>col-4</Col>
+            <Col xs={8}>col-8</Col>
+            <Col xs={4}>col-4</Col>
         </Row>
     </Container>
 </div>
@@ -261,24 +261,24 @@ each tier as needed. See the example below for a better idea of how it all works
     <Container className="text-center">
         <Row>
             <Col md={8}>.md:col-8</Col>
-            <Col span={6} md={4}>
+            <Col xs={6} md={4}>
                 {'.col-6 .md:col-4'}
             </Col>
         </Row>
         <Row>
-            <Col span={6} md={4}>
+            <Col xs={6} md={4}>
                 {'.col-6 .md:col-4'}
             </Col>
-            <Col span={6} md={4}>
+            <Col xs={6} md={4}>
                 {'.col-6 .md:col-4'}
             </Col>
-            <Col span={6} md={4}>
+            <Col xs={6} md={4}>
                 {'.col-6 .md:col-4'}
             </Col>
         </Row>
         <Row>
-            <Col span={6}>.col-6</Col>
-            <Col span={6}>.col-6</Col>
+            <Col xs={6}>.col-6</Col>
+            <Col xs={6}>.col-6</Col>
         </Row>
     </Container>
 </div>
@@ -287,12 +287,12 @@ each tier as needed. See the example below for a better idea of how it all works
 
 Use the responsive `.row-cols-*` classes to quickly set the number of columns that best render your
 content and layout. Whereas normal `.col-*` classes apply to the individual columns (e.g.,
-`.md:col-4`), the row columns classes are set on the parent `Row` as a shortcut; pass `cols`, `sm`,
-`md`, `lg`, `xl`, or `2xl` to it. With `cols="auto"` you can give the columns their natural width.
+`.md:col-4`), the row columns classes are set on the parent `Row` as a shortcut; pass `xs`, `sm`,
+`md`, `lg`, `xl`, or `2xl` to it. With `xs="auto"` you can give the columns their natural width.
 
 <div className={style.gridRow}>
     <Container className="text-center">
-        <Row cols={2}>
+        <Row xs={2}>
             <Col>Column</Col>
             <Col>Column</Col>
             <Col>Column</Col>
@@ -303,7 +303,7 @@ content and layout. Whereas normal `.col-*` classes apply to the individual colu
 
 <div className={style.gridRow}>
     <Container className="text-center">
-        <Row cols={3}>
+        <Row xs={3}>
             <Col>Column</Col>
             <Col>Column</Col>
             <Col>Column</Col>
@@ -314,7 +314,7 @@ content and layout. Whereas normal `.col-*` classes apply to the individual colu
 
 <div className={style.gridRow}>
     <Container className="text-center">
-        <Row cols="auto">
+        <Row xs="auto">
             <Col>Column</Col>
             <Col>Column</Col>
             <Col>Column</Col>
@@ -325,7 +325,7 @@ content and layout. Whereas normal `.col-*` classes apply to the individual colu
 
 <div className={style.gridRow}>
     <Container className="text-center">
-        <Row cols={1} sm={2} md={4}>
+        <Row xs={1} sm={2} md={4}>
             <Col>Column</Col>
             <Col>Column</Col>
             <Col>Column</Col>
@@ -346,10 +346,10 @@ that you use all 12 available columns).
             <Col sm={3}>Level 1: .sm:col-3</Col>
             <Col sm={9}>
                 <Row>
-                    <Col span={8} sm={6}>
+                    <Col xs={8} sm={6}>
                         {'Level 2: .col-8 .sm:col-6'}
                     </Col>
-                    <Col span={4} sm={6}>
+                    <Col xs={4} sm={6}>
                         {'Level 2: .col-4 .sm:col-6'}
                     </Col>
                 </Row>

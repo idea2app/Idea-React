@@ -20,12 +20,25 @@ it('renders an equal-width column from a breakpoint', () => {
     assert.equal(container.querySelector('.row > div')?.className, 'sm:col');
 });
 
+it('uses xs to set base column widths', () => {
+    const { container } = render(
+        <Row>
+            <Col xs>Equal</Col>
+            <Col xs="auto">Natural</Col>
+        </Row>
+    );
+    assert.deepEqual(
+        [...container.querySelectorAll('.row > div')].map(column => column.className),
+        ['col', 'col-auto']
+    );
+});
+
 it('uses Bootstrap 6 container, row, and responsive column classes', () => {
     const { container, rerender } = render(
         <Container className="custom" fluid>
             <Row>
                 <Col>Auto</Col>
-                <Col span={12} lg={7}>
+                <Col xs={12} lg={7}>
                     Main
                 </Col>
             </Row>
@@ -39,14 +52,18 @@ it('uses Bootstrap 6 container, row, and responsive column classes', () => {
         [...root.querySelectorAll('.row > div')].map(column => column.className),
         ['col', 'col-12 lg:col-7']
     );
-    rerender(<Container breakpoint="lg" />);
+    rerender(<Container fluid="lg" />);
 
     assert.equal((container.firstElementChild as HTMLElement).className, 'lg:container');
+
+    rerender(<Container fluid={false} />);
+
+    assert.equal((container.firstElementChild as HTMLElement).className, 'container');
 });
 
-it('sets row columns from cols and breakpoint props', () => {
+it('sets row columns from xs and breakpoint props', () => {
     const { container } = render(
-        <Row cols={1} sm={2} md="auto" className="g-4">
+        <Row xs={1} sm={2} md="auto" className="g-4">
             <Col>One</Col>
         </Row>
     );
