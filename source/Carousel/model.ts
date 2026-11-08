@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx';
+import { action, computed, observable } from 'mobx';
 
 export type CarouselEnds = 'loop' | 'wrap' | 'stop';
 
@@ -9,9 +9,13 @@ export class CarouselModel {
 
     private timer?: ReturnType<typeof setTimeout>;
 
-    private hovering = false;
+    @observable private accessor hovering = false;
+    @observable private accessor visible = true;
 
-    private visible = true;
+    @computed
+    get cycling() {
+        return this.playing && !this.hovering && this.visible;
+    }
 
     onChange?: (index: number) => unknown;
 
@@ -78,15 +82,15 @@ export class CarouselModel {
     @action
     toggle = () => (this.playing ? this.pause() : this.play());
 
-    setHovering = (hovering: boolean) => {
+    setHovering = action((hovering: boolean) => {
         this.hovering = hovering;
         this.schedule();
-    };
+    });
 
-    setVisible = (visible: boolean) => {
+    setVisible = action((visible: boolean) => {
         this.visible = visible;
         this.schedule();
-    };
+    });
 
     update = (count: number, ends: CarouselEnds, interval: (index: number) => number) => {
         this.count = count;
@@ -101,7 +105,7 @@ export class CarouselModel {
 
     private schedule = () => {
         this.clearTimer();
-        if (!this.playing || this.hovering || !this.visible || this.count < 2) return;
+        if (!this.cycling || this.count < 2) return;
 
         this.timer = setTimeout(this.next, Math.max(0, this.interval(this.activeIndex)));
     };

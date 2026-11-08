@@ -1,0 +1,8 @@
+.placeholder {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    user-select: none;
+}
+.large {
+    font-size: 2.5rem;
+}

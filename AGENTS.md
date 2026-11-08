@@ -193,6 +193,7 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - JSX 属性按 `as`、HTML 通用静态属性、组件专属属性、状态属性、回调属性排序；相同键值的 props 可用对象字面量简写后展开。
 - 同一模块的类型与值合并为一条 import，不拆成 `import type` 与 `import` 两条。
 - JSX 中不同逻辑块（如触发器与浮层）之间用空行分隔。
+- JSX 中超过 3 个类似子元素使用集合迭代渲染，不重复展开。
 
 ## 错误处理
 

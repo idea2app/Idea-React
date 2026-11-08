@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { it, mock } from 'node:test';
 
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { lazy, Suspense } from 'react';
+import { createRef, lazy, Suspense } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 import { Carousel, CarouselSlide } from '../source/Carousel';
@@ -40,6 +40,142 @@ it('renders safely during server-side rendering', () => {
     );
     assert.match(markup, /aria-roledescription="carousel"/);
     assert.match(markup, /Server rendered slide/);
+});
+
+it('uses Bootstrap 6 overlay rows, button variants, and indicator styling hooks', () => {
+    const { container } = render(
+        <Carousel
+            id="overlay-gallery"
+            controlsPlacement="overlay"
+            indicatorPlacement="between"
+            indicators
+        >
+            <CarouselSlide>First</CarouselSlide>
+            <CarouselSlide>Second</CarouselSlide>
+        </Carousel>
+    );
+    const carousel = screen.getByRole('region');
+    const row = container.querySelector('.carousel-overlay-controls');
+
+    assert.ok(carousel.classList.contains('carousel-overlay'));
+    assert.equal(row?.children.length, 3);
+    assert.equal(row?.firstElementChild, screen.getByRole('button', { name: 'Previous' }));
+    assert.equal(row?.lastElementChild, screen.getByRole('button', { name: 'Next' }));
+    assert.equal(
+        screen.getByRole('button', { name: 'Previous' }).className,
+        'btn-subtle theme-secondary btn-sm btn-icon'
+    );
+    assert.equal(
+        screen.getByRole('button', { name: 'Slide 1' }).getAttribute('data-bs-target'),
+        '#overlay-gallery'
+    );
+    assert.equal(container.querySelector('.carousel-control-prev'), null);
+    assert.equal(container.querySelector('.carousel-control-next'), null);
+});
+
+it('composes top-row content, rounded viewports, and individually sized slides', () => {
+    const { container } = render(
+        <Carousel
+            controlsPlacement="top"
+            controlsStart={<h5>Mixed widths</h5>}
+            innerClassName="rounded-5"
+            itemsGap="1rem"
+            auto
+        >
+            <CarouselSlide style={{ width: 160 }}>A</CarouselSlide>
+            <CarouselSlide style={{ width: 320 }}>B</CarouselSlide>
+        </Carousel>
+    );
+    const carousel = screen.getByRole('region');
+    const track = container.querySelector('.carousel-inner');
+
+    assert.ok(carousel.classList.contains('carousel-auto'));
+    assert.equal(carousel.firstElementChild?.firstElementChild?.textContent, 'Mixed widths');
+    assert.equal(track?.className, 'carousel-inner rounded-5');
+    assert.equal(screen.getByText('A').style.width, '160px');
+    assert.equal(screen.getByText('B').style.width, '320px');
+    assert.equal(carousel.hasAttribute('auto'), false);
+    assert.equal(carousel.hasAttribute('controlsStart'), false);
+    assert.equal(screen.getByRole('button', { name: 'Next' }).className, 'btn-sm btn-icon');
+});
+
+it('places indicators after grouped buttons and omits empty controls rows', () => {
+    const { container, rerender } = render(
+        <Carousel controlsPlacement="bottom" indicatorPlacement="end" indicators>
+            <CarouselSlide>First</CarouselSlide>
+            <CarouselSlide>Second</CarouselSlide>
+        </Carousel>
+    );
+    const carousel = screen.getByRole('region');
+
+    assert.ok(
+        carousel.lastElementChild?.lastElementChild?.classList.contains('carousel-indicators')
+    );
+    assert.equal(
+        screen.getByRole('button', { name: 'Slide 1' }).getAttribute('data-bs-target'),
+        ''
+    );
+
+    rerender(
+        <Carousel controls={false}>
+            <CarouselSlide>First</CarouselSlide>
+        </Carousel>
+    );
+    assert.equal(container.querySelector('.carousel-overlay-controls'), null);
+});
+
+it('uses each slide interval for autoplay progress and pauses its fill on hover', () => {
+    const ref = createRef<Carousel>();
+    const { container } = render(
+        <Carousel ref={ref} controlsPlacement="bottom" controls={false} autoplay indicators>
+            <CarouselSlide interval={2000}>First</CarouselSlide>
+            <CarouselSlide interval={4000}>Second</CarouselSlide>
+        </Carousel>
+    );
+    const carousel = screen.getByRole('region');
+
+    assert.ok(carousel.classList.contains('carousel-playing'));
+    assert.equal(carousel.style.getPropertyValue('--bs-carousel-interval'), '2000ms');
+    assert.equal(container.querySelectorAll('[data-carousel-action="toggle"]').length, 1);
+    assert.equal(container.querySelector('[data-carousel-action="next"]'), null);
+
+    fireEvent.mouseEnter(carousel);
+
+    assert.equal(ref.current?.store.cycling, false);
+
+    fireEvent.mouseLeave(carousel);
+
+    assert.equal(ref.current?.store.cycling, true);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Slide 2' }));
+
+    assert.equal(carousel.classList.contains('carousel-playing'), false);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Play' }));
+
+    assert.equal(carousel.style.getPropertyValue('--bs-carousel-interval'), '4000ms');
+});
+
+it('moves focus to the opposite control when stop-at-ends disables the focused button', () => {
+    render(
+        <Carousel ends="stop">
+            <CarouselSlide>First</CarouselSlide>
+            <CarouselSlide>Last</CarouselSlide>
+        </Carousel>
+    );
+    const next = screen.getByRole<HTMLButtonElement>('button', { name: 'Next' });
+    const previous = screen.getByRole<HTMLButtonElement>('button', { name: 'Previous' });
+
+    next.focus();
+    fireEvent.click(next);
+
+    assert.equal(next.disabled, true);
+    assert.equal(document.activeElement, previous);
+
+    fireEvent.click(previous);
+
+    assert.equal(previous.disabled, true);
+    assert.equal(document.activeElement, next);
 });
 
 it('preserves one slide boundary and metadata for lazy client-component references', async () => {
