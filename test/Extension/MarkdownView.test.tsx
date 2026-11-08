@@ -7,7 +7,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 
 import { MarkdownView } from '../../source/Extension/MarkdownView';
 
-it('synchronously renders Markdown and GitHub styles on the server', () => {
+it('synchronously renders Markdown with the GitHub styling class on the server', () => {
     const markup = renderToStaticMarkup(
         <MarkdownView className="custom">{'## Title\n\n**Strong** and `code`.'}</MarkdownView>
     );

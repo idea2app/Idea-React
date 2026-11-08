@@ -7,12 +7,17 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 # Markdown view
 
 `MarkdownView` synchronously parses a Markdown string with [marked][1] and renders
-the HTML inside an `<article>`. It includes [GitHub Markdown CSS][2] and adds
-`markdown-body` to the root element.
+the HTML inside an `<article>`. It adds `markdown-body` to the root element for
+use with [GitHub Markdown CSS][2].
 
-When using the published package, load
-`https://unpkg.com/idea-react/dist/style.css` alongside Bootstrap to apply its bundled
-Markdown styles.
+Load the stylesheet from unpkg.com with a `<link />` in your page's `<head>`,
+alongside Bootstrap:
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/github-markdown-css@5.9.0/github-markdown.css" />
+```
+
+The component does not import or bundle this stylesheet.
 
 ## Example
 

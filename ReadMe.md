@@ -145,6 +145,7 @@ For the current alpha release, use `idea-react@next` instead of `idea-react`.
 />
 <link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1.13.2/font/bootstrap-icons.css" />
 <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/github-markdown-css@5.9.0/github-markdown.css" />
 <link rel="stylesheet" href="https://unpkg.com/idea-react/dist/style.css" />
 ```
 

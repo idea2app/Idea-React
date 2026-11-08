@@ -1,5 +1,3 @@
-import 'github-markdown-css/github-markdown.css';
-
 import classNames from 'classnames';
 import { marked } from 'marked';
 import { ComponentPropsWithRef } from 'react';

@@ -216,6 +216,8 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 上游来源与版权许可说明集中在网站公共页脚，不在各篇组件文档重复，也不添加指向上游单页源码的链接。
 - MDX 中的大段静态文本优先使用 Markdown，而非嵌套的 JSX 文本块。
 - 从 `unpkg.com` 引入 Bootstrap CSS，严禁使用 Tailwind CSS 及其插件、配置和工具类。
+- 所有组件依赖的第三方 CSS 统一由使用方通过 `<link />` 从 `unpkg.com` 引入；
+  组件源码不导入或打包这些样式，文档站在公共布局中统一加载。
 - 能用 [Bootstrap 6 CSS 工具类][4] 的样式不写自定义 CSS；
   剩余样式全部使用 CSS modules，不另建全局自定义样式；需要嵌套的样式使用 LESS modules。
 - 可由 CSS 或 Bootstrap 工具类静态表达的布局、状态与堆叠关系优先用 CSS，避免为此引入客户端状态或 Context、Model。
