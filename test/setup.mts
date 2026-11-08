@@ -13,6 +13,7 @@ for (const key of [
     'Event',
     'Element',
     'HTMLElement',
+    'HTMLButtonElement',
     'HTMLDialogElement',
     'Node',
     'MutationObserver',

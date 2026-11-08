@@ -2,6 +2,7 @@ import { Carousel, CarouselSlide } from '../../../../source/Carousel';
 import { Button } from '../../../../source/Button';
 import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
 import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { CarouselImage } from '../../../component/Documentation/Components/CarouselImage';
 
 <ComponentsLayout active="carousel">
 
@@ -11,7 +12,7 @@ A slider or slideshow component for cycling through series of content, ranging f
 
 ## How it works
 
-- Carousel is built on CSS’s [scroll-snap][1], so sliding, touch dragging, momentum, and keyboard scrolling all come from the browser. JavaScript manages autoplay, the previous/next controls, the indicators, and active-slide syncing.
+- Carousel is built on CSS’s [scroll-snap][1], so sliding, touch dragging, momentum, and keyboard scrolling all come from the browser. The React component manages autoplay, the previous/next controls, the indicators, and active-slide syncing.
 
 - Because the slides live in a real scroll container, the carousel can show [more than one slide at a time][2], reveal a “peek” of the neighboring slides, and mix variable-width slides—all controlled with CSS.
 
@@ -19,43 +20,38 @@ A slider or slideshow component for cycling through series of content, ranging f
 
 - Carousel items or slides do not normalize their dimensions. As such, you may need to use additional utilities or custom styles to appropriately size content. While carousels support previous/next controls and indicators, they’re not explicitly required. Add and customize as you see fit.
 
-- `Carousel` initializes on mount, including active-slide syncing as the user scrolls or swipes. Use `autoplay` for [autoplaying carousels][3]; do not initialize the same element with Bootstrap’s JavaScript plugin.
+- `Carousel` initializes on mount, including active-slide syncing as the user scrolls or swipes. Pass `autoplay` for [autoplaying carousels][3]. Do not initialize the same carousel with Bootstrap’s JavaScript plugin.
 
-- **The wrapper starts on the first slide.** It does not expose initial-slide selection or seed its starting index from a child’s `active` prop. It manages active state, indicators, and the visible slide when `fade` is enabled. Controls and indicators are scoped to their own carousel, so multiple carousels do not need target attributes.
+- **The React wrapper starts on the first slide.** It manages the active state that drives indicator syncing and, with `fade`, which slide is shown. A child’s `active` prop does not select the initial slide. Controls and indicators are scoped to their own carousel, so multiple instances do not need Bootstrap target attributes.
 
-The animation effect of this component is dependent on the `prefers-reduced-motion` media query.
+The animation effect of this component is dependent on the `prefers-reduced-motion` media query. Slides swap immediately and the autoplay indicator countdown is disabled for users who prefer reduced motion.
 
 ## Examples
 
 ### Top controls
 
-The default carousel has a simple design that you can customize. Controls can be placed anywhere, including outside the inner carousel container. They can sit at the top or bottom of the carousel, with any order of controls and any additional content you may need.
+The default carousel has a simple design that you can customize. Controls can be placed outside the inner carousel container. They can sit at the top or bottom, with additional content alongside them. Use `controlsStart` for content at the start of the controls row.
 
-<CodeExample>
-    <Carousel aria-label="Example carousel" controlsPlacement="top">
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+    <Carousel
+        id="carouselStacked"
+        aria-label="Top controls"
+        controlsPlacement="top"
+        controlsStart={<h5 className="mb-0">Top controls</h5>}
+        innerClassName="rounded-5"
+    >
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
+            <CarouselImage>First slide</CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
+            <CarouselImage color="#444" background="#666">
+                Second slide
+            </CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
+            <CarouselImage color="#333" background="#555">
+                Third slide
+            </CarouselImage>
         </CarouselSlide>
     </Carousel>
 </CodeExample>
@@ -64,108 +60,117 @@ The default carousel has a simple design that you can customize. Controls can be
 
 Similar to the controls on top, but with the controls at the bottom of the carousel and different content.
 
-<CodeExample>
-    <Carousel aria-label="Example carousel" controlsPlacement="bottom">
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+    <Carousel
+        id="carouselStackedBottom"
+        aria-label="Bottom controls"
+        controlsPlacement="bottom"
+        innerClassName="rounded-5"
+    >
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
+            <CarouselImage>First slide</CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
+            <CarouselImage color="#444" background="#666">
+                Second slide
+            </CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
+            <CarouselImage color="#333" background="#555">
+                Third slide
+            </CarouselImage>
         </CarouselSlide>
     </Carousel>
 </CodeExample>
 
 ### Indicators
 
-Pass `indicators` to include slide indicator buttons. With an [overlay carousel][4], they appear over the bottom of the slides, alongside the previous/next controls.
+Pass `indicators` to include slide indicator buttons and use `indicatorPlacement` to position them within the controls row. With an [overlay carousel][4], the row sits over the bottom of the slides; its alignment determines where the indicators appear.
 
-<CodeExample>
-    <Carousel aria-label="Example carousel" controlsPlacement="bottom" indicators>
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+    <Carousel
+        id="carouselStackedIndicators"
+        aria-label="Indicators"
+        controlsPlacement="bottom"
+        indicatorPlacement="end"
+        innerClassName="rounded-5"
+        indicators
+    >
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
+            <CarouselImage>First slide</CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
+            <CarouselImage color="#444" background="#666">
+                Second slide
+            </CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
+            <CarouselImage color="#333" background="#555">
+                Third slide
+            </CarouselImage>
         </CarouselSlide>
     </Carousel>
 </CodeExample>
 
 ### Custom content
 
-You can put any markup you like inside each `CarouselSlide`. Add content, then size and style it with utilities or custom CSS as needed.
+You can put any markup you like inside each `CarouselSlide`. Add content, then size and style it with utilities or CSS modules as needed.
 
 <CodeExample>
-    <Carousel aria-label="Example carousel" controlsPlacement="bottom" indicators>
+    <Carousel
+        id="carouselExampleContent"
+        aria-label="Custom content"
+        controlsPlacement="bottom"
+        controlsClassName="d-flex justify-content-center gap-2"
+        indicatorPlacement="between"
+        innerClassName="rounded-5"
+    >
         <CarouselSlide>
             <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
+                className="d-flex flex-column justify-content-center bg-subtle-primary p-9 bg-1 rounded-5"
+                style={{ minHeight: 320 }}
             >
-                <h3>First slide</h3>
-                <p>Some representative placeholder content for the first slide.</p>
-                <Button variant="solid" theme="primary">
-                    Learn more
-                </Button>
+                <h3>Build anything</h3>
+                <p className="fg-emphasis-secondary mb-3">
+                    Compose slides from your own markup—text, buttons, cards, or media.
+                </p>
+                <div>
+                    <Button href="#" variant="solid" theme="primary">
+                        Get started
+                    </Button>
+                </div>
             </div>
         </CarouselSlide>
         <CarouselSlide>
             <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
+                className="d-flex flex-column justify-content-center text-center bg-subtle-success p-9 bg-2 rounded-5"
+                style={{ minHeight: 320 }}
             >
-                <h3>Second slide</h3>
-                <p>Some representative placeholder content for the second slide.</p>
-                <Button variant="solid" theme="primary">
-                    Learn more
-                </Button>
+                <h3>Style it your way</h3>
+                <p className="fg-emphasis-secondary mb-3">
+                    Use utilities or custom CSS to size and theme each slide however you need.
+                </p>
+                <div>
+                    <Button href="#" variant="solid" theme="success">
+                        Learn more
+                    </Button>
+                </div>
             </div>
         </CarouselSlide>
         <CarouselSlide>
             <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
+                className="d-flex flex-column justify-content-center text-end bg-subtle-warning p-9 bg-3 rounded-5"
+                style={{ minHeight: 320 }}
             >
-                <h3>Third slide</h3>
-                <p>Some representative placeholder content for the third slide.</p>
-                <Button variant="solid" theme="primary">
-                    Learn more
-                </Button>
+                <h3>Mix and match</h3>
+                <p className="fg-emphasis-secondary mb-3">
+                    Combine custom content with controls, indicators, and the overlay layout.
+                </p>
+                <div>
+                    <Button href="#" variant="solid" theme="inverse">
+                        Browse examples
+                    </Button>
+                </div>
             </div>
         </CarouselSlide>
     </Carousel>
@@ -177,66 +182,51 @@ Change the default carousel appearance with alternate control placement and anim
 
 ### Overlay controls
 
-Use `controlsPlacement="overlay"` to overlay carousel controls on top of the slides.
+Use `controlsPlacement="overlay"` to overlay carousel controls on top of the slides. The component wraps its controls in the overlay row automatically.
 
-<CodeExample>
-    <Carousel aria-label="Example carousel" controlsPlacement="overlay">
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+    <Carousel
+        id="carouselExample"
+        aria-label="Overlay controls"
+        controlsPlacement="overlay"
+        indicatorPlacement="end"
+        innerClassName="rounded-5"
+        indicators
+    >
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
+            <CarouselImage>First slide</CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
+            <CarouselImage color="#444" background="#666">
+                Second slide
+            </CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
+            <CarouselImage color="#333" background="#555">
+                Third slide
+            </CarouselImage>
         </CarouselSlide>
     </Carousel>
 </CodeExample>
 
 ### Crossfade
 
-Pass `fade` to your carousel to animate slides with a fade transition instead of a slide. Depending on your carousel content (e.g., text only slides), you may want to add `.bg-body` or some custom CSS to the `CarouselSlide` components for proper crossfading. The crossfade is a CSS opacity transition over `--bs-carousel-fade-duration`, and collapses to an instant swap for users who prefer reduced motion.
+Pass `fade` to animate slides with a fade transition instead of a slide. Depending on your content (e.g., text-only slides), you may want to add `bg-body` or a CSS module to the slides for proper crossfading. The crossfade is a CSS opacity transition over `--bs-carousel-fade-duration`, and collapses to an instant swap for users who prefer reduced motion.
 
-<CodeExample>
-    <Carousel aria-label="Example carousel" fade>
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+    <Carousel id="carouselExampleFade" aria-label="Crossfade" controlsPlacement="bottom" fade>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
+            <CarouselImage rounded>First slide</CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
+            <CarouselImage color="#444" background="#666" rounded>
+                Second slide
+            </CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
+            <CarouselImage color="#333" background="#555" rounded>
+                Third slide
+            </CarouselImage>
         </CarouselSlide>
     </Carousel>
 </CodeExample>
@@ -246,231 +236,208 @@ Pass `fade` to your carousel to animate slides with a fade transition instead of
 Because the carousel is a real scroll container, you can change how many slides are visible and how they’re sized with a few CSS custom properties on `Carousel` without writing any JavaScript.
 
 - `--bs-carousel-items` sets the number of whole slides visible per view (default `1`).
-- `--bs-carousel-items-gap` sets the space between slides (default `0`).
-- `--bs-carousel-items-peek` sets how much of the neighboring slides to reveal (default `0`).
+- `--bs-carousel-items-gap` sets the space between slides (default `0px`).
+- `--bs-carousel-items-peek` sets how much of the neighboring slides to reveal (default `0px`).
 
 ### Multiple items
 
 Set `items` to show several slides at once. Combine it with `itemsGap` for spacing; these props set the corresponding CSS custom properties.
 
-<CodeExample>
-    <Carousel aria-label="Example carousel" items={3} itemsGap="1rem" ends="stop">
-        <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
-        </CarouselSlide>
-        <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
-        </CarouselSlide>
-        <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
-        </CarouselSlide>
-        <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Fourth slide</h3>
-            </div>
-        </CarouselSlide>
-        <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Fifth slide</h3>
-            </div>
-        </CarouselSlide>
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+    <Carousel
+        id="carouselMultiple"
+        aria-label="Multiple items"
+        controlsPlacement="top"
+        controlsStart={<h5 className="mb-0">Three at a time</h5>}
+        items={3}
+        itemsGap="1rem"
+        ends="stop"
+    >
+        {['#777', '#6c6c6c', '#666', '#5c5c5c', '#555', '#4c4c4c', '#444'].map(
+            (background, index) => (
+                <CarouselSlide key={background}>
+                    <CarouselImage
+                        width={260}
+                        height={200}
+                        color="#fff"
+                        background={background}
+                        large={false}
+                        rounded
+                    >
+                        {String(index + 1)}
+                    </CarouselImage>
+                </CarouselSlide>
+            )
+        )}
     </Carousel>
 </CodeExample>
 
-Set `items={3}` to control the count.
+Set `items={3}` to control the count, or set `--bs-carousel-items` through a CSS module for responsive layouts.
 
 ### Peeking
 
 Set `itemsPeek` to reveal a sliver of the previous and next slides, hinting that there’s more to scroll.
 
-<CodeExample>
-    <Carousel aria-label="Example carousel" itemsGap="1rem" itemsPeek="3rem" ends="stop">
-        <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
-        </CarouselSlide>
-        <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
-        </CarouselSlide>
-        <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
-        </CarouselSlide>
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+    <Carousel
+        id="carouselPeek"
+        aria-label="Peeking"
+        controlsPlacement="top"
+        controlsStart={<h5 className="mb-0">Peek the neighbors</h5>}
+        itemsPeek="3rem"
+        itemsGap="1rem"
+        ends="stop"
+    >
+        {[
+            { children: 'First slide', background: '#777' },
+            { children: 'Second slide', background: '#666' },
+            { children: 'Third slide', background: '#555' },
+            { children: 'Fourth slide', background: '#444' },
+            { children: 'Fifth slide', background: '#333' }
+        ].map(({ children, background }) => (
+            <CarouselSlide key={children}>
+                <CarouselImage height={300} color="#fff" background={background} rounded>
+                    {children}
+                </CarouselImage>
+            </CarouselSlide>
+        ))}
     </Carousel>
 </CodeExample>
 
 ### Variable width
 
-Size each `CarouselSlide` yourself with `style` or a CSS module. Snap points still land on every slide.
+Pass `auto` and size each `CarouselSlide` yourself with utilities, `style`, or a CSS module. Snap points still land on every slide.
 
-<CodeExample>
-    <Carousel aria-label="Example carousel" center itemsPeek="2rem">
-        <CarouselSlide style={{ flexBasis: '40%' }}>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
-        </CarouselSlide>
-        <CarouselSlide style={{ flexBasis: '60%' }}>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
-        </CarouselSlide>
-        <CarouselSlide style={{ flexBasis: '30%' }}>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
-        </CarouselSlide>
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+    <Carousel
+        id="carouselVariable"
+        aria-label="Variable width"
+        controlsPlacement="top"
+        controlsStart={<h5 className="mb-0">Mixed widths</h5>}
+        itemsGap="1rem"
+        ends="stop"
+        auto
+    >
+        {[
+            { children: 'A', width: 160, background: '#777' },
+            { children: 'B', width: 320, background: '#666' },
+            { children: 'C', width: 220, background: '#555' },
+            { children: 'D', width: 380, background: '#4c4c4c' },
+            { children: 'E', width: 200, background: '#444' },
+            { children: 'F', width: 300, background: '#333' }
+        ].map(({ children, width, background }) => (
+            <CarouselSlide key={children} style={{ width }}>
+                <CarouselImage
+                    width={width}
+                    height={200}
+                    color="#fff"
+                    background={background}
+                    large={false}
+                    rounded
+                >
+                    {children}
+                </CarouselImage>
+            </CarouselSlide>
+        ))}
     </Carousel>
 </CodeExample>
 
-Pass `center` to snap the active slide to the center of the viewport instead of its start—pairs nicely with `--bs-carousel-items-peek`.
+Pass `center` to snap the active slide to the center of the viewport instead of its start—pairs nicely with `itemsPeek`.
 
 ## Autoplay
 
-Set `autoplay` to `true` to cycle a carousel automatically on page load. Autoplay pauses on hover—configurable with the `pause` option—and, where the [Page Visibility API][5] is supported, while the page isn’t visible. As soon as a visitor takes control—clicking a control or indicator, using the keyboard, or swiping—autoplay stops for good, so content isn’t moved out from under them.
+Set `autoplay` to `true` to cycle a carousel automatically on page load. Autoplay pauses on hover—configurable with the `pause` option—and while the page isn’t visible, using the [Page Visibility API][5]. As soon as a visitor takes control—clicking a control or indicator, using the keyboard, or swiping—autoplay stops, so content isn’t moved out from under them.
 
-For accessibility reasons, we recommend avoiding the use of autoplaying carousels. If your page does include one, provide a discoverable control to pause and resume it: pass `playPause` to add a play/pause button (shown below). This satisfies [WCAG 2.2 Success Criterion 2.2.2 Pause, Stop, Hide][6], which a hover- or focus-only pause does not.
+For accessibility reasons, we recommend avoiding the use of autoplaying carousels. If your page does include one, provide a discoverable control to pause and resume it: pass `playPause` to add a play/pause button (shown below). This satisfies [WCAG 2.2 Success Criterion 2.2.2 Pause, Stop, Hide][6], which a hover- or focus-only pause does not. The wrapper also includes this button automatically when `autoplay` is enabled.
 
-The play/pause button toggles autoplay and reflects the current state automatically—a pause icon while playing, a play icon while stopped. The wrapper supplies accessible names for both states. While playing, the active indicator fills like a progress bar over the current slide’s [interval][7] as a visual countdown; it pauses with autoplay and is disabled under reduced motion. Set its color with the `--bs-carousel-indicator-progress-bg` CSS variable.
+The play/pause button reflects the current state automatically—a pause icon while playing, a play icon while stopped. The wrapper supplies an accessible name for each state. While playing, the active indicator fills like a progress bar over the current slide’s [interval][7] as a visual countdown; it pauses with autoplay and is disabled under reduced motion. Set its color with the `--bs-carousel-indicator-progress-bg` CSS variable.
 
-<CodeExample>
-    <Carousel aria-label="Example carousel" autoplay playPause>
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+    <Carousel
+        id="carouselExampleAutoplaying"
+        aria-label="Autoplay"
+        controlsPlacement="bottom"
+        autoplay
+        playPause
+        indicators
+    >
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
+            <CarouselImage rounded>First slide</CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
+            <CarouselImage color="#444" background="#666" rounded>
+                Second slide
+            </CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
+            <CarouselImage color="#333" background="#555" rounded>
+                Third slide
+            </CarouselImage>
         </CarouselSlide>
     </Carousel>
 </CodeExample>
 
 ### Individual intervals
 
-Pass `interval` to a `CarouselSlide` to change the amount of time to delay between automatically cycling to the next item. The indicator’s progress fill matches each slide’s own interval, so the countdown speeds up or slows down to match (2s, then 4s, then 6s below).
+Pass `interval` to a `CarouselSlide` to change the delay between automatically cycling to the next item. The indicator’s progress fill matches each slide’s own interval, so the countdown speeds up or slows down to match (2s, then 4s, then 6s below).
 
-<CodeExample>
-    <Carousel aria-label="Example carousel" autoplay playPause>
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+    <Carousel
+        id="carouselExampleInterval"
+        aria-label="Individual intervals"
+        controlsPlacement="bottom"
+        controlsClassName="d-flex justify-content-between align-items-center mt-3"
+        innerClassName="rounded-5"
+        controls={false}
+        autoplay
+        playPause
+        indicators
+    >
         <CarouselSlide interval={2000}>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
+            <CarouselImage>First: 2 seconds</CarouselImage>
         </CarouselSlide>
         <CarouselSlide interval={4000}>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
+            <CarouselImage color="#444" background="#666">
+                Second: 4 seconds
+            </CarouselImage>
         </CarouselSlide>
         <CarouselSlide interval={6000}>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
+            <CarouselImage color="#333" background="#555">
+                Third: 6 seconds
+            </CarouselImage>
         </CarouselSlide>
     </Carousel>
 </CodeExample>
 
 ## End behavior
 
-The `ends` option controls what happens at the first and last slide. Pass `ends`, choosing from `loop` (the default), `wrap`, or `stop`.
+The `ends` prop controls what happens at the first and last slide. Choose from `loop` (the default), `wrap`, or `stop`.
 
 ### Loop (default)
 
 With `ends="loop"` the carousel scrolls seamlessly past the ends: stepping next from the last slide (or previous from the first) continues in the same direction into the destination slide instead of jumping back, for an endless conveyor effect. This is the default, so it applies with or without the prop. Seamless looping applies to single-slide carousels driven by the controls, keyboard, or autoplay; multi-item, peek, centered, and variable-width layouts—as well as users who prefer reduced motion—fall back to the `wrap` jump.
 
-<CodeExample>
-    <Carousel aria-label="Example carousel" ends="loop">
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+    <Carousel
+        id="carouselEndsLoop"
+        aria-label="Loop"
+        controlsPlacement="top"
+        controlsStart={<h5 className="mb-0">Loop</h5>}
+        innerClassName="rounded-5"
+        ends="loop"
+    >
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
+            <CarouselImage rounded>First slide</CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
+            <CarouselImage color="#444" background="#666" rounded>
+                Second slide
+            </CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
+            <CarouselImage color="#333" background="#555" rounded>
+                Third slide
+            </CarouselImage>
         </CarouselSlide>
     </Carousel>
 </CodeExample>
@@ -479,102 +446,87 @@ With `ends="loop"` the carousel scrolls seamlessly past the ends: stepping next 
 
 With `ends="wrap"` the carousel jumps from the last slide back to the first, and vice versa, so the controls never reach a dead end.
 
-<CodeExample>
-    <Carousel aria-label="Example carousel" ends="wrap">
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+    <Carousel
+        id="carouselEndsWrap"
+        aria-label="Wrap"
+        controlsPlacement="top"
+        controlsStart={<h5 className="mb-0">Wrap around</h5>}
+        innerClassName="rounded-5"
+        ends="wrap"
+    >
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
+            <CarouselImage>First slide</CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
+            <CarouselImage color="#444" background="#666">
+                Second slide
+            </CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
+            <CarouselImage color="#333" background="#555">
+                Third slide
+            </CarouselImage>
         </CarouselSlide>
     </Carousel>
 </CodeExample>
 
 ### Stop
 
-With `ends="stop"` the carousel hard-stops at the first and last slide. The previous control is automatically disabled on the first slide and the next control on the last (via the native `disabled` attribute on `<button>` controls); when a focused control becomes disabled, focus shifts to the opposite control so it isn’t lost.
+With `ends="stop"` the carousel hard-stops at the first and last slide. The previous control is automatically disabled on the first slide and the next control on the last via the native `disabled` attribute; when a focused control becomes disabled, focus shifts to the opposite control so it isn’t lost.
 
-<CodeExample>
-    <Carousel aria-label="Example carousel" ends="stop">
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+    <Carousel
+        id="carouselEndsStop"
+        aria-label="Stop"
+        controlsPlacement="top"
+        controlsStart={<h5 className="mb-0">Stop at the ends</h5>}
+        innerClassName="rounded-5"
+        ends="stop"
+    >
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
+            <CarouselImage>First slide</CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
+            <CarouselImage color="#444" background="#666">
+                Second slide
+            </CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
+            <CarouselImage color="#333" background="#555">
+                Third slide
+            </CarouselImage>
         </CarouselSlide>
     </Carousel>
 </CodeExample>
 
 ## Dark carousel
 
-Set `data-bs-theme="dark"` on `Carousel` for dark-mode controls and indicators. This is typically most useful with overlay carousels when you need the reverse contrast against the background of the slides.
+Set `data-bs-theme="dark"` on `Carousel` for darker controls and indicators. This is typically most useful with overlay carousels when you need the reverse contrast against the background of the slides.
 
-<CodeExample>
+<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
     <Carousel
-        aria-label="Example carousel"
+        id="carouselExampleDark"
+        aria-label="Dark carousel"
         data-bs-theme="dark"
         controlsPlacement="overlay"
+        indicatorPlacement="between"
         indicators
     >
-        <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>First slide</h3>
-            </div>
+        <CarouselSlide interval={10000}>
+            <CarouselImage color="#aaa" background="#f5f5f5" rounded>
+                First slide
+            </CarouselImage>
+        </CarouselSlide>
+        <CarouselSlide interval={2000}>
+            <CarouselImage color="#bbb" background="#eee" rounded>
+                Second slide
+            </CarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Second slide</h3>
-            </div>
-        </CarouselSlide>
-        <CarouselSlide>
-            <div
-                className="d-flex flex-column align-items-center justify-content-center bg-body-tertiary p-5 rounded-4"
-                style={{ minHeight: 240 }}
-            >
-                <h3>Third slide</h3>
-            </div>
+            <CarouselImage color="#999" background="#e5e5e5" rounded>
+                Third slide
+            </CarouselImage>
         </CarouselSlide>
     </Carousel>
 </CodeExample>
@@ -583,51 +535,122 @@ Set `data-bs-theme="dark"` on `Carousel` for dark-mode controls and indicators. 
 
 ### Variables
 
-Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][8].
+Local CSS custom properties expose spacing, colors, sizing, and transitions for all carousels. Override them through `style` or a CSS module. These defaults come from Bootstrap 6.0.0-alpha.1; see the [variable reference][8] for the control icon masks.
 
-| Variable                                   | Default                                                                                                                                                                                                                                             |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--bs-carousel-gap`                        | `0.75rem`                                                                                                                                                                                                                                           |
-| `--bs-carousel-indicator-bg`               | `var(--bs-fg-3)`                                                                                                                                                                                                                                    |
-| `--bs-carousel-indicator-width`            | `0.75rem`                                                                                                                                                                                                                                           |
-| `--bs-carousel-indicator-height`           | `0.75rem`                                                                                                                                                                                                                                           |
-| `--bs-carousel-indicator-spacer`           | `0.25rem`                                                                                                                                                                                                                                           |
-| `--bs-carousel-indicator-opacity-duration` | `0.6s`                                                                                                                                                                                                                                              |
-| `--bs-carousel-indicator-opacity-timing`   | `ease`                                                                                                                                                                                                                                              |
-| `--bs-carousel-indicator-width-duration`   | `0.3s`                                                                                                                                                                                                                                              |
-| `--bs-carousel-indicator-width-timing`     | `ease`                                                                                                                                                                                                                                              |
-| `--bs-carousel-indicator-progress-bg`      | `var(--bs-carousel-indicator-bg)`                                                                                                                                                                                                                   |
-| `--bs-carousel-control-icon-width`         | `1rem`                                                                                                                                                                                                                                              |
-| `--bs-carousel-control-prev-icon`          | `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0'/></svg>")`                      |
-| `--bs-carousel-control-next-icon`          | `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708'/></svg>")`                     |
-| `--bs-carousel-control-pause-icon`         | `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5'/></svg>")` |
-| `--bs-carousel-control-play-icon`          | `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z'/></svg>")`              |
-| `--bs-carousel-items`                      | `1`                                                                                                                                                                                                                                                 |
-| `--bs-carousel-items-gap`                  | `0px`                                                                                                                                                                                                                                               |
-| `--bs-carousel-items-peek`                 | `0px`                                                                                                                                                                                                                                               |
-| `--bs-carousel-fade-duration`              | `0.6s`                                                                                                                                                                                                                                              |
-| `--bs-carousel-fade-timing`                | `ease`                                                                                                                                                                                                                                              |
+| Variable                                   | Default                           |
+| ------------------------------------------ | --------------------------------- |
+| `--bs-carousel-gap`                        | `0.75rem`                         |
+| `--bs-carousel-indicator-bg`               | `var(--bs-fg-3)`                  |
+| `--bs-carousel-indicator-width`            | `0.75rem`                         |
+| `--bs-carousel-indicator-height`           | `0.75rem`                         |
+| `--bs-carousel-indicator-spacer`           | `0.25rem`                         |
+| `--bs-carousel-indicator-opacity-duration` | `0.6s`                            |
+| `--bs-carousel-indicator-opacity-timing`   | `ease`                            |
+| `--bs-carousel-indicator-width-duration`   | `0.3s`                            |
+| `--bs-carousel-indicator-width-timing`     | `ease`                            |
+| `--bs-carousel-indicator-progress-bg`      | `var(--bs-carousel-indicator-bg)` |
+| `--bs-carousel-control-icon-width`         | `1rem`                            |
+| `--bs-carousel-items`                      | `1`                               |
+| `--bs-carousel-items-gap`                  | `0px`                             |
+| `--bs-carousel-items-peek`                 | `0px`                             |
+| `--bs-carousel-fade-duration`              | `0.6s`                            |
+| `--bs-carousel-fade-timing`                | `ease`                            |
+
+The React controls use `Icon` with Bootstrap Icons rather than Bootstrap’s CSS-mask glyphs. The active countdown sets `--bs-carousel-interval` to the current slide’s interval in milliseconds.
 
 ## Usage
 
-The React component initializes on mount and cleans up its timers and listeners on unmount.
+### Via props
+
+Use props to control the carousel rather than Bootstrap’s data-attribute plugin. Previous/next buttons and indicator buttons are wired automatically to their own instance.
+
+| Prop                 | Description                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------ |
+| `autoplay`           | Automatically cycle through slides on mount.                                         |
+| `interval`           | Autoplay interval in milliseconds between slides; individual slides can override it. |
+| `ends`               | Choose `stop`, `wrap`, or `loop` behavior at the ends.                               |
+| `playPause`          | Render an accessible play/pause control.                                             |
+| `controlsPlacement`  | Put the controls at the top, bottom, or over the slides.                             |
+| `controlsStart`      | Content to display at the start of the controls row.                                 |
+| `controlsClassName`  | Bootstrap utilities or a CSS module for the non-overlay controls row.                |
+| `innerClassName`     | Bootstrap utilities or a CSS module for the scroll viewport.                         |
+| `indicatorPlacement` | Position indicators before, after, or between the previous/next buttons.             |
+
+### Via React
+
+Mount the component to initialize it. Timers and scroll listeners are cleaned up on unmount.
+
+```tsx
+import { Carousel, CarouselSlide } from 'idea-react';
+
+<Carousel aria-label="My carousel" controlsPlacement="bottom" indicators>
+    <CarouselSlide>First slide</CarouselSlide>
+    <CarouselSlide>Second slide</CarouselSlide>
+</Carousel>;
+```
+
+### Dependencies
+
+Load Bootstrap CSS and Bootstrap Icons alongside Idea React. The component manages its own state and scrolling and does not require Bootstrap’s JavaScript plugin. Follow the [installation guide][9].
 
 ### Options
 
-| Prop         | Default     | Description                                                                                                       |
-| ------------ | ----------- | ----------------------------------------------------------------------------------------------------------------- |
-| `autoplay`   | `false`     | Automatically cycle through slides on mount.                                                                      |
-| `interval`   | `5000`      | Delay in milliseconds between slides; individual slides can override it.                                          |
-| `keyboard`   | `true`      | React to left and right arrow keys outside editable controls.                                                     |
-| `pause`      | hover/focus | Temporarily pause autoplay while the pointer or focus is inside the carousel. Pass `false` to disable this pause. |
-| `ends`       | `"loop"`    | Choose seamless looping, a wraparound jump, or stopping at the ends.                                              |
-| `controls`   | `true`      | Render previous and next buttons.                                                                                 |
-| `indicators` | `false`     | Render slide indicators.                                                                                          |
-| `playPause`  | `false`     | Provide an explicit autoplay control.                                                                             |
+| Prop                 | Type            | Default     | Description                                                                                                                                                                                                                           |
+| -------------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `autoplay`           | boolean         | `false`     | Automatically cycle through slides on mount.                                                                                                                                                                                          |
+| `ends`               | string          | `"loop"`    | `stop` disables previous/next at the ends. `wrap` jumps to the opposite end. `loop` scrolls seamlessly for single-slide carousels, falling back to `wrap` for multi-item, peek, centered, variable-width, and reduced-motion layouts. |
+| `interval`           | number          | `5000`      | Delay in milliseconds between automatically cycling an item.                                                                                                                                                                          |
+| `keyboard`           | boolean         | `true`      | React to left/right arrow keys outside editable controls.                                                                                                                                                                             |
+| `pause`              | string, boolean | `"hover"`   | Pause temporarily while the pointer or focus is inside the carousel. Pass `false` to disable this pause.                                                                                                                              |
+| `controls`           | boolean         | `true`      | Render previous and next buttons.                                                                                                                                                                                                     |
+| `controlsPlacement`  | string          | `"overlay"` | Choose `top`, `bottom`, or `overlay`.                                                                                                                                                                                                 |
+| `indicators`         | boolean         | `false`     | Render slide indicators.                                                                                                                                                                                                              |
+| `indicatorPlacement` | string          | `"start"`   | Choose `start`, `end`, or `between`.                                                                                                                                                                                                  |
+| `playPause`          | boolean         | `false`     | Provide an explicit autoplay control; also included automatically for `autoplay`.                                                                                                                                                     |
+| `auto`               | boolean         | `false`     | Let slides retain their individual widths.                                                                                                                                                                                            |
+| `center`             | boolean         | `false`     | Snap the active slide to the center of the viewport.                                                                                                                                                                                  |
+| `fade`               | boolean         | `false`     | Crossfade stacked slides instead of scrolling.                                                                                                                                                                                        |
+
+The visible slide count, gap, and peek are controlled with CSS custom properties, exposed through `items`, `itemsGap`, and `itemsPeek`—see [Items][2].
+
+### Methods
+
+For imperative controls, attach a React ref to `Carousel` and use its model methods. Methods return before the scrolling or crossfade has visually completed.
+
+```tsx
+import { createRef } from 'react';
+import { Carousel } from 'idea-react';
+
+const carousel = createRef<Carousel>();
+
+carousel.current?.store.play();
+carousel.current?.store.pause();
+carousel.current?.store.next(true);
+carousel.current?.store.previous(true);
+carousel.current?.store.setIndex(2, true);
+```
+
+| Method                        | Description                                                                      |
+| ----------------------------- | -------------------------------------------------------------------------------- |
+| `store.play()`                | Start cycling through the carousel items.                                        |
+| `store.pause()`               | Stop cycling through items.                                                      |
+| `store.toggle()`              | Toggle autoplay.                                                                 |
+| `store.next(true)`            | Move to the next slide and stop autoplay for user-initiated navigation.          |
+| `store.previous(true)`        | Move to the previous slide and stop autoplay for user-initiated navigation.      |
+| `store.setIndex(index, true)` | Select a zero-based slide index and stop autoplay for user-initiated navigation. |
+
+The component disposes its model and scroll animation when unmounted; do not use Bootstrap’s `getInstance`, `getOrCreateInstance`, or `dispose` methods on it.
 
 ### Events
 
-`onChange(index)` receives the zero-based active slide index after navigation or scroll synchronization.
+`onChange(index)` receives the zero-based active slide index after navigation or scroll synchronization. It reports logical selection, not the end of the scroll or crossfade animation. Bootstrap’s `slide.bs.carousel` and `slid.bs.carousel` plugin events are not emitted by this wrapper.
+
+```tsx
+<Carousel onChange={handleSlideChange}>
+    <CarouselSlide>First slide</CarouselSlide>
+    <CarouselSlide>Second slide</CarouselSlide>
+</Carousel>
+```
 
 </ComponentsLayout>
 
@@ -639,3 +662,4 @@ The React component initializes on mount and cleans up its timers and listeners 
 [6]: https://www.w3.org/TR/WCAG/#pause-stop-hide
 [7]: #individual-intervals
 [8]: https://getbootstrap.com/docs/6.0/components/carousel/#variables
+[9]: /guides/install/

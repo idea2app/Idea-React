@@ -520,7 +520,8 @@ const examples: [string, ReactElement][] = [
         'Tab',
         <Tab
             id="polymorphic-tab"
-            tabs={[]}
+            eventKey="example"
+            label="Example"
             as={Target}
             payload={payload}
             data-example="polymorphic"

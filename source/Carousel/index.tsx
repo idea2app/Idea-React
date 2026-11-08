@@ -16,10 +16,12 @@ import {
     ReactNode
 } from 'react';
 
+import { Button } from '../Button';
 import { Icon } from '../Extension/Icon';
 import { polymorphic, PolymorphicClassProps } from '../Polymorphic';
 import { CarouselEnds, CarouselModel } from './model';
 import { CarouselScroll } from './scroll';
+import styles from './style.module.css';
 
 export interface CarouselSlideProps extends ComponentPropsWithRef<'div'> {
     interval?: number;
@@ -41,14 +43,19 @@ export const CarouselSlide = polymorphic<CarouselSlideProps>(
 CarouselSlide.displayName = 'CarouselSlide';
 
 export interface CarouselProps extends Omit<ComponentPropsWithRef<'div'>, 'onChange'> {
+    auto?: boolean;
     autoplay?: boolean;
     center?: boolean;
     controls?: boolean;
     controlsPlacement?: 'overlay' | 'top' | 'bottom';
+    controlsClassName?: string;
+    controlsStart?: ReactNode;
     dark?: boolean;
     ends?: CarouselEnds;
     fade?: boolean;
     indicators?: boolean;
+    indicatorPlacement?: 'start' | 'end' | 'between';
+    innerClassName?: string;
     interval?: number;
     items?: number;
     itemsGap?: string | number;
@@ -84,6 +91,18 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
     componentDidUpdate() {
         this.updateStore();
+
+        const focused = document.activeElement;
+        if (
+            focused instanceof HTMLButtonElement &&
+            focused.disabled &&
+            this.root.current?.contains(focused)
+        ) {
+            const action = focused.dataset.carouselAction === 'next' ? 'previous' : 'next';
+            this.root.current
+                .querySelector<HTMLButtonElement>(`[data-carousel-action="${action}"]`)
+                ?.focus();
+        }
     }
 
     componentWillUnmount() {
@@ -234,44 +253,33 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
         );
     };
 
-    renderControls = () => {
+    renderControl = (direction: 'previous' | 'next') => {
         const { controls = true, ends = 'loop' } = this.props;
         if (!controls) return null;
 
-        const atStart = this.store.activeIndex === 0;
-        const atEnd = this.store.activeIndex === this.getSlides().length - 1;
-        const buttonClass =
-            this.props.controlsPlacement === 'overlay'
-                ? 'carousel-control-prev'
-                : 'btn btn-subtle theme-secondary';
+        const previous = direction === 'previous';
+        const atEnd = this.store.activeIndex === (previous ? 0 : this.getSlides().length - 1);
+        const overlay = (this.props.controlsPlacement ?? 'overlay') === 'overlay';
+        const label = previous ? 'Previous' : 'Next';
 
         return (
-            <>
-                <button
-                    type="button"
-                    className={buttonClass}
-                    data-carousel-action="previous"
-                    aria-label="Previous"
-                    disabled={ends === 'stop' && atStart}
-                >
-                    <Icon name="chevron-left" aria-hidden="true" />
-                    <span className="visually-hidden">Previous</span>
-                </button>
-                <button
-                    type="button"
-                    className={
-                        this.props.controlsPlacement === 'overlay'
-                            ? 'carousel-control-next'
-                            : 'btn btn-subtle theme-secondary'
-                    }
-                    data-carousel-action="next"
-                    aria-label="Next"
-                    disabled={ends === 'stop' && atEnd}
-                >
-                    <Icon name="chevron-right" aria-hidden="true" />
-                    <span className="visually-hidden">Next</span>
-                </button>
-            </>
+            <Button
+                type="button"
+                variant={overlay ? 'subtle' : undefined}
+                theme={overlay ? 'secondary' : undefined}
+                size="sm"
+                data-carousel-action={direction}
+                aria-label={label}
+                disabled={ends === 'stop' && atEnd}
+                icon
+            >
+                <Icon
+                    name={previous ? 'chevron-left' : 'chevron-right'}
+                    size={1}
+                    aria-hidden="true"
+                />
+                <span className="visually-hidden">{label}</span>
+            </Button>
         );
     };
 
@@ -282,6 +290,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
                     <button
                         key={index}
                         type="button"
+                        data-bs-target={this.props.id ? `#${this.props.id}` : ''}
                         data-carousel-action="slide"
                         data-index={index}
                         aria-label={`Slide ${index + 1}`}
@@ -294,15 +303,65 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
     renderPlayPause = () =>
         (this.props.playPause || this.props.autoplay) && (
-            <button
+            <Button
                 type="button"
-                className="btn-icon btn-sm carousel-control-play-pause"
+                className={classNames('carousel-control-play-pause', {
+                    paused: !this.store.playing
+                })}
+                size="sm"
                 data-carousel-action="toggle"
                 aria-label={this.store.playing ? 'Pause' : 'Play'}
+                icon
             >
-                <Icon name={this.store.playing ? 'pause-fill' : 'play-fill'} aria-hidden="true" />
-            </button>
+                <Icon
+                    name={this.store.playing ? 'pause-fill' : 'play-fill'}
+                    size={1}
+                    aria-hidden="true"
+                />
+            </Button>
         );
+
+    renderControls = () => {
+        const {
+            controls = true,
+            controlsPlacement = 'overlay',
+            controlsClassName = 'd-flex justify-content-between align-items-center',
+            controlsStart,
+            indicators,
+            indicatorPlacement = 'start',
+            autoplay,
+            playPause
+        } = this.props;
+        if (!controls && !indicators && !autoplay && !playPause && !controlsStart) return null;
+
+        const split = indicatorPlacement === 'between';
+        const previous = this.renderControl('previous');
+        const next = this.renderControl('next');
+        const buttons = (
+            <>
+                {this.renderPlayPause()}
+                {previous}
+                {next}
+            </>
+        );
+
+        return (
+            <div
+                className={
+                    controlsPlacement === 'overlay'
+                        ? 'carousel-overlay-controls'
+                        : controlsClassName
+                }
+            >
+                {controlsStart}
+                {indicatorPlacement === 'start' && this.renderIndicators()}
+                {split ? previous : <div className="d-inline-flex gap-1">{buttons}</div>}
+                {indicatorPlacement !== 'start' && this.renderIndicators()}
+                {split && this.renderPlayPause()}
+                {split && next}
+            </div>
+        );
+    };
 
     render() {
         const Root: ElementType = this.props.as ?? 'div';
@@ -310,17 +369,21 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
         const slides = this.getSlides();
         const {
             as: _as,
+            auto,
             autoplay: _autoplay,
             center,
             children: _children,
             className,
             controls: _controls,
             controlsPlacement = 'overlay',
+            controlsClassName: _controlsClassName,
+            controlsStart: _controlsStart,
             dark,
             ends: _ends,
-            fade: _fade,
             fade,
             indicators: _indicators,
+            indicatorPlacement: _indicatorPlacement,
+            innerClassName,
             interval: _interval,
             items,
             itemsGap,
@@ -338,17 +401,11 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
             ...style,
             ...(items && { '--bs-carousel-items': items }),
             ...(itemsGap !== undefined && { '--bs-carousel-items-gap': itemsGap }),
-            ...(itemsPeek !== undefined && { '--bs-carousel-items-peek': itemsPeek })
+            ...(itemsPeek !== undefined && { '--bs-carousel-items-peek': itemsPeek }),
+            ...(this.store.playing && {
+                '--bs-carousel-interval': `${this.getSlideInterval(this.store.activeIndex)}ms`
+            })
         } as CSSProperties;
-        const outerControls = (
-            <div className="d-flex justify-content-between align-items-center gap-2">
-                {this.renderIndicators()}
-                <div className="d-flex align-items-center gap-2">
-                    {this.renderPlayPause()}
-                    {this.renderControls()}
-                </div>
-            </div>
-        );
 
         return (
             <Root
@@ -356,13 +413,22 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
                 ref={this.root}
                 className={classNames(
                     'carousel',
-                    { 'carousel-fade': fade, 'carousel-dark': dark, 'carousel-center': center },
+                    {
+                        'carousel-overlay': placement,
+                        'carousel-auto': auto,
+                        'carousel-fade': fade,
+                        'carousel-dark': dark,
+                        'carousel-center': center,
+                        'carousel-playing': this.store.playing,
+                        [styles.paused]: this.store.playing && !this.store.cycling
+                    },
                     className
                 )}
                 style={styleWithItems}
                 role="region"
                 aria-label={this.props['aria-label'] ?? 'Carousel'}
                 aria-roledescription="carousel"
+                {...(dark && { 'data-bs-theme': 'dark' })}
                 onClick={this.handleClick}
                 onKeyDown={this.handleKeyDown}
                 onMouseEnter={this.handleMouseEnter}
@@ -370,22 +436,17 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
                 onFocusCapture={this.handleFocusCapture}
                 onBlurCapture={this.handleBlurCapture}
             >
-                {controlsPlacement === 'top' && outerControls}
+                {controlsPlacement === 'top' && this.renderControls()}
                 <div
                     ref={this.track}
-                    className="carousel-inner"
+                    className={classNames('carousel-inner', innerClassName)}
                     tabIndex={0}
                     aria-label={this.props['aria-label'] ?? 'Carousel slides'}
                     onScroll={this.handleScroll}
                 >
                     {slides.map(this.renderSlide)}
                 </div>
-                {placement && this.renderControls()}
-                {controlsPlacement === 'bottom' && outerControls}
-                {placement &&
-                    (this.props.playPause || this.props.autoplay) &&
-                    this.renderPlayPause()}
-                {placement && this.renderIndicators()}
+                {controlsPlacement !== 'top' && this.renderControls()}
             </Root>
         );
     }

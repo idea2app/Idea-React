@@ -1,0 +1,3 @@
+.paused :global(.carousel-indicators .active)::after {
+    animation-play-state: paused;
+}
