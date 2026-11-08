@@ -1,0 +1,314 @@
+import styleText from './style.module.css?inline';
+import { ExampleLayout } from '../../../component/Examples/Layout';
+import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
+import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
+import { Button } from '../../../../source/Base/Button';
+import {
+    DialogBody,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    NativeDialog
+} from '../../../../source/Base/NativeDialog';
+import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
+import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../source/Form';
+import { CloseButton } from '../../../../source/Base/CloseButton';
+
+<ExampleLayout title="Carousel Template" styleText={styleText} className="">
+
+<header data-bs-theme="dark">
+    <Navbar theme="dark" expand="md" className="fixed-top">
+        <div className="container-fluid">
+            <NavbarBrand href="#">Carousel</NavbarBrand>
+            <NavbarToggler
+                type="button"
+                data-bs-toggle="drawer"
+                data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            ></NavbarToggler>
+            <NativeDialog
+                className="drawer drawer-end"
+                tabIndex="-1"
+                id="navbarCollapse"
+                aria-labelledby="navbarCollapseLabel"
+            >
+                <div className="drawer-header">
+                    <h5 className="drawer-title" id="navbarCollapseLabel">
+                        Menu
+                    </h5>
+                    <CloseButton
+                        type="button"
+                        dismiss="drawer"
+
+                        aria-label="Close"
+                    ></CloseButton>
+                </div>
+                <div className="drawer-body">
+                    <NavbarNav className="me-auto mb-2 md:mb-0">
+                        <NavItem>
+                            <NavLink active aria-current="page" href="#">
+                                Home
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="#">Link</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink disabled aria-disabled="true">
+                                Disabled
+                            </NavLink>
+                        </NavItem>
+                    </NavbarNav>
+                    <form className="d-flex" role="search">
+                        <FormControl
+                            className="me-2"
+                            type="search"
+                            placeholder="Search"
+                            aria-label="Search"
+                        />
+                        <Button variant="outline" theme="success" type="submit">
+                            Search
+                        </Button>
+                    </form>
+                </div>
+            </NativeDialog>
+        </div>
+    </Navbar>
+
+</header>
+
+<div>
+
+<div id="myCarousel" className="carousel slide mb-6" data-bs-autoplay="true">
+    <div className="carousel-inner">
+        <div className="carousel-item active">
+            <ExamplePlaceholder
+                width="100%"
+                height="100%"
+                background="var(--bs-secondary-color)"
+                text={false}
+                title={false}
+            />
+            <div className="carousel-hero text-start">
+                <h1>Example headline.</h1>
+                <p className="opacity-75">
+                    Some representative placeholder content for the first slide of the carousel.
+                </p>
+                <p>
+                    <Button
+                        variant="solid"
+                        theme="primary"
+                        size="lg"
+                        as="a"
+
+                        href="#"
+                    >
+                        Sign up today
+                    </Button>
+                </p>
+            </div>
+        </div>
+        <div className="carousel-item">
+            <ExamplePlaceholder
+                width="100%"
+                height="100%"
+                background="var(--bs-secondary-color)"
+                text={false}
+                title={false}
+            />
+            <div className="carousel-hero text-center">
+                <h1>Another example headline.</h1>
+                <p>Some representative placeholder content for the second slide of the carousel.</p>
+                <p>
+                    <Button
+                        variant="solid"
+                        theme="primary"
+                        size="lg"
+                        as="a"
+
+                        href="#"
+                    >
+                        Learn more
+                    </Button>
+                </p>
+            </div>
+        </div>
+        <div className="carousel-item">
+            <ExamplePlaceholder
+                width="100%"
+                height="100%"
+                background="var(--bs-secondary-color)"
+                text={false}
+                title={false}
+            />
+            <div className="carousel-hero text-end">
+                <h1>One more for good measure.</h1>
+                <p>Some representative placeholder content for the third slide of this carousel.</p>
+                <p>
+                    <Button
+                        variant="solid"
+                        theme="primary"
+                        size="lg"
+                        as="a"
+
+                        href="#"
+                    >
+                        Browse gallery
+                    </Button>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div className="d-flex justify-content-between align-items-center mt-3">
+        <div className="carousel-indicators">
+            <Button
+                variant={false}
+                type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="0"
+                className="active"
+                aria-current="true"
+                aria-label="Slide 1"
+            ></Button>
+            <Button
+                variant={false}
+                type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+            ></Button>
+            <Button
+                variant={false}
+                type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+            ></Button>
+        </div>
+        <div>
+            <Button
+                size="sm"
+                icon
+                variant={false}
+                className="carousel-control-play-pause"
+                type="button"
+                data-bs-target="#myCarousel"
+                aria-label="Pause"
+                data-bs-pause-label="Pause"
+                data-bs-play-label="Play"
+            >
+                <span className="carousel-icon-pause" aria-hidden="true"></span>
+                <span className="carousel-icon-play" aria-hidden="true"></span>
+            </Button>
+            <Button
+                size="sm"
+                icon
+                variant={false}
+
+                type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide="prev"
+            >
+                <span className="carousel-icon-prev" aria-hidden="true"></span>
+                <span className="visually-hidden">Previous</span>
+            </Button>
+            <Button
+                size="sm"
+                icon
+                variant={false}
+
+                type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide="next"
+            >
+                <span className="carousel-icon-next" aria-hidden="true"></span>
+                <span className="visually-hidden">Next</span>
+            </Button>
+        </div>
+    </div>
+
+</div>
+
+{/* Marketing messaging and featurettes */}
+{/* Wrap the rest of the page in another container to center all the content. */}
+
+  <div className="container marketing">
+
+    {/* Three columns of text below the carousel */}
+    <div className="row">
+      <div className="lg:col-4">
+        <ExamplePlaceholder width="140" height="140" background="var(--bs-secondary-color)" text={false} className="rounded-circle" />
+        <h2 className="fw-normal">Heading</h2>
+        <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+        <p><Button variant="solid" theme="secondary" as="a" href="#">View details &raquo;</Button></p>
+      </div>{/* /.lg:col-4 */}
+      <div className="lg:col-4">
+        <ExamplePlaceholder width="140" height="140" background="var(--bs-secondary-color)" text={false} className="rounded-circle" />
+        <h2 className="fw-normal">Heading</h2>
+        <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
+        <p><Button variant="solid" theme="secondary" as="a" href="#">View details &raquo;</Button></p>
+      </div>{/* /.lg:col-4 */}
+      <div className="lg:col-4">
+        <ExamplePlaceholder width="140" height="140" background="var(--bs-secondary-color)" text={false} className="rounded-circle" />
+        <h2 className="fw-normal">Heading</h2>
+        <p>And lastly this, the third column of representative placeholder content.</p>
+        <p><Button variant="solid" theme="secondary" as="a" href="#">View details &raquo;</Button></p>
+      </div>{/* /.lg:col-4 */}
+    </div>{/* /.row */}
+
+
+    {/* START THE FEATURETTES */}
+
+    <hr className="featurette-divider" />
+
+    <div className="row featurette">
+      <div className="md:col-7">
+        <h2 className="featurette-heading fw-normal lh-1">First featurette heading. <span className="fg-2">It’ll blow your mind.</span></h2>
+        <p className="fs-lg fw-light">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+      </div>
+      <div className="md:col-5">
+        <ExamplePlaceholder width="500" height="500" background="var(--bs-secondary-bg)" color="var(--bs-secondary-color)" className="bd-placeholder-img-lg featurette-image img-fluid mx-auto" />
+      </div>
+    </div>
+
+    <hr className="featurette-divider" />
+
+    <div className="row featurette">
+      <div className="md:col-7 md:order-2">
+        <h2 className="featurette-heading fw-normal lh-1">Oh yeah, it’s that good. <span className="fg-2">See for yourself.</span></h2>
+        <p className="fs-lg fw-light">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
+      </div>
+      <div className="md:col-5 md:order-1">
+        <ExamplePlaceholder width="500" height="500" background="var(--bs-secondary-bg)" color="var(--bs-secondary-color)" className="bd-placeholder-img-lg featurette-image img-fluid mx-auto" />
+      </div>
+    </div>
+
+    <hr className="featurette-divider" />
+
+    <div className="row featurette">
+      <div className="md:col-7">
+        <h2 className="featurette-heading fw-normal lh-1">And lastly, this one. <span className="fg-2">Checkmate.</span></h2>
+        <p className="fs-lg fw-light">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
+      </div>
+      <div className="md:col-5">
+        <ExamplePlaceholder width="500" height="500" background="var(--bs-secondary-bg)" color="var(--bs-secondary-color)" className="bd-placeholder-img-lg featurette-image img-fluid mx-auto" />
+      </div>
+    </div>
+
+    <hr className="featurette-divider" />
+
+    {/* /END THE FEATURETTES */}
+
+  </div>{/* /.container */}
+
+{/* FOOTER */}
+
+  <footer className="container">
+    <p className="float-end"><a href="#">Back to top</a></p>
+    <p>&copy; 2017–{new Date().getFullYear()} Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+  </footer>
+</div>
+
+</ExampleLayout>

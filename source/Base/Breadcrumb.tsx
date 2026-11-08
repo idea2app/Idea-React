@@ -10,9 +10,21 @@ export const Breadcrumb = polymorphic<ComponentPropsWithRef<'ol'>>(
 );
 Breadcrumb.displayName = 'Breadcrumb';
 
-export const BreadcrumbItem = polymorphic<ComponentPropsWithRef<'li'>>(
-    ({ as: Root = 'li', ...props }) => (
-        <Root {...props} className={classNames('breadcrumb-item', props.className)} />
+export type BreadcrumbItemProps = ComponentPropsWithRef<'li'> & { active?: boolean };
+
+export const BreadcrumbItem = polymorphic<BreadcrumbItemProps>(
+    ({
+        as: Root = 'li',
+        active,
+        className,
+        'aria-current': current = active ? 'page' : undefined,
+        ...props
+    }) => (
+        <Root
+            {...props}
+            className={classNames('breadcrumb-item', { active }, className)}
+            aria-current={current}
+        />
     )
 );
 BreadcrumbItem.displayName = 'BreadcrumbItem';

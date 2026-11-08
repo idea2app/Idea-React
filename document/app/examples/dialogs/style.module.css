@@ -1,0 +1,9 @@
+/* Override default dialog positioning for static examples */
+:global(.dialog-example) {
+    position: relative;
+    max-width: 500px;
+}
+
+:global(.w-340px) {
+    max-width: 340px;
+}

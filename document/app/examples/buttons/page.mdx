@@ -1,56 +1,157 @@
+import { ExampleLayout } from '../../../component/Examples/Layout';
+import { Icon } from '../../../../source/Extension/Icon';
 import { Button } from '../../../../source/Base/Button';
-import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
-import { CodeExample } from '../../../component/Document/Example';
-import { ButtonPlayground } from '../../../component/Document/ButtonPlayground';
-import { DocumentLayout } from '../../../component/Document/Layout';
+import { Spinner } from '../../../../source/Base/Spinner';
 
-<DocumentLayout active="buttons">
+<ExampleLayout title="Buttons" className="">
 
-# Buttons
+<svg xmlns="http://www.w3.org/2000/svg" className="d-none">
+    <symbol id="arrow-right-short" viewBox="0 0 16 16">
+        <path
+            fillRule="evenodd"
+            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+        />
+    </symbol>
+    <symbol id="x-lg" viewBox="0 0 16 16">
+        <path
+            fillRule="evenodd"
+            d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
+        />
+        <path
+            fillRule="evenodd"
+            d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
+        />
+    </symbol>
+</svg>
 
-Create calls to action for common tasks, from a single primary action to grouped controls.
+<div className="d-flex gap-2 justify-content-center py-5">
+    <Button variant="solid" theme="primary" className="rounded-pill px-3" type="button">
+        Primary
+    </Button>
+    <Button variant="solid" theme="secondary" className="rounded-pill px-3" type="button">
+        Secondary
+    </Button>
+    <Button variant="solid" theme="accent" className="rounded-pill px-3" type="button">
+        Accent
+    </Button>
+    <Button variant="solid" theme="success" className="rounded-pill px-3" type="button">
+        Success
+    </Button>
+    <Button variant="solid" theme="danger" className="rounded-pill px-3" type="button">
+        Danger
+    </Button>
+    <Button variant="solid" theme="warning" className="rounded-pill px-3" type="button">
+        Warning
+    </Button>
+    <Button variant="solid" theme="info" className="rounded-pill px-3" type="button">
+        Info
+    </Button>
+    <Button variant="solid" theme="light" className="rounded-pill px-3" type="button">
+        Light
+    </Button>
+    <Button variant="solid" theme="inverse" className="rounded-pill px-3" type="button">
+        Dark
+    </Button>
+    <Button variant="link" type="button">
+        Link
+    </Button>
+</div>
 
-## Variants
+<div className="b-example-divider"></div>
 
-Use a solid button for the main action, an outline for a secondary choice, and a text variant for
-lower-emphasis actions.
-
-<CodeExample>
-    <div className="d-flex flex-wrap align-items-center gap-3">
-        <Button variant="solid" theme="primary">
-            Get started
+<div className="lg:col-6 2xl:col-4 my-5 mx-auto">
+    <div className="d-grid gap-2">
+        <Button variant="outline" theme="secondary" type="button">
+            Secondary action
         </Button>
-        <Button variant="outline" theme="secondary">
-            Learn more
-        </Button>
-        <Button variant="text" theme="primary">
-            Cancel
+        <Button variant="solid" theme="primary" type="button">
+            Primary action
         </Button>
     </div>
-</CodeExample>
+</div>
 
-## Button group
+<div className="b-example-divider"></div>
 
-Group actions that share a context.
+<div className="d-flex gap-2 justify-content-center py-5">
+    <Button variant="solid" theme="primary" type="button">
+        Primary icon
+        <Icon name="arrow-right-short" size={1.25} className="ms-1" aria-hidden="true" />
+    </Button>
+    <Button variant="outline" theme="secondary" type="button">
+        Secondary icon
+        <Icon name="arrow-right-short" size={1.25} className="ms-1" aria-hidden="true" />
+    </Button>
+</div>
 
-<CodeExample>
-    <ButtonGroup aria-label="Text alignment">
-        <Button variant="outline" theme="secondary" active>
-            Left
-        </Button>
-        <Button variant="outline" theme="secondary">
-            Center
-        </Button>
-        <Button variant="outline" theme="secondary">
-            Right
-        </Button>
-    </ButtonGroup>
-</CodeExample>
+<div className="b-example-divider"></div>
 
-## Playground
+<div className="d-flex gap-2 justify-content-center py-5">
+    <Button variant="solid" theme="primary" type="button" disabled>
+        <Spinner animation="border" aria-hidden="true"></Spinner>
+        <span className="visually-hidden" role="status">
+            Loading...
+        </span>
+    </Button>
+    <Button variant="solid" theme="primary" type="button" disabled>
+        <Spinner animation="border" aria-hidden="true"></Spinner>
+        <span role="status">Loading...</span>
+    </Button>
+</div>
 
-Explore supported variants, themes, sizes, and states in the interactive button playground.
+<div className="b-example-divider"></div>
 
-<ButtonPlayground />
+<div className="d-flex gap-2 justify-content-center pt-5 pb-4">
+    <Button
+        variant="solid"
+        theme="primary"
+        icon
 
-</DocumentLayout>
+        className="rounded-circle p-2 lh-1"
+        type="button"
+    >
+        <Icon name="x-lg" size={1} aria-hidden="true" />
+        <span className="visually-hidden">Dismiss</span>
+    </Button>
+    <Button
+        variant="outline"
+        theme="primary"
+        icon
+
+        className="rounded-circle p-2 lh-1"
+        type="button"
+    >
+        <Icon name="x-lg" size={1} aria-hidden="true" />
+        <span className="visually-hidden">Dismiss</span>
+    </Button>
+
+</div>
+
+<div className="d-flex gap-2 justify-content-center pb-5">
+    <Button
+        variant="solid"
+        theme="primary"
+        icon
+
+        className="rounded-circle p-3 lh-1"
+        type="button"
+    >
+        <Icon name="x-lg" size={1.5} aria-hidden="true" />
+        <span className="visually-hidden">Dismiss</span>
+    </Button>
+    <Button
+        variant="outline"
+        theme="primary"
+        icon
+
+        className="rounded-circle p-3 lh-1"
+        type="button"
+    >
+        <Icon name="x-lg" size={1.5} aria-hidden="true" />
+        <span className="visually-hidden">Dismiss</span>
+    </Button>
+
+</div>
+
+<div className="b-example-divider"></div>
+
+</ExampleLayout>

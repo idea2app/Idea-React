@@ -1,60 +1,274 @@
+import styleText from './style.module.css?inline';
+import { ExampleLayout } from '../../../component/Examples/Layout';
+import { Icon } from '../../../../source/Extension/Icon';
 import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
-import { Badge } from '../../../../source/Base/Badge';
-import { CodeExample } from '../../../component/Document/Example';
-import { DocumentLayout } from '../../../component/Document/Layout';
+import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../source/Form';
 
-export const inbox = [
-    { title: 'Project update', detail: 'The design review is ready.', count: '2' },
-    { title: 'Team invitation', detail: 'Alex invited you to a workspace.', count: '1' },
-    { title: 'Weekly report', detail: 'Your activity summary is available.', count: '' }
-];
+<ExampleLayout title="List groups" styleText={styleText} className="">
 
-<DocumentLayout active="list-groups">
+<svg xmlns="http://www.w3.org/2000/svg" className="d-none">
+  <symbol id="calendar-event" viewBox="0 0 16 16">
+    <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+  </symbol>
 
-# List groups
+<symbol id="alarm" viewBox="0 0 16 16">
+    <path d="M8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z" />
+    <path d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1h-3zm1.038 3.018a6.093 6.093 0 0 1 .924 0 6 6 0 1 1-.924 0zM0 3.5c0 .753.333 1.429.86 1.887A8.035 8.035 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1z" />
+</symbol>
 
-Extend list groups with custom content to present notifications, navigation, and other collections.
+  <symbol id="list-check" viewBox="0 0 16 16">
+    <path fillRule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+  </symbol>
+</svg>
 
-## Notification list
-
-Combine a strong title with supporting text and a status badge.
-
-<CodeExample>
-    <ListGroup>
-        {inbox.map(({ title, detail, count }, index) => (
-            <ListGroupItem key={title} as="a" href={`#message-${index}`} action>
-                <div className="d-flex justify-content-between gap-3">
-                    <strong>{title}</strong>
-                    {count && <Badge theme="primary">{count}</Badge>}
+<div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
+    <ListGroup as="div">
+        <ListGroupItem as="a" href="#" actionclassName="d-flex gap-3 py-3" aria-current="true">
+            <img
+                src="https://github.com/twbs.png"
+                alt=""
+                width="32"
+                height="32"
+                className="rounded-circle flex-shrink-0"
+            />
+            <div className="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 className="mb-0">List group item heading</h6>
+                    <p className="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
                 </div>
-                <span className="d-block small fg-2 mt-1">{detail}</span>
-            </ListGroupItem>
-        ))}
+                <small className="opacity-50 text-nowrap">now</small>
+            </div>
+        </ListGroupItem>
+        <ListGroupItem as="a" href="#" actionclassName="d-flex gap-3 py-3" aria-current="true">
+            <img
+                src="https://github.com/twbs.png"
+                alt=""
+                width="32"
+                height="32"
+                className="rounded-circle flex-shrink-0"
+            />
+            <div className="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 className="mb-0">Another title here</h6>
+                    <p className="mb-0 opacity-75">
+                        Some placeholder content in a paragraph that goes a little longer so it
+                        wraps to a new line.
+                    </p>
+                </div>
+                <small className="opacity-50 text-nowrap">3d</small>
+            </div>
+        </ListGroupItem>
+        <ListGroupItem as="a" href="#" actionclassName="d-flex gap-3 py-3" aria-current="true">
+            <img
+                src="https://github.com/twbs.png"
+                alt=""
+                width="32"
+                height="32"
+                className="rounded-circle flex-shrink-0"
+            />
+            <div className="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 className="mb-0">Third heading</h6>
+                    <p className="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+                </div>
+                <small className="opacity-50 text-nowrap">1w</small>
+            </div>
+        </ListGroupItem>
     </ListGroup>
-</CodeExample>
+</div>
 
-## Numbered steps
+<div className="b-example-divider"></div>
 
-Use an ordered list when the sequence of items matters.
+<div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
+  <ListGroup as="div" >
+    <ListGroupItem as="label" className="d-flex gap-2">
+      <FormCheck type="checkbox" value="" className="check flex-shrink-0" checked />
+      <span>
+        First checkbox
+        <small className="d-block fg-2">With support text underneath to add more detail</small>
+      </span>
+    </ListGroupItem>
+    <ListGroupItem as="label" className="d-flex gap-2">
+      <FormCheck type="checkbox" value="" className="check flex-shrink-0" />
+      <span>
+        Second checkbox
+        <small className="d-block fg-2">Some other text goes here</small>
+      </span>
+    </ListGroupItem>
+    <ListGroupItem as="label" className="d-flex gap-2">
+      <FormCheck type="checkbox" value="" className="check flex-shrink-0" />
+      <span>
+        Third checkbox
+        <small className="d-block fg-2">And we end with another snippet of text</small>
+      </span>
+    </ListGroupItem>
+  </ListGroup>
 
-<CodeExample>
-    <ListGroup as="ol" numbered>
-        <ListGroupItem>Choose a plan</ListGroupItem>
-        <ListGroupItem>Invite your team</ListGroupItem>
-        <ListGroupItem>Launch your workspace</ListGroupItem>
+  <ListGroup as="div" >
+    <ListGroupItem as="label" className="d-flex gap-2">
+      <FormCheck className="radio flex-shrink-0" type="radio" name="listGroupRadios" id="listGroupRadios1" value="" checked />
+      <span>
+        First radio
+        <small className="d-block fg-2">With support text underneath to add more detail</small>
+      </span>
+    </ListGroupItem>
+    <ListGroupItem as="label" className="d-flex gap-2">
+      <FormCheck className="radio flex-shrink-0" type="radio" name="listGroupRadios" id="listGroupRadios2" value="" />
+      <span>
+        Second radio
+        <small className="d-block fg-2">Some other text goes here</small>
+      </span>
+    </ListGroupItem>
+    <ListGroupItem as="label" className="d-flex gap-2">
+      <FormCheck className="radio flex-shrink-0" type="radio" name="listGroupRadios" id="listGroupRadios3" value="" />
+      <span>
+        Third radio
+        <small className="d-block fg-2">And we end with another snippet of text</small>
+      </span>
+    </ListGroupItem>
+  </ListGroup>
+</div>
+
+<div className="b-example-divider"></div>
+
+<div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
+    <ListGroup as="div">
+        <ListGroupItem as="label" className="d-flex gap-3">
+            <FormCheck
+                type="checkbox"
+                value=""
+                className="check flex-shrink-0"
+                style={{ fontSize: '1.375em' }}
+                checked
+            />
+            <span className="pt-1 form-checked-content">
+                <strong>Finish sales report</strong>
+                <small className="d-block fg-2">
+                    <Icon name="calendar-event" className="me-1" role="img" aria-label="Schedule" />
+                    1:00–2:00pm
+                </small>
+            </span>
+        </ListGroupItem>
+        <ListGroupItem as="label" className="d-flex gap-3">
+            <FormCheck
+                type="checkbox"
+                value=""
+                className="check flex-shrink-0"
+                style={{ fontSize: '1.375em' }}
+            />
+            <span className="pt-1 form-checked-content">
+                <strong>Weekly All Hands</strong>
+                <small className="d-block fg-2">
+                    <Icon name="calendar-event" className="me-1" role="img" aria-label="Schedule" />
+                    2:00–2:30pm
+                </small>
+            </span>
+        </ListGroupItem>
+        <ListGroupItem as="label" className="d-flex gap-3">
+            <FormCheck
+                type="checkbox"
+                value=""
+                className="check flex-shrink-0"
+                style={{ fontSize: '1.375em' }}
+            />
+            <span className="pt-1 form-checked-content">
+                <strong>Out of office</strong>
+                <small className="d-block fg-2">
+                    <Icon name="alarm" className="me-1" role="img" aria-label="Reminder" />
+                    Tomorrow
+                </small>
+            </span>
+        </ListGroupItem>
+        <ListGroupItem as="label" className="d-flex gap-3 bg-1">
+            <FormCheck
+                disabled
+                type="checkbox"
+                value=""
+                className="check check-input-placeholder bg-1 flex-shrink-0 pe-none"
+                style={{ fontSize: '1.375em' }}
+            />
+            <span className="pt-1 form-checked-content">
+                <span contenteditable="true" className="w-100">
+                    Add new task...
+                </span>
+                <small className="d-block fg-2">
+                    <Icon name="list-check" className="me-1" aria-hidden="true" />
+                    Choose list...
+                </small>
+            </span>
+        </ListGroupItem>
     </ListGroup>
-</CodeExample>
+</div>
 
-## Horizontal list
+<div className="b-example-divider"></div>
 
-For short labels, switch to a horizontal list on wider screens.
+<div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
+  <ListGroup as="div" className="list-group-checkable d-grid gap-2 border-0">
+    <FormCheck className="radio list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios1" value="" checked />
+    <ListGroupItem as="label" className="rounded-3 py-3" htmlFor="listGroupCheckableRadios1">
+      First radio
+      <span className="d-block small opacity-50">With support text underneath to add more detail</span>
+    </ListGroupItem>
 
-<CodeExample>
-    <ListGroup horizontal="md">
-        <ListGroupItem>All</ListGroupItem>
-        <ListGroupItem active>Active</ListGroupItem>
-        <ListGroupItem>Archived</ListGroupItem>
-    </ListGroup>
-</CodeExample>
+    <FormCheck className="radio list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios2" value="" />
+    <ListGroupItem as="label" className="rounded-3 py-3" htmlFor="listGroupCheckableRadios2">
+      Second radio
+      <span className="d-block small opacity-50">Some other text goes here</span>
+    </ListGroupItem>
 
-</DocumentLayout>
+    <FormCheck className="radio list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios3" value="" />
+    <ListGroupItem as="label" className="rounded-3 py-3" htmlFor="listGroupCheckableRadios3">
+      Third radio
+      <span className="d-block small opacity-50">And we end with another snippet of text</span>
+    </ListGroupItem>
+
+    <FormCheck className="radio list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios4" value="" disabled />
+    <ListGroupItem as="label" className="rounded-3 py-3" htmlFor="listGroupCheckableRadios4">
+      Fourth disabled radio
+      <span className="d-block small opacity-50">This option is disabled</span>
+    </ListGroupItem>
+
+  </ListGroup>
+</div>
+
+<div className="b-example-divider"></div>
+
+<div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
+  <ListGroup as="div" className="list-group-radio d-grid gap-2 border-0">
+    <div className="position-relative">
+      <FormCheck className="radio position-absolute top-50 end-0 me-3 fs-lg" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid1" value="" checked />
+      <ListGroupItem as="label" className="py-3 pe-5" htmlFor="listGroupRadioGrid1">
+        <strong className="fw-semibold">First radio</strong>
+        <span className="d-block small opacity-75">With support text underneath to add more detail</span>
+      </ListGroupItem>
+    </div>
+
+    <div className="position-relative">
+      <FormCheck className="radio position-absolute top-50 end-0 me-3 fs-lg" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid2" value="" />
+      <ListGroupItem as="label" className="py-3 pe-5" htmlFor="listGroupRadioGrid2">
+        <strong className="fw-semibold">Second radio</strong>
+        <span className="d-block small opacity-75">Some other text goes here</span>
+      </ListGroupItem>
+    </div>
+
+    <div className="position-relative">
+      <FormCheck className="radio position-absolute top-50 end-0 me-3 fs-lg" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid3" value="" />
+      <ListGroupItem as="label" className="py-3 pe-5" htmlFor="listGroupRadioGrid3">
+        <strong className="fw-semibold">Third radio</strong>
+        <span className="d-block small opacity-75">And we end with another snippet of text</span>
+      </ListGroupItem>
+    </div>
+
+    <div className="position-relative">
+      <FormCheck className="radio position-absolute top-50 end-0 me-3 fs-lg" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid4" value="" disabled />
+      <ListGroupItem as="label" className="py-3 pe-5" htmlFor="listGroupRadioGrid4">
+        <strong className="fw-semibold">Fourth disabled radio</strong>
+        <span className="d-block small opacity-75">This option is disabled</span>
+      </ListGroupItem>
+    </div>
+
+  </ListGroup>
+</div>
+
+</ExampleLayout>

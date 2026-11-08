@@ -22,7 +22,7 @@ it('renders semantic breadcrumb items with default and custom decorative divider
                     <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbDivider>/</BreadcrumbDivider>
-                <BreadcrumbItem aria-current="page">
+                <BreadcrumbItem active>
                     <BreadcrumbLink href="/docs/data" active>
                         Data
                     </BreadcrumbLink>
@@ -33,6 +33,10 @@ it('renders semantic breadcrumb items with default and custom decorative divider
     assert.equal(screen.getByRole('list').className, 'breadcrumb custom');
     assert.equal(screen.getByRole('link', { name: 'Data' }).getAttribute('aria-current'), 'page');
     assert.equal(screen.getByRole('link', { name: 'Data' }).className, 'breadcrumb-link active');
+    assert.equal(
+        screen.getByRole('listitem', { current: 'page' }).className,
+        'breadcrumb-item active'
+    );
     assert.equal(screen.getAllByRole('listitem').length, 3);
     assert.equal(container.querySelectorAll('[aria-hidden="true"]').length, 2);
     assert.equal(container.querySelector('.breadcrumb-divider')?.textContent, '');

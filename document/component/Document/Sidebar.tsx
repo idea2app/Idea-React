@@ -101,19 +101,6 @@ const guides: NavLink[] = [
     { label: 'Webpack', slug: 'webpack' },
     { label: 'ViNext', slug: 'next' }
 ];
-const examples: NavLink[] = [
-    { label: 'Headers', slug: 'headers' },
-    { label: 'Heroes', slug: 'heroes' },
-    { label: 'Features', slug: 'features' },
-    { label: 'Sidebars', slug: 'sidebars' },
-    { label: 'Footers', slug: 'footers' },
-    { label: 'Menus', slug: 'menus' },
-    { label: 'List groups', slug: 'list-groups' },
-    { label: 'Dialogs', slug: 'dialogs' },
-    { label: 'Breadcrumbs', slug: 'breadcrumbs' },
-    { label: 'Buttons', slug: 'buttons' },
-    { label: 'Jumbotrons', slug: 'jumbotrons' }
-];
 export const documentGroups: NavGroup[] = [
     {
         label: 'Guides',
@@ -123,15 +110,6 @@ export const documentGroups: NavGroup[] = [
         itemHref: 'guides/',
         slug: 'guides',
         items: guides
-    },
-    {
-        label: 'Examples',
-        icon: 'window-stack',
-        iconClassName: 'fg-info',
-        href: 'examples/',
-        itemHref: 'examples/',
-        slug: 'examples',
-        items: examples
     },
     {
         label: 'Components',

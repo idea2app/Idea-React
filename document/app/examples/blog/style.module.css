@@ -1,0 +1,54 @@
+/* stylelint-disable @stylistic/selector-list-comma-newline-after */
+
+:global(.blog-header-logo) {
+    font-size: 2.25rem;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+:global([dir='rtl'] .blog-header-logo) {
+    font-family: Amiri, Georgia, 'Times New Roman', serif;
+}
+
+:global(.blog-header-logo:hover) {
+    text-decoration: none;
+}
+
+:global(h1),
+:global(h2),
+:global(h3),
+:global(h4),
+:global(h5),
+:global(h6) {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+:global([dir='rtl'] h1),
+:global([dir='rtl'] h2),
+:global([dir='rtl'] h3),
+:global([dir='rtl'] h4),
+:global([dir='rtl'] h5),
+:global([dir='rtl'] h6) {
+    font-family: Amiri, Georgia, 'Times New Roman', serif;
+}
+
+@media (min-width: 768px) {
+    :global(.h-md-250) {
+        height: 250px;
+    }
+}
+
+/* Pagination */
+:global(.blog-pagination) {
+    margin-bottom: 4rem;
+}
+
+/*
+ * Blog posts
+ */
+:global(.blog-post) {
+    margin-bottom: 4rem;
+}
+:global(.blog-post-meta) {
+    margin-bottom: 1.25rem;
+    color: #727272;
+}

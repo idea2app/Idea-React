@@ -1,119 +1,302 @@
+import styleText from './style.module.css?inline';
+import { ExampleLayout } from '../../../component/Examples/Layout';
 import { Button } from '../../../../source/Base/Button';
-import { FormControl } from '../../../../source/Form';
-import { Container } from '../../../../source/Layout/Grid';
-import { CodeExample } from '../../../component/Document/Example';
-import { DocumentLayout } from '../../../component/Document/Layout';
+import {
+    FormCheck,
+    FormControl,
+    FormSelect,
+    FormTextArea,
+    FormFloatingLabel
+} from '../../../../source/Form';
 
-<DocumentLayout active="heroes">
+<ExampleLayout title="Heroes" styleText={styleText} className="">
 
-# Heroes
+<div>
+  <h1 className="visually-hidden">Heroes examples</h1>
 
-Set the stage on a homepage with a concise headline, supporting text, and a clear call to action.
-
-## Centered hero
-
-Use a focused message when one action is the main goal of the page.
-
-<CodeExample>
-    <Container className="py-12 text-center">
-        <h2 className="display-5 fw-semibold text-balance">Build something remarkable</h2>
-        <p className="text-lg fg-2 mx-auto max-w-3xl">
-            Bring your next idea to life with flexible tools that grow with your team.
+<div className="px-4 py-5 my-5 text-center">
+    <img
+        className="d-block mx-auto mb-4"
+        src={'https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo.svg'}
+        alt=""
+        width="72"
+        height="57"
+    />
+    <h1 className="fs-4xl fw-bold fg-emphasis-inverse">Centered hero</h1>
+    <div className="lg:col-6 mx-auto">
+        <p className="fs-lg fw-light mb-4">
+            Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s
+            most popular front-end open source toolkit, featuring Sass variables and mixins,
+            responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.
         </p>
-        <Button variant="solid" theme="primary" size="lg">
-            Get started
-        </Button>
-    </Container>
-</CodeExample>
+        <div className="d-grid gap-2 sm:d-flex sm:justify-content-center">
+            <Button variant="solid" theme="primary" size="lg" type="button" className="px-4">
+                Primary button
+            </Button>
+            <Button
+                variant="outline"
+                theme="secondary"
+                size="lg"
 
-## Split hero
+                type="button"
+                className="px-4"
+            >
+                Secondary
+            </Button>
+        </div>
+    </div>
 
-Place the message and its actions beside a supporting visual or product preview.
+</div>
 
-<CodeExample>
-    <div className="d-flex flex-column md:flex-row align-items-center gap-7 rounded-5 bg-1 p-7">
-        <div className="flex-fill">
-            <p className="text-uppercase fw-semibold fg-accent">Introducing Idea</p>
-            <h2 className="display-6 fw-semibold">A clearer way to build</h2>
-            <p className="fg-2">
-                Keep your interface consistent from the first screen to the last.
+<div className="b-example-divider"></div>
+
+<div className="px-4 pt-5 my-5 text-center border-bottom">
+    <h1 className="fs-5xl fw-bold fg-emphasis-inverse">Centered screenshot</h1>
+    <div className="lg:col-6 mx-auto">
+        <p className="fs-lg fw-light mb-4">
+            Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s
+            most popular front-end open source toolkit, featuring Sass variables and mixins,
+            responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.
+        </p>
+        <div className="d-grid gap-2 sm:d-flex sm:justify-content-center mb-5">
+            <Button
+                variant="solid"
+                theme="primary"
+                size="lg"
+
+                type="button"
+                className="px-4 sm:me-3"
+            >
+                Primary button
+            </Button>
+            <Button
+                variant="outline"
+                theme="secondary"
+                size="lg"
+
+                type="button"
+                className="px-4"
+            >
+                Secondary
+            </Button>
+        </div>
+    </div>
+    <div className="overflow-hidden" style={{ maxHeight: '30vh' }}>
+        <div className="container px-5">
+            <img
+                src="https://raw.githubusercontent.com/twbs/bootstrap/main/site/src/assets/examples/heroes/bootstrap-docs.png"
+                className="img-fluid border rounded-3 shadow-lg mb-4"
+                alt="Example image"
+                width="700"
+                height="500"
+                loading="lazy"
+            />
+        </div>
+    </div>
+
+</div>
+
+<div className="b-example-divider"></div>
+
+<div className="container 2xl:col-8 px-4 py-5">
+    <div className="row lg:flex-row-reverse align-items-center g-5 py-5">
+        <div className="col-10 sm:col-8 lg:col-6">
+            <img
+                src="https://raw.githubusercontent.com/twbs/bootstrap/main/site/src/assets/examples/heroes/bootstrap-themes.png"
+                className="d-block lg:mx-auto img-fluid"
+                alt="Bootstrap Themes"
+                width="700"
+                height="500"
+                loading="lazy"
+            />
+        </div>
+        <div className="lg:col-6">
+            <h1 className="fs-4xl fw-bold fg-emphasis-inverse lh-1 mb-3">
+                Responsive left-aligned hero with image
+            </h1>
+            <p className="fs-lg fw-light">
+                Quickly design and customize responsive mobile-first sites with Bootstrap, the
+                world’s most popular front-end open source toolkit, featuring Sass variables and
+                mixins, responsive grid system, extensive prebuilt components, and powerful
+                JavaScript plugins.
             </p>
-            <div className="d-flex flex-wrap gap-3">
-                <Button variant="solid" theme="primary">
-                    Explore the product
+            <div className="d-grid gap-2 md:d-flex md:justify-content-start">
+                <Button
+                    variant="solid"
+                    theme="primary"
+                    size="lg"
+
+                    type="button"
+                    className="px-4 md:me-2"
+                >
+                    Primary
                 </Button>
-                <Button variant="outline" theme="secondary">
-                    Learn more
+                <Button
+                    variant="outline"
+                    theme="secondary"
+                    size="lg"
+
+                    type="button"
+                    className="px-4"
+                >
+                    Default
                 </Button>
             </div>
         </div>
-        <div className="flex-fill rounded-4 bg-body p-7 text-center">
-            <span className="display-4 fw-semibold">Idea React</span>
+    </div>
+
+</div>
+
+<div className="b-example-divider"></div>
+
+<div className="container xl:col-10 2xl:col-8 px-4 py-5">
+    <div className="row align-items-center lg:g-5 py-5">
+        <div className="lg:col-7 text-center lg:text-start">
+            <h1 className="fs-5xl fw-bold lh-1 fg-emphasis-inverse mb-3">
+                Vertically centered hero sign-up form
+            </h1>
+            <p className="lg:col-10 fs-xl">
+                Below is an example form built entirely with Bootstrap’s form controls. Each
+                required form group has a validation state that can be triggered by attempting to
+                submit the form without completing it.
+            </p>
+        </div>
+        <div className="md:col-10 mx-auto lg:col-5">
+            <form className="p-4 md:p-5 border rounded-3 bg-1">
+                <FormFloatingLabel className="mb-3">
+                    <label htmlFor="floatingInput">Email address</label>
+                    <FormControl
+                        type="email"
+
+                        id="floatingInput"
+                        placeholder="name@example.com"
+                    />
+                </FormFloatingLabel>
+                <FormFloatingLabel className="mb-3">
+                    <label htmlFor="floatingPassword">Password</label>
+                    <FormControl
+                        type="password"
+
+                        id="floatingPassword"
+                        placeholder="Password"
+                    />
+                </FormFloatingLabel>
+                <div className="form-field mb-3">
+                    <FormCheck
+                        type="checkbox"
+                        value="remember-me"
+                        id="heroRememberMe"
+                        className="check"
+                    />
+                    <label htmlFor="heroRememberMe">Remember me</label>
+                </div>
+                <Button
+                    variant="solid"
+                    theme="primary"
+                    size="lg"
+
+                    className="w-100"
+                    type="submit"
+                >
+                    Sign up
+                </Button>
+                <hr className="my-4" />
+                <small className="fg-2">By clicking Sign up, you agree to the terms of use.</small>
+            </form>
         </div>
     </div>
-</CodeExample>
 
-## Hero with product preview
+</div>
 
-Use a contained preview to balance the headline without competing with its call to action.
+<div className="b-example-divider"></div>
 
-<CodeExample>
-    <Container className="d-flex flex-column align-items-center gap-5 py-9 text-center">
-        <h2 className="display-5 fw-semibold max-w-4xl">
-            Documentation that keeps your team moving
-        </h2>
-        <p className="text-lg fg-2 max-w-3xl">
-            Find the patterns you need, understand how they work, and get back to building.
-        </p>
-        <div className="d-flex flex-wrap gap-3 justify-content-center">
-            <Button variant="solid" theme="primary">
-                Read the docs
-            </Button>
-            <Button variant="outline" theme="secondary">
-                View the components
-            </Button>
+<div className="container my-5">
+    <div className="row p-4 pb-0 lg:pe-0 lg:pt-5 align-items-center rounded-3 border shadow-lg">
+        <div className="lg:col-7 p-3 lg:p-5 lg:pt-3">
+            <h1 className="fs-5xl fw-bold lh-1 fg-emphasis-inverse">
+                Border hero with cropped image and shadows
+            </h1>
+            <p className="fs-lg fw-light">
+                Quickly design and customize responsive mobile-first sites with Bootstrap, the
+                world’s most popular front-end open source toolkit, featuring Sass variables and
+                mixins, responsive grid system, extensive prebuilt components, and powerful
+                JavaScript plugins.
+            </p>
+            <div className="d-grid gap-2 md:d-flex md:justify-content-start mb-4 lg:mb-3">
+                <Button
+                    variant="solid"
+                    theme="primary"
+                    size="lg"
+
+                    type="button"
+                    className="px-4 md:me-2"
+                >
+                    Primary
+                </Button>
+                <Button
+                    variant="outline"
+                    theme="secondary"
+                    size="lg"
+
+                    type="button"
+                    className="px-4"
+                >
+                    Default
+                </Button>
+            </div>
         </div>
-        <div className="w-100 rounded-5 bg-1 p-8">
-            <span className="display-6 fw-semibold">Idea React</span>
+        <div className="lg:col-4 lg:offset-1 p-0 overflow-hidden shadow-lg">
+            <img
+                className="rounded-lg-3"
+                src="https://raw.githubusercontent.com/twbs/bootstrap/main/site/src/assets/examples/heroes/bootstrap-docs.png"
+                alt=""
+                width="720"
+            />
         </div>
-    </Container>
-</CodeExample>
-
-## Sign-up hero
-
-Keep the form short and make its purpose clear before asking visitors to submit it.
-
-<CodeExample>
-    <div className="d-flex flex-column lg:flex-row align-items-center gap-7 rounded-5 bg-1 p-7">
-        <div className="flex-fill">
-            <h2 className="display-6 fw-semibold">Start building today</h2>
-            <p className="fg-2">Create a workspace for your next project.</p>
-        </div>
-        <form className="d-flex flex-column gap-3 w-100 max-w-3xl">
-            <label htmlFor="hero-email">Email address</label>
-            <FormControl id="hero-email" type="email" placeholder="you@example.com" />
-            <Button type="submit" variant="solid" theme="primary">
-                Sign up
-            </Button>
-        </form>
     </div>
-</CodeExample>
 
-## Dark hero
+</div>
 
-Use contrast to make a focused call to action stand out from surrounding sections.
+<div className="b-example-divider"></div>
 
-<CodeExample>
-    <section className="rounded-5 bg-dark p-7 lg:p-9" data-bs-theme="dark">
-        <p className="text-uppercase fw-semibold">The next chapter starts here</p>
-        <h2 className="display-4 fw-semibold">Make your best work together.</h2>
-        <p className="text-lg fg-2 max-w-3xl">
-            Bring the people and ideas behind your work into one shared space.
-        </p>
-        <Button variant="solid" theme="light">
-            Join the team
-        </Button>
-    </section>
-</CodeExample>
+<div className="bg-black fg-secondary px-4 py-5 text-center" data-bs-theme="dark">
+    <div className="py-5">
+        <h1 className="fs-4xl fw-bold fg-white">Dark color hero</h1>
+        <div className="lg:col-6 mx-auto">
+            <p className="mb-4">
+                Quickly design and customize responsive mobile-first sites with Bootstrap, the
+                world’s most popular front-end open source toolkit, featuring Sass variables and
+                mixins, responsive grid system, extensive prebuilt components, and powerful
+                JavaScript plugins.
+            </p>
+            <div className="d-grid gap-2 sm:d-flex sm:justify-content-center">
+                <Button
+                    variant="outline"
+                    theme="info"
+                    size="lg"
 
-</DocumentLayout>
+                    type="button"
+                    className="px-4 sm:me-3"
+                >
+                    Custom button
+                </Button>
+                <Button
+                    variant="outline"
+                    theme="secondary"
+                    size="lg"
+
+                    type="button"
+                    className="px-4"
+                >
+                    Secondary
+                </Button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+  <div className="b-example-divider mb-0"></div>
+</div>
+
+</ExampleLayout>

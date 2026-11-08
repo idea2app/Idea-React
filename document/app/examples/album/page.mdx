@@ -1,0 +1,275 @@
+import { ExampleLayout } from '../../../component/Examples/Layout';
+import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
+import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
+import { Button } from '../../../../source/Base/Button';
+import {
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardImage,
+    CardImageOverlay,
+    CardText,
+    CardTitle
+} from '../../../../source/Base/Card';
+import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
+
+<ExampleLayout title="Album example" className="">
+
+<header data-bs-theme="dark">
+    <div className="collapse bg-black" id="navbarHeader">
+        <div className="container">
+            <div className="row">
+                <div className="sm:col-8 md:col-7 py-4">
+                    <h4 className="fg-white">About</h4>
+                    <p className="fg-2">
+                        Add some information about the album below, the author, or any other
+                        background context. Make it a few sentences long so folks can pick up some
+                        informative tidbits. Then, link them off to some social networking sites or
+                        contact information.
+                    </p>
+                </div>
+                <div className="sm:col-4 md:offset-1 py-4">
+                    <h4 className="fg-white">Contact</h4>
+                    <ul className="list-unstyled">
+                        <li>
+                            <a href="#" className="fg-white">
+                                Follow on X
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" className="fg-white">
+                                Like on Facebook
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" className="fg-white">
+                                Email me
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <Navbar className="bg-black shadow-sm" aria-label="Album navigation">
+        <div className="container">
+            <NavbarBrand href="#" className="d-flex align-items-center">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    aria-hidden="true"
+                    className="me-2"
+                    viewBox="0 0 24 24"
+                >
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                    <circle cx="12" cy="13" r="4" />
+                </svg>
+                <strong>Album</strong>
+            </NavbarBrand>
+            <NavbarToggler
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarHeader"
+                aria-controls="navbarHeader"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            ></NavbarToggler>
+        </div>
+    </Navbar>
+</header>
+
+<div>
+
+<section className="py-5 text-center container">
+    <div className="row lg:py-5">
+        <div className="lg:col-6 md:col-8 mx-auto">
+            <h1 className="fw-light">Album example</h1>
+            <p className="fs-lg fw-light fg-2">
+                Something short and leading about the collection below—its contents, the creator,
+                etc. Make it short and sweet, but not too short so folks don’t simply skip over it
+                entirely.
+            </p>
+            <p>
+                <Button variant="solid" theme="primary" as="a" href="#" className="m-2">
+                    Main call to action
+                </Button>
+                <Button variant="solid" theme="secondary" as="a" href="#" className="m-2">
+                    Secondary action
+                </Button>
+            </p>
+        </div>
+    </div>
+</section>
+
+  <div className="album py-5 bg-1">
+    <div className="container">
+
+      <div className="row row-cols-1 sm:row-cols-2 md:row-cols-3 g-3">
+        <div className="col">
+          <Card   className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody  >
+              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <ButtonGroup >
+                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
+                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
+                </ButtonGroup>
+                <small className="fg-2">9 mins</small>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
+        <div className="col">
+          <Card   className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody  >
+              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <ButtonGroup >
+                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
+                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
+                </ButtonGroup>
+                <small className="fg-2">9 mins</small>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
+        <div className="col">
+          <Card   className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody  >
+              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <ButtonGroup >
+                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
+                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
+                </ButtonGroup>
+                <small className="fg-2">9 mins</small>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
+
+        <div className="col">
+          <Card   className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody  >
+              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <ButtonGroup >
+                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
+                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
+                </ButtonGroup>
+                <small className="fg-2">9 mins</small>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
+        <div className="col">
+          <Card   className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody  >
+              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <ButtonGroup >
+                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
+                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
+                </ButtonGroup>
+                <small className="fg-2">9 mins</small>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
+        <div className="col">
+          <Card   className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody  >
+              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <ButtonGroup >
+                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
+                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
+                </ButtonGroup>
+                <small className="fg-2">9 mins</small>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
+
+        <div className="col">
+          <Card   className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody  >
+              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <ButtonGroup >
+                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
+                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
+                </ButtonGroup>
+                <small className="fg-2">9 mins</small>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
+        <div className="col">
+          <Card   className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody  >
+              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <ButtonGroup >
+                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
+                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
+                </ButtonGroup>
+                <small className="fg-2">9 mins</small>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
+        <div className="col">
+          <Card   className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody  >
+              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <ButtonGroup >
+                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
+                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
+                </ButtonGroup>
+                <small className="fg-2">9 mins</small>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer className="fg-2 py-5">
+    <div className="container">
+        <p className="float-end mb-1">
+            <a href="#">Back to top</a>
+        </p>
+        <p className="mb-1">
+            Album example is &copy; Bootstrap, but please download and customize it for yourself!
+        </p>
+        <p className="mb-0">
+            New to Bootstrap? <a href="/">Visit the homepage</a> or read our{' '}
+            <a href={'https://getbootstrap.com/docs/6.0/getting-started/'}>getting started guide</a>
+            .
+        </p>
+    </div>
+</footer>
+
+</ExampleLayout>

@@ -1,0 +1,58 @@
+:global(body) {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
+:global(html) {
+    height: -webkit-fill-available;
+}
+
+:global(main) {
+    height: -webkit-fill-available;
+    max-height: 100vh;
+}
+
+:global(.btn-toggle) {
+    background-color: transparent;
+    padding: 0.25rem 0.5rem;
+    color: var(--bs-fg-1);
+    font-weight: 600;
+}
+:global(.btn-toggle:hover),
+:global(.btn-toggle:focus) {
+    background-color: var(--bs-bg-3);
+    color: color-mix(in oklab, var(--bs-fg-1), transparent 15%);
+}
+
+:global(.btn-toggle::before) {
+    transform-origin: 0.5em 50%;
+    transition: transform 0.35s ease;
+    width: 1.25em;
+    content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+    line-height: 0;
+}
+
+:global([data-bs-theme='dark'] .btn-toggle::before) {
+    content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%28255,255,255,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+}
+
+:global(.btn-toggle[aria-expanded='true']) {
+    color: color-mix(in oklab, var(--bs-fg-1), transparent 15%);
+}
+:global(.btn-toggle[aria-expanded='true']::before) {
+    transform: rotate(90deg);
+}
+
+:global(.btn-toggle-nav a) {
+    margin-top: 0.125rem;
+    margin-left: 1.25rem;
+    padding: 0.1875rem 0.5rem;
+}
+:global(.btn-toggle-nav a:hover),
+:global(.btn-toggle-nav a:focus) {
+    background-color: var(--bs-bg-3);
+}
+
+:global(.scrollarea) {
+    overflow-y: auto;
+}

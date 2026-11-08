@@ -16,11 +16,12 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 Indicate the current page's location within a navigational hierarchy using explicit divider elements.
 
 Compose `Breadcrumb`, `BreadcrumbItem`, `BreadcrumbLink`, and `BreadcrumbDivider` inside a labelled
-navigation element. Use the link’s `active` prop for the current page.
+navigation element. Use the item’s `active` prop to mark the current page; `BreadcrumbLink` also
+supports `active` when the link itself needs the current-page styling.
 
 ## Example
 
-Use an ordered list with `.breadcrumb-item` for each page and `.breadcrumb-divider` elements between them. Leave a divider empty to use the default chevron icon, or add your own separator content. Add `.active` to the `.breadcrumb-link` of the current page.
+Use an ordered list with `.breadcrumb-item` for each page and `.breadcrumb-divider` elements between them. Leave a divider empty to use the default chevron icon, or add your own separator content. Mark the current `.breadcrumb-item` as active.
 
 <CodeExample>
     <Stack gap={3}>
@@ -34,10 +35,8 @@ Use an ordered list with `.breadcrumb-item` for each page and `.breadcrumb-divid
                     <BreadcrumbLink href="#">Library</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbDivider />
-                <BreadcrumbItem aria-current="page">
-                    <BreadcrumbLink active href="#">
-                        Data
-                    </BreadcrumbLink>
+                <BreadcrumbItem active>
+                    <BreadcrumbLink href="#">Data</BreadcrumbLink>
                 </BreadcrumbItem>
             </Breadcrumb>
         </nav>
@@ -57,10 +56,8 @@ Use an ordered list with `.breadcrumb-item` for each page and `.breadcrumb-divid
                     <BreadcrumbLink href="#">Documents</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbDivider />
-                <BreadcrumbItem aria-current="page">
-                    <BreadcrumbLink active href="#">
-                        2026
-                    </BreadcrumbLink>
+                <BreadcrumbItem active>
+                    <BreadcrumbLink href="#">2026</BreadcrumbLink>
                 </BreadcrumbItem>
             </Breadcrumb>
         </nav>
@@ -83,10 +80,8 @@ Leave the `.breadcrumb-divider` empty to get the built-in chevron. Customize it 
                     <BreadcrumbLink href="#">Home</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbDivider />
-                <BreadcrumbItem aria-current="page">
-                    <BreadcrumbLink active href="#">
-                        Library
-                    </BreadcrumbLink>
+                <BreadcrumbItem active>
+                    <BreadcrumbLink href="#">Library</BreadcrumbLink>
                 </BreadcrumbItem>
             </Breadcrumb>
         </nav>
@@ -107,10 +102,8 @@ Add an inline SVG inside the divider to override the default with your own crisp
                 <BreadcrumbDivider>
                     <Icon name="chevron-double-right" aria-hidden />
                 </BreadcrumbDivider>
-                <BreadcrumbItem aria-current="page">
-                    <BreadcrumbLink active href="#">
-                        Library
-                    </BreadcrumbLink>
+                <BreadcrumbItem active>
+                    <BreadcrumbLink href="#">Library</BreadcrumbLink>
                 </BreadcrumbItem>
             </Breadcrumb>
         </nav>
@@ -133,10 +126,8 @@ For simple text-based dividers, just add the character directly.
                     <BreadcrumbLink href="#">Library</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbDivider>/</BreadcrumbDivider>
-                <BreadcrumbItem aria-current="page">
-                    <BreadcrumbLink active href="#">
-                        Data
-                    </BreadcrumbLink>
+                <BreadcrumbItem active>
+                    <BreadcrumbLink href="#">Data</BreadcrumbLink>
                 </BreadcrumbItem>
             </Breadcrumb>
         </nav>
@@ -159,10 +150,8 @@ Use any content you like—different icons, decorative elements, or themed separ
                     <BreadcrumbLink href="#">Library</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbDivider>›</BreadcrumbDivider>
-                <BreadcrumbItem aria-current="page">
-                    <BreadcrumbLink active href="#">
-                        Data
-                    </BreadcrumbLink>
+                <BreadcrumbItem active>
+                    <BreadcrumbLink href="#">Data</BreadcrumbLink>
                 </BreadcrumbItem>
             </Breadcrumb>
         </nav>

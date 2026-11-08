@@ -1,0 +1,1557 @@
+import styleText from './style.module.css?inline';
+import { ExampleLayout } from '../../../component/Examples/Layout';
+import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
+import { ExampleCode } from '../../../component/Examples/ExampleCode';
+import { Button } from '../../../../source/Base/Button';
+import { CloseButton } from '../../../../source/Base/CloseButton';
+
+export const themeColors = [
+    { name: 'primary', title: 'Primary' },
+    { name: 'secondary', title: 'Secondary' },
+    { name: 'accent', title: 'Accent' },
+    { name: 'success', title: 'Success' },
+    { name: 'danger', title: 'Danger' },
+    { name: 'warning', title: 'Warning' },
+    { name: 'info', title: 'Info' },
+    { name: 'light', title: 'Light' },
+    { name: 'dark', title: 'Dark' },
+    { name: 'inverse', title: 'Inverse' }
+];
+export const getData = key => (key === 'theme-colors' ? themeColors : []);
+
+<ExampleLayout title="Cheatsheet" styleText={styleText} className="bg-1">
+
+<header className="bd-header bg-black bg-90 py-3 d-flex align-items-stretch border-bottom border-black">
+  <div className="container-fluid d-flex align-items-center">
+    <h1 className="d-flex align-items-center fs-xl fg-white mb-0">
+      <img src={"https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg"} width="38" height="30" className="me-3" alt="Bootstrap" />
+      Cheatsheet
+    </h1>
+  </div>
+</header>
+<aside className="bd-aside xl:sticky-top fg-2 align-self-start mb-3 xl:mb-5 px-2">
+  <h2 className="h6 pt-4 pb-3 mb-4 border-bottom">On this page</h2>
+  <nav className="small" id="toc">
+    <ul className="list-unstyled">
+      <li className="my-2">
+        <Button className="d-inline-flex align-items-center border-0" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse" aria-controls="contents-collapse">Contents</Button>
+        <ul className="list-unstyled ps-3 collapse" id="contents-collapse">
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#typography">Typography</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#images">Images</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#tables">Tables</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#figures">Figures</a></li>
+        </ul>
+      </li>
+      <li className="my-2">
+        <Button className="d-inline-flex align-items-center border-0" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse" aria-controls="forms-collapse">Forms</Button>
+        <ul className="list-unstyled ps-3 collapse" id="forms-collapse">
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#overview">Overview</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#disabled-forms">Disabled forms</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#sizing">Sizing</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#input-group">Input group</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#floating-labels">Floating labels</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#validation">Validation</a></li>
+        </ul>
+      </li>
+      <li className="my-2">
+        <Button className="d-inline-flex align-items-center border-0" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#components-collapse" aria-controls="components-collapse">Components</Button>
+        <ul className="list-unstyled ps-3 collapse" id="components-collapse">
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#accordion">Accordion</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#alerts">Alerts</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#badge">Badge</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#breadcrumb">Breadcrumb</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#buttons">Buttons</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#button-group">Button group</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#card">Card</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#carousel">Carousel</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#dialog">Dialog</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#menus">Menus</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#list-group">List group</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#navs">Navs</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#navbar">Navbar</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#pagination">Pagination</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#popovers">Popovers</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#progress">Progress</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#scrollspy">Scrollspy</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#spinners">Spinners</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#toasts">Toasts</a></li>
+          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#tooltips">Tooltips</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</aside>
+<div className="bd-cheatsheet container-fluid bg-body">
+  <section id="content">
+    <h2 className="xl:sticky-top fw-bold pt-3 xl:pt-5 pb-2 xl:pb-3">Contents</h2>
+
+    <article className="my-3" id="typography">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Typography</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/content/typography"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <div className="fs-xs">.fs-xs</div>
+        <div className="fs-sm">.fs-sm</div>
+        <div className="fs-md">.fs-md</div>
+        <div className="fs-lg">.fs-lg</div>
+        <div className="fs-xl">.fs-xl</div>
+        <div className="fs-2xl">.fs-2xl</div>
+        <div className="fs-3xl">.fs-3xl</div>
+        <div className="fs-4xl">.fs-4xl</div>
+        <div className="fs-5xl">.fs-5xl</div>
+        <div className="fs-6xl">.fs-6xl</div>`} />
+
+        <ExampleCode showMarkup={false} code={`
+        <p className="h1">Heading 1</p>
+        <p className="h2">Heading 2</p>
+        <p className="h3">Heading 3</p>
+        <p className="h4">Heading 4</p>
+        <p className="h5">Heading 5</p>
+        <p className="h6">Heading 6</p>`} />
+
+        <ExampleCode showMarkup={false} code={`
+        <p>You can use the mark tag to <mark>highlight</mark> text.</p>
+        <p><del>This line of text is meant to be treated as deleted text.</del></p>
+        <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
+        <p><ins>This line of text is meant to be treated as an addition to the document.</ins></p>
+        <p><u>This line of text will render as underlined.</u></p>
+        <p><small>This line of text is meant to be treated as fine print.</small></p>
+        <p><strong>This line rendered as bold text.</strong></p>
+        <p><em>This line rendered as italicized text.</em></p>`} />
+
+        <ExampleCode showMarkup={false} code={`
+        <hr />`} />
+
+        <ExampleCode showMarkup={false} code={`
+        <blockquote className="blockquote">
+          <p>A well-known quote, contained in a blockquote element.</p>
+          <footer className="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+        </blockquote>`} />
+
+        <ExampleCode showMarkup={false} code={`
+        <ul className="list-unstyled">
+          <li>This is a list.</li>
+          <li>It appears completely unstyled.</li>
+          <li>Structurally, it's still a list.</li>
+          <li>However, this style only applies to immediate child elements.</li>
+          <li>Nested lists:
+            <ul>
+              <li>are unaffected by this style</li>
+              <li>will still show a bullet</li>
+              <li>and have appropriate left margin</li>
+            </ul>
+          </li>
+          <li>This may still come in handy in some situations.</li>
+        </ul>`} />
+
+        <ExampleCode showMarkup={false} code={`
+        <ul className="list-inline">
+          <li className="list-inline-item">This is a list item.</li>
+          <li className="list-inline-item">And another one.</li>
+          <li className="list-inline-item">But they're displayed inline.</li>
+        </ul>`} />
+      </div>
+    </article>
+    <article className="my-3" id="images">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Images</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/content/images"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <ExamplePlaceholder width="100%" height="250" className="bd-placeholder-img-lg img-fluid" text="Responsive image" />`} />
+
+        <ExampleCode showMarkup={false} code={`
+        <ExamplePlaceholder width="200" height="200" className="img-thumbnail" title="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera" />`} />
+      </div>
+    </article>
+    <article className="my-3" id="tables">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Tables</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/content/tables"}>Documentation</a>
+      </div>
+      <div>
+        <ExampleCode showMarkup={false} code={`
+          <table className="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>John</td>
+              <td>Doe</td>
+              <td>@social</td>
+            </tr>
+            </tbody>
+          </table>`} />
+
+        <ExampleCode showMarkup={false} code={`
+          <table className="table table-borderless" data-bs-theme="dark">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>John</td>
+              <td>Doe</td>
+              <td>@social</td>
+            </tr>
+            </tbody>
+          </table>`} />
+
+        <ExampleCode showMarkup={false} code={[`
+          <table className="table table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Class</th>
+              <th scope="col">Heading</th>
+              <th scope="col">Heading</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">Default</th>
+              <td>Cell</td>
+              <td>Cell</td>
+            </tr>`,
+            ...getData('theme-colors').map((themeColor) => `<tr className="theme-${themeColor.name}">
+                <th scope="row">${themeColor.title}</th>
+                <td>Cell</td>
+                <td>Cell</td>
+              </tr>`),
+            `</tbody>
+          </table>`]} />
+
+        <ExampleCode showMarkup={false} code={`
+          <table className="table table-sm table-bordered">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>John</td>
+              <td>Doe</td>
+              <td>@social</td>
+            </tr>
+            </tbody>
+          </table>`} />
+      </div>
+    </article>
+
+    <article className="my-3" id="figures">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Figures</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/content/images#figures"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <figure className="figure">
+          <ExamplePlaceholder width="400" height="300" className="img-fluid rounded" />
+          <figcaption className="figure-caption">A caption for the above image.</figcaption>
+        </figure>`} />
+      </div>
+    </article>
+
+  </section>
+
+  <section id="forms">
+    <h2 className="xl:sticky-top fw-bold pt-3 xl:pt-5 pb-2 xl:pb-3">Forms</h2>
+
+    <article className="my-3" id="overview">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Overview</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/forms/overview/"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <form>
+          <div className="mb-3">
+            <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+            <input type="password" className="form-control" id="exampleInputPassword1" />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="exampleSelect" className="form-label">Select menu</label>
+            <select className="form-control" id="exampleSelect">
+              <option selected>Open this select menu</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <div className="mb-3 form-field">
+            <input type="checkbox" id="exampleCheck1" className="check" />
+            <label htmlFor="exampleCheck1">Check me out</label>
+          </div>
+          <fieldset className="mb-3">
+            <legend>Radios buttons</legend>
+            <div className="form-field">
+              <input type="radio" name="radios" className="radio" id="exampleRadio1" />
+              <label htmlFor="exampleRadio1">Default radio</label>
+            </div>
+            <div className="mb-3 form-field">
+              <input type="radio" name="radios" className="radio" id="exampleRadio2" />
+              <label htmlFor="exampleRadio2">Another radio</label>
+            </div>
+          </fieldset>
+          <div className="mb-3">
+            <label className="form-label" htmlFor="customFile">Upload</label>
+            <input type="file" className="form-control" id="customFile" />
+          </div>
+          <div className="mb-3 form-field">
+            <div className="switch">
+              <input type="checkbox" role="switch" id="switchCheckChecked" checked />
+            </div>
+            <label htmlFor="switchCheckChecked">Checked switch checkbox input</label>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="customRange3" className="form-label">Example range</label>
+            <div className="form-range">
+              <input type="range" className="form-range-input" min="0" max="5" step="0.5" id="customRange3" />
+            </div>
+          </div>
+          <button type="submit" className="btn-solid theme-primary">Submit</button>
+        </form>`} />
+      </div>
+    </article>
+    <article className="my-3" id="disabled-forms">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Disabled forms</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/forms/overview/#disabled-forms"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <form>
+          <fieldset disabled aria-label="Disabled fieldset example">
+            <div className="mb-3">
+              <label htmlFor="disabledTextInput" className="form-label">Disabled input</label>
+              <input type="text" id="disabledTextInput" className="form-control" placeholder="Disabled input" />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="disabledSelect" className="form-label">Disabled select menu</label>
+              <select id="disabledSelect" className="form-control">
+                <option>Disabled select</option>
+              </select>
+            </div>
+            <div className="mb-3 form-field">
+              <input type="checkbox" id="disabledFieldsetCheck" className="check" disabled />
+              <label htmlFor="disabledFieldsetCheck">
+                Can't check this
+              </label>
+            </div>
+            <fieldset className="mb-3">
+              <legend>Disabled radios buttons</legend>
+              <div className="form-field">
+                <input type="radio" name="radios" className="radio" id="disabledRadio1" disabled />
+                <label htmlFor="disabledRadio1">Disabled radio</label>
+              </div>
+              <div className="mb-3 form-field">
+                <input type="radio" name="radios" className="radio" id="disabledRadio2" disabled />
+                <label htmlFor="disabledRadio2">Another radio</label>
+              </div>
+            </fieldset>
+            <div className="mb-3">
+              <label className="form-label" htmlFor="disabledCustomFile">Upload</label>
+              <input type="file" className="form-control" id="disabledCustomFile" disabled />
+            </div>
+            <div className="mb-3 form-field">
+              <div className="switch">
+                <input type="checkbox" role="switch" id="disabledSwitchCheckChecked" checked disabled />
+              </div>
+              <label htmlFor="disabledSwitchCheckChecked">Disabled checked switch checkbox input</label>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="disabledRange" className="form-label">Disabled range</label>
+              <div className="form-range">
+                <input type="range" className="form-range-input" min="0" max="5" step="0.5" id="disabledRange" />
+              </div>
+            </div>
+            <button type="submit" className="btn-solid theme-primary">Submit</button>
+          </fieldset>
+        </form>`} />
+      </div>
+    </article>
+    <article className="my-3" id="sizing">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Sizing</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/forms/form-control#sizing"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <div className="mb-3">
+          <input className="form-control form-control-lg" type="text" placeholder=".form-control-lg" aria-label=".form-control-lg example" />
+        </div>
+        <div className="mb-3">
+          <select className="form-control form-control-lg" aria-label=".form-control-lg example">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div className="mb-3">
+          <input type="file" className="form-control form-control-lg" aria-label="Large file input example" />
+        </div>`} />
+
+        <ExampleCode showMarkup={false} code={`
+        <div className="mb-3">
+          <input className="form-control form-control-sm" type="text" placeholder=".form-control-sm" aria-label=".form-control-sm example" />
+        </div>
+        <div className="mb-3">
+          <select className="form-control form-control-sm" aria-label=".form-control-sm example">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div className="mb-3">
+          <input type="file" className="form-control form-control-sm" aria-label="Small file input example" />
+        </div>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="input-group">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Input group</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/forms/input-group"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="basic-addon1">@</span>
+          <input type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+        </div>
+        <div className="input-group mb-3">
+          <input type="text" className="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+          <span className="input-group-text" id="basic-addon2">@example.com</span>
+        </div>
+        <label htmlFor="basic-url" className="form-label">Your vanity URL</label>
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="basic-addon3">https://example.com/users/</span>
+          <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" />
+        </div>
+        <div className="input-group mb-3">
+          <span className="input-group-text">$</span>
+          <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" />
+          <span className="input-group-text">.00</span>
+        </div>
+        <div className="input-group">
+          <span className="input-group-text">With textarea</span>
+          <textarea className="form-control" aria-label="With textarea"></textarea>
+        </div>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="floating-labels">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Floating labels</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/forms/floating-labels"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <form>
+          <div className="form-floating mb-3">
+            <label htmlFor="floatingInput">Email address</label>
+            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
+          </div>
+          <div className="form-floating">
+            <label htmlFor="floatingPassword">Password</label>
+            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+          </div>
+        </form>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="validation">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Validation</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/forms/validation"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <form className="row g-3">
+          <div className="md:col-4">
+            <label htmlFor="validationServer01" className="form-label">First name</label>
+            <input type="text" className="form-control is-valid" id="validationServer01" value="Mark" required />
+            <div className="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+          <div className="md:col-4">
+            <label htmlFor="validationServer02" className="form-label">Last name</label>
+            <input type="text" className="form-control is-valid" id="validationServer02" value="Otto" required />
+            <div className="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+          <div className="md:col-4">
+            <label htmlFor="validationServerUsername" className="form-label">Username</label>
+            <div className="input-group">
+              <span className="input-group-text" id="inputGroupPrepend3">@</span>
+              <input type="text" className="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3" required />
+              <div className="invalid-feedback">
+                Please choose a username.
+              </div>
+            </div>
+          </div>
+          <div className="md:col-6">
+            <label htmlFor="validationServer03" className="form-label">City</label>
+            <input type="text" className="form-control is-invalid" id="validationServer03" required />
+            <div className="invalid-feedback">
+              Please provide a valid city.
+            </div>
+          </div>
+          <div className="md:col-3">
+            <label htmlFor="validationServer04" className="form-label">State</label>
+            <select className="form-control is-invalid" id="validationServer04" required>
+              <option selected disabled value="">Choose...</option>
+              <option>...</option>
+            </select>
+            <div className="invalid-feedback">
+              Please select a valid state.
+            </div>
+          </div>
+          <div className="md:col-3">
+            <label htmlFor="validationServer05" className="form-label">Zip</label>
+            <input type="text" className="form-control is-invalid" id="validationServer05" required />
+            <div className="invalid-feedback">
+              Please provide a valid zip.
+            </div>
+          </div>
+          <div className="col-12">
+            <div className="form-field">
+              <input className="check is-invalid" type="checkbox" value="" id="invalidCheck3" required />
+              <label htmlFor="invalidCheck3">
+                Agree to terms and conditions
+              </label>
+              <div className="invalid-feedback">
+                You must agree before submitting.
+              </div>
+            </div>
+          </div>
+          <div className="col-12">
+            <button className="btn-solid theme-primary" type="submit">Submit form</button>
+          </div>
+        </form>
+        `} />
+      </div>
+    </article>
+
+  </section>
+
+  <section id="components">
+    <h2 className="xl:sticky-top fw-bold pt-3 xl:pt-5 pb-2 xl:pb-3">Components</h2>
+
+    <article className="my-3" id="accordion">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Accordion</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/accordion"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <div className="accordion" id="accordionExample">
+          <details className="accordion-item" name="accordionExample" open>
+            <summary className="accordion-header">
+              Accordion Item #1
+              <svg className="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"><path d="m2 5 6 6 6-6"/></svg>
+            </summary>
+            <div className="accordion-body">
+              <strong>This is the first item's accordion body.</strong> It is shown by default because the <code>open</code> attribute is present. The native <code>&lt;details&gt;</code> element handles all the show/hide logic without any JavaScript. You can put any HTML content within the <code>.accordion-body</code>.
+            </div>
+          </details>
+          <details className="accordion-item" name="accordionExample">
+            <summary className="accordion-header">
+              Accordion Item #2
+              <svg className="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"><path d="m2 5 6 6 6-6"/></svg>
+            </summary>
+            <div className="accordion-body">
+              <strong>This is the second item's accordion body.</strong> The <code>name</code> attribute groups this with other accordion items. When you open this item, any other open item in the same group will close automatically.
+            </div>
+          </details>
+          <details className="accordion-item" name="accordionExample">
+            <summary className="accordion-header">
+              Accordion Item #3
+              <svg className="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"><path d="m2 5 6 6 6-6"/></svg>
+            </summary>
+            <div className="accordion-body">
+              <strong>This is the third item's accordion body.</strong> This exclusive accordion behavior is built into the browser—no Bootstrap JavaScript required. Just use matching <code>name</code> attributes on your <code>&lt;details&gt;</code> elements.
+            </div>
+          </details>
+        </div>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="alerts">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Alerts</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/alerts"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={getData('theme-colors').map((themeColor) => `
+        <div className="alert theme-${themeColor.name} mb-3" role="alert">
+          <p>A simple ${themeColor.name} alert with <a href="#" className="alert-link">an example link</a>. Give it a click if you like.</p>
+          <button type="button" className="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        `)} />
+
+        <ExampleCode showMarkup={false} code={`
+        <div className="alert theme-success" role="alert">
+          <div className="vstack">
+            <h4 className="alert-heading">Well done!</h4>
+            <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+            <hr className="mt-0" />
+            <p className="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+          </div>
+        </div>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="badge">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Badge</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/badge"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <p className="h1">Example heading <span className="badge theme-primary">New</span></p>
+        <p className="h2">Example heading <span className="badge theme-accent">New</span></p>
+        <p className="h3">Example heading <span className="badge theme-success">New</span></p>
+        <p className="h4">Example heading <span className="badge theme-danger">New</span></p>
+        <p className="h5">Example heading <span className="badge theme-warning">New</span></p>
+        <p className="h6">Example heading <span className="badge theme-info">New</span></p>
+        <p className="h6">Example heading <span className="badge theme-inverse">New</span></p>
+        <p className="h6">Example heading <span className="badge theme-secondary">New</span></p>
+        `} />
+
+        <ExampleCode showMarkup={false} code={getData('theme-colors').map((themeColor) => `
+        <span className="badge theme-${themeColor.name}">${themeColor.title}</span>
+        `)} />
+      </div>
+    </article>
+    <article className="my-3" id="breadcrumb">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Breadcrumb</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/breadcrumb"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <a className="breadcrumb-link" href="#">Home</a>
+            </li>
+            <li className="breadcrumb-divider">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 16" width="6" height="12"><path d="M2 2l4 6-4 6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </li>
+            <li className="breadcrumb-item">
+              <a className="breadcrumb-link" href="#">Library</a>
+            </li>
+            <li className="breadcrumb-divider">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 16" width="6" height="12"><path d="M2 2l4 6-4 6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </li>
+            <li className="breadcrumb-item" aria-current="page">
+              <a className="breadcrumb-link active" href="#">Data</a>
+            </li>
+          </ol>
+        </nav>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="buttons">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Buttons</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/buttons"}>Documentation</a>
+      </div>
+      <div>
+        <ExampleCode showMarkup={false} code={[
+          ...getData('theme-colors').map((themeColor) => `
+          <button type="button" className="btn-solid theme-${themeColor.name}">${themeColor.title}</button>
+          `),
+          `<button type="button" className="btn-link">Link</button>`]} />
+
+        <ExampleCode showMarkup={false} code={getData('theme-colors').map((themeColor) => `
+          <button type="button" className="btn-outline theme-${themeColor.name}">${themeColor.title}</button>
+          `)} />
+
+        <ExampleCode showMarkup={false} code={getData('theme-colors').map((themeColor) => `
+          <button type="button" className="btn-subtle theme-${themeColor.name}">${themeColor.title}</button>
+          `)} />
+
+        <ExampleCode showMarkup={false} code={`
+          <button type="button" className="btn-solid theme-primary btn-sm">Small button</button>
+          <button type="button" className="btn-solid theme-primary">Standard button</button>
+          <button type="button" className="btn-solid theme-primary btn-lg">Large button</button>
+          `} />
+      </div>
+    </article>
+    <article className="my-3" id="button-group">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Button group</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/button-group"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+          <div className="btn-group me-2" role="group" aria-label="First group">
+            <button type="button" className="btn-solid theme-secondary">1</button>
+            <button type="button" className="btn-solid theme-secondary">2</button>
+            <button type="button" className="btn-solid theme-secondary">3</button>
+            <button type="button" className="btn-solid theme-secondary">4</button>
+          </div>
+          <div className="btn-group me-2" role="group" aria-label="Second group">
+            <button type="button" className="btn-solid theme-secondary">5</button>
+            <button type="button" className="btn-solid theme-secondary">6</button>
+            <button type="button" className="btn-solid theme-secondary">7</button>
+          </div>
+          <div className="btn-group" role="group" aria-label="Third group">
+            <button type="button" className="btn-solid theme-secondary">8</button>
+          </div>
+        </div>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="card">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Card</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/card"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+          <div className="row  row-cols-1 md:row-cols-2 g-4">
+            <div className="col">
+              <div className="card">
+                <ExamplePlaceholder width="100%" height="180" className="card-img-top" text="Image cap" />
+                <div className="card-body">
+                  <h5 className="card-title">Card title</h5>
+                  <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" className="btn-solid theme-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+            <div className="col">
+              <div className="card">
+                <div className="card-header">
+                  Featured
+                </div>
+                <div className="card-body">
+                  <h5 className="card-title">Card title</h5>
+                  <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" className="btn-solid theme-primary">Go somewhere</a>
+                </div>
+                <div className="card-footer fg-2">
+                  2 days ago
+                </div>
+              </div>
+            </div>
+            <div className="col">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">Card title</h5>
+                  <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item">An item</li>
+                  <li className="list-group-item">A second item</li>
+                  <li className="list-group-item">A third item</li>
+                </ul>
+                <div className="card-body flex-row gap-4">
+                  <a href="#">Card link</a>
+                  <a href="#">Another link</a>
+                </div>
+              </div>
+            </div>
+            <div className="col">
+              <div className="card">
+                <div className="row g-0">
+                  <div className="md:col-4">
+                    <ExamplePlaceholder width="100%" height="250" text="Image" />
+                  </div>
+                  <div className="md:col-8">
+                    <div className="card-body">
+                      <h5 className="card-title">Card title</h5>
+                      <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <p className="card-text"><small className="fg-2">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          `} />
+      </div>
+    </article>
+    <article className="my-3" id="carousel">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Carousel</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/carousel"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <div id="carouselExample" className="carousel slide">
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <ExamplePlaceholder width="800" height="400" className="bd-placeholder-img-lg d-block w-100 rounded-5" color="#555" background="#777" text="First slide" />
+            </div>
+            <div className="carousel-item">
+              <ExamplePlaceholder width="800" height="400" className="bd-placeholder-img-lg d-block w-100 rounded-5" color="#444" background="#666" text="Second slide" />
+            </div>
+            <div className="carousel-item">
+              <ExamplePlaceholder width="800" height="400" className="bd-placeholder-img-lg d-block w-100 rounded-5" color="#333" background="#555" text="Third slide" />
+            </div>
+          </div>
+          <div className="d-flex justify-content-between align-items-center mt-3">
+            <div className="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div>
+              <button className="btn-icon btn-sm" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span className="carousel-icon-prev" aria-hidden="true"></span>
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button className="btn-icon btn-sm" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span className="carousel-icon-next" aria-hidden="true"></span>
+                <span className="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="dialog">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Dialog</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/dialog"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <button type="button" className="btn-solid theme-primary" data-bs-toggle="dialog" data-bs-target="#exampleDialog">
+          Launch demo dialog
+        </button>
+        <button type="button" className="btn-solid theme-primary" data-bs-toggle="dialog" data-bs-target="#staticBackdropDialog">
+          Launch static backdrop dialog
+        </button>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="menus">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Menus</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/menus"}>Documentation</a>
+      </div>
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <div className="btn-group w-100 align-items-center justify-content-between flex-wrap me-0">
+          <div>
+            <button className="btn-solid theme-secondary btn-sm" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Menu
+            </button>
+            <div className="menu">
+              <h6 className="menu-header">Menu header</h6>
+              <a className="menu-item" href="#">Action</a>
+              <a className="menu-item" href="#">Another action</a>
+              <a className="menu-item" href="#">Something else here</a>
+              <hr className="menu-divider" />
+              <a className="menu-item" href="#">Separated link</a>
+            </div>
+          </div>
+          <div>
+            <button className="btn-solid theme-secondary" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Menu
+            </button>
+            <div className="menu">
+              <h6 className="menu-header">Menu header</h6>
+              <a className="menu-item" href="#">Action</a>
+              <a className="menu-item" href="#">Another action</a>
+              <a className="menu-item" href="#">Something else here</a>
+              <hr className="menu-divider" />
+              <a className="menu-item" href="#">Separated link</a>
+            </div>
+          </div>
+          <div>
+            <button className="btn-solid theme-secondary btn-lg" type="button" data-bs-toggle="menu" aria-expanded="false">
+              Menu
+            </button>
+            <div className="menu">
+              <h6 className="menu-header">Menu header</h6>
+              <a className="menu-item" href="#">Action</a>
+              <a className="menu-item" href="#">Another action</a>
+              <a className="menu-item" href="#">Something else here</a>
+              <hr className="menu-divider" />
+              <a className="menu-item" href="#">Separated link</a>
+            </div>
+          </div>
+        </div>
+        `} />
+
+        <ExampleCode showMarkup={false} code={`
+          <div className="btn-group">
+            <button type="button" className="btn-solid theme-primary">Primary</button>
+            <button type="button" className="btn-solid theme-primary menu-toggle-split" data-bs-toggle="menu" aria-expanded="false">
+              <span className="visually-hidden">Toggle Menu</span>
+            </button>
+            <div className="menu">
+              <a className="menu-item" href="#">Action</a>
+              <a className="menu-item" href="#">Another action</a>
+              <a className="menu-item" href="#">Something else here</a>
+            </div>
+          </div>{/* /btn-group */}
+          <div className="btn-group">
+            <button type="button" className="btn-solid theme-secondary">Secondary</button>
+            <button type="button" className="btn-solid theme-secondary menu-toggle-split" data-bs-toggle="menu" aria-expanded="false">
+              <span className="visually-hidden">Toggle Menu</span>
+            </button>
+            <div className="menu">
+              <a className="menu-item" href="#">Action</a>
+              <a className="menu-item" href="#">Another action</a>
+              <a className="menu-item" href="#">Something else here</a>
+            </div>
+          </div>{/* /btn-group */}
+          <div className="btn-group">
+            <button type="button" className="btn-solid theme-success">Success</button>
+            <button type="button" className="btn-solid theme-success menu-toggle-split" data-bs-toggle="menu" aria-expanded="false">
+              <span className="visually-hidden">Toggle Menu</span>
+            </button>
+            <div className="menu">
+              <a className="menu-item" href="#">Action</a>
+              <a className="menu-item" href="#">Another action</a>
+              <a className="menu-item" href="#">Something else here</a>
+            </div>
+          </div>{/* /btn-group */}
+          <div className="btn-group">
+            <button type="button" className="btn-solid theme-info">Info</button>
+            <button type="button" className="btn-solid theme-info menu-toggle-split" data-bs-toggle="menu" aria-expanded="false">
+              <span className="visually-hidden">Toggle Menu</span>
+            </button>
+            <div className="menu">
+              <a className="menu-item" href="#">Action</a>
+              <a className="menu-item" href="#">Another action</a>
+              <a className="menu-item" href="#">Something else here</a>
+            </div>
+          </div>{/* /btn-group */}
+          <div className="btn-group">
+            <button type="button" className="btn-solid theme-warning">Warning</button>
+            <button type="button" className="btn-solid theme-warning menu-toggle-split" data-bs-toggle="menu" aria-expanded="false">
+              <span className="visually-hidden">Toggle Menu</span>
+            </button>
+            <div className="menu">
+              <a className="menu-item" href="#">Action</a>
+              <a className="menu-item" href="#">Another action</a>
+              <a className="menu-item" href="#">Something else here</a>
+            </div>
+          </div>{/* /btn-group */}
+          <div className="btn-group">
+            <button type="button" className="btn-solid theme-danger">Danger</button>
+            <button type="button" className="btn-solid theme-danger menu-toggle-split" data-bs-toggle="menu" aria-expanded="false">
+              <span className="visually-hidden">Toggle Menu</span>
+            </button>
+            <div className="menu">
+              <a className="menu-item" href="#">Action</a>
+              <a className="menu-item" href="#">Another action</a>
+              <a className="menu-item" href="#">Something else here</a>
+            </div>
+          </div>{/* /btn-group */}
+          `} />
+
+        <ExampleCode showMarkup={false} code={`
+          <div className="btn-group w-100 align-items-center justify-content-between flex-wrap me-0">
+            <div>
+              <button className="btn-solid theme-secondary" type="button" data-bs-toggle="menu" data-bs-placement="right-start" aria-expanded="false">
+                End menu
+              </button>
+              <div className="menu">
+                <h6 className="menu-header">Menu header</h6>
+                <a className="menu-item" href="#">Action</a>
+                <a className="menu-item" href="#">Another action</a>
+                <a className="menu-item" href="#">Something else here</a>
+                <hr className="menu-divider" />
+                <a className="menu-item" href="#">Separated link</a>
+              </div>
+            </div>
+            <div>
+              <button className="btn-solid theme-secondary" type="button" data-bs-toggle="menu" data-bs-placement="top-start" aria-expanded="false">
+                Up menu
+              </button>
+              <div className="menu">
+                <h6 className="menu-header">Menu header</h6>
+                <a className="menu-item" href="#">Action</a>
+                <a className="menu-item" href="#">Another action</a>
+                <a className="menu-item" href="#">Something else here</a>
+                <hr className="menu-divider" />
+                <a className="menu-item" href="#">Separated link</a>
+              </div>
+            </div>
+            <div>
+              <button className="btn-solid theme-secondary" type="button" data-bs-toggle="menu" data-bs-placement="left-start" aria-expanded="false">
+                Start menu
+              </button>
+              <div className="menu">
+                <h6 className="menu-header">Menu header</h6>
+                <a className="menu-item" href="#">Action</a>
+                <a className="menu-item" href="#">Another action</a>
+                <a className="menu-item" href="#">Something else here</a>
+                <hr className="menu-divider" />
+                <a className="menu-item" href="#">Separated link</a>
+              </div>
+            </div>
+          </div>
+          `} />
+
+        <ExampleCode showMarkup={false} code={`
+          <div className="btn-group">
+            <div>
+              <button className="btn-solid theme-secondary" type="button" data-bs-toggle="menu" data-bs-placement="bottom-end" aria-expanded="false">
+                End-aligned menu
+              </button>
+              <div className="menu">
+                <h6 className="menu-header">Menu header</h6>
+                <a className="menu-item" href="#">Action</a>
+                <a className="menu-item" href="#">Another action</a>
+                <hr className="menu-divider" />
+                <a className="menu-item" href="#">Separated link</a>
+              </div>
+            </div>
+          </div>
+          `} />
+      </div>
+    </article>
+    <article className="my-3" id="list-group">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>List group</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/list-group"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <ul className="list-group">
+          <li className="list-group-item disabled" aria-disabled="true">A disabled item</li>
+          <li className="list-group-item">A second item</li>
+          <li className="list-group-item">A third item</li>
+          <li className="list-group-item">A fourth item</li>
+          <li className="list-group-item">And a fifth one</li>
+        </ul>
+        `} />
+
+        <ExampleCode showMarkup={false} code={`
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item">An item</li>
+          <li className="list-group-item">A second item</li>
+          <li className="list-group-item">A third item</li>
+          <li className="list-group-item">A fourth item</li>
+          <li className="list-group-item">And a fifth one</li>
+        </ul>
+        `} />
+
+        <ExampleCode showMarkup={false} code={[`
+        <div className="list-group">
+          <a href="#" className="list-group-item list-group-item-action">A simple default list group item</a>`,
+          ...getData('theme-colors').map((themeColor) => `
+          <a href="#" className="list-group-item list-group-item-action theme-${themeColor.name}">A simple ${themeColor.name} list group item</a>
+          `),
+        `</div>
+        `]} />
+      </div>
+    </article>
+    <article className="my-3" id="navs">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Navs</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/nav"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <nav className="nav">
+          <a className="nav-link active" aria-current="page" href="#">Active</a>
+          <a className="nav-link" href="#">Link</a>
+          <a className="nav-link" href="#">Link</a>
+          <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+        </nav>
+        `} />
+
+        <ExampleCode showMarkup={false} code={`
+        <nav>
+          <div className="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+            <button className="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+            <button className="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+            <button className="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+          </div>
+        </nav>
+        <div className="tab-content" id="nav-tabContent">
+          <div className="tab-pane show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <p>This is some placeholder content the <strong>Home tab's</strong> associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+          </div>
+          <div className="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <p>This is some placeholder content the <strong>Profile tab's</strong> associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+          </div>
+          <div className="tab-pane" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <p>This is some placeholder content the <strong>Contact tab's</strong> associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+          </div>
+        </div>
+        `} />
+
+        <ExampleCode showMarkup={false} code={`
+        <ul className="nav nav-pills">
+          <li className="nav-item">
+            <a className="nav-link active" aria-current="page" href="#">Active</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="#">Link</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="#">Link</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="navbar">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Navbar</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/navbar"}>Documentation</a>
+      </div>
+      <div>
+        <ExampleCode showMarkup={false} code={`
+          <nav className="navbar lg:navbar-expand bg-1">
+            <div className="container-fluid">
+              <a className="navbar-brand" href="#">
+                <img src="${"https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg"}" width="38" height="30" className="d-inline-block align-top" alt="Bootstrap" loading="lazy" style={{"filter": "invert(1) grayscale(100%) brightness(200%)"}} />
+              </a>
+              <button className="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon" aria-hidden="true"></span>
+              </button>
+              <dialog className="drawer drawer-end" tabIndex="-1" id="navbarSupportedContent" aria-label="Navigation">
+                <ul className="navbar-nav me-auto mb-2 lg:mb-0">
+                  <li className="nav-item">
+                    <a className="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">Link</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="#" role="button" data-bs-toggle="menu" aria-expanded="false">
+                      Menu
+                    </a>
+                    <div className="menu">
+                      <a className="menu-item" href="#">Action</a>
+                      <a className="menu-item" href="#">Another action</a>
+                      <hr className="menu-divider" />
+                      <a className="menu-item" href="#">Something else here</a>
+                    </div>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+                  </li>
+                </ul>
+                <form className="d-flex" role="search">
+                  <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                  <button className="btn-outline theme-dark" type="submit">Search</button>
+                </form>
+              </dialog>
+            </div>
+          </nav>
+
+          <nav className="navbar lg:navbar-expand bg-primary mt-5" data-bs-theme="dark">
+            <div className="container-fluid">
+              <a className="navbar-brand" href="#">
+                <img src="${"https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg"}" width="38" height="30" className="d-inline-block align-top" alt="Bootstrap" loading="lazy" />
+              </a>
+              <button className="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon" aria-hidden="true"></span>
+              </button>
+              <dialog className="drawer drawer-end" tabIndex="-1" id="navbarSupportedContent2" aria-label="Navigation">
+                <ul className="navbar-nav me-auto mb-2 lg:mb-0">
+                  <li className="nav-item">
+                    <a className="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">Link</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="#" role="button" data-bs-toggle="menu" aria-expanded="false">
+                      Menu
+                    </a>
+                    <div className="menu">
+                      <a className="menu-item" href="#">Action</a>
+                      <a className="menu-item" href="#">Another action</a>
+                      <hr className="menu-divider" />
+                      <a className="menu-item" href="#">Something else here</a>
+                    </div>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+                  </li>
+                </ul>
+                <form className="d-flex" role="search">
+                  <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                  <button className="btn-outline theme-light" type="submit">Search</button>
+                </form>
+              </dialog>
+            </div>
+          </nav>
+          `} />
+      </div>
+    </article>
+    <article className="my-3" id="pagination">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Pagination</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/pagination"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <nav aria-label="Pagination example">
+          <ul className="pagination pagination-sm">
+            <li className="page-item"><a className="page-link" href="#">1</a></li>
+            <li className="page-item active">
+              <a className="page-link" href="#" aria-current="page">2</a>
+            </li>
+            <li className="page-item"><a className="page-link" href="#">3</a></li>
+          </ul>
+        </nav>
+        `} />
+
+        <ExampleCode showMarkup={false} code={`
+        <nav aria-label="Standard pagination example">
+          <ul className="pagination">
+            <li className="page-item">
+              <a className="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li className="page-item"><a className="page-link" href="#">1</a></li>
+            <li className="page-item"><a className="page-link" href="#">2</a></li>
+            <li className="page-item"><a className="page-link" href="#">3</a></li>
+            <li className="page-item">
+              <a className="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        `} />
+
+        <ExampleCode showMarkup={false} code={`
+        <nav aria-label="Another pagination example">
+          <ul className="pagination pagination-lg flex-wrap">
+            <li className="page-item disabled">
+              <a className="page-link">Previous</a>
+            </li>
+            <li className="page-item"><a className="page-link" href="#">1</a></li>
+            <li className="page-item active">
+              <a className="page-link" href="#" aria-current="page">2</a>
+            </li>
+            <li className="page-item"><a className="page-link" href="#">3</a></li>
+            <li className="page-item">
+              <a className="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="popovers">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Popovers</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/popovers"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <button type="button" className="btn-solid theme-danger btn-lg" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+        `} />
+
+        <ExampleCode showMarkup={false} code={`
+        <button type="button" className="btn-solid theme-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+          Popover on top
+        </button>
+        <button type="button" className="btn-solid theme-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+          Popover on end
+        </button>
+        <button type="button" className="btn-solid theme-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+          Popover on bottom
+        </button>
+        <button type="button" className="btn-solid theme-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="left" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+          Popover on start
+        </button>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="progress">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Progress</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/progress"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <div className="progress mb-3" role="progressbar" aria-label="Example with label" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div className="progress-bar">0%</div>
+        </div>
+        <div className="progress mb-3" role="progressbar" aria-label="Success example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+          <div className="progress-bar theme-success w-25">25%</div>
+        </div>
+        <div className="progress mb-3" role="progressbar" aria-label="Info example with label" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+          <div className="progress-bar theme-info w-50">50%</div>
+        </div>
+        <div className="progress mb-3" role="progressbar" aria-label="Warning example with label" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+          <div className="progress-bar theme-warning w-75">75%</div>
+        </div>
+        <div className="progress" role="progressbar" aria-label="Danger example with label" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+          <div className="progress-bar theme-danger w-100">100%</div>
+        </div>
+        `} />
+
+        <ExampleCode showMarkup={false} code={`
+        <div className="progress-stacked">
+          <div className="progress" role="progressbar" aria-label="Segment one - default example" style={{"width": "15%"}} aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+            <div className="progress-bar"></div>
+          </div>
+          <div className="progress" role="progressbar" aria-label="Segment two - animated striped success example" style={{"width": "40%"}} aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+            <div className="progress-bar progress-bar-striped progress-bar-animated bg-success"></div>
+          </div>
+        </div>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="scrollspy">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Scrollspy</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/scrollspy"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={`
+        <nav id="navbar-example2" className="navbar bg-1 px-3">
+          <a className="navbar-brand" href="#">Navbar</a>
+          <ul className="nav nav-pills">
+            <li className="nav-item">
+              <a className="nav-link active" href="#scrollspyHeading1">First</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#scrollspyHeading2">Second</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#" role="button" data-bs-toggle="menu" aria-expanded="false">Menu</a>
+              <div className="menu">
+                <a className="menu-item" href="#scrollspyHeading3">Third</a>
+                <a className="menu-item" href="#scrollspyHeading4">Fourth</a>
+                <hr className="menu-divider" />
+                <a className="menu-item" href="#scrollspyHeading5">Fifth</a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+        <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" className="scrollspy-example position-relative mt-2 overflow-auto" tabIndex="0">
+          <h4 id="scrollspyHeading1">First heading</h4>
+          <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
+          <h4 id="scrollspyHeading2">Second heading</h4>
+          <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
+          <h4 id="scrollspyHeading3">Third heading</h4>
+          <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
+          <h4 id="scrollspyHeading4">Fourth heading</h4>
+          <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
+          <h4 id="scrollspyHeading5">Fifth heading</h4>
+          <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
+        </div>
+        `} />
+      </div>
+    </article>
+    <article className="my-3" id="spinners">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Spinners</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/spinners"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} code={getData('theme-colors').map((themeColor) => `
+        <div className="spinner-border fg-${themeColor.name}" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        `)} />
+
+        <ExampleCode showMarkup={false} code={getData('theme-colors').map((themeColor) => `
+        <div className="spinner-grow fg-${themeColor.name}" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        `)} />
+      </div>
+    </article>
+    <article className="my-3" id="toasts">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Toasts</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/toasts"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} className="p-5 align-items-center" code={`
+        <div className="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div className="toast-header">
+            <ExamplePlaceholder width="20" height="20" background="#007aff" className="rounded me-2" text={false} title={false} />
+            <strong className="me-auto">Bootstrap</strong>
+            <small className="fg-2">11 mins ago</small>
+            <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div className="toast-body">
+            Hello, world! This is a toast message.
+          </div>
+        </div>
+        `} />
+      </div>
+    </article>
+    <article className="mt-3 mb-5 pb-5" id="tooltips">
+      <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
+        <h3>Tooltips</h3>
+        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/tooltip"}>Documentation</a>
+      </div>
+
+      <div>
+        <ExampleCode showMarkup={false} className="tooltip-demo" code={`
+        <button type="button" className="btn-solid theme-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">Tooltip on top</button>
+        <button type="button" className="btn-solid theme-secondary" data-bs-toggle="tooltip" data-bs-placement="right" title="Tooltip on end">Tooltip on end</button>
+        <button type="button" className="btn-solid theme-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+        <button type="button" className="btn-solid theme-secondary" data-bs-toggle="tooltip" data-bs-placement="left" title="Tooltip on start">Tooltip on start</button>
+        <button type="button" className="btn-solid theme-secondary" data-bs-toggle="tooltip" data-bs-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">Tooltip with HTML</button>
+        `} />
+      </div>
+    </article>
+
+  </section>
+</div>
+
+<dialog className="dialog" id="exampleDialog">
+    <div className="dialog-header">
+        <h1 className="dialog-title fs-lg">Dialog title</h1>
+        <CloseButton
+            type="button"
+            dismiss="dialog"
+
+            aria-label="Close"
+        ></CloseButton>
+    </div>
+    <div className="dialog-body">
+        <p>This is a native dialog element using Bootstrap's Dialog component.</p>
+    </div>
+    <div className="dialog-footer">
+        <button type="button" className="btn-solid theme-secondary" data-bs-dismiss="dialog">
+            Close
+        </button>
+        <button type="button" className="btn-solid theme-primary">
+            Save changes
+        </button>
+    </div>
+
+</dialog>
+
+<dialog
+    className="dialog"
+    id="staticBackdropDialog"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+>
+    <div className="dialog-header">
+        <h1 className="dialog-title fs-lg">Static backdrop</h1>
+        <CloseButton
+            type="button"
+            dismiss="dialog"
+
+            aria-label="Close"
+        ></CloseButton>
+    </div>
+    <div className="dialog-body">
+        <p>I will not close if you click outside of me. Use the close button or press Escape.</p>
+    </div>
+    <div className="dialog-footer">
+        <button type="button" className="btn-solid theme-secondary" data-bs-dismiss="dialog">
+            Close
+        </button>
+        <button type="button" className="btn-solid theme-primary">
+            Understood
+        </button>
+    </div>
+
+</dialog>
+
+</ExampleLayout>
