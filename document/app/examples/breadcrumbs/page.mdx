@@ -1,0 +1,69 @@
+import {
+    Breadcrumb,
+    BreadcrumbDivider,
+    BreadcrumbItem,
+    BreadcrumbLink
+} from '../../../../source/Base/Breadcrumb';
+import { Icon } from '../../../../source/Extension/Icon';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+<DocumentLayout active="breadcrumbs">
+
+# Breadcrumbs
+
+Integrate custom dividers and clear hierarchy to help visitors understand where they are.
+
+## Standard breadcrumb
+
+Use a labelled navigation landmark and identify the current page with `active`.
+
+<CodeExample>
+    <nav aria-label="Breadcrumb">
+        <Breadcrumb>
+            <BreadcrumbItem>
+                <BreadcrumbLink href="#home">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbDivider />
+            <BreadcrumbItem>
+                <BreadcrumbLink href="#library">Library</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbDivider />
+            <BreadcrumbItem aria-current="page">
+                <BreadcrumbLink href="#data" active>
+                    Data
+                </BreadcrumbLink>
+            </BreadcrumbItem>
+        </Breadcrumb>
+    </nav>
+</CodeExample>
+
+## Custom divider
+
+Use the library's icon component when a different separator better fits the visual language.
+
+<CodeExample>
+    <nav aria-label="Breadcrumb">
+        <Breadcrumb>
+            <BreadcrumbItem>
+                <BreadcrumbLink href="#home">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbDivider>
+                <Icon name="chevron-double-right" aria-hidden="true" />
+            </BreadcrumbDivider>
+            <BreadcrumbItem>
+                <BreadcrumbLink href="#projects">Projects</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbDivider>
+                <Icon name="chevron-double-right" aria-hidden="true" />
+            </BreadcrumbDivider>
+            <BreadcrumbItem aria-current="page">
+                <BreadcrumbLink href="#detail" active>
+                    Details
+                </BreadcrumbLink>
+            </BreadcrumbItem>
+        </Breadcrumb>
+    </nav>
+</CodeExample>
+
+</DocumentLayout>

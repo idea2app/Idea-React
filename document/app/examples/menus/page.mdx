@@ -1,0 +1,67 @@
+import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
+import { Button } from '../../../../source/Base/Button';
+import { Menu, MenuDivider, MenuHeader, MenuItem } from '../../../../source/Base/Menu';
+import { Icon } from '../../../../source/Extension/Icon';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+<DocumentLayout active="menus">
+
+# Menus
+
+Enhance navigation and actions with contextual menus. Idea React menus support keyboard
+interaction, placement, and custom content.
+
+## Action menu
+
+Use a menu for a compact set of related actions.
+
+<CodeExample>
+    <Menu label="Options">
+        <MenuItem href="#edit">Edit</MenuItem>
+        <MenuItem href="#duplicate">Duplicate</MenuItem>
+        <MenuDivider />
+        <MenuItem href="#archive">Archive</MenuItem>
+    </Menu>
+</CodeExample>
+
+## Split button menu
+
+Use a button group when the primary action and its secondary options belong together.
+
+<CodeExample>
+    <ButtonGroup aria-label="Save options">
+        <Button variant="solid" theme="primary">
+            Save
+        </Button>
+        <Menu
+            split
+            label={
+                <>
+                    <Icon name="chevron-expand" aria-hidden="true" />
+                    <span className="visually-hidden">More save options</span>
+                </>
+            }
+            toggleProps={{ variant: 'solid', theme: 'primary', icon: true }}
+        >
+            <MenuItem href="#save-copy">Save a copy</MenuItem>
+            <MenuItem href="#save-draft">Save as draft</MenuItem>
+        </Menu>
+    </ButtonGroup>
+</CodeExample>
+
+## Custom menu content
+
+Use headings and supporting text to give longer menus more context.
+
+<CodeExample>
+    <Menu label="Choose a workspace">
+        <MenuHeader>Workspaces</MenuHeader>
+        <MenuItem href="#design">Design team</MenuItem>
+        <MenuItem href="#engineering">Engineering</MenuItem>
+        <MenuDivider />
+        <MenuItem href="#create">Create workspace</MenuItem>
+    </Menu>
+</CodeExample>
+
+</DocumentLayout>

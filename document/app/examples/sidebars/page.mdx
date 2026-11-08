@@ -1,0 +1,72 @@
+import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
+import { Col, Row } from '../../../../source/Layout/Grid';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+export const destinations = ['Overview', 'Projects', 'Team', 'Settings'];
+
+<DocumentLayout active="sidebars">
+
+# Sidebars
+
+Common navigation patterns work well in dashboards, documentation, and multi-column layouts. Use
+semantic navigation landmarks and make the selected destination clear.
+
+## Simple navigation
+
+Use an action list for a compact sidebar that sits beside the page content.
+
+<CodeExample>
+    <Row className="g-5">
+        <Col as="aside" xs={12} md={4} lg={3}>
+            <nav aria-label="Workspace">
+                <ListGroup>
+                    {destinations.map((label, index) => (
+                        <ListGroupItem
+                            key={label}
+                            href={`#${label.toLowerCase()}`}
+                            action
+                            active={!index}
+                        >
+                            {label}
+                        </ListGroupItem>
+                    ))}
+                </ListGroup>
+            </nav>
+        </Col>
+        <Col as="main">
+            <h2 className="h3">Overview</h2>
+            <p className="fg-2">Choose a destination to explore this workspace.</p>
+        </Col>
+    </Row>
+</CodeExample>
+
+## Sidebar with supporting information
+
+Keep secondary links and status details visually separate from primary navigation.
+
+<CodeExample>
+    <aside className="d-flex flex-column gap-5 rounded-4 bg-1 p-5">
+        <div>
+            <h2 className="h5">Workspace</h2>
+            <p className="fg-2 mb-0">Your team dashboard</p>
+        </div>
+        <nav aria-label="Workspace sections">
+            <ListGroup flush>
+                {destinations.map((label, index) => (
+                    <ListGroupItem
+                        key={label}
+                        href={`#${label.toLowerCase()}`}
+                        action
+                        active={!index}
+                    >
+                        {label}
+                    </ListGroupItem>
+                ))}
+            </ListGroup>
+        </nav>
+        <p className="small fg-2 mb-0">Plan: Team</p>
+    </aside>
+</CodeExample>
+
+</DocumentLayout>

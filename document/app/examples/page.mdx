@@ -1,0 +1,100 @@
+import { Card, CardBody, CardImage, CardText, CardTitle } from '../../../source/Base/Card';
+import { Col, Container, Row } from '../../../source/Layout/Grid';
+import { DocumentLayout } from '../../component/Document/Layout';
+
+export const examples = [
+    {
+        slug: 'headers',
+        title: 'Headers',
+        description:
+            'Display your branding, navigation, search, and more with these header components.'
+    },
+    {
+        slug: 'heroes',
+        title: 'Heroes',
+        description:
+            'Set the stage on your homepage with heroes that feature clear calls to action.'
+    },
+    {
+        slug: 'features',
+        title: 'Features',
+        description: 'Explain the features, benefits, or other details in your marketing content.'
+    },
+    {
+        slug: 'sidebars',
+        title: 'Sidebars',
+        description: 'Common navigation patterns ideal for drawer or multi-column layouts.'
+    },
+    {
+        slug: 'footers',
+        title: 'Footers',
+        description: 'Finish every page strong with an awesome footer, big or small.'
+    },
+    {
+        slug: 'menus',
+        title: 'Menus',
+        description: 'Enhance your menus with filters, icons, custom styles, and more.'
+    },
+    {
+        slug: 'list-groups',
+        title: 'List groups',
+        description: 'Extend list groups with utilities and custom styles for any content.'
+    },
+    {
+        slug: 'dialogs',
+        title: 'Dialogs',
+        description: 'Transform dialogs to serve any purpose, from feature tours to confirmations.'
+    },
+    {
+        slug: 'breadcrumbs',
+        title: 'Breadcrumbs',
+        description: 'Integrate custom icons and create stepper components.'
+    },
+    {
+        slug: 'buttons',
+        title: 'Buttons',
+        description: 'Create custom buttons for just about any use case with utilities.'
+    },
+    {
+        slug: 'jumbotrons',
+        title: 'Jumbotrons',
+        description: 'Create modernized versions of the classic Bootstrap component.'
+    }
+];
+
+<DocumentLayout active="examples">
+
+# Examples
+
+## Snippets
+
+Common patterns for building sites and apps that build on Idea React components and Bootstrap
+utilities. Each example is adapted to this library's React API.
+
+<Container fluid>
+    <Row xs={1} md={2} xl={3} className="g-5">
+        {examples.map(({ slug, title, description }) => (
+            <Col key={slug}>
+                <Card as="article" className="h-100 overflow-hidden">
+                    <a href={`./${slug}/`} aria-label={`View ${title} examples`}>
+                        <CardImage
+                            src={`https://getbootstrap.com/docs/6.0/assets/img/examples/${slug}.png`}
+                            alt=""
+                            loading="lazy"
+                        />
+                    </a>
+                    <CardBody>
+                        <CardTitle as="h2" className="h4">
+                            <a className="fg-body text-decoration-none" href={`./${slug}/`}>
+                                {title}
+                            </a>
+                        </CardTitle>
+                        <CardText>{description}</CardText>
+                    </CardBody>
+                </Card>
+            </Col>
+        ))}
+    </Row>
+</Container>
+
+</DocumentLayout>

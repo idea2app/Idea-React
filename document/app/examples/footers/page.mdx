@@ -1,0 +1,72 @@
+import { Icon } from '../../../../source/Extension/Icon';
+import { Button } from '../../../../source/Base/Button';
+import { FormControl } from '../../../../source/Form';
+import { Col, Row } from '../../../../source/Layout/Grid';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+export const links = ['About', 'Help center', 'Privacy', 'Terms'];
+
+<DocumentLayout active="footers">
+
+# Footers
+
+Finish a page with the information visitors need next: links, a short description, and optional
+subscription or social actions.
+
+## Multi-column footer
+
+Organize related links into groups and keep the brand information easy to find.
+
+<CodeExample>
+    <footer className="border-top py-7">
+        <Row className="g-5">
+            <Col xs={12} md={6}>
+                <a
+                    className="d-inline-flex align-items-center gap-2 fg-body text-decoration-none fw-semibold"
+                    href="#"
+                >
+                    <Icon name="code-square" aria-hidden="true" />
+                    Acme
+                </a>
+                <p className="fg-2 mt-3">Tools to help teams do their best work.</p>
+            </Col>
+            <Col xs={12} md={6}>
+                <nav aria-label="Footer">
+                    <ul className="list-unstyled d-flex flex-wrap gap-4 justify-content-md-end">
+                        {links.map(label => (
+                            <li key={label}>
+                                <a href="#">{label}</a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            </Col>
+        </Row>
+        <p className="small fg-2 mt-5 mb-0">© 2026 Acme, Inc.</p>
+    </footer>
+</CodeExample>
+
+## Newsletter footer
+
+Add a short opt-in form when updates are part of the site's ongoing experience.
+
+<CodeExample>
+    <footer className="d-flex flex-column lg:flex-row justify-content-between gap-5 border-top py-7">
+        <div>
+            <h2 className="h4">Stay in the loop</h2>
+            <p className="fg-2">Get occasional product updates in your inbox.</p>
+        </div>
+        <form className="d-flex flex-column sm:flex-row gap-2">
+            <label className="visually-hidden" htmlFor="example-email">
+                Email address
+            </label>
+            <FormControl id="example-email" type="email" placeholder="Email address" />
+            <Button type="submit" variant="solid" theme="primary" className="text-nowrap">
+                Subscribe
+            </Button>
+        </form>
+    </footer>
+</CodeExample>
+
+</DocumentLayout>

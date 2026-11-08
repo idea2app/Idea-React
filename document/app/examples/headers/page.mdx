@@ -1,0 +1,58 @@
+import { Navbar, NavbarBrand, NavbarNav } from '../../../../source/Base/Navbar';
+import { Button } from '../../../../source/Base/Button';
+import { NavLink } from '../../../../source/Base/Nav';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+<DocumentLayout active="headers">
+
+# Headers
+
+Display branding, navigation, and actions in headers that work across screen sizes. These patterns
+use Idea React's `Navbar` wrapper and ordinary semantic links.
+
+## Brand and navigation
+
+Keep the brand first, then provide a short set of primary destinations.
+
+<CodeExample>
+    <Navbar expand="lg" className="bg-body border-bottom px-4">
+        <NavbarBrand href="#">Acme</NavbarBrand>
+        <NavbarNav className="d-flex flex-row gap-4 ms-auto">
+            <li>
+                <NavLink href="#products">Products</NavLink>
+            </li>
+            <li>
+                <NavLink href="#features">Features</NavLink>
+            </li>
+            <li>
+                <NavLink href="#pricing">Pricing</NavLink>
+            </li>
+        </NavbarNav>
+    </Navbar>
+</CodeExample>
+
+## Call to action
+
+Pair a compact navigation with one clearly distinguished action.
+
+<CodeExample>
+    <Navbar expand="lg" className="bg-dark px-4" theme="dark">
+        <NavbarBrand href="#">Acme</NavbarBrand>
+        <div className="d-flex align-items-center gap-3 ms-auto">
+            <NavLink href="#sign-in">Sign in</NavLink>
+            <Button as="a" href="#start" variant="solid" theme="primary">
+                Get started
+            </Button>
+        </div>
+    </Navbar>
+</CodeExample>
+
+## Responsive navigation
+
+For a collapsible header with a drawer, use the documentation site's interactive
+[Navbar guide][1].
+
+</DocumentLayout>
+
+[1]: ../../components/navbar/

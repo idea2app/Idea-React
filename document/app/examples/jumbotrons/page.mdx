@@ -1,0 +1,71 @@
+import { Button } from '../../../../source/Base/Button';
+import { Icon } from '../../../../source/Extension/Icon';
+import { Container } from '../../../../source/Layout/Grid';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+<DocumentLayout active="jumbotrons">
+
+# Jumbotrons
+
+Create a prominent introductory section with a headline, explanatory copy, and a call to action.
+Use Bootstrap utilities to shape the content without requiring a separate component.
+
+## Simple jumbotron
+
+Give the message room to breathe with a contrasting surface and generous spacing.
+
+<CodeExample>
+    <Container className="rounded-5 bg-1 p-7 lg:p-9">
+        <h2 className="display-5 fw-semibold">A flexible workspace for every team</h2>
+        <p className="text-lg fg-2 max-w-3xl">
+            Bring projects, people, and progress together in one place.
+        </p>
+        <Button variant="solid" theme="primary" size="lg">
+            Explore the product
+        </Button>
+    </Container>
+</CodeExample>
+
+## Full-width introduction
+
+Use a full-width background to distinguish a page introduction from the content that follows.
+
+<CodeExample>
+    <section className="bg-dark py-9" data-bs-theme="dark">
+        <Container>
+            <p className="text-uppercase fw-semibold">Made for teams</p>
+            <h2 className="display-4 fw-semibold">Make room for better ideas.</h2>
+            <p className="text-lg max-w-3xl">
+                Start with a clear plan, bring everyone into the conversation, and deliver work
+                you're proud of.
+            </p>
+            <Button variant="solid" theme="light">
+                Start a project
+            </Button>
+        </Container>
+    </section>
+</CodeExample>
+
+## Jumbotron with an icon
+
+Use an icon to reinforce the topic without replacing the headline.
+
+<CodeExample>
+    <Container className="rounded-5 bg-1 p-7">
+        <div className="d-flex flex-column sm:flex-row align-items-start gap-5">
+            <div className="rounded-circle bg-body p-4">
+                <Icon name="star-fill" size={2} className="fg-accent" aria-hidden="true" />
+            </div>
+            <div>
+                <h2 className="display-6 fw-semibold">A new way to work</h2>
+                <p className="text-lg fg-2">Everything you need to bring your next idea to life.</p>
+                <Button variant="solid" theme="primary">
+                    Call to action
+                </Button>
+            </div>
+        </div>
+    </Container>
+</CodeExample>
+
+</DocumentLayout>

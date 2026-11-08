@@ -1,0 +1,103 @@
+import { Icon } from '../../../../source/Extension/Icon';
+import { Col, Row } from '../../../../source/Layout/Grid';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+export const features = [
+    {
+        icon: 'layers',
+        title: 'Composable',
+        text: 'Start with focused parts and combine them as your product grows.'
+    },
+    {
+        icon: 'universal-access',
+        title: 'Accessible',
+        text: 'Use semantic controls with keyboard-friendly interactions.'
+    },
+    {
+        icon: 'lightning-charge',
+        title: 'Responsive',
+        text: 'Create layouts that adapt from small screens to wide displays.'
+    }
+];
+
+<DocumentLayout active="features">
+
+# Features
+
+Explain the features and benefits of a product with layouts that combine concise copy, visual
+hierarchy, and reusable components.
+
+## Three-column feature grid
+
+Pair a small visual marker with a title and a short explanation for each feature.
+
+<CodeExample>
+    <Row xs={1} md={3} className="g-5">
+        {features.map(({ icon, title, text }) => (
+            <Col key={title}>
+                <div className="d-flex flex-column gap-3">
+                    <Icon name={icon} size={2} className="fg-accent" aria-hidden="true" />
+                    <h2 className="h4 mb-0">{title}</h2>
+                    <p className="fg-2 mb-0">{text}</p>
+                </div>
+            </Col>
+        ))}
+    </Row>
+</CodeExample>
+
+## Alternating feature
+
+Use a two-column layout when a feature benefits from a larger product illustration.
+
+<CodeExample>
+    <div className="d-flex flex-column lg:flex-row align-items-center gap-7 py-7">
+        <div className="flex-fill">
+            <h2 className="display-6 fw-semibold">Everything in one place</h2>
+            <p className="text-lg fg-2">
+                Bring your workflows and your team's context together in a space that is easy to
+                understand and simple to extend.
+            </p>
+        </div>
+        <div className="flex-fill rounded-5 bg-1 p-8 text-center">
+            <Icon name="window-stack" size={4} className="fg-accent" aria-hidden="true" />
+        </div>
+    </div>
+</CodeExample>
+
+## Feature cards
+
+Cards can group supporting details when visitors need to compare several capabilities.
+
+<CodeExample>
+    <Row xs={1} md={3} className="g-4">
+        {features.map(({ icon, title, text }) => (
+            <Col key={title}>
+                <article className="h-100 rounded-4 border p-5">
+                    <Icon name={icon} size={2} className="fg-accent" aria-hidden="true" />
+                    <h2 className="h4 mt-4">{title}</h2>
+                    <p className="fg-2 mb-0">{text}</p>
+                </article>
+            </Col>
+        ))}
+    </Row>
+</CodeExample>
+
+## Icon grid
+
+Use a regular grid when each feature can be explained in a single sentence.
+
+<CodeExample>
+    <Row xs={2} md={4} className="g-4 text-center">
+        {features.map(({ icon, title }) => (
+            <Col key={title}>
+                <div className="rounded-4 bg-1 p-4">
+                    <Icon name={icon} size={2} className="fg-accent" aria-hidden="true" />
+                    <h2 className="h6 mt-3 mb-0">{title}</h2>
+                </div>
+            </Col>
+        ))}
+    </Row>
+</CodeExample>
+
+</DocumentLayout>

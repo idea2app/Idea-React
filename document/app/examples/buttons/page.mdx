@@ -1,0 +1,56 @@
+import { Button } from '../../../../source/Base/Button';
+import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
+import { CodeExample } from '../../../component/Document/Example';
+import { ButtonPlayground } from '../../../component/Document/ButtonPlayground';
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+<DocumentLayout active="buttons">
+
+# Buttons
+
+Create calls to action for common tasks, from a single primary action to grouped controls.
+
+## Variants
+
+Use a solid button for the main action, an outline for a secondary choice, and a text variant for
+lower-emphasis actions.
+
+<CodeExample>
+    <div className="d-flex flex-wrap align-items-center gap-3">
+        <Button variant="solid" theme="primary">
+            Get started
+        </Button>
+        <Button variant="outline" theme="secondary">
+            Learn more
+        </Button>
+        <Button variant="text" theme="primary">
+            Cancel
+        </Button>
+    </div>
+</CodeExample>
+
+## Button group
+
+Group actions that share a context.
+
+<CodeExample>
+    <ButtonGroup aria-label="Text alignment">
+        <Button variant="outline" theme="secondary" active>
+            Left
+        </Button>
+        <Button variant="outline" theme="secondary">
+            Center
+        </Button>
+        <Button variant="outline" theme="secondary">
+            Right
+        </Button>
+    </ButtonGroup>
+</CodeExample>
+
+## Playground
+
+Explore supported variants, themes, sizes, and states in the interactive button playground.
+
+<ButtonPlayground />
+
+</DocumentLayout>

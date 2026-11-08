@@ -1,0 +1,60 @@
+import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
+import { Badge } from '../../../../source/Base/Badge';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+export const inbox = [
+    { title: 'Project update', detail: 'The design review is ready.', count: '2' },
+    { title: 'Team invitation', detail: 'Alex invited you to a workspace.', count: '1' },
+    { title: 'Weekly report', detail: 'Your activity summary is available.', count: '' }
+];
+
+<DocumentLayout active="list-groups">
+
+# List groups
+
+Extend list groups with custom content to present notifications, navigation, and other collections.
+
+## Notification list
+
+Combine a strong title with supporting text and a status badge.
+
+<CodeExample>
+    <ListGroup>
+        {inbox.map(({ title, detail, count }, index) => (
+            <ListGroupItem key={title} as="a" href={`#message-${index}`} action>
+                <div className="d-flex justify-content-between gap-3">
+                    <strong>{title}</strong>
+                    {count && <Badge theme="primary">{count}</Badge>}
+                </div>
+                <span className="d-block small fg-2 mt-1">{detail}</span>
+            </ListGroupItem>
+        ))}
+    </ListGroup>
+</CodeExample>
+
+## Numbered steps
+
+Use an ordered list when the sequence of items matters.
+
+<CodeExample>
+    <ListGroup as="ol" numbered>
+        <ListGroupItem>Choose a plan</ListGroupItem>
+        <ListGroupItem>Invite your team</ListGroupItem>
+        <ListGroupItem>Launch your workspace</ListGroupItem>
+    </ListGroup>
+</CodeExample>
+
+## Horizontal list
+
+For short labels, switch to a horizontal list on wider screens.
+
+<CodeExample>
+    <ListGroup horizontal="md">
+        <ListGroupItem>All</ListGroupItem>
+        <ListGroupItem active>Active</ListGroupItem>
+        <ListGroupItem>Archived</ListGroupItem>
+    </ListGroup>
+</CodeExample>
+
+</DocumentLayout>

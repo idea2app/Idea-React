@@ -1,0 +1,39 @@
+import { DialogDemo } from '../../../component/Document/DialogDemo';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { FormControl, FormLabel } from '../../../../source/Form';
+
+<DocumentLayout active="dialogs">
+
+# Dialogs
+
+Transform dialogs to serve many purposes, from simple confirmations to focused feature
+introductions. The examples below use the documentation site's reusable interactive demo.
+
+## Confirmation
+
+Keep the requested action and its consequence clear.
+
+<DialogDemo label="Delete item" title="Delete this item?" saveLabel="Delete">
+    <p>This action cannot be undone. The item will be permanently removed.</p>
+</DialogDemo>
+
+## Feature introduction
+
+Use a larger body to explain a new capability, and offer a next step.
+
+<DialogDemo label="Explore updates" title="A faster way to collaborate" saveLabel="Take a tour">
+    <p>
+        Share work with your team, collect feedback, and keep every decision close to the project.
+    </p>
+</DialogDemo>
+
+## Sign-up dialog
+
+Ask for the minimum information needed to continue, and keep the form inside the dialog.
+
+<DialogDemo label="Create account" title="Sign up for free" saveLabel="Create account">
+    <FormLabel htmlFor="dialog-email">Email address</FormLabel>
+    <FormControl id="dialog-email" type="email" placeholder="you@example.com" />
+</DialogDemo>
+
+</DocumentLayout>

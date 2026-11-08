@@ -1,0 +1,119 @@
+import { Button } from '../../../../source/Base/Button';
+import { FormControl } from '../../../../source/Form';
+import { Container } from '../../../../source/Layout/Grid';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+<DocumentLayout active="heroes">
+
+# Heroes
+
+Set the stage on a homepage with a concise headline, supporting text, and a clear call to action.
+
+## Centered hero
+
+Use a focused message when one action is the main goal of the page.
+
+<CodeExample>
+    <Container className="py-12 text-center">
+        <h2 className="display-5 fw-semibold text-balance">Build something remarkable</h2>
+        <p className="text-lg fg-2 mx-auto max-w-3xl">
+            Bring your next idea to life with flexible tools that grow with your team.
+        </p>
+        <Button variant="solid" theme="primary" size="lg">
+            Get started
+        </Button>
+    </Container>
+</CodeExample>
+
+## Split hero
+
+Place the message and its actions beside a supporting visual or product preview.
+
+<CodeExample>
+    <div className="d-flex flex-column md:flex-row align-items-center gap-7 rounded-5 bg-1 p-7">
+        <div className="flex-fill">
+            <p className="text-uppercase fw-semibold fg-accent">Introducing Idea</p>
+            <h2 className="display-6 fw-semibold">A clearer way to build</h2>
+            <p className="fg-2">
+                Keep your interface consistent from the first screen to the last.
+            </p>
+            <div className="d-flex flex-wrap gap-3">
+                <Button variant="solid" theme="primary">
+                    Explore the product
+                </Button>
+                <Button variant="outline" theme="secondary">
+                    Learn more
+                </Button>
+            </div>
+        </div>
+        <div className="flex-fill rounded-4 bg-body p-7 text-center">
+            <span className="display-4 fw-semibold">Idea React</span>
+        </div>
+    </div>
+</CodeExample>
+
+## Hero with product preview
+
+Use a contained preview to balance the headline without competing with its call to action.
+
+<CodeExample>
+    <Container className="d-flex flex-column align-items-center gap-5 py-9 text-center">
+        <h2 className="display-5 fw-semibold max-w-4xl">
+            Documentation that keeps your team moving
+        </h2>
+        <p className="text-lg fg-2 max-w-3xl">
+            Find the patterns you need, understand how they work, and get back to building.
+        </p>
+        <div className="d-flex flex-wrap gap-3 justify-content-center">
+            <Button variant="solid" theme="primary">
+                Read the docs
+            </Button>
+            <Button variant="outline" theme="secondary">
+                View the components
+            </Button>
+        </div>
+        <div className="w-100 rounded-5 bg-1 p-8">
+            <span className="display-6 fw-semibold">Idea React</span>
+        </div>
+    </Container>
+</CodeExample>
+
+## Sign-up hero
+
+Keep the form short and make its purpose clear before asking visitors to submit it.
+
+<CodeExample>
+    <div className="d-flex flex-column lg:flex-row align-items-center gap-7 rounded-5 bg-1 p-7">
+        <div className="flex-fill">
+            <h2 className="display-6 fw-semibold">Start building today</h2>
+            <p className="fg-2">Create a workspace for your next project.</p>
+        </div>
+        <form className="d-flex flex-column gap-3 w-100 max-w-3xl">
+            <label htmlFor="hero-email">Email address</label>
+            <FormControl id="hero-email" type="email" placeholder="you@example.com" />
+            <Button type="submit" variant="solid" theme="primary">
+                Sign up
+            </Button>
+        </form>
+    </div>
+</CodeExample>
+
+## Dark hero
+
+Use contrast to make a focused call to action stand out from surrounding sections.
+
+<CodeExample>
+    <section className="rounded-5 bg-dark p-7 lg:p-9" data-bs-theme="dark">
+        <p className="text-uppercase fw-semibold">The next chapter starts here</p>
+        <h2 className="display-4 fw-semibold">Make your best work together.</h2>
+        <p className="text-lg fg-2 max-w-3xl">
+            Bring the people and ideas behind your work into one shared space.
+        </p>
+        <Button variant="solid" theme="light">
+            Join the team
+        </Button>
+    </section>
+</CodeExample>
+
+</DocumentLayout>
