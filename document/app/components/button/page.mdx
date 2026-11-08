@@ -1,12 +1,12 @@
 import { Button, ButtonInput } from '../../../../source/Base/Button';
 import { ToggleButton } from '../../../../source/Base/ToggleButton';
 import { Icon } from '../../../../source/Extension/Icon';
-import { Col } from '../../../../source/Base/Grid';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { ButtonPlayground } from '../../../component/Documentation/Components/ButtonPlayground';
+import { Col } from '../../../../source/Layout/Grid';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { DocumentButtonPlayground } from '../../../component/Document/ButtonPlayground';
 
-<ComponentsLayout active="button">
+<DocumentLayout active="button">
 
 # Button
 
@@ -20,11 +20,11 @@ Use Bootstrap’s custom button styles for actions in forms, dialogs, and more w
 
 Buttons have a standard `.btn` class that sets up basic styles such as padding and content alignment, along with fallback visual styles for basic accessibility. Change this class to another button class to apply different visual styles for a specific button variant and theme.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <Button type="button">Base class</Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 The `.btn` class is intended to be a starting point for your own custom button styles, while our provided button variants can be used alongside `.theme-*` classes or as a basis for your own custom styles.
 
@@ -32,13 +32,13 @@ The `.btn` class is intended to be a starting point for your own custom button s
 
 Bootstrap includes several button variants, each serving its own semantic purpose, with a few extras thrown in for more control. Combined with our utilities, you have a very powerful set of defaults to choose from.
 
-<ButtonPlayground />
+<DocumentButtonPlayground />
 
 ## Variants
 
 Compare all button variants and styles at once:
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="md:justify-items-start d-grid grid-cols-4 gap-2 overflow-auto">
         <Button variant="solid" theme="primary" type="button">
             Primary
@@ -137,7 +137,7 @@ Compare all button variants and styles at once:
             Inverse
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 > **Conveying meaning to assistive technologies:** Using color to add meaning only provides a visual indication, which will not be conveyed to users of assistive technologies—such as screen readers. Ensure that information denoted by the color is either obvious from the content itself, or included through alternative means, such as additional text hidden with the `.visually-hidden` utility.
 
@@ -145,17 +145,17 @@ Compare all button variants and styles at once:
 
 Use the `.btn-link` class to create a button that looks like a link.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <Button variant="link" type="button">
             Link
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 Link buttons can also be styled with the theme colors.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <Button variant="link" theme="primary" type="button">
             Primary
@@ -182,13 +182,13 @@ Link buttons can also be styled with the theme colors.
             Inverse
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Styled buttons
 
 Add visual depth to solid buttons with gradients and shadows using the `.btn-styled` modifier class. This provides a more three-dimensional appearance that can be customized further with CSS variables.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 overflow-auto">
         <Button variant="solid" styled theme="primary">
             Primary
@@ -215,7 +215,7 @@ Add visual depth to solid buttons with gradients and shadows using the `.btn-sty
             Inverse
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 The gradient and shadow can be customized via CSS variables:
 
@@ -236,7 +236,7 @@ The `.btn` classes are designed to be used with the `<button>` element. However,
 
 When using button classes on `<a>` elements that are used to trigger in-page functionality (like collapsing content), rather than linking to new pages or sections within the current page, these links should be given a `role="button"` to appropriately convey their purpose to assistive technologies such as screen readers.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 overflow-auto">
         <Button variant="solid" theme="primary" href="#" role="button">
             Link
@@ -248,13 +248,13 @@ When using button classes on `<a>` elements that are used to trigger in-page fun
         <ButtonInput variant="solid" theme="primary" type="submit" defaultValue="Submit" />
         <ButtonInput variant="solid" theme="primary" type="reset" defaultValue="Reset" />
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Sizes
 
 Fancy larger or smaller buttons? Add `.btn-lg` or `.btn-sm` for additional sizes.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <Button variant="solid" size="lg" theme="primary" type="button">
             Large button
@@ -263,9 +263,9 @@ Fancy larger or smaller buttons? Add `.btn-lg` or `.btn-sm` for additional sizes
             Large button
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <Button variant="solid" size="sm" theme="primary" type="button">
             Small button
@@ -274,9 +274,9 @@ Fancy larger or smaller buttons? Add `.btn-lg` or `.btn-sm` for additional sizes
             Small button
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <Button variant="solid" size="xs" theme="primary" type="button">
             Extra small button
@@ -285,11 +285,11 @@ Fancy larger or smaller buttons? Add `.btn-lg` or `.btn-sm` for additional sizes
             Extra small button
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 You can even roll your own custom sizing with CSS variables:
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <Button
             variant="solid"
@@ -304,13 +304,13 @@ You can even roll your own custom sizing with CSS variables:
             Custom button
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Icon buttons
 
 Use `.btn-icon` for square buttons that contain only an icon. This class sets `aspect-ratio: 1` and removes padding, making the button perfectly square based on its `min-height`. Always include an `aria-label` attribute on icon-only buttons to ensure they are accessible to screen reader users.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <Button icon type="button" aria-label="Magic">
             <Icon name="magic" aria-hidden />
@@ -325,11 +325,11 @@ Use `.btn-icon` for square buttons that contain only an icon. This class sets `a
             <Icon name="sun-fill" aria-hidden />
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 Combine with size classes for different icon button sizes:
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <Button variant="solid" icon size="xs" theme="primary" type="button" aria-label="Confirm">
             <Icon name="check2" aria-hidden />
@@ -344,13 +344,13 @@ Combine with size classes for different icon button sizes:
             <Icon name="check2" aria-hidden />
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Disabled state
 
 Make buttons look inactive by adding the `disabled` boolean attribute to any `<button>` element. Disabled buttons have `pointer-events: none`, preventing hover and active states from triggering, and some additional styling to indicate the disabled state.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 overflow-auto">
         <Button variant="solid" theme="primary" type="button" disabled>
             Primary button
@@ -365,11 +365,11 @@ Make buttons look inactive by adding the `disabled` boolean attribute to any `<b
             Button
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 Disabled buttons using the `<a>` element behave a bit different. Use the `.disabled` class instead of the attribute on `<a>` elements to make them visually appear disabled. If you need to keep the `href` attribute, you may need additional HTML to fully disable the link functionality.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <Button
             variant="solid"
@@ -392,11 +392,11 @@ Disabled buttons using the `<a>` element behave a bit different. Use the `.disab
             Link
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 If there’s an `href` attribute, add `tabindex="-1"` and `aria-disabled="true"` to prevent keyboard focus and assistive technologies from interacting with the link.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <Button
             variant="solid"
@@ -421,7 +421,7 @@ If there’s an `href` attribute, add `tabindex="-1"` and `aria-disabled="true"`
             Link
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 You may also want to use custom JavaScript to disable the link functionality altogether.
 
@@ -432,7 +432,7 @@ prevents navigation, and supplies `aria-disabled` and `tabIndex={-1}`.
 
 Use the `.d-grid` utility to create responsive stacks of full-width “block buttons”. Space them out with gap utilities.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <div className="d-grid gap-2">
             <Button variant="solid" theme="primary" type="button">
@@ -443,11 +443,11 @@ Use the `.d-grid` utility to create responsive stacks of full-width “block but
             </Button>
         </div>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 Here we create a responsive variation, starting with vertically stacked buttons until the `md` breakpoint, where `.md:d-block` replaces the `.d-grid` class, thus nullifying the `gap-2` utility. Resize your browser to see them change.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <div className="d-grid gap-2 md:d-block">
             <Button variant="solid" theme="primary" type="button">
@@ -458,11 +458,11 @@ Here we create a responsive variation, starting with vertically stacked buttons 
             </Button>
         </div>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 You can adjust the width of your block buttons with grid column width classes. For example, for a half-width “block button”, use `.col-6`. Center it horizontally with `.mx-auto`, too.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <Col xs={6} className="d-grid gap-2 mx-auto">
             <Button variant="solid" theme="primary" type="button">
@@ -473,11 +473,11 @@ You can adjust the width of your block buttons with grid column width classes. F
             </Button>
         </Col>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 Additional utilities can be used to adjust the alignment of buttons when horizontal. Here we’ve taken our previous responsive example and added some flex utilities and a margin utility on the button to right-align the buttons when they’re no longer stacked.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
         <div className="d-grid gap-2 md:d-flex md:justify-content-end">
             <Button variant="solid" theme="primary" type="button" className="md:me-2">
@@ -488,7 +488,7 @@ Additional utilities can be used to adjust the alignment of buttons when horizon
             </Button>
         </div>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Toggle buttons
 
@@ -500,7 +500,7 @@ Create button-like checkboxes and radio buttons by adding `.btn-check` to a `<la
 
 Checkboxes can be checked, unchecked, or disabled. Checkbox-based toggle buttons only toggle a single button’s state.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 overflow-auto">
         <ToggleButton variant="solid" theme="primary" type="checkbox" defaultChecked>
             Checked
@@ -512,13 +512,13 @@ Checkboxes can be checked, unchecked, or disabled. Checkbox-based toggle buttons
             Disabled
         </ToggleButton>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Radios
 
 Radios can be checked, unchecked, or disabled. Use radio-based toggle buttons to toggle states between a set of buttons that include input elements with the same `name` attribute value.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 overflow-auto">
         <ToggleButton variant="solid" theme="primary" type="radio" name="options" defaultChecked>
             Checked
@@ -533,7 +533,7 @@ Radios can be checked, unchecked, or disabled. Use radio-based toggle buttons to
             Toggle
         </ToggleButton>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Active state
 
@@ -545,7 +545,7 @@ For toggle semantics, `Button` sets `aria-pressed` when `active` is provided. Bu
 
 Render the active state supplied by your application:
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 overflow-auto">
         <Button variant="solid" active={false} theme="primary" type="button">
             Inactive toggle button
@@ -557,9 +557,9 @@ Render the active state supplied by your application:
             Disabled toggle button
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 overflow-auto">
         <Button variant="solid" active={false} theme="primary" href="#" role="button">
             Inactive link button
@@ -578,7 +578,7 @@ Render the active state supplied by your application:
             Disabled link button
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 When using links as toggle buttons, set `role="button"` so the `active` prop also supplies `aria-pressed`.
 
@@ -640,7 +640,7 @@ Link buttons use local CSS variables.
 | `--bs-btn-disabled-color`        | `var(--bs-theme-contrast)`                                           |
 | `--bs-btn-disabled-border-color` | `var(--bs-theme-bg)`                                                 |
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/components/button-group/
 [2]: #active-state

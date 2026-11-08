@@ -1,9 +1,9 @@
 import { UserRankView } from '../../../../source/Extension/UserRank';
 
-import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="user-rank">
+<DocumentLayout active="user-rank">
 
 # User rank
 
@@ -12,7 +12,7 @@ a table of the remaining ranks with avatars, scores, and locations.
 
 ## Example
 
-<LiveExample>
+<DocumentLiveExample>
     <UserRankView
         title="Contributors"
         rank={[
@@ -23,18 +23,18 @@ a table of the remaining ranks with avatars, scores, and locations.
             { id: 5, name: 'github', avatar: 'https://github.com/github.png', score: 540 }
         ]}
     />
-</LiveExample>
+</DocumentLiveExample>
 
 ## Usage
 
-<CodeCard>
+<DocumentCodeCard>
     <UserRankView title="Weekly ranking" rank={[]} linkOf={({ id }) => `/users/${id}`} />
-</CodeCard>
+</DocumentCodeCard>
 
 `rank` lists users ordered by score; the first three render as medal cards and ranks 4–10 render as
 table rows. `linkOf` builds the profile link for each user, and address fields from
 `UserAddressProps` display each user's location.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/UserRank/index.tsx

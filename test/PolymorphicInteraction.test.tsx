@@ -10,7 +10,6 @@ import {
     Button,
     Card,
     Checkbox,
-    Editor,
     FormRange,
     HorizontalMarqueeBox,
     NavLink,
@@ -345,28 +344,4 @@ it('forwards TypeEcho refs to its root and releases replaced callback refs', t =
     unmount();
 
     assert.equal(ref.current, null);
-});
-
-it('preserves root styles and external blur handlers around editor behavior', t => {
-    const blurred = t.mock.fn();
-    const Root = ({ children: _children, ...props }: ComponentPropsWithRef<'section'>) => (
-        <section {...props} />
-    );
-    render(
-        <Editor
-            as={Root}
-            className="custom"
-            style={{ color: 'red' }}
-            data-testid="editor"
-            onBlur={blurred}
-        />
-    );
-    const root = screen.getByTestId('editor');
-
-    assert.equal(root.className, 'form-control custom');
-    assert.equal(root.style.color, 'red');
-
-    fireEvent.blur(root);
-
-    assert.equal(blurred.mock.callCount(), 1);
 });

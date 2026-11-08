@@ -14,7 +14,7 @@ import {
 
 import { ButtonProps } from '../Base/Button';
 import { Menu } from '../Base/Menu';
-import { polymorphic } from '../Base/Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export interface OptionProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     value?: string;

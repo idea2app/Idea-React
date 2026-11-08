@@ -1,9 +1,9 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { Progress, ProgressStack } from '../../../../source/Base/Progress';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="progress">
+<DocumentLayout active="progress">
 
 # Progress
 
@@ -25,7 +25,7 @@ Put that all together, and you have the following examples.
 Provide an accessible name; pass labels as children and inner-bar utilities through `barProps`.
 `ProgressStack` uses CSS to place each segment’s calculated width on its outer element.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <Progress value={0.0} aria-label="Basic example" />
         <Progress value={25.0} aria-label="Basic example" />
@@ -33,7 +33,7 @@ Provide an accessible name; pass labels as children and inner-bar utilities thro
         <Progress value={75.0} aria-label="Basic example" />
         <Progress value={100.0} aria-label="Basic example" />
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Bar sizing
 
@@ -41,34 +41,34 @@ Provide an accessible name; pass labels as children and inner-bar utilities thro
 
 Bootstrap provides a handful of [utilities for setting width][2]. Depending on your needs, these may help with quickly configuring the width of the `.progress-bar`.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <Progress value={75.0} barProps={{ className: 'w-75' }} aria-label="Basic example" />
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Height
 
 You only set a `height` value on the `.progress` container, so if you change that value, the inner `.progress-bar` will automatically resize accordingly.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <Progress value={25.0} aria-label="Example 1px high" style={{ height: '1px' }} />
         <Progress value={25.0} aria-label="Example 20px high" style={{ height: '20px' }} />
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Labels
 
 Add labels to your progress bars by placing text within the `.progress-bar`.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <Progress value={25.0} aria-label="Example with label">
             25%
         </Progress>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Long labels
 
@@ -82,7 +82,7 @@ Note that by default, the content inside the `.progress-bar` is controlled with 
 
 Use background utility classes to change the appearance of individual progress bars.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <Progress
             value={25.0}
@@ -97,13 +97,13 @@ Use background utility classes to change the appearance of individual progress b
         />
         <Progress value={100.0} barProps={{ className: 'bg-danger' }} aria-label="Danger example" />
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 > **Conveying meaning to assistive technologies:** Using color to add meaning only provides a visual indication, which will not be conveyed to users of assistive technologies—such as screen readers. Ensure that information denoted by the color is either obvious from the content itself, or included through alternative means, such as additional text hidden with the `.visually-hidden` utility.
 
 If you’re adding labels to progress bars with a custom background color, make sure to also set an appropriate [text color][4], so the labels remain readable and have sufficient contrast. We recommend using the [theme contrast][5] helper classes.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <Progress value={25.0} theme="success" aria-label="Success example">
             25%
@@ -118,13 +118,13 @@ If you’re adding labels to progress bars with a custom background color, make 
             100%
         </Progress>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Multiple bars
 
 You can include multiple progress components inside a container with `.progress-stacked` to create a single stacked progress bar. Note that in this case, the styling to set the visual width of the progress bar _must_ be applied to the `.progress` elements, rather than the `.progress-bar`s.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <ProgressStack>
             <Progress value={15.0} aria-label="Segment one" />
@@ -136,13 +136,13 @@ You can include multiple progress components inside a container with `.progress-
             <Progress value={20.0} barProps={{ className: 'bg-info' }} aria-label="Segment three" />
         </ProgressStack>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Striped
 
 Add `.progress-bar-striped` to any `.progress-bar` to apply a stripe via CSS gradient over the progress bar’s background color.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <Progress value={10.0} striped aria-label="Default striped example" />
         <Progress
@@ -170,17 +170,17 @@ Add `.progress-bar-striped` to any `.progress-bar` to apply a stripe via CSS gra
             aria-label="Danger striped example"
         />
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Animated stripes
 
 The striped gradient can also be animated. Add `.progress-bar-animated` to `.progress-bar` to animate the stripes right to left via CSS3 animations.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <Progress value={75.0} striped animated aria-label="Animated striped example" />
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## CSS
 
@@ -204,7 +204,7 @@ Customize the component with the following local CSS variables. Override them th
 
 Used for creating the CSS animations for `.progress-bar-animated`. The animation moves the striped background from one stripe width to zero, producing continuous motion from right to left.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
 [2]: https://getbootstrap.com/docs/6.0/utilities/width/

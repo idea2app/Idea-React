@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 import { Component, createRef, HTMLAttributes, MouseEvent } from 'react';
 import { blobOf } from 'web-utility';
 
-import { Image } from '../Base/Image';
+import { Image } from '../Content/Images';
 import { Loading } from './Loading';
 
 export async function elementToImage(element: HTMLElement, type?: string, quality?: number) {

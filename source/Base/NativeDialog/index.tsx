@@ -12,8 +12,8 @@ import {
     SyntheticEvent
 } from 'react';
 
-import { Breakpoint } from '../Grid';
-import { AsProps, polymorphic, PolymorphicClassProps } from '../Polymorphic';
+import { AsProps, polymorphic, PolymorphicClassProps } from '../../Helper/Polymorphic';
+import { Breakpoint } from '../../Layout/Grid';
 import styles from './style.module.css';
 
 const transitionMilliseconds = (value: string) =>

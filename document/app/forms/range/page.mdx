@@ -1,9 +1,9 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { FormField, FormLabel, FormRange, FormText } from '../../../../source/Form';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<DocumentationLayout active="range">
+<DocumentLayout active="range">
 
 # Range
 
@@ -15,16 +15,16 @@ The native `<input type="range">` is hard to style and can’t show a filled tra
 
 The `.form-range` wrapper owns the component’s tokens, so the input and any decorations inherit them. Each mounted `FormRange` initializes automatically.
 
-<CodeExample>
+<DocumentCodeExample>
     <FormLabel htmlFor="range1">Example range</FormLabel>
     <FormRange id="range1" />
-</CodeExample>
+</DocumentCodeExample>
 
 ## Theme colors
 
 Modify the appearance of the range by adding the `theme` prop to the `.form-range` wrapper. This will set the track fill and thumb color to the theme color.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <FormRange aria-label="Example primary range" theme="primary" />
         <FormRange aria-label="Example accent range" theme="accent" />
@@ -37,49 +37,49 @@ Modify the appearance of the range by adding the `theme` prop to the `.form-rang
         <FormRange aria-label="Example light range" theme="light" />
         <FormRange aria-label="Example inverse range" theme="inverse" />
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Disabled
 
 Add the `disabled` boolean attribute on the input to give it a grayed out appearance, remove pointer events, and prevent focusing.
 
-<CodeExample>
+<DocumentCodeExample>
     <FormLabel htmlFor="disabledRange">Disabled range</FormLabel>
     <FormRange id="disabledRange" disabled />
-</CodeExample>
+</DocumentCodeExample>
 
 ## Min and max
 
 Range inputs have implicit values for `min` and `max`—`0` and `100`, respectively. You may specify new values for those using the `min` and `max` attributes.
 
-<CodeExample>
+<DocumentCodeExample>
     <FormLabel htmlFor="range2">Example range</FormLabel>
     <FormRange min="0" max="5" id="range2" />
-</CodeExample>
+</DocumentCodeExample>
 
 ## Steps
 
 By default, range inputs “snap” to integer values. To change this, you can specify a `step` value. In the example below, we double the number of steps by using `step="0.5"`.
 
-<CodeExample>
+<DocumentCodeExample>
     <FormLabel htmlFor="range3">Example range</FormLabel>
     <FormRange min="0" max="5" step="0.5" id="range3" />
-</CodeExample>
+</DocumentCodeExample>
 
 ## Value bubble
 
 Set `bubble` to show a value bubble that follows the thumb. The bubble reuses our [tooltip][1] styles.
 
-<CodeExample>
+<DocumentCodeExample>
     <FormLabel htmlFor="rangeBubble">Brightness</FormLabel>
     <FormRange min="0" max="100" defaultValue="60" id="rangeBubble" bubble />
-</CodeExample>
+</DocumentCodeExample>
 
 ## Tick marks
 
 Link a `<datalist>` to the input with the `list` attribute and the plugin renders a tick mark for each `<option>`, positioned at its value (even when the values are unevenly spaced). An `<option>`’s `label` is shown beneath its tick.
 
-<CodeExample>
+<DocumentCodeExample>
     <FormLabel htmlFor="rangeTicks">Temperature</FormLabel>
     <FormRange
         min="0"
@@ -96,19 +96,19 @@ Link a `<datalist>` to the input with the `list` attribute and the plugin render
         <option value="75" />
         <option label="Hot" value="100" />
     </datalist>
-</CodeExample>
+</DocumentCodeExample>
 
 ## With form field
 
 Wrap `FormRange` in `FormField` to pair it with a label and description.
 
-<CodeExample>
+<DocumentCodeExample>
     <FormField>
         <FormLabel htmlFor="rangeField">Volume</FormLabel>
         <FormRange id="rangeField" bubble />
         <FormText>Adjust the volume level.</FormText>
     </FormField>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Usage
 
@@ -157,6 +157,6 @@ Each `FormRange` is initialized automatically when mounted—the component is Ja
 }
 ```
 
-</DocumentationLayout>
+</DocumentLayout>
 
 [1]: ../../components/tooltip/

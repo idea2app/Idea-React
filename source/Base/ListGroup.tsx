@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
+import { polymorphic } from '../Helper/Polymorphic';
+import type { Breakpoint } from '../Layout/Grid';
 import type { ComponentTheme } from './Button';
-import type { Breakpoint } from './Grid';
-import { polymorphic } from './Polymorphic';
 
 export type ListGroupHorizontal = boolean | Breakpoint;
 

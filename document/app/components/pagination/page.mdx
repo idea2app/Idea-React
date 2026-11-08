@@ -1,9 +1,9 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { Pagination, PageItem, PageLink } from '../../../../source/Base/Pagination';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="pagination">
+<DocumentLayout active="pagination">
 
 # Pagination
 
@@ -18,7 +18,7 @@ We use a large block of connected links for our pagination, making links hard to
 
 In addition, as pages likely have more than one such navigation section, it’s advisable to provide a descriptive `aria-label` for the `<nav>` to reflect its purpose. For example, if the pagination component is used to navigate between a set of search results, an appropriate label could be `aria-label="Search results pages"`.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <nav aria-label="Page navigation example">
             <Pagination>
@@ -40,13 +40,13 @@ In addition, as pages likely have more than one such navigation section, it’s 
             </Pagination>
         </nav>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Working with icons
 
 Looking to use an icon or symbol in place of text for some pagination links? Be sure to provide proper screen reader support with `aria` attributes.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <nav aria-label="Page navigation example">
             <Pagination>
@@ -72,13 +72,13 @@ Looking to use an icon or symbol in place of text for some pagination links? Be 
             </Pagination>
         </nav>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Active
 
 Add `.active` to indicate a `.page-item` is the one currently being viewed. If using an `<a>` on the current page, `aria-current="page"` should be added for assistive technologies.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <nav aria-label="...">
             <Pagination>
@@ -102,7 +102,7 @@ Add `.active` to indicate a `.page-item` is the one currently being viewed. If u
             </Pagination>
         </nav>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 If using a non-interactive element, like a `<span>` for the current page, you may omit the `aria-current` attribute.
 
@@ -119,7 +119,7 @@ Add `.disabled` to a `.page-item` to make it appear un-clickable. While `.disabl
 The `PageItem disabled` example below delegates this behavior to `PageLink`, which removes the
 destination and click handler, supplies `aria-disabled`, and excludes the link from keyboard focus.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <nav aria-label="...">
             <Pagination>
@@ -143,7 +143,7 @@ destination and click handler, supplies `aria-disabled`, and excludes the link f
             </Pagination>
         </nav>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 And just like active page items, you can swap out the disabled `<a>` for a `<span>` to remove click functionality and prevent keyboard focus while retaining intended styles.
 
@@ -157,7 +157,7 @@ And just like active page items, you can swap out the disabled `<a>` for a `<spa
 
 Add a `.theme-{color}` class to `.pagination` to apply a semantic theme color across the component, including hover, focus, and the active page item.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <nav aria-label="Page navigation example">
             <Pagination theme="primary">
@@ -328,13 +328,13 @@ Add a `.theme-{color}` class to `.pagination` to apply a semantic theme color ac
             </Pagination>
         </nav>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Sizing
 
 Fancy larger or smaller pagination? Add `.pagination-lg` or `.pagination-sm` for additional sizes.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <nav aria-label="...">
             <Pagination size="lg">
@@ -382,13 +382,13 @@ Fancy larger or smaller pagination? Add `.pagination-lg` or `.pagination-sm` for
             </Pagination>
         </nav>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Alignment
 
 Change the alignment of pagination components with [flexbox utilities][1]. For example, with `.justify-content-center`:
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <nav aria-label="Page navigation example">
             <Pagination className="justify-content-center">
@@ -410,11 +410,11 @@ Change the alignment of pagination components with [flexbox utilities][1]. For e
             </Pagination>
         </nav>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 Or with `.justify-content-end`:
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <nav aria-label="Page navigation example">
             <Pagination className="justify-content-end">
@@ -436,7 +436,7 @@ Or with `.justify-content-end`:
             </Pagination>
         </nav>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## CSS
 
@@ -465,6 +465,6 @@ Customize the component with the following local CSS variables. Override them th
 | `--bs-pagination-disabled-bg`           | `var(--bs-bg-2)`                                       |
 | `--bs-pagination-disabled-border-color` | `var(--bs-border-color)`                               |
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/utilities/flex/

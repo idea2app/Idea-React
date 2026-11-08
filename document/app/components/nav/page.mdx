@@ -1,9 +1,9 @@
 import { Menu, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 import { Nav, NavLink } from '../../../../source/Base/Nav';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="nav">
+<DocumentLayout active="nav">
 
 # Nav
 
@@ -17,7 +17,7 @@ The base `.nav` component is built with flexbox and provides a strong foundation
 
 > To convey the active state to assistive technologies, use the `aria-current` attribute — using the `page` value for current page, or `true` for the current item in a set.
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav>
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -32,11 +32,11 @@ The base `.nav` component is built with flexbox and provides a strong foundation
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 Bootstrap supports lists or a `<nav>` element. The `Nav` wrapper uses a semantic `<nav>` with direct `NavLink` children. Because `.nav` uses `display: flex`, these links behave the same as wrapped nav items, without the extra list markup.
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav>
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -51,11 +51,11 @@ Bootstrap supports lists or a `<nav>` element. The `Nav` wrapper uses a semantic
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 Where appropriate, you can also use `<button>` elements instead of `<a>` elements for the nav links. You can even mix and match—for example, by using buttons for menus.
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav>
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -78,7 +78,7 @@ Where appropriate, you can also use `<button>` elements instead of `<a>` element
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Tab JavaScript plugin
 
@@ -92,7 +92,7 @@ Change the style of `.nav`s component with modifiers and utilities. Mix and matc
 
 Takes the basic nav from above and adds the `.nav-tabs` class to generate a tabbed interface.
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav variant="tabs">
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -107,13 +107,13 @@ Takes the basic nav from above and adds the `.nav-tabs` class to generate a tabb
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### Pills
 
 Take that same HTML, but use `.nav-pills` instead for a more themed appearance.
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav variant="pills">
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -128,11 +128,11 @@ Take that same HTML, but use `.nav-pills` instead for a more themed appearance.
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 Pill navigation can also go vertical with an additional modifier class, `.nav-pills-vertical`.
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav variant="pills" vertical>
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -147,13 +147,13 @@ Pill navigation can also go vertical with an additional modifier class, `.nav-pi
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### Underline
 
 Take that same HTML, but use `.nav-underline` instead:
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav variant="underline">
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -168,7 +168,7 @@ Take that same HTML, but use `.nav-underline` instead:
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Alignment
 
@@ -178,7 +178,7 @@ Change the alignment of your nav with [flexbox utilities][2]. By default, navs a
 
 Centered with `.justify-content-center`:
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav className="justify-content-center">
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -193,11 +193,11 @@ Centered with `.justify-content-center`:
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 Right-aligned with `.justify-content-end`:
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav className="justify-content-end">
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -212,13 +212,13 @@ Right-aligned with `.justify-content-end`:
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### Vertical
 
 Stack your navigation by changing the flex item direction with the `.flex-column` utility. Need to stack them on some viewports but not others? Use the responsive versions (e.g., `.sm:flex-column`).
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav vertical>
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -233,11 +233,11 @@ Stack your navigation by changing the flex item direction with the `.flex-column
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 As always, vertical navigation is possible without `<ul>`s, too.
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav vertical>
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -252,13 +252,13 @@ As always, vertical navigation is possible without `<ul>`s, too.
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### Fill and justify
 
 Force your `.nav`’s contents to extend the full available width with one of two modifier classes. To proportionately fill all available space with your `.nav-item`s, use `.nav-fill`. Notice that all horizontal space is occupied, but not every nav item has the same width.
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav variant="pills" fill>
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -273,11 +273,11 @@ Force your `.nav`’s contents to extend the full available width with one of tw
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 When using a `<nav>`-based navigation, you can safely omit `.nav-item` as only `.nav-link` is required for styling `<a>` elements.
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav variant="pills" fill>
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -292,11 +292,11 @@ When using a `<nav>`-based navigation, you can safely omit `.nav-item` as only `
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 For equal-width elements, use `.nav-justified`. All horizontal space will be occupied by nav links, but unlike the `.nav-fill` above, every nav item will be the same width.
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav variant="pills" justified>
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -311,11 +311,11 @@ For equal-width elements, use `.nav-justified`. All horizontal space will be occ
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 Similar to the `.nav-fill` example using a `<nav>`-based navigation.
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav variant="pills" justified>
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -330,13 +330,13 @@ Similar to the `.nav-fill` example using a `<nav>`-based navigation.
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Working with flex utilities
 
 If you need responsive nav variations, consider using a series of [flexbox utilities][2]. While more verbose, these utilities offer greater customization across responsive breakpoints. In the example below, our nav will be stacked on the lowest breakpoint, then adapt to a horizontal layout that fills the available width starting from the small breakpoint.
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav variant="pills" className="flex-column sm:flex-row sm:d-flex">
         <NavLink
             active
@@ -360,7 +360,7 @@ If you need responsive nav variations, consider using a series of [flexbox utili
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Regarding accessibility
 
@@ -374,7 +374,7 @@ Add menus with the [Menu component][5].
 
 ### Tabs with menus
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav variant="tabs">
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -399,11 +399,11 @@ Add menus with the [Menu component][5].
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### Pills with menus
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav variant="pills">
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -428,7 +428,7 @@ Add menus with the [Menu component][5].
         </NavLink>
     </Nav>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## CSS
 
@@ -498,7 +498,7 @@ On the `.nav-underline` modifier class:
 }
 ```
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: /components/tab#javascript-behavior
 [2]: https://getbootstrap.com/docs/6.0/utilities/flex

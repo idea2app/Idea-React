@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 
-import { OVERLAY_ARROW_POSITIONS, OVERLAY_DIRECTIONS, OverlayTriggerProps } from './Overlay';
-import { polymorphic } from './Polymorphic';
+import {
+    OVERLAY_ARROW_POSITIONS,
+    OVERLAY_DIRECTIONS,
+    OverlayTriggerProps
+} from '../Helper/Overlay';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export type TooltipProps = OverlayTriggerProps;
 

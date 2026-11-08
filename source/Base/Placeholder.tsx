@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef, CSSProperties } from 'react';
 
+import { polymorphic } from '../Helper/Polymorphic';
 import { Button, ButtonProps, ComponentTheme } from './Button';
-import { polymorphic } from './Polymorphic';
 
 export interface PlaceholderProps extends ComponentPropsWithRef<'span'> {
     size?: 'xs' | 'sm' | 'lg';

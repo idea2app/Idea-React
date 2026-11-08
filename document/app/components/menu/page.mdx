@@ -1,7 +1,7 @@
 import { Button } from '../../../../source/Base/Button';
 import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
 import { Icon } from '../../../../source/Extension/Icon';
-import { Container } from '../../../../source/Base/Grid';
+import { Container } from '../../../../source/Layout/Grid';
 import { Navbar, NavbarBrand, NavbarNav } from '../../../../source/Base/Navbar';
 import { Checkbox, FormControl, FormField, FormLabel } from '../../../../source/Form';
 import {
@@ -17,10 +17,10 @@ import {
     MenuItemCheck,
     MenuSubmenu
 } from '../../../../source/Base/Menu';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="menu">
+<DocumentLayout active="menu">
 
 # Menu
 
@@ -30,13 +30,13 @@ Toggle contextual menus and custom overlays for lists of buttons, links, forms, 
 
 Toggle menus with buttons whenever possible. Here’s an example using an Idea React button:
 
-<CodeExample>
+<DocumentCodeExample>
     <Menu label="Menu button">
         <MenuItem href="#menu-items">Action</MenuItem>
         <MenuItem href="#menu-items">Another action</MenuItem>
         <MenuItem href="#menu-items">Something else here</MenuItem>
     </Menu>
-</CodeExample>
+</DocumentCodeExample>
 
 Menus are toggleable, contextual overlays for displaying lists of links and more. They’re made interactive by the `Menu` wrapper. Positioning updates when the viewport or trigger geometry changes. They’re toggled by clicking, not by hovering; this is [an intentional design decision][1].
 
@@ -46,7 +46,7 @@ Menus are toggleable, contextual overlays for displaying lists of links and more
 
 Use [button groups][2] to create split button menus where the menu is displayed when a secondary button is clicked.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-3">
         <Menu label="Menu button">
             <MenuItem href="#menu-items">Action</MenuItem>
@@ -75,13 +75,13 @@ Use [button groups][2] to create split button menus where the menu is displayed 
             </Menu>
         </ButtonGroup>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Dark menus
 
 Opt into darker menus to match a dark navbar or custom style by passing `theme="dark"` to `Menu`, or adding `data-bs-theme="dark"` to a parent.
 
-<CodeExample>
+<DocumentCodeExample>
     <Menu label="Menu button" theme="dark">
         <MenuItem active href="#dark-menus">
             Action
@@ -91,11 +91,11 @@ Opt into darker menus to match a dark navbar or custom style by passing `theme="
         <MenuDivider />
         <MenuItem href="#dark-menus">Separated link</MenuItem>
     </Menu>
-</CodeExample>
+</DocumentCodeExample>
 
 And putting it to use in a navbar:
 
-<CodeExample>
+<DocumentCodeExample>
     <Navbar theme="dark">
         <Container fluid>
             <NavbarBrand href="#dark-menus">Navbar</NavbarBrand>
@@ -110,13 +110,13 @@ And putting it to use in a navbar:
             </NavbarNav>
         </Container>
     </Navbar>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Translucent menus
 
 Blur and saturate the background of menus to create a translucent effect with `translucent`.
 
-<CodeExample>
+<DocumentCodeExample>
     <Menu label="Translucent menu" translucent>
         <MenuItem active href="#translucent-menus">
             Active menu item
@@ -129,7 +129,7 @@ Blur and saturate the background of menus to create a translucent effect with `t
             Danger menu item
         </MenuItem>
     </Menu>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Placement
 
@@ -140,7 +140,7 @@ Use `placement` on `Menu` to control where the menu appears.
 
 Use both a physical direction and an alignment, such as `bottom-start` or `right-end`.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-3">
         <Menu label="top-start" placement="top-start">
             <MenuItem href="#menu-items">Action</MenuItem>
@@ -183,7 +183,7 @@ Use both a physical direction and an alignment, such as `bottom-start` or `right
             <MenuItem href="#menu-items">Something else here</MenuItem>
         </Menu>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Responsive
 
@@ -195,7 +195,7 @@ For example, `placement="bottom-start" responsivePlacement={{ md: "bottom-end", 
 - Switch to `bottom-end` at the `md` breakpoint
 - Switch to `right-start` at the `lg` breakpoint
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-3">
         <Menu
             label="Bottom start → md:bottom-end"
@@ -216,7 +216,7 @@ For example, `placement="bottom-start" responsivePlacement={{ md: "bottom-end", 
             <MenuItem href="#menu-items">Something else here</MenuItem>
         </Menu>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 Resize your browser window to see the placement change at different breakpoints.
 
@@ -226,7 +226,7 @@ You can use `<a>` or `<button>` elements as menu items.
 
 We use utility classes to display menus in our docs examples, but they’re not required for your own use.
 
-<CodeExample>
+<DocumentCodeExample>
     <MenuPanel
         show
         className="position-static max-w-100"
@@ -236,11 +236,11 @@ We use utility classes to display menus in our docs examples, but they’re not 
         <MenuItem>Another action</MenuItem>
         <MenuItem>Something else here</MenuItem>
     </MenuPanel>
-</CodeExample>
+</DocumentCodeExample>
 
 You can also create non-interactive menu items with `MenuText`. Feel free to style further with custom CSS or text utilities.
 
-<CodeExample>
+<DocumentCodeExample>
     <MenuPanel
         show
         className="position-static max-w-100"
@@ -251,13 +251,13 @@ You can also create non-interactive menu items with `MenuText`. Feel free to sty
         <MenuItem href="#menu-items">Another action</MenuItem>
         <MenuItem href="#menu-items">Something else here</MenuItem>
     </MenuPanel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Active
 
 Pass `active` to `MenuItem` to style them as the active selection. To convey the active state to assistive technologies, use the `aria-current` attribute — using the `page` value for the current page, or `true` for the current item in a set.
 
-<CodeExample>
+<DocumentCodeExample>
     <MenuPanel
         show
         className="position-static max-w-100"
@@ -269,13 +269,13 @@ Pass `active` to `MenuItem` to style them as the active selection. To convey the
         </MenuItem>
         <MenuItem href="#active">Another link</MenuItem>
     </MenuPanel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Disabled
 
 Pass `disabled` to `MenuItem` to style them as disabled.
 
-<CodeExample>
+<DocumentCodeExample>
     <MenuPanel
         show
         className="position-static max-w-100"
@@ -287,13 +287,13 @@ Pass `disabled` to `MenuItem` to style them as disabled.
         </MenuItem>
         <MenuItem href="#disabled">Another link</MenuItem>
     </MenuPanel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Variants
 
 You can use the `theme` prop to apply a theme color to a menu item.
 
-<CodeExample>
+<DocumentCodeExample>
     <MenuPanel
         show
         className="position-static max-w-100"
@@ -303,13 +303,13 @@ You can use the `theme` prop to apply a theme color to a menu item.
         <MenuItem theme="success">Success action</MenuItem>
         <MenuItem theme="danger">Delete</MenuItem>
     </MenuPanel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Icons
 
 Use `MenuItemIcon` to add an icon slot to menu items. It renders the shared `Icon` component.
 
-<CodeExample>
+<DocumentCodeExample>
     <MenuPanel
         show
         className="position-static max-w-100"
@@ -329,13 +329,13 @@ Use `MenuItemIcon` to add an icon slot to menu items. It renders the shared `Ico
             Delete
         </MenuItem>
     </MenuPanel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Descriptions
 
 Use `MenuItemContent` for a flex column layout and `MenuItemDescription` for secondary text below the main label.
 
-<CodeExample>
+<DocumentCodeExample>
     <MenuPanel
         show
         className="position-static max-w-100"
@@ -354,13 +354,13 @@ Use `MenuItemContent` for a flex column layout and `MenuItemDescription` for sec
             </MenuItemContent>
         </MenuItem>
     </MenuPanel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Selected
 
 Pass `selected` to `MenuItem` to indicate the current selection.
 
-<CodeExample>
+<DocumentCodeExample>
     <MenuPanel
         show
         className="position-static max-w-100"
@@ -373,7 +373,7 @@ Pass `selected` to `MenuItem` to indicate the current selection.
         <MenuItem>Another option</MenuItem>
         <MenuItem>Something else</MenuItem>
     </MenuPanel>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Menu content
 
@@ -381,7 +381,7 @@ Pass `selected` to `MenuItem` to indicate the current selection.
 
 Add a header to label sections of actions in any menu.
 
-<CodeExample>
+<DocumentCodeExample>
     <MenuPanel
         show
         className="position-static max-w-100"
@@ -392,13 +392,13 @@ Add a header to label sections of actions in any menu.
         <MenuItem href="#menu-items">Another action</MenuItem>
         <MenuItem href="#menu-items">Something else here</MenuItem>
     </MenuPanel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Dividers
 
 Separate groups of related menu items with a divider.
 
-<CodeExample>
+<DocumentCodeExample>
     <MenuPanel
         show
         className="position-static max-w-100"
@@ -410,13 +410,13 @@ Separate groups of related menu items with a divider.
         <MenuDivider />
         <MenuItem href="#dividers">Separated link</MenuItem>
     </MenuPanel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Text
 
 Place any freeform text within a menu with text and use [margin][3] and [padding][4] utilities. Note that you’ll likely need additional sizing styles to constrain the menu width.
 
-<CodeExample>
+<DocumentCodeExample>
     <MenuPanel
         show
         className="position-static max-w-100"
@@ -427,13 +427,13 @@ Place any freeform text within a menu with text and use [margin][3] and [padding
             <p className="mb-0">And this is more example text.</p>
         </div>
     </MenuPanel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Forms
 
 Put a form within a menu, or make it into a menu, and use [margin][3] and [padding][4] utilities to give it the negative space you require.
 
-<CodeExample>
+<DocumentCodeExample>
     <MenuPanel
         show
         className="position-static max-w-100"
@@ -459,13 +459,13 @@ Put a form within a menu, or make it into a menu, and use [margin][3] and [paddi
         <MenuItem href="#forms">New around here? Sign up</MenuItem>
         <MenuItem href="#forms">Forgot password?</MenuItem>
     </MenuPanel>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Scrollable menus
 
 Assign `--bs-menu-max-height` and `--bs-menu-overflow-y` custom properties to constrain the menu height and enable scrolling.
 
-<CodeExample>
+<DocumentCodeExample>
     <Menu label="Scrollable menu" scrollable>
         <MenuItem href="#scrollable-menus">Item 1</MenuItem>
         <MenuItem href="#scrollable-menus">Item 2</MenuItem>
@@ -488,7 +488,7 @@ Assign `--bs-menu-max-height` and `--bs-menu-overflow-y` custom properties to co
         <MenuItem href="#scrollable-menus">Item 19</MenuItem>
         <MenuItem href="#scrollable-menus">Item 20</MenuItem>
     </Menu>
-</CodeExample>
+</DocumentCodeExample>
 
 You can also pass `scrollable` to make the menu scrollable. This assumes a generally safe maximum height of `80dvh` and sets the overflow for you.
 
@@ -498,7 +498,7 @@ Create nested menus with `MenuSubmenu`. Submenus support hover and click activat
 
 Pass a `label` and nested menu items to `MenuSubmenu`; it renders and wires the trigger and panel.
 
-<CodeExample>
+<DocumentCodeExample>
     <Menu label="Menu button">
         <MenuItem href="#menu-items">Action</MenuItem>
         <MenuItem href="#menu-items">Another action</MenuItem>
@@ -509,13 +509,13 @@ Pass a `label` and nested menu items to `MenuSubmenu`; it renders and wires the 
             <MenuItem>Something else</MenuItem>
         </MenuSubmenu>
     </Menu>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Nested
 
 Submenus can be nested to multiple levels. Each level opens to the side and flips direction when there’s not enough viewport space.
 
-<CodeExample>
+<DocumentCodeExample>
     <Menu label="Menu button">
         <MenuItem>Action</MenuItem>
         <MenuSubmenu label="More options">
@@ -526,13 +526,13 @@ Submenus can be nested to multiple levels. Each level opens to the side and flip
             </MenuSubmenu>
         </MenuSubmenu>
     </Menu>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Menu options
 
 Use `offset` to change the location of the menu. A number sets the distance from the trigger in pixels; `[crossAxis, mainAxis]` sets both axes. `padding` sets the viewport inset and `flip={false}` disables collision flipping. The trigger remains the positioning reference.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-3">
         <Menu label="Offset" offset={[10, 20]}>
             <MenuItem href="#menu-items">Action</MenuItem>
@@ -545,7 +545,7 @@ Use `offset` to change the location of the menu. A number sets the distance from
             <MenuItem href="#menu-items">Something else here</MenuItem>
         </Menu>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Auto close behavior
 
@@ -553,7 +553,7 @@ By default, the menu is closed when clicking inside or outside the menu. You can
 
 Regardless of the `autoClose` setting, pressing <kbd>Esc</kbd> while focus is within the menu (its toggle or items) closes the menu and returns focus to the toggle.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-3">
         <Menu label="Default" autoClose={true}>
             <MenuItem href="#menu-items">Action</MenuItem>
@@ -576,7 +576,7 @@ Regardless of the `autoClose` setting, pressing <kbd>Esc</kbd> while focus is wi
             <MenuItem href="#menu-items">Something else here</MenuItem>
         </Menu>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Accessibility
 
@@ -630,7 +630,7 @@ Local CSS custom properties expose the component’s colors, spacing, borders, a
 
 `onOpenChange(open)` receives the menu’s new visibility state.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://markdotto.com/blog/bootstrap-explained-dropdowns/
 [2]: https://getbootstrap.com/docs/6.0/components/button-group/

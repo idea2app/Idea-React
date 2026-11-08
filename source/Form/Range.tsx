@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { ComponentPropsWithoutRef, CSSProperties, forwardRef, Ref } from 'react';
 
 import { ComponentTheme } from '../Base/Button';
-import { AsProps, polymorphic } from '../Base/Polymorphic';
+import { AsProps, polymorphic } from '../Helper/Polymorphic';
 import { FormPlugin } from './Plugin';
 import { FormValidationProps } from './Primitives';
 

@@ -1,10 +1,10 @@
 import { Badge } from '../../../../source/Base/Badge';
 import { Button } from '../../../../source/Base/Button';
 import { Spinner, SpinnerIcon } from '../../../../source/Base/Spinner';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="spinner">
+<DocumentLayout active="spinner">
 
 # Spinners
 
@@ -23,7 +23,7 @@ For accessibility purposes, each loader here includes `role="status"` and a nest
 
 Use the border spinners for a lightweight loading indicator.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex align-items-center gap-3">
         <Spinner role="status">
             <span className="visually-hidden">Loading…</span>
@@ -37,25 +37,25 @@ Use the border spinners for a lightweight loading indicator.
             <span role="status">Loading…</span>
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Growing spinner
 
 If you don’t fancy a border spinner, switch to the grow spinner. While it doesn’t technically spin, it does repeatedly grow!
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex align-items-center gap-3">
         <Spinner animation="grow" role="status">
             <span className="visually-hidden">Loading…</span>
         </Spinner>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Variants
 
 Spinners use `currentColor` for their appearance, meaning you can customize the color with [text color utilities][2]. You can use any of our text color utilities on the standard spinner.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex align-items-center gap-3">
         <Spinner role="status" className="fg-primary">
             <span className="visually-hidden">Loading…</span>
@@ -64,13 +64,13 @@ Spinners use `currentColor` for their appearance, meaning you can customize the 
             <span className="visually-hidden">Loading…</span>
         </Spinner>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Size
 
 Spinner are `1em` by `1em` by default, all Add `.spinner-sm` to make a smaller spinner that can quickly be used within other components.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex align-items-center gap-3">
         <Spinner size="sm" role="status">
             <span className="visually-hidden">Loading…</span>
@@ -79,11 +79,11 @@ Spinner are `1em` by `1em` by default, all Add `.spinner-sm` to make a smaller s
             <span className="visually-hidden">Loading…</span>
         </Spinner>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 Or, use custom CSS or inline styles to change the dimensions as needed.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex align-items-center gap-3">
         <Spinner style={{ width: '3rem', height: '3rem' }} role="status">
             <span className="visually-hidden">Loading…</span>
@@ -92,17 +92,17 @@ Or, use custom CSS or inline styles to change the dimensions as needed.
             <span className="visually-hidden">Loading…</span>
         </Spinner>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Custom spinners
 
 You can use the `.spinner-rotate` class to rotate a custom SVG spinner.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <SpinnerIcon name="arrow-repeat" aria-hidden />
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## CSS
 
@@ -135,7 +135,7 @@ Growing spinner tokens:
 
 Used for creating the CSS animations for our spinners. The border spinner rotates through `360deg`; the grow spinner scales from `0` to its full size while fading in. Use `SpinnerIcon` to apply the rotation animation to an icon from the icon font.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion
 [2]: https://getbootstrap.com/docs/6.0/utilities/colors/

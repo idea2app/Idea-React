@@ -1,4 +1,4 @@
-import { polymorphic } from '../../Base/Polymorphic';
+import { polymorphic } from '../../Helper/Polymorphic';
 import { Icon } from '../Icon';
 
 export type UserAddressProps = Partial<Record<'email' | 'website', string>>;

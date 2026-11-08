@@ -1,7 +1,7 @@
 import { ElementType } from 'react';
 
 import { Nav, NavProps } from '../../Base/Nav';
-import { polymorphic } from '../../Base/Polymorphic';
+import { polymorphic } from '../../Helper/Polymorphic';
 import { ScrollNavScroller } from './Scroller';
 
 export type ScrollNavProps = NavProps;

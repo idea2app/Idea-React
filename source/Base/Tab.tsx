@@ -16,8 +16,8 @@ import {
     ReactNode
 } from 'react';
 
+import { AsProps, polymorphic, PolymorphicClassProps } from '../Helper/Polymorphic';
 import { Nav, NavProps } from './Nav';
-import { AsProps, polymorphic, PolymorphicClassProps } from './Polymorphic';
 
 export interface TabProps extends ComponentPropsWithRef<'div'> {
     eventKey: string;

@@ -6,10 +6,10 @@ import {
     BreadcrumbDivider
 } from '../../../../source/Base/Breadcrumb';
 import { Icon } from '../../../../source/Extension/Icon';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="breadcrumb">
+<DocumentLayout active="breadcrumb">
 
 # Breadcrumb
 
@@ -22,7 +22,7 @@ navigation element. Use the link’s `active` prop for the current page.
 
 Use an ordered list with `.breadcrumb-item` for each page and `.breadcrumb-divider` elements between them. Leave a divider empty to use the default chevron icon, or add your own separator content. Add `.active` to the `.breadcrumb-link` of the current page.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <nav aria-label="breadcrumb">
             <Breadcrumb>
@@ -65,7 +65,7 @@ Use an ordered list with `.breadcrumb-item` for each page and `.breadcrumb-divid
             </Breadcrumb>
         </nav>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Dividers
 
@@ -75,7 +75,7 @@ Dividers are added explicitly using `.breadcrumb-divider` elements. An empty div
 
 Leave the `.breadcrumb-divider` empty to get the built-in chevron. Customize it globally by overriding the `--bs-breadcrumb-divider-icon`, `--bs-breadcrumb-divider-width`, and `--bs-breadcrumb-divider-height` variables.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <nav aria-label="breadcrumb">
             <Breadcrumb>
@@ -91,13 +91,13 @@ Leave the `.breadcrumb-divider` empty to get the built-in chevron. Customize it 
             </Breadcrumb>
         </nav>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ### SVG dividers
 
 Add an inline SVG inside the divider to override the default with your own crisp, scalable icon. Use `currentColor` for the stroke or fill so it inherits the divider color for easy theming.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <nav aria-label="breadcrumb">
             <Breadcrumb>
@@ -115,13 +115,13 @@ Add an inline SVG inside the divider to override the default with your own crisp
             </Breadcrumb>
         </nav>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Text dividers
 
 For simple text-based dividers, just add the character directly.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <nav aria-label="breadcrumb">
             <Breadcrumb>
@@ -141,13 +141,13 @@ For simple text-based dividers, just add the character directly.
             </Breadcrumb>
         </nav>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Custom dividers
 
 Use any content you like—different icons, decorative elements, or themed separators.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <nav aria-label="breadcrumb">
             <Breadcrumb>
@@ -167,7 +167,7 @@ Use any content you like—different icons, decorative elements, or themed separ
             </Breadcrumb>
         </nav>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Accessibility
 
@@ -202,7 +202,7 @@ Customize the component with the following local CSS variables. Override them th
 | `--bs-breadcrumb-link-active-color`  | `var(--bs-fg-1)`     |
 | `--bs-breadcrumb-link-border-radius` | `var(--bs-radius-7)` |
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/customize/sass/#mask-icons
 [2]: https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/

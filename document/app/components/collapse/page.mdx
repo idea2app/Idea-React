@@ -1,10 +1,10 @@
 import { Card } from '../../../../source/Base/Card';
 import { Collapse, CollapseToggle } from '../../../../source/Base/Collapse';
-import { Row, Col } from '../../../../source/Base/Grid';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { Row, Col } from '../../../../source/Layout/Grid';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="collapse">
+<DocumentLayout active="collapse">
 
 # Collapse
 
@@ -27,7 +27,7 @@ Click the buttons below to show and hide another element via class changes:
 
 Generally, we recommend a button trigger: use `CollapseToggle` with a `target` selector. While not recommended from a semantic point of view, passing `href` also renders an anchor trigger. The component manages the collapse behavior and accessibility attributes.
 
-<CodeExample>
+<DocumentCodeExample>
     <p className="d-inline-flex flex-wrap gap-1">
         <CollapseToggle
             target="#collapseExample"
@@ -61,7 +61,7 @@ Generally, we recommend a button trigger: use `CollapseToggle` with a `target` s
         </Card>
     </Collapse>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Horizontal
 
@@ -69,7 +69,7 @@ The collapse component supports horizontal collapsing. Set `horizontal` to trans
 
 > Please note that while the example below has a `min-height` set to avoid excessive repaints in our docs, this is not explicitly required. **Only the `width` on the child element is required.**
 
-<CodeExample>
+<DocumentCodeExample>
     <p>
         <CollapseToggle
             target="#collapseWidthExample"
@@ -93,14 +93,14 @@ The collapse component supports horizontal collapsing. Set `horizontal` to trans
         </Collapse>
     </div>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Multiple toggles and targets
 
 A `CollapseToggle` can show and hide multiple elements by referencing them with a selector in its `target` prop.
 Conversely, multiple triggers can show and hide the same element if they each reference it with their `target` prop.
 
-<CodeExample>
+<DocumentCodeExample>
     <p className="d-inline-flex flex-wrap gap-1">
         <CollapseToggle
             target="#multiCollapseExample1"
@@ -159,7 +159,7 @@ Conversely, multiple triggers can show and hide the same element if they each re
         </Col>
     </Row>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Accessibility
 
@@ -208,7 +208,7 @@ Set `parent` on the collapsible area, not on its trigger. For native details-bas
 
 Use `onOpenChange(open)` to respond to visibility changes, or to update the state backing a controlled `open` prop.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size
 [2]: https://getbootstrap.com/docs/6.0/customize/transitions

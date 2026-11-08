@@ -1,9 +1,9 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { FormLabel, FormText, OTPInput } from '../../../../source/Form';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<DocumentationLayout active="otp-input">
+<DocumentLayout active="otp-input">
 
 # OTP input
 
@@ -26,48 +26,48 @@ OTP input is built on [form controls][1] and shares its sizing tokens.
 
 Use `OTPInput` with a `length` prop to determine how many slots to render. The plugin hides the real input behind transparent overlay styling and draws one `.otp-slot` per character. Give the input an accessible name with `aria-label` or an associated `<label>`.
 
-<CodeExample>
+<DocumentCodeExample>
     <OTPInput aria-label="Verification code" length={6} />
-</CodeExample>
+</DocumentCodeExample>
 
 ## Connected inputs
 
 Set `connected` to merge the slots into a single cohesive field with shared borders.
 
-<CodeExample>
+<DocumentCodeExample>
     <OTPInput aria-label="Verification code" connected length={6} />
-</CodeExample>
+</DocumentCodeExample>
 
 ## Four-digit PIN
 
 Set `length` to control the number of slots—use fewer for shorter codes like a 4-digit PIN.
 
-<CodeExample>
+<DocumentCodeExample>
     <OTPInput aria-label="PIN" connected length={4} />
-</CodeExample>
+</DocumentCodeExample>
 
 ## With separator
 
 Use `groups` with an array of group sizes to split the slots into groups separated by a visual divider—handy for codes like "123-456". The separator is decorative and never becomes part of the value.
 
-<CodeExample>
+<DocumentCodeExample>
     <OTPInput aria-label="Verification code" length={6} groups={[3, 3]} />
-</CodeExample>
+</DocumentCodeExample>
 
 ## Sizes
 
 Set `size="sm"` or `size="lg"` to change the slot size.
 
-<CodeExample>
+<DocumentCodeExample>
     <OTPInput aria-label="Small verification code" size="sm" length={6} wrapperClassName="mb-3" />
     <OTPInput aria-label="Large verification code" size="lg" length={6} />
-</CodeExample>
+</DocumentCodeExample>
 
 ## Alphanumeric and masking
 
 By default only digits are accepted. Set `type` to `alphanumeric` or `alpha` to accept letters, and `mask` to obscure the entered value while keeping it a normal text field (no `type="password"`, so the numeric keyboard and autofill still work).
 
-<CodeExample>
+<DocumentCodeExample>
     <OTPInput
         aria-label="Alphanumeric code"
         connected
@@ -76,21 +76,21 @@ By default only digits are accepted. Set `type` to `alphanumeric` or `alpha` to 
         wrapperClassName="mb-3"
     />
     <OTPInput aria-label="Masked code" connected length={6} mask />
-</CodeExample>
+</DocumentCodeExample>
 
 ## Disabled
 
 Add the `disabled` attribute to the input to prevent interaction.
 
-<CodeExample>
+<DocumentCodeExample>
     <OTPInput aria-label="Verification code" disabled connected length={6} />
-</CodeExample>
+</DocumentCodeExample>
 
 ## Validation
 
 Set `validation="valid"` or `validation="invalid"` to show validation states.
 
-<CodeExample>
+<DocumentCodeExample>
     <OTPInput
         defaultValue="123456"
         aria-label="Verification code"
@@ -106,19 +106,19 @@ Set `validation="valid"` or `validation="invalid"` to show validation states.
         length={6}
         validation="invalid"
     />
-</CodeExample>
+</DocumentCodeExample>
 
 ## With form label
 
 Associate a `<label>` with the input and add help text with `aria-describedby` for better accessibility.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={2}>
         <FormLabel htmlFor="otpCode">Verification code</FormLabel>
         <OTPInput id="otpCode" aria-describedby="otpHelp" length={6} />
         <FormText id="otpHelp">Enter the 6-digit code sent to your phone.</FormText>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Usage
 
@@ -162,7 +162,7 @@ Because the control is a single text input, it exposes one accessible name, role
 }
 ```
 
-</DocumentationLayout>
+</DocumentLayout>
 
 [1]: ../form-control/
 [2]: https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html

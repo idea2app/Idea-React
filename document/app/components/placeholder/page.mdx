@@ -6,10 +6,10 @@ import {
     PlaceholderAnimation,
     PlaceholderButton
 } from '../../../../source/Base/Placeholder';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="placeholder">
+<DocumentLayout active="placeholder">
 
 # Placeholder
 
@@ -27,7 +27,7 @@ Placeholders can be used to enhance the experience of your application. They’r
 
 In the example below, we take a typical card component and recreate it with placeholders applied to create a “loading card”. Size and proportions are the same between the two.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex justify-content-around flex-wrap gap-3">
         <Card style={{ width: '18rem' }}>
             <CardImage
@@ -81,7 +81,7 @@ In the example below, we take a typical card component and recreate it with plac
             </CardBody>
         </Card>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## How it works
 
@@ -89,7 +89,7 @@ Create placeholders with the `.placeholder` class and a grid column class (e.g.,
 
 We apply additional styling to `.btn`s via `::before` to ensure the `height` is respected. You may extend this pattern for other situations as needed, or add a `&nbsp;` within the element to reflect the height when actual text is rendered in its place.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <p aria-hidden="true">
             <Placeholder className="col-6" />
@@ -102,7 +102,7 @@ We apply additional styling to `.btn`s via `::before` to ensure the `height` is 
             className="col-4"
         />
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 > The use of `aria-hidden="true"` only indicates that the element should be hidden to screen readers. The _loading_ behavior of the placeholder depends on how authors will actually use the placeholder styles, how they plan to update things, etc. Some JavaScript code may be needed to _swap_ the state of the placeholder and inform AT users of the update.
 
@@ -110,19 +110,19 @@ We apply additional styling to `.btn`s via `::before` to ensure the `height` is 
 
 You can change the `width` through grid column classes, width utilities, or inline styles.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <Placeholder className="col-6" />
         <Placeholder className="w-75" />
         <Placeholder style={{ width: '25%' }} />
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Color
 
 By default, the `placeholder` uses `currentColor`. This can be overridden with a custom color or utility class.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <Placeholder className="col-9" />
         <Placeholder theme="primary" className="col-6" />
@@ -134,26 +134,26 @@ By default, the `placeholder` uses `currentColor`. This can be overridden with a
         <Placeholder theme="info" className="col-6" />
         <Placeholder theme="inverse" className="col-6" />
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Sizing
 
 The size of `.placeholder`s are based on the typographic style of the parent element. Customize them with sizing modifiers: `.placeholder-lg`, `.placeholder-sm`, or `.placeholder-xs`.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={2}>
         <Placeholder size="lg" className="col-12" />
         <Placeholder className="col-12" />
         <Placeholder size="sm" className="col-12" />
         <Placeholder size="xs" className="col-12" />
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Animation
 
 Use `.placeholder-wave` for the default loading animation. Use `.placeholder-pulse` for an opacity pulse. The old `.placeholder-glow` class remains as a compatibility alias for `.placeholder-pulse`.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <PlaceholderAnimation animation="wave">
             <Placeholder className="col-12" />
@@ -162,19 +162,19 @@ Use `.placeholder-wave` for the default loading animation. Use `.placeholder-pul
             <Placeholder className="col-12" />
         </PlaceholderAnimation>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Text
 
 Add `.placeholder-wave` to an inline element to apply the loading animation to text.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <PlaceholderAnimation animation="wave" className="fg-3 d-inline">
             Working on it…
         </PlaceholderAnimation>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## CSS
 
@@ -187,4 +187,4 @@ Add `.placeholder-wave` to an inline element to apply the loading animation to t
 | `--bs-placeholder-wave-opacity-max` | `1`     |
 | `--bs-placeholder-wave-opacity-min` | `0.4`   |
 
-</ComponentsLayout>
+</DocumentLayout>

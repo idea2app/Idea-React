@@ -12,8 +12,8 @@ import {
 } from 'react';
 
 import { Icon } from '../Extension/Icon';
+import { AsProps, polymorphic, PolymorphicClassProps } from '../Helper/Polymorphic';
 import { Button, ButtonProps, ComponentTheme } from './Button';
-import { AsProps, polymorphic, PolymorphicClassProps } from './Polymorphic';
 
 export interface AccordionProps extends ComponentPropsWithRef<'div'> {
     theme?: ComponentTheme;

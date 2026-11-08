@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
+import { polymorphic } from '../Helper/Polymorphic';
 import { ComponentTheme } from './Button';
-import { polymorphic } from './Polymorphic';
 
 export interface CardProps extends ComponentPropsWithRef<'div'> {
     row?: boolean;

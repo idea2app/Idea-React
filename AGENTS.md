@@ -183,7 +183,7 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 向子组件透传时只解构需要特殊处理的 props，其余用 `...this.props` 展开，不逐项转发。
 - 多个组件共享的属性定义在基础模块，组件通过 `extends`、`Omit` 或类型别名复用，不从组件文件再导出基础模块的类型。
 - 没有成员声明体的 `interface` 改用 `type` 与交叉类型表达。
-- 单根节点组件复用 `source/Base/Polymorphic.ts` 的泛型与组合机制支持 `as`，透传目标组件属性；
+- 单根节点组件复用 `source/Helper/Polymorphic.ts` 的泛型与组合机制支持 `as`，透传目标组件属性；
   片段或多根节点组件不强行添加包装节点，类组件的 `ref` 保持实例语义。
   类组件显式声明 `declare readonly props: PolymorphicClassProps<T, Props>`，避免 React 的
   `Readonly` 映射丢失目标属性的联合类型；内部按需使用类型收窄 getter。
@@ -265,6 +265,16 @@ pnpm build -r
 - “完成实现”“修复问题”“完成 PR”或“运行测试”均不等于提交或推送授权；
   完成验证后保留未提交改动供用户审阅。
 - 审核意见应通查同类问题，而非只改被评论的单行；将可复用的要求归纳到本文件，不夹带无关功能或修改。
+
+## 审核约定
+
+- 工具函数、公共类型及非展示组合机制放在 `source/Helper/`；组件与文档的目录按上游分类对齐，
+  如 `source/Content/Images.tsx`、`source/Content/Tables.tsx` 和 `source/Layout/Grid.tsx`。
+- 文档站组件集中在 `document/component/Document/`，公共名称使用 `Document` 前缀；
+  目录内文件保留简短名称。MDX 的标题与代码块通过 `h1`、`pre` 映射组合，不为此改写 AST。
+- 文档标题用 `Stack as="hgroup"` 组合标题与上游链接；仅有一个样式声明时直接内联。
+- RSS 与 Sitemap 共用 MDX 索引和 JSX 序列化，不手写 XML 转义；生产域名从文档站 `.env` 读取，
+  环境变量可覆盖，开发链接仍使用当前站点域名。
 
 [1]: https://getbootstrap.com/
 [2]: https://getbootstrap.com/docs/6.0/components/

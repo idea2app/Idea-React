@@ -2,9 +2,18 @@ import { readdir, writeFile } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { searchIndex, searchResources } from './index.ts';
+import { unrun } from 'unrun';
+import { loadEnv } from 'vite';
 
-const origin = process.env.SITE_URL;
+const {
+    module: { searchIndex, searchResources }
+} = await unrun<typeof import('./index.tsx')>({
+    path: new URL('./index.tsx', import.meta.url),
+    inputOptions: { transform: { jsx: { runtime: 'automatic', importSource: 'preact' } } }
+});
+
+const { SITE_URL } = loadEnv('production', fileURLToPath(new URL('../', import.meta.url)), '');
+const origin = process.env.SITE_URL || SITE_URL;
 if (!origin)
     throw new Error('Set SITE_URL to the documentation deployment origin before building.');
 

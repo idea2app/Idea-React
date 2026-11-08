@@ -1,7 +1,7 @@
-import { CodeCard } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeCard } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="live-tsx">
+<DocumentLayout active="live-tsx">
 
 # Live TSX
 
@@ -10,11 +10,11 @@ live preview, a code editor, and any evaluation errors.
 
 ## Usage
 
-<CodeCard>{`import { LiveTSX } from 'idea-react';
+<DocumentCodeCard>{`import { LiveTSX } from 'idea-react';
 
 <LiveTSX scope={{ Button }}>
     <Button theme="primary">Edit me live</Button>
-</LiveTSX>;`}</CodeCard>
+</LiveTSX>;`}</DocumentCodeCard>
 
 React element children are serialized to JSX source for the editor; string children are used as the
 code directly. Provide every referenced component or value through `scope`.
@@ -24,7 +24,7 @@ code directly. Provide every referenced component or value through `scope`.
 Evaluation errors render below the editor in a `fg-danger` block, so broken edits never crash the
 page.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/LiveTSX.tsx
 [2]: https://commerce.nearform.com/open-source/react-live/

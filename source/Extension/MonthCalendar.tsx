@@ -9,8 +9,8 @@ import { changeMonth, Day, formatDate, splitArray, TimeData } from 'web-utility'
 
 import { Badge } from '../Base/Badge';
 import { Button, type ComponentTheme } from '../Base/Button';
-import { text2color } from '../Base/color';
-import { AsProps, PolymorphicClassProps } from '../Base/Polymorphic';
+import { text2color } from '../Helper/color';
+import { AsProps, PolymorphicClassProps } from '../Helper/Polymorphic';
 import { OverlayBox } from './OverlayBox';
 
 export interface DateData {

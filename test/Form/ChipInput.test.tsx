@@ -3,8 +3,8 @@ import { it, mock } from 'node:test';
 
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
-import { Chip } from '../../source/Base/Chip';
 import { ChipInput, ChipInputLabel, FormGhost } from '../../source/Form';
+import { Chip } from '../../source/Form/Chip';
 
 it('renders chips and chip input options', () => {
     render(

@@ -68,8 +68,6 @@ import {
     DrawerFooter,
     DrawerHeader,
     DrawerTitle,
-    Editor,
-    EditorHTML,
     Form,
     FormAdornment,
     FormAdornmentIcon,
@@ -101,6 +99,7 @@ import {
     ListGroup,
     ListGroupItem,
     Loading,
+    MarkdownView,
     Menu,
     MenuDivider,
     MenuHeader,
@@ -351,15 +350,9 @@ const examples: [string, ReactElement][] = [
             data-example="polymorphic"
         />
     ],
-    ['Editor', <Editor as={Target} payload={payload} data-example="polymorphic" />],
     [
-        'EditorHTML',
-        <EditorHTML
-            data={{ blocks: [] }}
-            as={Target}
-            payload={payload}
-            data-example="polymorphic"
-        />
+        'MarkdownView',
+        <MarkdownView children="" as={Target} payload={payload} data-example="polymorphic" />
     ],
     [
         'HorizontalMarquee',

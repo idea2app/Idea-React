@@ -1,9 +1,9 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { FormControl, FormLabel, PasswordStrength } from '../../../../source/Form';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<DocumentationLayout active="password-strength">
+<DocumentLayout active="password-strength">
 
 # Password strength
 
@@ -25,43 +25,43 @@ Strength meters help users create secure passwords by providing real-time feedba
 
 The default strength meter uses four segments that fill progressively as password strength increases. The `PasswordStrength` component enables JavaScript behavior automatically.
 
-<CodeExample>
+<DocumentCodeExample>
     <div>
         <FormLabel htmlFor="password1">Password</FormLabel>
         <FormControl type="password" id="password1" placeholder="Enter password" />
         <PasswordStrength input="#password1" showText={false} />
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ### With text feedback
 
 Add a `.strength-text` element to display strength messages.
 
-<CodeExample>
+<DocumentCodeExample>
     <div>
         <FormLabel htmlFor="password2">Password</FormLabel>
         <FormControl type="password" id="password2" placeholder="Enter password" />
         <PasswordStrength input="#password2" showText />
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Progress bar
 
 Use `.strength-bar` for a single progress bar that grows with password strength.
 
-<CodeExample>
+<DocumentCodeExample>
     <div>
         <FormLabel htmlFor="password3">Password</FormLabel>
         <FormControl type="password" id="password3" placeholder="Enter password" />
         <PasswordStrength variant="bar" input="#password3" showText={false} />
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Static segmented
 
 You can use the component without JavaScript for static displays by passing the `strength` prop.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3} className="fg-3">
         <div>
             <div>Weak</div>
@@ -80,11 +80,11 @@ You can use the component without JavaScript for static displays by passing the 
             <PasswordStrength strength="strong" showText={false} />
         </div>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Static progress bar
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3} className="fg-3">
         <div>
             <div>Weak</div>
@@ -103,7 +103,7 @@ You can use the component without JavaScript for static displays by passing the 
             <PasswordStrength variant="bar" strength="strong" showText={false} />
         </div>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Strength criteria
 
@@ -205,4 +205,4 @@ For simple cases or server-rendered content, you can use the component without J
 }
 ```
 
-</DocumentationLayout>
+</DocumentLayout>

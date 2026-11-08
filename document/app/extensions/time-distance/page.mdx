@@ -1,9 +1,9 @@
 import { TimeDistance } from '../../../../source/Extension/TimeDistance';
 
-import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="time-distance">
+<DocumentLayout active="time-distance">
 
 # Time distance
 
@@ -12,24 +12,24 @@ semantic `<time>` element whose `title` holds the exact timestamp.
 
 ## Example
 
-<LiveExample>
+<DocumentLiveExample>
     <TimeDistance date="2020-01-01T00:00:00" />
-</LiveExample>
+</DocumentLiveExample>
 
 ## Usage
 
-<CodeCard>
+<DocumentCodeCard>
     <TimeDistance
         date="2020-01-01T00:00:00"
         beforeWord=" ago"
         afterWord=" later"
         unitWords={{ D: 'day(s)', H: 'hour(s)', m: 'minute(s)' }}
     />
-</CodeCard>
+</DocumentCodeCard>
 
 `unitWords` localizes the unit labels, while `beforeWord` and `afterWord` are appended for past and
 future moments respectively.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/TimeDistance.tsx

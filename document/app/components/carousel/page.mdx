@@ -1,10 +1,10 @@
 import { Carousel, CarouselSlide } from '../../../../source/Base/Carousel';
 import { Button } from '../../../../source/Base/Button';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { CarouselImage } from '../../../component/Documentation/Components/CarouselImage';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentCarouselImage } from '../../../component/Document/CarouselImage';
 
-<ComponentsLayout active="carousel">
+<DocumentLayout active="carousel">
 
 # Carousel
 
@@ -32,7 +32,7 @@ The animation effect of this component is dependent on the `prefers-reduced-moti
 
 The default carousel has a simple design that you can customize. Controls can be placed outside the inner carousel container. They can sit at the top or bottom, with additional content alongside them. Use `controlsStart` for content at the start of the controls row.
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
         id="carouselStacked"
         aria-label="Top controls"
@@ -41,26 +41,26 @@ The default carousel has a simple design that you can customize. Controls can be
         innerClassName="rounded-5"
     >
         <CarouselSlide>
-            <CarouselImage>First slide</CarouselImage>
+            <DocumentCarouselImage>First slide</DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#444" background="#666">
+            <DocumentCarouselImage color="#444" background="#666">
                 Second slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#333" background="#555">
+            <DocumentCarouselImage color="#333" background="#555">
                 Third slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Bottom controls
 
 Similar to the controls on top, but with the controls at the bottom of the carousel and different content.
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
         id="carouselStackedBottom"
         aria-label="Bottom controls"
@@ -68,26 +68,26 @@ Similar to the controls on top, but with the controls at the bottom of the carou
         innerClassName="rounded-5"
     >
         <CarouselSlide>
-            <CarouselImage>First slide</CarouselImage>
+            <DocumentCarouselImage>First slide</DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#444" background="#666">
+            <DocumentCarouselImage color="#444" background="#666">
                 Second slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#333" background="#555">
+            <DocumentCarouselImage color="#333" background="#555">
                 Third slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Indicators
 
 Pass `indicators` to include slide indicator buttons and use `indicatorPlacement` to position them within the controls row. With an [overlay carousel][4], the row sits over the bottom of the slides; its alignment determines where the indicators appear.
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
         id="carouselStackedIndicators"
         aria-label="Indicators"
@@ -97,26 +97,26 @@ Pass `indicators` to include slide indicator buttons and use `indicatorPlacement
         indicators
     >
         <CarouselSlide>
-            <CarouselImage>First slide</CarouselImage>
+            <DocumentCarouselImage>First slide</DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#444" background="#666">
+            <DocumentCarouselImage color="#444" background="#666">
                 Second slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#333" background="#555">
+            <DocumentCarouselImage color="#333" background="#555">
                 Third slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Custom content
 
 You can put any markup you like inside each `CarouselSlide`. Add content, then size and style it with utilities or CSS modules as needed.
 
-<CodeExample>
+<DocumentCodeExample>
     <Carousel
         id="carouselExampleContent"
         aria-label="Custom content"
@@ -174,7 +174,7 @@ You can put any markup you like inside each `CarouselSlide`. Add content, then s
             </div>
         </CarouselSlide>
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Modifiers
 
@@ -184,7 +184,7 @@ Change the default carousel appearance with alternate control placement and anim
 
 Use `controlsPlacement="overlay"` to overlay carousel controls on top of the slides. The component wraps its controls in the overlay row automatically.
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
         id="carouselExample"
         aria-label="Overlay controls"
@@ -194,42 +194,42 @@ Use `controlsPlacement="overlay"` to overlay carousel controls on top of the sli
         indicators
     >
         <CarouselSlide>
-            <CarouselImage>First slide</CarouselImage>
+            <DocumentCarouselImage>First slide</DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#444" background="#666">
+            <DocumentCarouselImage color="#444" background="#666">
                 Second slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#333" background="#555">
+            <DocumentCarouselImage color="#333" background="#555">
                 Third slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Crossfade
 
 Pass `fade` to animate slides with a fade transition instead of a slide. Depending on your content (e.g., text-only slides), you may want to add `bg-body` or a CSS module to the slides for proper crossfading. The crossfade is a CSS opacity transition over `--bs-carousel-fade-duration`, and collapses to an instant swap for users who prefer reduced motion.
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel id="carouselExampleFade" aria-label="Crossfade" controlsPlacement="bottom" fade>
         <CarouselSlide>
-            <CarouselImage rounded>First slide</CarouselImage>
+            <DocumentCarouselImage rounded>First slide</DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#444" background="#666" rounded>
+            <DocumentCarouselImage color="#444" background="#666" rounded>
                 Second slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#333" background="#555" rounded>
+            <DocumentCarouselImage color="#333" background="#555" rounded>
                 Third slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Items
 
@@ -243,7 +243,7 @@ Because the carousel is a real scroll container, you can change how many slides 
 
 Set `items` to show several slides at once. Combine it with `itemsGap` for spacing; these props set the corresponding CSS custom properties.
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
         id="carouselMultiple"
         aria-label="Multiple items"
@@ -256,7 +256,7 @@ Set `items` to show several slides at once. Combine it with `itemsGap` for spaci
         {['#777', '#6c6c6c', '#666', '#5c5c5c', '#555', '#4c4c4c', '#444'].map(
             (background, index) => (
                 <CarouselSlide key={background}>
-                    <CarouselImage
+                    <DocumentCarouselImage
                         width={260}
                         height={200}
                         color="#fff"
@@ -265,12 +265,12 @@ Set `items` to show several slides at once. Combine it with `itemsGap` for spaci
                         rounded
                     >
                         {String(index + 1)}
-                    </CarouselImage>
+                    </DocumentCarouselImage>
                 </CarouselSlide>
             )
         )}
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 Set `items={3}` to control the count, or set `--bs-carousel-items` through a CSS module for responsive layouts.
 
@@ -278,7 +278,7 @@ Set `items={3}` to control the count, or set `--bs-carousel-items` through a CSS
 
 Set `itemsPeek` to reveal a sliver of the previous and next slides, hinting that there’s more to scroll.
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
         id="carouselPeek"
         aria-label="Peeking"
@@ -296,19 +296,19 @@ Set `itemsPeek` to reveal a sliver of the previous and next slides, hinting that
             { children: 'Fifth slide', background: '#333' }
         ].map(({ children, background }) => (
             <CarouselSlide key={children}>
-                <CarouselImage height={300} color="#fff" background={background} rounded>
+                <DocumentCarouselImage height={300} color="#fff" background={background} rounded>
                     {children}
-                </CarouselImage>
+                </DocumentCarouselImage>
             </CarouselSlide>
         ))}
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Variable width
 
 Pass `auto` and size each `CarouselSlide` yourself with utilities, `style`, or a CSS module. Snap points still land on every slide.
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
         id="carouselVariable"
         aria-label="Variable width"
@@ -327,7 +327,7 @@ Pass `auto` and size each `CarouselSlide` yourself with utilities, `style`, or a
             { children: 'F', width: 300, background: '#333' }
         ].map(({ children, width, background }) => (
             <CarouselSlide key={children} style={{ width }}>
-                <CarouselImage
+                <DocumentCarouselImage
                     width={width}
                     height={200}
                     color="#fff"
@@ -336,11 +336,11 @@ Pass `auto` and size each `CarouselSlide` yourself with utilities, `style`, or a
                     rounded
                 >
                     {children}
-                </CarouselImage>
+                </DocumentCarouselImage>
             </CarouselSlide>
         ))}
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 Pass `center` to snap the active slide to the center of the viewport instead of its start—pairs nicely with `itemsPeek`.
 
@@ -352,7 +352,7 @@ For accessibility reasons, we recommend avoiding the use of autoplaying carousel
 
 The play/pause button reflects the current state automatically—a pause icon while playing, a play icon while stopped. The wrapper supplies an accessible name for each state. While playing, the active indicator fills like a progress bar over the current slide’s [interval][7] as a visual countdown; it pauses with autoplay and is disabled under reduced motion. Set its color with the `--bs-carousel-indicator-progress-bg` CSS variable.
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
         id="carouselExampleAutoplaying"
         aria-label="Autoplay"
@@ -362,26 +362,26 @@ The play/pause button reflects the current state automatically—a pause icon wh
         indicators
     >
         <CarouselSlide>
-            <CarouselImage rounded>First slide</CarouselImage>
+            <DocumentCarouselImage rounded>First slide</DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#444" background="#666" rounded>
+            <DocumentCarouselImage color="#444" background="#666" rounded>
                 Second slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#333" background="#555" rounded>
+            <DocumentCarouselImage color="#333" background="#555" rounded>
                 Third slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Individual intervals
 
 Pass `interval` to a `CarouselSlide` to change the delay between automatically cycling to the next item. The indicator’s progress fill matches each slide’s own interval, so the countdown speeds up or slows down to match (2s, then 4s, then 6s below).
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
         id="carouselExampleInterval"
         aria-label="Individual intervals"
@@ -394,20 +394,20 @@ Pass `interval` to a `CarouselSlide` to change the delay between automatically c
         indicators
     >
         <CarouselSlide interval={2000}>
-            <CarouselImage>First: 2 seconds</CarouselImage>
+            <DocumentCarouselImage>First: 2 seconds</DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide interval={4000}>
-            <CarouselImage color="#444" background="#666">
+            <DocumentCarouselImage color="#444" background="#666">
                 Second: 4 seconds
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide interval={6000}>
-            <CarouselImage color="#333" background="#555">
+            <DocumentCarouselImage color="#333" background="#555">
                 Third: 6 seconds
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 ## End behavior
 
@@ -417,7 +417,7 @@ The `ends` prop controls what happens at the first and last slide. Choose from `
 
 With `ends="loop"` the carousel scrolls seamlessly past the ends: stepping next from the last slide (or previous from the first) continues in the same direction into the destination slide instead of jumping back, for an endless conveyor effect. This is the default, so it applies with or without the prop. Seamless looping applies to single-slide carousels driven by the controls, keyboard, or autoplay; multi-item, peek, centered, and variable-width layouts—as well as users who prefer reduced motion—fall back to the `wrap` jump.
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
         id="carouselEndsLoop"
         aria-label="Loop"
@@ -427,26 +427,26 @@ With `ends="loop"` the carousel scrolls seamlessly past the ends: stepping next 
         ends="loop"
     >
         <CarouselSlide>
-            <CarouselImage rounded>First slide</CarouselImage>
+            <DocumentCarouselImage rounded>First slide</DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#444" background="#666" rounded>
+            <DocumentCarouselImage color="#444" background="#666" rounded>
                 Second slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#333" background="#555" rounded>
+            <DocumentCarouselImage color="#333" background="#555" rounded>
                 Third slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Wrap
 
 With `ends="wrap"` the carousel jumps from the last slide back to the first, and vice versa, so the controls never reach a dead end.
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
         id="carouselEndsWrap"
         aria-label="Wrap"
@@ -456,26 +456,26 @@ With `ends="wrap"` the carousel jumps from the last slide back to the first, and
         ends="wrap"
     >
         <CarouselSlide>
-            <CarouselImage>First slide</CarouselImage>
+            <DocumentCarouselImage>First slide</DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#444" background="#666">
+            <DocumentCarouselImage color="#444" background="#666">
                 Second slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#333" background="#555">
+            <DocumentCarouselImage color="#333" background="#555">
                 Third slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Stop
 
 With `ends="stop"` the carousel hard-stops at the first and last slide. The previous control is automatically disabled on the first slide and the next control on the last via the native `disabled` attribute; when a focused control becomes disabled, focus shifts to the opposite control so it isn’t lost.
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
         id="carouselEndsStop"
         aria-label="Stop"
@@ -485,26 +485,26 @@ With `ends="stop"` the carousel hard-stops at the first and last slide. The prev
         ends="stop"
     >
         <CarouselSlide>
-            <CarouselImage>First slide</CarouselImage>
+            <DocumentCarouselImage>First slide</DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#444" background="#666">
+            <DocumentCarouselImage color="#444" background="#666">
                 Second slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#333" background="#555">
+            <DocumentCarouselImage color="#333" background="#555">
                 Third slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Dark carousel
 
 Set `data-bs-theme="dark"` on `Carousel` for darker controls and indicators. This is typically most useful with overlay carousels when you need the reverse contrast against the background of the slides.
 
-<CodeExample source="document/component/Documentation/Components/CarouselImage/index.tsx">
+<DocumentCodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
         id="carouselExampleDark"
         aria-label="Dark carousel"
@@ -514,22 +514,22 @@ Set `data-bs-theme="dark"` on `Carousel` for darker controls and indicators. Thi
         indicators
     >
         <CarouselSlide interval={10000}>
-            <CarouselImage color="#aaa" background="#f5f5f5" rounded>
+            <DocumentCarouselImage color="#aaa" background="#f5f5f5" rounded>
                 First slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide interval={2000}>
-            <CarouselImage color="#bbb" background="#eee" rounded>
+            <DocumentCarouselImage color="#bbb" background="#eee" rounded>
                 Second slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
         <CarouselSlide>
-            <CarouselImage color="#999" background="#e5e5e5" rounded>
+            <DocumentCarouselImage color="#999" background="#e5e5e5" rounded>
                 Third slide
-            </CarouselImage>
+            </DocumentCarouselImage>
         </CarouselSlide>
     </Carousel>
-</CodeExample>
+</DocumentCodeExample>
 
 ## CSS
 
@@ -652,7 +652,7 @@ The component disposes its model and scroll animation when unmounted; do not use
 </Carousel>
 ```
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll_snap
 [2]: #items

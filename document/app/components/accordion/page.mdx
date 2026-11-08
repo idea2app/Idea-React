@@ -5,10 +5,10 @@ import {
     AccordionBody,
     AccordionToggle
 } from '../../../../source/Base/Accordion';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="accordion">
+<DocumentLayout active="accordion">
 
 # Accordion
 
@@ -22,7 +22,7 @@ Click the accordions below to expand/collapse the accordion content. Each `<deta
 
 To render an accordion that’s expanded by default, add the `open` attribute to the `<details>` element.
 
-<CodeExample>
+<DocumentCodeExample>
     <Accordion>
         <AccordionItem name="accordionExample" open>
             <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
@@ -70,7 +70,7 @@ To render an accordion that’s expanded by default, add the `open` attribute to
         </AccordionItem>
     </Accordion>
 
-</CodeExample>
+</DocumentCodeExample>
 
 The panel height animation needs [`interpolate-size`][1]. Browsers without it open and close the panel at once. See [Transitions][2] to change the timing or to remove it.
 
@@ -80,7 +80,7 @@ The panel height animation needs [`interpolate-size`][1]. Browsers without it op
 
 Use the contextual `.theme-{color}` classes to apply a semantic theme color to open accordion items.
 
-<CodeExample>
+<DocumentCodeExample>
     <Accordion theme="primary">
         <AccordionItem name="accordionExampleTheme" open>
             <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
@@ -128,13 +128,13 @@ Use the contextual `.theme-{color}` classes to apply a semantic theme color to o
         </AccordionItem>
     </Accordion>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Small
 
 Add `.accordion-sm` to the `.accordion` for a more compact accordion with tighter padding, a smaller border radius, and a smaller font size.
 
-<CodeExample>
+<DocumentCodeExample>
     <Accordion size="sm">
         <AccordionItem name="accordionSmall" open>
             <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
@@ -174,13 +174,13 @@ Add `.accordion-sm` to the `.accordion` for a more compact accordion with tighte
         </AccordionItem>
     </Accordion>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Flush
 
 Add `.accordion-flush` to remove some borders and rounded corners to render accordions edge-to-edge with their parent container.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="bg-1">
         <Accordion flush>
             <AccordionItem name="accordionFlushExample">
@@ -225,7 +225,7 @@ Add `.accordion-flush` to remove some borders and rounded corners to render acco
         </Accordion>
     </div>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Gap
 
@@ -233,7 +233,7 @@ Add `.accordion-gap` to put space between accordion items. Each item is a separa
 
 The gap lives on the accordion, not the panel. The panel still animates only its `block-size`, so the open and close transition stays smooth.
 
-<CodeExample>
+<DocumentCodeExample>
     <Accordion gap>
         <AccordionItem name="accordionGapExample" open>
             <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
@@ -271,13 +271,13 @@ The gap lives on the accordion, not the panel. The panel still animates only its
         </AccordionItem>
     </Accordion>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Always open
 
 Omit the `name` attribute on each `<details>` element to allow multiple accordion items to be open simultaneously.
 
-<CodeExample>
+<DocumentCodeExample>
     <Accordion>
         <AccordionItem open>
             <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
@@ -315,13 +315,13 @@ Omit the `name` attribute on each `<details>` element to allow multiple accordio
         </AccordionItem>
     </Accordion>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Expand & Collapse all
 
 To enable expanding and collapsing of all accordion items at once, remove the `name` attribute from each `<details>` element using JavaScript. This allows multiple accordion items to be open simultaneously. Restore the `name` attribute when you collapse the items again if you want exclusive behavior back.
 
-<CodeExample>
+<DocumentCodeExample>
     <AccordionToggle
         target="#accordionToggleAll"
         variant="subtle"
@@ -371,7 +371,7 @@ To enable expanding and collapsing of all accordion items at once, remove the `n
         </AccordionItem>
     </Accordion>
 
-</CodeExample>
+</DocumentCodeExample>
 
 We use the following JavaScript for this demo:
 
@@ -381,7 +381,7 @@ We use the following JavaScript for this demo:
 
 Accordions can be nested inside each other by placing a full `.accordion` within an `.accordion-body`. Use unique `name` attribute values for each level so the parent and child accordions operate independently.
 
-<CodeExample>
+<DocumentCodeExample>
     <Accordion>
         <AccordionItem name="accordionNested" open>
             <AccordionHeader>{' Accordion Item #1 '}</AccordionHeader>
@@ -436,7 +436,7 @@ Accordions can be nested inside each other by placing a full `.accordion` within
         </AccordionItem>
     </Accordion>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Accessibility
 
@@ -497,7 +497,7 @@ Use the native `onToggle` prop on `AccordionItem` to respond to open-state chang
 
 Pass the native `open` prop to `AccordionItem` to control its state. `AccordionToggle target="#id"` expands or collapses all items together.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size
 [2]: https://getbootstrap.com/docs/6.0/customize/transitions

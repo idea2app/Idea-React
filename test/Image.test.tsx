@@ -4,7 +4,7 @@ import { it } from 'node:test';
 import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 
-import { Image } from '../source/Base/Image';
+import { Image } from '../source/Content/Images';
 
 it('uses Bootstrap 6 responsive and thumbnail image classes', () => {
     render(<Image src="avatar.png" alt="Avatar" className="custom" fluid thumbnail />);

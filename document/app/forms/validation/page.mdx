@@ -1,6 +1,6 @@
 import { Stack } from '../../../../source/Base/Stack';
-import { ChipToken } from '../../../../source/Base/Chip';
-import { ValidationForm } from '../../../component/Documentation/Forms/ValidationForm';
+import { ChipToken } from '../../../../source/Form/Chip';
+import { DocumentValidationForm } from '../../../component/Document/ValidationForm';
 import {
     Checkbox,
     ChipInput,
@@ -24,11 +24,11 @@ import {
     Radio
 } from '../../../../source/Form';
 import { Button } from '../../../../source/Base/Button';
-import { CodeCard, CodeExample } from '../../../component/Documentation/Components/Example';
-import validationFormSource from '../../../component/Documentation/Forms/ValidationForm.tsx?raw';
-import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeCard, DocumentCodeExample } from '../../../component/Document/Example';
+import validationFormSource from '../../../component/Document/ValidationForm.tsx?raw';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<DocumentationLayout active="validation">
+<DocumentLayout active="validation">
 
 # Validation
 
@@ -53,12 +53,12 @@ For custom Bootstrap form validation messages, add `data-bs-validate` and the `n
 
 Use `data-bs-validate="valid"` to also show success styling on valid fields. Add `required` to each form input and `.invalid-feedback` to provide field-specific error messages. If you enable valid styling, use `.valid-feedback` for success messages.
 
-**For accessibility,** add `aria-describedby` to each form control, pointing to the `id` of its feedback message. This ensures screen readers announce the error when the user focuses an invalid field. The `ValidationForm` example below also sets `aria-invalid` on each control at submit time and clears it as users correct their input.
+**For accessibility,** add `aria-describedby` to each form control, pointing to the `id` of its feedback message. This ensures screen readers announce the error when the user focuses an invalid field. The `DocumentValidationForm` example below also sets `aria-invalid` on each control at submit time and clears it as users correct their input.
 
-For example, try to submit the form below; our `ValidationForm` wrapper will intercept submission and relay feedback to you.
+For example, try to submit the form below; our `DocumentValidationForm` wrapper will intercept submission and relay feedback to you.
 
-<CodeExample>
-    <ValidationForm noValidate data-bs-validate="" className="grid grid-cols-1 gap-5">
+<DocumentCodeExample>
+    <DocumentValidationForm noValidate data-bs-validate="" className="grid grid-cols-1 gap-5">
         <div className="grid gap-5">
             <FormField className="md:g-col-6">
                 <FormLabel htmlFor="validationCustom01">Name</FormLabel>
@@ -168,12 +168,12 @@ For example, try to submit the form below; our `ValidationForm` wrapper will int
         <Button type="submit" theme="primary" variant="solid" className="justify-self-start">
             Submit form
         </Button>
-    </ValidationForm>
-</CodeExample>
+    </DocumentValidationForm>
+</DocumentCodeExample>
 
-`ValidationForm` wraps the library’s `Form` with the upstream validation handlers. It also prevents navigation on successful submission so the demo remains on this page. In an application, replace that demo-only prevention with your submission flow.
+`DocumentValidationForm` wraps the library’s `Form` with the upstream validation handlers. It also prevents navigation on successful submission so the demo remains on this page. In an application, replace that demo-only prevention with your submission flow.
 
-<CodeCard>{validationFormSource}</CodeCard>
+<DocumentCodeCard>{validationFormSource}</DocumentCodeCard>
 
 <h2 id="browser-defaults">Browser defaults</h2>
 
@@ -181,8 +181,8 @@ Not interested in custom validation feedback messages or writing JavaScript to c
 
 While these feedback styles cannot be styled with CSS, you can still customize the feedback text through JavaScript.
 
-<CodeExample>
-    <ValidationForm className="grid grid-cols-1 gap-5">
+<DocumentCodeExample>
+    <DocumentValidationForm className="grid grid-cols-1 gap-5">
         <div className="grid gap-5">
             <FormField className="md:g-col-6">
                 <FormLabel htmlFor="validationDefault01">Name</FormLabel>
@@ -265,8 +265,8 @@ While these feedback styles cannot be styled with CSS, you can still customize t
         <Button type="submit" theme="primary" variant="solid" className="justify-self-start">
             Submit form
         </Button>
-    </ValidationForm>
-</CodeExample>
+    </DocumentValidationForm>
+</DocumentCodeExample>
 
 ## Server-side
 
@@ -274,8 +274,8 @@ We recommend using client-side validation, but in case you require server-side v
 
 For invalid fields, ensure that the invalid feedback/error message is associated with the relevant form field using `aria-describedby` (noting that this attribute allows more than one `id` to be referenced, in case the field already points to additional form text).
 
-<CodeExample>
-    <ValidationForm className="grid grid-cols-1 gap-5">
+<DocumentCodeExample>
+    <DocumentValidationForm className="grid grid-cols-1 gap-5">
         <div className="grid gap-5">
             <FormField className="md:g-col-6">
                 <FormLabel htmlFor="validationServer01">Name</FormLabel>
@@ -394,8 +394,8 @@ For invalid fields, ensure that the invalid feedback/error message is associated
         <Button type="submit" theme="primary" variant="solid" className="justify-self-start">
             Submit form
         </Button>
-    </ValidationForm>
-</CodeExample>
+    </DocumentValidationForm>
+</DocumentCodeExample>
 
 ## Supported elements
 
@@ -413,7 +413,7 @@ Validation styles are available for the following form controls and components:
 - `.combobox-toggle` comboboxes (class-based only)
 - Input groups (with feedback in a parent `.form-field`)
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={5}>
         <FormField>
             <FormLabel htmlFor="validationTextarea">Textarea</FormLabel>
@@ -603,7 +603,7 @@ Validation styles are available for the following form controls and components:
             </FormFeedback>
         </FormField>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Tooltips
 
@@ -613,8 +613,8 @@ We don’t recommend using tooltips for checkboxes, radios, and switches because
 
 This example functions the same as the [custom styles example][3]. Click the submit button to see the validation tooltips.
 
-<CodeExample>
-    <ValidationForm noValidate data-bs-validate="" className="grid grid-cols-1 gap-5">
+<DocumentCodeExample>
+    <DocumentValidationForm noValidate data-bs-validate="" className="grid grid-cols-1 gap-5">
         <div className="grid gap-5">
             <FormField className="md:g-col-6">
                 <FormLabel htmlFor="validationTooltip01">Name</FormLabel>
@@ -733,10 +733,10 @@ This example functions the same as the [custom styles example][3]. Click the sub
         <Button type="submit" theme="primary" variant="solid" className="justify-self-start">
             Submit form
         </Button>
-    </ValidationForm>
-</CodeExample>
+    </DocumentValidationForm>
+</DocumentCodeExample>
 
-</DocumentationLayout>
+</DocumentLayout>
 
 [1]: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#the-constraint-validation-api
 [2]: #browser-defaults

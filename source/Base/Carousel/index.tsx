@@ -17,8 +17,8 @@ import {
 } from 'react';
 
 import { Icon } from '../../Extension/Icon';
+import { polymorphic, PolymorphicClassProps } from '../../Helper/Polymorphic';
 import { Button } from '../Button';
-import { polymorphic, PolymorphicClassProps } from '../Polymorphic';
 import { CarouselEnds, CarouselModel } from './model';
 import { CarouselScroll } from './scroll';
 import styles from './style.module.css';

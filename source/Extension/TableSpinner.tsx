@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 
-import { polymorphic } from '../Base/Polymorphic';
 import { Spinner, SpinnerProps } from '../Base/Spinner';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export interface TableSpinnerProps
     extends

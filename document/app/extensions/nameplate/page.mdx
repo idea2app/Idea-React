@@ -1,9 +1,9 @@
 import { Nameplate } from '../../../../source/Extension/Nameplate';
 
-import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="nameplate">
+<DocumentLayout active="nameplate">
 
 # Nameplate
 
@@ -12,20 +12,20 @@ listings.
 
 ## Example
 
-<LiveExample>
+<DocumentLiveExample>
     <Nameplate name="idea2app" avatar="https://github.com/idea2app.png" />
-</LiveExample>
+</DocumentLiveExample>
 
 ## Usage
 
-<CodeCard>{`<ul className="list-unstyled">
+<DocumentCodeCard>{`<ul className="list-unstyled">
     {members.map(({ name, avatar }) => (
         <li key={name}>
             <Nameplate {...{ name, avatar }} />
         </li>
     ))}
-</ul>`}</CodeCard>
+</ul>`}</DocumentCodeCard>
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Nameplate.tsx

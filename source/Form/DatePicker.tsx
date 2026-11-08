@@ -5,8 +5,8 @@ import classNames from 'classnames';
 import { ComponentPropsWithoutRef, forwardRef, Ref } from 'react';
 
 import { Button, ButtonProps } from '../Base/Button';
-import { AsProps, polymorphic, PolymorphicComponent } from '../Base/Polymorphic';
 import { Icon } from '../Extension/Icon';
+import { AsProps, polymorphic, PolymorphicComponent } from '../Helper/Polymorphic';
 import { FormPlugin } from './Plugin';
 import { FormValidationProps } from './Primitives';
 

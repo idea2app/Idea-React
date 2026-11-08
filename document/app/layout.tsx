@@ -3,9 +3,9 @@ import { PropsWithChildren } from 'react';
 
 import { ColorModeToggle } from '../component/ColorMode';
 import { ColorModeProvider } from '../component/ColorMode/Provider';
-import { DocumentationFooter } from '../component/Documentation/Footer';
-import { DocumentationHeader } from '../component/Documentation/Header';
-import { DocumentationSearch } from '../component/Documentation/Search';
+import { DocumentFooter } from '../component/Document/Footer';
+import { DocumentHeader } from '../component/Document/Header';
+import { DocumentSearch } from '../component/Document/Search';
 import { ErrorHandler } from '../component/ErrorHandler';
 import nextConfig from '../next.config';
 import { footerColumns, navigation, site, versions } from './site';
@@ -28,6 +28,10 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
                     href="https://unpkg.com/bootstrap-icons@1.13.2/font/bootstrap-icons.css"
                 />
                 <link
+                    rel="stylesheet"
+                    href="https://unpkg.com/github-markdown-css@5.9.0/github-markdown.css"
+                />
+                <link
                     rel="alternate"
                     type="application/rss+xml"
                     title="Idea React documentation"
@@ -38,20 +42,18 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
                 <ErrorHandler />
 
                 <ColorModeProvider>
-                    <DocumentationHeader
+                    <DocumentHeader
                         links={navigation}
                         versions={versions}
                         version={site.version}
                         search={
-                            <DocumentationSearch
-                                indexUrl={`${nextConfig.basePath || ''}/rss.xml`}
-                            />
+                            <DocumentSearch indexUrl={`${nextConfig.basePath || ''}/rss.xml`} />
                         }
                         colorMode={<ColorModeToggle />}
                     />
                     {children}
 
-                    <DocumentationFooter columns={footerColumns}>
+                    <DocumentFooter columns={footerColumns}>
                         <p className="mb-3">
                             Advanced React components by <a href="https://idea2.app/">idea2app</a>,
                             built with the help of{' '}
@@ -71,7 +73,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
                             documentation:{' '}
                             <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
                         </p>
-                    </DocumentationFooter>
+                    </DocumentFooter>
                 </ColorModeProvider>
             </body>
         </html>

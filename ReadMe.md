@@ -31,31 +31,36 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 7. [Button Group](source/Base/ButtonGroup.tsx)
 8. [Card](source/Base/Card.tsx)
 9. [Carousel](source/Base/Carousel)
-10. [Chip](source/Base/Chip.tsx)
-11. [Close Button](source/Base/CloseButton.tsx)
-12. [Collapse](source/Base/Collapse.tsx)
-13. [Native Dialog](source/Base/NativeDialog)
-14. [Drawer](source/Base/Drawer.tsx)
-15. [List Group](source/Base/ListGroup.tsx)
-16. [Menu](source/Base/Menu.tsx)
-17. [Nav](source/Base/Nav.tsx)
-18. [Nav Overflow](source/Base/NavOverflow)
-19. [Navbar](source/Base/Navbar.tsx)
-20. [Pagination](source/Base/Pagination.tsx)
-21. [Placeholder](source/Base/Placeholder.tsx)
-22. [Popover](source/Base/Popover.tsx)
-23. [Progress](source/Base/Progress/)
-24. [Scrollspy](source/Base/ScrollSpy)
-25. [Spinner](source/Base/Spinner.tsx)
-26. [Stepper](source/Base/Stepper.tsx)
-27. [Tab](source/Base/Tab.tsx)
-28. [Toast](source/Base/Toast.tsx)
-29. [Toggler](source/Base/Toggler.tsx)
-30. [Tooltip](source/Base/Tooltip.tsx)
-31. [Grid](source/Base/Grid.tsx)
-32. [Image](source/Base/Image.tsx)
-33. [Table](source/Base/Table.tsx)
-34. [Toggle Button](source/Base/ToggleButton.tsx)
+10. [Close Button](source/Base/CloseButton.tsx)
+11. [Collapse](source/Base/Collapse.tsx)
+12. [Native Dialog](source/Base/NativeDialog)
+13. [Drawer](source/Base/Drawer.tsx)
+14. [List Group](source/Base/ListGroup.tsx)
+15. [Menu](source/Base/Menu.tsx)
+16. [Nav](source/Base/Nav.tsx)
+17. [Nav Overflow](source/Base/NavOverflow)
+18. [Navbar](source/Base/Navbar.tsx)
+19. [Pagination](source/Base/Pagination.tsx)
+20. [Placeholder](source/Base/Placeholder.tsx)
+21. [Popover](source/Base/Popover.tsx)
+22. [Progress](source/Base/Progress/)
+23. [Scrollspy](source/Base/ScrollSpy)
+24. [Spinner](source/Base/Spinner.tsx)
+25. [Stepper](source/Base/Stepper.tsx)
+26. [Tab](source/Base/Tab.tsx)
+27. [Toast](source/Base/Toast.tsx)
+28. [Toggler](source/Base/Toggler.tsx)
+29. [Tooltip](source/Base/Tooltip.tsx)
+30. [Toggle Button](source/Base/ToggleButton.tsx)
+
+### Layout components
+
+1. [Grid](source/Layout/Grid.tsx)
+
+### Content components
+
+1. [Images](source/Content/Images.tsx)
+2. [Tables](source/Content/Tables.tsx)
 
 ### Form components
 
@@ -68,12 +73,13 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 7. [Input Group](source/Form/InputGroup.tsx)
 8. [Floating Label](source/Form/FloatingLabel.tsx)
 9. [Form Adornment & Ghost](source/Form/Adorn.tsx)
-10. [Chip Input](source/Form/ChipInput.tsx)
-11. [Combobox](source/Form/Combobox.tsx)
-12. [Date Picker](source/Form/DatePicker.tsx)
-13. [OTP Input](source/Form/OTP.tsx)
-14. [Password Strength](source/Form/PasswordStrength.tsx)
-15. [Form Feedback & Text](source/Form/Feedback.tsx)
+10. [Chip](source/Form/Chip.tsx)
+11. [Chip Input](source/Form/ChipInput.tsx)
+12. [Combobox](source/Form/Combobox.tsx)
+13. [Date Picker](source/Form/DatePicker.tsx)
+14. [OTP Input](source/Form/OTP.tsx)
+15. [Password Strength](source/Form/PasswordStrength.tsx)
+16. [Form Feedback & Text](source/Form/Feedback.tsx)
 
 ### Extension components
 
@@ -81,29 +87,28 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 2. [Code Block](source/Extension/CodeBlock.tsx)
 3. [Countdown](source/Extension/Countdown.tsx)
 4. [Dialog](source/Extension/Dialog.tsx)
-5. [Editor](source/Extension/Editor.tsx)
-6. [Editor HTML](source/Extension/EditorHTML.tsx)
-7. [Horizontal Marquee](source/Extension/HorizontalMarquee/)
-8. [Icon](source/Extension/Icon.tsx)
-9. [Live TSX](source/Extension/LiveTSX.tsx)
-10. [Loading](source/Extension/Loading.tsx)
-11. [Month Calendar](source/Extension/MonthCalendar.tsx)
-12. [Nameplate](source/Extension/Nameplate.tsx)
-13. [Overlay Box](source/Extension/OverlayBox.tsx)
-14. [Page Nav](source/Extension/PageNav.tsx)
-15. [Scroll Nav](source/Extension/ScrollNav/)
-16. [Select](source/Extension/Select.tsx)
-17. [Share Box](source/Extension/ShareBox.tsx)
-18. [Spinner Button](source/Extension/SpinnerButton.tsx)
-19. [Table Spinner](source/Extension/TableSpinner.tsx)
-20. [Text Truncate](source/Extension/TextTruncate/)
-21. [Time](source/Extension/Time.tsx)
-22. [Time Distance](source/Extension/TimeDistance.tsx)
-23. [Timeline](source/Extension/Timeline/)
-24. [Type Echo](source/Extension/TypeEcho/)
-25. [User Rank](source/Extension/UserRank/)
-26. [Vertical Marquee](source/Extension/VerticalMarquee/)
-27. [Zodiac Bar](source/Extension/ZodiacBar.tsx)
+5. [Markdown View](source/Extension/MarkdownView.tsx)
+6. [Horizontal Marquee](source/Extension/HorizontalMarquee/)
+7. [Icon](source/Extension/Icon.tsx)
+8. [Live TSX](source/Extension/LiveTSX.tsx)
+9. [Loading](source/Extension/Loading.tsx)
+10. [Month Calendar](source/Extension/MonthCalendar.tsx)
+11. [Nameplate](source/Extension/Nameplate.tsx)
+12. [Overlay Box](source/Extension/OverlayBox.tsx)
+13. [Page Nav](source/Extension/PageNav.tsx)
+14. [Scroll Nav](source/Extension/ScrollNav/)
+15. [Select](source/Extension/Select.tsx)
+16. [Share Box](source/Extension/ShareBox.tsx)
+17. [Spinner Button](source/Extension/SpinnerButton.tsx)
+18. [Table Spinner](source/Extension/TableSpinner.tsx)
+19. [Text Truncate](source/Extension/TextTruncate/)
+20. [Time](source/Extension/Time.tsx)
+21. [Time Distance](source/Extension/TimeDistance.tsx)
+22. [Timeline](source/Extension/Timeline/)
+23. [Type Echo](source/Extension/TypeEcho/)
+24. [User Rank](source/Extension/UserRank/)
+25. [Vertical Marquee](source/Extension/VerticalMarquee/)
+26. [Zodiac Bar](source/Extension/ZodiacBar.tsx)
 
 ### Data components
 
@@ -115,8 +120,8 @@ Open Map component & model, have been migrated to https://github.com/idea2app/Op
 
 ### Utilities
 
-1. [`text2color`](source/Base/color.ts)
-2. [`animate()`](source/Base/animate.ts)
+1. [`text2color`](source/Helper/color.ts)
+2. [`animate()`](source/Helper/animate.ts)
 
 ## Usage
 
@@ -140,7 +145,7 @@ For the current alpha release, use `idea-react@next` instead of `idea-react`.
 />
 <link rel="stylesheet" href="https://unpkg.com/bootstrap-icons@1.13.2/font/bootstrap-icons.css" />
 <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.min.css" />
-<link rel="stylesheet" href="https://unpkg.com/idea-react/dist/index.css" />
+<link rel="stylesheet" href="https://unpkg.com/idea-react/dist/style.css" />
 ```
 
 ### `tsconfig.json`

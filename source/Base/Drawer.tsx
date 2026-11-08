@@ -5,10 +5,10 @@ import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, ComponentPropsWithRef, createRef, ElementType, ReactNode } from 'react';
 
+import { AsProps, polymorphic, PolymorphicClassProps } from '../Helper/Polymorphic';
+import { Breakpoint } from '../Layout/Grid';
 import { CloseButton } from './CloseButton';
-import { Breakpoint } from './Grid';
 import { NativeDialog, NativeDialogProps } from './NativeDialog';
-import { AsProps, polymorphic, PolymorphicClassProps } from './Polymorphic';
 
 export type DrawerPlacement = 'start' | 'end' | 'top' | 'bottom';
 

@@ -3,8 +3,8 @@
 import classNames from 'classnames';
 import { ButtonHTMLAttributes, Component, ElementType, KeyboardEvent, MouseEvent } from 'react';
 
+import { AsProps, PolymorphicClassProps } from '../Helper/Polymorphic';
 import { Button, ComponentTheme } from './Button';
-import { AsProps, PolymorphicClassProps } from './Polymorphic';
 
 export interface TogglerProps extends Omit<ButtonHTMLAttributes<HTMLElement>, 'value'> {
     as?: 'button' | 'div' | 'span';

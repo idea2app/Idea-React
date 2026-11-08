@@ -8,10 +8,10 @@ import {
     FormLabel,
     FormText
 } from '../../../../source/Form';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<DocumentationLayout active="form-adorn">
+<DocumentLayout active="form-adorn">
 
 # Form adorn
 
@@ -33,27 +33,27 @@ See the [form control][1] documentation for more information on the `.form-contr
 
 Wrap an icon and a `.form-ghost` input inside a `<label>` with `.form-control` and `.form-adorn`. Place the adornment before the input in the DOM for start position (left in LTR).
 
-<CodeExample>
+<DocumentCodeExample>
     <FormAdornment>
         <FormAdornmentIcon name="search" aria-hidden="true" />
         <FormGhost type="search" placeholder="Search..." />
     </FormAdornment>
-</CodeExample>
+</DocumentCodeExample>
 
 Use `.form-adorn-end` to position the adornment on the trailing side (keeps DOM order, uses CSS to flip visually):
 
-<CodeExample>
+<DocumentCodeExample>
     <FormAdornment end>
         <FormAdornmentIcon name="envelope" aria-hidden="true" />
         <FormGhost type="email" placeholder="you@example.com" />
     </FormAdornment>
-</CodeExample>
+</DocumentCodeExample>
 
 ## With labels
 
 Add a second label outside the `.form-adorn` wrapper to name the field. Point it at the input with `for`, so the input keeps its name even if you change the wrapper:
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <div>
             <FormLabel htmlFor="searchInput">Search</FormLabel>
@@ -70,13 +70,13 @@ Add a second label outside the `.form-adorn` wrapper to name the field. Point it
             </FormAdornment>
         </div>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## With form field
 
 Wrap a `.form-adorn` in a `.form-field` to pair it with a label and description text.
 
-<CodeExample>
+<DocumentCodeExample>
     <FormField>
         <FormLabel htmlFor="adornField">Search</FormLabel>
         <FormAdornment>
@@ -85,13 +85,13 @@ Wrap a `.form-adorn` in a `.form-field` to pair it with a label and description 
         </FormAdornment>
         <FormText>Search across all pages and posts.</FormText>
     </FormField>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Text adornments
 
 Use `.form-adorn-text` for currency symbols, units, domain suffixes, and other text-based adornments. Text adornments auto-size to their content.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <FormAdornment>
             <FormAdornmentText aria-hidden="true">$</FormAdornmentText>
@@ -110,13 +110,13 @@ Use `.form-adorn-text` for currency symbols, units, domain suffixes, and other t
             <FormGhost type="text" placeholder="username" />
         </FormAdornment>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Sizing
 
 Use `.form-adorn-sm` or `.form-adorn-lg` on the wrapper to adjust sizing.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <FormAdornment size="sm">
             <FormAdornmentIcon name="search" aria-hidden="true" />
@@ -131,7 +131,7 @@ Use `.form-adorn-sm` or `.form-adorn-lg` on the wrapper to adjust sizing.
             <FormGhost type="text" placeholder="Large input" />
         </FormAdornment>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## CSS
 
@@ -145,6 +145,6 @@ Use `.form-adorn-sm` or `.form-adorn-lg` on the wrapper to adjust sizing.
 }
 ```
 
-</DocumentationLayout>
+</DocumentLayout>
 
 [1]: ../form-control/

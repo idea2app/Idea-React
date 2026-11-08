@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
 import type { ComponentTheme } from '../Base/Button';
-import { polymorphic } from '../Base/Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 import { Checkbox, CheckboxProps } from './Checkbox';
 import { FormValidationProps } from './Primitives';
 

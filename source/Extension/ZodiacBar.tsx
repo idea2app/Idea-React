@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode } from 'react';
 
-import { polymorphic } from '../Base/Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export const ZodiacSigns = ['🐵', '🐔', '🐶', '🐷', '🐭', '🐮', '🐯', '🐰', '🐲', '🐍', '🐴', '🐐'];
 

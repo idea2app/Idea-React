@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
-import { polymorphic } from './Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export const Breadcrumb = polymorphic<ComponentPropsWithRef<'ol'>>(
     ({ as: Root = 'ol', className, ...props }) => (

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { ComponentPropsWithRef, CSSProperties, PropsWithChildren, Ref } from 'react';
 
 import type { ComponentTheme } from '../Base/Button';
-import { polymorphic } from '../Base/Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 import { splitInputProps } from './inputProps';
 import { FormValidationProps } from './Primitives';
 

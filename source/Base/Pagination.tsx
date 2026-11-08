@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { cloneElement, ComponentPropsWithRef, isValidElement } from 'react';
 
+import { polymorphic } from '../Helper/Polymorphic';
 import { ComponentTheme } from './Button';
-import { polymorphic } from './Polymorphic';
 
 export interface PaginationProps extends ComponentPropsWithRef<'ul'> {
     theme?: ComponentTheme;

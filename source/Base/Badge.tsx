@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
+import { polymorphic } from '../Helper/Polymorphic';
 import type { ComponentTheme } from './Button';
-import { polymorphic } from './Polymorphic';
 
 interface BadgeStyleProps {
     variant?: 'solid' | 'subtle' | 'outline';

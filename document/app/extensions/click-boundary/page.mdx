@@ -1,9 +1,9 @@
 import { ClickBoundary } from '../../../../source/Extension/ClickBoundary';
 
-import { CodeCard } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeCard } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="click-boundary">
+<DocumentLayout active="click-boundary">
 
 # Click boundary
 
@@ -13,11 +13,11 @@ clicks elsewhere.
 
 ## Usage
 
-<CodeCard>
+<DocumentCodeCard>
     <ClickBoundary onInnerClick={() => console.log('inside')} onOuterClick={() => setOpen(false)}>
         <div className="border rounded p-3">Click inside or outside this box</div>
     </ClickBoundary>
-</CodeCard>
+</DocumentCodeCard>
 
 The component listens for `click` events in the capture phase on `window`, so outer clicks are
 detected even when other handlers stop propagation. The listener is removed on unmount.
@@ -29,6 +29,6 @@ detected even when other handlers stop propagation. The listener is removed on u
 
 Both callbacks receive the native `MouseEvent`.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/ClickBoundary.tsx

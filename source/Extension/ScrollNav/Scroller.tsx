@@ -4,7 +4,7 @@ import { action, computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, createRef, ElementType, ReactNode, Ref } from 'react';
 
-import { AsProps, PolymorphicClassProps } from '../../Base/Polymorphic';
+import { AsProps, PolymorphicClassProps } from '../../Helper/Polymorphic';
 import { Icon } from '../Icon';
 import * as style from './index.module.less';
 

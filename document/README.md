@@ -24,16 +24,18 @@ and guides without an upstream equivalent link to Bootstrap's installation guide
 ## Build and deploy
 
 ```sh
-export SITE_URL=https://your-documentation-domain.example
 pnpm --filter @idea-react/document build
 pnpm --filter @idea-react/document start
 ```
 
-Set `SITE_URL` to the actual HTTP(S) origin, without a path. On PowerShell, use
-`$env:SITE_URL = 'https://your-documentation-domain.example'`.
+`document/.env` sets `SITE_URL=https://idea-react.pages.dev/` for the deployed site.
+Override it with an environment variable or `document/.env.local` when deploying elsewhere.
+RSS and Sitemap use absolute URLs; development feeds use the local request origin.
 For subdirectory hosting, configure `basePath` in `document/next.config.ts`.
 Pages that fail static export are excluded from both the search index and Sitemap.
 Deploy `document/dist/client/` to a static host.
 For subdirectory hosting, also reference the generated Sitemap from the host-root `robots.txt`;
 crawlers only discover robots rules at the origin root.
-For contributor workflows and deployment configuration, see [AGENTS.md](../AGENTS.md).
+For contributor workflows and deployment configuration, see [AGENTS.md][1].
+
+[1]: ../AGENTS.md

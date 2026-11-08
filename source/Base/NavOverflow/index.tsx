@@ -18,9 +18,9 @@ import {
 } from 'react';
 
 import { Icon } from '../../Extension/Icon';
+import { AsProps, PolymorphicClassProps } from '../../Helper/Polymorphic';
 import { Menu, MenuProps } from '../Menu';
 import { Nav, NavProps } from '../Nav';
-import { AsProps, PolymorphicClassProps } from '../Polymorphic';
 import { NavOverflowModel } from './model';
 
 interface OverflowChildProps {

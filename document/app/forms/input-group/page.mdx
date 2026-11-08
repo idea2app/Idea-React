@@ -15,10 +15,10 @@ import {
     Radio
 } from '../../../../source/Form';
 import { MenuDivider, MenuItem } from '../../../../source/Base/Menu';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<DocumentationLayout active="input-group">
+<DocumentLayout active="input-group">
 
 # Input group
 
@@ -27,7 +27,7 @@ Easily extend form controls by adding text, buttons, or button groups on either 
 Input groups attach add-on elements to a textual input field. Add-ons can be text, buttons, or button groups. Add labels, help text, and validation styles with [form fields][1].
 Pass `htmlFor` to `InputGroupText` to render the add-on itself as a label for its control.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <InputGroup>
             <InputGroupText id="basic-addon1">@</InputGroupText>
@@ -48,7 +48,7 @@ Pass `htmlFor` to `InputGroupText` to render the add-on itself as a label for it
             <InputGroupText id="basic-addon2">@example.com</InputGroupText>
         </InputGroup>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Examples
 
@@ -58,7 +58,7 @@ Place one add-on or button on either side of an input. You may also place one on
 
 Wrap an `.input-group` in a `.form-field` to pair it with a label and description text.
 
-<CodeExample>
+<DocumentCodeExample>
     <FormField>
         <FormLabel htmlFor="inputGroupField">Your vanity URL</FormLabel>
         <InputGroup>
@@ -67,13 +67,13 @@ Wrap an `.input-group` in a `.form-field` to pair it with a label and descriptio
         </InputGroup>
         <FormText>Choose a unique URL for your profile.</FormText>
     </FormField>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Buttons
 
 Use [buttons][2] instead of addons for supporting interactive options.
 
-<CodeExample>
+<DocumentCodeExample>
     <InputGroup>
         <InputGroupButton type="button" id="button-addon" theme="secondary" variant="outline">
             Button
@@ -85,22 +85,22 @@ Use [buttons][2] instead of addons for supporting interactive options.
             aria-describedby="button-addon"
         />
     </InputGroup>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Textarea
 
 Input groups adapt to the height of textarea elements.
 
-<CodeExample>
+<DocumentCodeExample>
     <InputGroup>
         <InputGroupText>With textarea</InputGroupText>
         <FormTextArea aria-label="With textarea" />
     </InputGroup>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Select
 
-<CodeExample>
+<DocumentCodeExample>
     <InputGroup className="mb-3">
         <InputGroupText htmlFor="inputGroupSelect01">Options</InputGroupText>
         <FormSelect id="inputGroupSelect01" defaultValue="Choose...">
@@ -149,11 +149,11 @@ Input groups adapt to the height of textarea elements.
             Button
         </InputGroupButton>
     </InputGroup>
-</CodeExample>
+</DocumentCodeExample>
 
 ### File input
 
-<CodeExample>
+<DocumentCodeExample>
     <InputGroup className="mb-3">
         <InputGroupText htmlFor="inputGroupFile01">Upload</InputGroupText>
         <FormControl type="file" id="inputGroupFile01" />
@@ -194,13 +194,13 @@ Input groups adapt to the height of textarea elements.
             Button
         </InputGroupButton>
     </InputGroup>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Checkboxes and radios
 
 Place any checkbox or radio within an input group’s addon instead of text.
 
-<CodeExample>
+<DocumentCodeExample>
     <InputGroup className="mb-3">
         <InputGroupText>
             <Checkbox aria-label="Checkbox for following text input" />
@@ -213,13 +213,13 @@ Place any checkbox or radio within an input group’s addon instead of text.
         </InputGroupText>
         <FormControl type="text" aria-label="Text input with radio button" />
     </InputGroup>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Multiple inputs
 
 While multiple `<input>`s are supported visually, validation styles are only available for input groups with a single `<input>`.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <InputGroup>
             <FormControl type="text" aria-label="First name" />
@@ -237,13 +237,13 @@ While multiple `<input>`s are supported visually, validation styles are only ava
             <FormControl type="text" placeholder="Server" aria-label="Server" />
         </InputGroup>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Multiple addons
 
 Multiple add-ons are supported and can be mixed with checkbox and radio input versions.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <InputGroup>
             <InputGroupText>$</InputGroupText>
@@ -261,11 +261,11 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
             <InputGroupText>.00</InputGroupText>
         </InputGroup>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Button addons
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <InputGroup>
             <InputGroupButton type="button" id="button-addon1" theme="secondary" variant="outline">
@@ -316,11 +316,11 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
             </InputGroupButton>
         </InputGroup>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Buttons with menus
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <InputGroup>
             <InputGroupMenu
@@ -379,11 +379,11 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
         </InputGroup>
     </Stack>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### Segmented buttons
 
-<CodeExample>
+<DocumentCodeExample>
     <InputGroup className="mb-3">
         <InputGroupButton type="button" theme="secondary" variant="outline">
             Action
@@ -422,7 +422,7 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
         </InputGroupMenu>
     </InputGroup>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Border radius
 
@@ -430,7 +430,7 @@ Sometimes building these components gets complicated, and CSS selectors can only
 
 Consider this extra hidden input example:
 
-<CodeExample>
+<DocumentCodeExample>
     <InputGroup>
         <InputGroupText id="visible-addon">@</InputGroupText>
         <FormControl
@@ -449,7 +449,7 @@ Consider this extra hidden input example:
             />
         </InputGroupIgnore>
     </InputGroup>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Sizing
 
@@ -457,7 +457,7 @@ Add the relative form sizing classes to the `.input-group` itself and contents w
 
 **Sizing on the individual input group elements isn’t supported.**
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
         <InputGroup size="sm">
             <InputGroupText id="inputGroup-sizing-sm">Small</InputGroupText>
@@ -484,7 +484,7 @@ Add the relative form sizing classes to the `.input-group` itself and contents w
             />
         </InputGroup>
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ## CSS
 
@@ -502,7 +502,7 @@ Add the relative form sizing classes to the `.input-group` itself and contents w
 }
 ```
 
-</DocumentationLayout>
+</DocumentLayout>
 
 [1]: ../field/
 [2]: ../../components/button/

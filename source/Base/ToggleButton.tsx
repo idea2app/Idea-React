@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { ComponentPropsWithRef, CSSProperties, Ref } from 'react';
 
 import { splitInputProps } from '../Form/inputProps';
+import { polymorphic } from '../Helper/Polymorphic';
 import type { ComponentTheme } from './Button';
-import { polymorphic } from './Polymorphic';
 
 type NativeInputProps = Omit<ComponentPropsWithRef<'input'>, 'ref' | 'type' | 'size'>;
 

@@ -1,10 +1,10 @@
 import { Option, Select } from '../../../../source/Extension/Select';
 
-import { CodeCard, CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { SelectDemo } from '../../../component/Documentation/Components/SelectDemo';
+import { DocumentCodeCard, DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { DocumentSelectDemo } from '../../../component/Document/SelectDemo';
 
-<ComponentsLayout active="select">
+<DocumentLayout active="select">
 
 # Select
 
@@ -13,26 +13,26 @@ toggles a keyboard-navigable menu of `Option` items.
 
 ## Example
 
-<CodeExample
-    source="document/component/Documentation/Components/SelectDemo.tsx"
+<DocumentCodeExample
+    source="document/component/Document/SelectDemo.tsx"
     code={`<Select value={value} onChange={setValue}>
     <Option value="0">idea2app</Option>
     <Option value="1">freeCodeCamp</Option>
 </Select>`}
 >
-    <SelectDemo />
-</CodeExample>
+    <DocumentSelectDemo />
+</DocumentCodeExample>
 
 ## Usage
 
 `Select` is controlled: pass the current `value` and update it in `onChange`.
 
-<CodeCard>
+<DocumentCodeCard>
     <Select value="react" onChange={() => {}}>
         <Option value="react">React</Option>
         <Option value="vue">Vue</Option>
     </Select>
-</CodeCard>
+</DocumentCodeCard>
 
 The toggle shows the selected option's content, or render a custom label with `valueRender`. Button
 styling props such as `theme`, `variant`, `size`, and `disabled` pass through to the toggle, and
@@ -43,7 +43,7 @@ native form field. Disabled selectors do not submit values, and disabled options
 Selected options expose their selected state. For searchable, grouped or multiple choices, use
 the [Combobox][2] form component instead.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Select.tsx
 [2]: ../../forms/combobox/

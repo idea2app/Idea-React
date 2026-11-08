@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 
-import { polymorphic } from '../../Base/Polymorphic';
+import { polymorphic } from '../../Helper/Polymorphic';
 import * as style from './index.module.less';
 
 export type HorizontalMarqueeProps = HTMLAttributes<HTMLDivElement> &

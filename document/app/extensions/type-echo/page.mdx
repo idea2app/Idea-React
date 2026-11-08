@@ -1,9 +1,9 @@
 import { TypeEcho } from '../../../../source/Extension/TypeEcho';
 
-import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="type-echo">
+<DocumentLayout active="type-echo">
 
 # Type echo
 
@@ -12,19 +12,19 @@ and showing a cursor until the text completes.
 
 ## Example
 
-<LiveExample>
+<DocumentLiveExample>
     <TypeEcho text="Build React apps with less glue and more possibility." />
-</LiveExample>
+</DocumentLiveExample>
 
 ## Usage
 
-<CodeCard>
+<DocumentCodeCard>
     <TypeEcho text="Build React apps with less glue." intervals={100} />
-</CodeCard>
+</DocumentCodeCard>
 
 `intervals` sets the delay between characters in milliseconds (default `150`). The animation runs
 once per mount, driven by an `IntersectionObserver` so off-screen text does not animate early.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/TypeEcho/index.tsx

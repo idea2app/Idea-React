@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
-import { polymorphic } from './Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export interface NavProps extends ComponentPropsWithRef<'nav'> {
     variant?: 'tabs' | 'pills' | 'underline';

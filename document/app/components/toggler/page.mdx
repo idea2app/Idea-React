@@ -1,9 +1,9 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { Toggler } from '../../../../source/Base/Toggler';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="toggler">
+<DocumentLayout active="toggler">
 
 # Toggler
 
@@ -17,17 +17,17 @@ Toggler is an interactive component that can be used to avoid writing small or o
 
 Toggle the class of an element by setting `attribute="class"` and passing the class name as `value`. Without a `target`, the component toggles itself.
 
-<CodeExample>
+<DocumentCodeExample>
     <Toggler as="div" className="w-100 p-3 rounded border" attribute="class" value="fg-danger">
         {' Click to toggle `fg-danger` '}
     </Toggler>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Remove existing
 
 If the element already has the class specified in `value`, toggling will remove it. Clicking again adds it back.
 
-<CodeExample>
+<DocumentCodeExample>
     <Toggler
         as="div"
         attribute="class"
@@ -36,13 +36,13 @@ If the element already has the class specified in `value`, toggling will remove 
     >
         {' Starts with `bg-subtle-info`. Click to remove it. '}
     </Toggler>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Target element
 
 Use `target` to toggle the class of another element. Target elements can supply their own `data-bs-attribute` and `data-bs-value` overrides.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex gap-2 flex-column align-items-start">
         <Toggler target="#togglerExample1" variant="solid" theme="primary">
             {'Toggle'}
@@ -58,13 +58,13 @@ Use `target` to toggle the class of another element. Target elements can supply 
         </div>
     </div>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### Multiple elements
 
 Use a class name selector in `target` to toggle the class of multiple elements.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={2}>
         <Toggler
             target=".togglerExampleClass1"
@@ -92,17 +92,17 @@ Use a class name selector in `target` to toggle the class of multiple elements.
         </div>
     </Stack>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### Toggle attribute
 
 Toggle attributes by setting the `attribute` and `value` props. For example, toggling the `hidden` attribute:
 
-<CodeExample>
+<DocumentCodeExample>
     <Toggler as="div" className="w-100 p-3 rounded border" attribute="hidden" value="true">
         {' Click to toggle `hidden` attribute '}
     </Toggler>
-</CodeExample>
+</DocumentCodeExample>
 
 You could also use this to toggle the `disabled` attribute on a `fieldset` element to disable all the controls within. Or any other ideas you can think of with attributes.
 
@@ -121,4 +121,4 @@ You could also use this to toggle the `disabled` attribute on a `fieldset` eleme
 
 Use `onToggled(elements)` to respond after the matched elements have been updated.
 
-</ComponentsLayout>
+</DocumentLayout>

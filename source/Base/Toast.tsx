@@ -6,9 +6,9 @@ import { observer } from 'mobx-react';
 import { ComponentPropsWithRef, FC, MouseEvent, ReactNode } from 'react';
 import { Timestamp, uniqueID } from 'web-utility';
 
+import { polymorphic } from '../Helper/Polymorphic';
 import type { ComponentTheme } from './Button';
 import { CloseButton } from './CloseButton';
-import { polymorphic } from './Polymorphic';
 
 export type ToastPosition =
     | 'top-start'

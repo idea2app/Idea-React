@@ -1,9 +1,9 @@
 import { MonthCalendar } from '../../../../source/Extension/MonthCalendar';
 
-import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="month-calendar">
+<DocumentLayout active="month-calendar">
 
 # Month calendar
 
@@ -12,14 +12,14 @@ month controls, localized weekday names, and selectable date entries.
 
 ## Example
 
-<LiveExample>
+<DocumentLiveExample>
     <MonthCalendar
         value={[
             { date: new Date(), content: '🎉 Today' },
             { date: new Date(Date.now() + 86400000), content: '📅 Planning' }
         ]}
     />
-</LiveExample>
+</DocumentLiveExample>
 
 ## Usage
 
@@ -27,7 +27,7 @@ month controls, localized weekday names, and selectable date entries.
 date are grouped in a popover. `onSelect` receives the clicked entry and `onChange` fires when the
 visible month changes.
 
-<CodeCard>
+<DocumentCodeCard>
     <MonthCalendar
         locale="zh-CN"
         theme="success"
@@ -35,11 +35,11 @@ visible month changes.
         onSelect={({ link }) => open(link)}
         onChange={date => loadMonth(date)}
     />
-</CodeCard>
+</DocumentCodeCard>
 
 `locale` controls weekday formatting and defaults to the browser language; `theme` styles the header
 and controls.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/MonthCalendar.tsx

@@ -2,7 +2,7 @@ import { HTMLAttributes } from 'react';
 import { TimeData } from 'web-utility';
 
 import { Card, CardBody, CardText, CardTitle } from '../../Base/Card';
-import { polymorphic } from '../../Base/Polymorphic';
+import { polymorphic } from '../../Helper/Polymorphic';
 import { Nameplate, NameplateProps } from '../Nameplate';
 import { Time } from '../Time';
 import * as styles from './index.module.less';

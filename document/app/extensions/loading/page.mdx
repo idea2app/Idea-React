@@ -1,8 +1,8 @@
-import { CodeCard, CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { LoadingDemo } from '../../../component/Documentation/Components/LoadingDemo';
+import { DocumentCodeCard, DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { DocumentLoadingDemo } from '../../../component/Document/LoadingDemo';
 
-<ComponentsLayout active="loading">
+<DocumentLayout active="loading">
 
 # Loading
 
@@ -11,25 +11,25 @@ covers the viewport with a translucent backdrop, so render it only while blockin
 
 ## Example
 
-<CodeExample
-    source="document/component/Documentation/Components/LoadingDemo.tsx"
+<DocumentCodeExample
+    source="document/component/Document/LoadingDemo.tsx"
     code={`<Button onClick={showLoading}>Show loading</Button>
 
 {loading && <Loading>Loading...</Loading>}`}
 
 >
 
-    <LoadingDemo />
+    <DocumentLoadingDemo />
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Usage
 
-<CodeCard>{`import { Loading } from 'idea-react';
+<DocumentCodeCard>{`import { Loading } from 'idea-react';
 
 {
 uploading && <Loading>Uploading…</Loading>;
-}`}</CodeCard>
+}`}</DocumentCodeCard>
 
 The children replace the default `Loading...` text. For loading states inside a button or a table,
 use the [Spinner button](../spinner-button/) or [Table spinner](../table-spinner/) instead.
@@ -37,6 +37,6 @@ use the [Spinner button](../spinner-button/) or [Table spinner](../table-spinner
 Set `opacity={100}` for a fully opaque backdrop, such as while restoring persisted application state.
 Keep the covered content `inert` until restoration finishes so keyboard focus cannot enter it.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Loading.tsx

@@ -1,13 +1,13 @@
-import { Container } from '../../../../source/Base/Grid';
+import { Container } from '../../../../source/Layout/Grid';
 import { Menu, MenuItem, MenuSubmenu } from '../../../../source/Base/Menu';
 import { Nav, NavLink } from '../../../../source/Base/Nav';
 import { Navbar, NavbarBrand, NavbarNav } from '../../../../source/Base/Navbar';
 import { NavOverflow } from '../../../../source/Base/NavOverflow';
 import { Icon } from '../../../../source/Extension/Icon';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="nav-overflow">
+<DocumentLayout active="nav-overflow">
 
 # Nav overflow
 
@@ -32,7 +32,7 @@ Here’s what you need to know before getting started:
 
 Wrap the links in `<NavOverflow id="…">`. When items don’t fit, they’ll automatically move to a "More" menu. Resize the browser to see how nav items automatically move to the "More" menu as space becomes limited.
 
-<CodeExample>
+<DocumentCodeExample>
     <NavOverflow id="overflow-example-7" variant="pills">
         <NavLink active aria-current="page" href="#">
             {'Home'}
@@ -53,13 +53,13 @@ Wrap the links in `<NavOverflow id="…">`. When items don’t fit, they’ll au
         <NavLink href="#">{'Help'}</NavLink>
     </NavOverflow>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### With tabs
 
 The overflow pattern works seamlessly with tabbed navigation:
 
-<CodeExample>
+<DocumentCodeExample>
     <NavOverflow id="overflow-example-6" variant="tabs">
         <NavLink active aria-current="page" href="#">
             {'Overview'}
@@ -78,11 +78,11 @@ The overflow pattern works seamlessly with tabbed navigation:
         <NavLink href="#">{'Related'}</NavLink>
     </NavOverflow>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### With underline
 
-<CodeExample>
+<DocumentCodeExample>
     <NavOverflow id="overflow-example-5" variant="underline">
         <NavLink active aria-current="page" href="#">
             {'Home'}
@@ -99,13 +99,13 @@ The overflow pattern works seamlessly with tabbed navigation:
         <NavLink href="#">{'Contact'}</NavLink>
     </NavOverflow>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### Keep items visible
 
 Use the `.nav-overflow-keep` class on items that should never be moved to the overflow menu. These items will remain visible regardless of available space—useful for high-priority items like "Home" or action buttons.
 
-<CodeExample>
+<DocumentCodeExample>
     <NavOverflow id="overflow-example-4" variant="pills">
         <NavLink active aria-current="page" href="#" className="nav-overflow-keep">
             {'Home'}
@@ -126,13 +126,13 @@ Use the `.nav-overflow-keep` class on items that should never be moved to the ov
         </NavLink>
     </NavOverflow>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### With disabled items
 
 Disabled states are preserved when items move to the overflow menu:
 
-<CodeExample>
+<DocumentCodeExample>
     <NavOverflow id="overflow-example-3" variant="pills">
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -151,13 +151,13 @@ Disabled states are preserved when items move to the overflow menu:
         <NavLink href="#">{'Even more'}</NavLink>
     </NavOverflow>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### In a navbar
 
 The nav overflow pattern can also be used within a [navbar][2] for horizontal navigation that adapts to available space:
 
-<CodeExample>
+<DocumentCodeExample>
     <Navbar expand className="bg-1">
         <Container fluid>
             <NavbarBrand href="#">{'Brand'}</NavbarBrand>
@@ -178,13 +178,13 @@ The nav overflow pattern can also be used within a [navbar][2] for horizontal na
         </Container>
     </Navbar>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### With menus
 
 A nav item that already hosts a [menu][3] becomes a submenu of the overflow menu. Its nested submenus stay intact.
 
-<CodeExample>
+<DocumentCodeExample>
     <NavOverflow id="overflow-example-1" variant="pills">
         <NavLink active aria-current="page" href="#">
             {'Home'}
@@ -221,7 +221,7 @@ A nav item that already hosts a [menu][3] becomes a submenu of the overflow menu
         <NavLink href="#">{'Help'}</NavLink>
     </NavOverflow>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Customizing the toggle
 
@@ -321,7 +321,7 @@ The instance method `updateOverflow()` manually recalculates overflow. Resizing 
 
 Use `onOverflowChange(overflowCount, visibleCount)` to observe overflow calculations.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion
 [2]: /components/navbar

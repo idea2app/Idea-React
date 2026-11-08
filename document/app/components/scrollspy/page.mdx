@@ -1,13 +1,13 @@
-import { Row, Col } from '../../../../source/Base/Grid';
+import { Row, Col } from '../../../../source/Layout/Grid';
 import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
 import { Menu, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 import { Nav, NavLink } from '../../../../source/Base/Nav';
 import { Navbar, NavbarBrand } from '../../../../source/Base/Navbar';
 import { ScrollSpy } from '../../../../source/Base/ScrollSpy';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="scrollspy">
+<DocumentLayout active="scrollspy">
 
 # Scrollspy
 
@@ -46,7 +46,7 @@ Jump to the [debug overlay][6] section to visualize the activation line in actio
 
 Scroll the area below the navbar and watch the active class change. Open the menu and watch the menu items be highlighted as well.
 
-<CodeExample>
+<DocumentCodeExample>
     <Navbar id="navbar-example2" className="bg-1 px-3 mb-3 rounded-2">
         <NavbarBrand href="#">{'Navbar'}</NavbarBrand>
 
@@ -116,13 +116,13 @@ Scroll the area below the navbar and watch the active class change. Open the men
         </p>
     </ScrollSpy>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### Nested nav
 
 Scrollspy also works with nested `.nav`s. If a nested `.nav` is `.active`, its parents will also be `.active`. Scroll the area next to the navbar and watch the active class change.
 
-<CodeExample>
+<DocumentCodeExample>
     <Row>
         <Col xs={4}>
             <nav
@@ -282,13 +282,13 @@ Scrollspy also works with nested `.nav`s. If a nested `.nav` is `.active`, its p
         </Col>
     </Row>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### List group
 
 Scrollspy also works with `.list-group`s. Scroll the area next to the list group and watch the active class change.
 
-<CodeExample>
+<DocumentCodeExample>
     <Row>
         <Col xs={4}>
             <ListGroup as="div" id="list-example">
@@ -353,13 +353,13 @@ Scrollspy also works with `.list-group`s. Scroll the area next to the list group
         </Col>
     </Row>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ### Simple anchors
 
 Scrollspy is not limited to nav components and list groups, so it will work on any `<a>` anchor elements in the current document. Scroll the area and watch the `.active` class change.
 
-<CodeExample>
+<DocumentCodeExample>
     <Row>
         <Col xs={4}>
             <div
@@ -439,7 +439,7 @@ Scrollspy is not limited to nav components and list groups, so it will work on a
         </Col>
     </Row>
 
-</CodeExample>
+</DocumentCodeExample>
 
 ## Debug overlay
 
@@ -450,7 +450,7 @@ It can be hard to picture exactly where Scrollspy decides a section is active. E
 
 Scroll the example and watch the highlighted navigation item change as headings cross the line. Guide positions are computed from the same `topMargin`/`rootMargin` [detection][7] math the component uses.
 
-<CodeExample>
+<DocumentCodeExample>
     <Nav id="debug-scrollspy-nav" variant="pills">
         <NavLink href="#debug-scrollspy-first">First</NavLink>
         <NavLink href="#debug-scrollspy-last">Last</NavLink>
@@ -471,7 +471,7 @@ Scroll the example and watch the highlighted navigation item change as headings 
             <p>The bottom zone selects the final section.</p>
         </section>
     </ScrollSpy>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Non-visible elements
 
@@ -505,7 +505,7 @@ Use the instance method `refresh()` after adding, removing, or revealing observe
 
 Use `onActiveChange(id)` to respond when a different section becomes active.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: /components/nav
 [2]: /components/list-group

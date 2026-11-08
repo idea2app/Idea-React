@@ -1,0 +1,57 @@
+import { MarkdownView } from '../../../../source/Extension/MarkdownView';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+<DocumentLayout active="markdown-view">
+
+# Markdown view
+
+`MarkdownView` synchronously parses a Markdown string with [marked][1] and renders
+the HTML inside an `<article>`. It includes [GitHub Markdown CSS][2] and adds
+`markdown-body` to the root element.
+
+When using the published package, load
+`https://unpkg.com/idea-react/dist/style.css` alongside Bootstrap to apply its bundled
+Markdown styles.
+
+## Example
+
+<DocumentCodeExample>
+    <MarkdownView className="border rounded p-4">
+        {
+            '## Hello, Markdown!\n\nWrite **formatted text**, [links](https://getbootstrap.com/), and lists:\n\n- React\n- Bootstrap'
+        }
+    </MarkdownView>
+</DocumentCodeExample>
+
+## Usage
+
+```tsx
+import { MarkdownView } from 'idea-react';
+
+<MarkdownView aria-label="Article">{markdownSource}</MarkdownView>;
+```
+
+Pass Markdown as the string `children`. Native article attributes, `className`, and
+refs pass through. Use `as` to select another root element.
+
+Parsing is synchronous, including during server rendering. Asynchronous marked
+extensions are not supported. Changing `children` immediately replaces the rendered
+HTML.
+
+## Trusted content
+
+Neither marked nor `MarkdownView` sanitizes HTML. Embedded HTML is rendered as-is,
+so only pass trusted Markdown. Sanitize untrusted input before rendering it;
+see [marked's security guidance][3].
+
+The previous `EditorHTML` component and its Editor.js data/parser API have been
+removed. Pass Markdown text instead of block data. Rich-text HTML from
+[React Bootstrap Editor][4] is a different format and must not be passed as Markdown.
+
+</DocumentLayout>
+
+[1]: https://marked.js.org/
+[2]: https://github.com/sindresorhus/github-markdown-css
+[3]: https://marked.js.org/using_advanced#options
+[4]: ../editor/

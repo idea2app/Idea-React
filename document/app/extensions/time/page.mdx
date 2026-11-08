@@ -1,9 +1,9 @@
 import { Time } from '../../../../source/Extension/Time';
 
-import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="time">
+<DocumentLayout active="time">
 
 # Time
 
@@ -12,15 +12,15 @@ machine-readable `dateTime` attribute.
 
 ## Example
 
-<LiveExample>
+<DocumentLiveExample>
     <Time dateTime="2026-10-01T08:00:00" format="YYYY-MM-DD HH:mm" />
-</LiveExample>
+</DocumentLiveExample>
 
 ## Usage
 
-<CodeCard>
+<DocumentCodeCard>
     <Time dateTime="2026-10-01" format="YYYY-MM-DD" />
-</CodeCard>
+</DocumentCodeCard>
 
 `dateTime` accepts a `Date`, timestamp, or date string; `format` follows the
 [web-utility `formatDate` tokens][2] such as `YYYY`, `MM`, `DD`, `HH`, and `mm`. The text re-renders
@@ -28,7 +28,7 @@ whenever either prop changes.
 
 For relative output such as "3 day(s) before", use [Time distance](../time-distance/).
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Time.tsx
 [2]: https://web-cell.dev/web-utility/functions/formatDate.html

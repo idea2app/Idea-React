@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
+import { polymorphic } from '../Helper/Polymorphic';
 import { Button } from './Button';
-import { polymorphic } from './Polymorphic';
 
 export interface NavbarProps extends ComponentPropsWithRef<'nav'> {
     theme?: 'light' | 'dark';

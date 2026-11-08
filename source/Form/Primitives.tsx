@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
-import { polymorphic } from '../Base/Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export type FormProps = ComponentPropsWithRef<'form'> & {
     validated?: boolean;

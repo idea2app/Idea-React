@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 import { Component, ComponentPropsWithRef, createRef, ElementType, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
-import { AsProps, PolymorphicClassProps } from '../Polymorphic';
+import { AsProps, PolymorphicClassProps } from '../../Helper/Polymorphic';
 import { ScrollSpyModel } from './model';
 
 export interface ScrollSpyProps extends Omit<

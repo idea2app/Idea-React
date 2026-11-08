@@ -13,9 +13,9 @@ import {
     TransitionEvent
 } from 'react';
 
+import { AsProps, polymorphic, PolymorphicClassProps } from '../Helper/Polymorphic';
 import { ComponentTheme } from './Button';
 import { CloseButton } from './CloseButton';
-import { AsProps, polymorphic, PolymorphicClassProps } from './Polymorphic';
 
 export interface AlertProps extends ComponentPropsWithoutRef<'div'> {
     theme?: ComponentTheme;

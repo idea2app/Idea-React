@@ -1,7 +1,7 @@
-import { CodeCard } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeCard } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="code-block">
+<DocumentLayout active="code-block">
 
 # Code block
 
@@ -10,7 +10,7 @@ as-is, while React elements are serialized to JSX source first.
 
 ## Example
 
-<CodeCard>{`export const Hello = () => <strong>Hello, Idea React!</strong>;`}</CodeCard>
+<DocumentCodeCard>{`export const Hello = () => <strong>Hello, Idea React!</strong>;`}</DocumentCodeCard>
 
 ## Language
 
@@ -24,9 +24,9 @@ to follow the system preference. Bootstrap theme containers work automatically, 
 nested containers with a different theme. Changing the scheme updates highlighting without
 rerendering the component.
 
-<CodeCard>{`<CodeBlock language="ts">{\`const answer: number = 42;\`}</CodeBlock>`}</CodeCard>
+<DocumentCodeCard>{`<CodeBlock language="ts">{\`const answer: number = 42;\`}</CodeBlock>`}</DocumentCodeCard>
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/CodeBlock/
 [2]: https://shiki.style/

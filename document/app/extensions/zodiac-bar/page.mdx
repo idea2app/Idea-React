@@ -1,9 +1,9 @@
 import { ZodiacBar } from '../../../../source/Extension/ZodiacBar';
 
-import { CodeCard, CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeCard, DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="zodiac-bar">
+<DocumentLayout active="zodiac-bar">
 
 # Zodiac bar
 
@@ -12,13 +12,13 @@ optional link and title per year.
 
 ## Example
 
-<CodeExample>
+<DocumentCodeExample>
     <ZodiacBar startYear={2020} endYear={2025} />
-</CodeExample>
+</DocumentCodeExample>
 
 ## Usage
 
-<CodeCard>
+<DocumentCodeCard>
     <ZodiacBar
         startYear={2008}
         endYear={2026}
@@ -27,12 +27,12 @@ optional link and title per year.
             link: `/events/${year}`
         })}
     />
-</CodeCard>
+</DocumentCodeCard>
 
 `endYear` defaults to the current year. `itemOf` customizes each item's `title` and `link`, and
 `itemClassName` restyles the year cards. The exported `zodiacOf(year)` helper returns the zodiac
 emoji for any historical year.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/ZodiacBar.tsx

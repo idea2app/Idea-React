@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef, CSSProperties, HTMLAttributes } from 'react';
 
+import { polymorphic } from '../Helper/Polymorphic';
 import type { ComponentTheme } from './Button';
-import { polymorphic } from './Polymorphic';
 
 export type AvatarSize = 'xs' | 'sm' | 'lg' | 'xl';
 export type AvatarStatus = 'online' | 'offline' | 'busy' | 'away';

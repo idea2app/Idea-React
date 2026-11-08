@@ -1,9 +1,9 @@
 import { Badge } from '../../../../source/Base/Badge';
 import { Button } from '../../../../source/Base/Button';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="badge">
+<DocumentLayout active="badge">
 
 # Badges
 
@@ -18,7 +18,7 @@ Badges are tiny, static display components used for adding context to other elem
 
 Badges come in three variants: solid (default), subtle, and outline.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Badge theme="primary">New</Badge>
         <Badge variant="subtle" theme="primary">
@@ -28,13 +28,13 @@ Badges come in three variants: solid (default), subtle, and outline.
             New
         </Badge>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Headings
 
 Badges adapt to the `font-size` of the parent element.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <h1>
             Example heading
@@ -61,20 +61,20 @@ Badges adapt to the `font-size` of the parent element.
             <Badge>New</Badge>
         </h6>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Buttons
 
 Badges can be used as part of links or buttons to provide a counter.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Button variant="solid" theme="primary" type="button">
             Notifications
             <Badge theme="danger">4</Badge>
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 Note that depending on how they are used, badges may be confusing for users of screen readers and similar assistive technologies. While the styling of badges provides a visual cue as to their purpose, these users will simply be presented with the content of the badge. Depending on the specific situation, these badges may seem like random additional words or numbers at the end of a sentence, link, or button.
 
@@ -84,7 +84,7 @@ Unless the context is clear (as with the “Notifications” example, where it i
 
 Use utilities to modify a `.badge` and position it in the corner of a link or button.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Button variant="solid" theme="primary" type="button" className="position-relative">
             Inbox
@@ -98,11 +98,11 @@ Use utilities to modify a `.badge` and position it in the corner of a link or bu
             </Badge>
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 You can also replace the `.badge` class with a few more utilities without a count for a more generic indicator.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Button variant="solid" theme="primary" type="button" className="position-relative">
             Profile
@@ -111,13 +111,13 @@ You can also replace the `.badge` class with a few more utilities without a coun
             </span>
         </Button>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Variants
 
 Use the contextual `.theme-{color}` classes to apply a semantic theme color to badges.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Badge theme="primary">Primary</Badge>
         <Badge theme="accent">Accent</Badge>
@@ -128,8 +128,8 @@ Use the contextual `.theme-{color}` classes to apply a semantic theme color to b
         <Badge theme="info">Info</Badge>
         <Badge theme="inverse">Inverse</Badge>
     </div>
-</CodeExample>
-<CodeExample>
+</DocumentCodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Badge variant="subtle" theme="primary">
             Primary
@@ -156,8 +156,8 @@ Use the contextual `.theme-{color}` classes to apply a semantic theme color to b
             Inverse
         </Badge>
     </div>
-</CodeExample>
-<CodeExample>
+</DocumentCodeExample>
+<DocumentCodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Badge variant="outline" theme="primary">
             Primary
@@ -184,7 +184,7 @@ Use the contextual `.theme-{color}` classes to apply a semantic theme color to b
             Inverse
         </Badge>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 > **Conveying meaning to assistive technologies:** Using color to add meaning only provides a visual indication, which will not be conveyed to users of assistive technologies—such as screen readers. Ensure that information denoted by the color is either obvious from the content itself, or included through alternative means, such as additional text hidden with the `.visually-hidden` utility.
 
@@ -207,4 +207,4 @@ Customize the component with the following local CSS variables. Override them th
 | `--bs-badge-border-color`  | `transparent`                    |
 | `--bs-badge-border-radius` | `var(--bs-radius-7)`             |
 
-</ComponentsLayout>
+</DocumentLayout>

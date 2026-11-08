@@ -12,8 +12,8 @@ import {
     MouseEvent
 } from 'react';
 
+import { AsProps, PolymorphicClassProps } from '../Helper/Polymorphic';
 import { ButtonProps } from './Button';
-import { AsProps, PolymorphicClassProps } from './Polymorphic';
 
 const TOGGLE = 'idea-react:collapse-toggle';
 const CHANGE = 'idea-react:collapse-change';

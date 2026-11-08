@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 import { Component, ElementType, HTMLAttributes, Ref, RefCallback } from 'react';
 import { sleep } from 'web-utility';
 
-import { AsProps, PolymorphicClassProps } from '../../Base/Polymorphic';
+import { AsProps, PolymorphicClassProps } from '../../Helper/Polymorphic';
 
 export interface TypeEchoContentProps extends Omit<HTMLAttributes<HTMLPreElement>, 'children'> {
     text: string;

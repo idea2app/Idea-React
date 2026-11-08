@@ -1,9 +1,9 @@
 import { Icon } from '../../../../source/Extension/Icon';
 
-import { CodeCard, LiveExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="icon">
+<DocumentLayout active="icon">
 
 # Icon
 
@@ -12,13 +12,13 @@ once, then reference any icon by name.
 
 ## Example
 
-<LiveExample>
+<DocumentLiveExample>
     <div className="d-flex align-items-center gap-3">
         <Icon name="rocket-takeoff" />
         <Icon name="github" size={1.5} />
         <Icon name="heart-fill" size={2} className="fg-danger" />
     </div>
-</LiveExample>
+</DocumentLiveExample>
 
 ## Usage
 
@@ -26,11 +26,11 @@ once, then reference any icon by name.
 decorative by default, so add an `aria-label` or visually hidden text when an icon conveys meaning
 on its own.
 
-<CodeCard>
+<DocumentCodeCard>
     <Icon name="trash" aria-label="Delete" role="img" />
-</CodeCard>
+</DocumentCodeCard>
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Icon.tsx
 [2]: https://icons.getbootstrap.com/

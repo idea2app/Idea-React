@@ -1,14 +1,14 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { ToastContainer } from '../../../../source/Base/Toast';
 import {
-    StaticToast,
-    ToastMessageDemo,
-    ToastPlacementDemo
-} from '../../../component/Documentation/Components/ToastDemo';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+    DocumentStaticToast,
+    DocumentToastMessageDemo,
+    DocumentToastPlacementDemo
+} from '../../../component/Document/ToastDemo';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { DocumentCodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="toasts">
+<DocumentLayout active="toasts">
 
 # Toasts
 
@@ -33,116 +33,150 @@ To encourage extensible and predictable toasts, we recommend a header and body. 
 
 Toasts are as flexible as you need and have very little required markup. At a minimum, we require a single element to contain your “toasted” content and strongly encourage a dismiss button.
 
-<CodeExample>
-    <StaticToast body="Hello, world! This is a toast message." />
-</CodeExample>
+<DocumentCodeExample>
+    <DocumentStaticToast body="Hello, world! This is a toast message." />
+</DocumentCodeExample>
 
 ### Live example
 
 Click the button below to show a toast (positioned with our utilities in the lower right corner) that has been hidden by default.
 
-<CodeExample source="document/component/Documentation/Components/ToastDemo.tsx">
-    <ToastMessageDemo />
-</CodeExample>
+<DocumentCodeExample source="document/component/Document/ToastDemo.tsx">
+    <DocumentToastMessageDemo />
+</DocumentCodeExample>
 
 ### Translucent
 
 Toasts are slightly translucent to blend in with what’s below them.
 
-<CodeExample>
-    <StaticToast body="Hello, world! This is a toast message." />
-</CodeExample>
+<DocumentCodeExample>
+    <DocumentStaticToast body="Hello, world! This is a toast message." />
+</DocumentCodeExample>
 
 Pass `translucent` to `ToastItem` or `Toast.open()` to enhance the translucency with a backdrop blur and saturation filter.
 
-<CodeExample>
-    <StaticToast translucent body="Hello, world! This is a toast message." />
-</CodeExample>
+<DocumentCodeExample>
+    <DocumentStaticToast translucent body="Hello, world! This is a toast message." />
+</DocumentCodeExample>
 
 ### Stacking
 
 You can stack toasts by wrapping them in a toast container, which will vertically add some spacing.
 
-<CodeExample>
+<DocumentCodeExample>
     <ToastContainer position="static">
-        <StaticToast body="Hello, world! This is a toast message." />
-        <StaticToast time="2 seconds ago" body="Heads up, toasts will stack automatically" />
+        <DocumentStaticToast body="Hello, world! This is a toast message." />
+        <DocumentStaticToast
+            time="2 seconds ago"
+            body="Heads up, toasts will stack automatically"
+        />
     </ToastContainer>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Dark toasts
 
 Set a toast to dark mode by setting `data-bs-theme="dark"` on a parent element.
 
-<CodeExample>
-    <StaticToast dark body="Hello, world! This is a toast message." />
-</CodeExample>
+<DocumentCodeExample>
+    <DocumentStaticToast dark body="Hello, world! This is a toast message." />
+</DocumentCodeExample>
 
 ### Variants
 
 Toasts can be themed with the `theme` prop, based on our [theme color utilities][1]. Apply to the entire toast or individual elements within the toast.
 
-<CodeExample>
+<DocumentCodeExample>
     <Stack gap={3}>
-        <StaticToast theme="primary" noHeader body="Hello, world! This is a toast message." />
-        <StaticToast theme="accent" noHeader body="Hello, world! This is a toast message." />
-        <StaticToast theme="secondary" noHeader body="Hello, world! This is a toast message." />
-        <StaticToast theme="success" noHeader body="Hello, world! This is a toast message." />
-        <StaticToast theme="danger" noHeader body="Hello, world! This is a toast message." />
-        <StaticToast theme="warning" noHeader body="Hello, world! This is a toast message." />
-        <StaticToast theme="info" noHeader body="Hello, world! This is a toast message." />
-        <StaticToast theme="inverse" noHeader body="Hello, world! This is a toast message." />
+        <DocumentStaticToast
+            theme="primary"
+            noHeader
+            body="Hello, world! This is a toast message."
+        />
+        <DocumentStaticToast
+            theme="accent"
+            noHeader
+            body="Hello, world! This is a toast message."
+        />
+        <DocumentStaticToast
+            theme="secondary"
+            noHeader
+            body="Hello, world! This is a toast message."
+        />
+        <DocumentStaticToast
+            theme="success"
+            noHeader
+            body="Hello, world! This is a toast message."
+        />
+        <DocumentStaticToast
+            theme="danger"
+            noHeader
+            body="Hello, world! This is a toast message."
+        />
+        <DocumentStaticToast
+            theme="warning"
+            noHeader
+            body="Hello, world! This is a toast message."
+        />
+        <DocumentStaticToast theme="info" noHeader body="Hello, world! This is a toast message." />
+        <DocumentStaticToast
+            theme="inverse"
+            noHeader
+            body="Hello, world! This is a toast message."
+        />
     </Stack>
-</CodeExample>
+</DocumentCodeExample>
 
 ### Custom content
 
 Customize your toasts by removing sub-components, tweaking them with [utilities][2], or by adding your own markup. Here we’ve created a simpler toast by removing the default `ToastHeader`, adding a custom hide icon from [Bootstrap Icons][3], and using some [flexbox utilities][4] to adjust the layout.
 
-<CodeExample>
-    <StaticToast noHeader body="Hello, world! This is a toast message." />
-</CodeExample>
+<DocumentCodeExample>
+    <DocumentStaticToast noHeader body="Hello, world! This is a toast message." />
+</DocumentCodeExample>
 
 Alternatively, you can also add additional controls and components to toasts.
 
-<CodeExample>
-    <StaticToast actions body="Hello, world! This is a toast message." />
-</CodeExample>
+<DocumentCodeExample>
+    <DocumentStaticToast actions body="Hello, world! This is a toast message." />
+</DocumentCodeExample>
 
 ### Instant
 
 By default, toasts fade in and out. To disable the animation, pass `instant` to `ToastItem` or `Toast.open()`. The toast then appears without the CSS transition.
 
-<CodeExample>
-    <StaticToast instant body="Hello, world! This is a toast message." />
-</CodeExample>
+<DocumentCodeExample>
+    <DocumentStaticToast instant body="Hello, world! This is a toast message." />
+</DocumentCodeExample>
 
 ## Placement
 
 Place toasts with custom CSS as you need them. The top right is often used for notifications, as is the top middle. Use the `position` prop on `ToastContainer` or `toast.Component` for a standard viewport position. If you’re only ever going to show one toast at a time, put the positioning styles right on `ToastItem`.
 
-<CodeExample source="document/component/Documentation/Components/ToastDemo.tsx">
-    <ToastPlacementDemo />
-</CodeExample>
+<DocumentCodeExample source="document/component/Document/ToastDemo.tsx">
+    <DocumentToastPlacementDemo />
+</DocumentCodeExample>
 
 For systems that generate more notifications, consider using a wrapping element so they can easily stack.
 
-<CodeExample>
+<DocumentCodeExample>
     <div className="position-relative p-3" style={{ minHeight: 180 }}>
         <ToastContainer position="static" className="ms-auto">
-            <StaticToast body="Hello, world! This is a toast message." />
+            <DocumentStaticToast body="Hello, world! This is a toast message." />
         </ToastContainer>
     </div>
-</CodeExample>
+</DocumentCodeExample>
 
 You can also get fancy with flexbox utilities to align toasts horizontally and/or vertically.
 
-<CodeExample>
+<DocumentCodeExample>
     <ToastContainer position="static" className="mx-auto">
-        <StaticToast body="Hello, world! This is a toast message." />
-        <StaticToast time="2 seconds ago" body="Heads up, toasts will stack automatically" />
+        <DocumentStaticToast body="Hello, world! This is a toast message." />
+        <DocumentStaticToast
+            time="2 seconds ago"
+            body="Heads up, toasts will stack automatically"
+        />
     </ToastContainer>
-</CodeExample>
+</DocumentCodeExample>
 
 ## Accessibility
 
@@ -152,23 +186,26 @@ Note that the live region needs to be present in the markup _before_ the toast i
 
 You also need to adapt the `role` and `aria-live` level depending on the content. If it’s an important message like an error, use `role="alert" aria-live="assertive"`, otherwise use `role="status" aria-live="polite"` attributes.
 
-<CodeExample>
+<DocumentCodeExample>
     <ToastContainer position="static" aria-live="polite" aria-atomic="true">
-        <StaticToast live="polite" body="A polite status update with enough time to read." />
+        <DocumentStaticToast
+            live="polite"
+            body="A polite status update with enough time to read."
+        />
     </ToastContainer>
-</CodeExample>
+</DocumentCodeExample>
 
 As the content you’re displaying changes, be sure to update the [`delay` timeout][7] so that users have enough time to read the toast.
 
 When using `delay: 0`, you must add a close button to allow users to dismiss the toast.
 
-<CodeExample source="document/component/Documentation/Components/ToastDemo.tsx">
-    <ToastMessageDemo
+<DocumentCodeExample source="document/component/Document/ToastDemo.tsx">
+    <DocumentToastMessageDemo
         label="Show persistent toast"
         delay={0}
         body="This toast stays visible until you close it."
     />
-</CodeExample>
+</DocumentCodeExample>
 
 While technically it’s possible to add focusable/actionable controls (such as additional buttons or links) in your toast, you should avoid doing this for autohiding toasts. Even if you give the toast a long [`delay` timeout][7], keyboard and assistive technology users may find it difficult to reach the toast in time to take action (since toasts don’t receive focus when they are displayed). If you absolutely must have further controls, we recommend using a toast with `delay: 0`.
 
@@ -218,7 +255,7 @@ Create a `Toast` model and mount its `Component` to establish the live region be
 
 `open(message)` returns a promise that resolves when that notification closes. Call `close(id)` to dismiss an individual notification.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/customize/theme/
 [2]: https://getbootstrap.com/docs/6.0/utilities/api/

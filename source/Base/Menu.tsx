@@ -15,10 +15,10 @@ import {
 } from 'react';
 
 import { Icon, IconProps } from '../Extension/Icon';
+import { FloatingOptions, FloatingPosition } from '../Helper/Overlay';
+import { AsProps, polymorphic, PolymorphicClassProps } from '../Helper/Polymorphic';
+import { Breakpoint } from '../Layout/Grid';
 import { Button, ButtonProps } from './Button';
-import { Breakpoint } from './Grid';
-import { FloatingOptions, FloatingPosition } from './Overlay';
-import { AsProps, polymorphic, PolymorphicClassProps } from './Polymorphic';
 
 export type MenuItemProps = ButtonProps & { active?: boolean; selected?: boolean };
 

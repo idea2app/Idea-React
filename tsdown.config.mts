@@ -13,7 +13,9 @@ export default defineConfig({
     format: ['cjs', 'esm'],
     target: 'es2015',
     platform: 'browser',
-    deps: { alwaysBundle: ['react-element-to-jsx-string'] },
+    deps: {
+        alwaysBundle: ['react-element-to-jsx-string', 'github-markdown-css/github-markdown.css']
+    },
     minify: true,
     dts: true,
     clean: true,

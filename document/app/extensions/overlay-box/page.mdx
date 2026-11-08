@@ -1,14 +1,14 @@
 import { Button } from '../../../../source/Base/Button';
 import { Icon } from '../../../../source/Extension/Icon';
-import { Image } from '../../../../source/Base/Image';
+import { Image } from '../../../../source/Content/Images';
 import { OverlayBox } from '../../../../source/Extension/OverlayBox';
 import { Popover } from '../../../../source/Base/Popover';
 
-import { CodeCard, CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import * as style from '../../../component/Documentation/Components/style.module.less';
+import { DocumentCodeCard, DocumentCodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import * as style from '../../../component/Document/style.module.less';
 
-<ComponentsLayout active="overlay-box">
+<DocumentLayout active="overlay-box">
 
 # Popover and tooltip
 
@@ -77,7 +77,7 @@ accessible association with `aria-describedby`.
 
 Pass JSX to `detail` to place rich content, such as an image, inside the popover.
 
-<CodeExample>
+<DocumentCodeExample>
     <OverlayBox
         trigger="click"
         title="view info"
@@ -87,7 +87,7 @@ Pass JSX to `detail` to place rich content, such as an image, inside the popover
             {'View'}
         </Button>
     </OverlayBox>
-</CodeExample>
+</DocumentCodeExample>
 
 #### Placement
 
@@ -122,7 +122,7 @@ Directions are mirrored when using Bootstrap in RTL.
 Use `placement` for the default direction and `responsivePlacement` for viewport breakpoints.
 The highest matching breakpoint wins.
 
-<CodeCard>
+<DocumentCodeCard>
     <OverlayBox
         placement="top"
         responsivePlacement={{ md: 'right', lg: 'bottom' }}
@@ -131,7 +131,7 @@ The highest matching breakpoint wins.
     >
         <Button>Open</Button>
     </OverlayBox>
-</CodeCard>
+</DocumentCodeCard>
 
 #### Custom container
 
@@ -139,11 +139,11 @@ Pass `container="body"` to escape clipping ancestors, or provide an element or a
 one. The wrapper translates viewport measurements into the overlay's positioned ancestor coordinates.
 Pointer and focus movement into portal content remain interactive; outside clicks and Escape dismiss it.
 
-<CodeCard>
+<DocumentCodeCard>
     <OverlayBox container="body" offset={[0, 12]} padding={8} title="Portal tooltip">
         <Button>Hover or focus</Button>
     </OverlayBox>
-</CodeCard>
+</DocumentCodeCard>
 
 `offset` is a main-axis distance or a `[crossAxis, mainAxis]` pair. `padding` sets the viewport inset;
 `flip={false}` retains the preferred side while still shifting within viewport boundaries.
@@ -411,11 +411,11 @@ Tooltips and popovers use local CSS variables for real-time customization. Overr
 Bootstrap enables popovers and tooltips through a JavaScript plugin. Mount the React component
 instead—there is no instance to initialize, retrieve, or dispose:
 
-<CodeCard>
+<DocumentCodeCard>
     <OverlayBox title="Popover title" detail="Popover content">
         <Button>Toggle popover</Button>
     </OverlayBox>
-</CodeCard>
+</DocumentCodeCard>
 
 The wrapper renders the panel, keeps `aria-describedby` in sync, and closes it on outside pointer
 interaction or <kbd>Escape</kbd>.
@@ -451,16 +451,16 @@ The plugin's data attributes map directly to props:
 The plugin's `show`, `hide`, `toggle`, `setContent`, and instance methods do not exist in the React
 wrapper. Render `<Popover>` or `<Tooltip>` directly when you need to control visibility or content:
 
-<CodeCard>
+<DocumentCodeCard>
     <Popover title="Popover title" placement="top">
         Popover content
     </Popover>
-</CodeCard>
+</DocumentCodeCard>
 
 Likewise, use React state and lifecycle instead of `show.bs.popover`, `shown.bs.tooltip`, and the
 other plugin events.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/OverlayBox.tsx
 [2]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Dialog.tsx

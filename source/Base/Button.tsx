@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef, MouseEvent } from 'react';
 
-import { polymorphic } from './Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export type ComponentTheme =
     | 'primary'

@@ -14,7 +14,7 @@ import {
 
 import { Button, ButtonProps } from '../Base/Button';
 import { Menu, MenuProps } from '../Base/Menu';
-import { polymorphic } from '../Base/Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export type InputGroupProps = ComponentPropsWithRef<'div'> & {
     size?: 'sm' | 'lg';

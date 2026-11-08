@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
+import { polymorphic } from '../Helper/Polymorphic';
+import { Breakpoint } from '../Layout/Grid';
 import { ComponentTheme } from './Button';
-import { Breakpoint } from './Grid';
-import { polymorphic } from './Polymorphic';
 
 export interface StepperProps extends ComponentPropsWithRef<'ol'> {
     horizontal?: boolean | Breakpoint;

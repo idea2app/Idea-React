@@ -4,7 +4,7 @@ import { it } from 'node:test';
 import { render, screen } from '@testing-library/react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import { Chip, ChipDismiss, ChipIcon, ChipImage, ChipToken } from '../source/Base/Chip';
+import { Chip, ChipDismiss, ChipIcon, ChipImage, ChipToken } from '../source/Form/Chip';
 
 it('server-renders static chip components without mounting the form plugin', () => {
     const markup = renderToStaticMarkup(
