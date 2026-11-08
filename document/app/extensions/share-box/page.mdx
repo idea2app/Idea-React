@@ -1,6 +1,6 @@
 import { ShareBox } from '../../../../source/Extension/ShareBox';
 
-import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { CodeCard, LiveExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="share-box">
@@ -13,7 +13,7 @@ share sheet.
 
 ## Example
 
-<DocumentLiveExample
+<LiveExample
     code={`<ShareBox
     title="idea2app"
     text="Every idea of yours is worth our efforts to realize"
@@ -25,14 +25,14 @@ share sheet.
 
 ## Usage
 
-<DocumentCodeCard>
+<CodeCard>
     <ShareBox title="My poster" text="Check this out!">
         <section className="p-4 text-center">
             <h2>Event poster</h2>
             <p>Rendered DOM content becomes a shareable image.</p>
         </section>
     </ShareBox>
-</DocumentCodeCard>
+</CodeCard>
 
 All [`ShareData`][3] fields (`title`, `text`, `url`, `files`) pass to `navigator.share()`. The
 snapshot regenerates on window resize, and a [Loading](../loading/) overlay is shown while the image

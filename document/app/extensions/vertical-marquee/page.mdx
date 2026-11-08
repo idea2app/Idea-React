@@ -1,6 +1,6 @@
 import { VerticalMarquee } from '../../../../source/Extension/VerticalMarquee';
 
-import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { CodeCard, LiveExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="vertical-marquee">
@@ -12,7 +12,7 @@ notice boards and credit rolls.
 
 ## Example
 
-<DocumentLiveExample>
+<LiveExample>
     <div className="border rounded p-2" style={{ height: '6rem' }}>
         <VerticalMarquee>
             <ul className="list-unstyled m-0">
@@ -23,16 +23,16 @@ notice boards and credit rolls.
             </ul>
         </VerticalMarquee>
     </div>
-</DocumentLiveExample>
+</LiveExample>
 
 ## Behavior
 
 Content shorter than the container stays still; overflowing content scrolls upward in a loop and
 pauses on hover. Set the scroll `duration` in seconds to tune the speed.
 
-<DocumentCodeCard>
+<CodeCard>
     <VerticalMarquee duration={10}>News and announcements</VerticalMarquee>
-</DocumentCodeCard>
+</CodeCard>
 
 See the [Horizontal marquee](../horizontal-marquee/) for the horizontal variant.
 

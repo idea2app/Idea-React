@@ -1,4 +1,4 @@
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 import { DocumentEditorDemo } from '../../../component/Document/EditorDemo';
 
@@ -24,9 +24,9 @@ The current 3.x release uses Bootstrap 6 and stage-3 decorators. Keep
 The editor runs in the browser. In a server-rendered application, put the smallest
 component that mounts it behind a client boundary.
 
-<DocumentCodeExample source="document/component/Document/EditorDemo.tsx">
+<CodeExample source="document/component/Document/EditorDemo.tsx">
     <DocumentEditorDemo />
-</DocumentCodeExample>
+</CodeExample>
 
 The `defaultValue` is an HTML string. The editor keeps a hidden input named by
 `name` in sync with the current markup, so a native form submission can read it.

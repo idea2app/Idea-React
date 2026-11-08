@@ -9,7 +9,7 @@ import { Button } from '../../../source/Base/Button';
 import { Loading } from '../../../source/Extension/Loading';
 
 @observer
-export class DocumentLoadingDemo extends Component {
+export class LoadingDemo extends Component {
     @observable
     accessor loading = false;
 

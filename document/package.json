@@ -19,8 +19,8 @@
         "@types/react-dom": "^19.3.0",
         "@vitejs/plugin-react": "^6.2.1",
         "@vitejs/plugin-rsc": "^0.5.39",
-        "preact": "^10.29.3",
-        "preact-render-to-string": "^6.6.7",
+        "preact": "^11.2.0",
+        "preact-render-to-string": "^6.8.2",
         "remark-gfm": "^4.0.1",
         "typescript": "^7.0.2",
         "vite": "^8.3.6"

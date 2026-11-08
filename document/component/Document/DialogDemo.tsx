@@ -18,7 +18,7 @@ import {
 import { Toast } from '../../../source/Base/Toast';
 import { OverlayBox } from '../../../source/Extension/OverlayBox';
 
-export interface DocumentDialogDemoProps extends Omit<NativeDialogProps, 'title'> {
+export interface DialogDemoProps extends Omit<NativeDialogProps, 'title'> {
     label: ReactNode;
     title: ReactNode;
     dark?: boolean;
@@ -27,7 +27,7 @@ export interface DocumentDialogDemoProps extends Omit<NativeDialogProps, 'title'
 }
 
 @observer
-export class DocumentDialogDemo extends Component<DocumentDialogDemoProps> {
+export class DialogDemo extends Component<DialogDemoProps> {
     @observable accessor open = false;
 
     show = action(() => (this.open = true));
@@ -90,7 +90,7 @@ export class DocumentDialogDemo extends Component<DocumentDialogDemoProps> {
 }
 
 @observer
-export class DocumentDialogSwapDemo extends Component {
+export class DialogSwapDemo extends Component {
     @observable accessor current: 'first' | 'second' | undefined;
 
     show = action((current: 'first' | 'second') => (this.current = current));
@@ -163,7 +163,7 @@ export class DocumentDialogSwapDemo extends Component {
 }
 
 @observer
-export class DocumentDialogOverlaysDemo extends Component {
+export class DialogOverlaysDemo extends Component {
     @observable accessor open = false;
 
     toast = new Toast();

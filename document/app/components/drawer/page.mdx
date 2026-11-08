@@ -1,9 +1,9 @@
 import { Button } from '../../../../source/Base/Button';
 import { Drawer } from '../../../../source/Base/Drawer';
-import { DocumentDrawerDemo } from '../../../component/Document/DrawerDemo';
-import { DocumentDrawerTriggersGuideDemo } from '../../../component/Document/OverlayGuideDemo';
+import { DrawerDemo } from '../../../component/Document/DrawerDemo';
+import { DrawerTriggersGuideDemo } from '../../../component/Document/OverlayGuideDemo';
 import { DocumentLayout } from '../../../component/Document/Layout';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 
 <DocumentLayout active="drawer" upstreamPath="components/drawer/">
 
@@ -33,7 +33,7 @@ The animation effect of this component is dependent on the `prefers-reduced-moti
 
 Below is a drawer example that is shown by default (via `open` and `modal={false}`). Drawer includes support for a header with a close button and an optional body class for some initial `padding`. We suggest that you include drawer headers with dismiss actions whenever possible, or provide an explicit dismiss action.
 
-<DocumentCodeExample>
+<CodeExample>
     <Drawer
         title="Drawer"
         placement="start"
@@ -48,15 +48,15 @@ Below is a drawer example that is shown by default (via `open` and `modal={false
             custom elements here.
         </p>
     </Drawer>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Live demo
 
 Use the buttons below to show and hide a drawer element via React state. Both a link and a button can invoke the same action, updating `open`. Use `onDismiss` to synchronize state after the close button, backdrop, or Escape is used.
 
-<DocumentCodeExample source="document/component/Document/OverlayGuideDemo/index.tsx">
-    <DocumentDrawerTriggersGuideDemo />
-</DocumentCodeExample>
+<CodeExample source="document/component/Document/OverlayGuideDemo/index.tsx">
+    <DrawerTriggersGuideDemo />
+</CodeExample>
 
 ### Without JavaScript
 
@@ -64,7 +64,7 @@ Supported browsers can open and close a drawer with the [Invoker Commands API][2
 
 The Invoker Commands API is not supported in all browsers. For guaranteed support, use React-controlled `open` and `onDismiss`, as in the examples above, when you need wrapper options, callbacks, or animated close.
 
-<DocumentCodeExample>
+<CodeExample>
     <Button
         variant="solid"
         theme="primary"
@@ -84,14 +84,14 @@ The Invoker Commands API is not supported in all browsers. For guaranteed suppor
             Close drawer
         </Button>
     </Drawer>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Body scrolling
 
 Scrolling the `<body>` element is disabled when a drawer opens modally. Pass `scroll` with `backdrop={false}` to keep body scrolling and open the drawer as non-modal. Focus moves into the drawer, but is not trapped, so the page stays interactive.
 
-<DocumentCodeExample source="document/component/Document/DrawerDemo.tsx">
-    <DocumentDrawerDemo
+<CodeExample source="document/component/Document/DrawerDemo.tsx">
+    <DrawerDemo
         label="Enable body scrolling"
         title="Body scrolling"
         placement="start"
@@ -100,15 +100,15 @@ Scrolling the `<body>` element is disabled when a drawer opens modally. Pass `sc
     >
         Some text as placeholder. In real life you can have the elements you have chosen. Like text,
         images, lists, etc.
-    </DocumentDrawerDemo>
-</DocumentCodeExample>
+    </DrawerDemo>
+</CodeExample>
 
 ### Body scrolling & backdrop
 
 You can also allow `<body>` scrolling while keeping a backdrop. With a backdrop present, the drawer stays modal (`showModal()` and focus trapping) even when `scroll` is `true`.
 
-<DocumentCodeExample source="document/component/Document/DrawerDemo.tsx">
-    <DocumentDrawerDemo
+<CodeExample source="document/component/Document/DrawerDemo.tsx">
+    <DrawerDemo
         label="Enable both scrolling & backdrop"
         title="Backdrop with scrolling"
         placement="start"
@@ -116,30 +116,30 @@ You can also allow `<body>` scrolling while keeping a backdrop. With a backdrop 
     >
         Some text as placeholder. In real life you can have the elements you have chosen. Like text,
         images, lists, etc.
-    </DocumentDrawerDemo>
-</DocumentCodeExample>
+    </DrawerDemo>
+</CodeExample>
 
 ### Static backdrop
 
 When backdrop is set to static, the drawer will not close when clicking outside of it.
 
-<DocumentCodeExample source="document/component/Document/DrawerDemo.tsx">
-    <DocumentDrawerDemo
+<CodeExample source="document/component/Document/DrawerDemo.tsx">
+    <DrawerDemo
         label="Toggle static drawer"
         title="Static backdrop"
         placement="start"
         backdrop="static"
     >
         I will not close if you click outside of me.
-    </DocumentDrawerDemo>
-</DocumentCodeExample>
+    </DrawerDemo>
+</CodeExample>
 
 ## Instant drawer
 
 By default, drawers animate with a slide on open and close. To disable animations, pass `animation="instant"` to `Drawer`.
 
-<DocumentCodeExample source="document/component/Document/DrawerDemo.tsx">
-    <DocumentDrawerDemo
+<CodeExample source="document/component/Document/DrawerDemo.tsx">
+    <DrawerDemo
         label="Toggle instant drawer"
         title="Instant drawer"
         placement="start"
@@ -147,31 +147,26 @@ By default, drawers animate with a slide on open and close. To disable animation
     >
         Some text as placeholder. In real life you can have the elements you have chosen. Like text,
         images, lists, etc.
-    </DocumentDrawerDemo>
-</DocumentCodeExample>
+    </DrawerDemo>
+</CodeExample>
 
 ## Dark drawer
 
 Change the appearance of drawers with utilities to better match them to different contexts like dark navbars. Here we pass `theme="dark"` to `Drawer`, and it makes all nested elements within use dark mode.
 
-<DocumentCodeExample source="document/component/Document/DrawerDemo.tsx">
-    <DocumentDrawerDemo
-        label="Toggle dark drawer"
-        title="Dark drawer"
-        placement="start"
-        theme="dark"
-    >
+<CodeExample source="document/component/Document/DrawerDemo.tsx">
+    <DrawerDemo label="Toggle dark drawer" title="Dark drawer" placement="start" theme="dark">
         Some text as placeholder. In real life you can have the elements you have chosen. Like text,
         images, lists, etc.
-    </DocumentDrawerDemo>
-</DocumentCodeExample>
+    </DrawerDemo>
+</CodeExample>
 
 ## Translucent drawer
 
 Pass `translucent` to the drawer panel to blur and saturate the background. This makes the panel semi-transparent so content behind it shows through.
 
-<DocumentCodeExample source="document/component/Document/DrawerDemo.tsx">
-    <DocumentDrawerDemo
+<CodeExample source="document/component/Document/DrawerDemo.tsx">
+    <DrawerDemo
         label="Toggle translucent drawer"
         title="Translucent drawer"
         placement="start"
@@ -179,19 +174,19 @@ Pass `translucent` to the drawer panel to blur and saturate the background. This
     >
         Some text as placeholder. In real life you can have the elements you have chosen. Like text,
         images, lists, etc.
-    </DocumentDrawerDemo>
-</DocumentCodeExample>
+    </DrawerDemo>
+</CodeExample>
 
 ## Sheet
 
 Pass `sheet` to render the panel flush against the viewport edge. The sheet variant removes the drawer’s inset, border, border-radius, and box-shadow, so it sits edge-to-edge like a traditional offcanvas. It works with any placement.
 
-<DocumentCodeExample source="document/component/Document/DrawerDemo.tsx">
-    <DocumentDrawerDemo label="Toggle sheet" title="Drawer sheet" placement="bottom" sheet>
+<CodeExample source="document/component/Document/DrawerDemo.tsx">
+    <DrawerDemo label="Toggle sheet" title="Drawer sheet" placement="bottom" sheet>
         Some text as placeholder. In real life you can have the elements you have chosen. Like text,
         images, lists, etc.
-    </DocumentDrawerDemo>
-</DocumentCodeExample>
+    </DrawerDemo>
+</CodeExample>
 
 ## Responsive
 
@@ -199,8 +194,8 @@ Responsive drawers hide content outside the viewport from a specified breakpoint
 
 To make a responsive drawer, set the `responsive` breakpoint prop. The wrapper wires its close button without an explicit target.
 
-<DocumentCodeExample source="document/component/Document/DrawerDemo.tsx">
-    <DocumentDrawerDemo
+<CodeExample source="document/component/Document/DrawerDemo.tsx">
+    <DrawerDemo
         label="Toggle responsive drawer"
         title="Responsive drawer"
         placement="end"
@@ -208,8 +203,8 @@ To make a responsive drawer, set the `responsive` breakpoint prop. The wrapper w
     >
         This drawer becomes inline content above the lg breakpoint. Resize the browser to see the
         change.
-    </DocumentDrawerDemo>
-</DocumentCodeExample>
+    </DrawerDemo>
+</CodeExample>
 
 ## Placement
 
@@ -223,49 +218,44 @@ Choose a `placement` for the drawer. Idea React defaults to `"end"`.
 
 Try the top, right, bottom, and fullscreen examples out below.
 
-<DocumentCodeExample source="document/component/Document/DrawerDemo.tsx">
-    <DocumentDrawerDemo label="Toggle top drawer" title="Drawer" placement="top">
+<CodeExample source="document/component/Document/DrawerDemo.tsx">
+    <DrawerDemo label="Toggle top drawer" title="Drawer" placement="top">
         Some text as placeholder. In real life you can have the elements you have chosen. Like text,
         images, lists, etc.
-    </DocumentDrawerDemo>
-</DocumentCodeExample>
+    </DrawerDemo>
+</CodeExample>
 
-<DocumentCodeExample source="document/component/Document/DrawerDemo.tsx">
-    <DocumentDrawerDemo label="Toggle end drawer" title="Drawer" placement="end">
+<CodeExample source="document/component/Document/DrawerDemo.tsx">
+    <DrawerDemo label="Toggle end drawer" title="Drawer" placement="end">
         Some text as placeholder. In real life you can have the elements you have chosen. Like text,
         images, lists, etc.
-    </DocumentDrawerDemo>
-</DocumentCodeExample>
+    </DrawerDemo>
+</CodeExample>
 
-<DocumentCodeExample source="document/component/Document/DrawerDemo.tsx">
-    <DocumentDrawerDemo label="Toggle bottom drawer" title="Drawer" placement="bottom">
+<CodeExample source="document/component/Document/DrawerDemo.tsx">
+    <DrawerDemo label="Toggle bottom drawer" title="Drawer" placement="bottom">
         Some text as placeholder. In real life you can have the elements you have chosen. Like text,
         images, lists, etc.
-    </DocumentDrawerDemo>
-</DocumentCodeExample>
+    </DrawerDemo>
+</CodeExample>
 
-<DocumentCodeExample source="document/component/Document/DrawerDemo.tsx">
-    <DocumentDrawerDemo label="Toggle fullscreen drawer" title="Fullscreen drawer" fullscreen>
+<CodeExample source="document/component/Document/DrawerDemo.tsx">
+    <DrawerDemo label="Toggle fullscreen drawer" title="Fullscreen drawer" fullscreen>
         Some text as placeholder. In real life you can have the elements you have chosen. Like text,
         images, lists, etc.
-    </DocumentDrawerDemo>
-</DocumentCodeExample>
+    </DrawerDemo>
+</CodeExample>
 
 ## Footer
 
 Pass optional `footer` content for action buttons or other content at the bottom of the drawer.
 
-<DocumentCodeExample source="document/component/Document/DrawerDemo.tsx">
-    <DocumentDrawerDemo
-        label="Toggle drawer with footer"
-        title="Drawer with footer"
-        placement="end"
-        footer
-    >
+<CodeExample source="document/component/Document/DrawerDemo.tsx">
+    <DrawerDemo label="Toggle drawer with footer" title="Drawer with footer" placement="end" footer>
         Some text as placeholder. In real life you can have the elements you have chosen. Like text,
         images, lists, etc.
-    </DocumentDrawerDemo>
-</DocumentCodeExample>
+    </DrawerDemo>
+</CodeExample>
 
 ## Accessibility
 

@@ -6,7 +6,7 @@ import {
     FormLabel,
     FormText
 } from '../../../../source/Form';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="checkbox" upstreamPath="forms/checkbox/">
@@ -26,36 +26,36 @@ For folks looking to replace our provided icons, override the `--bs-check-icon-c
 
 Labels and layout are handled with additional HTML and CSS.
 
-<DocumentCodeExample>
+<CodeExample>
     <Checkbox id="check" defaultChecked />
-</DocumentCodeExample>
+</CodeExample>
 
 ## Indeterminate
 
 Checkboxes can utilize the indeterminate pseudo class. There is no available HTML attribute for specifying it; the `indeterminate` prop sets the native JavaScript property.
 
-<DocumentCodeExample>
+<CodeExample>
     <Checkbox id="checkIndeterminate" indeterminate />
-</DocumentCodeExample>
+</CodeExample>
 
 ## With form field
 
 Wrap `Checkbox` in a `FormField` layout wrapper and add your label. The grid layout places the checkbox and label side by side.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <Checkbox id="checkLabel" />
         <FormLabel htmlFor="checkLabel" plain>
             Example new checkbox
         </FormLabel>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Description
 
 Add a description or other content after the label. We recommend wrapping the label and description in a `.form-field-content` to ensure appropriate spacing and alignment.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <Checkbox id="checkDescription" />
         <FormFieldContent>
@@ -65,13 +65,13 @@ Add a description or other content after the label. We recommend wrapping the la
             <FormText>Supporting description for the above label.</FormText>
         </FormFieldContent>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Theme colors
 
 Modify the appearance of checked checkboxes with the `theme` prop. This will set the checked background and border color to the theme color.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-column gap-2">
         <FormField>
             <Checkbox id="checkprimary" defaultChecked theme="primary" />
@@ -134,13 +134,13 @@ Modify the appearance of checked checkboxes with the `theme` prop. This will set
             </FormLabel>
         </FormField>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Disabled
 
 Add the `disabled` attribute and the associated `<label>`s are automatically styled to match with a lighter color to help indicate the input’s state.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={2}>
         <FormField>
             <Checkbox id="checkDisabled" disabled />
@@ -155,13 +155,13 @@ Add the `disabled` attribute and the associated `<label>`s are automatically sty
             </FormLabel>
         </FormField>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Sizes
 
 Set `size="sm"` or `size="lg"` to make your checkbox appear smaller or larger.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-column gap-3">
         <FormField>
             <Checkbox id="checkSizeSm" defaultChecked size="sm" />
@@ -182,7 +182,7 @@ Set `size="sm"` or `size="lg"` to make your checkbox appear smaller or larger.
             </FormLabel>
         </FormField>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## CSS
 

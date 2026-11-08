@@ -1,6 +1,6 @@
 import { MonthCalendar } from '../../../../source/Extension/MonthCalendar';
 
-import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { CodeCard, LiveExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="month-calendar">
@@ -12,14 +12,14 @@ month controls, localized weekday names, and selectable date entries.
 
 ## Example
 
-<DocumentLiveExample>
+<LiveExample>
     <MonthCalendar
         value={[
             { date: new Date(), content: '🎉 Today' },
             { date: new Date(Date.now() + 86400000), content: '📅 Planning' }
         ]}
     />
-</DocumentLiveExample>
+</LiveExample>
 
 ## Usage
 
@@ -27,7 +27,7 @@ month controls, localized weekday names, and selectable date entries.
 date are grouped in a popover. `onSelect` receives the clicked entry and `onChange` fires when the
 visible month changes.
 
-<DocumentCodeCard>
+<CodeCard>
     <MonthCalendar
         locale="zh-CN"
         theme="success"
@@ -35,7 +35,7 @@ visible month changes.
         onSelect={({ link }) => open(link)}
         onChange={date => loadMonth(date)}
     />
-</DocumentCodeCard>
+</CodeCard>
 
 `locale` controls weekday formatting and defaults to the browser language; `theme` styles the header
 and controls.

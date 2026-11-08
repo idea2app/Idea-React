@@ -1,6 +1,6 @@
 import { Time } from '../../../../source/Extension/Time';
 
-import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { CodeCard, LiveExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="time">
@@ -12,15 +12,15 @@ machine-readable `dateTime` attribute.
 
 ## Example
 
-<DocumentLiveExample>
+<LiveExample>
     <Time dateTime="2026-10-01T08:00:00" format="YYYY-MM-DD HH:mm" />
-</DocumentLiveExample>
+</LiveExample>
 
 ## Usage
 
-<DocumentCodeCard>
+<CodeCard>
     <Time dateTime="2026-10-01" format="YYYY-MM-DD" />
-</DocumentCodeCard>
+</CodeCard>
 
 `dateTime` accepts a `Date`, timestamp, or date string; `format` follows the
 [web-utility `formatDate` tokens][2] such as `YYYY`, `MM`, `DD`, `HH`, and `mm`. The text re-renders

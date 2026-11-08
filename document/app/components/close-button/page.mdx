@@ -1,5 +1,5 @@
 import { CloseButton } from '../../../../source/Base/CloseButton';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="close-button" upstreamPath="components/close-button/">
@@ -15,34 +15,34 @@ label “Close”. Pass an `onClick` handler when wiring it to your own dismissi
 
 Provide an option to dismiss or close a component with `.btn-close`. The icon is rendered with a CSS `mask-image`, so it inherits the `color` from the `.btn-close` class—no inline SVG required. **Be sure to include text for screen readers**, as we’ve done with `aria-label`.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <CloseButton type="button" aria-label="Close" />
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Disabled state
 
 Disabled close buttons change their `opacity`. We’ve also applied `pointer-events: none` and `user-select: none` to preventing hover and active states from triggering.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <CloseButton type="button" disabled aria-label="Close" />
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Dark variant
 
 Add `data-bs-theme="dark"` to the `.btn-close`, or to its parent element, to invert the close button. This happens automatically when in dark mode.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="bg-inverse">
         <div data-bs-theme="dark">
             <CloseButton type="button" aria-label="Close" />
             <CloseButton type="button" disabled aria-label="Close" />
         </div>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## CSS
 

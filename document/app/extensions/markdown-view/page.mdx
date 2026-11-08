@@ -1,5 +1,5 @@
 import { MarkdownView } from '../../../../source/Extension/MarkdownView';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="markdown-view">
@@ -21,13 +21,13 @@ The component does not import or bundle this stylesheet.
 
 ## Example
 
-<DocumentCodeExample>
+<CodeExample>
     <MarkdownView className="border rounded p-4">
         {
             '## Hello, Markdown!\n\nWrite **formatted text**, [links](https://getbootstrap.com/), and lists:\n\n- React\n- Bootstrap'
         }
     </MarkdownView>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Usage
 

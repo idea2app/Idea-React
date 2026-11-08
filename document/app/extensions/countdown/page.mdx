@@ -1,6 +1,6 @@
 import { Countdown } from '../../../../source/Extension/Countdown';
 
-import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { CodeCard, LiveExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="countdown">
@@ -12,7 +12,7 @@ every second until the end time is reached.
 
 ## Example
 
-<DocumentLiveExample>
+<LiveExample>
     <Countdown
         className="d-flex gap-3"
         endTime="2035-01-01T00:00:00"
@@ -23,14 +23,14 @@ every second until the end time is reached.
             { scale: 1000, label: 'seconds' }
         ]}
     />
-</DocumentLiveExample>
+</LiveExample>
 
 ## Units
 
 `units` lists the sections from largest to smallest. Each `scale` is the amount of the next smaller
 unit that makes up one of the current unit, ending at milliseconds.
 
-<DocumentCodeCard>
+<CodeCard>
     <Countdown
         endTime="2030-01-01T00:00:00"
         units={[
@@ -41,7 +41,7 @@ unit that makes up one of the current unit, ending at milliseconds.
         ]}
         onEnd={endTime => console.log('Finished at', endTime)}
     />
-</DocumentCodeCard>
+</CodeCard>
 
 `itemClassName` styles each section, and `onEnd` fires once when the countdown reaches zero.
 

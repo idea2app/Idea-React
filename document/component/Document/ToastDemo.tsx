@@ -16,7 +16,7 @@ import {
 import { Image } from '../../../source/Content/Images';
 import { FormField, FormLabel, FormSelect } from '../../../source/Form';
 
-export interface DocumentStaticToastProps {
+export interface StaticToastProps {
     title?: ReactNode;
     time?: ReactNode;
     body?: ReactNode;
@@ -30,7 +30,7 @@ export interface DocumentStaticToastProps {
 }
 
 @observer
-export class DocumentStaticToast extends Component<DocumentStaticToastProps> {
+export class StaticToast extends Component<StaticToastProps> {
     @observable accessor visible = true;
 
     hide = action(() => (this.visible = false));
@@ -105,7 +105,7 @@ export class DocumentStaticToast extends Component<DocumentStaticToastProps> {
     }
 }
 
-export interface DocumentToastMessageDemoProps {
+export interface ToastMessageDemoProps {
     label?: string;
     title?: ReactNode;
     body?: ReactNode;
@@ -114,7 +114,7 @@ export interface DocumentToastMessageDemoProps {
 }
 
 @observer
-export class DocumentToastMessageDemo extends Component<DocumentToastMessageDemoProps> {
+export class ToastMessageDemo extends Component<ToastMessageDemoProps> {
     toast = new Toast();
 
     handleClick = () => {
@@ -154,7 +154,7 @@ const TOAST_POSITIONS: Record<ToastPosition, string> = {
 };
 
 @observer
-export class DocumentToastPlacementDemo extends Component {
+export class ToastPlacementDemo extends Component {
     toast = new Toast();
 
     @observable accessor position: ToastPosition = 'top-end';

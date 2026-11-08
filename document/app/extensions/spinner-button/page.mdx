@@ -1,6 +1,6 @@
 import { SpinnerButton } from '../../../../source/Extension/SpinnerButton';
 
-import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { CodeCard, LiveExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="spinner-button">
@@ -12,22 +12,22 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 
 ## Example
 
-<DocumentLiveExample>
+<LiveExample>
     <div className="d-flex flex-wrap gap-2">
         <SpinnerButton theme="primary" animation="border" loading />
         <SpinnerButton theme="primary" animation="grow" type="submit" loading>
             Submit
         </SpinnerButton>
     </div>
-</DocumentLiveExample>
+</LiveExample>
 
 ## Usage
 
-<DocumentCodeCard>
+<CodeCard>
     <SpinnerButton theme="primary" animation="grow" loading>
         Submit
     </SpinnerButton>
-</DocumentCodeCard>
+</CodeCard>
 
 All [Button](../../components/button/) props pass through, and `animation` selects the spinner animation. When the
 button has no children while loading, a visually hidden "Loading..." label keeps it accessible.

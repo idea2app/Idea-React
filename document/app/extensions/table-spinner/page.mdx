@@ -1,6 +1,6 @@
 import { TableSpinner } from '../../../../source/Extension/TableSpinner';
 
-import { DocumentCodeCard } from '../../../component/Document/Example';
+import { CodeCard } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="table-spinner">
@@ -27,7 +27,7 @@ cell spanning the given number of columns.
 
 ## Usage
 
-<DocumentCodeCard>{`<tbody>{loading ? <TableSpinner colSpan={columns.length} /> : rows}</tbody>`}</DocumentCodeCard>
+<CodeCard>{`<tbody>{loading ? <TableSpinner colSpan={columns.length} /> : rows}</tbody>`}</CodeCard>
 
 `colSpan` must match the table's column count; `animation`, `theme`, and `size` style the spinner.
 

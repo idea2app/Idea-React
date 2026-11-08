@@ -6,7 +6,7 @@ import {
     FormLabel
 } from '../../../../source/Form';
 import { MenuDivider } from '../../../../source/Base/Menu';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="combobox" upstreamPath="forms/combobox/">
@@ -30,43 +30,43 @@ The combobox component provides a styled select experience using a `Combobox` wi
 
 Use `Combobox` with `ComboboxOption` children. Each selectable option needs a `value` prop.
 
-<DocumentCodeExample>
+<CodeExample>
     <Combobox name="option" placeholder="Select an item…">
         <ComboboxOption value="1">Option one</ComboboxOption>
         <ComboboxOption value="2">Option two</ComboboxOption>
         <ComboboxOption value="3">Option three</ComboboxOption>
     </Combobox>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Placeholders
 
 Set placeholder text with the `placeholder` prop. The `.combobox-value` element shows this text when nothing is selected, styled with `.combobox-placeholder`.
 
-<DocumentCodeExample>
+<CodeExample>
     <Combobox name="country" placeholder="Pick a country…">
         <ComboboxOption value="us">United States</ComboboxOption>
         <ComboboxOption value="uk">United Kingdom</ComboboxOption>
         <ComboboxOption value="ca">Canada</ComboboxOption>
     </Combobox>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Pre-selected value
 
 Set `defaultValue` on `Combobox` to pre-select an option, or use `value` and `onChange` for controlled selection. The toggle text updates automatically on initialization.
 
-<DocumentCodeExample>
+<CodeExample>
     <Combobox name="role" placeholder="Choose a role…" defaultValue="editor">
         <ComboboxOption value="admin">Admin</ComboboxOption>
         <ComboboxOption value="editor">Editor</ComboboxOption>
         <ComboboxOption value="viewer">Viewer</ComboboxOption>
     </Combobox>
-</DocumentCodeExample>
+</CodeExample>
 
 ### With form field
 
 Use the [form field][1] component to layout and wrap your combobox with a label, description, and validation feedback messages in a vertical stack.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <FormLabel htmlFor="exampleCombobox">Combobox</FormLabel>
         <Combobox id="exampleCombobox" name="country" placeholder="Pick a country…">
@@ -75,7 +75,7 @@ Use the [form field][1] component to layout and wrap your combobox with a label,
             <ComboboxOption value="ca">Canada</ComboboxOption>
         </Combobox>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Custom content
 
@@ -85,7 +85,7 @@ Since menu items are standard HTML, you can put anything inside them — SVG ico
 
 Set `icon` on `ComboboxOption` for a leading icon, rendered with the library’s `Icon` component.
 
-<DocumentCodeExample>
+<CodeExample>
     <Combobox name="language" placeholder="Choose a language…">
         <ComboboxOption value="html" icon="file-earmark-code">
             HTML
@@ -97,13 +97,13 @@ Set `icon` on `ComboboxOption` for a leading icon, rendered with the library’s
             JavaScript
         </ComboboxOption>
     </Combobox>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Descriptions
 
 Use the `description` prop on `ComboboxOption` for secondary text. The component supplies the flex column layout.
 
-<DocumentCodeExample>
+<CodeExample>
     <Combobox name="role" placeholder="Select a role…">
         <ComboboxOption value="admin" description="Full access to all resources">
             Admin
@@ -115,13 +115,13 @@ Use the `description` prop on `ComboboxOption` for secondary text. The component
             Viewer
         </ComboboxOption>
     </Combobox>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Checked icon
 
 Set `checkedIcon` on each `ComboboxOption` to show a check mark indicator. It is hidden by default and becomes visible when the option is selected.
 
-<DocumentCodeExample>
+<CodeExample>
     <Combobox name="status" placeholder="Choose a status…" defaultValue="active">
         <ComboboxOption value="active" description="Visible to users" checkedIcon>
             Active
@@ -134,13 +134,13 @@ Set `checkedIcon` on each `ComboboxOption` to show a check mark indicator. It is
             Archived
         </ComboboxOption>
     </Combobox>
-</DocumentCodeExample>
+</CodeExample>
 
 ### All together
 
 Combine all three for a rich menu item layout.
 
-<DocumentCodeExample>
+<CodeExample>
     <Combobox name="priority" placeholder="Set priority…">
         <ComboboxOption value="low" description="No rush" icon="file-earmark-code" checkedIcon>
             Low
@@ -162,13 +162,13 @@ Combine all three for a rich menu item layout.
             High
         </ComboboxOption>
     </Combobox>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Search menu items
 
 Enable filtering with `search`. The component adds a search input and no-results message before the items; customize them with `searchPlaceholder` and `noResultsText`. Items are filtered by matching their `textContent` against the query.
 
-<DocumentCodeExample>
+<CodeExample>
     <Combobox name="country" placeholder="Select a country…" search>
         <ComboboxOption value="us">United States</ComboboxOption>
         <ComboboxOption value="uk">United Kingdom</ComboboxOption>
@@ -181,13 +181,13 @@ Enable filtering with `search`. The component adds a search input and no-results
         <ComboboxOption value="in">India</ComboboxOption>
         <ComboboxOption value="mx">Mexico</ComboboxOption>
     </Combobox>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Groups
 
 Use `ComboboxGroup` with a `label` to create labeled groups within the menu.
 
-<DocumentCodeExample>
+<CodeExample>
     <Combobox name="language" placeholder="Select a language…">
         <ComboboxGroup label="Frontend">
             <ComboboxOption value="html">HTML</ComboboxOption>
@@ -200,13 +200,13 @@ Use `ComboboxGroup` with a `label` to create labeled groups within the menu.
             <ComboboxOption value="go">Go</ComboboxOption>
         </ComboboxGroup>
     </Combobox>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Multiple select
 
 Set `multiple` for multi-select behavior. Selected items are toggled on click and the menu stays open. The toggle displays the count when more than one item is selected.
 
-<DocumentCodeExample>
+<CodeExample>
     <Combobox name="skills" placeholder="Select skills…" multiple>
         <ComboboxOption value="html" checkedIcon>
             HTML
@@ -224,13 +224,13 @@ Set `multiple` for multi-select behavior. Selected items are toggled on click an
             Ruby
         </ComboboxOption>
     </Combobox>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Sizing
 
 Use `controlSize="sm"` or `controlSize="lg"` to change the toggle button’s size.
 
-<DocumentCodeExample>
+<CodeExample>
     <Combobox controlSize="sm" name="option" placeholder="Small select…">
         <ComboboxOption value="1">Option one</ComboboxOption>
         <ComboboxOption value="2">Option two</ComboboxOption>
@@ -246,13 +246,13 @@ Use `controlSize="sm"` or `controlSize="lg"` to change the toggle button’s siz
         <ComboboxOption value="2">Option two</ComboboxOption>
     </Combobox>
 
-</DocumentCodeExample>
+</CodeExample>
 
 ## Disabled
 
 Add `disabled` to the toggle button or individual menu items.
 
-<DocumentCodeExample>
+<CodeExample>
     <Combobox disabled name="option" placeholder="Cannot interact…">
         <ComboboxOption value="1">Option one</ComboboxOption>
         <ComboboxOption value="2">Option two</ComboboxOption>
@@ -266,7 +266,7 @@ Add `disabled` to the toggle button or individual menu items.
         <ComboboxOption value="3">Available</ComboboxOption>
     </Combobox>
 
-</DocumentCodeExample>
+</CodeExample>
 
 ## Form submission
 

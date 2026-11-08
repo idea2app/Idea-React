@@ -12,7 +12,7 @@ import {
 import { Icon } from '../../../../source/Extension/Icon';
 import { Col, Row } from '../../../../source/Layout/Grid';
 import { Button } from '../../../../source/Base/Button';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="form-control" upstreamPath="forms/form-control/">
@@ -25,18 +25,18 @@ Give textual `<input>`, `<textarea>`, and `<select>` elements an upgrade with cu
 
 Form control styles are available for most textual inputs (including date and time types), textareas, and select elements. We uniformly style them with the `.form-control` class with element-specific modifiers as needed.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormLabel htmlFor="exampleFormControlInput" className="mb-2">
         Email address
     </FormLabel>
     <FormControl type="email" id="exampleFormControlInput" placeholder="name@example.com" />
-</DocumentCodeExample>
+</CodeExample>
 
 ## With form field
 
 Use the [form field][1] component to layout and wrap your inputs with a label, description, and validation feedback messages in a vertical stack.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={3}>
         <FormField>
             <FormLabel htmlFor="exampleFormControlInput1">Email address</FormLabel>
@@ -48,13 +48,13 @@ Use the [form field][1] component to layout and wrap your inputs with a label, d
             <FormText> We’ll never share your email with anyone else. </FormText>
         </FormField>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Textarea
 
 Textareas use the same `.form-control` class as inputs. Modify their height by using the `rows` attribute or using custom CSS.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={3}>
         <FormField>
             <FormLabel htmlFor="exampleFormControlTextarea1">Example textarea</FormLabel>
@@ -65,13 +65,13 @@ Textareas use the same `.form-control` class as inputs. Modify their height by u
             <FormTextArea id="exampleFormControlTextarea2" rows={4} />
         </FormField>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Select
 
 Basic select element styles are provided by the `.form-control` class. Styles are limited by the browser—options and popovers cannot be styled.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <FormLabel htmlFor="exampleFormControlSelect2">Example select</FormLabel>
         <FormSelect id="exampleFormControlSelect2">
@@ -81,11 +81,11 @@ Basic select element styles are provided by the `.form-control` class. Styles ar
             <option value="3">Three</option>
         </FormSelect>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 The `multiple` attribute is supported on select elements:
 
-<DocumentCodeExample>
+<CodeExample>
     <div>
         <FormLabel htmlFor="exampleFormControlSelect3">Multiple select</FormLabel>
         <FormSelect
@@ -100,11 +100,11 @@ The `multiple` attribute is supported on select elements:
             <option value="3">Three</option>
         </FormSelect>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 As is the `size` attribute:
 
-<DocumentCodeExample>
+<CodeExample>
     <div>
         <FormLabel htmlFor="exampleFormControlSelect4">Size 3 select</FormLabel>
         <FormSelect
@@ -119,13 +119,13 @@ As is the `size` attribute:
             <option value="3">Three</option>
         </FormSelect>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Sizes
 
 Change the size of a form control by using classes like `.form-control-lg` and `.form-control-sm`. This adjusts `height`, `padding`, `font-size`, `line-height`, and `border-radius`.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={3}>
         <div>
             <FormLabel htmlFor="sizesInputSmall">Small input</FormLabel>
@@ -157,11 +157,11 @@ Change the size of a form control by using classes like `.form-control-lg` and `
             />
         </div>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 And for textareas:
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={3}>
         <div>
             <FormLabel htmlFor="sizesTextareaSmall">Small textarea</FormLabel>
@@ -190,11 +190,11 @@ And for textareas:
             />
         </div>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 And for selects:
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={3}>
         <div>
             <FormLabel htmlFor="sizesSelectSmall">Small select</FormLabel>
@@ -224,7 +224,7 @@ And for selects:
             </FormSelect>
         </div>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Form text
 
@@ -235,18 +235,18 @@ Block-level or inline-level form text can be created using `.form-text`.
 
 Form text below inputs can be styled with `.form-text`. If a block-level element will be used, a top margin is added for easy spacing from the inputs above.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormLabel htmlFor="inputPassword5">Password</FormLabel>
     <FormControl type="password" id="inputPassword5" aria-describedby="passwordHelpBlock" />
     <FormText id="passwordHelpBlock" block>
         Your password must be 8-20 characters long, contain letters and numbers, and must not
         contain spaces, special characters, or emoji.
     </FormText>
-</DocumentCodeExample>
+</CodeExample>
 
 Inline text can use any typical inline HTML element (be it a `<span>`, `<small>`, or something else) with nothing more than the `.form-text` class.
 
-<DocumentCodeExample>
+<CodeExample>
     <Row className="g-3 align-items-center">
         <Col xs="auto">
             <FormLabel htmlFor="inputPassword6" column>
@@ -264,7 +264,7 @@ Inline text can use any typical inline HTML element (be it a `<span>`, `<small>`
             <FormText id="passwordHelpInline"> Must be 8-20 characters long. </FormText>
         </Col>
     </Row>
-</DocumentCodeExample>
+</CodeExample>
 
 ## States
 
@@ -272,7 +272,7 @@ Inline text can use any typical inline HTML element (be it a `<span>`, `<small>`
 
 Add the `disabled` boolean attribute on an input to give it a grayed out appearance, remove pointer events, and prevent focusing.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={3}>
         <FormControl
             type="text"
@@ -304,26 +304,26 @@ Add the `disabled` boolean attribute on an input to give it a grayed out appeara
             disabled
         />
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Readonly
 
 Add the `readonly` boolean attribute on an input to prevent modification of the input’s value. `readonly` inputs can still be focused and selected, while `disabled` inputs cannot.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormControl
         type="text"
         defaultValue="Readonly input here..."
         aria-label="readonly input example"
         readOnly
     />
-</DocumentCodeExample>
+</CodeExample>
 
 ### Readonly plain text
 
 If you want to have `<input readonly>` elements in your form styled as plain text, replace `.form-control` with `.form-control-plaintext` to remove the default form field styling and preserve the correct `margin` and `padding`.
 
-<DocumentCodeExample>
+<CodeExample>
     <Row className="mb-3">
         <FormLabel htmlFor="staticEmail" column className="sm:col-2">
             Email
@@ -346,9 +346,9 @@ If you want to have `<input readonly>` elements in your form styled as plain tex
             <FormControl type="password" id="inputPassword" />
         </Col>
     </Row>
-</DocumentCodeExample>
+</CodeExample>
 
-<DocumentCodeExample>
+<CodeExample>
     <Form className="row g-3">
         <Col xs="auto">
             <FormLabel htmlFor="staticEmail2" plain className="visually-hidden">
@@ -374,7 +374,7 @@ If you want to have `<input readonly>` elements in your form styled as plain tex
             </Button>
         </Col>
     </Form>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Types
 
@@ -384,7 +384,7 @@ Nearly all input types are supported, but not all are documented here. Input typ
 
 No additional classes are needed for date and time inputs. Exact functionality and appearance are dependent on the browser and operating system. However, you can also use [our datepicker component][2] to create a more consistent experience across browsers with JavaScript.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={3}>
         <FormControl
             type="datetime-local"
@@ -408,13 +408,13 @@ No additional classes are needed for date and time inputs. Exact functionality a
         <FormControl type="month" aria-label="Month picker" defaultValue="2026-02" />
         <FormControl type="week" aria-label="Week picker" defaultValue="2026-W09" />
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Color
 
 Set the `type="color"` and add `.form-control-color` to the `<input>` alongside `.form-control`. We use the modifier class to set fixed `height`s and override some inconsistencies between browsers.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormLabel htmlFor="exampleColorInput">Color picker</FormLabel>
     <FormControl
         type="color"
@@ -423,11 +423,11 @@ Set the `type="color"` and add `.form-control-color` to the `<input>` alongside 
         title="Choose your color"
         color
     />
-</DocumentCodeExample>
+</CodeExample>
 
 Sizes are also supported:
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={3}>
         <div>
             <FormLabel htmlFor="exampleColorInputLg">Large color picker</FormLabel>
@@ -452,7 +452,7 @@ Sizes are also supported:
             />
         </div>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Datalists
 
@@ -460,7 +460,7 @@ Datalists allow you to create a group of `<option>`s that can be accessed (and a
 
 Learn more about [support for datalist elements][3].
 
-<DocumentCodeExample>
+<CodeExample>
     <FormLabel htmlFor="exampleDataList">Datalist example</FormLabel>
     <FormControl list="datalistOptions" id="exampleDataList" placeholder="Type to search..." />
     <datalist id="datalistOptions">
@@ -470,11 +470,11 @@ Learn more about [support for datalist elements][3].
         <option value="Los Angeles" />
         <option value="Chicago" />
     </datalist>
-</DocumentCodeExample>
+</CodeExample>
 
 You can also combine with the `.form-control-caret` class to add a caret to inputs without requiring a select element.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormLabel htmlFor="exampleDataListCaret">Datalist example with caret</FormLabel>
     <FormControl
         list="datalistOptionsCaret"
@@ -489,13 +489,13 @@ You can also combine with the `.form-control-caret` class to add a caret to inpu
         <option value="Los Angeles" />
         <option value="Chicago" />
     </datalist>
-</DocumentCodeExample>
+</CodeExample>
 
 ### File
 
 `input[type="file"]` elements are styled with the `::file-selector-button` pseudo element to add a button to the input. You only need to add the `.form-control` class, plus any size modifiers you need.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={5}>
         <FormField>
             <FormLabel htmlFor="formFile">Default file input example</FormLabel>
@@ -518,7 +518,7 @@ You can also combine with the `.form-control-caret` class to add a caret to inpu
             <FormControl id="formFileLg" type="file" controlSize="lg" />
         </FormField>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Ghost
 
@@ -526,7 +526,7 @@ Ghost inputs are a special type of input, not native to the browser, that remove
 
 `.form-ghost` removes the input’s focus outline, so consider using `:focus-within` on a parent element to provide a visible focus indicator.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <FormLabel htmlFor="exampleGhostInput">Search</FormLabel>
         <div className="d-flex align-items-center gap-3 p-3 border rounded-3">
@@ -539,7 +539,7 @@ Ghost inputs are a special type of input, not native to the browser, that remove
             />
         </div>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 You can also use the [form-adorn component][4] to provide prebuilt styles for your ghost input.
 

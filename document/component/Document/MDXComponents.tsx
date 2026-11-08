@@ -1,7 +1,7 @@
-import { DocumentCodeCard, DocumentCodeFence } from './Example';
+import { CodeCard, DocumentCodeFence } from './Example';
 
 export const useMDXComponents = (components = {}) => ({
-    DocumentCodeCard,
+    CodeCard,
     pre: DocumentCodeFence,
     ...components
 });

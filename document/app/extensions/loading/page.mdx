@@ -1,6 +1,6 @@
-import { DocumentCodeCard, DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeCard, CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
-import { DocumentLoadingDemo } from '../../../component/Document/LoadingDemo';
+import { LoadingDemo } from '../../../component/Document/LoadingDemo';
 
 <DocumentLayout active="loading">
 
@@ -11,7 +11,7 @@ covers the viewport with a translucent backdrop, so render it only while blockin
 
 ## Example
 
-<DocumentCodeExample
+<CodeExample
     source="document/component/Document/LoadingDemo.tsx"
     code={`<Button onClick={showLoading}>Show loading</Button>
 
@@ -19,17 +19,17 @@ covers the viewport with a translucent backdrop, so render it only while blockin
 
 >
 
-    <DocumentLoadingDemo />
+    <LoadingDemo />
 
-</DocumentCodeExample>
+</CodeExample>
 
 ## Usage
 
-<DocumentCodeCard>{`import { Loading } from 'idea-react';
+<CodeCard>{`import { Loading } from 'idea-react';
 
 {
 uploading && <Loading>Uploading…</Loading>;
-}`}</DocumentCodeCard>
+}`}</CodeCard>
 
 The children replace the default `Loading...` text. For loading states inside a button or a table,
 use the [Spinner button](../spinner-button/) or [Table spinner](../table-spinner/) instead.

@@ -9,7 +9,7 @@ import { Menu, MenuItem } from '../../../../source/Base/Menu';
 import { Navbar, NavbarBrand } from '../../../../source/Base/Navbar';
 import { FormLabel } from '../../../../source/Form';
 import { Container } from '../../../../source/Layout/Grid';
-import { DocumentCodeExample } from '../Example';
+import { CodeExample } from '../Example';
 import styles from './style.module.css';
 
 const placements = ['', 'fixed-top', 'fixed-bottom', 'sticky-top', 'sticky-bottom'] as const;
@@ -24,8 +24,8 @@ const labels: Record<Placement, string> = {
 };
 
 @observer
-export class DocumentNavbarPlacement extends Component {
-    static displayName = 'DocumentNavbarPlacement';
+export class NavbarPlacement extends Component {
+    static displayName = 'NavbarPlacement';
 
     @observable accessor placement: Placement = '';
 
@@ -74,7 +74,7 @@ export class DocumentNavbarPlacement extends Component {
                     </div>
                 </div>
 
-                <DocumentCodeExample code={code}>
+                <CodeExample code={code}>
                     <div
                         className={`position-relative overflow-auto border rounded ${styles.preview}`}
                     >
@@ -84,7 +84,7 @@ export class DocumentNavbarPlacement extends Component {
                             </Container>
                         </Navbar>
                     </div>
-                </DocumentCodeExample>
+                </CodeExample>
             </div>
         );
     }

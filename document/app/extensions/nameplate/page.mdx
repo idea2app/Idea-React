@@ -1,6 +1,6 @@
 import { Nameplate } from '../../../../source/Extension/Nameplate';
 
-import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { CodeCard, LiveExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="nameplate">
@@ -12,19 +12,19 @@ listings.
 
 ## Example
 
-<DocumentLiveExample>
+<LiveExample>
     <Nameplate name="idea2app" avatar="https://github.com/idea2app.png" />
-</DocumentLiveExample>
+</LiveExample>
 
 ## Usage
 
-<DocumentCodeCard>{`<ul className="list-unstyled">
+<CodeCard>{`<ul className="list-unstyled">
     {members.map(({ name, avatar }) => (
         <li key={name}>
             <Nameplate {...{ name, avatar }} />
         </li>
     ))}
-</ul>`}</DocumentCodeCard>
+</ul>`}</CodeCard>
 
 </DocumentLayout>
 

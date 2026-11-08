@@ -4,7 +4,7 @@ import { Image } from '../../../../source/Content/Images';
 import { OverlayBox } from '../../../../source/Extension/OverlayBox';
 import { Popover } from '../../../../source/Base/Popover';
 
-import { DocumentCodeCard, DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeCard, CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 import * as style from '../../../component/Document/style.module.less';
 
@@ -77,7 +77,7 @@ accessible association with `aria-describedby`.
 
 Pass JSX to `detail` to place rich content, such as an image, inside the popover.
 
-<DocumentCodeExample>
+<CodeExample>
     <OverlayBox
         trigger="click"
         title="view info"
@@ -87,7 +87,7 @@ Pass JSX to `detail` to place rich content, such as an image, inside the popover
             {'View'}
         </Button>
     </OverlayBox>
-</DocumentCodeExample>
+</CodeExample>
 
 #### Placement
 
@@ -122,7 +122,7 @@ Directions are mirrored when using Bootstrap in RTL.
 Use `placement` for the default direction and `responsivePlacement` for viewport breakpoints.
 The highest matching breakpoint wins.
 
-<DocumentCodeCard>
+<CodeCard>
     <OverlayBox
         placement="top"
         responsivePlacement={{ md: 'right', lg: 'bottom' }}
@@ -131,7 +131,7 @@ The highest matching breakpoint wins.
     >
         <Button>Open</Button>
     </OverlayBox>
-</DocumentCodeCard>
+</CodeCard>
 
 #### Custom container
 
@@ -139,11 +139,11 @@ Pass `container="body"` to escape clipping ancestors, or provide an element or a
 one. The wrapper translates viewport measurements into the overlay's positioned ancestor coordinates.
 Pointer and focus movement into portal content remain interactive; outside clicks and Escape dismiss it.
 
-<DocumentCodeCard>
+<CodeCard>
     <OverlayBox container="body" offset={[0, 12]} padding={8} title="Portal tooltip">
         <Button>Hover or focus</Button>
     </OverlayBox>
-</DocumentCodeCard>
+</CodeCard>
 
 `offset` is a main-axis distance or a `[crossAxis, mainAxis]` pair. `padding` sets the viewport inset;
 `flip={false}` retains the preferred side while still shifting within viewport boundaries.
@@ -411,11 +411,11 @@ Tooltips and popovers use local CSS variables for real-time customization. Overr
 Bootstrap enables popovers and tooltips through a JavaScript plugin. Mount the React component
 instead—there is no instance to initialize, retrieve, or dispose:
 
-<DocumentCodeCard>
+<CodeCard>
     <OverlayBox title="Popover title" detail="Popover content">
         <Button>Toggle popover</Button>
     </OverlayBox>
-</DocumentCodeCard>
+</CodeCard>
 
 The wrapper renders the panel, keeps `aria-describedby` in sync, and closes it on outside pointer
 interaction or <kbd>Escape</kbd>.
@@ -451,11 +451,11 @@ The plugin's data attributes map directly to props:
 The plugin's `show`, `hide`, `toggle`, `setContent`, and instance methods do not exist in the React
 wrapper. Render `<Popover>` or `<Tooltip>` directly when you need to control visibility or content:
 
-<DocumentCodeCard>
+<CodeCard>
     <Popover title="Popover title" placement="top">
         Popover content
     </Popover>
-</DocumentCodeCard>
+</CodeCard>
 
 Likewise, use React state and lifecycle instead of `show.bs.popover`, `shown.bs.tooltip`, and the
 other plugin events.

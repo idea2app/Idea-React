@@ -1,6 +1,6 @@
 import { ClickBoundary } from '../../../../source/Extension/ClickBoundary';
 
-import { DocumentCodeCard } from '../../../component/Document/Example';
+import { CodeCard } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="click-boundary">
@@ -13,11 +13,11 @@ clicks elsewhere.
 
 ## Usage
 
-<DocumentCodeCard>
+<CodeCard>
     <ClickBoundary onInnerClick={() => console.log('inside')} onOuterClick={() => setOpen(false)}>
         <div className="border rounded p-3">Click inside or outside this box</div>
     </ClickBoundary>
-</DocumentCodeCard>
+</CodeCard>
 
 The component listens for `click` events in the capture phase on `window`, so outer clicks are
 detected even when other handlers stop propagation. The listener is removed on unmount.

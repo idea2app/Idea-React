@@ -4,8 +4,8 @@ import { Component, InputEvent, SubmitEvent } from 'react';
 
 import { Form, FormProps } from '../../../source/Form';
 
-export class DocumentValidationForm extends Component<FormProps> {
-    static displayName = 'DocumentValidationForm';
+export class ValidationForm extends Component<FormProps> {
+    static displayName = 'ValidationForm';
 
     updateValidity = (control: Element) => {
         if (

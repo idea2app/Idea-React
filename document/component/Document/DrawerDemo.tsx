@@ -7,14 +7,14 @@ import { Component, ReactNode } from 'react';
 import { Button } from '../../../source/Base/Button';
 import { Drawer, DrawerProps } from '../../../source/Base/Drawer';
 
-export interface DocumentDrawerDemoProps extends Omit<DrawerProps, 'footer'> {
+export interface DrawerDemoProps extends Omit<DrawerProps, 'footer'> {
     label: ReactNode;
     title: string;
     footer?: boolean;
 }
 
 @observer
-export class DocumentDrawerDemo extends Component<DocumentDrawerDemoProps> {
+export class DrawerDemo extends Component<DrawerDemoProps> {
     @observable accessor open = false;
 
     show = action(() => (this.open = true));

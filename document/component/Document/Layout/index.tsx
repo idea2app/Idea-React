@@ -1,9 +1,9 @@
 import { Children, ComponentProps, FC, isValidElement, PropsWithChildren } from 'react';
 
 import { Col, Container, Row } from '../../../../source/Layout/Grid';
-import { DocumentNavigation } from '../Navigation';
-import { documentGroups, DocumentSidebar } from '../Sidebar';
-import { DocumentToc } from '../Toc';
+import { Navigation } from '../Navigation';
+import { documentGroups, Sidebar } from '../Sidebar';
+import { Toc } from '../Toc';
 import { DocumentHeading } from './Heading';
 
 export interface DocumentLayoutProps extends PropsWithChildren {
@@ -23,12 +23,12 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({ active, upstreamPath, 
     return (
         <Container className="py-4 pb-12 lg:pb-4">
             <Row className="g-5">
-                <aside className="lg:col-3 d-none lg:d-block">
-                    <DocumentSidebar active={active} />
-                </aside>
+                <Col as="aside" lg={3} className="d-none lg:d-block">
+                    <Sidebar active={active} />
+                </Col>
                 <Col xs={12} lg={9}>
                     <Row className="g-5">
-                        <main id="content" className="col-12 lg:col-9">
+                        <Col as="main" id="content" xs={12} lg={9}>
                             {isValidElement<ComponentProps<'h1'>>(heading) && (
                                 <DocumentHeading
                                     {...heading.props}
@@ -37,17 +37,17 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({ active, upstreamPath, 
                                 />
                             )}
                             {content.filter((_, index) => index !== headingIndex)}
-                        </main>
-                        <aside className="lg:col-3 d-none lg:d-block">
-                            <DocumentToc />
-                        </aside>
+                        </Col>
+                        <Col as="aside" lg={3} className="d-none lg:d-block">
+                            <Toc />
+                        </Col>
                     </Row>
                 </Col>
             </Row>
 
-            <DocumentNavigation>
-                <DocumentSidebar active={active} />
-            </DocumentNavigation>
+            <Navigation>
+                <Sidebar active={active} />
+            </Navigation>
         </Container>
     );
 };

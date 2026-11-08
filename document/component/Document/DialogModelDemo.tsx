@@ -17,7 +17,7 @@ import { Dialog, DialogClose } from '../../../source/Extension/Dialog';
 import { FormControl, FormField, FormLabel } from '../../../source/Form';
 
 @observer
-export class DocumentDialogModelDemo extends Component {
+export class DialogModelDemo extends Component {
     inputDialog = new Dialog<{}, Record<'a' | 'b', number>>(({ defer }) => (
         <NativeDialog
             open={!!defer}

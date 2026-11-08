@@ -1,6 +1,6 @@
 import { HorizontalMarquee } from '../../../../source/Extension/HorizontalMarquee';
 
-import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { CodeCard, LiveExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="horizontal-marquee">
@@ -12,21 +12,21 @@ replacement for the deprecated `<marquee>` element.
 
 ## Example
 
-<DocumentLiveExample>
+<LiveExample>
     <HorizontalMarquee className="border rounded p-2">
         Idea React · TypeScript-first Bootstrap 6 and React components powered by MobX · built by
         the idea2app community
     </HorizontalMarquee>
-</DocumentLiveExample>
+</LiveExample>
 
 ## Behavior
 
 Content narrower than the container stays still; overflowing content scrolls in a loop. The
 animation pauses while hovered so users can read the text.
 
-<DocumentCodeCard>
+<CodeCard>
     <HorizontalMarquee>Announcement text</HorizontalMarquee>
-</DocumentCodeCard>
+</CodeCard>
 
 See the [Vertical marquee](../vertical-marquee/) for the vertical variant.
 

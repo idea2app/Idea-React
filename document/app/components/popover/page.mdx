@@ -1,9 +1,9 @@
 import { Button } from '../../../../source/Base/Button';
 import { OverlayBox } from '../../../../source/Extension/OverlayBox';
-import { DocumentDialogDemo } from '../../../component/Document/DialogDemo';
+import { DialogDemo } from '../../../component/Document/DialogDemo';
 import styles from '../../../component/Document/OverlayGuideDemo/style.module.css';
 import { DocumentLayout } from '../../../component/Document/Layout';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 
 <DocumentLayout active="popover" upstreamPath="components/popover/">
 
@@ -15,7 +15,7 @@ Small, contextual overlays for displaying custom content and information via Jav
 
 Click the button below to show and close a popover.
 
-<DocumentCodeExample>
+<CodeExample>
     <OverlayBox
         title="Popover title"
         detail="This is the popover content—make it as long as you want."
@@ -25,7 +25,7 @@ Click the button below to show and close a popover.
             Toggle popover
         </Button>
     </OverlayBox>
-</DocumentCodeExample>
+</CodeExample>
 
 Things to know when using popovers with `OverlayBox`:
 
@@ -51,7 +51,7 @@ Titles are set via `title` and body content is set via `detail` on `OverlayBox`.
 
 Use the `title` prop on `OverlayBox`, rather than the native `title` attribute on the trigger, to avoid duplicate browser tooltips.
 
-<DocumentCodeExample>
+<CodeExample>
     <OverlayBox
         title="Popover title"
         detail="And here’s some amazing content. It’s very engaging. Right?"
@@ -61,13 +61,13 @@ Use the `title` prop on `OverlayBox`, rather than the native `title` attribute o
             Toggle popover
         </Button>
     </OverlayBox>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Placement
 
 Set `placement` to change the direction. Four options are available: top, right, bottom, and left. Directions are mirrored when using Bootstrap in RTL.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-3">
         <OverlayBox
             title="Popover on left"
@@ -110,13 +110,13 @@ Set `placement` to change the direction. Four options are available: top, right,
             </Button>
         </OverlayBox>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Responsive placement
 
 Change placement at different breakpoints using `responsivePlacement={{ md: 'right', lg: 'bottom' }}`, where each breakpoint is one of `sm`, `md`, `lg`, `xl`, or `2xl`.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-3">
         <OverlayBox
             title="Popover title"
@@ -141,7 +141,7 @@ Change placement at different breakpoints using `responsivePlacement={{ md: 'rig
             </Button>
         </OverlayBox>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 Resize your browser to see the popover placement change at different breakpoints.
 
@@ -149,7 +149,7 @@ Resize your browser to see the popover placement change at different breakpoints
 
 When you have some styles on a parent element that interfere with a popover, you’ll want to specify a custom `container` so that the popover’s HTML appears within that element instead. This is common in responsive tables, input groups, and the like.
 
-<DocumentCodeExample>
+<CodeExample>
     <OverlayBox
         title="Popover title"
         detail="And here’s some amazing content. It’s very engaging. Right?"
@@ -160,16 +160,12 @@ When you have some styles on a parent element that interfere with a popover, you
             Popover in body
         </Button>
     </OverlayBox>
-</DocumentCodeExample>
+</CodeExample>
 
 Another situation where you’ll want to set an explicit custom `container` are popovers inside a [dialog][1], to make sure that the popover itself is appended to the dialog. This is particularly important for popovers that contain interactive elements – dialogs will trap focus, so unless the popover is a child element of the dialog, users won’t be able to focus or activate these interactive elements.
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
-    <DocumentDialogDemo
-        id="popoverContainerDialog"
-        label="Popover inside dialog"
-        title="Popover container"
-    >
+<CodeExample source="document/component/Document/DialogDemo.tsx">
+    <DialogDemo id="popoverContainerDialog" label="Popover inside dialog" title="Popover container">
         <OverlayBox
             title="Popover title"
             detail="This popover stays in the dialog’s top layer."
@@ -180,14 +176,14 @@ Another situation where you’ll want to set an explicit custom `container` are 
                 Toggle popover
             </Button>
         </OverlayBox>
-    </DocumentDialogDemo>
-</DocumentCodeExample>
+    </DialogDemo>
+</CodeExample>
 
 ### Custom popovers
 
 You can customize the appearance of popovers using [CSS variables][2]. We pass a CSS module class through `overlayClassName` to scope our custom appearance and use it to override some of the local CSS variables.
 
-<DocumentCodeExample>
+<CodeExample>
     <OverlayBox
         title="Custom popover"
         detail="This popover is themed via CSS variables."
@@ -199,7 +195,7 @@ You can customize the appearance of popovers using [CSS variables][2]. We pass a
             Custom popover
         </Button>
     </OverlayBox>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Dismiss on next click
 
@@ -208,7 +204,7 @@ Use the `focus` trigger to dismiss popovers on the user’s next click of an ele
 
 **Dismissing on next click requires specific HTML for proper cross-browser and cross-platform behavior.** For an anchor trigger, include a [`tabindex`][3].
 
-<DocumentCodeExample>
+<CodeExample>
     <OverlayBox
         title="Dismissible popover"
         detail="And here’s some amazing content. It’s very engaging. Right?"
@@ -218,7 +214,7 @@ Use the `focus` trigger to dismiss popovers on the user’s next click of an ele
             Dismissible popover
         </Button>
     </OverlayBox>
-</DocumentCodeExample>
+</CodeExample>
 
 A shown popover can also be dismissed by pressing the <kbd>Escape</kbd> key. As with dropdown menus, a popover shown inside a dialog is dismissed on its own: the first <kbd>Escape</kbd> closes the popover and a subsequent one closes the dialog.
 
@@ -228,7 +224,7 @@ Elements with the `disabled` attribute aren’t interactive, meaning users canno
 
 For disabled popover triggers, you may also prefer `trigger={["hover", "focus"]}` so that the popover appears as immediate visual feedback to your users as they may not expect to _click_ on a disabled element.
 
-<DocumentCodeExample>
+<CodeExample>
     <OverlayBox title="Disabled popover" detail="Disabled popover" trigger={['hover', 'focus']}>
         <span className="d-inline-block rounded-3" tabIndex={0}>
             <Button variant="solid" theme="primary" disabled>
@@ -236,7 +232,7 @@ For disabled popover triggers, you may also prefer `trigger={["hover", "focus"]}
             </Button>
         </span>
     </OverlayBox>
-</DocumentCodeExample>
+</CodeExample>
 
 ## CSS
 

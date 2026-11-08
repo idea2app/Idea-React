@@ -1,4 +1,4 @@
-import { DocumentCodeCard } from '../../../component/Document/Example';
+import { CodeCard } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="live-tsx">
@@ -10,11 +10,11 @@ live preview, a code editor, and any evaluation errors.
 
 ## Usage
 
-<DocumentCodeCard>{`import { LiveTSX } from 'idea-react';
+<CodeCard>{`import { LiveTSX } from 'idea-react';
 
 <LiveTSX scope={{ Button }}>
     <Button theme="primary">Edit me live</Button>
-</LiveTSX>;`}</DocumentCodeCard>
+</LiveTSX>;`}</CodeCard>
 
 React element children are serialized to JSX source for the editor; string children are used as the
 code directly. Provide every referenced component or value through `scope`.

@@ -3,7 +3,7 @@ import reactElementToJSXString from 'react-element-to-jsx-string';
 
 import { Card } from '../../../source/Base/Card';
 import { CodeBlock } from '../../../source/Extension/CodeBlock';
-import { DocumentLiveRunner } from './LiveRunner';
+import { LiveRunner } from './LiveRunner';
 
 const CLIENT_REFERENCE_TAG = Symbol.for('react.client.reference');
 const WRAPPED_TAGS = new Set([Symbol.for('react.memo'), Symbol.for('react.forward_ref')]);
@@ -47,27 +47,22 @@ const toSourceCode = (children: ReactNode) => {
     });
 };
 
-export type DocumentCodeExampleProps = PropsWithChildren<{
+export type CodeExampleProps = PropsWithChildren<{
     code?: string;
     source?: string;
 }>;
 
-export type DocumentCodeCardProps = DocumentCodeExampleProps & {
+export type CodeCardProps = CodeExampleProps & {
     language?: string;
 };
 
-export type DocumentLiveExampleProps = PropsWithChildren<{
+export type LiveExampleProps = PropsWithChildren<{
     code?: string;
 }>;
 
 const getSourceURL = (source: string) => new URL(source, REPOSITORY_SOURCE_BASE).href;
 
-export const DocumentCodeCard: FC<DocumentCodeCardProps> = ({
-    children,
-    code,
-    language = 'tsx',
-    source
-}) => (
+export const CodeCard: FC<CodeCardProps> = ({ children, code, language = 'tsx', source }) => (
     <Card className="my-6" body>
         <CodeBlock
             language={language}
@@ -91,16 +86,16 @@ export const DocumentCodeFence: FC<ComponentProps<'pre'>> = ({ children }) => {
     const { className = '', children: code } = children.props;
     const language = className.replace(/^language-/, '') || 'text';
 
-    return <DocumentCodeCard language={language}>{code}</DocumentCodeCard>;
+    return <CodeCard language={language}>{code}</CodeCard>;
 };
 
-export const DocumentCodeExample: FC<DocumentCodeExampleProps> = ({ code, source, children }) => (
+export const CodeExample: FC<CodeExampleProps> = ({ code, source, children }) => (
     <>
         {children}
-        <DocumentCodeCard source={source}>{code ?? children}</DocumentCodeCard>
+        <CodeCard source={source}>{code ?? children}</CodeCard>
     </>
 );
 
-export const DocumentLiveExample: FC<DocumentLiveExampleProps> = ({ code, children }) => (
-    <DocumentLiveRunner code={code ?? toSourceCode(children)} />
+export const LiveExample: FC<LiveExampleProps> = ({ code, children }) => (
+    <LiveRunner code={code ?? toSourceCode(children)} />
 );

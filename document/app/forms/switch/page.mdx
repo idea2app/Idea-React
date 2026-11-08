@@ -1,6 +1,6 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { FormField, FormLabel, FormSwitch } from '../../../../source/Form';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="switch" upstreamPath="forms/switch/">
@@ -13,15 +13,15 @@ Custom toggle component built on top of native `<input>` checkbox elements.
 
 Switches work by layering an invisible checkbox over the custom switch indicator. This preserves interactivity while giving you a completely customizable layer underneath. `FormSwitch` supplies `role="switch"` on the checkbox. Pass native input attributes such as `id`, `name`, `disabled`, and `defaultChecked` directly to `FormSwitch`.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormSwitch defaultValue="" id="switch" />
-</DocumentCodeExample>
+</CodeExample>
 
 ## With form field
 
 Wrap `FormSwitch` in a `FormField` layout wrapper and add your label. The grid layout places the switch and label side by side.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-column gap-3">
         <FormField>
             <FormSwitch defaultValue="" id="switchMdLabel" />
@@ -30,13 +30,13 @@ Wrap `FormSwitch` in a `FormField` layout wrapper and add your label. The grid l
             </FormLabel>
         </FormField>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Theme colors
 
 Modify the appearance of switches by adding the `theme` prop to the `.switch` element. This will set the checked background and border color to the theme color.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-column gap-2">
         <FormField>
             <FormSwitch defaultValue="" id="switchprimary" defaultChecked theme="primary" />
@@ -99,13 +99,13 @@ Modify the appearance of switches by adding the `theme` prop to the `.switch` el
             </FormLabel>
         </FormField>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Disabled
 
 Add the `disabled` attribute and the associated `<label>`s are automatically styled to match with a lighter color to help indicate the input’s state.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={2}>
         <FormField>
             <FormSwitch defaultValue="" id="switchDisabledLabel" disabled />
@@ -120,13 +120,13 @@ Add the `disabled` attribute and the associated `<label>`s are automatically sty
             </FormLabel>
         </FormField>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Sizes
 
 Add a size modifier class to make your switch appear smaller or larger.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-column gap-3">
         <FormField>
             <FormSwitch defaultValue="" id="switchSizeSm" size="sm" />
@@ -147,13 +147,13 @@ Add a size modifier class to make your switch appear smaller or larger.
             </FormLabel>
         </FormField>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Custom width
 
 Customize your switch for any width and indicator size you need by overriding the CSS variables. For example, for a more modern look, you could widen the switch and indicator.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-column gap-3">
         <FormField>
             <FormSwitch
@@ -167,7 +167,7 @@ Customize your switch for any width and indicator size you need by overriding th
             </FormLabel>
         </FormField>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## CSS
 

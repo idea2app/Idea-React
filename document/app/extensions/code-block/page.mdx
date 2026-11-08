@@ -1,4 +1,4 @@
-import { DocumentCodeCard } from '../../../component/Document/Example';
+import { CodeCard } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="code-block">
@@ -10,7 +10,7 @@ as-is, while React elements are serialized to JSX source first.
 
 ## Example
 
-<DocumentCodeCard>{`export const Hello = () => <strong>Hello, Idea React!</strong>;`}</DocumentCodeCard>
+<CodeCard>{`export const Hello = () => <strong>Hello, Idea React!</strong>;`}</CodeCard>
 
 ## Language
 
@@ -24,7 +24,7 @@ to follow the system preference. Bootstrap theme containers work automatically, 
 nested containers with a different theme. Changing the scheme updates highlighting without
 rerendering the component.
 
-<DocumentCodeCard>{`<CodeBlock language="ts">{\`const answer: number = 42;\`}</CodeBlock>`}</DocumentCodeCard>
+<CodeCard>{`<CodeBlock language="ts">{\`const answer: number = 42;\`}</CodeBlock>`}</CodeCard>
 
 </DocumentLayout>
 

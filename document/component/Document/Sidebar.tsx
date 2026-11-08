@@ -161,11 +161,11 @@ export const documentGroups: NavGroup[] = [
 ];
 const basePath = nextConfig.basePath || '';
 
-export interface DocumentSidebarProps {
+export interface SidebarProps {
     active?: string;
 }
 
-export const DocumentSidebar: FC<DocumentSidebarProps> = ({ active }) => (
+export const Sidebar: FC<SidebarProps> = ({ active }) => (
     <nav
         className={`d-flex flex-column pb-3 ${style.sidebar}`}
         aria-label="Documentation navigation"

@@ -9,7 +9,7 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
 import { ToggleButton } from '../../../../source/Base/ToggleButton';
 import { Icon } from '../../../../source/Extension/Icon';
 import { FormLabel, FormSelect } from '../../../../source/Form';
-import { DocumentCodeExample } from '../Example';
+import { CodeExample } from '../Example';
 
 const colors = [
     'primary',
@@ -31,7 +31,7 @@ const sizes = [
 const rounding = ['default', 'pill', 'square'] as const;
 
 @observer
-export class DocumentButtonPlayground extends Component {
+export class ButtonPlayground extends Component {
     @observable accessor color: (typeof colors)[number] = 'primary';
     @observable accessor variant: (typeof variants)[number] = 'styled';
     @observable accessor size: (typeof sizes)[number]['value'] = '';
@@ -194,7 +194,7 @@ export class DocumentButtonPlayground extends Component {
                 </div>
 
                 <div className="mt-3 overflow-auto">
-                    <DocumentCodeExample>{this.renderPreview()}</DocumentCodeExample>
+                    <CodeExample>{this.renderPreview()}</CodeExample>
                 </div>
             </section>
         );

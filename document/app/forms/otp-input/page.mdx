@@ -1,6 +1,6 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { FormLabel, FormText, OTPInput } from '../../../../source/Form';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="otp-input" upstreamPath="forms/otp-input/">
@@ -26,48 +26,48 @@ OTP input is built on [form controls][1] and shares its sizing tokens.
 
 Use `OTPInput` with a `length` prop to determine how many slots to render. The plugin hides the real input behind transparent overlay styling and draws one `.otp-slot` per character. Give the input an accessible name with `aria-label` or an associated `<label>`.
 
-<DocumentCodeExample>
+<CodeExample>
     <OTPInput aria-label="Verification code" length={6} />
-</DocumentCodeExample>
+</CodeExample>
 
 ## Connected inputs
 
 Set `connected` to merge the slots into a single cohesive field with shared borders.
 
-<DocumentCodeExample>
+<CodeExample>
     <OTPInput aria-label="Verification code" connected length={6} />
-</DocumentCodeExample>
+</CodeExample>
 
 ## Four-digit PIN
 
 Set `length` to control the number of slots—use fewer for shorter codes like a 4-digit PIN.
 
-<DocumentCodeExample>
+<CodeExample>
     <OTPInput aria-label="PIN" connected length={4} />
-</DocumentCodeExample>
+</CodeExample>
 
 ## With separator
 
 Use `groups` with an array of group sizes to split the slots into groups separated by a visual divider—handy for codes like "123-456". The separator is decorative and never becomes part of the value.
 
-<DocumentCodeExample>
+<CodeExample>
     <OTPInput aria-label="Verification code" length={6} groups={[3, 3]} />
-</DocumentCodeExample>
+</CodeExample>
 
 ## Sizes
 
 Set `size="sm"` or `size="lg"` to change the slot size.
 
-<DocumentCodeExample>
+<CodeExample>
     <OTPInput aria-label="Small verification code" size="sm" length={6} wrapperClassName="mb-3" />
     <OTPInput aria-label="Large verification code" size="lg" length={6} />
-</DocumentCodeExample>
+</CodeExample>
 
 ## Alphanumeric and masking
 
 By default only digits are accepted. Set `type` to `alphanumeric` or `alpha` to accept letters, and `mask` to obscure the entered value while keeping it a normal text field (no `type="password"`, so the numeric keyboard and autofill still work).
 
-<DocumentCodeExample>
+<CodeExample>
     <OTPInput
         aria-label="Alphanumeric code"
         connected
@@ -76,21 +76,21 @@ By default only digits are accepted. Set `type` to `alphanumeric` or `alpha` to 
         wrapperClassName="mb-3"
     />
     <OTPInput aria-label="Masked code" connected length={6} mask />
-</DocumentCodeExample>
+</CodeExample>
 
 ## Disabled
 
 Add the `disabled` attribute to the input to prevent interaction.
 
-<DocumentCodeExample>
+<CodeExample>
     <OTPInput aria-label="Verification code" disabled connected length={6} />
-</DocumentCodeExample>
+</CodeExample>
 
 ## Validation
 
 Set `validation="valid"` or `validation="invalid"` to show validation states.
 
-<DocumentCodeExample>
+<CodeExample>
     <OTPInput
         defaultValue="123456"
         aria-label="Verification code"
@@ -106,19 +106,19 @@ Set `validation="valid"` or `validation="invalid"` to show validation states.
         length={6}
         validation="invalid"
     />
-</DocumentCodeExample>
+</CodeExample>
 
 ## With form label
 
 Associate a `<label>` with the input and add help text with `aria-describedby` for better accessibility.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={2}>
         <FormLabel htmlFor="otpCode">Verification code</FormLabel>
         <OTPInput id="otpCode" aria-describedby="otpHelp" length={6} />
         <FormText id="otpHelp">Enter the 6-digit code sent to your phone.</FormText>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Usage
 

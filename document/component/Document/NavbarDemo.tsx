@@ -7,7 +7,7 @@ import { Component, ReactNode } from 'react';
 import { Drawer, DrawerPlacement } from '../../../source/Base/Drawer';
 import { Navbar, NavbarBrand, NavbarProps, NavbarToggler } from '../../../source/Base/Navbar';
 
-export interface DocumentNavbarDemoProps {
+export interface NavbarDemoProps {
     brand?: ReactNode;
     title?: string;
     expand?: NavbarProps['expand'];
@@ -20,7 +20,7 @@ export interface DocumentNavbarDemoProps {
 }
 
 @observer
-export class DocumentNavbarDemo extends Component<DocumentNavbarDemoProps> {
+export class NavbarDemo extends Component<NavbarDemoProps> {
     @observable accessor open = false;
 
     show = action(() => (this.open = true));
@@ -64,7 +64,7 @@ export class DocumentNavbarDemo extends Component<DocumentNavbarDemoProps> {
 }
 
 @observer
-export class DocumentNavbarExternalDemo extends Component {
+export class NavbarExternalDemo extends Component {
     @observable accessor open = false;
 
     show = action(() => (this.open = true));

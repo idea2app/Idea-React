@@ -14,7 +14,7 @@ export interface DocumentCarouselImageProps {
     rounded?: boolean;
 }
 
-export const DocumentCarouselImage: FC<DocumentCarouselImageProps> = ({
+export const CarouselImage: FC<DocumentCarouselImageProps> = ({
     children,
     width = 800,
     height = 400,

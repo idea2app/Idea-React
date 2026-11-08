@@ -47,7 +47,7 @@ const inlineElements = new Set([
     'CardTitle',
     'CardSubtitle',
     'CardText',
-    'DocumentCarouselImage',
+    'CarouselImage',
     'ChipDismiss',
     'ChipInputLabel',
     'ChipToken',

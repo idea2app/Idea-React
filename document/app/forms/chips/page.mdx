@@ -8,7 +8,7 @@ import {
     FormLabel,
     FormText
 } from '../../../../source/Form';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="chips" upstreamPath="forms/chips/">
@@ -35,7 +35,7 @@ See examples of all of this in action below.
 
 Use `ChipToken` for the standalone tokens shown below, or `Chip` for a button. Add `ChipIcon` for a leading icon, `ChipImage` for an image like an avatar, and `ChipDismiss` for a remove button. Dismiss buttons use the library’s `Icon` component; use `ChipToken` rather than nesting a dismiss button inside `Chip`.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2">
         <ChipToken>Basic chip</ChipToken>
         <ChipToken>
@@ -48,13 +48,13 @@ Use `ChipToken` for the standalone tokens shown below, or `Chip` for a button. A
             Dismissible <ChipDismiss type="button" aria-label="Remove" />
         </ChipToken>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Themed chips
 
 Set `theme` to color your chips. Chips are subtle by default as this allows for a clear, themed active state.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2">
         <ChipToken>Default</ChipToken>
         <ChipToken theme="primary">Primary</ChipToken>
@@ -68,13 +68,13 @@ Set `theme` to color your chips. Chips are subtle by default as this allows for 
         <ChipToken theme="light">Light</ChipToken>
         <ChipToken theme="inverse">Inverse</ChipToken>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Active state
 
 Set `active` to make chips use the solid appearance (bg/contrast). This is useful for toggle-style chip selections.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2">
         <ChipToken theme="primary">Default</ChipToken>
         <ChipToken active theme="primary">
@@ -85,7 +85,7 @@ Set `active` to make chips use the solid appearance (bg/contrast). This is usefu
             Active
         </ChipToken>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Chip input
 
@@ -93,20 +93,20 @@ Wrap `ChipToken` components and a `FormGhost` input in `ChipInput` to create a t
 
 Type into the input below and press <kbd>Enter</kbd> or <kbd>,</kbd> to add new chips. Use the <kbd>Backspace</kbd> or <kbd>Delete</kbd> keys to remove chips. See the [Keyboard behavior][2] section for more details.
 
-<DocumentCodeExample>
+<CodeExample>
     <ChipInput>
         <ChipInputLabel htmlFor="skillsInput">Skills:</ChipInputLabel>
         <ChipToken> JavaScript </ChipToken>
         <ChipToken> TypeScript </ChipToken>
         <FormGhost type="text" id="skillsInput" placeholder="Add more…" />
     </ChipInput>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Theme variants
 
 Set `theme` on `ChipInput` to apply a theme color to all chips within.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={3}>
         <ChipInput theme="primary">
             <ChipToken>Approved</ChipToken>
@@ -119,33 +119,33 @@ Set `theme` on `ChipInput` to apply a theme color to all chips within.
             <FormGhost type="text" placeholder="Add issue" />
         </ChipInput>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 You can also individually apply a theme color to a chip with the chip’s `theme` prop.
 
-<DocumentCodeExample>
+<CodeExample>
     <ChipInput theme="primary">
         <ChipToken theme="warning">Bug</ChipToken>
         <ChipToken theme="danger">Critical</ChipToken>
         <FormGhost type="text" placeholder="Add issue" />
     </ChipInput>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Empty state
 
 Start with just the ghost input—chips are created as users type.
 
-<DocumentCodeExample>
+<CodeExample>
     <ChipInput theme="primary">
         <FormGhost type="text" placeholder="Type and press Enter" />
     </ChipInput>
-</DocumentCodeExample>
+</CodeExample>
 
 ### With label
 
 Use a form label for better accessibility.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <FormLabel htmlFor="skillsInputLabel">Skills</FormLabel>
         <ChipInput theme="primary">
@@ -156,20 +156,20 @@ Use a form label for better accessibility.
         </ChipInput>
         <FormText>Press Enter or comma to add a skill.</FormText>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Disabled
 
 Disable the ghost input to prevent adding new chips, and disable the dismiss buttons on existing chips. Existing chips become non-interactive.
 
-<DocumentCodeExample>
+<CodeExample>
     <ChipInput theme="primary">
         <ChipToken>
             Read only <ChipDismiss type="button" aria-label="Remove" disabled />
         </ChipToken>
         <FormGhost type="text" placeholder="Disabled..." disabled />
     </ChipInput>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Usage
 

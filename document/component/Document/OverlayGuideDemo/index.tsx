@@ -10,7 +10,7 @@ import { Drawer } from '../../../../source/Base/Drawer';
 import { Menu, MenuItem } from '../../../../source/Base/Menu';
 
 @observer
-export class DocumentAlertGuideDemo extends Component {
+export class AlertGuideDemo extends Component {
     @observable accessor visible = false;
 
     trigger = createRef<HTMLButtonElement>();
@@ -39,7 +39,7 @@ export class DocumentAlertGuideDemo extends Component {
 }
 
 @observer
-export class DocumentDrawerTriggersGuideDemo extends Component {
+export class DrawerTriggersGuideDemo extends Component {
     @observable accessor open = false;
 
     show = action(() => (this.open = true));

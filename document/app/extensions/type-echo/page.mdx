@@ -1,6 +1,6 @@
 import { TypeEcho } from '../../../../source/Extension/TypeEcho';
 
-import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { CodeCard, LiveExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="type-echo">
@@ -12,15 +12,15 @@ and showing a cursor until the text completes.
 
 ## Example
 
-<DocumentLiveExample>
+<LiveExample>
     <TypeEcho text="Build React apps with less glue and more possibility." />
-</DocumentLiveExample>
+</LiveExample>
 
 ## Usage
 
-<DocumentCodeCard>
+<CodeCard>
     <TypeEcho text="Build React apps with less glue." intervals={100} />
-</DocumentCodeCard>
+</CodeCard>
 
 `intervals` sets the delay between characters in milliseconds (default `150`). The animation runs
 once per mount, driven by an `IntersectionObserver` so off-screen text does not animate early.

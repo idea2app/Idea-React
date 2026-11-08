@@ -5,7 +5,7 @@ import { FC } from 'react';
 import { PageNav, PageNavProps } from '../../../source/Extension/PageNav';
 import * as style from './style.module.less';
 
-export const DocumentToc: FC<Pick<PageNavProps, 'onItemClick'>> = props => (
+export const Toc: FC<Pick<PageNavProps, 'onItemClick'>> = props => (
     <div className={style.toc}>
         <strong className="d-block fw-semibold mb-2">On this page</strong>
 

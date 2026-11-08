@@ -8,12 +8,12 @@ import {
     DialogFooter
 } from '../../../../source/Base/NativeDialog';
 import {
-    DocumentDialogDemo,
-    DocumentDialogOverlaysDemo,
-    DocumentDialogSwapDemo
+    DialogDemo,
+    DialogOverlaysDemo,
+    DialogSwapDemo
 } from '../../../component/Document/DialogDemo';
 import { DocumentLayout } from '../../../component/Document/Layout';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 
 <DocumentLayout active="dialog" upstreamPath="components/dialog/">
 
@@ -39,12 +39,12 @@ The animation effect of this component is dependent on the `prefers-reduced-moti
 
 Toggle a dialog by clicking the button below. The dialog uses the native `showModal()` API for true modal behavior.
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
-    <DocumentDialogDemo label="Open dialog" title="Dialog title" saveLabel="Save changes">
+<CodeExample source="document/component/Document/DialogDemo.tsx">
+    <DialogDemo label="Open dialog" title="Dialog title" saveLabel="Save changes">
         This is a native dialog element. It uses the browser’s built-in modal behavior for
         accessibility and focus management.
-    </DocumentDialogDemo>
-</DocumentCodeExample>
+    </DialogDemo>
+</CodeExample>
 
 ## Without JavaScript
 
@@ -52,7 +52,7 @@ Supported browsers can open and close a dialog with the [Invoker Commands API][1
 
 The Invoker Commands API is not supported in all browsers. For guaranteed support, use React-controlled `open` and `onClose`, as in the examples above, when you need wrapper options, events, or animated close.
 
-<DocumentCodeExample>
+<CodeExample>
     <Button
         variant="solid"
         theme="primary"
@@ -84,38 +84,33 @@ The Invoker Commands API is not supported in all browsers. For guaranteed suppor
             </Button>
         </DialogFooter>
     </NativeDialog>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Dark dialog
 
 To make a dialog dark, pass `theme="dark"` to `NativeDialog`.
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
-    <DocumentDialogDemo
-        label="Open dark dialog"
-        title="Dark dialog title"
-        saveLabel="Save changes"
-        dark
-    >
+<CodeExample source="document/component/Document/DialogDemo.tsx">
+    <DialogDemo label="Open dark dialog" title="Dark dialog title" saveLabel="Save changes" dark>
         This is a native dialog element. It uses the browser’s built-in modal behavior for
         accessibility and focus management.
-    </DocumentDialogDemo>
-</DocumentCodeExample>
+    </DialogDemo>
+</CodeExample>
 
 ## Static backdrop
 
 When `backdrop` is set to `static`, the dialog will not close when clicking outside of it. Click the button below to try it.
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
-    <DocumentDialogDemo
+<CodeExample source="document/component/Document/DialogDemo.tsx">
+    <DialogDemo
         label="Open static backdrop dialog"
         title="Static backdrop"
         saveLabel="Save changes"
         backdrop="static"
     >
         I will not close if you click outside of me. Use the close button or press Escape.
-    </DocumentDialogDemo>
-</DocumentCodeExample>
+    </DialogDemo>
+</CodeExample>
 
 ## Overlays
 
@@ -123,9 +118,9 @@ Tooltips, popovers, and toasts all work inside dialogs, but require some extra c
 
 Tooltips, popovers, toasts, and menus all work inside modal dialogs. Modal dialogs use `showModal()`, which promotes the dialog to the browser’s top layer -- a special rendering layer above everything else on the page.
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
-    <DocumentDialogOverlaysDemo />
-</DocumentCodeExample>
+<CodeExample source="document/component/Document/DialogDemo.tsx">
+    <DialogOverlaysDemo />
+</CodeExample>
 
 ## Animations
 
@@ -133,53 +128,53 @@ Tooltips, popovers, toasts, and menus all work inside modal dialogs. Modal dialo
 
 By default, dialogs animate with a fade on open and close. To disable animations, pass `animation="instant"` to `NativeDialog`.
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
-    <DocumentDialogDemo
+<CodeExample source="document/component/Document/DialogDemo.tsx">
+    <DialogDemo
         label="Instant dialog"
         title="Instant dialog"
         saveLabel="Save changes"
         animation="instant"
     >
         This dialog doesn’t animate and appears instantly on open and close.
-    </DocumentDialogDemo>
-</DocumentCodeExample>
+    </DialogDemo>
+</CodeExample>
 
 ### Slide down
 
 Pass `animation="slide-down"` to `NativeDialog` and it will slide **down** from the top of the viewport when opened.
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
-    <DocumentDialogDemo
+<CodeExample source="document/component/Document/DialogDemo.tsx">
+    <DialogDemo
         label="Slide down dialog"
         title="Slide down dialog"
         saveLabel="Save changes"
         animation="slide-down"
     >
         This dialog slides down from the top of the viewport.
-    </DocumentDialogDemo>
-</DocumentCodeExample>
+    </DialogDemo>
+</CodeExample>
 
 ### Slide up
 
 Pass `animation="slide-up"` to `NativeDialog` and it will slide **up** from the bottom of the viewport when opened.
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
-    <DocumentDialogDemo
+<CodeExample source="document/component/Document/DialogDemo.tsx">
+    <DialogDemo
         label="Slide up dialog"
         title="Slide up dialog"
         saveLabel="Save changes"
         animation="slide-up"
     >
         This dialog slides up from the bottom of the viewport.
-    </DocumentDialogDemo>
-</DocumentCodeExample>
+    </DialogDemo>
+</CodeExample>
 
 ## Scrollable
 
 Create a scrollable dialog that scrolls the dialog body while keeping the header and footer fixed. Pass `scrollable` to `NativeDialog`.
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
-    <DocumentDialogDemo
+<CodeExample source="document/component/Document/DialogDemo.tsx">
+    <DialogDemo
         label="Launch scrollable body dialog"
         title="Scrollable body"
         saveLabel="Save changes"
@@ -255,16 +250,16 @@ Create a scrollable dialog that scrolls the dialog body while keeping the header
             repeated paragraphs to demonstrate how content can exceed the dialog’s inner height,
             showing scrolling within the body while the header and footer remain fixed.
         </p>
-    </DocumentDialogDemo>
-</DocumentCodeExample>
+    </DialogDemo>
+</CodeExample>
 
 ## Swapping dialogs
 
 When a toggle trigger is inside an open dialog, clicking it will **swap** dialogs—opening the new one before closing the current. This ensures the backdrop stays visible throughout the transition with no flash. The React demo coordinates the two `open` props rather than using data-attribute triggers.
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
-    <DocumentDialogSwapDemo />
-</DocumentCodeExample>
+<CodeExample source="document/component/Document/DialogDemo.tsx">
+    <DialogSwapDemo />
+</CodeExample>
 
 ## Non-modal dialogs
 
@@ -276,16 +271,16 @@ By default, dialogs open as modals using the browser-native `showModal()` method
 - Don’t render in the browser’s top layer
 - Still respond to Escape key (if `keyboard: true`)
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
-    <DocumentDialogDemo
+<CodeExample source="document/component/Document/DialogDemo.tsx">
+    <DialogDemo
         label="Open non-modal dialog"
         title="Non-modal dialog"
         saveLabel="Save changes"
         modal={false}
     >
         This dialog doesn’t block interaction with the rest of the page.
-    </DocumentDialogDemo>
-</DocumentCodeExample>
+    </DialogDemo>
+</CodeExample>
 
 Use `modal={false}` to create a non-modal `NativeDialog`.
 
@@ -300,33 +295,33 @@ Dialogs have three optional sizes, available via the `size` prop on `NativeDialo
 | Large       | `size="lg"` | `800px`          |
 | Extra large | `size="xl"` | `1140px`         |
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
+<CodeExample source="document/component/Document/DialogDemo.tsx">
     <div className="d-flex flex-wrap gap-3">
-        <DocumentDialogDemo label="Default dialog" title="Default dialog" saveLabel="Save changes">
+        <DialogDemo label="Default dialog" title="Default dialog" saveLabel="Save changes">
             This is a native dialog element. It uses the browser’s built-in modal behavior for
             accessibility and focus management.
-        </DocumentDialogDemo>
-        <DocumentDialogDemo label="SM dialog" title="SM dialog" saveLabel="Save changes" size="sm">
+        </DialogDemo>
+        <DialogDemo label="SM dialog" title="SM dialog" saveLabel="Save changes" size="sm">
             This is a native dialog element. It uses the browser’s built-in modal behavior for
             accessibility and focus management.
-        </DocumentDialogDemo>
-        <DocumentDialogDemo label="LG dialog" title="LG dialog" saveLabel="Save changes" size="lg">
+        </DialogDemo>
+        <DialogDemo label="LG dialog" title="LG dialog" saveLabel="Save changes" size="lg">
             This is a native dialog element. It uses the browser’s built-in modal behavior for
             accessibility and focus management.
-        </DocumentDialogDemo>
-        <DocumentDialogDemo label="XL dialog" title="XL dialog" saveLabel="Save changes" size="xl">
+        </DialogDemo>
+        <DialogDemo label="XL dialog" title="XL dialog" saveLabel="Save changes" size="xl">
             This is a native dialog element. It uses the browser’s built-in modal behavior for
             accessibility and focus management.
-        </DocumentDialogDemo>
+        </DialogDemo>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Fullscreen dialog
 
 Pass `fullscreen` to make the dialog cover the entire viewport.
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
-    <DocumentDialogDemo
+<CodeExample source="document/component/Document/DialogDemo.tsx">
+    <DialogDemo
         label="Fullscreen dialog"
         title="Fullscreen dialog"
         saveLabel="Save changes"
@@ -334,8 +329,8 @@ Pass `fullscreen` to make the dialog cover the entire viewport.
     >
         This is a native dialog element. It uses the browser’s built-in modal behavior for
         accessibility and focus management.
-    </DocumentDialogDemo>
-</DocumentCodeExample>
+    </DialogDemo>
+</CodeExample>
 
 Responsive fullscreen variants are also available. These make the dialog fullscreen only below a specific breakpoint.
 
@@ -348,9 +343,9 @@ Responsive fullscreen variants are also available. These make the dialog fullscr
 | `fullscreen="xl"`  | `1280px`         |
 | `fullscreen="2xl"` | `1536px`         |
 
-<DocumentCodeExample source="document/component/Document/DialogDemo.tsx">
+<CodeExample source="document/component/Document/DialogDemo.tsx">
     <div className="d-flex flex-wrap gap-3">
-        <DocumentDialogDemo
+        <DialogDemo
             label="Fullscreen below sm"
             title="Fullscreen below sm"
             saveLabel="Save changes"
@@ -358,8 +353,8 @@ Responsive fullscreen variants are also available. These make the dialog fullscr
         >
             This is a native dialog element. It uses the browser’s built-in modal behavior for
             accessibility and focus management.
-        </DocumentDialogDemo>
-        <DocumentDialogDemo
+        </DialogDemo>
+        <DialogDemo
             label="Fullscreen below md"
             title="Fullscreen below md"
             saveLabel="Save changes"
@@ -367,8 +362,8 @@ Responsive fullscreen variants are also available. These make the dialog fullscr
         >
             This is a native dialog element. It uses the browser’s built-in modal behavior for
             accessibility and focus management.
-        </DocumentDialogDemo>
-        <DocumentDialogDemo
+        </DialogDemo>
+        <DialogDemo
             label="Fullscreen below lg"
             title="Fullscreen below lg"
             saveLabel="Save changes"
@@ -376,8 +371,8 @@ Responsive fullscreen variants are also available. These make the dialog fullscr
         >
             This is a native dialog element. It uses the browser’s built-in modal behavior for
             accessibility and focus management.
-        </DocumentDialogDemo>
-        <DocumentDialogDemo
+        </DialogDemo>
+        <DialogDemo
             label="Fullscreen below xl"
             title="Fullscreen below xl"
             saveLabel="Save changes"
@@ -385,8 +380,8 @@ Responsive fullscreen variants are also available. These make the dialog fullscr
         >
             This is a native dialog element. It uses the browser’s built-in modal behavior for
             accessibility and focus management.
-        </DocumentDialogDemo>
-        <DocumentDialogDemo
+        </DialogDemo>
+        <DialogDemo
             label="Fullscreen below 2xl"
             title="Fullscreen below 2xl"
             saveLabel="Save changes"
@@ -394,9 +389,9 @@ Responsive fullscreen variants are also available. These make the dialog fullscr
         >
             This is a native dialog element. It uses the browser’s built-in modal behavior for
             accessibility and focus management.
-        </DocumentDialogDemo>
+        </DialogDemo>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## CSS
 

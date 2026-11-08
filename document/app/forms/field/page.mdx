@@ -1,5 +1,5 @@
 import { Stack } from '../../../../source/Base/Stack';
-import { DocumentValidationForm } from '../../../component/Document/ValidationForm';
+import { ValidationForm } from '../../../component/Document/ValidationForm';
 import {
     Checkbox,
     Combobox,
@@ -17,7 +17,7 @@ import {
     Radio
 } from '../../../../source/Form';
 import { Button } from '../../../../source/Base/Button';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="field" upstreamPath="forms/field/">
@@ -28,13 +28,13 @@ A universal layout wrapper for form controls that handles label, description, an
 
 The Field component provides essential layout, spacing, and functionality for your form input or component of choice. They even scale to support laying out checkboxes, radios, and switches in a two-column layout.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <FormLabel htmlFor="fieldText">Email address</FormLabel>
         <FormControl type="email" id="fieldText" placeholder="name@example.com" />
         <FormText> We’ll never share your email with anyone else. </FormText>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 ## How it works
 
@@ -51,7 +51,7 @@ The `.form-field` wrapper uses CSS grid to manage the layout of a form control a
 
 Works the same way with `<select>` elements.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <FormLabel htmlFor="fieldSelect">Country</FormLabel>
         <FormSelect id="fieldSelect" defaultValue="Choose one…">
@@ -61,38 +61,38 @@ Works the same way with `<select>` elements.
             <option value="3">United Kingdom</option>
         </FormSelect>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Textarea
 
 Works the same way with `<textarea>` elements. Descriptions are optional.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <FormLabel htmlFor="fieldTextarea">Message</FormLabel>
         <FormTextArea id="fieldTextarea" rows={3} />
         <FormText> Be sure to include relevant details. </FormText>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Checkbox
 
 When a `.check` is a direct child, the grid switches to a two-column layout with the checkbox in column 1 and the label in column 2.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <Checkbox id="fieldCheck" />
         <FormLabel htmlFor="fieldCheck" plain>
             Remember me
         </FormLabel>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Radio
 
 Radios use the same two-column layout. Wrap each radio + label pair in its own `.form-field`.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-column gap-2">
         <FormField>
             <Radio id="fieldRadio1" name="fieldRadioGroup" />
@@ -107,13 +107,13 @@ Radios use the same two-column layout. Wrap each radio + label pair in its own `
             </FormLabel>
         </FormField>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Grouped
 
 Wrap multiple `.form-field`s in a `.form-group` to group related controls under a shared label. The group provides consistent spacing while each inner `.form-field` keeps its own layout.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormGroup>
         <FormLabel>Shipping method</FormLabel>
         <FormField>
@@ -130,13 +130,13 @@ Wrap multiple `.form-field`s in a `.form-group` to group related controls under 
         </FormField>
         <FormText>Choose your preferred shipping speed.</FormText>
     </FormGroup>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Group cards
 
 Add `.form-field-card` to each inner `.form-field` for a card-style treatment that highlights the selected option. Wrap the inner fields in a `.form-group` with tighter spacing for a more compact look.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormGroup>
         <FormLabel>Select a plan</FormLabel>
         <Stack gap={1}>
@@ -160,26 +160,26 @@ Add `.form-field-card` to each inner `.form-field` for a card-style treatment th
             </FormField>
         </Stack>
     </FormGroup>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Switch
 
 Switches also trigger the two-column grid.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <FormSwitch id="fieldSwitch" />
         <FormLabel htmlFor="fieldSwitch" plain>
             Enable notifications
         </FormLabel>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Combobox
 
 Comboboxes—as well as datepickers, OTPs, and any other form component—are support as well.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <FormLabel plain>Combobox</FormLabel>
         <Combobox name="option" placeholder="Select an item…">
@@ -191,13 +191,13 @@ Comboboxes—as well as datepickers, OTPs, and any other form component—are su
         <FormText>Choose an item from the menu above.</FormText>
     </FormField>
 
-</DocumentCodeExample>
+</CodeExample>
 
 ## Overhead label
 
 When a check, radio, or switch needs a field title above it, add a `.form-label`. It automatically spans both columns and sits on its own row above the control.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <FormLabel>Terms and conditions</FormLabel>
         <Checkbox id="fieldOverheadCheck" required />
@@ -208,13 +208,13 @@ When a check, radio, or switch needs a field title above it, add a `.form-label`
             <FormText>Please read before agreeing.</FormText>
         </FormFieldContent>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Descriptions
 
 Add a `<small class="form-text">` after the label and wrap it in a `.form-field-content` to ensure appropriate spacing and alignment.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-column gap-3">
         <FormField>
             <Checkbox id="fieldCheckDesc" />
@@ -240,7 +240,7 @@ Add a `<small class="form-text">` after the label and wrap it in a `.form-field-
             <FormText>Must be 3-20 characters, letters and numbers only.</FormText>
         </FormField>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Validation
 
@@ -250,8 +250,8 @@ Validation feedback (`.invalid-feedback`, `.valid-feedback`) stacks correctly in
 
 Add `data-bs-validate` to your `<form>` to opt in to `:user-invalid` styling. These pseudo-classes activate after the user interacts with a control. To also show success styling on valid fields, use `data-bs-validate="valid"`. Add `novalidate` to suppress native browser validation tooltips while keeping the constraint validation API available.
 
-<DocumentCodeExample>
-    <Stack as={DocumentValidationForm} noValidate data-bs-validate="" gap={3}>
+<CodeExample>
+    <Stack as={ValidationForm} noValidate data-bs-validate="" gap={3}>
         <FormField className="flex-1">
             <FormLabel htmlFor="fieldValidateEmail">Email address</FormLabel>
             <FormControl type="email" id="fieldValidateEmail" required />
@@ -271,13 +271,13 @@ Add `data-bs-validate` to your `<form>` to opt in to `:user-invalid` styling. Th
             Submit
         </Button>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Server-side
 
 Apply `.is-invalid` or `.is-valid` directly to the control for server-side validation. Feedback is visible immediately on page load.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField className="mb-3">
         <FormLabel htmlFor="fieldServerEmail">Email address</FormLabel>
         <FormControl
@@ -314,6 +314,6 @@ Apply `.is-invalid` or `.is-valid` directly to the control for server-side valid
         </FormLabel>
         <FormFeedback>This field is required.</FormFeedback>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 </DocumentLayout>

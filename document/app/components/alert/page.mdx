@@ -1,9 +1,9 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { Alert, AlertHeading, AlertLink } from '../../../../source/Base/Alert';
 import { Icon } from '../../../../source/Extension/Icon';
-import { DocumentAlertGuideDemo } from '../../../component/Document/OverlayGuideDemo';
+import { AlertGuideDemo } from '../../../component/Document/OverlayGuideDemo';
 import { DocumentLayout } from '../../../component/Document/Layout';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 
 <DocumentLayout active="alert" upstreamPath="components/alert/">
 
@@ -15,17 +15,17 @@ Provide contextual feedback messages for typical user actions with the handful o
 
 Alerts are flex containers that can contain any length of text, as well as an optional close button. They’re designed to be used with theme colors, but have neutral fallback colors for when no theme color is applied. For inline dismissal, use the `dismissible` prop. [Custom content][1] is also supported, with additional utilities or markup required.
 
-<DocumentCodeExample>
+<CodeExample>
     <Alert>
         <p>A simple alert—check it out!</p>
     </Alert>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Variants
 
 Use any of our `theme` values for color mode adaptive, contextual styling.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={3}>
         <Alert theme="primary">
             <p>A simple primary alert—check it out!</p>
@@ -52,7 +52,7 @@ Use any of our `theme` values for color mode adaptive, contextual styling.
             <p>A simple inverse alert—check it out!</p>
         </Alert>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 Color alone does not convey meaning to assistive technologies. Include visible text or additional visually hidden text to communicate the purpose of the message.
 
@@ -60,15 +60,15 @@ Color alone does not convey meaning to assistive technologies. Include visible t
 
 Click the button below to show an alert (hidden with inline styles to start), then dismiss (and destroy) it with the built-in close button.
 
-<DocumentCodeExample source="document/component/Document/OverlayGuideDemo/index.tsx">
-    <DocumentAlertGuideDemo />
-</DocumentCodeExample>
+<CodeExample source="document/component/Document/OverlayGuideDemo/index.tsx">
+    <AlertGuideDemo />
+</CodeExample>
 
 ## Link color
 
 Use the `AlertLink` component to quickly provide matching colored links within any alert.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={3}>
         <Alert theme="primary">
             <p>
@@ -124,18 +124,18 @@ Use the `AlertLink` component to quickly provide matching colored links within a
             </p>
         </Alert>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ## With icons
 
 Similarly, you can use [flexbox utilities][2] and [Bootstrap Icons][3] to create alerts with icons. Depending on your icons and content, you may want to add more utilities or custom styles.
 
-<DocumentCodeExample>
+<CodeExample>
     <Alert theme="primary" className="align-items-center">
         <Icon name="exclamation-triangle-fill" aria-label="Warning:" />
         <p>An example alert with an icon</p>
     </Alert>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Dismiss
 
@@ -148,11 +148,11 @@ An alert fades out before it is removed. The wrapper adds its exit state for the
 
 You can see this in action with a live demo:
 
-<DocumentCodeExample>
+<CodeExample>
     <Alert theme="warning" dismissible>
         <p>Something’s wrong, check the fields below and try again.</p>
     </Alert>
-</DocumentCodeExample>
+</CodeExample>
 
 When an alert is dismissed, the element is completely removed from the page structure. If a keyboard user dismisses the alert using the close button, their focus will suddenly be lost and, depending on the browser, reset to the start of the page/document. For this reason, we recommend including additional JavaScript that handles the `onClosed` callback and programmatically sets `focus()` to the most appropriate location in the page. If you’re planning to move focus to a non-interactive element that normally does not receive focus, make sure to add `tabindex="-1"` to the element.
 
@@ -160,7 +160,7 @@ When an alert is dismissed, the element is completely removed from the page stru
 
 For simple vertical layouts, it should be enough to add the `flex-column` class to the alert.
 
-<DocumentCodeExample>
+<CodeExample>
     <Alert theme="success" className="flex-column align-items-stretch">
         <AlertHeading className="mb-2">Well done!</AlertHeading>
         <p>
@@ -171,11 +171,11 @@ For simple vertical layouts, it should be enough to add the `flex-column` class 
         <hr className="my-3" />
         <p>Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
     </Alert>
-</DocumentCodeExample>
+</CodeExample>
 
 More complex layouts may require additional HTML within the alert—like when mixing in icons and dismiss buttons.
 
-<DocumentCodeExample>
+<CodeExample>
     <Alert theme="warning" dismissible>
         <div className="pe-3">
             <AlertHeading className="mb-2">More complex alert</AlertHeading>
@@ -186,7 +186,7 @@ More complex layouts may require additional HTML within the alert—like when mi
             </p>
         </div>
     </Alert>
-</DocumentCodeExample>
+</CodeExample>
 
 ## CSS
 

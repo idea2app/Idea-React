@@ -1,6 +1,6 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { FormField, FormFieldContent, FormLabel, FormText, Radio } from '../../../../source/Form';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="radio" upstreamPath="forms/radio/">
@@ -13,15 +13,15 @@ Highly customizable, native radio `<input>` elements for choosing one option fro
 
 Similar to checkboxes, radios are styled with the `.radio` class. However, there’s no custom SVG as we use pure CSS to style the input and its checked state.
 
-<DocumentCodeExample>
+<CodeExample>
     <Radio id="radio" />
-</DocumentCodeExample>
+</CodeExample>
 
 ## With form field
 
 Wrap `Radio` in a `FormField` layout wrapper and add your label. The grid layout places the radio and label side by side.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-column gap-2">
         <FormField>
             <Radio name="radios" id="radioLabel" />
@@ -36,13 +36,13 @@ Wrap `Radio` in a `FormField` layout wrapper and add your label. The grid layout
             </FormLabel>
         </FormField>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Description
 
 Add a description or other content after the label. We recommend wrapping the label and description in a `.form-field-content` to ensure appropriate spacing and alignment.
 
-<DocumentCodeExample>
+<CodeExample>
     <FormField>
         <Radio id="radioLabelDescription" />
         <FormFieldContent>
@@ -52,13 +52,13 @@ Add a description or other content after the label. We recommend wrapping the la
             <FormText>Supporting description for the above label.</FormText>
         </FormFieldContent>
     </FormField>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Theme colors
 
 Modify the appearance of checked radios with the `theme` prop. This will set the checked background and border color to the theme color.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-column gap-2">
         <FormField>
             <Radio id="radioprimary" defaultChecked theme="primary" />
@@ -121,13 +121,13 @@ Modify the appearance of checked radios with the `theme` prop. This will set the
             </FormLabel>
         </FormField>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Disabled
 
 Add the `disabled` attribute and the associated `<label>`s are automatically styled to match with a lighter color to help indicate the input’s state.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={2}>
         <FormField>
             <Radio id="radioDisabled" disabled />
@@ -142,13 +142,13 @@ Add the `disabled` attribute and the associated `<label>`s are automatically sty
             </FormLabel>
         </FormField>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Sizes
 
 Set `size="sm"` or `size="lg"` to make your radio appear smaller or larger.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-column gap-3">
         <FormField>
             <Radio id="radioSizeSm" defaultChecked size="sm" />
@@ -169,7 +169,7 @@ Set `size="sm"` or `size="lg"` to make your radio appear smaller or larger.
             </FormLabel>
         </FormField>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## CSS
 

@@ -1,6 +1,6 @@
 import { TextTruncate } from '../../../../source/Extension/TextTruncate';
 
-import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { CodeCard, LiveExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="text-truncate">
@@ -12,22 +12,22 @@ when the content actually overflows.
 
 ## Example
 
-<DocumentLiveExample>
+<LiveExample>
     <TextTruncate rows={2} className="border rounded p-3">
         Idea React is a TypeScript-first collection of advanced React components powered by MobX.
         From dialogs and notifications to live code, editors, and timelines, it brings the building
         blocks together so you can focus on your application instead of plumbing. This paragraph is
         long on purpose so the clamp and the expand toggle are visible in the example.
     </TextTruncate>
-</DocumentLiveExample>
+</LiveExample>
 
 ## Usage
 
-<DocumentCodeCard>
+<CodeCard>
     <TextTruncate rows={3} expandText="Show more" collapseText="Show less">
         A longer biography can be expanded when it overflows its visible lines.
     </TextTruncate>
-</DocumentCodeCard>
+</CodeCard>
 
 `rows` sets the visible line count (default `3`). The toggle reports its state through
 `aria-expanded`, and overflow is re-checked on window resize and content changes.

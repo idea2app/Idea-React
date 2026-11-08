@@ -10,7 +10,7 @@ import {
     FormText
 } from '../../../source/Form';
 import { Button } from '../../../source/Base/Button';
-import { DocumentCodeExample } from '../../component/Document/Example';
+import { CodeExample } from '../../component/Document/Example';
 import { DocumentLayout } from '../../component/Document/Layout';
 
 <DocumentLayout active="forms" upstreamPath="forms/overview/">
@@ -29,7 +29,7 @@ Be sure to use an appropriate `type` attribute on all inputs (e.g., `email` for 
 
 Here’s a quick example to demonstrate Bootstrap’s form styles. Keep reading for documentation on required classes, form layout, and more.
 
-<DocumentCodeExample>
+<CodeExample>
     <Form>
         <div className="mb-3">
             <FormLabel htmlFor="exampleInputEmail1">Email address</FormLabel>
@@ -52,7 +52,7 @@ Here’s a quick example to demonstrate Bootstrap’s form styles. Keep reading 
             Submit
         </Button>
     </Form>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Disabled forms
 
@@ -66,7 +66,7 @@ Add the `disabled` attribute to a `<fieldset>` to disable all the controls withi
 
 However, if your form also includes custom button-like elements such as `<a class="btn-*">...</a>`, these will only be given a style of `pointer-events: none`, meaning they are still focusable and operable using the keyboard. In this case, you must manually modify these controls by adding `tabindex="-1"` to prevent them from receiving focus and `aria-disabled="disabled"` to signal their state to assistive technologies.
 
-<DocumentCodeExample>
+<CodeExample>
     <Form>
         <FormFieldset disabled>
             <FormLegend>Disabled fieldset example</FormLegend>
@@ -91,7 +91,7 @@ However, if your form also includes custom button-like elements such as `<a clas
             </Button>
         </FormFieldset>
     </Form>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Accessibility
 

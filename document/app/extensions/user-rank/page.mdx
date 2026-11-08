@@ -1,6 +1,6 @@
 import { UserRankView } from '../../../../source/Extension/UserRank';
 
-import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { CodeCard, LiveExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="user-rank">
@@ -12,7 +12,7 @@ a table of the remaining ranks with avatars, scores, and locations.
 
 ## Example
 
-<DocumentLiveExample>
+<LiveExample>
     <UserRankView
         title="Contributors"
         rank={[
@@ -23,13 +23,13 @@ a table of the remaining ranks with avatars, scores, and locations.
             { id: 5, name: 'github', avatar: 'https://github.com/github.png', score: 540 }
         ]}
     />
-</DocumentLiveExample>
+</LiveExample>
 
 ## Usage
 
-<DocumentCodeCard>
+<CodeCard>
     <UserRankView title="Weekly ranking" rank={[]} linkOf={({ id }) => `/users/${id}`} />
-</DocumentCodeCard>
+</CodeCard>
 
 `rank` lists users ordered by score; the first three render as medal cards and ranks 4–10 render as
 table rows. `linkOf` builds the profile link for each user, and address fields from

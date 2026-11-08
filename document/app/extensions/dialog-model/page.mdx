@@ -1,5 +1,5 @@
-import { DocumentDialogModelDemo } from '../../../component/Document/DialogModelDemo';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { DialogModelDemo } from '../../../component/Document/DialogModelDemo';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="dialog-model">
@@ -14,7 +14,7 @@ The [`Dialog` model][1] composes the [NativeDialog wrapper][2] with promise-base
 Create the model with a render function, then `await open()` to collect the result. The example
 below resolves with the submitted numbers and rejects when the dialog is dismissed.
 
-<DocumentCodeExample
+<CodeExample
     source="document/component/Document/DialogModelDemo.tsx"
     code={`const inputDialog = new Dialog(({ defer }) => (
     <NativeDialog open={!!defer} onClose={() => defer?.reject(new DialogClose())}>
@@ -28,9 +28,9 @@ const data = await inputDialog.open();`}
 
 >
 
-    <DocumentDialogModelDemo />
+    <DialogModelDemo />
 
-</DocumentCodeExample>
+</CodeExample>
 
 </DocumentLayout>
 

@@ -1,6 +1,6 @@
 import { ZodiacBar } from '../../../../source/Extension/ZodiacBar';
 
-import { DocumentCodeCard, DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeCard, CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="zodiac-bar">
@@ -12,13 +12,13 @@ optional link and title per year.
 
 ## Example
 
-<DocumentCodeExample>
+<CodeExample>
     <ZodiacBar startYear={2020} endYear={2025} />
-</DocumentCodeExample>
+</CodeExample>
 
 ## Usage
 
-<DocumentCodeCard>
+<CodeCard>
     <ZodiacBar
         startYear={2008}
         endYear={2026}
@@ -27,7 +27,7 @@ optional link and title per year.
             link: `/events/${year}`
         })}
     />
-</DocumentCodeCard>
+</CodeCard>
 
 `endYear` defaults to the current year. `itemOf` customizes each item's `title` and `link`, and
 `itemClassName` restyles the year cards. The exported `zodiacOf(year)` helper returns the zodiac

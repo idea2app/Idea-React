@@ -8,11 +8,11 @@ import { createPortal } from 'react-dom';
 import { Button } from '../../../source/Base/Button';
 import { Drawer } from '../../../source/Base/Drawer';
 import { Icon } from '../../../source/Extension/Icon';
-import { DocumentToc } from './Toc';
+import { Toc } from './Toc';
 
 @observer
-export class DocumentNavigation extends Component<PropsWithChildren> {
-    static displayName = 'DocumentNavigation';
+export class Navigation extends Component<PropsWithChildren> {
+    static displayName = 'Navigation';
 
     @observable accessor headerTarget: HTMLElement | null = null;
     @observable accessor navigationOpen = false;
@@ -101,7 +101,7 @@ export class DocumentNavigation extends Component<PropsWithChildren> {
                     open={tocOpen}
                     onDismiss={this.hideToc}
                 >
-                    <DocumentToc onItemClick={this.hideToc} />
+                    <Toc onItemClick={this.hideToc} />
                 </Drawer>
             </>
         );

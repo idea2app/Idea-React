@@ -1,6 +1,6 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { Avatar, AvatarImage, AvatarStack } from '../../../../source/Base/Avatar';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="avatar" upstreamPath="components/avatar/">
@@ -21,25 +21,25 @@ Avatars are used to represent users or entities. They can display an image or in
 
 Use `Avatar` with `AvatarImage` for image-based avatars. The parent `Avatar` element provides an easy wrapper for additional avatar features like status indicators and stacks. You’re welcome to use `AvatarImage` on its own if you only need a single HTML element.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Avatar src="https://github.com/mdo.png" alt="mdo" />
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 When used inside the `Avatar` wrapper, the image fills the wrapper and its size is set with `--bs-avatar-size`. Used on its own, `AvatarImage` honors its own `width` and `height` instead, so set them to your desired size.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <AvatarImage src="https://github.com/mdo.png" alt="mdo" width="50" height="50" />
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Initials
 
 Use text content inside `Avatar` for initials-based avatars.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Avatar>AB</Avatar>
         <Avatar theme="primary">CD</Avatar>
@@ -51,11 +51,11 @@ Use text content inside `Avatar` for initials-based avatars.
         <Avatar theme="inverse">MN</Avatar>
         <Avatar theme="secondary">OP</Avatar>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 Set the `subtle` prop to create a subtle avatar.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Avatar>AB</Avatar>
         <Avatar subtle theme="primary">
@@ -83,13 +83,13 @@ Set the `subtle` prop to create a subtle avatar.
             OP
         </Avatar>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Sizes
 
 Avatars come in multiple sizes: extra small, small, default, large, and extra large.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Avatar size="xs" src="https://github.com/mdo.png" alt="mdo" />
         <Avatar size="sm" src="https://github.com/mdo.png" alt="mdo" />
@@ -97,15 +97,15 @@ Avatars come in multiple sizes: extra small, small, default, large, and extra la
         <Avatar size="lg" src="https://github.com/mdo.png" alt="mdo" />
         <Avatar size="xl" src="https://github.com/mdo.png" alt="mdo" />
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 Use a custom size by modifying the `--bs-avatar-size` variable. The numeric `size` prop sets it in rem.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Avatar src="https://github.com/mdo.png" alt="mdo" size={8} />
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Status indicator
 
@@ -118,20 +118,20 @@ Set the `status` prop to show an indicator inside the avatar. Each status has a 
 
 Because the status is conveyed purely through color and shape, provide a `statusLabel` (e.g. `Online`) so assistive technologies can announce it.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Avatar src="https://github.com/mdo.png" alt="mdo" status="online" statusLabel="Online" />
         <Avatar src="https://github.com/mdo.png" alt="mdo" status="offline" statusLabel="Offline" />
         <Avatar src="https://github.com/mdo.png" alt="mdo" status="busy" statusLabel="Busy" />
         <Avatar src="https://github.com/mdo.png" alt="mdo" status="away" statusLabel="Away" />
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Status with sizes
 
 The status indicator scales with the avatar size.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Avatar
             size="xs"
@@ -163,13 +163,13 @@ The status indicator scales with the avatar size.
             statusLabel="Online"
         />
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## Avatar stack
 
 Use `AvatarStack` to group multiple avatars together with overlapping effect. Avatars are rendered in reverse order so the first avatar appears on top. Stacks use a percentage of the avatar size to determine how much to overlap stacked avatars.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <AvatarStack>
             <Avatar src="https://github.com/mdo.png" alt="mdo" />
@@ -179,13 +179,13 @@ Use `AvatarStack` to group multiple avatars together with overlapping effect. Av
             <Avatar src="https://github.com/mdo.png" alt="mdo" />
         </AvatarStack>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Stack with sizes
 
 As a shorthand, `size` props are available for `AvatarStack` and `Avatar`.
 
-<DocumentCodeExample>
+<CodeExample>
     <Stack gap={3} className="align-items-start">
         <AvatarStack size="xs">
             <Avatar src="https://github.com/mdo.png" alt="mdo" />
@@ -213,13 +213,13 @@ As a shorthand, `size` props are available for `AvatarStack` and `Avatar`.
             <Avatar src="https://github.com/mdo.png" alt="mdo" />
         </AvatarStack>
     </Stack>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Stack with count
 
 Combine with initials to show a count of additional users.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <AvatarStack>
             <Avatar src="https://github.com/mdo.png" alt="mdo" />
@@ -228,9 +228,9 @@ Combine with initials to show a count of additional users.
             <Avatar theme="secondary">+5</Avatar>
         </AvatarStack>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <AvatarStack size="xl">
             <Avatar src="https://github.com/mdo.png" alt="mdo" />
@@ -239,7 +239,7 @@ Combine with initials to show a count of additional users.
             <Avatar theme="secondary">+5</Avatar>
         </AvatarStack>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ## CSS
 

@@ -1,6 +1,6 @@
 import { PageNav } from '../../../../source/Extension/PageNav';
 
-import { DocumentCodeCard } from '../../../component/Document/Example';
+import { CodeCard } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="page-nav">
@@ -13,15 +13,15 @@ rendered with it.
 
 ## Example
 
-<DocumentCodeCard>
+<CodeCard>
     <PageNav rootSelector="#content" />
-</DocumentCodeCard>
+</CodeCard>
 
 ## Usage
 
-<DocumentCodeCard>{`import { PageNav } from 'idea-react';
+<CodeCard>{`import { PageNav } from 'idea-react';
 
-<PageNav rootSelector="#content" minDepth={2} depth={3} />;`}</DocumentCodeCard>
+<PageNav rootSelector="#content" minDepth={2} depth={3} />;`}</CodeCard>
 
 On mount, the component collects `h1`–`h6` elements, assigns missing `id`s, and renders an anchor
 per heading indented by level. The link whose section is scrolled into view gains the `active`

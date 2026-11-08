@@ -5,7 +5,7 @@ import { Navbar, NavbarBrand, NavbarNav } from '../../../../source/Base/Navbar';
 import { NavOverflow } from '../../../../source/Base/NavOverflow';
 import { Icon } from '../../../../source/Extension/Icon';
 import { DocumentLayout } from '../../../component/Document/Layout';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 
 <DocumentLayout active="nav-overflow" upstreamPath="components/nav-overflow/">
 
@@ -32,7 +32,7 @@ Here’s what you need to know before getting started:
 
 Wrap the links in `<NavOverflow id="…">`. When items don’t fit, they’ll automatically move to a "More" menu. Resize the browser to see how nav items automatically move to the "More" menu as space becomes limited.
 
-<DocumentCodeExample>
+<CodeExample>
     <NavOverflow id="overflow-example-7" variant="pills">
         <NavLink active aria-current="page" href="#">
             {'Home'}
@@ -53,13 +53,13 @@ Wrap the links in `<NavOverflow id="…">`. When items don’t fit, they’ll au
         <NavLink href="#">{'Help'}</NavLink>
     </NavOverflow>
 
-</DocumentCodeExample>
+</CodeExample>
 
 ### With tabs
 
 The overflow pattern works seamlessly with tabbed navigation:
 
-<DocumentCodeExample>
+<CodeExample>
     <NavOverflow id="overflow-example-6" variant="tabs">
         <NavLink active aria-current="page" href="#">
             {'Overview'}
@@ -78,11 +78,11 @@ The overflow pattern works seamlessly with tabbed navigation:
         <NavLink href="#">{'Related'}</NavLink>
     </NavOverflow>
 
-</DocumentCodeExample>
+</CodeExample>
 
 ### With underline
 
-<DocumentCodeExample>
+<CodeExample>
     <NavOverflow id="overflow-example-5" variant="underline">
         <NavLink active aria-current="page" href="#">
             {'Home'}
@@ -99,13 +99,13 @@ The overflow pattern works seamlessly with tabbed navigation:
         <NavLink href="#">{'Contact'}</NavLink>
     </NavOverflow>
 
-</DocumentCodeExample>
+</CodeExample>
 
 ### Keep items visible
 
 Use the `.nav-overflow-keep` class on items that should never be moved to the overflow menu. These items will remain visible regardless of available space—useful for high-priority items like "Home" or action buttons.
 
-<DocumentCodeExample>
+<CodeExample>
     <NavOverflow id="overflow-example-4" variant="pills">
         <NavLink active aria-current="page" href="#" className="nav-overflow-keep">
             {'Home'}
@@ -126,13 +126,13 @@ Use the `.nav-overflow-keep` class on items that should never be moved to the ov
         </NavLink>
     </NavOverflow>
 
-</DocumentCodeExample>
+</CodeExample>
 
 ### With disabled items
 
 Disabled states are preserved when items move to the overflow menu:
 
-<DocumentCodeExample>
+<CodeExample>
     <NavOverflow id="overflow-example-3" variant="pills">
         <NavLink active aria-current="page" href="#">
             {'Active'}
@@ -151,13 +151,13 @@ Disabled states are preserved when items move to the overflow menu:
         <NavLink href="#">{'Even more'}</NavLink>
     </NavOverflow>
 
-</DocumentCodeExample>
+</CodeExample>
 
 ### In a navbar
 
 The nav overflow pattern can also be used within a [navbar][2] for horizontal navigation that adapts to available space:
 
-<DocumentCodeExample>
+<CodeExample>
     <Navbar expand className="bg-1">
         <Container fluid>
             <NavbarBrand href="#">{'Brand'}</NavbarBrand>
@@ -178,13 +178,13 @@ The nav overflow pattern can also be used within a [navbar][2] for horizontal na
         </Container>
     </Navbar>
 
-</DocumentCodeExample>
+</CodeExample>
 
 ### With menus
 
 A nav item that already hosts a [menu][3] becomes a submenu of the overflow menu. Its nested submenus stay intact.
 
-<DocumentCodeExample>
+<CodeExample>
     <NavOverflow id="overflow-example-1" variant="pills">
         <NavLink active aria-current="page" href="#">
             {'Home'}
@@ -221,7 +221,7 @@ A nav item that already hosts a [menu][3] becomes a submenu of the overflow menu
         <NavLink href="#">{'Help'}</NavLink>
     </NavOverflow>
 
-</DocumentCodeExample>
+</CodeExample>
 
 ## Customizing the toggle
 

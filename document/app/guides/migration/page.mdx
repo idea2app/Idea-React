@@ -1,5 +1,5 @@
 import { Combobox, ComboboxOption } from '../../../../source/Form/Combobox';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="migration">
@@ -34,12 +34,12 @@ Rename `Select` to `Combobox` and `Option` to `ComboboxOption`. Give the combobo
 `name` for its form field. Use `defaultValue` for an uncontrolled selection, or
 `value` and `onChange` for a controlled selection.
 
-<DocumentCodeExample>
+<CodeExample>
     <Combobox name="framework" defaultValue="react" search={false}>
         <ComboboxOption value="react">React</ComboboxOption>
         <ComboboxOption value="vue">Vue</ComboboxOption>
     </Combobox>
-</DocumentCodeExample>
+</CodeExample>
 
 ```tsx
 import { Combobox, ComboboxOption } from 'idea-react';

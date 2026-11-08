@@ -1,6 +1,6 @@
 import { TimeDistance } from '../../../../source/Extension/TimeDistance';
 
-import { DocumentCodeCard, DocumentLiveExample } from '../../../component/Document/Example';
+import { CodeCard, LiveExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="time-distance">
@@ -12,20 +12,20 @@ semantic `<time>` element whose `title` holds the exact timestamp.
 
 ## Example
 
-<DocumentLiveExample>
+<LiveExample>
     <TimeDistance date="2020-01-01T00:00:00" />
-</DocumentLiveExample>
+</LiveExample>
 
 ## Usage
 
-<DocumentCodeCard>
+<CodeCard>
     <TimeDistance
         date="2020-01-01T00:00:00"
         beforeWord=" ago"
         afterWord=" later"
         unitWords={{ D: 'day(s)', H: 'hour(s)', m: 'minute(s)' }}
     />
-</DocumentCodeCard>
+</CodeCard>
 
 `unitWords` localizes the unit labels, while `beforeWord` and `afterWord` are appended for past and
 future moments respectively.

@@ -3,7 +3,7 @@ import { Icon } from '../../../../source/Extension/Icon';
 import { OverlayBox } from '../../../../source/Extension/OverlayBox';
 import styles from '../../../component/Document/OverlayGuideDemo/style.module.css';
 import { DocumentLayout } from '../../../component/Document/Layout';
-import { DocumentCodeExample } from '../../../component/Document/Example';
+import { CodeExample } from '../../../component/Document/Example';
 
 <DocumentLayout active="tooltip" upstreamPath="components/tooltip/">
 
@@ -15,13 +15,13 @@ Custom replacement for browser tooltips—themed with CSS variables and position
 
 Hover the button below to see a tooltip. By default, the tooltip will appear above their trigger element (the child of `OverlayBox`).
 
-<DocumentCodeExample>
+<CodeExample>
     <OverlayBox title="Tooltip on top">
         <Button variant="solid" theme="secondary">
             Hover me
         </Button>
     </OverlayBox>
-</DocumentCodeExample>
+</CodeExample>
 
 Things to know when using tooltips with `OverlayBox`:
 
@@ -45,7 +45,7 @@ The animation effect of this component is dependent on the `prefers-reduced-moti
 
 Hover over the links below to see tooltips:
 
-<DocumentCodeExample>
+<CodeExample>
     <p className="text-body-secondary">
         Placeholder text to demonstrate some{' '}
         <OverlayBox title="Default tooltip">
@@ -67,7 +67,7 @@ Hover over the links below to see tooltips:
         </OverlayBox>{' '}
         site or project.
     </p>
-</DocumentCodeExample>
+</CodeExample>
 
 Use the `title` prop on `OverlayBox`, rather than the native `title` attribute on the trigger, to avoid duplicate browser tooltips.
 
@@ -75,7 +75,7 @@ Use the `title` prop on `OverlayBox`, rather than the native `title` attribute o
 
 You can customize the appearance of tooltips using [CSS variables][1]. We pass a CSS module class through `overlayClassName` to scope our custom appearance and use it to override a local CSS variable.
 
-<DocumentCodeExample>
+<CodeExample>
     <OverlayBox
         title="This top tooltip is themed via CSS variables."
         overlayClassName={styles.tooltip}
@@ -84,13 +84,13 @@ You can customize the appearance of tooltips using [CSS variables][1]. We pass a
             Custom tooltip
         </Button>
     </OverlayBox>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Placement
 
 Set `placement` to change the direction. Hover over the buttons below to see the four tooltips directions: top, right, bottom, and left. Directions are mirrored when using Bootstrap in RTL.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-3">
         <OverlayBox title="Tooltip on top" placement="top">
             <Button variant="solid" theme="secondary">
@@ -113,13 +113,13 @@ Set `placement` to change the direction. Hover over the buttons below to see the
             </Button>
         </OverlayBox>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Responsive placement
 
 Change placement at different breakpoints using `responsivePlacement={{ md: 'right', lg: 'bottom' }}`, where each breakpoint is one of `sm`, `md`, `lg`, `xl`, or `2xl`.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-3">
         <OverlayBox
             title="Responsive tooltip"
@@ -136,7 +136,7 @@ Change placement at different breakpoints using `responsivePlacement={{ md: 'rig
             </Button>
         </OverlayBox>
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 Resize your browser to see the tooltip placement change at different breakpoints.
 
@@ -144,7 +144,7 @@ Resize your browser to see the tooltip placement change at different breakpoints
 
 And with custom HTML added:
 
-<DocumentCodeExample>
+<CodeExample>
     <OverlayBox
         title={
             <>
@@ -156,11 +156,11 @@ And with custom HTML added:
             Tooltip with HTML
         </Button>
     </OverlayBox>
-</DocumentCodeExample>
+</CodeExample>
 
 With an icon (rendered through `Icon`):
 
-<DocumentCodeExample>
+<CodeExample>
     <OverlayBox
         title={
             <>
@@ -172,13 +172,13 @@ With an icon (rendered through `Icon`):
             Tooltip with icon
         </Button>
     </OverlayBox>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Interactive tooltips
 
 Move the pointer onto the tip to reach interactive content inside it, such as a link. The tooltip stays open while the pointer is over the trigger or the tip. It hides when the pointer leaves both, or when you press the <kbd>Escape</kbd> key. This helps satisfy the [WCAG 1.4.13 “Content on Hover or Focus”][2] success criterion.
 
-<DocumentCodeExample>
+<CodeExample>
     <OverlayBox
         title={
             <>
@@ -190,13 +190,13 @@ Move the pointer onto the tip to reach interactive content inside it, such as a 
             Interactive tooltip
         </Button>
     </OverlayBox>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Disabled elements
 
 Elements with the `disabled` attribute aren’t interactive, meaning users cannot focus, hover, or click them to trigger a tooltip (or popover). As a workaround, you’ll want to trigger the tooltip from a wrapper `<div>` or `<span>`, ideally made keyboard-focusable using `tabindex="0"`.
 
-<DocumentCodeExample>
+<CodeExample>
     <OverlayBox title="Disabled tooltip">
         <span className="d-inline-block rounded-3" tabIndex={0}>
             <Button variant="solid" theme="primary" disabled>
@@ -204,7 +204,7 @@ Elements with the `disabled` attribute aren’t interactive, meaning users canno
             </Button>
         </span>
     </OverlayBox>
-</DocumentCodeExample>
+</CodeExample>
 
 ## CSS
 
@@ -235,7 +235,7 @@ Local CSS custom properties expose the component’s colors, spacing, borders, a
 
 To enable tooltips on many triggers at once—including elements added to the DOM later—render an `OverlayBox` for each trigger in your React list. React mounts and removes the overlays with their triggers; no selector-based plugin initialization is needed.
 
-<DocumentCodeExample>
+<CodeExample>
     <div className="d-flex flex-wrap gap-3">
         {['First', 'Second', 'Third'].map(label => (
             <OverlayBox key={label} title={`${label} tooltip`}>
@@ -245,7 +245,7 @@ To enable tooltips on many triggers at once—including elements added to the DO
             </OverlayBox>
         ))}
     </div>
-</DocumentCodeExample>
+</CodeExample>
 
 ### Markup
 
