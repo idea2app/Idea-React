@@ -4,17 +4,17 @@ import { observer } from 'mobx-react';
 import { Component, FormEvent } from 'react';
 import { formToJSON } from 'web-utility';
 
-import { Button } from '../../../../source/Button';
-import { CloseButton } from '../../../../source/CloseButton';
-import { Dialog, DialogClose } from '../../../../source/Extension/Dialog';
-import { FormControl, FormField, FormLabel } from '../../../../source/Form';
+import { Button } from '../../../../source/Base/Button';
+import { CloseButton } from '../../../../source/Base/CloseButton';
 import {
     DialogBody,
     DialogFooter,
     DialogHeader,
     DialogTitle,
     NativeDialog
-} from '../../../../source/NativeDialog';
+} from '../../../../source/Base/NativeDialog';
+import { Dialog, DialogClose } from '../../../../source/Extension/Dialog';
+import { FormControl, FormField, FormLabel } from '../../../../source/Form';
 
 @observer
 export class DialogModelDemo extends Component {

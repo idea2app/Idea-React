@@ -10,7 +10,7 @@ import {
     DialogHeader,
     DialogTitle,
     NativeDialog
-} from '../source/NativeDialog';
+} from '../source/Base/NativeDialog';
 
 it('supports documented animation, scrolling, size and responsive fullscreen shapes', () => {
     const { container, rerender } = render(

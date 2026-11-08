@@ -14,8 +14,8 @@ import {
     ReactNode
 } from 'react';
 
+import { Icon, IconProps } from '../Extension/Icon';
 import { Button, ButtonProps } from './Button';
-import { Icon, IconProps } from './Extension/Icon';
 import { Breakpoint } from './Grid';
 import { FloatingOptions, FloatingPosition } from './Overlay';
 import { AsProps, polymorphic, PolymorphicClassProps } from './Polymorphic';

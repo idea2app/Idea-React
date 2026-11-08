@@ -2,7 +2,7 @@ import { OutputData } from '@editorjs/editorjs';
 import createParser from 'editorjs-html';
 import { HTMLAttributes } from 'react';
 
-import { polymorphic } from '../Polymorphic';
+import { polymorphic } from '../Base/Polymorphic';
 
 export const parser = createParser({
     link: ({ data: { link } }) => `<a href="${link}">${link}</a>`

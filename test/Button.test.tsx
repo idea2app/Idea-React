@@ -3,7 +3,7 @@ import { it, mock } from 'node:test';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Button, ButtonInput } from '../source/Button';
+import { Button, ButtonInput } from '../source/Base/Button';
 
 it('preserves button names in client-rendered documentation examples', () => {
     assert.equal(Button.displayName, 'Button');

@@ -5,10 +5,10 @@ import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, MouseEvent } from 'react';
 
+import { Container } from '../../../../../source/Base/Grid';
+import { Menu, MenuItem } from '../../../../../source/Base/Menu';
+import { Navbar, NavbarBrand } from '../../../../../source/Base/Navbar';
 import { FormLabel } from '../../../../../source/Form';
-import { Container } from '../../../../../source/Grid';
-import { Menu, MenuItem } from '../../../../../source/Menu';
-import { Navbar, NavbarBrand } from '../../../../../source/Navbar';
 import { CodeExample } from '../Example';
 import styles from './style.module.css';
 

@@ -14,7 +14,7 @@ import {
     CardSubtitle,
     CardText,
     CardTitle
-} from '../source/Card';
+} from '../source/Base/Card';
 
 it('preserves card component names in serialized documentation examples', () => {
     const components = {

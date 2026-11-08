@@ -17,7 +17,7 @@ import {
     ReactNode
 } from 'react';
 
-import { Icon } from '../Extension/Icon';
+import { Icon } from '../../Extension/Icon';
 import { Menu, MenuProps } from '../Menu';
 import { Nav, NavProps } from '../Nav';
 import { AsProps, PolymorphicClassProps } from '../Polymorphic';

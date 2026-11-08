@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode } from 'react';
 
-import { polymorphic } from '../../Polymorphic';
+import { polymorphic } from '../../Base/Polymorphic';
 import { TextTruncateContent } from './Content';
 
 export interface TextTruncateProps extends HTMLAttributes<HTMLDivElement> {

@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { Avatar, AvatarImage, AvatarStack } from '../source/Avatar';
+import { Avatar, AvatarImage, AvatarStack } from '../source/Base/Avatar';
 
 it('supports standalone images with native image attributes', () => {
     render(<AvatarImage src="/avatar.png" alt="Profile" width={50} />);

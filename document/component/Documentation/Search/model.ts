@@ -2,16 +2,6 @@ import { action, computed, observable } from 'mobx';
 
 export type DocumentationSearchEntry = Record<'title' | 'href' | 'description', string>;
 
-const isSearchEntry = (entry: unknown): entry is DocumentationSearchEntry =>
-    typeof entry === 'object' &&
-    entry !== null &&
-    'title' in entry &&
-    typeof entry.title === 'string' &&
-    'href' in entry &&
-    typeof entry.href === 'string' &&
-    'description' in entry &&
-    typeof entry.description === 'string';
-
 export class DocumentationSearchModel {
     @observable accessor query = '';
     @observable accessor entries: readonly DocumentationSearchEntry[] = [];
@@ -39,19 +29,26 @@ export class DocumentationSearchModel {
             const response = await fetch(this.indexUrl);
             if (!response.ok)
                 throw new Error(`Unable to load the search index (HTTP ${response.status}).`);
-            const entries: unknown = await response.json();
-
-            if (!Array.isArray(entries) || !entries.every(isSearchEntry))
-                throw new Error('The search index has an invalid format.');
-
+            const feed = new DOMParser().parseFromString(await response.text(), 'application/xml');
+            const channel = feed.querySelector('rss[version="2.0"] > channel');
+            if (feed.querySelector('parsererror') || !channel)
+                throw new Error('The search RSS feed has an invalid format.');
             const base = new URL(this.indexUrl, location.href);
+            const entries = [...channel.querySelectorAll(':scope > item')].map(item => {
+                const title = item.querySelector(':scope > title')?.textContent;
+                const href = item.querySelector(':scope > link')?.textContent;
+                const description = item.querySelector(':scope > description')?.textContent;
 
-            this.setEntries(
-                entries.map(({ href, ...entry }) => ({
-                    ...entry,
-                    href: new URL(href, base).href
-                }))
-            );
+                if (!title?.trim() || !href?.trim() || description == null)
+                    throw new Error('The search RSS feed contains an invalid item.');
+                const url = new URL(href.trim(), base);
+                if (!['http:', 'https:'].includes(url.protocol))
+                    throw new Error('The search RSS feed contains an invalid page URL.');
+
+                return { title, href: url.href, description };
+            });
+
+            this.setEntries(entries);
         } finally {
             this.finishLoad();
         }

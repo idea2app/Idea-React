@@ -7,7 +7,7 @@ import { observer } from 'mobx-react';
 import { Component, ComponentPropsWithRef, ElementType, FocusEvent } from 'react';
 import { createReactEditorJS } from 'react-editor-js';
 
-import { AsProps, PolymorphicClassProps } from '../Polymorphic';
+import { AsProps, PolymorphicClassProps } from '../Base/Polymorphic';
 
 const ReactEditorJS = createReactEditorJS();
 

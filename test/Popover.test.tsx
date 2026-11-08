@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { Popover } from '../source/Popover';
+import { Popover } from '../source/Base/Popover';
 
 it('renders official Bootstrap 6 popover markup', () => {
     render(

@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render } from '@testing-library/react';
 
-import { Col, Container, Row } from '../source/Grid';
+import { Col, Container, Row } from '../source/Base/Grid';
 
 it('preserves component names in serialized documentation examples', () => {
     assert.equal(Container.displayName, 'Container');

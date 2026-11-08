@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import { Stack } from '../source/Stack';
+import { Stack } from '../source/Base/Stack';
 
 it('renders a vertical stack by default and preserves layout attributes', () => {
     assert.equal(

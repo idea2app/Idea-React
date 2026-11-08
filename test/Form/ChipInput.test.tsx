@@ -2,28 +2,9 @@ import assert from 'node:assert/strict';
 import { it, mock } from 'node:test';
 
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { renderToStaticMarkup } from 'react-dom/server';
 
-import {
-    Chip,
-    ChipDismiss,
-    ChipIcon,
-    ChipImage,
-    ChipInput,
-    ChipInputLabel,
-    ChipToken,
-    FormGhost
-} from '../../source/Form';
-
-it('server-renders static chip components without mounting the form plugin', () => {
-    const markup = renderToStaticMarkup(
-        <Chip theme="primary" active>
-            Static
-        </Chip>
-    );
-    assert.match(markup, /class="chip active theme-primary"/);
-    assert.match(markup, />Static<\/button>/);
-});
+import { Chip } from '../../source/Base/Chip';
+import { ChipInput, ChipInputLabel, FormGhost } from '../../source/Form';
 
 it('renders chips and chip input options', () => {
     render(
@@ -70,18 +51,4 @@ it('creates and removes chips with native keyboard behavior and configured limit
     unmount();
 
     assert.equal(Chips.getInstance(wrapper), null);
-});
-
-it('composes avatar, icon and dismissible token shapes without nested buttons', () => {
-    render(
-        <ChipToken theme="success" active>
-            <ChipImage src="avatar.png" alt="Profile" />
-            <ChipIcon name="person" aria-hidden="true" />
-            Person
-            <ChipDismiss disabled />
-        </ChipToken>
-    );
-    assert.equal(screen.getByRole('img').className, 'chip-img');
-    assert.equal(screen.getByRole('button', { name: 'Remove' }).parentElement?.tagName, 'SPAN');
-    assert.equal(screen.getByRole('button', { name: 'Remove' }).hasAttribute('disabled'), true);
 });

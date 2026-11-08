@@ -183,7 +183,7 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 向子组件透传时只解构需要特殊处理的 props，其余用 `...this.props` 展开，不逐项转发。
 - 多个组件共享的属性定义在基础模块，组件通过 `extends`、`Omit` 或类型别名复用，不从组件文件再导出基础模块的类型。
 - 没有成员声明体的 `interface` 改用 `type` 与交叉类型表达。
-- 单根节点组件复用 `source/Polymorphic.ts` 的泛型与组合机制支持 `as`，透传目标组件属性；
+- 单根节点组件复用 `source/Base/Polymorphic.ts` 的泛型与组合机制支持 `as`，透传目标组件属性；
   片段或多根节点组件不强行添加包装节点，类组件的 `ref` 保持实例语义。
   类组件显式声明 `declare readonly props: PolymorphicClassProps<T, Props>`，避免 React 的
   `Readonly` 映射丢失目标属性的联合类型；内部按需使用类型收窄 getter。
@@ -226,7 +226,7 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - Markdown 正文中的链接采用文末数字引用：正文写 `[text][number]`，文末写 `[number]: URL`；图片链接同样使用引用形式。行末链接（如组件列表项）无需改为文末引用，可保留 `[text](URL)`。
 - 每篇文档的数字引用按首次出现顺序从 1 连续编号；重复链接复用同一编号，修改后同步整理正文与定义，移除未使用定义，不留跳号、重复或悬空引用。
 - 组件目录优先列出上游标准组件，再列扩展组件。
-- 静态站搜索优先采用最简单可用的方案，开发与生产共用 MDX 源码索引器并通过同一 JSON 地址加载，不依赖编译后的 HTML，不维护手写页面清单，不为索引格式或具体技术额外引入不必要的服务和框架。
+- 静态站搜索优先采用最简单可用的方案，开发与生产共用 MDX 源码索引器并通过同一 RSS 地址加载，RSS 包含完整纯文本正文供搜索与订阅复用；不依赖编译后的 HTML，不维护手写页面清单，不为索引格式或具体技术额外引入不必要的服务和框架。
 
 ## 测试与验证
 
@@ -251,7 +251,7 @@ pnpm build -r
 - `test` 使用 Node.js 原生 runner，需要 Node.js 22.18+，并做 TypeScript 检查。Lint 与格式检查针对本次修改文件运行。
 - 根目录 `pnpm build` 构建 TypeDoc、旧预览站与组件发布包；现有根构建、发布部署仍使用 `docs/`，不能将其误当作 ViNext 文档工作区的构建或部署。
 - 文档工作区单独构建，只部署 `document/dist/client/`；部署到子目录前配置 `document/next.config.ts` 的 `basePath`，并验证静态资源、搜索索引和结果链接。
-- 开发模式按请求从当前 MDX 文档生成搜索索引；生产模式用同一索引器生成静态 JSON，生产搜索需构建后预览静态产物。
+- 开发模式按请求从当前 MDX 文档生成 RSS 搜索索引；生产模式用同一索引器生成静态 RSS 与 Sitemap，生产搜索需构建后预览静态产物。
 - 浏览器验证包括键盘交互、主题恢复、错误弹窗、失败后重试与不同视口；文档站不依赖 Node.js 或 Worker 运行时。
 
 ## 发布维护

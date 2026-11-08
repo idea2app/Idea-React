@@ -3,8 +3,8 @@
 import { observer } from 'mobx-react';
 import { Component, ContextType, MouseEvent } from 'react';
 
+import { Menu, MenuItem } from '../../../source/Base/Menu';
 import { Icon } from '../../../source/Extension/Icon';
-import { Menu, MenuItem } from '../../../source/Menu';
 import { ColorScheme } from './model';
 import { ColorModeContext } from './Provider';
 

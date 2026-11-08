@@ -8,7 +8,7 @@ import {
     BreadcrumbDivider,
     BreadcrumbItem,
     BreadcrumbLink
-} from '../source/Breadcrumb';
+} from '../source/Base/Breadcrumb';
 
 it('renders semantic breadcrumb items with default and custom decorative dividers', () => {
     const { container } = render(

@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { Table } from '../source/Table';
+import { Table } from '../source/Base/Table';
 
 it('uses Bootstrap 6 table variants and responsive wrapper', () => {
     render(

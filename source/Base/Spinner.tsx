@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
+import { Icon, IconProps } from '../Extension/Icon';
 import type { ComponentTheme } from './Button';
-import { Icon, IconProps } from './Extension/Icon';
 import { polymorphic } from './Polymorphic';
 
 export type SpinnerAnimation = 'border' | 'grow';

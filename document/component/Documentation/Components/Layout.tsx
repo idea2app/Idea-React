@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { Col, Container, Row } from '../../../../source/Grid';
+import { Col, Container, Row } from '../../../../source/Base/Grid';
 import { Navigation } from './Navigation';
 import { Sidebar } from './Sidebar';
 import { Toc } from './Toc';

@@ -10,7 +10,7 @@ import {
     StepperLink,
     StepperNav,
     StepperOverflow
-} from '../source/Stepper';
+} from '../source/Base/Stepper';
 
 it('renders vertical and responsive horizontal steppers with rich themed items', () => {
     const { container, rerender } = render(

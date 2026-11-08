@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { Tooltip } from '../source/Tooltip';
+import { Tooltip } from '../source/Base/Tooltip';
 
 it('renders official Bootstrap 6 tooltip markup', () => {
     render(<Tooltip placement="left">Help</Tooltip>);

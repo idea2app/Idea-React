@@ -4,11 +4,11 @@ import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { ChangeEvent, Component } from 'react';
 
-import { Button, ButtonProps, ComponentTheme } from '../../../../../source/Button';
-import { ButtonGroup } from '../../../../../source/ButtonGroup';
+import { Button, ButtonProps, ComponentTheme } from '../../../../../source/Base/Button';
+import { ButtonGroup } from '../../../../../source/Base/ButtonGroup';
+import { ToggleButton } from '../../../../../source/Base/ToggleButton';
 import { Icon } from '../../../../../source/Extension/Icon';
 import { FormLabel, FormSelect } from '../../../../../source/Form';
-import { ToggleButton } from '../../../../../source/ToggleButton';
 import { CodeExample } from '../Example';
 
 const colors = [

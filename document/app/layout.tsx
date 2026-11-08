@@ -27,6 +27,12 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
                     rel="stylesheet"
                     href="https://unpkg.com/bootstrap-icons@1.13.2/font/bootstrap-icons.css"
                 />
+                <link
+                    rel="alternate"
+                    type="application/rss+xml"
+                    title="Idea React documentation"
+                    href={`${nextConfig.basePath || ''}/rss.xml`}
+                />
             </head>
             <body>
                 <ErrorHandler />
@@ -38,7 +44,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
                         version={site.version}
                         search={
                             <DocumentationSearch
-                                indexUrl={`${nextConfig.basePath || ''}/search-index.json`}
+                                indexUrl={`${nextConfig.basePath || ''}/rss.xml`}
                             />
                         }
                         colorMode={<ColorModeToggle />}

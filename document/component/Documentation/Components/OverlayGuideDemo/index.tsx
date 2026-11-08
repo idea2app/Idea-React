@@ -4,10 +4,10 @@ import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, createRef, MouseEvent } from 'react';
 
-import { Alert } from '../../../../../source/Alert';
-import { Button } from '../../../../../source/Button';
-import { Drawer } from '../../../../../source/Drawer';
-import { Menu, MenuItem } from '../../../../../source/Menu';
+import { Alert } from '../../../../../source/Base/Alert';
+import { Button } from '../../../../../source/Base/Button';
+import { Drawer } from '../../../../../source/Base/Drawer';
+import { Menu, MenuItem } from '../../../../../source/Base/Menu';
 
 @observer
 export class AlertGuideDemo extends Component {

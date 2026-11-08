@@ -3,8 +3,8 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { Button } from '../source/Button';
-import { ButtonGroup, ButtonToolbar } from '../source/ButtonGroup';
+import { Button } from '../source/Base/Button';
+import { ButtonGroup, ButtonToolbar } from '../source/Base/ButtonGroup';
 
 it('supports shared sizing and dividers for horizontal and vertical groups', () => {
     const { container, rerender } = render(<ButtonGroup size="xs" divider />);

@@ -4,7 +4,7 @@ import { it } from 'node:test';
 import { render, screen } from '@testing-library/react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import { Progress, ProgressStack } from '../source/Progress';
+import { Progress, ProgressStack } from '../source/Base/Progress';
 
 it('renders accessible labeled progress, themes, stripes and custom range', () => {
     const { rerender } = render(

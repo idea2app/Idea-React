@@ -1,7 +1,7 @@
 import { TimeHTMLAttributes } from 'react';
 import { formatDate, TimeData } from 'web-utility';
 
-import { polymorphic } from '../Polymorphic';
+import { polymorphic } from '../Base/Polymorphic';
 
 export interface TimeProps extends Omit<TimeHTMLAttributes<HTMLTimeElement>, 'dateTime'> {
     dateTime: TimeData;

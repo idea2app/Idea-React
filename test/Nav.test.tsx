@@ -3,7 +3,7 @@ import { it, mock } from 'node:test';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Nav, NavItem, NavLink } from '../source/Nav';
+import { Nav, NavItem, NavLink } from '../source/Base/Nav';
 
 it('supports card header tabs and derives the current page from active links', () => {
     render(

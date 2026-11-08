@@ -4,7 +4,7 @@ import { setTimeout } from 'node:timers/promises';
 
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
-import { Alert, AlertHeading, AlertLink } from '../source/Alert';
+import { Alert, AlertHeading, AlertLink } from '../source/Base/Alert';
 
 it('renders themed alerts with links and additional content and dismisses instantly', () => {
     const order: string[] = [];

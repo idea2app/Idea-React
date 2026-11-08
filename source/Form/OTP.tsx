@@ -4,7 +4,7 @@ import type OtpInput from 'bootstrap/js/src/otp-input.js';
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, forwardRef, Ref } from 'react';
 
-import { AsProps, polymorphic } from '../Polymorphic';
+import { AsProps, polymorphic } from '../Base/Polymorphic';
 import { FormPlugin } from './Plugin';
 import { FormValidationProps } from './Primitives';
 

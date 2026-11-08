@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { Badge } from '../source/Badge';
+import { Badge } from '../source/Base/Badge';
 
 it('preserves its public name in serialized documentation examples', () => {
     assert.equal(Badge.displayName, 'Badge');

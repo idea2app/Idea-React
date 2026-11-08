@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { Spinner, SpinnerIcon } from '../source/Spinner';
+import { Spinner, SpinnerIcon } from '../source/Base/Spinner';
 
 it('preserves spinner names in serialized documentation examples', () => {
     assert.equal(Spinner.displayName, 'Spinner');

@@ -1,10 +1,10 @@
 import { HTMLAttributes } from 'react';
 
-import { Badge } from '../../Badge';
-import { Col, Container, Row } from '../../Grid';
-import { Image } from '../../Image';
-import { polymorphic } from '../../Polymorphic';
-import { Table } from '../../Table';
+import { Badge } from '../../Base/Badge';
+import { Col, Container, Row } from '../../Base/Grid';
+import { Image } from '../../Base/Image';
+import { polymorphic } from '../../Base/Polymorphic';
+import { Table } from '../../Base/Table';
 import { UserAddress, UserAddressProps } from './Address';
 import * as style from './index.module.less';
 

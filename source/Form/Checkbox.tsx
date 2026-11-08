@@ -3,8 +3,8 @@
 import classNames from 'classnames';
 import { Component, ComponentPropsWithoutRef, forwardRef, Ref } from 'react';
 
-import type { ComponentTheme } from '../Button';
-import { AsProps, polymorphic } from '../Polymorphic';
+import type { ComponentTheme } from '../Base/Button';
+import { AsProps, polymorphic } from '../Base/Polymorphic';
 import { FormValidationProps } from './Primitives';
 
 export type CheckboxProps = Omit<ComponentPropsWithoutRef<'input'>, 'type' | 'size'> &

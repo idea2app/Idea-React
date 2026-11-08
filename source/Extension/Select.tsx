@@ -12,9 +12,9 @@ import {
     ReactNode
 } from 'react';
 
-import { ButtonProps } from '../Button';
-import { Menu } from '../Menu';
-import { polymorphic } from '../Polymorphic';
+import { ButtonProps } from '../Base/Button';
+import { Menu } from '../Base/Menu';
+import { polymorphic } from '../Base/Polymorphic';
 
 export interface OptionProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     value?: string;

@@ -4,11 +4,17 @@ import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { ChangeEvent, Component, ReactNode } from 'react';
 
-import { Button, ComponentTheme } from '../../../../source/Button';
-import { CloseButton } from '../../../../source/CloseButton';
+import { Button, ComponentTheme } from '../../../../source/Base/Button';
+import { CloseButton } from '../../../../source/Base/CloseButton';
+import { Image } from '../../../../source/Base/Image';
+import {
+    Toast,
+    ToastBody,
+    ToastHeader,
+    ToastItem,
+    ToastPosition
+} from '../../../../source/Base/Toast';
 import { FormField, FormLabel, FormSelect } from '../../../../source/Form';
-import { Image } from '../../../../source/Image';
-import { Toast, ToastBody, ToastHeader, ToastItem, ToastPosition } from '../../../../source/Toast';
 
 export interface StaticToastProps {
     title?: ReactNode;

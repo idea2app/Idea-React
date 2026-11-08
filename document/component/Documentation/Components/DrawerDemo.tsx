@@ -4,8 +4,8 @@ import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, ReactNode } from 'react';
 
-import { Button } from '../../../../source/Button';
-import { Drawer, DrawerProps } from '../../../../source/Drawer';
+import { Button } from '../../../../source/Base/Button';
+import { Drawer, DrawerProps } from '../../../../source/Base/Drawer';
 
 export interface DrawerDemoProps extends Omit<DrawerProps, 'footer'> {
     label: ReactNode;

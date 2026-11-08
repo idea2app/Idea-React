@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 
+import { Stack } from '../../../../source/Base/Stack';
 import { Icon } from '../../../../source/Extension/Icon';
-import { Stack } from '../../../../source/Stack';
 import nextConfig from '../../../next.config';
 import * as style from './style.module.less';
 
@@ -24,6 +24,7 @@ const components: NavLink[] = [
     { label: 'Button group', slug: 'button-group' },
     { label: 'Card', slug: 'card' },
     { label: 'Carousel', slug: 'carousel' },
+    { label: 'Chips & chip input', slug: 'chips' },
     { label: 'Close button', slug: 'close-button' },
     { label: 'Collapse', slug: 'collapse' },
     { label: 'Dialog', slug: 'dialog' },
@@ -88,7 +89,6 @@ const forms: NavLink[] = [
     { label: 'Input group', slug: 'input-group' },
     { label: 'Floating labels', slug: 'floating-labels' },
     { label: 'Form adorn', slug: 'form-adorn' },
-    { label: 'Chips', slug: 'chips' },
     { label: 'Combobox', slug: 'combobox' },
     { label: 'Datepicker', slug: 'datepicker' },
     { label: 'OTP input', slug: 'otp-input' },

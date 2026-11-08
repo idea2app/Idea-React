@@ -16,6 +16,7 @@ import {
     ReactNode
 } from 'react';
 
+import { Nav, NavProps } from './Nav';
 import { AsProps, polymorphic, PolymorphicClassProps } from './Polymorphic';
 
 export interface TabProps extends ComponentPropsWithRef<'div'> {
@@ -31,7 +32,10 @@ export const Tab = polymorphic<TabProps>(
 );
 Tab.displayName = 'Tab';
 
-export interface TabsProps extends Omit<ComponentPropsWithRef<'div'>, 'onChange'> {
+export interface TabsProps
+    extends
+        Omit<ComponentPropsWithRef<'div'>, 'onChange'>,
+        Pick<NavProps, 'vertical' | 'fill' | 'justified' | 'cardHeader' | 'navbar'> {
     activeKey?: string;
     defaultActiveKey?: string;
     fade?: boolean;
@@ -85,6 +89,13 @@ export class Tabs<T extends ElementType | undefined = 'div'> extends Component<
             : (this.tabs.find(({ props }) => !props.disabled)?.props.eventKey ?? '');
     }
 
+    get orientation() {
+        return (
+            this.componentProps.orientation ??
+            (this.componentProps.vertical ? 'vertical' : 'horizontal')
+        );
+    }
+
     handleClick = (event: MouseEvent<HTMLDivElement>) => {
         this.componentProps.onClick?.(event);
 
@@ -108,7 +119,7 @@ export class Tabs<T extends ElementType | undefined = 'div'> extends Component<
         const { tabs } = this;
         if (!button || Number.isNaN(index)) return;
 
-        const horizontal = this.componentProps.orientation !== 'vertical';
+        const horizontal = this.orientation !== 'vertical';
         const previous = horizontal ? event.key === 'ArrowLeft' : event.key === 'ArrowUp';
         const next = horizontal ? event.key === 'ArrowRight' : event.key === 'ArrowDown';
         const enabled = tabs
@@ -148,51 +159,50 @@ export class Tabs<T extends ElementType | undefined = 'div'> extends Component<
     panelId = (key: string) => `${this.componentProps.id}-panel-${encodeURIComponent(key)}`;
 
     renderTabs = () => {
-        const { orientation = 'horizontal', variant = 'tabs' } = this.componentProps;
+        const { variant = 'tabs', fill, justified, cardHeader, navbar } = this.componentProps;
+        const { orientation } = this;
         const listGroup = variant === 'list-group';
+        const tabListProps: ComponentPropsWithRef<'div'> = {
+            role: 'tablist',
+            'aria-label': this.componentProps['aria-label'] ?? 'Tabs',
+            'aria-orientation': orientation,
+            children: this.tabs.map(({ props: tab }, index) => {
+                const active = tab.eventKey === this.activeKey;
 
-        return (
-            <div
-                className={classNames(
-                    listGroup ? 'list-group' : 'nav',
-                    !listGroup && `nav-${variant}`,
-                    orientation === 'vertical' &&
-                        (listGroup
-                            ? 'flex-column'
-                            : variant === 'pills'
-                              ? 'nav-pills-vertical'
-                              : 'flex-column')
-                )}
-                role="tablist"
-                aria-label={this.componentProps['aria-label'] ?? 'Tabs'}
-                aria-orientation={orientation}
-            >
-                {this.tabs.map(({ props: tab }, index) => {
-                    const active = tab.eventKey === this.activeKey;
+                return (
+                    <button
+                        key={tab.eventKey}
+                        id={this.tabId(tab.eventKey)}
+                        type="button"
+                        role="tab"
+                        data-tab-index={index}
+                        aria-controls={this.panelId(tab.eventKey)}
+                        aria-selected={active}
+                        aria-disabled={tab.disabled || undefined}
+                        tabIndex={active ? 0 : -1}
+                        disabled={tab.disabled}
+                        className={classNames(
+                            listGroup ? 'list-group-item list-group-item-action' : 'nav-link',
+                            { active },
+                            tab.disabled && 'disabled'
+                        )}
+                    >
+                        {tab.label}
+                    </button>
+                );
+            })
+        };
 
-                    return (
-                        <button
-                            key={tab.eventKey}
-                            id={this.tabId(tab.eventKey)}
-                            type="button"
-                            role="tab"
-                            data-tab-index={index}
-                            aria-controls={this.panelId(tab.eventKey)}
-                            aria-selected={active}
-                            aria-disabled={tab.disabled || undefined}
-                            tabIndex={active ? 0 : -1}
-                            disabled={tab.disabled}
-                            className={classNames(
-                                listGroup ? 'list-group-item list-group-item-action' : 'nav-link',
-                                { active },
-                                tab.disabled && 'disabled'
-                            )}
-                        >
-                            {tab.label}
-                        </button>
-                    );
-                })}
-            </div>
+        return listGroup ? (
+            <div {...tabListProps} className="list-group" />
+        ) : (
+            <Nav
+                as="div"
+                {...tabListProps}
+                variant={variant}
+                vertical={orientation === 'vertical'}
+                {...{ fill, justified, cardHeader, navbar }}
+            />
         );
     };
 
@@ -241,6 +251,11 @@ export class Tabs<T extends ElementType | undefined = 'div'> extends Component<
             orientation: _orientation,
             children: _children,
             variant: _variant,
+            vertical: _vertical,
+            fill: _fill,
+            justified: _justified,
+            cardHeader: _cardHeader,
+            navbar: _navbar,
             ...props
         } = this.componentProps;
 

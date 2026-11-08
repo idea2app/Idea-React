@@ -5,7 +5,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import { createRef, lazy, Suspense } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import { Carousel, CarouselSlide } from '../source/Carousel';
+import { Carousel, CarouselSlide } from '../source/Base/Carousel';
 
 it('renders carousel slides, controls, indicators, and accessible slide state', () => {
     render(

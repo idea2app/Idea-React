@@ -9,7 +9,7 @@ import {
     AccordionHeader,
     AccordionItem,
     AccordionToggle
-} from '../source/Accordion';
+} from '../source/Base/Accordion';
 
 it('renders native exclusive, compact, themed, flush and spaced accordions', () => {
     const { container } = render(

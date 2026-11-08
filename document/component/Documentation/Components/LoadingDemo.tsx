@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 import { Component } from 'react';
 import { sleep } from 'web-utility';
 
-import { Button } from '../../../../source/Button';
+import { Button } from '../../../../source/Base/Button';
 import { Loading } from '../../../../source/Extension/Loading';
 
 @observer

@@ -1,7 +1,7 @@
 import { FC, isValidElement, PropsWithChildren, ReactNode } from 'react';
 import reactElementToJSXString from 'react-element-to-jsx-string';
 
-import { Card } from '../../../../source/Card';
+import { Card } from '../../../../source/Base/Card';
 import { CodeBlock } from '../../../../source/Extension/CodeBlock';
 import { LiveRunner } from './LiveRunner';
 

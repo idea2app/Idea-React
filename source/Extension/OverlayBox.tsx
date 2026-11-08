@@ -19,10 +19,15 @@ import {
 import { createPortal } from 'react-dom';
 import { uniqueID } from 'web-utility';
 
-import { FloatingOptions, FloatingPosition, OverlayContainer, OverlayPlacement } from '../Overlay';
-import { AsProps, PolymorphicClassProps } from '../Polymorphic';
-import { Popover } from '../Popover';
-import { Tooltip } from '../Tooltip';
+import {
+    FloatingOptions,
+    FloatingPosition,
+    OverlayContainer,
+    OverlayPlacement
+} from '../Base/Overlay';
+import { AsProps, PolymorphicClassProps } from '../Base/Polymorphic';
+import { Popover } from '../Base/Popover';
+import { Tooltip } from '../Base/Tooltip';
 
 export type OverlayTrigger = 'click' | 'focus' | 'hover';
 

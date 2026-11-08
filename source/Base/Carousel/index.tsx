@@ -16,8 +16,8 @@ import {
     ReactNode
 } from 'react';
 
+import { Icon } from '../../Extension/Icon';
 import { Button } from '../Button';
-import { Icon } from '../Extension/Icon';
 import { polymorphic, PolymorphicClassProps } from '../Polymorphic';
 import { CarouselEnds, CarouselModel } from './model';
 import { CarouselScroll } from './scroll';

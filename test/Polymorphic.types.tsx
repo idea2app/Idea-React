@@ -1,9 +1,17 @@
 import { Component, ComponentPropsWithRef, createRef, FC } from 'react';
 
-import { Alert } from '../source/Alert';
-import { Button } from '../source/Button';
-import { Card } from '../source/Card';
-import { Carousel } from '../source/Carousel';
+import { Alert } from '../source/Base/Alert';
+import { Button } from '../source/Base/Button';
+import { Card } from '../source/Base/Card';
+import { Carousel } from '../source/Base/Carousel';
+import { Col } from '../source/Base/Grid';
+import { ListGroup, ListGroupProps } from '../source/Base/ListGroup';
+import { NativeDialog } from '../source/Base/NativeDialog';
+import { NavLink } from '../source/Base/Nav';
+import { NavbarBrand, NavbarBrandProps } from '../source/Base/Navbar';
+import { polymorphic, PolymorphicClassProps, PolymorphicProps } from '../source/Base/Polymorphic';
+import { Stack } from '../source/Base/Stack';
+import { Toggler, TogglerProps } from '../source/Base/Toggler';
 import { LiveTSX } from '../source/Extension/LiveTSX';
 import { Loading } from '../source/Extension/Loading';
 import { Nameplate } from '../source/Extension/Nameplate';
@@ -12,14 +20,6 @@ import { ShareBox } from '../source/Extension/ShareBox';
 import { Checkbox } from '../source/Form/Checkbox';
 import { FormControl } from '../source/Form/Control';
 import { PasswordStrength } from '../source/Form/PasswordStrength';
-import { Col } from '../source/Grid';
-import { ListGroup, ListGroupProps } from '../source/ListGroup';
-import { NativeDialog } from '../source/NativeDialog';
-import { NavLink } from '../source/Nav';
-import { NavbarBrand, NavbarBrandProps } from '../source/Navbar';
-import { polymorphic, PolymorphicClassProps, PolymorphicProps } from '../source/Polymorphic';
-import { Stack } from '../source/Stack';
-import { Toggler, TogglerProps } from '../source/Toggler';
 
 interface RouterLinkProps extends Omit<ComponentPropsWithRef<'a'>, 'href'> {
     to: string;

@@ -17,9 +17,9 @@ import {
     ReactNode
 } from 'react';
 
+import { Menu, MenuHeader, MenuItemContent, MenuItemDescription } from '../Base/Menu';
+import { AsProps, polymorphic, PolymorphicClassProps } from '../Base/Polymorphic';
 import { Icon } from '../Extension/Icon';
-import { Menu, MenuHeader, MenuItemContent, MenuItemDescription } from '../Menu';
-import { AsProps, polymorphic, PolymorphicClassProps } from '../Polymorphic';
 import { FormValidationProps } from './Primitives';
 
 export interface ComboboxOptionProps extends ComponentPropsWithRef<'button'> {

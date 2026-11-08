@@ -1,8 +1,9 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { Badge } from '../../../../source/Badge';
+import { Badge } from '../../../../source/Base/Badge';
 import { Icon } from '../../../../source/Extension/Icon';
 import { DocumentationLink } from '../Header';
+import { DocumentationHeading } from '../Heading';
 import styles from './style.module.less';
 
 export type DocumentationHeroProps = PropsWithChildren<{
@@ -31,7 +32,12 @@ export const DocumentationHero: FC<DocumentationHeroProps> = ({
                 {announcement.label}
                 <Icon name="arrow-right" aria-hidden="true" />
             </Badge>
-            <h1 className="text-4xl fw-semibold lh-1 text-balance mb-0">{title}</h1>
+            <DocumentationHeading
+                className="text-4xl fw-semibold lh-1 text-balance mb-0"
+                upstreamPath="getting-started/install/"
+            >
+                {title}
+            </DocumentationHeading>
             {children}
         </div>
     </main>

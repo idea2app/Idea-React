@@ -4,10 +4,9 @@ import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, ReactNode } from 'react';
 
-import { Button } from '../../../../source/Button';
-import { CloseButton } from '../../../../source/CloseButton';
-import { OverlayBox } from '../../../../source/Extension/OverlayBox';
-import { Menu, MenuItem } from '../../../../source/Menu';
+import { Button } from '../../../../source/Base/Button';
+import { CloseButton } from '../../../../source/Base/CloseButton';
+import { Menu, MenuItem } from '../../../../source/Base/Menu';
 import {
     DialogBody,
     DialogFooter,
@@ -15,8 +14,9 @@ import {
     DialogTitle,
     NativeDialog,
     NativeDialogProps
-} from '../../../../source/NativeDialog';
-import { Toast } from '../../../../source/Toast';
+} from '../../../../source/Base/NativeDialog';
+import { Toast } from '../../../../source/Base/Toast';
+import { OverlayBox } from '../../../../source/Extension/OverlayBox';
 
 export interface DialogDemoProps extends Omit<NativeDialogProps, 'title'> {
     label: ReactNode;

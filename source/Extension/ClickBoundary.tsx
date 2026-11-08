@@ -9,7 +9,7 @@ import {
     PureComponent
 } from 'react';
 
-import { AsProps, PolymorphicClassProps } from '../Polymorphic';
+import { AsProps, PolymorphicClassProps } from '../Base/Polymorphic';
 
 export type ClickBoundaryProps = PropsWithChildren<
     {

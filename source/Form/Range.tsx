@@ -4,8 +4,8 @@ import type Range from 'bootstrap/js/src/range.js';
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, CSSProperties, forwardRef, Ref } from 'react';
 
-import { ComponentTheme } from '../Button';
-import { AsProps, polymorphic } from '../Polymorphic';
+import { ComponentTheme } from '../Base/Button';
+import { AsProps, polymorphic } from '../Base/Polymorphic';
 import { FormPlugin } from './Plugin';
 import { FormValidationProps } from './Primitives';
 

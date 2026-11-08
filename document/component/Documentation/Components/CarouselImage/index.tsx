@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import { Image } from '../../../../../source/Image';
+import { Image } from '../../../../../source/Base/Image';
 import styles from './style.module.css';
 
 export interface CarouselImageProps {

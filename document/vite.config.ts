@@ -14,6 +14,7 @@ interface MdastNode {
     name?: string | null;
     lang?: string | null;
     value?: string;
+    depth?: number;
     attributes?: MdastNode[];
     children?: MdastNode[];
 }
@@ -24,6 +25,38 @@ interface HastNode {
     properties?: Record<string, unknown>;
     children?: HastNode[];
 }
+
+const upstreamPaths: Record<string, string> = {
+    'components/chips': 'forms/chips',
+    'components/grid': 'layout/grid',
+    'components/image': 'content/images',
+    'components/table': 'content/tables',
+    forms: 'forms/overview'
+};
+
+const remarkDocumentationHeading = () => (tree: MdastNode, file: { path: string }) => {
+    const route =
+        file.path
+            .replaceAll('\\', '/')
+            .split('/app/')[1]
+            ?.replace(/\/?page\.mdx$/, '') ?? '';
+    const page = route.replace(/\/$/, '');
+    const upstream =
+        upstreamPaths[page] ??
+        (/^(components|forms)\/[^/]+$/.test(page) ? page : 'getting-started/install');
+    const visit = (node: MdastNode) => {
+        if ((node.type === 'heading' && node.depth === 1) || node.name === 'h1') {
+            node.type = 'mdxJsxFlowElement';
+            node.name = 'DocumentationHeading';
+            node.attributes = [
+                ...(node.attributes ?? []),
+                { type: 'mdxJsxAttribute', name: 'upstreamPath', value: `${upstream}/` }
+            ];
+        }
+        node.children?.forEach(visit);
+    };
+    visit(tree);
+};
 
 const inlineElements = new Set([
     'a',
@@ -168,7 +201,12 @@ export default defineConfig({
         documentationSearch(),
         mdx({
             providerImportSource: '@documentation/MDXComponents',
-            remarkPlugins: [remarkGfm, remarkCodeCards, remarkInlineButtonChildren],
+            remarkPlugins: [
+                remarkGfm,
+                remarkDocumentationHeading,
+                remarkCodeCards,
+                remarkInlineButtonChildren
+            ],
             rehypePlugins: [rehypeBootstrapTable]
         }),
         swc.vite({

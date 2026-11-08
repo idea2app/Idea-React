@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 
-import { polymorphic } from '../../Polymorphic';
+import { polymorphic } from '../../Base/Polymorphic';
 import * as style from './index.module.less';
 
 export interface VerticalMarqueeProps extends HTMLAttributes<HTMLDivElement> {

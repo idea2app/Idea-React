@@ -4,8 +4,8 @@ import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component, ReactNode } from 'react';
 
-import { Drawer, DrawerPlacement } from '../../../../source/Drawer';
-import { Navbar, NavbarBrand, NavbarProps, NavbarToggler } from '../../../../source/Navbar';
+import { Drawer, DrawerPlacement } from '../../../../source/Base/Drawer';
+import { Navbar, NavbarBrand, NavbarProps, NavbarToggler } from '../../../../source/Base/Navbar';
 
 export interface NavbarDemoProps {
     brand?: ReactNode;

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Children, ComponentPropsWithRef, isValidElement, ReactNode } from 'react';
 
-import { polymorphic } from '../Polymorphic';
+import { polymorphic } from '../Base/Polymorphic';
 import { FormLabel } from './Primitives';
 
 export type FormFloatingLabelProps = ComponentPropsWithRef<'div'> & {

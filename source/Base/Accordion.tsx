@@ -11,8 +11,8 @@ import {
     MouseEvent
 } from 'react';
 
+import { Icon } from '../Extension/Icon';
 import { Button, ButtonProps, ComponentTheme } from './Button';
-import { Icon } from './Extension/Icon';
 import { AsProps, polymorphic, PolymorphicClassProps } from './Polymorphic';
 
 export interface AccordionProps extends ComponentPropsWithRef<'div'> {

@@ -3,12 +3,17 @@
 import { observer } from 'mobx-react';
 import { ChangeEvent, Component, createRef } from 'react';
 
-import { Button } from '../../../../source/Button';
+import { Button } from '../../../../source/Base/Button';
+import {
+    MenuItem,
+    MenuItemContent,
+    MenuItemDescription,
+    MenuPanel
+} from '../../../../source/Base/Menu';
+import { NativeDialog } from '../../../../source/Base/NativeDialog';
+import { Placeholder, PlaceholderAnimation } from '../../../../source/Base/Placeholder';
 import { Icon } from '../../../../source/Extension/Icon';
 import { FormControl } from '../../../../source/Form';
-import { MenuItem, MenuItemContent, MenuItemDescription, MenuPanel } from '../../../../source/Menu';
-import { NativeDialog } from '../../../../source/NativeDialog';
-import { Placeholder, PlaceholderAnimation } from '../../../../source/Placeholder';
 import { DocumentationSearchModel } from './model';
 import styles from './style.module.less';
 

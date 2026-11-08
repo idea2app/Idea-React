@@ -1,8 +1,8 @@
 import { FC, ReactNode } from 'react';
 
+import { MenuItem } from '../../../source/Base/Menu';
+import { Navbar } from '../../../source/Base/Navbar';
 import { Icon } from '../../../source/Extension/Icon';
-import { MenuItem } from '../../../source/Menu';
-import { Navbar } from '../../../source/Navbar';
 import { DropdownMenu } from '../DropdownMenu';
 
 export type DocumentationLink = Record<'label' | 'href', string>;
@@ -64,11 +64,7 @@ export const DocumentationHeader: FC<DocumentationHeaderProps> = ({
             </div>
             {search}
             <div className="d-flex align-items-center gap-5 ms-auto flex-shrink-0">
-                <a
-                    className="d-none lg:d-inline-flex fg-2"
-                    href={repositoryHref}
-                    aria-label="GitHub"
-                >
+                <a className="d-inline-flex fg-2" href={repositoryHref} aria-label="GitHub">
                     <Icon name="github" aria-hidden="true" />
                 </a>
                 <DropdownMenu

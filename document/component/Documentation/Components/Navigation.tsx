@@ -5,8 +5,8 @@ import { observer } from 'mobx-react';
 import { Component, MouseEvent, PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 
-import { Button } from '../../../../source/Button';
-import { Drawer } from '../../../../source/Drawer';
+import { Button } from '../../../../source/Base/Button';
+import { Drawer } from '../../../../source/Base/Drawer';
 import { Icon } from '../../../../source/Extension/Icon';
 import { Toc } from './Toc';
 

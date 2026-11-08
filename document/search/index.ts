@@ -47,19 +47,70 @@ export async function* searchIndex(): AsyncGenerator<DocumentationSearchEntry> {
     }
 }
 
+export const searchResources = (entries: readonly DocumentationSearchEntry[], origin: string) => {
+    const url = new URL(origin);
+    if (
+        !['http:', 'https:'].includes(url.protocol) ||
+        url.username ||
+        url.password ||
+        url.pathname !== '/' ||
+        url.search ||
+        url.hash
+    )
+        throw new Error('SITE_URL must be an HTTP(S) origin without a path, query or fragment.');
+
+    const base = new URL(`${nextConfig.basePath || ''}/`, url);
+    const escapeXML = (value: string) =>
+        value.replace(/[<>&"']/g, character => `&#${character.charCodeAt(0)};`);
+    const locations = entries
+        .map(({ href }) => `<url><loc>${escapeXML(new URL(href, base).href)}</loc></url>`)
+        .join('');
+    const items = entries
+        .map(({ title, href, description }) => {
+            const link = escapeXML(new URL(href, base).href);
+
+            return `<item><title>${escapeXML(title)}</title><link>${link}</link><guid isPermaLink="true">${link}</guid><description>${escapeXML(description)}</description></item>`;
+        })
+        .join('');
+
+    return {
+        'rss.xml': {
+            type: 'application/rss+xml',
+            body: `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>Idea React documentation</title><link>${escapeXML(base.href)}</link><description>Idea React documentation with full plain-text page content.</description><language>en</language>${items}</channel></rss>\n`
+        },
+        'sitemap.xml': {
+            type: 'application/xml',
+            body: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${locations}</urlset>\n`
+        },
+        'robots.txt': {
+            type: 'text/plain',
+            body: `User-agent: *\nAllow: /\nSitemap: ${new URL('sitemap.xml', base).href}\n`
+        }
+    };
+};
+
 export const documentationSearch = (): Plugin => ({
     name: 'documentation-search',
     apply: 'serve',
     configureServer(server) {
         server.middlewares.use((request, response, next) => {
-            if (request.url?.split('?')[0] !== `${nextConfig.basePath || ''}/search-index.json`)
-                return next();
+            const pathname = request.url?.split('?')[0];
+            const filename = (['rss.xml', 'sitemap.xml', 'robots.txt'] as const).find(
+                name => pathname === `${nextConfig.basePath || ''}/${name}`
+            );
+            if (!filename) return next();
 
-            void Array.fromAsync(searchIndex()).then(entries => {
-                response.setHeader('Content-Type', 'application/json; charset=utf-8');
-                response.setHeader('Cache-Control', 'no-store');
-                response.end(JSON.stringify(entries));
-            }, next);
+            void Array.fromAsync(searchIndex())
+                .then(entries => {
+                    const origin = process.env.SITE_URL || `http://${request.headers.host}`;
+                    const resources = searchResources(entries, origin);
+                    const resource = resources[filename];
+
+                    response.setHeader('Content-Type', `${resource.type}; charset=utf-8`);
+                    response.setHeader('Cache-Control', 'no-store');
+                    response.end(resource.body);
+                })
+                .catch(next);
         });
     }
 });
