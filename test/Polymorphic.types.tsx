@@ -14,7 +14,6 @@ import { LiveTSX } from '../source/Extension/LiveTSX';
 import { Loading } from '../source/Extension/Loading';
 import { MarkdownView } from '../source/Extension/MarkdownView';
 import { Nameplate } from '../source/Extension/Nameplate';
-import { Select } from '../source/Extension/Select';
 import { ShareBox } from '../source/Extension/ShareBox';
 import { Checkbox } from '../source/Form/Checkbox';
 import { FormControl } from '../source/Form/Control';
@@ -96,8 +95,6 @@ export const polymorphicTypeExamples = [
     <Card ref={createRef<HTMLButtonElement>()} as="a" />,
     // @ts-expect-error a fragment-root component has no single root to replace
     <Nameplate as="div" avatar="avatar.png" name="Name" />,
-    // @ts-expect-error a fragment-root component has no single root to replace
-    <Select as="section" />,
     // @ts-expect-error a fragment-root component has no single root to replace
     <ShareBox as="section" />,
     // @ts-expect-error context-only providers with multiple roots have no single root to replace

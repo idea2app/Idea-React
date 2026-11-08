@@ -45,6 +45,7 @@ export const footerColumns = [
         title: 'Guides',
         links: [
             { label: 'Guides', href: site.guides },
+            { label: 'Migration', href: `${site.guides}migration/` },
             { label: 'React + MobX', href: 'https://github.com/idea2app/React-MobX-Bootstrap-ts' },
             { label: 'Next.js starter', href: 'https://github.com/idea2app/Next-Bootstrap-ts' },
             { label: 'Source code', href: `${site.repository}/tree/main/source` }

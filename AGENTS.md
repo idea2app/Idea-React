@@ -273,7 +273,10 @@ pnpm build -r
 - 工具函数、公共类型及非展示组合机制放在 `source/Helper/`；组件与文档的目录按上游分类对齐，
   如 `source/Content/Images.tsx`、`source/Content/Tables.tsx` 和 `source/Layout/Grid.tsx`。
 - 文档站组件集中在 `document/component/Document/`，公共名称使用 `Document` 前缀；
-  目录内文件保留简短名称。MDX 的标题与代码块通过 `h1`、`pre` 映射组合，不为此改写 AST。
+  目录内文件保留简短名称。页面标题及其上游、GitHub 编辑链接由文档布局负责，不全局覆盖 MDX
+  的 `h1`；代码块通过 `pre` 映射组合，不为此改写 AST。
+- 文档布局通过可选的 `upstreamPath` 显式指定相对于 Bootstrap 文档根目录的上游路径；
+  未传入时不显示上游入口，不根据导航分类推断或回退到安装页。
 - 文档标题用 `Stack as="hgroup"` 组合标题与上游链接；仅有一个样式声明时直接内联。
 - RSS 与 Sitemap 共用 MDX 索引和 JSX 序列化，不手写 XML 转义；生产域名从文档站 `.env` 读取，
   环境变量可覆盖，开发链接仍使用当前站点域名。

@@ -6,7 +6,7 @@ import { Icon } from '../../../source/Extension/Icon';
 import nextConfig from '../../next.config.ts';
 import * as style from './style.module.less';
 
-type NavLink = Record<'label' | 'slug', string> & { heading?: string };
+type NavLink = Record<'label' | 'slug', string>;
 type NavGroup = Record<
     'label' | 'icon' | 'iconClassName' | 'href' | 'itemHref' | 'slug',
     string
@@ -18,11 +18,11 @@ const components: NavLink[] = [
     { label: 'Accordion', slug: 'accordion' },
     { label: 'Alert', slug: 'alert' },
     { label: 'Avatar', slug: 'avatar' },
-    { label: 'Badge', slug: 'badge', heading: 'Badges' },
+    { label: 'Badge', slug: 'badge' },
     { label: 'Breadcrumb', slug: 'breadcrumb' },
     { label: 'Button', slug: 'button' },
     { label: 'Button group', slug: 'button-group' },
-    { label: 'Card', slug: 'card', heading: 'Cards' },
+    { label: 'Card', slug: 'card' },
     { label: 'Carousel', slug: 'carousel' },
     { label: 'Close button', slug: 'close-button' },
     { label: 'Collapse', slug: 'collapse' },
@@ -38,12 +38,12 @@ const components: NavLink[] = [
     { label: 'Popover', slug: 'popover' },
     { label: 'Progress', slug: 'progress' },
     { label: 'Scrollspy', slug: 'scrollspy' },
-    { label: 'Spinner', slug: 'spinner', heading: 'Spinners' },
+    { label: 'Spinner', slug: 'spinner' },
     { label: 'Stepper', slug: 'stepper' },
     { label: 'Tab', slug: 'tab' },
     { label: 'Toasts', slug: 'toasts' },
     { label: 'Toggler', slug: 'toggler' },
-    { label: 'Tooltip', slug: 'tooltip', heading: 'Tooltips' }
+    { label: 'Tooltip', slug: 'tooltip' }
 ];
 const extensions: NavLink[] = [
     { label: 'Click boundary', slug: 'click-boundary' },
@@ -61,7 +61,6 @@ const extensions: NavLink[] = [
     { label: 'Overlay box', slug: 'overlay-box' },
     { label: 'Page nav', slug: 'page-nav' },
     { label: 'Scroll nav', slug: 'scroll-nav' },
-    { label: 'Select', slug: 'select' },
     { label: 'Share box', slug: 'share-box' },
     { label: 'Spinner button', slug: 'spinner-button' },
     { label: 'Table spinner', slug: 'table-spinner' },
@@ -77,7 +76,7 @@ const extensions: NavLink[] = [
 const forms: NavLink[] = [
     { label: 'Overview', slug: '' },
     { label: 'Field', slug: 'field' },
-    { label: 'Form control', slug: 'form-control', heading: 'Form controls' },
+    { label: 'Form control', slug: 'form-control' },
     { label: 'Checkbox', slug: 'checkbox' },
     { label: 'Chips', slug: 'chips' },
     { label: 'Radio', slug: 'radio' },
@@ -95,6 +94,7 @@ const forms: NavLink[] = [
 ];
 const guides: NavLink[] = [
     { label: 'Install', slug: 'install' },
+    { label: 'Migration', slug: 'migration' },
     { label: 'Parcel', slug: 'parcel' },
     { label: 'Vite', slug: 'vite' },
     { label: 'Webpack', slug: 'webpack' },
@@ -126,7 +126,7 @@ export const documentGroups: NavGroup[] = [
         href: 'layout/grid/',
         itemHref: 'layout/',
         slug: 'layout',
-        items: [{ label: 'Grid', slug: 'grid', heading: 'Grid system' }]
+        items: [{ label: 'Grid', slug: 'grid' }]
     },
     {
         label: 'Content',

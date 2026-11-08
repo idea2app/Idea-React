@@ -72,7 +72,6 @@ const inlineElements = new Set([
     'MenuItemContent',
     'NavbarBrand',
     'NavLink',
-    'Option',
     'PageLink',
     'PageText',
     'PlaceholderButton',

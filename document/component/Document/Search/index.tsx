@@ -59,7 +59,7 @@ export class DocumentSearch extends Component<DocumentSearchProps> {
 
     renderSearchForm() {
         return (
-            <div className="d-flex align-items-center gap-4">
+            <div className="sticky-top z-1 bg-1 d-flex align-items-center gap-4 p-5 border-bottom">
                 <Icon name="search" aria-hidden="true" />
                 <FormControl
                     ref={this.input}
@@ -134,14 +134,16 @@ export class DocumentSearch extends Component<DocumentSearchProps> {
                 </Button>
                 <NativeDialog
                     ref={this.dialog}
-                    className={`${styles.dialog} p-5 overflow-y-auto`}
+                    className={`${styles.dialog} p-0 overflow-y-auto`}
                     aria-label="Search documentation"
                 >
                     {this.renderSearchForm()}
-                    {this.renderResults()}
-                    <p className="fg-2 text-sm mb-0">
-                        Search this documentation. Press Escape to close.
-                    </p>
+                    <div className="px-5 pb-5">
+                        {this.renderResults()}
+                        <p className="fg-2 text-sm mb-0">
+                            Search this documentation. Press Escape to close.
+                        </p>
+                    </div>
                 </NativeDialog>
             </>
         );

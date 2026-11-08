@@ -122,7 +122,6 @@ import {
     NavItem,
     NavLink,
     NavOverflow,
-    Option,
     OTPInput,
     OverlayBox,
     PageItem,
@@ -379,7 +378,6 @@ const examples: [string, ReactElement][] = [
     ],
     ['PageNav', <PageNav as={Target} payload={payload} data-example="polymorphic" />],
     ['ScrollNav', <ScrollNav as={Target} payload={payload} data-example="polymorphic" />],
-    ['Option', <Option as={Target} payload={payload} data-example="polymorphic" />],
     ['SpinnerButton', <SpinnerButton as={Target} payload={payload} data-example="polymorphic" />],
     [
         'TableSpinner',

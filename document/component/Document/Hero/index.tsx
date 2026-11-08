@@ -3,7 +3,6 @@ import { FC, PropsWithChildren } from 'react';
 import { Badge } from '../../../../source/Base/Badge';
 import { Icon } from '../../../../source/Extension/Icon';
 import { DocumentLink } from '../Header';
-import { DocumentHeading } from '../Heading';
 import styles from './style.module.less';
 
 export type DocumentHeroProps = PropsWithChildren<{
@@ -28,12 +27,7 @@ export const DocumentHero: FC<DocumentHeroProps> = ({ title, announcement, child
                 {announcement.label}
                 <Icon name="arrow-right" aria-hidden="true" />
             </Badge>
-            <DocumentHeading
-                className="text-4xl fw-semibold lh-1 text-balance mb-0"
-                upstreamPath="getting-started/install/"
-            >
-                {title}
-            </DocumentHeading>
+            <h1 className="text-4xl fw-semibold lh-1 text-balance mb-0">{title}</h1>
             {children}
         </div>
     </main>
