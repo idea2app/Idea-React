@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { Image } from '../../../../source/Content/Images';
 import styles from './style.module.css';
 
-export interface DocumentCarouselImageProps {
+export interface CarouselImageProps {
     children: string;
     width?: number;
     height?: number;
@@ -14,7 +14,7 @@ export interface DocumentCarouselImageProps {
     rounded?: boolean;
 }
 
-export const CarouselImage: FC<DocumentCarouselImageProps> = ({
+export const CarouselImage: FC<CarouselImageProps> = ({
     children,
     width = 800,
     height = 400,

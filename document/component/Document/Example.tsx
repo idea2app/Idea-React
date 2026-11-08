@@ -79,9 +79,9 @@ export const CodeCard: FC<CodeCardProps> = ({ children, code, language = 'tsx', 
     </Card>
 );
 
-export const DocumentCodeFence: FC<ComponentProps<'pre'>> = ({ children }) => {
-    if (!isValidElement<ComponentProps<'code'>>(children))
-        throw new Error('An MDX code fence must contain a code element.');
+export const DocumentCodeFence: FC<ComponentProps<'pre'>> = ({ children, ...props }) => {
+    if (!isValidElement<ComponentProps<'code'>>(children) || children.type !== 'code')
+        return <pre {...props}>{children}</pre>;
 
     const { className = '', children: code } = children.props;
     const language = className.replace(/^language-/, '') || 'text';

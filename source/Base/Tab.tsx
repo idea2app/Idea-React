@@ -17,7 +17,8 @@ import {
 } from 'react';
 
 import { AsProps, polymorphic, PolymorphicClassProps } from '../Helper/Polymorphic';
-import { Nav, NavProps } from './Nav';
+import { ListGroup, ListGroupItem } from './ListGroup';
+import { Nav, NavLink, NavProps } from './Nav';
 
 export interface TabProps extends ComponentPropsWithRef<'div'> {
     eventKey: string;
@@ -162,39 +163,36 @@ export class Tabs<T extends ElementType | undefined = 'div'> extends Component<
         const { variant = 'tabs', fill, justified, cardHeader, navbar } = this.componentProps;
         const { orientation } = this;
         const listGroup = variant === 'list-group';
-        const tabListProps: ComponentPropsWithRef<'div'> = {
-            role: 'tablist',
+        const tabListProps = {
+            role: 'tablist' as const,
             'aria-label': this.componentProps['aria-label'] ?? 'Tabs',
             'aria-orientation': orientation,
             children: this.tabs.map(({ props: tab }, index) => {
                 const active = tab.eventKey === this.activeKey;
+                const triggerProps = {
+                    id: this.tabId(tab.eventKey),
+                    type: 'button' as const,
+                    role: 'tab',
+                    'data-tab-index': index,
+                    'aria-controls': this.panelId(tab.eventKey),
+                    'aria-selected': active,
+                    'aria-disabled': tab.disabled || undefined,
+                    tabIndex: active ? 0 : -1,
+                    disabled: tab.disabled,
+                    className: classNames({ active }, tab.disabled && 'disabled'),
+                    children: tab.label
+                };
 
-                return (
-                    <button
-                        key={tab.eventKey}
-                        id={this.tabId(tab.eventKey)}
-                        type="button"
-                        role="tab"
-                        data-tab-index={index}
-                        aria-controls={this.panelId(tab.eventKey)}
-                        aria-selected={active}
-                        aria-disabled={tab.disabled || undefined}
-                        tabIndex={active ? 0 : -1}
-                        disabled={tab.disabled}
-                        className={classNames(
-                            listGroup ? 'list-group-item list-group-item-action' : 'nav-link',
-                            { active },
-                            tab.disabled && 'disabled'
-                        )}
-                    >
-                        {tab.label}
-                    </button>
+                return listGroup ? (
+                    <ListGroupItem key={tab.eventKey} as="button" {...triggerProps} action />
+                ) : (
+                    <NavLink key={tab.eventKey} as="button" {...triggerProps} />
                 );
             })
         };
 
         return listGroup ? (
-            <div {...tabListProps} className="list-group" />
+            <ListGroup as="div" {...tabListProps} />
         ) : (
             <Nav
                 as="div"

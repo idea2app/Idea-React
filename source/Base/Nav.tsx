@@ -57,6 +57,7 @@ export const NavLink = polymorphic<NavLinkProps>(
         <Root
             {...props}
             href={disabled ? undefined : href}
+            disabled={Root === 'button' ? disabled : undefined}
             tabIndex={disabled ? -1 : tabIndex}
             aria-disabled={disabled || undefined}
             aria-current={active ? 'page' : props['aria-current']}

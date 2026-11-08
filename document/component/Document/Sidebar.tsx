@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 
+import { Nav, NavItem, NavLink } from '../../../source/Base/Nav';
 import { Stack } from '../../../source/Base/Stack';
 import { Icon } from '../../../source/Extension/Icon';
 import nextConfig from '../../next.config.ts';
@@ -183,29 +184,25 @@ export const Sidebar: FC<SidebarProps> = ({ active }) => (
                             {label}
                         </a>
                     </strong>
-                    <ul className="nav flex-column mt-1">
+                    <Nav as="ul" className="mt-1" vertical>
                         {items.map(({ label, slug }) => {
                             const current = active === slug || (active === groupSlug && !slug);
 
                             return (
-                                <li key={label} className="nav-item">
-                                    <a
-                                        className={classNames(
-                                            'nav-link border-0',
-                                            style.sidebarLink,
-                                            {
-                                                active: current
-                                            }
-                                        )}
+                                <NavItem key={label}>
+                                    <NavLink
+                                        className={classNames('border-0', style.sidebarLink, {
+                                            active: current
+                                        })}
                                         href={`${basePath}/${itemHref}${slug ? `${slug}/` : ''}`}
                                         aria-current={current ? 'page' : undefined}
                                     >
                                         {label}
-                                    </a>
-                                </li>
+                                    </NavLink>
+                                </NavItem>
                             );
                         })}
-                    </ul>
+                    </Nav>
                 </Stack>
             )
         )}

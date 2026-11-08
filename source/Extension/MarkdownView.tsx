@@ -16,7 +16,7 @@ export const MarkdownView = polymorphic<MarkdownViewProps>(
         <Root
             {...props}
             className={classNames('markdown-body', className)}
-            dangerouslySetInnerHTML={{ __html: marked.parse(children, { async: false }) }}
+            dangerouslySetInnerHTML={{ __html: marked(children, { async: false }) }}
         />
     )
 );
