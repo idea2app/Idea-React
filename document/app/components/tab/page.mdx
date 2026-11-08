@@ -1,10 +1,10 @@
-import { Stack } from '../../../../source/Stack';
-import { Tabs, Tab } from '../../../../source/Tab';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import styles from '../../../component/Documentation/Components/style.module.less';
+import { Stack } from '../../../../source/Base/Stack';
+import { Tabs, Tab } from '../../../../source/Base/Tab';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { CodeExample } from '../../../component/Document/Example';
+import styles from '../../../component/Document/style.module.less';
 
-<ComponentsLayout active="tab">
+<DocumentLayout active="tab" upstreamPath="components/tab/">
 
 # Tab
 
@@ -15,6 +15,11 @@ The Tab plugin works with [nav components][1] such as `.nav-tabs` and `.nav-pill
 ## Nav tab
 
 Give `Tabs` a unique `id`, then add `Tab` children with an `eventKey` and `label`. The component creates matching tab controls and content panes, including their accessibility attributes.
+
+`Tabs` forwards the `Nav` layout and styling props `fill`, `justified`, `vertical`,
+`cardHeader`, and `navbar` to the tab list. `vertical` also enables vertical keyboard
+navigation; an explicit `orientation` takes precedence. These Nav-only props do not
+affect the `list-group` variant.
 
 <CodeExample>
     <Stack gap={3}>
@@ -57,7 +62,7 @@ Tabs should use button controls rather than navigation links. If wrapping the ta
 
 <CodeExample>
     <Stack gap={3}>
-        <Tabs id="nav-tab2" variant="tabs">
+        <Tabs id="nav-tab2" variant="tabs" fill>
             <Tab eventKey="home" label="Home">
                 <p>
                     {'This is some placeholder content the '}
@@ -96,7 +101,7 @@ The tabs plugin also works with pills.
 
 <CodeExample>
     <Stack gap={3}>
-        <Tabs id="pills-tab" variant="pills">
+        <Tabs id="pills-tab" variant="pills" justified>
             <Tab eventKey="home" label="Home">
                 <p>
                     {'This is some placeholder content the '}
@@ -129,15 +134,11 @@ The tabs plugin also works with pills.
     </Stack>
 </CodeExample>
 
-And with vertical pills. Set `orientation="vertical"` to give the tab list the corresponding `aria-orientation` and keyboard behavior.
+And with vertical pills. Set `vertical` to give the tab list the corresponding layout,
+`aria-orientation`, and keyboard behavior.
 
 <CodeExample>
-    <Tabs
-        id="v-pills-tab"
-        variant="pills"
-        orientation="vertical"
-        className="d-flex align-items-start gap-4"
-    >
+    <Tabs id="v-pills-tab" variant="pills" vertical className="d-flex align-items-start gap-4">
         <Tab eventKey="home" label="Home">
             <p>
                 {'This is some placeholder content the '}
@@ -237,7 +238,7 @@ Content panes fade in by default. The pane you leave hides immediately, because 
 
 Use `onChange(eventKey)` to respond to selection changes instead of registering Bootstrap plugin events.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: /components/nav
 [2]: /components/list-group#javascript-behavior

@@ -1,5 +1,5 @@
-import { Stack } from '../../../../source/Stack';
-import { Button } from '../../../../source/Button';
+import { Stack } from '../../../../source/Base/Stack';
+import { Button } from '../../../../source/Base/Button';
 import {
     Card,
     CardImage,
@@ -11,14 +11,14 @@ import {
     CardFooter,
     CardTitle,
     CardText
-} from '../../../../source/Card';
-import { ListGroup, ListGroupItem } from '../../../../source/ListGroup';
-import { Nav, NavLink } from '../../../../source/Nav';
-import { Row, Col } from '../../../../source/Grid';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+} from '../../../../source/Base/Card';
+import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
+import { Nav, NavLink } from '../../../../source/Base/Nav';
+import { Row, Col } from '../../../../source/Layout/Grid';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="card">
+<DocumentLayout active="card" upstreamPath="components/card/">
 
 # Cards
 
@@ -1275,7 +1275,7 @@ Customize the component with the following local CSS variables. Override them th
 | `--bs-card-group-margin`        | `0.75rem`                                                     |
 | `--bs-card-body-gap`            | `calc(var(--bs-card-spacer-y) * 0.5)`                         |
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/utilities/flex/
 [2]: https://getbootstrap.com/docs/6.0/layout/grid#column-classes

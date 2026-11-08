@@ -1,15 +1,15 @@
-import { Badge } from '../../../../source/Badge';
+import { Badge } from '../../../../source/Base/Badge';
 import {
     Stepper,
     StepperNav,
     StepperItem,
     StepperLink,
     StepperOverflow
-} from '../../../../source/Stepper';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+} from '../../../../source/Base/Stepper';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="stepper">
+<DocumentLayout active="stepper" upstreamPath="components/stepper/">
 
 # Stepper
 
@@ -272,7 +272,7 @@ Customize the component with the following local CSS variables. Override them th
 
 The `StepperOverflow` wrapper establishes an inline-size query container with horizontal scrolling. The horizontal stepper retains its minimum content width, keeping labels readable when the available space is narrow.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/utilities/text-alignment/
 [2]: https://getbootstrap.com/docs/6.0/utilities/link/

@@ -5,7 +5,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import { Tab, Tabs } from '../source/Tab';
+import { Tab, Tabs } from '../source/Base/Tab';
 
 const tabs = [
     <Tab key="home" eventKey="home" label="Home">
@@ -27,6 +27,57 @@ it('renders tab semantics safely during server-side rendering', () => {
 
     assert.match(markup, /role="tablist"/);
     assert.match(markup, /role="tabpanel"/);
+});
+
+it('forwards Nav styling to the tablist without leaking props onto the wrapper', () => {
+    const { container, rerender } = render(
+        <Tabs id="nav-props" variant="pills" vertical fill justified cardHeader navbar>
+            {tabs}
+        </Tabs>
+    );
+    const tablist = screen.getByRole('tablist');
+
+    for (const name of [
+        'navbar-nav',
+        'nav-pills',
+        'nav-pills-vertical',
+        'nav-fill',
+        'nav-justified'
+    ])
+        assert.ok(tablist.classList.contains(name), name);
+    assert.equal(tablist.getAttribute('aria-orientation'), 'vertical');
+    for (const name of ['vertical', 'fill', 'justified', 'cardHeader', 'navbar'])
+        assert.equal(container.firstElementChild?.hasAttribute(name), false);
+
+    fireEvent.keyDown(screen.getByRole('tab', { name: 'Home' }), { key: 'ArrowDown' });
+
+    assert.equal(
+        screen.getByRole('tab', { name: 'Profile' }).getAttribute('aria-selected'),
+        'true'
+    );
+
+    rerender(
+        <Tabs id="nav-props" orientation="horizontal" cardHeader vertical>
+            {tabs}
+        </Tabs>
+    );
+
+    assert.ok(tablist.classList.contains('card-header-tabs'));
+    assert.equal(tablist.classList.contains('flex-column'), false);
+    assert.equal(tablist.getAttribute('aria-orientation'), 'horizontal');
+});
+
+it('keeps Nav-only styling off the list-group variant', () => {
+    render(
+        <Tabs id="list-layout" variant="list-group" fill justified cardHeader navbar>
+            {tabs}
+        </Tabs>
+    );
+    const tablist = screen.getByRole('tablist');
+
+    assert.equal(tablist.className, 'list-group');
+    for (const name of ['as', 'fill', 'justified', 'cardHeader', 'navbar'])
+        assert.equal(tablist.hasAttribute(name), false);
 });
 
 it('activates tabs with clicks and keyboard while maintaining the tab-panel relationship', () => {

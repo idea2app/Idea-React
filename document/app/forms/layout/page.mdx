@@ -12,12 +12,12 @@ import {
     InputGroupText,
     Radio
 } from '../../../../source/Form';
-import { Col, Row } from '../../../../source/Grid';
-import { Button } from '../../../../source/Button';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import { Col, Row } from '../../../../source/Layout/Grid';
+import { Button } from '../../../../source/Base/Button';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<DocumentationLayout active="layout">
+<DocumentLayout active="layout" upstreamPath="forms/layout/">
 
 # Layout
 
@@ -409,7 +409,7 @@ Use the `.row-cols-*` classes to create responsive horizontal layouts. By adding
     </Form>
 </CodeExample>
 
-</DocumentationLayout>
+</DocumentLayout>
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form
 [2]: https://getbootstrap.com/docs/6.0/utilities/margin/

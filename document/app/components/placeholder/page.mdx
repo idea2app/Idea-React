@@ -1,15 +1,15 @@
-import { Stack } from '../../../../source/Stack';
-import { Button } from '../../../../source/Button';
-import { Card, CardImage, CardBody, CardTitle, CardText } from '../../../../source/Card';
+import { Stack } from '../../../../source/Base/Stack';
+import { Button } from '../../../../source/Base/Button';
+import { Card, CardImage, CardBody, CardTitle, CardText } from '../../../../source/Base/Card';
 import {
     Placeholder,
     PlaceholderAnimation,
     PlaceholderButton
-} from '../../../../source/Placeholder';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+} from '../../../../source/Base/Placeholder';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="placeholder">
+<DocumentLayout active="placeholder" upstreamPath="components/placeholder/">
 
 # Placeholder
 
@@ -187,4 +187,4 @@ Add `.placeholder-wave` to an inline element to apply the loading animation to t
 | `--bs-placeholder-wave-opacity-max` | `1`     |
 | `--bs-placeholder-wave-opacity-min` | `0.4`   |
 
-</ComponentsLayout>
+</DocumentLayout>

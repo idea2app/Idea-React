@@ -1,10 +1,10 @@
-import { Badge } from '../../../../source/Badge';
-import { Button } from '../../../../source/Button';
-import { Spinner, SpinnerIcon } from '../../../../source/Spinner';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { Badge } from '../../../../source/Base/Badge';
+import { Button } from '../../../../source/Base/Button';
+import { Spinner, SpinnerIcon } from '../../../../source/Base/Spinner';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="spinner">
+<DocumentLayout active="spinner" upstreamPath="components/spinner/">
 
 # Spinners
 
@@ -135,7 +135,7 @@ Growing spinner tokens:
 
 Used for creating the CSS animations for our spinners. The border spinner rotates through `360deg`; the grow spinner scales from `0` to its full size while fading in. Use `SpinnerIcon` to apply the rotation animation to an icon from the icon font.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion
 [2]: https://getbootstrap.com/docs/6.0/utilities/colors/

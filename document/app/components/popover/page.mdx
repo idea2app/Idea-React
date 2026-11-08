@@ -1,11 +1,11 @@
-import { Button } from '../../../../source/Button';
+import { Button } from '../../../../source/Base/Button';
 import { OverlayBox } from '../../../../source/Extension/OverlayBox';
-import { DialogDemo } from '../../../component/Documentation/Components/DialogDemo';
-import styles from '../../../component/Documentation/Components/OverlayGuideDemo/style.module.css';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DialogDemo } from '../../../component/Document/DialogDemo';
+import styles from '../../../component/Document/OverlayGuideDemo/style.module.css';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { CodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="popover">
+<DocumentLayout active="popover" upstreamPath="components/popover/">
 
 # Popover
 
@@ -164,7 +164,7 @@ When you have some styles on a parent element that interfere with a popover, you
 
 Another situation where you’ll want to set an explicit custom `container` are popovers inside a [dialog][1], to make sure that the popover itself is appended to the dialog. This is particularly important for popovers that contain interactive elements – dialogs will trap focus, so unless the popover is a child element of the dialog, users won’t be able to focus or activate these interactive elements.
 
-<CodeExample source="document/component/Documentation/Components/DialogDemo.tsx">
+<CodeExample source="document/component/Document/DialogDemo.tsx">
     <DialogDemo id="popoverContainerDialog" label="Popover inside dialog" title="Popover container">
         <OverlayBox
             title="Popover title"
@@ -290,7 +290,7 @@ Popovers do not manage keyboard focus order, and their placement can be random i
 | `flip`                | `true`            | Flip direction when space is constrained.                                                                  |
 | `overlayClassName`    | —                 | Apply a CSS module class to the popover.                                                                   |
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/components/dialog/
 [2]: #variables

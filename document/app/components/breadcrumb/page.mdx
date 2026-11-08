@@ -1,15 +1,15 @@
-import { Stack } from '../../../../source/Stack';
+import { Stack } from '../../../../source/Base/Stack';
 import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbDivider
-} from '../../../../source/Breadcrumb';
+} from '../../../../source/Base/Breadcrumb';
 import { Icon } from '../../../../source/Extension/Icon';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="breadcrumb">
+<DocumentLayout active="breadcrumb" upstreamPath="components/breadcrumb/">
 
 # Breadcrumb
 
@@ -202,7 +202,7 @@ Customize the component with the following local CSS variables. Override them th
 | `--bs-breadcrumb-link-active-color`  | `var(--bs-fg-1)`     |
 | `--bs-breadcrumb-link-border-radius` | `var(--bs-radius-7)` |
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/customize/sass/#mask-icons
 [2]: https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/

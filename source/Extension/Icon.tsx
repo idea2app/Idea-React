@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
-import { polymorphic } from '../Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export type IconProps = ComponentPropsWithRef<'span'> & {
     name: string;

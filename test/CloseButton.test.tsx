@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { CloseButton } from '../source/CloseButton';
+import { CloseButton } from '../source/Base/CloseButton';
 
 it('renders a Bootstrap 6 close button', () => {
     render(<CloseButton className="custom" onClick={() => undefined} />);

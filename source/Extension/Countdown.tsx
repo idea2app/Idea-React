@@ -6,7 +6,7 @@ import { ObservedComponent, reaction } from 'mobx-react-helper';
 import { ElementType, HTMLAttributes } from 'react';
 import { Second, TimeData } from 'web-utility';
 
-import { AsProps, PolymorphicClassProps } from '../Polymorphic';
+import { AsProps, PolymorphicClassProps } from '../Helper/Polymorphic';
 
 export interface TimeUnit {
     scale: number;

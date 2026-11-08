@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
-import { polymorphic } from '../Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export type FormProps = ComponentPropsWithRef<'form'> & {
     validated?: boolean;
@@ -77,6 +77,13 @@ export const FormLabel = polymorphic<FormLabelProps>(
     )
 );
 FormLabel.displayName = 'FormLabel';
+
+export const ChipInputLabel = polymorphic<ComponentPropsWithRef<'label'>>(
+    ({ as: Root = 'label', className, ...props }) => (
+        <Root {...props} className={classNames('chip-input-label', className)} />
+    )
+);
+ChipInputLabel.displayName = 'ChipInputLabel';
 
 export type FormLegendProps = ComponentPropsWithRef<'legend'> &
     Pick<FormLabelProps, 'column' | 'controlSize'>;

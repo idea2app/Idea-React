@@ -4,9 +4,9 @@ import Datepicker, { type DatepickerConfig } from 'bootstrap/js/src/datepicker.j
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, forwardRef, Ref } from 'react';
 
-import { Button, ButtonProps } from '../Button';
+import { Button, ButtonProps } from '../Base/Button';
 import { Icon } from '../Extension/Icon';
-import { AsProps, polymorphic, PolymorphicComponent } from '../Polymorphic';
+import { AsProps, polymorphic, PolymorphicComponent } from '../Helper/Polymorphic';
 import { FormPlugin } from './Plugin';
 import { FormValidationProps } from './Primitives';
 

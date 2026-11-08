@@ -1,13 +1,13 @@
-import { Container } from '../../../../source/Grid';
-import { Menu, MenuItem, MenuSubmenu } from '../../../../source/Menu';
-import { Nav, NavLink } from '../../../../source/Nav';
-import { Navbar, NavbarBrand, NavbarNav } from '../../../../source/Navbar';
-import { NavOverflow } from '../../../../source/NavOverflow';
+import { Container } from '../../../../source/Layout/Grid';
+import { Menu, MenuItem, MenuSubmenu } from '../../../../source/Base/Menu';
+import { Nav, NavLink } from '../../../../source/Base/Nav';
+import { Navbar, NavbarBrand, NavbarNav } from '../../../../source/Base/Navbar';
+import { NavOverflow } from '../../../../source/Base/NavOverflow';
 import { Icon } from '../../../../source/Extension/Icon';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { CodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="nav-overflow">
+<DocumentLayout active="nav-overflow" upstreamPath="components/nav-overflow/">
 
 # Nav overflow
 
@@ -321,7 +321,7 @@ The instance method `updateOverflow()` manually recalculates overflow. Resizing 
 
 Use `onOverflowChange(overflowCount, visibleCount)` to observe overflow calculations.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion
 [2]: /components/navbar

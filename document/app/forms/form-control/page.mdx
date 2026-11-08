@@ -1,4 +1,4 @@
-import { Stack } from '../../../../source/Stack';
+import { Stack } from '../../../../source/Base/Stack';
 import {
     Form,
     FormControl,
@@ -10,12 +10,12 @@ import {
     FormTextArea
 } from '../../../../source/Form';
 import { Icon } from '../../../../source/Extension/Icon';
-import { Col, Row } from '../../../../source/Grid';
-import { Button } from '../../../../source/Button';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import { Col, Row } from '../../../../source/Layout/Grid';
+import { Button } from '../../../../source/Base/Button';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<DocumentationLayout active="form-control">
+<DocumentLayout active="form-control" upstreamPath="forms/form-control/">
 
 # Form controls
 
@@ -650,7 +650,7 @@ Some inputs and buttons share some root variables for consistency across all for
 }
 ```
 
-</DocumentationLayout>
+</DocumentLayout>
 
 [1]: ../field/
 [2]: ../datepicker/

@@ -4,7 +4,7 @@ import { it, mock } from 'node:test';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import { PageItem, PageLink, PageText, Pagination } from '../source/Pagination';
+import { PageItem, PageLink, PageText, Pagination } from '../source/Base/Pagination';
 
 it('supports themes, sizes, active pages, disabled links and noninteractive page text', () => {
     const onClick = mock.fn();

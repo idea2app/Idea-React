@@ -1,9 +1,9 @@
-import { Stack } from '../../../../source/Stack';
+import { Stack } from '../../../../source/Base/Stack';
 import { FormLabel, FormText, OTPInput } from '../../../../source/Form';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<DocumentationLayout active="otp-input">
+<DocumentLayout active="otp-input" upstreamPath="forms/otp-input/">
 
 # OTP input
 
@@ -162,7 +162,7 @@ Because the control is a single text input, it exposes one accessible name, role
 }
 ```
 
-</DocumentationLayout>
+</DocumentLayout>
 
 [1]: ../form-control/
 [2]: https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html

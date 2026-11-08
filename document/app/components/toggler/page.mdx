@@ -1,9 +1,9 @@
-import { Stack } from '../../../../source/Stack';
-import { Toggler } from '../../../../source/Toggler';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { Stack } from '../../../../source/Base/Stack';
+import { Toggler } from '../../../../source/Base/Toggler';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { CodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="toggler">
+<DocumentLayout active="toggler" upstreamPath="components/toggler/">
 
 # Toggler
 
@@ -121,4 +121,4 @@ You could also use this to toggle the `disabled` attribute on a `fieldset` eleme
 
 Use `onToggled(elements)` to respond after the matched elements have been updated.
 
-</ComponentsLayout>
+</DocumentLayout>

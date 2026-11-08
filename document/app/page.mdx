@@ -1,13 +1,13 @@
 import { Icon } from '../../source/Extension/Icon';
-import { MenuItem } from '../../source/Menu';
+import { MenuItem } from '../../source/Base/Menu';
 import { CopyCommand } from '../component/CopyCommand';
-import { DocumentationAction } from '../component/Documentation/Action';
-import { DocumentationHero } from '../component/Documentation/Hero';
-import heroStyles from '../component/Documentation/Hero/style.module.less';
+import { DocumentAction } from '../component/Document/Action';
+import { DocumentHero } from '../component/Document/Hero';
+import heroStyles from '../component/Document/Hero/style.module.less';
 import { DropdownMenu } from '../component/DropdownMenu';
 import { site, versions } from './site';
 
-<DocumentationHero
+<DocumentHero
     title="Build React apps with less glue and more possibility"
     announcement={{ label: 'Idea React 3 is now in beta', href: versions[0].href }}
 >
@@ -42,7 +42,7 @@ brings the building blocks together so you can focus on your application.
         <MenuItem href={`${site.repository}/tree/main/source`}>Explore component source</MenuItem>
         <MenuItem href={site.api}>Read API reference</MenuItem>
     </DropdownMenu>
-    <DocumentationAction href={site.docs} icon="book" label="Read the docs" />
+    <DocumentAction href={site.docs} icon="book" label="Read the docs" />
 </div>
 
 <div className="d-flex flex-wrap justify-content-center align-items-center gap-3 fg-2 text-sm">
@@ -72,7 +72,7 @@ Built by the idea2app community.
 </div>
 </aside>
 
-</DocumentationHero>
+</DocumentHero>
 
 [1]: https://github.com/idea2app/Idea-React#usage
 [2]: https://github.com/idea2app/Idea-React/graphs/contributors

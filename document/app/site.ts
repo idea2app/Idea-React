@@ -1,5 +1,5 @@
 import { license, version } from '../../package.json';
-import type { DocumentationLink } from '../component/Documentation/Header';
+import type { DocumentLink } from '../component/Document/Header';
 import nextConfig from '../next.config';
 
 export const site = {
@@ -14,13 +14,13 @@ export const site = {
     guides: `${nextConfig.basePath || ''}/guides/`
 };
 
-export const navigation: DocumentationLink[] = [
+export const navigation: DocumentLink[] = [
     { label: 'Docs', href: site.docs },
     { label: 'API', href: site.api },
     { label: 'Community', href: `${site.repository}/issues` }
 ];
 
-export const versions: DocumentationLink[] = [
+export const versions: DocumentLink[] = [
     {
         label: `v${version} (prerelease)`,
         href: `https://www.npmjs.com/package/idea-react/v/${version}`
@@ -45,6 +45,7 @@ export const footerColumns = [
         title: 'Guides',
         links: [
             { label: 'Guides', href: site.guides },
+            { label: 'Migration', href: `${site.guides}migration/` },
             { label: 'React + MobX', href: 'https://github.com/idea2app/React-MobX-Bootstrap-ts' },
             { label: 'Next.js starter', href: 'https://github.com/idea2app/Next-Bootstrap-ts' },
             { label: 'Source code', href: `${site.repository}/tree/main/source` }

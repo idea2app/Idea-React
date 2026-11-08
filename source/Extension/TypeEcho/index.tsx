@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef, ElementType } from 'react';
 
-import { polymorphic } from '../../Polymorphic';
+import { polymorphic } from '../../Helper/Polymorphic';
 import { TypeEchoContent } from './Content';
 
 export interface TypeEchoProps extends ComponentPropsWithRef<'pre'> {

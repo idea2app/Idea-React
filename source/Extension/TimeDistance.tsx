@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 import { diffTime, TimeData } from 'web-utility';
 
-import { polymorphic } from '../Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export interface TimeDistanceProps extends HTMLAttributes<HTMLTimeElement> {
     date: TimeData;

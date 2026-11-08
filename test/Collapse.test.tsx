@@ -3,7 +3,7 @@ import { it, mock } from 'node:test';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Collapse, CollapseToggle } from '../source/Collapse';
+import { Collapse, CollapseToggle } from '../source/Base/Collapse';
 
 it('keeps multiple triggers and multiple horizontal targets synchronized', () => {
     render(

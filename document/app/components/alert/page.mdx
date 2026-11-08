@@ -1,11 +1,11 @@
-import { Stack } from '../../../../source/Stack';
-import { Alert, AlertHeading, AlertLink } from '../../../../source/Alert';
+import { Stack } from '../../../../source/Base/Stack';
+import { Alert, AlertHeading, AlertLink } from '../../../../source/Base/Alert';
 import { Icon } from '../../../../source/Extension/Icon';
-import { AlertGuideDemo } from '../../../component/Documentation/Components/OverlayGuideDemo';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { AlertGuideDemo } from '../../../component/Document/OverlayGuideDemo';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { CodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="alert">
+<DocumentLayout active="alert" upstreamPath="components/alert/">
 
 # Alert
 
@@ -60,7 +60,7 @@ Color alone does not convey meaning to assistive technologies. Include visible t
 
 Click the button below to show an alert (hidden with inline styles to start), then dismiss (and destroy) it with the built-in close button.
 
-<CodeExample source="document/component/Documentation/Components/OverlayGuideDemo/index.tsx">
+<CodeExample source="document/component/Document/OverlayGuideDemo/index.tsx">
     <AlertGuideDemo />
 </CodeExample>
 
@@ -216,7 +216,7 @@ The React wrapper manages dismissal and removes the alert after its fade transit
 
 `onClose` runs when dismissal begins, and `onClosed` runs after the transition and removal. Use `onClosed` to restore keyboard focus to an appropriate control, as in the live example.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: #additional-content
 [2]: https://getbootstrap.com/docs/6.0/utilities/flex/

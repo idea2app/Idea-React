@@ -1,11 +1,11 @@
-import { Stack } from '../../../../source/Stack';
-import { Badge } from '../../../../source/Badge';
+import { Stack } from '../../../../source/Base/Stack';
+import { Badge } from '../../../../source/Base/Badge';
 import { FormField, Checkbox, Radio } from '../../../../source/Form';
-import { ListGroup, ListGroupItem } from '../../../../source/ListGroup';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { CodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="list-group">
+<DocumentLayout active="list-group" upstreamPath="components/list-group/">
 
 # List group
 
@@ -557,7 +557,7 @@ Use CSS custom properties on the component to customize its appearance without r
 
 Use the [Tab plugin][3] to create tabbable list group panes.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/layout/breakpoints#container-queries
 [2]: https://getbootstrap.com/docs/6.0/utilities/flex

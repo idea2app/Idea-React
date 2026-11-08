@@ -1,6 +1,6 @@
 import { FC, PropsWithoutRef } from 'react';
 
-import { Avatar } from '../Avatar';
+import { Avatar } from '../Base/Avatar';
 
 export type NameplateProps = PropsWithoutRef<{ avatar: string; name: string }>;
 

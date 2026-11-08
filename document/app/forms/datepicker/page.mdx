@@ -10,11 +10,11 @@ import {
     FormLabel,
     FormText
 } from '../../../../source/Form';
-import { Button } from '../../../../source/Button';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import { Button } from '../../../../source/Base/Button';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<DocumentationLayout active="datepicker">
+<DocumentLayout active="datepicker" upstreamPath="forms/datepicker/">
 
 # Datepicker
 
@@ -388,7 +388,7 @@ Use `datepickerTheme` to set the datepicker popup’s theme independently of the
 | `datepickerTheme`         | string                   | `null`      | Force datepicker popup theme: `'light'`, `'dark'`, `'auto'`, or `null` to inherit from ancestor `[data-bs-theme]` |
 | `options.vcpOptions`      | object                   | `{}`        | Pass-through object for any [Vanilla Calendar Pro option][2]                                                      |
 
-</DocumentationLayout>
+</DocumentLayout>
 
 [1]: https://vanilla-calendar.pro/
 [2]: https://vanilla-calendar.pro/docs/reference/settings

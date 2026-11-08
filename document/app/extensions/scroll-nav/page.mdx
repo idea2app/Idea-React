@@ -1,10 +1,10 @@
-import { NavLink } from '../../../../source/Nav';
+import { NavLink } from '../../../../source/Base/Nav';
 import { ScrollNav } from '../../../../source/Extension/ScrollNav';
 
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="scroll-nav">
+<DocumentLayout active="scroll-nav">
 
 # Scroll nav
 
@@ -54,6 +54,6 @@ The component tracks scroll position and container size with a `ResizeObserver`,
 right caret button only when more content is available in that direction. Each click scrolls by 80%
 of the visible width with smooth scrolling.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/ScrollNav/index.tsx

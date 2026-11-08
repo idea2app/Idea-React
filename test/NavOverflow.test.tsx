@@ -4,8 +4,8 @@ import { it } from 'node:test';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import { NavLink } from '../source/Nav';
-import { NavOverflow } from '../source/NavOverflow';
+import { NavLink } from '../source/Base/Nav';
+import { NavOverflow } from '../source/Base/NavOverflow';
 
 it('renders safely during server-side rendering', () => {
     const markup = renderToStaticMarkup(

@@ -1,5 +1,5 @@
-import { Stack } from '../../../../source/Stack';
-import { ValidationForm } from '../../../component/Documentation/Forms/ValidationForm';
+import { Stack } from '../../../../source/Base/Stack';
+import { ValidationForm } from '../../../component/Document/ValidationForm';
 import {
     Checkbox,
     Combobox,
@@ -16,11 +16,11 @@ import {
     FormTextArea,
     Radio
 } from '../../../../source/Form';
-import { Button } from '../../../../source/Button';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import { Button } from '../../../../source/Base/Button';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<DocumentationLayout active="field">
+<DocumentLayout active="field" upstreamPath="forms/field/">
 
 # Field
 
@@ -316,4 +316,4 @@ Apply `.is-invalid` or `.is-valid` directly to the control for server-side valid
     </FormField>
 </CodeExample>
 
-</DocumentationLayout>
+</DocumentLayout>

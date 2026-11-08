@@ -1,14 +1,14 @@
-import { Button } from '../../../../source/Button';
+import { Button } from '../../../../source/Base/Button';
 import { Icon } from '../../../../source/Extension/Icon';
-import { Image } from '../../../../source/Image';
+import { Image } from '../../../../source/Content/Images';
 import { OverlayBox } from '../../../../source/Extension/OverlayBox';
-import { Popover } from '../../../../source/Popover';
+import { Popover } from '../../../../source/Base/Popover';
 
-import { CodeCard, CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import * as style from '../../../component/Documentation/Components/style.module.less';
+import { CodeCard, CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import * as style from '../../../component/Document/style.module.less';
 
-<ComponentsLayout active="overlay-box">
+<DocumentLayout active="overlay-box">
 
 # Popover and tooltip
 
@@ -460,7 +460,7 @@ wrapper. Render `<Popover>` or `<Tooltip>` directly when you need to control vis
 Likewise, use React state and lifecycle instead of `show.bs.popover`, `shown.bs.tooltip`, and the
 other plugin events.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/OverlayBox.tsx
 [2]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Dialog.tsx

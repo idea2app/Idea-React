@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
-import { Toast, ToastContainer, ToastItem } from '../source/Toast';
+import { Toast, ToastContainer, ToastItem } from '../source/Base/Toast';
 
 it('renders toast containers in static or fixed positions', () => {
     const { rerender } = render(<ToastContainer />);

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
 import { Icon, IconProps } from '../Extension/Icon';
-import { polymorphic } from '../Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 import { FormValidationProps } from './Primitives';
 
 export type FormAdornmentProps = Omit<ComponentPropsWithRef<'label'>, 'htmlFor'> &

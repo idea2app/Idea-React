@@ -4,8 +4,8 @@ import { afterEach, beforeEach, it, mock } from 'node:test';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import { Nav, NavLink } from '../source/Nav';
-import { ScrollSpy } from '../source/ScrollSpy';
+import { Nav, NavLink } from '../source/Base/Nav';
+import { ScrollSpy } from '../source/Base/ScrollSpy';
 
 class Observer {
     static instances: Observer[] = [];

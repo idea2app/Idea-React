@@ -1,8 +1,8 @@
-import { Button } from '../../../../source/Button';
-import { ButtonGroup } from '../../../../source/ButtonGroup';
+import { Button } from '../../../../source/Base/Button';
+import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
 import { Icon } from '../../../../source/Extension/Icon';
-import { Container } from '../../../../source/Grid';
-import { Navbar, NavbarBrand, NavbarNav } from '../../../../source/Navbar';
+import { Container } from '../../../../source/Layout/Grid';
+import { Navbar, NavbarBrand, NavbarNav } from '../../../../source/Base/Navbar';
 import { Checkbox, FormControl, FormField, FormLabel } from '../../../../source/Form';
 import {
     Menu,
@@ -16,11 +16,11 @@ import {
     MenuItemDescription,
     MenuItemCheck,
     MenuSubmenu
-} from '../../../../source/Menu';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+} from '../../../../source/Base/Menu';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { CodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="menu">
+<DocumentLayout active="menu" upstreamPath="components/menu/">
 
 # Menu
 
@@ -630,7 +630,7 @@ Local CSS custom properties expose the component’s colors, spacing, borders, a
 
 `onOpenChange(open)` receives the menu’s new visibility state.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://markdotto.com/blog/bootstrap-explained-dropdowns/
 [2]: https://getbootstrap.com/docs/6.0/components/button-group/

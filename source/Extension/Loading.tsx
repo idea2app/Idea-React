@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 
-import { polymorphic } from '../Polymorphic';
-import { Spinner } from '../Spinner';
+import { Spinner } from '../Base/Spinner';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export interface LoadingProps extends HTMLAttributes<HTMLDivElement> {
     opacity?: number;

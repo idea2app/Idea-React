@@ -3,8 +3,8 @@ import { it, mock } from 'node:test';
 
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
-import { Button } from '../source/Button';
-import { ButtonGroup } from '../source/ButtonGroup';
+import { Button } from '../source/Base/Button';
+import { ButtonGroup } from '../source/Base/ButtonGroup';
 import {
     Menu,
     MenuDivider,
@@ -17,7 +17,7 @@ import {
     MenuPanel,
     MenuSubmenu,
     MenuText
-} from '../source/Menu';
+} from '../source/Base/Menu';
 
 it('keeps split triggers inside a nested button group for adjoining border radii', () => {
     render(

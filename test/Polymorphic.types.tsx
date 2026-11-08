@@ -1,25 +1,25 @@
 import { Component, ComponentPropsWithRef, createRef, FC } from 'react';
 
-import { Alert } from '../source/Alert';
-import { Button } from '../source/Button';
-import { Card } from '../source/Card';
-import { Carousel } from '../source/Carousel';
+import { Alert } from '../source/Base/Alert';
+import { Button } from '../source/Base/Button';
+import { Card } from '../source/Base/Card';
+import { Carousel } from '../source/Base/Carousel';
+import { ListGroup, ListGroupProps } from '../source/Base/ListGroup';
+import { NativeDialog } from '../source/Base/NativeDialog';
+import { NavLink } from '../source/Base/Nav';
+import { NavbarBrand, NavbarBrandProps } from '../source/Base/Navbar';
+import { Stack } from '../source/Base/Stack';
+import { Toggler, TogglerProps } from '../source/Base/Toggler';
 import { LiveTSX } from '../source/Extension/LiveTSX';
 import { Loading } from '../source/Extension/Loading';
+import { MarkdownView } from '../source/Extension/MarkdownView';
 import { Nameplate } from '../source/Extension/Nameplate';
-import { Select } from '../source/Extension/Select';
 import { ShareBox } from '../source/Extension/ShareBox';
 import { Checkbox } from '../source/Form/Checkbox';
 import { FormControl } from '../source/Form/Control';
 import { PasswordStrength } from '../source/Form/PasswordStrength';
-import { Col } from '../source/Grid';
-import { ListGroup, ListGroupProps } from '../source/ListGroup';
-import { NativeDialog } from '../source/NativeDialog';
-import { NavLink } from '../source/Nav';
-import { NavbarBrand, NavbarBrandProps } from '../source/Navbar';
-import { polymorphic, PolymorphicClassProps, PolymorphicProps } from '../source/Polymorphic';
-import { Stack } from '../source/Stack';
-import { Toggler, TogglerProps } from '../source/Toggler';
+import { polymorphic, PolymorphicClassProps, PolymorphicProps } from '../source/Helper/Polymorphic';
+import { Col } from '../source/Layout/Grid';
 
 interface RouterLinkProps extends Omit<ComponentPropsWithRef<'a'>, 'href'> {
     to: string;
@@ -52,6 +52,14 @@ export const polymorphicTypeExamples = [
     <Button ref={createRef<HTMLAnchorElement>()} as="a" href="/docs" />,
     <Button as="div" role="button" />,
     <Loading as="section" aria-label="Loading" opacity={100} />,
+    <MarkdownView ref={createRef<HTMLElement>()}># Markdown</MarkdownView>,
+    <MarkdownView ref={createRef<HTMLDivElement>()} as="div">
+        **Markdown**
+    </MarkdownView>,
+    // @ts-expect-error MarkdownView only accepts string children
+    <MarkdownView>{123}</MarkdownView>,
+    // @ts-expect-error the rendered HTML is owned by MarkdownView
+    <MarkdownView dangerouslySetInnerHTML={{ __html: '<b>HTML</b>' }}>Markdown</MarkdownView>,
     <Col as="a" href="/docs" xs={6} />,
     <FormControl as="textarea" rows={4} />,
     <Checkbox ref={createRef<HTMLInputElement>()} as="input" />,
@@ -87,8 +95,6 @@ export const polymorphicTypeExamples = [
     <Card ref={createRef<HTMLButtonElement>()} as="a" />,
     // @ts-expect-error a fragment-root component has no single root to replace
     <Nameplate as="div" avatar="avatar.png" name="Name" />,
-    // @ts-expect-error a fragment-root component has no single root to replace
-    <Select as="section" />,
     // @ts-expect-error a fragment-root component has no single root to replace
     <ShareBox as="section" />,
     // @ts-expect-error context-only providers with multiple roots have no single root to replace

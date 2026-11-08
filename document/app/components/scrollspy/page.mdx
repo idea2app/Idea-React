@@ -1,13 +1,13 @@
-import { Row, Col } from '../../../../source/Grid';
-import { ListGroup, ListGroupItem } from '../../../../source/ListGroup';
-import { Menu, MenuItem, MenuDivider } from '../../../../source/Menu';
-import { Nav, NavLink } from '../../../../source/Nav';
-import { Navbar, NavbarBrand } from '../../../../source/Navbar';
-import { ScrollSpy } from '../../../../source/ScrollSpy';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { Row, Col } from '../../../../source/Layout/Grid';
+import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
+import { Menu, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
+import { Nav, NavLink } from '../../../../source/Base/Nav';
+import { Navbar, NavbarBrand } from '../../../../source/Base/Navbar';
+import { ScrollSpy } from '../../../../source/Base/ScrollSpy';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { CodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="scrollspy">
+<DocumentLayout active="scrollspy" upstreamPath="components/scrollspy/">
 
 # Scrollspy
 
@@ -505,7 +505,7 @@ Use the instance method `refresh()` after adding, removing, or revealing observe
 
 Use `onActiveChange(id)` to respond when a different section becomes active.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: /components/nav
 [2]: /components/list-group

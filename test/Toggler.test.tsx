@@ -3,7 +3,7 @@ import { it, mock } from 'node:test';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Toggler } from '../source/Toggler';
+import { Toggler } from '../source/Base/Toggler';
 
 it('toggles own classes, including removal of existing multiple classes', () => {
     render(

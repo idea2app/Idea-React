@@ -6,8 +6,8 @@ import { observer } from 'mobx-react';
 import { Component, ElementType } from 'react';
 import { scrollTo, uniqueID } from 'web-utility';
 
-import { Nav, NavLink, NavProps } from '../Nav';
-import { AsProps, PolymorphicClassProps } from '../Polymorphic';
+import { Nav, NavLink, NavProps } from '../Base/Nav';
+import { AsProps, PolymorphicClassProps } from '../Helper/Polymorphic';
 
 const HeadingSelector = Array.from({ length: 6 }, (_, index) => `h${index + 1}`).join(',');
 

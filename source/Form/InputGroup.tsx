@@ -12,9 +12,9 @@ import {
     ReactElement
 } from 'react';
 
-import { Button, ButtonProps } from '../Button';
-import { Menu, MenuProps } from '../Menu';
-import { polymorphic } from '../Polymorphic';
+import { Button, ButtonProps } from '../Base/Button';
+import { Menu, MenuProps } from '../Base/Menu';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export type InputGroupProps = ComponentPropsWithRef<'div'> & {
     size?: 'sm' | 'lg';

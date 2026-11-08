@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { Navbar, NavbarBrand, NavbarNav, NavbarText, NavbarToggler } from '../source/Navbar';
+import { Navbar, NavbarBrand, NavbarNav, NavbarText, NavbarToggler } from '../source/Base/Navbar';
 
 it('supports translucent color modes and navigation variants', () => {
     render(

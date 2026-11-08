@@ -1,21 +1,18 @@
-import { Stack } from '../../../../source/Stack';
-import { Button } from '../../../../source/Button';
+import { Stack } from '../../../../source/Base/Stack';
+import { Button } from '../../../../source/Base/Button';
 import { Form, FormControl, InputGroup, InputGroupText } from '../../../../source/Form';
-import { Container } from '../../../../source/Grid';
-import { Image } from '../../../../source/Image';
-import { Menu, MenuItem, MenuDivider } from '../../../../source/Menu';
-import { Nav, NavItem, NavLink } from '../../../../source/Nav';
-import { Navbar, NavbarBrand, NavbarNav, NavbarText } from '../../../../source/Navbar';
+import { Container } from '../../../../source/Layout/Grid';
+import { Image } from '../../../../source/Content/Images';
+import { Menu, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
+import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
+import { Navbar, NavbarBrand, NavbarNav, NavbarText } from '../../../../source/Base/Navbar';
 import { Icon } from '../../../../source/Extension/Icon';
-import {
-    NavbarDemo,
-    NavbarExternalDemo
-} from '../../../component/Documentation/Components/NavbarDemo';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { NavbarPlacement } from '../../../component/Documentation/Components/NavbarPlacement';
+import { NavbarDemo, NavbarExternalDemo } from '../../../component/Document/NavbarDemo';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { CodeExample } from '../../../component/Document/Example';
+import { NavbarPlacement } from '../../../component/Document/NavbarPlacement';
 
-<ComponentsLayout active="navbar">
+<DocumentLayout active="navbar" upstreamPath="components/navbar/">
 
 # Navbar
 
@@ -25,7 +22,7 @@ Create flexible, responsive navigation bars. Includes support for branding, navi
 
 Here’s a navbar that includes most supported sub-components and a responsive right drawer with [our Drawer component][1]. Resize the browser to preview responsive behavior.
 
-<CodeExample source="document/component/Documentation/Components/NavbarDemo.tsx">
+<CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
         expand="md"
         brand="Navbar"
@@ -172,7 +169,7 @@ Add the `.active` class on `.nav-link` to indicate the current page.
 
 Please note that you should also add the `aria-current` attribute on the active `.nav-link`.
 
-<CodeExample source="document/component/Documentation/Components/NavbarDemo.tsx">
+<CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
         expand="sm"
         brand="Navbar"
@@ -208,7 +205,7 @@ Please note that you should also add the `aria-current` attribute on the active 
 
 And because we use classes for our navs, you can avoid the list-based approach entirely if you like.
 
-<CodeExample source="document/component/Documentation/Components/NavbarDemo.tsx">
+<CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
         expand="sm"
         brand="Navbar"
@@ -236,7 +233,7 @@ And because we use classes for our navs, you can avoid the list-based approach e
 
 You can also use menus in your navbar. Menus require a wrapping element for positioning, so be sure to use separate and nested elements for `.nav-item` and `.nav-link` as shown below.
 
-<CodeExample source="document/component/Documentation/Components/NavbarDemo.tsx">
+<CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
         expand="lg"
         brand="Navbar"
@@ -373,7 +370,7 @@ Navbars may contain bits of text with the help of `.navbar-text`. This class adj
 
 Mix and match with other components and utilities as needed.
 
-<CodeExample source="document/component/Documentation/Components/NavbarDemo.tsx">
+<CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
         expand="md"
         brand="Navbar w/ text"
@@ -407,7 +404,7 @@ Mix and match with other components and utilities as needed.
 
 To make a navbar dark, set `theme="dark"` on `Navbar`.
 
-<CodeExample source="document/component/Documentation/Components/NavbarDemo.tsx">
+<CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
         expand="md"
         theme="dark"
@@ -501,7 +498,7 @@ Set `translucent` to blur and saturate the background of a navbar. This works we
 
 Navbar themes are easier than ever thanks to Bootstrap’s combination of Sass and CSS variables. The default is our "light navbar" for use with light background colors, but you can also apply `data-bs-theme="dark"` to the `.navbar` parent for dark background colors. Then, customize with `.bg-*` and additional utilities.
 
-<CodeExample source="document/component/Documentation/Components/NavbarDemo.tsx">
+<CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
         expand="md"
         theme="dark"
@@ -695,7 +692,7 @@ You can customize which side the drawer appears from using its `placement` prop:
 
 These examples show the drawer below the `md` breakpoint. Click the toggler on a narrow screen to see it slide in from different directions.
 
-<CodeExample source="document/component/Documentation/Components/NavbarDemo.tsx">
+<CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
         expand="md"
         brand="Left Drawer"
@@ -725,7 +722,7 @@ These examples show the drawer below the `md` breakpoint. Click the toggler on a
 
 </CodeExample>
 
-<CodeExample source="document/component/Documentation/Components/NavbarDemo.tsx">
+<CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
         expand="md"
         brand="Top Drawer"
@@ -763,7 +760,7 @@ The first example collapses below the `md` breakpoint; the following examples al
 
 With no `.navbar-brand` shown (hidden inside the drawer):
 
-<CodeExample source="document/component/Documentation/Components/NavbarDemo.tsx">
+<CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
         expand="md"
         brand={null}
@@ -810,7 +807,7 @@ With no `.navbar-brand` shown (hidden inside the drawer):
 
 With a brand name shown on the left and toggler on the right:
 
-<CodeExample source="document/component/Documentation/Components/NavbarDemo.tsx">
+<CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
         brand="Navbar"
         title="Menu"
@@ -855,7 +852,7 @@ With a brand name shown on the left and toggler on the right:
 
 With a toggler on the left and brand name on the right:
 
-<CodeExample source="document/component/Documentation/Components/NavbarDemo.tsx">
+<CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
         brand="Navbar"
         title="Menu"
@@ -902,7 +899,7 @@ With a toggler on the left and brand name on the right:
 
 Sometimes you want to use the drawer plugin to trigger a container element for content that structurally sits outside of the `.navbar`. Because our plugin works on the `id` and `data-bs-target` matching, that’s easily done!
 
-<CodeExample source="document/component/Documentation/Components/NavbarDemo.tsx">
+<CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarExternalDemo />
 </CodeExample>
 
@@ -971,7 +968,7 @@ Use CSS custom properties on the component to customize its appearance without r
 }
 ```
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: /components/drawer
 [2]: #color-schemes

@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render, screen } from '@testing-library/react';
 
-import { ListGroup, ListGroupItem } from '../source/ListGroup';
+import { ListGroup, ListGroupItem } from '../source/Base/ListGroup';
 
 it('supports ordered numbered lists and action-only containers', () => {
     const { container, rerender } = render(<ListGroup as="ol" start={3} numbered />);

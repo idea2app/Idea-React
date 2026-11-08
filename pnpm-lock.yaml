@@ -8,15 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@editorjs/editorjs':
-        specifier: ^2.31.7
-        version: 2.31.7
-      '@editorjs/paragraph':
-        specifier: ^2.11.7
-        version: 2.11.7
-      '@react-editor-js/core':
-        specifier: ^2.1.0
-        version: 2.1.0(@editorjs/editorjs@2.31.7)(react@19.3.1)
       '@shikijs/langs':
         specifier: ^4.6.0
         version: 4.6.0
@@ -32,9 +23,6 @@ importers:
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
-      editorjs-html:
-        specifier: ^4.0.5
-        version: 4.0.5
       html2canvas:
         specifier: ^1.4.1
         version: 1.4.1
@@ -44,12 +32,12 @@ importers:
       lodash:
         specifier: ^4.18.1
         version: 4.18.1
+      marked:
+        specifier: ^18.1.3
+        version: 18.1.3
       mobx-react-helper:
         specifier: ^0.5.4
         version: 0.5.4(mobx@7.1.5)(react@19.3.1)(typescript@6.0.3)
-      react-editor-js:
-        specifier: ^2.1.0
-        version: 2.1.0(@editorjs/editorjs@2.31.7)(@editorjs/paragraph@2.11.7)(react@19.3.1)
       react-live:
         specifier: ^5.0.1
         version: 5.0.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -213,6 +201,9 @@ importers:
       react:
         specifier: ^19.3.1
         version: 19.3.1
+      react-bootstrap-editor:
+        specifier: ^3.0.0-rc.0
+        version: 3.0.0-rc.0(marked@18.1.3)(mobx-react@10.0.3(mobx@7.1.5)(react@19.3.1))(mobx@7.1.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2)
       react-dom:
         specifier: ^19.3.1
         version: 19.3.1(react@19.3.1)
@@ -244,6 +235,12 @@ importers:
       '@vitejs/plugin-rsc':
         specifier: ^0.5.39
         version: 0.5.39(react-dom@19.3.1(react@19.3.1))(react-server-dom-webpack@19.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(less@4.9.1(supports-color@7.2.0))(yaml@2.9.1))
+      preact:
+        specifier: ^11.2.0
+        version: 11.2.0(preact-render-to-string@6.8.2)
+      preact-render-to-string:
+        specifier: ^6.8.2
+        version: 6.8.2(preact@11.2.0)
       remark-gfm:
         specifier: ^4.0.1
         version: 4.0.1(supports-color@7.2.0)
@@ -279,9 +276,6 @@ packages:
 
   '@cacheable/utils@2.5.0':
     resolution: {integrity: sha512-buipgOVDkkPXNR5+xBpDw7Zk2n1EvU7qBJCNUcL7rhQ//kfpOXPAvQ511Os0vpLYJ1pZnvudNytkQt2hst3wqA==}
-
-  '@codexteam/icons@0.0.4':
-    resolution: {integrity: sha512-V8N/TY2TGyas4wLrPIFq7bcow68b3gu8DfDt1+rrHPtXxcexadKauRJL6eQgfG7Z0LCrN4boLRawR4S9gjIh/Q==}
 
   '@cspell/cspell-bundled-dicts@10.4.1':
     resolution: {integrity: sha512-QkDsQSUa6qK/2/AF43YYTrN1rpsJN3Yn1ckA3qH9zmBn0N/tkCWaJ675wo8j1CguPjZdPBF1t4J5tLcjiQv/Dg==}
@@ -517,21 +511,6 @@ packages:
 
   '@dual-bundle/import-meta-resolve@4.2.1':
     resolution: {integrity: sha512-id+7YRUgoUX6CgV0DtuhirQWodeeA7Lf4i2x71JS/vtA5pRb/hIGWlw+G6MeXvsM+MXrz0VAydTGElX1rAfgPg==}
-
-  '@editorjs/caret@1.1.0':
-    resolution: {integrity: sha512-dzUjrPV7mtqM0HR/7IwT1/1PfyMxUfe5MRXo9joFmBRDIcrQ5ikbqVxSL9+Hy5tQ+BUWBwqLUgX1UKTJylWW9Q==}
-
-  '@editorjs/dom@1.2.0':
-    resolution: {integrity: sha512-0b7kyM6bKBNqr90JruQCghwoR7zFfXJp1Ysuj2CG8Df1lGBq2/aKGzPnJteXgFHmViykdebAVTICvQsUk9ocHQ==}
-
-  '@editorjs/editorjs@2.31.7':
-    resolution: {integrity: sha512-te4wI1heK3B8s0pz1asyRPEmOglfkb9ex5nvvCN5OUVDLSnohTszI+yyLI73qOIuUWxenIvJYkOuGHzh/a47Hw==}
-
-  '@editorjs/helpers@1.2.3':
-    resolution: {integrity: sha512-8NnWyZhVqfkaDSRTOpayd8oaGkppw00XvOvUIxPB6SZFd9LKgQo31o9v6eDK4XFsbTed8LQt2xmvZFFK9wNTSg==}
-
-  '@editorjs/paragraph@2.11.7':
-    resolution: {integrity: sha512-qD6bbWvRc4VvP0mXDOm+hOhzzhUYR9ZjcAvgCuKWcCbUMpCvhVF1s8NX40zdjekPi6JEnuHTamCncTrSzVsVhw==}
 
   '@emnapi/core@2.0.0-beta.2':
     resolution: {integrity: sha512-MzCVoWtcg4Pm2B3je5mMvYMvj3MmBKw+fU7vbsJc9/iT8ip6/eYIHo/Dsm/mr+wsHB6SEyJDuxB09Yy6r/8+4A==}
@@ -851,6 +830,9 @@ packages:
   '@mischnic/json-sourcemap@0.1.1':
     resolution: {integrity: sha512-iA7+tyVqfrATAIsIRWQG+a7ZLLD0VaOCKV2Wd/v4mqIU3J9c4jx9p7S0nw1XH3gJCKNBOOwACOPYYSUu9pgT+w==}
     engines: {node: '>=12.0.0'}
+
+  '@mixmark-io/domino@2.2.0':
+    resolution: {integrity: sha512-Y28PR25bHXUg88kCV7nivXrP2Nj2RueZ3/l/jdx6J9f8J4nsEGcgX0Qe6lt7Pa+J79+kPiJU3LguR6O/6zrLOw==}
 
   '@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.7':
     resolution: {integrity: sha512-2zPHLn+MuGJ6GP/5jDrwa9Jy0CI+D3Ibpvopf5SFfmc1G9gdofR4uB7YrJAAp4vodn/7iDOciyv8bgkRPLw7cA==}
@@ -1326,26 +1308,6 @@ packages:
 
   '@quansync/fs@1.1.0':
     resolution: {integrity: sha512-qAPG/t3HqML1TlN7sY/pTbEjzFVAKsMjNNMGheyDosro+kT4iw2KCUoHcVdmliwWjorm4elZbgNQyU2eD97eDg==}
-
-  '@react-editor-js/client@2.1.0':
-    resolution: {integrity: sha512-X/OwqY2KKUUVIy24zvubHTI4qhiVIWMxGlU/Bc6tkf9gcsWgQjPvn75DwrQ5SIGBOYpSBcHY01JX0RRtJHRumw==}
-    peerDependencies:
-      '@editorjs/editorjs': '*'
-      '@editorjs/paragraph': '*'
-      react: '*'
-
-  '@react-editor-js/core@2.1.0':
-    resolution: {integrity: sha512-6h98D5g2RatdCDQRW/+N+eiMtjoq0n1n02m8oA7FrlEzEaOUyV+J+rmtmRS8OexLVOiNeWaSPDpVJ3MNiVLq8Q==}
-    peerDependencies:
-      '@editorjs/editorjs': '*'
-      react: '*'
-
-  '@react-editor-js/server@2.1.0':
-    resolution: {integrity: sha512-RnTbCmzCHbjcjPNKhr9FaehItHgAZyd47Lq+iIGynFqWSsrwGy46LgOXSvb50DYbwDyT0GtxaXBIk6aiFki1Dg==}
-    peerDependencies:
-      '@editorjs/editorjs': '*'
-      '@editorjs/paragraph': '*'
-      react: '*'
 
   '@resvg/resvg-wasm@2.4.1':
     resolution: {integrity: sha512-yi6R0HyHtsoWTRA06Col4WoDs7SvlXU3DLMNP2bdAgs7HK18dTEVl1weXgxRzi8gwLteGUbIg29zulxIB3GSdg==}
@@ -1863,6 +1825,9 @@ packages:
   '@types/serve-static@2.2.0':
     resolution: {integrity: sha512-8mam4H1NHLtu7nmtalF7eyBH14QyOASmcxHhSfEoRyr0nP/YdoesEtU+uSRvMe96TW/HPTtkoKqQLl53N7UXMQ==}
 
+  '@types/turndown@5.0.6':
+    resolution: {integrity: sha512-ru00MoyeeouE5BX4gRL+6m/BsDfbRayOskWqUvh7CLGW+UXxHQItqALa38kKnOiZPqJrtzJUgAC2+F0rL1S4Pg==}
+
   '@types/unist@2.0.11':
     resolution: {integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==}
 
@@ -2272,6 +2237,9 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
+  browser-fs-access@0.38.0:
+    resolution: {integrity: sha512-JveqW2w6pEZqFEEfMgCszXzYpE89dG+nPsmOdcs741mFFAROeL+iqjGEpR07RI+s0YY0EFr+4KnOoACprJTpOw==}
+
   browserslist@4.29.5:
     resolution: {integrity: sha512-khTmKu5NGYTotqcYo8Bew2k4RAE9PuXRSFRXG2lQBrCEQHyeQ/vX6gKMxfokwywBsLiXZMnHsmWMG1pnO8J7uQ==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
@@ -2350,12 +2318,6 @@ packages:
   co-body@6.2.0:
     resolution: {integrity: sha512-Kbpv2Yd1NdL1V/V4cwLVxraHDV6K8ayohr2rmH0J87Er8+zJjcTa6dAn9QMPC9CRgU8+aNajKbSf1TzDB1yKPA==}
     engines: {node: '>=8.0.0'}
-
-  codex-notifier@1.1.2:
-    resolution: {integrity: sha512-DCp6xe/LGueJ1N5sXEwcBc3r3PyVkEEDNWCVigfvywAkeXcZMk9K41a31tkEFBW0Ptlwji6/JlAb49E3Yrxbtg==}
-
-  codex-tooltip@1.1.0:
-    resolution: {integrity: sha512-4AHzIapwZ979nzOPR9YYd8GU+xRAxrc5i5vV6+A6OZRRarLW2ToJZv63E/sYONeJSxUQ1Dyn+PtnVGA3OuoKhA==}
 
   collapse-white-space@2.1.0:
     resolution: {integrity: sha512-loKTxY1zCOuG4j9f6EPnuyyYkf58RnhhWTvRoZEokgB+WbdXehfjFviyOVYkqzEWz1Q5kRiZdBYS5SwxbQYwzw==}
@@ -2599,8 +2561,10 @@ packages:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
 
-  editorjs-html@4.0.5:
-    resolution: {integrity: sha512-ImQYxB3fNCJcd+nJ+Vbne/6PxidO1cYByNpu9nBDStVabfjVrMW65BuR+IEZfOii8VKYH+CW/lYDb2GDlzZtDg==}
+  edkit@1.3.2:
+    resolution: {integrity: sha512-P6vpm1LNI1tmXUz5MB8Si9/wj9jIo4m+ljRJ1283tVuwVCFCY4hj6UCy/eWnc559b7lYbpkKaNUq9SIR6Hcf5g==}
+    peerDependencies:
+      marked: '>=4.0.10'
 
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -3515,6 +3479,11 @@ packages:
   markdown-table@3.1.0:
     resolution: {integrity: sha512-xpeSCdM+B+6P3ncfgaB7FoDbtJ30xAe6Z18TGT7AgXJsHqCElCICZovQqdRMm7kHgpTyYv36EupqewoFFSB8vw==}
 
+  marked@18.1.3:
+    resolution: {integrity: sha512-9ChMH8EVVgjgID49nsL6IWxWk5c6GtAsq/xw7U1ggkjkU5AGuv68oLTVlFRtvcUYZtpbNyjyvGo3YDu0fGapiw==}
+    engines: {node: '>= 20'}
+    hasBin: true
+
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
@@ -4027,6 +3996,19 @@ packages:
     resolution: {integrity: sha512-LJlKCCAUFKOuZxipUdYw1NzIITEsPcgyOG9LkvRJvuKj/bRzbuRY0ARXvL0pWGpsZvn8jku+LMep2eU0seHp8g==}
     engines: {node: ^10 || ^12 || >=14}
 
+  preact-render-to-string@6.8.2:
+    resolution: {integrity: sha512-Hdx7cKD3AMYgt795TdddBpUbuGEFoL/VeA6s7VrBt9Gjt0r6rCy5wMp5xkDjQ9cbKj62frHsEx1x8yV6EjoOpg==}
+    peerDependencies:
+      preact: '>=10 || >= 11.0.0-0'
+
+  preact@11.2.0:
+    resolution: {integrity: sha512-/HfHI/7N84e6GrWBJ3J280z3mLaRJiDcSvj/A+y/4AbLnND/1UlGHe1sR6oYuTGwId0nP7dqDU9OnLxMPZ7xBg==}
+    peerDependencies:
+      preact-render-to-string: '>=6.7.0'
+    peerDependenciesMeta:
+      preact-render-to-string:
+        optional: true
+
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
@@ -4093,13 +4075,18 @@ packages:
     resolution: {integrity: sha512-s4VSOf6yN0rvbRZGxs8Om5CWj6seneMwK3oDb4lWDH0UPhWcxwOWw5+qk24bxq87szX1ydrwylIOp2uG1ojUpA==}
     engines: {node: '>= 0.8'}
 
+  react-bootstrap-editor@3.0.0-rc.0:
+    resolution: {integrity: sha512-ZcHvmrU1Ssj3us+Ocsg9iMjrdZwnHJ5nJLwwAgoh1RriLgOXkGoLbdbAGDqjyV4u15he9l1XbesH6AMyYaL5Ng==}
+    peerDependencies:
+      mobx: '>=6.11'
+      mobx-react: '>=9'
+      react: '>=16'
+      react-dom: '>=16.4.2'
+
   react-dom@19.3.1:
     resolution: {integrity: sha512-Y0bARz53lhEC1NMCASs0/j+faB/zqt3R8hpvg1e8+61ZVJ4UL0UdC4cBbXfZMcIuhrfgeILTLe+ZeBCavQPtKQ==}
     peerDependencies:
       react: ^19.3.1
-
-  react-editor-js@2.1.0:
-    resolution: {integrity: sha512-unI9D2pTH/2gBenc6LgCXJm8iqnrzB71CHgfjQmaB+lGR0Njx+ZXydgUQm1VofMmvF6vcCNVDE1Eb47zQbm14g==}
 
   react-element-to-jsx-string@18.0.0:
     resolution: {integrity: sha512-lM9VcGfx7NIC0WLMx3sJbVmiDhMGpHwVh+WKX/dwCmYPxgK1jRu5PJQnv+lxXKbBoBaq3FGSIiKBvFdWBcTYJQ==}
@@ -4549,6 +4536,13 @@ packages:
   turbo-stream@3.2.1:
     resolution: {integrity: sha512-BaX0eWz3IrypOVDFqPv3VGD6uZZW8y3oFAOJqZQ+oopmOyQ8/xNm7IMwAJFvxax2DBa8zSk+/AeqA6D6b1PXGg==}
 
+  turndown-plugin-gfm@1.0.2:
+    resolution: {integrity: sha512-vwz9tfvF7XN/jE0dGoBei3FXWuvll78ohzCZQuOb+ZjWrs3a0XhQVomJEb2Qh4VHTPNRO4GPZh0V7VRbiWwkRg==}
+
+  turndown@7.2.5:
+    resolution: {integrity: sha512-EKZvCCFHh8sWttpAMs10U6niZFJ2cpz8LkCPlylxoG4JcHF50J7EHnnBW3AY1qXtUMu7kDjCp7dnggB1sIbqEQ==}
+    engines: {node: '>=18', npm: '>=9'}
+
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
@@ -4965,8 +4959,6 @@ snapshots:
       hashery: 1.5.1
       keyv: 5.6.0
 
-  '@codexteam/icons@0.0.4': {}
-
   '@cspell/cspell-bundled-dicts@10.4.1':
     dependencies:
       '@cspell/dict-ada': 4.1.1
@@ -5190,28 +5182,6 @@ snapshots:
   '@cspell/url@10.4.1': {}
 
   '@dual-bundle/import-meta-resolve@4.2.1': {}
-
-  '@editorjs/caret@1.1.0':
-    dependencies:
-      '@editorjs/dom': 1.2.0
-
-  '@editorjs/dom@1.2.0':
-    dependencies:
-      '@editorjs/helpers': 1.2.3
-
-  '@editorjs/editorjs@2.31.7':
-    dependencies:
-      '@editorjs/caret': 1.1.0
-      codex-notifier: 1.1.2
-      codex-tooltip: 1.1.0
-
-  '@editorjs/helpers@1.2.3':
-    dependencies:
-      codex-tooltip: 1.1.0
-
-  '@editorjs/paragraph@2.11.7':
-    dependencies:
-      '@codexteam/icons': 0.0.4
 
   '@emnapi/core@2.0.0-beta.2':
     dependencies:
@@ -5502,6 +5472,8 @@ snapshots:
       '@lezer/common': 1.5.5
       '@lezer/lr': 1.4.12
       json5: 2.2.3
+
+  '@mixmark-io/domino@2.2.0': {}
 
   '@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.7':
     optional: true
@@ -6245,25 +6217,6 @@ snapshots:
     dependencies:
       quansync: 1.0.0
 
-  '@react-editor-js/client@2.1.0(@editorjs/editorjs@2.31.7)(@editorjs/paragraph@2.11.7)(react@19.3.1)':
-    dependencies:
-      '@editorjs/editorjs': 2.31.7
-      '@editorjs/paragraph': 2.11.7
-      '@react-editor-js/core': 2.1.0(@editorjs/editorjs@2.31.7)(react@19.3.1)
-      react: 19.3.1
-
-  '@react-editor-js/core@2.1.0(@editorjs/editorjs@2.31.7)(react@19.3.1)':
-    dependencies:
-      '@editorjs/editorjs': 2.31.7
-      react: 19.3.1
-
-  '@react-editor-js/server@2.1.0(@editorjs/editorjs@2.31.7)(@editorjs/paragraph@2.11.7)(react@19.3.1)':
-    dependencies:
-      '@editorjs/editorjs': 2.31.7
-      '@editorjs/paragraph': 2.11.7
-      '@react-editor-js/core': 2.1.0(@editorjs/editorjs@2.31.7)(react@19.3.1)
-      react: 19.3.1
-
   '@resvg/resvg-wasm@2.4.1': {}
 
   '@rolldown/binding-android-arm-eabi@1.2.16':
@@ -6679,6 +6632,8 @@ snapshots:
       '@types/http-errors': 2.0.5
       '@types/node': 26.6.6
 
+  '@types/turndown@5.0.6': {}
+
   '@types/unist@2.0.11': {}
 
   '@types/unist@3.0.3': {}
@@ -7047,6 +7002,8 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
+  browser-fs-access@0.38.0: {}
+
   browserslist@4.29.5:
     dependencies:
       baseline-browser-mapping: 2.11.35
@@ -7127,10 +7084,6 @@ snapshots:
       qs: 6.17.1
       raw-body: 2.5.3
       type-is: 1.6.18
-
-  codex-notifier@1.1.2: {}
-
-  codex-tooltip@1.1.0: {}
 
   collapse-white-space@2.1.0: {}
 
@@ -7375,7 +7328,19 @@ snapshots:
       es-errors: 1.3.0
       gopd: 1.2.0
 
-  editorjs-html@4.0.5: {}
+  edkit@1.3.2(marked@18.1.3)(typescript@7.0.2):
+    dependencies:
+      '@swc/helpers': 0.5.24
+      '@types/turndown': 5.0.6
+      browser-fs-access: 0.38.0
+      marked: 18.1.3
+      regenerator-runtime: 0.14.1
+      turndown: 7.2.5
+      turndown-plugin-gfm: 1.0.2
+      web-utility: 4.8.1(typescript@7.0.2)
+    transitivePeerDependencies:
+      - element-internals-polyfill
+      - typescript
 
   ee-first@1.1.1: {}
 
@@ -8489,6 +8454,8 @@ snapshots:
 
   markdown-table@3.1.0: {}
 
+  marked@18.1.3: {}
+
   math-intrinsics@1.1.0: {}
 
   mdast-util-find-and-replace@3.0.4:
@@ -8988,6 +8955,17 @@ snapshots:
       - element-internals-polyfill
       - typescript
 
+  mobx-react-helper@0.5.4(mobx@7.1.5)(react@19.3.1)(typescript@7.0.2):
+    dependencies:
+      '@swc/helpers': 0.5.24
+      lodash.isequalwith: 4.4.0
+      mobx: 7.1.5
+      react: 19.3.1
+      web-utility: 4.8.1(typescript@7.0.2)
+    transitivePeerDependencies:
+      - element-internals-polyfill
+      - typescript
+
   mobx-react-lite@5.1.2(mobx@7.1.5)(react@19.3.1):
     dependencies:
       mobx: 7.1.5
@@ -9283,6 +9261,14 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.2
 
+  preact-render-to-string@6.8.2(preact@11.2.0):
+    dependencies:
+      preact: 11.2.0(preact-render-to-string@6.8.2)
+
+  preact@11.2.0(preact-render-to-string@6.8.2):
+    optionalDependencies:
+      preact-render-to-string: 6.8.2(preact@11.2.0)
+
   prelude-ls@1.2.1: {}
 
   prettier-plugin-css-order@2.2.0(postcss@8.5.32)(prettier@3.9.10):
@@ -9353,20 +9339,25 @@ snapshots:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
+  react-bootstrap-editor@3.0.0-rc.0(marked@18.1.3)(mobx-react@10.0.3(mobx@7.1.5)(react@19.3.1))(mobx@7.1.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2):
+    dependencies:
+      '@swc/helpers': 0.5.24
+      edkit: 1.3.2(marked@18.1.3)(typescript@7.0.2)
+      mobx: 7.1.5
+      mobx-react: 10.0.3(mobx@7.1.5)(react@19.3.1)
+      mobx-react-helper: 0.5.4(mobx@7.1.5)(react@19.3.1)(typescript@7.0.2)
+      react: 19.3.1
+      react-dom: 19.3.1(react@19.3.1)
+      web-utility: 4.8.1(typescript@7.0.2)
+    transitivePeerDependencies:
+      - element-internals-polyfill
+      - marked
+      - typescript
+
   react-dom@19.3.1(react@19.3.1):
     dependencies:
       react: 19.3.1
       scheduler: 0.28.0
-
-  react-editor-js@2.1.0(@editorjs/editorjs@2.31.7)(@editorjs/paragraph@2.11.7)(react@19.3.1):
-    dependencies:
-      '@react-editor-js/client': 2.1.0(@editorjs/editorjs@2.31.7)(@editorjs/paragraph@2.11.7)(react@19.3.1)
-      '@react-editor-js/core': 2.1.0(@editorjs/editorjs@2.31.7)(react@19.3.1)
-      '@react-editor-js/server': 2.1.0(@editorjs/editorjs@2.31.7)(@editorjs/paragraph@2.11.7)(react@19.3.1)
-    transitivePeerDependencies:
-      - '@editorjs/editorjs'
-      - '@editorjs/paragraph'
-      - react
 
   react-element-to-jsx-string@18.0.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:
@@ -9950,6 +9941,12 @@ snapshots:
   tsscmp@1.0.6: {}
 
   turbo-stream@3.2.1: {}
+
+  turndown-plugin-gfm@1.0.2: {}
+
+  turndown@7.2.5:
+    dependencies:
+      '@mixmark-io/domino': 2.2.0
 
   type-check@0.4.0:
     dependencies:

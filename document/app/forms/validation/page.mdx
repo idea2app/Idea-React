@@ -1,9 +1,9 @@
-import { Stack } from '../../../../source/Stack';
-import { ValidationForm } from '../../../component/Documentation/Forms/ValidationForm';
+import { Stack } from '../../../../source/Base/Stack';
+import { ChipToken } from '../../../../source/Form/Chip';
+import { ValidationForm } from '../../../component/Document/ValidationForm';
 import {
     Checkbox,
     ChipInput,
-    ChipToken,
     FormAdornment,
     FormAdornmentIcon,
     FormControl,
@@ -23,12 +23,12 @@ import {
     InputGroupText,
     Radio
 } from '../../../../source/Form';
-import { Button } from '../../../../source/Button';
-import { CodeCard, CodeExample } from '../../../component/Documentation/Components/Example';
-import validationFormSource from '../../../component/Documentation/Forms/ValidationForm.tsx?raw';
-import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import { Button } from '../../../../source/Base/Button';
+import { CodeCard, CodeExample } from '../../../component/Document/Example';
+import validationFormSource from '../../../component/Document/ValidationForm.tsx?raw';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<DocumentationLayout active="validation">
+<DocumentLayout active="validation" upstreamPath="forms/validation/">
 
 # Validation
 
@@ -736,7 +736,7 @@ This example functions the same as the [custom styles example][3]. Click the sub
     </ValidationForm>
 </CodeExample>
 
-</DocumentationLayout>
+</DocumentLayout>
 
 [1]: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#the-constraint-validation-api
 [2]: #browser-defaults

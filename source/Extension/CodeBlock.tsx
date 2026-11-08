@@ -13,7 +13,7 @@ import reactElementToJSXString from 'react-element-to-jsx-string';
 import { createHighlighterCoreSync, ShikiTransformer } from 'shiki/core';
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
 
-import { polymorphic } from '../Polymorphic';
+import { polymorphic } from '../Helper/Polymorphic';
 
 const highlighter = createHighlighterCoreSync({
     themes: [githubLight, githubDark],

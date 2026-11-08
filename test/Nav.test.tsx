@@ -3,7 +3,23 @@ import { it, mock } from 'node:test';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Nav, NavItem, NavLink } from '../source/Nav';
+import { Nav, NavItem, NavLink } from '../source/Base/Nav';
+
+it('preserves native disabled behavior for button navigation links', () => {
+    const clicked = mock.fn();
+    render(
+        <NavLink as="button" type="button" disabled onClick={clicked}>
+            Disabled button
+        </NavLink>
+    );
+    const button = screen.getByRole('button', { name: 'Disabled button' });
+
+    assert.equal(button.hasAttribute('disabled'), true);
+
+    fireEvent.click(button);
+
+    assert.equal(clicked.mock.callCount(), 0);
+});
 
 it('supports card header tabs and derives the current page from active links', () => {
     render(

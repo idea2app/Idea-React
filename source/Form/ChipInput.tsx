@@ -5,9 +5,9 @@ import classNames from 'classnames';
 import { ComponentPropsWithoutRef, forwardRef, Ref } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import { ComponentTheme } from '../Button';
+import { ComponentTheme } from '../Base/Button';
 import { Icon } from '../Extension/Icon';
-import { AsProps, polymorphic } from '../Polymorphic';
+import { AsProps, polymorphic } from '../Helper/Polymorphic';
 import { FormPlugin } from './Plugin';
 import { FormValidationProps } from './Primitives';
 

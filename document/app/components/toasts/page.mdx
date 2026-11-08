@@ -1,14 +1,14 @@
-import { Stack } from '../../../../source/Stack';
-import { ToastContainer } from '../../../../source/Toast';
+import { Stack } from '../../../../source/Base/Stack';
+import { ToastContainer } from '../../../../source/Base/Toast';
 import {
     StaticToast,
     ToastMessageDemo,
     ToastPlacementDemo
-} from '../../../component/Documentation/Components/ToastDemo';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+} from '../../../component/Document/ToastDemo';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { CodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="toasts">
+<DocumentLayout active="toasts" upstreamPath="components/toasts/">
 
 # Toasts
 
@@ -41,7 +41,7 @@ Toasts are as flexible as you need and have very little required markup. At a mi
 
 Click the button below to show a toast (positioned with our utilities in the lower right corner) that has been hidden by default.
 
-<CodeExample source="document/component/Documentation/Components/ToastDemo.tsx">
+<CodeExample source="document/component/Document/ToastDemo.tsx">
     <ToastMessageDemo />
 </CodeExample>
 
@@ -121,7 +121,7 @@ By default, toasts fade in and out. To disable the animation, pass `instant` to 
 
 Place toasts with custom CSS as you need them. The top right is often used for notifications, as is the top middle. Use the `position` prop on `ToastContainer` or `toast.Component` for a standard viewport position. If you’re only ever going to show one toast at a time, put the positioning styles right on `ToastItem`.
 
-<CodeExample source="document/component/Documentation/Components/ToastDemo.tsx">
+<CodeExample source="document/component/Document/ToastDemo.tsx">
     <ToastPlacementDemo />
 </CodeExample>
 
@@ -162,7 +162,7 @@ As the content you’re displaying changes, be sure to update the [`delay` timeo
 
 When using `delay: 0`, you must add a close button to allow users to dismiss the toast.
 
-<CodeExample source="document/component/Documentation/Components/ToastDemo.tsx">
+<CodeExample source="document/component/Document/ToastDemo.tsx">
     <ToastMessageDemo
         label="Show persistent toast"
         delay={0}
@@ -218,7 +218,7 @@ Create a `Toast` model and mount its `Component` to establish the live region be
 
 `open(message)` returns a promise that resolves when that notification closes. Call `close(id)` to dismiss an individual notification.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/customize/theme/
 [2]: https://getbootstrap.com/docs/6.0/utilities/api/

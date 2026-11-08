@@ -4,11 +4,11 @@ import {
     AccordionHeader,
     AccordionBody,
     AccordionToggle
-} from '../../../../source/Accordion';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+} from '../../../../source/Base/Accordion';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { CodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="accordion">
+<DocumentLayout active="accordion" upstreamPath="components/accordion/">
 
 # Accordion
 
@@ -497,7 +497,7 @@ Use the native `onToggle` prop on `AccordionItem` to respond to open-state chang
 
 Pass the native `open` prop to `AccordionItem` to control its state. `AccordionToggle target="#id"` expands or collapses all items together.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size
 [2]: https://getbootstrap.com/docs/6.0/customize/transitions

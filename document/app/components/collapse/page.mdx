@@ -1,10 +1,10 @@
-import { Card } from '../../../../source/Card';
-import { Collapse, CollapseToggle } from '../../../../source/Collapse';
-import { Row, Col } from '../../../../source/Grid';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import { Card } from '../../../../source/Base/Card';
+import { Collapse, CollapseToggle } from '../../../../source/Base/Collapse';
+import { Row, Col } from '../../../../source/Layout/Grid';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { CodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="collapse">
+<DocumentLayout active="collapse" upstreamPath="components/collapse/">
 
 # Collapse
 
@@ -208,7 +208,7 @@ Set `parent` on the collapsible area, not on its trigger. For native details-bas
 
 Use `onOpenChange(open)` to respond to visibility changes, or to update the state backing a controlled `open` prop.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size
 [2]: https://getbootstrap.com/docs/6.0/customize/transitions

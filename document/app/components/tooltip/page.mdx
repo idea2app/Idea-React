@@ -1,11 +1,11 @@
-import { Button } from '../../../../source/Button';
+import { Button } from '../../../../source/Base/Button';
 import { Icon } from '../../../../source/Extension/Icon';
 import { OverlayBox } from '../../../../source/Extension/OverlayBox';
-import styles from '../../../component/Documentation/Components/OverlayGuideDemo/style.module.css';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
+import styles from '../../../component/Document/OverlayGuideDemo/style.module.css';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { CodeExample } from '../../../component/Document/Example';
 
-<ComponentsLayout active="tooltip">
+<DocumentLayout active="tooltip" upstreamPath="components/tooltip/">
 
 # Tooltips
 
@@ -270,7 +270,7 @@ A shown tooltip can be dismissed by pressing the <kbd>Escape</kbd> key, helping 
 | `flip`                | `true`            | Flip direction when space is constrained.                             |
 | `overlayClassName`    | —                 | Apply a CSS module class to the tooltip.                              |
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: #variables
 [2]: https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html

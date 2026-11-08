@@ -1,6 +1,6 @@
-import { Button, ButtonProps } from '../Button';
-import { polymorphic } from '../Polymorphic';
-import { Spinner, SpinnerProps } from '../Spinner';
+import { Button, ButtonProps } from '../Base/Button';
+import { Spinner, SpinnerProps } from '../Base/Spinner';
+import { polymorphic } from '../Helper/Polymorphic';
 
 export type SpinnerButtonProps = ButtonProps &
     Pick<SpinnerProps, 'animation'> & {

@@ -1,9 +1,9 @@
-import { Stack } from '../../../../source/Stack';
-import { Progress, ProgressStack } from '../../../../source/Progress';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { Stack } from '../../../../source/Base/Stack';
+import { Progress, ProgressStack } from '../../../../source/Base/Progress';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<ComponentsLayout active="progress">
+<DocumentLayout active="progress" upstreamPath="components/progress/">
 
 # Progress
 
@@ -204,7 +204,7 @@ Customize the component with the following local CSS variables. Override them th
 
 Used for creating the CSS animations for `.progress-bar-animated`. The animation moves the striped background from one stripe width to zero, producing continuous motion from right to left.
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
 [2]: https://getbootstrap.com/docs/6.0/utilities/width/

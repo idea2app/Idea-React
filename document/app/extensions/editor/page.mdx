@@ -1,32 +1,49 @@
-import { CodeCard } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { DocumentEditorDemo } from '../../../component/Document/EditorDemo';
 
-<ComponentsLayout active="editor">
+<DocumentLayout active="editor">
 
-# Editor
+# React Bootstrap Editor
 
-[`Editor`][1] embeds the block-style [Editor.js][2] rich text editor as a Bootstrap form control.
-The editor saves its data into a hidden `<input>`, so it participates in native form submission.
+[React Bootstrap Editor][1] is a separate rich-text editor library built on [Edkit][2],
+React, MobX, and Bootstrap. Idea React no longer exports an `Editor` component;
+import `Editor` directly from `react-bootstrap-editor`.
 
-## Usage
+## Install
 
-Editor.js only runs in the browser, so render the component on the client:
+```sh
+npm install react-bootstrap-editor mobx mobx-react react react-dom
+```
 
-<CodeCard>{`import { Button, Editor, Form } from 'idea-react';
+The current 3.x release uses Bootstrap 6 and stage-3 decorators. Keep
+`experimentalDecorators` disabled and `useDefineForClassFields` enabled in TypeScript.
 
-<Form method="post">
-    <Editor name="content" required defaultValue={savedDocument} tools={customTools} />
-    <Button variant="solid" theme="primary">Save</Button>
-</Form>;`}</CodeCard>
+## Example
 
-The wrapper saves on blur and serializes the latest Editor.js `OutputData` as JSON into the hidden
-input named by `name`. All [react-editor-js props][3], such as `tools` and `onInitialize`, pass
-through to the underlying editor.
+The editor runs in the browser. In a server-rendered application, put the smallest
+component that mounts it behind a client boundary.
 
-Render saved documents with the [Editor HTML](../editor-html/) component.
+<CodeExample source="document/component/Document/EditorDemo.tsx">
+    <DocumentEditorDemo />
+</CodeExample>
 
-</ComponentsLayout>
+The `defaultValue` is an HTML string. The editor keeps a hidden input named by
+`name` in sync with the current markup, so a native form submission can read it.
+`onChange` receives the updated HTML string. The `tools` prop accepts a list of
+Edkit tool constructors; omitting it uses the library's default toolbar.
 
-[1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Editor.tsx
-[2]: https://editorjs.io/
-[3]: https://github.com/Jungwoo-An/react-editor-js
+## Display content
+
+Editor output is HTML, not Markdown. Only render trusted or sanitized HTML in
+your application. Use [MarkdownView][3] for Markdown source instead.
+
+See the [upstream demo][4] and [editor API][5] for toolbar customization and media tools.
+
+</DocumentLayout>
+
+[1]: https://www.npmjs.com/package/react-bootstrap-editor
+[2]: https://github.com/idea2app/Edkit/
+[3]: ../markdown-view/
+[4]: https://idea2app.github.io/Edkit/React/
+[5]: https://github.com/idea2app/Edkit/blob/master/React/source/Editor.tsx

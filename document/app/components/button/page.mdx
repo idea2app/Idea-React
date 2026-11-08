@@ -1,12 +1,12 @@
-import { Button, ButtonInput } from '../../../../source/Button';
-import { ToggleButton } from '../../../../source/ToggleButton';
+import { Button, ButtonInput } from '../../../../source/Base/Button';
+import { ToggleButton } from '../../../../source/Base/ToggleButton';
 import { Icon } from '../../../../source/Extension/Icon';
-import { Col } from '../../../../source/Grid';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { ComponentsLayout } from '../../../component/Documentation/Components/Layout';
-import { ButtonPlayground } from '../../../component/Documentation/Components/ButtonPlayground';
+import { Col } from '../../../../source/Layout/Grid';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
+import { ButtonPlayground } from '../../../component/Document/ButtonPlayground';
 
-<ComponentsLayout active="button">
+<DocumentLayout active="button" upstreamPath="components/button/">
 
 # Button
 
@@ -640,7 +640,7 @@ Link buttons use local CSS variables.
 | `--bs-btn-disabled-color`        | `var(--bs-theme-contrast)`                                           |
 | `--bs-btn-disabled-border-color` | `var(--bs-theme-bg)`                                                 |
 
-</ComponentsLayout>
+</DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/components/button-group/
 [2]: #active-state

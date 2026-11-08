@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { render } from '@testing-library/react';
 
-import { Placeholder, PlaceholderAnimation, PlaceholderButton } from '../source/Placeholder';
+import { Placeholder, PlaceholderAnimation, PlaceholderButton } from '../source/Base/Placeholder';
 
 it('wraps sized, colored, animated skeletons and disabled placeholder buttons', () => {
     const { container } = render(

@@ -3,7 +3,7 @@ import { it, mock } from 'node:test';
 
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
-import { Drawer, DrawerHeader, DrawerTitle } from '../source/Drawer';
+import { Drawer, DrawerHeader, DrawerTitle } from '../source/Base/Drawer';
 
 it('renders a Bootstrap 6 drawer without dialog styles and dismisses from its close button', () => {
     const onDismiss = mock.fn();

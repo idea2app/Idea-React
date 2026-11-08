@@ -1,20 +1,17 @@
-import { Stack } from '../../../../source/Stack';
+import { Stack } from '../../../../source/Base/Stack';
+import { ChipDismiss, ChipIcon, ChipImage, ChipToken } from '../../../../source/Form/Chip';
 import {
-    ChipDismiss,
-    ChipIcon,
-    ChipImage,
     ChipInput,
     ChipInputLabel,
-    ChipToken,
     FormField,
     FormGhost,
     FormLabel,
     FormText
 } from '../../../../source/Form';
-import { CodeExample } from '../../../component/Documentation/Components/Example';
-import { DocumentationLayout } from '../../../component/Documentation/Components/Layout';
+import { CodeExample } from '../../../component/Document/Example';
+import { DocumentLayout } from '../../../component/Document/Layout';
 
-<DocumentationLayout active="chips">
+<DocumentLayout active="chips" upstreamPath="forms/chips/">
 
 # Chips
 
@@ -277,7 +274,7 @@ These variables are scoped to the `.chip-input` container.
 }
 ```
 
-</DocumentationLayout>
+</DocumentLayout>
 
 [1]: ../../components/badge/
 [2]: #keyboard-behavior

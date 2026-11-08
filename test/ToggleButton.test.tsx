@@ -3,7 +3,7 @@ import { it, mock } from 'node:test';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { ToggleButton } from '../source/ToggleButton';
+import { ToggleButton } from '../source/Base/ToggleButton';
 
 it('forwards change events, input attributes and button sizing', () => {
     const onChange = mock.fn();
