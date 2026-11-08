@@ -1,3 +1,4 @@
+import styleText from './style.module.css?inline';
 import { Card, CardBody, CardText, CardTitle } from '../../../source/Base/Card';
 import { Col, Container, Row } from '../../../source/Layout/Grid';
 import { ExampleLayout } from '../../component/Examples/Layout';
@@ -167,13 +168,13 @@ export const examples = [
     }
 ];
 
-<ExampleLayout title="Examples">
+<ExampleLayout title="Examples" styleText={styleText}>
 
 # Examples
 
 ## All examples
 
-Browse all 33 Bootstrap example pages. Each thumbnail is a live preview of its destination page.
+Browse all 33 Bootstrap example pages. Each thumbnail uses its official Bootstrap example image.
 
 <Container fluid>
     <Row xs={1} md={2} xl={3} className="g-5">
@@ -185,12 +186,10 @@ Browse all 33 Bootstrap example pages. Each thumbnail is a live preview of its d
                         className={style.exampleThumbnail}
                         aria-label={`View ${title} example`}
                     >
-                        <iframe
-                            src={`./${slug}/`}
-                            title={`${title} example preview`}
+                        <img
+                            src={`https://getbootstrap.com/docs/6.0/assets/img/examples/${slug}.png`}
+                            alt={`${title} example preview`}
                             loading="lazy"
-                            scrolling="no"
-                            tabIndex={-1}
                         />
                     </a>
                     <CardBody>
