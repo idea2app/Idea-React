@@ -1,23 +1,21 @@
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
-import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
+import { Collapse, CollapseToggle } from '../../../../source/Base/Collapse';
+import { Navbar, NavbarBrand } from '../../../../source/Base/Navbar';
 import { Button } from '../../../../source/Base/Button';
+import { Icon } from '../../../../source/Extension/Icon';
 import {
     Card,
     CardBody,
-    CardFooter,
-    CardHeader,
     CardImage,
-    CardImageOverlay,
-    CardText,
-    CardTitle
+    CardText
 } from '../../../../source/Base/Card';
 import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
 
-<ExampleLayout title="Album example" className="">
+<BaseLayout title="Album example">
 
 <header data-bs-theme="dark">
-    <div className="collapse bg-black" id="navbarHeader">
+    <Collapse id="navbarHeader" className="bg-black">
         <div className="container">
             <div className="row">
                 <div className="sm:col-8 md:col-7 py-4">
@@ -51,36 +49,21 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
                 </div>
             </div>
         </div>
-    </div>
+    </Collapse>
     <Navbar className="bg-black shadow-sm" aria-label="Album navigation">
         <div className="container">
             <NavbarBrand href="#" className="d-flex align-items-center">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    aria-hidden="true"
-                    className="me-2"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                    <circle cx="12" cy="13" r="4" />
-                </svg>
+                <Icon name="camera" size={1.25} className="me-2" aria-hidden="true" />
                 <strong>Album</strong>
             </NavbarBrand>
-            <NavbarToggler
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarHeader"
-                aria-controls="navbarHeader"
-                aria-expanded="false"
+            <CollapseToggle
+                target="#navbarHeader"
+                className="navbar-toggler"
                 aria-label="Toggle navigation"
-            ></NavbarToggler>
+                icon
+            >
+                <span className="navbar-toggler-icon" aria-hidden="true" />
+            </CollapseToggle>
         </div>
     </Navbar>
 </header>
@@ -113,10 +96,10 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
 
       <div className="row row-cols-1 sm:row-cols-2 md:row-cols-3 g-3">
         <div className="col">
-          <Card   className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody  >
-              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+          <Card className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody >
+              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
               <div className="d-flex justify-content-between align-items-center w-100">
                 <ButtonGroup >
                   <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
@@ -128,10 +111,10 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
           </Card>
         </div>
         <div className="col">
-          <Card   className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody  >
-              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+          <Card className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody >
+              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
               <div className="d-flex justify-content-between align-items-center w-100">
                 <ButtonGroup >
                   <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
@@ -143,56 +126,10 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
           </Card>
         </div>
         <div className="col">
-          <Card   className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody  >
-              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <div className="d-flex justify-content-between align-items-center w-100">
-                <ButtonGroup >
-                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
-                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
-                </ButtonGroup>
-                <small className="fg-2">9 mins</small>
-              </div>
-            </CardBody>
-          </Card>
-        </div>
-
-        <div className="col">
-          <Card   className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody  >
-              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <div className="d-flex justify-content-between align-items-center w-100">
-                <ButtonGroup >
-                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
-                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
-                </ButtonGroup>
-                <small className="fg-2">9 mins</small>
-              </div>
-            </CardBody>
-          </Card>
-        </div>
-        <div className="col">
-          <Card   className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody  >
-              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <div className="d-flex justify-content-between align-items-center w-100">
-                <ButtonGroup >
-                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
-                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
-                </ButtonGroup>
-                <small className="fg-2">9 mins</small>
-              </div>
-            </CardBody>
-          </Card>
-        </div>
-        <div className="col">
-          <Card   className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody  >
-              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+          <Card className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody >
+              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
               <div className="d-flex justify-content-between align-items-center w-100">
                 <ButtonGroup >
                   <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
@@ -205,10 +142,10 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
         </div>
 
         <div className="col">
-          <Card   className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody  >
-              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+          <Card className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody >
+              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
               <div className="d-flex justify-content-between align-items-center w-100">
                 <ButtonGroup >
                   <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
@@ -220,10 +157,10 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
           </Card>
         </div>
         <div className="col">
-          <Card   className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody  >
-              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+          <Card className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody >
+              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
               <div className="d-flex justify-content-between align-items-center w-100">
                 <ButtonGroup >
                   <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
@@ -235,10 +172,56 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
           </Card>
         </div>
         <div className="col">
-          <Card   className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef"  placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody  >
-              <CardText  >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+          <Card className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody >
+              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <ButtonGroup >
+                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
+                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
+                </ButtonGroup>
+                <small className="fg-2">9 mins</small>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
+
+        <div className="col">
+          <Card className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody >
+              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <ButtonGroup >
+                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
+                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
+                </ButtonGroup>
+                <small className="fg-2">9 mins</small>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
+        <div className="col">
+          <Card className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody >
+              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <ButtonGroup >
+                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
+                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
+                </ButtonGroup>
+                <small className="fg-2">9 mins</small>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
+        <div className="col">
+          <Card className="shadow-sm">
+            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+            <CardBody >
+              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
               <div className="d-flex justify-content-between align-items-center w-100">
                 <ButtonGroup >
                   <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
@@ -272,4 +255,4 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
     </div>
 </footer>
 
-</ExampleLayout>
+</BaseLayout>

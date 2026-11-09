@@ -1,10 +1,10 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Icon } from '../../../../source/Extension/Icon';
 import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
 import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../source/Form';
 
-<ExampleLayout title="List groups" styleText={styleText} className="">
+<BaseLayout title="List groups">
 
 <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
   <symbol id="calendar-event" viewBox="0 0 16 16">
@@ -24,13 +24,8 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
 
 <div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
     <ListGroup as="div">
-        <ListGroupItem as="a" href="#" actionclassName="d-flex gap-3 py-3" aria-current="true">
-            <img
-                src="https://github.com/twbs.png"
-                alt=""
-                width="32"
-                height="32"
-                className="rounded-circle flex-shrink-0"
+        <ListGroupItem as="a" href="#" action className="d-flex gap-3 py-3" aria-current="true">
+            <img src="https://github.com/twbs.png" alt="" width="32" height="32" className="rounded-circle flex-shrink-0"
             />
             <div className="d-flex gap-2 w-100 justify-content-between">
                 <div>
@@ -40,13 +35,8 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
                 <small className="opacity-50 text-nowrap">now</small>
             </div>
         </ListGroupItem>
-        <ListGroupItem as="a" href="#" actionclassName="d-flex gap-3 py-3" aria-current="true">
-            <img
-                src="https://github.com/twbs.png"
-                alt=""
-                width="32"
-                height="32"
-                className="rounded-circle flex-shrink-0"
+        <ListGroupItem as="a" href="#" action className="d-flex gap-3 py-3" aria-current="true">
+            <img src="https://github.com/twbs.png" alt="" width="32" height="32" className="rounded-circle flex-shrink-0"
             />
             <div className="d-flex gap-2 w-100 justify-content-between">
                 <div>
@@ -59,13 +49,8 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
                 <small className="opacity-50 text-nowrap">3d</small>
             </div>
         </ListGroupItem>
-        <ListGroupItem as="a" href="#" actionclassName="d-flex gap-3 py-3" aria-current="true">
-            <img
-                src="https://github.com/twbs.png"
-                alt=""
-                width="32"
-                height="32"
-                className="rounded-circle flex-shrink-0"
+        <ListGroupItem as="a" href="#" action className="d-flex gap-3 py-3" aria-current="true">
+            <img src="https://github.com/twbs.png" alt="" width="32" height="32" className="rounded-circle flex-shrink-0"
             />
             <div className="d-flex gap-2 w-100 justify-content-between">
                 <div>
@@ -135,13 +120,7 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
 <div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
     <ListGroup as="div">
         <ListGroupItem as="label" className="d-flex gap-3">
-            <FormCheck
-                type="checkbox"
-                value=""
-                className="check flex-shrink-0"
-                style={{ fontSize: '1.375em' }}
-                checked
-            />
+            <FormCheck type="checkbox" value="" className="check flex-shrink-0" style={{ fontSize: '1.375em' }} checked />
             <span className="pt-1 form-checked-content">
                 <strong>Finish sales report</strong>
                 <small className="d-block fg-2">
@@ -151,11 +130,7 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
             </span>
         </ListGroupItem>
         <ListGroupItem as="label" className="d-flex gap-3">
-            <FormCheck
-                type="checkbox"
-                value=""
-                className="check flex-shrink-0"
-                style={{ fontSize: '1.375em' }}
+            <FormCheck type="checkbox" value="" className="check flex-shrink-0" style={{ fontSize: '1.375em' }}
             />
             <span className="pt-1 form-checked-content">
                 <strong>Weekly All Hands</strong>
@@ -166,11 +141,7 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
             </span>
         </ListGroupItem>
         <ListGroupItem as="label" className="d-flex gap-3">
-            <FormCheck
-                type="checkbox"
-                value=""
-                className="check flex-shrink-0"
-                style={{ fontSize: '1.375em' }}
+            <FormCheck type="checkbox" value="" className="check flex-shrink-0" style={{ fontSize: '1.375em' }}
             />
             <span className="pt-1 form-checked-content">
                 <strong>Out of office</strong>
@@ -181,12 +152,7 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
             </span>
         </ListGroupItem>
         <ListGroupItem as="label" className="d-flex gap-3 bg-1">
-            <FormCheck
-                disabled
-                type="checkbox"
-                value=""
-                className="check check-input-placeholder bg-1 flex-shrink-0 pe-none"
-                style={{ fontSize: '1.375em' }}
+            <FormCheck disabled type="checkbox" value="" className="check check-input-placeholder bg-1 flex-shrink-0 pe-none" style={{ fontSize: '1.375em' }}
             />
             <span className="pt-1 form-checked-content">
                 <span contenteditable="true" className="w-100">
@@ -271,4 +237,4 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
   </ListGroup>
 </div>
 
-</ExampleLayout>
+</BaseLayout>

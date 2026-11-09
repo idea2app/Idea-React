@@ -1,0 +1,4 @@
+.frame:has(> main[data-example-layout='true']) > .header,
+.frame:has(> main[data-example-layout='true']) > .footer {
+    display: none;
+}

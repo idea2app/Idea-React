@@ -1,5 +1,5 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import {
     FormCheck,
     FormControl,
@@ -9,7 +9,7 @@ import {
 } from '../../../../source/Form';
 import { Button } from '../../../../source/Base/Button';
 
-<ExampleLayout title="Signin Template" styleText={styleText} className="d-flex align-items-center py-4 bg-1">
+<BaseLayout title="Signin Template" className="d-flex align-items-center py-4 bg-1">
 
 <div className="form-signin w-100 m-auto">
   <form>
@@ -18,11 +18,11 @@ import { Button } from '../../../../source/Base/Button';
 
     <FormFloatingLabel >
       <label htmlFor="floatingInput">Email address</label>
-      <FormControl type="email"   id="floatingInput" placeholder="name@example.com" />
+      <FormControl type="email" id="floatingInput" placeholder="name@example.com" />
     </FormFloatingLabel>
     <FormFloatingLabel >
       <label htmlFor="floatingPassword">Password</label>
-      <FormControl type="password"   id="floatingPassword" placeholder="Password" />
+      <FormControl type="password" id="floatingPassword" placeholder="Password" />
     </FormFloatingLabel>
 
     <div className="form-field text-start my-3">
@@ -37,4 +37,4 @@ import { Button } from '../../../../source/Base/Button';
   </form>
 </div>
 
-</ExampleLayout>
+</BaseLayout>

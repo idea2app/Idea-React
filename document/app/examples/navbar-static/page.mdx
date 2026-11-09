@@ -1,5 +1,5 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
 import { Button } from '../../../../source/Base/Button';
 import {
@@ -13,34 +13,20 @@ import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
 import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../source/Form';
 import { CloseButton } from '../../../../source/Base/CloseButton';
 
-<ExampleLayout title="Top navbar example" styleText={styleText} className="">
+<BaseLayout title="Top navbar example">
 
 <Navbar theme="dark" expand="md" className="bg-black bg-90 mb-4">
     <div className="container-fluid">
         <NavbarBrand href="#">Top navbar</NavbarBrand>
-        <NavbarToggler
-            type="button"
-            data-bs-toggle="drawer"
-            data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+        <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
         ></NavbarToggler>
-        <NativeDialog
-            className="drawer drawer-end"
-            tabIndex="-1"
-            id="navbarCollapse"
-            aria-labelledby="navbarCollapseLabel"
+        <NativeDialog className="drawer drawer-end" tabIndex="-1" id="navbarCollapse" aria-labelledby="navbarCollapseLabel"
         >
             <div className="drawer-header">
                 <h5 className="drawer-title" id="navbarCollapseLabel">
                     Menu
                 </h5>
-                <CloseButton
-                    type="button"
-                    dismiss="drawer"
-
-                    aria-label="Close"
+                <CloseButton type="button" dismiss="drawer" aria-label="Close"
                 ></CloseButton>
             </div>
             <div className="drawer-body">
@@ -60,11 +46,7 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
                     </NavItem>
                 </NavbarNav>
                 <form className="d-flex" role="search">
-                    <FormControl
-                        className="me-2"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
+                    <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search"
                     />
                     <Button variant="outline" theme="success" type="submit">
                         Search
@@ -84,14 +66,7 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
             scroll, this navbar remains in its original position and moves with the rest of the
             page.
         </p>
-        <Button
-            variant="solid"
-            theme="primary"
-            size="lg"
-            as="a"
-
-            href={'https://getbootstrap.com/docs/6.0/components/navbar'}
-            role="button"
+        <Button variant="solid" theme="primary" size="lg" as="a" href={'https://getbootstrap.com/docs/6.0/components/navbar'} role="button"
         >
             View navbar docs &raquo;
         </Button>
@@ -99,4 +74,4 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
 
 </div>
 
-</ExampleLayout>
+</BaseLayout>

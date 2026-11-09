@@ -1,5 +1,5 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Icon } from '../../../../source/Extension/Icon';
 import {
     DialogBody,
@@ -18,7 +18,7 @@ import {
 } from '../../../../source/Form';
 import { CloseButton } from '../../../../source/Base/CloseButton';
 
-<ExampleLayout title="Dialogs" styleText={styleText} className="">
+<BaseLayout title="Dialogs">
 
 <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
     <symbol id="bookmark-star" viewBox="0 0 16 16">
@@ -78,19 +78,11 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
             <p className="fg-2 mb-0">You can always change your mind in your account settings.</p>
         </div>
         <div className="dialog-footer p-0 border-top">
-            <Button
-                variant="link"
-
-                type="button"
-                className="fg-primary flex-fill py-3 m-0 rounded-0 border-end text-decoration-none fw-semibold"
+            <Button variant="link" type="button" className="fg-primary flex-fill py-3 m-0 rounded-0 border-end text-decoration-none fw-semibold"
             >
                 Yes, enable
             </Button>
-            <Button
-                variant="link"
-
-                type="button"
-                className="fg-primary flex-fill py-3 m-0 rounded-0 text-decoration-none"
+            <Button variant="link" type="button" className="fg-primary flex-fill py-3 m-0 rounded-0 text-decoration-none"
             >
                 No thanks
             </Button>
@@ -155,60 +147,32 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
             <form>
                 <FormFloatingLabel className="mb-3">
                     <label htmlFor="floatingEmail">Email address</label>
-                    <FormControl
-                        type="email"
-                        className="rounded-3"
-                        id="floatingEmail"
-                        placeholder="name@example.com"
+                    <FormControl type="email" className="rounded-3" id="floatingEmail" placeholder="name@example.com"
                     />
                 </FormFloatingLabel>
                 <FormFloatingLabel className="mb-3">
                     <label htmlFor="floatingPassword">Password</label>
-                    <FormControl
-                        type="password"
-                        className="rounded-3"
-                        id="floatingPassword"
-                        placeholder="Password"
+                    <FormControl type="password" className="rounded-3" id="floatingPassword" placeholder="Password"
                     />
                 </FormFloatingLabel>
-                <Button
-                    variant="solid"
-                    theme="primary"
-
-                    className="w-100 py-2 mb-2"
-                    type="submit"
+                <Button variant="solid" theme="primary" className="w-100 py-2 mb-2" type="submit"
                 >
                     Sign up
                 </Button>
                 <small className="fg-2">By clicking Sign up, you agree to the terms of use.</small>
                 <hr className="my-4" />
                 <h6 className="fw-bold mb-3">Or use a third-party</h6>
-                <Button
-                    variant="outline"
-                    theme="inverse"
-
-                    type="button"
-                    className="w-100 py-2 mb-2"
+                <Button variant="outline" theme="inverse" type="button" className="w-100 py-2 mb-2"
                 >
                     <Icon name="google" size={1} />
                     Sign up with Google
                 </Button>
-                <Button
-                    variant="outline"
-                    theme="primary"
-
-                    type="button"
-                    className="w-100 py-2 mb-2"
+                <Button variant="outline" theme="primary" type="button" className="w-100 py-2 mb-2"
                 >
                     <Icon name="facebook" size={1} />
                     Sign up with Facebook
                 </Button>
-                <Button
-                    variant="outline"
-                    theme="success"
-
-                    type="button"
-                    className="w-100 py-2"
+                <Button variant="outline" theme="success" type="button" className="w-100 py-2"
                 >
                     <Icon name="github" size={1} />
                     Sign up with GitHub
@@ -219,4 +183,4 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
 
 </div>
 
-</ExampleLayout>
+</BaseLayout>

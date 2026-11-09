@@ -1,5 +1,5 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Icon } from '../../../../source/Extension/Icon';
 import { Button } from '../../../../source/Base/Button';
 import {
@@ -13,7 +13,7 @@ import {
     CardTitle
 } from '../../../../source/Base/Card';
 
-<ExampleLayout title="Features" styleText={styleText} className="">
+<BaseLayout title="Features">
 
 <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
   <symbol id="bootstrap" viewBox="0 0 118 94">
@@ -361,4 +361,4 @@ import {
   </div>
 </div>
 
-</ExampleLayout>
+</BaseLayout>

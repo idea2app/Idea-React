@@ -1,7 +1,7 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 
-<ExampleLayout title="Sticky Footer Template" styleText={styleText} className="d-flex flex-column h-100 min-vh-100">
+<BaseLayout title="Sticky Footer Template" className="d-flex flex-column h-100 min-vh-100">
 
 {/* Begin page content */}
 
@@ -28,4 +28,4 @@ import { ExampleLayout } from '../../../component/Examples/Layout';
     </div>
 </footer>
 
-</ExampleLayout>
+</BaseLayout>

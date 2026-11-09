@@ -142,7 +142,9 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 文档站要用到的 [Bootstrap 官方组件][2] 必须先在 `source/` 封装为通用组件，
   再由文档站引用，不是将其专用组件放进组件库。
 - 文档与示例统一引用封装后的组件，MDX 不直接书写 Bootstrap 组件类名，只有展示原始 HTML（如无 JS 示例）时，代码块才保留类名写法。
+- 复刻上游示例时，优先使用本项目现有组件组合实现对应效果；不以原始 HTML、Bootstrap 类名或上游组件替代已有的本项目组件。
 - 文档站专用布局、组件、模型和样式放在 `document/component/`，不得从组件库导出或混入发布包。
+- 页面基础布局单独提供 Bootstrap 样式链接，由文档布局复用；不得为获取当前路由等信息使用客户端 Hook 将静态页面改为客户端渲染。
 - 静态展示组件保持服务端可渲染；仅把需要浏览器 API 或交互状态的最小组件边界标记为客户端组件，不用 Context、Model 令整个组件树进入客户端渲染。
 - 每个模块自行导出其定义的公共 API；聚合入口可导出模块，但不从定义模块重复转出其它模块的 API。
 - 多个同前缀的文件归入同名文件夹，文件使用 `index.tsx`、`model.ts`、
@@ -218,8 +220,11 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 从 `unpkg.com` 引入 Bootstrap CSS，严禁使用 Tailwind CSS 及其插件、配置和工具类。
 - 所有组件依赖的第三方 CSS 统一由使用方通过 `<link />` 从 `unpkg.com` 引入；
   组件源码不导入或打包这些样式，文档站在公共布局中统一加载。
+- 页面专属 CSS 通过 `*.less` 全局导入，或通过 `*.module.less` 导入并使用模块类名；不得使用 `?inline` 等方式导入 CSS 源文再注入 `<style>`。
+- MDX 中 JSX 属性之间不得留多余空格，并按项目格式化工具统一格式化。
+- 优先复用现有 `MarkdownView`、`CodeCard` 等组件，不为已覆盖的功能重复封装文档站组件。
 - 能用 [Bootstrap 6 CSS 工具类][4] 的样式不写自定义 CSS；
-  剩余样式全部使用 CSS modules，不另建全局自定义样式；需要嵌套的样式使用 LESS modules。
+  剩余样式使用 CSS modules；必须保留原始类名的页面专属样式可用 `*.less` 全局导入，且仅由对应页面引用；需要嵌套的模块样式使用 LESS modules。
 - 可由 CSS 或 Bootstrap 工具类静态表达的布局、状态与堆叠关系优先用 CSS，避免为此引入客户端状态或 Context、Model。
 - 样式模块的类型声明合入已有的 `source/types.d.ts`，不要另建重复声明文件。
 - 文档示例使用文档专用 Demo 组件时，为 `CodeExample` 提供源码路径；仓库内路径相对于仓库根目录且不以 `/` 开头，外部源码可传绝对 URL。

@@ -1,5 +1,5 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
 import { Button } from '../../../../source/Base/Button';
 import {
@@ -14,42 +14,42 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
 import { CloseButton } from '../../../../source/Base/CloseButton';
 import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 
-<ExampleLayout title="Navbar Template" styleText={styleText} className="">
+<BaseLayout title="Navbar Template">
 
 <div>
-  <Navbar  theme="dark"  aria-label="Dark drawer navbar">
+  <Navbar theme="dark" aria-label="Dark drawer navbar">
     <div className="container-fluid">
-      <NavbarBrand  href="#">Dark drawer navbar</NavbarBrand>
-      <NavbarToggler     type="button" data-bs-toggle="drawer" data-bs-target="#drawerNavbarDark" aria-controls="drawerNavbarDark" aria-label="Toggle navigation">
+      <NavbarBrand href="#">Dark drawer navbar</NavbarBrand>
+      <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#drawerNavbarDark" aria-controls="drawerNavbarDark" aria-label="Toggle navigation">
 
       </NavbarToggler>
       <NativeDialog className="drawer drawer-end bg-body fg-body" tabIndex="-1" id="drawerNavbarDark" aria-labelledby="drawerNavbarDarkLabel">
         <div className="drawer-header">
           <h5 className="drawer-title" id="drawerNavbarDarkLabel">Drawer</h5>
-          <CloseButton  type="button"  dismiss="drawer"   aria-label="Close"></CloseButton>
+          <CloseButton type="button" dismiss="drawer" aria-label="Close"></CloseButton>
         </div>
         <div className="drawer-body">
-          <NavbarNav  className="pe-3">
-            <NavItem  >
-              <NavLink  active  aria-current="page" href="#">Home</NavLink>
+          <NavbarNav className="pe-3">
+            <NavItem >
+              <NavLink active aria-current="page" href="#">Home</NavLink>
             </NavItem>
-            <NavItem  >
-              <NavLink   href="#">Link</NavLink>
+            <NavItem >
+              <NavLink href="#">Link</NavLink>
             </NavItem>
-            <NavItem  >
-              <NavLink   href="#" role="button" data-bs-toggle="menu" aria-expanded="false">
+            <NavItem >
+              <NavLink href="#" role="button" data-bs-toggle="menu" aria-expanded="false">
                 Menu
               </NavLink>
               <MenuPanel >
-                <MenuItem  as="a" href="#">Action</MenuItem>
-                <MenuItem  as="a" href="#">Another action</MenuItem>
-                <MenuDivider  />
-                <MenuItem  as="a" href="#">Something else here</MenuItem>
+                <MenuItem as="a" href="#">Action</MenuItem>
+                <MenuItem as="a" href="#">Another action</MenuItem>
+                <MenuDivider />
+                <MenuItem as="a" href="#">Something else here</MenuItem>
               </MenuPanel>
             </NavItem>
           </NavbarNav>
           <form className="d-flex mt-3" role="search">
-            <FormControl   className="me-2" type="search" placeholder="Search" aria-label="Search" />
+            <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
             <Button variant="outline" theme="success" type="submit">Search</Button>
           </form>
         </div>
@@ -61,28 +61,15 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 <Navbar theme="light" aria-label="Light drawer navbar">
     <div className="container-fluid">
         <NavbarBrand href="#">Light drawer navbar</NavbarBrand>
-        <NavbarToggler
-            type="button"
-            data-bs-toggle="drawer"
-            data-bs-target="#drawerNavbarLight"
-            aria-controls="drawerNavbarLight"
-            aria-label="Toggle navigation"
+        <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#drawerNavbarLight" aria-controls="drawerNavbarLight" aria-label="Toggle navigation"
         ></NavbarToggler>
-        <NativeDialog
-            className="drawer drawer-end"
-            tabIndex="-1"
-            id="drawerNavbarLight"
-            aria-labelledby="drawerNavbarLightLabel"
+        <NativeDialog className="drawer drawer-end" tabIndex="-1" id="drawerNavbarLight" aria-labelledby="drawerNavbarLightLabel"
         >
             <div className="drawer-header">
                 <h5 className="drawer-title" id="drawerNavbarLightLabel">
                     Drawer
                 </h5>
-                <CloseButton
-                    type="button"
-                    dismiss="drawer"
-
-                    aria-label="Close"
+                <CloseButton type="button" dismiss="drawer" aria-label="Close"
                 ></CloseButton>
             </div>
             <div className="drawer-body">
@@ -114,11 +101,7 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
                     </NavItem>
                 </NavbarNav>
                 <form className="d-flex mt-3" role="search">
-                    <FormControl
-                        className="me-2"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
+                    <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search"
                     />
                     <Button variant="outline" theme="success" type="submit">
                         Search
@@ -133,28 +116,15 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 <Navbar theme="dark" expand="lg" aria-label="Drawer navbar large">
     <div className="container-fluid">
         <NavbarBrand href="#">Responsive drawer navbar</NavbarBrand>
-        <NavbarToggler
-            type="button"
-            data-bs-toggle="drawer"
-            data-bs-target="#drawerNavbar2"
-            aria-controls="drawerNavbar2"
-            aria-label="Toggle navigation"
+        <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#drawerNavbar2" aria-controls="drawerNavbar2" aria-label="Toggle navigation"
         ></NavbarToggler>
-        <NativeDialog
-            className="drawer drawer-end"
-            tabIndex="-1"
-            id="drawerNavbar2"
-            aria-labelledby="drawerNavbar2Label"
+        <NativeDialog className="drawer drawer-end" tabIndex="-1" id="drawerNavbar2" aria-labelledby="drawerNavbar2Label"
         >
             <div className="drawer-header">
                 <h5 className="drawer-title" id="drawerNavbar2Label">
                     Drawer
                 </h5>
-                <CloseButton
-                    type="button"
-                    dismiss="drawer"
-
-                    aria-label="Close"
+                <CloseButton type="button" dismiss="drawer" aria-label="Close"
                 ></CloseButton>
             </div>
             <div className="drawer-body">
@@ -186,11 +156,7 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
                     </NavItem>
                 </NavbarNav>
                 <form className="d-flex mt-3 lg:mt-0" role="search">
-                    <FormControl
-                        className="me-2"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
+                    <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search"
                     />
                     <Button variant="outline" theme="success" type="submit">
                         Search
@@ -216,4 +182,4 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
   </div>
 </div>
 
-</ExampleLayout>
+</BaseLayout>

@@ -1,4 +1,4 @@
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
 import {
     Card,
@@ -11,7 +11,7 @@ import {
     CardTitle
 } from '../../../../source/Base/Card';
 
-<ExampleLayout title="Masonry example" className="">
+<BaseLayout title="Masonry example">
 
 <div className="container py-5">
   <h1>Bootstrap and Masonry</h1>
@@ -42,12 +42,7 @@ import {
 <div className="row" data-masonry='{"percentPosition": true }'>
     <div className="sm:col-6 lg:col-4 mb-4">
         <Card>
-            <CardImage
-                width="100%"
-                height="200"
-                placement="top"
-                as={ExamplePlaceholder}
-                text="Image cap"
+            <CardImage width="100%" height="200" placement="top" as={ExamplePlaceholder} text="Image cap"
             />
             <CardBody>
                 <CardTitle as="h5">Card title that wraps to a new line</CardTitle>
@@ -72,12 +67,7 @@ import {
     </div>
     <div className="sm:col-6 lg:col-4 mb-4">
         <Card>
-            <CardImage
-                width="100%"
-                height="200"
-                placement="top"
-                as={ExamplePlaceholder}
-                text="Image cap"
+            <CardImage width="100%" height="200" placement="top" as={ExamplePlaceholder} text="Image cap"
             />
             <CardBody>
                 <CardTitle as="h5">Card title</CardTitle>
@@ -150,4 +140,4 @@ import {
 
 </div>
 
-</ExampleLayout>
+</BaseLayout>

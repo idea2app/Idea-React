@@ -21,7 +21,7 @@ supports `active` when the link itself needs the current-page styling.
 
 ## Example
 
-Use an ordered list with `.breadcrumb-item` for each page and `.breadcrumb-divider` elements between them. Leave a divider empty to use the default chevron icon, or add your own separator content. Mark the current `.breadcrumb-item` as active.
+Use an ordered list with `BreadcrumbItem` for each page and `BreadcrumbDivider` elements between them. Leave a divider empty to use the default chevron icon, or add your own separator content. Mark the current `BreadcrumbItem` as active.
 
 <CodeExample>
     <Stack gap={3}>
@@ -66,11 +66,11 @@ Use an ordered list with `.breadcrumb-item` for each page and `.breadcrumb-divid
 
 ## Dividers
 
-Dividers are added explicitly using `.breadcrumb-divider` elements. An empty divider renders a default chevron, drawn with a CSS [`mask`][1] so it inherits the divider color (including in dark mode). To use a different separator, add your own content—any SVG icon, text character, or custom markup—which overrides the default.
+Dividers are added explicitly using `BreadcrumbDivider` elements. An empty divider renders a default chevron, drawn with a CSS [`mask`][1] so it inherits the divider color (including in dark mode). To use a different separator, add your own content—any SVG icon, text character, or custom markup—which overrides the default.
 
 ### Default divider
 
-Leave the `.breadcrumb-divider` empty to get the built-in chevron. Customize it globally by overriding the `--bs-breadcrumb-divider-icon`, `--bs-breadcrumb-divider-width`, and `--bs-breadcrumb-divider-height` variables.
+Leave the `BreadcrumbDivider` empty to get the built-in chevron. Customize it globally by overriding the `--bs-breadcrumb-divider-icon`, `--bs-breadcrumb-divider-width`, and `--bs-breadcrumb-divider-height` variables.
 
 <CodeExample>
     <Stack gap={3}>
@@ -163,7 +163,7 @@ Use any content you like—different icons, decorative elements, or themed separ
 Since breadcrumbs provide navigation, it’s important to follow these practices:
 
 - Add `aria-label="breadcrumb"` to the `<nav>` element to describe the navigation type
-- Add `aria-current="page"` to the `.breadcrumb-item` containing the current page
+- Add `aria-current="page"` to the `BreadcrumbItem` containing the current page
 - Divider elements are automatically hidden from assistive technology via CSS
 
 For more information, see the [ARIA Authoring Practices Guide breadcrumb pattern][2].

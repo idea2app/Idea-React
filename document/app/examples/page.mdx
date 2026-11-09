@@ -1,8 +1,7 @@
-import styleText from './style.module.css?inline';
 import { Card, CardBody, CardText, CardTitle } from '../../../source/Base/Card';
 import { Col, Container, Row } from '../../../source/Layout/Grid';
-import { ExampleLayout } from '../../component/Examples/Layout';
-import style from './style.module.css';
+import { BaseLayout } from '../../component/Document/BaseLayout';
+import style from './style.module.less';
 
 export const examples = [
     {
@@ -168,7 +167,7 @@ export const examples = [
     }
 ];
 
-<ExampleLayout title="Examples" styleText={styleText}>
+<BaseLayout title="Examples">
 
 # Examples
 
@@ -181,15 +180,9 @@ Browse all 33 Bootstrap example pages. Each thumbnail uses its official Bootstra
         {examples.map(({ slug, title, description }) => (
             <Col key={slug}>
                 <Card as="article" className="h-100 overflow-hidden">
-                    <a
-                        href={`./${slug}/`}
-                        className={style.exampleThumbnail}
-                        aria-label={`View ${title} example`}
+                    <a href={`./${slug}/`} className={style.exampleThumbnail} aria-label={`View ${title} example`}
                     >
-                        <img
-                            src={`https://getbootstrap.com/docs/6.0/assets/img/examples/${slug}.png`}
-                            alt={`${title} example preview`}
-                            loading="lazy"
+                        <img src={`https://getbootstrap.com/docs/6.0/assets/img/examples/${slug}.png`} alt={`${title} example preview`} loading="lazy"
                         />
                     </a>
                     <CardBody>
@@ -206,4 +199,4 @@ Browse all 33 Bootstrap example pages. Each thumbnail uses its official Bootstra
     </Row>
 </Container>
 
-</ExampleLayout>
+</BaseLayout>

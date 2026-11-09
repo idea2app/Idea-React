@@ -1,11 +1,11 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Icon } from '../../../../source/Extension/Icon';
 import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../source/Form';
 import { Button } from '../../../../source/Base/Button';
 import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 
-<ExampleLayout title="Menus" styleText={styleText} className="">
+<BaseLayout title="Menus">
 
 <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
   <symbol id="film" viewBox="0 0 16 16">
@@ -33,9 +33,7 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 
 <symbol id="trash" viewBox="0 0 16 16">
     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-    <path
-        fillRule="evenodd"
-        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+    <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
     />
 </symbol>
 
@@ -45,9 +43,7 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 </symbol>
 
 <symbol id="arrow-left-short" viewBox="0 0 16 16">
-    <path
-        fillRule="evenodd"
-        d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
+    <path fillRule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
     />
 </symbol>
 
@@ -92,45 +88,45 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 <div className="b-example-divider"></div>
 
 <div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
-  <MenuPanel  theme="light" className="d-block position-static mx-0 p-2 overflow-hidden w-280px opacity-100" >
+  <MenuPanel theme="light" className="d-block position-static mx-0 p-2 overflow-hidden w-280px opacity-100" >
     <form className="p-2 mb-2 mx--2 mt--2 bg-1 border-bottom">
-      <FormControl type="search"   autoComplete="false" placeholder="Type to filter..." />
+      <FormControl type="search" autoComplete="false" placeholder="Type to filter..." />
     </form>
-    <MenuItem  as="a" className="py-2" href="#">
+    <MenuItem as="a" className="py-2" href="#">
       <span className="d-inline-block bg-success rounded-circle p-1"></span>
       Action
     </MenuItem>
-    <MenuItem  as="a" className="py-2" href="#">
+    <MenuItem as="a" className="py-2" href="#">
       <span className="d-inline-block bg-primary rounded-circle p-1"></span>
       Another action
     </MenuItem>
-    <MenuItem  as="a" className="py-2" href="#">
+    <MenuItem as="a" className="py-2" href="#">
       <span className="d-inline-block bg-danger rounded-circle p-1"></span>
       Something else here
     </MenuItem>
-    <MenuItem  as="a" className="py-2" href="#">
+    <MenuItem as="a" className="py-2" href="#">
       <span className="d-inline-block bg-info rounded-circle p-1"></span>
       Separated link
     </MenuItem>
   </MenuPanel>
 
-  <MenuPanel  theme="dark" className="d-block position-static mx-0 p-2 overflow-hidden w-280px opacity-100" >
+  <MenuPanel theme="dark" className="d-block position-static mx-0 p-2 overflow-hidden w-280px opacity-100" >
     <form className="p-2 mb-2 mx--2 mt--2 bg-1 border-bottom">
-      <FormControl type="search"   autoComplete="false" placeholder="Type to filter..." />
+      <FormControl type="search" autoComplete="false" placeholder="Type to filter..." />
     </form>
-    <MenuItem  as="a" className="py-2" href="#">
+    <MenuItem as="a" className="py-2" href="#">
       <span className="d-inline-block bg-success rounded-circle p-1"></span>
       Action
     </MenuItem>
-    <MenuItem  as="a" className="py-2" href="#">
+    <MenuItem as="a" className="py-2" href="#">
       <span className="d-inline-block bg-primary rounded-circle p-1"></span>
       Another action
     </MenuItem>
-    <MenuItem  as="a" className="py-2" href="#">
+    <MenuItem as="a" className="py-2" href="#">
       <span className="d-inline-block bg-danger rounded-circle p-1"></span>
       Something else here
     </MenuItem>
-    <MenuItem  as="a" className="py-2" href="#">
+    <MenuItem as="a" className="py-2" href="#">
       <span className="d-inline-block bg-info rounded-circle p-1"></span>
       Separated link
     </MenuItem>
@@ -199,7 +195,7 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 <div className="b-example-divider"></div>
 
 <div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
-  <MenuPanel  theme="light" className="position-static d-flex flex-column lg:flex-row align-items-stretch lg:align-items-center justify-content-start p-4 opacity-100" >
+  <MenuPanel theme="light" className="position-static d-flex flex-column lg:flex-row align-items-stretch lg:align-items-center justify-content-start p-4 opacity-100" >
     <nav>
       <ul className="list-unstyled d-flex flex-column gap-1 mb-0">
         <li>
@@ -236,17 +232,17 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
     <div className="pe-3 py-2">
       <nav>
         <ul className="d-flex flex-column gap-1 list-unstyled">
-          <li><MenuItem href="#"  as="a">Documentation</MenuItem></li>
-          <li><MenuItem href="#"  as="a">Use cases</MenuItem></li>
-          <li><MenuItem href="#"  as="a">API status</MenuItem></li>
-          <li><MenuItem href="#"  as="a">Partners</MenuItem></li>
-          <li><MenuItem href="#"  as="a">Resources</MenuItem></li>
+          <li><MenuItem href="#" as="a">Documentation</MenuItem></li>
+          <li><MenuItem href="#" as="a">Use cases</MenuItem></li>
+          <li><MenuItem href="#" as="a">API status</MenuItem></li>
+          <li><MenuItem href="#" as="a">Partners</MenuItem></li>
+          <li><MenuItem href="#" as="a">Resources</MenuItem></li>
         </ul>
       </nav>
     </div>
   </MenuPanel>
 
-  <MenuPanel  theme="dark" className="position-static d-flex flex-column lg:flex-row align-items-stretch lg:align-items-center justify-content-start p-4 opacity-100" >
+  <MenuPanel theme="dark" className="position-static d-flex flex-column lg:flex-row align-items-stretch lg:align-items-center justify-content-start p-4 opacity-100" >
     <nav>
       <ul className="list-unstyled d-flex flex-column gap-1 mb-0">
         <li>
@@ -283,15 +279,15 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
     <div className="pe-3 py-2">
       <nav>
         <ul className="d-flex flex-column gap-1 list-unstyled">
-          <li><MenuItem href="#"  as="a">Documentation</MenuItem></li>
-          <li><MenuItem href="#"  as="a">Use cases</MenuItem></li>
-          <li><MenuItem href="#"  as="a">API status</MenuItem></li>
-          <li><MenuItem href="#"  as="a">Partners</MenuItem></li>
-          <li><MenuItem href="#"  as="a">Resources</MenuItem></li>
+          <li><MenuItem href="#" as="a">Documentation</MenuItem></li>
+          <li><MenuItem href="#" as="a">Use cases</MenuItem></li>
+          <li><MenuItem href="#" as="a">API status</MenuItem></li>
+          <li><MenuItem href="#" as="a">Partners</MenuItem></li>
+          <li><MenuItem href="#" as="a">Resources</MenuItem></li>
         </ul>
       </nav>
     </div>
   </MenuPanel>
 </div>
 
-</ExampleLayout>
+</BaseLayout>

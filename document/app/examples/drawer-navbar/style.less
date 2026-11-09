@@ -1,14 +1,14 @@
-:global(html),
-:global(body) {
+html,
+body {
     overflow-x: hidden; /* Prevent scroll on narrow devices */
 }
 
-:global(body) {
+body {
     padding-top: 56px;
 }
 
 @media (max-width: 991.98px) {
-    :global(.drawer-collapse) {
+    .drawer-collapse {
         position: fixed;
         top: 56px; /* Height of navbar */
         bottom: 0;
@@ -23,32 +23,32 @@
         width: 100%;
         overflow-y: auto;
     }
-    :global(.drawer-collapse.open) {
+    .drawer-collapse.open {
         transform: translateX(-100%);
         visibility: visible;
     }
 }
 
-:global(.nav-scroller .nav) {
+.nav-scroller .nav {
     color: rgba(255, 255, 255, 0.75);
 }
 
-:global(.nav-scroller .nav-link) {
+.nav-scroller .nav-link {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
     color: #6c757d;
     font-size: 0.875rem;
 }
 
-:global(.nav-scroller .nav-link:hover) {
+.nav-scroller .nav-link:hover {
     color: #007bff;
 }
 
-:global(.nav-scroller .active) {
+.nav-scroller .active {
     color: #343a40;
     font-weight: 500;
 }
 
-:global(.bg-purple) {
+.bg-purple {
     background-color: #6f42c1;
 }

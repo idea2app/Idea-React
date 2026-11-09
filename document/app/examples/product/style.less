@@ -1,8 +1,8 @@
-:global(.container) {
+.container {
     max-width: 960px;
 }
 
-:global(.icon-link > .bi) {
+.icon-link > .bi {
     width: 0.75em;
     height: 0.75em;
 }
@@ -11,7 +11,7 @@
  * Dummy devices (replace them with your own or something else entirely!)
  */
 
-:global(.product-device) {
+.product-device {
     position: absolute;
     right: 10%;
     bottom: -30%;
@@ -22,7 +22,7 @@
     height: 540px;
 }
 
-:global(.product-device::before) {
+.product-device::before {
     position: absolute;
     top: 10%;
     right: 10px;
@@ -33,7 +33,7 @@
     content: '';
 }
 
-:global(.product-device-2) {
+.product-device-2 {
     top: -25%;
     right: auto;
     bottom: 0;
@@ -45,11 +45,11 @@
  * Extra utilities
  */
 
-:global(.flex-equal > *) {
+.flex-equal > * {
     flex: 1;
 }
 @media (min-width: 768px) {
-    :global(.md\:flex-equal > *) {
+    .md\:flex-equal > * {
         flex: 1;
     }
 }

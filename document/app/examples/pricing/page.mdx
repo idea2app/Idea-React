@@ -1,5 +1,5 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Icon } from '../../../../source/Extension/Icon';
 import {
     Card,
@@ -13,7 +13,7 @@ import {
 } from '../../../../source/Base/Card';
 import { Button } from '../../../../source/Base/Button';
 
-<ExampleLayout title="Pricing example" styleText={styleText} className="">
+<BaseLayout title="Pricing example">
 
 <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
     <symbol id="check" viewBox="0 0 16 16">
@@ -48,11 +48,11 @@ import { Button } from '../../../../source/Base/Button';
   <div>
     <div className="row row-cols-1 md:row-cols-3 mb-3 text-center">
       <div className="col">
-        <Card   className="mb-4 rounded-3 shadow-sm">
-          <CardHeader   className="py-3">
+        <Card className="mb-4 rounded-3 shadow-sm">
+          <CardHeader className="py-3">
             <h4 className="my-0 fw-normal">Free</h4>
           </CardHeader>
-          <CardBody  >
+          <CardBody >
             <CardTitle as="h1" className="pricing-card-title">$0<small className="fg-2 fw-light">/mo</small></CardTitle>
             <ul className="list-unstyled mt-3 mb-4 w-100">
               <li>10 users included</li>
@@ -65,11 +65,11 @@ import { Button } from '../../../../source/Base/Button';
         </Card>
       </div>
       <div className="col">
-        <Card   className="mb-4 rounded-3 shadow-sm">
-          <CardHeader   className="py-3">
+        <Card className="mb-4 rounded-3 shadow-sm">
+          <CardHeader className="py-3">
             <h4 className="my-0 fw-normal">Pro</h4>
           </CardHeader>
-          <CardBody  >
+          <CardBody >
             <CardTitle as="h1" className="pricing-card-title">$15<small className="fg-2 fw-light">/mo</small></CardTitle>
             <ul className="list-unstyled mt-3 mb-4 w-100">
               <li>20 users included</li>
@@ -82,11 +82,11 @@ import { Button } from '../../../../source/Base/Button';
         </Card>
       </div>
       <div className="col">
-        <Card   className="mb-4 rounded-3 shadow-sm border-primary">
-          <CardHeader   className="py-3 theme-primary border-primary">
+        <Card className="mb-4 rounded-3 shadow-sm border-primary">
+          <CardHeader className="py-3 theme-primary border-primary">
             <h4 className="my-0 fw-normal">Enterprise</h4>
           </CardHeader>
-          <CardBody  >
+          <CardBody >
             <CardTitle as="h1" className="pricing-card-title">$29<small className="fg-2 fw-light">/mo</small></CardTitle>
             <ul className="list-unstyled mt-3 mb-4 w-100">
               <li>30 users included</li>
@@ -197,4 +197,4 @@ import { Button } from '../../../../source/Base/Button';
   </footer>
 </div>
 
-</ExampleLayout>
+</BaseLayout>

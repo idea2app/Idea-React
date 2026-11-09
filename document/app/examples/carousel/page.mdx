@@ -1,7 +1,8 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
 import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
+import { Carousel, CarouselSlide } from '../../../../source/Base/Carousel';
 import { Button } from '../../../../source/Base/Button';
 import {
     DialogBody,
@@ -14,35 +15,21 @@ import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
 import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../source/Form';
 import { CloseButton } from '../../../../source/Base/CloseButton';
 
-<ExampleLayout title="Carousel Template" styleText={styleText} className="">
+<BaseLayout title="Carousel Template">
 
 <header data-bs-theme="dark">
     <Navbar theme="dark" expand="md" className="fixed-top">
         <div className="container-fluid">
             <NavbarBrand href="#">Carousel</NavbarBrand>
-            <NavbarToggler
-                type="button"
-                data-bs-toggle="drawer"
-                data-bs-target="#navbarCollapse"
-                aria-controls="navbarCollapse"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
+            <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
             ></NavbarToggler>
-            <NativeDialog
-                className="drawer drawer-end"
-                tabIndex="-1"
-                id="navbarCollapse"
-                aria-labelledby="navbarCollapseLabel"
+            <NativeDialog className="drawer drawer-end" tabIndex="-1" id="navbarCollapse" aria-labelledby="navbarCollapseLabel"
             >
                 <div className="drawer-header">
                     <h5 className="drawer-title" id="navbarCollapseLabel">
                         Menu
                     </h5>
-                    <CloseButton
-                        type="button"
-                        dismiss="drawer"
-
-                        aria-label="Close"
+                    <CloseButton type="button" dismiss="drawer" aria-label="Close"
                     ></CloseButton>
                 </div>
                 <div className="drawer-body">
@@ -62,11 +49,7 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
                         </NavItem>
                     </NavbarNav>
                     <form className="d-flex" role="search">
-                        <FormControl
-                            className="me-2"
-                            type="search"
-                            placeholder="Search"
-                            aria-label="Search"
+                        <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search"
                         />
                         <Button variant="outline" theme="success" type="submit">
                             Search
@@ -81,9 +64,16 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
 
 <div>
 
-<div id="myCarousel" className="carousel slide mb-6" data-bs-autoplay="true">
-    <div className="carousel-inner">
-        <div className="carousel-item active">
+<Carousel
+    id="myCarousel"
+    autoplay
+    indicators
+    playPause
+    controlsPlacement="bottom"
+    controlsClassName="d-flex justify-content-between align-items-center mt-3"
+    className="mb-6"
+>
+        <CarouselSlide>
             <ExamplePlaceholder
                 width="100%"
                 height="100%"
@@ -97,20 +87,14 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
                     Some representative placeholder content for the first slide of the carousel.
                 </p>
                 <p>
-                    <Button
-                        variant="solid"
-                        theme="primary"
-                        size="lg"
-                        as="a"
-
-                        href="#"
+                    <Button variant="solid" theme="primary" size="lg" as="a" href="#"
                     >
                         Sign up today
                     </Button>
                 </p>
             </div>
-        </div>
-        <div className="carousel-item">
+        </CarouselSlide>
+        <CarouselSlide>
             <ExamplePlaceholder
                 width="100%"
                 height="100%"
@@ -122,20 +106,14 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
                 <h1>Another example headline.</h1>
                 <p>Some representative placeholder content for the second slide of the carousel.</p>
                 <p>
-                    <Button
-                        variant="solid"
-                        theme="primary"
-                        size="lg"
-                        as="a"
-
-                        href="#"
+                    <Button variant="solid" theme="primary" size="lg" as="a" href="#"
                     >
                         Learn more
                     </Button>
                 </p>
             </div>
-        </div>
-        <div className="carousel-item">
+        </CarouselSlide>
+        <CarouselSlide>
             <ExamplePlaceholder
                 width="100%"
                 height="100%"
@@ -147,89 +125,14 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
                 <h1>One more for good measure.</h1>
                 <p>Some representative placeholder content for the third slide of this carousel.</p>
                 <p>
-                    <Button
-                        variant="solid"
-                        theme="primary"
-                        size="lg"
-                        as="a"
-
-                        href="#"
+                    <Button variant="solid" theme="primary" size="lg" as="a" href="#"
                     >
                         Browse gallery
                     </Button>
                 </p>
             </div>
-        </div>
-    </div>
-    <div className="d-flex justify-content-between align-items-center mt-3">
-        <div className="carousel-indicators">
-            <Button
-                variant={false}
-                type="button"
-                data-bs-target="#myCarousel"
-                data-bs-slide-to="0"
-                className="active"
-                aria-current="true"
-                aria-label="Slide 1"
-            ></Button>
-            <Button
-                variant={false}
-                type="button"
-                data-bs-target="#myCarousel"
-                data-bs-slide-to="1"
-                aria-label="Slide 2"
-            ></Button>
-            <Button
-                variant={false}
-                type="button"
-                data-bs-target="#myCarousel"
-                data-bs-slide-to="2"
-                aria-label="Slide 3"
-            ></Button>
-        </div>
-        <div>
-            <Button
-                size="sm"
-                icon
-                variant={false}
-                className="carousel-control-play-pause"
-                type="button"
-                data-bs-target="#myCarousel"
-                aria-label="Pause"
-                data-bs-pause-label="Pause"
-                data-bs-play-label="Play"
-            >
-                <span className="carousel-icon-pause" aria-hidden="true"></span>
-                <span className="carousel-icon-play" aria-hidden="true"></span>
-            </Button>
-            <Button
-                size="sm"
-                icon
-                variant={false}
-
-                type="button"
-                data-bs-target="#myCarousel"
-                data-bs-slide="prev"
-            >
-                <span className="carousel-icon-prev" aria-hidden="true"></span>
-                <span className="visually-hidden">Previous</span>
-            </Button>
-            <Button
-                size="sm"
-                icon
-                variant={false}
-
-                type="button"
-                data-bs-target="#myCarousel"
-                data-bs-slide="next"
-            >
-                <span className="carousel-icon-next" aria-hidden="true"></span>
-                <span className="visually-hidden">Next</span>
-            </Button>
-        </div>
-    </div>
-
-</div>
+        </CarouselSlide>
+</Carousel>
 
 {/* Marketing messaging and featurettes */}
 {/* Wrap the rest of the page in another container to center all the content. */}
@@ -311,4 +214,4 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
   </footer>
 </div>
 
-</ExampleLayout>
+</BaseLayout>

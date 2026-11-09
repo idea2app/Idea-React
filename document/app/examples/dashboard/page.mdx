@@ -1,5 +1,5 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Icon } from '../../../../source/Extension/Icon';
 import { Navbar, NavbarNav, NavbarBrand } from '../../../../source/Base/Navbar';
 import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
@@ -15,7 +15,7 @@ import {
 import { CloseButton } from '../../../../source/Base/CloseButton';
 import { ButtonToolbar, ButtonGroup } from '../../../../source/Base/ButtonGroup';
 
-<ExampleLayout title="Dashboard Template" styleText={styleText} className="">
+<BaseLayout title="Dashboard Template">
 
 <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
     <symbol id="calendar3" viewBox="0 0 16 16">
@@ -26,9 +26,7 @@ import { ButtonToolbar, ButtonGroup } from '../../../../source/Base/ButtonGroup'
         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
     </symbol>
     <symbol id="chevron-right" viewBox="0 0 16 16">
-        <path
-            fillRule="evenodd"
-            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+        <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
         />
     </symbol>
     <symbol id="door-closed" viewBox="0 0 16 16">
@@ -46,9 +44,7 @@ import { ButtonToolbar, ButtonGroup } from '../../../../source/Base/ButtonGroup'
         <path d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z" />
     </symbol>
     <symbol id="graph-up" viewBox="0 0 16 16">
-        <path
-            fillRule="evenodd"
-            d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"
+        <path fillRule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"
         />
     </symbol>
     <symbol id="house-fill" viewBox="0 0 16 16">
@@ -56,9 +52,7 @@ import { ButtonToolbar, ButtonGroup } from '../../../../source/Base/ButtonGroup'
         <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
     </symbol>
     <symbol id="list" viewBox="0 0 16 16">
-        <path
-            fillRule="evenodd"
-            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+        <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
         />
     </symbol>
     <symbol id="people" viewBox="0 0 16 16">
@@ -76,36 +70,18 @@ import { ButtonToolbar, ButtonGroup } from '../../../../source/Base/ButtonGroup'
     </symbol>
 </svg>
 
-<Navbar  as="header" theme="dark" className="sticky-top md:flex-nowrap p-0 shadow" >
+<Navbar as="header" theme="dark" className="sticky-top md:flex-nowrap p-0 shadow" >
   <NavbarBrand className="md:col-3 lg:col-2 me-0 px-3 fs-md fg-white" href="#">Company name</NavbarBrand>
 
 <NavbarNav className="flex-row md:d-none">
     <NavItem className="text-nowrap">
-        <NavLink
-            variant={false}
-            as="button"
-            className="px-3 fg-white"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSearch"
-            aria-controls="navbarSearch"
-            aria-expanded="false"
-            aria-label="Toggle search"
+        <NavLink variant={false} as="button" className="px-3 fg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search"
         >
             <Icon name="search" aria-hidden="true" />
         </NavLink>
     </NavItem>
     <NavItem className="text-nowrap">
-        <NavLink
-            variant={false}
-            as="button"
-            className="px-3 fg-white"
-            type="button"
-            data-bs-toggle="drawer"
-            data-bs-target="#sidebarMenu"
-            aria-controls="sidebarMenu"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+        <NavLink variant={false} as="button" className="px-3 fg-white" type="button" data-bs-toggle="drawer" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
         >
             <Icon name="list" aria-hidden="true" />
         </NavLink>
@@ -113,7 +89,7 @@ import { ButtonToolbar, ButtonGroup } from '../../../../source/Base/ButtonGroup'
 </NavbarNav>
 
   <div id="navbarSearch" className="navbar-search w-100 collapse">
-    <FormControl   className="w-100 rounded-0 border-0" type="search" placeholder="Search" aria-label="Search" />
+    <FormControl className="w-100 rounded-0 border-0" type="search" placeholder="Search" aria-label="Search" />
   </div>
 </Navbar>
 
@@ -123,42 +99,42 @@ import { ButtonToolbar, ButtonGroup } from '../../../../source/Base/ButtonGroup'
       <NativeDialog className="md:drawer drawer-end bg-1" tabIndex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div className="drawer-header">
           <h5 className="drawer-title" id="sidebarMenuLabel">Company name</h5>
-          <CloseButton  type="button"  dismiss="drawer"   data-bs-target="#sidebarMenu" aria-label="Close"></CloseButton>
+          <CloseButton type="button" dismiss="drawer" data-bs-target="#sidebarMenu" aria-label="Close"></CloseButton>
         </div>
         <div className="drawer-body md:d-flex flex-column p-0 lg:pt-3 overflow-y-auto">
-          <Nav as="ul"  vertical>
-            <NavItem  >
-              <NavLink  active  className="d-flex align-items-center gap-2" aria-current="page" href="#">
+          <Nav as="ul" vertical>
+            <NavItem >
+              <NavLink active className="d-flex align-items-center gap-2" aria-current="page" href="#">
                 <Icon name="house-fill" aria-hidden="true" />
                 Dashboard
               </NavLink>
             </NavItem>
-            <NavItem  >
-              <NavLink   className="d-flex align-items-center gap-2" href="#">
+            <NavItem >
+              <NavLink className="d-flex align-items-center gap-2" href="#">
                 <Icon name="file-earmark" aria-hidden="true" />
                 Orders
               </NavLink>
             </NavItem>
-            <NavItem  >
-              <NavLink   className="d-flex align-items-center gap-2" href="#">
+            <NavItem >
+              <NavLink className="d-flex align-items-center gap-2" href="#">
                 <Icon name="cart" aria-hidden="true" />
                 Products
               </NavLink>
             </NavItem>
-            <NavItem  >
-              <NavLink   className="d-flex align-items-center gap-2" href="#">
+            <NavItem >
+              <NavLink className="d-flex align-items-center gap-2" href="#">
                 <Icon name="people" aria-hidden="true" />
                 Customers
               </NavLink>
             </NavItem>
-            <NavItem  >
-              <NavLink   className="d-flex align-items-center gap-2" href="#">
+            <NavItem >
+              <NavLink className="d-flex align-items-center gap-2" href="#">
                 <Icon name="graph-up" aria-hidden="true" />
                 Reports
               </NavLink>
             </NavItem>
-            <NavItem  >
-              <NavLink   className="d-flex align-items-center gap-2" href="#">
+            <NavItem >
+              <NavLink className="d-flex align-items-center gap-2" href="#">
                 <Icon name="puzzle" aria-hidden="true" />
                 Integrations
               </NavLink>
@@ -171,27 +147,27 @@ import { ButtonToolbar, ButtonGroup } from '../../../../source/Base/ButtonGroup'
               <Icon name="plus-circle" aria-hidden="true" />
             </a>
           </h6>
-          <Nav as="ul"  verticalclassName="mb-auto">
-            <NavItem  >
-              <NavLink   className="d-flex align-items-center gap-2" href="#">
+          <Nav as="ul" vertical className="mb-auto">
+            <NavItem >
+              <NavLink className="d-flex align-items-center gap-2" href="#">
                 <Icon name="file-earmark-text" aria-hidden="true" />
                 Current month
               </NavLink>
             </NavItem>
-            <NavItem  >
-              <NavLink   className="d-flex align-items-center gap-2" href="#">
+            <NavItem >
+              <NavLink className="d-flex align-items-center gap-2" href="#">
                 <Icon name="file-earmark-text" aria-hidden="true" />
                 Last quarter
               </NavLink>
             </NavItem>
-            <NavItem  >
-              <NavLink   className="d-flex align-items-center gap-2" href="#">
+            <NavItem >
+              <NavLink className="d-flex align-items-center gap-2" href="#">
                 <Icon name="file-earmark-text" aria-hidden="true" />
                 Social engagement
               </NavLink>
             </NavItem>
-            <NavItem  >
-              <NavLink   className="d-flex align-items-center gap-2" href="#">
+            <NavItem >
+              <NavLink className="d-flex align-items-center gap-2" href="#">
                 <Icon name="file-earmark-text" aria-hidden="true" />
                 Year-end sale
               </NavLink>
@@ -200,15 +176,15 @@ import { ButtonToolbar, ButtonGroup } from '../../../../source/Base/ButtonGroup'
 
           <hr className="my-3" />
 
-          <Nav as="ul"  verticalclassName="mb-auto">
-            <NavItem  >
-              <NavLink   className="d-flex align-items-center gap-2" href="#">
+          <Nav as="ul" vertical className="mb-auto">
+            <NavItem >
+              <NavLink className="d-flex align-items-center gap-2" href="#">
                 <Icon name="gear-wide-connected" aria-hidden="true" />
                 Settings
               </NavLink>
             </NavItem>
-            <NavItem  >
-              <NavLink   className="d-flex align-items-center gap-2" href="#">
+            <NavItem >
+              <NavLink className="d-flex align-items-center gap-2" href="#">
                 <Icon name="door-closed" aria-hidden="true" />
                 Sign out
               </NavLink>
@@ -368,4 +344,4 @@ import { ButtonToolbar, ButtonGroup } from '../../../../source/Base/ButtonGroup'
   </div>
 </div>
 
-</ExampleLayout>
+</BaseLayout>

@@ -1,12 +1,9 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
 import { Button } from '../../../../source/Base/Button';
 
-<ExampleLayout
-  title="Cover Template"
-  styleText={styleText}
-  className="d-flex h-100 text-center bg-black fg-white min-vh-100"
+<BaseLayout title="Cover Template" className="d-flex h-100 text-center bg-black fg-white min-vh-100"
 >
 
 <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" data-bs-theme="dark">
@@ -14,9 +11,9 @@ import { Button } from '../../../../source/Base/Button';
     <div>
       <h3 className="md:float-start mb-0">Cover</h3>
       <Nav className="nav-masthead justify-content-center md:float-end">
-        <NavLink  active  className="bg-transparent rounded-0 fw-bold py-1 px-0" aria-current="page" href="#">Home</NavLink>
-        <NavLink   className="bg-transparent rounded-0 fw-bold py-1 px-0" href="#">Features</NavLink>
-        <NavLink   className="bg-transparent rounded-0 fw-bold py-1 px-0" href="#">Contact</NavLink>
+        <NavLink active className="bg-transparent rounded-0 fw-bold py-1 px-0" aria-current="page" href="#">Home</NavLink>
+        <NavLink className="bg-transparent rounded-0 fw-bold py-1 px-0" href="#">Features</NavLink>
+        <NavLink className="bg-transparent rounded-0 fw-bold py-1 px-0" href="#">Contact</NavLink>
       </Nav>
     </div>
   </header>
@@ -39,4 +36,4 @@ import { Button } from '../../../../source/Base/Button';
   </footer>
 </div>
 
-</ExampleLayout>
+</BaseLayout>

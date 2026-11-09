@@ -16,14 +16,6 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
             <head>
                 <link
                     rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
-                />
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap-icons@1.13.2/font/bootstrap-icons.css"
-                />
-                <link
-                    rel="stylesheet"
                     href="https://unpkg.com/github-markdown-css@5.9.0/github-markdown.css"
                 />
                 <link

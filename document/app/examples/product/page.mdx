@@ -1,5 +1,5 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Icon } from '../../../../source/Extension/Icon';
 import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
 import { Button } from '../../../../source/Base/Button';
@@ -13,17 +13,10 @@ import {
 import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
 import { CloseButton } from '../../../../source/Base/CloseButton';
 
-<ExampleLayout title="Product example" styleText={styleText} className="">
+<BaseLayout title="Product example">
 
 <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
-    <symbol
-        id="aperture"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
+    <symbol id="aperture" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"
     >
         <circle cx="12" cy="12" r="10" />
         <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" />
@@ -32,9 +25,7 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
     </symbol>
     <symbol id="chevron-right" viewBox="0 0 16 16">
-        <path
-            fillRule="evenodd"
-            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+        <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
         />
     </symbol>
 </svg>
@@ -45,28 +36,15 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
             <Icon name="aperture" size={1.5} aria-hidden="true" />
             Aperture
         </NavbarBrand>
-        <NavbarToggler
-            type="button"
-            data-bs-toggle="drawer"
-            data-bs-target="#drawer"
-            aria-controls="drawer"
-            aria-label="Toggle navigation"
+        <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#drawer" aria-controls="drawer" aria-label="Toggle navigation"
         ></NavbarToggler>
-        <NativeDialog
-            className="drawer drawer-end"
-            tabIndex="-1"
-            id="drawer"
-            aria-labelledby="drawerLabel"
+        <NativeDialog className="drawer drawer-end" tabIndex="-1" id="drawer" aria-labelledby="drawerLabel"
         >
             <div className="drawer-header">
                 <h5 className="drawer-title" id="drawerLabel">
                     Aperture
                 </h5>
-                <CloseButton
-                    type="button"
-                    dismiss="drawer"
-
-                    aria-label="Close"
+                <CloseButton type="button" dismiss="drawer" aria-label="Close"
                 ></CloseButton>
             </div>
             <div className="drawer-body">
@@ -132,9 +110,7 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
             <h2 className="fs-3xl fw-light">Another headline</h2>
             <p className="fs-lg fw-light">And an even wittier subheading.</p>
         </div>
-        <div
-            className="bg-subtle-secondary shadow-sm mx-auto"
-            style={{ width: '80%', height: '300px', borderRadius: '21px 21px 0 0' }}
+        <div className="bg-subtle-secondary shadow-sm mx-auto" style={{ width: '80%', height: '300px', borderRadius: '21px 21px 0 0' }}
         ></div>
     </div>
     <div className="bg-subtle-secondary md:me-3 pt-3 px-3 md:pt-5 md:px-5 text-center overflow-hidden">
@@ -142,9 +118,7 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
             <h2 className="fs-3xl fw-light">Another headline</h2>
             <p className="fs-lg fw-light">And an even wittier subheading.</p>
         </div>
-        <div
-            className="bg-black shadow-sm mx-auto"
-            style={{ width: '80%', height: '300px', borderRadius: '21px 21px 0 0' }}
+        <div className="bg-black shadow-sm mx-auto" style={{ width: '80%', height: '300px', borderRadius: '21px 21px 0 0' }}
         ></div>
     </div>
 </div>
@@ -155,9 +129,7 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
             <h2 className="fs-3xl fw-light">Another headline</h2>
             <p className="fs-lg fw-light">And an even wittier subheading.</p>
         </div>
-        <div
-            className="bg-black shadow-sm mx-auto"
-            style={{ width: '80%', height: '300px', borderRadius: '21px 21px 0 0' }}
+        <div className="bg-black shadow-sm mx-auto" style={{ width: '80%', height: '300px', borderRadius: '21px 21px 0 0' }}
         ></div>
     </div>
     <div className="theme-primary theme-contrast md:me-3 pt-3 px-3 md:pt-5 md:px-5 text-center overflow-hidden">
@@ -165,9 +137,7 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
             <h2 className="fs-3xl fw-light">Another headline</h2>
             <p className="fs-lg fw-light">And an even wittier subheading.</p>
         </div>
-        <div
-            className="bg-subtle-secondary shadow-sm mx-auto"
-            style={{ width: '80%', height: '300px', borderRadius: '21px 21px 0 0' }}
+        <div className="bg-subtle-secondary shadow-sm mx-auto" style={{ width: '80%', height: '300px', borderRadius: '21px 21px 0 0' }}
         ></div>
     </div>
 </div>
@@ -178,9 +148,7 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
             <h2 className="fs-3xl fw-light">Another headline</h2>
             <p className="fs-lg fw-light">And an even wittier subheading.</p>
         </div>
-        <div
-            className="bg-body shadow-sm mx-auto"
-            style={{ width: '80%', height: '300px', borderRadius: '21px 21px 0 0' }}
+        <div className="bg-body shadow-sm mx-auto" style={{ width: '80%', height: '300px', borderRadius: '21px 21px 0 0' }}
         ></div>
     </div>
     <div className="bg-subtle-secondary md:me-3 pt-3 px-3 md:pt-5 md:px-5 text-center overflow-hidden">
@@ -188,9 +156,7 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
             <h2 className="fs-3xl fw-light">Another headline</h2>
             <p className="fs-lg fw-light">And an even wittier subheading.</p>
         </div>
-        <div
-            className="bg-body shadow-sm mx-auto"
-            style={{ width: '80%', height: '300px', borderRadius: '21px 21px 0 0' }}
+        <div className="bg-body shadow-sm mx-auto" style={{ width: '80%', height: '300px', borderRadius: '21px 21px 0 0' }}
         ></div>
     </div>
 </div>
@@ -216,18 +182,7 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
 <footer className="container py-5">
     <div className="row">
         <div className="col-12 md:col">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="d-block mb-2"
-                role="img"
-                viewBox="0 0 24 24"
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="d-block mb-2" role="img" viewBox="0 0 24 24"
             >
                 <title>Product</title>
                 <circle cx="12" cy="12" r="10" />
@@ -348,4 +303,4 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
     </div>
 </footer>
 
-</ExampleLayout>
+</BaseLayout>

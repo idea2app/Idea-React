@@ -1,5 +1,5 @@
-import styleText from './style.module.css?inline';
-import { ExampleLayout } from '../../../component/Examples/Layout';
+import './style.less';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Button } from '../../../../source/Base/Button';
 import {
     FormCheck,
@@ -9,18 +9,13 @@ import {
     FormFloatingLabel
 } from '../../../../source/Form';
 
-<ExampleLayout title="Heroes" styleText={styleText} className="">
+<BaseLayout title="Heroes">
 
 <div>
   <h1 className="visually-hidden">Heroes examples</h1>
 
 <div className="px-4 py-5 my-5 text-center">
-    <img
-        className="d-block mx-auto mb-4"
-        src={'https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo.svg'}
-        alt=""
-        width="72"
-        height="57"
+    <img className="d-block mx-auto mb-4" src={'https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo.svg'} alt="" width="72" height="57"
     />
     <h1 className="fs-4xl fw-bold fg-emphasis-inverse">Centered hero</h1>
     <div className="lg:col-6 mx-auto">
@@ -33,13 +28,7 @@ import {
             <Button variant="solid" theme="primary" size="lg" type="button" className="px-4">
                 Primary button
             </Button>
-            <Button
-                variant="outline"
-                theme="secondary"
-                size="lg"
-
-                type="button"
-                className="px-4"
+            <Button variant="outline" theme="secondary" size="lg" type="button" className="px-4"
             >
                 Secondary
             </Button>
@@ -59,23 +48,11 @@ import {
             responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.
         </p>
         <div className="d-grid gap-2 sm:d-flex sm:justify-content-center mb-5">
-            <Button
-                variant="solid"
-                theme="primary"
-                size="lg"
-
-                type="button"
-                className="px-4 sm:me-3"
+            <Button variant="solid" theme="primary" size="lg" type="button" className="px-4 sm:me-3"
             >
                 Primary button
             </Button>
-            <Button
-                variant="outline"
-                theme="secondary"
-                size="lg"
-
-                type="button"
-                className="px-4"
+            <Button variant="outline" theme="secondary" size="lg" type="button" className="px-4"
             >
                 Secondary
             </Button>
@@ -83,13 +60,7 @@ import {
     </div>
     <div className="overflow-hidden" style={{ maxHeight: '30vh' }}>
         <div className="container px-5">
-            <img
-                src="https://raw.githubusercontent.com/twbs/bootstrap/main/site/src/assets/examples/heroes/bootstrap-docs.png"
-                className="img-fluid border rounded-3 shadow-lg mb-4"
-                alt="Example image"
-                width="700"
-                height="500"
-                loading="lazy"
+            <img src="https://raw.githubusercontent.com/twbs/bootstrap/main/site/src/assets/examples/heroes/bootstrap-docs.png" className="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy"
             />
         </div>
     </div>
@@ -101,13 +72,7 @@ import {
 <div className="container 2xl:col-8 px-4 py-5">
     <div className="row lg:flex-row-reverse align-items-center g-5 py-5">
         <div className="col-10 sm:col-8 lg:col-6">
-            <img
-                src="https://raw.githubusercontent.com/twbs/bootstrap/main/site/src/assets/examples/heroes/bootstrap-themes.png"
-                className="d-block lg:mx-auto img-fluid"
-                alt="Bootstrap Themes"
-                width="700"
-                height="500"
-                loading="lazy"
+            <img src="https://raw.githubusercontent.com/twbs/bootstrap/main/site/src/assets/examples/heroes/bootstrap-themes.png" className="d-block lg:mx-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy"
             />
         </div>
         <div className="lg:col-6">
@@ -121,23 +86,11 @@ import {
                 JavaScript plugins.
             </p>
             <div className="d-grid gap-2 md:d-flex md:justify-content-start">
-                <Button
-                    variant="solid"
-                    theme="primary"
-                    size="lg"
-
-                    type="button"
-                    className="px-4 md:me-2"
+                <Button variant="solid" theme="primary" size="lg" type="button" className="px-4 md:me-2"
                 >
                     Primary
                 </Button>
-                <Button
-                    variant="outline"
-                    theme="secondary"
-                    size="lg"
-
-                    type="button"
-                    className="px-4"
+                <Button variant="outline" theme="secondary" size="lg" type="button" className="px-4"
                 >
                     Default
                 </Button>
@@ -165,38 +118,20 @@ import {
             <form className="p-4 md:p-5 border rounded-3 bg-1">
                 <FormFloatingLabel className="mb-3">
                     <label htmlFor="floatingInput">Email address</label>
-                    <FormControl
-                        type="email"
-
-                        id="floatingInput"
-                        placeholder="name@example.com"
+                    <FormControl type="email" id="floatingInput" placeholder="name@example.com"
                     />
                 </FormFloatingLabel>
                 <FormFloatingLabel className="mb-3">
                     <label htmlFor="floatingPassword">Password</label>
-                    <FormControl
-                        type="password"
-
-                        id="floatingPassword"
-                        placeholder="Password"
+                    <FormControl type="password" id="floatingPassword" placeholder="Password"
                     />
                 </FormFloatingLabel>
                 <div className="form-field mb-3">
-                    <FormCheck
-                        type="checkbox"
-                        value="remember-me"
-                        id="heroRememberMe"
-                        className="check"
+                    <FormCheck type="checkbox" value="remember-me" id="heroRememberMe" className="check"
                     />
                     <label htmlFor="heroRememberMe">Remember me</label>
                 </div>
-                <Button
-                    variant="solid"
-                    theme="primary"
-                    size="lg"
-
-                    className="w-100"
-                    type="submit"
+                <Button variant="solid" theme="primary" size="lg" className="w-100" type="submit"
                 >
                     Sign up
                 </Button>
@@ -223,34 +158,18 @@ import {
                 JavaScript plugins.
             </p>
             <div className="d-grid gap-2 md:d-flex md:justify-content-start mb-4 lg:mb-3">
-                <Button
-                    variant="solid"
-                    theme="primary"
-                    size="lg"
-
-                    type="button"
-                    className="px-4 md:me-2"
+                <Button variant="solid" theme="primary" size="lg" type="button" className="px-4 md:me-2"
                 >
                     Primary
                 </Button>
-                <Button
-                    variant="outline"
-                    theme="secondary"
-                    size="lg"
-
-                    type="button"
-                    className="px-4"
+                <Button variant="outline" theme="secondary" size="lg" type="button" className="px-4"
                 >
                     Default
                 </Button>
             </div>
         </div>
         <div className="lg:col-4 lg:offset-1 p-0 overflow-hidden shadow-lg">
-            <img
-                className="rounded-lg-3"
-                src="https://raw.githubusercontent.com/twbs/bootstrap/main/site/src/assets/examples/heroes/bootstrap-docs.png"
-                alt=""
-                width="720"
+            <img className="rounded-lg-3" src="https://raw.githubusercontent.com/twbs/bootstrap/main/site/src/assets/examples/heroes/bootstrap-docs.png" alt="" width="720"
             />
         </div>
     </div>
@@ -270,23 +189,11 @@ import {
                 JavaScript plugins.
             </p>
             <div className="d-grid gap-2 sm:d-flex sm:justify-content-center">
-                <Button
-                    variant="outline"
-                    theme="info"
-                    size="lg"
-
-                    type="button"
-                    className="px-4 sm:me-3"
+                <Button variant="outline" theme="info" size="lg" type="button" className="px-4 sm:me-3"
                 >
                     Custom button
                 </Button>
-                <Button
-                    variant="outline"
-                    theme="secondary"
-                    size="lg"
-
-                    type="button"
-                    className="px-4"
+                <Button variant="outline" theme="secondary" size="lg" type="button" className="px-4"
                 >
                     Secondary
                 </Button>
@@ -299,4 +206,4 @@ import {
   <div className="b-example-divider mb-0"></div>
 </div>
 
-</ExampleLayout>
+</BaseLayout>

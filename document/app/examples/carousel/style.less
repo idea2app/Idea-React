@@ -2,7 +2,7 @@
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
 
-:global(body) {
+body {
     padding-top: 3rem;
     padding-bottom: 3rem;
     color: var(--bs-fg-3);
@@ -12,18 +12,18 @@
 -------------------------------------------------- */
 
 /* Carousel base class */
-:global(.carousel) {
+.carousel {
     margin-bottom: 4rem;
 }
 
 /* Declare heights because of positioning of img element */
-:global(.carousel-item) {
+.carousel-item {
     position: relative;
     height: 32rem;
 }
 
 /* Custom hero content overlaid on each slide (replaces the old .carousel-caption) */
-:global(.carousel-hero) {
+.carousel-hero {
     position: absolute;
     inset-inline: 15%;
     bottom: 3rem;
@@ -37,23 +37,23 @@
 -------------------------------------------------- */
 
 /* Center align the text within the three columns below the carousel */
-:global(.marketing .lg\:col-4) {
+.marketing .lg\:col-4 {
     margin-bottom: 1.5rem;
     text-align: center;
 }
-:global(.marketing .lg\:col-4 p) {
+.marketing .lg\:col-4 p {
     margin-inline: 0.75rem;
 }
 
 /* Featurettes
 ------------------------- */
 
-:global(.featurette-divider) {
+.featurette-divider {
     margin: 5rem 0; /* Space out the Bootstrap <hr> more */
 }
 
 /* Thin out the marketing headings */
-:global(.featurette-heading) {
+.featurette-heading {
     letter-spacing: -0.05rem;
 }
 
@@ -62,19 +62,19 @@
 
 @media (min-width: 40em) {
     /* Bump up size of carousel content */
-    :global(.carousel-hero p) {
+    .carousel-hero p {
         margin-bottom: 1.25rem;
         font-size: 1.25rem;
         line-height: 1.4;
     }
 
-    :global(.featurette-heading) {
+    .featurette-heading {
         font-size: 50px;
     }
 }
 
 @media (min-width: 62em) {
-    :global(.featurette-heading) {
+    .featurette-heading {
         margin-top: 7rem;
     }
 }
