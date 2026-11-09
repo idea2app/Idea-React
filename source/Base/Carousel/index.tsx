@@ -264,7 +264,6 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
         return (
             <Button
-                type="button"
                 variant={overlay ? 'subtle' : undefined}
                 theme={overlay ? 'secondary' : undefined}
                 size="sm"
@@ -300,7 +299,6 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     renderPlayPause = () =>
         (this.props.playPause || this.props.autoplay) && (
             <Button
-                type="button"
                 className={classNames('carousel-control-play-pause', {
                     paused: !this.store.playing
                 })}

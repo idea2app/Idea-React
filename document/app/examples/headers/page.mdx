@@ -17,7 +17,7 @@ export const headerNavItems = ['Home', 'Features', 'Pricing', 'FAQs', 'About'];
             fillRule="evenodd"
             clipRule="evenodd"
             d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
-        ></path>
+        />
     </symbol>
     <symbol id="home" viewBox="0 0 16 16">
         <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
@@ -65,12 +65,12 @@ export const headerNavItems = ['Home', 'Features', 'Pricing', 'FAQs', 'About'];
 
   </Container>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
 <Container>
     <header className="d-flex justify-content-center py-3">
         <Nav as="ul" variant="pills">
-            {headerNavItems.map((label) => (
+            {headerNavItems.map(label => (
                 <NavItem key={label}>
                     <NavLink
                         href="#"
@@ -85,7 +85,7 @@ export const headerNavItems = ['Home', 'Features', 'Pricing', 'FAQs', 'About'];
     </header>
 </Container>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
   <Container >
     <header className="d-flex flex-wrap align-items-center justify-content-center md:justify-content-between py-3 mb-4 border-bottom">
@@ -104,14 +104,14 @@ export const headerNavItems = ['Home', 'Features', 'Pricing', 'FAQs', 'About'];
       </Nav></Col>
 
       <Col md={3} className="text-end">
-        <Button variant="outline" theme="primary" type="button" className="me-2">Login</Button>
-        <Button variant="solid" theme="primary" type="button">Sign up</Button>
+        <Button variant="outline" theme="primary" className="me-2">Login</Button>
+        <Button variant="solid" theme="primary">Sign up</Button>
       </Col>
     </header>
 
   </Container>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
   <header className="p-3 bg-body fg-body" data-bs-theme="dark">
     <Container >
@@ -133,15 +133,15 @@ export const headerNavItems = ['Home', 'Features', 'Pricing', 'FAQs', 'About'];
         </Col>
 
         <div className="text-end">
-          <Button variant="outline" theme="secondary" type="button" className="me-2">Login</Button>
-          <Button variant="solid" theme="warning" type="button">Sign up</Button>
+          <Button variant="outline" theme="secondary" className="me-2">Login</Button>
+          <Button variant="solid" theme="warning">Sign up</Button>
         </div>
       </div>
     </Container>
 
   </header>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
   <header className="p-3 mb-3 border-bottom">
     <Container >
@@ -178,7 +178,7 @@ export const headerNavItems = ['Home', 'Features', 'Pricing', 'FAQs', 'About'];
 
   </header>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
   <header className="py-3 mb-3 border-bottom">
     <Container fluid className="d-grid gap-3 align-items-center" style={{"gridTemplateColumns": "1fr 2fr"}}>
@@ -248,7 +248,7 @@ export const headerNavItems = ['Home', 'Features', 'Pricing', 'FAQs', 'About'];
     </div>
 </Container>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
 <nav className="py-2 bg-1 border-bottom">
     <Container className="d-flex flex-wrap">
@@ -295,7 +295,7 @@ export const headerNavItems = ['Home', 'Features', 'Pricing', 'FAQs', 'About'];
 
 </header>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
   <header>
     <div className="px-3 py-2 fg-white bg-black border-bottom" data-bs-theme="dark">
@@ -347,15 +347,15 @@ export const headerNavItems = ['Home', 'Features', 'Pricing', 'FAQs', 'About'];
         </Col>
 
         <div className="text-end">
-          <Button variant="solid" theme="secondary" type="button" className="me-2">Login</Button>
-          <Button variant="solid" theme="primary" type="button">Sign-up</Button>
+          <Button variant="solid" theme="secondary" className="me-2">Login</Button>
+          <Button variant="solid" theme="primary">Sign-up</Button>
         </div>
       </Container>
     </div>
 
   </header>
 
-  <div className="b-example-divider"></div>
+  <div className="b-example-divider" />
 </div>
 
 </BaseLayout>

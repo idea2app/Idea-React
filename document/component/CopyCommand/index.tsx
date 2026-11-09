@@ -25,7 +25,6 @@ export class CopyCommand extends Component<CopyCommandProps> {
             <div className="d-flex position-relative align-items-center justify-content-between gap-7 border rounded-8 bg-1 px-5 py-4">
                 <code className="text-sm fg-body text-break">{children}</code>
                 <Button
-                    type="button"
                     variant="text"
                     className="d-inline-flex p-1"
                     aria-label={status === 'copied' ? 'Command copied' : 'Copy install command'}

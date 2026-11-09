@@ -38,11 +38,19 @@ it('supports card header tabs and derives the current page from active links', (
 
 it('uses Bootstrap 6 nav variant, orientation, and fill classes', () => {
     const { rerender } = render(
-        <Nav aria-label="Sections" variant="pills" className="custom" vertical fill justified />
+        <Nav
+            aria-label="Sections"
+            variant="pills"
+            className="custom"
+            vertical
+            fill
+            justified
+            flush
+        />
     );
     assert.equal(
         screen.getByRole('navigation', { name: 'Sections' }).className,
-        'nav nav-pills nav-pills-vertical nav-fill nav-justified custom'
+        'nav nav-pills nav-pills-vertical nav-fill nav-justified nav-flush custom'
     );
     rerender(<Nav aria-label="Sections" variant="tabs" vertical />);
 

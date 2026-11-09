@@ -3,13 +3,7 @@ import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
 import { Button } from '../../../../source/Base/Button';
-import {
-    DialogBody,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    NativeDialog
-} from '../../../../source/Base/NativeDialog';
+import { Drawer } from '../../../../source/Base/Drawer';
 import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
 import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../source/Form';
 import { MenuPanel, MenuItem } from '../../../../source/Base/Menu';
@@ -33,11 +27,9 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
   <Navbar theme="dark" className="bg-black" aria-label="First navbar example">
     <Container fluid>
       <NavbarBrand href="#">Never expand</NavbarBrand>
-      <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+      <NavbarToggler {...{ commandfor: 'navbarsExample01', command: 'show-modal' }} aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation" />
 
-      </NavbarToggler>
-
-      <NativeDialog className="drawer drawer-end" tabIndex="-1" id="navbarsExample01" aria-label="Navigation">
+      <Drawer title="Navigation" placement="end" id="navbarsExample01">
         <NavbarNav className="me-auto mb-2">
           {navbarItems.map(({ label, active, disabled, menu }) => (
             <NavItem key={label}>
@@ -66,7 +58,7 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
         <form role="search">
           <FormControl type="search" placeholder="Search" aria-label="Search" />
         </form>
-      </NativeDialog>
+      </Drawer>
     </Container>
 
   </Navbar>
@@ -74,11 +66,9 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
   <Navbar theme="dark" expand className="bg-black" aria-label="Second navbar example">
     <Container fluid>
       <NavbarBrand href="#">Always expand</NavbarBrand>
-      <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+      <NavbarToggler {...{ commandfor: 'navbarsExample02', command: 'show-modal' }} aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation" />
 
-      </NavbarToggler>
-
-      <NativeDialog className="drawer drawer-end" tabIndex="-1" id="navbarsExample02" aria-label="Navigation">
+      <Drawer title="Navigation" placement="end" id="navbarsExample02">
         <NavbarNav className="me-auto">
           {shortNavbarItems.map(({ label, active }) => (
             <NavItem key={label}>
@@ -91,7 +81,7 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
         <form role="search">
           <FormControl type="search" placeholder="Search" aria-label="Search" />
         </form>
-      </NativeDialog>
+      </Drawer>
     </Container>
 
   </Navbar>
@@ -99,11 +89,9 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
   <Navbar theme="dark" expand="sm" className="bg-black" aria-label="Third navbar example">
     <Container fluid>
       <NavbarBrand href="#">Expand at sm</NavbarBrand>
-      <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+      <NavbarToggler {...{ commandfor: 'navbarsExample03', command: 'show-modal' }} aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation" />
 
-      </NavbarToggler>
-
-      <NativeDialog className="drawer drawer-end" tabIndex="-1" id="navbarsExample03" aria-label="Navigation">
+      <Drawer title="Navigation" placement="end" id="navbarsExample03">
         <NavbarNav className="me-auto mb-2 sm:mb-0">
           {navbarItems.map(({ label, active, disabled, menu }) => (
             <NavItem key={label}>
@@ -133,7 +121,7 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
         <form role="search">
           <FormControl type="search" placeholder="Search" aria-label="Search" />
         </form>
-      </NativeDialog>
+      </Drawer>
     </Container>
 
   </Navbar>
@@ -141,11 +129,9 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
   <Navbar theme="dark" expand="md" className="bg-black" aria-label="Fourth navbar example">
     <Container fluid>
       <NavbarBrand href="#">Expand at md</NavbarBrand>
-      <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+      <NavbarToggler {...{ commandfor: 'navbarsExample04', command: 'show-modal' }} aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation" />
 
-      </NavbarToggler>
-
-      <NativeDialog className="drawer drawer-end" tabIndex="-1" id="navbarsExample04" aria-label="Navigation">
+      <Drawer title="Navigation" placement="end" id="navbarsExample04">
         <NavbarNav className="me-auto mb-2 md:mb-0">
           {navbarItems.map(({ label, active, disabled, menu }) => (
             <NavItem key={label}>
@@ -175,7 +161,7 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
         <form role="search">
           <FormControl type="search" placeholder="Search" aria-label="Search" />
         </form>
-      </NativeDialog>
+      </Drawer>
     </Container>
 
   </Navbar>
@@ -183,11 +169,9 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
   <Navbar theme="dark" expand="lg" className="bg-black" aria-label="Fifth navbar example">
     <Container fluid>
       <NavbarBrand href="#">Expand at lg</NavbarBrand>
-      <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+      <NavbarToggler {...{ commandfor: 'navbarsExample05', command: 'show-modal' }} aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation" />
 
-      </NavbarToggler>
-
-      <NativeDialog className="drawer drawer-end" tabIndex="-1" id="navbarsExample05" aria-label="Navigation">
+      <Drawer title="Navigation" placement="end" id="navbarsExample05">
         <NavbarNav className="me-auto mb-2 lg:mb-0">
           {navbarItems.map(({ label, active, disabled, menu }) => (
             <NavItem key={label}>
@@ -217,7 +201,7 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
         <form role="search">
           <FormControl type="search" placeholder="Search" aria-label="Search" />
         </form>
-      </NativeDialog>
+      </Drawer>
     </Container>
 
   </Navbar>
@@ -225,11 +209,9 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
   <Navbar theme="dark" expand="xl" className="bg-black" aria-label="Sixth navbar example">
     <Container fluid>
       <NavbarBrand href="#">Expand at xl</NavbarBrand>
-      <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarsExample06" aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation">
+      <NavbarToggler {...{ commandfor: 'navbarsExample06', command: 'show-modal' }} aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation" />
 
-      </NavbarToggler>
-
-      <NativeDialog className="drawer drawer-end" tabIndex="-1" id="navbarsExample06" aria-label="Navigation">
+      <Drawer title="Navigation" placement="end" id="navbarsExample06">
         <NavbarNav className="me-auto mb-2 xl:mb-0">
           {navbarItems.map(({ label, active, disabled, menu }) => (
             <NavItem key={label}>
@@ -259,7 +241,7 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
         <form role="search">
           <FormControl type="search" placeholder="Search" aria-label="Search" />
         </form>
-      </NativeDialog>
+      </Drawer>
     </Container>
 
   </Navbar>
@@ -267,11 +249,9 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
   <Navbar theme="dark" expand="2xl" className="bg-black" aria-label="Seventh navbar example">
     <Container fluid>
       <NavbarBrand href="#">Expand at 2xl</NavbarBrand>
-      <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarsExample2xl" aria-controls="navbarsExample2xl" aria-expanded="false" aria-label="Toggle navigation">
+      <NavbarToggler {...{ commandfor: 'navbarsExample2xl', command: 'show-modal' }} aria-controls="navbarsExample2xl" aria-expanded="false" aria-label="Toggle navigation" />
 
-      </NavbarToggler>
-
-      <NativeDialog className="drawer drawer-end" tabIndex="-1" id="navbarsExample2xl" aria-label="Navigation">
+      <Drawer title="Navigation" placement="end" id="navbarsExample2xl">
         <NavbarNav className="me-auto mb-2 xl:mb-0">
           {navbarItems.map(({ label, active, disabled, menu }) => (
             <NavItem key={label}>
@@ -301,7 +281,7 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
         <form role="search">
           <FormControl type="search" placeholder="Search" aria-label="Search" />
         </form>
-      </NativeDialog>
+      </Drawer>
     </Container>
 
   </Navbar>
@@ -309,11 +289,9 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
   <Navbar theme="dark" expand="lg" aria-label="Eighth navbar example">
     <Container >
       <NavbarBrand href="#">Container</NavbarBrand>
-      <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+      <NavbarToggler {...{ commandfor: 'navbarsExample07', command: 'show-modal' }} aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation" />
 
-      </NavbarToggler>
-
-      <NativeDialog className="drawer drawer-end" tabIndex="-1" id="navbarsExample07" aria-label="Navigation">
+      <Drawer title="Navigation" placement="end" id="navbarsExample07">
         <NavbarNav className="me-auto mb-2 lg:mb-0">
           {navbarItems.map(({ label, active, disabled, menu }) => (
             <NavItem key={label}>
@@ -343,7 +321,7 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
         <form role="search">
           <FormControl type="search" placeholder="Search" aria-label="Search" />
         </form>
-      </NativeDialog>
+      </Drawer>
     </Container>
 
   </Navbar>
@@ -351,11 +329,9 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
   <Navbar theme="dark" expand="lg" aria-label="Ninth navbar example">
     <Container fluid="xl">
       <NavbarBrand href="#">Container XL</NavbarBrand>
-      <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarsExample07XL" aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation">
+      <NavbarToggler {...{ commandfor: 'navbarsExample07XL', command: 'show-modal' }} aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation" />
 
-      </NavbarToggler>
-
-      <NativeDialog className="drawer drawer-end" tabIndex="-1" id="navbarsExample07XL" aria-label="Navigation">
+      <Drawer title="Navigation" placement="end" id="navbarsExample07XL">
         <NavbarNav className="me-auto mb-2 lg:mb-0">
           {navbarItems.map(({ label, active, disabled, menu }) => (
             <NavItem key={label}>
@@ -385,7 +361,7 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
         <form role="search">
           <FormControl type="search" placeholder="Search" aria-label="Search" />
         </form>
-      </NativeDialog>
+      </Drawer>
     </Container>
 
   </Navbar>
@@ -396,11 +372,9 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
 
   <Navbar theme="dark" expand="lg" aria-label="Tenth navbar example">
     <Container fluid>
-      <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+      <NavbarToggler {...{ commandfor: 'navbarsExample08', command: 'show-modal' }} aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" />
 
-      </NavbarToggler>
-
-      <NativeDialog className="drawer drawer-end md:justify-content-center" tabIndex="-1" id="navbarsExample08" aria-label="Navigation">
+      <Drawer title="Navigation" placement="end" id="navbarsExample08" className="md:justify-content-center">
         <NavbarNav >
           {centeredNavbarItems.map(({ label, active, disabled, menu }) => (
             <NavItem key={label}>
@@ -427,7 +401,7 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
           ))}
 
 </NavbarNav>
-      </NativeDialog>
+      </Drawer>
     </Container>
 
   </Navbar>
@@ -436,11 +410,9 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
     <Navbar expand="lg" className="bg-1 rounded" aria-label="Eleventh navbar example">
       <Container fluid>
         <NavbarBrand href="#">Navbar</NavbarBrand>
-        <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+        <NavbarToggler {...{ commandfor: 'navbarsExample09', command: 'show-modal' }} aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation" />
 
-        </NavbarToggler>
-
-        <NativeDialog className="drawer drawer-end" tabIndex="-1" id="navbarsExample09" aria-label="Navigation">
+        <Drawer title="Navigation" placement="end" id="navbarsExample09">
           <NavbarNav className="me-auto mb-2 lg:mb-0">
             {navbarItems.map(({ label, active, disabled, menu }) => (
               <NavItem key={label}>
@@ -470,17 +442,15 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
           <form role="search">
             <FormControl type="search" placeholder="Search" aria-label="Search" />
           </form>
-        </NativeDialog>
+        </Drawer>
       </Container>
     </Navbar>
 
     <Navbar expand="lg" className="bg-1 rounded" aria-label="Twelfth navbar example">
       <Container fluid>
-        <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
+        <NavbarToggler {...{ commandfor: 'navbarsExample10', command: 'show-modal' }} aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation" />
 
-        </NavbarToggler>
-
-        <NativeDialog className="drawer drawer-end md:justify-content-center" tabIndex="-1" id="navbarsExample10" aria-label="Navigation">
+        <Drawer title="Navigation" placement="end" id="navbarsExample10" className="md:justify-content-center">
           <NavbarNav >
             {centeredNavbarItems.map(({ label, active, disabled, menu }) => (
               <NavItem key={label}>
@@ -507,17 +477,15 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
             ))}
 
 </NavbarNav>
-        </NativeDialog>
+        </Drawer>
       </Container>
     </Navbar>
 
     <Navbar expand="lg" className="bg-1 rounded" aria-label="Thirteenth navbar example">
       <Container fluid>
-        <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+        <NavbarToggler {...{ commandfor: 'navbarsExample11', command: 'show-modal' }} aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation" />
 
-        </NavbarToggler>
-
-        <NativeDialog className="drawer drawer-end lg:d-flex" tabIndex="-1" id="navbarsExample11" aria-label="Navigation">
+        <Drawer title="Navigation" placement="end" id="navbarsExample11" className="lg:d-flex">
           <Col as={NavbarBrand} lg={3} className="me-0" href="#">Centered nav</Col>
           <Col as={NavbarNav} lg={6} className="lg:justify-content-center">
             {navbarItems.map(({ label, active, disabled, menu }) => (
@@ -547,7 +515,7 @@ export const dropdownItems = ['Action', 'Another action', 'Something else here']
           <Col lg={3} className="lg:d-flex lg:justify-content-end">
             <Button variant="solid" theme="primary">Button</Button>
           </Col>
-        </NativeDialog>
+        </Drawer>
       </Container>
     </Navbar>
 

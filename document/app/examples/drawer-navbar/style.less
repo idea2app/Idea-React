@@ -7,46 +7,24 @@ body {
     padding-top: 56px;
 }
 
-@media (max-width: 991.98px) {
-    .drawer-collapse {
-        position: fixed;
-        top: 56px; /* Height of navbar */
-        bottom: 0;
-        left: 100%;
-        visibility: hidden;
-        transition:
-            transform 0.3s ease-in-out,
-            visibility 0.3s ease-in-out;
-        background-color: #343a40;
-        padding-right: 1rem;
-        padding-left: 1rem;
-        width: 100%;
-        overflow-y: auto;
-    }
-    .drawer-collapse.open {
-        transform: translateX(-100%);
-        visibility: visible;
-    }
-}
-
 .nav-scroller-nav {
     color: rgba(255, 255, 255, 0.75);
-}
 
-.nav-scroller-nav .nav-link {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    color: #6c757d;
-    font-size: 0.875rem;
-}
+    .nav-link {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        color: #6c757d;
+        font-size: 0.875rem;
 
-.nav-scroller-nav .nav-link:hover {
-    color: #007bff;
-}
+        &:hover {
+            color: #007bff;
+        }
+    }
 
-.nav-scroller-nav .active {
-    color: #343a40;
-    font-weight: 500;
+    .active {
+        color: #343a40;
+        font-weight: 500;
+    }
 }
 
 .bg-purple {

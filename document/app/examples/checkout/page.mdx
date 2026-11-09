@@ -9,6 +9,7 @@ import {
     FormTextArea,
     InputGroup,
     FormLabel,
+    FormField,
     InputGroupText
 } from '../../../../source/Form';
 import { Button } from '../../../../source/Base/Button';
@@ -152,33 +153,33 @@ export const cartProducts = [
 
           <hr className="my-4" />
 
-          <div className="form-field">
-            <FormCheck type="checkbox" id="same-address" className="check" />
+          <FormField>
+            <FormCheck type="checkbox" id="same-address" />
             <label htmlFor="same-address">Shipping address is the same as my billing address</label>
-          </div>
+          </FormField>
 
-          <div className="form-field">
-            <FormCheck type="checkbox" id="save-info" className="check" />
+          <FormField>
+            <FormCheck type="checkbox" id="save-info" />
             <label htmlFor="save-info">Save this information for next time</label>
-          </div>
+          </FormField>
 
           <hr className="my-4" />
 
           <h4 className="mb-3">Payment</h4>
 
           <div className="my-3">
-            <div className="form-field">
-              <FormCheck id="credit" name="paymentMethod" type="radio" className="radio" checked required />
+            <FormField>
+              <FormCheck id="credit" name="paymentMethod" type="radio" checked required />
               <label htmlFor="credit">Credit card</label>
-            </div>
-            <div className="form-field">
-              <FormCheck id="debit" name="paymentMethod" type="radio" className="radio" required />
+            </FormField>
+            <FormField>
+              <FormCheck id="debit" name="paymentMethod" type="radio" required />
               <label htmlFor="debit">Debit card</label>
-            </div>
-            <div className="form-field">
-              <FormCheck id="paypal" name="paymentMethod" type="radio" className="radio" required />
+            </FormField>
+            <FormField>
+              <FormCheck id="paypal" name="paymentMethod" type="radio" required />
               <label htmlFor="paypal">PayPal</label>
-            </div>
+            </FormField>
           </div>
 
           <Row className="gy-3">

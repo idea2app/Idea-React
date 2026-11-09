@@ -222,9 +222,11 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
   组件源码不导入或打包这些样式，文档站在公共布局中统一加载。
 - 页面专属 CSS 通过 `*.less` 全局导入，或通过 `*.module.less` 导入并使用模块类名；不得使用 `?inline` 等方式导入 CSS 源文再注入 `<style>`。
 - MDX 中 JSX 属性之间不得留多余空格，并按项目格式化工具统一格式化。
+- JSX/MDX 元素没有子节点时使用自闭合标签。
 - 优先复用现有 `MarkdownView`、`CodeCard` 等组件，不为已覆盖的功能重复封装文档站组件。
 - 能用 [Bootstrap 6 CSS 工具类][4] 的样式不写自定义 CSS；
   剩余样式使用 CSS modules；必须保留原始类名的页面专属样式可用 `*.less` 全局导入，且仅由对应页面引用；需要嵌套的模块样式使用 LESS modules。
+- LESS 样式优先将伪类、伪元素、后代选择器及媒体查询嵌套在最近的相关选择器中，避免重复书写父选择器。
 - 可由 CSS 或 Bootstrap 工具类静态表达的布局、状态与堆叠关系优先用 CSS，避免为此引入客户端状态或 Context、Model。
 - 样式模块的类型声明合入已有的 `source/types.d.ts`，不要另建重复声明文件。
 - 文档示例使用文档专用 Demo 组件时，为 `CodeExample` 提供源码路径；仓库内路径相对于仓库根目录且不以 `/` 开头，外部源码可传绝对 URL。

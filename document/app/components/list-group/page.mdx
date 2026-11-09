@@ -1,6 +1,6 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { Badge } from '../../../../source/Base/Badge';
-import { FormField, Checkbox, Radio } from '../../../../source/Form';
+import { FormField, Checkbox, Radio, FormCheck } from '../../../../source/Form';
 import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
 import { DocumentLayout } from '../../../component/Document/Layout';
 import { CodeExample } from '../../../component/Document/Example';
@@ -522,6 +522,27 @@ You can use `.stretched-link` on `<label>`s to make the whole list group item cl
             </FormField>
         </ListGroupItem>
     </ListGroup>
+
+</CodeExample>
+
+Use the `checkable` and `radio` props for the corresponding list group variants. Add `listGroup` to `FormCheck` to apply the input styling used by checkable groups.
+
+<CodeExample>
+    <Stack gap={3}>
+        <ListGroup as="div" checkable>
+            <FormCheck listGroup type="radio" name="checkableList" id="checkableListOne" />
+            <ListGroupItem as="label" htmlFor="checkableListOne">
+                {'First option'}
+            </ListGroupItem>
+        </ListGroup>
+
+        <ListGroup as="div" radio>
+            <FormCheck type="radio" name="radioList" id="radioListOne" />
+            <ListGroupItem as="label" htmlFor="radioListOne">
+                {'First option'}
+            </ListGroupItem>
+        </ListGroup>
+    </Stack>
 
 </CodeExample>
 

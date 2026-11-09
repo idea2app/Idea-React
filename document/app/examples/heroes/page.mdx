@@ -7,7 +7,8 @@ import {
     FormControl,
     FormSelect,
     FormTextArea,
-    FormFloatingLabel
+    FormFloatingLabel,
+    FormField
 } from '../../../../source/Form';
 
 <BaseLayout title="Heroes">
@@ -26,10 +27,10 @@ import {
             responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.
         </p>
         <div className="d-grid gap-2 sm:d-flex sm:justify-content-center">
-            <Button variant="solid" theme="primary" size="lg" type="button" className="px-4">
+            <Button variant="solid" theme="primary" size="lg" className="px-4">
                 Primary button
             </Button>
-            <Button variant="outline" theme="secondary" size="lg" type="button" className="px-4"
+            <Button variant="outline" theme="secondary" size="lg" className="px-4"
             >
                 Secondary
             </Button>
@@ -38,7 +39,7 @@ import {
 
 </div>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
 <div className="px-4 pt-5 my-5 text-center border-bottom">
     <h1 className="fs-5xl fw-bold fg-emphasis-inverse">Centered screenshot</h1>
@@ -49,11 +50,11 @@ import {
             responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.
         </p>
         <div className="d-grid gap-2 sm:d-flex sm:justify-content-center mb-5">
-            <Button variant="solid" theme="primary" size="lg" type="button" className="px-4 sm:me-3"
+            <Button variant="solid" theme="primary" size="lg" className="px-4 sm:me-3"
             >
                 Primary button
             </Button>
-            <Button variant="outline" theme="secondary" size="lg" type="button" className="px-4"
+            <Button variant="outline" theme="secondary" size="lg" className="px-4"
             >
                 Secondary
             </Button>
@@ -68,7 +69,7 @@ import {
 
 </div>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
 <Container as={Col} {...{ '2xl': 8 }} className="px-4 py-5">
     <Row className="lg:flex-row-reverse align-items-center g-5 py-5">
@@ -87,11 +88,11 @@ import {
                 JavaScript plugins.
             </p>
             <div className="d-grid gap-2 md:d-flex md:justify-content-start">
-                <Button variant="solid" theme="primary" size="lg" type="button" className="px-4 md:me-2"
+                <Button variant="solid" theme="primary" size="lg" className="px-4 md:me-2"
                 >
                     Primary
                 </Button>
-                <Button variant="outline" theme="secondary" size="lg" type="button" className="px-4"
+                <Button variant="outline" theme="secondary" size="lg" className="px-4"
                 >
                     Default
                 </Button>
@@ -101,7 +102,7 @@ import {
 
 </Container>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
 <Container as={Col} xl={10} {...{ '2xl': 8 }} className="px-4 py-5">
     <Row className="align-items-center lg:g-5 py-5">
@@ -127,11 +128,10 @@ import {
                     <FormControl type="password" id="floatingPassword" placeholder="Password"
                     />
                 </FormFloatingLabel>
-                <div className="form-field mb-3">
-                    <FormCheck type="checkbox" value="remember-me" id="heroRememberMe" className="check"
-                    />
+                <FormField className="mb-3">
+                    <FormCheck type="checkbox" value="remember-me" id="heroRememberMe" />
                     <label htmlFor="heroRememberMe">Remember me</label>
-                </div>
+                </FormField>
                 <Button variant="solid" theme="primary" size="lg" className="w-100" type="submit"
                 >
                     Sign up
@@ -144,7 +144,7 @@ import {
 
 </Container>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
 <Container className="my-5">
     <Row className="p-4 pb-0 lg:pe-0 lg:pt-5 align-items-center rounded-3 border shadow-lg">
@@ -159,11 +159,11 @@ import {
                 JavaScript plugins.
             </p>
             <div className="d-grid gap-2 md:d-flex md:justify-content-start mb-4 lg:mb-3">
-                <Button variant="solid" theme="primary" size="lg" type="button" className="px-4 md:me-2"
+                <Button variant="solid" theme="primary" size="lg" className="px-4 md:me-2"
                 >
                     Primary
                 </Button>
-                <Button variant="outline" theme="secondary" size="lg" type="button" className="px-4"
+                <Button variant="outline" theme="secondary" size="lg" className="px-4"
                 >
                     Default
                 </Button>
@@ -177,7 +177,7 @@ import {
 
 </Container>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
 <div className="bg-black fg-secondary px-4 py-5 text-center" data-bs-theme="dark">
     <div className="py-5">
@@ -190,11 +190,11 @@ import {
                 JavaScript plugins.
             </p>
             <div className="d-grid gap-2 sm:d-flex sm:justify-content-center">
-                <Button variant="outline" theme="info" size="lg" type="button" className="px-4 sm:me-3"
+                <Button variant="outline" theme="info" size="lg" className="px-4 sm:me-3"
                 >
                     Custom button
                 </Button>
-                <Button variant="outline" theme="secondary" size="lg" type="button" className="px-4"
+                <Button variant="outline" theme="secondary" size="lg" className="px-4"
                 >
                     Secondary
                 </Button>
@@ -204,7 +204,7 @@ import {
 
 </div>
 
-  <div className="b-example-divider mb-0"></div>
+  <div className="b-example-divider mb-0" />
 </div>
 
 </BaseLayout>

@@ -1,19 +1,12 @@
 import { Col, Container } from '../../../../source/Layout/Grid';
 import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
-import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
+import { NavbarNav } from '../../../../source/Base/Navbar';
 import { Button } from '../../../../source/Base/Button';
-import {
-    DialogBody,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    NativeDialog
-} from '../../../../source/Base/NativeDialog';
 import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
-import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../source/Form';
-import { CloseButton } from '../../../../source/Base/CloseButton';
+import { FormControl } from '../../../../source/Form';
 import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
+import { NavbarDemo } from '../../../component/Document/NavbarDemo';
 
 export const drawerNavItems = [
     { label: 'Home', active: true },
@@ -25,18 +18,7 @@ export const drawerMenuItems = ['Action', 'Another action', 'Something else here
 <BaseLayout title="Navbar Template">
 
 <div>
-  <Navbar theme="dark" aria-label="Dark drawer navbar">
-    <Container fluid>
-      <NavbarBrand href="#">Dark drawer navbar</NavbarBrand>
-      <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#drawerNavbarDark" aria-controls="drawerNavbarDark" aria-label="Toggle navigation">
-
-      </NavbarToggler>
-      <NativeDialog className="drawer drawer-end bg-body fg-body" tabIndex="-1" id="drawerNavbarDark" aria-labelledby="drawerNavbarDarkLabel">
-        <div className="drawer-header">
-          <h5 className="drawer-title" id="drawerNavbarDarkLabel">Drawer</h5>
-          <CloseButton type="button" dismiss="drawer" aria-label="Close"></CloseButton>
-        </div>
-        <div className="drawer-body">
+  <NavbarDemo brand="Dark drawer navbar" title="Drawer" expand={false} theme="dark" aria-label="Dark drawer navbar">
           <NavbarNav className="pe-3">
             {drawerNavItems.map(({ label, active, menu }) => (
               <NavItem key={label}>
@@ -68,27 +50,9 @@ export const drawerMenuItems = ['Action', 'Another action', 'Something else here
             <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
             <Button variant="outline" theme="success" type="submit">Search</Button>
           </form>
-        </div>
-      </NativeDialog>
-    </Container>
+  </NavbarDemo>
 
-  </Navbar>
-
-<Navbar theme="light" aria-label="Light drawer navbar">
-    <Container fluid>
-        <NavbarBrand href="#">Light drawer navbar</NavbarBrand>
-        <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#drawerNavbarLight" aria-controls="drawerNavbarLight" aria-label="Toggle navigation"
-        ></NavbarToggler>
-        <NativeDialog className="drawer drawer-end" tabIndex="-1" id="drawerNavbarLight" aria-labelledby="drawerNavbarLightLabel"
-        >
-            <div className="drawer-header">
-                <h5 className="drawer-title" id="drawerNavbarLightLabel">
-                    Drawer
-                </h5>
-                <CloseButton type="button" dismiss="drawer" aria-label="Close"
-                ></CloseButton>
-            </div>
-            <div className="drawer-body">
+<NavbarDemo brand="Light drawer navbar" title="Drawer" expand={false} theme="light" aria-label="Light drawer navbar">
                 <NavbarNav className="pe-3">
                     {drawerNavItems.map(({ label, active, menu }) => (
                         <NavItem key={label}>
@@ -123,27 +87,9 @@ export const drawerMenuItems = ['Action', 'Another action', 'Something else here
                         Search
                     </Button>
                 </form>
-            </div>
-        </NativeDialog>
-    </Container>
+ </NavbarDemo>
 
-</Navbar>
-
-<Navbar theme="dark" expand="lg" aria-label="Drawer navbar large">
-    <Container fluid>
-        <NavbarBrand href="#">Responsive drawer navbar</NavbarBrand>
-        <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#drawerNavbar2" aria-controls="drawerNavbar2" aria-label="Toggle navigation"
-        ></NavbarToggler>
-        <NativeDialog className="drawer drawer-end" tabIndex="-1" id="drawerNavbar2" aria-labelledby="drawerNavbar2Label"
-        >
-            <div className="drawer-header">
-                <h5 className="drawer-title" id="drawerNavbar2Label">
-                    Drawer
-                </h5>
-                <CloseButton type="button" dismiss="drawer" aria-label="Close"
-                ></CloseButton>
-            </div>
-            <div className="drawer-body">
+<NavbarDemo brand="Responsive drawer navbar" title="Drawer" expand="lg" theme="dark" aria-label="Drawer navbar large">
                 <NavbarNav className="lg:justify-content-end lg:flex-grow-1 pe-3">
                     {drawerNavItems.map(({ label, active, menu }) => (
                         <NavItem key={label}>
@@ -178,11 +124,7 @@ export const drawerMenuItems = ['Action', 'Another action', 'Something else here
                         Search
                     </Button>
                 </form>
-            </div>
-        </NativeDialog>
-    </Container>
-
-</Navbar>
+ </NavbarDemo>
 
   <Container className="my-5">
     <div className="p-5 rounded">

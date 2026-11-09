@@ -45,62 +45,62 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
 {/* Modal sheet style */}
 
 <div className="d-flex flex-column p-4 gap-4 md:py-5 align-items-center justify-content-center">
-    <NativeDialog className="dialog dialog-example rounded-4 shadow w-340px" open>
-        <div className="dialog-header border-0">
-            <h1 className="dialog-title">Modal title</h1>
-            <CloseButton type="button" aria-label="Close"></CloseButton>
-        </div>
-        <div className="dialog-body pt-0">
+    <NativeDialog className="dialog-example rounded-4 shadow w-340px" open>
+        <DialogHeader className="border-0">
+            <DialogTitle>Modal title</DialogTitle>
+            <CloseButton aria-label="Close" />
+        </DialogHeader>
+        <DialogBody className="pt-0">
             <p>
                 This is a modal sheet, a variation of the modal that docs itself to the bottom of
                 the viewport like the newer share sheets in iOS.
             </p>
-        </div>
-        <div className="dialog-footer flex-column border-0 pt-0">
-            <Button variant="solid" theme="primary" type="button" className="w-100">
+        </DialogBody>
+        <DialogFooter className="flex-column border-0 pt-0">
+            <Button variant="solid" theme="primary" className="w-100">
                 Save changes
             </Button>
-            <Button variant="solid" theme="secondary" type="button" className="w-100">
+            <Button variant="solid" theme="secondary" className="w-100">
                 Close
             </Button>
-        </div>
+        </DialogFooter>
     </NativeDialog>
 </div>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
 {/* Confirmation dialog */}
 
 <div className="d-flex flex-column p-4 gap-4 md:py-5 align-items-center justify-content-center">
-    <NativeDialog className="dialog dialog-example rounded-4 shadow w-340px" open>
-        <div className="dialog-body text-center py-4">
+    <NativeDialog className="dialog-example rounded-4 shadow w-340px" open>
+        <DialogBody className="text-center py-4">
             <h5 className="fw-bold mb-2">Enable this setting?</h5>
             <p className="fg-2 mb-0">You can always change your mind in your account settings.</p>
-        </div>
-        <div className="dialog-footer p-0 border-top">
-            <Button variant="link" type="button" className="fg-primary flex-fill py-3 m-0 rounded-0 border-end text-decoration-none fw-semibold"
+        </DialogBody>
+        <DialogFooter className="p-0 border-top">
+            <Button variant="link" className="fg-primary flex-fill py-3 m-0 rounded-0 border-end text-decoration-none fw-semibold"
             >
                 Yes, enable
             </Button>
-            <Button variant="link" type="button" className="fg-primary flex-fill py-3 m-0 rounded-0 text-decoration-none"
+            <Button variant="link" className="fg-primary flex-fill py-3 m-0 rounded-0 text-decoration-none"
             >
                 No thanks
             </Button>
-        </div>
+        </DialogFooter>
     </NativeDialog>
 
 </div>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
 {/* What's new dialog */}
 
 <div className="d-flex flex-column p-4 gap-4 md:py-5 align-items-center justify-content-center">
-    <NativeDialog className="dialog dialog-example rounded-4 shadow w-340px" open>
-        <div className="dialog-header border-0 pt-4">
-            <h1 className="dialog-title fs-2xl fw-bold">What's new</h1>
-        </div>
-        <div className="dialog-body">
+    <NativeDialog className="dialog-example rounded-4 shadow w-340px" open>
+        <DialogHeader className="border-0 pt-4">
+            <DialogTitle className="fs-2xl fw-bold">What's new</DialogTitle>
+        </DialogHeader>
+        <DialogBody>
             <ul className="list-unstyled mb-0">
                 <li className="d-flex gap-3 mb-3">
                     <Icon name="grid-fill" size={3} className="fg-2 flex-shrink-0" />
@@ -124,26 +124,26 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
                     </div>
                 </li>
             </ul>
-        </div>
-        <div className="dialog-footer border-0 pt-3 pb-4">
-            <Button variant="solid" theme="primary" type="button" className="w-100 py-2">
+        </DialogBody>
+        <DialogFooter className="border-0 pt-3 pb-4">
+            <Button variant="solid" theme="primary" className="w-100 py-2">
                 Great, thanks!
             </Button>
-        </div>
+        </DialogFooter>
     </NativeDialog>
 </div>
 
-<div className="b-example-divider"></div>
+<div className="b-example-divider" />
 
 {/* Sign up dialog */}
 
 <div className="d-flex flex-column p-4 gap-4 md:py-5 align-items-center justify-content-center">
-    <NativeDialog className="dialog dialog-example rounded-4 shadow w-340px" open>
-        <div className="dialog-header border-0">
-            <h1 className="dialog-title fs-xl fw-bold">Sign up for free</h1>
-            <CloseButton type="button" aria-label="Close"></CloseButton>
-        </div>
-        <div className="dialog-body pt-0">
+    <NativeDialog className="dialog-example rounded-4 shadow w-340px" open>
+        <DialogHeader className="border-0">
+            <DialogTitle className="fs-xl fw-bold">Sign up for free</DialogTitle>
+            <CloseButton aria-label="Close" />
+        </DialogHeader>
+        <DialogBody className="pt-0">
             <form>
                 <FormFloatingLabel className="mb-3">
                     <label htmlFor="floatingEmail">Email address</label>
@@ -162,23 +162,23 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
                 <small className="fg-2">By clicking Sign up, you agree to the terms of use.</small>
                 <hr className="my-4" />
                 <h6 className="fw-bold mb-3">Or use a third-party</h6>
-                <Button variant="outline" theme="inverse" type="button" className="w-100 py-2 mb-2"
+                <Button variant="outline" theme="inverse" className="w-100 py-2 mb-2"
                 >
                     <Icon name="google" size={1} />
                     Sign up with Google
                 </Button>
-                <Button variant="outline" theme="primary" type="button" className="w-100 py-2 mb-2"
+                <Button variant="outline" theme="primary" className="w-100 py-2 mb-2"
                 >
                     <Icon name="facebook" size={1} />
                     Sign up with Facebook
                 </Button>
-                <Button variant="outline" theme="success" type="button" className="w-100 py-2"
+                <Button variant="outline" theme="success" className="w-100 py-2"
                 >
                     <Icon name="github" size={1} />
                     Sign up with GitHub
                 </Button>
             </form>
-        </div>
+        </DialogBody>
     </NativeDialog>
 
 </div>

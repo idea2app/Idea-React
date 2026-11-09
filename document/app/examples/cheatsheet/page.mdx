@@ -3,8 +3,16 @@ import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
 import { MarkdownView } from '../../../../source/Extension/MarkdownView';
-import { Button } from '../../../../source/Base/Button';
 import { CloseButton } from '../../../../source/Base/CloseButton';
+import { Collapse, CollapseToggle } from '../../../../source/Base/Collapse';
+import {
+    NativeDialog,
+    DialogBody,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle
+} from '../../../../source/Base/NativeDialog';
+import { Button } from '../../../../source/Base/Button';
 import { Table } from '../../../../source/Content/Tables';
 
 export const themeColors = [
@@ -46,28 +54,51 @@ export const normalizeMarkup = (content, ...values) =>
   <nav className="small" id="toc">
     <ul className="list-unstyled">
       <li className="my-2">
-        <Button className="d-inline-flex align-items-center border-0" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse" aria-controls="contents-collapse">Contents</Button>
-        <ul className="list-unstyled ps-3 collapse" id="contents-collapse">
+        <CollapseToggle
+          variant={false}
+          className="d-inline-flex align-items-center border-0"
+          target="#contents-collapse"
+        >
+          Contents
+        </CollapseToggle>
+        <Collapse id="contents-collapse">
+          <ul className="list-unstyled ps-3">
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#typography">Typography</a></li>
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#images">Images</a></li>
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#tables">Tables</a></li>
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#figures">Figures</a></li>
-        </ul>
+          </ul>
+        </Collapse>
       </li>
       <li className="my-2">
-        <Button className="d-inline-flex align-items-center border-0" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse" aria-controls="forms-collapse">Forms</Button>
-        <ul className="list-unstyled ps-3 collapse" id="forms-collapse">
+        <CollapseToggle
+          variant={false}
+          className="d-inline-flex align-items-center border-0"
+          target="#forms-collapse"
+        >
+          Forms
+        </CollapseToggle>
+        <Collapse id="forms-collapse">
+          <ul className="list-unstyled ps-3">
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#overview">Overview</a></li>
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#disabled-forms">Disabled forms</a></li>
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#sizing">Sizing</a></li>
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#input-group">Input group</a></li>
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#floating-labels">Floating labels</a></li>
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#validation">Validation</a></li>
-        </ul>
+          </ul>
+        </Collapse>
       </li>
       <li className="my-2">
-        <Button className="d-inline-flex align-items-center border-0" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#components-collapse" aria-controls="components-collapse">Components</Button>
-        <ul className="list-unstyled ps-3 collapse" id="components-collapse">
+        <CollapseToggle
+          variant={false}
+          className="d-inline-flex align-items-center border-0"
+          target="#components-collapse"
+        >
+          Components
+        </CollapseToggle>
+        <Collapse id="components-collapse">
+          <ul className="list-unstyled ps-3">
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#accordion">Accordion</a></li>
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#alerts">Alerts</a></li>
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#badge">Badge</a></li>
@@ -88,7 +119,8 @@ export const normalizeMarkup = (content, ...values) =>
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#spinners">Spinners</a></li>
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#toasts">Toasts</a></li>
           <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#tooltips">Tooltips</a></li>
-        </ul>
+          </ul>
+        </Collapse>
       </li>
     </ul>
   </nav>
@@ -892,14 +924,20 @@ export const normalizeMarkup = (content, ...values) =>
       </div>
 
       <div>
-        <MarkdownView children={normalizeMarkup`
-        <button type="button" class="btn-solid theme-primary" data-bs-toggle="dialog" data-bs-target="#exampleDialog">
+        <Button
+          variant="solid"
+          theme="primary"
+          {...{ commandfor: 'exampleDialog', command: 'show-modal' }}
+        >
           Launch demo dialog
-        </button>
-        <button type="button" class="btn-solid theme-primary" data-bs-toggle="dialog" data-bs-target="#staticBackdropDialog">
+        </Button>
+        <Button
+          variant="solid"
+          theme="primary"
+          {...{ commandfor: 'staticBackdropDialog', command: 'show-modal' }}
+        >
           Launch static backdrop dialog
-        </button>
-        `} />
+        </Button>
       </div>
     </article>
     <article className="my-3" id="menus">
@@ -1489,45 +1527,53 @@ export const normalizeMarkup = (content, ...values) =>
   </section>
 </Container>
 
-<dialog className="dialog" id="exampleDialog">
-    <div className="dialog-header">
-        <h1 className="dialog-title fs-lg">Dialog title</h1>
-        <CloseButton type="button" dismiss="dialog" aria-label="Close"
-        ></CloseButton>
-    </div>
-    <div className="dialog-body">
+<NativeDialog id="exampleDialog">
+    <DialogHeader>
+        <DialogTitle className="fs-lg">Dialog title</DialogTitle>
+        <CloseButton {...{ commandfor: 'exampleDialog', command: 'close' }} aria-label="Close" />
+    </DialogHeader>
+    <DialogBody>
         <p>This is a native dialog element using Bootstrap's Dialog component.</p>
-    </div>
-    <div className="dialog-footer">
-        <button type="button" className="btn-solid theme-secondary" data-bs-dismiss="dialog">
+    </DialogBody>
+    <DialogFooter>
+        <Button
+            variant="solid"
+            theme="secondary"
+            {...{ commandfor: 'exampleDialog', command: 'close' }}
+        >
             Close
-        </button>
-        <button type="button" className="btn-solid theme-primary">
+        </Button>
+        <Button variant="solid" theme="primary">
             Save changes
-        </button>
-    </div>
+        </Button>
+    </DialogFooter>
 
-</dialog>
+</NativeDialog>
 
-<dialog className="dialog" id="staticBackdropDialog" data-bs-backdrop="static" data-bs-keyboard="false"
->
-    <div className="dialog-header">
-        <h1 className="dialog-title fs-lg">Static backdrop</h1>
-        <CloseButton type="button" dismiss="dialog" aria-label="Close"
-        ></CloseButton>
-    </div>
-    <div className="dialog-body">
+<NativeDialog id="staticBackdropDialog" backdrop="static" keyboard={false}>
+    <DialogHeader>
+        <DialogTitle className="fs-lg">Static backdrop</DialogTitle>
+        <CloseButton
+            {...{ commandfor: 'staticBackdropDialog', command: 'close' }}
+            aria-label="Close"
+        />
+    </DialogHeader>
+    <DialogBody>
         <p>I will not close if you click outside of me. Use the close button or press Escape.</p>
-    </div>
-    <div className="dialog-footer">
-        <button type="button" className="btn-solid theme-secondary" data-bs-dismiss="dialog">
+    </DialogBody>
+    <DialogFooter>
+        <Button
+            variant="solid"
+            theme="secondary"
+            {...{ commandfor: 'staticBackdropDialog', command: 'close' }}
+        >
             Close
-        </button>
-        <button type="button" className="btn-solid theme-primary">
+        </Button>
+        <Button variant="solid" theme="primary">
             Understood
-        </button>
-    </div>
+        </Button>
+    </DialogFooter>
 
-</dialog>
+</NativeDialog>
 
 </BaseLayout>

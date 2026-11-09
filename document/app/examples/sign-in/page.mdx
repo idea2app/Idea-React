@@ -5,7 +5,8 @@ import {
     FormControl,
     FormSelect,
     FormTextArea,
-    FormFloatingLabel
+    FormFloatingLabel,
+    FormField
 } from '../../../../source/Form';
 import { Button } from '../../../../source/Base/Button';
 
@@ -25,12 +26,12 @@ import { Button } from '../../../../source/Base/Button';
       <FormControl type="password" id="floatingPassword" placeholder="Password" />
     </FormFloatingLabel>
 
-    <div className="form-field text-start my-3">
-      <FormCheck type="checkbox" value="remember-me" id="checkDefault" className="check" />
+    <FormField className="text-start my-3">
+      <FormCheck type="checkbox" value="remember-me" id="checkDefault" />
       <label htmlFor="checkDefault">
         Remember me
       </label>
-    </div>
+    </FormField>
     <Button variant="solid" theme="primary" className="w-100 py-2" type="submit">Sign in</Button>
     <p className="mt-5 mb-3 fg-2">&copy; 2017–{new Date().getFullYear()}</p>
 

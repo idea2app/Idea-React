@@ -26,3 +26,21 @@ it('renders native form checks', () => {
 
     assert.equal(screen.getByLabelText('Accept terms').className, 'check');
 });
+
+it('adds list group item styling to form checks', () => {
+    render(
+        <>
+            <FormCheck aria-label="Select item" listGroup />
+            <FormCheck aria-label="Choose item" type="radio" listGroup />
+        </>
+    );
+
+    assert.equal(
+        screen.getByRole('checkbox', { name: 'Select item' }).className,
+        'check list-group-item-check'
+    );
+    assert.equal(
+        screen.getByRole('radio', { name: 'Choose item' }).className,
+        'radio list-group-item-check'
+    );
+});

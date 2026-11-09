@@ -11,6 +11,8 @@ interface ListGroupStyleProps {
     flush?: boolean;
     numbered?: boolean;
     horizontal?: ListGroupHorizontal;
+    checkable?: boolean;
+    radio?: boolean;
 }
 
 export type ListGroupProps = ListGroupStyleProps &
@@ -21,10 +23,15 @@ export type ListGroupProps = ListGroupStyleProps &
     );
 
 export const ListGroup = polymorphic<ListGroupStyleProps & ComponentPropsWithRef<'ul'>>(
-    ({ as: Root = 'ul', flush, numbered, horizontal, className, ...props }) => {
+    ({ as: Root = 'ul', flush, numbered, horizontal, checkable, radio, className, ...props }) => {
         const classes = classNames(
             'list-group',
-            { 'list-group-flush': flush, 'list-group-numbered': numbered },
+            {
+                'list-group-flush': flush,
+                'list-group-numbered': numbered,
+                'list-group-checkable': checkable,
+                'list-group-radio': radio
+            },
             horizontal &&
                 (horizontal === true
                     ? 'list-group-horizontal'

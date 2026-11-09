@@ -32,15 +32,25 @@ Radio.displayName = 'Radio';
 
 export type FormCheckProps = CheckboxProps &
     Pick<ComponentPropsWithRef<'input'>, 'ref'> & {
+        listGroup?: boolean;
         type?: 'checkbox' | 'radio';
     };
 
 export const FormCheck = polymorphic<FormCheckProps>(
-    ({ as: RootAs, type = 'checkbox', indeterminate, ...props }) =>
+    ({ as: RootAs, type = 'checkbox', indeterminate, listGroup, className, ...props }) =>
         type === 'checkbox' ? (
-            <Checkbox as={RootAs} {...props} indeterminate={indeterminate} />
+            <Checkbox
+                as={RootAs}
+                {...props}
+                indeterminate={indeterminate}
+                className={classNames(listGroup && 'list-group-item-check', className)}
+            />
         ) : (
-            <Radio as={RootAs} {...props} />
+            <Radio
+                as={RootAs}
+                {...props}
+                className={classNames(listGroup && 'list-group-item-check', className)}
+            />
         )
 );
 FormCheck.displayName = 'FormCheck';

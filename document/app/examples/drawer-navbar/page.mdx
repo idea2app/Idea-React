@@ -2,13 +2,14 @@ import { Container } from '../../../../source/Layout/Grid';
 import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
-import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
+import { NavbarNav } from '../../../../source/Base/Navbar';
 import { Button } from '../../../../source/Base/Button';
 import { NavItem, NavLink } from '../../../../source/Base/Nav';
 import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../source/Form';
 import { Badge } from '../../../../source/Base/Badge';
 import { MenuPanel, MenuItem } from '../../../../source/Base/Menu';
 import { ScrollNav } from '../../../../source/Extension/ScrollNav';
+import { NavbarDemo } from '../../../component/Document/NavbarDemo';
 
 export const primaryNavItems = [
     { label: 'Dashboard', active: true },
@@ -53,15 +54,15 @@ export const suggestions = [
 
 <BaseLayout title="Drawer navbar template" className="bg-1">
 
-<Navbar theme="dark" expand="lg" className="fixed-top" aria-label="Main navigation">
-  <Container fluid>
-    <NavbarBrand href="#">Drawer navbar</NavbarBrand>
-    <NavbarToggler className="p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
-
-    </NavbarToggler>
-
-    <div className="drawer-collapse" id="navbarsExampleDefault">
-      <NavbarNav className="me-auto mb-2 lg:mb-0">
+<NavbarDemo
+    brand="Drawer navbar"
+    title="Main navigation"
+    expand="lg"
+    theme="dark"
+    className="fixed-top"
+    aria-label="Main navigation"
+>
+    <NavbarNav className="me-auto mb-2 lg:mb-0">
         {primaryNavItems.map(({ label, active, menuItems }) => (
           <NavItem key={label}>
             <NavLink
@@ -83,15 +84,12 @@ export const suggestions = [
             )}
           </NavItem>
         ))}
-      </NavbarNav>
-      <form className="d-flex" role="search">
+    </NavbarNav>
+    <form className="d-flex" role="search">
         <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
         <Button variant="outline" theme="success" type="submit">Search</Button>
-      </form>
-    </div>
-
-  </Container>
-</Navbar>
+    </form>
+</NavbarDemo>
 
 <ScrollNav
     aria-label="Secondary navigation"

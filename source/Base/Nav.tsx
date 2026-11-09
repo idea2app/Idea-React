@@ -8,6 +8,7 @@ export interface NavProps extends ComponentPropsWithRef<'nav'> {
     vertical?: boolean;
     fill?: boolean;
     justified?: boolean;
+    flush?: boolean;
     cardHeader?: boolean;
     navbar?: boolean;
 }
@@ -19,6 +20,7 @@ export const Nav = polymorphic<NavProps>(
         vertical,
         fill,
         justified,
+        flush,
         cardHeader,
         navbar,
         className,
@@ -32,7 +34,7 @@ export const Nav = polymorphic<NavProps>(
                 variant && `nav-${variant}`,
                 cardHeader && variant === 'tabs' && 'card-header-tabs',
                 vertical && (variant === 'pills' ? 'nav-pills-vertical' : 'flex-column'),
-                { 'nav-fill': fill, 'nav-justified': justified },
+                { 'nav-fill': fill, 'nav-justified': justified, 'nav-flush': flush },
                 className
             )}
         />

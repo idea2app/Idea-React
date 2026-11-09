@@ -6,6 +6,7 @@ import { Component, ReactNode } from 'react';
 
 import { Drawer, DrawerPlacement } from '../../../source/Base/Drawer';
 import { Navbar, NavbarBrand, NavbarProps, NavbarToggler } from '../../../source/Base/Navbar';
+import { Container } from '../../../source/Layout/Grid';
 
 export interface NavbarDemoProps {
     brand?: ReactNode;
@@ -16,6 +17,8 @@ export interface NavbarDemoProps {
     className?: string;
     bodyClassName?: string;
     togglerFirst?: boolean;
+    id?: string;
+    'aria-label'?: string;
     children?: ReactNode;
 }
 
@@ -37,27 +40,42 @@ export class NavbarDemo extends Component<NavbarDemoProps> {
             className = 'bg-1 fg-2',
             bodyClassName,
             togglerFirst,
+            id,
+            'aria-label': ariaLabel,
             children
         } = this.props;
         const { open } = this;
+        const alwaysExpanded = expand === true;
         const brandNode = brand != null && <NavbarBrand href="#">{brand}</NavbarBrand>;
-        const toggler = <NavbarToggler expanded={open} onClick={this.show} />;
+        const toggler = !alwaysExpanded && <NavbarToggler expanded={open} onClick={this.show} />;
+        const navigation = alwaysExpanded ? (
+            children
+        ) : (
+            <Drawer
+                open={open}
+                title={title}
+                placement={placement}
+                bodyClassName={bodyClassName}
+                responsive={typeof expand === 'string' ? expand : undefined}
+                onDismiss={this.hide}
+            >
+                {children}
+            </Drawer>
+        );
 
         return (
-            <Navbar expand={expand} theme={theme} className={className}>
-                <div className="container-fluid">
+            <Navbar
+                id={id}
+                aria-label={ariaLabel}
+                expand={expand}
+                theme={theme}
+                className={className}
+            >
+                <Container fluid>
                     {togglerFirst ? toggler : brandNode}
                     {togglerFirst ? brandNode : toggler}
-                    <Drawer
-                        open={open}
-                        title={title}
-                        placement={placement}
-                        bodyClassName={bodyClassName}
-                        onDismiss={this.hide}
-                    >
-                        {children}
-                    </Drawer>
-                </div>
+                    {navigation}
+                </Container>
             </Navbar>
         );
     }

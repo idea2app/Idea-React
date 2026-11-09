@@ -9,26 +9,31 @@
  */
 
 @media (min-width: 768px) {
-    .sidebar .lg\:drawer {
-        position: sticky;
-        top: 48px;
+    .sidebar {
+        .lg\:drawer {
+            position: sticky;
+            top: 48px;
+        }
     }
+
     .navbar-search {
         display: block;
     }
 }
 
-.sidebar .nav-link {
-    font-weight: 500;
-    font-size: 0.875rem;
-}
+.sidebar {
+    .nav-link {
+        font-weight: 500;
+        font-size: 0.875rem;
 
-.sidebar .nav-link.active {
-    color: #2470dc;
-}
+        &.active {
+            color: #2470dc;
+        }
+    }
 
-.sidebar-heading {
-    font-size: 0.75rem;
+    .sidebar-heading {
+        font-size: 0.75rem;
+    }
 }
 
 /*
@@ -42,6 +47,8 @@
     padding-bottom: 0.75rem;
 }
 
-.navbar .form-control {
-    padding: 0.75rem 1rem;
+.navbar {
+    .form-control {
+        padding: 0.75rem 1rem;
+    }
 }

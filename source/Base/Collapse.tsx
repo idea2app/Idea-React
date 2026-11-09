@@ -134,6 +134,7 @@ export interface CollapseToggleProps
     target: string;
     href?: string;
     type?: 'button' | 'submit' | 'reset';
+    navbarToggler?: boolean;
 }
 
 @observer
@@ -201,16 +202,28 @@ export class CollapseToggle<T extends ElementType | undefined = 'button'> extend
             disabled,
             icon,
             styled,
+            navbarToggler,
             className,
+            children,
             ...props
         } = this.componentProps;
         const Root: ElementType = RootAs ?? (href ? 'a' : 'button');
         const nativeButton = Root === 'button';
+        const content = navbarToggler ? (
+            <span className="navbar-toggler-icon" aria-hidden="true" />
+        ) : (
+            children
+        );
         const rootClassName = classNames(
             variant === false ? undefined : variant ? `btn-${variant}` : icon ? undefined : 'btn',
             theme && `theme-${theme}`,
             size && `btn-${size}`,
-            { 'btn-icon': icon, 'btn-styled': styled, disabled },
+            {
+                'btn-icon': icon || navbarToggler,
+                'btn-styled': styled,
+                disabled,
+                'navbar-toggler': navbarToggler
+            },
             className
         );
 
@@ -227,7 +240,9 @@ export class CollapseToggle<T extends ElementType | undefined = 'button'> extend
                 aria-controls={this.controls || undefined}
                 aria-expanded={this.expanded}
                 onClick={this.handleClick}
-            />
+            >
+                {content}
+            </Root>
         );
     }
 }

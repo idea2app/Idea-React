@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import { it } from 'node:test';
 
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
+import { Collapse, CollapseToggle } from '../source/Base/Collapse';
 import { Navbar, NavbarBrand, NavbarNav, NavbarText, NavbarToggler } from '../source/Base/Navbar';
 
 it('supports translucent color modes and navigation variants', () => {
@@ -61,9 +62,43 @@ it('renders brand, navigation, text, and toggler sub-components', () => {
         'btn-icon navbar-toggler'
     );
     assert.equal(
+        screen.getByRole('button', { name: 'Toggle navigation' }).getAttribute('type'),
+        'button'
+    );
+    assert.equal(
         screen.getByRole('button', { name: 'Toggle navigation' }).getAttribute('aria-expanded'),
         'true'
     );
     assert.equal(screen.getByRole('list').className, 'navbar-nav');
     assert.equal(screen.getByText('Signed in as Ada').className, 'navbar-text');
+});
+
+it('toggles a collapse target with the navbar toggler variant', () => {
+    render(
+        <>
+            <CollapseToggle
+                target="#navbar-collapse"
+                variant={false}
+                aria-label="Toggle navigation"
+                navbarToggler
+            />
+            <Collapse id="navbar-collapse" />
+        </>
+    );
+    const toggler = screen.getByRole('button', { name: 'Toggle navigation' });
+    const collapse = document.getElementById('navbar-collapse');
+
+    assert.equal(toggler.className, 'btn-icon navbar-toggler');
+    assert.equal(toggler.getAttribute('type'), 'button');
+    assert.equal(toggler.getAttribute('aria-controls'), 'navbar-collapse');
+    assert.equal(toggler.getAttribute('aria-expanded'), 'false');
+    assert.equal(
+        toggler.querySelector('.navbar-toggler-icon')?.getAttribute('aria-hidden'),
+        'true'
+    );
+
+    fireEvent.click(toggler);
+
+    assert.equal(collapse?.classList.contains('show'), true);
+    assert.equal(toggler.getAttribute('aria-expanded'), 'true');
 });

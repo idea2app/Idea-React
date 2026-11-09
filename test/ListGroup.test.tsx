@@ -44,6 +44,16 @@ it('renders Bootstrap 6 list groups with variant classes', () => {
     assert.equal(disabled.getAttribute('aria-disabled'), 'true');
 });
 
+it('supports checkable and radio list group variants', () => {
+    const { container, rerender } = render(<ListGroup as="div" checkable />);
+
+    assert.equal(container.firstElementChild?.className, 'list-group list-group-checkable');
+
+    rerender(<ListGroup as="div" radio />);
+
+    assert.equal(container.firstElementChild?.className, 'list-group list-group-radio');
+});
+
 it('renders actionable items as links and buttons', () => {
     render(
         <ListGroup>
