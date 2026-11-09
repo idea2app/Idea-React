@@ -12,7 +12,7 @@ import { DocumentSearch } from './Search';
 export const DocumentFrame = ({ children }: PropsWithChildren) => (
     <ColorModeProvider>
         <div className={style.frame}>
-            <div className={style.header}>
+            <div className={`${style.header} sticky-top`}>
                 <DocumentHeader
                     links={navigation}
                     versions={versions}

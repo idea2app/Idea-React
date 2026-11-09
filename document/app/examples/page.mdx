@@ -1,202 +1,244 @@
-import { Card, CardBody, CardText, CardTitle } from '../../../source/Base/Card';
+import { Image } from '../../../source/Content/Images';
 import { Col, Container, Row } from '../../../source/Layout/Grid';
 import { BaseLayout } from '../../component/Document/BaseLayout';
-import style from './style.module.less';
 
-export const examples = [
+export const exampleGroups = [
     {
-        slug: 'album',
-        title: 'Album',
-        description: 'A simple one-page template for photo galleries, portfolios, and collections.'
+        title: 'Snippets',
+        description:
+            'Common patterns for building sites and apps that build on existing components and utilities with custom CSS and more.',
+        examples: [
+            {
+                slug: 'headers',
+                title: 'Headers',
+                description:
+                    'Display your branding, navigation, search, and more with these header components.'
+            },
+            {
+                slug: 'heroes',
+                title: 'Heroes',
+                description: 'Set the stage on your homepage with heroes that feature clear calls to action.'
+            },
+            {
+                slug: 'features',
+                title: 'Features',
+                description: 'Explain the features, benefits, or other details in your marketing content.'
+            },
+            {
+                slug: 'sidebars',
+                title: 'Sidebars',
+                description: 'Common navigation patterns ideal for drawer or multi-column layouts.'
+            },
+            {
+                slug: 'footers',
+                title: 'Footers',
+                description: 'Finish every page strong with an awesome footer, big or small.'
+            },
+            {
+                slug: 'menus',
+                title: 'Menus',
+                description: 'Enhance your menus with filters, icons, custom styles, and more.'
+            },
+            {
+                slug: 'list-groups',
+                title: 'List groups',
+                description: 'Extend list groups with utilities and custom content.'
+            },
+            {
+                slug: 'dialogs',
+                title: 'Dialogs',
+                description: 'Transform dialogs to serve any purpose, from feature tours to confirmations.'
+            },
+            {
+                slug: 'breadcrumbs',
+                title: 'Breadcrumbs',
+                description: 'Integrate custom icons and create stepper components.'
+            },
+            {
+                slug: 'buttons',
+                title: 'Buttons',
+                description: 'Create custom buttons for just about any use case with utilities.'
+            },
+            {
+                slug: 'jumbotrons',
+                title: 'Jumbotrons',
+                description: 'Create modernized versions of the classic Bootstrap component.'
+            }
+        ]
     },
     {
-        slug: 'blog',
-        title: 'Blog',
-        description: 'A magazine-style blog layout with a featured story and article archive.'
+        title: 'Custom Components',
+        description:
+            'Brand-new components and templates to help folks quickly get started with Bootstrap and demonstrate best practices for adding onto the framework.',
+        examples: [
+            {
+                slug: 'album',
+                title: 'Album',
+                description: 'Simple one-page template for photo galleries, portfolios, and more.'
+            },
+            {
+                slug: 'pricing',
+                title: 'Pricing',
+                description:
+                    'Example pricing page built with Cards and featuring a custom header and footer.'
+            },
+            {
+                slug: 'checkout',
+                title: 'Checkout',
+                description:
+                    'Custom checkout form showing our form components and their validation features.'
+            },
+            {
+                slug: 'product',
+                title: 'Product',
+                description: 'Lean product-focused marketing page with extensive grid and image work.'
+            },
+            {
+                slug: 'cover',
+                title: 'Cover',
+                description: 'A one-page template for building simple and beautiful home pages.'
+            },
+            {
+                slug: 'carousel',
+                title: 'Carousel',
+                description: 'Customize the navbar and carousel, then add some new components.'
+            },
+            {
+                slug: 'blog',
+                title: 'Blog',
+                description: 'Magazine like blog template with header, navigation, featured content.'
+            },
+            {
+                slug: 'dashboard',
+                title: 'Dashboard',
+                description: 'Basic admin dashboard shell with fixed sidebar and navbar.'
+            },
+            {
+                slug: 'sign-in',
+                title: 'Sign-in',
+                description: 'Custom form layout and design for a simple sign in form.'
+            },
+            {
+                slug: 'sticky-footer',
+                title: 'Sticky footer',
+                description: 'Attach a footer to the bottom of the viewport when page content is short.'
+            },
+            {
+                slug: 'sticky-footer-navbar',
+                title: 'Sticky footer navbar',
+                description: 'Attach a footer to the bottom of the viewport with a fixed top navbar.'
+            },
+            {
+                slug: 'jumbotron',
+                title: 'Jumbotron',
+                description: "Use utilities to recreate and enhance Bootstrap 4's jumbotron."
+            }
+        ]
     },
     {
-        slug: 'breadcrumbs',
-        title: 'Breadcrumbs',
-        description: 'Breadcrumb navigation treatments and separators.'
+        title: 'Framework',
+        description: 'Examples that focus on implementing uses of built-in components provided by Bootstrap.',
+        examples: [
+            {
+                slug: 'starter-template',
+                title: 'Starter template',
+                description: 'Nothing but the basics: compiled CSS and JavaScript.'
+            },
+            {
+                slug: 'grid',
+                title: 'Grid',
+                description: 'Multiple examples of grid layouts with all four tiers, nesting, and more.'
+            },
+            {
+                slug: 'cheatsheet',
+                title: 'Cheatsheet',
+                description: 'Kitchen sink of Bootstrap components.'
+            }
+        ]
     },
     {
-        slug: 'buttons',
-        title: 'Buttons',
-        description: 'Button styles, states, and common actions.'
-    },
-    {
-        slug: 'carousel',
-        title: 'Carousel',
-        description: 'A marketing page with a responsive hero carousel.'
-    },
-    {
-        slug: 'cheatsheet',
-        title: 'Cheatsheet',
-        description: 'A visual reference for typography, forms, utilities, and components.'
-    },
-    {
-        slug: 'checkout',
-        title: 'Checkout',
-        description: 'A responsive checkout form with order summary and payment details.'
-    },
-    {
-        slug: 'cover',
-        title: 'Cover',
-        description: 'A one-page cover layout for simple landing pages.'
-    },
-    {
-        slug: 'dashboard',
-        title: 'Dashboard',
-        description: 'An admin dashboard with navigation, cards, and data visualizations.'
-    },
-    {
-        slug: 'dialogs',
-        title: 'Dialogs',
-        description: 'Dialog layouts for forms, confirmations, and announcements.'
-    },
-    {
-        slug: 'drawer-navbar',
-        title: 'Drawer navbar',
-        description: 'A responsive navbar paired with a slide-in navigation drawer.'
-    },
-    {
-        slug: 'features',
-        title: 'Features',
-        description: 'Feature grids, cards, illustrations, and supporting content.'
-    },
-    {
-        slug: 'footers',
-        title: 'Footers',
-        description: 'Footer layouts from compact navigation to multi-column sections.'
-    },
-    {
-        slug: 'grid',
-        title: 'Grid',
-        description: 'A live reference for responsive grid breakpoints and column sizing.'
-    },
-    {
-        slug: 'headers',
-        title: 'Headers',
-        description: 'Header patterns for branding, navigation, search, and actions.'
-    },
-    {
-        slug: 'heroes',
-        title: 'Heroes',
-        description: 'Homepage hero sections with calls to action, imagery, and forms.'
-    },
-    { slug: 'jumbotron', title: 'Jumbotron', description: 'A simple, single jumbotron layout.' },
-    {
-        slug: 'jumbotrons',
-        title: 'Jumbotrons',
-        description: 'Jumbotron variations built with layout and utility components.'
-    },
-    {
-        slug: 'list-groups',
-        title: 'List groups',
-        description: 'List-group layouts for notifications, tasks, and selectable options.'
-    },
-    {
-        slug: 'masonry',
-        title: 'Masonry',
-        description: 'A card gallery arranged in responsive masonry columns.'
-    },
-    {
-        slug: 'menus',
-        title: 'Menus',
-        description: 'Menu patterns with icons, filters, groups, and supporting content.'
-    },
-    {
-        slug: 'navbar-bottom',
-        title: 'Navbar bottom',
-        description: 'A mobile-friendly navbar fixed to the bottom of the viewport.'
-    },
-    {
-        slug: 'navbar-fixed',
-        title: 'Navbar fixed',
-        description: 'A fixed-top navigation bar with scrolling page content.'
-    },
-    {
-        slug: 'navbar-static',
-        title: 'Navbar static',
-        description: 'A top navigation bar that scrolls with the page.'
-    },
-    {
-        slug: 'navbars-drawer',
-        title: 'Navbars drawer',
-        description: 'Navbar layouts composed with responsive drawers.'
-    },
-    {
-        slug: 'navbars',
         title: 'Navbars',
-        description: 'A responsive navigation bar template with several breakpoints.'
+        description: 'Taking the default navbar component and showing how it can be moved, placed, and extended.',
+        examples: [
+            {
+                slug: 'navbars',
+                title: 'Navbars',
+                description: 'Demonstration of all responsive and container options for the navbar.'
+            },
+            {
+                slug: 'navbars-drawer',
+                title: 'Navbars drawer',
+                description: 'Same as the Navbars example, but with our drawer component.'
+            },
+            {
+                slug: 'drawer-navbar',
+                title: 'Drawer navbar',
+                description: 'Navbar template with a drawer-style collapsible navigation pattern.'
+            },
+            {
+                slug: 'navbar-static',
+                title: 'Navbar static',
+                description:
+                    'Single navbar example of a static top navbar along with some additional content.'
+            },
+            {
+                slug: 'navbar-fixed',
+                title: 'Navbar fixed',
+                description:
+                    'Single navbar example with a fixed top navbar along with some additional content.'
+            },
+            {
+                slug: 'navbar-bottom',
+                title: 'Navbar bottom',
+                description:
+                    'Single navbar example with a bottom navbar along with some additional content.'
+            }
+        ]
     },
     {
-        slug: 'pricing',
-        title: 'Pricing',
-        description: 'A pricing table with plans, feature comparisons, and signup actions.'
-    },
-    {
-        slug: 'product',
-        title: 'Product',
-        description: 'A product landing page with responsive product imagery.'
-    },
-    {
-        slug: 'sidebars',
-        title: 'Sidebars',
-        description: 'Sidebar navigation patterns for application and dashboard layouts.'
-    },
-    {
-        slug: 'sign-in',
-        title: 'Sign in',
-        description: 'A centered sign-in form for a minimal authentication page.'
-    },
-    {
-        slug: 'starter-template',
-        title: 'Starter template',
-        description: 'A basic page template with a navbar and starter content.'
-    },
-    {
-        slug: 'sticky-footer-navbar',
-        title: 'Sticky footer navbar',
-        description: 'A full-height page with a sticky footer and navbar.'
-    },
-    {
-        slug: 'sticky-footer',
-        title: 'Sticky footer',
-        description: 'A simple full-height layout that keeps the footer at the bottom.'
+        title: 'Integrations',
+        description: 'Integrations with external libraries.',
+        examples: [
+            {
+                slug: 'masonry',
+                title: 'Masonry',
+                description: 'Combine the powers of the Bootstrap grid and the Masonry layout.'
+            }
+        ]
     }
 ];
 
-<BaseLayout title="Examples">
+<BaseLayout>
 
-# Examples
+<Container as="main" id="content" className="py-5">
+  <h1 className="mb-3">Examples</h1>
+  <p className="lead mb-5">Explore 33 Bootstrap examples built with Idea React components.</p>
 
-## All examples
-
-Browse all 33 Bootstrap example pages. Each thumbnail uses its official Bootstrap example image.
-
-<Container fluid>
-    <Row xs={1} md={2} xl={3} className="g-5">
-        {examples.map(({ slug, title, description }) => (
-            <Col key={slug}>
-                <Card as="article" className="h-100 overflow-hidden">
-                    <a href={`./${slug}/`} className={style.exampleThumbnail} aria-label={`View ${title} example`}
-                    >
-                        <img src={`https://getbootstrap.com/docs/6.0/assets/img/examples/${slug}.png`} alt={`${title} example preview`} loading="lazy"
-                        />
-                    </a>
-                    <CardBody>
-                        <CardTitle as="h2" className="h4">
-                            <a className="fg-body text-decoration-none" href={`./${slug}/`}>
-                                {title}
-                            </a>
-                        </CardTitle>
-                        <CardText>{description}</CardText>
-                    </CardBody>
-                </Card>
-            </Col>
+  {exampleGroups.map(({ title, description, examples }) => (
+    <section key={title} className="mb-5">
+      <h2>{title}</h2>
+      <p className="fg-2 mb-4">{description}</p>
+      <Row>
+        {examples.map(({ slug, title: exampleTitle, description: exampleDescription }) => (
+          <Col as="article" key={slug} xs={12} sm={6} md={3} className="mb-3">
+            <a className="d-block" href={`./${slug}/`}>
+              <Image
+                className="w-100 mb-3"
+                thumbnail
+                width={480}
+                height={300}
+                src={`https://getbootstrap.com/docs/6.0/assets/img/examples/${slug}.png`}
+                alt={`${exampleTitle} example preview`}
+                loading="lazy"
+              />
+              <h3 className="h5 mb-1">{exampleTitle}</h3>
+            </a>
+            <p className="fg-2">{exampleDescription}</p>
+          </Col>
         ))}
-    </Row>
+      </Row>
+    </section>
+  ))}
 </Container>
 
 </BaseLayout>

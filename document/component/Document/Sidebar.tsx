@@ -99,7 +99,7 @@ const guides: NavLink[] = [
     { label: 'Parcel', slug: 'parcel' },
     { label: 'Vite', slug: 'vite' },
     { label: 'Webpack', slug: 'webpack' },
-    { label: 'ViNext', slug: 'next' }
+    { label: 'Next.js', slug: 'next' }
 ];
 export const documentGroups: NavGroup[] = [
     {
