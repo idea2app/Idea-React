@@ -77,7 +77,6 @@ import {
     FormFeedback,
     FormField,
     FormFieldContent,
-    FormFieldset,
     FormFloatingLabel,
     FormGhost,
     FormGroup,
@@ -413,7 +412,6 @@ const examples: [string, ReactElement][] = [
         <ZodiacBar startYear={2000} as={Target} payload={payload} data-example="polymorphic" />
     ],
     ['Form', <Form as={Target} payload={payload} data-example="polymorphic" />],
-    ['FormFieldset', <FormFieldset as={Target} payload={payload} data-example="polymorphic" />],
     ['FormField', <FormField as={Target} payload={payload} data-example="polymorphic" />],
     ['FormGroup', <FormGroup as={Target} payload={payload} data-example="polymorphic" />],
     [

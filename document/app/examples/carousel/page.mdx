@@ -94,7 +94,6 @@ export const marketingFeatures = [
                 width="100%"
                 height="100%"
                 background="var(--bs-secondary-color)"
-                text={false}
                 title={false}
             />
             <div className={`carousel-hero ${alignment}`}>
@@ -119,7 +118,7 @@ export const marketingFeatures = [
     <Row >
       {marketingFeatures.map(({ description }, index) => (
         <Col key={index} lg={4}>
-          <ExamplePlaceholder width="140" height="140" background="var(--bs-secondary-color)" text={false} className="rounded-circle" />
+          <ExamplePlaceholder width="140" height="140" background="var(--bs-secondary-color)" title={false} className="rounded-circle" />
           <h2 className="fw-normal">Heading</h2>
           <p>{description}</p>
           <p><Button variant="solid" theme="secondary" href="#">View details &raquo;</Button></p>

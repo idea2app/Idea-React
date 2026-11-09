@@ -7,7 +7,6 @@ import {
     Form,
     FormField,
     FormFieldContent,
-    FormFieldset,
     FormGroup,
     FormLabel,
     FormLegend
@@ -23,9 +22,9 @@ it('renders native form structure and field wrappers', () => {
                 </FormField>
                 <FormFieldContent data-testid="field-content">Content</FormFieldContent>
             </FormGroup>
-            <FormFieldset disabled>
+            <fieldset disabled>
                 <legend>Disabled fields</legend>
-            </FormFieldset>
+            </fieldset>
         </Form>
     );
     assert.equal(screen.getByRole('form', { name: 'Profile' }).tagName, 'FORM');
@@ -37,7 +36,7 @@ it('renders native form structure and field wrappers', () => {
 
 it('sizes horizontal labels and fieldset legends consistently with controls', () => {
     render(
-        <FormFieldset>
+        <fieldset>
             <FormLegend controlSize="lg" column>
                 Details
             </FormLegend>
@@ -45,7 +44,7 @@ it('sizes horizontal labels and fieldset legends consistently with controls', ()
                 Name
             </FormLabel>
             <input id="horizontal" />
-        </FormFieldset>
+        </fieldset>
     );
     assert.equal(screen.getByText('Details').className, 'col-form-label col-form-label-lg');
     assert.equal(screen.getByText('Name').className, 'col-form-label col-form-label-sm');

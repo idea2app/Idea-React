@@ -104,9 +104,9 @@ export class NavbarExternalDemo extends Component {
                     <span className="fg-2">Toggled via the navbar toggler.</span>
                 </Drawer>
                 <Navbar theme="dark" className="bg-body">
-                    <div className="container-fluid">
+                    <Container fluid>
                         <NavbarToggler expanded={open} onClick={this.show} />
-                    </div>
+                    </Container>
                 </Navbar>
             </>
         );

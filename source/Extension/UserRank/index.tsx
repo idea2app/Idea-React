@@ -24,7 +24,7 @@ export interface UserRankViewProps extends HTMLAttributes<HTMLDivElement> {
 export const UserRankView = polymorphic<UserRankViewProps>(
     ({ as: RootAs, className = '', title, rank = [], linkOf, ...props }) => {
         const renderMedal = (user: UserRank) => (
-            <li key={user.id} className="col">
+            <Col key={user.id} as="li">
                 <div className={`shadow-lg overflow-hidden rounded-circle m-auto ${style.image}`}>
                     <Image src={user.avatar} alt={user.name} loading="lazy" fluid />
                 </div>
@@ -38,7 +38,7 @@ export const UserRankView = polymorphic<UserRankViewProps>(
                     </div>
                     <UserAddress {...user} />
                 </div>
-            </li>
+            </Col>
         );
         const renderRow = (user: UserRank, index: number, { length }: UserRank[]) => (
             <tr key={user.id} className="position-relative">
@@ -87,11 +87,12 @@ export const UserRankView = polymorphic<UserRankViewProps>(
                                 {title}
                             </h3>
                         </div>
-                        <ul
-                            className={`row mt-2 g-0 align-items-end text-center ps-0 pt-2 list-unstyled ${style.topUsers}`}
+                        <Row
+                            as="ul"
+                            className={`mt-2 g-0 align-items-end text-center ps-0 pt-2 list-unstyled ${style.topUsers}`}
                         >
                             {rank.slice(0, 3).map(renderMedal)}
-                        </ul>
+                        </Row>
                     </Col>
                     <Col xs={12} lg={5}>
                         <Table className={`my-3 pt-2 ${style.restUsers}`} responsive>

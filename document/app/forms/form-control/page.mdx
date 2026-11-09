@@ -325,9 +325,9 @@ If you want to have `<input readonly>` elements in your form styled as plain tex
 
 <CodeExample>
     <Row className="mb-3">
-        <FormLabel htmlFor="staticEmail" column className="sm:col-2">
+        <Col as={FormLabel} sm={2} htmlFor="staticEmail" column>
             Email
-        </FormLabel>
+        </Col>
         <Col sm={10}>
             <FormControl
                 type="text"
@@ -339,9 +339,9 @@ If you want to have `<input readonly>` elements in your form styled as plain tex
         </Col>
     </Row>
     <Row className="mb-3">
-        <FormLabel htmlFor="inputPassword" column className="sm:col-2">
+        <Col as={FormLabel} sm={2} htmlFor="inputPassword" column>
             Password
-        </FormLabel>
+        </Col>
         <Col sm={10}>
             <FormControl type="password" id="inputPassword" />
         </Col>
@@ -349,7 +349,7 @@ If you want to have `<input readonly>` elements in your form styled as plain tex
 </CodeExample>
 
 <CodeExample>
-    <Form className="row g-3">
+    <Row as={Form} className="g-3">
         <Col xs="auto">
             <FormLabel htmlFor="staticEmail2" plain className="visually-hidden">
                 Email
@@ -373,7 +373,7 @@ If you want to have `<input readonly>` elements in your form styled as plain tex
                 Confirm identity
             </Button>
         </Col>
-    </Form>
+    </Row>
 </CodeExample>
 
 ## Types

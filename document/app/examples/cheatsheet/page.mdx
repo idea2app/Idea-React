@@ -1,10 +1,40 @@
-import { Container } from '../../../../source/Layout/Grid';
-import './style.less';
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
+import { CheatsheetStyles } from '../../../component/Examples/Cheatsheet/Styles';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
-import { MarkdownView } from '../../../../source/Extension/MarkdownView';
+import { Alert, AlertHeading, AlertLink } from '../../../../source/Base/Alert';
+import { Badge } from '../../../../source/Base/Badge';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '../../../../source/Base/Breadcrumb';
+import { Button } from '../../../../source/Base/Button';
+import { ButtonGroup, ButtonToolbar } from '../../../../source/Base/ButtonGroup';
+import {
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardText,
+    CardTitle
+} from '../../../../source/Base/Card';
+import { Carousel, CarouselSlide } from '../../../../source/Base/Carousel';
 import { CloseButton } from '../../../../source/Base/CloseButton';
 import { Collapse, CollapseToggle } from '../../../../source/Base/Collapse';
+import { Drawer } from '../../../../source/Base/Drawer';
+import {
+    Checkbox,
+    Form,
+    FormControl,
+    FormField,
+    FormFeedback,
+    FormFloatingLabel,
+    FormLabel,
+    FormRange,
+    FormSelect,
+    FormSwitch,
+    FormText,
+    FormTextArea,
+    Radio
+} from '../../../../source/Form';
+import { InputGroup, InputGroupText } from '../../../../source/Form/InputGroup';
 import {
     NativeDialog,
     DialogBody,
@@ -12,8 +42,26 @@ import {
     DialogHeader,
     DialogTitle
 } from '../../../../source/Base/NativeDialog';
-import { Button } from '../../../../source/Base/Button';
+import {
+    Accordion,
+    AccordionBody,
+    AccordionHeader,
+    AccordionItem
+} from '../../../../source/Base/Accordion';
+import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
+import { Menu, MenuDivider, MenuHeader, MenuItem } from '../../../../source/Base/Menu';
+import { Nav, NavLink } from '../../../../source/Base/Nav';
+import { Tab, Tabs } from '../../../../source/Base/Tab';
+import { Navbar, NavbarBrand, NavbarNav, NavbarToggler } from '../../../../source/Base/Navbar';
+import { Pagination, PageItem, PageLink } from '../../../../source/Base/Pagination';
+import { Popover } from '../../../../source/Base/Popover';
+import { Progress } from '../../../../source/Base/Progress';
+import { ScrollSpy } from '../../../../source/Base/ScrollSpy';
+import { Spinner } from '../../../../source/Base/Spinner';
+import { ToastBody, ToastHeader, ToastItem } from '../../../../source/Base/Toast';
+import { Tooltip } from '../../../../source/Base/Tooltip';
 import { Table } from '../../../../source/Content/Tables';
+import { createElement } from 'react';
 
 export const themeColors = [
     { name: 'primary', title: 'Primary' },
@@ -32,14 +80,115 @@ export const sampleRows = [
     { number: 2, first: 'Jacob', last: 'Thornton', handle: '@fat' },
     { number: 3, first: 'John', last: 'Doe', handle: '@social' }
 ];
-export const getData = key => (key === 'theme-colors' ? themeColors : []);
-export const normalizeMarkup = (content, ...values) =>
-    (typeof content === 'string' ? content : String.raw(content, ...values)).replace(
-        /^ {1,8}/gm,
-        ''
-    );
+export const sampleColumns = [
+    { key: 'number', title: '#' },
+    { key: 'first', title: 'First' },
+    { key: 'last', title: 'Last' },
+    { key: 'handle', title: 'Handle' }
+];
+export const typographySizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'];
+export const headingSizes = [1, 2, 3, 4, 5, 6];
+export const inlineStyles = [
+    { tag: 'mark', text: 'highlight', prefix: 'You can use the mark tag to ' },
+    { tag: 'del', text: 'This line of text is meant to be treated as deleted text.' },
+    { tag: 's', text: 'This line of text is meant to be treated as no longer accurate.' },
+    {
+        tag: 'ins',
+        text: 'This line of text is meant to be treated as an addition to the document.'
+    },
+    { tag: 'u', text: 'This line of text will render as underlined.' },
+    { tag: 'small', text: 'This line of text is meant to be treated as fine print.' },
+    { tag: 'strong', text: 'This line rendered as bold text.' },
+    { tag: 'em', text: 'This line rendered as italicized text.' }
+];
+export const basicNavigationLinks = [
+    { label: 'Active', active: true },
+    { label: 'Link', id: 'first-link' },
+    { label: 'Link', id: 'second-link' },
+    { label: 'Disabled', disabled: true }
+];
+export const tabExamples = [
+    { id: 'home', title: 'Home' },
+    { id: 'profile', title: 'Profile' },
+    { id: 'contact', title: 'Contact' }
+];
+export const navbarLinks = [
+    { id: 'home', title: 'Home', active: true },
+    { id: 'link', title: 'Link' },
+    { id: 'menu', title: 'Menu' },
+    { id: 'disabled', title: 'Disabled', disabled: true }
+];
+export const dialogExamples = [
+    {
+        id: 'exampleDialog',
+        title: 'Dialog title',
+        description: "This is a native dialog element using Bootstrap's Dialog component.",
+        action: 'Save changes'
+    },
+    {
+        id: 'staticBackdropDialog',
+        title: 'Static backdrop',
+        description:
+            'I will not close if you click outside of me. Use the close button or press Escape.',
+        action: 'Understood',
+        backdrop: 'static',
+        keyboard: false
+    }
+];
+export const navigationGroups = [
+    {
+        id: 'contents',
+        title: 'Contents',
+        links: [
+            ['typography', 'Typography'],
+            ['images', 'Images'],
+            ['tables', 'Tables'],
+            ['figures', 'Figures']
+        ]
+    },
+    {
+        id: 'forms',
+        title: 'Forms',
+        links: [
+            ['overview', 'Overview'],
+            ['disabled-forms', 'Disabled forms'],
+            ['sizing', 'Sizing'],
+            ['input-group', 'Input group'],
+            ['floating-labels', 'Floating labels'],
+            ['validation', 'Validation']
+        ]
+    },
+    {
+        id: 'components',
+        title: 'Components',
+        links: [
+            ['accordion', 'Accordion'],
+            ['alerts', 'Alerts'],
+            ['badge', 'Badge'],
+            ['breadcrumb', 'Breadcrumb'],
+            ['buttons', 'Buttons'],
+            ['button-group', 'Button group'],
+            ['card', 'Card'],
+            ['carousel', 'Carousel'],
+            ['dialog', 'Dialog'],
+            ['menus', 'Menus'],
+            ['list-group', 'List group'],
+            ['navs', 'Navs'],
+            ['navbar', 'Navbar'],
+            ['pagination', 'Pagination'],
+            ['popovers', 'Popovers'],
+            ['progress', 'Progress'],
+            ['scrollspy', 'Scrollspy'],
+            ['spinners', 'Spinners'],
+            ['toasts', 'Toasts'],
+            ['tooltips', 'Tooltips']
+        ]
+    }
+];
 
 <BaseLayout title="Cheatsheet" className="bg-1">
+
+<CheatsheetStyles />
 
 <header className="bd-header bg-black bg-90 py-3 d-flex align-items-stretch border-bottom border-black">
   <Container fluid className="d-flex align-items-center">
@@ -53,75 +202,31 @@ export const normalizeMarkup = (content, ...values) =>
   <h2 className="h6 pt-4 pb-3 mb-4 border-bottom">On this page</h2>
   <nav className="small" id="toc">
     <ul className="list-unstyled">
-      <li className="my-2">
-        <CollapseToggle
-          variant={false}
-          className="d-inline-flex align-items-center border-0"
-          target="#contents-collapse"
-        >
-          Contents
-        </CollapseToggle>
-        <Collapse id="contents-collapse">
-          <ul className="list-unstyled ps-3">
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#typography">Typography</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#images">Images</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#tables">Tables</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#figures">Figures</a></li>
-          </ul>
-        </Collapse>
-      </li>
-      <li className="my-2">
-        <CollapseToggle
-          variant={false}
-          className="d-inline-flex align-items-center border-0"
-          target="#forms-collapse"
-        >
-          Forms
-        </CollapseToggle>
-        <Collapse id="forms-collapse">
-          <ul className="list-unstyled ps-3">
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#overview">Overview</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#disabled-forms">Disabled forms</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#sizing">Sizing</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#input-group">Input group</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#floating-labels">Floating labels</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#validation">Validation</a></li>
-          </ul>
-        </Collapse>
-      </li>
-      <li className="my-2">
-        <CollapseToggle
-          variant={false}
-          className="d-inline-flex align-items-center border-0"
-          target="#components-collapse"
-        >
-          Components
-        </CollapseToggle>
-        <Collapse id="components-collapse">
-          <ul className="list-unstyled ps-3">
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#accordion">Accordion</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#alerts">Alerts</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#badge">Badge</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#breadcrumb">Breadcrumb</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#buttons">Buttons</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#button-group">Button group</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#card">Card</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#carousel">Carousel</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#dialog">Dialog</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#menus">Menus</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#list-group">List group</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#navs">Navs</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#navbar">Navbar</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#pagination">Pagination</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#popovers">Popovers</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#progress">Progress</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#scrollspy">Scrollspy</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#spinners">Spinners</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#toasts">Toasts</a></li>
-          <li><a className="d-inline-flex align-items-center rounded text-decoration-none" href="#tooltips">Tooltips</a></li>
-          </ul>
-        </Collapse>
-      </li>
+      {navigationGroups.map(({ id, title, links }) => (
+        <li key={id} className="my-2">
+          <CollapseToggle
+            className="d-inline-flex align-items-center border-0"
+            variant={false}
+            target={`#${id}-collapse`}
+          >
+            {title}
+          </CollapseToggle>
+          <Collapse id={`${id}-collapse`}>
+            <ul className="list-unstyled ps-3">
+              {links.map(([href, label]) => (
+                <li key={href}>
+                  <a
+                    className="d-inline-flex align-items-center rounded text-decoration-none"
+                    href={`#${href}`}
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Collapse>
+        </li>
+      ))}
     </ul>
   </nav>
 </aside>
@@ -136,67 +241,54 @@ export const normalizeMarkup = (content, ...values) =>
       </div>
 
       <div>
-        <MarkdownView children={normalizeMarkup`
-        <div class="fs-xs">.fs-xs</div>
-        <div class="fs-sm">.fs-sm</div>
-        <div class="fs-md">.fs-md</div>
-        <div class="fs-lg">.fs-lg</div>
-        <div class="fs-xl">.fs-xl</div>
-        <div class="fs-2xl">.fs-2xl</div>
-        <div class="fs-3xl">.fs-3xl</div>
-        <div class="fs-4xl">.fs-4xl</div>
-        <div class="fs-5xl">.fs-5xl</div>
-        <div class="fs-6xl">.fs-6xl</div>`} />
+        {typographySizes.map(size => (
+            <div key={size} className={`fs-${size}`}>
+                .fs-{size}
+            </div>
+        ))}
+        {headingSizes.map(size => (
+            <p key={size} className={`h${size}`}>
+                Heading {size}
+            </p>
+        ))}
+        {inlineStyles.map(({ tag: Tag, text, prefix = '' }) => (
+            <p key={Tag}>
+                {prefix}
+                <Tag>{text}</Tag>
+                {Tag === 'mark' ? ' text.' : null}
+            </p>
+        ))}
 
-        <MarkdownView children={normalizeMarkup`
-        <p class="h1">Heading 1</p>
-        <p class="h2">Heading 2</p>
-        <p class="h3">Heading 3</p>
-        <p class="h4">Heading 4</p>
-        <p class="h5">Heading 5</p>
-        <p class="h6">Heading 6</p>`} />
+        <hr />
 
-        <MarkdownView children={normalizeMarkup`
-        <p>You can use the mark tag to <mark>highlight</mark> text.</p>
-        <p><del>This line of text is meant to be treated as deleted text.</del></p>
-        <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
-        <p><ins>This line of text is meant to be treated as an addition to the document.</ins></p>
-        <p><u>This line of text will render as underlined.</u></p>
-        <p><small>This line of text is meant to be treated as fine print.</small></p>
-        <p><strong>This line rendered as bold text.</strong></p>
-        <p><em>This line rendered as italicized text.</em></p>`} />
+        <blockquote className="blockquote">
+            <p>A well-known quote, contained in a blockquote element.</p>
+            <footer className="blockquote-footer">
+                Someone famous in <cite title="Source Title">Source Title</cite>
+            </footer>
+        </blockquote>
 
-        <MarkdownView children={normalizeMarkup`
-        <hr />`} />
+        <ul className="list-unstyled">
+            {['This is a list.', 'It appears completely unstyled.', "Structurally, it's still a list.",
+              'However, this style only applies to immediate child elements.'].map(item => (
+                <li key={item}>{item}</li>
+            ))}
+            <li>
+                Nested lists:
+                <ul>
+                    {['are unaffected by this style', 'will still show a bullet', 'and have appropriate left margin'].map(item => (
+                        <li key={item}>{item}</li>
+                    ))}
+                </ul>
+            </li>
+            <li>This may still come in handy in some situations.</li>
+        </ul>
 
-        <MarkdownView children={normalizeMarkup`
-        <blockquote class="blockquote">
-          <p>A well-known quote, contained in a blockquote element.</p>
-          <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-        </blockquote>`} />
-
-        <MarkdownView children={normalizeMarkup`
-        <ul class="list-unstyled">
-          <li>This is a list.</li>
-          <li>It appears completely unstyled.</li>
-          <li>Structurally, it's still a list.</li>
-          <li>However, this style only applies to immediate child elements.</li>
-          <li>Nested lists:
-            <ul>
-              <li>are unaffected by this style</li>
-              <li>will still show a bullet</li>
-              <li>and have appropriate left margin</li>
-            </ul>
-          </li>
-          <li>This may still come in handy in some situations.</li>
-        </ul>`} />
-
-        <MarkdownView children={normalizeMarkup`
-        <ul class="list-inline">
-          <li class="list-inline-item">This is a list item.</li>
-          <li class="list-inline-item">And another one.</li>
-          <li class="list-inline-item">But they're displayed inline.</li>
-        </ul>`} />
+        <ul className="list-inline">
+            {['This is a list item.', 'And another one.', "But they're displayed inline."].map(item => (
+                <li key={item} className="list-inline-item">{item}</li>
+            ))}
+        </ul>
       </div>
     </article>
     <article className="my-3" id="images">
@@ -210,8 +302,9 @@ export const normalizeMarkup = (content, ...values) =>
             width="100%"
             height="250"
             className="bd-placeholder-img-lg img-fluid"
-            text="Responsive image"
-        />
+        >
+            Responsive image
+        </ExamplePlaceholder>
 
         <ExamplePlaceholder
             width="200"
@@ -230,19 +323,19 @@ export const normalizeMarkup = (content, ...values) =>
         <Table striped>
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              {sampleColumns.map(({ key, title }) => <th key={key} scope="col">{title}</th>)}
             </tr>
           </thead>
           <tbody>
-            {sampleRows.map(({ number, first, last, handle }) => (
-              <tr key={number}>
-                <th scope="row">{number}</th>
-                <td>{first}</td>
-                <td>{last}</td>
-                <td>{handle}</td>
+            {sampleRows.map(row => (
+              <tr key={row.number}>
+                {sampleColumns.map(({ key }) =>
+                  key === 'number' ? (
+                    <th key={key} scope="row">{row.number}</th>
+                  ) : (
+                    <td key={key}>{row[key]}</td>
+                  )
+                )}
               </tr>
             ))}
           </tbody>
@@ -251,19 +344,19 @@ export const normalizeMarkup = (content, ...values) =>
         <Table borderless data-bs-theme="dark">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              {sampleColumns.map(({ key, title }) => <th key={key} scope="col">{title}</th>)}
             </tr>
           </thead>
           <tbody>
-            {sampleRows.map(({ number, first, last, handle }) => (
-              <tr key={number}>
-                <th scope="row">{number}</th>
-                <td>{first}</td>
-                <td>{last}</td>
-                <td>{handle}</td>
+            {sampleRows.map(row => (
+              <tr key={row.number}>
+                {sampleColumns.map(({ key }) =>
+                  key === 'number' ? (
+                    <th key={key} scope="row">{row.number}</th>
+                  ) : (
+                    <td key={key}>{row[key]}</td>
+                  )
+                )}
               </tr>
             ))}
           </tbody>
@@ -273,21 +366,18 @@ export const normalizeMarkup = (content, ...values) =>
           <thead>
             <tr>
               <th scope="col">Class</th>
-              <th scope="col">Heading</th>
-              <th scope="col">Heading</th>
+              {['First', 'Second'].map(heading => <th key={heading} scope="col">Heading</th>)}
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">Default</th>
-              <td>Cell</td>
-              <td>Cell</td>
+              {['first', 'second'].map(cell => <td key={cell}>Cell</td>)}
             </tr>
             {themeColors.map(({ name, title }) => (
               <tr key={name} className={`theme-${name}`}>
                 <th scope="row">{title}</th>
-                <td>Cell</td>
-                <td>Cell</td>
+                {['first', 'second'].map(cell => <td key={cell}>Cell</td>)}
               </tr>
             ))}
           </tbody>
@@ -296,19 +386,19 @@ export const normalizeMarkup = (content, ...values) =>
         <Table small bordered>
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              {sampleColumns.map(({ key, title }) => <th key={key} scope="col">{title}</th>)}
             </tr>
           </thead>
           <tbody>
-            {sampleRows.map(({ number, first, last, handle }) => (
-              <tr key={number}>
-                <th scope="row">{number}</th>
-                <td>{first}</td>
-                <td>{last}</td>
-                <td>{handle}</td>
+            {sampleRows.map(row => (
+              <tr key={row.number}>
+                {sampleColumns.map(({ key }) =>
+                  key === 'number' ? (
+                    <th key={key} scope="row">{row.number}</th>
+                  ) : (
+                    <td key={key}>{row[key]}</td>
+                  )
+                )}
               </tr>
             ))}
           </tbody>
@@ -322,13 +412,10 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/content/images#figures">Documentation</a>
       </div>
 
-      <div>
-        <MarkdownView children={normalizeMarkup`
-        <figure class="figure">
-          <ExamplePlaceholder width="400" height="300" class="img-fluid rounded" />
-          <figcaption class="figure-caption">A caption for the above image.</figcaption>
-        </figure>`} />
-      </div>
+      <figure className="figure">
+          <ExamplePlaceholder width="400" height="300" className="img-fluid rounded" />
+          <figcaption className="figure-caption">A caption for the above image.</figcaption>
+      </figure>
     </article>
 
   </section>
@@ -342,61 +429,56 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/forms/overview/">Documentation</a>
       </div>
 
-      <div>
-        <MarkdownView children={normalizeMarkup`
-        <form>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" />
-          </div>
-          <div class="mb-3">
-            <label for="exampleSelect" class="form-label">Select menu</label>
-            <select class="form-control" id="exampleSelect">
-              <option selected>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div class="mb-3 form-field">
-            <input type="checkbox" id="exampleCheck1" class="check" />
-            <label for="exampleCheck1">Check me out</label>
-          </div>
-          <fieldset class="mb-3">
-            <legend>Radios buttons</legend>
-            <div class="form-field">
-              <input type="radio" name="radios" class="radio" id="exampleRadio1" />
-              <label for="exampleRadio1">Default radio</label>
-            </div>
-            <div class="mb-3 form-field">
-              <input type="radio" name="radios" class="radio" id="exampleRadio2" />
-              <label for="exampleRadio2">Another radio</label>
-            </div>
-          </fieldset>
-          <div class="mb-3">
-            <label class="form-label" for="customFile">Upload</label>
-            <input type="file" class="form-control" id="customFile" />
-          </div>
-          <div class="mb-3 form-field">
-            <div class="switch">
-              <input type="checkbox" role="switch" id="switchCheckChecked" checked />
-            </div>
-            <label for="switchCheckChecked">Checked switch checkbox input</label>
-          </div>
-          <div class="mb-3">
-            <label for="customRange3" class="form-label">Example range</label>
-            <div class="form-range">
-              <input type="range" class="form-range-input" min="0" max="5" step="0.5" id="customRange3" />
-            </div>
-          </div>
-          <button type="submit" class="btn-solid theme-primary">Submit</button>
-        </form>`} />
-      </div>
+      <Form>
+        <div className="mb-3">
+          <FormLabel htmlFor="exampleInputEmail1">Email address</FormLabel>
+          <FormControl type="email" id="exampleInputEmail1" aria-describedby="emailHelp" />
+          <FormText id="emailHelp">We'll never share your email with anyone else.</FormText>
+        </div>
+        <div className="mb-3">
+          <FormLabel htmlFor="exampleInputPassword1">Password</FormLabel>
+          <FormControl type="password" id="exampleInputPassword1" />
+        </div>
+        <div className="mb-3">
+          <FormLabel htmlFor="exampleSelect">Select menu</FormLabel>
+          <FormSelect id="exampleSelect">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </FormSelect>
+        </div>
+        <FormField className="mb-3">
+          <Checkbox id="exampleCheck1" />
+          <FormLabel plain htmlFor="exampleCheck1">Check me out</FormLabel>
+        </FormField>
+        <fieldset className="mb-3">
+          <legend>Radios buttons</legend>
+          {[
+            { id: 'exampleRadio1', label: 'Default radio' },
+            { id: 'exampleRadio2', label: 'Another radio' }
+          ].map(({ id, label }) => (
+            <FormField key={id}>
+              <Radio name="radios" id={id} />
+              <FormLabel plain htmlFor={id}>{label}</FormLabel>
+            </FormField>
+          ))}
+        </fieldset>
+        <div className="mb-3">
+          <FormLabel htmlFor="customFile">Upload</FormLabel>
+          <FormControl type="file" id="customFile" />
+        </div>
+        <div className="mb-3">
+          <FormSwitch inputId="switchCheckChecked" defaultChecked>
+            Checked switch checkbox input
+          </FormSwitch>
+        </div>
+        <div className="mb-3">
+          <FormLabel htmlFor="customRange3">Example range</FormLabel>
+          <FormRange id="customRange3" min="0" max="5" step="0.5" />
+        </div>
+        <Button variant="solid" theme="primary" type="submit">Submit</Button>
+      </Form>
     </article>
     <article className="my-3" id="disabled-forms">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
@@ -404,57 +486,50 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/forms/overview/#disabled-forms">Documentation</a>
       </div>
 
-      <div>
-        <MarkdownView children={normalizeMarkup`
-        <form>
-          <fieldset disabled aria-label="Disabled fieldset example">
-            <div class="mb-3">
-              <label for="disabledTextInput" class="form-label">Disabled input</label>
-              <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input" />
-            </div>
-            <div class="mb-3">
-              <label for="disabledSelect" class="form-label">Disabled select menu</label>
-              <select id="disabledSelect" class="form-control">
-                <option>Disabled select</option>
-              </select>
-            </div>
-            <div class="mb-3 form-field">
-              <input type="checkbox" id="disabledFieldsetCheck" class="check" disabled />
-              <label for="disabledFieldsetCheck">
-                Can't check this
-              </label>
-            </div>
-            <fieldset class="mb-3">
-              <legend>Disabled radios buttons</legend>
-              <div class="form-field">
-                <input type="radio" name="radios" class="radio" id="disabledRadio1" disabled />
-                <label for="disabledRadio1">Disabled radio</label>
-              </div>
-              <div class="mb-3 form-field">
-                <input type="radio" name="radios" class="radio" id="disabledRadio2" disabled />
-                <label for="disabledRadio2">Another radio</label>
-              </div>
-            </fieldset>
-            <div class="mb-3">
-              <label class="form-label" for="disabledCustomFile">Upload</label>
-              <input type="file" class="form-control" id="disabledCustomFile" disabled />
-            </div>
-            <div class="mb-3 form-field">
-              <div class="switch">
-                <input type="checkbox" role="switch" id="disabledSwitchCheckChecked" checked disabled />
-              </div>
-              <label for="disabledSwitchCheckChecked">Disabled checked switch checkbox input</label>
-            </div>
-            <div class="mb-3">
-              <label for="disabledRange" class="form-label">Disabled range</label>
-              <div class="form-range">
-                <input type="range" class="form-range-input" min="0" max="5" step="0.5" id="disabledRange" />
-              </div>
-            </div>
-            <button type="submit" class="btn-solid theme-primary">Submit</button>
+      <Form>
+        <fieldset disabled aria-label="Disabled fieldset example">
+          <div className="mb-3">
+            <FormLabel htmlFor="disabledTextInput">Disabled input</FormLabel>
+            <FormControl id="disabledTextInput" placeholder="Disabled input" />
+          </div>
+          <div className="mb-3">
+            <FormLabel htmlFor="disabledSelect">Disabled select menu</FormLabel>
+            <FormSelect id="disabledSelect">
+              <option>Disabled select</option>
+            </FormSelect>
+          </div>
+          <FormField className="mb-3">
+            <Checkbox id="disabledFieldsetCheck" />
+            <FormLabel plain htmlFor="disabledFieldsetCheck">Can't check this</FormLabel>
+          </FormField>
+          <fieldset className="mb-3">
+            <legend>Disabled radios buttons</legend>
+            {[
+              { id: 'disabledRadio1', label: 'Disabled radio' },
+              { id: 'disabledRadio2', label: 'Another radio' }
+            ].map(({ id, label }) => (
+              <FormField key={id}>
+                <Radio name="disabledRadios" id={id} />
+                <FormLabel plain htmlFor={id}>{label}</FormLabel>
+              </FormField>
+            ))}
           </fieldset>
-        </form>`} />
-      </div>
+          <div className="mb-3">
+            <FormLabel htmlFor="disabledCustomFile">Upload</FormLabel>
+            <FormControl type="file" id="disabledCustomFile" />
+          </div>
+          <div className="mb-3">
+            <FormSwitch inputId="disabledSwitchCheckChecked" defaultChecked>
+              Disabled checked switch checkbox input
+            </FormSwitch>
+          </div>
+          <div className="mb-3">
+            <FormLabel htmlFor="disabledRange">Disabled range</FormLabel>
+            <FormRange id="disabledRange" min="0" max="5" step="0.5" />
+          </div>
+          <Button variant="solid" theme="primary" type="submit">Submit</Button>
+        </fieldset>
+      </Form>
     </article>
     <article className="my-3" id="sizing">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
@@ -463,38 +538,24 @@ export const normalizeMarkup = (content, ...values) =>
       </div>
 
       <div>
-        <MarkdownView children={normalizeMarkup`
-        <div class="mb-3">
-          <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" aria-label=".form-control-lg example" />
-        </div>
-        <div class="mb-3">
-          <select class="form-control form-control-lg" aria-label=".form-control-lg example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <input type="file" class="form-control form-control-lg" aria-label="Large file input example" />
-        </div>`} />
-
-        <MarkdownView children={normalizeMarkup`
-        <div class="mb-3">
-          <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm" aria-label=".form-control-sm example" />
-        </div>
-        <div class="mb-3">
-          <select class="form-control form-control-sm" aria-label=".form-control-sm example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <input type="file" class="form-control form-control-sm" aria-label="Small file input example" />
-        </div>
-        `} />
+        {['lg', 'sm'].map(size => (
+          <div key={size}>
+            <div className="mb-3">
+              <FormControl controlSize={size} placeholder={`.form-control-${size}`} aria-label={`.form-control-${size} example`} />
+            </div>
+            <div className="mb-3">
+              <FormSelect controlSize={size} aria-label={`.form-control-${size} example`}>
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </FormSelect>
+            </div>
+            <div className="mb-3">
+              <FormControl type="file" controlSize={size} aria-label={`${size === 'lg' ? 'Large' : 'Small'} file input example`} />
+            </div>
+          </div>
+        ))}
       </div>
     </article>
     <article className="my-3" id="input-group">
@@ -504,30 +565,28 @@ export const normalizeMarkup = (content, ...values) =>
       </div>
 
       <div>
-        <MarkdownView children={normalizeMarkup`
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">@</span>
-          <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
-        </div>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-          <span class="input-group-text" id="basic-addon2">@example.com</span>
-        </div>
-        <label for="basic-url" class="form-label">Your vanity URL</label>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-          <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" />
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text">$</span>
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" />
-          <span class="input-group-text">.00</span>
-        </div>
-        <div class="input-group">
-          <span class="input-group-text">With textarea</span>
-          <textarea class="form-control" aria-label="With textarea"></textarea>
-        </div>
-        `} />
+        <InputGroup className="mb-3">
+          <InputGroupText>@</InputGroupText>
+          <FormControl placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+        </InputGroup>
+        <InputGroup className="mb-3">
+          <FormControl placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+          <InputGroupText>@example.com</InputGroupText>
+        </InputGroup>
+        <FormLabel htmlFor="basic-url">Your vanity URL</FormLabel>
+        <InputGroup className="mb-3">
+          <InputGroupText>https://example.com/users/</InputGroupText>
+          <FormControl id="basic-url" aria-describedby="basic-addon3" />
+        </InputGroup>
+        <InputGroup className="mb-3">
+          <InputGroupText>$</InputGroupText>
+          <FormControl aria-label="Amount (to the nearest dollar)" />
+          <InputGroupText>.00</InputGroupText>
+        </InputGroup>
+        <InputGroup>
+          <InputGroupText>With textarea</InputGroupText>
+          <FormTextArea aria-label="With textarea" />
+        </InputGroup>
       </div>
     </article>
     <article className="my-3" id="floating-labels">
@@ -536,20 +595,16 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/forms/floating-labels">Documentation</a>
       </div>
 
-      <div>
-        <MarkdownView children={normalizeMarkup`
-        <form>
-          <div class="form-floating mb-3">
-            <label for="floatingInput">Email address</label>
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
-          </div>
-          <div class="form-floating">
-            <label for="floatingPassword">Password</label>
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
-          </div>
-        </form>
-        `} />
-      </div>
+      <Form>
+        <FormFloatingLabel className="mb-3">
+          <FormLabel htmlFor="floatingInput">Email address</FormLabel>
+          <FormControl type="email" id="floatingInput" placeholder="name@example.com" />
+        </FormFloatingLabel>
+        <FormFloatingLabel>
+          <FormLabel htmlFor="floatingPassword">Password</FormLabel>
+          <FormControl type="password" id="floatingPassword" placeholder="Password" />
+        </FormFloatingLabel>
+      </Form>
     </article>
     <article className="my-3" id="validation">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
@@ -557,74 +612,54 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/forms/validation">Documentation</a>
       </div>
 
-      <div>
-        <MarkdownView children={normalizeMarkup`
-        <form class="row g-3">
-          <div class="md:col-4">
-            <label for="validationServer01" class="form-label">First name</label>
-            <input type="text" class="form-control is-valid" id="validationServer01" value="Mark" required />
-            <div class="valid-feedback">
-              Looks good!
-            </div>
-          </div>
-          <div class="md:col-4">
-            <label for="validationServer02" class="form-label">Last name</label>
-            <input type="text" class="form-control is-valid" id="validationServer02" value="Otto" required />
-            <div class="valid-feedback">
-              Looks good!
-            </div>
-          </div>
-          <div class="md:col-4">
-            <label for="validationServerUsername" class="form-label">Username</label>
-            <div class="input-group">
-              <span class="input-group-text" id="inputGroupPrepend3">@</span>
-              <input type="text" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3" required />
-              <div class="invalid-feedback">
-                Please choose a username.
-              </div>
-            </div>
-          </div>
-          <div class="md:col-6">
-            <label for="validationServer03" class="form-label">City</label>
-            <input type="text" class="form-control is-invalid" id="validationServer03" required />
-            <div class="invalid-feedback">
-              Please provide a valid city.
-            </div>
-          </div>
-          <div class="md:col-3">
-            <label for="validationServer04" class="form-label">State</label>
-            <select class="form-control is-invalid" id="validationServer04" required>
+      <Form validated>
+        <Row className="g-3">
+          <Col as={FormField} md={4}>
+            <FormLabel htmlFor="validationServer01">First name</FormLabel>
+            <FormControl id="validationServer01" value="Mark" required validation="valid" />
+            <FormFeedback type="valid">Looks good!</FormFeedback>
+          </Col>
+          <Col as={FormField} md={4}>
+            <FormLabel htmlFor="validationServer02">Last name</FormLabel>
+            <FormControl id="validationServer02" value="Otto" required validation="valid" />
+            <FormFeedback type="valid">Looks good!</FormFeedback>
+          </Col>
+          <Col as={FormField} md={4}>
+            <FormLabel htmlFor="validationServerUsername">Username</FormLabel>
+            <InputGroup>
+              <InputGroupText>@</InputGroupText>
+              <FormControl id="validationServerUsername" aria-describedby="inputGroupPrepend3" required validation="invalid" />
+              <FormFeedback>Please choose a username.</FormFeedback>
+            </InputGroup>
+          </Col>
+          <Col as={FormField} md={6}>
+            <FormLabel htmlFor="validationServer03">City</FormLabel>
+            <FormControl id="validationServer03" required validation="invalid" />
+            <FormFeedback>Please provide a valid city.</FormFeedback>
+          </Col>
+          <Col as={FormField} md={3}>
+            <FormLabel htmlFor="validationServer04">State</FormLabel>
+            <FormSelect id="validationServer04" required validation="invalid">
               <option selected disabled value="">Choose...</option>
               <option>...</option>
-            </select>
-            <div class="invalid-feedback">
-              Please select a valid state.
-            </div>
-          </div>
-          <div class="md:col-3">
-            <label for="validationServer05" class="form-label">Zip</label>
-            <input type="text" class="form-control is-invalid" id="validationServer05" required />
-            <div class="invalid-feedback">
-              Please provide a valid zip.
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="form-field">
-              <input class="check is-invalid" type="checkbox" value="" id="invalidCheck3" required />
-              <label for="invalidCheck3">
-                Agree to terms and conditions
-              </label>
-              <div class="invalid-feedback">
-                You must agree before submitting.
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <button class="btn-solid theme-primary" type="submit">Submit form</button>
-          </div>
-        </form>
-        `} />
-      </div>
+            </FormSelect>
+            <FormFeedback>Please select a valid state.</FormFeedback>
+          </Col>
+          <Col as={FormField} md={3}>
+            <FormLabel htmlFor="validationServer05">Zip</FormLabel>
+            <FormControl id="validationServer05" required validation="invalid" />
+            <FormFeedback>Please provide a valid zip.</FormFeedback>
+          </Col>
+          <Col as={FormField} xs={12}>
+            <Checkbox className="is-invalid" id="invalidCheck3" required />
+            <FormLabel plain htmlFor="invalidCheck3">Agree to terms and conditions</FormLabel>
+            <FormFeedback>You must agree before submitting.</FormFeedback>
+          </Col>
+          <Col xs={12}>
+            <Button variant="solid" theme="primary" type="submit">Submit form</Button>
+          </Col>
+        </Row>
+      </Form>
     </article>
 
   </section>
@@ -638,39 +673,28 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/accordion">Documentation</a>
       </div>
 
-      <div>
-        <MarkdownView children={normalizeMarkup`
-        <div class="accordion" id="accordionExample">
-          <details class="accordion-item" name="accordionExample" open>
-            <summary class="accordion-header">
-              Accordion Item #1
-              <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"><path d="m2 5 6 6 6-6"/></svg>
-            </summary>
-            <div class="accordion-body">
-              <strong>This is the first item's accordion body.</strong> It is shown by default because the <code>open</code> attribute is present. The native <code>&lt;details&gt;</code> element handles all the show/hide logic without any JavaScript. You can put any HTML content within the <code>.accordion-body</code>.
-            </div>
-          </details>
-          <details class="accordion-item" name="accordionExample">
-            <summary class="accordion-header">
-              Accordion Item #2
-              <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"><path d="m2 5 6 6 6-6"/></svg>
-            </summary>
-            <div class="accordion-body">
-              <strong>This is the second item's accordion body.</strong> The <code>name</code> attribute groups this with other accordion items. When you open this item, any other open item in the same group will close automatically.
-            </div>
-          </details>
-          <details class="accordion-item" name="accordionExample">
-            <summary class="accordion-header">
-              Accordion Item #3
-              <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"><path d="m2 5 6 6 6-6"/></svg>
-            </summary>
-            <div class="accordion-body">
-              <strong>This is the third item's accordion body.</strong> This exclusive accordion behavior is built into the browser—no Bootstrap JavaScript required. Just use matching <code>name</code> attributes on your <code>&lt;details&gt;</code> elements.
-            </div>
-          </details>
-        </div>
-        `} />
-      </div>
+      <Accordion id="accordionExample">
+        {[
+          {
+            title: 'Accordion Item #1',
+            open: true,
+            content: <>It is shown by default because the <code>open</code> attribute is present. The native <code>&lt;details&gt;</code> element handles all the show/hide logic without any JavaScript. You can put any HTML content within the accordion body.</>
+          },
+          {
+            title: 'Accordion Item #2',
+            content: <>The <code>name</code> attribute groups this with other accordion items. When you open this item, any other open item in the same group will close automatically.</>
+          },
+          {
+            title: 'Accordion Item #3',
+            content: <>This exclusive accordion behavior is built into the browser?no Bootstrap JavaScript required. Just use matching <code>name</code> attributes on the <code>&lt;details&gt;</code> elements.</>
+          }
+        ].map(({ title, open, content }) => (
+          <AccordionItem key={title} name="accordionExample" open={open}>
+            <AccordionHeader>{title}</AccordionHeader>
+            <AccordionBody><strong>{title}'s accordion body.</strong> {content}</AccordionBody>
+          </AccordionItem>
+        ))}
+      </Accordion>
     </article>
     <article className="my-3" id="alerts">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
@@ -679,23 +703,20 @@ export const normalizeMarkup = (content, ...values) =>
       </div>
 
       <div>
-        <MarkdownView children={normalizeMarkup(getData('theme-colors').map((themeColor) => `
-        <div class="alert theme-${themeColor.name} mb-3" role="alert">
-          <p>A simple ${themeColor.name} alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.</p>
-          <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        `).join(''))} />
+        {themeColors.map(({ name }) => (
+          <Alert key={name} theme={name} dismissible className="mb-3">
+            <p>A simple {name} alert with <AlertLink href="#">an example link</AlertLink>. Give it a click if you like.</p>
+          </Alert>
+        ))}
 
-        <MarkdownView children={normalizeMarkup`
-        <div class="alert theme-success" role="alert">
-          <div class="vstack">
-            <h4 class="alert-heading">Well done!</h4>
+        <Alert theme="success">
+          <div className="vstack">
+            <AlertHeading>Well done!</AlertHeading>
             <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-            <hr class="mt-0" />
-            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+            <hr className="mt-0" />
+            <p className="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
           </div>
-        </div>
-        `} />
+        </Alert>
       </div>
     </article>
     <article className="my-3" id="badge">
@@ -705,20 +726,13 @@ export const normalizeMarkup = (content, ...values) =>
       </div>
 
       <div>
-        <MarkdownView children={normalizeMarkup`
-        <p class="h1">Example heading <span class="badge theme-primary">New</span></p>
-        <p class="h2">Example heading <span class="badge theme-accent">New</span></p>
-        <p class="h3">Example heading <span class="badge theme-success">New</span></p>
-        <p class="h4">Example heading <span class="badge theme-danger">New</span></p>
-        <p class="h5">Example heading <span class="badge theme-warning">New</span></p>
-        <p class="h6">Example heading <span class="badge theme-info">New</span></p>
-        <p class="h6">Example heading <span class="badge theme-inverse">New</span></p>
-        <p class="h6">Example heading <span class="badge theme-secondary">New</span></p>
-        `} />
+        {themeColors.slice(0, 8).map(({ name }, index) => (
+          <p key={name} className={`h${Math.min(index + 1, 6)}`}>
+            Example heading <Badge theme={name}>New</Badge>
+          </p>
+        ))}
 
-        <MarkdownView children={normalizeMarkup(getData('theme-colors').map((themeColor) => `
-        <span class="badge theme-${themeColor.name}">${themeColor.title}</span>
-        `).join(''))} />
+        {themeColors.map(({ name, title }) => <Badge key={name} theme={name}>{title}</Badge>)}
       </div>
     </article>
     <article className="my-3" id="breadcrumb">
@@ -727,29 +741,13 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/breadcrumb">Documentation</a>
       </div>
 
-      <div>
-        <MarkdownView children={normalizeMarkup`
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a class="breadcrumb-link" href="#">Home</a>
-            </li>
-            <li class="breadcrumb-divider">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 16" width="6" height="12"><path d="M2 2l4 6-4 6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </li>
-            <li class="breadcrumb-item">
-              <a class="breadcrumb-link" href="#">Library</a>
-            </li>
-            <li class="breadcrumb-divider">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 16" width="6" height="12"><path d="M2 2l4 6-4 6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </li>
-            <li class="breadcrumb-item" aria-current="page">
-              <a class="breadcrumb-link active" href="#">Data</a>
-            </li>
-          </ol>
-        </nav>
-        `} />
-      </div>
+      <nav aria-label="breadcrumb">
+        <Breadcrumb>
+          <BreadcrumbItem><BreadcrumbLink href="#">Home</BreadcrumbLink></BreadcrumbItem>
+          <BreadcrumbItem><BreadcrumbLink href="#">Library</BreadcrumbLink></BreadcrumbItem>
+          <BreadcrumbItem active><BreadcrumbLink href="#" active>Data</BreadcrumbLink></BreadcrumbItem>
+        </Breadcrumb>
+      </nav>
     </article>
     <article className="my-3" id="buttons">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
@@ -757,25 +755,24 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/buttons">Documentation</a>
       </div>
       <div>
-        <MarkdownView children={normalizeMarkup([
-          ...getData('theme-colors').map((themeColor) => `
-          <button type="button" class="btn-solid theme-${themeColor.name}">${themeColor.title}</button>
-          `),
-          `<button type="button" class="btn-link">Link</button>`].join(''))} />
+        {[
+          { variant: 'solid', label: 'Solid buttons' },
+          { variant: 'outline', label: 'Outline buttons' },
+          { variant: 'subtle', label: 'Subtle buttons' }
+        ].map(({ variant, label }) => (
+          <div key={variant} aria-label={label}>
+            {themeColors.map(({ name, title }) => (
+              <Button key={name} variant={variant} theme={name}>{title}</Button>
+            ))}
+            {variant === 'solid' && <Button variant="link">Link</Button>}
+          </div>
+        ))}
 
-        <MarkdownView children={normalizeMarkup(getData('theme-colors').map((themeColor) => `
-          <button type="button" class="btn-outline theme-${themeColor.name}">${themeColor.title}</button>
-          `).join(''))} />
-
-        <MarkdownView children={normalizeMarkup(getData('theme-colors').map((themeColor) => `
-          <button type="button" class="btn-subtle theme-${themeColor.name}">${themeColor.title}</button>
-          `).join(''))} />
-
-        <MarkdownView children={normalizeMarkup`
-          <button type="button" class="btn-solid theme-primary btn-sm">Small button</button>
-          <button type="button" class="btn-solid theme-primary">Standard button</button>
-          <button type="button" class="btn-solid theme-primary btn-lg">Large button</button>
-          `} />
+        {['sm', null, 'lg'].map(size => (
+          <Button key={size ?? 'standard'} variant="solid" theme="primary" size={size}>
+            {size ? `${size === 'sm' ? 'Small' : 'Large'} button` : 'Standard button'}
+          </Button>
+        ))}
       </div>
     </article>
     <article className="my-3" id="button-group">
@@ -784,26 +781,17 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/button-group">Documentation</a>
       </div>
 
-      <div>
-        <MarkdownView children={normalizeMarkup`
-        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-          <div class="btn-group me-2" role="group" aria-label="First group">
-            <button type="button" class="btn-solid theme-secondary">1</button>
-            <button type="button" class="btn-solid theme-secondary">2</button>
-            <button type="button" class="btn-solid theme-secondary">3</button>
-            <button type="button" class="btn-solid theme-secondary">4</button>
-          </div>
-          <div class="btn-group me-2" role="group" aria-label="Second group">
-            <button type="button" class="btn-solid theme-secondary">5</button>
-            <button type="button" class="btn-solid theme-secondary">6</button>
-            <button type="button" class="btn-solid theme-secondary">7</button>
-          </div>
-          <div class="btn-group" role="group" aria-label="Third group">
-            <button type="button" class="btn-solid theme-secondary">8</button>
-          </div>
-        </div>
-        `} />
-      </div>
+      <ButtonToolbar aria-label="Toolbar with button groups">
+        {[
+          { label: 'First group', values: [1, 2, 3, 4] },
+          { label: 'Second group', values: [5, 6, 7] },
+          { label: 'Third group', values: [8] }
+        ].map(({ label, values }) => (
+          <ButtonGroup key={label} aria-label={label} className="me-2">
+            {values.map(value => <Button key={value} variant="solid" theme="secondary">{value}</Button>)}
+          </ButtonGroup>
+        ))}
+      </ButtonToolbar>
     </article>
     <article className="my-3" id="card">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
@@ -811,70 +799,48 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/card">Documentation</a>
       </div>
 
-      <div>
-        <MarkdownView children={normalizeMarkup`
-          <div class="row row-cols-1 md:row-cols-2 g-4">
-            <div class="col">
-              <div class="card">
-                <ExamplePlaceholder width="100%" height="180" class="card-img-top" text="Image cap" />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn-solid theme-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card">
-                <div class="card-header">
-                  Featured
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn-solid theme-primary">Go somewhere</a>
-                </div>
-                <div class="card-footer fg-2">
-                  2 days ago
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">An item</li>
-                  <li class="list-group-item">A second item</li>
-                  <li class="list-group-item">A third item</li>
-                </ul>
-                <div class="card-body flex-row gap-4">
-                  <a href="#">Card link</a>
-                  <a href="#">Another link</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card">
-                <div class="row g-0">
-                  <div class="md:col-4">
-                    <ExamplePlaceholder width="100%" height="250" text="Image" />
-                  </div>
-                  <div class="md:col-8">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      <p class="card-text"><small class="fg-2">Last updated 3 mins ago</small></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          `} />
-      </div>
+      <Row xs={1} md={2} className="g-4">
+        {['image', 'featured', 'list', 'horizontal'].map(variant => (
+          <Col key={variant}>
+            <Card>
+              {variant === 'image' && <ExamplePlaceholder width="100%" height="180" className="card-img-top">Image cap</ExamplePlaceholder>}
+              {variant === 'featured' && <CardHeader>Featured</CardHeader>}
+              {variant === 'horizontal' ? (
+                <Row className="g-0">
+                  <Col md={4}><ExamplePlaceholder width="100%" height="250">Image</ExamplePlaceholder></Col>
+                  <Col md={8}>
+                    <CardBody>
+                      <CardTitle>Card title</CardTitle>
+                      <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+                      <CardText><small className="fg-2">Last updated 3 mins ago</small></CardText>
+                    </CardBody>
+                  </Col>
+                </Row>
+              ) : (
+                <>
+                  <CardBody>
+                    <CardTitle>Card title</CardTitle>
+                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                    {variant !== 'list' && <Button href="#" variant="solid" theme="primary">Go somewhere</Button>}
+                  </CardBody>
+                  {variant === 'featured' && <CardFooter className="fg-2">2 days ago</CardFooter>}
+                  {variant === 'list' && (
+                    <>
+                      <ListGroup flush>
+                        {['An item', 'A second item', 'A third item'].map(item => <ListGroupItem key={item}>{item}</ListGroupItem>)}
+                      </ListGroup>
+                      <CardBody className="flex-row gap-4">
+                        <a href="#">Card link</a>
+                        <a href="#">Another link</a>
+                      </CardBody>
+                    </>
+                  )}
+                </>
+              )}
+            </Card>
+          </Col>
+        ))}
+      </Row>
     </article>
     <article className="my-3" id="carousel">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
@@ -882,40 +848,19 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/carousel">Documentation</a>
       </div>
 
-      <div>
-        <MarkdownView children={normalizeMarkup`
-        <div id="carouselExample" class="carousel slide">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <ExamplePlaceholder width="800" height="400" class="bd-placeholder-img-lg d-block w-100 rounded-5" color="#555" background="#777" text="First slide" />
-            </div>
-            <div class="carousel-item">
-              <ExamplePlaceholder width="800" height="400" class="bd-placeholder-img-lg d-block w-100 rounded-5" color="#444" background="#666" text="Second slide" />
-            </div>
-            <div class="carousel-item">
-              <ExamplePlaceholder width="800" height="400" class="bd-placeholder-img-lg d-block w-100 rounded-5" color="#333" background="#555" text="Third slide" />
-            </div>
-          </div>
-          <div class="d-flex justify-content-between align-items-center mt-3">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div>
-              <button class="btn-icon btn-sm" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-icon-prev" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="btn-icon btn-sm" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-icon-next" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        `} />
-      </div>
+      <Carousel id="carouselExample" controls indicators>
+        {[
+          { title: 'First slide', background: '#777', color: '#555' },
+          { title: 'Second slide', background: '#666', color: '#444' },
+          { title: 'Third slide', background: '#555', color: '#333' }
+        ].map(({ title, background, color }) => (
+          <CarouselSlide key={title}>
+            <ExamplePlaceholder width="800" height="400" className="d-block w-100 rounded-5" color={color} background={background}>
+              {title}
+            </ExamplePlaceholder>
+          </CarouselSlide>
+        ))}
+      </Carousel>
     </article>
     <article className="my-3" id="dialog">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
@@ -946,179 +891,46 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/menus">Documentation</a>
       </div>
       <div>
-        <MarkdownView children={normalizeMarkup`
-        <div class="btn-group w-100 align-items-center justify-content-between flex-wrap me-0">
-          <div>
-            <button class="btn-solid theme-secondary btn-sm" type="button" data-bs-toggle="menu" aria-expanded="false">
-              Menu
-            </button>
-            <div class="menu">
-              <h6 class="menu-header">Menu header</h6>
-              <a class="menu-item" href="#">Action</a>
-              <a class="menu-item" href="#">Another action</a>
-              <a class="menu-item" href="#">Something else here</a>
-              <hr class="menu-divider" />
-              <a class="menu-item" href="#">Separated link</a>
-            </div>
-          </div>
-          <div>
-            <button class="btn-solid theme-secondary" type="button" data-bs-toggle="menu" aria-expanded="false">
-              Menu
-            </button>
-            <div class="menu">
-              <h6 class="menu-header">Menu header</h6>
-              <a class="menu-item" href="#">Action</a>
-              <a class="menu-item" href="#">Another action</a>
-              <a class="menu-item" href="#">Something else here</a>
-              <hr class="menu-divider" />
-              <a class="menu-item" href="#">Separated link</a>
-            </div>
-          </div>
-          <div>
-            <button class="btn-solid theme-secondary btn-lg" type="button" data-bs-toggle="menu" aria-expanded="false">
-              Menu
-            </button>
-            <div class="menu">
-              <h6 class="menu-header">Menu header</h6>
-              <a class="menu-item" href="#">Action</a>
-              <a class="menu-item" href="#">Another action</a>
-              <a class="menu-item" href="#">Something else here</a>
-              <hr class="menu-divider" />
-              <a class="menu-item" href="#">Separated link</a>
-            </div>
-          </div>
+        <div className="d-flex flex-wrap gap-3">
+          {['sm', null, 'lg'].map(size => (
+            <Menu key={size ?? 'standard'} label="Menu" toggleProps={{ variant: 'solid', theme: 'secondary', size }}>
+              <MenuHeader>Menu header</MenuHeader>
+              {['Action', 'Another action', 'Something else here'].map(item => <MenuItem key={item} href="#">{item}</MenuItem>)}
+              <MenuDivider />
+              <MenuItem href="#">Separated link</MenuItem>
+            </Menu>
+          ))}
         </div>
-        `} />
 
-        <MarkdownView children={normalizeMarkup`
-          <div class="btn-group">
-            <button type="button" class="btn-solid theme-primary">Primary</button>
-            <button type="button" class="btn-solid theme-primary menu-toggle-split" data-bs-toggle="menu" aria-expanded="false">
-              <span class="visually-hidden">Toggle Menu</span>
-            </button>
-            <div class="menu">
-              <a class="menu-item" href="#">Action</a>
-              <a class="menu-item" href="#">Another action</a>
-              <a class="menu-item" href="#">Something else here</a>
-            </div>
-          </div>{/* /btn-group */}
-          <div class="btn-group">
-            <button type="button" class="btn-solid theme-secondary">Secondary</button>
-            <button type="button" class="btn-solid theme-secondary menu-toggle-split" data-bs-toggle="menu" aria-expanded="false">
-              <span class="visually-hidden">Toggle Menu</span>
-            </button>
-            <div class="menu">
-              <a class="menu-item" href="#">Action</a>
-              <a class="menu-item" href="#">Another action</a>
-              <a class="menu-item" href="#">Something else here</a>
-            </div>
-          </div>{/* /btn-group */}
-          <div class="btn-group">
-            <button type="button" class="btn-solid theme-success">Success</button>
-            <button type="button" class="btn-solid theme-success menu-toggle-split" data-bs-toggle="menu" aria-expanded="false">
-              <span class="visually-hidden">Toggle Menu</span>
-            </button>
-            <div class="menu">
-              <a class="menu-item" href="#">Action</a>
-              <a class="menu-item" href="#">Another action</a>
-              <a class="menu-item" href="#">Something else here</a>
-            </div>
-          </div>{/* /btn-group */}
-          <div class="btn-group">
-            <button type="button" class="btn-solid theme-info">Info</button>
-            <button type="button" class="btn-solid theme-info menu-toggle-split" data-bs-toggle="menu" aria-expanded="false">
-              <span class="visually-hidden">Toggle Menu</span>
-            </button>
-            <div class="menu">
-              <a class="menu-item" href="#">Action</a>
-              <a class="menu-item" href="#">Another action</a>
-              <a class="menu-item" href="#">Something else here</a>
-            </div>
-          </div>{/* /btn-group */}
-          <div class="btn-group">
-            <button type="button" class="btn-solid theme-warning">Warning</button>
-            <button type="button" class="btn-solid theme-warning menu-toggle-split" data-bs-toggle="menu" aria-expanded="false">
-              <span class="visually-hidden">Toggle Menu</span>
-            </button>
-            <div class="menu">
-              <a class="menu-item" href="#">Action</a>
-              <a class="menu-item" href="#">Another action</a>
-              <a class="menu-item" href="#">Something else here</a>
-            </div>
-          </div>{/* /btn-group */}
-          <div class="btn-group">
-            <button type="button" class="btn-solid theme-danger">Danger</button>
-            <button type="button" class="btn-solid theme-danger menu-toggle-split" data-bs-toggle="menu" aria-expanded="false">
-              <span class="visually-hidden">Toggle Menu</span>
-            </button>
-            <div class="menu">
-              <a class="menu-item" href="#">Action</a>
-              <a class="menu-item" href="#">Another action</a>
-              <a class="menu-item" href="#">Something else here</a>
-            </div>
-          </div>{/* /btn-group */}
-          `} />
+        <div className="d-flex flex-wrap gap-3">
+          {themeColors.map(({ name, title }) => (
+            <Menu key={name} label={title} split toggleProps={{ variant: 'solid', theme: name }}>
+              {['Action', 'Another action', 'Something else here'].map(item => <MenuItem key={item} href="#">{item}</MenuItem>)}
+            </Menu>
+          ))}
+        </div>
 
-        <MarkdownView children={normalizeMarkup`
-          <div class="btn-group w-100 align-items-center justify-content-between flex-wrap me-0">
-            <div>
-              <button class="btn-solid theme-secondary" type="button" data-bs-toggle="menu" data-bs-placement="right-start" aria-expanded="false">
-                End menu
-              </button>
-              <div class="menu">
-                <h6 class="menu-header">Menu header</h6>
-                <a class="menu-item" href="#">Action</a>
-                <a class="menu-item" href="#">Another action</a>
-                <a class="menu-item" href="#">Something else here</a>
-                <hr class="menu-divider" />
-                <a class="menu-item" href="#">Separated link</a>
-              </div>
-            </div>
-            <div>
-              <button class="btn-solid theme-secondary" type="button" data-bs-toggle="menu" data-bs-placement="top-start" aria-expanded="false">
-                Up menu
-              </button>
-              <div class="menu">
-                <h6 class="menu-header">Menu header</h6>
-                <a class="menu-item" href="#">Action</a>
-                <a class="menu-item" href="#">Another action</a>
-                <a class="menu-item" href="#">Something else here</a>
-                <hr class="menu-divider" />
-                <a class="menu-item" href="#">Separated link</a>
-              </div>
-            </div>
-            <div>
-              <button class="btn-solid theme-secondary" type="button" data-bs-toggle="menu" data-bs-placement="left-start" aria-expanded="false">
-                Start menu
-              </button>
-              <div class="menu">
-                <h6 class="menu-header">Menu header</h6>
-                <a class="menu-item" href="#">Action</a>
-                <a class="menu-item" href="#">Another action</a>
-                <a class="menu-item" href="#">Something else here</a>
-                <hr class="menu-divider" />
-                <a class="menu-item" href="#">Separated link</a>
-              </div>
-            </div>
-          </div>
-          `} />
+        <div className="d-flex flex-wrap gap-3">
+          {[
+            { label: 'End menu', placement: 'right-start' },
+            { label: 'Up menu', placement: 'top-start' },
+            { label: 'Start menu', placement: 'left-start' }
+          ].map(({ label, placement }) => (
+            <Menu key={label} label={label} placement={placement} toggleProps={{ variant: 'solid', theme: 'secondary' }}>
+              <MenuHeader>Menu header</MenuHeader>
+              {['Action', 'Another action', 'Something else here'].map(item => <MenuItem key={item} href="#">{item}</MenuItem>)}
+              <MenuDivider />
+              <MenuItem href="#">Separated link</MenuItem>
+            </Menu>
+          ))}
+        </div>
 
-        <MarkdownView children={normalizeMarkup`
-          <div class="btn-group">
-            <div>
-              <button class="btn-solid theme-secondary" type="button" data-bs-toggle="menu" data-bs-placement="bottom-end" aria-expanded="false">
-                End-aligned menu
-              </button>
-              <div class="menu">
-                <h6 class="menu-header">Menu header</h6>
-                <a class="menu-item" href="#">Action</a>
-                <a class="menu-item" href="#">Another action</a>
-                <hr class="menu-divider" />
-                <a class="menu-item" href="#">Separated link</a>
-              </div>
-            </div>
-          </div>
-          `} />
+        <Menu label="End-aligned menu" align="end" toggleProps={{ variant: 'solid', theme: 'secondary' }}>
+          <MenuHeader>Menu header</MenuHeader>
+          {['Action', 'Another action'].map(item => <MenuItem key={item} href="#">{item}</MenuItem>)}
+          <MenuDivider />
+          <MenuItem href="#">Separated link</MenuItem>
+        </Menu>
       </div>
     </article>
     <article className="my-3" id="list-group">
@@ -1128,34 +940,26 @@ export const normalizeMarkup = (content, ...values) =>
       </div>
 
       <div>
-        <MarkdownView children={normalizeMarkup`
-        <ul class="list-group">
-          <li class="list-group-item disabled" aria-disabled="true">A disabled item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-          <li class="list-group-item">A fourth item</li>
-          <li class="list-group-item">And a fifth one</li>
-        </ul>
-        `} />
+        <ListGroup>
+          {['A disabled item', 'A second item', 'A third item', 'A fourth item', 'And a fifth one'].map((item, index) => (
+            <ListGroupItem key={item} disabled={!index}>{item}</ListGroupItem>
+          ))}
+        </ListGroup>
 
-        <MarkdownView children={normalizeMarkup`
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">An item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-          <li class="list-group-item">A fourth item</li>
-          <li class="list-group-item">And a fifth one</li>
-        </ul>
-        `} />
+        <ListGroup flush>
+          {['An item', 'A second item', 'A third item', 'A fourth item', 'And a fifth one'].map(item => <ListGroupItem key={item}>{item}</ListGroupItem>)}
+        </ListGroup>
 
-        <MarkdownView children={normalizeMarkup([`
-        <div class="list-group">
-          <a href="#" class="list-group-item list-group-item-action">A simple default list group item</a>`,
-          ...getData('theme-colors').map((themeColor) => `
-          <a href="#" class="list-group-item list-group-item-action theme-${themeColor.name}">A simple ${themeColor.name} list group item</a>
-          `),
-        `</div>
-        `].join(''))} />
+        <ListGroup>
+          {[
+            { name: 'default', title: 'Default' },
+            ...themeColors.map(({ name, title }) => ({ name, title }))
+          ].map(({ name, title }) => (
+            <ListGroupItem key={name} href="#" action theme={name === 'default' ? undefined : name}>
+              A simple {title.toLowerCase()} list group item
+            </ListGroupItem>
+          ))}
+        </ListGroup>
       </div>
     </article>
     <article className="my-3" id="navs">
@@ -1165,52 +969,31 @@ export const normalizeMarkup = (content, ...values) =>
       </div>
 
       <div>
-        <MarkdownView children={normalizeMarkup`
-        <nav class="nav">
-          <a class="nav-link active" aria-current="page" href="#">Active</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </nav>
-        `} />
+        <Nav aria-label="Primary navigation">
+          {basicNavigationLinks.map(({ label, id, active, disabled }, index) => (
+            <NavLink key={id ?? label + index} href={disabled ? undefined : '#'} active={active} disabled={disabled}>
+              {label}
+            </NavLink>
+          ))}
+        </Nav>
 
-        <MarkdownView children={normalizeMarkup`
-        <nav>
-          <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
-            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
-            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
-          </div>
-        </nav>
-        <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-            <p>This is some placeholder content the <strong>Home tab's</strong> associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
-          </div>
-          <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-            <p>This is some placeholder content the <strong>Profile tab's</strong> associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
-          </div>
-          <div class="tab-pane" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-            <p>This is some placeholder content the <strong>Contact tab's</strong> associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
-          </div>
-        </div>
-        `} />
+        <Tabs id="nav-tab" variant="tabs" defaultActiveKey="home">
+          {tabExamples.map(({ id, title }) => (
+            <Tab key={id} eventKey={id} label={title}>
+              <p>This is some placeholder content for the <strong>{title} tab's</strong> associated content. Clicking another tab switches the content. The tab component manages visibility and keyboard interaction.</p>
+            </Tab>
+          ))}
+        </Tabs>
 
-        <MarkdownView children={normalizeMarkup`
-        <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Active</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        `} />
+        <Nav variant="pills" as="ul">
+          {basicNavigationLinks.map(({ label, id, active, disabled }, index) => (
+            <li key={id ?? label + index} className="nav-item">
+              <NavLink href={disabled ? undefined : '#'} active={active} disabled={disabled}>
+                {label}
+              </NavLink>
+            </li>
+          ))}
+        </Nav>
       </div>
     </article>
     <article className="my-3" id="navbar">
@@ -1219,85 +1002,42 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/navbar">Documentation</a>
       </div>
       <div>
-        <MarkdownView children={normalizeMarkup`
-          <nav class="navbar lg:navbar-expand bg-1">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">
-                <img src="${"https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg"}" width="38" height="30" class="d-inline-block align-top" alt="Bootstrap" loading="lazy" style={{"filter": "invert(1) grayscale(100%) brightness(200%)"}} />
-              </a>
-              <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" aria-hidden="true"></span>
-              </button>
-              <dialog class="drawer drawer-end" tabIndex="-1" id="navbarSupportedContent" aria-label="Navigation">
-                <ul class="navbar-nav me-auto mb-2 lg:mb-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#" role="button" data-bs-toggle="menu" aria-expanded="false">
-                      Menu
-                    </a>
-                    <div class="menu">
-                      <a class="menu-item" href="#">Action</a>
-                      <a class="menu-item" href="#">Another action</a>
-                      <hr class="menu-divider" />
-                      <a class="menu-item" href="#">Something else here</a>
-                    </div>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                  </li>
-                </ul>
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                  <button class="btn-outline theme-dark" type="submit">Search</button>
-                </form>
-              </dialog>
-            </div>
-          </nav>
-
-          <nav class="navbar lg:navbar-expand bg-primary mt-5" data-bs-theme="dark">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">
-                <img src="${"https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg"}" width="38" height="30" class="d-inline-block align-top" alt="Bootstrap" loading="lazy" />
-              </a>
-              <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" aria-hidden="true"></span>
-              </button>
-              <dialog class="drawer drawer-end" tabIndex="-1" id="navbarSupportedContent2" aria-label="Navigation">
-                <ul class="navbar-nav me-auto mb-2 lg:mb-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#" role="button" data-bs-toggle="menu" aria-expanded="false">
-                      Menu
-                    </a>
-                    <div class="menu">
-                      <a class="menu-item" href="#">Action</a>
-                      <a class="menu-item" href="#">Another action</a>
-                      <hr class="menu-divider" />
-                      <a class="menu-item" href="#">Something else here</a>
-                    </div>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                  </li>
-                </ul>
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                  <button class="btn-outline theme-light" type="submit">Search</button>
-                </form>
-              </dialog>
-            </div>
-          </nav>
-          `} />
+        {[
+          { id: 'navbarSupportedContent', theme: 'light', background: 'bg-1', buttonTheme: 'dark' },
+          { id: 'navbarSupportedContent2', theme: 'dark', background: 'bg-primary', buttonTheme: 'light' }
+        ].map(({ id, theme, background, buttonTheme }) => (
+          <Navbar key={id} expand="lg" theme={theme} className={background}>
+            <Container fluid>
+              <NavbarBrand href="#">
+                <img src="https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg" width="38" height="30" alt="Bootstrap" loading="lazy" />
+              </NavbarBrand>
+              <NavbarToggler {...{ commandfor: id, command: 'show-modal' }} />
+              <Drawer id={id} title="Navigation" placement="end">
+                <NavbarNav className="me-auto mb-2 lg:mb-0">
+                  {navbarLinks.map(({ id, title, active, disabled }) => (
+                    <li key={id} className="nav-item">
+                      {id === 'menu' ? (
+                        <Menu label={title} nav>
+                          {['Action', 'Another action'].map(item => <MenuItem key={item} href="#">{item}</MenuItem>)}
+                          <MenuDivider />
+                          <MenuItem href="#">Something else here</MenuItem>
+                        </Menu>
+                      ) : (
+                        <NavLink active={active} disabled={disabled} href={disabled ? undefined : '#'}>
+                          {title}
+                        </NavLink>
+                      )}
+                    </li>
+                  ))}
+                </NavbarNav>
+                <Form role="search" className="d-flex">
+                  <FormControl type="search" className="me-2" placeholder="Search" aria-label="Search" />
+                  <Button variant="outline" theme={buttonTheme} type="submit">Search</Button>
+                </Form>
+              </Drawer>
+            </Container>
+          </Navbar>
+        ))}
       </div>
     </article>
     <article className="my-3" id="pagination">
@@ -1307,55 +1047,27 @@ export const normalizeMarkup = (content, ...values) =>
       </div>
 
       <div>
-        <MarkdownView children={normalizeMarkup`
         <nav aria-label="Pagination example">
-          <ul class="pagination pagination-sm">
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active">
-              <a class="page-link" href="#" aria-current="page">2</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-          </ul>
+          <Pagination size="sm">
+            {[1, 2, 3].map(page => <PageItem key={page} active={page === 2}><PageLink href="#">{page}</PageLink></PageItem>)}
+          </Pagination>
         </nav>
-        `} />
 
-        <MarkdownView children={normalizeMarkup`
         <nav aria-label="Standard pagination example">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
+          <Pagination>
+            <PageItem><PageLink href="#" aria-label="Previous">Previous</PageLink></PageItem>
+            {[1, 2, 3].map(page => <PageItem key={page}><PageLink href="#">{page}</PageLink></PageItem>)}
+            <PageItem><PageLink href="#" aria-label="Next">Next</PageLink></PageItem>
+          </Pagination>
         </nav>
-        `} />
 
-        <MarkdownView children={normalizeMarkup`
         <nav aria-label="Another pagination example">
-          <ul class="pagination pagination-lg flex-wrap">
-            <li class="page-item disabled">
-              <a class="page-link">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active">
-              <a class="page-link" href="#" aria-current="page">2</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
+          <Pagination size="lg" className="flex-wrap">
+            <PageItem disabled><PageLink>Previous</PageLink></PageItem>
+            {[1, 2, 3].map(page => <PageItem key={page} active={page === 2}><PageLink href="#">{page}</PageLink></PageItem>)}
+            <PageItem><PageLink href="#">Next</PageLink></PageItem>
+          </Pagination>
         </nav>
-        `} />
       </div>
     </article>
     <article className="my-3" id="popovers">
@@ -1365,24 +1077,24 @@ export const normalizeMarkup = (content, ...values) =>
       </div>
 
       <div>
-        <MarkdownView children={normalizeMarkup`
-        <button type="button" class="btn-solid theme-danger btn-lg" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
-        `} />
+        <div className="d-flex flex-wrap gap-3">
+          <Button variant="solid" theme="danger" size="lg">Click to toggle popover</Button>
+          <Popover title="Popover title">And here's some amazing content. It's very engaging. Right?</Popover>
+        </div>
 
-        <MarkdownView children={normalizeMarkup`
-        <button type="button" class="btn-solid theme-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-          Popover on top
-        </button>
-        <button type="button" class="btn-solid theme-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-          Popover on end
-        </button>
-        <button type="button" class="btn-solid theme-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-          Popover on bottom
-        </button>
-        <button type="button" class="btn-solid theme-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="left" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-          Popover on start
-        </button>
-        `} />
+        <div className="d-flex flex-wrap gap-3">
+          {[
+            { placement: 'top', label: 'Popover on top' },
+            { placement: 'right', label: 'Popover on end' },
+            { placement: 'bottom', label: 'Popover on bottom' },
+            { placement: 'left', label: 'Popover on start' }
+          ].map(({ placement, label }) => (
+            <div key={placement} className="d-flex flex-column align-items-center gap-2">
+              <Button variant="solid" theme="secondary">{label}</Button>
+              <Popover placement={placement}>Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</Popover>
+            </div>
+          ))}
+        </div>
       </div>
     </article>
     <article className="my-3" id="progress">
@@ -1392,34 +1104,17 @@ export const normalizeMarkup = (content, ...values) =>
       </div>
 
       <div>
-        <MarkdownView children={normalizeMarkup`
-        <div class="progress mb-3" role="progressbar" aria-label="Example with label" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-bar">0%</div>
-        </div>
-        <div class="progress mb-3" role="progressbar" aria-label="Success example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-bar theme-success w-25">25%</div>
-        </div>
-        <div class="progress mb-3" role="progressbar" aria-label="Info example with label" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-bar theme-info w-50">50%</div>
-        </div>
-        <div class="progress mb-3" role="progressbar" aria-label="Warning example with label" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-bar theme-warning w-75">75%</div>
-        </div>
-        <div class="progress" role="progressbar" aria-label="Danger example with label" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-bar theme-danger w-100">100%</div>
-        </div>
-        `} />
+        {[
+          { value: 0, label: '0%' },
+          { value: 25, label: '25%', theme: 'success' },
+          { value: 50, label: '50%', theme: 'info' },
+          { value: 75, label: '75%', theme: 'warning' },
+          { value: 100, label: '100%', theme: 'danger' }
+        ].map(({ value, label, theme }) => (
+          <Progress key={value} value={value} theme={theme} className="mb-3" aria-label={label + ' complete'}>{label}</Progress>
+        ))}
 
-        <MarkdownView children={normalizeMarkup`
-        <div class="progress-stacked">
-          <div class="progress" role="progressbar" aria-label="Segment one - default example" style={{"width": "15%"}} aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar"></div>
-          </div>
-          <div class="progress" role="progressbar" aria-label="Segment two - animated striped success example" style={{"width": "40%"}} aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"></div>
-          </div>
-        </div>
-        `} />
+        <Progress value={75} theme="primary" striped animated aria-label="Animated progress">75%</Progress>
       </div>
     </article>
     <article className="my-3" id="scrollspy">
@@ -1429,40 +1124,22 @@ export const normalizeMarkup = (content, ...values) =>
       </div>
 
       <div>
-        <MarkdownView children={normalizeMarkup`
-        <nav id="navbar-example2" class="navbar bg-1 px-3">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <ul class="nav nav-pills">
-            <li class="nav-item">
-              <a class="nav-link active" href="#scrollspyHeading1">First</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#scrollspyHeading2">Second</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" role="button" data-bs-toggle="menu" aria-expanded="false">Menu</a>
-              <div class="menu">
-                <a class="menu-item" href="#scrollspyHeading3">Third</a>
-                <a class="menu-item" href="#scrollspyHeading4">Fourth</a>
-                <hr class="menu-divider" />
-                <a class="menu-item" href="#scrollspyHeading5">Fifth</a>
-              </div>
-            </li>
-          </ul>
-        </nav>
-        <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example position-relative mt-2 overflow-auto" tabIndex="0">
-          <h4 id="scrollspyHeading1">First heading</h4>
-          <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
-          <h4 id="scrollspyHeading2">Second heading</h4>
-          <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
-          <h4 id="scrollspyHeading3">Third heading</h4>
-          <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
-          <h4 id="scrollspyHeading4">Fourth heading</h4>
-          <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
-          <h4 id="scrollspyHeading5">Fifth heading</h4>
-          <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
-        </div>
-        `} />
+        <Navbar id="navbar-example2" className="bg-1 px-3">
+          <NavbarBrand href="#">Navbar</NavbarBrand>
+          <Nav variant="pills">
+            {['First', 'Second', 'Third', 'Fourth', 'Fifth'].map((label, index) => (
+              <NavLink key={label} href={'#scrollspyHeading' + (index + 1)}>{label}</NavLink>
+            ))}
+          </Nav>
+        </Navbar>
+        <ScrollSpy target="#navbar-example2" className="mt-2 overflow-auto" style={{ height: 200 }}>
+          {['First', 'Second', 'Third', 'Fourth', 'Fifth'].map((label, index) => (
+            <section key={label}>
+              <h4 id={'scrollspyHeading' + (index + 1)}>{label} heading</h4>
+              <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
+            </section>
+          ))}
+        </ScrollSpy>
       </div>
     </article>
     <article className="my-3" id="spinners">
@@ -1472,17 +1149,9 @@ export const normalizeMarkup = (content, ...values) =>
       </div>
 
       <div>
-        <MarkdownView children={normalizeMarkup(getData('theme-colors').map((themeColor) => `
-        <div class="spinner-border fg-${themeColor.name}" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-        `).join(''))} />
+        {themeColors.map(({ name }) => <Spinner key={name} theme={name}><span className="visually-hidden">Loading...</span></Spinner>)}
 
-        <MarkdownView children={normalizeMarkup(getData('theme-colors').map((themeColor) => `
-        <div class="spinner-grow fg-${themeColor.name}" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-        `).join(''))} />
+        {themeColors.map(({ name }) => <Spinner key={name} animation="grow" theme={name}><span className="visually-hidden">Loading...</span></Spinner>)}
       </div>
     </article>
     <article className="my-3" id="toasts">
@@ -1491,21 +1160,15 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/toasts">Documentation</a>
       </div>
 
-      <div>
-        <MarkdownView className="p-5 align-items-center" children={normalizeMarkup`
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header">
-            <ExamplePlaceholder width="20" height="20" background="#007aff" class="rounded me-2" text={false} title={false} />
-            <strong class="me-auto">Bootstrap</strong>
-            <small class="fg-2">11 mins ago</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-          <div class="toast-body">
-            Hello, world! This is a toast message.
-          </div>
-        </div>
-        `} />
-      </div>
+      <ToastItem role="alert" aria-live="assertive" aria-atomic="true" className="p-5">
+        <ToastHeader>
+          <ExamplePlaceholder width="20" height="20" background="#007aff" className="rounded me-2" title={false} />
+          <strong className="me-auto">Bootstrap</strong>
+          <small className="fg-2">11 mins ago</small>
+          <CloseButton aria-label="Close" />
+        </ToastHeader>
+        <ToastBody>Hello, world! This is a toast message.</ToastBody>
+      </ToastItem>
     </article>
     <article className="mt-3 mb-5 pb-5" id="tooltips">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
@@ -1513,67 +1176,42 @@ export const normalizeMarkup = (content, ...values) =>
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/tooltip">Documentation</a>
       </div>
 
-      <div>
-        <MarkdownView className="tooltip-demo" children={normalizeMarkup`
-        <button type="button" class="btn-solid theme-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">Tooltip on top</button>
-        <button type="button" class="btn-solid theme-secondary" data-bs-toggle="tooltip" data-bs-placement="right" title="Tooltip on end">Tooltip on end</button>
-        <button type="button" class="btn-solid theme-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
-        <button type="button" class="btn-solid theme-secondary" data-bs-toggle="tooltip" data-bs-placement="left" title="Tooltip on start">Tooltip on start</button>
-        <button type="button" class="btn-solid theme-secondary" data-bs-toggle="tooltip" data-bs-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">Tooltip with HTML</button>
-        `} />
+      <div className="d-flex flex-wrap gap-3">
+        {[
+          { placement: 'top', label: 'Tooltip on top' },
+          { placement: 'right', label: 'Tooltip on end' },
+          { placement: 'bottom', label: 'Tooltip on bottom' },
+          { placement: 'left', label: 'Tooltip on start' }
+        ].map(({ placement, label }) => (
+          <div key={placement} className="d-flex flex-column align-items-center gap-2">
+            <Button variant="solid" theme="secondary" aria-describedby={'tooltip-' + placement}>{label}</Button>
+            <Tooltip id={'tooltip-' + placement} placement={placement}>{label}</Tooltip>
+          </div>
+        ))}
+        <Button variant="solid" theme="secondary" aria-describedby="tooltip-html">Tooltip with HTML</Button>
+        <Tooltip id="tooltip-html">Tooltip with HTML</Tooltip>
       </div>
     </article>
 
   </section>
 </Container>
 
-<NativeDialog id="exampleDialog">
-    <DialogHeader>
-        <DialogTitle className="fs-lg">Dialog title</DialogTitle>
-        <CloseButton {...{ commandfor: 'exampleDialog', command: 'close' }} aria-label="Close" />
-    </DialogHeader>
-    <DialogBody>
-        <p>This is a native dialog element using Bootstrap's Dialog component.</p>
-    </DialogBody>
-    <DialogFooter>
-        <Button
-            variant="solid"
-            theme="secondary"
-            {...{ commandfor: 'exampleDialog', command: 'close' }}
-        >
-            Close
-        </Button>
-        <Button variant="solid" theme="primary">
-            Save changes
-        </Button>
-    </DialogFooter>
-
+{dialogExamples.map(({ id, title, description, action, backdrop, keyboard }) => (
+<NativeDialog key={id} id={id} backdrop={backdrop} keyboard={keyboard}>
+<DialogHeader>
+<DialogTitle className="fs-lg">{title}</DialogTitle>
+<CloseButton {...{ commandfor: id, command: 'close' }} aria-label="Close" />
+</DialogHeader>
+<DialogBody>
+<p>{description}</p>
+</DialogBody>
+<DialogFooter>
+<Button variant="solid" theme="secondary" {...{ commandfor: id, command: 'close' }}>
+Close
+</Button>
+<Button variant="solid" theme="primary">{action}</Button>
+</DialogFooter>
 </NativeDialog>
-
-<NativeDialog id="staticBackdropDialog" backdrop="static" keyboard={false}>
-    <DialogHeader>
-        <DialogTitle className="fs-lg">Static backdrop</DialogTitle>
-        <CloseButton
-            {...{ commandfor: 'staticBackdropDialog', command: 'close' }}
-            aria-label="Close"
-        />
-    </DialogHeader>
-    <DialogBody>
-        <p>I will not close if you click outside of me. Use the close button or press Escape.</p>
-    </DialogBody>
-    <DialogFooter>
-        <Button
-            variant="solid"
-            theme="secondary"
-            {...{ commandfor: 'staticBackdropDialog', command: 'close' }}
-        >
-            Close
-        </Button>
-        <Button variant="solid" theme="primary">
-            Understood
-        </Button>
-    </DialogFooter>
-
-</NativeDialog>
+))}
 
 </BaseLayout>

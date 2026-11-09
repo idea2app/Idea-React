@@ -1,27 +1,26 @@
 import classNames from 'classnames';
-import { CSSProperties, FC, ReactNode } from 'react';
+import { CSSProperties, FC, PropsWithChildren, ReactNode } from 'react';
 
-export type PlaceholderProps = {
+export type PlaceholderProps = PropsWithChildren<{
     width?: number | string;
     height?: number | string;
     background?: string;
     color?: string;
-    text?: ReactNode | false;
     title?: ReactNode | false;
     className?: string;
-};
+}>;
 
 export const Placeholder: FC<PlaceholderProps> = ({
     width,
     height,
     background = 'var(--bs-secondary-color)',
     color = 'var(--bs-body-bg)',
-    text = 'Placeholder',
+    children = 'Placeholder',
     title,
     className
 }) => {
     const style: CSSProperties = { width, height, backgroundColor: background, color };
-    const label = title === false ? undefined : title || text || undefined;
+    const label = title === false ? undefined : title || children || undefined;
 
     return (
         <div

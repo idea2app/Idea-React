@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 
 import { Icon } from '../../../source/Extension/Icon';
+import { Col, Container, Row } from '../../../source/Layout/Grid';
 import { DocumentLink } from './Header';
 
 export type DocumentFooterProps = PropsWithChildren<{
@@ -15,9 +16,9 @@ export const DocumentFooter: FC<DocumentFooterProps> = ({
     homeHref = './',
     brand = 'Idea React'
 }) => (
-    <footer className="container mt-12 py-12 px-6 fg-2">
-        <div className="row g-9">
-            <div className="col-12 lg:col-4">
+    <Container as="footer" className="mt-12 py-12 px-6 fg-2">
+        <Row className="g-9">
+            <Col xs={12} lg={4}>
                 <a
                     href={homeHref}
                     className="d-inline-flex align-items-center gap-3 mb-4 fg-body text-lg text-decoration-none"
@@ -26,9 +27,9 @@ export const DocumentFooter: FC<DocumentFooterProps> = ({
                     <span>{brand}</span>
                 </a>
                 <div className="text-sm">{children}</div>
-            </div>
+            </Col>
             {columns.map(({ title, links }) => (
-                <section key={title} className="col-6 md:col-3 lg:col-2">
+                <Col key={title} as="section" xs={6} md={3} lg={2}>
                     <h2 className="text-lg fw-medium mb-3">{title}</h2>
                     <ul className="list-unstyled mb-0">
                         {links.map(({ href, label }) => (
@@ -39,8 +40,8 @@ export const DocumentFooter: FC<DocumentFooterProps> = ({
                             </li>
                         ))}
                     </ul>
-                </section>
+                </Col>
             ))}
-        </div>
-    </footer>
+        </Row>
+    </Container>
 );
