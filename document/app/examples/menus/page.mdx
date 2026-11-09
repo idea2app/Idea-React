@@ -5,6 +5,21 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
 import { Button } from '../../../../source/Base/Button';
 import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 
+export const menuItems = ['Action', 'Another action', 'Something else here'];
+export const coloredMenuItems = [
+    { label: 'Action', color: 'success' },
+    { label: 'Another action', color: 'primary' },
+    { label: 'Something else here', color: 'danger' },
+    { label: 'Separated link', color: 'info' }
+];
+export const iconMenuItems = [
+    { label: 'Documents', icon: 'files' },
+    { label: 'Photos', icon: 'image-fill' },
+    { label: 'Movies', icon: 'film' },
+    { label: 'Music', icon: 'music-note-beamed' },
+    { label: 'Games', icon: 'joystick' }
+];
+
 <BaseLayout title="Menus">
 
 <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
@@ -33,7 +48,9 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 
 <symbol id="trash" viewBox="0 0 16 16">
     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-    <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+    <path
+        fillRule="evenodd"
+        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
     />
 </symbol>
 
@@ -43,7 +60,9 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 </symbol>
 
 <symbol id="arrow-left-short" viewBox="0 0 16 16">
-    <path fillRule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
+    <path
+        fillRule="evenodd"
+        d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
     />
 </symbol>
 
@@ -54,30 +73,22 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 
 <div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
     <MenuPanel theme="light" className="position-static d-flex p-2 mx-0 w-220px opacity-100">
-        <MenuItem active as="a" href="#">
-            Action
-        </MenuItem>
-        <MenuItem as="a" href="#">
-            Another action
-        </MenuItem>
-        <MenuItem as="a" href="#">
-            Something else here
-        </MenuItem>
+        {menuItems.map((label, index) => (
+            <MenuItem key={label} active={index === 0} as="a" href="#">
+                {label}
+            </MenuItem>
+        ))}
         <MenuDivider />
         <MenuItem as="a" href="#">
             Separated link
         </MenuItem>
     </MenuPanel>
     <MenuPanel theme="dark" className="position-static d-flex p-2 mx-0 w-220px opacity-100">
-        <MenuItem active as="a" href="#">
-            Action
-        </MenuItem>
-        <MenuItem as="a" href="#">
-            Another action
-        </MenuItem>
-        <MenuItem as="a" href="#">
-            Something else here
-        </MenuItem>
+        {menuItems.map((label, index) => (
+            <MenuItem key={label} active={index === 0} as="a" href="#">
+                {label}
+            </MenuItem>
+        ))}
         <MenuDivider />
         <MenuItem as="a" href="#">
             Separated link
@@ -92,44 +103,24 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
     <form className="p-2 mb-2 mx--2 mt--2 bg-1 border-bottom">
       <FormControl type="search" autoComplete="false" placeholder="Type to filter..." />
     </form>
-    <MenuItem as="a" className="py-2" href="#">
-      <span className="d-inline-block bg-success rounded-circle p-1"></span>
-      Action
-    </MenuItem>
-    <MenuItem as="a" className="py-2" href="#">
-      <span className="d-inline-block bg-primary rounded-circle p-1"></span>
-      Another action
-    </MenuItem>
-    <MenuItem as="a" className="py-2" href="#">
-      <span className="d-inline-block bg-danger rounded-circle p-1"></span>
-      Something else here
-    </MenuItem>
-    <MenuItem as="a" className="py-2" href="#">
-      <span className="d-inline-block bg-info rounded-circle p-1"></span>
-      Separated link
-    </MenuItem>
+    {coloredMenuItems.map(({ label, color }) => (
+      <MenuItem key={label} as="a" className="py-2" href="#">
+        <span className={`d-inline-block bg-${color} rounded-circle p-1`}></span>
+        {label}
+      </MenuItem>
+    ))}
   </MenuPanel>
 
   <MenuPanel theme="dark" className="d-block position-static mx-0 p-2 overflow-hidden w-280px opacity-100" >
     <form className="p-2 mb-2 mx--2 mt--2 bg-1 border-bottom">
       <FormControl type="search" autoComplete="false" placeholder="Type to filter..." />
     </form>
-    <MenuItem as="a" className="py-2" href="#">
-      <span className="d-inline-block bg-success rounded-circle p-1"></span>
-      Action
-    </MenuItem>
-    <MenuItem as="a" className="py-2" href="#">
-      <span className="d-inline-block bg-primary rounded-circle p-1"></span>
-      Another action
-    </MenuItem>
-    <MenuItem as="a" className="py-2" href="#">
-      <span className="d-inline-block bg-danger rounded-circle p-1"></span>
-      Something else here
-    </MenuItem>
-    <MenuItem as="a" className="py-2" href="#">
-      <span className="d-inline-block bg-info rounded-circle p-1"></span>
-      Separated link
-    </MenuItem>
+    {coloredMenuItems.map(({ label, color }) => (
+      <MenuItem key={label} as="a" className="py-2" href="#">
+        <span className={`d-inline-block bg-${color} rounded-circle p-1`}></span>
+        {label}
+      </MenuItem>
+    ))}
   </MenuPanel>
 </div>
 
@@ -137,56 +128,28 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 
 <div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
     <MenuPanel theme="light" className="d-flex position-static mx-0 w-220px opacity-100">
-        <MenuItem as="a" href="#">
-            <Icon name="files" size={1} aria-hidden="true" />
-            Documents
-        </MenuItem>
-        <MenuItem as="a" href="#">
-            <Icon name="image-fill" size={1} aria-hidden="true" />
-            Photos
-        </MenuItem>
-        <MenuItem as="a" href="#">
-            <Icon name="film" size={1} aria-hidden="true" />
-            Movies
-        </MenuItem>
-        <MenuItem as="a" href="#">
-            <Icon name="music-note-beamed" size={1} aria-hidden="true" />
-            Music
-        </MenuItem>
-        <MenuItem as="a" href="#">
-            <Icon name="joystick" size={1} aria-hidden="true" />
-            Games
-        </MenuItem>
+        {iconMenuItems.map(({ label, icon }) => (
+            <MenuItem key={label} as="a" href="#">
+                <Icon name={icon} size={1} />
+                {label}
+            </MenuItem>
+        ))}
         <MenuDivider />
         <MenuItem as="a" className="theme-danger" href="#">
-            <Icon name="trash" size={1} aria-hidden="true" />
+            <Icon name="trash" size={1} />
             Trash
         </MenuItem>
     </MenuPanel>
     <MenuPanel theme="dark" className="d-flex position-static mx-0 w-220px opacity-100">
-        <MenuItem as="a" href="#">
-            <Icon name="files" size={1} aria-hidden="true" />
-            Documents
-        </MenuItem>
-        <MenuItem as="a" href="#">
-            <Icon name="image-fill" size={1} aria-hidden="true" />
-            Photos
-        </MenuItem>
-        <MenuItem as="a" href="#">
-            <Icon name="film" size={1} aria-hidden="true" />
-            Movies
-        </MenuItem>
-        <MenuItem as="a" href="#">
-            <Icon name="music-note-beamed" size={1} aria-hidden="true" />
-            Music
-        </MenuItem>
-        <MenuItem as="a" href="#">
-            <Icon name="joystick" size={1} aria-hidden="true" />
-            Games
-        </MenuItem>
+        {iconMenuItems.map(({ label, icon }) => (
+            <MenuItem key={label} as="a" href="#">
+                <Icon name={icon} size={1} />
+                {label}
+            </MenuItem>
+        ))}
         <MenuDivider />
         <MenuItem as="a" className="theme-danger" href="#">
-            <Icon name="trash" size={1} aria-hidden="true" />
+            <Icon name="trash" size={1} />
             Trash
         </MenuItem>
     </MenuPanel>
@@ -199,8 +162,8 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
     <nav>
       <ul className="list-unstyled d-flex flex-column gap-1 mb-0">
         <li>
-          <Button variant="text" theme="light" as="a" href="#" className="w-100 justify-content-start gap-3 p-3 px-4 lh-sm text-start">
-            <Icon name="image-fill" size={1.5} aria-hidden="true" />
+          <Button variant="text" theme="light" href="#" className="w-100 justify-content-start gap-3 p-3 px-4 lh-sm text-start">
+            <Icon name="image-fill" size={1.5} />
             <div>
               <strong className="d-block">Main product</strong>
               <small>Take a tour through the product</small>
@@ -208,8 +171,8 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
           </Button>
         </li>
         <li>
-          <Button variant="text" theme="light" as="a" href="#" className="w-100 justify-content-start gap-3 p-3 px-4 lh-sm text-start">
-            <Icon name="music-note-beamed" size={1.5} aria-hidden="true" />
+          <Button variant="text" theme="light" href="#" className="w-100 justify-content-start gap-3 p-3 px-4 lh-sm text-start">
+            <Icon name="music-note-beamed" size={1.5} />
             <div>
               <strong className="d-block">Another product</strong>
               <small>Explore this other product we offer</small>
@@ -217,8 +180,8 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
           </Button>
         </li>
         <li>
-          <Button variant="text" theme="light" as="a" href="#" className="w-100 justify-content-start gap-3 p-3 px-4 lh-sm text-start">
-            <Icon name="question-circle" size={1.5} aria-hidden="true" />
+          <Button variant="text" theme="light" href="#" className="w-100 justify-content-start gap-3 p-3 px-4 lh-sm text-start">
+            <Icon name="question-circle" size={1.5} />
             <div>
               <strong className="d-block">Support</strong>
               <small>Get help from our support crew</small>
@@ -246,8 +209,8 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
     <nav>
       <ul className="list-unstyled d-flex flex-column gap-1 mb-0">
         <li>
-          <Button variant="text" theme="light" as="a" href="#" className="w-100 justify-content-start gap-3 p-3 px-4 lh-sm text-start">
-            <Icon name="image-fill" size={1.5} aria-hidden="true" />
+          <Button variant="text" theme="light" href="#" className="w-100 justify-content-start gap-3 p-3 px-4 lh-sm text-start">
+            <Icon name="image-fill" size={1.5} />
             <div>
               <strong className="d-block">Main product</strong>
               <small>Take a tour through the product</small>
@@ -255,8 +218,8 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
           </Button>
         </li>
         <li>
-          <Button variant="text" theme="light" as="a" href="#" className="w-100 justify-content-start gap-3 p-3 px-4 lh-sm text-start">
-            <Icon name="music-note-beamed" size={1.5} aria-hidden="true" />
+          <Button variant="text" theme="light" href="#" className="w-100 justify-content-start gap-3 p-3 px-4 lh-sm text-start">
+            <Icon name="music-note-beamed" size={1.5} />
             <div>
               <strong className="d-block">Another product</strong>
               <small>Explore this other product we offer</small>
@@ -264,8 +227,8 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
           </Button>
         </li>
         <li>
-          <Button variant="text" theme="light" as="a" href="#" className="w-100 justify-content-start gap-3 p-3 px-4 lh-sm text-start">
-            <Icon name="question-circle" size={1.5} aria-hidden="true" />
+          <Button variant="text" theme="light" href="#" className="w-100 justify-content-start gap-3 p-3 px-4 lh-sm text-start">
+            <Icon name="question-circle" size={1.5} />
             <div>
               <strong className="d-block">Support</strong>
               <small>Get help from our support crew</small>

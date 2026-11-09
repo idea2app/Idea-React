@@ -296,7 +296,13 @@ it('forwards ScrollNav refs and attributes to the selected outer root', t => {
     const clicked = t.mock.fn();
 
     render(
-        <ScrollNav ref={ref} as="section" aria-label="Sections" onClick={clicked}>
+        <ScrollNav
+            ref={ref}
+            as="section"
+            aria-label="Sections"
+            navClassName="justify-content-between"
+            onClick={clicked}
+        >
             <NavLink href="/docs">Documentation</NavLink>
         </ScrollNav>
     );
@@ -304,7 +310,7 @@ it('forwards ScrollNav refs and attributes to the selected outer root', t => {
 
     assert.equal(root?.tagName, 'SECTION');
     assert.equal(root?.getAttribute('aria-label'), 'Sections');
-    assert.ok(root?.querySelector('.nav'));
+    assert.ok(root?.querySelector('.nav')?.classList.contains('justify-content-between'));
 
     fireEvent.click(screen.getByRole('link', { name: 'Documentation' }));
 

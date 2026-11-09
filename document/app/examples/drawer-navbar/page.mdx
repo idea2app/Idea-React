@@ -1,17 +1,60 @@
+import { Container } from '../../../../source/Layout/Grid';
 import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
 import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
 import { Button } from '../../../../source/Base/Button';
-import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
+import { NavItem, NavLink } from '../../../../source/Base/Nav';
 import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../source/Form';
 import { Badge } from '../../../../source/Base/Badge';
 import { MenuPanel, MenuItem } from '../../../../source/Base/Menu';
+import { ScrollNav } from '../../../../source/Extension/ScrollNav';
+
+export const primaryNavItems = [
+    { label: 'Dashboard', active: true },
+    { label: 'Notifications' },
+    { label: 'Profile' },
+    { label: 'Switch account' },
+    { label: 'Settings', menuItems: ['Action', 'Another action', 'Something else here'] }
+];
+export const secondaryNavItems = [
+    { id: 'dashboard', label: 'Dashboard', active: true },
+    { id: 'friends', label: 'Friends', badge: 27 },
+    { id: 'explore', label: 'Explore' },
+    { id: 'suggestions', label: 'Suggestions' },
+    { id: 'link-1', label: 'Link' },
+    { id: 'link-2', label: 'Link' },
+    { id: 'link-3', label: 'Link' },
+    { id: 'link-4', label: 'Link' },
+    { id: 'link-5', label: 'Link' }
+];
+export const recentUpdates = [
+    {
+        color: '#007bff',
+        content:
+            'Some representative placeholder content, with some information about this user. Imagine this being some sort of status update, perhaps?'
+    },
+    {
+        color: '#e83e8c',
+        content:
+            'Some more representative placeholder content, related to this other user. Another status update, perhaps.'
+    },
+    {
+        color: '#6f42c1',
+        content:
+            'This user also gets some representative placeholder content. Maybe they did something interesting, and you really want to highlight this in the recent updates.'
+    }
+];
+export const suggestions = [
+    { id: 1, name: 'Full Name', username: '@username' },
+    { id: 2, name: 'Full Name', username: '@username' },
+    { id: 3, name: 'Full Name', username: '@username' }
+];
 
 <BaseLayout title="Drawer navbar template" className="bg-1">
 
 <Navbar theme="dark" expand="lg" className="fixed-top" aria-label="Main navigation">
-  <div className="container-fluid">
+  <Container fluid>
     <NavbarBrand href="#">Drawer navbar</NavbarBrand>
     <NavbarToggler className="p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
 
@@ -19,26 +62,27 @@ import { MenuPanel, MenuItem } from '../../../../source/Base/Menu';
 
     <div className="drawer-collapse" id="navbarsExampleDefault">
       <NavbarNav className="me-auto mb-2 lg:mb-0">
-        <NavItem >
-          <NavLink active aria-current="page" href="#">Dashboard</NavLink>
-        </NavItem>
-        <NavItem >
-          <NavLink href="#">Notifications</NavLink>
-        </NavItem>
-        <NavItem >
-          <NavLink href="#">Profile</NavLink>
-        </NavItem>
-        <NavItem >
-          <NavLink href="#">Switch account</NavLink>
-        </NavItem>
-        <NavItem >
-          <NavLink href="#" role="button" data-bs-toggle="menu" aria-expanded="false">Settings</NavLink>
-          <MenuPanel >
-            <MenuItem as="a" href="#">Action</MenuItem>
-            <MenuItem as="a" href="#">Another action</MenuItem>
-            <MenuItem as="a" href="#">Something else here</MenuItem>
-          </MenuPanel>
-        </NavItem>
+        {primaryNavItems.map(({ label, active, menuItems }) => (
+          <NavItem key={label}>
+            <NavLink
+              active={active}
+              aria-current={active ? 'page' : undefined}
+              href="#"
+              role={menuItems ? 'button' : undefined}
+              data-bs-toggle={menuItems ? 'menu' : undefined}
+              aria-expanded={menuItems ? false : undefined}
+            >
+              {label}
+            </NavLink>
+            {menuItems && (
+              <MenuPanel>
+                {menuItems.map((menuItem) => (
+                  <MenuItem key={menuItem} as="a" href="#">{menuItem}</MenuItem>
+                ))}
+              </MenuPanel>
+            )}
+          </NavItem>
+        ))}
       </NavbarNav>
       <form className="d-flex" role="search">
         <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
@@ -46,33 +90,29 @@ import { MenuPanel, MenuItem } from '../../../../source/Base/Menu';
       </form>
     </div>
 
-  </div>
+  </Container>
 </Navbar>
 
-<div className="nav-scroller bg-body shadow-sm">
-    <Nav aria-label="Secondary navigation">
-        <NavLink active aria-current="page" href="#">
-            Dashboard
+<ScrollNav
+    aria-label="Secondary navigation"
+    className="bg-body shadow-sm"
+    navClassName="nav-scroller-nav"
+>
+    {secondaryNavItems.map(({ id, label, active, badge }) => (
+        <NavLink key={id} active={active} aria-current={active ? 'page' : undefined} href="#">
+            {label}
+            {badge && (
+                <Badge theme="secondary" pill className="align-text-bottom">
+                    {badge}
+                </Badge>
+            )}
         </NavLink>
-        <NavLink href="#">
-            Friends
-            <Badge theme="secondary" pill className="align-text-bottom">
-                27
-            </Badge>
-        </NavLink>
-        <NavLink href="#">Explore</NavLink>
-        <NavLink href="#">Suggestions</NavLink>
-        <NavLink href="#">Link</NavLink>
-        <NavLink href="#">Link</NavLink>
-        <NavLink href="#">Link</NavLink>
-        <NavLink href="#">Link</NavLink>
-        <NavLink href="#">Link</NavLink>
-    </Nav>
-</div>
+    ))}
+</ScrollNav>
 
-<div className="container">
+<Container >
   <div className="d-flex align-items-center p-3 my-3 fg-white bg-purple rounded shadow-sm">
-    <img className="me-3" src={"https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg"} alt="Bootstrap" width="48" height="38" />
+    <img className="me-3" src="https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg" alt="Bootstrap" width="48" height="38" />
     <div className="lh-1">
       <h1 className="h6 mb-0 fg-white lh-1">Bootstrap</h1>
       <small>Since 2011</small>
@@ -81,33 +121,21 @@ import { MenuPanel, MenuItem } from '../../../../source/Base/Menu';
 
 <div className="my-3 p-3 bg-body rounded shadow-sm">
     <h6 className="border-bottom pb-2 mb-0">Recent updates</h6>
-    <div className="d-flex fg-2 pt-3">
-        <ExamplePlaceholder width="32" height="32" background="#007bff" color="#007bff" className="flex-shrink-0 me-2 rounded"
-        />
-        <p className="pb-3 mb-0 small lh-sm border-bottom">
-            <strong className="d-block text-gray-dark">@username</strong>
-            Some representative placeholder content, with some information about this user. Imagine
-            this being some sort of status update, perhaps?
-        </p>
-    </div>
-    <div className="d-flex fg-2 pt-3">
-        <ExamplePlaceholder width="32" height="32" background="#e83e8c" color="#e83e8c" className="flex-shrink-0 me-2 rounded"
-        />
-        <p className="pb-3 mb-0 small lh-sm border-bottom">
-            <strong className="d-block text-gray-dark">@username</strong>
-            Some more representative placeholder content, related to this other user. Another status
-            update, perhaps.
-        </p>
-    </div>
-    <div className="d-flex fg-2 pt-3">
-        <ExamplePlaceholder width="32" height="32" background="#6f42c1" color="#6f42c1" className="flex-shrink-0 me-2 rounded"
-        />
-        <p className="pb-3 mb-0 small lh-sm border-bottom">
-            <strong className="d-block text-gray-dark">@username</strong>
-            This user also gets some representative placeholder content. Maybe they did something
-            interesting, and you really want to highlight this in the recent updates.
-        </p>
-    </div>
+    {recentUpdates.map(({ color, content }) => (
+        <div key={color} className="d-flex fg-2 pt-3">
+            <ExamplePlaceholder
+                width="32"
+                height="32"
+                background={color}
+                color={color}
+                className="flex-shrink-0 me-2 rounded"
+            />
+            <p className="pb-3 mb-0 small lh-sm border-bottom">
+                <strong className="d-block text-gray-dark">@username</strong>
+                {content}
+            </p>
+        </div>
+    ))}
     <small className="d-block text-end mt-3">
         <a href="#">All updates</a>
     </small>
@@ -115,40 +143,22 @@ import { MenuPanel, MenuItem } from '../../../../source/Base/Menu';
 
   <div className="my-3 p-3 bg-body rounded shadow-sm">
     <h6 className="border-bottom pb-2 mb-0">Suggestions</h6>
-    <div className="d-flex fg-2 pt-3">
-      <ExamplePlaceholder width="32" height="32" background="#007bff" color="#007bff" className="flex-shrink-0 me-2 rounded" />
-      <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
-        <div className="d-flex justify-content-between">
-          <strong className="text-gray-dark">Full Name</strong>
-          <a href="#">Follow</a>
+    {suggestions.map(({ id, name, username }) => (
+      <div key={id} className="d-flex fg-2 pt-3">
+        <ExamplePlaceholder width="32" height="32" background="#007bff" color="#007bff" className="flex-shrink-0 me-2 rounded" />
+        <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
+          <div className="d-flex justify-content-between">
+            <strong className="text-gray-dark">{name}</strong>
+            <a href="#">Follow</a>
+          </div>
+          <span className="d-block">{username}</span>
         </div>
-        <span className="d-block">@username</span>
       </div>
-    </div>
-    <div className="d-flex fg-2 pt-3">
-      <ExamplePlaceholder width="32" height="32" background="#007bff" color="#007bff" className="flex-shrink-0 me-2 rounded" />
-      <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
-        <div className="d-flex justify-content-between">
-          <strong className="text-gray-dark">Full Name</strong>
-          <a href="#">Follow</a>
-        </div>
-        <span className="d-block">@username</span>
-      </div>
-    </div>
-    <div className="d-flex fg-2 pt-3">
-      <ExamplePlaceholder width="32" height="32" background="#007bff" color="#007bff" className="flex-shrink-0 me-2 rounded" />
-      <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
-        <div className="d-flex justify-content-between">
-          <strong className="text-gray-dark">Full Name</strong>
-          <a href="#">Follow</a>
-        </div>
-        <span className="d-block">@username</span>
-      </div>
-    </div>
+    ))}
     <small className="d-block text-end mt-3">
       <a href="#">All suggestions</a>
     </small>
   </div>
-</div>
+</Container>
 
 </BaseLayout>

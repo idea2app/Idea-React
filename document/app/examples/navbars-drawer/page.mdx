@@ -1,3 +1,4 @@
+import { Col, Container } from '../../../../source/Layout/Grid';
 import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
@@ -14,11 +15,18 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
 import { CloseButton } from '../../../../source/Base/CloseButton';
 import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 
+export const drawerNavItems = [
+    { label: 'Home', active: true },
+    { label: 'Link' },
+    { label: 'Menu', menu: true }
+];
+export const drawerMenuItems = ['Action', 'Another action', 'Something else here'];
+
 <BaseLayout title="Navbar Template">
 
 <div>
   <Navbar theme="dark" aria-label="Dark drawer navbar">
-    <div className="container-fluid">
+    <Container fluid>
       <NavbarBrand href="#">Dark drawer navbar</NavbarBrand>
       <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#drawerNavbarDark" aria-controls="drawerNavbarDark" aria-label="Toggle navigation">
 
@@ -30,23 +38,31 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
         </div>
         <div className="drawer-body">
           <NavbarNav className="pe-3">
-            <NavItem >
-              <NavLink active aria-current="page" href="#">Home</NavLink>
-            </NavItem>
-            <NavItem >
-              <NavLink href="#">Link</NavLink>
-            </NavItem>
-            <NavItem >
-              <NavLink href="#" role="button" data-bs-toggle="menu" aria-expanded="false">
-                Menu
-              </NavLink>
-              <MenuPanel >
-                <MenuItem as="a" href="#">Action</MenuItem>
-                <MenuItem as="a" href="#">Another action</MenuItem>
-                <MenuDivider />
-                <MenuItem as="a" href="#">Something else here</MenuItem>
-              </MenuPanel>
-            </NavItem>
+            {drawerNavItems.map(({ label, active, menu }) => (
+              <NavItem key={label}>
+                <NavLink
+                  active={active}
+                  aria-current={active ? 'page' : undefined}
+                  href="#"
+                  role={menu ? 'button' : undefined}
+                  data-bs-toggle={menu ? 'menu' : undefined}
+                  aria-expanded={menu ? false : undefined}
+                >
+                  {label}
+                </NavLink>
+                {menu && (
+                  <MenuPanel>
+                    {drawerMenuItems.slice(0, 2).map((item) => (
+                      <MenuItem key={item} as="a" href="#">{item}</MenuItem>
+                    ))}
+                    <MenuDivider />
+                    {drawerMenuItems.slice(2).map((item) => (
+                      <MenuItem key={item} as="a" href="#">{item}</MenuItem>
+                    ))}
+                  </MenuPanel>
+                )}
+              </NavItem>
+            ))}
           </NavbarNav>
           <form className="d-flex mt-3" role="search">
             <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search" />
@@ -54,12 +70,12 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
           </form>
         </div>
       </NativeDialog>
-    </div>
+    </Container>
 
   </Navbar>
 
 <Navbar theme="light" aria-label="Light drawer navbar">
-    <div className="container-fluid">
+    <Container fluid>
         <NavbarBrand href="#">Light drawer navbar</NavbarBrand>
         <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#drawerNavbarLight" aria-controls="drawerNavbarLight" aria-label="Toggle navigation"
         ></NavbarToggler>
@@ -74,31 +90,31 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
             </div>
             <div className="drawer-body">
                 <NavbarNav className="pe-3">
-                    <NavItem>
-                        <NavLink active aria-current="page" href="#">
-                            Home
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="#">Link</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="#" role="button" data-bs-toggle="menu" aria-expanded="false">
-                            Menu
-                        </NavLink>
-                        <MenuPanel>
-                            <MenuItem as="a" href="#">
-                                Action
-                            </MenuItem>
-                            <MenuItem as="a" href="#">
-                                Another action
-                            </MenuItem>
-                            <MenuDivider />
-                            <MenuItem as="a" href="#">
-                                Something else here
-                            </MenuItem>
-                        </MenuPanel>
-                    </NavItem>
+                    {drawerNavItems.map(({ label, active, menu }) => (
+                        <NavItem key={label}>
+                            <NavLink
+                                active={active}
+                                aria-current={active ? 'page' : undefined}
+                                href="#"
+                                role={menu ? 'button' : undefined}
+                                data-bs-toggle={menu ? 'menu' : undefined}
+                                aria-expanded={menu ? false : undefined}
+                            >
+                                {label}
+                            </NavLink>
+                            {menu && (
+                                <MenuPanel>
+                                    {drawerMenuItems.slice(0, 2).map((item) => (
+                                        <MenuItem key={item} as="a" href="#">{item}</MenuItem>
+                                    ))}
+                                    <MenuDivider />
+                                    {drawerMenuItems.slice(2).map((item) => (
+                                        <MenuItem key={item} as="a" href="#">{item}</MenuItem>
+                                    ))}
+                                </MenuPanel>
+                            )}
+                        </NavItem>
+                    ))}
                 </NavbarNav>
                 <form className="d-flex mt-3" role="search">
                     <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search"
@@ -109,12 +125,12 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
                 </form>
             </div>
         </NativeDialog>
-    </div>
+    </Container>
 
 </Navbar>
 
 <Navbar theme="dark" expand="lg" aria-label="Drawer navbar large">
-    <div className="container-fluid">
+    <Container fluid>
         <NavbarBrand href="#">Responsive drawer navbar</NavbarBrand>
         <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#drawerNavbar2" aria-controls="drawerNavbar2" aria-label="Toggle navigation"
         ></NavbarToggler>
@@ -129,31 +145,31 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
             </div>
             <div className="drawer-body">
                 <NavbarNav className="lg:justify-content-end lg:flex-grow-1 pe-3">
-                    <NavItem>
-                        <NavLink active aria-current="page" href="#">
-                            Home
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="#">Link</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="#" role="button" data-bs-toggle="menu" aria-expanded="false">
-                            Menu
-                        </NavLink>
-                        <MenuPanel>
-                            <MenuItem as="a" href="#">
-                                Action
-                            </MenuItem>
-                            <MenuItem as="a" href="#">
-                                Another action
-                            </MenuItem>
-                            <MenuDivider />
-                            <MenuItem as="a" href="#">
-                                Something else here
-                            </MenuItem>
-                        </MenuPanel>
-                    </NavItem>
+                    {drawerNavItems.map(({ label, active, menu }) => (
+                        <NavItem key={label}>
+                            <NavLink
+                                active={active}
+                                aria-current={active ? 'page' : undefined}
+                                href="#"
+                                role={menu ? 'button' : undefined}
+                                data-bs-toggle={menu ? 'menu' : undefined}
+                                aria-expanded={menu ? false : undefined}
+                            >
+                                {label}
+                            </NavLink>
+                            {menu && (
+                                <MenuPanel>
+                                    {drawerMenuItems.slice(0, 2).map((item) => (
+                                        <MenuItem key={item} as="a" href="#">{item}</MenuItem>
+                                    ))}
+                                    <MenuDivider />
+                                    {drawerMenuItems.slice(2).map((item) => (
+                                        <MenuItem key={item} as="a" href="#">{item}</MenuItem>
+                                    ))}
+                                </MenuPanel>
+                            )}
+                        </NavItem>
+                    ))}
                 </NavbarNav>
                 <form className="d-flex mt-3 lg:mt-0" role="search">
                     <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search"
@@ -164,22 +180,22 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
                 </form>
             </div>
         </NativeDialog>
-    </div>
+    </Container>
 
 </Navbar>
 
-  <div className="container my-5">
+  <Container className="my-5">
     <div className="p-5 rounded">
-      <div className="sm:col-8 py-5 mx-auto">
+      <Col sm={8} className="py-5 mx-auto">
         <h1 className="fs-4xl fw-normal">Navbar with drawer examples</h1>
-        <p className="fs-lg">This example shows how responsive drawer menus work within the navbar. For positioning of navbars, checkout the <a href={"https://getbootstrap.com/docs/6.0/examples/navbar-static/"}>top</a> and <a href={"https://getbootstrap.com/docs/6.0/examples/navbar-fixed/"}>fixed top</a> examples.</p>
+        <p className="fs-lg">This example shows how responsive drawer menus work within the navbar. For positioning of navbars, checkout the <a href="https://getbootstrap.com/docs/6.0/examples/navbar-static/">top</a> and <a href="https://getbootstrap.com/docs/6.0/examples/navbar-fixed/">fixed top</a> examples.</p>
         <p>From the top down, you'll see a dark navbar, light navbar and a responsive navbar—each with drawers built in. Resize your browser window to the large breakpoint to see the toggle for the drawer.</p>
         <p>
-          <Button variant="solid" theme="primary" as="a" href={"https://getbootstrap.com/docs/6.0/components/navbar#drawer"} role="button">Learn more about drawer navbars &raquo;</Button>
+          <Button variant="solid" theme="primary" href="https://getbootstrap.com/docs/6.0/components/navbar#drawer" role="button">Learn more about drawer navbars &raquo;</Button>
         </p>
+    </Col>
     </div>
-    </div>
-  </div>
+  </Container>
 </div>
 
 </BaseLayout>

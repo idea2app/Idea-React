@@ -4,6 +4,59 @@ import { Icon } from '../../../../source/Extension/Icon';
 import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
 import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../source/Form';
 
+export const activityItems = [
+    {
+        title: 'List group item heading',
+        text: 'Some placeholder content in a paragraph.',
+        time: 'now'
+    },
+    {
+        title: 'Another title here',
+        text: 'Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.',
+        time: '3d'
+    },
+    { title: 'Third heading', text: 'Some placeholder content in a paragraph.', time: '1w' }
+];
+export const checkableItems = [
+    {
+        label: 'First checkbox',
+        description: 'With support text underneath to add more detail',
+        checked: true
+    },
+    { label: 'Second checkbox', description: 'Some other text goes here', checked: false },
+    {
+        label: 'Third checkbox',
+        description: 'And we end with another snippet of text',
+        checked: false
+    }
+];
+export const radioItems = [
+    {
+        label: 'First radio',
+        description: 'With support text underneath to add more detail',
+        checked: true
+    },
+    { label: 'Second radio', description: 'Some other text goes here', checked: false },
+    { label: 'Third radio', description: 'And we end with another snippet of text', checked: false }
+];
+export const taskItems = [
+    {
+        title: 'Finish sales report',
+        icon: 'calendar-event',
+        label: 'Schedule',
+        detail: '1:00–2:00pm',
+        checked: true
+    },
+    {
+        title: 'Weekly All Hands',
+        icon: 'calendar-event',
+        label: 'Schedule',
+        detail: '2:00–2:30pm',
+        checked: false
+    },
+    { title: 'Out of office', icon: 'alarm', label: 'Reminder', detail: 'Tomorrow', checked: false }
+];
+
 <BaseLayout title="List groups">
 
 <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
@@ -24,42 +77,31 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
 
 <div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
     <ListGroup as="div">
-        <ListGroupItem as="a" href="#" action className="d-flex gap-3 py-3" aria-current="true">
-            <img src="https://github.com/twbs.png" alt="" width="32" height="32" className="rounded-circle flex-shrink-0"
-            />
-            <div className="d-flex gap-2 w-100 justify-content-between">
-                <div>
-                    <h6 className="mb-0">List group item heading</h6>
-                    <p className="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+        {activityItems.map(({ title, text, time }) => (
+            <ListGroupItem
+                key={title}
+                as="a"
+                href="#"
+                action
+                className="d-flex gap-3 py-3"
+                aria-current="true"
+            >
+                <img
+                    src="https://github.com/twbs.png"
+                    alt=""
+                    width="32"
+                    height="32"
+                    className="rounded-circle flex-shrink-0"
+                />
+                <div className="d-flex gap-2 w-100 justify-content-between">
+                    <div>
+                        <h6 className="mb-0">{title}</h6>
+                        <p className="mb-0 opacity-75">{text}</p>
+                    </div>
+                    <small className="opacity-50 text-nowrap">{time}</small>
                 </div>
-                <small className="opacity-50 text-nowrap">now</small>
-            </div>
-        </ListGroupItem>
-        <ListGroupItem as="a" href="#" action className="d-flex gap-3 py-3" aria-current="true">
-            <img src="https://github.com/twbs.png" alt="" width="32" height="32" className="rounded-circle flex-shrink-0"
-            />
-            <div className="d-flex gap-2 w-100 justify-content-between">
-                <div>
-                    <h6 className="mb-0">Another title here</h6>
-                    <p className="mb-0 opacity-75">
-                        Some placeholder content in a paragraph that goes a little longer so it
-                        wraps to a new line.
-                    </p>
-                </div>
-                <small className="opacity-50 text-nowrap">3d</small>
-            </div>
-        </ListGroupItem>
-        <ListGroupItem as="a" href="#" action className="d-flex gap-3 py-3" aria-current="true">
-            <img src="https://github.com/twbs.png" alt="" width="32" height="32" className="rounded-circle flex-shrink-0"
-            />
-            <div className="d-flex gap-2 w-100 justify-content-between">
-                <div>
-                    <h6 className="mb-0">Third heading</h6>
-                    <p className="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                </div>
-                <small className="opacity-50 text-nowrap">1w</small>
-            </div>
-        </ListGroupItem>
+            </ListGroupItem>
+        ))}
     </ListGroup>
 </div>
 
@@ -67,51 +109,34 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
 
 <div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
   <ListGroup as="div" >
-    <ListGroupItem as="label" className="d-flex gap-2">
-      <FormCheck type="checkbox" value="" className="check flex-shrink-0" checked />
-      <span>
-        First checkbox
-        <small className="d-block fg-2">With support text underneath to add more detail</small>
-      </span>
-    </ListGroupItem>
-    <ListGroupItem as="label" className="d-flex gap-2">
-      <FormCheck type="checkbox" value="" className="check flex-shrink-0" />
-      <span>
-        Second checkbox
-        <small className="d-block fg-2">Some other text goes here</small>
-      </span>
-    </ListGroupItem>
-    <ListGroupItem as="label" className="d-flex gap-2">
-      <FormCheck type="checkbox" value="" className="check flex-shrink-0" />
-      <span>
-        Third checkbox
-        <small className="d-block fg-2">And we end with another snippet of text</small>
-      </span>
-    </ListGroupItem>
+    {checkableItems.map(({ label, description, checked }) => (
+      <ListGroupItem key={label} as="label" className="d-flex gap-2">
+        <FormCheck type="checkbox" value="" className="check flex-shrink-0" checked={checked} />
+        <span>
+          {label}
+          <small className="d-block fg-2">{description}</small>
+        </span>
+      </ListGroupItem>
+    ))}
   </ListGroup>
 
   <ListGroup as="div" >
-    <ListGroupItem as="label" className="d-flex gap-2">
-      <FormCheck className="radio flex-shrink-0" type="radio" name="listGroupRadios" id="listGroupRadios1" value="" checked />
-      <span>
-        First radio
-        <small className="d-block fg-2">With support text underneath to add more detail</small>
-      </span>
-    </ListGroupItem>
-    <ListGroupItem as="label" className="d-flex gap-2">
-      <FormCheck className="radio flex-shrink-0" type="radio" name="listGroupRadios" id="listGroupRadios2" value="" />
-      <span>
-        Second radio
-        <small className="d-block fg-2">Some other text goes here</small>
-      </span>
-    </ListGroupItem>
-    <ListGroupItem as="label" className="d-flex gap-2">
-      <FormCheck className="radio flex-shrink-0" type="radio" name="listGroupRadios" id="listGroupRadios3" value="" />
-      <span>
-        Third radio
-        <small className="d-block fg-2">And we end with another snippet of text</small>
-      </span>
-    </ListGroupItem>
+    {radioItems.map(({ label, description, checked }, index) => (
+      <ListGroupItem key={label} as="label" className="d-flex gap-2">
+        <FormCheck
+          className="radio flex-shrink-0"
+          type="radio"
+          name="listGroupRadios"
+          id={`listGroupRadios${index + 1}`}
+          value=""
+          checked={checked}
+        />
+        <span>
+          {label}
+          <small className="d-block fg-2">{description}</small>
+        </span>
+      </ListGroupItem>
+    ))}
   </ListGroup>
 </div>
 
@@ -119,47 +144,38 @@ import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../so
 
 <div className="d-flex flex-column md:flex-row p-4 gap-4 md:py-5 align-items-center justify-content-center">
     <ListGroup as="div">
-        <ListGroupItem as="label" className="d-flex gap-3">
-            <FormCheck type="checkbox" value="" className="check flex-shrink-0" style={{ fontSize: '1.375em' }} checked />
-            <span className="pt-1 form-checked-content">
-                <strong>Finish sales report</strong>
-                <small className="d-block fg-2">
-                    <Icon name="calendar-event" className="me-1" role="img" aria-label="Schedule" />
-                    1:00–2:00pm
-                </small>
-            </span>
-        </ListGroupItem>
-        <ListGroupItem as="label" className="d-flex gap-3">
-            <FormCheck type="checkbox" value="" className="check flex-shrink-0" style={{ fontSize: '1.375em' }}
-            />
-            <span className="pt-1 form-checked-content">
-                <strong>Weekly All Hands</strong>
-                <small className="d-block fg-2">
-                    <Icon name="calendar-event" className="me-1" role="img" aria-label="Schedule" />
-                    2:00–2:30pm
-                </small>
-            </span>
-        </ListGroupItem>
-        <ListGroupItem as="label" className="d-flex gap-3">
-            <FormCheck type="checkbox" value="" className="check flex-shrink-0" style={{ fontSize: '1.375em' }}
-            />
-            <span className="pt-1 form-checked-content">
-                <strong>Out of office</strong>
-                <small className="d-block fg-2">
-                    <Icon name="alarm" className="me-1" role="img" aria-label="Reminder" />
-                    Tomorrow
-                </small>
-            </span>
-        </ListGroupItem>
+        {taskItems.map(({ title, icon, label, detail, checked }) => (
+            <ListGroupItem key={title} as="label" className="d-flex gap-3">
+                <FormCheck
+                    type="checkbox"
+                    value=""
+                    className="check flex-shrink-0"
+                    style={{ fontSize: '1.375em' }}
+                    checked={checked}
+                />
+                <span className="pt-1 form-checked-content">
+                    <strong>{title}</strong>
+                    <small className="d-block fg-2">
+                        <Icon name={icon} className="me-1" role="img" aria-label={label} />
+                        {detail}
+                    </small>
+                </span>
+            </ListGroupItem>
+        ))}
         <ListGroupItem as="label" className="d-flex gap-3 bg-1">
-            <FormCheck disabled type="checkbox" value="" className="check check-input-placeholder bg-1 flex-shrink-0 pe-none" style={{ fontSize: '1.375em' }}
+            <FormCheck
+                disabled
+                type="checkbox"
+                value=""
+                className="check check-input-placeholder bg-1 flex-shrink-0 pe-none"
+                style={{ fontSize: '1.375em' }}
             />
             <span className="pt-1 form-checked-content">
                 <span contenteditable="true" className="w-100">
                     Add new task...
                 </span>
                 <small className="d-block fg-2">
-                    <Icon name="list-check" className="me-1" aria-hidden="true" />
+                    <Icon name="list-check" className="me-1" />
                     Choose list...
                 </small>
             </span>

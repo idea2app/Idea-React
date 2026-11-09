@@ -1,3 +1,4 @@
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
 import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Button } from '../../../../source/Base/Button';
@@ -15,10 +16,10 @@ import {
   <h1 className="visually-hidden">Heroes examples</h1>
 
 <div className="px-4 py-5 my-5 text-center">
-    <img className="d-block mx-auto mb-4" src={'https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo.svg'} alt="" width="72" height="57"
+    <img className="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"
     />
     <h1 className="fs-4xl fw-bold fg-emphasis-inverse">Centered hero</h1>
-    <div className="lg:col-6 mx-auto">
+    <Col lg={6} className="mx-auto">
         <p className="fs-lg fw-light mb-4">
             Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s
             most popular front-end open source toolkit, featuring Sass variables and mixins,
@@ -33,7 +34,7 @@ import {
                 Secondary
             </Button>
         </div>
-    </div>
+    </Col>
 
 </div>
 
@@ -41,7 +42,7 @@ import {
 
 <div className="px-4 pt-5 my-5 text-center border-bottom">
     <h1 className="fs-5xl fw-bold fg-emphasis-inverse">Centered screenshot</h1>
-    <div className="lg:col-6 mx-auto">
+    <Col lg={6} className="mx-auto">
         <p className="fs-lg fw-light mb-4">
             Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s
             most popular front-end open source toolkit, featuring Sass variables and mixins,
@@ -57,25 +58,25 @@ import {
                 Secondary
             </Button>
         </div>
-    </div>
+    </Col>
     <div className="overflow-hidden" style={{ maxHeight: '30vh' }}>
-        <div className="container px-5">
+        <Container className="px-5">
             <img src="https://raw.githubusercontent.com/twbs/bootstrap/main/site/src/assets/examples/heroes/bootstrap-docs.png" className="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy"
             />
-        </div>
+        </Container>
     </div>
 
 </div>
 
 <div className="b-example-divider"></div>
 
-<div className="container 2xl:col-8 px-4 py-5">
-    <div className="row lg:flex-row-reverse align-items-center g-5 py-5">
-        <div className="col-10 sm:col-8 lg:col-6">
+<Container as={Col} {...{ '2xl': 8 }} className="px-4 py-5">
+    <Row className="lg:flex-row-reverse align-items-center g-5 py-5">
+        <Col xs={10} sm={8} lg={6}>
             <img src="https://raw.githubusercontent.com/twbs/bootstrap/main/site/src/assets/examples/heroes/bootstrap-themes.png" className="d-block lg:mx-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy"
             />
-        </div>
-        <div className="lg:col-6">
+        </Col>
+        <Col lg={6}>
             <h1 className="fs-4xl fw-bold fg-emphasis-inverse lh-1 mb-3">
                 Responsive left-aligned hero with image
             </h1>
@@ -95,26 +96,26 @@ import {
                     Default
                 </Button>
             </div>
-        </div>
-    </div>
+        </Col>
+    </Row>
 
-</div>
+</Container>
 
 <div className="b-example-divider"></div>
 
-<div className="container xl:col-10 2xl:col-8 px-4 py-5">
-    <div className="row align-items-center lg:g-5 py-5">
-        <div className="lg:col-7 text-center lg:text-start">
+<Container as={Col} xl={10} {...{ '2xl': 8 }} className="px-4 py-5">
+    <Row className="align-items-center lg:g-5 py-5">
+        <Col lg={7} className="text-center lg:text-start">
             <h1 className="fs-5xl fw-bold lh-1 fg-emphasis-inverse mb-3">
                 Vertically centered hero sign-up form
             </h1>
-            <p className="lg:col-10 fs-xl">
-                Below is an example form built entirely with Bootstrap’s form controls. Each
+            <Col as="p" lg={10} className="fs-xl">
+                {`Below is an example form built entirely with Bootstrap’s form controls. Each
                 required form group has a validation state that can be triggered by attempting to
-                submit the form without completing it.
-            </p>
-        </div>
-        <div className="md:col-10 mx-auto lg:col-5">
+                submit the form without completing it.`}
+            </Col>
+        </Col>
+        <Col md={10} lg={5} className="mx-auto">
             <form className="p-4 md:p-5 border rounded-3 bg-1">
                 <FormFloatingLabel className="mb-3">
                     <label htmlFor="floatingInput">Email address</label>
@@ -138,16 +139,16 @@ import {
                 <hr className="my-4" />
                 <small className="fg-2">By clicking Sign up, you agree to the terms of use.</small>
             </form>
-        </div>
-    </div>
+        </Col>
+    </Row>
 
-</div>
+</Container>
 
 <div className="b-example-divider"></div>
 
-<div className="container my-5">
-    <div className="row p-4 pb-0 lg:pe-0 lg:pt-5 align-items-center rounded-3 border shadow-lg">
-        <div className="lg:col-7 p-3 lg:p-5 lg:pt-3">
+<Container className="my-5">
+    <Row className="p-4 pb-0 lg:pe-0 lg:pt-5 align-items-center rounded-3 border shadow-lg">
+        <Col lg={7} className="p-3 lg:p-5 lg:pt-3">
             <h1 className="fs-5xl fw-bold lh-1 fg-emphasis-inverse">
                 Border hero with cropped image and shadows
             </h1>
@@ -167,21 +168,21 @@ import {
                     Default
                 </Button>
             </div>
-        </div>
-        <div className="lg:col-4 lg:offset-1 p-0 overflow-hidden shadow-lg">
+        </Col>
+        <Col lg={{ span: 4, offset: 1 }} className="p-0 overflow-hidden shadow-lg">
             <img className="rounded-lg-3" src="https://raw.githubusercontent.com/twbs/bootstrap/main/site/src/assets/examples/heroes/bootstrap-docs.png" alt="" width="720"
             />
-        </div>
-    </div>
+        </Col>
+    </Row>
 
-</div>
+</Container>
 
 <div className="b-example-divider"></div>
 
 <div className="bg-black fg-secondary px-4 py-5 text-center" data-bs-theme="dark">
     <div className="py-5">
         <h1 className="fs-4xl fw-bold fg-white">Dark color hero</h1>
-        <div className="lg:col-6 mx-auto">
+        <Col lg={6} className="mx-auto">
             <p className="mb-4">
                 Quickly design and customize responsive mobile-first sites with Bootstrap, the
                 world’s most popular front-end open source toolkit, featuring Sass variables and
@@ -198,7 +199,7 @@ import {
                     Secondary
                 </Button>
             </div>
-        </div>
+        </Col>
     </div>
 
 </div>

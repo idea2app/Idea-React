@@ -1,9 +1,12 @@
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
 import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Icon } from '../../../../source/Extension/Icon';
 import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
 import { Button } from '../../../../source/Base/Button';
-import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
+import { NavLink } from '../../../../source/Base/Nav';
+import { ScrollNav } from '../../../../source/Extension/ScrollNav';
+import { Table } from '../../../../source/Content/Tables';
 import {
     Card,
     CardBody,
@@ -15,10 +18,32 @@ import {
     CardTitle
 } from '../../../../source/Base/Card';
 
+export const blogCategories = [
+    'World',
+    'U.S.',
+    'Technology',
+    'Design',
+    'Culture',
+    'Business',
+    'Politics',
+    'Opinion',
+    'Science',
+    'Health',
+    'Style',
+    'Travel'
+];
+
 <BaseLayout title="Blog Template">
 
 <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
-    <symbol id="aperture" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"
+    <symbol
+        id="aperture"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
     >
         <circle cx="12" cy="12" r="10" />
         <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" />
@@ -27,60 +52,57 @@ import {
         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
     </symbol>
     <symbol id="chevron-right" viewBox="0 0 16 16">
-        <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+        <path
+            fillRule="evenodd"
+            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
         />
     </symbol>
 </svg>
 
-<div className="container">
+<Container >
   <header className="border-bottom lh-1 py-3">
-    <div className="row flex-nowrap justify-content-between align-items-center">
-      <div className="col-4 pt-1">
+    <Row className="flex-nowrap justify-content-between align-items-center">
+      <Col xs={4} className="pt-1">
         <a className="theme-secondary" href="#">Subscribe</a>
-      </div>
-      <div className="col-4 text-center">
+      </Col>
+      <Col xs={4} className="text-center">
         <a className="blog-header-logo fg-emphasis-inverse text-decoration-none" href="#">Large</a>
-      </div>
-      <div className="col-4 d-flex justify-content-end align-items-center">
+      </Col>
+      <Col xs={4} className="d-flex justify-content-end align-items-center">
         <a className="theme-secondary" href="#" aria-label="Search">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
         </a>
-        <Button variant="outline" theme="secondary" size="sm" as="a" href="#">Sign up</Button>
-      </div>
-    </div>
+        <Button variant="outline" theme="secondary" size="sm" href="#">Sign up</Button>
+      </Col>
+    </Row>
   </header>
 
-  <div className="nav-scroller py-1 mb-3 border-bottom">
-    <Nav variant="underline" className="justify-content-between">
-      <NavLink active className="theme-inverse" href="#">World</NavLink>
-      <NavLink className="theme-inverse" href="#">U.S.</NavLink>
-      <NavLink className="theme-inverse" href="#">Technology</NavLink>
-      <NavLink className="theme-inverse" href="#">Design</NavLink>
-      <NavLink className="theme-inverse" href="#">Culture</NavLink>
-      <NavLink className="theme-inverse" href="#">Business</NavLink>
-      <NavLink className="theme-inverse" href="#">Politics</NavLink>
-      <NavLink className="theme-inverse" href="#">Opinion</NavLink>
-      <NavLink className="theme-inverse" href="#">Science</NavLink>
-      <NavLink className="theme-inverse" href="#">Health</NavLink>
-      <NavLink className="theme-inverse" href="#">Style</NavLink>
-      <NavLink className="theme-inverse" href="#">Travel</NavLink>
-    </Nav>
-  </div>
-</div>
+  <ScrollNav
+    variant="underline"
+    className="py-1 mb-3 border-bottom"
+    navClassName="justify-content-between"
+  >
+      {blogCategories.map((category, index) => (
+          <NavLink key={category} active={index === 0} className="theme-inverse" href="#">
+              {category}
+          </NavLink>
+      ))}
+  </ScrollNav>
+</Container>
 
-<div className="container">
+<Container >
   <div className="p-4 md:p-5 mb-4 rounded fg-emphasis-inverse bg-2">
-    <div className="lg:col-6 px-0">
+    <Col lg={6} className="px-0">
       <h1 className="fs-5xl fw-light fst-italic">Title of a longer featured blog post</h1>
       <p className="fs-lg fw-light my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
       <p className="fs-lg fw-light mb-0"><a href="#" className="fg-emphasis-inverse fw-bold">Continue reading...</a></p>
-    </div>
+    </Col>
   </div>
 
-<div className="row mb-2">
-    <div className="md:col-6">
-        <div className="row g-0 border rounded overflow-hidden md:flex-row mb-4 shadow-sm h-md-250 position-relative">
-            <div className="col p-4 d-flex flex-column position-static">
+<Row className="mb-2">
+    <Col md={6}>
+        <Row className="g-0 border rounded overflow-hidden md:flex-row mb-4 shadow-sm h-md-250 position-relative">
+            <Col className="p-4 d-flex flex-column position-static">
                 <strong className="d-inline-block mb-2 fg-emphasis-primary">World</strong>
                 <h3 className="mb-0">Featured post</h3>
                 <div className="mb-1 fg-2">Nov 12</div>
@@ -90,18 +112,23 @@ import {
                 </CardText>
                 <a href="#" className="icon-link gap-1 icon-link-hover stretched-link">
                     Continue reading
-                    <Icon name="chevron-right" aria-hidden="true" />
+                    <Icon name="chevron-right" />
                 </a>
-            </div>
-            <div className="col-auto d-none lg:d-block">
-                <ExamplePlaceholder width="200" height="250" background="#55595c" color="#eceeef" text="Thumbnail"
+            </Col>
+            <Col xs="auto" className="d-none lg:d-block">
+                <ExamplePlaceholder
+                    width="200"
+                    height="250"
+                    background="#55595c"
+                    color="#eceeef"
+                    text="Thumbnail"
                 />
-            </div>
-        </div>
-    </div>
-    <div className="md:col-6">
-        <div className="row g-0 border rounded overflow-hidden md:flex-row mb-4 shadow-sm h-md-250 position-relative">
-            <div className="col p-4 d-flex flex-column position-static">
+            </Col>
+        </Row>
+    </Col>
+    <Col md={6}>
+        <Row className="g-0 border rounded overflow-hidden md:flex-row mb-4 shadow-sm h-md-250 position-relative">
+            <Col className="p-4 d-flex flex-column position-static">
                 <strong className="d-inline-block mb-2 fg-emphasis-success">Design</strong>
                 <h3 className="mb-0">Post title</h3>
                 <div className="mb-1 fg-2">Nov 11</div>
@@ -111,19 +138,24 @@ import {
                 </p>
                 <a href="#" className="icon-link gap-1 icon-link-hover stretched-link">
                     Continue reading
-                    <Icon name="chevron-right" aria-hidden="true" />
+                    <Icon name="chevron-right" />
                 </a>
-            </div>
-            <div className="col-auto d-none lg:d-block">
-                <ExamplePlaceholder width="200" height="250" background="#55595c" color="#eceeef" text="Thumbnail"
+            </Col>
+            <Col xs="auto" className="d-none lg:d-block">
+                <ExamplePlaceholder
+                    width="200"
+                    height="250"
+                    background="#55595c"
+                    color="#eceeef"
+                    text="Thumbnail"
                 />
-            </div>
-        </div>
-    </div>
-</div>
+            </Col>
+        </Row>
+    </Col>
+</Row>
 
-  <div className="row g-5">
-    <div className="md:col-8">
+  <Row className="g-5">
+    <Col md={8}>
       <h3 className="pb-4 mb-4 fst-italic border-bottom">
         From the Firehose
       </h3>
@@ -193,7 +225,7 @@ import {
         <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
         <h3>Example table</h3>
         <p>And don't forget about tables in these posts:</p>
-        <table className="table">
+        <Table>
           <thead>
             <tr>
               <th>Name</th>
@@ -225,7 +257,7 @@ import {
               <td>23</td>
             </tr>
           </tfoot>
-        </table>
+        </Table>
 
         <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the other highly repetitive body text used throughout.</p>
       </article>
@@ -244,13 +276,13 @@ import {
       </article>
 
       <nav className="blog-pagination" aria-label="Pagination">
-        <Button variant="outline" theme="primary" as="a" className="rounded-pill" href="#">Older</Button>
+        <Button variant="outline" theme="primary" className="rounded-pill" href="#">Older</Button>
         <Button variant="outline" theme="secondary" as="a" className="rounded-pill disabled" aria-disabled="true">Newer</Button>
       </nav>
 
-    </div>
+    </Col>
 
-    <div className="md:col-4">
+    <Col md={4}>
       <div className="position-sticky" style={{"top": "2rem"}}>
         <div className="p-4 mb-3 bg-1 rounded">
           <h4 className="fst-italic">About</h4>
@@ -263,28 +295,28 @@ import {
             <li>
               <a className="d-flex flex-column lg:flex-row gap-3 align-items-start lg:align-items-center py-3 theme-inverse text-decoration-none border-top" href="#">
                 <ExamplePlaceholder width="100%" height="96" background="#777" color="#777" text={false} title={false} />
-                <div className="lg:col-8">
+                <Col lg={8}>
                   <h6 className="mb-0">Example blog post title</h6>
                   <small className="fg-2">January 15, 2024</small>
-                </div>
+                </Col>
               </a>
             </li>
             <li>
               <a className="d-flex flex-column lg:flex-row gap-3 align-items-start lg:align-items-center py-3 theme-inverse text-decoration-none border-top" href="#">
                 <ExamplePlaceholder width="100%" height="96" background="#777" color="#777" text={false} title={false} />
-                <div className="lg:col-8">
+                <Col lg={8}>
                   <h6 className="mb-0">This is another blog post title</h6>
                   <small className="fg-2">January 14, 2024</small>
-                </div>
+                </Col>
               </a>
             </li>
             <li>
               <a className="d-flex flex-column lg:flex-row gap-3 align-items-start lg:align-items-center py-3 theme-inverse text-decoration-none border-top" href="#">
                 <ExamplePlaceholder width="100%" height="96" background="#777" color="#777" text={false} title={false} />
-                <div className="lg:col-8">
+                <Col lg={8}>
                   <h6 className="mb-0">Longer blog post title: This one has multiple lines!</h6>
                   <small className="fg-2">January 13, 2024</small>
-                </div>
+                </Col>
               </a>
             </li>
           </ul>
@@ -317,11 +349,11 @@ import {
           </ol>
         </div>
       </div>
-    </div>
+    </Col>
 
-  </div>
+  </Row>
 
-</div>
+</Container>
 
 <footer className="py-5 text-center fg-2 bg-1">
     <p>

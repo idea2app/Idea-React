@@ -1,3 +1,4 @@
+import { Container } from '../../../../source/Layout/Grid';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Button } from '../../../../source/Base/Button';
 import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
@@ -12,23 +13,30 @@ import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
 import { CloseButton } from '../../../../source/Base/CloseButton';
 import { MenuPanel, MenuItem } from '../../../../source/Base/Menu';
 
+export const navbarItems = [
+    { label: 'Home', active: true },
+    { label: 'Link' },
+    { label: 'Disabled', disabled: true },
+    { label: 'Menu', menu: true }
+];
+
 <BaseLayout title="Bottom navbar example">
 
-<div className="container">
+<Container >
     <div className="bg-1 p-5 rounded mt-3">
         <h1>Bottom Navbar example</h1>
         <p className="fs-lg fw-light">
             This example is a quick exercise to illustrate how the bottom navbar works.
         </p>
-        <Button variant="solid" theme="primary" size="lg" as="a" href={'https://getbootstrap.com/docs/6.0/components/navbar'} role="button"
+        <Button variant="solid" theme="primary" size="lg" href="https://getbootstrap.com/docs/6.0/components/navbar" role="button"
         >
             View navbar docs &raquo;
         </Button>
     </div>
 
-</div>
+</Container>
 <Navbar theme="dark" expand="sm" className="fixed-bottom">
-    <div className="container-fluid">
+    <Container fluid>
         <NavbarBrand href="#">Bottom navbar</NavbarBrand>
         <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
         ></NavbarToggler>
@@ -43,39 +51,35 @@ import { MenuPanel, MenuItem } from '../../../../source/Base/Menu';
             </div>
             <div className="drawer-body">
                 <NavbarNav>
-                    <NavItem>
-                        <NavLink active aria-current="page" href="#">
-                            Home
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="#">Link</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink disabled aria-disabled="true">
-                            Disabled
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="#" role="button" data-bs-toggle="menu" aria-expanded="false">
-                            Menu
-                        </NavLink>
-                        <MenuPanel>
-                            <MenuItem as="a" href="#">
-                                Action
-                            </MenuItem>
-                            <MenuItem as="a" href="#">
-                                Another action
-                            </MenuItem>
-                            <MenuItem as="a" href="#">
-                                Something else here
-                            </MenuItem>
-                        </MenuPanel>
-                    </NavItem>
+                    {navbarItems.map(({ label, active, disabled, menu }) => (
+                        <NavItem key={label}>
+                            <NavLink
+                                active={active}
+                                aria-current={active ? 'page' : undefined}
+                                disabled={disabled}
+                                aria-disabled={disabled}
+                                href={disabled ? undefined : '#'}
+                                role={menu ? 'button' : undefined}
+                                data-bs-toggle={menu ? 'menu' : undefined}
+                                aria-expanded={menu ? false : undefined}
+                            >
+                                {label}
+                            </NavLink>
+                            {menu && (
+                                <MenuPanel>
+                                    {['Action', 'Another action', 'Something else here'].map((item) => (
+                                        <MenuItem key={item} as="a" href="#">
+                                            {item}
+                                        </MenuItem>
+                                    ))}
+                                </MenuPanel>
+                            )}
+                        </NavItem>
+                    ))}
                 </NavbarNav>
             </div>
         </NativeDialog>
-    </div>
+    </Container>
 
 </Navbar>
 

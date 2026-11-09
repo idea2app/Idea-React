@@ -255,7 +255,7 @@ export class NavOverflow<T extends ElementType | undefined = 'div'> extends Comp
                   : vertical === 'left'
                     ? ['end-100', horizontal === 'end' ? 'bottom-0' : 'top-0']
                     : ['start-100', horizontal === 'end' ? 'bottom-0' : 'top-0'];
-        const icon = moreIcon ?? <Icon name="three-dots" aria-hidden="true" />;
+        const icon = moreIcon ?? <Icon name="three-dots" />;
         const text = moreText === false ? null : moreText;
 
         return (

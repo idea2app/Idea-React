@@ -33,6 +33,42 @@ it('uses xs to set base column widths', () => {
     );
 });
 
+it('supports responsive column spans, offsets, and ordering', () => {
+    const { container } = render(
+        <Row>
+            <Col
+                xs={{ span: 6, order: 'last' }}
+                sm={{ offset: 2, order: 'first' }}
+                md={{ span: 'auto', offset: 1, order: 3 }}
+                lg={{ span: true }}
+                xl={{ span: 5 }}
+                {...{ '2xl': { span: 4, offset: 0, order: 0 } }}
+            >
+                Responsive
+            </Col>
+        </Row>
+    );
+
+    assert.equal(
+        container.querySelector('.row > div')?.className,
+        'col-6 order-last sm:offset-2 sm:order-first md:col-auto md:offset-1 md:order-3 lg:col xl:col-5 2xl:col-4 2xl:offset-0 2xl:order-0'
+    );
+});
+
+it('keeps auto-layout columns when only offset or order is specified', () => {
+    const { container } = render(
+        <Row>
+            <Col md={{ offset: 2 }} />
+            <Col lg={{ order: 'first' }} />
+        </Row>
+    );
+
+    assert.deepEqual(
+        [...container.querySelectorAll('.row > div')].map(column => column.className),
+        ['col md:offset-2', 'col lg:order-first']
+    );
+});
+
 it('uses Bootstrap 6 container, row, and responsive column classes', () => {
     const { container, rerender } = render(
         <Container className="custom" fluid>

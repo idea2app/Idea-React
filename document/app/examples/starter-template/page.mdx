@@ -1,3 +1,4 @@
+import { Col, Row } from '../../../../source/Layout/Grid';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Icon } from '../../../../source/Extension/Icon';
 import { Button } from '../../../../source/Base/Button';
@@ -10,12 +11,15 @@ import { Button } from '../../../../source/Base/Button';
     </symbol>
     <symbol id="bootstrap" viewBox="0 0 118 94">
         <title>Bootstrap</title>
-        <path fillRule="evenodd" clipRule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
         ></path>
     </symbol>
 </svg>
 
-<div className="lg:col-8 mx-auto p-6 md:py-9">
+<Col lg={8} className="mx-auto p-6 md:py-9">
   <header className="d-flex align-items-center pb-3 mb-5 border-bottom">
     <a href="/" className="d-flex align-items-center fg-body text-decoration-none">
       <Icon name="bootstrap" size={2.5} className="me-2" role="img" aria-label="Bootstrap" />
@@ -25,88 +29,88 @@ import { Button } from '../../../../source/Base/Button';
 
   <div>
     <h1 className="fg-body">Get started with Bootstrap</h1>
-    <p className="fs-lg md:col-8">Quickly and easily get started with Bootstrap's compiled, production-ready files with this barebones example featuring some basic HTML and helpful links. Download all our examples to get started.</p>
+  <Col as="p" md={8} className="fs-lg">{`Quickly and easily get started with Bootstrap's compiled, production-ready files with this barebones example featuring some basic HTML and helpful links. Download all our examples to get started.`}</Col>
 
     <div className="mb-9">
-      <Button variant="solid" theme="primary" size="lg" as="a" href={"https://getbootstrap.com/docs/6.0/examples"} className="px-6">Download examples</Button>
+      <Button variant="solid" theme="primary" size="lg" href="https://getbootstrap.com/docs/6.0/examples" className="px-6">Download examples</Button>
     </div>
 
-    <hr className="col-3 md:col-2 mb-5" />
+    <Col as="hr" xs={3} md={2} className="mb-5" />
 
-    <div className="row g-9">
-      <div className="md:col-6">
+    <Row className="g-9">
+      <Col md={6}>
         <h2 className="fg-body">Starter projects</h2>
         <p>Ready to go beyond the starter template? Check out these open source projects that you can quickly duplicate to a new GitHub repository.</p>
         <ul className="list-unstyled ps-0">
           <li>
             <a className="icon-link mb-1" href="https://github.com/twbs/examples/tree/main/icons-font" rel="noopener" target="_blank">
-              <Icon name="arrow-right-circle" size={1} aria-hidden="true" />
+              <Icon name="arrow-right-circle" size={1} />
               Bootstrap npm starter
             </a>
           </li>
           <li>
             <a className="icon-link mb-1" href="https://github.com/twbs/examples/tree/main/parcel" rel="noopener" target="_blank">
-              <Icon name="arrow-right-circle" size={1} aria-hidden="true" />
+              <Icon name="arrow-right-circle" size={1} />
               Bootstrap Parcel starter
             </a>
           </li>
           <li>
             <a className="icon-link mb-1" href="https://github.com/twbs/examples/tree/main/vite" rel="noopener" target="_blank">
-              <Icon name="arrow-right-circle" size={1} aria-hidden="true" />
+              <Icon name="arrow-right-circle" size={1} />
               Bootstrap Vite starter
             </a>
           </li>
           <li>
             <a className="icon-link mb-1" href="https://github.com/twbs/examples/tree/main/webpack" rel="noopener" target="_blank">
-              <Icon name="arrow-right-circle" size={1} aria-hidden="true" />
+              <Icon name="arrow-right-circle" size={1} />
               Bootstrap Webpack starter
             </a>
           </li>
         </ul>
-      </div>
+      </Col>
 
-      <div className="md:col-6">
+      <Col md={6}>
         <h2 className="fg-body">Guides</h2>
         <p>Read more detailed instructions and documentation on using or contributing to Bootstrap.</p>
         <ul className="list-unstyled ps-0">
           <li>
-            <a className="icon-link mb-1" href={"https://getbootstrap.com/docs/6.0/guides/quickstart"}>
-              <Icon name="arrow-right-circle" size={1} aria-hidden="true" />
+            <a className="icon-link mb-1" href="https://getbootstrap.com/docs/6.0/guides/quickstart">
+              <Icon name="arrow-right-circle" size={1} />
               Bootstrap quickstart guide
             </a>
           </li>
           <li>
-            <a className="icon-link mb-1" href={"https://getbootstrap.com/docs/6.0/guides/webpack"}>
-              <Icon name="arrow-right-circle" size={1} aria-hidden="true" />
+            <a className="icon-link mb-1" href="https://getbootstrap.com/docs/6.0/guides/webpack">
+              <Icon name="arrow-right-circle" size={1} />
               Bootstrap Webpack guide
             </a>
           </li>
           <li>
-            <a className="icon-link mb-1" href={"https://getbootstrap.com/docs/6.0/guides/parcel"}>
-              <Icon name="arrow-right-circle" size={1} aria-hidden="true" />
+            <a className="icon-link mb-1" href="https://getbootstrap.com/docs/6.0/guides/parcel">
+              <Icon name="arrow-right-circle" size={1} />
               Bootstrap Parcel guide
             </a>
           </li>
           <li>
-            <a className="icon-link mb-1" href={"https://getbootstrap.com/docs/6.0/guides/vite"}>
-              <Icon name="arrow-right-circle" size={1} aria-hidden="true" />
+            <a className="icon-link mb-1" href="https://getbootstrap.com/docs/6.0/guides/vite">
+              <Icon name="arrow-right-circle" size={1} />
               Bootstrap Vite guide
             </a>
           </li>
           <li>
-            <a className="icon-link mb-1" href={"https://getbootstrap.com/docs/6.0/guides/contribute"}>
-              <Icon name="arrow-right-circle" size={1} aria-hidden="true" />
+            <a className="icon-link mb-1" href="https://getbootstrap.com/docs/6.0/guides/contribute">
+              <Icon name="arrow-right-circle" size={1} />
               Contributing to Bootstrap
             </a>
           </li>
         </ul>
-      </div>
-    </div>
+      </Col>
+    </Row>
 
   </div>
   <footer className="pt-9 my-9 fg-2 border-top">
     Created by the Bootstrap team &middot; &copy; {new Date().getFullYear()}
   </footer>
-</div>
+</Col>
 
 </BaseLayout>

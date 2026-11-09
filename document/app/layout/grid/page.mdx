@@ -283,6 +283,25 @@ each tier as needed. See the example below for a better idea of how it all works
     </Container>
 </div>
 
+### Offsets and ordering
+
+Pass a responsive object to a `Col` breakpoint prop to combine a column span with an offset or
+visual order. Each option is independent, so you can also set only an offset or order at a
+breakpoint. Order accepts a number, `"first"`, or `"last"`.
+
+<div className={style.gridRow}>
+    <Container className="text-center">
+        <Row>
+            <Col xs={6}>Unordered column</Col>
+            <Col md={{ span: 4, offset: 2, order: 'last' }}>Offset and reordered column</Col>
+        </Row>
+        <Row>
+            <Col sm={{ offset: 2 }}>Offset auto-layout column</Col>
+            <Col sm={{ order: 'first' }}>First on small screens and up</Col>
+        </Row>
+    </Container>
+</div>
+
 ### Row columns
 
 Use the responsive `.row-cols-*` classes to quickly set the number of columns that best render your

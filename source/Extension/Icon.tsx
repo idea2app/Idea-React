@@ -8,11 +8,24 @@ export type IconProps = ComponentPropsWithRef<'span'> & {
     size?: number;
 };
 export const Icon = polymorphic<IconProps>(
-    ({ as: Root = 'span', className, style, name, size, ...props }) => (
+    ({
+        as: Root = 'span',
+        className,
+        style,
+        name,
+        size,
+        'aria-hidden': ariaHidden,
+        'aria-label': ariaLabel,
+        'aria-labelledby': ariaLabelledBy,
+        ...props
+    }) => (
         <Root
+            {...props}
+            aria-hidden={ariaHidden ?? (ariaLabel || ariaLabelledBy ? undefined : true)}
+            aria-label={ariaLabel}
+            aria-labelledby={ariaLabelledBy}
             className={classNames(`bi-${name}`, className)}
             style={{ fontSize: size && `${size}rem`, ...style }}
-            {...props}
         />
     )
 );

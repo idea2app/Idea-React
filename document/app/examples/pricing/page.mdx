@@ -1,3 +1,4 @@
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
 import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Icon } from '../../../../source/Extension/Icon';
@@ -12,6 +13,72 @@ import {
     CardTitle
 } from '../../../../source/Base/Card';
 import { Button } from '../../../../source/Base/Button';
+import { Table } from '../../../../source/Content/Tables';
+
+export const planFeatureGroups = [
+    [
+        { name: 'Public', included: [true, true, true] },
+        { name: 'Private', included: [false, true, true] }
+    ],
+    [
+        { name: 'Permissions', included: [true, true, true] },
+        { name: 'Sharing', included: [false, true, true] },
+        { name: 'Unlimited members', included: [false, true, true] },
+        { name: 'Extra security', included: [false, false, true] }
+    ]
+];
+export const pricingPlans = [
+    {
+        name: 'Free',
+        price: '$0',
+        users: '10 users included',
+        storage: '2 GB of storage',
+        support: 'Email support',
+        button: 'Sign up for free',
+        variant: 'outline'
+    },
+    {
+        name: 'Pro',
+        price: '$15',
+        users: '20 users included',
+        storage: '10 GB of storage',
+        support: 'Priority email support',
+        button: 'Get started',
+        variant: 'solid'
+    },
+    {
+        name: 'Enterprise',
+        price: '$29',
+        users: '30 users included',
+        storage: '15 GB of storage',
+        support: 'Phone and email support',
+        button: 'Contact us',
+        variant: 'solid',
+        cardClassName: 'border-primary',
+        headerClassName: 'theme-primary border-primary'
+    }
+];
+export const pricingFooterSections = [
+    {
+        title: 'Features',
+        links: [
+            'Cool stuff',
+            'Random feature',
+            'Team feature',
+            'Stuff for developers',
+            'Another one',
+            'Last time'
+        ]
+    },
+    {
+        title: 'Resources',
+        links: ['Resource', 'Resource name', 'Another resource', 'Final resource']
+    },
+    {
+        title: 'About',
+        links: ['Team', 'Locations', 'Privacy', 'Terms']
+    }
+];
 
 <BaseLayout title="Pricing example">
 
@@ -22,7 +89,7 @@ import { Button } from '../../../../source/Base/Button';
     </symbol>
 </svg>
 
-<div className="container py-3">
+<Container className="py-3">
   <header>
     <div className="d-flex flex-column md:flex-row align-items-center pb-3 mb-4 border-bottom">
       <a href="/" className="d-flex align-items-center theme-inverse text-decoration-none">
@@ -46,155 +113,94 @@ import { Button } from '../../../../source/Base/Button';
   </header>
 
   <div>
-    <div className="row row-cols-1 md:row-cols-3 mb-3 text-center">
-      <div className="col">
-        <Card className="mb-4 rounded-3 shadow-sm">
-          <CardHeader className="py-3">
-            <h4 className="my-0 fw-normal">Free</h4>
-          </CardHeader>
-          <CardBody >
-            <CardTitle as="h1" className="pricing-card-title">$0<small className="fg-2 fw-light">/mo</small></CardTitle>
-            <ul className="list-unstyled mt-3 mb-4 w-100">
-              <li>10 users included</li>
-              <li>2 GB of storage</li>
-              <li>Email support</li>
-              <li>Help center access</li>
-            </ul>
-            <Button variant="outline" theme="primary" size="lg" type="button" className="w-100">Sign up for free</Button>
-          </CardBody>
-        </Card>
-      </div>
-      <div className="col">
-        <Card className="mb-4 rounded-3 shadow-sm">
-          <CardHeader className="py-3">
-            <h4 className="my-0 fw-normal">Pro</h4>
-          </CardHeader>
-          <CardBody >
-            <CardTitle as="h1" className="pricing-card-title">$15<small className="fg-2 fw-light">/mo</small></CardTitle>
-            <ul className="list-unstyled mt-3 mb-4 w-100">
-              <li>20 users included</li>
-              <li>10 GB of storage</li>
-              <li>Priority email support</li>
-              <li>Help center access</li>
-            </ul>
-            <Button variant="solid" theme="primary" size="lg" type="button" className="w-100">Get started</Button>
-          </CardBody>
-        </Card>
-      </div>
-      <div className="col">
-        <Card className="mb-4 rounded-3 shadow-sm border-primary">
-          <CardHeader className="py-3 theme-primary border-primary">
-            <h4 className="my-0 fw-normal">Enterprise</h4>
-          </CardHeader>
-          <CardBody >
-            <CardTitle as="h1" className="pricing-card-title">$29<small className="fg-2 fw-light">/mo</small></CardTitle>
-            <ul className="list-unstyled mt-3 mb-4 w-100">
-              <li>30 users included</li>
-              <li>15 GB of storage</li>
-              <li>Phone and email support</li>
-              <li>Help center access</li>
-            </ul>
-            <Button variant="solid" theme="primary" size="lg" type="button" className="w-100">Contact us</Button>
-          </CardBody>
-        </Card>
-      </div>
-    </div>
+    <Row xs={1} md={3} className="mb-3 text-center">
+      {pricingPlans.map(
+        ({
+          name,
+          price,
+          users,
+          storage,
+          support,
+          button,
+          variant,
+          cardClassName = '',
+          headerClassName = ''
+        }) => (
+          <Col key={name}>
+            <Card className={`mb-4 rounded-3 shadow-sm ${cardClassName}`}>
+              <CardHeader className={`py-3 ${headerClassName}`}>
+                <h4 className="my-0 fw-normal">{name}</h4>
+              </CardHeader>
+              <CardBody>
+                <CardTitle as="h1" className="pricing-card-title">
+                  {price}<small className="fg-2 fw-light">/mo</small>
+                </CardTitle>
+                <ul className="list-unstyled mt-3 mb-4 w-100">
+                  {[users, storage, support, 'Help center access'].map((feature) => (
+                    <li key={feature}>{feature}</li>
+                  ))}
+                </ul>
+                <Button variant={variant} theme="primary" size="lg" type="button" className="w-100">
+                  {button}
+                </Button>
+              </CardBody>
+            </Card>
+          </Col>
+        )
+      )}
+    </Row>
 
     <h2 className="fs-3xl fw-light text-center mb-4">Compare plans</h2>
 
     <div className="table-responsive">
-      <table className="table text-center">
+      <Table className="text-center">
         <thead>
           <tr>
-            <th style={{"width": "34%"}}></th>
-            <th style={{"width": "22%"}}>Free</th>
-            <th style={{"width": "22%"}}>Pro</th>
-            <th style={{"width": "22%"}}>Enterprise</th>
+            <th style={{ width: '34%' }}></th>
+            {['Free', 'Pro', 'Enterprise'].map((plan) => (
+              <th key={plan} style={{ width: '22%' }}>{plan}</th>
+            ))}
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th scope="row" className="text-start">Public</th>
-            <td><Icon name="check" size={1.5} role="img" aria-label="Included" /></td>
-            <td><Icon name="check" size={1.5} role="img" aria-label="Included" /></td>
-            <td><Icon name="check" size={1.5} role="img" aria-label="Included" /></td>
-          </tr>
-          <tr>
-            <th scope="row" className="text-start">Private</th>
-            <td></td>
-            <td><Icon name="check" size={1.5} role="img" aria-label="Included" /></td>
-            <td><Icon name="check" size={1.5} role="img" aria-label="Included" /></td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th scope="row" className="text-start">Permissions</th>
-            <td><Icon name="check" size={1.5} role="img" aria-label="Included" /></td>
-            <td><Icon name="check" size={1.5} role="img" aria-label="Included" /></td>
-            <td><Icon name="check" size={1.5} role="img" aria-label="Included" /></td>
-          </tr>
-          <tr>
-            <th scope="row" className="text-start">Sharing</th>
-            <td></td>
-            <td><Icon name="check" size={1.5} role="img" aria-label="Included" /></td>
-            <td><Icon name="check" size={1.5} role="img" aria-label="Included" /></td>
-          </tr>
-          <tr>
-            <th scope="row" className="text-start">Unlimited members</th>
-            <td></td>
-            <td><Icon name="check" size={1.5} role="img" aria-label="Included" /></td>
-            <td><Icon name="check" size={1.5} role="img" aria-label="Included" /></td>
-          </tr>
-          <tr>
-            <th scope="row" className="text-start">Extra security</th>
-            <td></td>
-            <td></td>
-            <td><Icon name="check" size={1.5} role="img" aria-label="Included" /></td>
-          </tr>
-        </tbody>
-      </table>
+        {planFeatureGroups.map((features, groupIndex) => (
+          <tbody key={groupIndex}>
+            {features.map(({ name, included }) => (
+              <tr key={name}>
+                <th scope="row" className="text-start">{name}</th>
+                {included.map((hasFeature, planIndex) => (
+                  <td key={planIndex}>
+                    {hasFeature && <Icon name="check" size={1.5} role="img" aria-label="Included" />}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        ))}
+      </Table>
     </div>
 
   </div>
 
   <footer className="pt-4 md:my-5 md:pt-5 border-top">
-    <div className="row">
-      <div className="col-12 md:col">
-        <img className="mb-2" src={"https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo.svg"} alt="" width="24" height="19" />
+    <Row >
+      <Col xs={12} md>
+        <img className="mb-2" src="https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo.svg" alt="" width="24" height="19" />
         <small className="d-block mb-3 fg-2">&copy; 2017–{new Date().getFullYear()}</small>
-      </div>
-      <div className="col-6 md:col">
-        <h5>Features</h5>
-        <ul className="list-unstyled">
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Cool stuff</a></li>
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Random feature</a></li>
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Team feature</a></li>
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Stuff for developers</a></li>
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Another one</a></li>
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Last time</a></li>
-        </ul>
-      </div>
-      <div className="col-6 md:col">
-        <h5>Resources</h5>
-        <ul className="list-unstyled">
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Resource</a></li>
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Resource name</a></li>
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Another resource</a></li>
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Final resource</a></li>
-        </ul>
-      </div>
-      <div className="col-6 md:col">
-        <h5>About</h5>
-        <ul className="list-unstyled">
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Team</a></li>
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Locations</a></li>
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Privacy</a></li>
-          <li className="mb-1"><a className="theme-secondary text-decoration-none" href="#">Terms</a></li>
-        </ul>
-      </div>
-    </div>
+      </Col>
+      {pricingFooterSections.map(({ title, links }) => (
+        <Col key={title} xs={6} md>
+          <h5>{title}</h5>
+          <ul className="list-unstyled">
+            {links.map((label) => (
+              <li key={label} className="mb-1">
+                <a className="theme-secondary text-decoration-none" href="#">{label}</a>
+              </li>
+            ))}
+          </ul>
+        </Col>
+      ))}
+    </Row>
   </footer>
-</div>
+</Container>
 
 </BaseLayout>

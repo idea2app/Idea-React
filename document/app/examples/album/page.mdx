@@ -1,24 +1,20 @@
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
 import { Collapse, CollapseToggle } from '../../../../source/Base/Collapse';
 import { Navbar, NavbarBrand } from '../../../../source/Base/Navbar';
 import { Button } from '../../../../source/Base/Button';
 import { Icon } from '../../../../source/Extension/Icon';
-import {
-    Card,
-    CardBody,
-    CardImage,
-    CardText
-} from '../../../../source/Base/Card';
+import { Card, CardBody, CardImage, CardText } from '../../../../source/Base/Card';
 import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
 
 <BaseLayout title="Album example">
 
 <header data-bs-theme="dark">
     <Collapse id="navbarHeader" className="bg-black">
-        <div className="container">
-            <div className="row">
-                <div className="sm:col-8 md:col-7 py-4">
+        <Container>
+            <Row>
+                <Col sm={8} md={7} className="py-4">
                     <h4 className="fg-white">About</h4>
                     <p className="fg-2">
                         Add some information about the album below, the author, or any other
@@ -26,8 +22,8 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
                         informative tidbits. Then, link them off to some social networking sites or
                         contact information.
                     </p>
-                </div>
-                <div className="sm:col-4 md:offset-1 py-4">
+                </Col>
+                <Col sm={4} md={{ offset: 1 }} className="py-4">
                     <h4 className="fg-white">Contact</h4>
                     <ul className="list-unstyled">
                         <li>
@@ -46,14 +42,14 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
                             </a>
                         </li>
                     </ul>
-                </div>
-            </div>
-        </div>
+                </Col>
+            </Row>
+        </Container>
     </Collapse>
     <Navbar className="bg-black shadow-sm" aria-label="Album navigation">
-        <div className="container">
+        <Container>
             <NavbarBrand href="#" className="d-flex align-items-center">
-                <Icon name="camera" size={1.25} className="me-2" aria-hidden="true" />
+                <Icon name="camera" size={1.25} className="me-2" />
                 <strong>Album</strong>
             </NavbarBrand>
             <CollapseToggle
@@ -64,15 +60,15 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
             >
                 <span className="navbar-toggler-icon" aria-hidden="true" />
             </CollapseToggle>
-        </div>
+        </Container>
     </Navbar>
 </header>
 
 <div>
 
-<section className="py-5 text-center container">
-    <div className="row lg:py-5">
-        <div className="lg:col-6 md:col-8 mx-auto">
+<Container as="section" className="py-5 text-center">
+    <Row className="lg:py-5">
+        <Col lg={6} md={8} className="mx-auto">
             <h1 className="fw-light">Album example</h1>
             <p className="fs-lg fw-light fg-2">
                 Something short and leading about the collection below—its contents, the creator,
@@ -80,167 +76,55 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
                 entirely.
             </p>
             <p>
-                <Button variant="solid" theme="primary" as="a" href="#" className="m-2">
-                    Main call to action
-                </Button>
-                <Button variant="solid" theme="secondary" as="a" href="#" className="m-2">
-                    Secondary action
-                </Button>
+                {['Main call to action', 'Secondary action'].map((label, index) => (
+                    <Button
+                        key={label}
+                        variant="solid"
+                        theme={index === 0 ? 'primary' : 'secondary'}
+                        href="#"
+                        className="m-2"
+                    >
+                        {label}
+                    </Button>
+                ))}
             </p>
-        </div>
-    </div>
-</section>
+        </Col>
+    </Row>
+</Container>
 
   <div className="album py-5 bg-1">
-    <div className="container">
+    <Container >
 
-      <div className="row row-cols-1 sm:row-cols-2 md:row-cols-3 g-3">
-        <div className="col">
-          <Card className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody >
-              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <div className="d-flex justify-content-between align-items-center w-100">
-                <ButtonGroup >
-                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
-                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
-                </ButtonGroup>
-                <small className="fg-2">9 mins</small>
-              </div>
-            </CardBody>
-          </Card>
-        </div>
-        <div className="col">
-          <Card className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody >
-              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <div className="d-flex justify-content-between align-items-center w-100">
-                <ButtonGroup >
-                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
-                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
-                </ButtonGroup>
-                <small className="fg-2">9 mins</small>
-              </div>
-            </CardBody>
-          </Card>
-        </div>
-        <div className="col">
-          <Card className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody >
-              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <div className="d-flex justify-content-between align-items-center w-100">
-                <ButtonGroup >
-                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
-                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
-                </ButtonGroup>
-                <small className="fg-2">9 mins</small>
-              </div>
-            </CardBody>
-          </Card>
-        </div>
-
-        <div className="col">
-          <Card className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody >
-              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <div className="d-flex justify-content-between align-items-center w-100">
-                <ButtonGroup >
-                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
-                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
-                </ButtonGroup>
-                <small className="fg-2">9 mins</small>
-              </div>
-            </CardBody>
-          </Card>
-        </div>
-        <div className="col">
-          <Card className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody >
-              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <div className="d-flex justify-content-between align-items-center w-100">
-                <ButtonGroup >
-                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
-                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
-                </ButtonGroup>
-                <small className="fg-2">9 mins</small>
-              </div>
-            </CardBody>
-          </Card>
-        </div>
-        <div className="col">
-          <Card className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody >
-              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <div className="d-flex justify-content-between align-items-center w-100">
-                <ButtonGroup >
-                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
-                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
-                </ButtonGroup>
-                <small className="fg-2">9 mins</small>
-              </div>
-            </CardBody>
-          </Card>
-        </div>
-
-        <div className="col">
-          <Card className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody >
-              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <div className="d-flex justify-content-between align-items-center w-100">
-                <ButtonGroup >
-                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
-                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
-                </ButtonGroup>
-                <small className="fg-2">9 mins</small>
-              </div>
-            </CardBody>
-          </Card>
-        </div>
-        <div className="col">
-          <Card className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody >
-              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <div className="d-flex justify-content-between align-items-center w-100">
-                <ButtonGroup >
-                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
-                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
-                </ButtonGroup>
-                <small className="fg-2">9 mins</small>
-              </div>
-            </CardBody>
-          </Card>
-        </div>
-        <div className="col">
-          <Card className="shadow-sm">
-            <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
-            <CardBody >
-              <CardText >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <div className="d-flex justify-content-between align-items-center w-100">
-                <ButtonGroup >
-                  <Button variant="outline" theme="secondary" size="sm" type="button">View</Button>
-                  <Button variant="outline" theme="secondary" size="sm" type="button">Edit</Button>
-                </ButtonGroup>
-                <small className="fg-2">9 mins</small>
-              </div>
-            </CardBody>
-          </Card>
-        </div>
-      </div>
-    </div>
+      <Row xs={1} sm={2} md={3} className="g-3">
+        {Array.from({ length: 9 }, (_, index) => index).map(index => (
+          <Col key={index}>
+            <Card className="shadow-sm">
+              <CardImage width="100%" height="225" background="#55595c" color="#eceeef" placement="top" as={ExamplePlaceholder} text="Thumbnail" />
+              <CardBody>
+                <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+                <div className="d-flex justify-content-between align-items-center w-100">
+                  <ButtonGroup>
+                    {['View', 'Edit'].map(label => (
+                      <Button key={label} variant="outline" theme="secondary" size="sm" type="button">
+                        {label}
+                      </Button>
+                    ))}
+                  </ButtonGroup>
+                  <small className="fg-2">9 mins</small>
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Container>
 
   </div>
 
 </div>
 
 <footer className="fg-2 py-5">
-    <div className="container">
+    <Container>
         <p className="float-end mb-1">
             <a href="#">Back to top</a>
         </p>
@@ -249,10 +133,9 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
         </p>
         <p className="mb-0">
             New to Bootstrap? <a href="/">Visit the homepage</a> or read our{' '}
-            <a href={'https://getbootstrap.com/docs/6.0/getting-started/'}>getting started guide</a>
-            .
+            <a href="https://getbootstrap.com/docs/6.0/getting-started/">getting started guide</a>.
         </p>
-    </div>
+    </Container>
 </footer>
 
 </BaseLayout>

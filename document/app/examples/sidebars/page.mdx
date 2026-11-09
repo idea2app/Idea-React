@@ -1,3 +1,4 @@
+import { Col } from '../../../../source/Layout/Grid';
 import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Icon } from '../../../../source/Extension/Icon';
@@ -6,12 +7,35 @@ import { Button } from '../../../../source/Base/Button';
 import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
 import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 
+export const sidebarItems = Array.from({ length: 12 }, (_, index) => ({
+    id: index + 1,
+    day: ['Wed', 'Tues', 'Mon'][index % 3],
+    current: index === 0
+}));
+export const sidebarNavItems = [
+    { label: 'Home', icon: 'home' },
+    { label: 'Dashboard', icon: 'speedometer2' },
+    { label: 'Orders', icon: 'table' },
+    { label: 'Products', icon: 'grid' },
+    { label: 'Customers', icon: 'people-circle' }
+];
+export const sidebarMenuItems = ['New project...', 'Settings', 'Profile', 'Sign out'];
+export const collapsibleItems = {
+    home: ['Overview', 'Updates', 'Reports'],
+    dashboard: ['Overview', 'Weekly', 'Monthly', 'Annually'],
+    orders: ['New', 'Processed', 'Shipped', 'Returned'],
+    account: ['New...', 'Profile', 'Settings', 'Sign out']
+};
+
 <BaseLayout title="Sidebars">
 
 <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
     <symbol id="bootstrap" viewBox="0 0 118 94">
         <title>Bootstrap</title>
-        <path fillRule="evenodd" clipRule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
         ></path>
     </symbol>
     <symbol id="home" viewBox="0 0 16 16">
@@ -19,7 +43,9 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
     </symbol>
     <symbol id="speedometer2" viewBox="0 0 16 16">
         <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z" />
-        <path fillRule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"
+        <path
+            fillRule="evenodd"
+            d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"
         />
     </symbol>
     <symbol id="table" viewBox="0 0 16 16">
@@ -27,7 +53,9 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
     </symbol>
     <symbol id="people-circle" viewBox="0 0 16 16">
         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-        <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+        <path
+            fillRule="evenodd"
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
         />
     </symbol>
     <symbol id="grid" viewBox="0 0 16 16">
@@ -38,68 +66,64 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 <div className="d-flex flex-nowrap overflow-x-auto overflow-y-hidden max-h-100 vh-100">
   <h1 className="visually-hidden">Sidebars examples</h1>
 
-<div className="d-flex flex-column flex-shrink-0 p-3 bg-black" style={{ width: '280px' }} data-bs-theme="dark"
+<div
+    className="d-flex flex-column flex-shrink-0 p-3 bg-black"
+    style={{ width: '280px' }}
+    data-bs-theme="dark"
 >
-    <a href="/" className="d-flex align-items-center mb-3 md:mb-0 md:me-auto fg-white text-decoration-none"
+    <a
+        href="/"
+        className="d-flex align-items-center mb-3 md:mb-0 md:me-auto fg-white text-decoration-none"
     >
-        <Icon name="bootstrap" size={2.5} className="pe-none me-2" aria-hidden="true" />
+        <Icon name="bootstrap" size={2.5} className="pe-none me-2" />
         <span className="fs-xl">Sidebar</span>
     </a>
     <hr />
     <Nav as="ul" vertical className="align-items-start mb-auto">
-        <NavItem>
-            <NavLink href="#" active aria-current="page">
-                <Icon name="home" size={1} className="pe-none me-2" aria-hidden="true" />
-                Home
-            </NavLink>
-        </NavItem>
-        <li>
-            <NavLink href="#" className="fg-white">
-                <Icon name="speedometer2" size={1} className="pe-none me-2" aria-hidden="true" />
-                Dashboard
-            </NavLink>
-        </li>
-        <li>
-            <NavLink href="#" className="fg-white">
-                <Icon name="table" size={1} className="pe-none me-2" aria-hidden="true" />
-                Orders
-            </NavLink>
-        </li>
-        <li>
-            <NavLink href="#" className="fg-white">
-                <Icon name="grid" size={1} className="pe-none me-2" aria-hidden="true" />
-                Products
-            </NavLink>
-        </li>
-        <li>
-            <NavLink href="#" className="fg-white">
-                <Icon name="people-circle" size={1} className="pe-none me-2" aria-hidden="true" />
-                Customers
-            </NavLink>
-        </li>
+        {sidebarNavItems.map(({ label, icon }, index) => (
+            <NavItem key={label}>
+                <NavLink
+                    href="#"
+                    active={index === 0}
+                    aria-current={index === 0 ? 'page' : undefined}
+                    className={index === 0 ? undefined : 'fg-white'}
+                >
+                    <Icon name={icon} size={1} className="pe-none me-2" />
+                    {label}
+                </NavLink>
+            </NavItem>
+        ))}
     </Nav>
     <hr />
     <div>
-        <a className="d-flex align-items-center fg-white text-decoration-none" href="#" role="button" data-bs-toggle="menu" aria-expanded="false"
+        <a
+            className="d-flex align-items-center fg-white text-decoration-none"
+            href="#"
+            role="button"
+            data-bs-toggle="menu"
+            aria-expanded="false"
         >
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" className="rounded-circle me-2"
+            <img
+                src="https://github.com/mdo.png"
+                alt=""
+                width="32"
+                height="32"
+                className="rounded-circle me-2"
             />
             <strong>mdo</strong>
         </a>
         <MenuPanel className="shadow">
-            <MenuItem as="a" href="#">
-                New project...
-            </MenuItem>
-            <MenuItem as="a" href="#">
-                Settings
-            </MenuItem>
-            <MenuItem as="a" href="#">
-                Profile
-            </MenuItem>
+            {sidebarMenuItems.slice(0, 3).map(item => (
+                <MenuItem key={item} as="a" href="#">
+                    {item}
+                </MenuItem>
+            ))}
             <MenuDivider />
-            <MenuItem as="a" href="#">
-                Sign out
-            </MenuItem>
+            {sidebarMenuItems.slice(3).map(item => (
+                <MenuItem key={item} as="a" href="#">
+                    {item}
+                </MenuItem>
+            ))}
         </MenuPanel>
     </div>
 </div>
@@ -107,66 +131,59 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 <div className="b-example-divider b-example-vr"></div>
 
 <div className="d-flex flex-column flex-shrink-0 p-3 bg-1" style={{ width: '280px' }}>
-    <a href="/" className="d-flex align-items-center mb-3 md:mb-0 md:me-auto theme-inverse text-decoration-none"
+    <a
+        href="/"
+        className="d-flex align-items-center mb-3 md:mb-0 md:me-auto theme-inverse text-decoration-none"
     >
-        <Icon name="bootstrap" size={2.5} className="pe-none me-2" aria-hidden="true" />
+        <Icon name="bootstrap" size={2.5} className="pe-none me-2" />
         <span className="fs-xl">Sidebar</span>
     </a>
     <hr />
     <Nav as="ul" vertical className="align-items-start mb-auto">
-        <NavItem>
-            <NavLink href="#" active aria-current="page">
-                <Icon name="home" size={1} className="pe-none me-2" aria-hidden="true" />
-                Home
-            </NavLink>
-        </NavItem>
-        <li>
-            <NavLink href="#" className="theme-inverse">
-                <Icon name="speedometer2" size={1} className="pe-none me-2" aria-hidden="true" />
-                Dashboard
-            </NavLink>
-        </li>
-        <li>
-            <NavLink href="#" className="theme-inverse">
-                <Icon name="table" size={1} className="pe-none me-2" aria-hidden="true" />
-                Orders
-            </NavLink>
-        </li>
-        <li>
-            <NavLink href="#" className="theme-inverse">
-                <Icon name="grid" size={1} className="pe-none me-2" aria-hidden="true" />
-                Products
-            </NavLink>
-        </li>
-        <li>
-            <NavLink href="#" className="theme-inverse">
-                <Icon name="people-circle" size={1} className="pe-none me-2" aria-hidden="true" />
-                Customers
-            </NavLink>
-        </li>
+        {sidebarNavItems.map(({ label, icon }, index) => (
+            <NavItem key={label}>
+                <NavLink
+                    href="#"
+                    active={index === 0}
+                    aria-current={index === 0 ? 'page' : undefined}
+                    className={index === 0 ? undefined : 'theme-inverse'}
+                >
+                    <Icon name={icon} size={1} className="pe-none me-2" />
+                    {label}
+                </NavLink>
+            </NavItem>
+        ))}
     </Nav>
     <hr />
     <div>
-        <a className="d-flex align-items-center fg-body text-decoration-none" href="#" role="button" data-bs-toggle="menu" aria-expanded="false"
+        <a
+            className="d-flex align-items-center fg-body text-decoration-none"
+            href="#"
+            role="button"
+            data-bs-toggle="menu"
+            aria-expanded="false"
         >
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" className="rounded-circle me-2"
+            <img
+                src="https://github.com/mdo.png"
+                alt=""
+                width="32"
+                height="32"
+                className="rounded-circle me-2"
             />
             <strong>mdo</strong>
         </a>
         <MenuPanel className="shadow">
-            <MenuItem as="a" href="#">
-                New project...
-            </MenuItem>
-            <MenuItem as="a" href="#">
-                Settings
-            </MenuItem>
-            <MenuItem as="a" href="#">
-                Profile
-            </MenuItem>
+            {sidebarMenuItems.slice(0, 3).map(item => (
+                <MenuItem key={item} as="a" href="#">
+                    {item}
+                </MenuItem>
+            ))}
             <MenuDivider />
-            <MenuItem as="a" href="#">
-                Sign out
-            </MenuItem>
+            {sidebarMenuItems.slice(3).map(item => (
+                <MenuItem key={item} as="a" href="#">
+                    {item}
+                </MenuItem>
+            ))}
         </MenuPanel>
     </div>
 </div>
@@ -174,65 +191,71 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 <div className="b-example-divider b-example-vr"></div>
 
 <div className="d-flex flex-column flex-shrink-0 bg-1" style={{ width: '4.5rem' }}>
-    <a href="/" className="d-block p-3 theme-inverse text-decoration-none" title="Icon-only" data-bs-toggle="tooltip" data-bs-placement="right"
+    <a
+        href="/"
+        className="d-block p-3 theme-inverse text-decoration-none"
+        title="Icon-only"
+        data-bs-toggle="tooltip"
+        data-bs-placement="right"
     >
-        <Icon name="bootstrap" size={2.5} className="pe-none" aria-hidden="true" />
+        <Icon name="bootstrap" size={2.5} className="pe-none" />
         <span className="visually-hidden">Icon-only</span>
     </a>
     <Nav as="ul" vertical className="nav-flush mb-auto text-center">
-        <NavItem>
-            <NavLink href="#" active className="py-3 border-bottom rounded-0 flex-fill" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right"
-            >
-                <Icon name="home" size={1.5} className="pe-none" role="img" aria-label="Home" />
-            </NavLink>
-        </NavItem>
-        <li>
-            <NavLink href="#" className="py-3 border-bottom rounded-0" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right"
-            >
-                <Icon name="speedometer2" size={1.5} className="pe-none" role="img" aria-label="Dashboard"
-                />
-            </NavLink>
-        </li>
-        <li>
-            <NavLink href="#" className="py-3 border-bottom rounded-0" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right"
-            >
-                <Icon name="table" size={1.5} className="pe-none" role="img" aria-label="Orders" />
-            </NavLink>
-        </li>
-        <li>
-            <NavLink href="#" className="py-3 border-bottom rounded-0" title="Products" data-bs-toggle="tooltip" data-bs-placement="right"
-            >
-                <Icon name="grid" size={1.5} className="pe-none" role="img" aria-label="Products" />
-            </NavLink>
-        </li>
-        <li>
-            <NavLink href="#" className="py-3 border-bottom rounded-0" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right"
-            >
-                <Icon name="people-circle" size={1.5} className="pe-none" role="img" aria-label="Customers"
-                />
-            </NavLink>
-        </li>
+        {sidebarNavItems.map(({ label, icon }, index) => (
+            <NavItem key={label}>
+                <NavLink
+                    href="#"
+                    active={index === 0}
+                    className={
+                        index === 0
+                            ? 'py-3 border-bottom rounded-0 flex-fill'
+                            : 'py-3 border-bottom rounded-0'
+                    }
+                    aria-current={index === 0 ? 'page' : undefined}
+                    title={label}
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                >
+                    <Icon
+                        name={icon}
+                        size={1.5}
+                        className="pe-none"
+                        role="img"
+                        aria-label={label}
+                    />
+                </NavLink>
+            </NavItem>
+        ))}
     </Nav>
     <div className="border-top">
-        <a className="d-flex align-items-center justify-content-center p-3 theme-inverse text-decoration-none" href="#" role="button" data-bs-toggle="menu" aria-expanded="false"
+        <a
+            className="d-flex align-items-center justify-content-center p-3 theme-inverse text-decoration-none"
+            href="#"
+            role="button"
+            data-bs-toggle="menu"
+            aria-expanded="false"
         >
-            <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" className="rounded-circle"
+            <img
+                src="https://github.com/mdo.png"
+                alt="mdo"
+                width="24"
+                height="24"
+                className="rounded-circle"
             />
         </a>
         <MenuPanel className="shadow">
-            <MenuItem as="a" href="#">
-                New project...
-            </MenuItem>
-            <MenuItem as="a" href="#">
-                Settings
-            </MenuItem>
-            <MenuItem as="a" href="#">
-                Profile
-            </MenuItem>
+            {sidebarMenuItems.slice(0, 3).map(item => (
+                <MenuItem key={item} as="a" href="#">
+                    {item}
+                </MenuItem>
+            ))}
             <MenuDivider />
-            <MenuItem as="a" href="#">
-                Sign out
-            </MenuItem>
+            {sidebarMenuItems.slice(3).map(item => (
+                <MenuItem key={item} as="a" href="#">
+                    {item}
+                </MenuItem>
+            ))}
         </MenuPanel>
     </div>
 </div>
@@ -240,140 +263,112 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 <div className="b-example-divider b-example-vr"></div>
 
 <div className="flex-shrink-0 p-3" style={{ width: '280px' }}>
-    <a href="/" className="d-flex align-items-center pb-3 mb-3 theme-inverse text-decoration-none border-bottom"
+    <a
+        href="/"
+        className="d-flex align-items-center pb-3 mb-3 theme-inverse text-decoration-none border-bottom"
     >
-        <Icon name="bootstrap" size={1.875} className="pe-none me-2" aria-hidden="true" />
+        <Icon name="bootstrap" size={1.875} className="pe-none me-2" />
         <span className="fs-lg fw-semibold">Collapsible</span>
     </a>
     <ul className="list-unstyled ps-0">
         <li className="mb-1">
-            <Button variant={false} className="btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true"
+            <Button
+                variant={false}
+                className="btn-toggle d-inline-flex align-items-center rounded border-0"
+                data-bs-toggle="collapse"
+                data-bs-target="#home-collapse"
+                aria-expanded="true"
             >
                 Home
             </Button>
             <div className="collapse show" id="home-collapse">
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            Overview
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            Updates
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            Reports
-                        </a>
-                    </li>
+                    {collapsibleItems.home.map(item => (
+                        <li key={item}>
+                            <a
+                                href="#"
+                                className="theme-inverse d-inline-flex text-decoration-none rounded"
+                            >
+                                {item}
+                            </a>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </li>
         <li className="mb-1">
-            <Button variant={false} className="btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false"
+            <Button
+                variant={false}
+                className="btn-toggle d-inline-flex align-items-center rounded border-0"
+                data-bs-toggle="collapse"
+                data-bs-target="#dashboard-collapse"
+                aria-expanded="false"
             >
                 Dashboard
             </Button>
             <div className="collapse" id="dashboard-collapse">
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            Overview
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            Weekly
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            Monthly
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            Annually
-                        </a>
-                    </li>
+                    {collapsibleItems.dashboard.map(item => (
+                        <li key={item}>
+                            <a
+                                href="#"
+                                className="theme-inverse d-inline-flex text-decoration-none rounded"
+                            >
+                                {item}
+                            </a>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </li>
         <li className="mb-1">
-            <Button variant={false} className="btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false"
+            <Button
+                variant={false}
+                className="btn-toggle d-inline-flex align-items-center rounded border-0"
+                data-bs-toggle="collapse"
+                data-bs-target="#orders-collapse"
+                aria-expanded="false"
             >
                 Orders
             </Button>
             <div className="collapse" id="orders-collapse">
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            New
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            Processed
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            Shipped
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            Returned
-                        </a>
-                    </li>
+                    {collapsibleItems.orders.map(item => (
+                        <li key={item}>
+                            <a
+                                href="#"
+                                className="theme-inverse d-inline-flex text-decoration-none rounded"
+                            >
+                                {item}
+                            </a>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </li>
         <li className="border-top my-3"></li>
         <li className="mb-1">
-            <Button variant={false} className="btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false"
+            <Button
+                variant={false}
+                className="btn-toggle d-inline-flex align-items-center rounded border-0"
+                data-bs-toggle="collapse"
+                data-bs-target="#account-collapse"
+                aria-expanded="false"
             >
                 Account
             </Button>
             <div className="collapse" id="account-collapse">
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            New...
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            Settings
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="theme-inverse d-inline-flex text-decoration-none rounded"
-                        >
-                            Sign out
-                        </a>
-                    </li>
+                    {collapsibleItems.account.map(item => (
+                        <li key={item}>
+                            <a
+                                href="#"
+                                className="theme-inverse d-inline-flex text-decoration-none rounded"
+                            >
+                                {item}
+                            </a>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </li>
@@ -384,95 +379,19 @@ import { MenuPanel, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 
   <div className="d-flex flex-column align-items-stretch flex-shrink-0 bg-1" style={{"width": "380px"}}>
     <a href="/" className="d-flex align-items-center flex-shrink-0 p-3 theme-inverse text-decoration-none border-bottom">
-      <Icon name="bootstrap" size={1.875} className="pe-none me-2" aria-hidden="true" />
+      <Icon name="bootstrap" size={1.875} className="pe-none me-2" />
       <span className="fs-lg fw-semibold">List group</span>
     </a>
     <ListGroup as="div" flush className="border-bottom scrollarea">
-      <ListGroupItem as="a" href="#" action activeclassName="py-3 lh-sm" aria-current="true">
+      {sidebarItems.map(({ id, day, current }) => (
+      <ListGroupItem key={id} as="a" href="#" action active={current} className="py-3 lh-sm" aria-current={current ? 'true' : undefined}>
         <div className="d-flex w-100 align-items-center justify-content-between">
           <strong className="mb-1">List group item heading</strong>
-          <small>Wed</small>
+          <small className={current ? '' : 'fg-2'}>{day}</small>
         </div>
-        <div className="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
+        <Col xs={10} className="mb-1 small">Some placeholder content in a paragraph below the heading and date.</Col>
       </ListGroupItem>
-      <ListGroupItem as="a" href="#" action className="py-3 lh-sm">
-        <div className="d-flex w-100 align-items-center justify-content-between">
-          <strong className="mb-1">List group item heading</strong>
-          <small className="fg-2">Tues</small>
-        </div>
-        <div className="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-      </ListGroupItem>
-      <ListGroupItem as="a" href="#" action className="py-3 lh-sm">
-        <div className="d-flex w-100 align-items-center justify-content-between">
-          <strong className="mb-1">List group item heading</strong>
-          <small className="fg-2">Mon</small>
-        </div>
-        <div className="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-      </ListGroupItem>
-
-      <ListGroupItem as="a" href="#" action className="py-3 lh-sm" aria-current="true">
-        <div className="d-flex w-100 align-items-center justify-content-between">
-          <strong className="mb-1">List group item heading</strong>
-          <small className="fg-2">Wed</small>
-        </div>
-        <div className="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-      </ListGroupItem>
-      <ListGroupItem as="a" href="#" action className="py-3 lh-sm">
-        <div className="d-flex w-100 align-items-center justify-content-between">
-          <strong className="mb-1">List group item heading</strong>
-          <small className="fg-2">Tues</small>
-        </div>
-        <div className="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-      </ListGroupItem>
-      <ListGroupItem as="a" href="#" action className="py-3 lh-sm">
-        <div className="d-flex w-100 align-items-center justify-content-between">
-          <strong className="mb-1">List group item heading</strong>
-          <small className="fg-2">Mon</small>
-        </div>
-        <div className="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-      </ListGroupItem>
-      <ListGroupItem as="a" href="#" action className="py-3 lh-sm" aria-current="true">
-        <div className="d-flex w-100 align-items-center justify-content-between">
-          <strong className="mb-1">List group item heading</strong>
-          <small className="fg-2">Wed</small>
-        </div>
-        <div className="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-      </ListGroupItem>
-      <ListGroupItem as="a" href="#" action className="py-3 lh-sm">
-        <div className="d-flex w-100 align-items-center justify-content-between">
-          <strong className="mb-1">List group item heading</strong>
-          <small className="fg-2">Tues</small>
-        </div>
-        <div className="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-      </ListGroupItem>
-      <ListGroupItem as="a" href="#" action className="py-3 lh-sm">
-        <div className="d-flex w-100 align-items-center justify-content-between">
-          <strong className="mb-1">List group item heading</strong>
-          <small className="fg-2">Mon</small>
-        </div>
-        <div className="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-      </ListGroupItem>
-      <ListGroupItem as="a" href="#" action className="py-3 lh-sm" aria-current="true">
-        <div className="d-flex w-100 align-items-center justify-content-between">
-          <strong className="mb-1">List group item heading</strong>
-          <small className="fg-2">Wed</small>
-        </div>
-        <div className="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-      </ListGroupItem>
-      <ListGroupItem as="a" href="#" action className="py-3 lh-sm">
-        <div className="d-flex w-100 align-items-center justify-content-between">
-          <strong className="mb-1">List group item heading</strong>
-          <small className="fg-2">Tues</small>
-        </div>
-        <div className="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-      </ListGroupItem>
-      <ListGroupItem as="a" href="#" action className="py-3 lh-sm">
-        <div className="d-flex w-100 align-items-center justify-content-between">
-          <strong className="mb-1">List group item heading</strong>
-          <small className="fg-2">Mon</small>
-        </div>
-        <div className="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-      </ListGroupItem>
+      ))}
     </ListGroup>
 
   </div>

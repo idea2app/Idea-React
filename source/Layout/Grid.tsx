@@ -64,42 +64,52 @@ export const Row = polymorphic<RowProps>(
 Row.displayName = 'Row';
 
 export interface ColProps extends ComponentPropsWithRef<'div'> {
-    xs?: BreakpointColSize;
-    sm?: BreakpointColSize;
-    md?: BreakpointColSize;
-    lg?: BreakpointColSize;
-    xl?: BreakpointColSize;
-    '2xl'?: BreakpointColSize;
+    xs?: ColBreakpoint;
+    sm?: ColBreakpoint;
+    md?: ColBreakpoint;
+    lg?: ColBreakpoint;
+    xl?: ColBreakpoint;
+    '2xl'?: ColBreakpoint;
 }
+
+export type ColOrder = number | 'first' | 'last';
+
+export interface ColBreakpointOptions {
+    span?: BreakpointColSize;
+    offset?: number;
+    order?: ColOrder;
+}
+
+export type ColBreakpoint = BreakpointColSize | ColBreakpointOptions;
 
 export const Col = polymorphic<ColProps>(
     ({ as: Root = 'div', xs, sm, md, lg, xl, '2xl': xxl, className, ...props }) => {
-        const sizes: [Breakpoint, BreakpointColSize | undefined][] = [
+        const sizes: [Breakpoint | undefined, ColBreakpoint | undefined][] = [
+            [undefined, xs],
             ['sm', sm],
             ['md', md],
             ['lg', lg],
             ['xl', xl],
             ['2xl', xxl]
         ];
-        const sized = sizes.some(([, size]) => size !== undefined);
-
-        return (
-            <Root
-                {...props}
-                className={classNames(
-                    {
-                        col: (xs === undefined && !sized) || xs === true,
-                        [`col-${xs}`]: xs !== undefined && xs !== true
-                    },
-                    sizes.map(
-                        ([breakpoint, size]) =>
-                            size !== undefined &&
-                            (size === true ? `${breakpoint}:col` : `${breakpoint}:col-${size}`)
-                    ),
-                    className
-                )}
-            />
+        const hasSpan = sizes.some(([, options]) =>
+            typeof options === 'object' ? options.span !== undefined : options !== undefined
         );
+        const classes = sizes.map(([breakpoint, options]) => {
+            if (options === undefined) return [];
+
+            const prefix = breakpoint ? `${breakpoint}:` : '';
+            const { span, offset, order } =
+                typeof options === 'object' ? options : { span: options };
+
+            return [
+                span !== undefined && `${prefix}col${span === true ? '' : `-${span}`}`,
+                offset !== undefined && `${prefix}offset-${offset}`,
+                order !== undefined && `${prefix}order-${order}`
+            ];
+        });
+
+        return <Root {...props} className={classNames(!hasSpan && 'col', classes, className)} />;
     }
 );
 Col.displayName = 'Col';

@@ -1,3 +1,4 @@
+import { Container } from '../../../../source/Layout/Grid';
 import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 
@@ -6,7 +7,7 @@ import { BaseLayout } from '../../../component/Document/BaseLayout';
 {/* Begin page content */}
 
 <div className="flex-shrink-0">
-    <div className="container">
+    <Container>
         <h1 className="mt-5">Sticky footer</h1>
         <p className="fs-lg fw-light">
             Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and
@@ -14,18 +15,18 @@ import { BaseLayout } from '../../../component/Document/BaseLayout';
         </p>
         <p>
             Use{' '}
-            <a href={'https://getbootstrap.com/docs/6.0/examples/sticky-footer-navbar/'}>
+            <a href="https://getbootstrap.com/docs/6.0/examples/sticky-footer-navbar/">
                 the sticky footer with a fixed navbar
             </a>{' '}
             if need be, too.
         </p>
-    </div>
+    </Container>
 </div>
 
 <footer className="footer mt-auto py-3 bg-1">
-    <div className="container">
+    <Container>
         <span className="fg-2">Place sticky footer content here.</span>
-    </div>
+    </Container>
 </footer>
 
 </BaseLayout>

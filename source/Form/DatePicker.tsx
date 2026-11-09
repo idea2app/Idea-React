@@ -163,7 +163,7 @@ class DatePickerComponent extends FormPlugin<
 
             return (
                 <Button as={as} {...buttonProps} {...attributes} ref={this.setRef}>
-                    {leadingIcon && <Icon name={leadingIcon} aria-hidden="true" />}
+                    {leadingIcon && <Icon name={leadingIcon} />}
                     <span data-bs-datepicker-display="">{children}</span>
                 </Button>
             );

@@ -1,59 +1,60 @@
+import { Col } from '../../../../source/Layout/Grid';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Icon } from '../../../../source/Extension/Icon';
 import { Button } from '../../../../source/Base/Button';
 import { Spinner } from '../../../../source/Base/Spinner';
 
+export const themeButtons = [
+    { theme: 'primary', label: 'Primary' },
+    { theme: 'secondary', label: 'Secondary' },
+    { theme: 'accent', label: 'Accent' },
+    { theme: 'success', label: 'Success' },
+    { theme: 'danger', label: 'Danger' },
+    { theme: 'warning', label: 'Warning' },
+    { theme: 'info', label: 'Info' },
+    { theme: 'light', label: 'Light' },
+    { theme: 'inverse', label: 'Dark' },
+    { variant: 'link', label: 'Link' }
+];
+
 <BaseLayout title="Buttons">
 
 <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
     <symbol id="arrow-right-short" viewBox="0 0 16 16">
-        <path fillRule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+        <path
+            fillRule="evenodd"
+            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
         />
     </symbol>
     <symbol id="x-lg" viewBox="0 0 16 16">
-        <path fillRule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
+        <path
+            fillRule="evenodd"
+            d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
         />
-        <path fillRule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
+        <path
+            fillRule="evenodd"
+            d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
         />
     </symbol>
 </svg>
 
 <div className="d-flex gap-2 justify-content-center py-5">
-    <Button variant="solid" theme="primary" className="rounded-pill px-3" type="button">
-        Primary
-    </Button>
-    <Button variant="solid" theme="secondary" className="rounded-pill px-3" type="button">
-        Secondary
-    </Button>
-    <Button variant="solid" theme="accent" className="rounded-pill px-3" type="button">
-        Accent
-    </Button>
-    <Button variant="solid" theme="success" className="rounded-pill px-3" type="button">
-        Success
-    </Button>
-    <Button variant="solid" theme="danger" className="rounded-pill px-3" type="button">
-        Danger
-    </Button>
-    <Button variant="solid" theme="warning" className="rounded-pill px-3" type="button">
-        Warning
-    </Button>
-    <Button variant="solid" theme="info" className="rounded-pill px-3" type="button">
-        Info
-    </Button>
-    <Button variant="solid" theme="light" className="rounded-pill px-3" type="button">
-        Light
-    </Button>
-    <Button variant="solid" theme="inverse" className="rounded-pill px-3" type="button">
-        Dark
-    </Button>
-    <Button variant="link" type="button">
-        Link
-    </Button>
+    {themeButtons.map(({ theme, label, variant = 'solid' }) => (
+        <Button
+            key={label}
+            variant={variant}
+            theme={theme}
+            className={variant === 'solid' ? 'rounded-pill px-3' : undefined}
+            type="button"
+        >
+            {label}
+        </Button>
+    ))}
 </div>
 
 <div className="b-example-divider"></div>
 
-<div className="lg:col-6 2xl:col-4 my-5 mx-auto">
+<Col lg={6} {...{ '2xl': 4 }} className="my-5 mx-auto">
     <div className="d-grid gap-2">
         <Button variant="outline" theme="secondary" type="button">
             Secondary action
@@ -62,18 +63,18 @@ import { Spinner } from '../../../../source/Base/Spinner';
             Primary action
         </Button>
     </div>
-</div>
+</Col>
 
 <div className="b-example-divider"></div>
 
 <div className="d-flex gap-2 justify-content-center py-5">
     <Button variant="solid" theme="primary" type="button">
         Primary icon
-        <Icon name="arrow-right-short" size={1.25} className="ms-1" aria-hidden="true" />
+        <Icon name="arrow-right-short" size={1.25} className="ms-1" />
     </Button>
     <Button variant="outline" theme="secondary" type="button">
         Secondary icon
-        <Icon name="arrow-right-short" size={1.25} className="ms-1" aria-hidden="true" />
+        <Icon name="arrow-right-short" size={1.25} className="ms-1" />
     </Button>
 </div>
 
@@ -97,12 +98,12 @@ import { Spinner } from '../../../../source/Base/Spinner';
 <div className="d-flex gap-2 justify-content-center pt-5 pb-4">
     <Button variant="solid" theme="primary" icon className="rounded-circle p-2 lh-1" type="button"
     >
-        <Icon name="x-lg" size={1} aria-hidden="true" />
+        <Icon name="x-lg" size={1} />
         <span className="visually-hidden">Dismiss</span>
     </Button>
     <Button variant="outline" theme="primary" icon className="rounded-circle p-2 lh-1" type="button"
     >
-        <Icon name="x-lg" size={1} aria-hidden="true" />
+        <Icon name="x-lg" size={1} />
         <span className="visually-hidden">Dismiss</span>
     </Button>
 
@@ -111,12 +112,12 @@ import { Spinner } from '../../../../source/Base/Spinner';
 <div className="d-flex gap-2 justify-content-center pb-5">
     <Button variant="solid" theme="primary" icon className="rounded-circle p-3 lh-1" type="button"
     >
-        <Icon name="x-lg" size={1.5} aria-hidden="true" />
+        <Icon name="x-lg" size={1.5} />
         <span className="visually-hidden">Dismiss</span>
     </Button>
     <Button variant="outline" theme="primary" icon className="rounded-circle p-3 lh-1" type="button"
     >
-        <Icon name="x-lg" size={1.5} aria-hidden="true" />
+        <Icon name="x-lg" size={1.5} />
         <span className="visually-hidden">Dismiss</span>
     </Button>
 

@@ -1,3 +1,4 @@
+import { Container } from '../../../../source/Layout/Grid';
 import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Navbar, NavbarNav, NavbarBrand, NavbarToggler } from '../../../../source/Base/Navbar';
@@ -13,10 +14,16 @@ import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
 import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../source/Form';
 import { CloseButton } from '../../../../source/Base/CloseButton';
 
+export const navbarItems = [
+    { label: 'Home', active: true },
+    { label: 'Link' },
+    { label: 'Disabled', disabled: true }
+];
+
 <BaseLayout title="Top navbar example">
 
 <Navbar theme="dark" expand="md" className="bg-black bg-90 mb-4">
-    <div className="container-fluid">
+    <Container fluid>
         <NavbarBrand href="#">Top navbar</NavbarBrand>
         <NavbarToggler type="button" data-bs-toggle="drawer" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
         ></NavbarToggler>
@@ -31,19 +38,19 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
             </div>
             <div className="drawer-body">
                 <NavbarNav className="me-auto mb-2 md:mb-0">
-                    <NavItem>
-                        <NavLink active aria-current="page" href="#">
-                            Home
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="#">Link</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink disabled aria-disabled="true">
-                            Disabled
-                        </NavLink>
-                    </NavItem>
+                    {navbarItems.map(({ label, active, disabled }) => (
+                        <NavItem key={label}>
+                            <NavLink
+                                active={active}
+                                aria-current={active ? 'page' : undefined}
+                                disabled={disabled}
+                                aria-disabled={disabled}
+                                href={disabled ? undefined : '#'}
+                            >
+                                {label}
+                            </NavLink>
+                        </NavItem>
+                    ))}
                 </NavbarNav>
                 <form className="d-flex" role="search">
                     <FormControl className="me-2" type="search" placeholder="Search" aria-label="Search"
@@ -54,11 +61,11 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
                 </form>
             </div>
         </NativeDialog>
-    </div>
+    </Container>
 
 </Navbar>
 
-<div className="container">
+<Container >
     <div className="bg-1 p-5 rounded">
         <h1>Navbar example</h1>
         <p className="fs-lg fw-light">
@@ -66,12 +73,12 @@ import { CloseButton } from '../../../../source/Base/CloseButton';
             scroll, this navbar remains in its original position and moves with the rest of the
             page.
         </p>
-        <Button variant="solid" theme="primary" size="lg" as="a" href={'https://getbootstrap.com/docs/6.0/components/navbar'} role="button"
+        <Button variant="solid" theme="primary" size="lg" href="https://getbootstrap.com/docs/6.0/components/navbar" role="button"
         >
             View navbar docs &raquo;
         </Button>
     </div>
 
-</div>
+</Container>
 
 </BaseLayout>

@@ -53,7 +53,7 @@ export const ComboboxOption = polymorphic<ComboboxOptionProps>(
             data-label={optionText(children)}
             data-option-hidden={props.hidden || undefined}
         >
-            {icon && <Icon name={icon} className="menu-item-icon" aria-hidden="true" />}
+            {icon && <Icon name={icon} className="menu-item-icon" />}
             {description ? (
                 <MenuItemContent>
                     {children}
@@ -62,7 +62,7 @@ export const ComboboxOption = polymorphic<ComboboxOptionProps>(
             ) : (
                 children
             )}
-            {checkedIcon && <Icon name="check-lg" className="menu-item-check" aria-hidden="true" />}
+            {checkedIcon && <Icon name="check-lg" className="menu-item-check" />}
         </Root>
     )
 );
@@ -335,11 +335,7 @@ export class Combobox<T extends ElementType | undefined = 'div'> extends Compone
                             >
                                 {hasSelection ? label : placeholder}
                             </span>
-                            <Icon
-                                name="chevron-down"
-                                className="combobox-caret"
-                                aria-hidden="true"
-                            />
+                            <Icon name="chevron-down" className="combobox-caret" />
                         </>
                     }
                     toggleProps={{

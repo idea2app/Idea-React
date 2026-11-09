@@ -1,3 +1,4 @@
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
 import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
@@ -14,44 +15,38 @@ import { Button } from '../../../../source/Base/Button';
 import { Badge } from '../../../../source/Base/Badge';
 import { Card } from '../../../../source/Base/Card';
 
+export const cartProducts = [
+    { name: 'Product name', description: 'Brief description', price: '$12' },
+    { name: 'Second product', description: 'Brief description', price: '$8' },
+    { name: 'Third item', description: 'Brief description', price: '$5' }
+];
+
 <BaseLayout title="Checkout example" className="bg-1">
 
-<div className="container">
+<Container >
   <div>
     <div className="py-5 text-center">
-      <img className="d-block mx-auto mb-4" src={"https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo.svg"} alt="" width="72" height="57" />
+      <img className="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57" />
       <h1 className="h2">Checkout form</h1>
       <p className="fs-lg fw-light">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
     </div>
 
-    <div className="row g-5">
-      <div className="md:col-5 lg:col-4 md:order-last">
+    <Row className="g-5">
+      <Col md={{ span: 5, order: 'last' }} lg={4}>
         <h4 className="d-flex justify-content-between align-items-center mb-3">
           <span className="fg-primary">Your cart</span>
           <Badge variant="subtle" theme="primary" pill >3</Badge>
         </h4>
         <ListGroup className="mb-3">
-          <ListGroupItem className="d-flex justify-content-between lh-sm">
-            <div>
-              <h6 className="my-0">Product name</h6>
-              <small className="fg-2">Brief description</small>
-            </div>
-            <span className="fg-2">$12</span>
-          </ListGroupItem>
-          <ListGroupItem className="d-flex justify-content-between lh-sm">
-            <div>
-              <h6 className="my-0">Second product</h6>
-              <small className="fg-2">Brief description</small>
-            </div>
-            <span className="fg-2">$8</span>
-          </ListGroupItem>
-          <ListGroupItem className="d-flex justify-content-between lh-sm">
-            <div>
-              <h6 className="my-0">Third item</h6>
-              <small className="fg-2">Brief description</small>
-            </div>
-            <span className="fg-2">$5</span>
-          </ListGroupItem>
+          {cartProducts.map(({ name, description, price }) => (
+            <ListGroupItem key={name} className="d-flex justify-content-between lh-sm">
+              <div>
+                <h6 className="my-0">{name}</h6>
+                <small className="fg-2">{description}</small>
+              </div>
+              <span className="fg-2">{price}</span>
+            </ListGroupItem>
+          ))}
           <ListGroupItem className="d-flex justify-content-between bg-1">
             <div className="fg-success">
               <h6 className="my-0">Promo code</h6>
@@ -71,28 +66,28 @@ import { Card } from '../../../../source/Base/Card';
             <Button variant="solid" theme="secondary" type="submit">Redeem</Button>
           </InputGroup>
         </Card>
-      </div>
-      <div className="md:col-7 lg:col-8">
+      </Col>
+      <Col md={7} lg={8}>
         <h4 className="mb-3">Billing address</h4>
         <form data-bs-validate noValidate>
-          <div className="row g-3">
-            <div className="sm:col-6">
+          <Row className="g-3">
+            <Col sm={6}>
               <FormLabel htmlFor="firstName" >First name</FormLabel>
               <FormControl type="text" id="firstName" placeholder="" value="" required />
               <div className="invalid-feedback">
                 Valid first name is required.
               </div>
-            </div>
+            </Col>
 
-            <div className="sm:col-6">
+            <Col sm={6}>
               <FormLabel htmlFor="lastName" >Last name</FormLabel>
               <FormControl type="text" id="lastName" placeholder="" value="" required />
               <div className="invalid-feedback">
                 Valid last name is required.
               </div>
-            </div>
+            </Col>
 
-            <div className="col-12">
+            <Col xs={12}>
               <FormLabel htmlFor="username" >Username</FormLabel>
               <InputGroup >
                 <InputGroupText >@</InputGroupText>
@@ -101,30 +96,30 @@ import { Card } from '../../../../source/Base/Card';
                   Your username is required.
                 </div>
               </InputGroup>
-            </div>
+            </Col>
 
-            <div className="col-12">
+            <Col xs={12}>
               <FormLabel htmlFor="email" >Email <span className="fg-2">(Optional)</span></FormLabel>
               <FormControl type="email" id="email" placeholder="you@example.com" />
               <div className="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
-            </div>
+            </Col>
 
-            <div className="col-12">
+            <Col xs={12}>
               <FormLabel htmlFor="address" >Address</FormLabel>
               <FormControl type="text" id="address" placeholder="1234 Main St" required />
               <div className="invalid-feedback">
                 Please enter your shipping address.
               </div>
-            </div>
+            </Col>
 
-            <div className="col-12">
+            <Col xs={12}>
               <FormLabel htmlFor="address2" >Address 2 <span className="fg-2">(Optional)</span></FormLabel>
               <FormControl type="text" id="address2" placeholder="Apartment or suite" />
-            </div>
+            </Col>
 
-            <div className="md:col-5">
+            <Col md={5}>
               <FormLabel htmlFor="country" >Country</FormLabel>
               <FormSelect id="country" required>
                 <option value="">Choose...</option>
@@ -133,9 +128,9 @@ import { Card } from '../../../../source/Base/Card';
               <div className="invalid-feedback">
                 Please select a valid country.
               </div>
-            </div>
+            </Col>
 
-            <div className="md:col-4">
+            <Col md={4}>
               <FormLabel htmlFor="state" >State</FormLabel>
               <FormSelect id="state" required>
                 <option value="">Choose...</option>
@@ -144,16 +139,16 @@ import { Card } from '../../../../source/Base/Card';
               <div className="invalid-feedback">
                 Please provide a valid state.
               </div>
-            </div>
+            </Col>
 
-            <div className="md:col-3">
+            <Col md={3}>
               <FormLabel htmlFor="zip" >Zip</FormLabel>
               <FormControl type="text" id="zip" placeholder="" required />
               <div className="invalid-feedback">
                 Zip code required.
               </div>
-            </div>
-          </div>
+            </Col>
+          </Row>
 
           <hr className="my-4" />
 
@@ -186,47 +181,47 @@ import { Card } from '../../../../source/Base/Card';
             </div>
           </div>
 
-          <div className="row gy-3">
-            <div className="md:col-6">
+          <Row className="gy-3">
+            <Col md={6}>
               <FormLabel htmlFor="cc-name" >Name on card</FormLabel>
               <FormControl type="text" id="cc-name" placeholder="" required />
               <small className="fg-2">Full name as displayed on card</small>
               <div className="invalid-feedback">
                 Name on card is required
               </div>
-            </div>
+            </Col>
 
-            <div className="md:col-6">
+            <Col md={6}>
               <FormLabel htmlFor="cc-number" >Credit card number</FormLabel>
               <FormControl type="text" id="cc-number" placeholder="" required />
               <div className="invalid-feedback">
                 Credit card number is required
               </div>
-            </div>
+            </Col>
 
-            <div className="md:col-3">
+            <Col md={3}>
               <FormLabel htmlFor="cc-expiration" >Expiration</FormLabel>
               <FormControl type="text" id="cc-expiration" placeholder="" required />
               <div className="invalid-feedback">
                 Expiration date required
               </div>
-            </div>
+            </Col>
 
-            <div className="md:col-3">
+            <Col md={3}>
               <FormLabel htmlFor="cc-cvv" >CVV</FormLabel>
               <FormControl type="text" id="cc-cvv" placeholder="" required />
               <div className="invalid-feedback">
                 Security code required
               </div>
-            </div>
-          </div>
+            </Col>
+          </Row>
 
           <hr className="my-4" />
 
           <Button variant="solid" theme="primary" size="lg" className="w-100" type="submit">Continue to checkout</Button>
         </form>
-      </div>
-    </div>
+      </Col>
+    </Row>
 
   </div>
 
@@ -238,6 +233,6 @@ import { Card } from '../../../../source/Base/Card';
       <li className="list-inline-item"><a href="#">Support</a></li>
     </ul>
   </footer>
-</div>
+</Container>
 
 </BaseLayout>

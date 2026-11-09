@@ -1,9 +1,11 @@
+import { Container } from '../../../../source/Layout/Grid';
 import './style.less';
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
 import { MarkdownView } from '../../../../source/Extension/MarkdownView';
 import { Button } from '../../../../source/Base/Button';
 import { CloseButton } from '../../../../source/Base/CloseButton';
+import { Table } from '../../../../source/Content/Tables';
 
 export const themeColors = [
     { name: 'primary', title: 'Primary' },
@@ -17,19 +19,27 @@ export const themeColors = [
     { name: 'dark', title: 'Dark' },
     { name: 'inverse', title: 'Inverse' }
 ];
+export const sampleRows = [
+    { number: 1, first: 'Mark', last: 'Otto', handle: '@mdo' },
+    { number: 2, first: 'Jacob', last: 'Thornton', handle: '@fat' },
+    { number: 3, first: 'John', last: 'Doe', handle: '@social' }
+];
 export const getData = key => (key === 'theme-colors' ? themeColors : []);
 export const normalizeMarkup = (content, ...values) =>
-    (typeof content === 'string' ? content : String.raw(content, ...values)).replace(/^ {1,8}/gm, '');
+    (typeof content === 'string' ? content : String.raw(content, ...values)).replace(
+        /^ {1,8}/gm,
+        ''
+    );
 
 <BaseLayout title="Cheatsheet" className="bg-1">
 
 <header className="bd-header bg-black bg-90 py-3 d-flex align-items-stretch border-bottom border-black">
-  <div className="container-fluid d-flex align-items-center">
+  <Container fluid className="d-flex align-items-center">
     <h1 className="d-flex align-items-center fs-xl fg-white mb-0">
-      <img src={"https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg"} width="38" height="30" className="me-3" alt="Bootstrap" />
+      <img src="https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg" width="38" height="30" className="me-3" alt="Bootstrap" />
       Cheatsheet
     </h1>
-  </div>
+  </Container>
 </header>
 <aside className="bd-aside xl:sticky-top fg-2 align-self-start mb-3 xl:mb-5 px-2">
   <h2 className="h6 pt-4 pb-3 mb-4 border-bottom">On this page</h2>
@@ -83,14 +93,14 @@ export const normalizeMarkup = (content, ...values) =>
     </ul>
   </nav>
 </aside>
-<div className="bd-cheatsheet container-fluid bg-body">
+<Container fluid className="bd-cheatsheet bg-body">
   <section id="content">
     <h2 className="xl:sticky-top fw-bold pt-3 xl:pt-5 pb-2 xl:pb-3">Contents</h2>
 
     <article className="my-3" id="typography">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Typography</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/content/typography"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/content/typography">Documentation</a>
       </div>
 
       <div>
@@ -160,7 +170,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="images">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Images</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/content/images"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/content/images">Documentation</a>
       </div>
 
       <div>
@@ -182,134 +192,102 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="tables">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Tables</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/content/tables"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/content/tables">Documentation</a>
       </div>
       <div>
-        <MarkdownView children={normalizeMarkup`
-          <table class="table table-striped">
-            <thead>
+        <Table striped>
+          <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">First</th>
               <th scope="col">Last</th>
               <th scope="col">Handle</th>
             </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>John</td>
-              <td>Doe</td>
-              <td>@social</td>
-            </tr>
-            </tbody>
-          </table>`} />
+          </thead>
+          <tbody>
+            {sampleRows.map(({ number, first, last, handle }) => (
+              <tr key={number}>
+                <th scope="row">{number}</th>
+                <td>{first}</td>
+                <td>{last}</td>
+                <td>{handle}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
 
-        <MarkdownView children={normalizeMarkup`
-          <table class="table table-borderless" data-bs-theme="dark">
-            <thead>
+        <Table borderless data-bs-theme="dark">
+          <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">First</th>
               <th scope="col">Last</th>
               <th scope="col">Handle</th>
             </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>John</td>
-              <td>Doe</td>
-              <td>@social</td>
-            </tr>
-            </tbody>
-          </table>`} />
+          </thead>
+          <tbody>
+            {sampleRows.map(({ number, first, last, handle }) => (
+              <tr key={number}>
+                <th scope="row">{number}</th>
+                <td>{first}</td>
+                <td>{last}</td>
+                <td>{handle}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
 
-        <MarkdownView children={normalizeMarkup([`
-          <table class="table table-hover">
-            <thead>
+        <Table hover>
+          <thead>
             <tr>
               <th scope="col">Class</th>
               <th scope="col">Heading</th>
               <th scope="col">Heading</th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             <tr>
               <th scope="row">Default</th>
               <td>Cell</td>
               <td>Cell</td>
-            </tr>`,
-            ...getData('theme-colors').map((themeColor) => `<tr class="theme-${themeColor.name}">
-                <th scope="row">${themeColor.title}</th>
+            </tr>
+            {themeColors.map(({ name, title }) => (
+              <tr key={name} className={`theme-${name}`}>
+                <th scope="row">{title}</th>
                 <td>Cell</td>
                 <td>Cell</td>
-              </tr>`),
-            `</tbody>
-          </table>`].join(''))} />
+              </tr>
+            ))}
+          </tbody>
+        </Table>
 
-        <MarkdownView children={normalizeMarkup`
-          <table class="table table-sm table-bordered">
-            <thead>
+        <Table small bordered>
+          <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">First</th>
               <th scope="col">Last</th>
               <th scope="col">Handle</th>
             </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>John</td>
-              <td>Doe</td>
-              <td>@social</td>
-            </tr>
-            </tbody>
-          </table>`} />
+          </thead>
+          <tbody>
+            {sampleRows.map(({ number, first, last, handle }) => (
+              <tr key={number}>
+                <th scope="row">{number}</th>
+                <td>{first}</td>
+                <td>{last}</td>
+                <td>{handle}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </div>
     </article>
 
     <article className="my-3" id="figures">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Figures</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/content/images#figures"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/content/images#figures">Documentation</a>
       </div>
 
       <div>
@@ -329,7 +307,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="overview">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Overview</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/forms/overview/"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/forms/overview/">Documentation</a>
       </div>
 
       <div>
@@ -391,7 +369,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="disabled-forms">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Disabled forms</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/forms/overview/#disabled-forms"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/forms/overview/#disabled-forms">Documentation</a>
       </div>
 
       <div>
@@ -449,7 +427,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="sizing">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Sizing</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/forms/form-control#sizing"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/forms/form-control#sizing">Documentation</a>
       </div>
 
       <div>
@@ -490,7 +468,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="input-group">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Input group</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/forms/input-group"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/forms/input-group">Documentation</a>
       </div>
 
       <div>
@@ -523,7 +501,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="floating-labels">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Floating labels</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/forms/floating-labels"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/forms/floating-labels">Documentation</a>
       </div>
 
       <div>
@@ -544,7 +522,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="validation">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Validation</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/forms/validation"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/forms/validation">Documentation</a>
       </div>
 
       <div>
@@ -625,7 +603,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="accordion">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Accordion</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/accordion"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/accordion">Documentation</a>
       </div>
 
       <div>
@@ -665,7 +643,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="alerts">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Alerts</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/alerts"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/alerts">Documentation</a>
       </div>
 
       <div>
@@ -691,7 +669,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="badge">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Badge</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/badge"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/badge">Documentation</a>
       </div>
 
       <div>
@@ -714,7 +692,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="breadcrumb">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Breadcrumb</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/breadcrumb"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/breadcrumb">Documentation</a>
       </div>
 
       <div>
@@ -744,7 +722,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="buttons">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Buttons</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/buttons"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/buttons">Documentation</a>
       </div>
       <div>
         <MarkdownView children={normalizeMarkup([
@@ -771,7 +749,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="button-group">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Button group</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/button-group"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/button-group">Documentation</a>
       </div>
 
       <div>
@@ -798,7 +776,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="card">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Card</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/card"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/card">Documentation</a>
       </div>
 
       <div>
@@ -869,7 +847,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="carousel">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Carousel</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/carousel"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/carousel">Documentation</a>
       </div>
 
       <div>
@@ -910,7 +888,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="dialog">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Dialog</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/dialog"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/dialog">Documentation</a>
       </div>
 
       <div>
@@ -927,7 +905,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="menus">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Menus</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/menus"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/menus">Documentation</a>
       </div>
       <div>
         <MarkdownView children={normalizeMarkup`
@@ -1108,7 +1086,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="list-group">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>List group</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/list-group"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/list-group">Documentation</a>
       </div>
 
       <div>
@@ -1145,7 +1123,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="navs">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Navs</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/nav"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/nav">Documentation</a>
       </div>
 
       <div>
@@ -1200,7 +1178,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="navbar">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Navbar</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/navbar"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/navbar">Documentation</a>
       </div>
       <div>
         <MarkdownView children={normalizeMarkup`
@@ -1287,7 +1265,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="pagination">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Pagination</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/pagination"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/pagination">Documentation</a>
       </div>
 
       <div>
@@ -1345,7 +1323,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="popovers">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Popovers</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/popovers"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/popovers">Documentation</a>
       </div>
 
       <div>
@@ -1372,7 +1350,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="progress">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Progress</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/progress"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/progress">Documentation</a>
       </div>
 
       <div>
@@ -1409,7 +1387,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="scrollspy">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Scrollspy</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/scrollspy"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/scrollspy">Documentation</a>
       </div>
 
       <div>
@@ -1452,7 +1430,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="spinners">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Spinners</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/spinners"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/spinners">Documentation</a>
       </div>
 
       <div>
@@ -1472,7 +1450,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="my-3" id="toasts">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Toasts</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/toasts"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/toasts">Documentation</a>
       </div>
 
       <div>
@@ -1494,7 +1472,7 @@ export const normalizeMarkup = (content, ...values) =>
     <article className="mt-3 mb-5 pb-5" id="tooltips">
       <div className="bd-heading xl:sticky-top align-self-start mt-5 mb-3 xl:mt-0 xl:mb-2">
         <h3>Tooltips</h3>
-        <a className="d-flex align-items-center" href={"https://getbootstrap.com/docs/6.0/components/tooltip"}>Documentation</a>
+        <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/components/tooltip">Documentation</a>
       </div>
 
       <div>
@@ -1509,7 +1487,7 @@ export const normalizeMarkup = (content, ...values) =>
     </article>
 
   </section>
-</div>
+</Container>
 
 <dialog className="dialog" id="exampleDialog">
     <div className="dialog-header">
