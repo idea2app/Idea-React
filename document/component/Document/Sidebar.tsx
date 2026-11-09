@@ -130,6 +130,18 @@ export const documentGroups: NavGroup[] = [
         items: [{ label: 'Grid', slug: 'grid' }]
     },
     {
+        label: 'Utilities',
+        icon: 'tools',
+        iconClassName: 'fg-info',
+        href: 'utilities/aspect-ratio/',
+        itemHref: 'utilities/',
+        slug: 'utilities',
+        items: [
+            { label: 'Aspect ratio', slug: 'aspect-ratio' },
+            { label: 'Motion', slug: 'motion' }
+        ]
+    },
+    {
         label: 'Content',
         icon: 'body-text',
         iconClassName: 'fg-info',

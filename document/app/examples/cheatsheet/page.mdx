@@ -61,6 +61,7 @@ import { Spinner } from '../../../../source/Base/Spinner';
 import { ToastBody, ToastHeader, ToastItem } from '../../../../source/Base/Toast';
 import { Tooltip } from '../../../../source/Base/Tooltip';
 import { Table } from '../../../../source/Content/Tables';
+import { Figure, FigureCaption } from '../../../../source/Content/Figure';
 import { createElement } from 'react';
 
 export const themeColors = [
@@ -412,10 +413,10 @@ export const navigationGroups = [
         <a className="d-flex align-items-center" href="https://getbootstrap.com/docs/6.0/content/images#figures">Documentation</a>
       </div>
 
-      <figure className="figure">
+      <Figure>
           <ExamplePlaceholder width="400" height="300" className="img-fluid rounded" />
-          <figcaption className="figure-caption">A caption for the above image.</figcaption>
-      </figure>
+          <FigureCaption>A caption for the above image.</FigureCaption>
+      </Figure>
     </article>
 
   </section>
@@ -1197,6 +1198,7 @@ export const navigationGroups = [
 </Container>
 
 {dialogExamples.map(({ id, title, description, action, backdrop, keyboard }) => (
+
 <NativeDialog key={id} id={id} backdrop={backdrop} keyboard={keyboard}>
 <DialogHeader>
 <DialogTitle className="fs-lg">{title}</DialogTitle>

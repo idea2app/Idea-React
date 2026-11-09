@@ -1,4 +1,5 @@
 import { Image } from '../../../../source/Content/Images';
+import { Figure, FigureCaption, FigureImage } from '../../../../source/Content/Figure';
 
 import { DocumentLayout } from '../../../component/Document/Layout';
 
@@ -12,6 +13,9 @@ than their parent) and add lightweight styles to them—all via classes.
 Idea React provides the [`Image` wrapper][1] for these examples. Set `fluid` for `.img-fluid` and
 `thumbnail` for `.img-thumbnail`, `rounded` for rounded corners, and `roundedCircle` for circular
 images. All other `<img>` attributes pass through.
+
+For semantic image-and-caption groups, use [`Figure`, `FigureImage`, and `FigureCaption`][2].
+`FigureImage` is responsive by default.
 
 ## Responsive images
 
@@ -87,30 +91,28 @@ using a `<figure>` element. Figures are flex containers in Bootstrap, so you can
 layout and alignment with our flex utilities.
 
 Use the included `.figure` and `.figure-caption` classes to provide some baseline styles for the
-HTML5 `<figure>` and `<figcaption>` elements. Images in figures have no explicit size, so be sure to
-add `fluid` to your `Image` to make it responsive.
+HTML5 `<figure>` and `<figcaption>` elements. Images in figures have no explicit size, so use
+`FigureImage` to make the image responsive; set `fluid={false}` to opt out.
 
-<figure className="figure">
-    <Image
-        fluid
+<Figure>
+    <FigureImage
+        className="rounded-3"
         src="https://picsum.photos/seed/idea-react-figure/400/300"
         alt="A sample image inside a figure"
-        className="rounded-3"
     />
-    <figcaption className="figure-caption">A caption for the above image.</figcaption>
-</figure>
+    <FigureCaption>A caption for the above image.</FigureCaption>
+</Figure>
 
 And with a reverse alignment:
 
-<figure className="figure align-items-end">
-    <Image
-        fluid
+<Figure className="align-items-end">
+    <FigureImage
+        className="rounded-3"
         src="https://picsum.photos/seed/idea-react-figure-reverse/400/300"
         alt="A sample image inside a reverse-aligned figure"
-        className="rounded-3"
     />
-    <figcaption className="figure-caption">A caption for the above image.</figcaption>
-</figure>
+    <FigureCaption>A caption for the above image.</FigureCaption>
+</Figure>
 
 ## Picture
 
@@ -127,6 +129,25 @@ decorative. The `alt="..."` in the example below is a placeholder for that text.
 </picture>
 ```
 
+## CSS
+
+### Variables
+
+Bootstrap exposes CSS variables for customizing image thumbnails and figures.
+
+| Component       | CSS variable                    | Default                       |
+| --------------- | ------------------------------- | ----------------------------- |
+| Image thumbnail | `--bs-thumbnail-padding`        | `.25rem`                      |
+|                 | `--bs-thumbnail-bg`             | `var(--bs-bg-body)`           |
+|                 | `--bs-thumbnail-border-width`   | `var(--bs-border-width)`      |
+|                 | `--bs-thumbnail-border-color`   | `var(--bs-border-color)`      |
+|                 | `--bs-thumbnail-border-radius`  | `var(--bs-radius-5)`          |
+|                 | `--bs-thumbnail-box-shadow`     | `var(--bs-box-shadow-sm)`     |
+| Figure          | `--bs-figure-gap`               | `calc(var(--bs-spacer) * .5)` |
+|                 | `--bs-figure-caption-font-size` | `var(--bs-font-size-sm)`      |
+|                 | `--bs-figure-caption-color`     | `var(--bs-fg-3)`              |
+
 </DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Content/Images.tsx
+[2]: https://github.com/idea2app/Idea-React/blob/main/source/Content/Figure.tsx
