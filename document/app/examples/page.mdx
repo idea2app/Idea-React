@@ -1,7 +1,27 @@
 import { Image } from '../../../source/Content/Images';
+import { Icon } from '../../../source/Extension/Icon';
 import { Col, Container, Row } from '../../../source/Layout/Grid';
 
 import { BaseLayout } from '../../component/Document/BaseLayout';
+
+export const starterTemplates = [
+    {
+        name: 'React-MobX-Bootstrap-ts',
+        description: 'A React project scaffold with TypeScript, MobX, and Bootstrap.',
+        demo: 'https://idea2app.github.io/React-MobX-Bootstrap-ts/'
+    },
+    {
+        name: 'Next-Bootstrap-ts',
+        description: 'A React project scaffold with TypeScript, Next.js, and Bootstrap.',
+        demo: 'https://next-bootstrap-ts.vercel.app/'
+    },
+    {
+        name: 'Lark-Next-Bootstrap-ts',
+        description:
+            'A Lark project scaffold with TypeScript, React, Next.js, Bootstrap, and Workbox.',
+        demo: 'https://lark-next-bootstrap-ts.vercel.app/'
+    }
+];
 
 export const exampleGroups = [
     {
@@ -224,6 +244,44 @@ export const exampleGroups = [
 <Container as="main" id="content" className="py-5">
   <h1 className="mb-3">Examples</h1>
   <p className="lead mb-5">Explore 33 Bootstrap examples built with Idea React components.</p>
+
+  <section aria-labelledby="starters" className="mb-5">
+    <h2 id="starters">Starters</h2>
+    <p>Start your next project with these TypeScript and Bootstrap templates.</p>
+    <Row>
+        {starterTemplates.map(({ name, description, demo }) => (
+            <Col as="article" key={name} md={6} lg={4} className="mb-3 d-flex gap-3">
+                <Icon name="box-seam" className="flex-shrink-0 mt-1" />
+                <div>
+                    <h3 className="h5 mb-1">
+                        <a
+                            id={`starter-${name}`}
+                            className="d-block underline-offset-1"
+                            href={`https://github.com/idea2app/${name}`}
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            {name}
+                        </a>
+                    </h3>
+                    <p className="fg-2">{description}</p>
+                    <p>
+                        <a
+                            className="icon-link small theme-secondary underline-offset-1"
+                            href={demo}
+                            target="_blank"
+                            rel="noopener"
+                            aria-labelledby={`demo-${name} starter-${name}`}
+                        >
+                            <Icon name="box-arrow-up-right" />
+                            <span id={`demo-${name}`}>View demo</span>
+                        </a>
+                    </p>
+                </div>
+            </Col>
+        ))}
+    </Row>
+  </section>
 
     {exampleGroups.map(({ title, description, examples }) => (
         <section key={title} className="mb-5">
