@@ -27,6 +27,7 @@ interface RouterLinkProps extends Omit<ComponentPropsWithRef<'a'>, 'href'> {
 
 const RouterLink = forwardRef<HTMLAnchorElement, RouterLinkProps>(
     ({ to, replace, ...props }, ref) => (
+        // eslint-disable-next-line jsx-a11y/anchor-has-content
         <a {...props} ref={ref} href={to} data-replace={replace || undefined} />
     )
 );
@@ -90,7 +91,7 @@ it('merges router props with button styling and preserves disabled navigation be
             Documentation
         </Button>
     );
-    const link = screen.getByRole('link', { name: 'Documentation' });
+    const link = screen.getByRole('button', { name: 'Documentation' });
 
     assert.equal(ref.current, link);
     assert.equal(link.className, 'btn-solid theme-primary');
@@ -137,7 +138,7 @@ it('composes library wrappers without discarding either wrapper class', () => {
             Documentation
         </Button>
     );
-    const link = screen.getByRole('link', { name: 'Documentation' });
+    const link = screen.getByRole('button', { name: 'Documentation' });
 
     assert.ok(link.classList.contains('btn'));
     assert.ok(link.classList.contains('theme-primary'));

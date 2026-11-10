@@ -12,8 +12,8 @@ pnpm install
 pnpm --filter @idea-react/document dev
 ```
 
-The site includes MDX pages, Bootstrap styling, theme switching, and local page search.
-Development and production search use the same MDX source indexer and load `rss.xml`.
+The site includes MDX documentation, TSX examples, Bootstrap styling, theme switching, and local page search.
+Development and production search use the same MDX/TSX source indexer and load `rss.xml`.
 The development server generates it on request; the build writes it to the static output.
 The RSS feed includes every page's title, link, and full plain-text content for search and subscription.
 Search ranks title matches before body-only matches.

@@ -101,7 +101,6 @@ export class DocumentSearch extends Component<DocumentSearchProps> {
                     {results.map(({ href, title, description }) => (
                         <li key={href}>
                             <MenuItem
-                                as="a"
                                 href={href}
                                 variant={false}
                                 className={`d-grid gap-1 rounded-5 p-4 text-wrap text-decoration-none ${styles.resultItem}`}

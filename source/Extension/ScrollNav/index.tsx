@@ -5,9 +5,7 @@ import { Nav, NavProps } from '../../Base/Nav';
 import { polymorphic } from '../../Helper/Polymorphic';
 import { ScrollNavScroller } from './Scroller';
 
-export type ScrollNavProps = NavProps & {
-    navClassName?: string;
-};
+export type ScrollNavProps = NavProps & { navClassName?: string };
 
 /**
  * A horizontal scrolling navigation bar based on Bootstrap's `nav-scroller` pattern.

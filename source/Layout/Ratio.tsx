@@ -20,8 +20,8 @@ export const Ratio = polymorphic<RatioProps>(
         return (
             <Root
                 {...props}
-                style={ratioStyle}
                 className={classNames(`ratio-${preset ? aspectRatio : 'auto'}`, className)}
+                style={ratioStyle}
             />
         );
     }

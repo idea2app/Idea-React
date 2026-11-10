@@ -1,12 +1,13 @@
-import { Col, Container, Row } from '../../../../source/Layout/Grid';
-import { BaseLayout } from '../../../component/Document/BaseLayout';
-import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
+import { Button } from '../../../../source/Base/Button';
+import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
+import { Card, CardBody, CardImage, CardText } from '../../../../source/Base/Card';
 import { Collapse, CollapseToggle } from '../../../../source/Base/Collapse';
 import { Navbar, NavbarBrand } from '../../../../source/Base/Navbar';
-import { Button } from '../../../../source/Base/Button';
 import { Icon } from '../../../../source/Extension/Icon';
-import { Card, CardBody, CardImage, CardText } from '../../../../source/Base/Card';
-import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
+
+import { BaseLayout } from '../../../component/Document/BaseLayout';
+import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
 
 <BaseLayout title="Album example">
 
@@ -26,21 +27,13 @@ import { ButtonGroup } from '../../../../source/Base/ButtonGroup';
                 <Col sm={4} md={{ offset: 1 }} className="py-4">
                     <h4 className="fg-white">Contact</h4>
                     <ul className="list-unstyled">
-                        <li>
-                            <a href="#" className="fg-white">
-                                Follow on X
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="fg-white">
-                                Like on Facebook
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="fg-white">
-                                Email me
-                            </a>
-                        </li>
+                        {['Follow on X', 'Like on Facebook', 'Email me'].map(label => (
+                            <li key={label}>
+                                <a href="#" className="fg-white">
+                                    {label}
+                                </a>
+                            </li>
+                        ))}
                     </ul>
                 </Col>
             </Row>

@@ -230,13 +230,13 @@ The gradient and shadow can be customized via CSS variables:
 
 ## Button tags
 
-The `.btn` classes are designed to be used with the `<button>` element. However, you can also use these classes on `<a>` or `<input>` elements (though some browsers may apply a slightly different rendering).
+`Button` renders a native `<button>` by default and renders an `<a>` when `href` is provided. In either case, its default ARIA role is `button`; provide an explicit `role` only when you need to override it.
 
-When using button classes on `<a>` elements that are used to trigger in-page functionality (like collapsing content), rather than linking to new pages or sections within the current page, these links should be given a `role="button"` to appropriately convey their purpose to assistive technologies such as screen readers.
+`ButtonInput` renders an `<input>` element with native button behavior.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 overflow-auto">
-        <Button variant="solid" theme="primary" href="#" role="button">
+        <Button variant="solid" theme="primary" href="#">
             Link
         </Button>
         <Button variant="solid" theme="primary" type="submit">
@@ -372,7 +372,6 @@ Disabled buttons using the `<a>` element behave a bit different. Use the `.disab
             variant="solid"
             theme="primary"
             disabled
-            role="button"
             aria-disabled="true"
             href="#"
         >
@@ -382,7 +381,6 @@ Disabled buttons using the `<a>` element behave a bit different. Use the `.disab
             variant="solid"
             theme="secondary"
             disabled
-            role="button"
             aria-disabled="true"
             href="#"
         >
@@ -401,7 +399,6 @@ If there’s an `href` attribute, add `tabindex="-1"` and `aria-disabled="true"`
             disabled
             href="#"
             tabIndex={-1}
-            role="button"
             aria-disabled="true"
         >
             Primary link
@@ -412,7 +409,6 @@ If there’s an `href` attribute, add `tabindex="-1"` and `aria-disabled="true"`
             disabled
             href="#"
             tabIndex={-1}
-            role="button"
             aria-disabled="true"
         >
             Link
@@ -558,10 +554,10 @@ Render the active state supplied by your application:
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 overflow-auto">
-        <Button variant="solid" active={false} theme="primary" href="#" role="button">
+        <Button variant="solid" active={false} theme="primary" href="#">
             Inactive link button
         </Button>
-        <Button variant="solid" active theme="primary" href="#" role="button">
+        <Button variant="solid" active theme="primary" href="#">
             Active toggle link
         </Button>
         <Button
@@ -569,7 +565,6 @@ Render the active state supplied by your application:
             theme="primary"
             disabled
             aria-disabled="true"
-            role="button"
             href="#"
         >
             Disabled link button
@@ -577,7 +572,7 @@ Render the active state supplied by your application:
     </div>
 </CodeExample>
 
-When using links as toggle buttons, set `role="button"` so the `active` prop also supplies `aria-pressed`.
+Because `Button` defaults to the `button` role even when `href` renders an anchor, the `active` prop also supplies `aria-pressed` without additional role configuration.
 
 ## CSS
 

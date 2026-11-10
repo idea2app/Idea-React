@@ -1,0 +1,165 @@
+import './style.less';
+
+import { Drawer } from '../../../../source/Base/Drawer';
+import { NavItem, NavLink } from '../../../../source/Base/Nav';
+import { Navbar, NavbarBrand, NavbarNav, NavbarToggler } from '../../../../source/Base/Navbar';
+import { Icon } from '../../../../source/Extension/Icon';
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
+
+const productNavItems = [
+    { label: 'Aperture', icon: 'globe' },
+    { label: 'Tour' },
+    { label: 'Product' },
+    { label: 'Features' },
+    { label: 'Enterprise' },
+    { label: 'Support' },
+    { label: 'Pricing' },
+    { label: 'Cart', icon: 'cart' }
+];
+
+const productRows = [
+    [
+        { theme: 'bg-black fg-white', padding: 'py-5', preview: 'bg-subtle-secondary' },
+        { theme: 'bg-subtle-secondary', padding: 'p-5', preview: 'bg-black' }
+    ],
+    [
+        { theme: 'bg-subtle-secondary', padding: 'p-5', preview: 'bg-black' },
+        { theme: 'theme-primary theme-contrast', padding: 'py-5', preview: 'bg-subtle-secondary' }
+    ],
+    [
+        { theme: 'bg-subtle-secondary', padding: 'p-5', preview: 'bg-body' },
+        { theme: 'bg-subtle-secondary', padding: 'py-5', preview: 'bg-body' }
+    ],
+    [
+        { theme: 'bg-subtle-secondary', padding: 'p-5', preview: 'bg-body' },
+        { theme: 'bg-subtle-secondary', padding: 'py-5', preview: 'bg-body' }
+    ]
+] as const;
+
+const footerGroups = [
+    {
+        title: 'Features',
+        links: [
+            'Cool stuff',
+            'Random feature',
+            'Team feature',
+            'Stuff for developers',
+            'Another one',
+            'Last time'
+        ]
+    },
+    {
+        title: 'Resources',
+        links: ['Resource name', 'Resource', 'Another resource', 'Final resource']
+    },
+    { title: 'Resources', links: ['Business', 'Education', 'Government', 'Gaming'] },
+    { title: 'About', links: ['Team', 'Locations', 'Privacy', 'Terms'] }
+] as const;
+
+export default function ProductPage() {
+    return (
+        <BaseLayout title="Product example">
+            <Navbar theme="dark" expand="md" className="sticky-top border-bottom">
+                <Container>
+                    <NavbarBrand className="md:d-none" href="#">
+                        <Icon name="globe" size={1.5} />
+                        Aperture
+                    </NavbarBrand>
+                    <NavbarToggler
+                        commandfor="drawer"
+                        command="show-modal"
+                        aria-label="Toggle navigation"
+                    />
+                    <Drawer id="drawer" title="Aperture" placement="end" responsive="md">
+                        <NavbarNav className="flex-grow-1 justify-content-between">
+                            {productNavItems.map(({ label, icon }) => (
+                                <NavItem key={label}>
+                                    <NavLink href="#" aria-label={icon ? label : undefined}>
+                                        {icon ? <Icon name={icon} size={1.5} /> : label}
+                                    </NavLink>
+                                </NavItem>
+                            ))}
+                        </NavbarNav>
+                    </Drawer>
+                </Container>
+            </Navbar>
+
+            <div>
+                <div className="position-relative overflow-hidden p-5 md:p-9 md:m-3 text-center bg-subtle-secondary">
+                    <Col md={6} className="lg:p-9 mx-auto my-9">
+                        <h1 className="fs-5xl fw-bold">Designed for engineers</h1>
+                        <h3 className="fw-normal fg-secondary mb-3 text-pretty">
+                            Build anything you want with Aperture
+                        </h3>
+                        <div className="d-flex gap-3 justify-content-center fs-lg fw-light">
+                            <a className="icon-link" href="#">
+                                Learn more
+                                <Icon name="chevron-right" />
+                            </a>
+                            <a className="icon-link" href="#">
+                                Buy
+                                <Icon name="chevron-right" />
+                            </a>
+                        </div>
+                    </Col>
+                    <div className="product-device shadow-sm d-none md:d-block" />
+                    <div className="product-device product-device-2 shadow-sm d-none md:d-block" />
+                </div>
+
+                {productRows.map((products, rowIndex) => (
+                    <div key={rowIndex} className="md:d-flex md:flex-equal w-100 md:my-3 md:ps-3">
+                        {products.map(({ theme, padding, preview }, index) => (
+                            <div
+                                key={index}
+                                className={`${theme} md:me-3 pt-3 px-3 md:pt-5 md:px-5 text-center overflow-hidden`}
+                            >
+                                <div className={`my-5 ${padding}`}>
+                                    <h2 className="fs-3xl fw-light">Another headline</h2>
+                                    <p className="fs-lg fw-light">
+                                        And an even wittier subheading.
+                                    </p>
+                                </div>
+                                <div className={`product-preview ${preview} shadow-sm mx-auto`} />
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
+
+            <Container as="footer" className="py-5">
+                <Row>
+                    <Col xs={12} md>
+                        <Icon
+                            name="globe"
+                            size={1.5}
+                            className="d-block mb-2"
+                            role="img"
+                            aria-label="Product"
+                        />
+                        <small className="d-block mb-3 fg-2">
+                            &copy; 2017–{new Date().getFullYear()}
+                        </small>
+                    </Col>
+                    {footerGroups.map(({ title, links }, index) => (
+                        <Col key={index} xs={6} md>
+                            <h5>{title}</h5>
+                            <ul className="list-unstyled">
+                                {links.map(label => (
+                                    <li key={label}>
+                                        <a
+                                            className="theme-secondary text-decoration-none"
+                                            href="#"
+                                        >
+                                            {label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </Col>
+                    ))}
+                </Row>
+            </Container>
+        </BaseLayout>
+    );
+}

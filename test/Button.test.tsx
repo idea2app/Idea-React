@@ -21,7 +21,11 @@ it('defaults buttons, links, inputs and toggles to unthemed base styling', () =>
     for (const name of ['Button', 'Input'])
         assert.equal(screen.getByRole('button', { name }).className, 'btn');
 
-    assert.equal(screen.getByRole('link', { name: 'Link' }).className, 'btn');
+    const link = screen.getByRole('button', { name: 'Link' });
+
+    assert.equal(link.tagName, 'A');
+    assert.equal(link.getAttribute('href'), '/docs');
+    assert.equal(link.className, 'btn');
 });
 
 it('preserves explicit variants and themes for buttons and inputs', () => {
@@ -59,7 +63,8 @@ it('allows composite controls to opt out of button styling without losing behavi
     );
     assert.equal(screen.getByRole('button', { name: 'Control' }).className, 'form-control');
     assert.equal(screen.getByRole('button', { name: 'Input control' }).className, 'form-control');
-    assert.equal(screen.getByRole('link').className, 'custom');
+    assert.equal(screen.getByText('Unstyled link').getAttribute('role'), 'button');
+    assert.equal(screen.getByText('Unstyled link').className, 'custom');
 
     assert.equal(
         screen.getByRole('button', { name: 'Unstyled active button' }).className,
@@ -150,14 +155,26 @@ it('preserves submit semantics and disables buttons and links', () => {
     assert.equal(onClick.mock.callCount(), 0);
 });
 
-it('renders a link without button-only attributes', () => {
+it('renders a link with button role and without native button-only attributes', () => {
     render(
-        <Button href="/docs" variant="solid" theme="primary">
-            Docs
-        </Button>
+        <>
+            <Button href="/docs" variant="solid" theme="primary">
+                Docs
+            </Button>
+            <Button href="/external" active role="link">
+                External link
+            </Button>
+        </>
     );
-    assert.equal(screen.getByRole('link').getAttribute('href'), '/docs');
-    assert.equal(screen.getByRole('link').hasAttribute('disabled'), false);
+    const link = screen.getByRole('button', { name: 'Docs' });
+
+    assert.equal(link.tagName, 'A');
+    assert.equal(link.getAttribute('href'), '/docs');
+    assert.equal(link.hasAttribute('disabled'), false);
+
+    const externalLink = screen.getByRole('link', { name: 'External link' });
+
+    assert.equal(externalLink.getAttribute('aria-pressed'), null);
 });
 
 it('supports link variants, extra small sizes, and standalone icon buttons', () => {

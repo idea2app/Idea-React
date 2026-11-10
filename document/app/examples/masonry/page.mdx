@@ -1,16 +1,45 @@
 import { Col, Container, Row } from '../../../../source/Layout/Grid';
+
 import { BaseLayout } from '../../../component/Document/BaseLayout';
-import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
-import {
-    Card,
-    CardBody,
-    CardFooter,
-    CardHeader,
-    CardImage,
-    CardImageOverlay,
-    CardText,
-    CardTitle
-} from '../../../../source/Base/Card';
+import { MasonryCard } from './Card';
+
+export const masonryCards = [
+    {
+        imageHeight: 200,
+        imageLabel: 'Image cap',
+        title: 'Card title that wraps to a new line',
+        description:
+            'This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
+    },
+    { quote: true, className: 'p-3', figureClassName: 'p-3 mb-0' },
+    {
+        imageHeight: 200,
+        imageLabel: 'Image cap',
+        title: 'Card title',
+        description:
+            'This card has supporting text below as a natural lead-in to additional content.',
+        updated: true
+    },
+    {
+        quote: true,
+        className: 'theme-primary theme-contrast text-center p-3',
+        captionClassName: 'fg-white'
+    },
+    {
+        className: 'text-center',
+        title: 'Card title',
+        description: 'This card has a regular title and short paragraph of text below it.',
+        updated: true
+    },
+    { imageHeight: 260, imageLabel: 'Card image' },
+    { quote: true, className: 'p-3 text-end' },
+    {
+        title: 'Card title',
+        description:
+            'This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.',
+        updated: true
+    }
+];
 
 <BaseLayout title="Masonry example">
 
@@ -41,112 +70,12 @@ import {
 <hr className="my-5" />
 
 <Row data-masonry='{"percentPosition": true }'>
-    <Col sm={6} lg={4} className="mb-4">
-        <Card>
-            <CardImage
-                width="100%"
-                height="200"
-                placement="top"
-                as={ExamplePlaceholder}
-            >Image cap</CardImage>
-            <CardBody>
-                <CardTitle as="h5">Card title that wraps to a new line</CardTitle>
-                <CardText>
-                    This is a longer card with supporting text below as a natural lead-in to
-                    additional content. This content is a little bit longer.
-                </CardText>
-            </CardBody>
-        </Card>
-    </Col>
-    <Col sm={6} lg={4} className="mb-4">
-        <Card className="p-3">
-            <figure className="p-3 mb-0">
-                <blockquote className="blockquote">
-                    <p>A well-known quote, contained in a blockquote element.</p>
-                </blockquote>
-                <figcaption className="blockquote-footer mb-0 fg-2">
-                    Someone famous in <cite title="Source Title">Source Title</cite>
-                </figcaption>
-            </figure>
-        </Card>
-    </Col>
-    <Col sm={6} lg={4} className="mb-4">
-        <Card>
-            <CardImage
-                width="100%"
-                height="200"
-                placement="top"
-                as={ExamplePlaceholder}
-            >Image cap</CardImage>
-            <CardBody>
-                <CardTitle as="h5">Card title</CardTitle>
-                <CardText>
-                    This card has supporting text below as a natural lead-in to additional content.
-                </CardText>
-                <CardText>
-                    <small className="fg-2">Last updated 3 mins ago</small>
-                </CardText>
-            </CardBody>
-        </Card>
-    </Col>
-    <Col sm={6} lg={4} className="mb-4">
-        <Card className="theme-primary theme-contrast text-center p-3">
-            <figure className="mb-0">
-                <blockquote className="blockquote">
-                    <p>A well-known quote, contained in a blockquote element.</p>
-                </blockquote>
-                <figcaption className="blockquote-footer mb-0 fg-white">
-                    Someone famous in <cite title="Source Title">Source Title</cite>
-                </figcaption>
-            </figure>
-        </Card>
-    </Col>
-    <Col sm={6} lg={4} className="mb-4">
-        <Card className="text-center">
-            <CardBody>
-                <CardTitle as="h5">Card title</CardTitle>
-                <CardText>
-                    This card has a regular title and short paragraph of text below it.
-                </CardText>
-                <CardText>
-                    <small className="fg-2">Last updated 3 mins ago</small>
-                </CardText>
-            </CardBody>
-        </Card>
-    </Col>
-    <Col sm={6} lg={4} className="mb-4">
-        <Card>
-            <CardImage width="100%" height="260" as={ExamplePlaceholder}>Card image</CardImage>
-        </Card>
-    </Col>
-    <Col sm={6} lg={4} className="mb-4">
-        <Card className="p-3 text-end">
-            <figure className="mb-0">
-                <blockquote className="blockquote">
-                    <p>A well-known quote, contained in a blockquote element.</p>
-                </blockquote>
-                <figcaption className="blockquote-footer mb-0 fg-2">
-                    Someone famous in <cite title="Source Title">Source Title</cite>
-                </figcaption>
-            </figure>
-        </Card>
-    </Col>
-    <Col sm={6} lg={4} className="mb-4">
-        <Card>
-            <CardBody>
-                <CardTitle as="h5">Card title</CardTitle>
-                <CardText>
-                    This is another card with title and supporting text below. This card has some
-                    additional content to make it slightly taller overall.
-                </CardText>
-                <CardText>
-                    <small className="fg-2">Last updated 3 mins ago</small>
-                </CardText>
-            </CardBody>
-        </Card>
-    </Col>
+    {masonryCards.map((card, index) => (
+        <Col key={index} sm={6} lg={4} className="mb-4">
+            <MasonryCard {...card} />
+        </Col>
+    ))}
 </Row>
-
 </Container>
 
 </BaseLayout>

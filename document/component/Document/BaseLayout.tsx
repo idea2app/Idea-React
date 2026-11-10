@@ -1,4 +1,7 @@
+import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
+
+import styles from './BaseLayout.module.less';
 
 export type BaseLayoutProps = PropsWithChildren<{
     title?: string;
@@ -16,7 +19,11 @@ export const BaseLayout: FC<BaseLayoutProps> = ({ title, className = '', childre
             href="https://unpkg.com/bootstrap-icons@1.13.2/font/bootstrap-icons.css"
         />
         {title ? (
-            <main id="content" className={className} data-example-layout="true">
+            <main
+                id="content"
+                className={classNames(styles.layout, className)}
+                data-example-layout="true"
+            >
                 <h1 className="visually-hidden">{title} examples</h1>
                 {children}
             </main>

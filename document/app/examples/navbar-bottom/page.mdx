@@ -1,15 +1,16 @@
-import { Container } from '../../../../source/Layout/Grid';
-import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Button } from '../../../../source/Base/Button';
-import { NavbarNav } from '../../../../source/Base/Navbar';
+import { Menu, MenuItem } from '../../../../source/Base/Menu';
 import {
     DialogBody,
     DialogFooter,
     DialogHeader,
-    DialogTitle,
+    DialogTitle
 } from '../../../../source/Base/NativeDialog';
 import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
-import { MenuPanel, MenuItem } from '../../../../source/Base/Menu';
+import { NavbarNav } from '../../../../source/Base/Navbar';
+import { Container } from '../../../../source/Layout/Grid';
+
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { NavbarDemo } from '../../../component/Document/NavbarDemo';
 
 export const navbarItems = [
@@ -27,41 +28,32 @@ export const navbarItems = [
         <p className="fs-lg fw-light">
             This example is a quick exercise to illustrate how the bottom navbar works.
         </p>
-        <Button variant="solid" theme="primary" size="lg" href="https://getbootstrap.com/docs/6.0/components/navbar" role="button"
-        >
+        <Button variant="solid" theme="primary" size="lg" href="https://getbootstrap.com/docs/6.0/components/navbar">
             View navbar docs &raquo;
         </Button>
     </div>
 
 </Container>
 <NavbarDemo brand="Bottom navbar" title="Menu" expand="sm" theme="dark" className="fixed-bottom">
-                <NavbarNav>
-                    {navbarItems.map(({ label, active, disabled, menu }) => (
-                        <NavItem key={label}>
-                            <NavLink
-                                active={active}
-                                aria-current={active ? 'page' : undefined}
-                                disabled={disabled}
-                                aria-disabled={disabled}
-                                href={disabled ? undefined : '#'}
-                                role={menu ? 'button' : undefined}
-                                data-bs-toggle={menu ? 'menu' : undefined}
-                                aria-expanded={menu ? false : undefined}
-                            >
-                                {label}
-                            </NavLink>
-                            {menu && (
-                                <MenuPanel>
-                                    {['Action', 'Another action', 'Something else here'].map((item) => (
-                                        <MenuItem key={item} as="a" href="#">
-                                            {item}
-                                        </MenuItem>
-                                    ))}
-                                </MenuPanel>
-                            )}
-                        </NavItem>
-                    ))}
-                </NavbarNav>
+    <NavbarNav>
+        {navbarItems.map(({ label, active, disabled, menu }) => (
+            <NavItem key={label}>
+                {menu ? (<Menu nav label={label}>
+                        {['Action', 'Another action', 'Something else here'].map((item) => (
+                            <MenuItem key={item} href="#">
+                                {item}
+                            </MenuItem>
+                        ))}
+                    </Menu>) : (<NavLink
+                    active={active}
+                    aria-current={active ? 'page' : undefined}
+                    disabled={disabled}
+                    aria-disabled={disabled}
+                    href={disabled ? undefined : '#'}
+                >{label}</NavLink>)}
+            </NavItem>
+        ))}
+    </NavbarNav>
 </NavbarDemo>
 
 </BaseLayout>

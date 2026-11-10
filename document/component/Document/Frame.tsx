@@ -21,6 +21,7 @@ export const DocumentFrame = ({ children }: PropsWithChildren) => (
                     colorMode={<ColorModeToggle />}
                 />
             </div>
+
             {children}
 
             <div className={style.footer}>

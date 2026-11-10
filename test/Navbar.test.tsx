@@ -96,9 +96,17 @@ it('toggles a collapse target with the navbar toggler variant', () => {
         toggler.querySelector('.navbar-toggler-icon')?.getAttribute('aria-hidden'),
         'true'
     );
-
     fireEvent.click(toggler);
 
     assert.equal(collapse?.classList.contains('show'), true);
     assert.equal(toggler.getAttribute('aria-expanded'), 'true');
+});
+
+it('forwards native dialog commands from the navbar toggler', () => {
+    render(<NavbarToggler commandfor="navigation-drawer" command="show-modal" />);
+
+    const toggler = screen.getByRole('button', { name: 'Toggle navigation' });
+
+    assert.equal(toggler.getAttribute('commandfor'), 'navigation-drawer');
+    assert.equal(toggler.getAttribute('command'), 'show-modal');
 });

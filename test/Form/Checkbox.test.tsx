@@ -34,7 +34,6 @@ it('adds list group item styling to form checks', () => {
             <FormCheck aria-label="Choose item" type="radio" listGroup />
         </>
     );
-
     assert.equal(
         screen.getByRole('checkbox', { name: 'Select item' }).className,
         'check list-group-item-check'

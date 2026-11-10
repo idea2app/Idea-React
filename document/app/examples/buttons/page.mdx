@@ -1,8 +1,9 @@
-import { Col } from '../../../../source/Layout/Grid';
-import { BaseLayout } from '../../../component/Document/BaseLayout';
-import { Icon } from '../../../../source/Extension/Icon';
 import { Button } from '../../../../source/Base/Button';
 import { Spinner } from '../../../../source/Base/Spinner';
+import { Icon } from '../../../../source/Extension/Icon';
+import { Col } from '../../../../source/Layout/Grid';
+
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 
 export const themeButtons = [
     { theme: 'primary', label: 'Primary' },
@@ -19,26 +20,7 @@ export const themeButtons = [
 
 <BaseLayout title="Buttons">
 
-<svg xmlns="http://www.w3.org/2000/svg" className="d-none">
-    <symbol id="arrow-right-short" viewBox="0 0 16 16">
-        <path
-            fillRule="evenodd"
-            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-        />
-    </symbol>
-    <symbol id="x-lg" viewBox="0 0 16 16">
-        <path
-            fillRule="evenodd"
-            d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
-        />
-        <path
-            fillRule="evenodd"
-            d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
-        />
-    </symbol>
-</svg>
-
-<div className="d-flex gap-2 justify-content-center py-5">
+<div className="d-flex flex-wrap gap-2 justify-content-center py-5">
     {themeButtons.map(({ theme, label, variant = 'solid' }) => (
         <Button
             key={label}
@@ -66,7 +48,7 @@ export const themeButtons = [
 
 <div className="b-example-divider" />
 
-<div className="d-flex gap-2 justify-content-center py-5">
+<div className="d-flex flex-wrap gap-2 justify-content-center py-5">
     <Button variant="solid" theme="primary">
         Primary icon
         <Icon name="arrow-right-short" size={1.25} className="ms-1" />
@@ -79,7 +61,7 @@ export const themeButtons = [
 
 <div className="b-example-divider" />
 
-<div className="d-flex gap-2 justify-content-center py-5">
+<div className="d-flex flex-wrap gap-2 justify-content-center py-5">
     <Button variant="solid" theme="primary" disabled>
         <Spinner animation="border" aria-hidden="true" />
         <span className="visually-hidden" role="status">
@@ -94,7 +76,7 @@ export const themeButtons = [
 
 <div className="b-example-divider" />
 
-<div className="d-flex gap-2 justify-content-center pt-5 pb-4">
+<div className="d-flex flex-wrap gap-2 justify-content-center pt-5 pb-4">
     <Button variant="solid" theme="primary" icon className="rounded-circle p-2 lh-1"
     >
         <Icon name="x-lg" size={1} />
@@ -108,7 +90,7 @@ export const themeButtons = [
 
 </div>
 
-<div className="d-flex gap-2 justify-content-center pb-5">
+<div className="d-flex flex-wrap gap-2 justify-content-center pb-5">
     <Button variant="solid" theme="primary" icon className="rounded-circle p-3 lh-1"
     >
         <Icon name="x-lg" size={1.5} />

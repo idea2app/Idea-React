@@ -1,5 +1,6 @@
 import { Image } from '../../../source/Content/Images';
 import { Col, Container, Row } from '../../../source/Layout/Grid';
+
 import { BaseLayout } from '../../component/Document/BaseLayout';
 
 export const exampleGroups = [
@@ -17,12 +18,14 @@ export const exampleGroups = [
             {
                 slug: 'heroes',
                 title: 'Heroes',
-                description: 'Set the stage on your homepage with heroes that feature clear calls to action.'
+                description:
+                    'Set the stage on your homepage with heroes that feature clear calls to action.'
             },
             {
                 slug: 'features',
                 title: 'Features',
-                description: 'Explain the features, benefits, or other details in your marketing content.'
+                description:
+                    'Explain the features, benefits, or other details in your marketing content.'
             },
             {
                 slug: 'sidebars',
@@ -47,7 +50,8 @@ export const exampleGroups = [
             {
                 slug: 'dialogs',
                 title: 'Dialogs',
-                description: 'Transform dialogs to serve any purpose, from feature tours to confirmations.'
+                description:
+                    'Transform dialogs to serve any purpose, from feature tours to confirmations.'
             },
             {
                 slug: 'breadcrumbs',
@@ -91,7 +95,8 @@ export const exampleGroups = [
             {
                 slug: 'product',
                 title: 'Product',
-                description: 'Lean product-focused marketing page with extensive grid and image work.'
+                description:
+                    'Lean product-focused marketing page with extensive grid and image work.'
             },
             {
                 slug: 'cover',
@@ -106,7 +111,8 @@ export const exampleGroups = [
             {
                 slug: 'blog',
                 title: 'Blog',
-                description: 'Magazine like blog template with header, navigation, featured content.'
+                description:
+                    'Magazine like blog template with header, navigation, featured content.'
             },
             {
                 slug: 'dashboard',
@@ -121,12 +127,14 @@ export const exampleGroups = [
             {
                 slug: 'sticky-footer',
                 title: 'Sticky footer',
-                description: 'Attach a footer to the bottom of the viewport when page content is short.'
+                description:
+                    'Attach a footer to the bottom of the viewport when page content is short.'
             },
             {
                 slug: 'sticky-footer-navbar',
                 title: 'Sticky footer navbar',
-                description: 'Attach a footer to the bottom of the viewport with a fixed top navbar.'
+                description:
+                    'Attach a footer to the bottom of the viewport with a fixed top navbar.'
             },
             {
                 slug: 'jumbotron',
@@ -137,7 +145,8 @@ export const exampleGroups = [
     },
     {
         title: 'Framework',
-        description: 'Examples that focus on implementing uses of built-in components provided by Bootstrap.',
+        description:
+            'Examples that focus on implementing uses of built-in components provided by Bootstrap.',
         examples: [
             {
                 slug: 'starter-template',
@@ -147,7 +156,8 @@ export const exampleGroups = [
             {
                 slug: 'grid',
                 title: 'Grid',
-                description: 'Multiple examples of grid layouts with all four tiers, nesting, and more.'
+                description:
+                    'Multiple examples of grid layouts with all four tiers, nesting, and more.'
             },
             {
                 slug: 'cheatsheet',
@@ -158,7 +168,8 @@ export const exampleGroups = [
     },
     {
         title: 'Navbars',
-        description: 'Taking the default navbar component and showing how it can be moved, placed, and extended.',
+        description:
+            'Taking the default navbar component and showing how it can be moved, placed, and extended.',
         examples: [
             {
                 slug: 'navbars',
@@ -214,31 +225,31 @@ export const exampleGroups = [
   <h1 className="mb-3">Examples</h1>
   <p className="lead mb-5">Explore 33 Bootstrap examples built with Idea React components.</p>
 
-  {exampleGroups.map(({ title, description, examples }) => (
-    <section key={title} className="mb-5">
-      <h2>{title}</h2>
-      <p className="fg-2 mb-4">{description}</p>
-      <Row>
-        {examples.map(({ slug, title: exampleTitle, description: exampleDescription }) => (
-          <Col as="article" key={slug} xs={12} sm={6} md={3} className="mb-3">
-            <a className="d-block" href={`./${slug}/`}>
-              <Image
-                className="w-100 mb-3"
-                thumbnail
-                width={480}
-                height={300}
-                src={`https://getbootstrap.com/docs/6.0/assets/img/examples/${slug}.png`}
-                alt={`${exampleTitle} example preview`}
-                loading="lazy"
-              />
-              <h3 className="h5 mb-1">{exampleTitle}</h3>
-            </a>
-            <p className="fg-2">{exampleDescription}</p>
-          </Col>
-        ))}
-      </Row>
-    </section>
-  ))}
+    {exampleGroups.map(({ title, description, examples }) => (
+        <section key={title} className="mb-5">
+            <h2>{title}</h2>
+            <p className="fg-2 mb-4">{description}</p>
+            <Row>
+                {examples.map(({ slug, title: exampleTitle, description: exampleDescription }) => (
+                    <Col as="article" key={slug} xs={12} sm={6} md={3} className="mb-3">
+                        <a className="d-block" href={`./${slug}/`}>
+                            <Image
+                                className="w-100 mb-3"
+                                thumbnail
+                                width={480}
+                                height={300}
+                                src={`https://getbootstrap.com/docs/6.0/assets/img/examples/${slug}.png`}
+                                alt={`${exampleTitle} example preview`}
+                                loading="lazy"
+                            />
+                            <h3 className="h5 mb-1">{exampleTitle}</h3>
+                        </a>
+                        <p className="fg-2">{exampleDescription}</p>
+                    </Col>
+                ))}
+            </Row>
+        </section>
+    ))}
 </Container>
 
 </BaseLayout>

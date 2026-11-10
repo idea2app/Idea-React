@@ -48,7 +48,6 @@ it('supports responsive column spans, offsets, and ordering', () => {
             </Col>
         </Row>
     );
-
     assert.equal(
         container.querySelector('.row > div')?.className,
         'col-6 order-last sm:offset-2 sm:order-first md:col-auto md:offset-1 md:order-3 lg:col xl:col-5 2xl:col-4 2xl:offset-0 2xl:order-0'
@@ -62,7 +61,6 @@ it('keeps auto-layout columns when only offset or order is specified', () => {
             <Col lg={{ order: 'first' }} />
         </Row>
     );
-
     assert.deepEqual(
         [...container.querySelectorAll('.row > div')].map(column => column.className),
         ['col md:offset-2', 'col lg:order-first']

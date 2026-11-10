@@ -68,6 +68,8 @@ export interface NavbarTogglerProps extends Omit<
     'children' | 'type'
 > {
     expanded?: boolean;
+    commandfor?: string;
+    command?: string;
 }
 
 export const NavbarToggler = polymorphic<NavbarTogglerProps>(

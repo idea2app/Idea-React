@@ -5,7 +5,7 @@ import remarkGfm from 'remark-gfm';
 import swc from 'unplugin-swc';
 import { unrun } from 'unrun';
 import vinext from 'vinext';
-import { defineConfig } from 'vite';
+import { defineConfig, ResolvedConfig } from 'vite';
 
 import { swcOptions } from '../swc.config.mts';
 
@@ -16,6 +16,7 @@ interface MdastNode {
     value?: string;
     depth?: number;
     attributes?: MdastNode[];
+    // eslint-disable-next-line no-restricted-syntax -- AST children are not component props.
     children?: MdastNode[];
 }
 
@@ -23,6 +24,7 @@ interface HastNode {
     type: string;
     tagName?: string;
     properties?: Record<string, unknown>;
+    // eslint-disable-next-line no-restricted-syntax -- AST children are not component props.
     children?: HastNode[];
 }
 
@@ -106,6 +108,7 @@ const rehypeBootstrapTable = () => (tree: HastNode) => {
         node.children = node.children.map(child => {
             if (child.type !== 'element' || child.tagName !== 'table') {
                 visit(child);
+
                 return child;
             }
             child.properties = { ...child.properties, className: ['table'] };
@@ -122,10 +125,11 @@ const rehypeBootstrapTable = () => (tree: HastNode) => {
 };
 
 export default defineConfig(async () => {
+    const path = new URL('./search/index.tsx', import.meta.url);
     const {
         module: { documentationSearch }
     } = await unrun<typeof import('./search/index.tsx')>({
-        path: new URL('./search/index.tsx', import.meta.url),
+        path,
         inputOptions: { transform: { jsx: { runtime: 'automatic', importSource: 'preact' } } }
     });
 
@@ -144,7 +148,13 @@ export default defineConfig(async () => {
             }
         },
         plugins: [
-            documentationSearch(),
+            {
+                ...documentationSearch(),
+                configResolved({ configFileDependencies }: ResolvedConfig) {
+                    // unrun loads this module outside Vite's dependency graph.
+                    configFileDependencies.push(fileURLToPath(path));
+                }
+            },
             mdx({
                 providerImportSource: '@document/MDXComponents',
                 remarkPlugins: [remarkGfm, remarkInlineButtonChildren],

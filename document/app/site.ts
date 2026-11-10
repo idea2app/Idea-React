@@ -69,7 +69,7 @@ export const footerColumns = [
             { label: 'Issues', href: `${site.repository}/issues` },
             { label: 'Pull requests', href: `${site.repository}/pulls` },
             { label: 'Contributors', href: `${site.repository}/graphs/contributors` },
-            { label: 'npm', href: 'https://www.npmjs.com/package/idea-react' }
+            { label: 'NPM', href: 'https://www.npmjs.com/package/idea-react' }
         ]
     }
 ];

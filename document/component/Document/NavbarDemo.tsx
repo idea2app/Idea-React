@@ -2,25 +2,25 @@
 
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component, ReactNode } from 'react';
+import { Component, PropsWithChildren, ReactNode } from 'react';
 
 import { Drawer, DrawerPlacement } from '../../../source/Base/Drawer';
 import { Navbar, NavbarBrand, NavbarProps, NavbarToggler } from '../../../source/Base/Navbar';
-import { Container } from '../../../source/Layout/Grid';
+import { Container, ContainerProps } from '../../../source/Layout/Grid';
 
-export interface NavbarDemoProps {
-    brand?: ReactNode;
+export type NavbarDemoProps = PropsWithChildren<{
+    id?: string;
+    className?: string;
+    bodyClassName?: string;
     title?: string;
+    brand?: ReactNode;
     expand?: NavbarProps['expand'];
     theme?: 'light' | 'dark';
     placement?: DrawerPlacement;
-    className?: string;
-    bodyClassName?: string;
+    fluid?: ContainerProps['fluid'];
     togglerFirst?: boolean;
-    id?: string;
     'aria-label'?: string;
-    children?: ReactNode;
-}
+}>;
 
 @observer
 export class NavbarDemo extends Component<NavbarDemoProps> {
@@ -32,15 +32,16 @@ export class NavbarDemo extends Component<NavbarDemoProps> {
 
     render() {
         const {
+            id,
+            className = 'bg-1 fg-2',
+            bodyClassName,
             brand = 'Navbar',
             title = 'Menu',
             expand = 'md',
             theme,
             placement = 'end',
-            className = 'bg-1 fg-2',
-            bodyClassName,
+            fluid = true,
             togglerFirst,
-            id,
             'aria-label': ariaLabel,
             children
         } = this.props;
@@ -52,10 +53,7 @@ export class NavbarDemo extends Component<NavbarDemoProps> {
             children
         ) : (
             <Drawer
-                open={open}
-                title={title}
-                placement={placement}
-                bodyClassName={bodyClassName}
+                {...{ open, title, placement, bodyClassName }}
                 responsive={typeof expand === 'string' ? expand : undefined}
                 onDismiss={this.hide}
             >
@@ -64,14 +62,8 @@ export class NavbarDemo extends Component<NavbarDemoProps> {
         );
 
         return (
-            <Navbar
-                id={id}
-                aria-label={ariaLabel}
-                expand={expand}
-                theme={theme}
-                className={className}
-            >
-                <Container fluid>
+            <Navbar {...{ id, className, expand, theme }} aria-label={ariaLabel}>
+                <Container fluid={fluid}>
                     {togglerFirst ? toggler : brandNode}
                     {togglerFirst ? brandNode : toggler}
                     {navigation}

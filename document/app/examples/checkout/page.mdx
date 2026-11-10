@@ -1,25 +1,44 @@
-import { Col, Container, Row } from '../../../../source/Layout/Grid';
-import './style.less';
-import { BaseLayout } from '../../../component/Document/BaseLayout';
+import { Badge } from '../../../../source/Base/Badge';
+import { Button } from '../../../../source/Base/Button';
+import { Card } from '../../../../source/Base/Card';
 import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
 import {
     FormCheck,
     FormControl,
+    FormFeedback,
+    FormField,
+    FormLabel,
     FormSelect,
     FormTextArea,
     InputGroup,
-    FormLabel,
-    FormField,
     InputGroupText
 } from '../../../../source/Form';
-import { Button } from '../../../../source/Base/Button';
-import { Badge } from '../../../../source/Base/Badge';
-import { Card } from '../../../../source/Base/Card';
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
+
+import { BaseLayout } from '../../../component/Document/BaseLayout';
 
 export const cartProducts = [
     { name: 'Product name', description: 'Brief description', price: '$12' },
     { name: 'Second product', description: 'Brief description', price: '$8' },
     { name: 'Third item', description: 'Brief description', price: '$5' }
+];
+
+export const paymentFields = [
+    {
+        width: 6,
+        id: 'cc-name',
+        label: 'Name on card',
+        help: 'Full name as displayed on card',
+        feedback: 'Name on card is required'
+    },
+    {
+        width: 6,
+        id: 'cc-number',
+        label: 'Credit card number',
+        feedback: 'Credit card number is required'
+    },
+    { width: 3, id: 'cc-expiration', label: 'Expiration', feedback: 'Expiration date required' },
+    { width: 3, id: 'cc-cvv', label: 'CVV', feedback: 'Security code required' }
 ];
 
 <BaseLayout title="Checkout example" className="bg-1">
@@ -168,53 +187,27 @@ export const cartProducts = [
           <h4 className="mb-3">Payment</h4>
 
           <div className="my-3">
-            <FormField>
-              <FormCheck id="credit" name="paymentMethod" type="radio" checked required />
-              <label htmlFor="credit">Credit card</label>
-            </FormField>
-            <FormField>
-              <FormCheck id="debit" name="paymentMethod" type="radio" required />
-              <label htmlFor="debit">Debit card</label>
-            </FormField>
-            <FormField>
-              <FormCheck id="paypal" name="paymentMethod" type="radio" required />
-              <label htmlFor="paypal">PayPal</label>
-            </FormField>
+            {[
+                { id: 'credit', label: 'Credit card' },
+                { id: 'debit', label: 'Debit card' },
+                { id: 'paypal', label: 'PayPal' }
+            ].map(({ id, label }) => (
+                <FormField key={id}>
+                    <FormCheck id={id} name="paymentMethod" type="radio" defaultChecked={id === 'credit'} required />
+                    <label htmlFor={id}>{label}</label>
+                </FormField>
+            ))}
           </div>
 
           <Row className="gy-3">
-            <Col md={6}>
-              <FormLabel htmlFor="cc-name" >Name on card</FormLabel>
-              <FormControl type="text" id="cc-name" placeholder="" required />
-              <small className="fg-2">Full name as displayed on card</small>
-              <div className="invalid-feedback">
-                Name on card is required
-              </div>
-            </Col>
-
-            <Col md={6}>
-              <FormLabel htmlFor="cc-number" >Credit card number</FormLabel>
-              <FormControl type="text" id="cc-number" placeholder="" required />
-              <div className="invalid-feedback">
-                Credit card number is required
-              </div>
-            </Col>
-
-            <Col md={3}>
-              <FormLabel htmlFor="cc-expiration" >Expiration</FormLabel>
-              <FormControl type="text" id="cc-expiration" placeholder="" required />
-              <div className="invalid-feedback">
-                Expiration date required
-              </div>
-            </Col>
-
-            <Col md={3}>
-              <FormLabel htmlFor="cc-cvv" >CVV</FormLabel>
-              <FormControl type="text" id="cc-cvv" placeholder="" required />
-              <div className="invalid-feedback">
-                Security code required
-              </div>
-            </Col>
+            {paymentFields.map(({ width, id, label, help, feedback }) => (
+                <Col key={id} md={width}>
+                    <FormLabel htmlFor={id}>{label}</FormLabel>
+                    <FormControl type="text" id={id} placeholder="" required />
+                    {help && <small className="fg-2">{help}</small>}
+                    <FormFeedback>{feedback}</FormFeedback>
+                </Col>
+            ))}
           </Row>
 
           <hr className="my-4" />
@@ -229,9 +222,9 @@ export const cartProducts = [
   <footer className="my-5 pt-5 fg-2 text-center small">
     <p className="mb-1">&copy; 2017–{new Date().getFullYear()} Company Name</p>
     <ul className="list-inline">
-      <li className="list-inline-item"><a href="#">Privacy</a></li>
-      <li className="list-inline-item"><a href="#">Terms</a></li>
-      <li className="list-inline-item"><a href="#">Support</a></li>
+      {['Privacy', 'Terms', 'Support'].map(label => (
+          <li key={label} className="list-inline-item"><a href="#">{label}</a></li>
+      ))}
     </ul>
   </footer>
 </Container>

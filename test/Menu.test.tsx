@@ -254,6 +254,11 @@ it('toggles with a real button and closes on selection or outside interaction', 
     assert.equal(trigger.getAttribute('aria-expanded'), 'true');
     assert.equal(container.querySelector('.menu')?.classList.contains('show'), true);
 
+    const docsLink = screen.getByRole('button', { name: 'Docs' });
+
+    assert.equal(docsLink.tagName, 'A');
+    assert.equal(docsLink.getAttribute('href'), '/docs');
+
     fireEvent.click(screen.getByRole('button', { name: 'Action' }));
     assert.equal(trigger.getAttribute('aria-expanded'), 'false');
 
@@ -272,13 +277,13 @@ it('supports keyboard navigation, skips disabled items and restores focus on Esc
     const trigger = screen.getByRole('button', { name: 'Explore' });
 
     await act(() => fireEvent.keyDown(trigger, { key: 'ArrowDown' }));
-    assert.equal(document.activeElement, screen.getByRole('link', { name: 'Docs' }));
+    assert.equal(document.activeElement, screen.getByRole('button', { name: 'Docs' }));
 
     await act(() => fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' }));
     assert.equal(document.activeElement, screen.getByRole('button', { name: 'Action' }));
 
     await act(() => fireEvent.keyDown(document.activeElement!, { key: 'Home' }));
-    assert.equal(document.activeElement, screen.getByRole('link', { name: 'Docs' }));
+    assert.equal(document.activeElement, screen.getByRole('button', { name: 'Docs' }));
 
     fireEvent.keyDown(document.activeElement!, { key: 'Escape' });
     assert.equal(document.activeElement, trigger);
@@ -377,7 +382,7 @@ it('opens nested submenus with click, hover, and keyboard input', async () => {
 
     await act(() => fireEvent.keyDown(trigger, { key: 'ArrowRight' }));
     assert.equal(trigger.getAttribute('aria-expanded'), 'true');
-    assert.equal(document.activeElement, screen.getByRole('link', { name: 'New' }));
+    assert.equal(document.activeElement, screen.getByRole('button', { name: 'New' }));
 
     fireEvent.keyDown(document.activeElement!, { key: 'ArrowLeft' });
     assert.equal(trigger.getAttribute('aria-expanded'), 'false');

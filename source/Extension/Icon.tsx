@@ -21,11 +21,11 @@ export const Icon = polymorphic<IconProps>(
     }) => (
         <Root
             {...props}
+            className={classNames(`bi-${name}`, className)}
+            style={{ fontSize: size && `${size}rem`, ...style }}
             aria-hidden={ariaHidden ?? (ariaLabel || ariaLabelledBy ? undefined : true)}
             aria-label={ariaLabel}
             aria-labelledby={ariaLabelledBy}
-            className={classNames(`bi-${name}`, className)}
-            style={{ fontSize: size && `${size}rem`, ...style }}
         />
     )
 );
