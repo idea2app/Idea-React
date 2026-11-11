@@ -103,7 +103,7 @@ The overflow pattern works seamlessly with tabbed navigation:
 
 ### Keep items visible
 
-Use the `.nav-overflow-keep` class on items that should never be moved to the overflow menu. These items will remain visible regardless of available space—useful for high-priority items like "Home" or action buttons.
+Pass `className="nav-overflow-keep"` to any item that should never be moved to the overflow menu. These items remain visible regardless of available space—useful for high-priority items like "Home" or action buttons.
 
 <CodeExample>
     <NavOverflow id="overflow-example-4" variant="pills">
@@ -294,7 +294,7 @@ Or use a raw pixel value:
 </NavOverflow>
 ```
 
-Above the threshold, normal progressive collapse resumes. Items with `.nav-overflow-keep` are never collapsed.
+Above the threshold, normal progressive collapse resumes. Items with `nav-overflow-keep` in their `className` are never collapsed.
 
 ## Usage
 

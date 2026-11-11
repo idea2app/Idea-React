@@ -7,7 +7,7 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 
 # Radio
 
-Highly customizable, native radio `<input>` elements for choosing one option from many.
+`Radio` wraps a native radio input with customizable appearance for choosing one option from many.
 
 ## Basic radio
 
@@ -40,7 +40,7 @@ Wrap `Radio` in a `FormField` layout wrapper and add your label. The grid layout
 
 ## Description
 
-Add a description or other content after the label. We recommend wrapping the label and description in a `.form-field-content` to ensure appropriate spacing and alignment.
+Add a description or other content after the label. Wrap the label and description in `FormFieldContent` to ensure appropriate spacing and alignment.
 
 <CodeExample>
     <FormField>
@@ -125,7 +125,7 @@ Modify the appearance of checked radios with the `theme` prop. This will set the
 
 ## Disabled
 
-Add the `disabled` attribute and the associated `<label>`s are automatically styled to match with a lighter color to help indicate the input’s state.
+Set the `disabled` prop on `Radio`; its associated `FormLabel` is automatically styled in a lighter color to indicate the input's state.
 
 <CodeExample>
     <Stack gap={2}>

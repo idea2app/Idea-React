@@ -29,7 +29,7 @@ Things to know when using tooltips with `OverlayBox`:
 - Specify `container="body"` to avoid rendering problems in more complex components (like our input groups, button groups, etc).
 - Triggering tooltips on hidden elements will not work.
 - Tooltips for `disabled` elements must be triggered on a wrapper element.
-- When triggered from hyperlinks that span multiple lines, tooltips will be centered. Use `white-space: nowrap;` on your `<a>`s to avoid this behavior.
+- When triggered from links whose text spans multiple lines, tooltips will be centered. Use `white-space: nowrap` in the link's styles to avoid this behavior.
 - Unmount `OverlayBox` together with its trigger so the tooltip and positioning listeners are cleaned up.
 - Tooltips can be triggered thanks to an element inside a shadow DOM.
 
@@ -194,7 +194,7 @@ Move the pointer onto the tip to reach interactive content inside it, such as a 
 
 ### Disabled elements
 
-Elements with the `disabled` attribute aren’t interactive, meaning users cannot focus, hover, or click them to trigger a tooltip (or popover). As a workaround, you’ll want to trigger the tooltip from a wrapper `<div>` or `<span>`, ideally made keyboard-focusable using `tabindex="0"`.
+Disabled controls are not interactive, so users cannot focus, hover, or click them to trigger a tooltip. As a workaround, place the control inside a keyboard-focusable wrapper and use that wrapper as the `OverlayBox` trigger.
 
 <CodeExample>
     <OverlayBox title="Disabled tooltip">

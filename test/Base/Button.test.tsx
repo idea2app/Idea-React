@@ -21,7 +21,7 @@ it('defaults buttons, links, inputs and toggles to unthemed base styling', () =>
     for (const name of ['Button', 'Input'])
         assert.equal(screen.getByRole('button', { name }).className, 'btn');
 
-    const link = screen.getByRole('button', { name: 'Link' });
+    const link = screen.getByRole('link', { name: 'Link' });
 
     assert.equal(link.tagName, 'A');
     assert.equal(link.getAttribute('href'), '/docs');
@@ -63,8 +63,7 @@ it('allows composite controls to opt out of button styling without losing behavi
     );
     assert.equal(screen.getByRole('button', { name: 'Control' }).className, 'form-control');
     assert.equal(screen.getByRole('button', { name: 'Input control' }).className, 'form-control');
-    assert.equal(screen.getByText('Unstyled link').getAttribute('role'), 'button');
-    assert.equal(screen.getByText('Unstyled link').className, 'custom');
+    assert.equal(screen.getByRole('link', { name: 'Unstyled link' }).className, 'custom');
 
     assert.equal(
         screen.getByRole('button', { name: 'Unstyled active button' }).className,
@@ -155,7 +154,7 @@ it('preserves submit semantics and disables buttons and links', () => {
     assert.equal(onClick.mock.callCount(), 0);
 });
 
-it('renders a link with button role and without native button-only attributes', () => {
+it('renders links with link role and without native button-only attributes', () => {
     render(
         <>
             <Button href="/docs" variant="solid" theme="primary">
@@ -166,7 +165,7 @@ it('renders a link with button role and without native button-only attributes', 
             </Button>
         </>
     );
-    const link = screen.getByRole('button', { name: 'Docs' });
+    const link = screen.getByRole('link', { name: 'Docs' });
 
     assert.equal(link.tagName, 'A');
     assert.equal(link.getAttribute('href'), '/docs');

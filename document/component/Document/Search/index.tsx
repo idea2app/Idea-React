@@ -13,7 +13,7 @@ import {
 import { NativeDialog } from '../../../../source/Base/NativeDialog';
 import { Placeholder, PlaceholderAnimation } from '../../../../source/Base/Placeholder';
 import { Icon } from '../../../../source/Extension/Icon';
-import { FormControl } from '../../../../source/Form';
+import { FormAdornment, FormAdornmentIcon, FormGhost } from '../../../../source/Form';
 import { DocumentSearchModel } from './model';
 import styles from './style.module.less';
 
@@ -49,9 +49,9 @@ export class DocumentSearch extends Component<DocumentSearchProps> {
     handleShortcut = (event: KeyboardEvent) => {
         const { key, ctrlKey, metaKey } = event;
 
-        if (key === 'Escape' && this.dialog.current?.open) return this.dialog.current.close();
-
-        if ((ctrlKey || metaKey) && key.toLowerCase() === 'k') {
+        if (key === 'Escape' && this.dialog.current?.open) {
+            this.dialog.current.close();
+        } else if ((ctrlKey || metaKey) && key.toLowerCase() === 'k') {
             event.preventDefault();
             if (!this.dialog.current?.open) this.open();
         }
@@ -59,21 +59,22 @@ export class DocumentSearch extends Component<DocumentSearchProps> {
 
     renderSearchForm() {
         return (
-            <div className="sticky-top z-1 bg-1 d-flex align-items-center gap-4 p-5 border-bottom">
-                <Icon name="search" aria-hidden="true" />
-                <FormControl
-                    ref={this.input}
-                    className="min-w-0"
-                    type="search"
-                    aria-label="Search documentation"
-                    placeholder="Search documentation..."
-                    value={this.model.query}
-                    onChange={this.handleSearch}
-                />
-                <Button variant="text" onClick={this.close}>
-                    Close
+            <header className="sticky-top z-1 bg-1 d-flex align-items-center gap-4 p-5 border-bottom">
+                <FormAdornment className="flex-grow-1 min-w-0">
+                    <FormAdornmentIcon name="search" aria-hidden="true" />
+                    <FormGhost
+                        ref={this.input}
+                        type="search"
+                        aria-label="Search documentation"
+                        placeholder="Search documentation..."
+                        value={this.model.query}
+                        onChange={this.handleSearch}
+                    />
+                </FormAdornment>
+                <Button icon variant="text" aria-label="Close search" onClick={this.close}>
+                    <Icon name="x-lg" />
                 </Button>
-            </div>
+            </header>
         );
     }
 

@@ -1,5 +1,5 @@
 import { Stack } from '../../../../source/Base/Stack';
-import { ChipToken } from '../../../../source/Form/Chip';
+import { Chip } from '../../../../source/Form/Chip';
 import { ValidationForm } from '../../../component/Document/ValidationForm';
 import {
     Checkbox,
@@ -36,11 +36,11 @@ Provide valuable, actionable feedback to your users with HTML5 form validation, 
 
 ## How it works
 
-Here’s how form validation works with Bootstrap:
+The form wrappers support native client-side validation and component-based feedback:
 
-- **Client-side validation** uses CSS pseudo-classes scoped behind the `data-bs-validate` attribute. Add `data-bs-validate` to your `<form>` to opt in to `:user-invalid` styling—validation styles only appear **after the user interacts** with a control (e.g., typing and blurring, or attempting to submit), so required fields don’t show up as invalid on page load.
-- By default, **client-side validation only shows invalid styling.** To also show success styling for valid fields, set `data-bs-validate="valid"`.
-- **Server-side validation** uses the `.is-invalid` and `.is-valid` classes to indicate field state without requiring user interaction. These work globally—no `data-bs-validate` attribute needed.
+- **Client-side validation** uses CSS pseudo-classes scoped behind the `data-bs-validate` attribute. Pass it to `ValidationForm` to opt in to `:user-invalid` styling—validation styles only appear **after the user interacts** with a control (e.g., typing and blurring, or attempting to submit), so required fields don’t show up as invalid on page load.
+- By default, **client-side validation only shows invalid styling.** To also show success styling for valid fields, set `data-bs-validate="valid"` on `ValidationForm`.
+- **Server-side validation** uses the `validation` prop on form controls to indicate field state without requiring user interaction.
 - All modern browsers support the [constraint validation API][1], a series of JavaScript methods for validating form controls.
 - Feedback messages may utilize the [browser defaults][2] (different for each browser, and unstylable via CSS) or our custom feedback styles with additional HTML and CSS.
 - You may provide custom validity messages with `setCustomValidity` in JavaScript.
@@ -49,9 +49,9 @@ With that in mind, consider the following demos for our custom form validation s
 
 <h2 id="custom-styles">Custom styles</h2>
 
-For custom Bootstrap form validation messages, add `data-bs-validate` and the `novalidate` boolean attribute to your `<form>`. The `data-bs-validate` attribute opts in to Bootstrap’s `:user-invalid` styling, while `novalidate` disables the browser default feedback tooltips. Custom feedback styles apply custom colors, borders, and focus styles to better communicate feedback.
+For custom validation messages, pass `data-bs-validate` and `noValidate` to `ValidationForm`. The first opts in to `:user-invalid` styling, while the second disables browser-default feedback tooltips. Custom feedback styles apply colors, borders, and focus styles to better communicate field state.
 
-Use `data-bs-validate="valid"` to also show success styling on valid fields. Add `required` to each form input and `.invalid-feedback` to provide field-specific error messages. If you enable valid styling, use `.valid-feedback` for success messages.
+Set `data-bs-validate="valid"` to also show success styling on valid fields. Add `required` to each control and use `FormFeedback` for field-specific messages. Set its `type` prop to `valid` for success feedback.
 
 **For accessibility,** add `aria-describedby` to each form control, pointing to the `id` of its feedback message. This ensures screen readers announce the error when the user focuses an invalid field. The `ValidationForm` example below also sets `aria-invalid` on each control at submit time and clears it as users correct their input.
 
@@ -270,7 +270,7 @@ While these feedback styles cannot be styled with CSS, you can still customize t
 
 ## Server-side
 
-We recommend using client-side validation, but in case you require server-side validation, you can indicate invalid and valid form fields with `.is-invalid` and `.is-valid`. Note that `.invalid-feedback` is also supported with these classes.
+We recommend using client-side validation, but for server-side validation set each control's `validation` prop to `invalid` or `valid`. Pair it with `FormFeedback` to display the corresponding message.
 
 For invalid fields, ensure that the invalid feedback/error message is associated with the relevant form field using `aria-describedby` (noting that this attribute allows more than one `id` to be referenced, in case the field already points to additional form text).
 
@@ -399,19 +399,10 @@ For invalid fields, ensure that the invalid feedback/error message is associated
 
 ## Supported elements
 
-Validation styles are available for the following form controls and components:
-
-- `<input>`s and `<textarea>`s with `.form-control`
-- `<select>`s with `.form-control`
-- `.check` checkboxes
-- `.radio` radios
-- `.switch` switches
-- `.form-range-input` range inputs
-- `.form-floating` floating labels
-- `.form-adorn` adorned inputs
-- `.chip-input` chip inputs
-- `.combobox-toggle` comboboxes (class-based only)
-- Input groups (with feedback in a parent `.form-field`)
+Validation styles work with the form wrappers: `FormControl`, `FormTextArea`, `FormSelect`,
+`Checkbox`, `Radio`, `FormSwitch`, `FormRange`, `FormFloatingLabel`, `FormAdornment`, and
+`ChipInput`. `Combobox` also supports validation props. For input groups, place the group and its
+feedback inside `FormField`.
 
 <CodeExample>
     <Stack gap={5}>
@@ -589,7 +580,7 @@ Validation styles are available for the following form controls and components:
         <FormField>
             <FormLabel htmlFor="validationChipInput">Tags</FormLabel>
             <ChipInput dismissible={false}>
-                <ChipToken>Example</ChipToken>
+                <Chip>Example</Chip>
                 <FormGhost
                     type="text"
                     id="validationChipInput"

@@ -52,7 +52,7 @@ const inlineElements = new Set([
     'CarouselImage',
     'ChipDismiss',
     'ChipInputLabel',
-    'ChipToken',
+    'Chip',
     'CloseButton',
     'CollapseToggle',
     'ComboboxOption',

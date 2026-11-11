@@ -42,7 +42,8 @@ Menus are toggleable, contextual overlays for displaying lists of links and more
 
 ## Examples
 
-`Menu` uses the recommended `<button>` element for its toggle. Upstream also demonstrates an anchor toggle with `role="button"`; the current wrapper intentionally exposes a button toggle instead.
+`Menu` uses its button-based toggle. Unlike an upstream anchor example, the wrapper does not expose
+an alternate link toggle.
 
 Use [button groups][2] to create split button menus where the menu is displayed when a secondary button is clicked.
 
@@ -222,7 +223,8 @@ Resize your browser window to see the placement change at different breakpoints.
 
 ## Menu items
 
-You can use `<a>` or `<button>` elements as menu items.
+Use `MenuItem` for each entry. It renders a link when `href` is provided; set `as="button"` for an
+action.
 
 We use utility classes to display menus in our docs examples, but they’re not required for your own use.
 

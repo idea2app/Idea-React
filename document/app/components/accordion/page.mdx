@@ -31,12 +31,10 @@ To render an accordion that’s expanded by default, add the `open` attribute to
                 <strong>{'This is the first item’s accordion body.'}</strong>
                 {' It is shown by default because the '}
                 <code>{'open'}</code>
-                {' attribute is present. The native '}
-                <code>{'<details>'}</code>
                 {
-                    ' element handles all the show/hide logic without any JavaScript. You can put any HTML content within the '
+                    ' prop is present. Accordion items use native disclosure behavior without requiring JavaScript. Put any content inside '
                 }
-                <code>{'.accordion-body'}</code>
+                <code>{'AccordionBody'}</code>
                 {'. '}
             </AccordionBody>
         </AccordionItem>
@@ -49,7 +47,7 @@ To render an accordion that’s expanded by default, add the `open` attribute to
                 {' The '}
                 <code>{'name'}</code>
                 {
-                    ' attribute groups this with other accordion items. When you open this item, any other open item in the same group will close automatically. '
+                    ' prop groups this with other accordion items. When you open this item, any other open item in the same group will close automatically. '
                 }
             </AccordionBody>
         </AccordionItem>
@@ -60,12 +58,10 @@ To render an accordion that’s expanded by default, add the `open` attribute to
             <AccordionBody>
                 <strong>{'This is the third item’s accordion body.'}</strong>
                 {
-                    ' This exclusive accordion behavior is built into the browser—no Bootstrap JavaScript required. Just use matching '
+                    ' This exclusive accordion behavior is built into the browser—no Bootstrap JavaScript required. Set matching '
                 }
                 <code>{'name'}</code>
-                {' attributes on your '}
-                <code>{'<details>'}</code>
-                {' elements. '}
+                {' props on the items. '}
             </AccordionBody>
         </AccordionItem>
     </Accordion>
@@ -78,7 +74,7 @@ The panel height animation needs [`interpolate-size`][1]. Browsers without it op
 
 ## Variants
 
-Use the contextual `.theme-{color}` classes to apply a semantic theme color to open accordion items.
+Set the `theme` prop on `Accordion` to apply a semantic theme color to its open items.
 
 <CodeExample>
     <Accordion theme="primary">
@@ -132,7 +128,7 @@ Use the contextual `.theme-{color}` classes to apply a semantic theme color to o
 
 ## Small
 
-Add `.accordion-sm` to the `.accordion` for a more compact accordion with tighter padding, a smaller border radius, and a smaller font size.
+Set `size="sm"` on `Accordion` for a more compact layout with tighter padding, a smaller border radius, and a smaller font size.
 
 <CodeExample>
     <Accordion size="sm">
@@ -142,9 +138,9 @@ Add `.accordion-sm` to the `.accordion` for a more compact accordion with tighte
             <AccordionBody>
                 <strong>{'This is the first item’s accordion body.'}</strong>
                 {' The '}
-                <code>{'.accordion-sm'}</code>
+                <code>{'size="sm"'}</code>
                 {
-                    ' class tightens up the padding, border radius, and font size for a more compact presentation. '
+                    ' size prop tightens up the padding, border radius, and font size for a more compact presentation. '
                 }
             </AccordionBody>
         </AccordionItem>
@@ -166,9 +162,9 @@ Add `.accordion-sm` to the `.accordion` for a more compact accordion with tighte
             <AccordionBody>
                 <strong>{'This is the third item’s accordion body.'}</strong>
                 {' Combine '}
-                <code>{'.accordion-sm'}</code>
-                {' with other variants like '}
-                <code>{'.accordion-flush'}</code>
+                <code>{'size="sm"'}</code>
+                {' with other props like '}
+                <code>{'flush'}</code>
                 {' as needed. '}
             </AccordionBody>
         </AccordionItem>
@@ -178,7 +174,7 @@ Add `.accordion-sm` to the `.accordion` for a more compact accordion with tighte
 
 ## Flush
 
-Add `.accordion-flush` to remove some borders and rounded corners to render accordions edge-to-edge with their parent container.
+Set the `flush` prop on `Accordion` to remove some borders and rounded corners so it can sit edge-to-edge with its parent container.
 
 <CodeExample>
     <div className="bg-1">
@@ -190,7 +186,7 @@ Add `.accordion-flush` to remove some borders and rounded corners to render acco
                     {
                         'Placeholder content for this accordion, which is intended to demonstrate the '
                     }
-                    <code>{'.accordion-flush'}</code>
+                    <code>{'flush'}</code>
                     {' class. This is the first item’s accordion body.'}
                 </AccordionBody>
             </AccordionItem>
@@ -202,7 +198,7 @@ Add `.accordion-flush` to remove some borders and rounded corners to render acco
                     {
                         'Placeholder content for this accordion, which is intended to demonstrate the '
                     }
-                    <code>{'.accordion-flush'}</code>
+                    <code>{'flush'}</code>
                     {
                         ' class. This is the second item’s accordion body. Let’s imagine this being filled with some actual content.'
                     }
@@ -216,7 +212,7 @@ Add `.accordion-flush` to remove some borders and rounded corners to render acco
                     {
                         'Placeholder content for this accordion, which is intended to demonstrate the '
                     }
-                    <code>{'.accordion-flush'}</code>
+                    <code>{'flush'}</code>
                     {
                         ' class. This is the third item’s accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.'
                     }
@@ -229,7 +225,7 @@ Add `.accordion-flush` to remove some borders and rounded corners to render acco
 
 ## Gap
 
-Add `.accordion-gap` to put space between accordion items. Each item is a separate rounded card.
+Set the `gap` prop on `Accordion` to add space between items. Each item is a separate rounded card.
 
 The gap lives on the accordion, not the panel. The panel still animates only its `block-size`, so the open and close transition stays smooth.
 
@@ -241,7 +237,7 @@ The gap lives on the accordion, not the panel. The panel still animates only its
             <AccordionBody>
                 <strong>{'This is the first item’s accordion body.'}</strong>
                 {' The '}
-                <code>{'.accordion-gap'}</code>
+                <code>{'gap'}</code>
                 {
                     ' class spaces items apart. Each item keeps a full border radius while the panel opens and closes. '
                 }
@@ -379,7 +375,7 @@ We use the following JavaScript for this demo:
 
 ## Nested
 
-Accordions can be nested inside each other by placing a full `.accordion` within an `.accordion-body`. Use unique `name` attribute values for each level so the parent and child accordions operate independently.
+Nest an `Accordion` inside an `AccordionBody` to create an accordion within an item. Use unique `name` attribute values for each level so parent and child accordions operate independently.
 
 <CodeExample>
     <Accordion>

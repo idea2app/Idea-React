@@ -33,7 +33,9 @@ Things to know when using popovers with `OverlayBox`:
 - Specify `container="body"` to avoid rendering problems in more complex components (like our input groups, button groups, etc).
 - Triggering popovers on hidden elements will not work.
 - Popovers for `disabled` elements must be triggered on a wrapper element.
-- When triggered from anchors that wrap across multiple lines, popovers will be centered between the anchors’ overall width. Use `.text-nowrap` on your `<a>`s to avoid this behavior.
+- When triggered from links whose text wraps across multiple lines, popovers will be centered
+  between the links' overall width. Apply `white-space: nowrap` to the link's styles to avoid this
+  behavior.
 - Unmount `OverlayBox` together with its trigger so the popover and positioning listeners are cleaned up.
 - Popovers can be triggered thanks to an element inside a shadow DOM.
 
@@ -220,7 +222,9 @@ A shown popover can also be dismissed by pressing the <kbd>Escape</kbd> key. As 
 
 ### Disabled elements
 
-Elements with the `disabled` attribute aren’t interactive, meaning users cannot hover or click them to trigger a popover (or tooltip). As a workaround, you’ll want to trigger the popover from a wrapper `<div>` or `<span>`, ideally made keyboard-focusable using `tabindex="0"`.
+Disabled controls are not interactive, so users cannot hover or click them to trigger a popover. As
+a workaround, place the control inside a keyboard-focusable wrapper and use that wrapper as the
+`OverlayBox` trigger.
 
 For disabled popover triggers, you may also prefer `trigger={["hover", "focus"]}` so that the popover appears as immediate visual feedback to your users as they may not expect to _click_ on a disabled element.
 

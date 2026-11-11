@@ -18,7 +18,9 @@ A slider or slideshow component for cycling through series of content, ranging f
 
 - Carousels can have any number of slides, with just about any content within. Our examples show images and text, but you can put anything you like inside each `CarouselSlide`. We don't support nested carousels.
 
-- Carousel items or slides do not normalize their dimensions. As such, you may need to use additional utilities or custom styles to appropriately size content. While carousels support previous/next controls and indicators, they’re not explicitly required. Add and customize as you see fit.
+- Carousel items or slides do not normalize their dimensions. As such, you may need to use
+  utilities through `className` or custom styles to size content. Previous/next controls and
+  indicators are optional; add and customize them as needed.
 
 - `Carousel` initializes on mount, including active-slide syncing as the user scrolls or swipes. Pass `autoplay` for [autoplaying carousels][3]. Do not initialize the same carousel with Bootstrap’s JavaScript plugin.
 
@@ -114,7 +116,8 @@ Pass `indicators` to include slide indicator buttons and use `indicatorPlacement
 
 ### Custom content
 
-You can put any markup you like inside each `CarouselSlide`. Add content, then size and style it with utilities or CSS modules as needed.
+You can put any content inside each `CarouselSlide`. Add content, then size and style it with
+utilities through `className` or CSS Modules as needed.
 
 <CodeExample>
     <Carousel
@@ -306,7 +309,8 @@ Set `itemsPeek` to reveal a sliver of the previous and next slides, hinting that
 
 ### Variable width
 
-Pass `auto` and size each `CarouselSlide` yourself with utilities, `style`, or a CSS module. Snap points still land on every slide.
+Pass `auto` and size each `CarouselSlide` yourself with `className`, `style`, or a CSS Module. Snap
+points still land on every slide.
 
 <CodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
@@ -572,8 +576,8 @@ Use props to control the carousel rather than Bootstrap’s data-attribute plugi
 | `playPause`          | Render an accessible play/pause control.                                             |
 | `controlsPlacement`  | Put the controls at the top, bottom, or over the slides.                             |
 | `controlsStart`      | Content to display at the start of the controls row.                                 |
-| `controlsClassName`  | Bootstrap utilities or a CSS module for the non-overlay controls row.                |
-| `innerClassName`     | Bootstrap utilities or a CSS module for the scroll viewport.                         |
+| `controlsClassName`  | Utility class names or a CSS Module for the non-overlay controls row.                |
+| `innerClassName`     | Utility class names or a CSS Module for the scroll viewport.                         |
 | `indicatorPlacement` | Position indicators before, after, or between the previous/next buttons.             |
 
 ### Via React

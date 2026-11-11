@@ -13,7 +13,7 @@ Use our custom range inputs for consistent cross-browser styling with a filled t
 
 The native `<input type="range">` is hard to style and can’t show a filled track in a consistent, cross-browser way using CSS alone—only Firefox offers `::-moz-range-progress`, and CSS can’t read an input’s value. So our range is a small **JavaScript component**: use `FormRange`, which wraps a native range input, and the plugin keeps a `--bs-range-fill` custom property (0–1) in sync, which the CSS uses to draw the fill, the value bubble, and tick marks.
 
-The `.form-range` wrapper owns the component’s tokens, so the input and any decorations inherit them. Each mounted `FormRange` initializes automatically.
+`FormRange` owns the component's theme tokens, so the input and any decorations inherit them. Each mounted component initializes automatically.
 
 <CodeExample>
     <FormLabel htmlFor="range1">Example range</FormLabel>
@@ -22,7 +22,7 @@ The `.form-range` wrapper owns the component’s tokens, so the input and any de
 
 ## Theme colors
 
-Modify the appearance of the range by adding the `theme` prop to the `.form-range` wrapper. This will set the track fill and thumb color to the theme color.
+Set the `theme` prop on `FormRange` to change the track fill and thumb color.
 
 <CodeExample>
     <Stack gap={3}>

@@ -57,21 +57,23 @@ Cards are flexible and extensible content containers with support for headers an
 
 Cards are built with as little markup and styles as possible, but still manage to deliver a ton of control and customization.
 
-- Cards are flexbox containers, so they offer easy alignment via [flexbox utilities][1] and [grid column classes][2].
+- Cards are flexbox containers, so align their contents with [flexbox utilities][1] through `className`
+  and arrange them with `Row` and `Col`.
 
-- `.card` has no default padding, you need `.card-body` for that. Use it as a modifier class or a child element alongside headers, footers, images, and more. This allows greater flexibility with the least amount of overhead.
+- `Card` has no default padding. Add a `CardBody` child, or set `body` on `Card` for a simple padded card. This allows greater flexibility with the least amount of overhead.
 
-- Cards have no `margin` by default. Use [margin utilities][3] or [gap utilities][4] as needed.
+- Cards have no `margin` by default. Use [margin utilities][2] through `className` or set spacing with
+  `Stack`'s `gap` prop.
 
-- Cards can contain text, images, lists, and most other HTML.
+- Cards can contain text, images, lists, and other content components.
 
-- Choose semantic HTML that fits the content. We use `<div>`s for simplicity's sake in our documentation, but you can also use `<section>`, `<article>`, etc.
+- Choose semantic elements that fit the content. Use the `as` prop on `Card` or its child components to render an appropriate element such as `section` or `article`.
 
 ## Content types
 
 ### Body
 
-The building block of a card is the `.card-body`. Use it whenever you need a padded section within a card.
+The building block of a card is `CardBody`. Use it whenever you need a padded section within a card.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -81,7 +83,7 @@ The building block of a card is the `.card-body`. Use it whenever you need a pad
     </Stack>
 </CodeExample>
 
-For simple cards, you can use the `.card-body` class directly on the card element.
+For simple cards, set the `body` prop directly on `Card`.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -91,13 +93,11 @@ For simple cards, you can use the `.card-body` class directly on the card elemen
 
 ### Titles, text, and links
 
-Card bodies arrange their direct children in a column and apply a consistent gap, so titles and text need no styles of their own. Use these optional classes as content hooks.
+Card bodies arrange their direct children in a column and apply a consistent gap, so titles and text need no additional styles.
 
-- For a title, use `.card-title`.
-- For a subtitle, use `.card-subtitle`. It reduces the gap above the subtitle.
-- For text, use `.card-text`.
+- Use `CardTitle` for a title, `CardSubtitle` for a subtitle, and `CardText` for text. `CardSubtitle` reduces the gap above it.
 
-Use type and color utilities as needed. A color utility on `.card-subtitle` overrides `--bs-card-subtitle-color`. Links need no card-specific class.
+Use text and color utilities through `className` as needed. A color utility on `CardSubtitle` overrides `--bs-card-subtitle-color`. Links need no card-specific wrapper.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -139,7 +139,7 @@ Place images anywhere in a card and style as you like.
     </Stack>
 </CodeExample>
 
-Use `.card-img-top` and `.card-img-bottom` to round the top and bottom corners of the image.
+Set `placement="top"` or `placement="bottom"` on `CardImage` to round the corresponding image corners.
 
 <CodeExample>
     <div className="d-flex gap-3 flex-wrap overflow-auto">
@@ -178,7 +178,7 @@ Use `.card-img-top` and `.card-img-bottom` to round the top and bottom corners o
 
 ### List groups
 
-When your card only contains a list group—no header, footer, or body—use a `.list-group` on its own. A card already draws an outer border, so a default list group inside a card would double that border.
+When your card only contains a list group—with no header, footer, or body—use `ListGroup` on its own. A card already draws an outer border, so a default list group inside a card would double that border.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -190,7 +190,7 @@ When your card only contains a list group—no header, footer, or body—use a `
     </Stack>
 </CodeExample>
 
-When you mix a list group with other card sub-components, add `.list-group-flush` to drop the list’s own outer border.
+When you mix a list group with other card sub-components, set the `flush` prop on `ListGroup` to remove its outer border.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -273,7 +273,7 @@ Add an optional header and/or footer within a card.
     </Stack>
 </CodeExample>
 
-Card headers can be styled by adding `.card-header` to `<h*>` elements.
+Use `CardHeader` for a card header; set its `as` prop when the heading needs a specific semantic element.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -333,7 +333,8 @@ Card headers can be styled by adding `.card-header` to `<h*>` elements.
 
 ## Width
 
-Cards assume no specific `width` to start, so they’ll be 100% wide unless otherwise stated. You can change this as needed with custom CSS, grid classes, grid Sass mixins, or utilities.
+Cards are 100% wide by default. Set their width with custom CSS, place them in `Col` components, or
+pass sizing utilities through `className`.
 
 ### Grid
 
@@ -374,7 +375,7 @@ Using the grid, wrap cards in columns and rows as needed.
 
 ### Utilities
 
-Use our handful of [available sizing utilities][5] to quickly set a card’s width.
+Use our handful of [available sizing utilities][3] to quickly set a card’s width.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -425,7 +426,7 @@ Use custom CSS in your stylesheets or as inline styles to set a width.
 
 ## Navigation
 
-Add some navigation to a card’s header (or block) with Bootstrap’s [nav components][6].
+Add some navigation to a card’s header (or block) with Bootstrap’s [nav components][4].
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -457,7 +458,7 @@ Add some navigation to a card’s header (or block) with Bootstrap’s [nav comp
 
 </CodeExample>
 
-This works with `.nav-pills` as well.
+This works with `Nav` using `variant="pills"` as well.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -542,7 +543,8 @@ Similar to headers and footers, cards can include top and bottom “image caps�
 
 ### Image overlays
 
-Turn an image into a card background and overlay your card’s text. Depending on the image, you may or may not need additional styles or utilities.
+Turn an image into a card background and overlay your card’s text. Depending on the image, you may
+need additional styles or utilities through `className`.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -571,7 +573,7 @@ Turn an image into a card background and overlay your card’s text. Depending o
 
 ## Card row
 
-Use the `.card-row` class to make a card horizontal. For image caps, use the `.card-img-start` or `.card-img-end` class to position the image at the (inline) start or end position of the card.
+Set `row` on `Card` to make it horizontal. Set `CardImage`'s `placement` prop to `start` or `end` to position the image at either inline edge.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -625,7 +627,7 @@ And with the reverse layout:
 
 ## Theme variants
 
-Customize cards by using our theme color utilities. By default, cards use `bg` for their background and border colors when applying a theme color. Use `.card-subtle` to swap the background and border colors for a more subtle look.
+Customize cards by setting the `theme` prop. By default, cards use `bg` for their background and border colors; set `subtle` to use more subtle colors.
 
 <CodeExample>
     <div className="d-grid grid grid-cols-1 md:grid-cols-2 gap-4 overflow-auto">
@@ -751,7 +753,7 @@ Customize cards by using our theme color utilities. By default, cards use `bg` f
 
 ## Translucent cards
 
-Add `.card-translucent` to blur and saturate the background of a card. Header and footer backgrounds are also adjusted for a consistent look.
+Set `translucent` on `Card` to blur and saturate its background. Header and footer backgrounds are also adjusted for a consistent look.
 
 <CodeExample>
     <div className="bg-black overflow-auto">
@@ -795,7 +797,7 @@ In addition to styling the content within cards, Bootstrap includes a few option
 
 Use card groups to render cards as a single, attached element with equal width and height columns. Card groups start off stacked and use `display: flex;` to become attached with uniform dimensions starting at the `sm` breakpoint.
 
-This layout uses [container queries][7], so wrap the card group in a query container—add the `.contains-inline` utility to a parent element—for the row layout to take effect. Without a query container, the cards remain stacked.
+This layout uses [container queries][5], so place `CardGroup` inside a query container with the `contains-inline` utility applied through the parent's `className`. Without a query container, the cards remain stacked.
 
 <CodeExample>
     <Stack gap={3} className="max-w-100 overflow-auto p-2" style={{ resize: 'horizontal' }}>
@@ -935,7 +937,7 @@ When using card groups with footers, their content will automatically line up.
 
 ### Grid cards
 
-Use the Bootstrap grid system and its [`.row-cols` classes][8] to control how many grid columns (wrapped around your cards) you show per row. For example, here’s `.row-cols-1` laying out the cards on one column, and `.md:row-cols-2` splitting four cards to equal width across multiple rows, from the medium breakpoint up.
+Use `Row` and `Col` to control how many cards appear per row. Set responsive column props on `Row`—for example, `xs={1}` and `md={2}`—to lay cards out in one column on small viewports and two equal-width columns from the medium breakpoint up.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -1016,7 +1018,7 @@ Use the Bootstrap grid system and its [`.row-cols` classes][8] to control how ma
     </Stack>
 </CodeExample>
 
-Change it to `.row-cols-3` and you’ll see the fourth card wrap.
+Change the `md` prop on `Row` to `3` and you’ll see the fourth card wrap.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -1097,7 +1099,7 @@ Change it to `.row-cols-3` and you’ll see the fourth card wrap.
     </Stack>
 </CodeExample>
 
-When you need equal height, add `.h-100` to the cards. If you want equal heights by default, set `--bs-card-height: 100%` in your CSS module.
+When you need equal heights, apply a height utility through each `Card`'s `className`. To make that the default, set `--bs-card-height: 100%` in your CSS module.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -1278,10 +1280,7 @@ Customize the component with the following local CSS variables. Override them th
 </DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/utilities/flex/
-[2]: https://getbootstrap.com/docs/6.0/layout/grid#column-classes
-[3]: https://getbootstrap.com/docs/6.0/utilities/margin/
-[4]: https://getbootstrap.com/docs/6.0/utilities/gap/
-[5]: https://getbootstrap.com/docs/6.0/utilities/width/
-[6]: https://getbootstrap.com/docs/6.0/components/nav/
-[7]: https://getbootstrap.com/docs/6.0/layout/breakpoints#container-queries
-[8]: https://getbootstrap.com/docs/6.0/layout/grid#row-columns
+[2]: https://getbootstrap.com/docs/6.0/utilities/margin/
+[3]: https://getbootstrap.com/docs/6.0/utilities/width/
+[4]: https://getbootstrap.com/docs/6.0/components/nav/
+[5]: https://getbootstrap.com/docs/6.0/layout/breakpoints#container-queries

@@ -44,7 +44,7 @@ export const Button = polymorphic<ButtonProps>(
         const link = isButtonLink(attributes);
         const Root = RootAs ?? (link ? 'a' : 'button');
         const nativeButton = Root === 'button';
-        const role = attributes.role ?? 'button';
+        const role = attributes.role ?? (link ? 'link' : 'button');
         const onClick =
             !nativeButton && disabled
                 ? typeof Root === 'string'

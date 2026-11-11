@@ -5,18 +5,19 @@ import { ComponentTheme } from '../Base/Button';
 import { Icon, IconProps } from '../Extension/Icon';
 import { polymorphic } from '../Helper/Polymorphic';
 
-export type ChipProps = ComponentPropsWithRef<'button'> & {
+export type ChipProps = ComponentPropsWithRef<'span'> & {
     active?: boolean;
     theme?: ComponentTheme;
+    type?: ComponentPropsWithRef<'button'>['type'];
 };
 
 export const Chip = polymorphic<ChipProps>(
-    ({ as: Root = 'button', className, active, theme, type = 'button', ...props }) => (
+    ({ as: Root = 'span', className, active, theme, type = 'button', ...props }) => (
         <Root
             {...props}
             className={classNames('chip', { active }, theme && `theme-${theme}`, className)}
             type={Root === 'button' ? type : undefined}
-            aria-pressed={active}
+            aria-pressed={Root === 'button' ? active : undefined}
         />
     )
 );
@@ -49,16 +50,3 @@ export const ChipDismiss = polymorphic<ComponentPropsWithRef<'button'>>(
     )
 );
 ChipDismiss.displayName = 'ChipDismiss';
-
-export type ChipTokenProps = ComponentPropsWithRef<'span'> & Pick<ChipProps, 'active' | 'theme'>;
-
-export const ChipToken = polymorphic<ChipTokenProps>(
-    ({ as: Root = 'span', className, active, theme, ...props }) => (
-        <Root
-            {...props}
-            tabIndex={props.tabIndex ?? 0}
-            className={classNames('chip', { active }, theme && `theme-${theme}`, className)}
-        />
-    )
-);
-ChipToken.displayName = 'ChipToken';

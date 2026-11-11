@@ -20,13 +20,13 @@ Examples and usage guidelines for form control styles, layout options, and custo
 
 ## Overview
 
-Bootstrap’s form controls expand on [our Rebooted form styles][1] with classes. Idea React components apply these classes for a more consistent rendering across browsers and devices.
+Idea React's form components build on [Bootstrap's form styles][1] and provide a consistent API for rendering controls across browsers and devices.
 
 For further customization, pass a CSS Module class through `className`. The CSS reference sections show custom property defaults from the published stylesheet; Sass-only build configuration is omitted because this site uses compiled Bootstrap CSS.
 
 Be sure to use an appropriate `type` attribute on all inputs (e.g., `email` for email address or `number` for numerical information) to take advantage of newer input controls like email verification, number selection, and more.
 
-Here’s a quick example to demonstrate Bootstrap’s form styles. Keep reading for documentation on required classes, form layout, and more.
+Here’s a quick example using the form components. Keep reading for component props, form layout, and more.
 
 <CodeExample>
     <Form>
@@ -55,15 +55,15 @@ Here’s a quick example to demonstrate Bootstrap’s form styles. Keep reading 
 
 ## Disabled forms
 
-Add the `disabled` boolean attribute on an input to prevent user interactions and make it appear lighter.
+Set the `disabled` prop on `FormControl` to prevent user interaction and give it a disabled appearance.
 
 ```tsx
 <FormControl id="disabledInput" type="text" placeholder="Disabled input here..." disabled />
 ```
 
-Add the `disabled` attribute to a `<fieldset>` to disable all the controls within. Browsers treat all native form controls (`<input>`, `<select>`, and `<button>` elements) inside a `<fieldset disabled>` as disabled, preventing both keyboard and mouse interactions on them.
+Add the native `disabled` attribute to a `fieldset` to disable all nested controls. Browsers treat native inputs, selects, and buttons inside a disabled fieldset as disabled, preventing keyboard and mouse interaction.
 
-However, if your form also includes custom button-like elements such as `<a class="btn-*">...</a>`, these will only be given a style of `pointer-events: none`, meaning they are still focusable and operable using the keyboard. In this case, you must manually modify these controls by adding `tabindex="-1"` to prevent them from receiving focus and `aria-disabled="disabled"` to signal their state to assistive technologies.
+This does not disable custom links styled as buttons. Use `Button`'s `disabled` prop for button-like links; it removes navigation and updates keyboard focus and accessibility state.
 
 <CodeExample>
     <Form>
@@ -94,18 +94,17 @@ However, if your form also includes custom button-like elements such as `<a clas
 
 ## Accessibility
 
-Ensure that all form controls have an appropriate accessible name so that their purpose can be conveyed to users of assistive technologies. The simplest way to achieve this is to use a `<label>` element, or—in the case of buttons—to include sufficiently descriptive text as part of the `<button>...</button>` content.
+Ensure that all form controls have an appropriate accessible name so assistive technologies can convey their purpose. Use `FormLabel` for form controls, or descriptive content for buttons.
 
-For situations where it’s not possible to include a visible `<label>` or appropriate text content, there are alternative ways of still providing an accessible name, such as:
+When a visible `FormLabel` or button text is not appropriate, provide an accessible name by:
 
-- `<label>` elements hidden using the `.visually-hidden` class
-- Pointing to an existing element that can act as a label using `aria-labelledby`
+- Pointing to an existing element with `aria-labelledby`
 - Providing a `title` attribute
 - Explicitly setting the accessible name on an element using `aria-label`
 
-If none of these are present, assistive technologies may resort to using the `placeholder` attribute as a fallback for the accessible name on `<input>` and `<textarea>` elements. The examples in this section provide a few suggested, case-specific approaches.
+Do not rely on `placeholder` as a control's accessible name; it is only a fallback in some assistive technology and disappears when the control has a value.
 
-While using visually hidden content (`.visually-hidden`, `aria-label`, and even `placeholder` content, which disappears once a form field has content) will benefit assistive technology users, a lack of visible label text may still be problematic for certain users. Some form of visible label is generally the best approach, both for accessibility and usability.
+While `aria-label` can provide an accessible name, a visible label is generally best for accessibility and usability.
 
 ## CSS
 

@@ -22,7 +22,8 @@ styles discussed below.
 
 ## About
 
-Placeholders can be used to enhance the experience of your application. They’re built only with HTML and CSS, meaning you don’t need any JavaScript to create them. You will, however, need some custom JavaScript to toggle their visibility. Their appearance, color, and sizing can be easily customized with our utility classes.
+Placeholders are built with HTML and CSS and need no JavaScript. Render them conditionally to control
+visibility, and use the `Placeholder` props to set their color, size, width, and animation.
 
 ## Example
 
@@ -87,9 +88,10 @@ In the example below, we take a typical card component and recreate it with plac
 
 ## How it works
 
-Create placeholders with the `.placeholder` class and a grid column class (e.g., `.col-6`) to set the `width`. They can replace the text inside an element or be added as a modifier class to an existing component.
+Render `Placeholder` for a skeleton shape, and use `Col` to set its grid width. Use the `as` prop
+when the placeholder should render as a different element.
 
-We apply additional styling to `.btn`s via `::before` to ensure the `height` is respected. You may extend this pattern for other situations as needed, or add a `&nbsp;` within the element to reflect the height when actual text is rendered in its place.
+`PlaceholderButton` applies the button sizing and disabled state for button-shaped placeholders.
 
 <CodeExample>
     <Stack gap={3}>
@@ -111,7 +113,8 @@ We apply additional styling to `.btn`s via `::before` to ensure the `height` is 
 
 ## Width
 
-You can change the `width` through grid column classes, width utilities, or inline styles.
+Set the `width` prop for a fixed or percentage width, use `Col` for grid sizing, or pass width
+utilities through `className`.
 
 <CodeExample>
     <Stack gap={3}>
@@ -123,7 +126,8 @@ You can change the `width` through grid column classes, width utilities, or inli
 
 ## Color
 
-By default, the `placeholder` uses `currentColor`. This can be overridden with a custom color or utility class.
+By default, `Placeholder` uses `currentColor`. Set its `theme` prop to choose a theme color, or use
+`className` for a custom color.
 
 <CodeExample>
     <Stack gap={3}>
@@ -141,7 +145,8 @@ By default, the `placeholder` uses `currentColor`. This can be overridden with a
 
 ## Sizing
 
-The size of `.placeholder`s are based on the typographic style of the parent element. Customize them with sizing modifiers: `.placeholder-lg`, `.placeholder-sm`, or `.placeholder-xs`.
+The size of `Placeholder` follows the typographic style of its parent. Set `size` to `"lg"`, `"sm"`,
+or `"xs"` to use a sizing modifier.
 
 <CodeExample>
     <Stack gap={2}>
@@ -154,7 +159,8 @@ The size of `.placeholder`s are based on the typographic style of the parent ele
 
 ## Animation
 
-Use `.placeholder-wave` for the default loading animation. Use `.placeholder-pulse` for an opacity pulse. The old `.placeholder-glow` class remains as a compatibility alias for `.placeholder-pulse`.
+Set `PlaceholderAnimation`'s `animation` prop to `"wave"` for the default loading animation, or
+`"pulse"` for an opacity pulse. `"glow"` remains available as a compatibility alias for `"pulse"`.
 
 <CodeExample>
     <Stack gap={3}>
@@ -169,7 +175,7 @@ Use `.placeholder-wave` for the default loading animation. Use `.placeholder-pul
 
 ### Text
 
-Add `.placeholder-wave` to an inline element to apply the loading animation to text.
+Wrap text in `PlaceholderAnimation` to apply the loading animation.
 
 <CodeExample>
     <Stack gap={3}>

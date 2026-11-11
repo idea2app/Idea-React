@@ -44,7 +44,6 @@ import {
     ChipImage,
     ChipInput,
     ChipInputLabel,
-    ChipToken,
     ClickBoundary,
     CloseButton,
     CodeBlock,
@@ -439,7 +438,6 @@ const examples: [string, ReactElement][] = [
     ],
     ['ChipImage', <ChipImage as={Target} payload={payload} data-example="polymorphic" />],
     ['ChipDismiss', <ChipDismiss as={Target} payload={payload} data-example="polymorphic" />],
-    ['ChipToken', <ChipToken as={Target} payload={payload} data-example="polymorphic" />],
     ['ChipInputLabel', <ChipInputLabel as={Target} payload={payload} data-example="polymorphic" />],
     ['ChipInput', <ChipInput as={Target} payload={payload} data-example="polymorphic" />],
     [

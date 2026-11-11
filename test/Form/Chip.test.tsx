@@ -4,7 +4,7 @@ import { it } from 'node:test';
 import { render, screen } from '@testing-library/react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import { Chip, ChipDismiss, ChipIcon, ChipImage, ChipToken } from '../../source/Form/Chip';
+import { Chip, ChipDismiss, ChipIcon, ChipImage } from '../../source/Form/Chip';
 
 it('server-renders static chip components without mounting the form plugin', () => {
     const markup = renderToStaticMarkup(
@@ -14,7 +14,8 @@ it('server-renders static chip components without mounting the form plugin', () 
     );
 
     assert.match(markup, /class="chip active theme-primary"/);
-    assert.match(markup, />Static<\/button>/);
+    assert.match(markup, />Static<\/span>/);
+    assert.doesNotMatch(markup, /aria-pressed/);
 });
 
 it('preserves anchor semantics and explicit native button types', () => {
@@ -23,25 +24,32 @@ it('preserves anchor semantics and explicit native button types', () => {
             <Chip as="a" href="https://getbootstrap.com/docs/6.0/">
                 Bootstrap
             </Chip>
-            <Chip type="submit">Submit</Chip>
+            <Chip as="button" type="submit" active>
+                Submit
+            </Chip>
         </>
     );
 
     assert.equal(screen.getByRole('link', { name: 'Bootstrap' }).hasAttribute('type'), false);
     assert.equal(screen.getByRole('button', { name: 'Submit' }).getAttribute('type'), 'submit');
+    assert.equal(
+        screen.getByRole('button', { name: 'Submit' }).getAttribute('aria-pressed'),
+        'true'
+    );
 });
 
-it('composes avatar, icon and dismissible token shapes without nested buttons', () => {
+it('composes avatar, icon and dismissible chips without nested buttons', () => {
     render(
-        <ChipToken theme="success" active>
+        <Chip theme="success" active>
             <ChipImage src="avatar.png" alt="Profile" />
             <ChipIcon name="person" aria-hidden="true" />
             Person
             <ChipDismiss disabled />
-        </ChipToken>
+        </Chip>
     );
 
     assert.equal(screen.getByRole('img').className, 'chip-img');
     assert.equal(screen.getByRole('button', { name: 'Remove' }).parentElement?.tagName, 'SPAN');
     assert.equal(screen.getByRole('button', { name: 'Remove' }).hasAttribute('disabled'), true);
+    assert.equal(screen.getByText('Person').tagName, 'SPAN');
 });

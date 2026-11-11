@@ -1,5 +1,5 @@
 import { Stack } from '../../../../source/Base/Stack';
-import { ChipDismiss, ChipIcon, ChipImage, ChipToken } from '../../../../source/Form/Chip';
+import { Chip, ChipDismiss, ChipIcon, ChipImage } from '../../../../source/Form/Chip';
 import {
     ChipInput,
     ChipInputLabel,
@@ -19,34 +19,33 @@ Small interactive elements representing entities like people, places, tags, or v
 
 ## Overview
 
-Chips are small interactive elements representing entities. They can be used to group and select values in forms or other interactive contexts. They're similar to the older [Badges][1] component, but have some meaningful differences.
+Chips represent entities and can group or select values in forms and other interactive contexts. They're similar to the older [Badges][1] component, but have some meaningful differences.
 
-- Chips are interactive elements, not static like Badges.
+- `Chip` renders a `span` by default, matching Bootstrap's chip semantics. Use `as="button"` when the chip itself needs native button behavior.
 - Chips have one size—they don't scale with the parent `font-size` like Badges.
 - Chips can have icons, avatars, and dismiss buttons.
 - Chips can be themed, individually or as a group on the parent container. By default, chips use the `subtle` and `text` theme tokens, while active state uses the `bg` and `contrast` tokens.
-- Chips can be active or disabled.
-- Chips automatically gain focus when clicked into their active state.
-- Chips support keyboard navigation and selection in their custom `.chip-input` container.
+- Native button chips can use the button's disabled state.
+- `ChipInput` supports keyboard navigation and selection, and gives its chips focus automatically.
 
 See examples of all of this in action below.
 
 ## Chips
 
-Use `ChipToken` for the standalone tokens shown below, or `Chip` for a button. Add `ChipIcon` for a leading icon, `ChipImage` for an image like an avatar, and `ChipDismiss` for a remove button. Dismiss buttons use the library’s `Icon` component; use `ChipToken` rather than nesting a dismiss button inside `Chip`.
+Use `Chip` for each chip. It renders a `span` by default; set `as="button"` when the chip itself should be a button. Add `ChipIcon` for a leading icon, `ChipImage` for an image like an avatar, and `ChipDismiss` for a remove button. Dismiss buttons use the library’s `Icon` component and can be nested safely inside the default `span`.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2">
-        <ChipToken>Basic chip</ChipToken>
-        <ChipToken>
+        <Chip>Basic chip</Chip>
+        <Chip>
             <ChipImage src="https://github.com/mdo.png" width={16} height={16} alt="" /> With avatar
-        </ChipToken>
-        <ChipToken>
+        </Chip>
+        <Chip>
             <ChipIcon name="person-fill" aria-hidden="true" /> With icon
-        </ChipToken>
-        <ChipToken>
+        </Chip>
+        <Chip>
             Dismissible <ChipDismiss type="button" aria-label="Remove" />
-        </ChipToken>
+        </Chip>
     </div>
 </CodeExample>
 
@@ -56,17 +55,17 @@ Set `theme` to color your chips. Chips are subtle by default as this allows for 
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2">
-        <ChipToken>Default</ChipToken>
-        <ChipToken theme="primary">Primary</ChipToken>
-        <ChipToken theme="accent">Accent</ChipToken>
-        <ChipToken theme="secondary">Secondary</ChipToken>
-        <ChipToken theme="success">Success</ChipToken>
-        <ChipToken theme="danger">Danger</ChipToken>
-        <ChipToken theme="warning">Warning</ChipToken>
-        <ChipToken theme="info">Info</ChipToken>
-        <ChipToken theme="dark">Dark</ChipToken>
-        <ChipToken theme="light">Light</ChipToken>
-        <ChipToken theme="inverse">Inverse</ChipToken>
+        <Chip>Default</Chip>
+        <Chip theme="primary">Primary</Chip>
+        <Chip theme="accent">Accent</Chip>
+        <Chip theme="secondary">Secondary</Chip>
+        <Chip theme="success">Success</Chip>
+        <Chip theme="danger">Danger</Chip>
+        <Chip theme="warning">Warning</Chip>
+        <Chip theme="info">Info</Chip>
+        <Chip theme="dark">Dark</Chip>
+        <Chip theme="light">Light</Chip>
+        <Chip theme="inverse">Inverse</Chip>
     </div>
 </CodeExample>
 
@@ -76,28 +75,28 @@ Set `active` to make chips use the solid appearance (bg/contrast). This is usefu
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2">
-        <ChipToken theme="primary">Default</ChipToken>
-        <ChipToken active theme="primary">
+        <Chip theme="primary">Default</Chip>
+        <Chip active theme="primary">
             Active
-        </ChipToken>
-        <ChipToken theme="success">Default</ChipToken>
-        <ChipToken active theme="success">
+        </Chip>
+        <Chip theme="success">Default</Chip>
+        <Chip active theme="success">
             Active
-        </ChipToken>
+        </Chip>
     </div>
 </CodeExample>
 
 ## Chip input
 
-Wrap `ChipToken` components and a `FormGhost` input in `ChipInput` to create a tag input field. The component enables JavaScript behavior automatically. Chips are grayscale by default, with primary blue for active states, but you can apply any theme color to the container so that chips within inherit the color of your choosing.
+Wrap `Chip` components and a `FormGhost` input in `ChipInput` to create a tag input field. The component enables JavaScript behavior automatically. Chips are grayscale by default, with primary blue for active states, but you can apply any theme color to the container so that chips within inherit the color of your choosing.
 
 Type into the input below and press <kbd>Enter</kbd> or <kbd>,</kbd> to add new chips. Use the <kbd>Backspace</kbd> or <kbd>Delete</kbd> keys to remove chips. See the [Keyboard behavior][2] section for more details.
 
 <CodeExample>
     <ChipInput>
         <ChipInputLabel htmlFor="skillsInput">Skills:</ChipInputLabel>
-        <ChipToken> JavaScript </ChipToken>
-        <ChipToken> TypeScript </ChipToken>
+        <Chip> JavaScript </Chip>
+        <Chip> TypeScript </Chip>
         <FormGhost type="text" id="skillsInput" placeholder="Add more…" />
     </ChipInput>
 </CodeExample>
@@ -109,13 +108,13 @@ Set `theme` on `ChipInput` to apply a theme color to all chips within.
 <CodeExample>
     <Stack gap={3}>
         <ChipInput theme="primary">
-            <ChipToken>Approved</ChipToken>
-            <ChipToken>Verified</ChipToken>
+            <Chip>Approved</Chip>
+            <Chip>Verified</Chip>
             <FormGhost type="text" placeholder="Add status..." />
         </ChipInput>
         <ChipInput theme="danger">
-            <ChipToken>Bug</ChipToken>
-            <ChipToken>Critical</ChipToken>
+            <Chip>Bug</Chip>
+            <Chip>Critical</Chip>
             <FormGhost type="text" placeholder="Add issue" />
         </ChipInput>
     </Stack>
@@ -125,8 +124,8 @@ You can also individually apply a theme color to a chip with the chip’s `theme
 
 <CodeExample>
     <ChipInput theme="primary">
-        <ChipToken theme="warning">Bug</ChipToken>
-        <ChipToken theme="danger">Critical</ChipToken>
+        <Chip theme="warning">Bug</Chip>
+        <Chip theme="danger">Critical</Chip>
         <FormGhost type="text" placeholder="Add issue" />
     </ChipInput>
 </CodeExample>
@@ -149,9 +148,9 @@ Use a form label for better accessibility.
     <FormField>
         <FormLabel htmlFor="skillsInputLabel">Skills</FormLabel>
         <ChipInput theme="primary">
-            <ChipToken>
+            <Chip>
                 React <ChipDismiss type="button" aria-label="Remove" />
-            </ChipToken>
+            </Chip>
             <FormGhost type="text" id="skillsInputLabel" placeholder="Add skill..." />
         </ChipInput>
         <FormText>Press Enter or comma to add a skill.</FormText>
@@ -164,9 +163,9 @@ Disable the ghost input to prevent adding new chips, and disable the dismiss but
 
 <CodeExample>
     <ChipInput theme="primary">
-        <ChipToken>
+        <Chip>
             Read only <ChipDismiss type="button" aria-label="Remove" disabled />
-        </ChipToken>
+        </Chip>
         <FormGhost type="text" placeholder="Disabled..." disabled />
     </ChipInput>
 </CodeExample>
@@ -226,9 +225,9 @@ Chip inputs support Mail.app-style keyboard navigation with chip selection.
 
 ## Accessibility
 
-- Use a `<label>` element associated with the chip input for screen readers
+- Associate `ChipInputLabel` with the chip input to provide an accessible name
 - Chips are focusable and support full keyboard navigation
-- Each `.chip-dismiss` button has `aria-label="Remove"`
+- Each `ChipDismiss` button has `aria-label="Remove"`
 - Selected chips have the `.active` class for visual indication
 - Chips are announced as they are added or removed
 
@@ -258,7 +257,7 @@ Chip inputs support Mail.app-style keyboard navigation with chip selection.
 
 ### Chip input variables
 
-These variables are scoped to the `.chip-input` container.
+These variables are scoped to the `ChipInput` container.
 
 ```css
 .example {

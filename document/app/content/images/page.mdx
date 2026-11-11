@@ -7,20 +7,19 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 
 # Images
 
-Documentation and examples for opting images into responsive behavior (so they never become wider
-than their parent) and add lightweight styles to them—all via classes.
+Use the [`Image` wrapper][1] for responsive images and common image treatments without manually adding their
+underlying classes.
 
-Idea React provides the [`Image` wrapper][1] for these examples. Set `fluid` for `.img-fluid` and
-`thumbnail` for `.img-thumbnail`, `rounded` for rounded corners, and `roundedCircle` for circular
-images. All other `<img>` attributes pass through.
+Set `fluid` for responsive sizing, `thumbnail` for a framed image, `rounded` for rounded corners,
+or `roundedCircle` for a circular image. Native image attributes such as `src`, `alt`, `width`, and
+`height` pass through.
 
 For semantic image-and-caption groups, use [`Figure`, `FigureImage`, and `FigureCaption`][2].
 `FigureImage` is responsive by default.
 
 ## Responsive images
 
-Images in Bootstrap are made responsive with `.img-fluid`. This applies `max-width: 100%;` and
-`height: auto;` to the image so that it scales with the parent width.
+Set `fluid` on `Image` to constrain its width to the parent while preserving its aspect ratio.
 
 <Image
     fluid
@@ -30,8 +29,7 @@ Images in Bootstrap are made responsive with `.img-fluid`. This applies `max-wid
 
 ## Image thumbnails
 
-In addition to our border-radius utilities, you can use `.img-thumbnail` to give an image a rounded
-1px border appearance.
+Set `thumbnail` on `Image` to give it a framed, rounded appearance.
 
 <Image
     thumbnail
@@ -41,8 +39,8 @@ In addition to our border-radius utilities, you can use `.img-thumbnail` to give
 
 ## Aligning images
 
-Align images with the helper float classes or text alignment classes. `block`-level images can be
-centered using the `.mx-auto` margin utility class.
+Use layout utilities through `className` to float or align images. To center an image as a block,
+combine `mx-auto` and `d-block`; a parent with text alignment can center an inline image.
 
 <div className="clearfix">
     <Image
@@ -86,13 +84,10 @@ centered using the `.mx-auto` margin utility class.
 
 ## Figures
 
-Anytime you need to display a piece of content—like an image with an optional caption—consider
-using a `<figure>` element. Figures are flex containers in Bootstrap, so you can easily modify the
-layout and alignment with our flex utilities.
+Use `Figure`, `FigureImage`, and `FigureCaption` to group an image with an optional caption. `Figure`
+is a flex container, so layout and alignment utilities can be passed through its `className`.
 
-Use the included `.figure` and `.figure-caption` classes to provide some baseline styles for the
-HTML5 `<figure>` and `<figcaption>` elements. Images in figures have no explicit size, so use
-`FigureImage` to make the image responsive; set `fluid={false}` to opt out.
+`FigureImage` is responsive by default; set `fluid={false}` to opt out.
 
 <Figure>
     <FigureImage
@@ -116,16 +111,16 @@ And with a reverse alignment:
 
 ## Picture
 
-If you are using the `<picture>` element to specify multiple `<source>` elements for a specific
-`<img>`, make sure to add the `.img-*` classes to the `<img>` and not to the `<picture>` tag.
+Use the native `<picture>` element when selecting among image sources. Put `Image` inside it so
+image styling applies to the rendered image, not its parent.
 
-Give the `<img>` an `alt` text that describes the image, or an empty `alt=""` when it's only
-decorative. The `alt="..."` in the example below is a placeholder for that text.
+Give `Image` an `alt` value that describes the image, or `alt=""` when it is only decorative. The
+placeholder value in the example below should be replaced with meaningful text.
 
 ```html
 <picture>
     <source srcset="..." type="image/svg+xml" />
-    <img src="..." class="img-fluid img-thumbnail" alt="..." />
+    <img src="..." alt="..." />
 </picture>
 ```
 

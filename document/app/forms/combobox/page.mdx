@@ -40,7 +40,7 @@ Use `Combobox` with `ComboboxOption` children. Each selectable option needs a `v
 
 ### Placeholders
 
-Set placeholder text with the `placeholder` prop. The `.combobox-value` element shows this text when nothing is selected, styled with `.combobox-placeholder`.
+Set placeholder text with the `placeholder` prop. `Combobox` displays it when nothing is selected.
 
 <CodeExample>
     <Combobox name="country" placeholder="Pick a country…">
@@ -270,7 +270,7 @@ Add `disabled` to the toggle button or individual menu items.
 
 ## Form submission
 
-The combobox creates a hidden `<input>` for form submission using the required `name` prop. The hidden input’s `name` matches the prop and its `value` updates whenever the selection changes.
+For form submission, `Combobox` creates a hidden input whose `name` matches the required `name` prop and whose `value` updates whenever the selection changes.
 
 ```tsx
 <Combobox name="country" defaultValue="us">

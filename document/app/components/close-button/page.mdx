@@ -13,7 +13,7 @@ label “Close”. Pass an `onClick` handler when wiring it to your own dismissi
 
 ## Example
 
-Provide an option to dismiss or close a component with `.btn-close`. The icon is rendered with a CSS `mask-image`, so it inherits the `color` from the `.btn-close` class—no inline SVG required. **Be sure to include text for screen readers**, as we’ve done with `aria-label`.
+Use `CloseButton` to dismiss or close a component. Its icon is rendered with a CSS mask and inherits its color—no inline SVG is required. **Set an accessible label** with `aria-label` so screen readers can identify the button.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -33,7 +33,7 @@ Disabled close buttons change their `opacity`. We’ve also applied `pointer-eve
 
 ## Dark variant
 
-Add `data-bs-theme="dark"` to the `.btn-close`, or to its parent element, to invert the close button. This happens automatically when in dark mode.
+Set `data-bs-theme="dark"` on `CloseButton` or one of its parent elements to invert it. This happens automatically in dark mode.
 
 <CodeExample>
     <div className="bg-inverse">

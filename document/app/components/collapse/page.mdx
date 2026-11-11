@@ -8,11 +8,11 @@ import { CodeExample } from '../../../component/Document/Example';
 
 # Collapse
 
-Toggle the visibility of content across your project with a few classes and our JavaScript plugins.
+Toggle content visibility by pairing `Collapse` with a connected `CollapseToggle`.
 
 ## How it works
 
-The collapse JavaScript plugin is used to show and hide content. Buttons or anchors are used as triggers that are mapped to specific elements you toggle. The plugin only adds and removes `.show`—the CSS animates the size from `0` to the content size. Given how CSS handles animations, you cannot use `padding` on a `.collapse` element. Instead, use the class as an independent wrapping element.
+`Collapse` shows and hides content using its `open` or `defaultOpen` prop. Pair it with `CollapseToggle` and set both components' `target` props to connect the trigger and content. CSS animates the size from zero to the content size; because of how the transition works, put padding on a child rather than directly on the `Collapse` component.
 
 The animation needs [`interpolate-size`][1]. Browsers without it open and close the element at once. See [Transitions][2] to change the timing or to remove it.
 
@@ -22,8 +22,7 @@ The animation needs [`interpolate-size`][1]. Browsers without it open and close 
 
 Click the buttons below to show and hide another element via class changes:
 
-- `.collapse` hides content
-- `.collapse.show` shows content
+- `Collapse` hides content when closed and reveals it when `open` is true
 
 Generally, we recommend a button trigger: use `CollapseToggle` with a `target` selector. While not recommended from a semantic point of view, passing `href` also renders an anchor trigger. The component manages the collapse behavior and accessibility attributes.
 
@@ -65,7 +64,8 @@ Generally, we recommend a button trigger: use `CollapseToggle` with a `target` s
 
 ## Horizontal
 
-The collapse component supports horizontal collapsing. Set `horizontal` to transition the inline size instead of the block size, and set a `width` on the immediate child element. Use inline styles or our [width utilities][4].
+The component also supports horizontal collapsing. Set `horizontal` to transition the inline size
+instead of the block size, and set a `width` on the immediate child through `style` or `className`.
 
 > Please note that while the example below has a `min-height` set to avoid excessive repaints in our docs, this is not explicitly required. **Only the `width` on the child element is required.**
 
@@ -163,13 +163,16 @@ Conversely, multiple triggers can show and hide the same element if they each re
 
 ## Accessibility
 
-Be sure to add `aria-expanded` to the control element. This attribute explicitly conveys the current state of the collapsible element tied to the control to screen readers and similar assistive technologies. If the collapsible element is closed by default, the attribute on the control element should have a value of `aria-expanded="false"`. If you’ve set the collapsible element to be open by default using the `show` class, set `aria-expanded="true"` on the control instead. The plugin will automatically toggle this attribute on the control based on whether or not the collapsible element has been opened or closed (via JavaScript, or because the user triggered another control element also tied to the same collapsible element). If the control element’s HTML element is not a button (e.g., an `<a>` or `<div>`), the attribute `role="button"` should be added to the element.
+`CollapseToggle` keeps `aria-expanded` and `aria-controls` synchronized with the targeted `Collapse`.
+Use its default button element for the toggle, or set `as` to another element and provide the
+appropriate interactive semantics.
 
-`CollapseToggle` keeps `aria-expanded` and `aria-controls` synchronized with the targeted elements.
+`CollapseToggle` sets `aria-controls` from its `target` prop, which identifies the `Collapse` by
+selector.
 
-If your control element is targeting a single collapsible element – i.e. the `data-bs-target` attribute is pointing to an `id` selector – you should add the `aria-controls` attribute to the control element, containing the `id` of the collapsible element. Modern screen readers and similar assistive technologies make use of this attribute to provide users with additional shortcuts to navigate directly to the collapsible element itself.
-
-Note that Bootstrap’s current implementation does not cover the various _optional_ keyboard interactions described in the [ARIA Authoring Practices Guide accordion pattern][5] - you will need to include these yourself with custom JavaScript.
+`CollapseToggle` does not implement the optional keyboard interactions described in the
+[ARIA Authoring Practices Guide accordion pattern][4]; add those interactions when building a full
+accordion pattern.
 
 ## CSS
 
@@ -185,13 +188,14 @@ The collapse transition is controlled by CSS custom properties:
 }
 ```
 
-### Classes
+### Styling
 
-Collapse transition classes are shared with accordion in Bootstrap's transition stylesheet. `.collapse` hides the content and `.collapse.show` reveals it; `.collapse-horizontal` changes the animated axis to inline size. The component applies these classes through its visibility and `horizontal` props.
+`Collapse` shares its transition styles with `Accordion`. The `horizontal` prop changes the animated axis to inline size; the component applies its visibility state automatically.
 
 ## Usage
 
-The component adds or removes `.show` to control visibility; CSS handles the transition. Initialization and cleanup are automatic.
+The `open` and `defaultOpen` props control visibility; CSS handles the transition. Initialization
+and cleanup are automatic.
 
 ### Options
 
@@ -202,7 +206,7 @@ The component adds or removes `.show` to control visibility; CSS handles the tra
 | `horizontal`  | boolean | `false` | Animate inline size rather than block size.                                            |
 | `parent`      | string  | —       | Parent selector for accordion-like behavior: opening one collapse closes its siblings. |
 
-Set `parent` on the collapsible area, not on its trigger. For native details-based disclosure groups, see [Accordion][6].
+Set `parent` on the collapsible area, not on its trigger. For native details-based disclosure groups, see [Accordion][5].
 
 ### Events
 
@@ -213,6 +217,5 @@ Use `onOpenChange(open)` to respond to visibility changes, or to update the stat
 [1]: https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size
 [2]: https://getbootstrap.com/docs/6.0/customize/transitions
 [3]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion
-[4]: https://getbootstrap.com/docs/6.0/utilities/width
-[5]: https://www.w3.org/WAI/ARIA/apg/patterns/accordion/
-[6]: /components/accordion
+[4]: https://www.w3.org/WAI/ARIA/apg/patterns/accordion/
+[5]: /components/accordion

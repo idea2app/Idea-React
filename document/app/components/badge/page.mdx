@@ -78,11 +78,11 @@ Badges can be used as part of links or buttons to provide a counter.
 
 Note that depending on how they are used, badges may be confusing for users of screen readers and similar assistive technologies. While the styling of badges provides a visual cue as to their purpose, these users will simply be presented with the content of the badge. Depending on the specific situation, these badges may seem like random additional words or numbers at the end of a sentence, link, or button.
 
-Unless the context is clear (as with the “Notifications” example, where it is understood that the “4” is the number of notifications), consider including additional context with a visually hidden piece of additional text.
+Unless the context is clear (as with the “Notifications” example, where it is understood that the “4” is the number of notifications), Include additional context in accessible text when the badge's meaning is not clear.
 
 ### Positioned
 
-Use utilities to modify a `.badge` and position it in the corner of a link or button.
+Use `Badge` for the indicator and pass positioning and spacing utilities through its `className`.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -100,22 +100,26 @@ Use utilities to modify a `.badge` and position it in the corner of a link or bu
     </div>
 </CodeExample>
 
-You can also replace the `.badge` class with a few more utilities without a count for a more generic indicator.
+For a dot indicator without a count, use `Badge` with appearance utilities in `className` and
+accessible text describing the status.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
         <Button variant="solid" theme="primary" className="position-relative">
             Profile
-            <span className="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-bg rounded-circle">
+            <Badge
+                theme="danger"
+                className="position-absolute top-0 start-100 translate-middle p-2 rounded-circle"
+            >
                 <span className="visually-hidden">New alerts</span>
-            </span>
+            </Badge>
         </Button>
     </div>
 </CodeExample>
 
 ## Variants
 
-Use the contextual `.theme-{color}` classes to apply a semantic theme color to badges.
+Set `theme` on `Badge` to apply a semantic theme color.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -186,7 +190,8 @@ Use the contextual `.theme-{color}` classes to apply a semantic theme color to b
     </div>
 </CodeExample>
 
-> **Conveying meaning to assistive technologies:** Using color to add meaning only provides a visual indication, which will not be conveyed to users of assistive technologies—such as screen readers. Ensure that information denoted by the color is either obvious from the content itself, or included through alternative means, such as additional text hidden with the `.visually-hidden` utility.
+> **Conveying meaning to assistive technologies:** Color provides only a visual indication. Ensure
+> the meaning is also clear from the content or included in accessible text.
 
 ## CSS
 

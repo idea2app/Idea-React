@@ -5,12 +5,10 @@ import styles from './style.module.less';
 <BaseLayout title="Grid Template" className="py-4">
     <div>
         <Container>
-            <h1>Bootstrap grid examples</h1>
+            <h1>Idea React grid examples</h1>
             <p className="fs-lg fw-light">Basic grid layouts to get you familiar with building within the Bootstrap grid system.</p>
             <p>
-                In these examples the <code>.themed-grid-col</code> class is added to the
-                columns to add some theming. This is not a class that is available in
-                Bootstrap by default.
+                These examples use a page-local style module to distinguish the columns.
             </p>
 
             <h2 className="mt-4">Six grid tiers</h2>
@@ -18,7 +16,7 @@ import styles from './style.module.less';
 
             {['xs', 'sm', 'md', 'lg', 'xl', '2xl'].map(breakpoint => (<Row key={breakpoint} className="mb-3 text-center">
                     {Array.from({ length: 3 }, (_, index) => (<Col key={index} {...{ [breakpoint]: 4 }} className={styles['themed-grid-col']}>
-                            {breakpoint === 'xs' ? '.col-4' : `.${breakpoint}:col-4`}
+                            4 columns from {breakpoint}
                         </Col>))}
                 </Row>))}
 
@@ -29,17 +27,16 @@ import styles from './style.module.less';
                 mobile devices, tablets and below, the columns will automatically stack.
             </p>
             <Row className="mb-3 text-center">
-                {Array.from({ length: 3 }, (_, index) => (<Col key={index} md={4} className={styles['themed-grid-col']}>.md:col-4</Col>))}
+                {Array.from({ length: 3 }, (_, index) => (<Col key={index} md={4} className={styles['themed-grid-col']}>4 columns from md</Col>))}
             </Row>
 
             <h2 className="mt-4">Three equal columns alternative</h2>
             <p>
-                By using the <code>.row-cols-*</code> classes, you can easily create a grid
-                with equal columns.
+                Set the number of columns on <code>Row</code> to create an evenly divided grid.
             </p>
             <Row md={3} className="mb-3 text-center">
                 {Array.from({ length: 3 }, (_, index) => (<Col key={index} className={styles['themed-grid-col']}>
-                        <code>.col</code> child of <code>.md:row-cols-3</code>
+                        One of three auto-sized columns
                     </Col>))}
             </Row>
 
@@ -53,7 +50,7 @@ import styles from './style.module.less';
             </p>
             <Row className="mb-3 text-center">
                 {[3, 6, 3].map((width, index) => (<Col key={index} md={width} className={styles['themed-grid-col']}>
-                        .md:col-{width}
+                        {width} columns from md
                     </Col>))}
             </Row>
 
@@ -63,12 +60,12 @@ import styles from './style.module.less';
                 <strong>starting at desktops and scaling to large desktops</strong>.
             </p>
             <Row className="mb-3 text-center">
-                <Col md={8} className={styles['themed-grid-col']}>.md:col-8</Col>
-                <Col md={4} className={styles['themed-grid-col']}>.md:col-4</Col>
+                <Col md={8} className={styles['themed-grid-col']}>8 columns from md</Col>
+                <Col md={4} className={styles['themed-grid-col']}>4 columns from md</Col>
             </Row>
 
             <h2 className="mt-4">Full width, single column</h2>
-            <p className="fg-warning">No grid classes are necessary for full-width elements.</p>
+            <p className="fg-warning">A column defaults to full width when no responsive span is set.</p>
 
             <hr className="my-4"/>
 
@@ -83,68 +80,68 @@ import styles from './style.module.less';
             <Row className="mb-3 text-center">
                 <Col md={8} className={styles['themed-grid-col']}>
                     <div className="pb-3">
-                        <p>.md:col-8</p>
+                        <p>8 columns from md</p>
                     </div>
                     <Row>
-                        {Array.from({ length: 2 }, (_, index) => (<Col key={index} md={6} className={styles['themed-grid-col']}>.md:col-6</Col>))}
+                        {Array.from({ length: 2 }, (_, index) => (<Col key={index} md={6} className={styles['themed-grid-col']}>6 columns from md</Col>))}
                     </Row>
                 </Col>
-                <Col md={4} className={styles['themed-grid-col']}>.md:col-4</Col>
+                <Col md={4} className={styles['themed-grid-col']}>4 columns from md</Col>
             </Row>
 
             <hr className="my-4"/>
 
             <h2 className="mt-4">Mixed: mobile and desktop</h2>
-            <p>The Bootstrap 6 grid system has six tiers of classes: xs (extra small, this class infix is not used), sm (small), md (medium), lg (large), xl (x-large), and 2xl (xx-large). You can use nearly any combination of these classes to create more dynamic and flexible layouts.</p>
-            <p>Each tier of classes scales up, meaning if you plan on setting the same widths for md, lg, xl and 2xl, you only need to specify md.</p>
+            <p>The grid has six responsive tiers: xs (extra small), sm (small), md (medium), lg (large), xl (extra large), and 2xl (extra extra large). Combine the matching props on <code>Col</code> to create flexible layouts.</p>
+            <p>Each tier scales up, so a <code>md</code> prop also applies at larger breakpoints unless overridden.</p>
             <Row className="mb-3 text-center">
-                <Col md={8} className={styles['themed-grid-col']}>.md:col-8</Col>
-                <Col xs={6} md={4} className={styles['themed-grid-col']}>.col-6 .md:col-4</Col>
+                <Col md={8} className={styles['themed-grid-col']}>8 columns from md</Col>
+                <Col xs={6} md={4} className={styles['themed-grid-col']}>6 from xs, 4 from md</Col>
             </Row>
             <Row className="mb-3 text-center">
-                {Array.from({ length: 3 }, (_, index) => (<Col key={index} xs={6} md={4} className={styles['themed-grid-col']}>.col-6 .md:col-4</Col>))}
+                {Array.from({ length: 3 }, (_, index) => (<Col key={index} xs={6} md={4} className={styles['themed-grid-col']}>6 from xs, 4 from md</Col>))}
             </Row>
             <Row className="mb-3 text-center">
-                {Array.from({ length: 2 }, (_, index) => (<Col key={index} xs={6} className={styles['themed-grid-col']}>.col-6</Col>))}
+                {Array.from({ length: 2 }, (_, index) => (<Col key={index} xs={6} className={styles['themed-grid-col']}>6 columns from xs</Col>))}
             </Row>
 
             <hr className="my-4"/>
 
             <h2 className="mt-4">Mixed: mobile, tablet, and desktop</h2>
             <Row className="mb-3 text-center">
-                <Col sm={6} lg={8} className={styles['themed-grid-col']}>.sm:col-6 .lg:col-8</Col>
-                <Col xs={6} lg={4} className={styles['themed-grid-col']}>.col-6 .lg:col-4</Col>
+                <Col sm={6} lg={8} className={styles['themed-grid-col']}>6 from sm, 8 from lg</Col>
+                <Col xs={6} lg={4} className={styles['themed-grid-col']}>6 from xs, 4 from lg</Col>
             </Row>
             <Row className="mb-3 text-center">
-                {Array.from({ length: 3 }, (_, index) => (<Col key={index} xs={6} sm={4} className={styles['themed-grid-col']}>.col-6 .sm:col-4</Col>))}
+                {Array.from({ length: 3 }, (_, index) => (<Col key={index} xs={6} sm={4} className={styles['themed-grid-col']}>6 from xs, 4 from sm</Col>))}
             </Row>
 
             <hr className="my-4"/>
 
             <h2 className="mt-4">Gutters</h2>
             <p>
-                With <code>.gx-*</code> classes, the horizontal gutters can be adjusted.
+                Set horizontal gutter utilities in <code>Row</code>'s <code>className</code>.
             </p>
             <Row xs={1} md={3} className="gx-4 text-center">
                 {Array.from({ length: 6 }, (_, index) => (<Col key={index} className={styles['themed-grid-col']}>
-                        <code>.col</code> with <code>.gx-4</code> gutters
+                        Auto-sized column with <code>className="gx-4"</code> on the row
                     </Col>))}
             </Row>
             <p className="mt-4">
-                Use the <code>.gy-*</code> classes to control the vertical gutters.
+                Set vertical gutter utilities in <code>Row</code>'s <code>className</code>.
             </p>
             <Row xs={1} md={3} className="gy-4 text-center">
                 {Array.from({ length: 6 }, (_, index) => (<Col key={index} className={styles['themed-grid-col']}>
-                        <code>.col</code> with <code>.gy-4</code> gutters
+                        Auto-sized column with <code>className="gy-4"</code> on the row
                     </Col>))}
             </Row>
             <p className="mt-4">
-                With <code>.g-*</code> classes, the gutters in both directions can be
-                adjusted.
+                Set both horizontal and vertical gutter utilities in <code>Row</code>'s
+                <code>className</code>.
             </p>
             <Row xs={1} md={3} className="g-3 text-center">
                 {Array.from({ length: 6 }, (_, index) => (<Col key={index} className={styles['themed-grid-col']}>
-                        <code>.col</code> with <code>.g-3</code> gutters
+                        Auto-sized column with <code>className="g-3"</code> on the row
                     </Col>))}
             </Row>
         </Container>
@@ -157,13 +154,13 @@ import styles from './style.module.less';
 
         {[
 
-{ fluid: false, label: '.container' },
-{ fluid: 'sm', label: '.sm:container' },
-{ fluid: 'md', label: '.md:container' },
-{ fluid: 'lg', label: '.lg:container' },
-{ fluid: 'xl', label: '.xl:container' },
-{ fluid: '2xl', label: '.2xl:container' },
-{ fluid: true, label: '.container-fluid' }
+{ fluid: false, label: 'fluid={false}' },
+{ fluid: 'sm', label: 'fluid="sm"' },
+{ fluid: 'md', label: 'fluid="md"' },
+{ fluid: 'lg', label: 'fluid="lg"' },
+{ fluid: 'xl', label: 'fluid="xl"' },
+{ fluid: '2xl', label: 'fluid="2xl"' },
+{ fluid: true, label: 'fluid' }
 ].map(({ fluid, label }) => (<Container key={label} fluid={fluid} className={`${styles['themed-container']} text-center`}>
 {label}
 

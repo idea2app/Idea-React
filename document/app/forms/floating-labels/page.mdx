@@ -23,11 +23,11 @@ Create beautifully simple form labels that float over your input fields.
 
 ## Example
 
-Wrap a `FormControl` and `FormLabel` pair in `FormFloatingLabel` to enable floating labels with Bootstrap’s textual form fields.
+Wrap a `FormControl` and `FormLabel` pair in `FormFloatingLabel` to enable floating labels.
 
-A non-empty `placeholder` attribute is required on each `<input>` as our CSS-only floating label implementation relies on the `:placeholder-shown` pseudo-element to detect when the input is empty. The placeholder stays transparent until the control is focused, then uses the normal placeholder color. Only the `<label>` is shown when the field is empty and unfocused.
+A non-empty `placeholder` is required on each text `FormControl`. The CSS-only implementation relies on the `:placeholder-shown` pseudo-element to detect an empty input. The placeholder stays transparent until the control is focused, then uses the normal placeholder color; only `FormLabel` is shown while the field is empty and unfocused.
 
-Also note that the `<label>` must come first so that screen readers announce it before the field’s value; our CSS reacts to the control’s state with the `:has()` selector.
+`FormFloatingLabel` places `FormLabel` before the control so screen readers announce the label before the field's value. Its CSS reacts to the control's state with the `:has()` selector.
 
 <CodeExample>
     <Stack gap={3}>
@@ -46,7 +46,7 @@ Also note that the `<label>` must come first so that screen readers announce it 
     </Stack>
 </CodeExample>
 
-When there’s a `defaultValue` (or controlled `value`) already defined, `<label>`s will automatically adjust to their floated position.
+When `defaultValue` or a controlled `value` is set, `FormLabel` automatically moves to its floated position.
 
 <CodeExample>
     <FormFloatingLabel>
@@ -81,7 +81,7 @@ Form validation styles also work as expected.
 
 ## Textareas
 
-By default, `<textarea>`s with `.form-control` will be the same height as `<input>`s.
+By default, `FormTextArea` has the same height as `FormControl`.
 
 <CodeExample>
     <FormFloatingLabel>
@@ -92,7 +92,7 @@ By default, `<textarea>`s with `.form-control` will be the same height as `<inpu
     </FormFloatingLabel>
 </CodeExample>
 
-To set a custom height on your `<textarea>`, do not use the `rows` attribute. Instead, override the `--bs-form-floating-height` CSS variable on `FormFloatingLabel` through a CSS module so the label floats correctly at any height.
+To set a custom height on `FormTextArea`, do not use the `rows` attribute. Instead, override the `--bs-form-floating-height` CSS variable on `FormFloatingLabel` through a CSS module so the label floats correctly at any height.
 
 <CodeExample>
     <FormFloatingLabel className={style.tallFloating}>
@@ -105,7 +105,7 @@ To set a custom height on your `<textarea>`, do not use the `rows` attribute. In
 
 ## Selects
 
-Select elements work in the same way, but unlike `<input>`s, they’ll always show the `<label>` in its floated state. **Selects with `size` and `multiple` are not supported.**
+`FormSelect` works in the same way, but always shows `FormLabel` in its floated state. **Selects with `size` and `multiple` are not supported.**
 
 <CodeExample>
     <FormFloatingLabel>
@@ -127,7 +127,7 @@ Select elements work in the same way, but unlike `<input>`s, they’ll always sh
 
 ## Date and time
 
-Date, time, datetime-local, month, and week inputs also always show the `<label>` in its floated state. These controls do not support placeholders the way textual inputs do, so a `placeholder` attribute is not required (and is ignored by most browsers on these types).
+Date, time, datetime-local, month, and week `FormControl` inputs also always show `FormLabel` in its floated state. These input types do not support placeholders the way textual inputs do, so a `placeholder` is not required (and is ignored by most browsers).
 
 <CodeExample>
     <Stack gap={3}>
@@ -205,7 +205,7 @@ Add the `disabled` boolean attribute on an input, a textarea or a select to give
 
 ## Readonly plaintext
 
-Floating labels also support `.form-control-plaintext`, which can be helpful for toggling from an editable `<input>` to a plaintext value without affecting the page layout.
+Floating labels also support the `plaintext` prop on `FormControl`, which is useful for toggling from an editable input to a plaintext value without affecting the page layout.
 
 <CodeExample>
     <Stack gap={3}>
@@ -239,7 +239,7 @@ Floating labels also support `.form-control-plaintext`, which can be helpful for
 
 ## Input groups
 
-Floating labels also support `.input-group`.
+Floating labels also work inside `InputGroup`.
 
 <CodeExample>
     <InputGroup>
@@ -253,7 +253,7 @@ Floating labels also support `.input-group`.
     </InputGroup>
 </CodeExample>
 
-When using `.input-group` and `.form-floating` along with form validation, place the `-feedback` outside the `.input-group` inside a `.form-field` wrapper.
+When using `InputGroup` and `FormFloatingLabel` with validation, place `FormFeedback` outside `InputGroup` but inside `FormField`.
 
 <CodeExample>
     <FormField>
@@ -278,7 +278,7 @@ When using `.input-group` and `.form-floating` along with form validation, place
 
 ## Always floating
 
-Add `.form-floating-always` to keep the label floated and show the placeholder. Use it on the `.form-floating` itself or as a wrapper around one.
+Set the `always` prop on `FormFloatingLabel` to keep the label floated and the placeholder visible.
 
 <CodeExample>
     <Stack gap={3}>
@@ -297,11 +297,11 @@ Add `.form-floating-always` to keep the label floated and show the placeholder. 
     </Stack>
 </CodeExample>
 
-By default, placeholders stay transparent until the control is focused. With `.form-floating-always`, the placeholder stays visible in both states.
+By default, placeholders stay transparent until the control is focused. With `always`, the placeholder stays visible in both states.
 
 ## Layout
 
-When working with the Bootstrap grid system, be sure to place form elements within column classes.
+When using the grid, place form elements inside `Col` components.
 
 <CodeExample>
     <Row className="g-2">

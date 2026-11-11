@@ -35,7 +35,7 @@ The default strength meter uses four segments that fill progressively as passwor
 
 ### With text feedback
 
-Add a `.strength-text` element to display strength messages.
+`PasswordStrength` displays the strength message by default. Set `showText={false}` to hide it.
 
 <CodeExample>
     <div>
@@ -47,7 +47,7 @@ Add a `.strength-text` element to display strength messages.
 
 ### Progress bar
 
-Use `.strength-bar` for a single progress bar that grows with password strength.
+Set `variant="bar"` on `PasswordStrength` for a single progress bar that grows with password strength.
 
 <CodeExample>
     <div>

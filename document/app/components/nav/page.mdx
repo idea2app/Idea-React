@@ -11,9 +11,9 @@ Add lists of links to your pages with various navigation components—tabs, pill
 
 ## Base nav
 
-Navigation available in Bootstrap share general markup and styles, from the base `.nav` class to the active and disabled states. Swap modifier classes to switch between each style.
+`Nav` provides a semantic navigation container with `NavLink` children. Use the `active` and `disabled` props on links, and set `variant` to switch between visual styles.
 
-The base `.nav` component is built with flexbox and provides a strong foundation for building all types of navigation components. It includes some style overrides (for working with lists), some link padding for larger hit areas, and basic disabled styling.
+The base `Nav` component uses flexbox and provides a foundation for navigation. It includes link padding for larger hit areas and disabled styling.
 
 > To convey the active state to assistive technologies, use the `aria-current` attribute — using the `page` value for current page, or `true` for the current item in a set.
 
@@ -34,7 +34,7 @@ The base `.nav` component is built with flexbox and provides a strong foundation
 
 </CodeExample>
 
-Bootstrap supports lists or a `<nav>` element. The `Nav` wrapper uses a semantic `<nav>` with direct `NavLink` children. Because `.nav` uses `display: flex`, these links behave the same as wrapped nav items, without the extra list markup.
+`Nav` renders a semantic `<nav>` element with direct `NavLink` children. Its flex layout lets the links work without extra list markup.
 
 <CodeExample>
     <Nav>
@@ -53,7 +53,7 @@ Bootstrap supports lists or a `<nav>` element. The `Nav` wrapper uses a semantic
 
 </CodeExample>
 
-Where appropriate, you can also use `<button>` elements instead of `<a>` elements for the nav links. You can even mix and match—for example, by using buttons for menus.
+When a navigation item performs an action instead of navigating, set `as="button"` on `NavLink`. You can mix these with links, for example when adding a menu.
 
 <CodeExample>
     <Nav>
@@ -86,11 +86,11 @@ Use [Tabs and Tab][1] to create tabbable regions.
 
 ## Available styles
 
-Change the style of `.nav`s component with modifiers and utilities. Mix and match as needed, or build your own.
+Set the `variant` prop on `Nav` to choose a style. Mix and match with layout utilities through `className` as needed.
 
 ### Tabs
 
-Takes the basic nav from above and adds the `.nav-tabs` class to generate a tabbed interface.
+Set `variant="tabs"` on `Nav` for a tabbed appearance.
 
 <CodeExample>
     <Nav variant="tabs">
@@ -111,7 +111,7 @@ Takes the basic nav from above and adds the `.nav-tabs` class to generate a tabb
 
 ### Pills
 
-Take that same HTML, but use `.nav-pills` instead for a more themed appearance.
+Set `variant="pills"` on `Nav` for a more themed appearance.
 
 <CodeExample>
     <Nav variant="pills">
@@ -130,7 +130,7 @@ Take that same HTML, but use `.nav-pills` instead for a more themed appearance.
 
 </CodeExample>
 
-Pill navigation can also go vertical with an additional modifier class, `.nav-pills-vertical`.
+Set `vertical` on a pill `Nav` to stack the links vertically.
 
 <CodeExample>
     <Nav variant="pills" vertical>
@@ -151,7 +151,7 @@ Pill navigation can also go vertical with an additional modifier class, `.nav-pi
 
 ### Underline
 
-Take that same HTML, but use `.nav-underline` instead:
+Set `variant="underline"` on `Nav` for an underline style:
 
 <CodeExample>
     <Nav variant="underline">
@@ -176,7 +176,7 @@ Change the alignment of your nav with [flexbox utilities][2]. By default, navs a
 
 ### Horizontal
 
-Centered with `.justify-content-center`:
+Use a flexbox alignment utility through `Nav`'s `className` to center the links:
 
 <CodeExample>
     <Nav className="justify-content-center">
@@ -195,7 +195,7 @@ Centered with `.justify-content-center`:
 
 </CodeExample>
 
-Right-aligned with `.justify-content-end`:
+Use a flexbox alignment utility through `Nav`'s `className` to align the links to the end:
 
 <CodeExample>
     <Nav className="justify-content-end">
@@ -216,7 +216,7 @@ Right-aligned with `.justify-content-end`:
 
 ### Vertical
 
-Stack your navigation by changing the flex item direction with the `.flex-column` utility. Need to stack them on some viewports but not others? Use the responsive versions (e.g., `.sm:flex-column`).
+Set `vertical` on `Nav` to stack links. To change direction only at certain viewports, pass a responsive flexbox utility through `className`.
 
 <CodeExample>
     <Nav vertical>
@@ -235,7 +235,7 @@ Stack your navigation by changing the flex item direction with the `.flex-column
 
 </CodeExample>
 
-As always, vertical navigation is possible without `<ul>`s, too.
+`Nav` renders a `<nav>` with direct `NavLink` children; it does not require a list wrapper.
 
 <CodeExample>
     <Nav vertical>
@@ -256,7 +256,7 @@ As always, vertical navigation is possible without `<ul>`s, too.
 
 ### Fill and justify
 
-Force your `.nav`’s contents to extend the full available width with one of two modifier classes. To proportionately fill all available space with your `.nav-item`s, use `.nav-fill`. Notice that all horizontal space is occupied, but not every nav item has the same width.
+Set `fill` on `Nav` to make its links occupy the full available width proportionally. Notice that all horizontal space is occupied, but not every link has the same width.
 
 <CodeExample>
     <Nav variant="pills" fill>
@@ -275,7 +275,7 @@ Force your `.nav`’s contents to extend the full available width with one of tw
 
 </CodeExample>
 
-When using a `<nav>`-based navigation, you can safely omit `.nav-item` as only `.nav-link` is required for styling `<a>` elements.
+`NavLink` components can be direct children of `Nav`; no `NavItem` wrapper is required.
 
 <CodeExample>
     <Nav variant="pills" fill>
@@ -294,7 +294,7 @@ When using a `<nav>`-based navigation, you can safely omit `.nav-item` as only `
 
 </CodeExample>
 
-For equal-width elements, use `.nav-justified`. All horizontal space will be occupied by nav links, but unlike the `.nav-fill` above, every nav item will be the same width.
+Set `justified` on `Nav` to make its links equal width while filling the available space.
 
 <CodeExample>
     <Nav variant="pills" justified>
@@ -313,7 +313,7 @@ For equal-width elements, use `.nav-justified`. All horizontal space will be occ
 
 </CodeExample>
 
-Similar to the `.nav-fill` example using a `<nav>`-based navigation.
+Use `Nav` with `fill` for proportional widths, or `justified` for equal widths.
 
 <CodeExample>
     <Nav variant="pills" justified>
@@ -364,13 +364,13 @@ If you need responsive nav variations, consider using a series of [flexbox utili
 
 ## Regarding accessibility
 
-If you’re using navs to provide a navigation bar, be sure to add a `role="navigation"` to the most logical parent container of the `<ul>`, or wrap a `<nav>` element around the whole navigation. Do not add the role to the `<ul>` itself, as this would prevent it from being announced as an actual list by assistive technologies.
+`Nav` renders a `<nav>` landmark by default. When rendering it as another element with `as`, provide an appropriate navigation landmark; do not assign the landmark role to a list.
 
-Note that navigation bars, even if visually styled as tabs with the `.nav-tabs` class, should **not** be given `role="tablist"`, `role="tab"` or `role="tabpanel"` attributes. These are only appropriate for dynamic tabbed interfaces, as described in the [ARIA Authoring Practices Guide tabs pattern][3]. See the [Tab plugin][4] for dynamic tabbed interfaces. The `aria-current` attribute is not necessary on dynamic tabbed interfaces since our JavaScript handles the selected state by adding `aria-selected="true"` on the active tab.
+`Nav` with `variant="tabs"` is still navigation and should **not** be given tab roles. Use `Tabs` for a dynamic tabbed interface, as described in the [ARIA Authoring Practices Guide tabs pattern][3]. `Tabs` manages the selected state and required ARIA attributes.
 
 ## Using menus
 
-Add menus with the [Menu component][5].
+Add menus with the [Menu component][4].
 
 ### Tabs with menus
 
@@ -459,7 +459,7 @@ On the `.nav` base class:
 }
 ```
 
-On the `.nav-tabs` modifier class:
+When `variant="tabs"` is set:
 
 ```css
 .nav {
@@ -474,7 +474,7 @@ On the `.nav-tabs` modifier class:
 }
 ```
 
-On the `.nav-pills` modifier class:
+When `variant="pills"` is set:
 
 ```css
 .nav {
@@ -487,7 +487,7 @@ On the `.nav-pills` modifier class:
 }
 ```
 
-On the `.nav-underline` modifier class:
+When `variant="underline"` is set:
 
 ```css
 .nav {
@@ -503,5 +503,4 @@ On the `.nav-underline` modifier class:
 [1]: /components/tab#javascript-behavior
 [2]: https://getbootstrap.com/docs/6.0/utilities/flex
 [3]: https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/
-[4]: /components/tab
-[5]: /components/menus#usage
+[4]: /components/menu#usage
