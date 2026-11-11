@@ -31,7 +31,7 @@ pnpm --filter @idea-react/document start
 
 `document/.env` sets `SITE_URL=https://idea-react.pages.dev/` for the deployed site.
 Override it with an environment variable or `document/.env.local` when deploying elsewhere.
-RSS and Sitemap use absolute URLs; development feeds use the local request origin.
+RSS and Sitemap use absolute URLs; development feeds use the local request origin. Search results link to the page path relative to the current origin, so preview deployments never jump to production.
 For subdirectory hosting, configure `basePath` in `document/next.config.ts`.
 Pages that fail static export are excluded from both the search index and Sitemap.
 Deploy `document/dist/client/` to a static host.

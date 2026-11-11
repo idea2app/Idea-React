@@ -186,9 +186,6 @@ importers:
       react:
         specifier: ^19.3.1
         version: 19.3.1
-      react-bootstrap-editor:
-        specifier: ^3.0.0-rc.0
-        version: 3.0.0-rc.0(marked@18.1.3)(mobx-react@10.0.3(mobx@7.1.5)(react@19.3.1))(mobx@7.1.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2)
       react-dom:
         specifier: ^19.3.1
         version: 19.3.1(react@19.3.1)
@@ -821,9 +818,6 @@ packages:
   '@mischnic/json-sourcemap@0.1.1':
     resolution: {integrity: sha512-iA7+tyVqfrATAIsIRWQG+a7ZLLD0VaOCKV2Wd/v4mqIU3J9c4jx9p7S0nw1XH3gJCKNBOOwACOPYYSUu9pgT+w==}
     engines: {node: '>=12.0.0'}
-
-  '@mixmark-io/domino@2.2.0':
-    resolution: {integrity: sha512-Y28PR25bHXUg88kCV7nivXrP2Nj2RueZ3/l/jdx6J9f8J4nsEGcgX0Qe6lt7Pa+J79+kPiJU3LguR6O/6zrLOw==}
 
   '@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.7':
     resolution: {integrity: sha512-2zPHLn+MuGJ6GP/5jDrwa9Jy0CI+D3Ibpvopf5SFfmc1G9gdofR4uB7YrJAAp4vodn/7iDOciyv8bgkRPLw7cA==}
@@ -1825,9 +1819,6 @@ packages:
   '@types/serve-static@2.2.0':
     resolution: {integrity: sha512-8mam4H1NHLtu7nmtalF7eyBH14QyOASmcxHhSfEoRyr0nP/YdoesEtU+uSRvMe96TW/HPTtkoKqQLl53N7UXMQ==}
 
-  '@types/turndown@5.0.6':
-    resolution: {integrity: sha512-ru00MoyeeouE5BX4gRL+6m/BsDfbRayOskWqUvh7CLGW+UXxHQItqALa38kKnOiZPqJrtzJUgAC2+F0rL1S4Pg==}
-
   '@types/unist@2.0.11':
     resolution: {integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==}
 
@@ -2252,9 +2243,6 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
-  browser-fs-access@0.38.0:
-    resolution: {integrity: sha512-JveqW2w6pEZqFEEfMgCszXzYpE89dG+nPsmOdcs741mFFAROeL+iqjGEpR07RI+s0YY0EFr+4KnOoACprJTpOw==}
-
   browserslist@4.29.5:
     resolution: {integrity: sha512-khTmKu5NGYTotqcYo8Bew2k4RAE9PuXRSFRXG2lQBrCEQHyeQ/vX6gKMxfokwywBsLiXZMnHsmWMG1pnO8J7uQ==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
@@ -2586,11 +2574,6 @@ packages:
 
   echarts@6.1.0:
     resolution: {integrity: sha512-q0yaFPggC9FUdsWH4blavRWFmxdrIodbkoKNAjJudAI6CA9gNPxHtV2RcZNEepZVlk4yvBYkOkbk6HIVpIyHZA==}
-
-  edkit@1.3.2:
-    resolution: {integrity: sha512-P6vpm1LNI1tmXUz5MB8Si9/wj9jIo4m+ljRJ1283tVuwVCFCY4hj6UCy/eWnc559b7lYbpkKaNUq9SIR6Hcf5g==}
-    peerDependencies:
-      marked: '>=4.0.10'
 
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -4138,14 +4121,6 @@ packages:
     resolution: {integrity: sha512-s4VSOf6yN0rvbRZGxs8Om5CWj6seneMwK3oDb4lWDH0UPhWcxwOWw5+qk24bxq87szX1ydrwylIOp2uG1ojUpA==}
     engines: {node: '>= 0.8'}
 
-  react-bootstrap-editor@3.0.0-rc.0:
-    resolution: {integrity: sha512-ZcHvmrU1Ssj3us+Ocsg9iMjrdZwnHJ5nJLwwAgoh1RriLgOXkGoLbdbAGDqjyV4u15he9l1XbesH6AMyYaL5Ng==}
-    peerDependencies:
-      mobx: '>=6.11'
-      mobx-react: '>=9'
-      react: '>=16'
-      react-dom: '>=16.4.2'
-
   react-dom@19.3.1:
     resolution: {integrity: sha512-Y0bARz53lhEC1NMCASs0/j+faB/zqt3R8hpvg1e8+61ZVJ4UL0UdC4cBbXfZMcIuhrfgeILTLe+ZeBCavQPtKQ==}
     peerDependencies:
@@ -4605,13 +4580,6 @@ packages:
 
   turbo-stream@3.2.1:
     resolution: {integrity: sha512-BaX0eWz3IrypOVDFqPv3VGD6uZZW8y3oFAOJqZQ+oopmOyQ8/xNm7IMwAJFvxax2DBa8zSk+/AeqA6D6b1PXGg==}
-
-  turndown-plugin-gfm@1.0.2:
-    resolution: {integrity: sha512-vwz9tfvF7XN/jE0dGoBei3FXWuvll78ohzCZQuOb+ZjWrs3a0XhQVomJEb2Qh4VHTPNRO4GPZh0V7VRbiWwkRg==}
-
-  turndown@7.2.5:
-    resolution: {integrity: sha512-EKZvCCFHh8sWttpAMs10U6niZFJ2cpz8LkCPlylxoG4JcHF50J7EHnnBW3AY1qXtUMu7kDjCp7dnggB1sIbqEQ==}
-    engines: {node: '>=18', npm: '>=9'}
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -5550,8 +5518,6 @@ snapshots:
       '@lezer/common': 1.5.5
       '@lezer/lr': 1.4.12
       json5: 2.2.3
-
-  '@mixmark-io/domino@2.2.0': {}
 
   '@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.7':
     optional: true
@@ -6727,8 +6693,6 @@ snapshots:
       '@types/http-errors': 2.0.5
       '@types/node': 26.6.6
 
-  '@types/turndown@5.0.6': {}
-
   '@types/unist@2.0.11': {}
 
   '@types/unist@3.0.3': {}
@@ -7105,8 +7069,6 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
-  browser-fs-access@0.38.0: {}
-
   browserslist@4.29.5:
     dependencies:
       baseline-browser-mapping: 2.11.35
@@ -7447,20 +7409,6 @@ snapshots:
     dependencies:
       tslib: 2.3.0
       zrender: 6.1.0
-
-  edkit@1.3.2(marked@18.1.3)(typescript@7.0.2):
-    dependencies:
-      '@swc/helpers': 0.5.24
-      '@types/turndown': 5.0.6
-      browser-fs-access: 0.38.0
-      marked: 18.1.3
-      regenerator-runtime: 0.14.1
-      turndown: 7.2.5
-      turndown-plugin-gfm: 1.0.2
-      web-utility: 4.8.1(typescript@7.0.2)
-    transitivePeerDependencies:
-      - element-internals-polyfill
-      - typescript
 
   ee-first@1.1.1: {}
 
@@ -9153,17 +9101,6 @@ snapshots:
       - element-internals-polyfill
       - typescript
 
-  mobx-react-helper@0.5.4(mobx@7.1.5)(react@19.3.1)(typescript@7.0.2):
-    dependencies:
-      '@swc/helpers': 0.5.24
-      lodash.isequalwith: 4.4.0
-      mobx: 7.1.5
-      react: 19.3.1
-      web-utility: 4.8.1(typescript@7.0.2)
-    transitivePeerDependencies:
-      - element-internals-polyfill
-      - typescript
-
   mobx-react-lite@5.1.2(mobx@7.1.5)(react@19.3.1):
     dependencies:
       mobx: 7.1.5
@@ -9536,21 +9473,6 @@ snapshots:
       http-errors: 2.0.1
       iconv-lite: 0.4.24
       unpipe: 1.0.0
-
-  react-bootstrap-editor@3.0.0-rc.0(marked@18.1.3)(mobx-react@10.0.3(mobx@7.1.5)(react@19.3.1))(mobx@7.1.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2):
-    dependencies:
-      '@swc/helpers': 0.5.24
-      edkit: 1.3.2(marked@18.1.3)(typescript@7.0.2)
-      mobx: 7.1.5
-      mobx-react: 10.0.3(mobx@7.1.5)(react@19.3.1)
-      mobx-react-helper: 0.5.4(mobx@7.1.5)(react@19.3.1)(typescript@7.0.2)
-      react: 19.3.1
-      react-dom: 19.3.1(react@19.3.1)
-      web-utility: 4.8.1(typescript@7.0.2)
-    transitivePeerDependencies:
-      - element-internals-polyfill
-      - marked
-      - typescript
 
   react-dom@19.3.1(react@19.3.1):
     dependencies:
@@ -10147,12 +10069,6 @@ snapshots:
   tsscmp@1.0.6: {}
 
   turbo-stream@3.2.1: {}
-
-  turndown-plugin-gfm@1.0.2: {}
-
-  turndown@7.2.5:
-    dependencies:
-      '@mixmark-io/domino': 2.2.0
 
   type-check@0.4.0:
     dependencies:

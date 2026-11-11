@@ -45,7 +45,10 @@ export class DocumentSearchModel {
                 if (!['http:', 'https:'].includes(url.protocol))
                     throw new Error('The search RSS feed contains an invalid page URL.');
 
-                return { title, href: url.href, description };
+                const { pathname, search, hash } = url;
+
+                // RSS links carry the production origin; keep only the path so previews stay on their own origin
+                return { title, href: `${pathname}${search}${hash}`, description };
             });
 
             this.setEntries(entries);
@@ -78,6 +81,7 @@ export class DocumentSearchModel {
             .map(({ entry: { description, ...entry } }) => {
                 const match = description.toLowerCase().indexOf(words[0]);
                 const start = Math.max(0, match - 40);
+
                 return {
                     ...entry,
                     description: `${start ? '...' : ''}${description.slice(start, start + 180)}${description.length > start + 180 ? '...' : ''}`

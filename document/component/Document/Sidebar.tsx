@@ -8,6 +8,7 @@ import nextConfig from '../../next.config.ts';
 import * as style from './style.module.less';
 
 type NavLink = Record<'label' | 'slug', string>;
+
 type NavGroup = Record<
     'label' | 'icon' | 'iconClassName' | 'href' | 'itemHref' | 'slug',
     string
@@ -51,7 +52,6 @@ const extensions: NavLink[] = [
     { label: 'Code block', slug: 'code-block' },
     { label: 'Countdown', slug: 'countdown' },
     { label: 'Dialog model', slug: 'dialog-model' },
-    { label: 'Editor', slug: 'editor' },
     { label: 'Markdown view', slug: 'markdown-view' },
     { label: 'Horizontal marquee', slug: 'horizontal-marquee' },
     { label: 'Icon', slug: 'icon' },
@@ -99,7 +99,8 @@ const guides: NavLink[] = [
     { label: 'Parcel', slug: 'parcel' },
     { label: 'Vite', slug: 'vite' },
     { label: 'Webpack', slug: 'webpack' },
-    { label: 'Next.js', slug: 'next' }
+    { label: 'Next.js', slug: 'next' },
+    { label: 'Ecosystem', slug: 'ecosystem' }
 ];
 export const documentGroups: NavGroup[] = [
     {
