@@ -1,4 +1,3 @@
-import './style.less';
 import {
     Accordion,
     AccordionBody,
@@ -61,9 +60,12 @@ import {
 } from '../../../../source/Form';
 import { InputGroup, InputGroupText } from '../../../../source/Form/InputGroup';
 import { Col, Container, Row } from '../../../../source/Layout/Grid';
+
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
 import { CheatsheetSection } from './CheatsheetSection';
+import './style.less';
+
 export const themeColors = [
     { name: 'primary', title: 'Primary' },
     { name: 'accent', title: 'Accent' },
@@ -97,14 +99,23 @@ export const typographySizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl
 export const headingSizes = [1, 2, 3, 4, 5, 6];
 export const inlineStyles = [
     { tag: 'mark', text: 'highlight', prefix: 'You can use the mark tag to ' },
-    { tag: 'del', text: 'This line of text is meant to be treated as deleted text.' },
-    { tag: 's', text: 'This line of text is meant to be treated as no longer accurate.' },
+    {
+        tag: 'del',
+        text: 'This line of text is meant to be treated as deleted text.'
+    },
+    {
+        tag: 's',
+        text: 'This line of text is meant to be treated as no longer accurate.'
+    },
     {
         tag: 'ins',
         text: 'This line of text is meant to be treated as an addition to the document.'
     },
     { tag: 'u', text: 'This line of text will render as underlined.' },
-    { tag: 'small', text: 'This line of text is meant to be treated as fine print.' },
+    {
+        tag: 'small',
+        text: 'This line of text is meant to be treated as fine print.'
+    },
     { tag: 'strong', text: 'This line rendered as bold text.' },
     { tag: 'em', text: 'This line rendered as italicized text.' }
 ];
@@ -197,7 +208,13 @@ export const navigationGroups = [
     <header className="bd-header bg-black bg-90 py-3 d-flex align-items-stretch border-bottom border-black">
         <Container fluid className="d-flex align-items-center">
             <h1 className="d-flex align-items-center fs-xl fg-white mb-0">
-                <img src="https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg" width="38" height="30" className="me-3" alt="Bootstrap"/>
+                <img
+                    className="me-3"
+                    width="38"
+                    height="30"
+                    src="https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg"
+                    alt="Bootstrap"
+                />
                 Cheatsheet
             </h1>
         </Container>
@@ -206,21 +223,32 @@ export const navigationGroups = [
         <h2 className="h6 pt-4 pb-3 mb-4 border-bottom">On this page</h2>
         <nav className="small" id="toc">
             <ul className="list-unstyled">
-                {navigationGroups.map(({ id, title, links }) => (<li key={id} className="my-2">
-                        <CollapseToggle className="btn d-inline-flex align-items-center border-0" variant={false} target={`#${id}-collapse`}>
-                            <Icon name="chevron-right" className="me-1"/>
+                {navigationGroups.map(({ id, title, links }) => (
+                    <li key={id} className="my-2">
+                        <CollapseToggle
+                            className="btn d-inline-flex align-items-center border-0"
+                            variant={false}
+                            target={`#${id}-collapse`}
+                        >
+                            <Icon name="chevron-right" className="me-1" />
                             {title}
                         </CollapseToggle>
                         <Collapse id={`${id}-collapse`}>
                             <ul className="list-unstyled ps-3">
-                                {links.map(([href, label]) => (<li key={href}>
-                                        <a className="d-inline-flex align-items-center rounded text-decoration-none" href={`#${href}`}>
+                                {links.map(([href, label]) => (
+                                    <li key={href}>
+                                        <a
+                                            className="d-inline-flex align-items-center rounded text-decoration-none"
+                                            href={`#${href}`}
+                                        >
                                             {label}
                                         </a>
-                                    </li>))}
+                                    </li>
+                                ))}
                             </ul>
                         </Collapse>
-                    </li>))}
+                    </li>
+                ))}
             </ul>
         </nav>
     </aside>
@@ -228,23 +256,33 @@ export const navigationGroups = [
         <section id="content">
             <h2 className="xl:sticky-top fw-bold pt-3 xl:pt-5 pb-2 xl:pb-3">Contents</h2>
 
-            <CheatsheetSection id="typography" title="Typography" documentationPath="content/typography">
+            <CheatsheetSection
+                id="typography"
+                title="Typography"
+                documentationPath="content/typography"
+            >
                 <div>
-                    {typographySizes.map(size => (<div key={size} className={`fs-${size}`}>
+                    {typographySizes.map(size => (
+                        <div key={size} className={`fs-${size}`}>
                             .fs-{size}
-                        </div>))}
+                        </div>
+                    ))}
                 </div>
                 <div>
-                    {headingSizes.map(size => (<p key={size} className={`h${size}`}>
+                    {headingSizes.map(size => (
+                        <p key={size} className={`h${size}`}>
                             Heading {size}
-                        </p>))}
+                        </p>
+                    ))}
                 </div>
                 <div>
-                    {inlineStyles.map(({ tag: Tag, text, prefix = '' }) => (<p key={Tag}>
+                    {inlineStyles.map(({ tag: Tag, text, prefix = '' }) => (
+                        <p key={Tag}>
                             {prefix}
                             <Tag>{text}</Tag>
                             {Tag === 'mark' ? ' text.' : null}
-                        </p>))}
+                        </p>
+                    ))}
                 </div>
                 <div>
                     <hr />
@@ -254,8 +292,7 @@ export const navigationGroups = [
                         <p>A well-known quote, contained in a blockquote element.</p>
                         <footer className="blockquote-footer">
                             <p>
-                                Someone famous in{' '}
-                                <cite title="Source Title">Source Title</cite>
+                                Someone famous in <cite title="Source Title">Source Title</cite>
                             </p>
                         </footer>
                     </blockquote>
@@ -263,126 +300,189 @@ export const navigationGroups = [
                 <div>
                     <ul className="list-unstyled">
                         {[
+                            'This is a list.',
+                            'It appears completely unstyled.',
+                            "Structurally, it's still a list.",
+                            'However, this style only applies to immediate child elements.'
+                        ].map(item => (
+                            <li key={item}>{item}</li>
+                        ))}
+                        {
+                            <li>
+                                <p>Nested lists:</p>
+                                <ul>
+                                    {[
+                                        'are unaffected by this style',
+                                        'will still show a bullet',
+                                        'and have appropriate left margin'
+                                    ].map(item => (
+                                        <li key={item}>{item}</li>
+                                    ))}
+                                </ul>
+                            </li>
+                        }
+                        <li>This may still come in handy in some situations.</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul className="list-inline">
+                        {[
+                            'This is a list item.',
+                            'And another one.',
+                            "But they're displayed inline."
+                        ].map(item => (
+                            <li key={item} className="list-inline-item">
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </CheatsheetSection>
+            <CheatsheetSection id="images" title="Images" documentationPath="content/images">
+                <div>
+                    <ExamplePlaceholder
+                        width="100%"
+                        height="250"
+                        className="bd-placeholder-img-lg img-fluid"
+                    >
+                        Responsive image
+                    </ExamplePlaceholder>
+                </div>
+                <div>
+                    <ExamplePlaceholder
+                        width="200"
+                        height="200"
+                        className="img-thumbnail"
+                        title="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera"
+                    >
+                        200x200
+                    </ExamplePlaceholder>
+                </div>
+            </CheatsheetSection>
+            <CheatsheetSection id="tables" title="Tables" documentationPath="content/tables">
+                <div>
+                    <Table striped>
+                        <thead>
+                            <tr>
+                                {sampleColumns.map(({ key, title }) => (
+                                    <th key={key} scope="col">
+                                        {title}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sampleRows.map(row => (
+                                <tr key={row.number}>
+                                    {sampleColumns.map(({ key }) =>
+                                        key === 'number' ? (
+                                            <th key={key} scope="row">
+                                                {row.number}
+                                            </th>
+                                        ) : (
+                                            <td key={key}>{row[key]}</td>
+                                        )
+                                    )}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
+                <div>
+                    <Table borderless data-bs-theme="dark">
+                        <thead>
+                            <tr>
+                                {sampleColumns.map(({ key, title }) => (
+                                    <th key={key} scope="col">
+                                        {title}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sampleRows.map(row => (
+                                <tr key={row.number}>
+                                    {sampleColumns.map(({ key }) =>
+                                        key === 'number' ? (
+                                            <th key={key} scope="row">
+                                                {row.number}
+                                            </th>
+                                        ) : (
+                                            <td key={key}>{row[key]}</td>
+                                        )
+                                    )}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
+                <div>
+                    <Table hover>
+                        <thead>
+                            <tr>
+                                <th scope="col">Class</th>
+                                {['First', 'Second'].map(heading => (
+                                    <th key={heading} scope="col">
+                                        Heading
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Default</th>
+                                {['first', 'second'].map(cell => (
+                                    <td key={cell}>Cell</td>
+                                ))}
+                            </tr>
+                            {themeColors.map(({ name, title }) => (
+                                <tr key={name} className={`theme-${name}`}>
+                                    <th scope="row">{title}</th>
+                                    {['first', 'second'].map(cell => (
+                                        <td key={cell}>Cell</td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
+                <div>
+                    <Table small bordered>
+                        <thead>
+                            <tr>
+                                {sampleColumns.map(({ key, title }) => (
+                                    <th key={key} scope="col">
+                                        {title}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sampleRows.map(row => (
+                                <tr key={row.number}>
+                                    {sampleColumns.map(({ key }) =>
+                                        key === 'number' ? (
+                                            <th key={key} scope="row">
+                                                {row.number}
+                                            </th>
+                                        ) : (
+                                            <td key={key}>{row[key]}</td>
+                                        )
+                                    )}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
+            </CheatsheetSection>
 
-'This is a list.',
-'It appears completely unstyled.',
-"Structurally, it's still a list.",
-'However, this style only applies to immediate child elements.'
-].map(item => (<li key={item}>{item}</li>))}
-{<li>
-
-<p>Nested lists:</p>
-<ul>
-{[
-'are unaffected by this style',
-'will still show a bullet',
-'and have appropriate left margin'
-].map(item => (<li key={item}>{item}</li>))}
-</ul>
-</li>}
-<li>This may still come in handy in some situations.</li>
-</ul>
-</div>
-<div>
-<ul className="list-inline">
-{[
-'This is a list item.',
-'And another one.',
-"But they're displayed inline."
-].map(item => (<li key={item} className="list-inline-item">
-{item}
-</li>))}
-</ul>
-</div>
-</CheatsheetSection>
-<CheatsheetSection id="images" title="Images" documentationPath="content/images">
-<div>
-<ExamplePlaceholder width="100%" height="250" className="bd-placeholder-img-lg img-fluid">Responsive image</ExamplePlaceholder>
-</div>
-<div>
-<ExamplePlaceholder width="200" height="200" className="img-thumbnail" title="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera">200x200</ExamplePlaceholder>
-</div>
-</CheatsheetSection>
-<CheatsheetSection id="tables" title="Tables" documentationPath="content/tables">
-<div>
-<Table striped>
-<thead>
-<tr>
-{sampleColumns.map(({ key, title }) => (<th key={key} scope="col">
-{title}
-</th>))}
-</tr>
-</thead>
-<tbody>
-{sampleRows.map(row => (<tr key={row.number}>
-{sampleColumns.map(({ key }) => key === 'number' ? (<th key={key} scope="row">
-{row.number}
-</th>) : (<td key={key}>{row[key]}</td>))}
-</tr>))}
-</tbody>
-</Table>
-</div>
-<div>
-<Table borderless data-bs-theme="dark">
-<thead>
-<tr>
-{sampleColumns.map(({ key, title }) => (<th key={key} scope="col">
-{title}
-</th>))}
-</tr>
-</thead>
-<tbody>
-{sampleRows.map(row => (<tr key={row.number}>
-{sampleColumns.map(({ key }) => key === 'number' ? (<th key={key} scope="row">
-{row.number}
-</th>) : (<td key={key}>{row[key]}</td>))}
-</tr>))}
-</tbody>
-</Table>
-</div>
-<div>
-<Table hover>
-<thead>
-<tr>
-<th scope="col">Class</th>
-{['First', 'Second'].map(heading => (<th key={heading} scope="col">Heading</th>))}
-</tr>
-</thead>
-<tbody>
-<tr>
-<th scope="row">Default</th>
-{['first', 'second'].map(cell => (<td key={cell}>Cell</td>))}
-</tr>
-{themeColors.map(({ name, title }) => (<tr key={name} className={`theme-${name}`}>
-<th scope="row">{title}</th>
-{['first', 'second'].map(cell => (<td key={cell}>Cell</td>))}
-</tr>))}
-</tbody>
-</Table>
-</div>
-<div>
-<Table small bordered>
-<thead>
-<tr>
-{sampleColumns.map(({ key, title }) => (<th key={key} scope="col">
-{title}
-</th>))}
-</tr>
-</thead>
-<tbody>
-{sampleRows.map(row => (<tr key={row.number}>
-{sampleColumns.map(({ key }) => key === 'number' ? (<th key={key} scope="row">
-{row.number}
-</th>) : (<td key={key}>{row[key]}</td>))}
-</tr>))}
-</tbody>
-</Table>
-</div>
-</CheatsheetSection>
-
-            <CheatsheetSection id="figures" title="Figures" documentationPath="content/images#figures">
+            <CheatsheetSection
+                id="figures"
+                title="Figures"
+                documentationPath="content/images#figures"
+            >
                 <Figure>
-                    <ExamplePlaceholder width="400" height="300" className="img-fluid rounded"/>
+                    <ExamplePlaceholder width="400" height="300" className="img-fluid rounded" />
                     <FigureCaption>A caption for the above image.</FigureCaption>
                 </Figure>
             </CheatsheetSection>
@@ -395,590 +495,882 @@ export const navigationGroups = [
                 <Form>
                     <div className="mb-3">
                         <FormLabel htmlFor="exampleInputEmail1">Email address</FormLabel>
-                        <FormControl type="email" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-                        <FormText id="emailHelp">We'll never share your email with anyone else.</FormText>
+                        <FormControl
+                            type="email"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                        />
+                        <FormText id="emailHelp">
+                            We'll never share your email with anyone else.
+                        </FormText>
                     </div>
                     <div className="mb-3">
                         <FormLabel htmlFor="exampleInputPassword1">Password</FormLabel>
-                        <FormControl type="password" id="exampleInputPassword1"/>
+                        <FormControl type="password" id="exampleInputPassword1" />
                     </div>
                     <div className="mb-3">
                         <FormLabel htmlFor="exampleSelect">Select menu</FormLabel>
                         <FormSelect id="exampleSelect" defaultValue="">
                             <option value="">Open this select menu</option>
-                            {['One', 'Two', 'Three'].map((label, index) => (<option key={label} value={index + 1}>
+                            {['One', 'Two', 'Three'].map((label, index) => (
+                                <option key={label} value={index + 1}>
                                     {label}
-                                </option>))}
+                                </option>
+                            ))}
                         </FormSelect>
                     </div>
                     <FormField className="mb-3">
-                        <Checkbox id="exampleCheck1"/>
-                        <FormLabel plain htmlFor="exampleCheck1">Check me out</FormLabel>
+                        <Checkbox id="exampleCheck1" />
+                        <FormLabel plain htmlFor="exampleCheck1">
+                            Check me out
+                        </FormLabel>
                     </FormField>
                     <fieldset className="mb-3">
                         <legend>Radios buttons</legend>
                         {[
-
-{ id: 'exampleRadio1', label: 'Default radio' },
-{ id: 'exampleRadio2', label: 'Another radio' }
-].map(({ id, label }) => (<FormField key={id}>
-
-<Radio name="radios" id={id}/>
-<FormLabel plain htmlFor={id}>
-{label}
-</FormLabel>
-</FormField>))}
-</fieldset>
-<div className="mb-3">
-<FormLabel htmlFor="customFile">Upload</FormLabel>
-<FormControl type="file" id="customFile"/>
-</div>
-<FormField className="mb-3">
-<FormSwitch inputId="switchCheckChecked" defaultChecked/>
-<FormLabel plain htmlFor="switchCheckChecked">Checked switch checkbox input</FormLabel>
-</FormField>
-<div className="mb-3">
-<FormLabel htmlFor="customRange3">Example range</FormLabel>
-<FormRange id="customRange3" min="0" max="5" step="0.5"/>
-</div>
-<Button variant="solid" theme="primary" type="submit">Submit</Button>
-</Form>
-</CheatsheetSection>
-<CheatsheetSection id="disabled-forms" title="Disabled forms" documentationPath="forms/overview/#disabled-forms">
-<Form>
-<fieldset disabled aria-label="Disabled fieldset example">
-<div className="mb-3">
-<FormLabel htmlFor="disabledTextInput">Disabled input</FormLabel>
-<FormControl id="disabledTextInput" placeholder="Disabled input"/>
-</div>
-<div className="mb-3">
-<FormLabel htmlFor="disabledSelect">Disabled select menu</FormLabel>
-<FormSelect id="disabledSelect">
-<option>Disabled select</option>
-</FormSelect>
-</div>
-<FormField className="mb-3">
-<Checkbox id="disabledFieldsetCheck"/>
-<FormLabel plain htmlFor="disabledFieldsetCheck">Can't check this</FormLabel>
-</FormField>
-<fieldset className="mb-3">
-<legend>Disabled radios buttons</legend>
-{[
-{ id: 'disabledRadio1', label: 'Disabled radio' },
-{ id: 'disabledRadio2', label: 'Another radio' }
-].map(({ id, label }) => (<FormField key={id}>
-<Radio name="disabledRadios" id={id}/>
-<FormLabel plain htmlFor={id}>
-{label}
-</FormLabel>
-</FormField>))}
-</fieldset>
-<div className="mb-3">
-<FormLabel htmlFor="disabledCustomFile">Upload</FormLabel>
-<FormControl type="file" id="disabledCustomFile"/>
-</div>
-<FormField className="mb-3">
-<FormSwitch inputId="disabledSwitchCheckChecked" defaultChecked/>
-<FormLabel plain htmlFor="disabledSwitchCheckChecked">Disabled checked switch checkbox input</FormLabel>
-</FormField>
-<div className="mb-3">
-<FormLabel htmlFor="disabledRange">Disabled range</FormLabel>
-<FormRange id="disabledRange" min="0" max="5" step="0.5"/>
-</div>
-<Button variant="solid" theme="primary" type="submit">Submit</Button>
-</fieldset>
-</Form>
-</CheatsheetSection>
-<CheatsheetSection id="sizing" title="Sizing" documentationPath="forms/form-control#sizing">
-{['lg', 'sm'].map(size => (<div key={size}>
-<div className="mb-3">
-<FormControl controlSize={size} placeholder={`.form-control-${size}`} aria-label={`.form-control-${size} example`}/>
-</div>
-<div className="mb-3">
-<FormSelect controlSize={size} aria-label={`.form-control-${size} example`}>
-<option selected>Open this select menu</option>
-<option value="1">One</option>
-<option value="2">Two</option>
-<option value="3">Three</option>
-</FormSelect>
-</div>
-<div className="mb-3">
-<FormControl type="file" controlSize={size} aria-label={`${size === 'lg' ? 'Large' : 'Small'} file input example`}/>
-</div>
-</div>))}
-</CheatsheetSection>
-<CheatsheetSection id="input-group" title="Input group" documentationPath="forms/input-group">
-<div>
-<InputGroup className="mb-3">
-<InputGroupText>@</InputGroupText>
-<FormControl placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
-</InputGroup>
-<InputGroup className="mb-3">
-<FormControl placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-<InputGroupText>@example.com</InputGroupText>
-</InputGroup>
-<FormLabel htmlFor="basic-url">Your vanity URL</FormLabel>
-<InputGroup className="mb-3">
-<InputGroupText>
-<a href="https://example.com/users/">{"https://example.com/users/"}</a>
-</InputGroupText>
-<FormControl id="basic-url" aria-describedby="basic-addon3"/>
-</InputGroup>
-<InputGroup className="mb-3">
-<InputGroupText>$</InputGroupText>
-<FormControl aria-label="Amount (to the nearest dollar)"/>
-<InputGroupText>.00</InputGroupText>
-</InputGroup>
-<InputGroup>
-<InputGroupText>With textarea</InputGroupText>
-<FormTextArea aria-label="With textarea"/>
-</InputGroup>
-</div>
-</CheatsheetSection>
-<CheatsheetSection id="floating-labels" title="Floating labels" documentationPath="forms/floating-labels">
-<Form>
-<FormFloatingLabel className="mb-3">
-<FormLabel htmlFor="floatingInput">Email address</FormLabel>
-<FormControl type="email" id="floatingInput" placeholder="name@example.com"/>
-</FormFloatingLabel>
-<FormFloatingLabel>
-<FormLabel htmlFor="floatingPassword">Password</FormLabel>
-<FormControl type="password" id="floatingPassword" placeholder="Password"/>
-</FormFloatingLabel>
-</Form>
-</CheatsheetSection>
-<CheatsheetSection id="validation" title="Validation" documentationPath="forms/validation">
-<Form validated>
-<Row className="g-3">
-<Col as={FormField} md={4}>
-<FormLabel htmlFor="validationServer01">First name</FormLabel>
-<FormControl id="validationServer01" value="Mark" required validation="valid"/>
-<FormFeedback type="valid">Looks good!</FormFeedback>
-</Col>
-<Col as={FormField} md={4}>
-<FormLabel htmlFor="validationServer02">Last name</FormLabel>
-<FormControl id="validationServer02" value="Otto" required validation="valid"/>
-<FormFeedback type="valid">Looks good!</FormFeedback>
-</Col>
-<Col as={FormField} md={4}>
-<FormLabel htmlFor="validationServerUsername">Username</FormLabel>
-<InputGroup>
-<InputGroupText id="inputGroupPrepend3">@</InputGroupText>
-<FormControl id="validationServerUsername" aria-describedby="inputGroupPrepend3 usernameFeedback" required validation="invalid"/>
-</InputGroup>
-<FormFeedback id="usernameFeedback" className="d-block">Please choose a username.</FormFeedback>
-</Col>
-<Col as={FormField} md={6}>
-<FormLabel htmlFor="validationServer03">City</FormLabel>
-<FormControl id="validationServer03" required validation="invalid"/>
-<FormFeedback>Please provide a valid city.</FormFeedback>
-</Col>
-<Col as={FormField} md={3}>
-<FormLabel htmlFor="validationServer04">State</FormLabel>
-<FormSelect id="validationServer04" required validation="invalid">
-<option selected disabled value="">Choose...</option>
-<option>...</option>
-</FormSelect>
-<FormFeedback>Please select a valid state.</FormFeedback>
-</Col>
-<Col as={FormField} md={3}>
-<FormLabel htmlFor="validationServer05">Zip</FormLabel>
-<FormControl id="validationServer05" required validation="invalid"/>
-<FormFeedback>Please provide a valid zip.</FormFeedback>
-</Col>
-<Col as={FormField} xs={12}>
-<Checkbox className="is-invalid" id="invalidCheck3" required/>
-<FormLabel plain htmlFor="invalidCheck3">Agree to terms and conditions</FormLabel>
-<FormFeedback>You must agree before submitting.</FormFeedback>
-</Col>
-<Col xs={12}>
-<Button variant="solid" theme="primary" type="submit">Submit form</Button>
-</Col>
-</Row>
-</Form>
-</CheatsheetSection>
-</section>
+                            { id: 'exampleRadio1', label: 'Default radio' },
+                            { id: 'exampleRadio2', label: 'Another radio' }
+                        ].map(({ id, label }) => (
+                            <FormField key={id}>
+                                <Radio name="radios" id={id} />
+                                <FormLabel plain htmlFor={id}>
+                                    {label}
+                                </FormLabel>
+                            </FormField>
+                        ))}
+                    </fieldset>
+                    <div className="mb-3">
+                        <FormLabel htmlFor="customFile">Upload</FormLabel>
+                        <FormControl type="file" id="customFile" />
+                    </div>
+                    <FormField className="mb-3">
+                        <FormSwitch inputId="switchCheckChecked" defaultChecked />
+                        <FormLabel plain htmlFor="switchCheckChecked">
+                            Checked switch checkbox input
+                        </FormLabel>
+                    </FormField>
+                    <div className="mb-3">
+                        <FormLabel htmlFor="customRange3">Example range</FormLabel>
+                        <FormRange id="customRange3" min="0" max="5" step="0.5" />
+                    </div>
+                    <Button variant="solid" theme="primary" type="submit">
+                        Submit
+                    </Button>
+                </Form>
+            </CheatsheetSection>
+            <CheatsheetSection
+                id="disabled-forms"
+                title="Disabled forms"
+                documentationPath="forms/overview/#disabled-forms"
+            >
+                <Form>
+                    <fieldset disabled aria-label="Disabled fieldset example">
+                        <div className="mb-3">
+                            <FormLabel htmlFor="disabledTextInput">Disabled input</FormLabel>
+                            <FormControl id="disabledTextInput" placeholder="Disabled input" />
+                        </div>
+                        <div className="mb-3">
+                            <FormLabel htmlFor="disabledSelect">Disabled select menu</FormLabel>
+                            <FormSelect id="disabledSelect">
+                                <option>Disabled select</option>
+                            </FormSelect>
+                        </div>
+                        <FormField className="mb-3">
+                            <Checkbox id="disabledFieldsetCheck" />
+                            <FormLabel plain htmlFor="disabledFieldsetCheck">
+                                Can't check this
+                            </FormLabel>
+                        </FormField>
+                        <fieldset className="mb-3">
+                            <legend>Disabled radios buttons</legend>
+                            {[
+                                { id: 'disabledRadio1', label: 'Disabled radio' },
+                                { id: 'disabledRadio2', label: 'Another radio' }
+                            ].map(({ id, label }) => (
+                                <FormField key={id}>
+                                    <Radio name="disabledRadios" id={id} />
+                                    <FormLabel plain htmlFor={id}>
+                                        {label}
+                                    </FormLabel>
+                                </FormField>
+                            ))}
+                        </fieldset>
+                        <div className="mb-3">
+                            <FormLabel htmlFor="disabledCustomFile">Upload</FormLabel>
+                            <FormControl type="file" id="disabledCustomFile" />
+                        </div>
+                        <FormField className="mb-3">
+                            <FormSwitch inputId="disabledSwitchCheckChecked" defaultChecked />
+                            <FormLabel plain htmlFor="disabledSwitchCheckChecked">
+                                Disabled checked switch checkbox input
+                            </FormLabel>
+                        </FormField>
+                        <div className="mb-3">
+                            <FormLabel htmlFor="disabledRange">Disabled range</FormLabel>
+                            <FormRange id="disabledRange" min="0" max="5" step="0.5" />
+                        </div>
+                        <Button variant="solid" theme="primary" type="submit">
+                            Submit
+                        </Button>
+                    </fieldset>
+                </Form>
+            </CheatsheetSection>
+            <CheatsheetSection
+                id="sizing"
+                title="Sizing"
+                documentationPath="forms/form-control#sizing"
+            >
+                {['lg', 'sm'].map(size => (
+                    <div key={size}>
+                        <div className="mb-3">
+                            <FormControl
+                                controlSize={size}
+                                placeholder={`.form-control-${size}`}
+                                aria-label={`.form-control-${size} example`}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <FormSelect
+                                controlSize={size}
+                                aria-label={`.form-control-${size} example`}
+                            >
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </FormSelect>
+                        </div>
+                        <div className="mb-3">
+                            <FormControl
+                                type="file"
+                                controlSize={size}
+                                aria-label={`${size === 'lg' ? 'Large' : 'Small'} file input example`}
+                            />
+                        </div>
+                    </div>
+                ))}
+            </CheatsheetSection>
+            <CheatsheetSection
+                id="input-group"
+                title="Input group"
+                documentationPath="forms/input-group"
+            >
+                <div>
+                    <InputGroup className="mb-3">
+                        <InputGroupText>@</InputGroupText>
+                        <FormControl
+                            placeholder="Username"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                        />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <FormControl
+                            placeholder="Recipient's username"
+                            aria-label="Recipient's username"
+                            aria-describedby="basic-addon2"
+                        />
+                        <InputGroupText>@example.com</InputGroupText>
+                    </InputGroup>
+                    <FormLabel htmlFor="basic-url">Your vanity URL</FormLabel>
+                    <InputGroup className="mb-3">
+                        <InputGroupText>
+                            <a href="https://example.com/users/">{'https://example.com/users/'}</a>
+                        </InputGroupText>
+                        <FormControl id="basic-url" aria-describedby="basic-addon3" />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroupText>$</InputGroupText>
+                        <FormControl aria-label="Amount (to the nearest dollar)" />
+                        <InputGroupText>.00</InputGroupText>
+                    </InputGroup>
+                    <InputGroup>
+                        <InputGroupText>With textarea</InputGroupText>
+                        <FormTextArea aria-label="With textarea" />
+                    </InputGroup>
+                </div>
+            </CheatsheetSection>
+            <CheatsheetSection
+                id="floating-labels"
+                title="Floating labels"
+                documentationPath="forms/floating-labels"
+            >
+                <Form>
+                    <FormFloatingLabel className="mb-3">
+                        <FormLabel htmlFor="floatingInput">Email address</FormLabel>
+                        <FormControl
+                            type="email"
+                            id="floatingInput"
+                            placeholder="name@example.com"
+                        />
+                    </FormFloatingLabel>
+                    <FormFloatingLabel>
+                        <FormLabel htmlFor="floatingPassword">Password</FormLabel>
+                        <FormControl type="password" id="floatingPassword" placeholder="Password" />
+                    </FormFloatingLabel>
+                </Form>
+            </CheatsheetSection>
+            <CheatsheetSection
+                id="validation"
+                title="Validation"
+                documentationPath="forms/validation"
+            >
+                <Form validated>
+                    <Row className="g-3">
+                        <Col as={FormField} md={4}>
+                            <FormLabel htmlFor="validationServer01">First name</FormLabel>
+                            <FormControl
+                                id="validationServer01"
+                                value="Mark"
+                                required
+                                validation="valid"
+                            />
+                            <FormFeedback type="valid">Looks good!</FormFeedback>
+                        </Col>
+                        <Col as={FormField} md={4}>
+                            <FormLabel htmlFor="validationServer02">Last name</FormLabel>
+                            <FormControl
+                                id="validationServer02"
+                                value="Otto"
+                                required
+                                validation="valid"
+                            />
+                            <FormFeedback type="valid">Looks good!</FormFeedback>
+                        </Col>
+                        <Col as={FormField} md={4}>
+                            <FormLabel htmlFor="validationServerUsername">Username</FormLabel>
+                            <InputGroup>
+                                <InputGroupText id="inputGroupPrepend3">@</InputGroupText>
+                                <FormControl
+                                    id="validationServerUsername"
+                                    aria-describedby="inputGroupPrepend3 usernameFeedback"
+                                    required
+                                    validation="invalid"
+                                />
+                            </InputGroup>
+                            <FormFeedback id="usernameFeedback" className="d-block">
+                                Please choose a username.
+                            </FormFeedback>
+                        </Col>
+                        <Col as={FormField} md={6}>
+                            <FormLabel htmlFor="validationServer03">City</FormLabel>
+                            <FormControl id="validationServer03" required validation="invalid" />
+                            <FormFeedback>Please provide a valid city.</FormFeedback>
+                        </Col>
+                        <Col as={FormField} md={3}>
+                            <FormLabel htmlFor="validationServer04">State</FormLabel>
+                            <FormSelect id="validationServer04" required validation="invalid">
+                                <option selected disabled value="">
+                                    Choose...
+                                </option>
+                                <option>...</option>
+                            </FormSelect>
+                            <FormFeedback>Please select a valid state.</FormFeedback>
+                        </Col>
+                        <Col as={FormField} md={3}>
+                            <FormLabel htmlFor="validationServer05">Zip</FormLabel>
+                            <FormControl id="validationServer05" required validation="invalid" />
+                            <FormFeedback>Please provide a valid zip.</FormFeedback>
+                        </Col>
+                        <Col as={FormField} xs={12}>
+                            <Checkbox className="is-invalid" id="invalidCheck3" required />
+                            <FormLabel plain htmlFor="invalidCheck3">
+                                Agree to terms and conditions
+                            </FormLabel>
+                            <FormFeedback>You must agree before submitting.</FormFeedback>
+                        </Col>
+                        <Col xs={12}>
+                            <Button variant="solid" theme="primary" type="submit">
+                                Submit form
+                            </Button>
+                        </Col>
+                    </Row>
+                </Form>
+            </CheatsheetSection>
+        </section>
 
         <section id="components">
             <h2 className="xl:sticky-top fw-bold pt-3 xl:pt-5 pb-2 xl:pb-3">Components</h2>
 
-            <CheatsheetSection id="accordion" title="Accordion" documentationPath="components/accordion">
+            <CheatsheetSection
+                id="accordion"
+                title="Accordion"
+                documentationPath="components/accordion"
+            >
                 <Accordion id="accordionExample">
                     {[
-
-{
-title: 'Accordion Item #1',
-open: true,
-content: (<>
-It is shown by default because the <code>open</code>{' '}
-attribute is present. The native{' '}
-
-<code>&lt;details&gt;</code> element handles all the
-show/hide logic without any JavaScript. You can put any
-HTML content within the accordion body.
-</>)
-},
-{
-title: 'Accordion Item #2',
-content: (<>
-The <code>name</code> attribute groups this with other
-accordion items. When you open this item, any other open
-item in the same group will close automatically.
-</>)
-},
-{
-title: 'Accordion Item #3',
-content: (<>
-This exclusive accordion behavior is built into the
-browser?no Bootstrap JavaScript required. Just use
-matching <code>name</code> attributes on the{' '}
-<code>&lt;details&gt;</code> elements.
-</>)
-}
-].map(({ title, open, content }) => (<AccordionItem key={title} name="accordionExample" open={open}>
-<AccordionHeader>{title}</AccordionHeader>
-<AccordionBody>
-<strong>{title}'s accordion body.</strong> {content}
-</AccordionBody>
-</AccordionItem>))}
-</Accordion>
-</CheatsheetSection>
-<CheatsheetSection id="alerts" title="Alerts" documentationPath="components/alerts">
-<div>
-{themeColors.map(({ name }) => (<Alert key={name} theme={name} dismissible className="mb-3">
-<p>
-A simple {name} alert with{' '}
-<AlertLink href="#">an example link</AlertLink>. Give it a
-click if you like.
-</p>
-</Alert>))}
-</div>
-<div>
-<Alert theme="success">
-<div className="vstack">
-<AlertHeading>Well done!</AlertHeading>
-<p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-<hr className="mt-0"/>
-<p className="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-</div>
-</Alert>
-</div>
-</CheatsheetSection>
-<CheatsheetSection id="badge" title="Badge" documentationPath="components/badge">
-<div>
-{themeColors.slice(0, 8).map(({ name }, index) => (<p key={name} className={`h${Math.min(index + 1, 6)}`}>
-Example heading <Badge theme={name}>New</Badge>
-</p>))}
-</div>
-<Stack direction="horizontal" gap={4} className="flex-wrap">
-{themeColors.map(({ name, title }) => (<Badge key={name} theme={name}>
-{title}
-</Badge>))}
-</Stack>
-</CheatsheetSection>
-<CheatsheetSection id="breadcrumb" title="Breadcrumb" documentationPath="components/breadcrumb">
-<nav aria-label="breadcrumb">
-<Breadcrumb>
-<BreadcrumbItem>
-<BreadcrumbLink href="#">Home</BreadcrumbLink>
-</BreadcrumbItem>
-<BreadcrumbItem>
-<BreadcrumbLink href="#">Library</BreadcrumbLink>
-</BreadcrumbItem>
-<BreadcrumbItem active>
-<BreadcrumbLink href="#" active>Data</BreadcrumbLink>
-</BreadcrumbItem>
-</Breadcrumb>
-</nav>
-</CheatsheetSection>
-<CheatsheetSection id="buttons" title="Buttons" documentationPath="components/buttons">
-{[
-{ variant: 'solid', label: 'Solid buttons' },
-{ variant: 'outline', label: 'Outline buttons' },
-{ variant: 'subtle', label: 'Subtle buttons' }
-].map(({ variant, label }) => (<Stack key={variant} direction="horizontal" gap={3} className="flex-wrap" aria-label={label}>
-{menuColors.map(({ name, title }) => (<Button key={name} variant={variant} theme={name}>
-{title}
-</Button>))}
-{variant === 'solid' && <Button variant="link">Link</Button>}
-</Stack>))}
-<Stack direction="horizontal" gap={4} className="flex-wrap">
-{['sm', undefined, 'lg'].map(size => (<Button key={size ?? 'standard'} variant="solid" theme="primary" size={size}>
-{size
-? `${size === 'sm' ? 'Small' : 'Large'} button`
-: 'Standard button'}
-</Button>))}
-</Stack>
-</CheatsheetSection>
-<CheatsheetSection id="button-group" title="Button group" documentationPath="components/button-group">
-<ButtonToolbar aria-label="Toolbar with button groups">
-{[
-{ label: 'First group', values: [1, 2, 3, 4] },
-{ label: 'Second group', values: [5, 6, 7] },
-{ label: 'Third group', values: [8] }
-].map(({ label, values }) => (<ButtonGroup key={label} aria-label={label} className="me-2">
-{values.map(value => (<Button key={value} variant="solid" theme="secondary">
-{value}
-</Button>))}
-</ButtonGroup>))}
-</ButtonToolbar>
-</CheatsheetSection>
-<CheatsheetSection id="card" title="Card" documentationPath="components/card">
-<Row xs={1} md={2} className="g-4">
-{['image', 'featured', 'list', 'horizontal'].map(variant => (<Col key={variant}>
-<Card>
-{variant === 'image' && (<ExamplePlaceholder width="100%" height="180" className="card-img-top">Image cap</ExamplePlaceholder>)}
-{variant === 'featured' && (<CardHeader>Featured</CardHeader>)}
-{variant === 'horizontal' ? (<Row className="g-0">
-<Col md={4}>
-<ExamplePlaceholder width="100%" height="250">Image</ExamplePlaceholder>
-</Col>
-<Col md={8}>
-<CardBody>
-<CardTitle>Card title</CardTitle>
-<CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-<CardText>
-<small className="fg-2">Last updated 3 mins ago</small>
-</CardText>
-</CardBody>
-</Col>
-</Row>) : (<>
-<CardBody>
-<CardTitle>Card title</CardTitle>
-<CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-{variant !== 'list' && (<Button href="#" variant="solid" theme="primary">Go somewhere</Button>)}
-</CardBody>
-{variant === 'featured' && (<CardFooter className="fg-2">2 days ago</CardFooter>)}
-{variant === 'list' && (<>
-<ListGroup flush>
-{[
-'An item',
-'A second item',
-'A third item'
-].map(item => (<ListGroupItem key={item}>
-{item}
-</ListGroupItem>))}
-</ListGroup>
-<CardBody className="flex-row gap-4">
-<a href="#">Card link</a>
-<a href="#">Another link</a>
-</CardBody>
-</>)}
-</>)}
-</Card>
-</Col>))}
-</Row>
-</CheatsheetSection>
-<CheatsheetSection id="carousel" title="Carousel" documentationPath="components/carousel">
-<Carousel id="carouselExample" autoplay controls controlsPlacement="bottom" controlsClassName="d-flex justify-content-between align-items-center mt-3" indicators>
-{[
-{ title: 'First slide', background: '#777', color: '#555' },
-{ title: 'Second slide', background: '#666', color: '#444' },
-{ title: 'Third slide', background: '#555', color: '#333' }
-].map(({ title, background, color }) => (<CarouselSlide key={title}>
-<ExamplePlaceholder width="800" height="400" className="bd-placeholder-img-lg d-block w-100 rounded-5" color={color} background={background}>
-{title}
-</ExamplePlaceholder>
-</CarouselSlide>))}
-</Carousel>
-</CheatsheetSection>
-<CheatsheetSection id="dialog" title="Dialog" documentationPath="components/dialog">
-<Stack direction="horizontal" gap={5} className="flex-wrap">
-<Button variant="solid" theme="primary" {...{ commandfor: 'exampleDialog', command: 'show-modal' }}>Launch demo dialog</Button>
-<Button variant="solid" theme="primary" {...{ commandfor: 'staticBackdropDialog', command: 'show-modal' }}>Launch static backdrop dialog</Button>
-</Stack>
-</CheatsheetSection>
-<CheatsheetSection id="menus" title="Menus" documentationPath="components/menus">
-<ButtonGroup className="w-100 align-items-center justify-content-between flex-wrap me-0">
-{['sm', undefined, 'lg'].map(size => (<Menu key={size ?? 'standard'} label="Menu" toggleProps={{ variant: 'solid', theme: 'secondary', size }}>
-<MenuHeader>Menu header</MenuHeader>
-{['Action', 'Another action', 'Something else here'].map(item => (<MenuItem key={item} href="#">
-{item}
-</MenuItem>))}
-<MenuDivider />
-<MenuItem href="#">Separated link</MenuItem>
-</Menu>))}
-</ButtonGroup>
+                        {
+                            title: 'Accordion Item #1',
+                            open: true,
+                            content: (
+                                <>
+                                    It is shown by default because the <code>open</code> attribute
+                                    is present. The native <code>&lt;details&gt;</code> element
+                                    handles all the show/hide logic without any JavaScript. You can
+                                    put any HTML content within the accordion body.
+                                </>
+                            )
+                        },
+                        {
+                            title: 'Accordion Item #2',
+                            content: (
+                                <>
+                                    The <code>name</code> attribute groups this with other accordion
+                                    items. When you open this item, any other open item in the same
+                                    group will close automatically.
+                                </>
+                            )
+                        },
+                        {
+                            title: 'Accordion Item #3',
+                            content: (
+                                <>
+                                    This exclusive accordion behavior is built into the browser?no
+                                    Bootstrap JavaScript required. Just use matching{' '}
+                                    <code>name</code> attributes on the <code>&lt;details&gt;</code>{' '}
+                                    elements.
+                                </>
+                            )
+                        }
+                    ].map(({ title, open, content }) => (
+                        <AccordionItem key={title} name="accordionExample" open={open}>
+                            <AccordionHeader>{title}</AccordionHeader>
+                            <AccordionBody>
+                                <strong>{title}'s accordion body.</strong> {content}
+                            </AccordionBody>
+                        </AccordionItem>
+                    ))}
+                </Accordion>
+            </CheatsheetSection>
+            <CheatsheetSection id="alerts" title="Alerts" documentationPath="components/alerts">
+                <div>
+                    {themeColors.map(({ name }) => (
+                        <Alert key={name} theme={name} dismissible className="mb-3">
+                            <p>
+                                A simple {name} alert with{' '}
+                                <AlertLink href="#">an example link</AlertLink>. Give it a click if
+                                you like.
+                            </p>
+                        </Alert>
+                    ))}
+                </div>
+                <div>
+                    <Alert theme="success">
+                        <div className="vstack">
+                            <AlertHeading>Well done!</AlertHeading>
+                            <p>
+                                Aww yeah, you successfully read this important alert message. This
+                                example text is going to run a bit longer so that you can see how
+                                spacing within an alert works with this kind of content.
+                            </p>
+                            <hr className="mt-0" />
+                            <p className="mb-0">
+                                Whenever you need to, be sure to use margin utilities to keep things
+                                nice and tidy.
+                            </p>
+                        </div>
+                    </Alert>
+                </div>
+            </CheatsheetSection>
+            <CheatsheetSection id="badge" title="Badge" documentationPath="components/badge">
+                <div>
+                    {themeColors.slice(0, 8).map(({ name }, index) => (
+                        <p key={name} className={`h${Math.min(index + 1, 6)}`}>
+                            Example heading <Badge theme={name}>New</Badge>
+                        </p>
+                    ))}
+                </div>
+                <Stack direction="horizontal" gap={4} className="flex-wrap">
+                    {themeColors.map(({ name, title }) => (
+                        <Badge key={name} theme={name}>
+                            {title}
+                        </Badge>
+                    ))}
+                </Stack>
+            </CheatsheetSection>
+            <CheatsheetSection
+                id="breadcrumb"
+                title="Breadcrumb"
+                documentationPath="components/breadcrumb"
+            >
+                <nav aria-label="breadcrumb">
+                    <Breadcrumb>
+                        <BreadcrumbItem>
+                            <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbItem>
+                            <BreadcrumbLink href="#">Library</BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbItem active>
+                            <BreadcrumbLink href="#" active>
+                                Data
+                            </BreadcrumbLink>
+                        </BreadcrumbItem>
+                    </Breadcrumb>
+                </nav>
+            </CheatsheetSection>
+            <CheatsheetSection id="buttons" title="Buttons" documentationPath="components/buttons">
+                {[
+                    { variant: 'solid', label: 'Solid buttons' },
+                    { variant: 'outline', label: 'Outline buttons' },
+                    { variant: 'subtle', label: 'Subtle buttons' }
+                ].map(({ variant, label }) => (
+                    <Stack
+                        key={variant}
+                        direction="horizontal"
+                        gap={3}
+                        className="flex-wrap"
+                        aria-label={label}
+                    >
+                        {menuColors.map(({ name, title }) => (
+                            <Button key={name} variant={variant} theme={name}>
+                                {title}
+                            </Button>
+                        ))}
+                        {variant === 'solid' && <Button variant="link">Link</Button>}
+                    </Stack>
+                ))}
+                <Stack direction="horizontal" gap={4} className="flex-wrap">
+                    {['sm', undefined, 'lg'].map(size => (
+                        <Button
+                            key={size ?? 'standard'}
+                            variant="solid"
+                            theme="primary"
+                            size={size}
+                        >
+                            {size
+                                ? `${size === 'sm' ? 'Small' : 'Large'} button`
+                                : 'Standard button'}
+                        </Button>
+                    ))}
+                </Stack>
+            </CheatsheetSection>
+            <CheatsheetSection
+                id="button-group"
+                title="Button group"
+                documentationPath="components/button-group"
+            >
+                <ButtonToolbar aria-label="Toolbar with button groups">
+                    {[
+                        { label: 'First group', values: [1, 2, 3, 4] },
+                        { label: 'Second group', values: [5, 6, 7] },
+                        { label: 'Third group', values: [8] }
+                    ].map(({ label, values }) => (
+                        <ButtonGroup key={label} aria-label={label} className="me-2">
+                            {values.map(value => (
+                                <Button key={value} variant="solid" theme="secondary">
+                                    {value}
+                                </Button>
+                            ))}
+                        </ButtonGroup>
+                    ))}
+                </ButtonToolbar>
+            </CheatsheetSection>
+            <CheatsheetSection id="card" title="Card" documentationPath="components/card">
+                <Row xs={1} md={2} className="g-4">
+                    {['image', 'featured', 'list', 'horizontal'].map(variant => (
+                        <Col key={variant}>
+                            <Card>
+                                {variant === 'image' && (
+                                    <ExamplePlaceholder
+                                        width="100%"
+                                        height="180"
+                                        className="card-img-top"
+                                    >
+                                        Image cap
+                                    </ExamplePlaceholder>
+                                )}
+                                {variant === 'featured' && <CardHeader>Featured</CardHeader>}
+                                {variant === 'horizontal' ? (
+                                    <Row className="g-0">
+                                        <Col md={4}>
+                                            <ExamplePlaceholder width="100%" height="250">
+                                                Image
+                                            </ExamplePlaceholder>
+                                        </Col>
+                                        <Col md={8}>
+                                            <CardBody>
+                                                <CardTitle>Card title</CardTitle>
+                                                <CardText>
+                                                    This is a wider card with supporting text below
+                                                    as a natural lead-in to additional content. This
+                                                    content is a little bit longer.
+                                                </CardText>
+                                                <CardText>
+                                                    <small className="fg-2">
+                                                        Last updated 3 mins ago
+                                                    </small>
+                                                </CardText>
+                                            </CardBody>
+                                        </Col>
+                                    </Row>
+                                ) : (
+                                    <>
+                                        <CardBody>
+                                            <CardTitle>Card title</CardTitle>
+                                            <CardText>
+                                                Some quick example text to build on the card title
+                                                and make up the bulk of the card's content.
+                                            </CardText>
+                                            {variant !== 'list' && (
+                                                <Button href="#" variant="solid" theme="primary">
+                                                    Go somewhere
+                                                </Button>
+                                            )}
+                                        </CardBody>
+                                        {variant === 'featured' && (
+                                            <CardFooter className="fg-2">2 days ago</CardFooter>
+                                        )}
+                                        {variant === 'list' && (
+                                            <>
+                                                <ListGroup flush>
+                                                    {[
+                                                        'An item',
+                                                        'A second item',
+                                                        'A third item'
+                                                    ].map(item => (
+                                                        <ListGroupItem key={item}>
+                                                            {item}
+                                                        </ListGroupItem>
+                                                    ))}
+                                                </ListGroup>
+                                                <CardBody className="flex-row gap-4">
+                                                    <a href="#">Card link</a>
+                                                    <a href="#">Another link</a>
+                                                </CardBody>
+                                            </>
+                                        )}
+                                    </>
+                                )}
+                            </Card>
+                        </Col>
+                    ))}
+                </Row>
+            </CheatsheetSection>
+            <CheatsheetSection
+                id="carousel"
+                title="Carousel"
+                documentationPath="components/carousel"
+            >
+                <Carousel
+                    id="carouselExample"
+                    autoplay
+                    controls
+                    controlsPlacement="bottom"
+                    controlsClassName="d-flex justify-content-between align-items-center mt-3"
+                    indicators
+                >
+                    {[
+                        { title: 'First slide', background: '#777', color: '#555' },
+                        { title: 'Second slide', background: '#666', color: '#444' },
+                        { title: 'Third slide', background: '#555', color: '#333' }
+                    ].map(({ title, background, color }) => (
+                        <CarouselSlide key={title}>
+                            <ExamplePlaceholder
+                                width="800"
+                                height="400"
+                                className="bd-placeholder-img-lg d-block w-100 rounded-5"
+                                color={color}
+                                background={background}
+                            >
+                                {title}
+                            </ExamplePlaceholder>
+                        </CarouselSlide>
+                    ))}
+                </Carousel>
+            </CheatsheetSection>
+            <CheatsheetSection id="dialog" title="Dialog" documentationPath="components/dialog">
+                <Stack direction="horizontal" gap={5} className="flex-wrap">
+                    <Button
+                        variant="solid"
+                        theme="primary"
+                        {...{ commandfor: 'exampleDialog', command: 'show-modal' }}
+                    >
+                        Launch demo dialog
+                    </Button>
+                    <Button
+                        variant="solid"
+                        theme="primary"
+                        {...{ commandfor: 'staticBackdropDialog', command: 'show-modal' }}
+                    >
+                        Launch static backdrop dialog
+                    </Button>
+                </Stack>
+            </CheatsheetSection>
+            <CheatsheetSection id="menus" title="Menus" documentationPath="components/menus">
+                <ButtonGroup className="w-100 align-items-center justify-content-between flex-wrap me-0">
+                    {['sm', undefined, 'lg'].map(size => (
+                        <Menu
+                            key={size ?? 'standard'}
+                            label="Menu"
+                            toggleProps={{ variant: 'solid', theme: 'secondary', size }}
+                        >
+                            <MenuHeader>Menu header</MenuHeader>
+                            {['Action', 'Another action', 'Something else here'].map(item => (
+                                <MenuItem key={item} href="#">
+                                    {item}
+                                </MenuItem>
+                            ))}
+                            <MenuDivider />
+                            <MenuItem href="#">Separated link</MenuItem>
+                        </Menu>
+                    ))}
+                </ButtonGroup>
 
                 <Stack direction="horizontal" gap={4} className="flex-wrap">
-                    {menuColors.map(({ name, title }) => (<ButtonGroup key={name}>
+                    {menuColors.map(({ name, title }) => (
+                        <ButtonGroup key={name}>
                             <Button variant="solid" theme={name}>
                                 {title}
                             </Button>
-                            <Menu label={<span className="visually-hidden">Toggle Menu</span>} split toggleProps={{ variant: 'solid', theme: name }}>
-                                {[
-    'Action',
-    'Another action',
-    'Something else here'
-
-].map(item => (<MenuItem key={item} href="#">
-{item}
-
-</MenuItem>))}
-</Menu>
-</ButtonGroup>))}
-</Stack>
+                            <Menu
+                                label={<span className="visually-hidden">Toggle Menu</span>}
+                                split
+                                toggleProps={{ variant: 'solid', theme: name }}
+                            >
+                                {['Action', 'Another action', 'Something else here'].map(item => (
+                                    <MenuItem key={item} href="#">
+                                        {item}
+                                    </MenuItem>
+                                ))}
+                            </Menu>
+                        </ButtonGroup>
+                    ))}
+                </Stack>
 
                 <ButtonGroup className="w-100 align-items-center justify-content-between flex-wrap me-0">
                     {[
-
-{ label: 'End menu', placement: 'right-start' },
-{ label: 'Up menu', placement: 'top-start' },
-{ label: 'Start menu', placement: 'left-start' }
-].map(({ label, placement }) => (<Menu key={label} label={label} placement={placement} toggleProps={{ variant: 'solid', theme: 'secondary' }}>
-
-<MenuHeader>Menu header</MenuHeader>
-{['Action', 'Another action', 'Something else here'].map(item => (<MenuItem key={item} href="#">
-{item}
-</MenuItem>))}
-<MenuDivider />
-<MenuItem href="#">Separated link</MenuItem>
-</Menu>))}
-</ButtonGroup>
+                        { label: 'End menu', placement: 'right-start' },
+                        { label: 'Up menu', placement: 'top-start' },
+                        { label: 'Start menu', placement: 'left-start' }
+                    ].map(({ label, placement }) => (
+                        <Menu
+                            key={label}
+                            label={label}
+                            placement={placement}
+                            toggleProps={{ variant: 'solid', theme: 'secondary' }}
+                        >
+                            <MenuHeader>Menu header</MenuHeader>
+                            {['Action', 'Another action', 'Something else here'].map(item => (
+                                <MenuItem key={item} href="#">
+                                    {item}
+                                </MenuItem>
+                            ))}
+                            <MenuDivider />
+                            <MenuItem href="#">Separated link</MenuItem>
+                        </Menu>
+                    ))}
+                </ButtonGroup>
 
                 <ButtonGroup>
-                    <Menu label="End-aligned menu" align="end" toggleProps={{ variant: 'solid', theme: 'secondary' }}>
+                    <Menu
+                        label="End-aligned menu"
+                        align="end"
+                        toggleProps={{ variant: 'solid', theme: 'secondary' }}
+                    >
                         <MenuHeader>Menu header</MenuHeader>
-                        {['Action', 'Another action'].map(item => (<MenuItem key={item} href="#">
+                        {['Action', 'Another action'].map(item => (
+                            <MenuItem key={item} href="#">
                                 {item}
-                            </MenuItem>))}
+                            </MenuItem>
+                        ))}
                         <MenuDivider />
                         <MenuItem href="#">Separated link</MenuItem>
                     </Menu>
                 </ButtonGroup>
             </CheatsheetSection>
-            <CheatsheetSection id="list-group" title="List group" documentationPath="components/list-group">
+            <CheatsheetSection
+                id="list-group"
+                title="List group"
+                documentationPath="components/list-group"
+            >
                 <ListGroup>
                     {[
-
-'A disabled item',
-'A second item',
-'A third item',
-'A fourth item',
-'And a fifth one'
-].map((item, index) => (<ListGroupItem key={item} disabled={!index}>
-{item}
-
-</ListGroupItem>))}
-</ListGroup>
+                        'A disabled item',
+                        'A second item',
+                        'A third item',
+                        'A fourth item',
+                        'And a fifth one'
+                    ].map((item, index) => (
+                        <ListGroupItem key={item} disabled={!index}>
+                            {item}
+                        </ListGroupItem>
+                    ))}
+                </ListGroup>
 
                 <ListGroup flush>
                     {[
-
-'An item',
-'A second item',
-'A third item',
-'A fourth item',
-'And a fifth one'
-].map(item => (<ListGroupItem key={item}>{item}</ListGroupItem>))}
-
-</ListGroup>
+                        'An item',
+                        'A second item',
+                        'A third item',
+                        'A fourth item',
+                        'And a fifth one'
+                    ].map(item => (
+                        <ListGroupItem key={item}>{item}</ListGroupItem>
+                    ))}
+                </ListGroup>
 
                 <ListGroup>
                     {[
-
-{ name: 'default', title: 'Default' },
-...themeColors.map(({ name, title }) => ({ name, title }))
-].map(({ name, title }) => (<ListGroupItem key={name} href="#" action theme={name === 'default' ? undefined : name}>
-A simple {title.toLowerCase()} list group item
-
-</ListGroupItem>))}
-</ListGroup>
-</CheatsheetSection>
-<CheatsheetSection id="navs" title="Navs" documentationPath="components/nav">
-<Nav aria-label="Primary navigation">
-{basicNavigationLinks.map(({ label, id, active, disabled }, index) => (<NavLink key={id ?? label + index} href={disabled ? undefined : '#'} active={active} disabled={disabled}>
-{label}
-</NavLink>))}
-</Nav>
+                        { name: 'default', title: 'Default' },
+                        ...themeColors.map(({ name, title }) => ({ name, title }))
+                    ].map(({ name, title }) => (
+                        <ListGroupItem
+                            key={name}
+                            href="#"
+                            action
+                            theme={name === 'default' ? undefined : name}
+                        >
+                            A simple {title.toLowerCase()} list group item
+                        </ListGroupItem>
+                    ))}
+                </ListGroup>
+            </CheatsheetSection>
+            <CheatsheetSection id="navs" title="Navs" documentationPath="components/nav">
+                <Nav aria-label="Primary navigation">
+                    {basicNavigationLinks.map(({ label, id, active, disabled }, index) => (
+                        <NavLink
+                            key={id ?? label + index}
+                            href={disabled ? undefined : '#'}
+                            active={active}
+                            disabled={disabled}
+                        >
+                            {label}
+                        </NavLink>
+                    ))}
+                </Nav>
 
                 <Tabs id="nav-tab" variant="tabs" defaultActiveKey="home">
-                    {tabExamples.map(({ id, title }) => (<Tab key={id} eventKey={id} label={title}>
+                    {tabExamples.map(({ id, title }) => (
+                        <Tab key={id} eventKey={id} label={title}>
                             <p>
                                 This is some placeholder content for the{' '}
-                                <strong>{title} tab's</strong> associated content. Clicking
-                                another tab switches the content. The tab component manages
-                                visibility and keyboard interaction.
+                                <strong>{title} tab's</strong> associated content. Clicking another
+                                tab switches the content. The tab component manages visibility and
+                                keyboard interaction.
                             </p>
-                        </Tab>))}
+                        </Tab>
+                    ))}
                 </Tabs>
 
                 <Nav variant="pills" as="ul">
-                    {basicNavigationLinks.map(({ label, id, active, disabled }, index) => (<li key={id ?? label + index} className="nav-item">
-                            <NavLink href={disabled ? undefined : '#'} active={active} disabled={disabled}>
+                    {basicNavigationLinks.map(({ label, id, active, disabled }, index) => (
+                        <li key={id ?? label + index} className="nav-item">
+                            <NavLink
+                                href={disabled ? undefined : '#'}
+                                active={active}
+                                disabled={disabled}
+                            >
                                 {label}
                             </NavLink>
-                        </li>))}
+                        </li>
+                    ))}
                 </Nav>
             </CheatsheetSection>
             <CheatsheetSection id="navbar" title="Navbar" documentationPath="components/navbar">
                 <div>
                     {[
-
-{
-id: 'navbarSupportedContent',
-theme: 'light',
-background: 'bg-1',
-buttonTheme: 'dark'
-},
-{
-id: 'navbarSupportedContent2',
-theme: 'dark',
-background: 'bg-primary',
-buttonTheme: 'light'
-}
-].map(({ id, theme, background, buttonTheme }) => (<Navbar key={id} expand="lg" theme={theme} className={background}>
-
-<Container fluid>
-<NavbarBrand href="#">
-<img src="https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg" width="38" height="30" alt="Bootstrap" loading="lazy"/>
-</NavbarBrand>
-<NavbarToggler {...{ commandfor: id, command: 'show-modal' }}/>
-<Drawer id={id} title="Navigation" placement="end">
-<NavbarNav className="me-auto mb-2 lg:mb-0">
-{navbarLinks.map(({ id, title, active, disabled }) => (<li key={id} className="nav-item">
-{id === 'menu' ? (<Menu label={title} nav>
-{[
-'Action',
-'Another action'
-].map(item => (<MenuItem key={item} href="#">
-{item}
-</MenuItem>))}
-<MenuDivider />
-<MenuItem href="#">Something else here</MenuItem>
-</Menu>) : (<NavLink active={active} disabled={disabled} href={disabled ? undefined : '#'}>
-{title}
-</NavLink>)}
-</li>))}
-</NavbarNav>
-<Form role="search" className="d-flex">
-<FormControl type="search" className="me-2" placeholder="Search" aria-label="Search"/>
-<Button variant="outline" theme={buttonTheme} type="submit">Search</Button>
-</Form>
-</Drawer>
-</Container>
-</Navbar>))}
-</div>
-</CheatsheetSection>
-<CheatsheetSection id="pagination" title="Pagination" documentationPath="components/pagination">
-<nav aria-label="Pagination example">
-<Pagination size="sm">
-{[1, 2, 3].map(page => (<PageItem key={page} active={page === 2}>
-<PageLink href="#">{page}</PageLink>
-</PageItem>))}
-</Pagination>
-</nav>
+                        {
+                            id: 'navbarSupportedContent',
+                            theme: 'light',
+                            background: 'bg-1',
+                            buttonTheme: 'dark'
+                        },
+                        {
+                            id: 'navbarSupportedContent2',
+                            theme: 'dark',
+                            background: 'bg-primary',
+                            buttonTheme: 'light'
+                        }
+                    ].map(({ id, theme, background, buttonTheme }) => (
+                        <Navbar key={id} expand="lg" theme={theme} className={background}>
+                            <Container fluid>
+                                <NavbarBrand href="#">
+                                    <img
+                                        src="https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo-white.svg"
+                                        width="38"
+                                        height="30"
+                                        alt="Bootstrap"
+                                        loading="lazy"
+                                    />
+                                </NavbarBrand>
+                                <NavbarToggler {...{ commandfor: id, command: 'show-modal' }} />
+                                <Drawer id={id} title="Navigation" placement="end">
+                                    <NavbarNav className="me-auto mb-2 lg:mb-0">
+                                        {navbarLinks.map(({ id, title, active, disabled }) => (
+                                            <li key={id} className="nav-item">
+                                                {id === 'menu' ? (
+                                                    <Menu label={title} nav>
+                                                        {['Action', 'Another action'].map(item => (
+                                                            <MenuItem key={item} href="#">
+                                                                {item}
+                                                            </MenuItem>
+                                                        ))}
+                                                        <MenuDivider />
+                                                        <MenuItem href="#">
+                                                            Something else here
+                                                        </MenuItem>
+                                                    </Menu>
+                                                ) : (
+                                                    <NavLink
+                                                        active={active}
+                                                        disabled={disabled}
+                                                        href={disabled ? undefined : '#'}
+                                                    >
+                                                        {title}
+                                                    </NavLink>
+                                                )}
+                                            </li>
+                                        ))}
+                                    </NavbarNav>
+                                    <Form role="search" className="d-flex">
+                                        <FormControl
+                                            type="search"
+                                            className="me-2"
+                                            placeholder="Search"
+                                            aria-label="Search"
+                                        />
+                                        <Button variant="outline" theme={buttonTheme} type="submit">
+                                            Search
+                                        </Button>
+                                    </Form>
+                                </Drawer>
+                            </Container>
+                        </Navbar>
+                    ))}
+                </div>
+            </CheatsheetSection>
+            <CheatsheetSection
+                id="pagination"
+                title="Pagination"
+                documentationPath="components/pagination"
+            >
+                <nav aria-label="Pagination example">
+                    <Pagination size="sm">
+                        {[1, 2, 3].map(page => (
+                            <PageItem key={page} active={page === 2}>
+                                <PageLink href="#">{page}</PageLink>
+                            </PageItem>
+                        ))}
+                    </Pagination>
+                </nav>
 
                 <nav aria-label="Standard pagination example">
                     <Pagination>
                         <PageItem>
-                            <PageLink href="#" aria-label="Previous">Previous</PageLink>
+                            <PageLink href="#" aria-label="Previous">
+                                Previous
+                            </PageLink>
                         </PageItem>
-                        {[1, 2, 3].map(page => (<PageItem key={page}>
+                        {[1, 2, 3].map(page => (
+                            <PageItem key={page}>
                                 <PageLink href="#">{page}</PageLink>
-                            </PageItem>))}
+                            </PageItem>
+                        ))}
                         <PageItem>
-                            <PageLink href="#" aria-label="Next">Next</PageLink>
+                            <PageLink href="#" aria-label="Next">
+                                Next
+                            </PageLink>
                         </PageItem>
                     </Pagination>
                 </nav>
@@ -988,130 +1380,211 @@ buttonTheme: 'light'
                         <PageItem disabled>
                             <PageLink>Previous</PageLink>
                         </PageItem>
-                        {[1, 2, 3].map(page => (<PageItem key={page} active={page === 2}>
+                        {[1, 2, 3].map(page => (
+                            <PageItem key={page} active={page === 2}>
                                 <PageLink href="#">{page}</PageLink>
-                            </PageItem>))}
+                            </PageItem>
+                        ))}
                         <PageItem>
                             <PageLink href="#">Next</PageLink>
                         </PageItem>
                     </Pagination>
                 </nav>
             </CheatsheetSection>
-            <CheatsheetSection id="popovers" title="Popovers" documentationPath="components/popovers">
+            <CheatsheetSection
+                id="popovers"
+                title="Popovers"
+                documentationPath="components/popovers"
+            >
                 <Stack direction="horizontal" gap={3} className="flex-wrap">
-                    <OverlayBox title="Popover title" detail="And here's some amazing content. It's very engaging. Right?" trigger="click">
-                        <Button variant="solid" theme="danger" size="lg">Click to toggle popover</Button>
+                    <OverlayBox
+                        title="Popover title"
+                        detail="And here's some amazing content. It's very engaging. Right?"
+                        trigger="click"
+                    >
+                        <Button variant="solid" theme="danger" size="lg">
+                            Click to toggle popover
+                        </Button>
                     </OverlayBox>
                     {[
+                        { placement: 'top', label: 'Popover on top' },
+                        { placement: 'right', label: 'Popover on end' },
+                        { placement: 'bottom', label: 'Popover on bottom' },
+                        { placement: 'left', label: 'Popover on start' }
+                    ].map(({ placement, label }) => (
+                        <OverlayBox
+                            key={placement}
+                            title={label}
+                            detail="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+                            placement={placement}
+                            trigger="click"
+                        >
+                            <Button variant="solid" theme="secondary">
+                                {label}
+                            </Button>
+                        </OverlayBox>
+                    ))}
+                </Stack>
+            </CheatsheetSection>
+            <CheatsheetSection
+                id="progress"
+                title="Progress"
+                documentationPath="components/progress"
+            >
+                <div>
+                    {[
+                        { value: 0, label: '0%' },
+                        { value: 25, label: '25%', theme: 'success' },
+                        { value: 50, label: '50%', theme: 'info' },
+                        { value: 75, label: '75%', theme: 'warning' },
+                        { value: 100, label: '100%', theme: 'danger' }
+                    ].map(({ value, label, theme }) => (
+                        <Progress
+                            key={value}
+                            value={value}
+                            theme={theme}
+                            className="mb-3"
+                            aria-label={label + ' complete'}
+                        >
+                            {label}
+                        </Progress>
+                    ))}
+                </div>
+                <ProgressStack>
+                    <Progress value={15} aria-label="Segment one - default example" />
+                    <Progress
+                        value={40}
+                        theme="success"
+                        striped
+                        animated
+                        aria-label="Segment two - animated striped success example"
+                    />
+                </ProgressStack>
+            </CheatsheetSection>
+            <CheatsheetSection
+                id="scrollspy"
+                title="Scrollspy"
+                documentationPath="components/scrollspy"
+            >
+                <div>
+                    <Navbar id="navbar-example2" className="bg-1 px-3">
+                        <NavbarBrand href="#">Navbar</NavbarBrand>
+                        <Nav variant="pills">
+                            {['First', 'Second', 'Third', 'Fourth', 'Fifth'].map((label, index) => (
+                                <NavLink key={label} href={'#scrollspyHeading' + (index + 1)}>
+                                    {label}
+                                </NavLink>
+                            ))}
+                        </Nav>
+                    </Navbar>
+                    <ScrollSpy
+                        target="#navbar-example2"
+                        className="scrollspy-example mt-2 overflow-auto"
+                    >
+                        {['First', 'Second', 'Third', 'Fourth', 'Fifth'].map((label, index) => (
+                            <section key={label}>
+                                <h4 id={'scrollspyHeading' + (index + 1)}>{label} heading</h4>
+                                <p>
+                                    This is some placeholder content for the scrollspy page. Note
+                                    that as you scroll down the page, the appropriate navigation
+                                    link is highlighted. It's repeated throughout the component
+                                    example. We keep adding some more example copy here to emphasize
+                                    the scrolling and highlighting.
+                                </p>
+                            </section>
+                        ))}
+                    </ScrollSpy>
+                </div>
+            </CheatsheetSection>
+            <CheatsheetSection
+                id="spinners"
+                title="Spinners"
+                documentationPath="components/spinners"
+            >
+                <Stack direction="horizontal" gap={3} className="flex-wrap">
+                    {themeColors.map(({ name }) => (
+                        <Spinner key={name} className={`fg-${name}`}>
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    ))}
+                </Stack>
+                <Stack direction="horizontal" gap={3} className="flex-wrap">
+                    {themeColors.map(({ name }) => (
+                        <Spinner key={name} animation="grow" className={`fg-${name}`}>
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    ))}
+                </Stack>
+            </CheatsheetSection>
+            <CheatsheetSection id="toasts" title="Toasts" documentationPath="components/toasts">
+                <ToastItem role="alert" aria-live="assertive" aria-atomic="true">
+                    <ToastHeader>
+                        <ExamplePlaceholder
+                            width="20px"
+                            height="20px"
+                            background="#007aff"
+                            className="rounded me-2"
+                        />
+                        <strong className="me-auto">Bootstrap</strong>
+                        <small className="fg-2">11 mins ago</small>
+                        <CloseButton aria-label="Close" />
+                    </ToastHeader>
+                    <ToastBody>Hello, world! This is a toast message.</ToastBody>
+                </ToastItem>
+            </CheatsheetSection>
+            <CheatsheetSection
+                id="tooltips"
+                title="Tooltips"
+                documentationPath="components/tooltip"
+                className="mt-3 mb-5 pb-5"
+            >
+                <Stack direction="horizontal" gap={3} className="flex-wrap">
+                    {[
+                        { placement: 'top', label: 'Tooltip on top' },
+                        { placement: 'right', label: 'Tooltip on end' },
+                        { placement: 'bottom', label: 'Tooltip on bottom' },
+                        { placement: 'left', label: 'Tooltip on start' }
+                    ].map(({ placement, label }) => (
+                        <OverlayBox key={placement} title={label} placement={placement}>
+                            <Button variant="solid" theme="secondary">
+                                {label}
+                            </Button>
+                        </OverlayBox>
+                    ))}
+                    <OverlayBox
+                        title={
+                            <>
+                                <em>Tooltip</em> <u>with</u> <b>HTML</b>
+                            </>
+                        }
+                    >
+                        <Button variant="solid" theme="secondary">
+                            Tooltip with HTML
+                        </Button>
+                    </OverlayBox>
+                </Stack>
+            </CheatsheetSection>
+        </section>
+    </Container>
 
-{ placement: 'top', label: 'Popover on top' },
-{ placement: 'right', label: 'Popover on end' },
-{ placement: 'bottom', label: 'Popover on bottom' },
-{ placement: 'left', label: 'Popover on start' }
-].map(({ placement, label }) => (<OverlayBox key={placement} title={label} detail="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." placement={placement} trigger="click">
-
-<Button variant="solid" theme="secondary">
-{label}
-</Button>
-</OverlayBox>))}
-</Stack>
-</CheatsheetSection>
-<CheatsheetSection id="progress" title="Progress" documentationPath="components/progress">
-<div>
-{[
-{ value: 0, label: '0%' },
-{ value: 25, label: '25%', theme: 'success' },
-{ value: 50, label: '50%', theme: 'info' },
-{ value: 75, label: '75%', theme: 'warning' },
-{ value: 100, label: '100%', theme: 'danger' }
-].map(({ value, label, theme }) => (<Progress key={value} value={value} theme={theme} className="mb-3" aria-label={label + ' complete'}>
-{label}
-</Progress>))}
-</div>
-<ProgressStack>
-<Progress value={15} aria-label="Segment one - default example"/>
-<Progress value={40} theme="success" striped animated aria-label="Segment two - animated striped success example"/>
-</ProgressStack>
-</CheatsheetSection>
-<CheatsheetSection id="scrollspy" title="Scrollspy" documentationPath="components/scrollspy">
-<div>
-<Navbar id="navbar-example2" className="bg-1 px-3">
-<NavbarBrand href="#">Navbar</NavbarBrand>
-<Nav variant="pills">
-{['First', 'Second', 'Third', 'Fourth', 'Fifth'].map((label, index) => (<NavLink key={label} href={'#scrollspyHeading' + (index + 1)}>
-{label}
-</NavLink>))}
-</Nav>
-</Navbar>
-<ScrollSpy target="#navbar-example2" className="scrollspy-example mt-2 overflow-auto">
-{['First', 'Second', 'Third', 'Fourth', 'Fifth'].map((label, index) => (<section key={label}>
-<h4 id={'scrollspyHeading' + (index + 1)}>
-{label} heading
-</h4>
-<p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
-</section>))}
-</ScrollSpy>
-</div>
-</CheatsheetSection>
-<CheatsheetSection id="spinners" title="Spinners" documentationPath="components/spinners">
-<Stack direction="horizontal" gap={3} className="flex-wrap">
-{themeColors.map(({ name }) => (<Spinner key={name} className={`fg-${name}`}>
-<span className="visually-hidden">Loading...</span>
-</Spinner>))}
-</Stack>
-<Stack direction="horizontal" gap={3} className="flex-wrap">
-{themeColors.map(({ name }) => (<Spinner key={name} animation="grow" className={`fg-${name}`}>
-<span className="visually-hidden">Loading...</span>
-</Spinner>))}
-</Stack>
-</CheatsheetSection>
-<CheatsheetSection id="toasts" title="Toasts" documentationPath="components/toasts">
-<ToastItem role="alert" aria-live="assertive" aria-atomic="true">
-<ToastHeader>
-<ExamplePlaceholder width="20px" height="20px" background="#007aff" className="rounded me-2"/>
-<strong className="me-auto">Bootstrap</strong>
-<small className="fg-2">11 mins ago</small>
-<CloseButton aria-label="Close"/>
-</ToastHeader>
-<ToastBody>Hello, world! This is a toast message.</ToastBody>
-</ToastItem>
-</CheatsheetSection>
-<CheatsheetSection id="tooltips" title="Tooltips" documentationPath="components/tooltip" className="mt-3 mb-5 pb-5">
-<Stack direction="horizontal" gap={3} className="flex-wrap">
-{[
-{ placement: 'top', label: 'Tooltip on top' },
-{ placement: 'right', label: 'Tooltip on end' },
-{ placement: 'bottom', label: 'Tooltip on bottom' },
-{ placement: 'left', label: 'Tooltip on start' }
-].map(({ placement, label }) => (<OverlayBox key={placement} title={label} placement={placement}>
-<Button variant="solid" theme="secondary">
-{label}
-</Button>
-</OverlayBox>))}
-<OverlayBox title={<>
-<em>Tooltip</em> <u>with</u> <b>HTML</b>
-</>}>
-<Button variant="solid" theme="secondary">Tooltip with HTML</Button>
-</OverlayBox>
-</Stack>
-</CheatsheetSection>
-</section>
-</Container>
-
-    {dialogExamples.map(({ id, title, description, action, backdrop, keyboard }) => (<NativeDialog key={id} id={id} backdrop={backdrop} keyboard={keyboard}>
+    {dialogExamples.map(({ id, title, description, action, backdrop, keyboard }) => (
+        <NativeDialog key={id} id={id} backdrop={backdrop} keyboard={keyboard}>
             <DialogHeader>
                 <DialogTitle className="fs-lg">{title}</DialogTitle>
-                <CloseButton {...{ commandfor: id, command: 'close' }} aria-label="Close"/>
+                <CloseButton {...{ commandfor: id, command: 'close' }} aria-label="Close" />
             </DialogHeader>
             <DialogBody>
                 <p>{description}</p>
             </DialogBody>
             <DialogFooter>
-                <Button variant="solid" theme="secondary" {...{ commandfor: id, command: 'close' }}>Close</Button>
+                <Button variant="solid" theme="secondary" {...{ commandfor: id, command: 'close' }}>
+                    Close
+                </Button>
                 <Button variant="solid" theme="primary">
                     {action}
                 </Button>
             </DialogFooter>
-        </NativeDialog>))}
+        </NativeDialog>
+    ))}
 
 </BaseLayout>

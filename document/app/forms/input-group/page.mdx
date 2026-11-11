@@ -52,11 +52,11 @@ Pass `htmlFor` to `InputGroupText` to render the add-on itself as a label for it
 
 ## Examples
 
-Place one add-on or button on either side of an input. You may also place one on both sides of an input. Remember to place `<label>`s outside the input group.
+Place one add-on or button on either side of a control, or add one to both sides. Place [`FormLabel`][1] outside `InputGroup` so the label remains associated with the control.
 
 ## With form field
 
-Wrap an `.input-group` in a `.form-field` to pair it with a label and description text.
+Wrap `InputGroup` in [`FormField`][1] to pair it with a label and description.
 
 <CodeExample>
     <FormField>
@@ -217,7 +217,7 @@ Place any checkbox or radio within an input group’s addon instead of text.
 
 ### Multiple inputs
 
-While multiple `<input>`s are supported visually, validation styles are only available for input groups with a single `<input>`.
+Although `InputGroup` can display multiple [`FormControl`][3] components, validation styles are available only when the group contains a single control.
 
 <CodeExample>
     <Stack gap={3}>
@@ -426,7 +426,7 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
 
 ## Border radius
 
-Sometimes building these components gets complicated, and CSS selectors can only do so much. We’ve accounted for most of the common use cases, but in case you need to provide an extra element and skip the border-radius logic, add the `.input-group-ignore` class to the element.
+Sometimes an extra element needs to bypass the group's border-radius adjustments. Wrap that element in `InputGroupIgnore` to preserve its own border radius.
 
 Consider this extra hidden input example:
 
@@ -453,7 +453,7 @@ Consider this extra hidden input example:
 
 ## Sizing
 
-Add the relative form sizing classes to the `.input-group` itself and contents within will automatically resize—no need for repeating the form control size classes on each element.
+Set the `size` prop on `InputGroup` to resize its contents; you do not need to repeat the size prop on each form control.
 
 **Sizing on the individual input group elements isn’t supported.**
 
@@ -506,3 +506,4 @@ Add the relative form sizing classes to the `.input-group` itself and contents w
 
 [1]: ../field/
 [2]: ../../components/button/
+[3]: ../form-control/

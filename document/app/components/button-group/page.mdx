@@ -18,7 +18,7 @@ accessible label for each group or toolbar.
 
 ## Examples
 
-Wrap a series of buttons in `.btn-group`.
+Wrap a series of buttons in `ButtonGroup`.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -36,11 +36,11 @@ Wrap a series of buttons in `.btn-group`.
     </div>
 </CodeExample>
 
-> Button groups require an appropriate `role` attribute and explicit label to ensure assistive technologies like screen readers identify buttons as grouped and announce them. Use `role="group"` for button groups or `role="toolbar"` for button toolbars. Then use `aria-label` or `aria-labelledby` to label them.
+> [Button][1] groups require an appropriate `role` attribute and explicit label to ensure assistive technologies like screen readers identify buttons as grouped and announce them. Use `role="group"` for button groups or `role="toolbar"` for button toolbars. Then use `aria-label` or `aria-labelledby` to label them.
 
 ### With links
 
-These classes can also be added to groups of links, as an alternative to the [`.nav` navigation components][1].
+`ButtonGroup` can also group links; use the [navigation components][2] for navigation-specific behavior.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -60,7 +60,7 @@ These classes can also be added to groups of links, as an alternative to the [`.
 
 ### Dividers
 
-Add a divider between buttons by adding the `.btn-group-divider` class to the `.btn-group`. Most useful when used with buttons that have the same theme color and a solid fill.
+Set the `divider` prop on `ButtonGroup` to add dividers between buttons. This is most useful with buttons that share a theme color and solid fill.
 
 <CodeExample>
     <div className="d-flex gap-2">
@@ -114,7 +114,7 @@ Works with vertical button groups, too.
 
 ## Theme variants
 
-Ue the `.theme-{color}` classes to apply a theme color to a set of buttons.
+Set the `theme` prop on each [`Button`][1] in the group to apply a consistent theme color.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -152,7 +152,7 @@ You can mix and match button variants in a button group.
 
 ## Style variants
 
-All button styles are supported in button groups. Mix and match with the `.btn-group-divider` class to add dividers between some styles or just use the button borders in others.
+All button styles are supported in button groups. Set `divider` on `ButtonGroup` to add dividers between some styles, or use the button borders with other styles.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -206,7 +206,7 @@ All button styles are supported in button groups. Mix and match with the `.btn-g
 
 ### Checkbox
 
-Checkbox toggle buttons can be grouped together. Any or all of the buttons can be checked.
+[Checkbox][3] toggle buttons can be grouped together. Any or all of the buttons can be checked.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -252,7 +252,8 @@ By design, radio toggle button groups can only have one button checked at a time
 
 ## Button toolbar
 
-Combine sets of button groups into button toolbars for more complex components. Use utility classes as needed to space out groups, buttons, and more.
+Combine `ButtonGroup` components inside `ButtonToolbar` for more complex layouts. Pass spacing
+utilities through the `className` of the toolbar or its children.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -291,7 +292,8 @@ Combine sets of button groups into button toolbars for more complex components. 
     </div>
 </CodeExample>
 
-Feel free to mix input groups with button groups in your toolbars. Similar to the example above, you’ll likely need some utilities though to space things properly.
+Feel free to mix input groups with button groups in your toolbars. As in the example above, you may
+need spacing utilities through `className` to lay them out.
 
 <CodeExample>
     <div className="d-flex gap-3 flex-column">
@@ -354,7 +356,7 @@ Feel free to mix input groups with button groups in your toolbars. Similar to th
 
 ## Sizing
 
-Instead of applying button sizing classes to every button in a group, just add `.btn-group-*` to each `.btn-group`, including each one when nesting multiple groups.
+Set the `size` prop on `ButtonGroup` to resize its buttons together. Set it on each group independently when nesting multiple groups.
 
 <CodeExample>
     <div className="d-flex gap-3 flex-column align-items-start">
@@ -407,7 +409,7 @@ Instead of applying button sizing classes to every button in a group, just add `
 
 ## Nesting
 
-Place a `.btn-group` within another `.btn-group` when you want menus mixed with a series of buttons.
+Place a `ButtonGroup` inside another `ButtonGroup` when you want menus mixed with a series of buttons.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -534,4 +536,6 @@ Make a set of buttons appear vertically stacked rather than horizontally. **Spli
 
 </DocumentLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/components/nav/
+[1]: ../button/
+[2]: https://getbootstrap.com/docs/6.0/components/nav/
+[3]: ../../forms/checkbox/

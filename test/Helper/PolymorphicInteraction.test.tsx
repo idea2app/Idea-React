@@ -138,7 +138,7 @@ it('composes library wrappers without discarding either wrapper class', () => {
             Documentation
         </Button>
     );
-    const link = screen.getByRole('button', { name: 'Documentation' });
+    const link = screen.getByRole('link', { name: 'Documentation' });
 
     assert.ok(link.classList.contains('btn'));
     assert.ok(link.classList.contains('theme-primary'));

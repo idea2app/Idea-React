@@ -29,7 +29,9 @@ The animation effect of this component is dependent on the `prefers-reduced-moti
 
 ### Basic
 
-To encourage extensible and predictable toasts, we recommend a header and body. Toast headers use `display: flex`, allowing easy alignment of content thanks to our margin and flexbox utilities.
+To encourage extensible and predictable toasts, we recommend a header and body. Toast headers use
+`display: flex`, allowing easy alignment with margin and flexbox utilities passed through
+`className`.
 
 Toasts are as flexible as you need and have very little required markup. At a minimum, we require a single element to contain your “toasted” content and strongly encourage a dismiss button.
 
@@ -80,7 +82,8 @@ Set a toast to dark mode by setting `data-bs-theme="dark"` on a parent element.
 
 ### Variants
 
-Toasts can be themed with the `theme` prop, based on our [theme color utilities][1]. Apply to the entire toast or individual elements within the toast.
+Set the `theme` prop to apply a theme color to the toast. Use theme color utilities through
+`className` on individual elements.
 
 <CodeExample>
     <Stack gap={3}>
@@ -97,7 +100,9 @@ Toasts can be themed with the `theme` prop, based on our [theme color utilities]
 
 ### Custom content
 
-Customize your toasts by removing sub-components, tweaking them with [utilities][2], or by adding your own markup. Here we’ve created a simpler toast by removing the default `ToastHeader`, adding a custom hide icon from [Bootstrap Icons][3], and using some [flexbox utilities][4] to adjust the layout.
+Customize your toasts by removing sub-components, adding your own content, or passing utility class
+names through `className`. For example, render [`Icon`][1] for a hide control and use flexbox utilities
+to adjust the layout.
 
 <CodeExample>
     <StaticToast noHeader body="Hello, world! This is a toast message." />
@@ -135,7 +140,8 @@ For systems that generate more notifications, consider using a wrapping element 
     </div>
 </CodeExample>
 
-You can also get fancy with flexbox utilities to align toasts horizontally and/or vertically.
+Use flexbox utilities through `ToastContainer`'s `className` to align toasts horizontally or
+vertically.
 
 <CodeExample>
     <ToastContainer position="static" className="mx-auto">
@@ -146,7 +152,7 @@ You can also get fancy with flexbox utilities to align toasts horizontally and/o
 
 ## Accessibility
 
-Toasts are intended to be small interruptions to your visitors or users, so to help those with screen readers and similar assistive technologies, you should wrap your toasts in an [`aria-live` region][5]. Changes to live regions (such as injecting/updating a toast component) are automatically announced by screen readers without needing to move the user’s focus or otherwise interrupt the user. Additionally, include `aria-atomic="true"` to ensure that the entire toast is always announced as a single (atomic) unit, rather than just announcing what was changed (which could lead to problems if you only update part of the toast’s content, or if displaying the same toast content at a later point in time). If the information needed is important for the process, e.g. for a list of errors in a form, then use the [alert component][6] instead of toast.
+Toasts are intended to be small interruptions to your visitors or users, so to help those with screen readers and similar assistive technologies, you should wrap your toasts in an [`aria-live` region][2]. Changes to live regions (such as injecting/updating a toast component) are automatically announced by screen readers without needing to move the user’s focus or otherwise interrupt the user. Additionally, include `aria-atomic="true"` to ensure that the entire toast is always announced as a single (atomic) unit, rather than just announcing what was changed (which could lead to problems if you only update part of the toast’s content, or if displaying the same toast content at a later point in time). If the information needed is important for the process, e.g. for a list of errors in a form, then use the [alert component][3] instead of toast.
 
 Note that the live region needs to be present in the markup _before_ the toast is generated or updated. If you dynamically generate both at the same time and inject them into the page, they will generally not be announced by assistive technologies.
 
@@ -158,7 +164,7 @@ You also need to adapt the `role` and `aria-live` level depending on the content
     </ToastContainer>
 </CodeExample>
 
-As the content you’re displaying changes, be sure to update the [`delay` timeout][7] so that users have enough time to read the toast.
+As the content you’re displaying changes, be sure to update the [`delay` timeout][4] so that users have enough time to read the toast.
 
 When using `delay: 0`, you must add a close button to allow users to dismiss the toast.
 
@@ -170,13 +176,13 @@ When using `delay: 0`, you must add a close button to allow users to dismiss the
     />
 </CodeExample>
 
-While technically it’s possible to add focusable/actionable controls (such as additional buttons or links) in your toast, you should avoid doing this for autohiding toasts. Even if you give the toast a long [`delay` timeout][7], keyboard and assistive technology users may find it difficult to reach the toast in time to take action (since toasts don’t receive focus when they are displayed). If you absolutely must have further controls, we recommend using a toast with `delay: 0`.
+While technically it’s possible to add focusable/actionable controls (such as additional buttons or links) in your toast, you should avoid doing this for autohiding toasts. Even if you give the toast a long [`delay` timeout][4], keyboard and assistive technology users may find it difficult to reach the toast in time to take action (since toasts don’t receive focus when they are displayed). If you absolutely must have further controls, we recommend using a toast with `delay: 0`.
 
 ## CSS
 
 ### Variables
 
-Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][8].
+Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][5].
 
 | Variable                         | Default                              |
 | -------------------------------- | ------------------------------------ |
@@ -220,11 +226,8 @@ Create a `Toast` model and mount its `Component` to establish the live region be
 
 </DocumentLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/customize/theme/
-[2]: https://getbootstrap.com/docs/6.0/utilities/api/
-[3]: https://icons.getbootstrap.com/
-[4]: https://getbootstrap.com/docs/6.0/utilities/flex/
-[5]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions
-[6]: https://getbootstrap.com/docs/6.0/components/alerts/
-[7]: #accessibility
-[8]: https://getbootstrap.com/docs/6.0/components/toasts/#variables
+[1]: ../../extensions/icon/
+[2]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions
+[3]: https://getbootstrap.com/docs/6.0/components/alerts/
+[4]: #accessibility
+[5]: https://getbootstrap.com/docs/6.0/components/toasts/#variables

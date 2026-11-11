@@ -13,7 +13,10 @@ Provide contextual feedback messages for typical user actions with the handful o
 
 ## Default alert
 
-Alerts are flex containers that can contain any length of text, as well as an optional close button. They’re designed to be used with theme colors, but have neutral fallback colors for when no theme color is applied. For inline dismissal, use the `dismissible` prop. [Custom content][1] is also supported, with additional utilities or markup required.
+Alerts are flex containers that can contain any length of text and an optional close button. They’re
+designed to be used with theme colors, but have neutral fallback colors when no theme is applied.
+For inline dismissal, use the `dismissible` prop. Add custom content as children and style it with
+components or `className` utilities as needed.
 
 <CodeExample>
     <Alert>
@@ -128,7 +131,8 @@ Use the `AlertLink` component to quickly provide matching colored links within a
 
 ## With icons
 
-Similarly, you can use [flexbox utilities][2] and [Bootstrap Icons][3] to create alerts with icons. Depending on your icons and content, you may want to add more utilities or custom styles.
+Render [`Icon`][1] inside `Alert` for an icon, and use flexbox utilities through `className` to align the
+content. Depending on the icon and content, you may need additional utilities or custom styles.
 
 <CodeExample>
     <Alert theme="primary" className="align-items-center">
@@ -141,10 +145,10 @@ Similarly, you can use [flexbox utilities][2] and [Bootstrap Icons][3] to create
 
 Use the `dismissible` prop to dismiss an alert inline. Here’s how:
 
-- `dismissible` adds a [close button][4] to the alert.
+- `dismissible` adds a [close button][2] to the alert.
 - Use `onClosed` to synchronize application state after dismissal.
 
-An alert fades out before it is removed. The wrapper adds its exit state for the length of the transition, so no extra classes are needed in your markup. Pass `instant` to remove the alert at once instead. See [Transitions][5] for the tokens that tune the fade.
+An alert fades out before it is removed. The wrapper adds its exit state for the length of the transition, so no extra classes are needed in your markup. Pass `instant` to remove the alert at once instead. See [Transitions][3] for the tokens that tune the fade.
 
 You can see this in action with a live demo:
 
@@ -192,7 +196,7 @@ More complex layouts may require additional HTML within the alert—like when mi
 
 ### Variables
 
-Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][6].
+Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][4].
 
 | Variable                         | Default                  |
 | -------------------------------- | ------------------------ |
@@ -218,9 +222,7 @@ The React wrapper manages dismissal and removes the alert after its fade transit
 
 </DocumentLayout>
 
-[1]: #additional-content
-[2]: https://getbootstrap.com/docs/6.0/utilities/flex/
-[3]: https://icons.getbootstrap.com/
-[4]: https://getbootstrap.com/docs/6.0/components/close-button/
-[5]: https://getbootstrap.com/docs/6.0/customize/transitions/
-[6]: https://getbootstrap.com/docs/6.0/components/alert/#variables
+[1]: ../../extensions/icon/
+[2]: https://getbootstrap.com/docs/6.0/components/close-button/
+[3]: https://getbootstrap.com/docs/6.0/customize/transitions/
+[4]: https://getbootstrap.com/docs/6.0/components/alert/#variables

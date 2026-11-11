@@ -13,7 +13,7 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 
 # Combobox
 
-A customizable select-like component built with markup-first HTML, powered by the Menu component for positioning and keyboard navigation.
+A customizable select-like component built with markup-first HTML, powered by the [Menu][1] component for positioning and keyboard navigation.
 
 ## Overview
 
@@ -24,7 +24,7 @@ The combobox component provides a styled select experience using a `Combobox` wi
 - Check mark indicators for selected items
 - Single and multiple selection modes
 - Full keyboard navigation and accessibility
-- Form submission via auto-created hidden input
+- [Form][2] submission via auto-created hidden input
 
 ## Example
 
@@ -40,7 +40,7 @@ Use `Combobox` with `ComboboxOption` children. Each selectable option needs a `v
 
 ### Placeholders
 
-Set placeholder text with the `placeholder` prop. The `.combobox-value` element shows this text when nothing is selected, styled with `.combobox-placeholder`.
+Set placeholder text with the `placeholder` prop. `Combobox` displays it when nothing is selected.
 
 <CodeExample>
     <Combobox name="country" placeholder="Pick a country…">
@@ -64,7 +64,7 @@ Set `defaultValue` on `Combobox` to pre-select an option, or use `value` and `on
 
 ### With form field
 
-Use the [form field][1] component to layout and wrap your combobox with a label, description, and validation feedback messages in a vertical stack.
+Use the [form field][3] component to layout and wrap your combobox with a label, description, and validation feedback messages in a vertical stack.
 
 <CodeExample>
     <FormField>
@@ -83,7 +83,7 @@ Since menu items are standard HTML, you can put anything inside them — SVG ico
 
 ### Icons
 
-Set `icon` on `ComboboxOption` for a leading icon, rendered with the library’s `Icon` component.
+Set `icon` on `ComboboxOption` for a leading icon, rendered with the library’s [`Icon`][4] component.
 
 <CodeExample>
     <Combobox name="language" placeholder="Choose a language…">
@@ -270,7 +270,7 @@ Add `disabled` to the toggle button or individual menu items.
 
 ## Form submission
 
-The combobox creates a hidden `<input>` for form submission using the required `name` prop. The hidden input’s `name` matches the prop and its `value` updates whenever the selection changes.
+For form submission, `Combobox` creates a hidden input whose `name` matches the required `name` prop and whose `value` updates whenever the selection changes.
 
 ```tsx
 <Combobox name="country" defaultValue="us">
@@ -293,7 +293,7 @@ Pass options directly as `Combobox` props. The wrapper manages the menu and form
 | ----------------- | ------- | -------- | -------------------------------------------------------------------- |
 | `multiple`        | boolean | `false`  | Enable multi-select mode. Selections toggle and the menu stays open. |
 | `name`            | string  | Required | Name for the auto-created hidden inputs.                             |
-| `placeholder`     | string  | `''`     | Placeholder text for the toggle.                                     |
+| `placeholder`     | string  | `''`     | [Placeholder][5] text for the toggle.                                |
 | `search`          | boolean | `false`  | Enable search input in the menu.                                     |
 | `searchNormalize` | boolean | `false`  | Normalize accented characters for search matching.                   |
 
@@ -308,9 +308,13 @@ The combobox component follows WAI-ARIA combobox patterns:
 
 ## CSS custom properties
 
-The combobox uses CSS custom properties prefixed with `--bs-combobox-*` for the toggle, and inherits `--bs-menu-*` properties from the Menu component for the menu overlay. See the [source SCSS][2] for the full list of available tokens.
+The combobox uses CSS custom properties prefixed with `--bs-combobox-*` for the toggle, and inherits `--bs-menu-*` properties from the [Menu][1] component for the menu overlay. See the [source SCSS][6] for the full list of available tokens.
 
 </DocumentLayout>
 
-[1]: ../field/
-[2]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/scss/forms/_combobox.scss
+[1]: ../../components/menu/
+[2]: ../
+[3]: ../field/
+[4]: ../../extensions/icon/
+[5]: ../../components/placeholder/
+[6]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/scss/forms/_combobox.scss

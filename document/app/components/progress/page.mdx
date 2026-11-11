@@ -7,17 +7,17 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 
 # Progress
 
-Documentation and examples for using Bootstrap custom progress bars featuring support for stacked bars, animated backgrounds, and text labels.
+Use `Progress` and `ProgressStack` to display progress bars, including stacked bars, striped backgrounds, animation, and text labels.
 
 ## How it works
 
-Progress components are built with two HTML elements, some CSS to set the width, and a few attributes. We don’t use [the HTML5 `<progress>` element][1], ensuring you can stack progress bars, animate them, and place text labels over them.
+`Progress` renders an accessible progress indicator and visual bar. It does not use the [HTML `<progress>` element][1], which allows the component to support stacking, animation, and labels inside the bar.
 
-- We use the `.progress` as a wrapper to indicate the max value of the progress bar.
-- The `.progress` wrapper also requires a `role="progressbar"` and `aria` attributes to make it accessible, including an accessible name (using `aria-label`, `aria-labelledby`, or similar).
-- We use the inner `.progress-bar` purely for the visual bar and label.
-- The `.progress-bar` requires an inline style, utility class, or custom CSS to set its width.
-- We provide a special `.progress-stacked` class to create multiple/stacked progress bars.
+- `Progress` uses `value`, `min`, and `max` to set the current and range values, and generates the accessibility attributes automatically.
+- Provide an accessible name with `aria-label` or `aria-labelledby`.
+- Pass a label as `Progress`'s children.
+- Use `barProps` to pass styles or utility classes to the inner bar.
+- Use `ProgressStack` to group multiple progress components into a stacked bar.
 
 Put that all together, and you have the following examples.
 
@@ -39,7 +39,7 @@ Provide an accessible name; pass labels as children and inner-bar utilities thro
 
 ### Width
 
-Bootstrap provides a handful of [utilities for setting width][2]. Depending on your needs, these may help with quickly configuring the width of the `.progress-bar`.
+Use width utilities through `Progress`'s `barProps.className` when you need to adjust the visual bar width.
 
 <CodeExample>
     <Stack gap={3}>
@@ -49,7 +49,7 @@ Bootstrap provides a handful of [utilities for setting width][2]. Depending on y
 
 ### Height
 
-You only set a `height` value on the `.progress` container, so if you change that value, the inner `.progress-bar` will automatically resize accordingly.
+Set the height on `Progress` itself; the inner bar resizes automatically.
 
 <CodeExample>
     <Stack gap={3}>
@@ -60,7 +60,7 @@ You only set a `height` value on the `.progress` container, so if you change tha
 
 ## Labels
 
-Add labels to your progress bars by placing text within the `.progress-bar`.
+Pass a label as children of `Progress`.
 
 <CodeExample>
     <Stack gap={3}>
@@ -72,15 +72,15 @@ Add labels to your progress bars by placing text within the `.progress-bar`.
 
 ### Long labels
 
-Note that by default, the content inside the `.progress-bar` is controlled with `overflow: hidden`, so it doesn’t bleed out of the bar. If your progress bar is shorter than its label, the content will be capped and may become unreadable. To change this behavior, you can use `.overflow-visible` from the [overflow utilities][3].
+By default, the content inside `Progress` is clipped to the bar. If the bar is shorter than its label, the content may become unreadable. To change this behavior, pass the `overflow-visible` utility through `barProps.className`.
 
-> Labels longer than the progress bar within may not be fully accessible using this method because it relies on the text color having the correct contrast ratio with both the `.progress` and `.progress-bar` background colors. Use caution when implementing this example.
+> Labels longer than the progress bar may not be fully accessible because their text color must contrast with both the track and bar backgrounds. Use caution when implementing this example.
 >
 > If the text can overlap the progress bar, we often recommend displaying the label outside of the progress bar for better accessibility.
 
 ## Backgrounds
 
-Use background utility classes to change the appearance of individual progress bars.
+Set `theme` on `Progress` to choose a theme color for its bar. For custom colors, pass a background utility through `barProps.className`.
 
 <CodeExample>
     <Stack gap={3}>
@@ -99,9 +99,9 @@ Use background utility classes to change the appearance of individual progress b
     </Stack>
 </CodeExample>
 
-> **Conveying meaning to assistive technologies:** Using color to add meaning only provides a visual indication, which will not be conveyed to users of assistive technologies—such as screen readers. Ensure that information denoted by the color is either obvious from the content itself, or included through alternative means, such as additional text hidden with the `.visually-hidden` utility.
+> **Conveying meaning to assistive technologies:** Color alone is not conveyed to screen reader users. Ensure that information is also clear from the content, or include it in the accessible name with `aria-label` or `aria-labelledby`.
 
-If you’re adding labels to progress bars with a custom background color, make sure to also set an appropriate [text color][4], so the labels remain readable and have sufficient contrast. We recommend using the [theme contrast][5] helper classes.
+If you’re adding labels to progress bars with a custom background color, make sure to also set an appropriate [text color][2], so the labels remain readable and have sufficient contrast. We recommend using the [theme contrast][3] helper classes.
 
 <CodeExample>
     <Stack gap={3}>
@@ -122,7 +122,7 @@ If you’re adding labels to progress bars with a custom background color, make 
 
 ## Multiple bars
 
-You can include multiple progress components inside a container with `.progress-stacked` to create a single stacked progress bar. Note that in this case, the styling to set the visual width of the progress bar _must_ be applied to the `.progress` elements, rather than the `.progress-bar`s.
+Place multiple `Progress` components inside `ProgressStack` to create a single stacked bar. In this case, set each segment's value on `Progress`; do not set a separate width on its inner bar.
 
 <CodeExample>
     <Stack gap={3}>
@@ -140,7 +140,7 @@ You can include multiple progress components inside a container with `.progress-
 
 ## Striped
 
-Add `.progress-bar-striped` to any `.progress-bar` to apply a stripe via CSS gradient over the progress bar’s background color.
+Set `striped` on `Progress` to apply a gradient stripe over the bar's background color.
 
 <CodeExample>
     <Stack gap={3}>
@@ -174,7 +174,7 @@ Add `.progress-bar-striped` to any `.progress-bar` to apply a stripe via CSS gra
 
 ## Animated stripes
 
-The striped gradient can also be animated. Add `.progress-bar-animated` to `.progress-bar` to animate the stripes right to left via CSS3 animations.
+Set `animated` as well as `striped` on `Progress` to animate the stripes from right to left.
 
 <CodeExample>
     <Stack gap={3}>
@@ -202,12 +202,11 @@ Customize the component with the following local CSS variables. Override them th
 
 ### Keyframes
 
-Used for creating the CSS animations for `.progress-bar-animated`. The animation moves the striped background from one stripe width to zero, producing continuous motion from right to left.
+Used when the `animated` prop is enabled. The animation moves the striped background from one stripe
+width to zero, producing continuous motion from right to left.
 
 </DocumentLayout>
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
-[2]: https://getbootstrap.com/docs/6.0/utilities/width/
-[3]: https://getbootstrap.com/docs/6.0/utilities/overflow/
-[4]: https://getbootstrap.com/docs/6.0/utilities/colors#colors
-[5]: https://getbootstrap.com/docs/6.0/utilities/theme#contrast
+[2]: https://getbootstrap.com/docs/6.0/utilities/colors#colors
+[3]: https://getbootstrap.com/docs/6.0/utilities/theme#contrast

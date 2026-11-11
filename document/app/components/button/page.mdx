@@ -18,7 +18,7 @@ Use Bootstrap’s custom button styles for actions in forms, dialogs, and more w
 
 ## Base class
 
-Buttons have a standard `.btn` class that sets up basic styles such as padding and content alignment, along with fallback visual styles for basic accessibility. Change this class to another button class to apply different visual styles for a specific button variant and theme.
+`Button` applies its base button styles automatically. Set its `variant` and `theme` props to choose the visual style and color.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
@@ -26,7 +26,7 @@ Buttons have a standard `.btn` class that sets up basic styles such as padding a
     </div>
 </CodeExample>
 
-The `.btn` class is intended to be a starting point for your own custom button styles, while our provided button variants can be used alongside `.theme-*` classes or as a basis for your own custom styles.
+Use `Button`'s `className` prop to add custom styles; built-in variants can be combined with the `theme` prop or extended in your own styles.
 
 ## Playground
 
@@ -139,11 +139,12 @@ Compare all button variants and styles at once:
     </div>
 </CodeExample>
 
-> **Conveying meaning to assistive technologies:** Using color to add meaning only provides a visual indication, which will not be conveyed to users of assistive technologies—such as screen readers. Ensure that information denoted by the color is either obvious from the content itself, or included through alternative means, such as additional text hidden with the `.visually-hidden` utility.
+> **Conveying meaning to assistive technologies:** Color provides only a visual indication. Ensure
+> the meaning is also clear from the content or included in accessible text.
 
 ## Link buttons
 
-Use the `.btn-link` class to create a button that looks like a link.
+Set `variant="link"` on `Button` to make it look like a link.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
@@ -184,7 +185,7 @@ Link buttons can also be styled with the theme colors.
 
 ## Styled buttons
 
-Add visual depth to solid buttons with gradients and shadows using the `.btn-styled` modifier class. This provides a more three-dimensional appearance that can be customized further with CSS variables.
+Set the `styled` prop on a solid `Button` to add gradients and shadows for visual depth. Customize the effect further with CSS variables.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 overflow-auto">
@@ -250,7 +251,7 @@ The gradient and shadow can be customized via CSS variables:
 
 ## Sizes
 
-Fancy larger or smaller buttons? Add `.btn-lg` or `.btn-sm` for additional sizes.
+Set `size="lg"` or `size="sm"` on `Button` for a larger or smaller size.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
@@ -305,7 +306,7 @@ You can even roll your own custom sizing with CSS variables:
 
 ## Icon buttons
 
-Use `.btn-icon` for square buttons that contain only an icon. This class sets `aspect-ratio: 1` and removes padding, making the button perfectly square based on its `min-height`. Always include an `aria-label` attribute on icon-only buttons to ensure they are accessible to screen reader users.
+Set the `icon` prop on `Button` for a square icon-only button. It sets a 1:1 aspect ratio and removes padding, making the button square based on its minimum height. Always include an `aria-label` on icon-only buttons for screen reader users.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
@@ -324,7 +325,7 @@ Use `.btn-icon` for square buttons that contain only an icon. This class sets `a
     </div>
 </CodeExample>
 
-Combine with size classes for different icon button sizes:
+Combine with the `size` prop for different icon button sizes:
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
@@ -345,7 +346,7 @@ Combine with size classes for different icon button sizes:
 
 ## Disabled state
 
-Make buttons look inactive by adding the `disabled` boolean attribute to any `<button>` element. Disabled buttons have `pointer-events: none`, preventing hover and active states from triggering, and some additional styling to indicate the disabled state.
+Set the `disabled` prop on `Button` to prevent interaction and apply disabled styling. Native button elements also prevent activation when disabled.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 overflow-auto">
@@ -364,26 +365,14 @@ Make buttons look inactive by adding the `disabled` boolean attribute to any `<b
     </div>
 </CodeExample>
 
-Disabled buttons using the `<a>` element behave a bit different. Use the `.disabled` class instead of the attribute on `<a>` elements to make them visually appear disabled. If you need to keep the `href` attribute, you may need additional HTML to fully disable the link functionality.
+When `Button` renders as a link, its `disabled` prop removes navigation and keyboard focus as well as applying disabled styling.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
-        <Button
-            variant="solid"
-            theme="primary"
-            disabled
-            aria-disabled="true"
-            href="#"
-        >
+        <Button variant="solid" theme="primary" disabled aria-disabled="true" href="#">
             Primary link
         </Button>
-        <Button
-            variant="solid"
-            theme="secondary"
-            disabled
-            aria-disabled="true"
-            href="#"
-        >
+        <Button variant="solid" theme="secondary" disabled aria-disabled="true" href="#">
             Link
         </Button>
     </div>
@@ -423,7 +412,8 @@ prevents navigation, and supplies `aria-disabled` and `tabIndex={-1}`.
 
 ## Block buttons
 
-Use the `.d-grid` utility to create responsive stacks of full-width “block buttons”. Space them out with gap utilities.
+Use a grid container with gap utilities passed through `className` to create a vertical stack of
+full-width buttons.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
@@ -438,7 +428,8 @@ Use the `.d-grid` utility to create responsive stacks of full-width “block but
     </div>
 </CodeExample>
 
-Here we create a responsive variation, starting with vertically stacked buttons until the `md` breakpoint, where `.md:d-block` replaces the `.d-grid` class, thus nullifying the `gap-2` utility. Resize your browser to see them change.
+This responsive variation changes from a vertical stack to a horizontal layout at the `md`
+breakpoint. Resize your browser to see the layout change.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
@@ -453,7 +444,8 @@ Here we create a responsive variation, starting with vertically stacked buttons 
     </div>
 </CodeExample>
 
-You can adjust the width of your block buttons with grid column width classes. For example, for a half-width “block button”, use `.col-6`. Center it horizontally with `.mx-auto`, too.
+Use a [`Col`][1] with `xs={6}` to constrain the button stack to half the available width, and center it
+with margin utilities passed through `className`.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center overflow-auto">
@@ -485,9 +477,9 @@ Additional utilities can be used to adjust the alignment of buttons when horizon
 
 ## Toggle buttons
 
-Create button-like checkboxes and radio buttons by adding `.btn-check` to a `<label>` element with button classes, with a checkbox or radio input nested inside. The input is visually hidden while the label provides the button appearance. These toggle buttons can further be grouped in a [button group][1] if needed.
+Use `ToggleButton` to create button-like checkboxes and radio buttons. It provides the button appearance and interaction behavior, and can be grouped in a [button group][2].
 
-> Visually, these toggle buttons are identical to our [active-state buttons][2], but are conveyed differently by assistive technologies. Checkbox toggles will be announced by screen readers as "checked"/"not checked" as they are checkboxes under the hood. Active-state buttons are announced as "button"/"button pressed". It’s up to you to decide which approach makes more sense for your use case.
+> Visually, these toggle buttons are identical to our [active-state buttons][3], but are conveyed differently by assistive technologies. [Checkbox][4] toggles will be announced by screen readers as "checked"/"not checked" as they are checkboxes under the hood. Active-state buttons are announced as "button"/"button pressed". It’s up to you to decide which approach makes more sense for your use case.
 
 ### Checkboxes
 
@@ -560,13 +552,7 @@ Render the active state supplied by your application:
         <Button variant="solid" active theme="primary" href="#">
             Active toggle link
         </Button>
-        <Button
-            variant="solid"
-            theme="primary"
-            disabled
-            aria-disabled="true"
-            href="#"
-        >
+        <Button variant="solid" theme="primary" disabled aria-disabled="true" href="#">
             Disabled link button
         </Button>
     </div>
@@ -600,7 +586,7 @@ Buttons use CSS variables for real-time customization. These are set on the base
 | `--bs-btn-transition-duration` | `0.15s`                                             |
 | `--bs-btn-transition-timing`   | `ease-in-out`                                       |
 
-Each variant class (`.btn-solid`, `.btn-outline`, etc.) updates these variables based on the current theme color, allowing buttons to adapt automatically when used with `.theme-*` classes.
+The `variant` prop updates these variables according to the selected `theme`, allowing buttons to adapt automatically to their theme color.
 
 Styled buttons use local CSS variables.
 
@@ -634,6 +620,7 @@ Link buttons use local CSS variables.
 
 </DocumentLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/components/button-group/
-[2]: #active-state
-[3]: #toggle-buttons
+[1]: ../../layout/grid/
+[2]: https://getbootstrap.com/docs/6.0/components/button-group/
+[3]: #active-state
+[4]: ../../forms/checkbox/

@@ -50,8 +50,10 @@ export class DocumentSearchModel {
                 // RSS links carry the production origin; keep only the path so previews stay on their own origin
                 return { title, href: `${pathname}${search}${hash}`, description };
             });
-
-            this.setEntries(entries);
+            const searchableEntries = entries.filter(
+                ({ href }) => !href.split(/[?#]/, 1)[0].split('/').includes('examples')
+            );
+            this.setEntries(searchableEntries);
         } finally {
             this.finishLoad();
         }

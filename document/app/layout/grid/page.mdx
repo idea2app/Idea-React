@@ -32,37 +32,36 @@ how the grid system comes together.
     </Container>
 </div>
 
-The above example creates three equal-width columns across all devices and viewports using our
-predefined grid classes. Those columns are centered in the page with the parent `.container`.
+The above example creates three equal-width columns across all devices and viewports using the
+default `Col` sizing. The `Container` centers them in the page.
 
 ## How it works
 
 Breaking it down, here's how the grid system comes together:
 
 - **Our grid supports six responsive breakpoints.** Breakpoints are based on `min-width` media
-  queries, meaning they affect that breakpoint and all those above it (e.g., `.sm:col-4` applies to
-  `sm`, `md`, `lg`, `xl`, and `2xl`). This means you can control container and column sizing and
-  behavior by each breakpoint.
+  queries, meaning a breakpoint prop affects that breakpoint and all those above it (e.g.,
+  `sm={4}` on `Col` applies from `sm` upward). Use responsive props to control container and column
+  sizing and behavior.
 
-- **Containers center and horizontally pad your content.** Use `.container` for a responsive pixel
-  width, `.container-fluid` for `width: 100%` across all viewports and devices, or a responsive
-  container (e.g., `.md:container`) for a combination of fluid and pixel widths.
+- **Containers center and horizontally pad your content.** Use `Container` with its default sizing,
+  set `fluid` for full width, or pass a breakpoint such as `fluid="md"` for responsive container
+  sizing.
 
 - **Rows are wrappers for columns.** Each column has horizontal `padding` (called a gutter) for
   controlling the space between them. This `padding` is then counteracted on the rows with negative
-  margins to ensure the content in your columns is visually aligned down the left side. Rows also
-  support modifier classes to uniformly apply column sizing and gutter classes to change the
+  margins to ensure the content in your columns is visually aligned down the left side. Set
+  responsive column counts with `Row` props; use gutter utilities through `className` to change the
   spacing of your content.
 
 - **Columns are incredibly flexible.** There are 12 template columns available per row, allowing
-  you to create different combinations of elements that span any number of columns. Column classes
-  indicate the number of template columns to span (e.g., `col-4` spans four). `width`s are set in
-  percentages so you always have the same relative sizing.
+  you to create different combinations of elements that span any number of columns. Set a `Col`
+  breakpoint prop (for example `xs={4}`) to span a number of columns. Widths are set in percentages
+  so you always have the same relative sizing.
 
-- **Gutters are also responsive and customizable.** Gutter classes are available across all
-  breakpoints, with all the same sizes as our margin and padding utilities. Change horizontal
-  gutters with `.gx-*` classes, vertical gutters with `.gy-*`, or all gutters with `.g-*` classes.
-  `.g-0` is also available to remove gutters.
+- **Gutters are also responsive and customizable.** Pass gutter utilities through `Row`'s
+  `className` to adjust horizontal, vertical, or all gutters at each breakpoint, including removing
+  gutters entirely.
 
 - **Sass variables, maps, and mixins power the grid.** If you don't want to use the predefined grid
   classes in Bootstrap, you can use our grid's source Sass to create your own with more semantic
@@ -354,10 +353,9 @@ breakpoint. Order accepts a number, `"first"`, or `"last"`.
 
 ### Row columns
 
-Use the responsive `.row-cols-*` classes to quickly set the number of columns that best render your
-content and layout. Whereas normal `.col-*` classes apply to the individual columns (e.g.,
-`.md:col-4`), the row columns classes are set on the parent `Row` as a shortcut; pass `xs`, `sm`,
-`md`, `lg`, `xl`, or `2xl` to it. With `xs="auto"` you can give the columns their natural width.
+Set `xs`, `sm`, `md`, `lg`, `xl`, or `2xl` on `Row` to control the number of columns at each
+breakpoint. This is a shortcut for setting each column's width; use `xs="auto"` to give columns
+their natural width.
 
 <div className={style.gridRow}>
     <Container className="text-center">

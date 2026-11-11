@@ -18,7 +18,9 @@ A slider or slideshow component for cycling through series of content, ranging f
 
 - Carousels can have any number of slides, with just about any content within. Our examples show images and text, but you can put anything you like inside each `CarouselSlide`. We don't support nested carousels.
 
-- Carousel items or slides do not normalize their dimensions. As such, you may need to use additional utilities or custom styles to appropriately size content. While carousels support previous/next controls and indicators, they’re not explicitly required. Add and customize as you see fit.
+- Carousel items or slides do not normalize their dimensions. As such, you may need to use
+  utilities through `className` or custom styles to size content. Previous/next controls and
+  indicators are optional; add and customize them as needed.
 
 - `Carousel` initializes on mount, including active-slide syncing as the user scrolls or swipes. Pass `autoplay` for [autoplaying carousels][3]. Do not initialize the same carousel with Bootstrap’s JavaScript plugin.
 
@@ -114,7 +116,8 @@ Pass `indicators` to include slide indicator buttons and use `indicatorPlacement
 
 ### Custom content
 
-You can put any markup you like inside each `CarouselSlide`. Add content, then size and style it with utilities or CSS modules as needed.
+You can put any content inside each `CarouselSlide`. Add content, then size and style it with
+utilities through `className` or CSS Modules as needed.
 
 <CodeExample>
     <Carousel
@@ -306,7 +309,8 @@ Set `itemsPeek` to reveal a sliver of the previous and next slides, hinting that
 
 ### Variable width
 
-Pass `auto` and size each `CarouselSlide` yourself with utilities, `style`, or a CSS module. Snap points still land on every slide.
+Pass `auto` and size each `CarouselSlide` yourself with `className`, `style`, or a CSS Module. Snap
+points still land on every slide.
 
 <CodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
@@ -556,7 +560,7 @@ Local CSS custom properties expose spacing, colors, sizing, and transitions for 
 | `--bs-carousel-fade-duration`              | `0.6s`                            |
 | `--bs-carousel-fade-timing`                | `ease`                            |
 
-The React controls use `Icon` with Bootstrap Icons rather than Bootstrap’s CSS-mask glyphs. The active countdown sets `--bs-carousel-interval` to the current slide’s interval in milliseconds.
+The React controls use [`Icon`][9] with Bootstrap Icons rather than Bootstrap’s CSS-mask glyphs. The active countdown sets `--bs-carousel-interval` to the current slide’s interval in milliseconds.
 
 ## Usage
 
@@ -591,7 +595,7 @@ import { Carousel, CarouselSlide } from 'idea-react';
 
 ### Dependencies
 
-Load Bootstrap CSS and Bootstrap Icons alongside Idea React. The component manages its own state and scrolling and does not require Bootstrap’s JavaScript plugin. Follow the [installation guide][9].
+Load Bootstrap CSS and Bootstrap Icons alongside Idea React. The component manages its own state and scrolling and does not require Bootstrap’s JavaScript plugin. Follow the [installation guide][10].
 
 ### Options
 
@@ -662,4 +666,5 @@ The component disposes its model and scroll animation when unmounted; do not use
 [6]: https://www.w3.org/TR/WCAG/#pause-stop-hide
 [7]: #individual-intervals
 [8]: https://getbootstrap.com/docs/6.0/components/carousel/#variables
-[9]: /guides/install/
+[9]: ../../extensions/icon/
+[10]: /guides/install/

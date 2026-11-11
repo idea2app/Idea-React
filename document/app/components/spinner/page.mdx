@@ -8,16 +8,16 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 
 # Spinners
 
-Indicate the loading state of a component or page with Bootstrap spinners, built entirely with HTML, CSS, and no JavaScript.
+Use `Spinner` to indicate a component or page loading state. It is styled with CSS and requires no JavaScript.
 
 `Spinner` accepts `animation="border"` or `"grow"`, `size="sm"`, and native element attributes.
-`SpinnerIcon` applies the rotation animation to an `Icon` from the icon font.
+`SpinnerIcon` applies the rotation animation to an [`Icon`][1] from the icon font.
 
-Bootstrap “spinners” can be used to show the loading state in your projects. They’re built only with HTML and CSS, meaning you don’t need any JavaScript to create them. You may, however, need some custom JavaScript to toggle their visibility. Their appearance, alignment, and sizing can be easily customized with our utility classes.
+`Spinner` visibility can be controlled by rendering it conditionally. Customize its color with `className`, alignment with layout utilities, and size with its `size` prop.
 
-For accessibility purposes, each loader here includes `role="status"` and a nested `<span class="visually-hidden">Loading…</span>`.
+For accessibility, provide an accessible name such as `aria-label="Loading"` when `Spinner` uses `role="status"`.
 
-> The animation effect depends on the `prefers-reduced-motion` media query. See the [reduced motion section of our accessibility documentation][1].
+> The animation effect depends on the `prefers-reduced-motion` media query. See the [reduced motion section of our accessibility documentation][2].
 
 ## Border spinner
 
@@ -25,9 +25,7 @@ Use the border spinners for a lightweight loading indicator.
 
 <CodeExample>
     <div className="d-flex align-items-center gap-3">
-        <Spinner role="status">
-            <span className="visually-hidden">Loading…</span>
-        </Spinner>
+        <Spinner role="status" aria-label="Loading" />
         <Badge theme="primary">
             <Spinner aria-hidden="true" />
             <span role="status">Loading</span>
@@ -45,39 +43,30 @@ If you don’t fancy a border spinner, switch to the grow spinner. While it does
 
 <CodeExample>
     <div className="d-flex align-items-center gap-3">
-        <Spinner animation="grow" role="status">
-            <span className="visually-hidden">Loading…</span>
-        </Spinner>
+        <Spinner animation="grow" role="status" aria-label="Loading" />
     </div>
 </CodeExample>
 
 ## Variants
 
-Spinners use `currentColor` for their appearance, meaning you can customize the color with [text color utilities][2]. You can use any of our text color utilities on the standard spinner.
+Spinners use `currentColor`, so pass a text-color utility through `className` to customize their
+appearance.
 
 <CodeExample>
     <div className="d-flex align-items-center gap-3">
-        <Spinner role="status" className="fg-primary">
-            <span className="visually-hidden">Loading…</span>
-        </Spinner>
-        <Spinner animation="grow" role="status" className="fg-accent">
-            <span className="visually-hidden">Loading…</span>
-        </Spinner>
+        <Spinner role="status" aria-label="Loading" className="fg-primary" />
+        <Spinner animation="grow" role="status" aria-label="Loading" className="fg-accent" />
     </div>
 </CodeExample>
 
 ## Size
 
-Spinner are `1em` by `1em` by default, all Add `.spinner-sm` to make a smaller spinner that can quickly be used within other components.
+`Spinner` is `1em` square by default. Set `size="sm"` for a smaller indicator that fits inside other components.
 
 <CodeExample>
     <div className="d-flex align-items-center gap-3">
-        <Spinner size="sm" role="status">
-            <span className="visually-hidden">Loading…</span>
-        </Spinner>
-        <Spinner animation="grow" size="sm" role="status">
-            <span className="visually-hidden">Loading…</span>
-        </Spinner>
+        <Spinner size="sm" role="status" aria-label="Loading" />
+        <Spinner animation="grow" size="sm" role="status" aria-label="Loading" />
     </div>
 </CodeExample>
 
@@ -85,18 +74,19 @@ Or, use custom CSS or inline styles to change the dimensions as needed.
 
 <CodeExample>
     <div className="d-flex align-items-center gap-3">
-        <Spinner style={{ width: '3rem', height: '3rem' }} role="status">
-            <span className="visually-hidden">Loading…</span>
-        </Spinner>
-        <Spinner animation="grow" style={{ width: '3rem', height: '3rem' }} role="status">
-            <span className="visually-hidden">Loading…</span>
-        </Spinner>
+        <Spinner style={{ width: '3rem', height: '3rem' }} role="status" aria-label="Loading" />
+        <Spinner
+            animation="grow"
+            style={{ width: '3rem', height: '3rem' }}
+            role="status"
+            aria-label="Loading"
+        />
     </div>
 </CodeExample>
 
 ## Custom spinners
 
-You can use the `.spinner-rotate` class to rotate a custom SVG spinner.
+Use `SpinnerIcon` to apply the rotation animation to an [`Icon`][1].
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -137,5 +127,5 @@ Used for creating the CSS animations for our spinners. The border spinner rotate
 
 </DocumentLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion
-[2]: https://getbootstrap.com/docs/6.0/utilities/colors/
+[1]: ../../extensions/icon/
+[2]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion

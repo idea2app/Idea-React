@@ -1,5 +1,6 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { Pagination, PageItem, PageLink } from '../../../../source/Base/Pagination';
+
 import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
@@ -14,9 +15,9 @@ Compose `Pagination`, `PageItem`, `PageLink`, and `PageText` inside a labelled n
 
 ## Overview
 
-We use a large block of connected links for our pagination, making links hard to miss and easily scalable—all while providing large hit areas. Pagination is built with list HTML elements so screen readers can announce the number of available links. Use a wrapping `<nav>` element to identify it as a navigation section to screen readers and other assistive technologies.
+`Pagination` renders the page links as a list, providing large hit areas and allowing screen readers to announce the available links. Place it inside a navigation landmark so assistive technologies can identify its purpose.
 
-In addition, as pages likely have more than one such navigation section, it’s advisable to provide a descriptive `aria-label` for the `<nav>` to reflect its purpose. For example, if the pagination component is used to navigate between a set of search results, an appropriate label could be `aria-label="Search results pages"`.
+If the page has more than one navigation landmark, give the pagination landmark a descriptive accessible name, such as "Search results pages".
 
 <CodeExample>
     <Stack gap={3}>
@@ -76,7 +77,7 @@ Looking to use an icon or symbol in place of text for some pagination links? Be 
 
 ## Active
 
-Add `.active` to indicate a `.page-item` is the one currently being viewed. If using an `<a>` on the current page, `aria-current="page"` should be added for assistive technologies.
+Set `active` on `PageItem` to indicate the current page. When `PageLink` renders as a link, it also sets `aria-current="page"` for assistive technologies.
 
 <CodeExample>
     <Stack gap={3}>
@@ -89,9 +90,7 @@ Add `.active` to indicate a `.page-item` is the one currently being viewed. If u
                     <PageLink href="#">1</PageLink>
                 </PageItem>
                 <PageItem active>
-                    <PageLink href="#" aria-current="page">
-                        2
-                    </PageLink>
+                    <PageLink href="#">2</PageLink>
                 </PageItem>
                 <PageItem>
                     <PageLink href="#">3</PageLink>
@@ -104,20 +103,12 @@ Add `.active` to indicate a `.page-item` is the one currently being viewed. If u
     </Stack>
 </CodeExample>
 
-If using a non-interactive element, like a `<span>` for the current page, you may omit the `aria-current` attribute.
-
-```html
-<li class="page-item active">
-    <span class="page-link">2</span>
-</li>
-```
+For a non-interactive current page, render `PageText` instead of a link; it does not need `aria-current`.
 
 ## Disabled
 
-Add `.disabled` to a `.page-item` to make it appear un-clickable. While `.disabled` uses `pointer-events: none` to disable the link‘s interactivity, that CSS property is not yet standardized and doesn’t account for keyboard navigation. As such, you should always add `tabindex="-1"` on disabled links and use custom JavaScript to fully disable their functionality.
-
-The `PageItem disabled` example below delegates this behavior to `PageLink`, which removes the
-destination and click handler, supplies `aria-disabled`, and excludes the link from keyboard focus.
+Set `disabled` on `PageItem` to disable its `PageLink`. The component removes the destination and
+click handler, supplies `aria-disabled`, and excludes the link from keyboard focus.
 
 <CodeExample>
     <Stack gap={3}>
@@ -130,9 +121,7 @@ destination and click handler, supplies `aria-disabled`, and excludes the link f
                     <PageLink href="#">1</PageLink>
                 </PageItem>
                 <PageItem active>
-                    <PageLink href="#" aria-current="page">
-                        2
-                    </PageLink>
+                    <PageLink href="#">2</PageLink>
                 </PageItem>
                 <PageItem>
                     <PageLink href="#">3</PageLink>
@@ -145,17 +134,10 @@ destination and click handler, supplies `aria-disabled`, and excludes the link f
     </Stack>
 </CodeExample>
 
-And just like active page items, you can swap out the disabled `<a>` for a `<span>` to remove click functionality and prevent keyboard focus while retaining intended styles.
-
-```html
-<li class="page-item disabled">
-    <span class="page-link">Previous</span>
-</li>
-```
-
 ## Variants
 
-Add a `.theme-{color}` class to `.pagination` to apply a semantic theme color across the component, including hover, focus, and the active page item.
+Set `theme` on `Pagination` to apply a semantic theme color across the component, including hover,
+focus, and the active page item.
 
 <CodeExample>
     <Stack gap={3}>
@@ -332,16 +314,14 @@ Add a `.theme-{color}` class to `.pagination` to apply a semantic theme color ac
 
 ## Sizing
 
-Fancy larger or smaller pagination? Add `.pagination-lg` or `.pagination-sm` for additional sizes.
+Set the `size` prop to `"lg"` or `"sm"` to change the pagination size.
 
 <CodeExample>
     <Stack gap={3}>
         <nav aria-label="...">
             <Pagination size="lg">
                 <PageItem active>
-                    <PageLink href="#" aria-current="page">
-                        1
-                    </PageLink>
+                    <PageLink href="#">1</PageLink>
                 </PageItem>
                 <PageItem>
                     <PageLink href="#">2</PageLink>
@@ -354,9 +334,7 @@ Fancy larger or smaller pagination? Add `.pagination-lg` or `.pagination-sm` for
         <nav aria-label="...">
             <Pagination>
                 <PageItem active>
-                    <PageLink href="#" aria-current="page">
-                        1
-                    </PageLink>
+                    <PageLink href="#">1</PageLink>
                 </PageItem>
                 <PageItem>
                     <PageLink href="#">2</PageLink>
@@ -369,9 +347,7 @@ Fancy larger or smaller pagination? Add `.pagination-lg` or `.pagination-sm` for
         <nav aria-label="...">
             <Pagination size="sm">
                 <PageItem active>
-                    <PageLink href="#" aria-current="page">
-                        1
-                    </PageLink>
+                    <PageLink href="#">1</PageLink>
                 </PageItem>
                 <PageItem>
                     <PageLink href="#">2</PageLink>
@@ -386,7 +362,8 @@ Fancy larger or smaller pagination? Add `.pagination-lg` or `.pagination-sm` for
 
 ## Alignment
 
-Change the alignment of pagination components with [flexbox utilities][1]. For example, with `.justify-content-center`:
+Align pagination by passing flexbox utilities through `className`, such as
+`className="justify-content-center"`:
 
 <CodeExample>
     <Stack gap={3}>
@@ -412,7 +389,7 @@ Change the alignment of pagination components with [flexbox utilities][1]. For e
     </Stack>
 </CodeExample>
 
-Or with `.justify-content-end`:
+Or pass `className="justify-content-end"`:
 
 <CodeExample>
     <Stack gap={3}>
@@ -466,5 +443,3 @@ Customize the component with the following local CSS variables. Override them th
 | `--bs-pagination-disabled-border-color` | `var(--bs-border-color)`                               |
 
 </DocumentLayout>
-
-[1]: https://getbootstrap.com/docs/6.0/utilities/flex/

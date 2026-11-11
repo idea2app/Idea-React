@@ -10,13 +10,13 @@ import styles from '../../../component/Document/style.module.less';
 
 Create toggleable content panes using any of our navigation or list group components.
 
-The Tab plugin works with [nav components][1] such as `.nav-tabs` and `.nav-pills`, and with [list groups][2].
+`Tabs` supports navigation styles such as `variant="tabs"` and `variant="pills"`, as well as a `variant="list-group"` presentation.
 
 ## Nav tab
 
 Give `Tabs` a unique `id`, then add `Tab` children with an `eventKey` and `label`. The component creates matching tab controls and content panes, including their accessibility attributes.
 
-`Tabs` forwards the `Nav` layout and styling props `fill`, `justified`, `vertical`,
+`Tabs` forwards the [`Nav`][1] layout and styling props `fill`, `justified`, `vertical`,
 `cardHeader`, and `navbar` to the tab list. `vertical` also enables vertical keyboard
 navigation; an explicit `orientation` takes precedence. These Nav-only props do not
 affect the `list-group` variant.
@@ -58,7 +58,7 @@ affect the `list-group` variant.
 
 ## With buttons
 
-Tabs should use button controls rather than navigation links. If wrapping the tab list in `<nav>`, don’t add `role="tablist"` directly to that element, as this would override its navigation landmark. `Tabs` puts the tab-list role on an inner `<div>` and generates button controls.
+Tabs use button controls rather than navigation links. `Tabs` renders the tab list and its `tablist` role on an inner element, and generates the button controls.
 
 <CodeExample>
     <Stack gap={3}>
@@ -179,7 +179,7 @@ And with vertical pills. Set `vertical` to give the tab list the corresponding l
 
 ## List groups
 
-The tab plugin also works with [list groups][3]. Add `data-bs-toggle="tab"` to each `.list-group-item` and pair them with `.tab-pane` elements.
+Use `Tabs` with `variant="list-group"` for a list-group presentation. Add `Tab` children as usual; the component generates the controls and corresponding content panels.
 
 <CodeExample>
     <Stack gap={3}>
@@ -207,9 +207,9 @@ The tab plugin also works with [list groups][3]. Add `data-bs-toggle="tab"` to e
 
 ## Accessibility
 
-Dynamic tabbed interfaces, as described in the [ARIA Authoring Practices Guide tabs pattern][4], require `role="tablist"`, `role="tab"`, `role="tabpanel"`, and additional `aria-` attributes in order to convey their structure, functionality, and current state to users of assistive technologies (such as screen readers). As a best practice, we recommend using `<button>` elements for the tabs, as these are controls that trigger a dynamic change, rather than links that navigate to a new page or location.
+Dynamic tabbed interfaces, as described in the [ARIA Authoring Practices Guide tabs pattern][2], require tab roles and additional `aria-` attributes to convey their structure and current state. `Tabs` generates these attributes and uses buttons for controls that switch content rather than navigate to another page.
 
-In line with the ARIA Authoring Practices pattern, only the currently active tab receives keyboard focus. `Tabs` sets `tabIndex={-1}` on inactive controls. Once the active tab has focus, the cursor keys activate the previous/next tab. The <kbd>Home</kbd> and <kbd>End</kbd> keys activate the first and last enabled tabs, respectively. The component changes the [roving `tabindex`][5] accordingly: horizontal lists use Left/Right, while vertical lists use Up/Down.
+In line with the ARIA Authoring Practices pattern, only the currently active tab receives keyboard focus. `Tabs` sets `tabIndex={-1}` on inactive controls. Once the active tab has focus, the cursor keys activate the previous/next tab. The <kbd>Home</kbd> and <kbd>End</kbd> keys activate the first and last enabled tabs, respectively. The component changes the [roving `tabindex`][3] accordingly: horizontal lists use Left/Right, while vertical lists use Up/Down.
 
 > In general, to facilitate keyboard navigation, it’s recommended to make the tab panels themselves focusable as well. `Tabs` supplies `tabIndex={0}` for each panel.
 
@@ -240,8 +240,6 @@ Use `onChange(eventKey)` to respond to selection changes instead of registering 
 
 </DocumentLayout>
 
-[1]: /components/nav
-[2]: /components/list-group#javascript-behavior
-[3]: /components/list-group
-[4]: https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/
-[5]: https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/
+[1]: ../nav/
+[2]: https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/
+[3]: https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/

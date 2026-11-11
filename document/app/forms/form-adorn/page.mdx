@@ -19,19 +19,19 @@ Decorate inputs with icons, text, and more using a custom wrapper that easily ha
 
 ## How it works
 
-Apply both `.form-control` and `.form-adorn` to a wrapper element. `.form-control` provides the border, background, padding, and focus states; `.form-adorn` uses flexbox to position adornments alongside a "ghost input," a form control that has virtually no visual styling. The `.form-ghost` input inside is transparent and inherits styles from the wrapper.
+Wrap adornments and a `FormGhost` control in `FormAdornment`. The wrapper provides the border, background, padding, and focus states, and uses flexbox to position adornments beside the visually unstyled `FormGhost`, which inherits the wrapper's styles.
 
-Use a `<label>` for the wrapper. The wrapper looks like an input, so people click the icon, the text, or the padding around them and expect the field to take focus. A `<label>` gives you that for free, because clicking a label focuses the control it labels. No JavaScript is involved.
+`FormAdornment` renders a label by default. This lets people click the icon, text, or surrounding padding to focus the control without any JavaScript.
 
-Mark the adornments with `aria-hidden="true"`. A wrapping `<label>` labels the input, so without it an adornment such as `$` joins the accessible name and a screen reader announces "Amount $" instead of "Amount". An adornment is decorative, so keep it out of the accessibility tree and put anything meaningful in the visible label or in a `.form-text` description.
+Mark decorative `FormAdornmentIcon` and `FormAdornmentText` components with `aria-hidden="true"`. Because the default `FormAdornment` label also labels its nested input, text adornments such as `$` can become part of the input's accessible name. Keep decorative content out of the accessibility tree, and provide meaningful names with [`FormLabel`][1] or visible label text and descriptions with [`FormText`][1].
 
-> An element can have more than one label, so the wrapping `<label>` and a separate `<label for="…">` work together. Do not put a button or another interactive control inside the wrapper — a `<label>` must not contain interactive content.
+> An input can have more than one label, so the default `FormAdornment` label and a separate [`FormLabel`][1] can work together. Set [`FormLabel`][1]'s `htmlFor` to the input's `id`. Do not put a button or another interactive control inside the default `FormAdornment` label. If the wrapper needs interactive content, use its `as` prop to render a non-label element and label the input separately.
 
-See the [form control][1] documentation for more information on the `.form-control` and `.form-ghost` classes.
+See the [form control][2] documentation for more information on [`FormControl`][2] and `FormGhost`.
 
 ## Example
 
-Wrap an icon and a `.form-ghost` input inside a `<label>` with `.form-control` and `.form-adorn`. Place the adornment before the input in the DOM for start position (left in LTR).
+Use `FormAdornment` to wrap an icon and a `FormGhost` input. Place the adornment before the input in the DOM to position it at the start (left in LTR).
 
 <CodeExample>
     <FormAdornment>
@@ -40,7 +40,7 @@ Wrap an icon and a `.form-ghost` input inside a `<label>` with `.form-control` a
     </FormAdornment>
 </CodeExample>
 
-Use `.form-adorn-end` to position the adornment on the trailing side (keeps DOM order, uses CSS to flip visually):
+Set the `end` prop to position the adornment on the trailing side. The DOM order stays the same while the visual order changes:
 
 <CodeExample>
     <FormAdornment end>
@@ -51,7 +51,7 @@ Use `.form-adorn-end` to position the adornment on the trailing side (keeps DOM 
 
 ## With labels
 
-Add a second label outside the `.form-adorn` wrapper to name the field. Point it at the input with `for`, so the input keeps its name even if you change the wrapper:
+Add a [`FormLabel`][1] outside `FormAdornment` to give the field a visible name. Set its `htmlFor` prop to the `id` of the `FormGhost` input so the label remains associated with the field if you change the wrapper:
 
 <CodeExample>
     <Stack gap={3}>
@@ -74,7 +74,7 @@ Add a second label outside the `.form-adorn` wrapper to name the field. Point it
 
 ## With form field
 
-Wrap a `.form-adorn` in a `.form-field` to pair it with a label and description text.
+Use [`FormField`][1] to group [`FormLabel`][1], `FormAdornment`, and [`FormText`][1] into a field with a label and description.
 
 <CodeExample>
     <FormField>
@@ -89,7 +89,7 @@ Wrap a `.form-adorn` in a `.form-field` to pair it with a label and description 
 
 ## Text adornments
 
-Use `.form-adorn-text` for currency symbols, units, domain suffixes, and other text-based adornments. Text adornments auto-size to their content.
+Use `FormAdornmentText` for currency symbols, units, domain suffixes, and other text-based adornments. Text adornments auto-size to their content.
 
 <CodeExample>
     <Stack gap={3}>
@@ -114,7 +114,7 @@ Use `.form-adorn-text` for currency symbols, units, domain suffixes, and other t
 
 ## Sizing
 
-Use `.form-adorn-sm` or `.form-adorn-lg` on the wrapper to adjust sizing.
+Set the `size` prop to `sm` or `lg` on `FormAdornment` to adjust its size.
 
 <CodeExample>
     <Stack gap={3}>
@@ -147,4 +147,5 @@ Use `.form-adorn-sm` or `.form-adorn-lg` on the wrapper to adjust sizing.
 
 </DocumentLayout>
 
-[1]: ../form-control/
+[1]: ../field/
+[2]: ../form-control/

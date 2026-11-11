@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { ChangeEvent, Component, createRef } from 'react';
 
 import { Button } from '../../../../source/Base/Button';
+import { CloseButton } from '../../../../source/Base/CloseButton';
 import {
     MenuItem,
     MenuItemContent,
@@ -11,9 +12,9 @@ import {
     MenuPanel
 } from '../../../../source/Base/Menu';
 import { NativeDialog } from '../../../../source/Base/NativeDialog';
-import { Placeholder, PlaceholderAnimation } from '../../../../source/Base/Placeholder';
+import { Placeholder } from '../../../../source/Base/Placeholder';
 import { Icon } from '../../../../source/Extension/Icon';
-import { FormControl } from '../../../../source/Form';
+import { FormAdornment, FormAdornmentIcon, FormGhost } from '../../../../source/Form';
 import { DocumentSearchModel } from './model';
 import styles from './style.module.less';
 
@@ -49,9 +50,9 @@ export class DocumentSearch extends Component<DocumentSearchProps> {
     handleShortcut = (event: KeyboardEvent) => {
         const { key, ctrlKey, metaKey } = event;
 
-        if (key === 'Escape' && this.dialog.current?.open) return this.dialog.current.close();
-
-        if ((ctrlKey || metaKey) && key.toLowerCase() === 'k') {
+        if (key === 'Escape' && this.dialog.current?.open) {
+            this.dialog.current.close();
+        } else if ((ctrlKey || metaKey) && key.toLowerCase() === 'k') {
             event.preventDefault();
             if (!this.dialog.current?.open) this.open();
         }
@@ -59,21 +60,20 @@ export class DocumentSearch extends Component<DocumentSearchProps> {
 
     renderSearchForm() {
         return (
-            <div className="sticky-top z-1 bg-1 d-flex align-items-center gap-4 p-5 border-bottom">
-                <Icon name="search" aria-hidden="true" />
-                <FormControl
-                    ref={this.input}
-                    className="min-w-0"
-                    type="search"
-                    aria-label="Search documentation"
-                    placeholder="Search documentation..."
-                    value={this.model.query}
-                    onChange={this.handleSearch}
-                />
-                <Button variant="text" onClick={this.close}>
-                    Close
-                </Button>
-            </div>
+            <header className="sticky-top z-1 bg-1 d-flex align-items-center gap-4 p-5 border-bottom">
+                <FormAdornment className="flex-grow-1 min-w-0">
+                    <FormAdornmentIcon name="search" aria-hidden="true" />
+                    <FormGhost
+                        ref={this.input}
+                        type="search"
+                        aria-label="Search documentation"
+                        placeholder="Search documentation..."
+                        value={this.model.query}
+                        onChange={this.handleSearch}
+                    />
+                </FormAdornment>
+                <CloseButton aria-label="Close search" onClick={this.close} />
+            </header>
         );
     }
 
@@ -83,12 +83,12 @@ export class DocumentSearch extends Component<DocumentSearchProps> {
         return loading ? (
             <div className="my-5" role="status">
                 <p className="mb-4">Loading search index...</p>
-                <PlaceholderAnimation animation="wave" className="d-grid gap-3">
+                <Placeholder as="div" animation="wave" className="d-grid gap-3">
                     <Placeholder as="div" className="w-100" />
                     <Placeholder as="div" className="w-75" />
                     <Placeholder as="div" className="w-100" />
                     <Placeholder as="div" className="w-50" />
-                </PlaceholderAnimation>
+                </Placeholder>
             </div>
         ) : (
             <>

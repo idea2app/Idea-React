@@ -42,7 +42,8 @@ Menus are toggleable, contextual overlays for displaying lists of links and more
 
 ## Examples
 
-`Menu` uses the recommended `<button>` element for its toggle. Upstream also demonstrates an anchor toggle with `role="button"`; the current wrapper intentionally exposes a button toggle instead.
+`Menu` uses its button-based toggle. Unlike an upstream anchor example, the wrapper does not expose
+an alternate link toggle.
 
 Use [button groups][2] to create split button menus where the menu is displayed when a secondary button is clicked.
 
@@ -222,7 +223,8 @@ Resize your browser window to see the placement change at different breakpoints.
 
 ## Menu items
 
-You can use `<a>` or `<button>` elements as menu items.
+Use `MenuItem` for each entry. It renders a link when `href` is provided; set `as="button"` for an
+action.
 
 We use utility classes to display menus in our docs examples, but they’re not required for your own use.
 
@@ -307,7 +309,7 @@ You can use the `theme` prop to apply a theme color to a menu item.
 
 ### Icons
 
-Use `MenuItemIcon` to add an icon slot to menu items. It renders the shared `Icon` component.
+Use `MenuItemIcon` to add an icon slot to menu items. It renders the shared [`Icon`][3] component.
 
 <CodeExample>
     <MenuPanel
@@ -414,7 +416,7 @@ Separate groups of related menu items with a divider.
 
 ### Text
 
-Place any freeform text within a menu with text and use [margin][3] and [padding][4] utilities. Note that you’ll likely need additional sizing styles to constrain the menu width.
+Place any freeform text within a menu with text and use [margin][4] and [padding][5] utilities. Note that you’ll likely need additional sizing styles to constrain the menu width.
 
 <CodeExample>
     <MenuPanel
@@ -431,7 +433,7 @@ Place any freeform text within a menu with text and use [margin][3] and [padding
 
 ### Forms
 
-Put a form within a menu, or make it into a menu, and use [margin][3] and [padding][4] utilities to give it the negative space you require.
+Put a form within a menu, or make it into a menu, and use [margin][4] and [padding][5] utilities to give it the negative space you require.
 
 <CodeExample>
     <MenuPanel
@@ -580,7 +582,7 @@ Regardless of the `autoClose` setting, pressing <kbd>Esc</kbd> while focus is wi
 
 ## Accessibility
 
-The [<abbr title="Web Accessibility Initiative">WAI</abbr> <abbr title="Accessible Rich Internet Applications">ARIA</abbr>][5] standard defines an actual [`role="menu"` widget][6], but this is specific to application-like menus which trigger actions or functions. <abbr title="Accessible Rich Internet Applications">ARIA</abbr> menus can only contain menu items, checkbox menu items, radio button menu items, radio button groups, and sub-menus.
+The [<abbr title="Web Accessibility Initiative">WAI</abbr> <abbr title="Accessible Rich Internet Applications">ARIA</abbr>][6] standard defines an actual [`role="menu"` widget][7], but this is specific to application-like menus which trigger actions or functions. <abbr title="Accessible Rich Internet Applications">ARIA</abbr> menus can only contain menu items, checkbox menu items, radio button menu items, radio button groups, and sub-menus.
 
 Idea React’s menus, on the other hand, are designed to be generic and applicable to a variety of situations and markup structures. For instance, it is possible to create menus that contain additional inputs and form controls, such as search fields or login forms. For this reason, Idea React does not expect (nor automatically add) any of the `role` and `aria-` attributes required for true <abbr title="Accessible Rich Internet Applications">ARIA</abbr> menus. Authors will have to include these more specific attributes themselves.
 
@@ -598,13 +600,13 @@ Menus include built-in keyboard support for navigating menu items. Submenu arrow
 | `Enter` / `Space` | Activate focused item or open submenu |
 | `Esc`             | Close the menu                        |
 | `Home` / `End`    | Jump to first/last menu item          |
-| `Tab`             | Move focus and close the menu         |
+| [`Tab`][8]        | Move focus and close the menu         |
 
 ## CSS
 
 ### Variables
 
-Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][7].
+Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][9].
 
 | Variable               | Default |
 | ---------------------- | ------- |
@@ -634,8 +636,10 @@ Local CSS custom properties expose the component’s colors, spacing, borders, a
 
 [1]: https://markdotto.com/blog/bootstrap-explained-dropdowns/
 [2]: https://getbootstrap.com/docs/6.0/components/button-group/
-[3]: https://getbootstrap.com/docs/6.0/utilities/margin/
-[4]: https://getbootstrap.com/docs/6.0/utilities/padding/
-[5]: https://www.w3.org/TR/wai-aria/
-[6]: https://www.w3.org/TR/wai-aria/#menu
-[7]: https://getbootstrap.com/docs/6.0/components/menu/#variables
+[3]: ../../extensions/icon/
+[4]: https://getbootstrap.com/docs/6.0/utilities/margin/
+[5]: https://getbootstrap.com/docs/6.0/utilities/padding/
+[6]: https://www.w3.org/TR/wai-aria/
+[7]: https://www.w3.org/TR/wai-aria/#menu
+[8]: ../tab/
+[9]: https://getbootstrap.com/docs/6.0/components/menu/#variables

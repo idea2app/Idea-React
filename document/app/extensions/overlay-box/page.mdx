@@ -44,9 +44,9 @@ Things to know when using popovers:
 - Set `title` for the popover header and `detail` for the body. Without `detail`, the wrapper renders
   a tooltip instead.
 - Triggering popovers on hidden elements will not work.
-- Popovers for `.disabled` or `disabled` elements must be triggered on a wrapper element.
-- When triggered from anchors that wrap across multiple lines, add `.text-nowrap` to keep the panel
-  centered on a single line.
+- Disabled controls are not interactive, so use a focusable wrapper as the `OverlayBox` trigger.
+- For a link whose text wraps across multiple lines, apply `white-space: nowrap` to its styles to
+  keep the panel centered on a single line.
 - The wrapper removes the panel and its `aria-describedby` reference when it closes or unmounts.
 - Popovers can be triggered from an element inside a shadow DOM.
 - React escapes text by default. Pass JSX to `title` or `detail` when you intentionally need HTML;
@@ -70,8 +70,8 @@ Titles are set via the `title` prop and body content is set via `detail`.
     </Button>
 </OverlayBox>
 
-Use `title` for the popover header, not the native HTML `title` attribute. The wrapper handles the
-accessible association with `aria-describedby`.
+Use the `title` prop for the popover header, not the native HTML `title` attribute. The wrapper
+handles the accessible association with `aria-describedby`.
 
 #### Image content
 
@@ -181,17 +181,14 @@ Use the `focus` trigger to dismiss popovers on the user's next click of an eleme
 toggle element. **Clicks and focus inside the popover itself do not dismiss it**, so users can select
 text or use controls in the content.
 
-Use an `<a>` element with `tabindex="0"` and `role="button"` rather than a `<button>` for proper
-cross-browser and cross-platform behavior.
-
 <OverlayBox
     trigger="focus"
     title="Dismissible popover"
     detail="And here's some amazing content. It's very engaging. Right?"
 >
-    <a tabIndex={0} role="button" className="btn-solid theme-secondary">
+    <Button variant="solid" theme="secondary">
         Dismissible popover
-    </a>
+    </Button>
 </OverlayBox>
 
 A shown popover can also be dismissed by pressing <kbd>Escape</kbd>. A popover shown inside a dialog
@@ -200,19 +197,16 @@ the dialog.
 
 #### Disabled elements
 
-Elements with the `disabled` attribute aren't interactive, meaning users cannot hover or click them
-to trigger a popover or tooltip. Trigger the popover from a wrapper `<div>` or `<span>`, ideally made
-keyboard-focusable with `tabindex="0"`.
+Disabled controls are not interactive, so users cannot hover or click them to trigger a popover.
+Make the `OverlayBox` wrapper keyboard-focusable with `tabIndex={0}`.
 
 For disabled popover triggers, you may also prefer a `['hover', 'focus']` trigger so the popover
 appears as immediate visual feedback; users may not expect to click a disabled element.
 
-<OverlayBox title="Disabled popover" trigger={['hover', 'focus']}>
-    <span tabIndex={0} className="d-inline-block rounded-3">
-        <Button variant="solid" theme="primary" disabled>
-            Disabled button
-        </Button>
-    </span>
+<OverlayBox title="Disabled popover" trigger={['hover', 'focus']} tabIndex={0}>
+    <Button variant="solid" theme="primary" disabled>
+        Disabled button
+    </Button>
 </OverlayBox>
 
 ## Tooltip
@@ -234,9 +228,9 @@ Things to know when using tooltips:
 - Tooltips are rendered next to the trigger and removed when closed.
 - Provide a title; an empty overlay conveys nothing to users.
 - Triggering tooltips on hidden elements will not work.
-- Tooltips for `.disabled` or `disabled` elements must be triggered on a wrapper element.
-- When triggered from hyperlinks that span multiple lines, add `.text-nowrap` to keep the tip
-  centered.
+- Disabled controls are not interactive, so make the `OverlayBox` wrapper keyboard-focusable.
+- For a link whose text wraps across multiple lines, apply `white-space: nowrap` to the link's
+  styles to keep the tip centered.
 - Tooltips can be triggered from an element inside a shadow DOM.
 - The default trigger is both hover and focus, so keyboard users can reach the tooltip.
 
@@ -249,7 +243,7 @@ The fade animation honors `prefers-reduced-motion`.
 Hover over the links below to see tooltips:
 
 <div className="fg-3">
-    {'Placeholder text to demonstrate some '}
+    {'[Placeholder][2] text to demonstrate some '}
     <OverlayBox title="Default tooltip" className="text-nowrap">
         <a href="#">inline links</a>
     </OverlayBox>
@@ -357,7 +351,7 @@ With an icon:
 Move the pointer onto the tip to reach interactive content inside it, such as a link. The tooltip
 stays open while the pointer is over the trigger or the tip. It hides when the pointer leaves both,
 or when you press <kbd>Escape</kbd>. This helps satisfy the [WCAG 1.4.13 "Content on Hover or
-Focus"][4] success criterion.
+Focus"][2] success criterion.
 
 <OverlayBox
     title={
@@ -373,16 +367,13 @@ Focus"][4] success criterion.
 
 #### Disabled elements
 
-Elements with the `disabled` attribute aren't interactive, meaning users cannot focus, hover, or
-click them to trigger a tooltip. Trigger the tooltip from a wrapper `<div>` or `<span>`, ideally made
-keyboard-focusable with `tabindex="0"`.
+Disabled controls are not interactive, so make the `OverlayBox` wrapper keyboard-focusable with
+`tabIndex={0}`.
 
-<OverlayBox title="Disabled tooltip" trigger={['hover', 'focus']}>
-    <span tabIndex={0} className="d-inline-block">
-        <Button variant="solid" theme="primary" disabled>
-            Disabled button
-        </Button>
-    </span>
+<OverlayBox title="Disabled tooltip" trigger={['hover', 'focus']} tabIndex={0}>
+    <Button variant="solid" theme="primary" disabled>
+        Disabled button
+    </Button>
 </OverlayBox>
 
 ## Accessibility
@@ -396,7 +387,7 @@ because it makes the overlay impossible to reach with a keyboard.
 Avoid large amounts of content in a tooltip or popover that uses the same `aria-describedby`
 association: assistive technologies announce the entire content as one continuous stream. Popovers
 do not manage keyboard focus order; if you need interactive content, consider using a
-[`Dialog`][2] instead.
+[`Dialog`][3] instead.
 
 ## CSS
 
@@ -404,7 +395,7 @@ do not manage keyboard focus order; if you need interactive content, consider us
 
 Tooltips and popovers use local CSS variables for real-time customization. Override them through
 `overlayClassName` or by targeting `.tooltip` and `.popover` in a scoped style. See the upstream
-[popover CSS][3] and [tooltip CSS][4] for the complete variable and Sass map reference.
+[popover CSS][4] and [tooltip CSS][5] for the complete variable and Sass map reference.
 
 ## Usage
 
@@ -422,14 +413,14 @@ interaction or <kbd>Escape</kbd>.
 
 ### Props
 
-| Prop               | Type                                                | Default              | Description                                                                |
-| ------------------ | --------------------------------------------------- | -------------------- | -------------------------------------------------------------------------- |
-| `title`            | `ReactNode`                                         | —                    | Tooltip text or popover header. Required.                                  |
-| `detail`           | `ReactNode`                                         | —                    | Popover body. When omitted, the overlay is a tooltip.                      |
-| `placement`        | `'top' \| 'right' \| 'bottom' \| 'left'`            | `'top'`              | Side of the trigger where the panel appears.                               |
-| `trigger`          | `'click' \| 'focus' \| 'hover'` or an array of them | `['hover', 'focus']` | Interactions that open the panel.                                          |
-| `delay`            | `number \| { show: number; hide: number }`          | `0`                  | Delay in milliseconds before showing or hiding.                            |
-| `overlayClassName` | `string`                                            | —                    | Extra classes for the tooltip or popover panel, useful for scoped theming. |
+| Prop               | Type                                                | Default              | Description                                                              |
+| ------------------ | --------------------------------------------------- | -------------------- | ------------------------------------------------------------------------ |
+| `title`            | `ReactNode`                                         | —                    | Tooltip text or popover header. Required.                                |
+| `detail`           | `ReactNode`                                         | —                    | Popover body. When omitted, the overlay is a tooltip.                    |
+| `placement`        | `'top' \| 'right' \| 'bottom' \| 'left'`            | `'top'`              | Side of the trigger where the panel appears.                             |
+| `trigger`          | `'click' \| 'focus' \| 'hover'` or an array of them | `['hover', 'focus']` | Interactions that open the panel.                                        |
+| `delay`            | `number \| { show: number; hide: number }`          | `0`                  | Delay in milliseconds before showing or hiding.                          |
+| `overlayClassName` | `string`                                            | —                    | Class names for the tooltip or popover panel, useful for scoped theming. |
 
 ### Data attributes
 
@@ -463,6 +454,7 @@ other plugin events.
 </DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/OverlayBox.tsx
-[2]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Dialog.tsx
-[3]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/popover.mdx
-[4]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/tooltip.mdx
+[2]: ../../components/placeholder/
+[3]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Dialog.tsx
+[4]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/popover.mdx
+[5]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/tooltip.mdx

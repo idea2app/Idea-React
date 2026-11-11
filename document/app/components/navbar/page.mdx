@@ -78,32 +78,32 @@ Here’s a navbar that includes most supported sub-components and a responsive r
 
 Here’s what you need to know before getting started with the navbar:
 
-- Navbars require a wrapping `.navbar` with `.{breakpoint}:navbar-expand` (e.g. `.md:navbar-expand`) for responsive collapsing and [color scheme][2] classes.
-- Navbars and their contents are fluid by default. Change the [container][3] to limit their horizontal width in different ways.
-- Use our [margin][4], [padding][5], and [flex][6] utility classes for controlling spacing and alignment within navbars.
+- Use `Navbar` as the root, set `expand` to control the responsive breakpoint, and set `theme` to choose its color scheme.
+- Navbars and their contents are fluid by default. Change the [container][2] to limit their horizontal width in different ways.
+- Use our [margin][3], [padding][4], and [flex][5] utility classes for controlling spacing and alignment within navbars.
 - Navbars are responsive by default using our **drawer component**. On mobile, navigation links slide in from the side as a drawer.
-- Ensure accessibility by using a `<nav>` element or, if using a more generic element such as a `<div>`, add a `role="navigation"` to every navbar to explicitly identify it as a landmark region for users of assistive technologies.
+- `Navbar` renders a semantic `<nav>` landmark by default. If you change its element with `as`, provide an appropriate navigation landmark.
 - Indicate the current item by using `aria-current="page"` for the current page or `aria-current="true"` for the current item in a set.
 
-> The animation effect depends on the `prefers-reduced-motion` media query. See the [reduced motion accessibility guidance][7].
+> The animation effect depends on the `prefers-reduced-motion` media query. See the [reduced motion accessibility guidance][6].
 
 ## Supported content
 
 Navbars come with built-in support for a handful of sub-components. Choose from the following as needed:
 
-- `.navbar-brand` for your company, product, or project name.
-- `.navbar-nav` for a full-height and lightweight navigation (including support for menus).
-- `.navbar-toggler` for use with our drawer plugin and other [navigation toggling][8] behaviors.
+- `NavbarBrand` for your company, product, or project name.
+- `NavbarNav` for lightweight navigation links, including menus.
+- `NavbarToggler` for navigation toggling and drawer behaviors.
 - Flex and spacing utilities for any form controls and actions.
-- `.navbar-text` for adding vertically centered strings of text.
+- `NavbarText` for vertically centered text.
 
 ### Brand
 
-The `.navbar-brand` can be applied to most elements, but an anchor works best, as some elements might require utility classes or custom styles.
+Use `NavbarBrand` for a brand name or link. It renders an anchor by default; set `as="span"` when the brand is not a link.
 
 #### Text
 
-Add your text within an element with the `.navbar-brand` class.
+Pass the brand text as `NavbarBrand`'s children.
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
@@ -124,7 +124,7 @@ Add your text within an element with the `.navbar-brand` class.
 
 #### Image
 
-You can replace the text within the `.navbar-brand` with an `<img>`.
+Place an [`Image`][7] inside `NavbarBrand` to use an image as the brand.
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
@@ -143,7 +143,7 @@ You can replace the text within the `.navbar-brand` with an `<img>`.
 
 #### Image and text
 
-You can also make use of some additional utilities to add an image and text at the same time. Note the addition of `.d-inline-block` and `.align-text-top` on the `<img>`.
+To combine an image and text, place both inside `NavbarBrand` and pass layout utilities through the [`Image`][7] component's `className`.
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
@@ -164,11 +164,11 @@ You can also make use of some additional utilities to add an image and text at t
 
 ### Nav
 
-Navbar navigation links build on our `.nav` options with their own modifier class and require the use of [toggler classes][9] for proper responsive styling. **Navigation in navbars will also grow to occupy as much horizontal space as possible** to keep your navbar contents securely aligned.
+`NavbarNav` contains [`NavLink`][8] items and supports navigation variants. Set `Navbar`'s `expand` prop for responsive layout. **Navigation in navbars also grows to occupy horizontal space** to keep the contents aligned.
 
-Add the `.active` class on `.nav-link` to indicate the current page.
+Set `active` on [`NavLink`][8] to indicate the current page.
 
-Please note that you should also add the `aria-current` attribute on the active `.nav-link`.
+Also set `aria-current="page"` on the active [`NavLink`][8].
 
 <CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
@@ -232,7 +232,7 @@ And because we use classes for our navs, you can avoid the list-based approach e
 
 </CodeExample>
 
-You can also use menus in your navbar. Menus require a wrapping element for positioning, so be sure to use separate and nested elements for `.nav-item` and `.nav-link` as shown below.
+You can also use menus in your navbar. Wrap each menu in [`NavItem`][8] for its positioning, as shown below.
 
 <CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
@@ -296,7 +296,8 @@ Place various form controls and components within a navbar:
 
 </CodeExample>
 
-Immediate child elements of `.navbar` use flex layout and will default to `justify-content: space-between`. Use additional [flex utilities][6] as needed to adjust this behavior.
+Immediate child elements of `Navbar` use flex layout and default to `justify-content: space-between`.
+Use additional [flex utilities][5] as needed to adjust this behavior.
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
@@ -320,7 +321,7 @@ Immediate child elements of `.navbar` use flex layout and will default to `justi
 
 </CodeExample>
 
-Input groups work, too. If your navbar is an entire form, or mostly a form, you can use the `<form>` element as the container and save some HTML.
+Input groups work, too. If the navbar is primarily a form, use the [`Form`][9] wrapper as its container.
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
@@ -359,7 +360,7 @@ Various buttons are supported as part of these navbar forms, too. This is also a
 
 ### Text
 
-Navbars may contain bits of text with the help of `.navbar-text`. This class adjusts vertical alignment and horizontal spacing for strings of text.
+Use `NavbarText` for text in a navbar; it adjusts vertical alignment and horizontal spacing.
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
@@ -642,7 +643,9 @@ Navbar themes are easier than ever thanks to Bootstrap’s combination of Sass a
 
 ## Containers
 
-Although it’s not required, you can wrap a navbar in a `.container` to center it on a page–though note that an inner container is still required. Or you can add a container inside the `.navbar` to only center the contents of a [fixed or static top navbar][10].
+Although it’s not required, you can wrap `Navbar` in a [`Container`][10] to center it on a page, or place a
+[`Container`][10] inside `Navbar` to center only its contents. An inner [`Container`][10] is required for a
+[fixed or static top navbar][11].
 
 <CodeExample>
     <Container>
@@ -666,7 +669,7 @@ Use any of the responsive containers to change how wide the content in your navb
 
 ## Placement
 
-Use our [position utilities][11] to place navbars in non-static positions. Choose from fixed to the top, fixed to the bottom, stickied to the top (scrolls with the page until it reaches the top, then stays there), or stickied to the bottom (scrolls with the page until it reaches the bottom, then stays there).
+Use our [position utilities][12] to place navbars in non-static positions. Choose from fixed to the top, fixed to the bottom, stickied to the top (scrolls with the page until it reaches the top, then stays there), or stickied to the bottom (scrolls with the page until it reaches the bottom, then stays there).
 
 Fixed navbars use `position: fixed`, meaning they’re pulled from the normal flow of the DOM and may require custom CSS (e.g., `padding-top` on the `<body>`) to prevent overlap with other elements.
 
@@ -755,11 +758,11 @@ These examples show the drawer below the `md` breakpoint. Click the toggler on a
 
 ### Toggler
 
-Navbar togglers are left-aligned by default, but should they follow a sibling element like a `.navbar-brand`, they’ll automatically be aligned to the far right. Reversing your markup will reverse the placement of the toggler.
+Navbar togglers are left-aligned by default, but when placed after a sibling such as `NavbarBrand`, they automatically align to the far right. Reversing the component order reverses the toggler placement.
 
 The first example collapses below the `md` breakpoint; the following examples always keep the toggler visible. Click it to open the drawer.
 
-To toggle inline content outside the responsive navbar examples, pass its selector to `CollapseToggle` with the `navbarToggler` prop:
+To toggle inline content outside the responsive navbar examples, pass its selector to [`CollapseToggle`][13] with the `navbarToggler` prop:
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
@@ -775,7 +778,7 @@ To toggle inline content outside the responsive navbar examples, pass its select
 
 </CodeExample>
 
-With no `.navbar-brand` shown (hidden inside the drawer):
+With no brand shown in the navbar (the brand is hidden inside the drawer):
 
 <CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
@@ -988,13 +991,15 @@ Use CSS custom properties on the component to customize its appearance without r
 </DocumentLayout>
 
 [1]: /components/drawer
-[2]: #color-schemes
-[3]: #containers
-[4]: https://getbootstrap.com/docs/6.0/utilities/margin
-[5]: https://getbootstrap.com/docs/6.0/utilities/padding
-[6]: https://getbootstrap.com/docs/6.0/utilities/flex
-[7]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion
-[8]: #responsive-behaviors
-[9]: #toggler
-[10]: #placement
-[11]: https://getbootstrap.com/docs/6.0/utilities/position
+[2]: #containers
+[3]: https://getbootstrap.com/docs/6.0/utilities/margin
+[4]: https://getbootstrap.com/docs/6.0/utilities/padding
+[5]: https://getbootstrap.com/docs/6.0/utilities/flex
+[6]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion
+[7]: ../../content/images/
+[8]: ../nav/
+[9]: ../../forms/
+[10]: ../../layout/grid/
+[11]: #placement
+[12]: https://getbootstrap.com/docs/6.0/utilities/position
+[13]: ../collapse/

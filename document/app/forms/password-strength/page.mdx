@@ -14,7 +14,7 @@ Provide visual feedback on password strength with segmented meters or progress b
 Strength meters help users create secure passwords by providing real-time feedback on password complexity. Bootstrap’s strength component offers:
 
 - **Segmented meter**: Four segments that fill based on strength level
-- **Progress bar variant**: A single bar that grows with strength
+- **[Progress][1] bar variant**: A single bar that grows with strength
 - **Text feedback**: Optional text messages for each strength level
 - **Customizable scoring**: Configure minimum length and scoring criteria
 - **Minimal JavaScript**: Lightweight component following Bootstrap patterns
@@ -35,7 +35,7 @@ The default strength meter uses four segments that fill progressively as passwor
 
 ### With text feedback
 
-Add a `.strength-text` element to display strength messages.
+`PasswordStrength` displays the strength message by default. Set `showText={false}` to hide it.
 
 <CodeExample>
     <div>
@@ -47,7 +47,7 @@ Add a `.strength-text` element to display strength messages.
 
 ### Progress bar
 
-Use `.strength-bar` for a single progress bar that grows with password strength.
+Set `variant="bar"` on `PasswordStrength` for a single progress bar that grows with password strength.
 
 <CodeExample>
     <div>
@@ -206,3 +206,5 @@ For simple cases or server-rendered content, you can use the component without J
 ```
 
 </DocumentLayout>
+
+[1]: ../../components/progress/

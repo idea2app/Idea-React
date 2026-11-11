@@ -38,18 +38,18 @@ The Field component provides essential layout, spacing, and functionality for yo
 
 ## How it works
 
-The `.form-field` wrapper uses CSS grid to manage the layout of a form control alongside its label, description, and validation feedback.
+`FormField` uses CSS grid to lay out a form control alongside its label, description, and validation feedback.
 
 - **Default layout** is a single-column grid where everything stacks vertically. Use this for text inputs, selects, textareas, ranges, input groups, and adorned inputs.
-- **Two-column layout** activates automatically via `:has()` when a `.check`, `.radio`, or `.switch` is a direct child. The control pins to column 1 while the label, description, and feedback stack in column 2.
-- **Overhead label** — when a `.form-label` is present alongside a check, radio, or switch, it spans both columns and sits above the control row.
-- **Grouped controls** — nest multiple `.form-field`s inside an outer `.form-field` to group radios, checkboxes, or switches under a shared label with shared description and validation feedback.
+- **Two-column layout** activates automatically via `:has()` when a [`Checkbox`][1], [`Radio`][2], or [`FormSwitch`][3] is a direct child. The control sits in the first column while its label, description, and feedback stack in the second.
+- **Overhead label** — when a `FormLabel` is present alongside a check, radio, or switch, it spans both columns and sits above the control row.
+- **Grouped controls** — nest multiple `FormField` components inside an outer `FormField` to group radios, checkboxes, or switches under a shared label with shared description and validation feedback.
 
 ## Examples
 
 ### Select
 
-Works the same way with `<select>` elements.
+Use [`FormSelect`][4] for select controls.
 
 <CodeExample>
     <FormField>
@@ -65,7 +65,7 @@ Works the same way with `<select>` elements.
 
 ### Textarea
 
-Works the same way with `<textarea>` elements. Descriptions are optional.
+Use [`FormTextArea`][4] for multi-line text controls. Descriptions are optional.
 
 <CodeExample>
     <FormField>
@@ -77,7 +77,7 @@ Works the same way with `<textarea>` elements. Descriptions are optional.
 
 ### Checkbox
 
-When a `.check` is a direct child, the grid switches to a two-column layout with the checkbox in column 1 and the label in column 2.
+When a [`Checkbox`][1] is a direct child, the grid switches to a two-column layout with the checkbox in the first column and its label in the second.
 
 <CodeExample>
     <FormField>
@@ -90,7 +90,7 @@ When a `.check` is a direct child, the grid switches to a two-column layout with
 
 ### Radio
 
-Radios use the same two-column layout. Wrap each radio + label pair in its own `.form-field`.
+Radios use the same two-column layout. Wrap each [`Radio`][2] and its label in its own `FormField`.
 
 <CodeExample>
     <div className="d-flex flex-column gap-2">
@@ -111,7 +111,7 @@ Radios use the same two-column layout. Wrap each radio + label pair in its own `
 
 ### Grouped
 
-Wrap multiple `.form-field`s in a `.form-group` to group related controls under a shared label. The group provides consistent spacing while each inner `.form-field` keeps its own layout.
+Wrap multiple `FormField` components in `FormGroup` to group related controls under a shared label. The group provides consistent spacing while each inner field keeps its own layout.
 
 <CodeExample>
     <FormGroup>
@@ -134,7 +134,7 @@ Wrap multiple `.form-field`s in a `.form-group` to group related controls under 
 
 ### Group cards
 
-Add `.form-field-card` to each inner `.form-field` for a card-style treatment that highlights the selected option. Wrap the inner fields in a `.form-group` with tighter spacing for a more compact look.
+Set the `card` prop on each `FormField` for a card-style treatment that highlights the selected option. Wrap the inner fields in `FormGroup` with tighter spacing for a more compact look.
 
 <CodeExample>
     <FormGroup>
@@ -195,7 +195,7 @@ Comboboxes—as well as datepickers, OTPs, and any other form component—are su
 
 ## Overhead label
 
-When a check, radio, or switch needs a field title above it, add a `.form-label`. It automatically spans both columns and sits on its own row above the control.
+When a check, radio, or switch needs a field title above it, add a `FormLabel`. It automatically spans both columns and sits on its own row above the control.
 
 <CodeExample>
     <FormField>
@@ -212,7 +212,7 @@ When a check, radio, or switch needs a field title above it, add a `.form-label`
 
 ## Descriptions
 
-Add a `<small class="form-text">` after the label and wrap it in a `.form-field-content` to ensure appropriate spacing and alignment.
+Add `FormText` after the label and wrap it in `FormFieldContent` to ensure appropriate spacing and alignment.
 
 <CodeExample>
     <div className="d-flex flex-column gap-3">
@@ -244,11 +244,14 @@ Add a `<small class="form-text">` after the label and wrap it in a `.form-field-
 
 ## Validation
 
-Validation feedback (`.invalid-feedback`, `.valid-feedback`) stacks correctly inside `.form-field` for all control types.
+[`FormFeedback`][5] stacks correctly inside `FormField` for all control types. Set its `type` prop to `valid` for success feedback; it defaults to invalid feedback.
 
 ### Client-side
 
-Add `data-bs-validate` to your `<form>` to opt in to `:user-invalid` styling. These pseudo-classes activate after the user interacts with a control. To also show success styling on valid fields, use `data-bs-validate="valid"`. Add `novalidate` to suppress native browser validation tooltips while keeping the constraint validation API available.
+Pass `data-bs-validate` to `ValidationForm` to opt in to `:user-invalid` styling. These
+pseudo-classes activate after the user interacts with a control. To also show success styling on
+valid fields, use `data-bs-validate="valid"`. Set `noValidate` to suppress native browser validation
+tooltips while keeping the constraint validation API available.
 
 <CodeExample>
     <Stack as={ValidationForm} noValidate data-bs-validate="" gap={3}>
@@ -275,7 +278,7 @@ Add `data-bs-validate` to your `<form>` to opt in to `:user-invalid` styling. Th
 
 ### Server-side
 
-Apply `.is-invalid` or `.is-valid` directly to the control for server-side validation. Feedback is visible immediately on page load.
+Set the control's `validation` prop to `invalid` or `valid` for server-side validation. Feedback is visible immediately on page load.
 
 <CodeExample>
     <FormField className="mb-3">
@@ -317,3 +320,9 @@ Apply `.is-invalid` or `.is-valid` directly to the control for server-side valid
 </CodeExample>
 
 </DocumentLayout>
+
+[1]: ../checkbox/
+[2]: ../radio/
+[3]: ../switch/
+[4]: ../form-control/
+[5]: ../validation/

@@ -11,8 +11,10 @@ plugins) with Bootstrap.
 
 Idea React provides the [`Table` wrapper][1] for these examples. Use the `striped`,
 `stripedColumns`, `hover`, `bordered`, `borderless`, and `small` props for the corresponding
-modifiers, and `responsive` to wrap the table in `.table-responsive` (pass a breakpoint to use the
-responsive variant, for example `responsive="md"`).
+variants; `card` adds the card wrapper, while `responsive` adds a responsive wrapper. Set
+`verticalAlign`, `captionTop`, and `stacked` to apply the corresponding table styles. Pass a
+breakpoint to `responsive` or `stacked` to apply its style responsively, for example
+`responsive="md"`.
 
 The `as` prop replaces the table root, or the outer wrapper when `responsive` is enabled.
 With an explicit `as`, additional props, `className`, and the ref are forwarded to that root;
@@ -20,12 +22,11 @@ responsive tables retain their inner table and its Bootstrap variants.
 
 ## Overview
 
-Due to the widespread use of `<table>` elements across third-party widgets like calendars and date
-pickers, Bootstrap's tables are **opt-in**. Add the base class `.table`—the wrapper does it—then
-extend with our optional modifier classes or custom styles. All table styles are not inherited in
-Bootstrap, meaning any nested tables can be styled independent from the parent.
+Due to the widespread use of tables across third-party widgets like calendars and date pickers,
+`Table` styles are **opt-in**. The wrapper applies the base styling; use its variant props or
+`className` to customize the table. Nested tables can be styled independently from their parent.
 
-Using the most basic table markup, here's how `.table`-based tables look in Bootstrap.
+Here is the default appearance of `Table`.
 
 <Table>
     <thead>
@@ -60,8 +61,8 @@ Using the most basic table markup, here's how `.table`-based tables look in Boot
 
 ## Variants
 
-Use theme-specific color classes to style tables, table rows, or individual cells. These adapt to
-color modes as well.
+Use theme color utilities through `className` to style a table, row, or cell. These adapt to color
+modes as well.
 
 <Table>
     <thead>
@@ -273,7 +274,7 @@ These hoverable rows can also be combined with the striped rows variant:
 
 ### Active tables
 
-Highlight a table row or cell by adding the `.table-active` class.
+Highlight a row or cell by passing `className="table-active"` to it.
 
 <Table>
     <thead>
@@ -310,8 +311,8 @@ Highlight a table row or cell by adding the `.table-active` class.
 
 For the accented tables (striped rows, striped columns, hoverable rows, and active tables), we start
 by setting the background of a table cell to `var(--bs-theme-bg-subtle, var(--bs-table-bg))`. The
-table variants are the `.theme-*` classes: each one sets `--bs-theme-bg-subtle` and `--bs-theme-fg`
-on the table, row, or cell it is added to, and the cells inside pick them up. This way, we don't get
+theme utility classes each set `--bs-theme-bg-subtle` and `--bs-theme-fg` on the table, row, or cell
+whose `className` includes the utility, and the cells inside pick them up. This way, we don't get
 into trouble if semi-transparent colors are used as table backgrounds.
 
 A box shadow is layered on top of any specified `background-color`, and the stripe, active, and hover
@@ -355,7 +356,7 @@ Add the `bordered` prop for borders on all sides of the table and cells.
     </tbody>
 </Table>
 
-Border color utilities can be added to change colors:
+Pass border-color utilities through `className` to change colors:
 
 <Table bordered className="border-primary">
     <thead>
@@ -429,7 +430,8 @@ Need a bordered, rounded table without nesting it in a card? Wrap the table and 
 
 ### With utilities
 
-Compose border, border radius, and overflow utilities. Drop the table's bottom margin with `.mb-0`.
+Use border, border-radius, and overflow utilities through the wrapper's `className`. Pass a margin
+utility through `Table`'s `className` to remove its bottom margin.
 
 <div className="border rounded overflow-hidden">
     <Table striped className="mb-0">
@@ -464,47 +466,45 @@ Compose border, border radius, and overflow utilities. Drop the table's bottom m
     </Table>
 </div>
 
-### With `.table-card`
+### With a card wrapper
 
-Use `.table-card` for the same look. It rounds corners like a card, clips cell backgrounds, and
-removes the last row's bottom border so it does not stack on the wrapper.
+Set `card` on `Table` to add a wrapper that rounds corners like a card, clips cell backgrounds,
+and removes the last row's bottom border so it does not stack on the wrapper.
 
-<div className="table-card">
-    <Table hover>
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>John</td>
-                <td>Doe</td>
-                <td>@social</td>
-            </tr>
-        </tbody>
-    </Table>
-</div>
+<Table card hover>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
 
 ## Small tables
 
-Add the `small` prop to make any `.table` more compact by cutting all cell `padding` in half.
+Set the `small` prop on `Table` to make it more compact by cutting all cell padding in half.
 
 <Table small>
     <thead>
@@ -539,8 +539,8 @@ Add the `small` prop to make any `.table` more compact by cutting all cell `padd
 
 ## Table group dividers
 
-Add a thicker, darker border between table groups—`<thead>`, `<tbody>`, and `<tfoot>`—with
-`.table-group-divider`. Customize the color by changing the `border-top-color`.
+Add `className="table-group-divider"` to a row group to add a thicker, darker border between table
+groups. Customize its color with the `border-top-color` style.
 
 <Table>
     <thead>
@@ -575,11 +575,12 @@ Add a thicker, darker border between table groups—`<thead>`, `<tbody>`, and `<
 
 ## Vertical alignment
 
-Table cells of `<thead>` are always vertical aligned to the bottom. Table cells in `<tbody>` inherit
-their alignment from `<table>` and are aligned to the top by default. Use the vertical align classes
-to re-align where needed.
+Header cells are vertically aligned to the bottom. Body cells inherit their alignment from the
+table and are aligned to the top by default. Set `verticalAlign` on `Table` to control body cell
+alignment; vertical-alignment utility classes can still be passed through `className` on individual
+rows or cells.
 
-<Table responsive className="align-middle">
+<Table responsive verticalAlign="middle">
     <thead>
         <tr>
             <th scope="col" className="w-25">
@@ -791,9 +792,9 @@ table and understand what it's about and decide if they want to read it.
     </tbody>
 </Table>
 
-You can also put the `<caption>` on the top of the table with `.caption-top`.
+Set the `captionTop` prop on `Table` to place its caption above the table.
 
-<Table className="caption-top">
+<Table captionTop>
     <caption>List of users</caption>
     <thead>
         <tr>
@@ -827,15 +828,15 @@ You can also put the `<caption>` on the top of the table with `.caption-top`.
 
 ## Stacked tables
 
-Add `.table-stacked` to convert a table's rows into stacked blocks when space is limited. Each row
-becomes a vertical block with the first cell acting as a bold title and the remaining cells displayed
-as label–value pairs. Labels are generated from `data-cell` attributes on each `<td>`.
+Set `stacked` on `Table` to convert its rows into stacked blocks when space is limited. Each
+row becomes a vertical block with the first cell acting as a bold title and the remaining cells
+displayed as label–value pairs. Labels are generated from `data-cell` attributes on each cell.
 
-Both `.table-stacked` and `.table-responsive` use container queries, so the `responsive` wrapper is
-required as the query container. Use `.md:table-stacked`, `.lg:table-stacked`, etc. to only stack
-below a specific container width. The default `.table-stacked` always stacks.
+The `responsive` prop provides the container query required for responsive stacking. Pass
+`stacked="md"` or another breakpoint to stack only below a specific container width. Without a
+breakpoint, the rows are always stacked.
 
-<Table responsive className="md:table-stacked">
+<Table responsive stacked="md">
     <thead>
         <tr>
             <th scope="col">Name</th>

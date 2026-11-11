@@ -10,26 +10,35 @@ export interface TableProps extends ComponentPropsWithRef<'table'> {
     hover?: boolean;
     bordered?: boolean;
     borderless?: boolean;
+    card?: boolean;
     small?: boolean;
     responsive?: boolean | Breakpoint;
+    stacked?: boolean | Breakpoint;
+    verticalAlign?: 'baseline' | 'top' | 'middle' | 'bottom' | 'text-top' | 'text-bottom';
+    captionTop?: boolean;
 }
 
 export const Table = polymorphic<TableProps>(
     ({
         as: RootAs,
+        className,
+        children,
         striped,
         stripedColumns,
         hover,
         bordered,
         borderless,
+        card,
         small,
         responsive,
-        className,
-        children,
+        stacked,
+        verticalAlign,
+        captionTop,
         ...props
     }) => {
         const Root = RootAs ?? 'div';
         const TableRoot = !responsive && RootAs ? RootAs : 'table';
+        const hasWrapper = !!responsive || !!card;
 
         const table = (
             <TableRoot
@@ -44,6 +53,10 @@ export const Table = polymorphic<TableProps>(
                         'table-borderless': borderless,
                         'table-sm': small
                     },
+                    stacked === true && 'table-stacked',
+                    typeof stacked === 'string' && `${stacked}:table-stacked`,
+                    verticalAlign && `align-${verticalAlign}`,
+                    captionTop && 'caption-top',
                     responsive && RootAs ? undefined : className
                 )}
             >
@@ -51,15 +64,16 @@ export const Table = polymorphic<TableProps>(
             </TableRoot>
         );
 
-        return !responsive ? (
+        return !hasWrapper ? (
             table
         ) : (
             <Root
-                {...(RootAs ? props : {})}
+                {...(responsive && RootAs ? props : {})}
                 className={classNames(
-                    'table-responsive',
-                    responsive !== true && `${responsive}:table-responsive`,
-                    RootAs && className
+                    responsive && 'table-responsive',
+                    responsive && responsive !== true && `${responsive}:table-responsive`,
+                    card && 'table-card',
+                    responsive && RootAs && className
                 )}
             >
                 {table}
