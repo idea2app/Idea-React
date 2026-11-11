@@ -1,0 +1,136 @@
+import { Button } from '../../../../source/Base/Button';
+import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
+import { Icon } from '../../../../source/Extension/Icon';
+import { FormCheck, FormControl, FormSelect, FormTextArea } from '../../../../source/Form';
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
+
+import { BaseLayout } from '../../../component/Document/BaseLayout';
+
+export const footerNavItems = ['Home', 'Features', 'Pricing', 'FAQs', 'About'];
+export const footerSections = [
+    { title: 'Section', links: footerNavItems },
+    { title: 'Section', links: footerNavItems },
+    { title: 'Section', links: footerNavItems }
+];
+
+<BaseLayout title="Footers">
+
+<Container>
+  <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <Col as="p" md={4} className="mb-0 fg-2">{<> &copy; {new Date().getFullYear()} Company, Inc</>}</Col>
+
+    <Col as="a" href="/" md={4} className="d-flex align-items-center justify-content-center mb-3 md:mb-0 md:me-auto theme-inverse text-decoration-none" aria-label="Bootstrap">
+      <Icon name="bootstrap" size={2.5} className="me-2" />
+    </Col>
+
+    <Col md={4}><Nav as="ul" className="justify-content-end">
+      {footerNavItems.map((label, index) => (
+        <NavItem  key={index}><NavLink href="#" className="px-2 fg-2">{label}</NavLink></NavItem>
+      ))}
+    </Nav></Col>
+
+  </footer>
+</Container>
+
+<div className="b-example-divider" />
+
+<Container>
+  <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <Col md={4} className="d-flex align-items-center">
+      <a href="/" className="mb-3 me-2 md:mb-0 fg-2 text-decoration-none lh-1" aria-label="Bootstrap">
+        <Icon name="bootstrap" size={1.875} />
+      </a>
+      <span className="mb-3 md:mb-0 fg-2">&copy; {new Date().getFullYear()} Company, Inc</span>
+    </Col>
+
+    <Col md={4}><Nav as="ul" className="justify-content-end list-unstyled d-flex">
+      <li className="ms-3"><a className="fg-2" href="#" aria-label="Instagram"><Icon name="instagram" size={1.5} /></a></li>
+      <li className="ms-3"><a className="fg-2" href="#" aria-label="Facebook"><Icon name="facebook" size={1.5} /></a></li>
+    </Nav></Col>
+
+  </footer>
+</Container>
+
+<div className="b-example-divider" />
+
+<Container>
+    <footer className="py-3 my-4">
+        <Nav as="ul" className="justify-content-center border-bottom pb-3 mb-3">
+            {footerNavItems.map(label => (
+                <NavItem key={label}>
+                    <NavLink href="#" className="px-2 fg-2">
+                        {label}
+                    </NavLink>
+                </NavItem>
+            ))}
+        </Nav>
+        <p className="text-center fg-2">&copy; {new Date().getFullYear()} Company, Inc</p>
+    </footer>
+</Container>
+
+<div className="b-example-divider" />
+
+<Container>
+  <Row as="footer" xs={1} sm={2} md={5} className="py-5 my-5 border-top">
+    <Col className="mb-3">
+      <a href="/" className="d-flex align-items-center mb-3 theme-inverse text-decoration-none" aria-label="Bootstrap">
+        <Icon name="bootstrap" size={2.5} className="me-2" />
+      </a>
+      <p className="fg-2">&copy; {new Date().getFullYear()}</p>
+    </Col>
+
+    <Col className="mb-3" />
+
+    {footerSections.map(({ title, links }, index) => (
+      <Col key={index} className="mb-3">
+        <h5>{title}</h5>
+        <Nav as="ul" vertical>
+          {links.map(label => (<NavItem key={label} className="mb-2"><NavLink href="#" className="p-0 fg-2">{label}</NavLink></NavItem>))}
+        </Nav>
+      </Col>
+    ))}
+  </Row>
+</Container>
+
+<div className="b-example-divider" />
+
+<Container>
+  <footer className="py-5">
+    <Row>
+      {footerSections.map(({ title, links }, sectionIndex) => (
+        <Col key={sectionIndex} xs={6} md={2} className="mb-3">
+          <h5>{title}</h5>
+          <Nav as="ul" vertical>
+            {links.map((label) => (
+              <NavItem key={label} className="mb-2">
+                <NavLink href="#" className="p-0 fg-2">{label}</NavLink>
+              </NavItem>
+            ))}
+          </Nav>
+        </Col>
+      ))}
+      <Col md={{ span: 5, offset: 1 }} className="mb-3">
+        <form>
+          <h5>Subscribe to our newsletter</h5>
+          <p>Monthly digest of what's new and exciting from us.</p>
+          <div className="d-flex flex-column sm:flex-row w-100 gap-2">
+            <label htmlFor="newsletter1" className="visually-hidden">Email address</label>
+            <FormControl id="newsletter1" type="email" placeholder="Email address" />
+            <Button variant="solid" theme="primary">Subscribe</Button>
+          </div>
+        </form>
+      </Col>
+    </Row>
+
+    <div className="d-flex flex-column sm:flex-row justify-content-between py-4 my-4 border-top">
+      <p>&copy; {new Date().getFullYear()} Company, Inc. All rights reserved.</p>
+      <ul className="list-unstyled d-flex">
+        <li className="ms-3"><a className="theme-inverse" href="#" aria-label="Instagram"><Icon name="instagram" size={1.5} /></a></li>
+        <li className="ms-3"><a className="theme-inverse" href="#" aria-label="Facebook"><Icon name="facebook" size={1.5} /></a></li>
+      </ul>
+    </div>
+
+  </footer>
+</Container>
+
+</BaseLayout>

@@ -2,11 +2,11 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="next">
 
-# Next.js with ViNext
+# Next.js
 
-Use ViNext to create a Next.js-style React application that runs on Vite. This setup follows the
-documentation site's SWC decorator transform and static-export configuration, with Idea React as
-the component library.
+Create a statically exported Next.js application with Idea React. This guide uses ViNext, a Vite
+implementation of the Next.js application model, and follows the documentation site's SWC
+decorator transform and static-export configuration.
 
 ## Setup
 
@@ -37,9 +37,9 @@ my-project/
 └── vite.config.ts
 ```
 
-## Configure ViNext
+## Configure Next.js
 
-Register ViNext and SWC in `vite.config.ts`:
+Register ViNext, the Vite implementation used in this guide, and SWC in `vite.config.ts`:
 
 ```ts
 import swc from 'unplugin-swc';
@@ -133,8 +133,8 @@ import { Button, Container } from 'idea-react';
 export default function Page() {
     return (
         <Container>
-            <h1>Hello, Idea React and ViNext!</h1>
-            <Button type="button" variant="solid" theme="primary">
+            <h1>Hello, Idea React and Next.js!</h1>
+            <Button variant="solid" theme="primary">
                 Get started
             </Button>
         </Container>

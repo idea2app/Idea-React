@@ -5,7 +5,10 @@ import { DocumentAction } from '../component/Document/Action';
 import { DocumentHero } from '../component/Document/Hero';
 import heroStyles from '../component/Document/Hero/style.module.less';
 import { DropdownMenu } from '../component/DropdownMenu';
+import { BaseLayout } from '../component/Document/BaseLayout';
 import { site, versions } from './site';
+
+<BaseLayout>
 
 <DocumentHero
     title="Build React apps with less glue and more possibility"
@@ -33,7 +36,7 @@ brings the building blocks together so you can focus on your application.
         }}
         label={
             <>
-                <Icon name="rocket-takeoff" aria-hidden="true" />
+                <Icon name="rocket-takeoff" />
                 For Agents
             </>
         }
@@ -62,7 +65,7 @@ brings the building blocks together so you can focus on your application.
     aria-label="Idea React community"
 >
 <div className="flex-shrink-0 fg-accent">
-    <Icon name="code-square" size={2} aria-hidden="true" />
+    <Icon name="code-square" size={2} />
 </div>
 <div className="text-sm fg-2">
 
@@ -76,3 +79,5 @@ Built by the idea2app community.
 
 [1]: https://github.com/idea2app/Idea-React#usage
 [2]: https://github.com/idea2app/Idea-React/graphs/contributors
+
+</BaseLayout>

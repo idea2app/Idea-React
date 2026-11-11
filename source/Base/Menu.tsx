@@ -60,12 +60,7 @@ export const MenuPanel = polymorphic<MenuPanelProps>(
 MenuPanel.displayName = 'MenuPanel';
 
 export const MenuItemIcon = polymorphic<IconProps>(({ as: RootAs, className, ...props }) => (
-    <Icon
-        as={RootAs}
-        aria-hidden="true"
-        {...props}
-        className={classNames('menu-item-icon', className)}
-    />
+    <Icon as={RootAs} {...props} className={classNames('menu-item-icon', className)} />
 ));
 MenuItemIcon.displayName = 'MenuItemIcon';
 
@@ -73,7 +68,6 @@ export const MenuItemCheck = polymorphic<Omit<IconProps, 'name'>>(
     ({ as: RootAs, className, ...props }) => (
         <Icon
             as={RootAs}
-            aria-hidden="true"
             {...props}
             name="check"
             className={classNames('menu-item-check', className)}

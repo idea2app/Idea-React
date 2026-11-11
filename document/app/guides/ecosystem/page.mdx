@@ -1,0 +1,177 @@
+import { Badge } from '../../../../source/Base/Badge';
+import { Table } from '../../../../source/Content/Tables';
+
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+export const projects = [
+    {
+        name: 'Edkit / React',
+        source: 'https://github.com/idea2app/Edkit/tree/master/React',
+        topics: ['bootstrap', 'editor', 'html', 'react', 'rich-text', 'typescript'],
+        npm: 'react-bootstrap-editor',
+        description: 'Lightweight rich text editor based on TypeScript, React, and Bootstrap.'
+    },
+    {
+        name: 'ECharts-JSX',
+        source: 'https://github.com/idea2app/ECharts-JSX/tree/master',
+        topics: ['chart', 'echarts', 'jsx', 'tsx', 'typescript', 'wrapper'],
+        npm: 'echarts-jsx',
+        description:
+            'A real JSX wrapper for ECharts, which makes it easy to build visualization apps with React.'
+    },
+    {
+        name: 'MobX-React-helper',
+        source: 'https://github.com/idea2app/MobX-React-helper',
+        topics: [],
+        npm: 'mobx-react-helper',
+        description:
+            'MobX helper library for React class components, with TypeScript class and decorator support.'
+    },
+    {
+        name: 'React-Router-class-tools',
+        source: 'https://github.com/idea2app/React-Router-class-tools',
+        topics: ['class', 'component', 'react', 'router', 'tool', 'utility'],
+        npm: 'react-router-class-tools',
+        description:
+            'Class component utilities for React Router 6+, which restore the class support dropped by the official team.'
+    },
+    {
+        name: 'MobX-i18n',
+        source: 'https://github.com/idea2app/MobX-i18n',
+        topics: [
+            'i18n',
+            'international',
+            'mobx',
+            'responsive',
+            'toolkit',
+            'translate',
+            'typescript',
+            'utility'
+        ],
+        npm: 'mobx-i18n',
+        description: 'Responsive translation utility based on TypeScript and MobX.'
+    },
+    {
+        name: 'OpenReactMap',
+        source: 'https://github.com/idea2app/OpenReactMap',
+        topics: [
+            'compatibility',
+            'free',
+            'geo',
+            'lbs',
+            'map',
+            'mobx',
+            'open',
+            'react',
+            'typescript'
+        ],
+        npm: 'open-react-map',
+        description:
+            'Compatible map component supporting geo services with free or open APIs, based on TypeScript, MobX, and React.'
+    },
+    {
+        name: 'MobX-RESTful-table',
+        source: 'https://github.com/idea2app/MobX-RESTful-table',
+        topics: ['component', 'crud', 'mobx', 'react', 'restful', 'table'],
+        npm: 'mobx-restful-table',
+        description:
+            'A pagination table and scroll list component suite for CRUD operations, based on MobX RESTful and React.'
+    },
+    {
+        name: 'MobX-AI',
+        source: 'https://github.com/idea2app/MobX-AI',
+        topics: [],
+        description: 'AI SDK and UI based on MobX.'
+    },
+    {
+        name: 'React-MobX-Bootstrap-ts',
+        source: 'https://github.com/idea2app/React-MobX-Bootstrap-ts',
+        topics: ['bootstrap', 'mobx', 'parcel', 'react', 'typescript'],
+        description: 'React project scaffold based on TypeScript, MobX, and Bootstrap.'
+    },
+    {
+        name: 'Vite-React-MobX-Bootstrap-ts',
+        source: 'https://github.com/idea2app/Vite-React-MobX-Bootstrap-ts',
+        topics: [],
+        description:
+            'React project scaffold based on TypeScript, MobX, and Bootstrap, powered by Vite.'
+    },
+    {
+        name: 'Next-Bootstrap-ts',
+        source: 'https://github.com/idea2app/Next-Bootstrap-ts',
+        topics: ['bootstrap', 'nextjs', 'scaffold', 'template', 'typescript'],
+        description: 'React project scaffold based on TypeScript, Next.js, and Bootstrap.'
+    },
+    {
+        name: 'Lark-Next-Bootstrap-ts',
+        source: 'https://github.com/idea2app/Lark-Next-Bootstrap-ts',
+        topics: ['bootstrap', 'lark', 'nextjs', 'pwa', 'scaffold', 'ssr'],
+        description:
+            'Lark project scaffold based on TypeScript, React, Next.js, Bootstrap, and Workbox.'
+    }
+];
+
+<DocumentLayout active="ecosystem">
+
+# Ecosystem
+
+Idea React works alongside a family of open-source libraries and project scaffolds from the same
+organization. Each entry links to its source code and GitHub topics, and shows the latest NPM
+release when the project is published as a package.
+
+<Table responsive>
+    <thead>
+        <tr>
+            <th scope="col">Project</th>
+            <th scope="col">Topics</th>
+            <th scope="col">NPM</th>
+            <th scope="col">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {projects.map(({ name, source, topics, npm, description }) => (
+            <tr key={name}>
+                <th scope="row">
+                    <a href={source} target="_blank" rel="noreferrer">
+                        {name}
+                    </a>
+                </th>
+                <td>
+                    {topics.map(topic => (
+                        <Badge
+                            key={topic}
+                            className="me-1"
+                            theme="secondary"
+                            variant="subtle"
+                            href={`https://github.com/topics/${topic}`}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            {topic}
+                        </Badge>
+                    ))}
+                </td>
+                <td>
+                    {npm ? (
+                        <a
+                            href={`https://www.npmjs.com/package/${npm}`}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <img
+                                src={`https://img.shields.io/npm/v/${npm}`}
+                                alt={`${npm} on NPM`}
+                                loading="lazy"
+                            />
+                        </a>
+                    ) : (
+                        '—'
+                    )}
+                </td>
+                <td>{description}</td>
+            </tr>
+        ))}
+    </tbody>
+</Table>
+
+</DocumentLayout>

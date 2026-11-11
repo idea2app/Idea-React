@@ -53,7 +53,7 @@ export const AccordionHeader = polymorphic<AccordionHeaderProps>(
     ({ as: Root = 'summary', icon = 'chevron-down', className, children, ...props }) => (
         <Root {...props} className={classNames('accordion-header', className)}>
             {children}
-            {icon && <Icon name={icon} className="accordion-icon" aria-hidden="true" />}
+            {icon && <Icon name={icon} className="accordion-icon" />}
         </Root>
     )
 );

@@ -1,0 +1,176 @@
+import './style.less';
+import { Button } from '../../../../source/Base/Button';
+import { Card, CardBody, CardHeader, CardTitle } from '../../../../source/Base/Card';
+import { Table } from '../../../../source/Content/Tables';
+import { Icon } from '../../../../source/Extension/Icon';
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
+export const exampleLinks1 = [
+    { className: 'me-3 py-2 theme-inverse text-decoration-none', label: 'Features' },
+    { className: 'me-3 py-2 theme-inverse text-decoration-none', label: 'Enterprise' },
+    { className: 'me-3 py-2 theme-inverse text-decoration-none', label: 'Support' },
+    { className: 'py-2 theme-inverse text-decoration-none', label: 'Pricing' }
+];
+export const planFeatureGroups = [
+    [
+        { name: 'Public', included: [true, true, true] },
+        { name: 'Private', included: [false, true, true] }
+    ],
+    [
+        { name: 'Permissions', included: [true, true, true] },
+        { name: 'Sharing', included: [false, true, true] },
+        { name: 'Unlimited members', included: [false, true, true] },
+        { name: 'Extra security', included: [false, false, true] }
+    ]
+];
+export const pricingPlans = [
+    {
+        name: 'Free',
+        price: '$0',
+        users: '10 users included',
+        storage: '2 GB of storage',
+        support: 'Email support',
+        button: 'Sign up for free',
+        variant: 'outline'
+    },
+    {
+        name: 'Pro',
+        price: '$15',
+        users: '20 users included',
+        storage: '10 GB of storage',
+        support: 'Priority email support',
+        button: 'Get started',
+        variant: 'solid'
+    },
+    {
+        name: 'Enterprise',
+        price: '$29',
+        users: '30 users included',
+        storage: '15 GB of storage',
+        support: 'Phone and email support',
+        button: 'Contact us',
+        variant: 'solid',
+        cardClassName: 'border-primary',
+        headerClassName: 'theme-primary border-primary'
+    }
+];
+export const pricingFooterSections = [
+    {
+        title: 'Features',
+        links: [
+            'Cool stuff',
+            'Random feature',
+            'Team feature',
+            'Stuff for developers',
+            'Another one',
+            'Last time'
+        ]
+    },
+    {
+        title: 'Resources',
+        links: ['Resource', 'Resource name', 'Another resource', 'Final resource']
+    },
+    {
+        title: 'About',
+        links: ['Team', 'Locations', 'Privacy', 'Terms']
+    }
+];
+
+<BaseLayout title="Pricing example">
+    <Container className="py-3">
+        <header>
+            <div className="d-flex flex-column md:flex-row align-items-center pb-3 mb-4 border-bottom">
+                <a href="/" className="d-flex align-items-center theme-inverse text-decoration-none">
+                    <Icon name="bootstrap" size={2.5} className="me-2" role="img" aria-label="Bootstrap"/>
+                    <span className="fs-xl">Pricing example</span>
+                </a>
+
+                <nav className="d-inline-flex mt-2 md:mt-0 md:ms-auto">
+                    {exampleLinks1.map(({ className, label }, index) => (<a key={index} className={className} href="#">
+                            {label}
+                        </a>))}
+                </nav>
+            </div>
+
+            <div className="pricing-header p-3 md:pb-4 mx-auto text-center">
+                <h1 className="fs-5xl fw-normal fg-emphasis-inverse">Pricing</h1>
+                <p className="fs-lg fg-2">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
+            </div>
+        </header>
+
+        <div>
+            <Row xs={1} md={3} className="mb-3 text-center">
+                {pricingPlans.map(({ name, price, users, storage, support, button, variant, cardClassName = '', headerClassName = '' }) => (<Col key={name}>
+                            <Card className={`mb-4 rounded-3 shadow-sm ${cardClassName}`}>
+                                <CardHeader className={`py-3 ${headerClassName}`}>
+                                    <h4 className="my-0 fw-normal">{name}</h4>
+                                </CardHeader>
+                                <CardBody>
+                                    <CardTitle as="h1" className="pricing-card-title">
+                                        {price}
+                                        <small className="fg-2 fw-light">/mo</small>
+                                    </CardTitle>
+                                    <ul className="list-unstyled mt-3 mb-4 w-100">
+                                        {[
+    users,
+    storage,
+    support,
+    'Help center access'
+
+].map(feature => (<li key={feature}>{feature}</li>))}
+
+</ul>
+<Button variant={variant} theme="primary" size="lg" className="w-100">
+{button}
+</Button>
+</CardBody>
+</Card>
+</Col>))}
+</Row>
+
+            <h2 className="fs-3xl fw-light text-center mb-4">Compare plans</h2>
+            <Table responsive className="text-center">
+                <thead>
+                    <tr>
+                        <th className="comparison-label"/>
+                        {['Free', 'Pro', 'Enterprise'].map(plan => (<th key={plan} className="comparison-plan">
+                                {plan}
+                            </th>))}
+                    </tr>
+                </thead>
+                {planFeatureGroups.map((features, groupIndex) => (<tbody key={groupIndex}>
+                        {features.map(({ name, included }) => (<tr key={name}>
+                                <th scope="row" className="text-start">
+                                    {name}
+                                </th>
+                                {included.map((hasFeature, planIndex) => (<td key={planIndex}>
+                                        {hasFeature && (<Icon name="check" size={1.5} role="img" aria-label="Included"/>)}
+                                    </td>))}
+                            </tr>))}
+                    </tbody>))}
+            </Table>
+        </div>
+
+        <footer className="pt-4 md:my-5 md:pt-5 border-top">
+            <Row>
+                <Col xs={12} md>
+                    <img className="mb-2" src="https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo.svg" alt="" width="24" height="19"/>
+                    {<small className="d-block mb-3 fg-2">
+                        &copy; 2017–{new Date().getFullYear()}
+                    </small>}
+                </Col>
+                {pricingFooterSections.map(({ title, links }) => (<Col key={title} xs={6} md>
+                        <h5>{title}</h5>
+                        <ul className="list-unstyled">
+                            {links.map(label => (<li key={label} className="mb-1">
+                                    <a className="theme-secondary text-decoration-none" href="#">
+                                        {label}
+                                    </a>
+                                </li>))}
+                        </ul>
+                    </Col>))}
+            </Row>
+        </footer>
+    </Container>
+
+</BaseLayout>

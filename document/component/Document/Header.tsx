@@ -22,7 +22,7 @@ export const DocumentHeader: FC<DocumentHeaderProps> = ({
     brand = 'Idea React',
     repositoryHref = 'https://github.com/idea2app/Idea-React'
 }) => (
-    <header className="sticky-top border-bottom bg-body">
+    <header className="border-bottom bg-body">
         <a
             className="visually-hidden-focusable position-absolute top-0 start-0 bg-body p-4 z-fixed"
             href="#content"

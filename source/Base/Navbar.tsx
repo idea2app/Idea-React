@@ -68,6 +68,8 @@ export interface NavbarTogglerProps extends Omit<
     'children' | 'type'
 > {
     expanded?: boolean;
+    commandfor?: string;
+    command?: string;
 }
 
 export const NavbarToggler = polymorphic<NavbarTogglerProps>(
@@ -77,18 +79,22 @@ export const NavbarToggler = polymorphic<NavbarTogglerProps>(
         className,
         'aria-label': ariaLabel = 'Toggle navigation',
         ...props
-    }) => (
-        <Button
-            as={RootAs}
-            {...props}
-            type="button"
-            className={classNames('navbar-toggler', className)}
-            aria-label={ariaLabel}
-            aria-expanded={expanded}
-            icon
-        >
-            <span className="navbar-toggler-icon" aria-hidden="true" />
-        </Button>
-    )
+    }) => {
+        const icon = <span className="navbar-toggler-icon" aria-hidden="true" />;
+        const togglerClassName = classNames('navbar-toggler', className);
+
+        return (
+            <Button
+                as={RootAs}
+                {...props}
+                className={togglerClassName}
+                aria-label={ariaLabel}
+                aria-expanded={expanded}
+                icon
+            >
+                {icon}
+            </Button>
+        );
+    }
 );
 NavbarToggler.displayName = 'NavbarToggler';

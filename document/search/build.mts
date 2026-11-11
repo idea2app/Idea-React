@@ -34,7 +34,7 @@ if (skipped.length)
     console.warn(
         `Excluded pages without exported HTML: ${skipped.map(({ href }) => href).join(', ')}`
     );
-if (!published.length) throw new Error('No exported MDX pages found for search and Sitemap.');
+if (!published.length) throw new Error('No exported pages found for search and Sitemap.');
 
 await Promise.all(
     Object.entries(searchResources(published, origin)).map(([filename, { body }]) =>
@@ -42,4 +42,4 @@ await Promise.all(
     )
 );
 
-console.log(`Indexed ${published.length} MDX page(s) for search and Sitemap.`);
+console.info(`Indexed ${published.length} page(s) for search and Sitemap.`);

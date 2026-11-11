@@ -1,0 +1,58 @@
+.container {
+    max-width: 960px;
+}
+
+.icon-link > .bi {
+    width: 0.75em;
+    height: 0.75em;
+}
+
+.product-preview {
+    border-radius: 21px 21px 0 0;
+    width: 80%;
+    height: 300px;
+}
+
+/*
+ * Dummy devices (replace them with your own or something else entirely!)
+ */
+.product-device {
+    position: absolute;
+    right: 10%;
+    bottom: -30%;
+    transform: rotate(30deg);
+    border-radius: 21px;
+    background-color: #333;
+    width: 300px;
+    height: 540px;
+
+    &::before {
+        position: absolute;
+        top: 10%;
+        right: 10px;
+        bottom: 10%;
+        left: 10px;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.1);
+        content: '';
+    }
+    &-2 {
+        top: -25%;
+        right: auto;
+        bottom: 0;
+        left: 5%;
+        background-color: #e5e5e5;
+    }
+}
+
+/*
+ * Extra utilities
+ */
+.flex-equal > * {
+    flex: 1;
+}
+@media (min-width: 768px) {
+    .md\:flex-equal > * {
+        flex: 1;
+    }
+}

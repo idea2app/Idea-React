@@ -2,22 +2,25 @@
 
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component, ReactNode } from 'react';
+import { Component, PropsWithChildren, ReactNode } from 'react';
 
 import { Drawer, DrawerPlacement } from '../../../source/Base/Drawer';
 import { Navbar, NavbarBrand, NavbarProps, NavbarToggler } from '../../../source/Base/Navbar';
+import { Container, ContainerProps } from '../../../source/Layout/Grid';
 
-export interface NavbarDemoProps {
-    brand?: ReactNode;
+export type NavbarDemoProps = PropsWithChildren<{
+    id?: string;
+    className?: string;
+    bodyClassName?: string;
     title?: string;
+    brand?: ReactNode;
     expand?: NavbarProps['expand'];
     theme?: 'light' | 'dark';
     placement?: DrawerPlacement;
-    className?: string;
-    bodyClassName?: string;
+    fluid?: ContainerProps['fluid'];
     togglerFirst?: boolean;
-    children?: ReactNode;
-}
+    'aria-label'?: string;
+}>;
 
 @observer
 export class NavbarDemo extends Component<NavbarDemoProps> {
@@ -29,35 +32,42 @@ export class NavbarDemo extends Component<NavbarDemoProps> {
 
     render() {
         const {
+            id,
+            className = 'bg-1 fg-2',
+            bodyClassName,
             brand = 'Navbar',
             title = 'Menu',
             expand = 'md',
             theme,
             placement = 'end',
-            className = 'bg-1 fg-2',
-            bodyClassName,
+            fluid = true,
             togglerFirst,
+            'aria-label': ariaLabel,
             children
         } = this.props;
         const { open } = this;
+        const alwaysExpanded = expand === true;
         const brandNode = brand != null && <NavbarBrand href="#">{brand}</NavbarBrand>;
-        const toggler = <NavbarToggler expanded={open} onClick={this.show} />;
+        const toggler = !alwaysExpanded && <NavbarToggler expanded={open} onClick={this.show} />;
+        const navigation = alwaysExpanded ? (
+            children
+        ) : (
+            <Drawer
+                {...{ open, title, placement, bodyClassName }}
+                responsive={typeof expand === 'string' ? expand : undefined}
+                onDismiss={this.hide}
+            >
+                {children}
+            </Drawer>
+        );
 
         return (
-            <Navbar expand={expand} theme={theme} className={className}>
-                <div className="container-fluid">
+            <Navbar {...{ id, className, expand, theme }} aria-label={ariaLabel}>
+                <Container fluid={fluid}>
                     {togglerFirst ? toggler : brandNode}
                     {togglerFirst ? brandNode : toggler}
-                    <Drawer
-                        open={open}
-                        title={title}
-                        placement={placement}
-                        bodyClassName={bodyClassName}
-                        onDismiss={this.hide}
-                    >
-                        {children}
-                    </Drawer>
-                </div>
+                    {navigation}
+                </Container>
             </Navbar>
         );
     }
@@ -86,9 +96,9 @@ export class NavbarExternalDemo extends Component {
                     <span className="fg-2">Toggled via the navbar toggler.</span>
                 </Drawer>
                 <Navbar theme="dark" className="bg-body">
-                    <div className="container-fluid">
+                    <Container fluid>
                         <NavbarToggler expanded={open} onClick={this.show} />
-                    </div>
+                    </Container>
                 </Navbar>
             </>
         );

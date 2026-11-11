@@ -1,6 +1,6 @@
 {
     "name": "idea-react",
-    "version": "3.0.0-rc.0",
+    "version": "3.0.0-rc.1",
     "license": "LGPL-3.0-or-later",
     "author": "shiy2008@gmail.com",
     "description": "A React advanced components library based on TypeScript & Bootstrap, built by idea2app remote developers team.",
@@ -51,8 +51,6 @@
         "react-element-to-jsx-string": ">=15"
     },
     "devDependencies": {
-        "@cspell/eslint-plugin": "^10.4.1",
-        "@eslint/js": "^10.0.1",
         "@parcel/config-default": "~2.16.4",
         "@parcel/packager-ts": "~2.16.4",
         "@parcel/transformer-less": "2.16.4",
@@ -69,10 +67,7 @@
         "@types/react-dom": "^19.3.0",
         "buffer": "^6.0.3",
         "eslint": "^10.14.0",
-        "eslint-config-prettier": "^10.1.8",
-        "eslint-plugin-react": "^7.37.5",
-        "eslint-plugin-simple-import-sort": "^14.0.0",
-        "globals": "^17.14.0",
+        "eslint-idea2app-next-js": "^0.1.1",
         "happy-dom": "^21.0.4",
         "husky": "^9.1.7",
         "jiti": "^2.7.0",
@@ -95,7 +90,6 @@
         "typedoc": "^0.28.20",
         "typedoc-plugin-mdn-links": "^5.1.1",
         "typescript": "~6.0.3",
-        "typescript-eslint": "^8.72.1",
         "unplugin-swc": "^2.0.0",
         "unrun": "^0.3.1"
     },

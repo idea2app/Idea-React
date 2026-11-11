@@ -10,6 +10,7 @@ export * from './Carousel';
 export * from './CloseButton';
 export * from './Collapse';
 export * from './Drawer';
+export * from './Fade';
 export * from './ListGroup';
 export * from './Menu';
 export * from './NativeDialog';

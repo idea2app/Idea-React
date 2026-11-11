@@ -264,7 +264,6 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
         return (
             <Button
-                type="button"
                 variant={overlay ? 'subtle' : undefined}
                 theme={overlay ? 'secondary' : undefined}
                 size="sm"
@@ -273,11 +272,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
                 disabled={ends === 'stop' && atEnd}
                 icon
             >
-                <Icon
-                    name={previous ? 'chevron-left' : 'chevron-right'}
-                    size={1}
-                    aria-hidden="true"
-                />
+                <Icon name={previous ? 'chevron-left' : 'chevron-right'} size={1} />
                 <span className="visually-hidden">{label}</span>
             </Button>
         );
@@ -304,7 +299,6 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     renderPlayPause = () =>
         (this.props.playPause || this.props.autoplay) && (
             <Button
-                type="button"
                 className={classNames('carousel-control-play-pause', {
                     paused: !this.store.playing
                 })}
@@ -313,11 +307,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
                 aria-label={this.store.playing ? 'Pause' : 'Play'}
                 icon
             >
-                <Icon
-                    name={this.store.playing ? 'pause-fill' : 'play-fill'}
-                    size={1}
-                    aria-hidden="true"
-                />
+                <Icon name={this.store.playing ? 'pause-fill' : 'play-fill'} size={1} />
             </Button>
         );
 

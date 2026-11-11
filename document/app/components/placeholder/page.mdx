@@ -6,6 +6,7 @@ import {
     PlaceholderAnimation,
     PlaceholderButton
 } from '../../../../source/Base/Placeholder';
+import { Col } from '../../../../source/Layout/Grid';
 import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
@@ -59,24 +60,25 @@ In the example below, we take a typical card component and recreate it with plac
             <CardBody>
                 <PlaceholderAnimation animation="wave">
                     <CardTitle as="h5">
-                        <Placeholder className="col-6" />
+                        <Col as={Placeholder} xs={6} />
                     </CardTitle>
                 </PlaceholderAnimation>
                 <PlaceholderAnimation animation="wave">
                     <CardText>
-                        <Placeholder className="col-7" />
-                        <Placeholder className="col-4" />
-                        <Placeholder className="col-4" />
-                        <Placeholder className="col-6" />
-                        <Placeholder className="col-8" />
+                        <Col as={Placeholder} xs={7} />
+                        <Col as={Placeholder} xs={4} />
+                        <Col as={Placeholder} xs={4} />
+                        <Col as={Placeholder} xs={6} />
+                        <Col as={Placeholder} xs={8} />
                     </CardText>
                 </PlaceholderAnimation>
-                <PlaceholderButton
+                <Col
+                    as={PlaceholderButton}
+                    xs={6}
                     variant="solid"
                     theme="primary"
                     aria-disabled="true"
                     href="#"
-                    className="col-6"
                 />
             </CardBody>
         </Card>
@@ -92,14 +94,15 @@ We apply additional styling to `.btn`s via `::before` to ensure the `height` is 
 <CodeExample>
     <Stack gap={3}>
         <p aria-hidden="true">
-            <Placeholder className="col-6" />
+            <Col as={Placeholder} xs={6} />
         </p>
-        <PlaceholderButton
+        <Col
+            as={PlaceholderButton}
+            xs={4}
             variant="solid"
             theme="primary"
             aria-disabled="true"
             href="#"
-            className="col-4"
         />
     </Stack>
 </CodeExample>
@@ -112,7 +115,7 @@ You can change the `width` through grid column classes, width utilities, or inli
 
 <CodeExample>
     <Stack gap={3}>
-        <Placeholder className="col-6" />
+        <Col as={Placeholder} xs={6} />
         <Placeholder className="w-75" />
         <Placeholder style={{ width: '25%' }} />
     </Stack>
@@ -124,15 +127,15 @@ By default, the `placeholder` uses `currentColor`. This can be overridden with a
 
 <CodeExample>
     <Stack gap={3}>
-        <Placeholder className="col-9" />
-        <Placeholder theme="primary" className="col-6" />
-        <Placeholder theme="accent" className="col-6" />
-        <Placeholder theme="secondary" className="col-6" />
-        <Placeholder theme="success" className="col-6" />
-        <Placeholder theme="danger" className="col-6" />
-        <Placeholder theme="warning" className="col-6" />
-        <Placeholder theme="info" className="col-6" />
-        <Placeholder theme="inverse" className="col-6" />
+        <Col as={Placeholder} xs={9} />
+        <Col as={Placeholder} xs={6} theme="primary" />
+        <Col as={Placeholder} xs={6} theme="accent" />
+        <Col as={Placeholder} xs={6} theme="secondary" />
+        <Col as={Placeholder} xs={6} theme="success" />
+        <Col as={Placeholder} xs={6} theme="danger" />
+        <Col as={Placeholder} xs={6} theme="warning" />
+        <Col as={Placeholder} xs={6} theme="info" />
+        <Col as={Placeholder} xs={6} theme="inverse" />
     </Stack>
 </CodeExample>
 
@@ -142,10 +145,10 @@ The size of `.placeholder`s are based on the typographic style of the parent ele
 
 <CodeExample>
     <Stack gap={2}>
-        <Placeholder size="lg" className="col-12" />
-        <Placeholder className="col-12" />
-        <Placeholder size="sm" className="col-12" />
-        <Placeholder size="xs" className="col-12" />
+        <Col as={Placeholder} xs={12} size="lg" />
+        <Col as={Placeholder} xs={12} />
+        <Col as={Placeholder} xs={12} size="sm" />
+        <Col as={Placeholder} xs={12} size="xs" />
     </Stack>
 </CodeExample>
 
@@ -156,10 +159,10 @@ Use `.placeholder-wave` for the default loading animation. Use `.placeholder-pul
 <CodeExample>
     <Stack gap={3}>
         <PlaceholderAnimation animation="wave">
-            <Placeholder className="col-12" />
+            <Col as={Placeholder} xs={12} />
         </PlaceholderAnimation>
         <PlaceholderAnimation animation="pulse">
-            <Placeholder className="col-12" />
+            <Col as={Placeholder} xs={12} />
         </PlaceholderAnimation>
     </Stack>
 </CodeExample>

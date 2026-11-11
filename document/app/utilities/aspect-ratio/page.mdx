@@ -1,0 +1,83 @@
+import { Ratio } from '../../../../source/Layout/Ratio';
+
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+<DocumentLayout active="aspect-ratio" upstreamPath="utilities/aspect-ratio/">
+
+# Aspect ratio
+
+Make elements maintain specific aspect ratios. Perfect for handling videos, slideshow embeds, and
+more based on the width of the parent.
+
+Idea React provides the [`Ratio` wrapper][1] for Bootstrap's aspect-ratio utilities. Set
+`aspectRatio` to `auto`, `1x1`, `4x3`, `16x9`, or `21x9`, and use `as` to apply the utility directly
+to an element such as an `iframe`. The default is `1x1`.
+
+Use the ratio utility to manage the aspect ratios of content like `<iframe>`s, `<embed>`s, `<video>`s,
+and `<object>`s. It also works on standard HTML elements such as `<div>`s and `<img>`s.
+
+## Example
+
+Apply a ratio to an embedded video. The `Ratio` root is the iframe itself, so the browser sizes it
+according to the selected aspect ratio.
+
+<Ratio
+    as="iframe"
+    aspectRatio="16x9"
+    className="w-100"
+    title="Bootstrap video"
+    src="https://www.youtube-nocookie.com/embed/zpOULjyy-n8?rel=0"
+    allowFullScreen
+/>
+
+Swap `aspectRatio` for another predefined value:
+
+export const ratios = [
+    { aspectRatio: 'auto', label: 'Auto', width: 'w-100' },
+    { aspectRatio: '1x1', label: '1×1', width: 'w-25' },
+    { aspectRatio: '4x3', label: '4×3', width: 'w-50' },
+    { aspectRatio: '16x9', label: '16×9', width: 'w-75' },
+    { aspectRatio: '21x9', label: '21×9', width: 'w-100' }
+];
+
+<div className="d-flex flex-column align-items-start gap-3">
+    {ratios.map(({ aspectRatio, label, width }) => (
+        <Ratio key={aspectRatio} aspectRatio={aspectRatio} className={`${width} border rounded`}>
+            {label}
+        </Ratio>
+    ))}
+</div>
+
+## Custom ratios
+
+Pass a CSS aspect ratio such as `"2 / 1"` to `aspectRatio` for a custom ratio. The wrapper uses
+Bootstrap's `--bs-ratio` custom property and the `ratio-auto` utility. You can also override that
+property at breakpoints in your own CSS.
+
+<Ratio aspectRatio="2 / 1" className="w-25 border rounded">
+    2×1
+</Ratio>
+
+For example, define a breakpoint-specific ratio in your stylesheet:
+
+```css
+.custom-ratio {
+    --bs-ratio: 4 / 3;
+}
+
+@media (min-width: 768px) {
+    .custom-ratio {
+        --bs-ratio: 2 / 1;
+    }
+}
+```
+
+Apply the class along with `aspectRatio="auto"`:
+
+<Ratio aspectRatio="auto" className="w-25 custom-ratio border rounded">
+    4×3, then 2×1
+</Ratio>
+
+</DocumentLayout>
+
+[1]: https://github.com/idea2app/Idea-React/blob/main/source/Layout/Ratio.tsx

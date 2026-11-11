@@ -1,0 +1,132 @@
+body {
+    scroll-behavior: smooth;
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+.bd-heading + div > * + * {
+    margin-top: 3rem;
+}
+
+/* Table of contents */
+.bd-aside {
+    a {
+        margin-top: 0.125rem;
+        margin-left: 0.3125rem;
+        padding: 0.1875rem 0.5rem;
+        color: var(--bs-fg-body);
+
+        &:hover,
+        &:focus {
+            background-color: rgba(121, 82, 179, 0.1);
+            color: var(--bs-fg-body);
+        }
+    }
+    .active {
+        color: var(--bs-fg-body);
+        font-weight: 600;
+    }
+
+    .btn {
+        padding: 0.25rem 0.5rem;
+        color: var(--bs-fg-body);
+        font-weight: 600;
+
+        &:hover,
+        &:focus {
+            background-color: rgba(121, 82, 179, 0.1);
+            color: var(--bs-fg-body);
+        }
+        &:focus {
+            box-shadow: 0 0 0 1px rgba(121, 82, 179, 0.7);
+        }
+        > .bi {
+            transform-origin: 0.5em 50%;
+            transition: transform 0.35s ease;
+            width: 1.25em;
+        }
+        &[aria-expanded='true'] > .bi {
+            transform: rotate(90deg);
+        }
+    }
+}
+/* Examples */
+.scrollspy-example {
+    height: 200px;
+}
+
+[id='modal'] .bd-example .btn,
+[id='buttons'] .bd-example .btn,
+[id='tooltips'] .bd-example .btn,
+[id='popovers'] .bd-example .btn,
+[id='menus'] .bd-example .btn-group,
+[id='menus'] .bd-example .menu {
+    margin: 0 1rem 1rem 0;
+}
+
+/* Cheatsheet layout */
+@media (min-width: 1200px) {
+    main[data-example-layout] {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 4fr 1fr;
+        gap: 1rem;
+    }
+
+    .bd-header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        grid-column: 1 / span 3;
+        z-index: 1030;
+    }
+
+    .bd-aside,
+    .bd-cheatsheet {
+        padding-top: 4rem;
+    }
+
+    /**
+   * 1. Too bad only Firefox supports subgrids ATM
+   */
+    .bd-cheatsheet,
+    .bd-cheatsheet section,
+    .bd-cheatsheet article {
+        display: inherit; /* 1 */
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 4fr;
+        grid-column: 1 / span 2;
+        gap: inherit; /* 1 */
+    }
+
+    .bd-aside {
+        grid-area: 1 / 3;
+        scroll-margin-top: 4rem;
+    }
+
+    .bd-cheatsheet section,
+    .bd-cheatsheet section > h2 {
+        top: 2rem;
+        scroll-margin-top: 2rem;
+    }
+
+    .bd-cheatsheet section > h2::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: -2rem;
+        left: 0;
+        z-index: -1;
+        content: '';
+    }
+
+    .bd-cheatsheet article,
+    .bd-cheatsheet .bd-heading {
+        top: 8rem;
+        scroll-margin-top: 8rem;
+    }
+
+    .bd-cheatsheet .bd-heading {
+        z-index: 1;
+    }
+}

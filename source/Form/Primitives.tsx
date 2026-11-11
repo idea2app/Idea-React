@@ -14,14 +14,6 @@ export const Form = polymorphic<FormProps>(
 );
 Form.displayName = 'Form';
 
-export type FormFieldsetProps = ComponentPropsWithRef<'fieldset'>;
-
-export const FormFieldset = polymorphic<FormFieldsetProps>(
-    ({ as: Root = 'fieldset', ...props }) => <Root {...props} />
-);
-
-FormFieldset.displayName = 'FormFieldset';
-
 export type FormFieldProps = ComponentPropsWithRef<'div'> & {
     card?: boolean;
 };

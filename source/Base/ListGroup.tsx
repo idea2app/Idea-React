@@ -8,6 +8,8 @@ import type { ComponentTheme } from './Button';
 export type ListGroupHorizontal = boolean | Breakpoint;
 
 interface ListGroupStyleProps {
+    radio?: boolean;
+    checkable?: boolean;
     flush?: boolean;
     numbered?: boolean;
     horizontal?: ListGroupHorizontal;
@@ -21,10 +23,15 @@ export type ListGroupProps = ListGroupStyleProps &
     );
 
 export const ListGroup = polymorphic<ListGroupStyleProps & ComponentPropsWithRef<'ul'>>(
-    ({ as: Root = 'ul', flush, numbered, horizontal, className, ...props }) => {
+    ({ as: Root = 'ul', flush, numbered, horizontal, checkable, radio, className, ...props }) => {
         const classes = classNames(
             'list-group',
-            { 'list-group-flush': flush, 'list-group-numbered': numbered },
+            {
+                'list-group-checkable': checkable,
+                'list-group-radio': radio,
+                'list-group-flush': flush,
+                'list-group-numbered': numbered
+            },
             horizontal &&
                 (horizontal === true
                     ? 'list-group-horizontal'
@@ -45,8 +52,11 @@ interface ListGroupItemStyleProps {
 }
 
 type ListGroupItemLinkAttributes = ComponentPropsWithRef<'a'> & { href: string };
+
 type ListGroupItemButtonAttributes = ComponentPropsWithRef<'button'> & { href?: never };
+
 type ListGroupItemAttributes = ComponentPropsWithRef<'li'> & { href?: never; type?: never };
+
 type ListGroupItemElementAttributes =
     ListGroupItemLinkAttributes | ListGroupItemButtonAttributes | ListGroupItemAttributes;
 

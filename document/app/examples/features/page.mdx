@@ -1,0 +1,160 @@
+import { Button } from '../../../../source/Base/Button';
+import { Card } from '../../../../source/Base/Card';
+import { Icon } from '../../../../source/Extension/Icon';
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
+import styles from './style.module.less';
+export const featureIcons = ['collection', 'person-circle', 'toggles2'];
+export const hangingIcons = ['toggles2', 'cpu-fill', 'tools'];
+export const iconGridIcons = [
+    'bootstrap',
+    'cpu-fill',
+    'calendar3',
+    'house',
+    'speedometer2',
+    'toggles2',
+    'geo-fill',
+    'tools'
+];
+export const customCards = [
+    {
+        image: 'unsplash-photo-1.jpg',
+        title: 'Short title, long jacket',
+        location: 'Earth',
+        duration: '3d'
+    },
+    {
+        image: 'unsplash-photo-2.jpg',
+        title: 'Much longer title that wraps to multiple lines',
+        location: 'Pakistan',
+        duration: '4d'
+    },
+    {
+        image: 'unsplash-photo-3.jpg',
+        title: 'Another longer title belongs here',
+        location: 'California',
+        duration: '5d'
+    }
+];
+export const smallFeatureIcons = ['collection', 'gear-fill', 'speedometer', 'table'];
+
+<BaseLayout title="Features">
+    <div>
+        <h1 className="visually-hidden">Features examples</h1>
+
+        <Container className="px-4 py-5" id="featured-3">
+            <h2 className="pb-2 border-bottom">Columns with icons</h2>
+
+            <Row xs={1} lg={3} className="g-4 py-5">
+                {featureIcons.map(icon => (<Col key={icon} className="feature">
+                        <div className={`${styles['feature-icon']} d-inline-flex align-items-center justify-content-center theme-primary theme-contrast bg-gradient fs-3xl mb-3`}>
+                            <Icon name={icon}/>
+                        </div>
+                        <h3 className="fs-2xl">Featured title</h3>
+                        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                        <a href="#" className="icon-link">
+                            Call to action
+                            <Icon name="chevron-right"/>
+                        </a>
+                    </Col>))}
+            </Row>
+        </Container>
+
+        <div className="b-example-divider"/>
+
+        <Container className="px-4 py-5" id="hanging-icons">
+            <h2 className="pb-2 border-bottom">Hanging icons</h2>
+
+            <Row xs={1} lg={3} className="g-4 py-5">
+                {hangingIcons.map(icon => (<Col key={icon} className="d-flex align-items-start">
+                        <div className={`${styles['icon-square']} bg-2 d-inline-flex align-items-center justify-content-center fs-xl flex-shrink-0 me-3`}>
+                            <Icon name={icon}/>
+                        </div>
+                        <div>
+                            <h3 className="fs-2xl">Featured title</h3>
+                            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                            <Button variant="solid" theme="primary" href="#">Primary button</Button>
+                        </div>
+                    </Col>))}
+            </Row>
+        </Container>
+
+        <div className="b-example-divider"/>
+
+        <Container className="px-4 py-5" id="custom-cards">
+            <h2 className="pb-2 border-bottom">Custom cards</h2>
+
+            <Row xs={1} lg={3} className="align-items-stretch g-4 py-5">
+                {customCards.map(({ image, title, location, duration }) => (<Col key={image}>
+                        <Card className={`${styles['card-cover']} h-100 overflow-hidden rounded-4 shadow-lg`} style={{
+    backgroundImage: `url('https://raw.githubusercontent.com/twbs/bootstrap/main/site/src/assets/examples/features/${image}')`
+
+}}>
+
+<div className={`d-flex flex-column h-100 p-5 pb-3 fg-white ${styles['text-shadow-1']}`}>
+<h3 className="pt-5 mt-5 mb-4 fs-3xl lh-1 fw-bold">
+{title}
+</h3>
+<ul className="d-flex list-unstyled mt-auto">
+<li className="me-auto">
+<img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" className="rounded-circle border border-white"/>
+</li>
+<li className="d-flex align-items-center me-3">
+<Icon name="geo-fill" className="me-2" role="img" aria-label="Location"/>
+<small>{location}</small>
+</li>
+<li className="d-flex align-items-center">
+<Icon name="calendar3" className="me-2" role="img" aria-label="Duration"/>
+<small>{duration}</small>
+</li>
+</ul>
+</div>
+</Card>
+</Col>))}
+</Row>
+</Container>
+
+        <div className="b-example-divider"/>
+
+        <Container className="px-4 py-5" id="icon-grid">
+            <h2 className="pb-2 border-bottom">Icon grid</h2>
+
+            <Row xs={1} sm={2} md={3} lg={4} className="g-4 py-5">
+                {iconGridIcons.map(icon => (<Col key={icon} className="d-flex align-items-start">
+                        <Icon name={icon} className="fg-2 flex-shrink-0 me-3"/>
+                        <div>
+                            <h3 className="fw-bold mb-0 fs-xl">Featured title</h3>
+                            <p>Paragraph of text beneath the heading to explain the heading.</p>
+                        </div>
+                    </Col>))}
+            </Row>
+        </Container>
+
+        <div className="b-example-divider"/>
+
+        <Container className="px-4 py-5">
+            <h2 className="pb-2 border-bottom">Features with title</h2>
+
+            <Row xs={1} md={2} className="md:align-items-center g-5 py-5">
+                <Col className="d-flex flex-column align-items-start gap-2">
+                    <h2 className="fw-bold">Left-aligned title explaining these awesome features</h2>
+                    <p className="fg-2">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <Button variant="solid" theme="primary" size="lg" href="#">Primary button</Button>
+                </Col>
+
+                <Col>
+                    <Row xs={1} sm={2} className="g-4">
+                        {smallFeatureIcons.map(icon => (<Col key={icon} className="d-flex flex-column gap-2">
+                                <div className={`${styles['feature-icon-small']} d-inline-flex align-items-center justify-content-center theme-primary theme-contrast bg-gradient fs-xl rounded-3`}>
+                                    <Icon name={icon}/>
+                                </div>
+                                <h4 className="fw-semibold mb-0">Featured title</h4>
+                                <p className="fg-2">Paragraph of text beneath the heading to explain the heading.</p>
+                            </Col>))}
+                    </Row>
+                </Col>
+            </Row>
+        </Container>
+    </div>
+
+</BaseLayout>

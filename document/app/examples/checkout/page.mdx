@@ -1,0 +1,232 @@
+import { Badge } from '../../../../source/Base/Badge';
+import { Button } from '../../../../source/Base/Button';
+import { Card } from '../../../../source/Base/Card';
+import { ListGroup, ListGroupItem } from '../../../../source/Base/ListGroup';
+import {
+    FormCheck,
+    FormControl,
+    FormFeedback,
+    FormField,
+    FormLabel,
+    FormSelect,
+    FormTextArea,
+    InputGroup,
+    InputGroupText
+} from '../../../../source/Form';
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
+
+import { BaseLayout } from '../../../component/Document/BaseLayout';
+
+export const cartProducts = [
+    { name: 'Product name', description: 'Brief description', price: '$12' },
+    { name: 'Second product', description: 'Brief description', price: '$8' },
+    { name: 'Third item', description: 'Brief description', price: '$5' }
+];
+
+export const paymentFields = [
+    {
+        width: 6,
+        id: 'cc-name',
+        label: 'Name on card',
+        help: 'Full name as displayed on card',
+        feedback: 'Name on card is required'
+    },
+    {
+        width: 6,
+        id: 'cc-number',
+        label: 'Credit card number',
+        feedback: 'Credit card number is required'
+    },
+    { width: 3, id: 'cc-expiration', label: 'Expiration', feedback: 'Expiration date required' },
+    { width: 3, id: 'cc-cvv', label: 'CVV', feedback: 'Security code required' }
+];
+
+<BaseLayout title="Checkout example" className="bg-1">
+
+<Container >
+  <div>
+    <div className="py-5 text-center">
+      <img className="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/6.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57" />
+      <h1 className="h2">Checkout form</h1>
+      <p className="fs-lg fw-light">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+    </div>
+
+    <Row className="g-5">
+      <Col md={{ span: 5, order: 'last' }} lg={4}>
+        <h4 className="d-flex justify-content-between align-items-center mb-3">
+          <span className="fg-primary">Your cart</span>
+          <Badge variant="subtle" theme="primary" pill >3</Badge>
+        </h4>
+        <ListGroup className="mb-3">
+          {cartProducts.map(({ name, description, price }) => (
+            <ListGroupItem key={name} className="d-flex justify-content-between lh-sm">
+              <div>
+                <h6 className="my-0">{name}</h6>
+                <small className="fg-2">{description}</small>
+              </div>
+              <span className="fg-2">{price}</span>
+            </ListGroupItem>
+          ))}
+          <ListGroupItem className="d-flex justify-content-between bg-1">
+            <div className="fg-success">
+              <h6 className="my-0">Promo code</h6>
+              <small>EXAMPLECODE</small>
+            </div>
+            <span className="fg-success">−$5</span>
+          </ListGroupItem>
+          <ListGroupItem className="d-flex justify-content-between">
+            <span>Total (USD)</span>
+            <strong>$20</strong>
+          </ListGroupItem>
+        </ListGroup>
+
+        <Card as="form" className="p-2">
+          <InputGroup >
+            <FormControl type="text" placeholder="Promo code" />
+            <Button variant="solid" theme="secondary" type="submit">Redeem</Button>
+          </InputGroup>
+        </Card>
+      </Col>
+      <Col md={7} lg={8}>
+        <h4 className="mb-3">Billing address</h4>
+        <form data-bs-validate noValidate>
+          <Row className="g-3">
+            <Col sm={6}>
+              <FormLabel htmlFor="firstName" >First name</FormLabel>
+              <FormControl type="text" id="firstName" placeholder="" value="" required />
+              <div className="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </Col>
+
+            <Col sm={6}>
+              <FormLabel htmlFor="lastName" >Last name</FormLabel>
+              <FormControl type="text" id="lastName" placeholder="" value="" required />
+              <div className="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </Col>
+
+            <Col xs={12}>
+              <FormLabel htmlFor="username" >Username</FormLabel>
+              <InputGroup >
+                <InputGroupText >@</InputGroupText>
+                <FormControl type="text" id="username" placeholder="Username" required />
+              <div className="invalid-feedback">
+                  Your username is required.
+                </div>
+              </InputGroup>
+            </Col>
+
+            <Col xs={12}>
+              <FormLabel htmlFor="email" >Email <span className="fg-2">(Optional)</span></FormLabel>
+              <FormControl type="email" id="email" placeholder="you@example.com" />
+              <div className="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
+            </Col>
+
+            <Col xs={12}>
+              <FormLabel htmlFor="address" >Address</FormLabel>
+              <FormControl type="text" id="address" placeholder="1234 Main St" required />
+              <div className="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </Col>
+
+            <Col xs={12}>
+              <FormLabel htmlFor="address2" >Address 2 <span className="fg-2">(Optional)</span></FormLabel>
+              <FormControl type="text" id="address2" placeholder="Apartment or suite" />
+            </Col>
+
+            <Col md={5}>
+              <FormLabel htmlFor="country" >Country</FormLabel>
+              <FormSelect id="country" required>
+                <option value="">Choose...</option>
+                <option>United States</option>
+              </FormSelect>
+              <div className="invalid-feedback">
+                Please select a valid country.
+              </div>
+            </Col>
+
+            <Col md={4}>
+              <FormLabel htmlFor="state" >State</FormLabel>
+              <FormSelect id="state" required>
+                <option value="">Choose...</option>
+                <option>California</option>
+              </FormSelect>
+              <div className="invalid-feedback">
+                Please provide a valid state.
+              </div>
+            </Col>
+
+            <Col md={3}>
+              <FormLabel htmlFor="zip" >Zip</FormLabel>
+              <FormControl type="text" id="zip" placeholder="" required />
+              <div className="invalid-feedback">
+                Zip code required.
+              </div>
+            </Col>
+          </Row>
+
+          <hr className="my-4" />
+
+          <FormField>
+            <FormCheck type="checkbox" id="same-address" />
+            <label htmlFor="same-address">Shipping address is the same as my billing address</label>
+          </FormField>
+
+          <FormField>
+            <FormCheck type="checkbox" id="save-info" />
+            <label htmlFor="save-info">Save this information for next time</label>
+          </FormField>
+
+          <hr className="my-4" />
+
+          <h4 className="mb-3">Payment</h4>
+
+          <div className="my-3">
+            {[
+                { id: 'credit', label: 'Credit card' },
+                { id: 'debit', label: 'Debit card' },
+                { id: 'paypal', label: 'PayPal' }
+            ].map(({ id, label }) => (
+                <FormField key={id}>
+                    <FormCheck id={id} name="paymentMethod" type="radio" defaultChecked={id === 'credit'} required />
+                    <label htmlFor={id}>{label}</label>
+                </FormField>
+            ))}
+          </div>
+
+          <Row className="gy-3">
+            {paymentFields.map(({ width, id, label, help, feedback }) => (
+                <Col key={id} md={width}>
+                    <FormLabel htmlFor={id}>{label}</FormLabel>
+                    <FormControl type="text" id={id} placeholder="" required />
+                    {help && <small className="fg-2">{help}</small>}
+                    <FormFeedback>{feedback}</FormFeedback>
+                </Col>
+            ))}
+          </Row>
+
+          <hr className="my-4" />
+
+          <Button variant="solid" theme="primary" size="lg" className="w-100" type="submit">Continue to checkout</Button>
+        </form>
+      </Col>
+    </Row>
+
+  </div>
+
+  <footer className="my-5 pt-5 fg-2 text-center small">
+    <p className="mb-1">&copy; 2017–{new Date().getFullYear()} Company Name</p>
+    <ul className="list-inline">
+      {['Privacy', 'Terms', 'Support'].map(label => (
+          <li key={label} className="list-inline-item"><a href="#">{label}</a></li>
+      ))}
+    </ul>
+  </footer>
+</Container>
+
+</BaseLayout>

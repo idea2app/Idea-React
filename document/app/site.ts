@@ -10,12 +10,14 @@ export const site = {
     docs: `${nextConfig.basePath || ''}/guides/install/`,
     api: 'https://idea2app.github.io/Idea-React/',
     components: `${nextConfig.basePath || ''}/components/`,
+    examples: `${nextConfig.basePath || ''}/examples/`,
     forms: `${nextConfig.basePath || ''}/forms/`,
     guides: `${nextConfig.basePath || ''}/guides/`
 };
 
 export const navigation: DocumentLink[] = [
     { label: 'Docs', href: site.docs },
+    { label: 'Examples', href: site.examples },
     { label: 'API', href: site.api },
     { label: 'Community', href: `${site.repository}/issues` }
 ];
@@ -38,6 +40,7 @@ export const footerColumns = [
         links: [
             { label: 'Home', href: './' },
             { label: 'Docs', href: site.docs },
+            { label: 'Examples', href: site.examples },
             { label: 'API reference', href: site.api }
         ]
     },
@@ -66,7 +69,7 @@ export const footerColumns = [
             { label: 'Issues', href: `${site.repository}/issues` },
             { label: 'Pull requests', href: `${site.repository}/pulls` },
             { label: 'Contributors', href: `${site.repository}/graphs/contributors` },
-            { label: 'npm', href: 'https://www.npmjs.com/package/idea-react' }
+            { label: 'NPM', href: 'https://www.npmjs.com/package/idea-react' }
         ]
     }
 ];

@@ -3,7 +3,6 @@ import {
     Form,
     FormControl,
     FormField,
-    FormFieldset,
     FormLabel,
     FormLegend,
     FormSelect,
@@ -68,7 +67,7 @@ However, if your form also includes custom button-like elements such as `<a clas
 
 <CodeExample>
     <Form>
-        <FormFieldset disabled>
+        <fieldset disabled>
             <FormLegend>Disabled fieldset example</FormLegend>
             <div className="mb-3">
                 <FormLabel htmlFor="disabledTextInput">Disabled input</FormLabel>
@@ -89,7 +88,7 @@ However, if your form also includes custom button-like elements such as `<a clas
             <Button type="submit" theme="primary" variant="solid">
                 Submit
             </Button>
-        </FormFieldset>
+        </fieldset>
     </Form>
 </CodeExample>
 

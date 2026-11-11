@@ -1,0 +1,49 @@
+import { Icon } from '../../../../source/Extension/Icon';
+import { Col, Container, Row } from '../../../../source/Layout/Grid';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
+import { Button } from '../../../../source/Base/Button';
+
+<BaseLayout title="Jumbotron example">
+
+<div>
+  <Container className="py-6">
+    <header className="pb-4 mb-6 border-bottom">
+      <a href="/" className="d-flex align-items-center fg-emphasis-secondary text-decoration-none">
+        <Icon name="bootstrap" size={2.5} className="me-2" role="img" aria-label="Bootstrap" />
+        <span className="fs-xl">Jumbotron example</span>
+      </a>
+    </header>
+
+    <div className="p-9 mb-4 bg-subtle-secondary rounded-5">
+      <Container fluid className="py-5">
+        <h1 className="fs-4xl fw-bold">Custom jumbotron</h1>
+        <Col as="p" md={8} className="fs-xl">{'Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.'}</Col>
+        <Button variant="solid" theme="primary" size="lg">Example button</Button>
+      </Container>
+    </div>
+
+    <Row className="md:align-items-stretch">
+      <Col md={6}>
+        <div className="h-100 p-9 bg-black fg-white rounded-5" data-bs-theme="dark">
+          <h2>Change the background</h2>
+          <p>Swap the background-color utility and add a <code>.fg-*</code> color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
+          <Button variant="outline" theme="secondary" className="fg-white">Example button</Button>
+        </div>
+      </Col>
+      <Col md={6}>
+        <div className="h-100 p-9 bg-subtle-secondary border rounded-5">
+          <h2>Add borders</h2>
+          <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
+          <Button variant="outline" theme="secondary">Example button</Button>
+        </div>
+      </Col>
+    </Row>
+
+    <footer className="pt-3 mt-4 fg-2 border-top">
+      &copy; {new Date().getFullYear()}
+    </footer>
+
+  </Container>
+</div>
+
+</BaseLayout>

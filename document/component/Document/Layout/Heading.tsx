@@ -29,7 +29,11 @@ export const DocumentHeading: FC<DocumentHeadingProps> = ({
             {children}
         </h1>
 
-        <Stack direction="horizontal" gap={2} className="flex-wrap ms-auto">
+        <Stack
+            className="flex-wrap align-items-center justify-content-end ms-auto"
+            direction="horizontal"
+            gap={2}
+        >
             {upstreamPath && (
                 <Chip
                     as="a"

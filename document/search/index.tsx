@@ -4,7 +4,8 @@ import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { createProcessor } from '@mdx-js/mdx';
-import type { ComponentChildren } from 'preact';
+import { parseSync } from '@swc/core';
+import type { RenderableProps } from 'preact';
 import renderToString from 'preact-render-to-string';
 import remarkGfm from 'remark-gfm';
 import type { Plugin } from 'vite';
@@ -17,11 +18,11 @@ declare module 'preact' {
     namespace JSX {
         interface IntrinsicElements extends Record<
             'channel' | 'description' | 'language' | 'item' | 'url' | 'loc',
-            { children?: ComponentChildren; key?: string }
+            RenderableProps<{ key?: string }>
         > {
-            rss: { version: string; children?: ComponentChildren };
-            guid: { isPermaLink: string; children?: ComponentChildren };
-            urlset: { xmlns: string; children?: ComponentChildren };
+            rss: RenderableProps<{ version: string }>;
+            guid: RenderableProps<{ isPermaLink: string }>;
+            urlset: RenderableProps<{ xmlns: string }>;
         }
     }
 }
@@ -30,6 +31,7 @@ interface SearchNode {
     type: string;
     value?: string;
     depth?: number;
+    // eslint-disable-next-line no-restricted-syntax -- AST children are not component props.
     children?: SearchNode[];
 }
 
@@ -46,20 +48,44 @@ const headingText = (node: SearchNode): string =>
 const directory = fileURLToPath(new URL('../app/', import.meta.url));
 const processor = createProcessor({ remarkPlugins: [remarkGfm] });
 
+const tsxText = (node: unknown): string => {
+    if (Array.isArray(node)) return node.map(tsxText).join(' ');
+    if (!node || typeof node !== 'object') return '';
+
+    if ('type' in node) {
+        if (node.type === 'ImportDeclaration' || node.type === 'JSXAttribute') return '';
+        if (
+            (node.type === 'JSXText' || node.type === 'StringLiteral') &&
+            'value' in node &&
+            typeof node.value === 'string'
+        )
+            return node.value;
+    }
+
+    return Object.entries(node)
+        .filter(([key]) => !['span', 'ctxt', 'typeAnnotation', 'typeArguments'].includes(key))
+        .map(([, value]) => tsxText(value))
+        .join(' ');
+};
+
 export async function* searchIndex(): AsyncGenerator<DocumentSearchEntry> {
     for (const { name, parentPath } of await readdir(directory, {
         recursive: true,
         withFileTypes: true
     })) {
-        if (name !== 'page.mdx') continue;
+        if (name !== 'page.mdx' && name !== 'page.tsx') continue;
 
-        const tree = processor.parse(await readFile(join(parentPath, name), 'utf8'));
+        const source = await readFile(join(parentPath, name), 'utf8');
+        const tree = name === 'page.mdx' ? processor.parse(source) : undefined;
         const path = relative(directory, parentPath);
+        const text = tree
+            ? textContent(tree)
+            : tsxText(parseSync(source, { syntax: 'typescript', tsx: true }));
 
         yield {
-            title: headingText(tree) || path || 'Idea React',
+            title: (tree && headingText(tree)) || path || 'Idea React',
             href: './' + path.split(sep).map(encodeURIComponent).join('/') + (path ? '/' : ''),
-            description: textContent(tree).replace(/\s+/g, ' ').trim()
+            description: text.replace(/\s+/g, ' ').trim()
         };
     }
 }

@@ -53,7 +53,6 @@ export class Navigation extends Component<PropsWithChildren> {
         const navigationToggle = (
             <Button
                 size="sm"
-                type="button"
                 aria-label="Toggle docs navigation"
                 aria-controls="documentation-navigation-drawer"
                 aria-expanded={navigationOpen}
@@ -70,7 +69,6 @@ export class Navigation extends Component<PropsWithChildren> {
 
                 <div className="fixed-bottom d-flex justify-content-center mb-5 pe-none lg:d-none z-fixed">
                     <Button
-                        type="button"
                         variant="solid"
                         theme="inverse"
                         className="rounded-pill px-5 fs-sm shadow-lg pe-auto"

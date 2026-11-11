@@ -90,18 +90,44 @@ modifiers. Here's how the grid changes across these breakpoints:
 <Table responsive>
     <thead>
         <tr>
-            <th scope="col"></th>
-            <th scope="col">xs<br /><span className="fw-normal">`<576px`</span></th>
-            <th scope="col">sm<br /><span className="fw-normal">`≥576px`</span></th>
-            <th scope="col">md<br /><span className="fw-normal">`≥768px`</span></th>
-            <th scope="col">lg<br /><span className="fw-normal">`≥1024px`</span></th>
-            <th scope="col">xl<br /><span className="fw-normal">`≥1280px`</span></th>
-            <th scope="col">2xl<br /><span className="fw-normal">`≥1536px`</span></th>
+            <th scope="col" />
+            <th scope="col">
+                xs
+                <br />
+                <span className="fw-normal" />
+            </th>
+            <th scope="col">
+                sm
+                <br />
+                <span className="fw-normal" />
+            </th>
+            <th scope="col">
+                md
+                <br />
+                <span className="fw-normal" />
+            </th>
+            <th scope="col">
+                lg
+                <br />
+                <span className="fw-normal" />
+            </th>
+            <th scope="col">
+                xl
+                <br />
+                <span className="fw-normal" />
+            </th>
+            <th scope="col">
+                2xl
+                <br />
+                <span className="fw-normal" />
+            </th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <th scope="row" className="text-nowrap">Container <code className="fw-normal">max-width</code></th>
+            <th scope="row" className="text-nowrap">
+                Container <code className="fw-normal">max-width</code>
+            </th>
             <td>None (auto)</td>
             <td>540px</td>
             <td>720px</td>
@@ -110,32 +136,56 @@ modifiers. Here's how the grid changes across these breakpoints:
             <td>1440px</td>
         </tr>
         <tr>
-            <th scope="row" className="text-nowrap">Class prefix</th>
-            <td><code>.col-</code></td>
-            <td><code>.sm:col-</code></td>
-            <td><code>.md:col-</code></td>
-            <td><code>.lg:col-</code></td>
-            <td><code>.xl:col-</code></td>
-            <td><code>.2xl:col-</code></td>
+            <th scope="row" className="text-nowrap">
+                Class prefix
+            </th>
+            <td>
+                <code>.col-</code>
+            </td>
+            <td>
+                <code>.sm:col-</code>
+            </td>
+            <td>
+                <code>.md:col-</code>
+            </td>
+            <td>
+                <code>.lg:col-</code>
+            </td>
+            <td>
+                <code>.xl:col-</code>
+            </td>
+            <td>
+                <code>.2xl:col-</code>
+            </td>
         </tr>
         <tr>
-            <th scope="row" className="text-nowrap"># of columns</th>
+            <th scope="row" className="text-nowrap">
+                # of columns
+            </th>
             <td colSpan={6}>12</td>
         </tr>
         <tr>
-            <th scope="row" className="text-nowrap">Gutter width</th>
+            <th scope="row" className="text-nowrap">
+                Gutter width
+            </th>
             <td colSpan={6}>1.5rem (.75rem on left and right)</td>
         </tr>
         <tr>
-            <th scope="row" className="text-nowrap">Custom gutters</th>
+            <th scope="row" className="text-nowrap">
+                Custom gutters
+            </th>
             <td colSpan={6}>Yes</td>
         </tr>
         <tr>
-            <th scope="row" className="text-nowrap">Nestable</th>
+            <th scope="row" className="text-nowrap">
+                Nestable
+            </th>
             <td colSpan={6}>Yes</td>
         </tr>
         <tr>
-            <th scope="row" className="text-nowrap">Column ordering</th>
+            <th scope="row" className="text-nowrap">
+                Column ordering
+            </th>
             <td colSpan={6}>Yes</td>
         </tr>
     </tbody>
@@ -279,6 +329,25 @@ each tier as needed. See the example below for a better idea of how it all works
         <Row>
             <Col xs={6}>.col-6</Col>
             <Col xs={6}>.col-6</Col>
+        </Row>
+    </Container>
+</div>
+
+### Offsets and ordering
+
+Pass a responsive object to a `Col` breakpoint prop to combine a column span with an offset or
+visual order. Each option is independent, so you can also set only an offset or order at a
+breakpoint. Order accepts a number, `"first"`, or `"last"`.
+
+<div className={style.gridRow}>
+    <Container className="text-center">
+        <Row>
+            <Col xs={6}>Unordered column</Col>
+            <Col md={{ span: 4, offset: 2, order: 'last' }}>Offset and reordered column</Col>
+        </Row>
+        <Row>
+            <Col sm={{ offset: 2 }}>Offset auto-layout column</Col>
+            <Col sm={{ order: 'first' }}>First on small screens and up</Col>
         </Row>
     </Container>
 </div>

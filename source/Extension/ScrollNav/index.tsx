@@ -1,10 +1,11 @@
+import classNames from 'classnames';
 import { ElementType } from 'react';
 
 import { Nav, NavProps } from '../../Base/Nav';
 import { polymorphic } from '../../Helper/Polymorphic';
 import { ScrollNavScroller } from './Scroller';
 
-export type ScrollNavProps = NavProps;
+export type ScrollNavProps = NavProps & { navClassName?: string };
 
 /**
  * A horizontal scrolling navigation bar based on Bootstrap's `nav-scroller` pattern.
@@ -16,6 +17,7 @@ export const ScrollNav = polymorphic<ScrollNavProps>(
     ({
         as: RootAs,
         className = '',
+        navClassName,
         children,
         ref,
         variant,
@@ -35,7 +37,7 @@ export const ScrollNav = polymorphic<ScrollNavProps>(
             <Nav
                 {...(RootAs ? {} : props)}
                 ref={RootAs ? undefined : ref}
-                className="flex-nowrap"
+                className={classNames('flex-nowrap', navClassName)}
                 {...{ variant, vertical, fill, justified, cardHeader, navbar }}
             >
                 {children}

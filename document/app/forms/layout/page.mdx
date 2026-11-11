@@ -3,7 +3,6 @@ import {
     Form,
     FormControl,
     FormField,
-    FormFieldset,
     FormGroup,
     FormLabel,
     FormLegend,
@@ -90,7 +89,7 @@ By adding [gutter modifier classes][3], you can have control over the gutter wid
 More complex layouts can also be created with the grid system.
 
 <CodeExample>
-    <Form className="row g-3">
+    <Row as={Form} className="g-3">
         <Col md={6}>
             <FormLabel htmlFor="inputEmail4">Email</FormLabel>
             <FormControl type="email" id="inputEmail4" />
@@ -135,7 +134,7 @@ More complex layouts can also be created with the grid system.
                 Sign in
             </Button>
         </Col>
-    </Form>
+    </Row>
 </CodeExample>
 
 ## Horizontal form
@@ -147,25 +146,25 @@ At times, you maybe need to use margin or padding utilities to create that perfe
 <CodeExample>
     <Form>
         <Row className="mb-3">
-            <FormLabel htmlFor="inputEmail3" column className="sm:col-2">
+            <Col as={FormLabel} sm={2} htmlFor="inputEmail3" column>
                 Email
-            </FormLabel>
+            </Col>
             <Col sm={10}>
                 <FormControl type="email" id="inputEmail3" />
             </Col>
         </Row>
         <Row className="mb-3">
-            <FormLabel htmlFor="inputPassword3" column className="sm:col-2">
+            <Col as={FormLabel} sm={2} htmlFor="inputPassword3" column>
                 Password
-            </FormLabel>
+            </Col>
             <Col sm={10}>
                 <FormControl type="password" id="inputPassword3" />
             </Col>
         </Row>
-        <FormFieldset className="row mb-3">
-            <FormLegend column className="sm:col-2 pt-0">
+        <Row as="fieldset" className="mb-3">
+            <Col as={FormLegend} sm={2} column className="pt-0">
                 Radios
-            </FormLegend>
+            </Col>
             <Col sm={10}>
                 <FormGroup>
                     <FormField className="mb-1">
@@ -193,9 +192,9 @@ At times, you maybe need to use margin or padding utilities to create that perfe
                     </FormField>
                 </FormGroup>
             </Col>
-        </FormFieldset>
+        </Row>
         <Row className="mb-3">
-            <Col sm={10} className="sm:offset-2">
+            <Col sm={{ span: 10, offset: 2 }}>
                 <FormField>
                     <Checkbox id="gridCheck1" />
                     <FormLabel htmlFor="gridCheck1" plain>
@@ -216,9 +215,9 @@ Be sure to use `.col-form-label-sm` or `.col-form-label-lg` to your `<label>`s o
 
 <CodeExample>
     <Row className="mb-3">
-        <FormLabel htmlFor="colFormLabelSm" column controlSize="sm" className="sm:col-2">
+        <Col as={FormLabel} sm={2} htmlFor="colFormLabelSm" column controlSize="sm">
             Email
-        </FormLabel>
+        </Col>
         <Col sm={10}>
             <FormControl
                 type="email"
@@ -229,17 +228,17 @@ Be sure to use `.col-form-label-sm` or `.col-form-label-lg` to your `<label>`s o
         </Col>
     </Row>
     <Row className="mb-3">
-        <FormLabel htmlFor="colFormLabel" column className="sm:col-2">
+        <Col as={FormLabel} sm={2} htmlFor="colFormLabel" column>
             Email
-        </FormLabel>
+        </Col>
         <Col sm={10}>
             <FormControl type="email" id="colFormLabel" placeholder="col-form-label" />
         </Col>
     </Row>
     <Row>
-        <FormLabel htmlFor="colFormLabelLg" column controlSize="lg" className="sm:col-2">
+        <Col as={FormLabel} sm={2} htmlFor="colFormLabelLg" column controlSize="lg">
             Email
-        </FormLabel>
+        </Col>
         <Col sm={10}>
             <FormControl
                 type="email"
@@ -274,7 +273,7 @@ As shown in the previous examples, our grid system allows you to place any numbe
 The example below uses a flexbox utility to vertically center the contents and changes `.col` to `.col-auto` so that your columns only take up as much space as needed. Put another way, the column sizes itself based on the contents.
 
 <CodeExample>
-    <Form className="row gy-2 gx-3 align-items-center">
+    <Row as={Form} className="gy-2 gx-3 align-items-center">
         <Col xs="auto">
             <FormLabel htmlFor="autoSizingInput" plain className="visually-hidden">
                 Name
@@ -314,13 +313,13 @@ The example below uses a flexbox utility to vertically center the contents and c
                 Submit
             </Button>
         </Col>
-    </Form>
+    </Row>
 </CodeExample>
 
 You can then remix that once again with size-specific column classes.
 
 <CodeExample>
-    <Form className="row gx-3 gy-2 align-items-center">
+    <Row as={Form} className="gx-3 gy-2 align-items-center">
         <Col sm={3}>
             <FormLabel htmlFor="specificSizeInputName" plain className="visually-hidden">
                 Name
@@ -364,7 +363,7 @@ You can then remix that once again with size-specific column classes.
                 Submit
             </Button>
         </Col>
-    </Form>
+    </Row>
 </CodeExample>
 
 ## Inline forms
@@ -372,7 +371,7 @@ You can then remix that once again with size-specific column classes.
 Use the `.row-cols-*` classes to create responsive horizontal layouts. By adding [gutter modifier classes][3], we’ll have gutters in horizontal and vertical directions. On narrow mobile viewports, the `.col-12` helps stack the form controls and more. The `.align-items-center` aligns the form elements to the middle, making checkboxes and labels align properly.
 
 <CodeExample>
-    <Form className="row lg:row-cols-auto g-3 align-items-center">
+    <Row as={Form} lg="auto" className="g-3 align-items-center">
         <Col xs={12}>
             <FormLabel htmlFor="inlineFormInputGroupUsername" plain className="visually-hidden">
                 Username
@@ -406,7 +405,7 @@ Use the `.row-cols-*` classes to create responsive horizontal layouts. By adding
                 Submit
             </Button>
         </Col>
-    </Form>
+    </Row>
 </CodeExample>
 
 </DocumentLayout>

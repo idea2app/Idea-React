@@ -1,0 +1,114 @@
+import { Badge } from '../../../../source/Base/Badge';
+import { Button } from '../../../../source/Base/Button';
+import { Fade } from '../../../../source/Base/Fade';
+import { Spinner } from '../../../../source/Base/Spinner';
+import { FormControl } from '../../../../source/Form/Control';
+
+import { DocumentLayout } from '../../../component/Document/Layout';
+
+<DocumentLayout active="motion" upstreamPath="utilities/motion/">
+
+# Motion
+
+Disable or apply CSS transitions and animations on individual elements with motion utilities.
+
+Bootstrap animates many components with CSS transitions and animations. The motion utilities let
+you disable that motion on a single element (`.transition-none`, `.animation-none`) or apply a small
+predefined animation (`.animation-shake`, `.animation-pop`).
+
+## Transition
+
+Add `.transition-none` to set `transition: none`, so property changes apply instantly rather than
+animating. Hover both buttons below: the default one eases its hover color change, while the second
+snaps instantly.
+
+<div className="d-flex gap-3">
+    <Button variant="solid" theme="primary">
+        Default
+    </Button>
+    <Button variant="solid" theme="primary" className="transition-none">
+        No hover transition
+    </Button>
+</div>
+
+## Animation
+
+### Disable an animation
+
+Add `.animation-none` to set `animation: none`, which stops any running keyframe animation such as
+a spinner.
+
+<div className="d-flex align-items-center gap-3">
+    <Spinner role="status" aria-label="Loading" />
+    <Spinner role="status" aria-label="Loading without animation" className="animation-none" />
+</div>
+
+### Shake
+
+Add `.animation-shake` to play a brief horizontal shake once. It pairs well with invalid form
+feedback—apply it to a field or toggle it when validation fails to draw attention to what needs
+fixing.
+
+<FormControl
+    className="animation-shake"
+    type="text"
+    value="Not quite right"
+    validation="invalid"
+    aria-label="Invalid value"
+    readOnly
+/>
+
+### Pop
+
+Add `.animation-pop` to scale an element in with a slight overshoot. It works well for content that
+appears dynamically, such as a badge whose count just updated.
+
+<Badge theme="primary" className="animation-pop">
+    New
+</Badge>
+
+## Reduced motion
+
+`.transition-none` and `.animation-none` always apply, regardless of a user's motion preference.
+Bootstrap already respects `prefers-reduced-motion` for its built-in transitions, and automatically
+disables the decorative `.animation-shake` and `.animation-pop` effects when reduced motion is
+preferred.
+
+## CSS
+
+Components declare motion through duration and timing tokens. For example, the `.fade` class uses
+`--bs-transition-fade-duration` and `--bs-transition-fade-timing`; `.collapse` uses
+`--bs-transition-collapse-property`, `--bs-transition-collapse-duration`, and
+`--bs-transition-collapse-timing`. Dialog, drawer, and menu share an easing token at the root
+level, so one override can restyle all three.
+
+### Fade wrapper
+
+Bootstrap's `.fade` class applies an opacity transition. Add `.show` to make the content visible.
+Idea React's `Fade` wrapper applies these classes to its child without adding a DOM element. Set
+`in` to show the child. When `in` is false or omitted, the child remains mounted but is transparent
+and still occupies its layout space.
+
+<Fade in>
+    <div className="p-3 border rounded">
+        This content fades in using Bootstrap's CSS transition.
+    </div>
+</Fade>
+
+`Fade` only applies CSS classes; it does not mount or unmount its child or manage enter/exit
+callbacks. Use it when the visibility state is already owned by your component or model.
+
+Override the fade duration and easing with the Bootstrap CSS tokens:
+
+```css
+.custom-fade {
+    --bs-transition-fade-duration: 300ms;
+    --bs-transition-fade-timing: ease-in-out;
+}
+```
+
+<Fade in className="custom-fade">
+    <div className="p-3 border rounded">A slower fade transition.</div>
+</Fade>
+
+</DocumentLayout>

@@ -6,6 +6,7 @@ import { Image } from '../../../../source/Content/Images';
 import { Menu, MenuItem, MenuDivider } from '../../../../source/Base/Menu';
 import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
 import { Navbar, NavbarBrand, NavbarNav, NavbarText } from '../../../../source/Base/Navbar';
+import { Collapse, CollapseToggle } from '../../../../source/Base/Collapse';
 import { Icon } from '../../../../source/Extension/Icon';
 import { NavbarDemo, NavbarExternalDemo } from '../../../component/Document/NavbarDemo';
 import { DocumentLayout } from '../../../component/Document/Layout';
@@ -344,11 +345,11 @@ Various buttons are supported as part of these navbar forms, too. This is also a
 <CodeExample>
     <Navbar className="bg-1 fg-2">
         <Container fluid className="justify-content-start">
-            <Button variant="outline" theme="success" type="button" className="me-2">
+            <Button variant="outline" theme="success" className="me-2">
                 {'Main button'}
             </Button>
 
-            <Button variant="outline" size="sm" theme="secondary" type="button">
+            <Button variant="outline" size="sm" theme="secondary">
                 {'Smaller button'}
             </Button>
         </Container>
@@ -757,6 +758,22 @@ These examples show the drawer below the `md` breakpoint. Click the toggler on a
 Navbar togglers are left-aligned by default, but should they follow a sibling element like a `.navbar-brand`, they’ll automatically be aligned to the far right. Reversing your markup will reverse the placement of the toggler.
 
 The first example collapses below the `md` breakpoint; the following examples always keep the toggler visible. Click it to open the drawer.
+
+To toggle inline content outside the responsive navbar examples, pass its selector to `CollapseToggle` with the `navbarToggler` prop:
+
+<CodeExample>
+    <Navbar className="bg-1 fg-2">
+        <NavbarBrand href="#">{'Navbar'}</NavbarBrand>
+        <CollapseToggle
+            target="#navbarContent"
+            navbarToggler
+            variant={false}
+            aria-label="Toggle navigation"
+        />
+        <Collapse id="navbarContent">{'Navbar content'}</Collapse>
+    </Navbar>
+
+</CodeExample>
 
 With no `.navbar-brand` shown (hidden inside the drawer):
 

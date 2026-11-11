@@ -44,7 +44,7 @@ export const ChipDismiss = polymorphic<ComponentPropsWithRef<'button'>>(
             aria-label={label}
             className={classNames('chip-dismiss', className)}
         >
-            {children ?? <Icon name="x-lg" aria-hidden="true" />}
+            {children ?? <Icon name="x-lg" />}
         </Root>
     )
 );

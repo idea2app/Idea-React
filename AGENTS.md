@@ -142,7 +142,9 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 文档站要用到的 [Bootstrap 官方组件][2] 必须先在 `source/` 封装为通用组件，
   再由文档站引用，不是将其专用组件放进组件库。
 - 文档与示例统一引用封装后的组件，MDX 不直接书写 Bootstrap 组件类名，只有展示原始 HTML（如无 JS 示例）时，代码块才保留类名写法。
-- 文档站专用布局、组件、模型和样式放在 `document/component/`，不得从组件库导出或混入发布包。
+- 复刻上游示例时，优先使用本项目现有组件组合实现对应效果；不以原始 HTML、Bootstrap 类名或上游组件替代已有的本项目组件。
+- 文档站公共布局、组件、模型和样式放在 `document/component/`；仅供单个页面或示例使用的实现与对应路由文件同级存放；以上均不得从组件库导出或混入发布包。
+- 页面基础布局单独提供 Bootstrap 样式链接，由文档布局复用；不得为获取当前路由等信息使用客户端 Hook 将静态页面改为客户端渲染。
 - 静态展示组件保持服务端可渲染；仅把需要浏览器 API 或交互状态的最小组件边界标记为客户端组件，不用 Context、Model 令整个组件树进入客户端渲染。
 - 每个模块自行导出其定义的公共 API；聚合入口可导出模块，但不从定义模块重复转出其它模块的 API。
 - 多个同前缀的文件归入同名文件夹，文件使用 `index.tsx`、`model.ts`、
@@ -218,8 +220,11 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 从 `unpkg.com` 引入 Bootstrap CSS，严禁使用 Tailwind CSS 及其插件、配置和工具类。
 - 所有组件依赖的第三方 CSS 统一由使用方通过 `<link />` 从 `unpkg.com` 引入；
   组件源码不导入或打包这些样式，文档站在公共布局中统一加载。
-- 能用 [Bootstrap 6 CSS 工具类][4] 的样式不写自定义 CSS；
-  剩余样式全部使用 CSS modules，不另建全局自定义样式；需要嵌套的样式使用 LESS modules。
+- 页面专属 CSS 通过 `*.less` 全局导入，或通过 `*.module.less` 导入并使用模块类名；不得使用 `?inline` 等方式导入 CSS 源文再注入 `<style>`。
+- MDX 与 TSX 页面均直接导入页面 CSS/LESS；MDX 编译仅在 RSC 环境通过 `recmaPlugins` 注入 `import.meta.viteRsc.loadCss()`，补齐 RSC 默认仅识别 JS/TS 的样式资源处理。可独立命名的页面样式使用 CSS/LESS modules，覆盖上游全局选择器的样式保留全局 LESS。
+- JSX/MDX 元素没有子节点时使用自闭合标签。
+- 能用 [Bootstrap 6 CSS 工具类][4] 的样式不写自定义 CSS，剩余样式使用 CSS modules；必须保留原始类名的页面专属样式可用 `*.less` 全局导入，且仅由对应页面引用；需要嵌套的模块样式使用 LESS modules。
+- LESS 样式优先将伪类、伪元素、后代选择器及媒体查询嵌套在最近的相关选择器中，避免重复书写父选择器。
 - 可由 CSS 或 Bootstrap 工具类静态表达的布局、状态与堆叠关系优先用 CSS，避免为此引入客户端状态或 Context、Model。
 - 样式模块的类型声明合入已有的 `source/types.d.ts`，不要另建重复声明文件。
 - 文档示例使用文档专用 Demo 组件时，为 `CodeExample` 提供源码路径；仓库内路径相对于仓库根目录且不以 `/` 开头，外部源码可传绝对 URL。
@@ -228,13 +233,13 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - Markdown 正文中的链接采用文末数字引用：正文写 `[text][number]`，文末写 `[number]: URL`；图片链接同样使用引用形式。行末链接（如组件列表项）无需改为文末引用，可保留 `[text](URL)`。
 - 每篇文档的数字引用按首次出现顺序从 1 连续编号；重复链接复用同一编号，修改后同步整理正文与定义，移除未使用定义，不留跳号、重复或悬空引用。
 - 组件目录优先列出上游标准组件，再列扩展组件。
-- 静态站搜索优先采用最简单可用的方案，开发与生产共用 MDX 源码索引器并通过同一 RSS 地址加载，RSS 包含完整纯文本正文供搜索与订阅复用；不依赖编译后的 HTML，不维护手写页面清单，不为索引格式或具体技术额外引入不必要的服务和框架。
+- 静态站搜索优先采用最简单可用的方案，开发与生产共用 MDX/TSX 源码索引器并通过同一 RSS 地址加载，RSS 包含完整纯文本正文供搜索与订阅复用；不依赖编译后的 HTML，不维护手写页面清单，不为索引格式或具体技术额外引入不必要的服务和框架。
 
 ## 测试与验证
 
 - 使用 Node.js 原生 test runner、`node:assert/strict` 和原生 mock，不引入外部测试框架。
 - 不同测试阶段的断言与后续操作之间留空行，区分准备、操作和验证。
-- 通用组件单元测试放在 `test/`，遵循 `ComponentName.test.tsx` 命名；
+- 通用组件单元测试放在 `test/`，按 `source/` 对应模块的子目录结构存放，仅含一个测试文件的组件子目录省略该层，遵循 `ComponentName.test.tsx` 命名；
   不为文档站专用组件和模型编写或保留单元测试。
 - 按改动范围运行相关类型检查、Lint、测试和构建；页面交互与响应式布局通过浏览器验证。
 - 纯 SSG 构建不仅要检查退出码，还要确认实际导出的 HTML 等静态文件及路由，
@@ -253,19 +258,11 @@ pnpm build -r
 - `test` 使用 Node.js 原生 runner，需要 Node.js 22.18+，并做 TypeScript 检查。Lint 与格式检查针对本次修改文件运行。
 - 根目录 `pnpm build` 构建 TypeDoc、旧预览站与组件发布包；现有根构建、发布部署仍使用 `docs/`，不能将其误当作 ViNext 文档工作区的构建或部署。
 - 文档工作区单独构建，只部署 `document/dist/client/`；部署到子目录前配置 `document/next.config.ts` 的 `basePath`，并验证静态资源、搜索索引和结果链接。
-- 开发模式按请求从当前 MDX 文档生成 RSS 搜索索引；生产模式用同一索引器生成静态 RSS 与 Sitemap，生产搜索需构建后预览静态产物。
+- 开发模式按请求从当前 MDX/TSX 页面生成 RSS 搜索索引；生产模式用同一索引器生成静态 RSS 与 Sitemap，生产搜索需构建后预览静态产物。
 - 浏览器验证包括键盘交互、主题恢复、错误弹窗、失败后重试与不同视口；文档站不依赖 Node.js 或 Worker 运行时。
 
-## 发布维护
+## PR 审核
 
-- 仅在用户明确要求发布时更新 `package.json` 版本、创建对应版本标签并推送；推送目标应核实当前分支和远程配置，不照搬固定分支名或推送所有标签。
-- 发布前运行相关验证及根构建，检查产物；组件包发布与文档工作区部署分别处理。
-
-## Git 操作
-
-- 未经用户明确要求，不创建提交、不推送、不 amend 或改写现有提交。
-- “完成实现”“修复问题”“完成 PR”或“运行测试”均不等于提交或推送授权；
-  完成验证后保留未提交改动供用户审阅。
 - 审核意见应通查同类问题，而非只改被评论的单行；将可复用的要求归纳到本文件，不夹带无关功能或修改。
 
 [1]: https://getbootstrap.com/

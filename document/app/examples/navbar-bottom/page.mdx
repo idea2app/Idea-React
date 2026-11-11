@@ -1,0 +1,59 @@
+import { Button } from '../../../../source/Base/Button';
+import { Menu, MenuItem } from '../../../../source/Base/Menu';
+import {
+    DialogBody,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle
+} from '../../../../source/Base/NativeDialog';
+import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
+import { NavbarNav } from '../../../../source/Base/Navbar';
+import { Container } from '../../../../source/Layout/Grid';
+
+import { BaseLayout } from '../../../component/Document/BaseLayout';
+import { NavbarDemo } from '../../../component/Document/NavbarDemo';
+
+export const navbarItems = [
+    { label: 'Home', active: true },
+    { label: 'Link' },
+    { label: 'Disabled', disabled: true },
+    { label: 'Menu', menu: true }
+];
+
+<BaseLayout title="Bottom navbar example">
+
+<Container >
+    <div className="bg-1 p-5 rounded mt-3">
+        <h1>Bottom Navbar example</h1>
+        <p className="fs-lg fw-light">
+            This example is a quick exercise to illustrate how the bottom navbar works.
+        </p>
+        <Button variant="solid" theme="primary" size="lg" href="https://getbootstrap.com/docs/6.0/components/navbar">
+            View navbar docs &raquo;
+        </Button>
+    </div>
+
+</Container>
+<NavbarDemo brand="Bottom navbar" title="Menu" expand="sm" theme="dark" className="fixed-bottom">
+    <NavbarNav>
+        {navbarItems.map(({ label, active, disabled, menu }) => (
+            <NavItem key={label}>
+                {menu ? (<Menu nav label={label}>
+                        {['Action', 'Another action', 'Something else here'].map((item) => (
+                            <MenuItem key={item} href="#">
+                                {item}
+                            </MenuItem>
+                        ))}
+                    </Menu>) : (<NavLink
+                    active={active}
+                    aria-current={active ? 'page' : undefined}
+                    disabled={disabled}
+                    aria-disabled={disabled}
+                    href={disabled ? undefined : '#'}
+                >{label}</NavLink>)}
+            </NavItem>
+        ))}
+    </NavbarNav>
+</NavbarDemo>
+
+</BaseLayout>

@@ -26,7 +26,9 @@ interface ButtonStyleProps {
 }
 
 type ButtonLinkAttributes = ComponentPropsWithRef<'a'> & { href: string };
+
 type ButtonAttributes = ComponentPropsWithRef<'button'> & { href?: never };
+
 type ButtonElementAttributes = ButtonAttributes | ButtonLinkAttributes;
 
 export type ButtonProps = ButtonStyleProps & ButtonElementAttributes;
@@ -42,6 +44,7 @@ export const Button = polymorphic<ButtonProps>(
         const link = isButtonLink(attributes);
         const Root = RootAs ?? (link ? 'a' : 'button');
         const nativeButton = Root === 'button';
+        const role = attributes.role ?? 'button';
         const onClick =
             !nativeButton && disabled
                 ? typeof Root === 'string'
@@ -60,12 +63,13 @@ export const Button = polymorphic<ButtonProps>(
             <Root
                 {...attributes}
                 className={classes}
+                role={role}
                 type={nativeButton ? attributes.type || 'button' : attributes.type}
                 href={disabled ? undefined : attributes.href}
                 disabled={nativeButton || typeof Root !== 'string' ? disabled : undefined}
                 aria-disabled={(!nativeButton && disabled) || undefined}
                 aria-pressed={
-                    !link || attributes.role === 'button'
+                    !link || role === 'button'
                         ? (active ?? attributes['aria-pressed'])
                         : attributes['aria-pressed']
                 }

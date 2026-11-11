@@ -58,7 +58,7 @@ class ChipInputComponent extends FormPlugin<ChipInputComponentProps, Pick<Chips,
                 createOnBlur,
                 dismissible,
                 placeholder,
-                dismissIcon: renderToStaticMarkup(<Icon name="x-lg" aria-hidden="true" />)
+                dismissIcon: renderToStaticMarkup(<Icon name="x-lg" />)
             });
             element.addEventListener('change.bs.chips', this.handleValuesChange);
 

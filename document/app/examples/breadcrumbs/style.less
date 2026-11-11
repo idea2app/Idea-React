@@ -1,0 +1,31 @@
+.breadcrumb-custom .breadcrumb-item {
+    position: relative;
+    flex-grow: 1;
+    padding: 0.75rem 3rem;
+
+    &::after {
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        right: -25px;
+        transform: scale(0.707) rotate(45deg);
+        z-index: 1;
+        margin-top: -25px;
+        box-shadow: 1px -1px var(--bs-border-color);
+        border-top-right-radius: 0.5rem;
+        background-color: var(--bs-bg-3);
+        width: 50px;
+        height: 50px;
+        content: '';
+    }
+    &:first-child {
+        padding-left: 1.5rem;
+    }
+    &:last-child {
+        padding-right: 1.5rem;
+
+        &::after {
+            display: none;
+        }
+    }
+}

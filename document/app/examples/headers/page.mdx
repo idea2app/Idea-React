@@ -1,0 +1,312 @@
+import { Button } from '../../../../source/Base/Button';
+import { Menu, MenuDivider, MenuItem } from '../../../../source/Base/Menu';
+import { Nav, NavItem, NavLink } from '../../../../source/Base/Nav';
+import { Icon } from '../../../../source/Extension/Icon';
+import { FormControl } from '../../../../source/Form';
+import { Col, Container } from '../../../../source/Layout/Grid';
+import { BaseLayout } from '../../../component/Document/BaseLayout';
+import styles from './style.module.css';
+export const secondaryNavItems = [
+    { label: 'Features' },
+    { label: 'Pricing' },
+    { label: 'FAQs' },
+    { label: 'About' }
+];
+export const lightNavItems = [
+    { className: 'px-2 theme-secondary', label: 'Home' },
+    { className: 'px-2', label: 'Features' },
+    { className: 'px-2', label: 'Pricing' },
+    { className: 'px-2', label: 'FAQs' },
+    { className: 'px-2', label: 'About' }
+];
+export const darkNavItems = [
+    { className: 'px-2 fg-secondary', label: 'Home' },
+    { className: 'px-2 fg-white', label: 'Features' },
+    { className: 'px-2 fg-white', label: 'Pricing' },
+    { className: 'px-2 fg-white', label: 'FAQs' },
+    { className: 'px-2 fg-white', label: 'About' }
+];
+export const overviewNavItems = [
+    { className: 'px-2 theme-secondary', label: 'Overview' },
+    { className: 'px-2 theme-inverse', label: 'Inventory' },
+    { className: 'px-2 theme-inverse', label: 'Customers' },
+    { className: 'px-2 theme-inverse', label: 'Products' }
+];
+export const iconNavItems = [
+    { className: 'fg-secondary flex-column', name: 'house', label: 'Home' },
+    { className: 'fg-white flex-column', name: 'speedometer2', label: 'Dashboard' },
+    { className: 'fg-white flex-column', name: 'table', label: 'Orders' },
+    { className: 'fg-white flex-column', name: 'grid', label: 'Products' },
+    { className: 'fg-white flex-column', name: 'person-circle', label: 'Customers' }
+];
+export const headerNavItems = ['Home', 'Features', 'Pricing', 'FAQs', 'About'];
+export const accountMenuItems = ['New project...', 'Settings', 'Profile'];
+
+<BaseLayout title="Headers">
+    <div>
+        <h1 className="visually-hidden">Headers examples</h1>
+
+        <Container>
+            <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a href="/" className="d-flex align-items-center mb-3 md:mb-0 md:me-auto theme-inverse text-decoration-none">
+                    <Icon name="bootstrap" size={2.5} className="me-2"/>
+                    <span className="fs-xl">Simple header</span>
+                </a>
+
+                <Nav as="ul">
+                    <NavItem>
+                        <NavLink href="#" active aria-current="page">Home</NavLink>
+                    </NavItem>
+                    {secondaryNavItems.map(({ label }, index) => (<NavItem key={index}>
+                            <NavLink href="#">{label}</NavLink>
+                        </NavItem>))}
+                </Nav>
+            </header>
+        </Container>
+
+        <div className="b-example-divider"/>
+
+        <Container>
+            <header className="d-flex justify-content-center py-3">
+                <Nav as="ul" variant="pills">
+                    {headerNavItems.map(label => (<NavItem key={label}>
+                            <NavLink href="#" active={label === 'Home'} aria-current={label === 'Home' ? 'page' : undefined}>
+                                {label}
+                            </NavLink>
+                        </NavItem>))}
+                </Nav>
+            </header>
+        </Container>
+
+        <div className="b-example-divider"/>
+
+        <Container>
+            <header className="d-flex flex-wrap align-items-center justify-content-center md:justify-content-between py-3 mb-4 border-bottom">
+                <Col md={3} className="mb-2 md:mb-0">
+                    <a href="/" className="d-inline-flex theme-inverse text-decoration-none">
+                        <Icon name="bootstrap" size={2.5} role="img" aria-label="Bootstrap"/>
+                    </a>
+                </Col>
+
+                <Col xs={12} md="auto">
+                    <Nav as="ul" className="mb-2 justify-content-center md:mb-0">
+                        {lightNavItems.map(({ className, label }, index) => (<li key={index}>
+                                <NavLink href="#" className={className}>
+                                    {label}
+                                </NavLink>
+                            </li>))}
+                    </Nav>
+                </Col>
+
+                <Col md={3} className="text-end">
+                    <Button variant="outline" theme="primary" className="me-2">Login</Button>
+                    <Button variant="solid" theme="primary">Sign up</Button>
+                </Col>
+            </header>
+        </Container>
+
+        <div className="b-example-divider"/>
+
+        <header className="p-3 bg-body fg-body" data-bs-theme="dark">
+            <Container>
+                <div className="d-flex flex-wrap align-items-center justify-content-center lg:justify-content-start">
+                    <a href="/" className="d-flex align-items-center mb-2 lg:mb-0 fg-white text-decoration-none">
+                        <Icon name="bootstrap" size={2.5} className="me-2" role="img" aria-label="Bootstrap"/>
+                    </a>
+
+                    <Col xs={12} lg="auto" className="lg:me-auto">
+                        <Nav as="ul" className="mb-2 justify-content-center md:mb-0">
+                            {darkNavItems.map(({ className, label }, index) => (<li key={index}>
+                                    <NavLink href="#" className={className}>
+                                        {label}
+                                    </NavLink>
+                                </li>))}
+                        </Nav>
+                    </Col>
+
+                    <Col as="form" xs={12} lg="auto" className="mb-3 lg:mb-0 lg:me-3" role="search">
+                        <FormControl type="search" placeholder="Search..." aria-label="Search"/>
+                    </Col>
+
+                    <div className="text-end">
+                        <Button variant="outline" theme="secondary" className="me-2">Login</Button>
+                        <Button variant="solid" theme="warning">Sign up</Button>
+                    </div>
+                </div>
+            </Container>
+        </header>
+
+        <div className="b-example-divider"/>
+
+        <header className="p-3 mb-3 border-bottom">
+            <Container>
+                <div className="d-flex flex-wrap align-items-center justify-content-center lg:justify-content-start">
+                    <a href="/" className="d-flex align-items-center mb-2 lg:mb-0 theme-inverse text-decoration-none">
+                        <Icon name="bootstrap" size={2.5} className="me-2" role="img" aria-label="Bootstrap"/>
+                    </a>
+
+                    <Col xs={12} lg="auto" className="lg:me-auto">
+                        <Nav as="ul" className="mb-2 justify-content-center md:mb-0">
+                            {overviewNavItems.map(({ className, label }, index) => (<li key={index}>
+                                    <NavLink href="#" className={className}>
+                                        {label}
+                                    </NavLink>
+                                </li>))}
+                        </Nav>
+                    </Col>
+
+                    <Col as="form" xs={12} lg="auto" className="mb-3 lg:mb-0 lg:me-3" role="search">
+                        <FormControl type="search" placeholder="Search..." aria-label="Search"/>
+                    </Col>
+
+                    <div className="text-end">
+                        <Menu label={<>
+                                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle"/>
+                                </>} toggleProps={{
+
+variant: false,
+className: 'd-block bg-transparent border-0 p-0 theme-inverse text-decoration-none'
+}} menuClassName="shadow">
+{accountMenuItems.map(label => (<MenuItem key={label} href="#">
+{label}
+
+</MenuItem>))}
+<MenuDivider />
+<MenuItem href="#">Sign out</MenuItem>
+</Menu>
+</div>
+</div>
+</Container>
+</header>
+
+        <div className="b-example-divider"/>
+
+        <header className="py-3 mb-3 border-bottom">
+            <Container fluid className={`${styles.grid} d-grid gap-3 align-items-center`}>
+                <div>
+                    <Menu label={<Icon name="bootstrap" size={2.5} className="me-2"/>} menuClassName="shadow" toggleProps={{
+
+variant: false,
+className: 'd-flex align-items-center bg-transparent border-0 p-0 mb-2 lg:mb-0 theme-inverse text-decoration-none',
+'aria-label': 'Bootstrap menu'
+}}>
+{['Overview', 'Inventory', 'Customers', 'Products'].map((label, index) => (<MenuItem key={label} active={index === 0} href="#" aria-current={index === 0 ? 'page' : undefined}>
+{label}
+
+</MenuItem>))}
+<MenuDivider />
+<MenuItem href="#">Reports</MenuItem>
+<MenuItem href="#">Analytics</MenuItem>
+</Menu>
+</div>
+
+                <div className="d-flex align-items-center">
+                    <form className="w-100 me-3" role="search">
+                        <FormControl type="search" placeholder="Search..." aria-label="Search"/>
+                    </form>
+
+                    <div className="flex-shrink-0">
+                        <Menu label={<>
+                                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle"/>
+                                </>} toggleProps={{
+
+variant: false,
+className: 'd-block bg-transparent border-0 p-0 theme-inverse text-decoration-none'
+}} menuClassName="shadow">
+{accountMenuItems.map(label => (<MenuItem key={label} href="#">
+{label}
+
+</MenuItem>))}
+<MenuDivider />
+<MenuItem href="#">Sign out</MenuItem>
+</Menu>
+</div>
+</div>
+</Container>
+</header>
+
+        <Container fluid className="pb-3">
+            <div className={`${styles.grid} d-grid gap-3`}>
+                <div className="bg-1 border rounded-3">
+                    {Array.from({ length: 10 }).map((_, i) => (<br key={i}/>))}
+                </div>
+                <div className="bg-1 border rounded-3">
+                    {Array.from({ length: 10 }).map((_, i) => (<br key={i}/>))}
+                </div>
+            </div>
+        </Container>
+
+        <div className="b-example-divider"/>
+
+        <nav className="py-2 bg-1 border-bottom">
+            <Container className="d-flex flex-wrap">
+                <Nav as="ul" className="me-auto">
+                    {headerNavItems.map(label => (<NavItem key={label}>
+                            <NavLink href="#" active={label === 'Home'} className="theme-inverse px-2" aria-current={label === 'Home' ? 'page' : undefined}>
+                                {label}
+                            </NavLink>
+                        </NavItem>))}
+                </Nav>
+                <Nav as="ul">
+                    <NavItem>
+                        <NavLink href="#" className="theme-inverse px-2">Login</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="#" className="theme-inverse px-2">Sign up</NavLink>
+                    </NavItem>
+                </Nav>
+            </Container>
+        </nav>
+        <header className="py-3 mb-4 border-bottom">
+            <Container className="d-flex flex-wrap justify-content-center">
+                <a href="/" className="d-flex align-items-center mb-3 lg:mb-0 lg:me-auto theme-inverse text-decoration-none">
+                    <Icon name="bootstrap" size={2.5} className="me-2"/>
+                    <span className="fs-xl">Double header</span>
+                </a>
+                <Col as="form" xs={12} lg="auto" className="mb-3 lg:mb-0" role="search">
+                    <FormControl type="search" placeholder="Search..." aria-label="Search"/>
+                </Col>
+            </Container>
+        </header>
+
+        <div className="b-example-divider"/>
+
+        <header>
+            <div className="px-3 py-2 fg-white bg-black border-bottom" data-bs-theme="dark">
+                <Container>
+                    <div className="d-flex flex-wrap align-items-center justify-content-center lg:justify-content-start">
+                        <a href="/" className="d-flex align-items-center my-2 lg:my-0 lg:me-auto fg-body text-decoration-none">
+                            <Icon name="bootstrap" size={2.5} className="me-2" role="img" aria-label="Bootstrap"/>
+                        </a>
+
+                        <Col xs={12} lg="auto">
+                            <Nav as="ul" className="my-2 justify-content-center md:my-0">
+                                {iconNavItems.map(({ className, name, label }, index) => (<li key={index}>
+                                        <NavLink href="#" className={className}>
+                                            <Icon name={name} size={1.5} className="d-block mx-auto"/>
+                                            {label}
+                                        </NavLink>
+                                    </li>))}
+                            </Nav>
+                        </Col>
+                    </div>
+                </Container>
+            </div>
+            <div className="px-3 py-2 border-bottom mb-3">
+                <Container className="d-flex flex-wrap justify-content-center">
+                    <Col as="form" xs={12} lg="auto" className="mb-2 lg:mb-0 lg:me-auto" role="search">
+                        <FormControl type="search" placeholder="Search..." aria-label="Search"/>
+                    </Col>
+
+                    <div className="text-end">
+                        <Button variant="solid" theme="secondary" className="me-2">Login</Button>
+                        <Button variant="solid" theme="primary">Sign-up</Button>
+                    </div>
+                </Container>
+            </div>
+        </header>
+
+        <div className="b-example-divider"/>
+    </div>
+
+</BaseLayout>
