@@ -23,11 +23,11 @@ Create beautifully simple form labels that float over your input fields.
 
 ## Example
 
-Wrap a `FormControl` and `FormLabel` pair in `FormFloatingLabel` to enable floating labels.
+Wrap a [`FormControl`][1] and [`FormLabel`][2] pair in `FormFloatingLabel` to enable floating labels.
 
-A non-empty `placeholder` is required on each text `FormControl`. The CSS-only implementation relies on the `:placeholder-shown` pseudo-element to detect an empty input. The placeholder stays transparent until the control is focused, then uses the normal placeholder color; only `FormLabel` is shown while the field is empty and unfocused.
+A non-empty `placeholder` is required on each text [`FormControl`][1]. The CSS-only implementation relies on the `:placeholder-shown` pseudo-element to detect an empty input. The placeholder stays transparent until the control is focused, then uses the normal placeholder color; only [`FormLabel`][2] is shown while the field is empty and unfocused.
 
-`FormFloatingLabel` places `FormLabel` before the control so screen readers announce the label before the field's value. Its CSS reacts to the control's state with the `:has()` selector.
+`FormFloatingLabel` places [`FormLabel`][2] before the control so screen readers announce the label before the field's value. Its CSS reacts to the control's state with the `:has()` selector.
 
 <CodeExample>
     <Stack gap={3}>
@@ -46,7 +46,7 @@ A non-empty `placeholder` is required on each text `FormControl`. The CSS-only i
     </Stack>
 </CodeExample>
 
-When `defaultValue` or a controlled `value` is set, `FormLabel` automatically moves to its floated position.
+When `defaultValue` or a controlled `value` is set, [`FormLabel`][2] automatically moves to its floated position.
 
 <CodeExample>
     <FormFloatingLabel>
@@ -62,7 +62,7 @@ When `defaultValue` or a controlled `value` is set, `FormLabel` automatically mo
     </FormFloatingLabel>
 </CodeExample>
 
-Form validation styles also work as expected.
+[Form][3] validation styles also work as expected.
 
 <CodeExample>
     <FormFloatingLabel>
@@ -81,7 +81,7 @@ Form validation styles also work as expected.
 
 ## Textareas
 
-By default, `FormTextArea` has the same height as `FormControl`.
+By default, [`FormTextArea`][1] has the same height as [`FormControl`][1].
 
 <CodeExample>
     <FormFloatingLabel>
@@ -92,7 +92,7 @@ By default, `FormTextArea` has the same height as `FormControl`.
     </FormFloatingLabel>
 </CodeExample>
 
-To set a custom height on `FormTextArea`, do not use the `rows` attribute. Instead, override the `--bs-form-floating-height` CSS variable on `FormFloatingLabel` through a CSS module so the label floats correctly at any height.
+To set a custom height on [`FormTextArea`][1], do not use the `rows` attribute. Instead, override the `--bs-form-floating-height` CSS variable on `FormFloatingLabel` through a CSS module so the label floats correctly at any height.
 
 <CodeExample>
     <FormFloatingLabel className={style.tallFloating}>
@@ -105,7 +105,7 @@ To set a custom height on `FormTextArea`, do not use the `rows` attribute. Inste
 
 ## Selects
 
-`FormSelect` works in the same way, but always shows `FormLabel` in its floated state. **Selects with `size` and `multiple` are not supported.**
+[`FormSelect`][1] works in the same way, but always shows [`FormLabel`][2] in its floated state. **Selects with `size` and `multiple` are not supported.**
 
 <CodeExample>
     <FormFloatingLabel>
@@ -127,7 +127,7 @@ To set a custom height on `FormTextArea`, do not use the `rows` attribute. Inste
 
 ## Date and time
 
-Date, time, datetime-local, month, and week `FormControl` inputs also always show `FormLabel` in its floated state. These input types do not support placeholders the way textual inputs do, so a `placeholder` is not required (and is ignored by most browsers).
+Date, time, datetime-local, month, and week [`FormControl`][1] inputs also always show [`FormLabel`][2] in its floated state. These input types do not support placeholders the way textual inputs do, so a `placeholder` is not required (and is ignored by most browsers).
 
 <CodeExample>
     <Stack gap={3}>
@@ -205,7 +205,7 @@ Add the `disabled` boolean attribute on an input, a textarea or a select to give
 
 ## Readonly plaintext
 
-Floating labels also support the `plaintext` prop on `FormControl`, which is useful for toggling from an editable input to a plaintext value without affecting the page layout.
+Floating labels also support the `plaintext` prop on [`FormControl`][1], which is useful for toggling from an editable input to a plaintext value without affecting the page layout.
 
 <CodeExample>
     <Stack gap={3}>
@@ -239,7 +239,7 @@ Floating labels also support the `plaintext` prop on `FormControl`, which is use
 
 ## Input groups
 
-Floating labels also work inside `InputGroup`.
+Floating labels also work inside [`InputGroup`][4].
 
 <CodeExample>
     <InputGroup>
@@ -253,7 +253,7 @@ Floating labels also work inside `InputGroup`.
     </InputGroup>
 </CodeExample>
 
-When using `InputGroup` and `FormFloatingLabel` with validation, place `FormFeedback` outside `InputGroup` but inside `FormField`.
+When using [`InputGroup`][4] and `FormFloatingLabel` with validation, place [`FormFeedback`][5] outside [`InputGroup`][4] but inside [`FormField`][2].
 
 <CodeExample>
     <FormField>
@@ -301,7 +301,7 @@ By default, placeholders stay transparent until the control is focused. With `al
 
 ## Layout
 
-When using the grid, place form elements inside `Col` components.
+When using the grid, place form elements inside [`Col`][6] components.
 
 <CodeExample>
     <Row className="g-2">
@@ -359,3 +359,10 @@ When using the grid, place form elements inside `Col` components.
 ```
 
 </DocumentLayout>
+
+[1]: ../form-control/
+[2]: ../field/
+[3]: ../
+[4]: ../input-group/
+[5]: ../validation/
+[6]: ../../layout/grid/

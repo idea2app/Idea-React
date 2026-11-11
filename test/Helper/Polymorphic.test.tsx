@@ -128,7 +128,6 @@ import {
     PageText,
     Pagination,
     Placeholder,
-    PlaceholderAnimation,
     PlaceholderButton,
     Popover,
     Progress,
@@ -292,10 +291,6 @@ const examples: [string, ReactElement][] = [
     ['PageLink', <PageLink as={Target} payload={payload} data-example="polymorphic" />],
     ['PageText', <PageText as={Target} payload={payload} data-example="polymorphic" />],
     ['Placeholder', <Placeholder as={Target} payload={payload} data-example="polymorphic" />],
-    [
-        'PlaceholderAnimation',
-        <PlaceholderAnimation as={Target} payload={payload} data-example="polymorphic" />
-    ],
     [
         'PlaceholderButton',
         <PlaceholderButton as={Target} payload={payload} data-example="polymorphic" />

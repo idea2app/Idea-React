@@ -243,7 +243,7 @@ The fade animation honors `prefers-reduced-motion`.
 Hover over the links below to see tooltips:
 
 <div className="fg-3">
-    {'Placeholder text to demonstrate some '}
+    {'[Placeholder][2] text to demonstrate some '}
     <OverlayBox title="Default tooltip" className="text-nowrap">
         <a href="#">inline links</a>
     </OverlayBox>
@@ -351,7 +351,7 @@ With an icon:
 Move the pointer onto the tip to reach interactive content inside it, such as a link. The tooltip
 stays open while the pointer is over the trigger or the tip. It hides when the pointer leaves both,
 or when you press <kbd>Escape</kbd>. This helps satisfy the [WCAG 1.4.13 "Content on Hover or
-Focus"][4] success criterion.
+Focus"][2] success criterion.
 
 <OverlayBox
     title={
@@ -387,7 +387,7 @@ because it makes the overlay impossible to reach with a keyboard.
 Avoid large amounts of content in a tooltip or popover that uses the same `aria-describedby`
 association: assistive technologies announce the entire content as one continuous stream. Popovers
 do not manage keyboard focus order; if you need interactive content, consider using a
-[`Dialog`][2] instead.
+[`Dialog`][3] instead.
 
 ## CSS
 
@@ -395,7 +395,7 @@ do not manage keyboard focus order; if you need interactive content, consider us
 
 Tooltips and popovers use local CSS variables for real-time customization. Override them through
 `overlayClassName` or by targeting `.tooltip` and `.popover` in a scoped style. See the upstream
-[popover CSS][3] and [tooltip CSS][4] for the complete variable and Sass map reference.
+[popover CSS][4] and [tooltip CSS][5] for the complete variable and Sass map reference.
 
 ## Usage
 
@@ -454,6 +454,7 @@ other plugin events.
 </DocumentLayout>
 
 [1]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/OverlayBox.tsx
-[2]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Dialog.tsx
-[3]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/popover.mdx
-[4]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/tooltip.mdx
+[2]: ../../components/placeholder/
+[3]: https://github.com/idea2app/Idea-React/blob/main/source/Extension/Dialog.tsx
+[4]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/popover.mdx
+[5]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/components/tooltip.mdx

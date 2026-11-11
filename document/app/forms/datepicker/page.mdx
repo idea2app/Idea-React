@@ -69,7 +69,7 @@ Use the [form field][3] component to layout and wrap your inputs with a label, d
 
 ### With icon
 
-Use the [form adorn component][4] to add a calendar icon alongside the datepicker input. When the input is inside `FormAdornment`, the calendar automatically positions relative to the wrapper instead of the input.
+Use the [form adorn component][4] to add a calendar icon alongside the datepicker input. When the input is inside [`FormAdornment`][4], the calendar automatically positions relative to the wrapper instead of the input.
 
 <CodeExample>
     <FormLabel htmlFor="datepickerIconStart">Select date</FormLabel>
@@ -381,7 +381,7 @@ Use `datepickerTheme` to set the datepicker popup’s theme independently of the
 | `firstWeekday`            | number                   | `1`         | First day of week (0 = Sunday, 1 = Monday, etc.)                                                                  |
 | `inline`                  | boolean                  | `false`     | Render calendar inline (always visible, no popup).                                                                |
 | `options.locale`          | string                   | `'default'` | Locale for date formatting (e.g., `'en-US'`, `'de-DE'`)                                                           |
-| `options.positionElement` | string, element          | `null`      | Element to position the calendar relative to. Automatically detects `FormAdornment` when present.                 |
+| `options.positionElement` | string, element          | `null`      | Element to position the calendar relative to. Automatically detects [`FormAdornment`][4] when present.            |
 | `selectedDates`           | array                    | `[]`        | Pre-selected dates in `YYYY-MM-DD` format                                                                         |
 | `selectionMode`           | string                   | `'single'`  | Selection mode: `'single'`, `'multiple'`, or `'multiple-ranged'`                                                  |
 | `placement`               | string                   | `'left'`    | Calendar position relative to input: `'left'`, `'center'`, `'right'`, `'auto'`                                    |

@@ -15,30 +15,30 @@ Automatically update Bootstrap navigation or list group components based on scro
 
 ## How it works
 
-`ScrollSpy` marks navigation links as active when the section referenced by their `href` is scrolled into view. It works with `Nav` and `ListGroup`, as well as other in-page links.
+`ScrollSpy` marks navigation links as active when the section referenced by their `href` is scrolled into view. It works with [`Nav`][1] and [`ListGroup`][2], as well as other in-page links.
 
 - To start, scrollspy requires two things: a navigation, list group, or a simple set of links, plus a scrollable container. The scrollable container can be the `<body>` or a custom element with a set `height` and `overflow-y: scroll`.
 
 - Use `ScrollSpy` as the scrollable container and set `target="#navId"`, where `navId` is the unique `id` of the associated navigation. The component supplies a focusable `tabIndex={0}` for keyboard access.
 
-- As you scroll the container, the active state is added to and removed from links in the associated navigation. Links must point to an existing element `id`; for example, `NavLink` with `href="#home"` requires a matching section with `id="home"`.
+- As you scroll the container, the active state is added to and removed from links in the associated navigation. Links must point to an existing element `id`; for example, [`NavLink`][1] with `href="#home"` requires a matching section with `id="home"`.
 
-- Target elements that are not visible will be ignored. See the [Non-visible elements][1] section below.
+- Target elements that are not visible will be ignored. See the [Non-visible elements][3] section below.
 
 - Target `id`s are matched with `getElementById`, so ids containing special or percent-encoded characters (for example `#item.1`, `#section:overview`, or `#%2Fpath`) resolve correctly.
 
 ### Detection
 
-Scrollspy uses an [`IntersectionObserver`][2] to track sections without `scroll-position` polling. Detection is deterministic and driven entirely by an activation line near the top of the scroll container.
+Scrollspy uses an [`IntersectionObserver`][4] to track sections without `scroll-position` polling. Detection is deterministic and driven entirely by an activation line near the top of the scroll container.
 
 - The active section is the deepest one whose top has scrolled past the activation line, like the section you’re currently reading.
 - While scrolling through the gap between two headings, the last activated section stays active until the next one crosses the line.
 - At the very top of the container, before any section crosses the line, the first section stays active.
 - At the very bottom of the container, the last section is activated even if its top never reaches the line (handy for short final sections).
 
-Set where the activation line sits with `topMargin` (a more user-friendly `%` or `px` value from the top of the scroll root, such as `96px` to sit below a stickied navbar), or take full control with the raw IntersectionObserver `rootMargin` string. See [Options][3].
+Set where the activation line sits with `topMargin` (a more user-friendly `%` or `px` value from the top of the scroll root, such as `96px` to sit below a stickied navbar), or take full control with the raw IntersectionObserver `rootMargin` string. See [Options][5].
 
-Jump to the [debug overlay][4] section to visualize the activation line in action.
+Jump to the [debug overlay][6] section to visualize the activation line in action.
 
 ## Examples
 
@@ -286,7 +286,7 @@ Scrollspy also works with nested `.nav`s. If a nested `.nav` is `.active`, its p
 
 ### List group
 
-`ScrollSpy` also works with `ListGroup`. Scroll the area next to the list group and watch the active state change.
+`ScrollSpy` also works with [`ListGroup`][2]. Scroll the area next to the list group and watch the active state change.
 
 <CodeExample>
     <Row>
@@ -357,7 +357,7 @@ Scrollspy also works with nested `.nav`s. If a nested `.nav` is `.active`, its p
 
 ### Simple anchors
 
-`ScrollSpy` is not limited to `Nav` and `ListGroup`; it also works with in-page links. Scroll the area and watch the active state change.
+`ScrollSpy` is not limited to [`Nav`][1] and [`ListGroup`][2]; it also works with in-page links. Scroll the area and watch the active state change.
 
 <CodeExample>
     <Row>
@@ -448,7 +448,7 @@ It can be hard to picture exactly where Scrollspy decides a section is active. E
 - **The red dashed line near the top is the activation line.** A section becomes active as its heading scrolls above this line. In this example it sits at `96px`.
 - **The red bottom zone lights up when you reach the bottom of the container.** This is where the last section stays active even if its heading never reaches the activation line.
 
-Scroll the example and watch the highlighted navigation item change as headings cross the line. Guide positions are computed from the same `topMargin`/`rootMargin` [detection][5] math the component uses.
+Scroll the example and watch the highlighted navigation item change as headings cross the line. Guide positions are computed from the same `topMargin`/`rootMargin` [detection][7] math the component uses.
 
 <CodeExample>
     <Nav id="debug-scrollspy-nav" variant="pills">
@@ -507,8 +507,10 @@ Use `onActiveChange(id)` to respond when a different section becomes active.
 
 </DocumentLayout>
 
-[1]: #non-visible-elements
-[2]: https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver
-[3]: #options
-[4]: #debug-overlay
-[5]: #detection
+[1]: ../nav/
+[2]: ../list-group/
+[3]: #non-visible-elements
+[4]: https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver
+[5]: #options
+[6]: #debug-overlay
+[7]: #detection

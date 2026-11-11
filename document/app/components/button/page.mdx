@@ -444,7 +444,7 @@ breakpoint. Resize your browser to see the layout change.
     </div>
 </CodeExample>
 
-Use a `Col` with `xs={6}` to constrain the button stack to half the available width, and center it
+Use a [`Col`][1] with `xs={6}` to constrain the button stack to half the available width, and center it
 with margin utilities passed through `className`.
 
 <CodeExample>
@@ -477,9 +477,9 @@ Additional utilities can be used to adjust the alignment of buttons when horizon
 
 ## Toggle buttons
 
-Use `ToggleButton` to create button-like checkboxes and radio buttons. It provides the button appearance and interaction behavior, and can be grouped in a [button group][1].
+Use `ToggleButton` to create button-like checkboxes and radio buttons. It provides the button appearance and interaction behavior, and can be grouped in a [button group][2].
 
-> Visually, these toggle buttons are identical to our [active-state buttons][2], but are conveyed differently by assistive technologies. Checkbox toggles will be announced by screen readers as "checked"/"not checked" as they are checkboxes under the hood. Active-state buttons are announced as "button"/"button pressed". It’s up to you to decide which approach makes more sense for your use case.
+> Visually, these toggle buttons are identical to our [active-state buttons][3], but are conveyed differently by assistive technologies. [Checkbox][4] toggles will be announced by screen readers as "checked"/"not checked" as they are checkboxes under the hood. Active-state buttons are announced as "button"/"button pressed". It’s up to you to decide which approach makes more sense for your use case.
 
 ### Checkboxes
 
@@ -620,5 +620,7 @@ Link buttons use local CSS variables.
 
 </DocumentLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/components/button-group/
-[2]: #active-state
+[1]: ../../layout/grid/
+[2]: https://getbootstrap.com/docs/6.0/components/button-group/
+[3]: #active-state
+[4]: ../../forms/checkbox/

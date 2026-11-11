@@ -228,11 +228,11 @@ And for selects:
 
 ## Form text
 
-`FormText` is inline by default; set `block` for descriptions that belong on their own line.
+[`FormText`][2] is inline by default; set `block` for descriptions that belong on their own line.
 
-> Form text should be explicitly associated with the form control it relates to using the `aria-describedby` attribute. This will ensure that assistive technologies—such as screen readers—will announce this form text when the user focuses or enters the control.
+> [Form][2] text should be explicitly associated with the form control it relates to using the `aria-describedby` attribute. This will ensure that assistive technologies—such as screen readers—will announce this form text when the user focuses or enters the control.
 
-`FormText` adds top spacing when rendered as a block, keeping descriptions separated from the controls above.
+[`FormText`][2] adds top spacing when rendered as a block, keeping descriptions separated from the controls above.
 
 <CodeExample>
     <FormLabel htmlFor="inputPassword5">Password</FormLabel>
@@ -243,7 +243,7 @@ And for selects:
     </FormText>
 </CodeExample>
 
-`FormText` renders as a `<small>` element by default. Use its `as` prop to choose another inline element when needed.
+[`FormText`][2] renders as a `<small>` element by default. Use its `as` prop to choose another inline element when needed.
 
 <CodeExample>
     <Row className="g-3 align-items-center">
@@ -383,7 +383,7 @@ props or styling are shown below.
 ### Date & Time
 
 Date and time inputs need no additional component-specific props. Their exact functionality and
-appearance depend on the browser and operating system. You can also use [our datepicker component][2]
+appearance depend on the browser and operating system. You can also use [our datepicker component][3]
 for a more consistent experience across browsers with JavaScript.
 
 <CodeExample>
@@ -460,7 +460,7 @@ Sizes are also supported:
 
 Datalists allow you to create a group of `<option>`s that can be accessed (and autocompleted) from within an `<input>`. These are similar to `<select>` elements, but come with more menu styling limitations and differences. While most browsers and operating systems include some support for `<datalist>` elements, their styling is inconsistent at best.
 
-Learn more about [support for datalist elements][3].
+Learn more about [support for datalist elements][4].
 
 <CodeExample>
     <FormLabel htmlFor="exampleDataList">Datalist example</FormLabel>
@@ -524,9 +524,9 @@ File inputs use the `::file-selector-button` pseudo-element to style the button 
 
 ### Ghost
 
-`FormGhost` removes the input's default styling when a surrounding component handles spacing, borders, and focus states. Use it for composites such as search bars and command inputs.
+[`FormGhost`][5] removes the input's default styling when a surrounding component handles spacing, borders, and focus states. Use it for composites such as search bars and command inputs.
 
-Because `FormGhost` removes the input's focus outline, make sure its surrounding component provides a visible focus indicator, such as with `:focus-within`.
+Because [`FormGhost`][5] removes the input's focus outline, make sure its surrounding component provides a visible focus indicator, such as with `:focus-within`.
 
 <CodeExample>
     <FormField>
@@ -543,7 +543,7 @@ Because `FormGhost` removes the input's focus outline, make sure its surrounding
     </FormField>
 </CodeExample>
 
-You can also use the [form-adorn component][4] to provide prebuilt styles for your ghost input.
+You can also use the [form-adorn component][5] to provide prebuilt styles for your ghost input.
 
 ## CSS
 
@@ -580,7 +580,7 @@ Optional custom properties shown as `initial` are unset in the published CSS.
 }
 ```
 
-For `FormLabel`:
+For [`FormLabel`][2]:
 
 ```css
 .example {
@@ -592,7 +592,7 @@ For `FormLabel`:
 }
 ```
 
-For `FormText`:
+For [`FormText`][2]:
 
 ```css
 .example {
@@ -655,6 +655,7 @@ Some inputs and buttons share some root variables for consistency across all for
 </DocumentLayout>
 
 [1]: ../field/
-[2]: ../datepicker/
-[3]: https://caniuse.com/datalist
-[4]: ../form-adorn/
+[2]: ../
+[3]: ../datepicker/
+[4]: https://caniuse.com/datalist
+[5]: ../form-adorn/

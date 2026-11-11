@@ -24,20 +24,20 @@ Give your forms some structure—from inline to horizontal to custom grid implem
 
 ## Forms
 
-Every group of form fields should reside in a `Form` element. `Form` preserves native browser form behavior and passes standard form attributes through.
+Every group of form fields should reside in a [`Form`][1] element. [`Form`][1] preserves native browser form behavior and passes standard form attributes through.
 
-- New to browser forms? Consider reviewing [the MDN form docs][1] for an overview and complete list of available attributes.
-- `Button` components inside a `Form` default to `type="button"`, so set `type="submit"` explicitly on submit buttons.
+- New to browser forms? Consider reviewing [the MDN form docs][2] for an overview and complete list of available attributes.
+- [`Button`][3] components inside a [`Form`][1] default to `type="button"`, so set `type="submit"` explicitly on submit buttons.
 
 The form control wrappers fill their available width, so fields stack vertically by default. Use spacing and grid utilities through the layout components' `className` props to vary this layout.
 
 ## Utilities
 
-Margin utilities are the easiest way to add structure to forms. Pass them through `FormField`'s
+Margin utilities are the easiest way to add structure to forms. Pass them through [`FormField`][4]'s
 `className` to space labels, controls, optional form text, and validation feedback. Use a single
 direction throughout the form for consistency.
 
-Use semantic elements such as `fieldset` where appropriate; the `Form` wrapper can also render as a different element with its `as` prop.
+Use semantic elements such as `fieldset` where appropriate; the [`Form`][1] wrapper can also render as a different element with its `as` prop.
 
 <CodeExample>
     <FormField className="mb-3">
@@ -60,8 +60,8 @@ Use semantic elements such as `fieldset` where appropriate; the `Form` wrapper c
 
 ## Form grid
 
-Use `Row` and `Col` for form layouts that require multiple columns, varied widths, and additional
-alignment options. Set responsive column spans with the `Col` breakpoint props.
+Use [`Row`][5] and [`Col`][5] for form layouts that require multiple columns, varied widths, and additional
+alignment options. Set responsive column spans with the [`Col`][5] breakpoint props.
 
 <CodeExample>
     <Row>
@@ -76,7 +76,7 @@ alignment options. Set responsive column spans with the `Col` breakpoint props.
 
 ## Gutters
 
-Set gutter utilities through `Row`'s `className` to control spacing between columns in both
+Set gutter utilities through [`Row`][5]'s `className` to control spacing between columns in both
 directions.
 
 <CodeExample>
@@ -143,9 +143,9 @@ More complex layouts can also be created with the grid system.
 
 ## Horizontal form
 
-Create horizontal forms with the `Row` and `Col` layout components. Set the column breakpoint props (such as `sm={2}`) to size labels and controls, and use the `column` prop on `FormLabel` or `FormLegend` to align the label with its control.
+Create horizontal forms with the [`Row`][5] and [`Col`][5] layout components. Set the column breakpoint props (such as `sm={2}`) to size labels and controls, and use the `column` prop on [`FormLabel`][4] or [`FormLegend`][4] to align the label with its control.
 
-Use margin or padding utilities through `className` on `Row`, `Col`, or `FormLabel` to adjust
+Use margin or padding utilities through `className` on [`Row`][5], [`Col`][5], or [`FormLabel`][4] to adjust
 alignment. For example, removing top padding from a stacked radio label can better align its text
 baseline.
 
@@ -217,7 +217,7 @@ baseline.
 
 ### Horizontal form label sizing
 
-Set `controlSize` on `FormLabel` or `FormLegend` to match the `controlSize` of the associated form control.
+Set `controlSize` on [`FormLabel`][4] or [`FormLegend`][4] to match the `controlSize` of the associated form control.
 
 <CodeExample>
     <Row className="mb-3">
@@ -258,7 +258,7 @@ Set `controlSize` on `FormLabel` or `FormLegend` to match the `controlSize` of t
 
 ## Column sizing
 
-Place any number of `Col` components in a `Row` to split the available width equally. Set a
+Place any number of [`Col`][5] components in a [`Row`][5] to split the available width equally. Set a
 breakpoint prop such as `sm={7}` to size one column while the remaining columns share the rest.
 
 <CodeExample>
@@ -277,7 +277,7 @@ breakpoint prop such as `sm={7}` to size one column while the remaining columns 
 
 ## Auto-sizing
 
-The example below passes a flexbox alignment utility through `Row`'s `className` and sets the `Col`
+The example below passes a flexbox alignment utility through [`Row`][5]'s `className` and sets the [`Col`][5]
 component's `xs` prop to `"auto"`, so each column takes only as much space as its contents need.
 
 <CodeExample>
@@ -324,7 +324,7 @@ component's `xs` prop to `"auto"`, so each column takes only as much space as it
     </Row>
 </CodeExample>
 
-You can then combine responsive `Col` props to adjust the layout at multiple breakpoints.
+You can then combine responsive [`Col`][5] props to adjust the layout at multiple breakpoints.
 
 <CodeExample>
     <Row as={Form} className="gx-3 gy-2 align-items-center">
@@ -376,8 +376,8 @@ You can then combine responsive `Col` props to adjust the layout at multiple bre
 
 ## Inline forms
 
-Use responsive `Col` props to create horizontal layouts. Add gutter and alignment utilities through
-`Row`'s `className`; on narrow viewports, set `xs={12}` on each `Col` to stack the controls.
+Use responsive [`Col`][5] props to create horizontal layouts. Add gutter and alignment utilities through
+[`Row`][5]'s `className`; on narrow viewports, set `xs={12}` on each [`Col`][5] to stack the controls.
 
 <CodeExample>
     <Row as={Form} lg="auto" className="g-3 align-items-center">
@@ -419,4 +419,8 @@ Use responsive `Col` props to create horizontal layouts. Add gutter and alignmen
 
 </DocumentLayout>
 
-[1]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form
+[1]: ../
+[2]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form
+[3]: ../../components/button/
+[4]: ../field/
+[5]: ../../layout/grid/

@@ -190,7 +190,7 @@ The collapse transition is controlled by CSS custom properties:
 
 ### Styling
 
-`Collapse` shares its transition styles with `Accordion`. The `horizontal` prop changes the animated axis to inline size; the component applies its visibility state automatically.
+`Collapse` shares its transition styles with [`Accordion`][5]. The `horizontal` prop changes the animated axis to inline size; the component applies its visibility state automatically.
 
 ## Usage
 
@@ -206,7 +206,7 @@ and cleanup are automatic.
 | `horizontal`  | boolean | `false` | Animate inline size rather than block size.                                            |
 | `parent`      | string  | —       | Parent selector for accordion-like behavior: opening one collapse closes its siblings. |
 
-Set `parent` on the collapsible area, not on its trigger. For native details-based disclosure groups, see [Accordion][5].
+Set `parent` on the collapsible area, not on its trigger. For native details-based disclosure groups, see [Accordion][6].
 
 ### Events
 
@@ -218,4 +218,5 @@ Use `onOpenChange(open)` to respond to visibility changes, or to update the stat
 [2]: https://getbootstrap.com/docs/6.0/customize/transitions
 [3]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion
 [4]: https://www.w3.org/WAI/ARIA/apg/patterns/accordion/
-[5]: /components/accordion
+[5]: ../accordion/
+[6]: /components/accordion

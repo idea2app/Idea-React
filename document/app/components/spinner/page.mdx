@@ -11,13 +11,13 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 Use `Spinner` to indicate a component or page loading state. It is styled with CSS and requires no JavaScript.
 
 `Spinner` accepts `animation="border"` or `"grow"`, `size="sm"`, and native element attributes.
-`SpinnerIcon` applies the rotation animation to an `Icon` from the icon font.
+`SpinnerIcon` applies the rotation animation to an [`Icon`][1] from the icon font.
 
 `Spinner` visibility can be controlled by rendering it conditionally. Customize its color with `className`, alignment with layout utilities, and size with its `size` prop.
 
 For accessibility, provide an accessible name such as `aria-label="Loading"` when `Spinner` uses `role="status"`.
 
-> The animation effect depends on the `prefers-reduced-motion` media query. See the [reduced motion section of our accessibility documentation][1].
+> The animation effect depends on the `prefers-reduced-motion` media query. See the [reduced motion section of our accessibility documentation][2].
 
 ## Border spinner
 
@@ -86,7 +86,7 @@ Or, use custom CSS or inline styles to change the dimensions as needed.
 
 ## Custom spinners
 
-Use `SpinnerIcon` to apply the rotation animation to an `Icon`.
+Use `SpinnerIcon` to apply the rotation animation to an [`Icon`][1].
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -127,4 +127,5 @@ Used for creating the CSS animations for our spinners. The border spinner rotate
 
 </DocumentLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion
+[1]: ../../extensions/icon/
+[2]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion

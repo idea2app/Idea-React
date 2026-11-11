@@ -1,14 +1,17 @@
-import './style.less';
 import { Fragment } from 'react';
+
 import { Button } from '../../../../source/Base/Button';
 import { Carousel, CarouselSlide } from '../../../../source/Base/Carousel';
 import { NavItem, NavLink } from '../../../../source/Base/Nav';
 import { NavbarNav } from '../../../../source/Base/Navbar';
 import { FormControl } from '../../../../source/Form';
 import { Col, Container, Row } from '../../../../source/Layout/Grid';
+
 import { BaseLayout } from '../../../component/Document/BaseLayout';
 import { NavbarDemo } from '../../../component/Document/NavbarDemo';
 import { Placeholder as ExamplePlaceholder } from '../../../component/Examples/Placeholder';
+import './style.less';
+
 export const carouselNavItems = [
     { label: 'Home', active: true },
     { label: 'Link' },

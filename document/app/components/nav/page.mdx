@@ -366,11 +366,11 @@ If you need responsive nav variations, consider using a series of [flexbox utili
 
 `Nav` renders a `<nav>` landmark by default. When rendering it as another element with `as`, provide an appropriate navigation landmark; do not assign the landmark role to a list.
 
-`Nav` with `variant="tabs"` is still navigation and should **not** be given tab roles. Use `Tabs` for a dynamic tabbed interface, as described in the [ARIA Authoring Practices Guide tabs pattern][3]. `Tabs` manages the selected state and required ARIA attributes.
+`Nav` with `variant="tabs"` is still navigation and should **not** be given tab roles. Use [`Tabs`][3] for a dynamic tabbed interface, as described in the [ARIA Authoring Practices Guide tabs pattern][4]. [`Tabs`][3] manages the selected state and required ARIA attributes.
 
 ## Using menus
 
-Add menus with the [Menu component][4].
+Add menus with the [Menu component][5].
 
 ### Tabs with menus
 
@@ -500,7 +500,8 @@ When `variant="underline"` is set:
 
 </DocumentLayout>
 
-[1]: /components/tab#javascript-behavior
+[1]: ../tab/
 [2]: https://getbootstrap.com/docs/6.0/utilities/flex
-[3]: https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/
-[4]: /components/menu#usage
+[3]: /components/tab#javascript-behavior
+[4]: https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/
+[5]: /components/menu#usage

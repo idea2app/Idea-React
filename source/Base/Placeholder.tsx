@@ -26,45 +26,31 @@ export const Placeholder = polymorphic<PlaceholderProps>(
         <Root
             {...props}
             className={classNames(
-                'placeholder',
-                size && `placeholder-${size}`,
-                animation && `placeholder-${animation}`,
-                theme && `bg-${theme}`,
+                animation ? `placeholder-${animation}` : 'placeholder',
+                !animation && size && `placeholder-${size}`,
+                !animation && theme && `bg-${theme}`,
                 className
             )}
-            style={{ width, ...style }}
+            style={{ width: animation ? undefined : width, ...style }}
             aria-hidden={hidden}
         />
     )
 );
 Placeholder.displayName = 'Placeholder';
 
-export interface PlaceholderAnimationProps extends ComponentPropsWithRef<'div'> {
-    animation?: PlaceholderProps['animation'];
-}
-
-export const PlaceholderAnimation = polymorphic<PlaceholderAnimationProps>(
-    ({ as: Root = 'div', animation = 'wave', className, ...props }) => (
-        <Root
-            {...props}
-            className={classNames(`placeholder-${animation}`, className)}
-            aria-hidden="true"
-        />
-    )
-);
-PlaceholderAnimation.displayName = 'PlaceholderAnimation';
-
 export type PlaceholderButtonProps = ButtonProps;
 
 export const PlaceholderButton = polymorphic<PlaceholderButtonProps>(
-    ({ as: RootAs, className, ...props }) => (
+    ({ as: RootAs, className, children = '\u00a0', ...props }) => (
         <Button
             as={RootAs}
             {...props}
             className={classNames('placeholder', className)}
             aria-hidden="true"
             disabled
-        />
+        >
+            {children}
+        </Button>
     )
 );
 PlaceholderButton.displayName = 'PlaceholderButton';

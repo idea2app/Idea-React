@@ -27,7 +27,7 @@ Click the button below to show and close a popover.
     </OverlayBox>
 </CodeExample>
 
-Things to know when using popovers with `OverlayBox`:
+Things to know when using popovers with [`OverlayBox`][1]:
 
 - Provide meaningful `title` and `detail` content; use `detail` for the popover body.
 - Specify `container="body"` to avoid rendering problems in more complex components (like our input groups, button groups, etc).
@@ -36,7 +36,7 @@ Things to know when using popovers with `OverlayBox`:
 - When triggered from links whose text wraps across multiple lines, popovers will be centered
   between the links' overall width. Apply `white-space: nowrap` to the link's styles to avoid this
   behavior.
-- Unmount `OverlayBox` together with its trigger so the popover and positioning listeners are cleaned up.
+- Unmount [`OverlayBox`][1] together with its trigger so the popover and positioning listeners are cleaned up.
 - Popovers can be triggered thanks to an element inside a shadow DOM.
 
 Pass rich content as React nodes instead of injecting untrusted HTML. React escapes text content by default.
@@ -49,9 +49,9 @@ Keep reading to see how popovers work with some examples.
 
 ### Live demo
 
-Titles are set via `title` and body content is set via `detail` on `OverlayBox`.
+Titles are set via `title` and body content is set via `detail` on [`OverlayBox`][1].
 
-Use the `title` prop on `OverlayBox`, rather than the native `title` attribute on the trigger, to avoid duplicate browser tooltips.
+Use the `title` prop on [`OverlayBox`][1], rather than the native `title` attribute on the trigger, to avoid duplicate browser tooltips.
 
 <CodeExample>
     <OverlayBox
@@ -164,7 +164,7 @@ When you have some styles on a parent element that interfere with a popover, you
     </OverlayBox>
 </CodeExample>
 
-Another situation where you’ll want to set an explicit custom `container` are popovers inside a [dialog][1], to make sure that the popover itself is appended to the dialog. This is particularly important for popovers that contain interactive elements – dialogs will trap focus, so unless the popover is a child element of the dialog, users won’t be able to focus or activate these interactive elements.
+Another situation where you’ll want to set an explicit custom `container` are popovers inside a [dialog][2], to make sure that the popover itself is appended to the dialog. This is particularly important for popovers that contain interactive elements – dialogs will trap focus, so unless the popover is a child element of the dialog, users won’t be able to focus or activate these interactive elements.
 
 <CodeExample source="document/component/Document/DialogDemo.tsx">
     <DialogDemo id="popoverContainerDialog" label="Popover inside dialog" title="Popover container">
@@ -183,7 +183,7 @@ Another situation where you’ll want to set an explicit custom `container` are 
 
 ### Custom popovers
 
-You can customize the appearance of popovers using [CSS variables][2]. We pass a CSS module class through `overlayClassName` to scope our custom appearance and use it to override some of the local CSS variables.
+You can customize the appearance of popovers using [CSS variables][3]. We pass a CSS module class through `overlayClassName` to scope our custom appearance and use it to override some of the local CSS variables.
 
 <CodeExample>
     <OverlayBox
@@ -204,7 +204,7 @@ You can customize the appearance of popovers using [CSS variables][2]. We pass a
 Use the `focus` trigger to dismiss popovers on the user’s next click of an element other than the toggle element.
 **Clicks and focus inside the popover itself do not dismiss it**, so users can select text or use controls in the content.
 
-**Dismissing on next click requires specific HTML for proper cross-browser and cross-platform behavior.** For an anchor trigger, include a [`tabindex`][3].
+**Dismissing on next click requires specific HTML for proper cross-browser and cross-platform behavior.** For an anchor trigger, include a [`tabindex`][4].
 
 <CodeExample>
     <OverlayBox
@@ -224,7 +224,7 @@ A shown popover can also be dismissed by pressing the <kbd>Escape</kbd> key. As 
 
 Disabled controls are not interactive, so users cannot hover or click them to trigger a popover. As
 a workaround, place the control inside a keyboard-focusable wrapper and use that wrapper as the
-`OverlayBox` trigger.
+[`OverlayBox`][1] trigger.
 
 For disabled popover triggers, you may also prefer `trigger={["hover", "focus"]}` so that the popover appears as immediate visual feedback to your users as they may not expect to _click_ on a disabled element.
 
@@ -242,7 +242,7 @@ For disabled popover triggers, you may also prefer `trigger={["hover", "focus"]}
 
 ### Variables
 
-Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][4].
+Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][5].
 
 | Variable                           | Default                                             |
 | ---------------------------------- | --------------------------------------------------- |
@@ -280,23 +280,24 @@ Popovers do not manage keyboard focus order, and their placement can be random i
 
 ### Options
 
-| `OverlayBox` prop     | Default           | Description                                                                                                |
-| --------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------- |
-| `title`               | required          | Popover heading as a React node.                                                                           |
-| `detail`              | —                 | Popover body as a React node. Without it, `OverlayBox` renders a tooltip.                                  |
-| `trigger`             | hover and focus   | Use `"click"` for the click-to-toggle examples, `"focus"` to dismiss on blur, or an array of triggers.     |
-| `placement`           | `"top"`           | Preferred direction: `top`, `right`, `bottom`, or `left`.                                                  |
-| `responsivePlacement` | —                 | Override direction at named breakpoints.                                                                   |
-| `container`           | alongside trigger | A selector, DOM element, or callback returning an element. Keep dialog overlays in the dialog’s top layer. |
-| `delay`               | `0`               | Show/hide delay in milliseconds, or `{ show: 500, hide: 100 }`.                                            |
-| `offset`              | `12`              | Distance from the trigger, or a `[crossAxis, mainAxis]` pair.                                              |
-| `padding`             | `8`               | Viewport inset for overflow avoidance.                                                                     |
-| `flip`                | `true`            | Flip direction when space is constrained.                                                                  |
-| `overlayClassName`    | —                 | Apply a CSS module class to the popover.                                                                   |
+| [`OverlayBox`][1] prop | Default           | Description                                                                                                |
+| ---------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------- |
+| `title`                | required          | Popover heading as a React node.                                                                           |
+| `detail`               | —                 | Popover body as a React node. Without it, [`OverlayBox`][1] renders a tooltip.                             |
+| `trigger`              | hover and focus   | Use `"click"` for the click-to-toggle examples, `"focus"` to dismiss on blur, or an array of triggers.     |
+| `placement`            | `"top"`           | Preferred direction: `top`, `right`, `bottom`, or `left`.                                                  |
+| `responsivePlacement`  | —                 | Override direction at named breakpoints.                                                                   |
+| `container`            | alongside trigger | A selector, DOM element, or callback returning an element. Keep dialog overlays in the dialog’s top layer. |
+| `delay`                | `0`               | Show/hide delay in milliseconds, or `{ show: 500, hide: 100 }`.                                            |
+| `offset`               | `12`              | Distance from the trigger, or a `[crossAxis, mainAxis]` pair.                                              |
+| `padding`              | `8`               | Viewport inset for overflow avoidance.                                                                     |
+| `flip`                 | `true`            | Flip direction when space is constrained.                                                                  |
+| `overlayClassName`     | —                 | Apply a CSS module class to the popover.                                                                   |
 
 </DocumentLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/components/dialog/
-[2]: #variables
-[3]: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
-[4]: https://getbootstrap.com/docs/6.0/components/popover/#variables
+[1]: ../../extensions/overlay-box/
+[2]: https://getbootstrap.com/docs/6.0/components/dialog/
+[3]: #variables
+[4]: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
+[5]: https://getbootstrap.com/docs/6.0/components/popover/#variables

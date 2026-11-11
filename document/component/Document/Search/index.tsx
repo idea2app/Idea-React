@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { ChangeEvent, Component, createRef } from 'react';
 
 import { Button } from '../../../../source/Base/Button';
+import { CloseButton } from '../../../../source/Base/CloseButton';
 import {
     MenuItem,
     MenuItemContent,
@@ -11,7 +12,7 @@ import {
     MenuPanel
 } from '../../../../source/Base/Menu';
 import { NativeDialog } from '../../../../source/Base/NativeDialog';
-import { Placeholder, PlaceholderAnimation } from '../../../../source/Base/Placeholder';
+import { Placeholder } from '../../../../source/Base/Placeholder';
 import { Icon } from '../../../../source/Extension/Icon';
 import { FormAdornment, FormAdornmentIcon, FormGhost } from '../../../../source/Form';
 import { DocumentSearchModel } from './model';
@@ -71,9 +72,7 @@ export class DocumentSearch extends Component<DocumentSearchProps> {
                         onChange={this.handleSearch}
                     />
                 </FormAdornment>
-                <Button icon variant="text" aria-label="Close search" onClick={this.close}>
-                    <Icon name="x-lg" />
-                </Button>
+                <CloseButton aria-label="Close search" onClick={this.close} />
             </header>
         );
     }
@@ -84,12 +83,12 @@ export class DocumentSearch extends Component<DocumentSearchProps> {
         return loading ? (
             <div className="my-5" role="status">
                 <p className="mb-4">Loading search index...</p>
-                <PlaceholderAnimation animation="wave" className="d-grid gap-3">
+                <Placeholder as="div" animation="wave" className="d-grid gap-3">
                     <Placeholder as="div" className="w-100" />
                     <Placeholder as="div" className="w-75" />
                     <Placeholder as="div" className="w-100" />
                     <Placeholder as="div" className="w-50" />
-                </PlaceholderAnimation>
+                </Placeholder>
             </div>
         ) : (
             <>

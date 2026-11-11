@@ -560,7 +560,7 @@ Local CSS custom properties expose spacing, colors, sizing, and transitions for 
 | `--bs-carousel-fade-duration`              | `0.6s`                            |
 | `--bs-carousel-fade-timing`                | `ease`                            |
 
-The React controls use `Icon` with Bootstrap Icons rather than Bootstrap’s CSS-mask glyphs. The active countdown sets `--bs-carousel-interval` to the current slide’s interval in milliseconds.
+The React controls use [`Icon`][9] with Bootstrap Icons rather than Bootstrap’s CSS-mask glyphs. The active countdown sets `--bs-carousel-interval` to the current slide’s interval in milliseconds.
 
 ## Usage
 
@@ -576,8 +576,8 @@ Use props to control the carousel rather than Bootstrap’s data-attribute plugi
 | `playPause`          | Render an accessible play/pause control.                                             |
 | `controlsPlacement`  | Put the controls at the top, bottom, or over the slides.                             |
 | `controlsStart`      | Content to display at the start of the controls row.                                 |
-| `controlsClassName`  | Utility class names or a CSS Module for the non-overlay controls row.                |
-| `innerClassName`     | Utility class names or a CSS Module for the scroll viewport.                         |
+| `controlsClassName`  | Bootstrap utilities or a CSS module for the non-overlay controls row.                |
+| `innerClassName`     | Bootstrap utilities or a CSS module for the scroll viewport.                         |
 | `indicatorPlacement` | Position indicators before, after, or between the previous/next buttons.             |
 
 ### Via React
@@ -595,7 +595,7 @@ import { Carousel, CarouselSlide } from 'idea-react';
 
 ### Dependencies
 
-Load Bootstrap CSS and Bootstrap Icons alongside Idea React. The component manages its own state and scrolling and does not require Bootstrap’s JavaScript plugin. Follow the [installation guide][9].
+Load Bootstrap CSS and Bootstrap Icons alongside Idea React. The component manages its own state and scrolling and does not require Bootstrap’s JavaScript plugin. Follow the [installation guide][10].
 
 ### Options
 
@@ -666,4 +666,5 @@ The component disposes its model and scroll animation when unmounted; do not use
 [6]: https://www.w3.org/TR/WCAG/#pause-stop-hide
 [7]: #individual-intervals
 [8]: https://getbootstrap.com/docs/6.0/components/carousel/#variables
-[9]: /guides/install/
+[9]: ../../extensions/icon/
+[10]: /guides/install/

@@ -101,7 +101,7 @@ Set the `theme` prop to apply a theme color to the toast. Use theme color utilit
 ### Custom content
 
 Customize your toasts by removing sub-components, adding your own content, or passing utility class
-names through `className`. For example, render `Icon` for a hide control and use flexbox utilities
+names through `className`. For example, render [`Icon`][1] for a hide control and use flexbox utilities
 to adjust the layout.
 
 <CodeExample>
@@ -152,7 +152,7 @@ vertically.
 
 ## Accessibility
 
-Toasts are intended to be small interruptions to your visitors or users, so to help those with screen readers and similar assistive technologies, you should wrap your toasts in an [`aria-live` region][1]. Changes to live regions (such as injecting/updating a toast component) are automatically announced by screen readers without needing to move the user’s focus or otherwise interrupt the user. Additionally, include `aria-atomic="true"` to ensure that the entire toast is always announced as a single (atomic) unit, rather than just announcing what was changed (which could lead to problems if you only update part of the toast’s content, or if displaying the same toast content at a later point in time). If the information needed is important for the process, e.g. for a list of errors in a form, then use the [alert component][2] instead of toast.
+Toasts are intended to be small interruptions to your visitors or users, so to help those with screen readers and similar assistive technologies, you should wrap your toasts in an [`aria-live` region][2]. Changes to live regions (such as injecting/updating a toast component) are automatically announced by screen readers without needing to move the user’s focus or otherwise interrupt the user. Additionally, include `aria-atomic="true"` to ensure that the entire toast is always announced as a single (atomic) unit, rather than just announcing what was changed (which could lead to problems if you only update part of the toast’s content, or if displaying the same toast content at a later point in time). If the information needed is important for the process, e.g. for a list of errors in a form, then use the [alert component][3] instead of toast.
 
 Note that the live region needs to be present in the markup _before_ the toast is generated or updated. If you dynamically generate both at the same time and inject them into the page, they will generally not be announced by assistive technologies.
 
@@ -164,7 +164,7 @@ You also need to adapt the `role` and `aria-live` level depending on the content
     </ToastContainer>
 </CodeExample>
 
-As the content you’re displaying changes, be sure to update the [`delay` timeout][3] so that users have enough time to read the toast.
+As the content you’re displaying changes, be sure to update the [`delay` timeout][4] so that users have enough time to read the toast.
 
 When using `delay: 0`, you must add a close button to allow users to dismiss the toast.
 
@@ -176,13 +176,13 @@ When using `delay: 0`, you must add a close button to allow users to dismiss the
     />
 </CodeExample>
 
-While technically it’s possible to add focusable/actionable controls (such as additional buttons or links) in your toast, you should avoid doing this for autohiding toasts. Even if you give the toast a long [`delay` timeout][3], keyboard and assistive technology users may find it difficult to reach the toast in time to take action (since toasts don’t receive focus when they are displayed). If you absolutely must have further controls, we recommend using a toast with `delay: 0`.
+While technically it’s possible to add focusable/actionable controls (such as additional buttons or links) in your toast, you should avoid doing this for autohiding toasts. Even if you give the toast a long [`delay` timeout][4], keyboard and assistive technology users may find it difficult to reach the toast in time to take action (since toasts don’t receive focus when they are displayed). If you absolutely must have further controls, we recommend using a toast with `delay: 0`.
 
 ## CSS
 
 ### Variables
 
-Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][4].
+Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][5].
 
 | Variable                         | Default                              |
 | -------------------------------- | ------------------------------------ |
@@ -226,7 +226,8 @@ Create a `Toast` model and mount its `Component` to establish the live region be
 
 </DocumentLayout>
 
-[1]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions
-[2]: https://getbootstrap.com/docs/6.0/components/alerts/
-[3]: #accessibility
-[4]: https://getbootstrap.com/docs/6.0/components/toasts/#variables
+[1]: ../../extensions/icon/
+[2]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions
+[3]: https://getbootstrap.com/docs/6.0/components/alerts/
+[4]: #accessibility
+[5]: https://getbootstrap.com/docs/6.0/components/toasts/#variables

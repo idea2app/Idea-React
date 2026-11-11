@@ -11,8 +11,10 @@ plugins) with Bootstrap.
 
 Idea React provides the [`Table` wrapper][1] for these examples. Use the `striped`,
 `stripedColumns`, `hover`, `bordered`, `borderless`, and `small` props for the corresponding
-variants, and `responsive` to wrap the table. Pass a breakpoint to use the responsive variant, for
-example `responsive="md"`.
+variants; `card` adds the card wrapper, while `responsive` adds a responsive wrapper. Set
+`verticalAlign`, `captionTop`, and `stacked` to apply the corresponding table styles. Pass a
+breakpoint to `responsive` or `stacked` to apply its style responsively, for example
+`responsive="md"`.
 
 The `as` prop replaces the table root, or the outer wrapper when `responsive` is enabled.
 With an explicit `as`, additional props, `className`, and the ref are forwarded to that root;
@@ -464,44 +466,41 @@ utility through `Table`'s `className` to remove its bottom margin.
     </Table>
 </div>
 
-### With the `table-card` class
+### With a card wrapper
 
-Apply `table-card` through the wrapper's `className` for the same look. It rounds corners like a
-card, clips cell backgrounds, and
-removes the last row's bottom border so it does not stack on the wrapper.
+Set `card` on `Table` to add a wrapper that rounds corners like a card, clips cell backgrounds,
+and removes the last row's bottom border so it does not stack on the wrapper.
 
-<div className="table-card">
-    <Table hover>
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>John</td>
-                <td>Doe</td>
-                <td>@social</td>
-            </tr>
-        </tbody>
-    </Table>
-</div>
+<Table card hover>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+        </tr>
+    </tbody>
+</Table>
 
 ## Small tables
 
@@ -577,10 +576,11 @@ groups. Customize its color with the `border-top-color` style.
 ## Vertical alignment
 
 Header cells are vertically aligned to the bottom. Body cells inherit their alignment from the
-table and are aligned to the top by default. Use vertical-alignment utilities through `className`
-where needed.
+table and are aligned to the top by default. Set `verticalAlign` on `Table` to control body cell
+alignment; vertical-alignment utility classes can still be passed through `className` on individual
+rows or cells.
 
-<Table responsive className="align-middle">
+<Table responsive verticalAlign="middle">
     <thead>
         <tr>
             <th scope="col" className="w-25">
@@ -792,9 +792,9 @@ table and understand what it's about and decide if they want to read it.
     </tbody>
 </Table>
 
-Pass `className="caption-top"` to `Table` to place its caption above the table.
+Set the `captionTop` prop on `Table` to place its caption above the table.
 
-<Table className="caption-top">
+<Table captionTop>
     <caption>List of users</caption>
     <thead>
         <tr>
@@ -828,16 +828,15 @@ Pass `className="caption-top"` to `Table` to place its caption above the table.
 
 ## Stacked tables
 
-Pass `className="table-stacked"` to `Table` to convert its rows into stacked blocks when space is
-limited. Each row becomes a vertical block with the first cell acting as a bold title and the
-remaining cells displayed as label–value pairs. Labels are generated from `data-cell` attributes
-on each cell.
+Set `stacked` on `Table` to convert its rows into stacked blocks when space is limited. Each
+row becomes a vertical block with the first cell acting as a bold title and the remaining cells
+displayed as label–value pairs. Labels are generated from `data-cell` attributes on each cell.
 
 The `responsive` prop provides the container query required for responsive stacking. Pass
-`className="md:table-stacked"` or another breakpoint variant to stack only below a specific
-container width. Without a breakpoint, the rows are always stacked.
+`stacked="md"` or another breakpoint to stack only below a specific container width. Without a
+breakpoint, the rows are always stacked.
 
-<Table responsive className="md:table-stacked">
+<Table responsive stacked="md">
     <thead>
         <tr>
             <th scope="col">Name</th>

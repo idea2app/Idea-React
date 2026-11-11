@@ -171,7 +171,7 @@ For example, try to submit the form below; our `ValidationForm` wrapper will int
     </ValidationForm>
 </CodeExample>
 
-`ValidationForm` wraps the library’s `Form` with the upstream validation handlers. It also prevents navigation on successful submission so the demo remains on this page. In an application, replace that demo-only prevention with your submission flow.
+`ValidationForm` wraps the library’s [`Form`][3] with the upstream validation handlers. It also prevents navigation on successful submission so the demo remains on this page. In an application, replace that demo-only prevention with your submission flow.
 
 <CodeCard>{validationFormSource}</CodeCard>
 
@@ -399,10 +399,10 @@ For invalid fields, ensure that the invalid feedback/error message is associated
 
 ## Supported elements
 
-Validation styles work with the form wrappers: `FormControl`, `FormTextArea`, `FormSelect`,
-`Checkbox`, `Radio`, `FormSwitch`, `FormRange`, `FormFloatingLabel`, `FormAdornment`, and
-`ChipInput`. `Combobox` also supports validation props. For input groups, place the group and its
-feedback inside `FormField`.
+Validation styles work with the form wrappers: [`FormControl`][4], [`FormTextArea`][4], [`FormSelect`][4],
+[`Checkbox`][5], [`Radio`][6], [`FormSwitch`][7], [`FormRange`][8], [`FormFloatingLabel`][9], [`FormAdornment`][10], and
+[`ChipInput`][11]. [`Combobox`][12] also supports validation props. For input groups, place the group and its
+feedback inside [`FormField`][13].
 
 <CodeExample>
     <Stack gap={5}>
@@ -602,7 +602,7 @@ If your form layout allows it, you can swap the `.{valid|invalid}-feedback` clas
 
 We don’t recommend using tooltips for checkboxes, radios, and switches because their placement is not reliable or consistent in most cases. You can also use a combination of feedback text and tooltips in your forms.
 
-This example functions the same as the [custom styles example][3]. Click the submit button to see the validation tooltips.
+This example functions the same as the [custom styles example][14]. Click the submit button to see the validation tooltips.
 
 <CodeExample>
     <ValidationForm noValidate data-bs-validate="" className="grid grid-cols-1 gap-5">
@@ -731,4 +731,15 @@ This example functions the same as the [custom styles example][3]. Click the sub
 
 [1]: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#the-constraint-validation-api
 [2]: #browser-defaults
-[3]: #custom-styles
+[3]: ../
+[4]: ../form-control/
+[5]: ../checkbox/
+[6]: ../radio/
+[7]: ../switch/
+[8]: ../range/
+[9]: ../floating-labels/
+[10]: ../form-adorn/
+[11]: ../chips/
+[12]: ../combobox/
+[13]: ../field/
+[14]: #custom-styles

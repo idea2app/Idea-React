@@ -20,14 +20,6 @@ interface MdastNode {
     children?: MdastNode[];
 }
 
-interface HastNode {
-    type: string;
-    tagName?: string;
-    properties?: Record<string, unknown>;
-    // eslint-disable-next-line no-restricted-syntax -- AST children are not component props.
-    children?: HastNode[];
-}
-
 const inlineElements = new Set([
     'a',
     'p',
@@ -100,29 +92,6 @@ const visit = (node: MdastNode) => {
     }
 };
 const remarkInlineButtonChildren = () => (tree: MdastNode) => visit(tree);
-
-const rehypeBootstrapTable = () => (tree: HastNode) => {
-    const visit = (node: HastNode) => {
-        if (!node.children) return;
-
-        node.children = node.children.map(child => {
-            if (child.type !== 'element' || child.tagName !== 'table') {
-                visit(child);
-
-                return child;
-            }
-            child.properties = { ...child.properties, className: ['table'] };
-
-            return {
-                type: 'element',
-                tagName: 'div',
-                properties: { className: ['table-responsive'] },
-                children: [child]
-            };
-        });
-    };
-    visit(tree);
-};
 
 const recmaRscStyles = () => (tree: ESTree.Program) => {
     const importsStyles = tree.body.some(
@@ -204,7 +173,6 @@ export default defineConfig(async () => {
                     development: config.command === 'serve',
                     providerImportSource: '@document/MDXComponents',
                     remarkPlugins: [remarkGfm, remarkInlineButtonChildren],
-                    rehypePlugins: [rehypeBootstrapTable],
                     // RSC's automatic CSS wrapper only recognizes JS/TS module extensions.
                     recmaPlugins: name === 'rsc' ? [recmaRscStyles] : []
                 });

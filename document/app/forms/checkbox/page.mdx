@@ -40,7 +40,7 @@ Checkboxes can utilize the indeterminate pseudo class. There is no available HTM
 
 ## With form field
 
-Wrap `Checkbox` in a `FormField` layout wrapper and add your label. The grid layout places the checkbox and label side by side.
+Wrap `Checkbox` in a [`FormField`][1] layout wrapper and add your label. The grid layout places the checkbox and label side by side.
 
 <CodeExample>
     <FormField>
@@ -53,7 +53,7 @@ Wrap `Checkbox` in a `FormField` layout wrapper and add your label. The grid lay
 
 ## Description
 
-Add a description or other content after the label. Wrap the label and description in `FormFieldContent` to ensure appropriate spacing and alignment.
+Add a description or other content after the label. Wrap the label and description in [`FormFieldContent`][1] to ensure appropriate spacing and alignment.
 
 <CodeExample>
     <FormField>
@@ -138,7 +138,7 @@ Modify the appearance of checked checkboxes with the `theme` prop. This will set
 
 ## Disabled
 
-Set the `disabled` prop on `Checkbox`; its associated `FormLabel` is automatically styled in a lighter color to indicate the input's state.
+Set the `disabled` prop on `Checkbox`; its associated [`FormLabel`][1] is automatically styled in a lighter color to indicate the input's state.
 
 <CodeExample>
     <Stack gap={2}>
@@ -211,3 +211,5 @@ CSS variables for the checkbox component are built on the Sass variables.
 ```
 
 </DocumentLayout>
+
+[1]: ../field/

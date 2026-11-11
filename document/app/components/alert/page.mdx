@@ -131,7 +131,7 @@ Use the `AlertLink` component to quickly provide matching colored links within a
 
 ## With icons
 
-Render `Icon` inside `Alert` for an icon, and use flexbox utilities through `className` to align the
+Render [`Icon`][1] inside `Alert` for an icon, and use flexbox utilities through `className` to align the
 content. Depending on the icon and content, you may need additional utilities or custom styles.
 
 <CodeExample>
@@ -145,10 +145,10 @@ content. Depending on the icon and content, you may need additional utilities or
 
 Use the `dismissible` prop to dismiss an alert inline. Here’s how:
 
-- `dismissible` adds a [close button][1] to the alert.
+- `dismissible` adds a [close button][2] to the alert.
 - Use `onClosed` to synchronize application state after dismissal.
 
-An alert fades out before it is removed. The wrapper adds its exit state for the length of the transition, so no extra classes are needed in your markup. Pass `instant` to remove the alert at once instead. See [Transitions][2] for the tokens that tune the fade.
+An alert fades out before it is removed. The wrapper adds its exit state for the length of the transition, so no extra classes are needed in your markup. Pass `instant` to remove the alert at once instead. See [Transitions][3] for the tokens that tune the fade.
 
 You can see this in action with a live demo:
 
@@ -196,7 +196,7 @@ More complex layouts may require additional HTML within the alert—like when mi
 
 ### Variables
 
-Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][3].
+Local CSS custom properties expose the component’s colors, spacing, borders, and transitions. Override them through `style` or a CSS module. The defaults below come from the Bootstrap stylesheet used by Idea React; see the [upstream variable reference][4].
 
 | Variable                         | Default                  |
 | -------------------------------- | ------------------------ |
@@ -222,6 +222,7 @@ The React wrapper manages dismissal and removes the alert after its fade transit
 
 </DocumentLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/components/close-button/
-[2]: https://getbootstrap.com/docs/6.0/customize/transitions/
-[3]: https://getbootstrap.com/docs/6.0/components/alert/#variables
+[1]: ../../extensions/icon/
+[2]: https://getbootstrap.com/docs/6.0/components/close-button/
+[3]: https://getbootstrap.com/docs/6.0/customize/transitions/
+[4]: https://getbootstrap.com/docs/6.0/components/alert/#variables

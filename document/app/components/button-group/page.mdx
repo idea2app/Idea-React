@@ -36,11 +36,11 @@ Wrap a series of buttons in `ButtonGroup`.
     </div>
 </CodeExample>
 
-> Button groups require an appropriate `role` attribute and explicit label to ensure assistive technologies like screen readers identify buttons as grouped and announce them. Use `role="group"` for button groups or `role="toolbar"` for button toolbars. Then use `aria-label` or `aria-labelledby` to label them.
+> [Button][1] groups require an appropriate `role` attribute and explicit label to ensure assistive technologies like screen readers identify buttons as grouped and announce them. Use `role="group"` for button groups or `role="toolbar"` for button toolbars. Then use `aria-label` or `aria-labelledby` to label them.
 
 ### With links
 
-`ButtonGroup` can also group links; use the [navigation components][1] for navigation-specific behavior.
+`ButtonGroup` can also group links; use the [navigation components][2] for navigation-specific behavior.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -114,7 +114,7 @@ Works with vertical button groups, too.
 
 ## Theme variants
 
-Set the `theme` prop on each `Button` in the group to apply a consistent theme color.
+Set the `theme` prop on each [`Button`][1] in the group to apply a consistent theme color.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -206,7 +206,7 @@ All button styles are supported in button groups. Set `divider` on `ButtonGroup`
 
 ### Checkbox
 
-Checkbox toggle buttons can be grouped together. Any or all of the buttons can be checked.
+[Checkbox][3] toggle buttons can be grouped together. Any or all of the buttons can be checked.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2 align-items-center">
@@ -536,4 +536,6 @@ Make a set of buttons appear vertically stacked rather than horizontally. **Spli
 
 </DocumentLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/components/nav/
+[1]: ../button/
+[2]: https://getbootstrap.com/docs/6.0/components/nav/
+[3]: ../../forms/checkbox/

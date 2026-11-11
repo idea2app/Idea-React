@@ -41,7 +41,7 @@ The Field component provides essential layout, spacing, and functionality for yo
 `FormField` uses CSS grid to lay out a form control alongside its label, description, and validation feedback.
 
 - **Default layout** is a single-column grid where everything stacks vertically. Use this for text inputs, selects, textareas, ranges, input groups, and adorned inputs.
-- **Two-column layout** activates automatically via `:has()` when a `Checkbox`, `Radio`, or `FormSwitch` is a direct child. The control sits in the first column while its label, description, and feedback stack in the second.
+- **Two-column layout** activates automatically via `:has()` when a [`Checkbox`][1], [`Radio`][2], or [`FormSwitch`][3] is a direct child. The control sits in the first column while its label, description, and feedback stack in the second.
 - **Overhead label** — when a `FormLabel` is present alongside a check, radio, or switch, it spans both columns and sits above the control row.
 - **Grouped controls** — nest multiple `FormField` components inside an outer `FormField` to group radios, checkboxes, or switches under a shared label with shared description and validation feedback.
 
@@ -49,7 +49,7 @@ The Field component provides essential layout, spacing, and functionality for yo
 
 ### Select
 
-Use `FormSelect` for select controls.
+Use [`FormSelect`][4] for select controls.
 
 <CodeExample>
     <FormField>
@@ -65,7 +65,7 @@ Use `FormSelect` for select controls.
 
 ### Textarea
 
-Use `FormTextArea` for multi-line text controls. Descriptions are optional.
+Use [`FormTextArea`][4] for multi-line text controls. Descriptions are optional.
 
 <CodeExample>
     <FormField>
@@ -77,7 +77,7 @@ Use `FormTextArea` for multi-line text controls. Descriptions are optional.
 
 ### Checkbox
 
-When a `Checkbox` is a direct child, the grid switches to a two-column layout with the checkbox in the first column and its label in the second.
+When a [`Checkbox`][1] is a direct child, the grid switches to a two-column layout with the checkbox in the first column and its label in the second.
 
 <CodeExample>
     <FormField>
@@ -90,7 +90,7 @@ When a `Checkbox` is a direct child, the grid switches to a two-column layout wi
 
 ### Radio
 
-Radios use the same two-column layout. Wrap each `Radio` and its label in its own `FormField`.
+Radios use the same two-column layout. Wrap each [`Radio`][2] and its label in its own `FormField`.
 
 <CodeExample>
     <div className="d-flex flex-column gap-2">
@@ -244,7 +244,7 @@ Add `FormText` after the label and wrap it in `FormFieldContent` to ensure appro
 
 ## Validation
 
-`FormFeedback` stacks correctly inside `FormField` for all control types. Set its `type` prop to `valid` for success feedback; it defaults to invalid feedback.
+[`FormFeedback`][5] stacks correctly inside `FormField` for all control types. Set its `type` prop to `valid` for success feedback; it defaults to invalid feedback.
 
 ### Client-side
 
@@ -320,3 +320,9 @@ Set the control's `validation` prop to `invalid` or `valid` for server-side vali
 </CodeExample>
 
 </DocumentLayout>
+
+[1]: ../checkbox/
+[2]: ../radio/
+[3]: ../switch/
+[4]: ../form-control/
+[5]: ../validation/

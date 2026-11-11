@@ -124,7 +124,7 @@ Pass the brand text as `NavbarBrand`'s children.
 
 #### Image
 
-Place an `Image` inside `NavbarBrand` to use an image as the brand.
+Place an [`Image`][7] inside `NavbarBrand` to use an image as the brand.
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
@@ -143,7 +143,7 @@ Place an `Image` inside `NavbarBrand` to use an image as the brand.
 
 #### Image and text
 
-To combine an image and text, place both inside `NavbarBrand` and pass layout utilities through the `Image` component's `className`.
+To combine an image and text, place both inside `NavbarBrand` and pass layout utilities through the [`Image`][7] component's `className`.
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
@@ -164,11 +164,11 @@ To combine an image and text, place both inside `NavbarBrand` and pass layout ut
 
 ### Nav
 
-`NavbarNav` contains `NavLink` items and supports navigation variants. Set `Navbar`'s `expand` prop for responsive layout. **Navigation in navbars also grows to occupy horizontal space** to keep the contents aligned.
+`NavbarNav` contains [`NavLink`][8] items and supports navigation variants. Set `Navbar`'s `expand` prop for responsive layout. **Navigation in navbars also grows to occupy horizontal space** to keep the contents aligned.
 
-Set `active` on `NavLink` to indicate the current page.
+Set `active` on [`NavLink`][8] to indicate the current page.
 
-Also set `aria-current="page"` on the active `NavLink`.
+Also set `aria-current="page"` on the active [`NavLink`][8].
 
 <CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
@@ -232,7 +232,7 @@ And because we use classes for our navs, you can avoid the list-based approach e
 
 </CodeExample>
 
-You can also use menus in your navbar. Wrap each menu in `NavItem` for its positioning, as shown below.
+You can also use menus in your navbar. Wrap each menu in [`NavItem`][8] for its positioning, as shown below.
 
 <CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
@@ -321,7 +321,7 @@ Use additional [flex utilities][5] as needed to adjust this behavior.
 
 </CodeExample>
 
-Input groups work, too. If the navbar is primarily a form, use the `Form` wrapper as its container.
+Input groups work, too. If the navbar is primarily a form, use the [`Form`][9] wrapper as its container.
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
@@ -643,9 +643,9 @@ Navbar themes are easier than ever thanks to Bootstrap’s combination of Sass a
 
 ## Containers
 
-Although it’s not required, you can wrap `Navbar` in a `Container` to center it on a page, or place a
-`Container` inside `Navbar` to center only its contents. An inner `Container` is required for a
-[fixed or static top navbar][7].
+Although it’s not required, you can wrap `Navbar` in a [`Container`][10] to center it on a page, or place a
+[`Container`][10] inside `Navbar` to center only its contents. An inner [`Container`][10] is required for a
+[fixed or static top navbar][11].
 
 <CodeExample>
     <Container>
@@ -669,7 +669,7 @@ Use any of the responsive containers to change how wide the content in your navb
 
 ## Placement
 
-Use our [position utilities][8] to place navbars in non-static positions. Choose from fixed to the top, fixed to the bottom, stickied to the top (scrolls with the page until it reaches the top, then stays there), or stickied to the bottom (scrolls with the page until it reaches the bottom, then stays there).
+Use our [position utilities][12] to place navbars in non-static positions. Choose from fixed to the top, fixed to the bottom, stickied to the top (scrolls with the page until it reaches the top, then stays there), or stickied to the bottom (scrolls with the page until it reaches the bottom, then stays there).
 
 Fixed navbars use `position: fixed`, meaning they’re pulled from the normal flow of the DOM and may require custom CSS (e.g., `padding-top` on the `<body>`) to prevent overlap with other elements.
 
@@ -762,7 +762,7 @@ Navbar togglers are left-aligned by default, but when placed after a sibling suc
 
 The first example collapses below the `md` breakpoint; the following examples always keep the toggler visible. Click it to open the drawer.
 
-To toggle inline content outside the responsive navbar examples, pass its selector to `CollapseToggle` with the `navbarToggler` prop:
+To toggle inline content outside the responsive navbar examples, pass its selector to [`CollapseToggle`][13] with the `navbarToggler` prop:
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
@@ -996,5 +996,10 @@ Use CSS custom properties on the component to customize its appearance without r
 [4]: https://getbootstrap.com/docs/6.0/utilities/padding
 [5]: https://getbootstrap.com/docs/6.0/utilities/flex
 [6]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion
-[7]: #placement
-[8]: https://getbootstrap.com/docs/6.0/utilities/position
+[7]: ../../content/images/
+[8]: ../nav/
+[9]: ../../forms/
+[10]: ../../layout/grid/
+[11]: #placement
+[12]: https://getbootstrap.com/docs/6.0/utilities/position
+[13]: ../collapse/

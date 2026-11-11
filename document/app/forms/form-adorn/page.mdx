@@ -23,11 +23,11 @@ Wrap adornments and a `FormGhost` control in `FormAdornment`. The wrapper provid
 
 `FormAdornment` renders a label by default. This lets people click the icon, text, or surrounding padding to focus the control without any JavaScript.
 
-Mark decorative `FormAdornmentIcon` and `FormAdornmentText` components with `aria-hidden="true"`. Because the default `FormAdornment` label also labels its nested input, text adornments such as `$` can become part of the input's accessible name. Keep decorative content out of the accessibility tree, and provide meaningful names with `FormLabel` or visible label text and descriptions with `FormText`.
+Mark decorative `FormAdornmentIcon` and `FormAdornmentText` components with `aria-hidden="true"`. Because the default `FormAdornment` label also labels its nested input, text adornments such as `$` can become part of the input's accessible name. Keep decorative content out of the accessibility tree, and provide meaningful names with [`FormLabel`][1] or visible label text and descriptions with [`FormText`][1].
 
-> An input can have more than one label, so the default `FormAdornment` label and a separate `FormLabel` can work together. Set `FormLabel`'s `htmlFor` to the input's `id`. Do not put a button or another interactive control inside the default `FormAdornment` label. If the wrapper needs interactive content, use its `as` prop to render a non-label element and label the input separately.
+> An input can have more than one label, so the default `FormAdornment` label and a separate [`FormLabel`][1] can work together. Set [`FormLabel`][1]'s `htmlFor` to the input's `id`. Do not put a button or another interactive control inside the default `FormAdornment` label. If the wrapper needs interactive content, use its `as` prop to render a non-label element and label the input separately.
 
-See the [form control][1] documentation for more information on `FormControl` and `FormGhost`.
+See the [form control][2] documentation for more information on [`FormControl`][2] and `FormGhost`.
 
 ## Example
 
@@ -51,7 +51,7 @@ Set the `end` prop to position the adornment on the trailing side. The DOM order
 
 ## With labels
 
-Add a `FormLabel` outside `FormAdornment` to give the field a visible name. Set its `htmlFor` prop to the `id` of the `FormGhost` input so the label remains associated with the field if you change the wrapper:
+Add a [`FormLabel`][1] outside `FormAdornment` to give the field a visible name. Set its `htmlFor` prop to the `id` of the `FormGhost` input so the label remains associated with the field if you change the wrapper:
 
 <CodeExample>
     <Stack gap={3}>
@@ -74,7 +74,7 @@ Add a `FormLabel` outside `FormAdornment` to give the field a visible name. Set 
 
 ## With form field
 
-Use `FormField` to group `FormLabel`, `FormAdornment`, and `FormText` into a field with a label and description.
+Use [`FormField`][1] to group [`FormLabel`][1], `FormAdornment`, and [`FormText`][1] into a field with a label and description.
 
 <CodeExample>
     <FormField>
@@ -147,4 +147,5 @@ Set the `size` prop to `sm` or `lg` on `FormAdornment` to adjust its size.
 
 </DocumentLayout>
 
-[1]: ../form-control/
+[1]: ../field/
+[2]: ../form-control/

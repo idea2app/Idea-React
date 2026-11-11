@@ -57,7 +57,7 @@ Set `action` on `ListGroupItem` to create an interactive item with hover, disabl
 
 Set `disabled` on `ListGroupItem` to disable interaction and communicate the disabled state to assistive technologies.
 
-Do not use `Button` styles for list group items.
+Do not use [`Button`][1] styles for list group items.
 
 <CodeExample>
     <ListGroup as="div">
@@ -185,7 +185,7 @@ These work great with custom content as well.
 
 Set `horizontal` on `ListGroup` to display items in a row at all sizes, or set it to a breakpoint such as `sm` or `md` to switch to a row at that breakpoint.
 
-The responsive variants use [container queries][1], so place the list group in a query container with the `contains-inline` utility applied through the parent's `className`. Currently **horizontal list groups cannot be combined with flush list groups.**
+The responsive variants use [container queries][2], so place the list group in a query container with the `contains-inline` utility applied through the parent's `className`. Currently **horizontal list groups cannot be combined with flush list groups.**
 
 **ProTip:** For equal-width horizontal items, apply the `flex-fill` utility through each `ListGroupItem`'s `className`.
 
@@ -359,7 +359,7 @@ Theme colors also work with interactive `ListGroupItem` components. Notice the h
 
 ## With badges
 
-Add badges to any list group item to show unread counts, activity, and more with the help of some [utilities][2].
+Add badges to any list group item to show unread counts, activity, and more with the help of some [utilities][3].
 
 <CodeExample>
     <ListGroup>
@@ -383,7 +383,7 @@ Add badges to any list group item to show unread counts, activity, and more with
 
 ## Custom content
 
-Add nearly any HTML within, even for linked list groups like the one below, with the help of [flexbox utilities][2].
+Add nearly any HTML within, even for linked list groups like the one below, with the help of [flexbox utilities][3].
 
 <CodeExample>
     <ListGroup as="div">
@@ -428,7 +428,7 @@ Add nearly any HTML within, even for linked list groups like the one below, with
 
 ## Checkboxes and radios
 
-Place `Checkbox` and `Radio` components inside list group items and customize them as needed. If there is no visible label, provide an `aria-label`.
+Place [`Checkbox`][4] and [`Radio`][5] components inside list group items and customize them as needed. If there is no visible label, provide an `aria-label`.
 
 <CodeExample>
     <ListGroup>
@@ -525,7 +525,7 @@ Apply the `stretched-link` utility through the item's `className` when the entir
 
 </CodeExample>
 
-Use the `checkable` and `radio` props for the corresponding list group variants. Add `listGroup` to `FormCheck` to apply the input styling used by checkable groups.
+Use the `checkable` and `radio` props for the corresponding list group variants. Add `listGroup` to [`FormCheck`][4] to apply the input styling used by checkable groups.
 
 <CodeExample>
     <Stack gap={3}>
@@ -576,10 +576,13 @@ Use CSS custom properties on the component to customize its appearance without r
 
 ## JavaScript behavior
 
-Use the [Tab plugin][3] to create tabbable list group panes.
+Use the [Tab plugin][6] to create tabbable list group panes.
 
 </DocumentLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/layout/breakpoints#container-queries
-[2]: https://getbootstrap.com/docs/6.0/utilities/flex
-[3]: /components/tab#list-groups
+[1]: ../button/
+[2]: https://getbootstrap.com/docs/6.0/layout/breakpoints#container-queries
+[3]: https://getbootstrap.com/docs/6.0/utilities/flex
+[4]: ../../forms/checkbox/
+[5]: ../../forms/radio/
+[6]: /components/tab#list-groups

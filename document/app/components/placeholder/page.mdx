@@ -1,11 +1,7 @@
 import { Stack } from '../../../../source/Base/Stack';
 import { Button } from '../../../../source/Base/Button';
 import { Card, CardImage, CardBody, CardTitle, CardText } from '../../../../source/Base/Card';
-import {
-    Placeholder,
-    PlaceholderAnimation,
-    PlaceholderButton
-} from '../../../../source/Base/Placeholder';
+import { Placeholder, PlaceholderButton } from '../../../../source/Base/Placeholder';
 import { Col } from '../../../../source/Layout/Grid';
 import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
@@ -16,14 +12,14 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 
 Use loading placeholders (skeleton loaders) for your components or pages to indicate something may still be loading.
 
-Use `Placeholder` for skeleton shapes, `PlaceholderAnimation` to animate a group or text, and
-`PlaceholderButton` for a disabled button-shaped placeholder. Their props generate the component
-styles discussed below.
+Use `Placeholder` for skeleton shapes and animation, and `PlaceholderButton` for a disabled
+button-shaped placeholder. Their props generate the component styles discussed below.
 
 ## About
 
 Placeholders are built with HTML and CSS and need no JavaScript. Render them conditionally to control
-visibility, and use the `Placeholder` props to set their color, size, width, and animation.
+visibility, and use the `Placeholder` props to set their color, size, width, or animation. When
+animating several placeholders together, render them as children of an animated `Placeholder`.
 
 ## Example
 
@@ -59,20 +55,16 @@ In the example below, we take a typical card component and recreate it with plac
                 alt=""
             />
             <CardBody>
-                <PlaceholderAnimation animation="wave">
-                    <CardTitle as="h5">
-                        <Col as={Placeholder} xs={6} />
-                    </CardTitle>
-                </PlaceholderAnimation>
-                <PlaceholderAnimation animation="wave">
-                    <CardText>
-                        <Col as={Placeholder} xs={7} />
-                        <Col as={Placeholder} xs={4} />
-                        <Col as={Placeholder} xs={4} />
-                        <Col as={Placeholder} xs={6} />
-                        <Col as={Placeholder} xs={8} />
-                    </CardText>
-                </PlaceholderAnimation>
+                <Placeholder as="h5" animation="wave" className="card-title">
+                    <Col as={Placeholder} xs={6} />
+                </Placeholder>
+                <Placeholder as="p" animation="wave" className="card-text">
+                    <Col as={Placeholder} xs={7} />
+                    <Col as={Placeholder} xs={4} />
+                    <Col as={Placeholder} xs={4} />
+                    <Col as={Placeholder} xs={6} />
+                    <Col as={Placeholder} xs={8} />
+                </Placeholder>
                 <Col
                     as={PlaceholderButton}
                     xs={6}
@@ -88,7 +80,7 @@ In the example below, we take a typical card component and recreate it with plac
 
 ## How it works
 
-Render `Placeholder` for a skeleton shape, and use `Col` to set its grid width. Use the `as` prop
+Render `Placeholder` for a skeleton shape, and use [`Col`][1] to set its grid width. Use the `as` prop
 when the placeholder should render as a different element.
 
 `PlaceholderButton` applies the button sizing and disabled state for button-shaped placeholders.
@@ -113,14 +105,14 @@ when the placeholder should render as a different element.
 
 ## Width
 
-Set the `width` prop for a fixed or percentage width, use `Col` for grid sizing, or pass width
-utilities through `className`.
+Set the `width` prop for a fixed or percentage width, use [`Col`][1] for grid sizing, or pass Bootstrap
+width utilities through `className`.
 
 <CodeExample>
     <Stack gap={3}>
         <Col as={Placeholder} xs={6} />
         <Placeholder className="w-75" />
-        <Placeholder style={{ width: '25%' }} />
+        <Placeholder width="25%" />
     </Stack>
 </CodeExample>
 
@@ -159,29 +151,29 @@ or `"xs"` to use a sizing modifier.
 
 ## Animation
 
-Set `PlaceholderAnimation`'s `animation` prop to `"wave"` for the default loading animation, or
-`"pulse"` for an opacity pulse. `"glow"` remains available as a compatibility alias for `"pulse"`.
+Set `Placeholder`'s `animation` prop to `"wave"` for the default loading animation, or `"pulse"` for
+an opacity pulse. `"glow"` remains available as a compatibility alias for `"pulse"`.
 
 <CodeExample>
     <Stack gap={3}>
-        <PlaceholderAnimation animation="wave">
+        <Placeholder as="p" animation="wave">
             <Col as={Placeholder} xs={12} />
-        </PlaceholderAnimation>
-        <PlaceholderAnimation animation="pulse">
+        </Placeholder>
+        <Placeholder as="p" animation="pulse">
             <Col as={Placeholder} xs={12} />
-        </PlaceholderAnimation>
+        </Placeholder>
     </Stack>
 </CodeExample>
 
 ### Text
 
-Wrap text in `PlaceholderAnimation` to apply the loading animation.
+Set `animation` on `Placeholder` to apply the loading animation to text.
 
 <CodeExample>
     <Stack gap={3}>
-        <PlaceholderAnimation animation="wave" className="fg-3 d-inline">
+        <Placeholder as="span" animation="wave" className="fg-3">
             Working on it…
-        </PlaceholderAnimation>
+        </Placeholder>
     </Stack>
 </CodeExample>
 
@@ -197,3 +189,5 @@ Wrap text in `PlaceholderAnimation` to apply the loading animation.
 | `--bs-placeholder-wave-opacity-min` | `0.4`   |
 
 </DocumentLayout>
+
+[1]: ../../layout/grid/

@@ -55,7 +55,7 @@ Here’s a quick example using the form components. Keep reading for component p
 
 ## Disabled forms
 
-Set the `disabled` prop on `FormControl` to prevent user interaction and give it a disabled appearance.
+Set the `disabled` prop on [`FormControl`][2] to prevent user interaction and give it a disabled appearance.
 
 ```tsx
 <FormControl id="disabledInput" type="text" placeholder="Disabled input here..." disabled />
@@ -63,7 +63,7 @@ Set the `disabled` prop on `FormControl` to prevent user interaction and give it
 
 Add the native `disabled` attribute to a `fieldset` to disable all nested controls. Browsers treat native inputs, selects, and buttons inside a disabled fieldset as disabled, preventing keyboard and mouse interaction.
 
-This does not disable custom links styled as buttons. Use `Button`'s `disabled` prop for button-like links; it removes navigation and updates keyboard focus and accessibility state.
+This does not disable custom links styled as buttons. Use [`Button`][3]'s `disabled` prop for button-like links; it removes navigation and updates keyboard focus and accessibility state.
 
 <CodeExample>
     <Form>
@@ -94,9 +94,9 @@ This does not disable custom links styled as buttons. Use `Button`'s `disabled` 
 
 ## Accessibility
 
-Ensure that all form controls have an appropriate accessible name so assistive technologies can convey their purpose. Use `FormLabel` for form controls, or descriptive content for buttons.
+Ensure that all form controls have an appropriate accessible name so assistive technologies can convey their purpose. Use [`FormLabel`][4] for form controls, or descriptive content for buttons.
 
-When a visible `FormLabel` or button text is not appropriate, provide an accessible name by:
+When a visible [`FormLabel`][4] or button text is not appropriate, provide an accessible name by:
 
 - Pointing to an existing element with `aria-labelledby`
 - Providing a `title` attribute
@@ -110,7 +110,7 @@ While `aria-label` can provide an accessible name, a visible label is generally 
 
 ### Variables
 
-Some form variables are set at the root level to be re-used and extended by individual form components, but you’ll most often see variables set at the form control level. Root variables include `--bs-btn-input-*`, which are shared with [buttons][2], and `--bs-control-*` variables.
+Some form variables are set at the root level to be re-used and extended by individual form components, but you’ll most often see variables set at the form control level. Root variables include `--bs-btn-input-*`, which are shared with [buttons][3], and `--bs-control-*` variables.
 
 ```css
 .example {
@@ -159,4 +159,6 @@ Some form variables are set at the root level to be re-used and extended by indi
 </DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/content/reboot#forms
-[2]: ../components/button/
+[2]: form-control/
+[3]: ../components/button/
+[4]: field/

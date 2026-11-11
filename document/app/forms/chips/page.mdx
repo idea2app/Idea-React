@@ -32,7 +32,7 @@ See examples of all of this in action below.
 
 ## Chips
 
-Use `Chip` for each chip. It renders a `span` by default; set `as="button"` when the chip itself should be a button. Add `ChipIcon` for a leading icon, `ChipImage` for an image like an avatar, and `ChipDismiss` for a remove button. Dismiss buttons use the library’s `Icon` component and can be nested safely inside the default `span`.
+Use `Chip` for each chip. It renders a `span` by default; set `as="button"` when the chip itself should be a button. Add `ChipIcon` for a leading icon, `ChipImage` for an image like an avatar, and `ChipDismiss` for a remove button. Dismiss buttons use the library’s [`Icon`][2] component and can be nested safely inside the default `span`.
 
 <CodeExample>
     <div className="d-flex flex-wrap gap-2">
@@ -88,9 +88,9 @@ Set `active` to make chips use the solid appearance (bg/contrast). This is usefu
 
 ## Chip input
 
-Wrap `Chip` components and a `FormGhost` input in `ChipInput` to create a tag input field. The component enables JavaScript behavior automatically. Chips are grayscale by default, with primary blue for active states, but you can apply any theme color to the container so that chips within inherit the color of your choosing.
+Wrap `Chip` components and a [`FormGhost`][3] input in `ChipInput` to create a tag input field. The component enables JavaScript behavior automatically. Chips are grayscale by default, with primary blue for active states, but you can apply any theme color to the container so that chips within inherit the color of your choosing.
 
-Type into the input below and press <kbd>Enter</kbd> or <kbd>,</kbd> to add new chips. Use the <kbd>Backspace</kbd> or <kbd>Delete</kbd> keys to remove chips. See the [Keyboard behavior][2] section for more details.
+Type into the input below and press <kbd>Enter</kbd> or <kbd>,</kbd> to add new chips. Use the <kbd>Backspace</kbd> or <kbd>Delete</kbd> keys to remove chips. See the [Keyboard behavior][4] section for more details.
 
 <CodeExample>
     <ChipInput>
@@ -183,7 +183,7 @@ Pass options directly as `ChipInput` props:
 | `separator`       | string \| null | `','`   | Character that triggers chip creation when typed. Set to `null` to disable. |
 | `allowDuplicates` | boolean        | `false` | Allow duplicate chip values.                                                |
 | `maxChips`        | number \| null | `null`  | Maximum number of chips allowed. `null` for unlimited.                      |
-| `placeholder`     | string         | `''`    | Placeholder text for dynamically created inputs.                            |
+| `placeholder`     | string         | `''`    | [Placeholder][5] text for dynamically created inputs.                       |
 | `dismissible`     | boolean        | `true`  | Add dismiss buttons to created chips.                                       |
 | `createOnBlur`    | boolean        | `true`  | Create chip from input value when the input loses focus.                    |
 
@@ -276,4 +276,7 @@ These variables are scoped to the `ChipInput` container.
 </DocumentLayout>
 
 [1]: ../../components/badge/
-[2]: #keyboard-behavior
+[2]: ../../extensions/icon/
+[3]: ../form-adorn/
+[4]: #keyboard-behavior
+[5]: ../../components/placeholder/

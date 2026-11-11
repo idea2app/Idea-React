@@ -19,14 +19,14 @@ The nav overflow component (also known as the "Priority+" pattern) automatically
 
 Here’s what you need to know before getting started:
 
-- Place `NavLink` and `Menu` children inside `NavOverflow`, and give the wrapper a unique `id`.
+- Place [`NavLink`][1] and [`Menu`][2] children inside `NavOverflow`, and give the wrapper a unique `id`.
 - **Responds to container size**, not viewport size. The component watches the wrapper with a ResizeObserver, so it works in embedded contexts, documentation examples, and responsive containers.
 - The wrapper is what makes this reliable. Collapsing items changes the width of the nav, so the component measures the wrapper instead. Measuring the nav would feed the result back in as the input.
 - Overflow items are represented in a "More" menu while the originals are hidden. A nav item that hosts a menu becomes a submenu of the overflow menu.
 - Works with all nav styles: default, pills, tabs, and underline.
 - Active and disabled states are preserved in the overflow menu.
 
-> The animation effect depends on the `prefers-reduced-motion` media query. See the [reduced motion accessibility guidance][1].
+> The animation effect depends on the `prefers-reduced-motion` media query. See the [reduced motion accessibility guidance][3].
 
 ## Examples
 
@@ -155,7 +155,7 @@ Disabled states are preserved when items move to the overflow menu:
 
 ### In a navbar
 
-The nav overflow pattern can also be used within a [navbar][2] for horizontal navigation that adapts to available space:
+The nav overflow pattern can also be used within a [navbar][4] for horizontal navigation that adapts to available space:
 
 <CodeExample>
     <Navbar expand className="bg-1">
@@ -182,7 +182,7 @@ The nav overflow pattern can also be used within a [navbar][2] for horizontal na
 
 ### With menus
 
-A nav item that already hosts a [menu][3] becomes a submenu of the overflow menu. Its nested submenus stay intact.
+A nav item that already hosts a [menu][5] becomes a submenu of the overflow menu. Its nested submenus stay intact.
 
 <CodeExample>
     <NavOverflow id="overflow-example-1" variant="pills">
@@ -238,7 +238,7 @@ Use the `moreText` option to customize the text shown in the overflow toggle but
 
 ### Custom icon
 
-Provide a custom icon via the `moreIcon` prop, using the `Icon` component:
+Provide a custom icon via the `moreIcon` prop, using the [`Icon`][6] component:
 
 ```tsx
 <NavOverflow id="custom-icon" moreIcon={<Icon name="three-dots" />} moreText={false}>
@@ -323,6 +323,9 @@ Use `onOverflowChange(overflowCount, visibleCount)` to observe overflow calculat
 
 </DocumentLayout>
 
-[1]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion
-[2]: /components/navbar
-[3]: /components/menu
+[1]: ../nav/
+[2]: ../menu/
+[3]: https://getbootstrap.com/docs/6.0/getting-started/accessibility/#reduced-motion
+[4]: /components/navbar
+[5]: /components/menu
+[6]: ../../extensions/icon/

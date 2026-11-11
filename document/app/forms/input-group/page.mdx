@@ -52,11 +52,11 @@ Pass `htmlFor` to `InputGroupText` to render the add-on itself as a label for it
 
 ## Examples
 
-Place one add-on or button on either side of a control, or add one to both sides. Place `FormLabel` outside `InputGroup` so the label remains associated with the control.
+Place one add-on or button on either side of a control, or add one to both sides. Place [`FormLabel`][1] outside `InputGroup` so the label remains associated with the control.
 
 ## With form field
 
-Wrap `InputGroup` in `FormField` to pair it with a label and description.
+Wrap `InputGroup` in [`FormField`][1] to pair it with a label and description.
 
 <CodeExample>
     <FormField>
@@ -217,7 +217,7 @@ Place any checkbox or radio within an input group’s addon instead of text.
 
 ### Multiple inputs
 
-Although `InputGroup` can display multiple `FormControl` components, validation styles are available only when the group contains a single control.
+Although `InputGroup` can display multiple [`FormControl`][3] components, validation styles are available only when the group contains a single control.
 
 <CodeExample>
     <Stack gap={3}>
@@ -506,3 +506,4 @@ Set the `size` prop on `InputGroup` to resize its contents; you do not need to r
 
 [1]: ../field/
 [2]: ../../components/button/
+[3]: ../form-control/

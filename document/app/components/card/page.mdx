@@ -58,11 +58,11 @@ Cards are flexible and extensible content containers with support for headers an
 Cards are built with as little markup and styles as possible, but still manage to deliver a ton of control and customization.
 
 - Cards are flexbox containers, so align their contents with [flexbox utilities][1] through `className`
-  and arrange them with `Row` and `Col`.
+  and arrange them with [`Row`][2] and [`Col`][2].
 
 - `Card` has no default padding. Add a `CardBody` child, or set `body` on `Card` for a simple padded card. This allows greater flexibility with the least amount of overhead.
 
-- Cards have no `margin` by default. Use [margin utilities][2] through `className` or set spacing with
+- Cards have no `margin` by default. Use [margin utilities][3] through `className` or set spacing with
   `Stack`'s `gap` prop.
 
 - Cards can contain text, images, lists, and other content components.
@@ -178,7 +178,7 @@ Set `placement="top"` or `placement="bottom"` on `CardImage` to round the corres
 
 ### List groups
 
-When your card only contains a list group—with no header, footer, or body—use `ListGroup` on its own. A card already draws an outer border, so a default list group inside a card would double that border.
+When your card only contains a list group—with no header, footer, or body—use [`ListGroup`][4] on its own. A card already draws an outer border, so a default list group inside a card would double that border.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -190,7 +190,7 @@ When your card only contains a list group—with no header, footer, or body—us
     </Stack>
 </CodeExample>
 
-When you mix a list group with other card sub-components, set the `flush` prop on `ListGroup` to remove its outer border.
+When you mix a list group with other card sub-components, set the `flush` prop on [`ListGroup`][4] to remove its outer border.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -333,7 +333,7 @@ Use `CardHeader` for a card header; set its `as` prop when the heading needs a s
 
 ## Width
 
-Cards are 100% wide by default. Set their width with custom CSS, place them in `Col` components, or
+Cards are 100% wide by default. Set their width with custom CSS, place them in [`Col`][2] components, or
 pass sizing utilities through `className`.
 
 ### Grid
@@ -375,7 +375,7 @@ Using the grid, wrap cards in columns and rows as needed.
 
 ### Utilities
 
-Use our handful of [available sizing utilities][3] to quickly set a card’s width.
+Use our handful of [available sizing utilities][5] to quickly set a card’s width.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -426,7 +426,7 @@ Use custom CSS in your stylesheets or as inline styles to set a width.
 
 ## Navigation
 
-Add some navigation to a card’s header (or block) with Bootstrap’s [nav components][4].
+Add some navigation to a card’s header (or block) with Bootstrap’s [nav components][6].
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -458,7 +458,7 @@ Add some navigation to a card’s header (or block) with Bootstrap’s [nav comp
 
 </CodeExample>
 
-This works with `Nav` using `variant="pills"` as well.
+This works with [`Nav`][7] using `variant="pills"` as well.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -797,7 +797,7 @@ In addition to styling the content within cards, Bootstrap includes a few option
 
 Use card groups to render cards as a single, attached element with equal width and height columns. Card groups start off stacked and use `display: flex;` to become attached with uniform dimensions starting at the `sm` breakpoint.
 
-This layout uses [container queries][5], so place `CardGroup` inside a query container with the `contains-inline` utility applied through the parent's `className`. Without a query container, the cards remain stacked.
+This layout uses [container queries][8], so place `CardGroup` inside a query container with the `contains-inline` utility applied through the parent's `className`. Without a query container, the cards remain stacked.
 
 <CodeExample>
     <Stack gap={3} className="max-w-100 overflow-auto p-2" style={{ resize: 'horizontal' }}>
@@ -937,7 +937,7 @@ When using card groups with footers, their content will automatically line up.
 
 ### Grid cards
 
-Use `Row` and `Col` to control how many cards appear per row. Set responsive column props on `Row`—for example, `xs={1}` and `md={2}`—to lay cards out in one column on small viewports and two equal-width columns from the medium breakpoint up.
+Use [`Row`][2] and [`Col`][2] to control how many cards appear per row. Set responsive column props on [`Row`][2]—for example, `xs={1}` and `md={2}`—to lay cards out in one column on small viewports and two equal-width columns from the medium breakpoint up.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -1018,7 +1018,7 @@ Use `Row` and `Col` to control how many cards appear per row. Set responsive col
     </Stack>
 </CodeExample>
 
-Change the `md` prop on `Row` to `3` and you’ll see the fourth card wrap.
+Change the `md` prop on [`Row`][2] to `3` and you’ll see the fourth card wrap.
 
 <CodeExample>
     <Stack gap={3} className="overflow-auto">
@@ -1280,7 +1280,10 @@ Customize the component with the following local CSS variables. Override them th
 </DocumentLayout>
 
 [1]: https://getbootstrap.com/docs/6.0/utilities/flex/
-[2]: https://getbootstrap.com/docs/6.0/utilities/margin/
-[3]: https://getbootstrap.com/docs/6.0/utilities/width/
-[4]: https://getbootstrap.com/docs/6.0/components/nav/
-[5]: https://getbootstrap.com/docs/6.0/layout/breakpoints#container-queries
+[2]: ../../layout/grid/
+[3]: https://getbootstrap.com/docs/6.0/utilities/margin/
+[4]: ../list-group/
+[5]: https://getbootstrap.com/docs/6.0/utilities/width/
+[6]: https://getbootstrap.com/docs/6.0/components/nav/
+[7]: ../nav/
+[8]: https://getbootstrap.com/docs/6.0/layout/breakpoints#container-queries
