@@ -16,7 +16,7 @@ export const DocumentHeader: FC<DocumentHeaderProps> = ({
     links,
     versions,
     version,
-    homeHref = './',
+    homeHref = '/',
     search,
     colorMode,
     brand = 'Idea React',

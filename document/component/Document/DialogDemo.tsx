@@ -6,19 +6,19 @@ import { Component, ReactNode } from 'react';
 
 import { Button } from '../../../source/Base/Button';
 import { CloseButton } from '../../../source/Base/CloseButton';
-import { Menu, MenuItem } from '../../../source/Base/Menu';
 import {
+    Dialog,
     DialogBody,
     DialogFooter,
     DialogHeader,
-    DialogTitle,
-    NativeDialog,
-    NativeDialogProps
-} from '../../../source/Base/NativeDialog';
+    DialogProps,
+    DialogTitle
+} from '../../../source/Base/Dialog';
+import { Menu, MenuItem } from '../../../source/Base/Menu';
 import { Toast } from '../../../source/Base/Toast';
 import { OverlayBox } from '../../../source/Extension/OverlayBox';
 
-export interface DialogDemoProps extends Omit<NativeDialogProps, 'title'> {
+export interface DialogDemoProps extends Omit<DialogProps, 'title'> {
     label: ReactNode;
     title: ReactNode;
     dark?: boolean;
@@ -55,7 +55,7 @@ export class DialogDemo extends Component<DialogDemoProps> {
                 <Button variant="solid" theme="primary" onClick={this.show}>
                     {label}
                 </Button>
-                <NativeDialog
+                <Dialog
                     {...props}
                     open={open}
                     aria-label={typeof title === 'string' ? title : undefined}
@@ -83,7 +83,7 @@ export class DialogDemo extends Component<DialogDemoProps> {
                             )}
                         </DialogFooter>
                     )}
-                </NativeDialog>
+                </Dialog>
             </>
         );
     }
@@ -109,11 +109,7 @@ export class DialogSwapDemo extends Component {
                 <Button variant="solid" theme="primary" onClick={this.openFirst}>
                     Open first dialog
                 </Button>
-                <NativeDialog
-                    open={current === 'first'}
-                    aria-label="First dialog"
-                    onClose={this.hide}
-                >
+                <Dialog open={current === 'first'} aria-label="First dialog" onClose={this.hide}>
                     <DialogHeader>
                         <DialogTitle>First dialog</DialogTitle>
                         <CloseButton onClick={this.hide} />
@@ -132,12 +128,8 @@ export class DialogSwapDemo extends Component {
                             Go to second dialog
                         </Button>
                     </DialogFooter>
-                </NativeDialog>
-                <NativeDialog
-                    open={current === 'second'}
-                    aria-label="Second dialog"
-                    onClose={this.hide}
-                >
+                </Dialog>
+                <Dialog open={current === 'second'} aria-label="Second dialog" onClose={this.hide}>
                     <DialogHeader>
                         <DialogTitle>Second dialog</DialogTitle>
                         <CloseButton onClick={this.hide} />
@@ -156,7 +148,7 @@ export class DialogSwapDemo extends Component {
                             Back to first dialog
                         </Button>
                     </DialogFooter>
-                </NativeDialog>
+                </Dialog>
             </>
         );
     }
@@ -182,7 +174,7 @@ export class DialogOverlaysDemo extends Component {
                 <Button variant="solid" theme="primary" onClick={this.show}>
                     Open dialog
                 </Button>
-                <NativeDialog
+                <Dialog
                     open={open}
                     aria-label="Overlays inside dialogs"
                     className="not-prose"
@@ -232,7 +224,7 @@ export class DialogOverlaysDemo extends Component {
                         </Button>
                     </DialogFooter>
                     <this.toast.Component position="bottom-end" />
-                </NativeDialog>
+                </Dialog>
             </>
         );
     }

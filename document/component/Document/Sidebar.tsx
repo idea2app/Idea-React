@@ -51,7 +51,7 @@ const extensions: NavLink[] = [
     { label: 'Click boundary', slug: 'click-boundary' },
     { label: 'Code block', slug: 'code-block' },
     { label: 'Countdown', slug: 'countdown' },
-    { label: 'Dialog model', slug: 'dialog-model' },
+    { label: 'DialogBox model', slug: 'dialog-model' },
     { label: 'Markdown view', slug: 'markdown-view' },
     { label: 'Horizontal marquee', slug: 'horizontal-marquee' },
     { label: 'Icon', slug: 'icon' },

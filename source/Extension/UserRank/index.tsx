@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 
 import { Badge } from '../../Base/Badge';
-import { Image } from '../../Content/Images';
+import { Image } from '../../Content/Image';
 import { Table } from '../../Content/Tables';
 import { polymorphic } from '../../Helper/Polymorphic';
 import { Col, Container, Row } from '../../Layout/Grid';

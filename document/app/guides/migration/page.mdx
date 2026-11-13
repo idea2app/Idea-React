@@ -1,117 +1,170 @@
-import { Combobox, ComboboxOption } from '../../../../source/Form/Combobox';
-import { CodeExample } from '../../../component/Document/Example';
 import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="migration">
 
 # Migration
 
-Replace removed components using the alternatives below. Import public components
-from `idea-react` rather than internal source paths.
+Import public components from `idea-react` rather than internal source paths.
 
-## Removed components
+## v1 to v2
 
-| Removed API                                                  | Replacement                                                                                                                                                   |
-| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Select`, `Option`, `SelectProps`, `OptionProps`             | [Combobox and ComboboxOption][1], or [FormSelect][2] for a native select                                                                                      |
-| `Editor` and its Editor.js configuration/data types          | The separate [React Bootstrap Editor][3] package for HTML editing; retain an Editor.js integration in your application if you still need Editor.js block data |
-| `EditorHTML`, `EditorHTMLProps`, `parser`                    | [MarkdownView][4] for Markdown strings; convert existing Editor.js data explicitly before using it                                                            |
-| `FilePicker`, `FileUploader`, `MultipleFileUploader`         | File components in [MobX RESTful table][5]; review its current file uploader API rather than assuming old props still apply                                   |
-| `FilterInput`                                                | Searchable input facilities in [MobX RESTful table][5]                                                                                                        |
-| `IdeaForm`, `IdeaInfo`, `IdeaTable`                          | [Form][6] and data-display facilities in [MobX RESTful table][5], including its current REST form/table APIs                                                  |
-| `PaginationBar`                                              | The pager in [MobX RESTful table][5] for model-backed pagination, or [Pagination][7] for presentation only                                                    |
-| `ScrollBoundary`                                             | The scroll boundary/list components in [MobX RESTful table][5]                                                                                                |
-| `AddressPicker`, `MapData`                                   | An application-level location picker using [Open React Map][8]; the old embedded-map message API is not retained                                              |
-| `OpenMap` and its map, coordinate, marker and location types | The separate [Open React Map][8] package                                                                                                                      |
+### Removed APIs
 
-The data components and map integration were extracted into separate packages
-during the 1.0 migration. Their current APIs are not guaranteed to be drop-in
-replacements for the former Idea React components.
+Data-backed Table, List and Form components moved to [MobX RESTful table][1], while Open Map and its
+model moved to [Open React Map][4]. These are migrations, not drop-in replacements:
 
-## Select to Combobox
+| v1 API                 | v2 migration                                                                                    |
+| ---------------------- | ----------------------------------------------------------------------------------------------- |
+| `FilePicker`           | Use file components in [MobX RESTful table][1]; check its current uploader API for prop changes |
+| `FileUploader`         | Use file components in [MobX RESTful table][1]; check its current uploader API for prop changes |
+| `MultipleFileUploader` | Use file components in [MobX RESTful table][1]; check its current uploader API for prop changes |
+| `FilterInput`          | Use searchable input facilities in [MobX RESTful table][1]                                      |
+| `IdeaForm`             | Use [Form][2] and the current REST form APIs in [MobX RESTful table][1]                         |
+| `IdeaInfo`             | Use data-display facilities in [MobX RESTful table][1]                                          |
+| `IdeaTable`            | Use the current REST table APIs in [MobX RESTful table][1]                                      |
+| `PaginationBar`        | Use the pager in [MobX RESTful table][1], or [Pagination][3] for presentation only              |
+| `ScrollBoundary`       | Use the scroll boundary/list components in [MobX RESTful table][1]                              |
+| `AddressPicker`        | Build an application-level location picker with [Open React Map][4]                             |
+| `MapData`              | Rework location data for [Open React Map][4]; the old embedded-map message API is not retained  |
+| `OpenMap`              | Migrate the component and its map, coordinate, marker and location types to [Open React Map][4] |
 
-Rename `Select` to [`Combobox`][1] and `Option` to [`ComboboxOption`][1]. Give the combobox a
-`name` for its form field. Use `defaultValue` for an uncontrolled selection, or
-`value` and `onChange` for a controlled selection.
+### Added components
 
-<CodeExample>
-    <Combobox name="framework" defaultValue="react" search={false}>
-        <ComboboxOption value="react">React</ComboboxOption>
-        <ComboboxOption value="vue">Vue</ComboboxOption>
-    </Combobox>
-</CodeExample>
+1. `Countdown`
+2. `HorizontalMarquee`
+3. `LiveTSX`
+4. `ScrollNav`
+5. `ShareBox`
+6. `TextTruncate`
+7. `Time`
+8. `Timeline`
+9. `Toast`
+10. `UserRank`
+11. `VerticalMarquee`
+12. `ZodiacBar`
 
-```tsx
-import { Combobox, ComboboxOption } from 'idea-react';
+### Dialog input
 
-<Combobox name="framework" defaultValue="react" search={false}>
-    <ComboboxOption value="react">React</ComboboxOption>
-    <ComboboxOption value="vue">Vue</ComboboxOption>
-</Combobox>;
-```
+The Promise-based dialog model gained a typed input parameter. Pass optional input to `open(input)`;
+existing calls to `open()` remain valid. In v3, the model is named [DialogBox][5].
 
-[`Combobox`][1] also supports search, groups and multiple selection. Its `onChange`
-argument is `string | string[]`; narrow the value when your model accepts only a
-string. The old button-specific `theme`, `variant`, `size`, `align` and
-`valueRender` props are not aliases on [`Combobox`][1]: use its documented form styling
-and custom option content instead. For small controls use `controlSize="sm"`.
+## v2 to v3
 
-## Editor and EditorHTML
+### Removed components
 
-Rich-text editing is provided by the separate `react-bootstrap-editor` package:
+| v2 component | v3 alternative                                                                        |
+| ------------ | ------------------------------------------------------------------------------------- |
+| `Select`     | [Combobox][6], or [FormSelect][7] for a native select                                 |
+| `Option`     | [ComboboxOption][6]                                                                   |
+| `Editor`     | [React Bootstrap Editor][8] for HTML editing; use an Editor.js integration for blocks |
+| `EditorHTML` | [MarkdownView][9] only after converting the Editor.js data to Markdown                |
+
+`MarkdownView` accepts Markdown text; it does not convert or render Editor.js block data.
+
+The recommended [React Bootstrap Editor][8] edits HTML, not Editor.js block data. Install it
+separately:
 
 ```sh
 npm install react-bootstrap-editor
 ```
 
-It edits HTML, not Editor.js block data. Existing Editor.js documents require an
-explicit conversion or an application-owned Editor.js integration.
+Existing Editor.js documents require explicit conversion or an application-owned Editor.js
+integration.
 
-For Markdown, replace `EditorHTML` and its block-data/parser API with string
-children:
+### Renamed APIs
 
-```tsx
-import { MarkdownView } from 'idea-react';
+| v2 API        | v3 API           |
+| ------------- | ---------------- |
+| `Dialog`      | `DialogBox`      |
+| `DialogClose` | `DialogBoxClose` |
+| `DialogProps` | `DialogBoxProps` |
 
-<MarkdownView>{'## Heading\n\nA **Markdown** document.'}</MarkdownView>;
-```
+### Bootstrap CSS
 
-Load its stylesheet in the page head:
+Idea React v2 uses Bootstrap 5; v3 targets Bootstrap 6. Replace the Bootstrap 5 stylesheet with the
+Bootstrap 6 stylesheet used by your application. Idea React components do not bundle third-party
+CSS, so load both Bootstrap and the library stylesheet in the document head:
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/github-markdown-css@5.9.0/github-markdown.css" />
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+/>
+<link rel="stylesheet" href="https://unpkg.com/idea-react/dist/style.css" />
 ```
 
-[`MarkdownView`][4] synchronously parses Markdown and does not sanitize embedded HTML.
-Pass trusted Markdown or sanitize untrusted content before rendering. HTML from
-the external editor and Editor.js block objects are not Markdown strings.
+Bootstrap utility names and component styles may differ between major versions; update custom
+classes and selectors along with the stylesheet.
 
-## Renamed APIs and reorganized modules
+## React-Bootstrap v2 to Idea React v3
 
-These are not removed capabilities:
+React-Bootstrap v2 targets Bootstrap 5, while Idea React v3 targets Bootstrap 6. The table lists
+only component and prop names that differ; same-named components are omitted.
 
-- The old `IdeaPopover` and `IdeaDialog` names became [OverlayBox][9] and
-  [Dialog][10]. The latter is a Promise-based dialog model, not the native dialog
-  element wrapper.
-- [`Image`][11], [`Table`][12] and grid components remain exported from `idea-react`. Their
-  implementations now belong to Content and Layout; shared helpers belong to
-  Helper, and [Chip][13] belongs to Form.
-- [Nameplate][14] and the other extension components not listed as removed above are
-  still available.
+| React-Bootstrap v2 API                   | Idea React v3 API                                                  |
+| ---------------------------------------- | ------------------------------------------------------------------ |
+| `Modal`                                  | `Dialog`                                                           |
+| `Modal.Header`                           | `DialogHeader`                                                     |
+| `Modal.Title`                            | `DialogTitle`                                                      |
+| `Modal.Body`                             | `DialogBody`                                                       |
+| `Modal.Footer`                           | `DialogFooter`                                                     |
+| `Modal.show` / `Modal.onHide`            | `Dialog.open` / `Dialog.onClose`                                   |
+| `Offcanvas`                              | `Drawer`                                                           |
+| `Offcanvas.Header`                       | `DrawerHeader`                                                     |
+| `Offcanvas.Title`                        | `DrawerTitle`                                                      |
+| `Offcanvas.Body`                         | `DrawerBody`                                                       |
+| `Offcanvas.show` / `Offcanvas.onHide`    | `Drawer.open` / `Drawer.onDismiss`                                 |
+| `Dropdown`                               | `Menu`                                                             |
+| `Dropdown.show` / `Dropdown.onToggle`    | `Menu` manages its open state; `Menu.onOpenChange` reports changes |
+| `Dropdown.Toggle`                        | `Menu.label` and `Menu.toggleProps`                                |
+| `Dropdown.Item`                          | `MenuItem`                                                         |
+| `Dropdown.Divider`                       | `MenuDivider`                                                      |
+| `Dropdown.Header`                        | `MenuHeader`                                                       |
+| `Form.Control`                           | `FormControl`                                                      |
+| `Form.Control.size` / `Form.Select.size` | `FormControl.controlSize` / `FormSelect.controlSize`               |
+| `Form.Select`                            | `FormSelect`                                                       |
+| `Form.Check`                             | `FormCheck`                                                        |
+| `Form.Check` with `type="switch"`        | `FormSwitch`                                                       |
+| `Form.Group`                             | `FormGroup` or `FormField`                                         |
+| `Form.Label`                             | `FormLabel`                                                        |
+| `ProgressBar`                            | `Progress`                                                         |
+| `ProgressBar.now`                        | `Progress.value`                                                   |
+
+Idea React uses flat named exports instead of React-Bootstrap's nested component properties. A
+`Modal`'s `show`/`onHide` pair does not transfer directly: control `Dialog` with `open` and update it
+from `onClose`. See the [Dialog][10] and [Form][2] guides for current props and examples.
+
+### Dependencies and stylesheets
+
+Remove React-Bootstrap and install Idea React with the required peer dependencies:
+
+```sh
+npm uninstall react-bootstrap
+npm install idea-react mobx mobx-react react react-dom react-element-to-jsx-string web-utility
+```
+
+Load Bootstrap 6 and Idea React CSS separately; replace any Bootstrap 5 stylesheet with the
+Bootstrap 6 version:
+
+```html
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+/>
+<link rel="stylesheet" href="https://unpkg.com/idea-react/dist/style.css" />
+```
+
+If the application uses `Icon`, also load the Bootstrap Icons font stylesheet.
 
 </DocumentLayout>
 
-[1]: ../../forms/combobox/
-[2]: ../../forms/form-control/
-[3]: ../ecosystem/
-[4]: ../../extensions/markdown-view/
-[5]: https://github.com/idea2app/MobX-RESTful-table
-[6]: ../../forms/
-[7]: ../../components/pagination/
-[8]: https://github.com/idea2app/OpenReactMap
-[9]: ../../extensions/overlay-box/
-[10]: ../../extensions/dialog-model/
-[11]: ../../content/images/
-[12]: ../../content/tables/
-[13]: ../../forms/chips/
-[14]: ../../extensions/nameplate/
+[1]: https://github.com/idea2app/MobX-RESTful-table
+[2]: ../../forms/
+[3]: ../../components/pagination/
+[4]: https://github.com/idea2app/OpenReactMap
+[5]: ../../extensions/dialog-model/
+[6]: ../../forms/combobox/
+[7]: ../../forms/form-control/
+[8]: ../ecosystem/
+[9]: ../../extensions/markdown-view/
+[10]: ../../components/dialog/

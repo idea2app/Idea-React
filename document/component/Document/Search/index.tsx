@@ -5,13 +5,13 @@ import { ChangeEvent, Component, createRef } from 'react';
 
 import { Button } from '../../../../source/Base/Button';
 import { CloseButton } from '../../../../source/Base/CloseButton';
+import { Dialog } from '../../../../source/Base/Dialog';
 import {
     MenuItem,
     MenuItemContent,
     MenuItemDescription,
     MenuPanel
 } from '../../../../source/Base/Menu';
-import { NativeDialog } from '../../../../source/Base/NativeDialog';
 import { Placeholder } from '../../../../source/Base/Placeholder';
 import { Icon } from '../../../../source/Extension/Icon';
 import { FormAdornment, FormAdornmentIcon, FormGhost } from '../../../../source/Form';
@@ -24,7 +24,7 @@ export interface DocumentSearchProps {
 
 @observer
 export class DocumentSearch extends Component<DocumentSearchProps> {
-    dialog = createRef<NativeDialog>();
+    dialog = createRef<Dialog>();
     input = createRef<HTMLInputElement>();
     model = new DocumentSearchModel(this.props.indexUrl);
 
@@ -130,7 +130,7 @@ export class DocumentSearch extends Component<DocumentSearchProps> {
                     <span>Search docs...</span>
                     <kbd className="ms-auto text-xs">Ctrl K</kbd>
                 </Button>
-                <NativeDialog
+                <Dialog
                     ref={this.dialog}
                     className={`${styles.dialog} p-0 overflow-y-auto`}
                     aria-label="Search documentation"
@@ -142,7 +142,7 @@ export class DocumentSearch extends Component<DocumentSearchProps> {
                             Search this documentation. Press Escape to close.
                         </p>
                     </div>
-                </NativeDialog>
+                </Dialog>
             </>
         );
     }

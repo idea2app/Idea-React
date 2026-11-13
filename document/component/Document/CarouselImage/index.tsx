@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import { Image } from '../../../../source/Content/Images';
+import { Image } from '../../../../source/Content/Image';
 import styles from './style.module.css';
 
 export interface CarouselImageProps {
+    // eslint-disable-next-line no-restricted-syntax
     children: string;
     width?: number;
     height?: number;
