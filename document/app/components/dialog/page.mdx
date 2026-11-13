@@ -1,12 +1,12 @@
 import { Button } from '../../../../source/Base/Button';
 import { CloseButton } from '../../../../source/Base/CloseButton';
 import {
-    NativeDialog,
+    Dialog,
     DialogHeader,
     DialogTitle,
     DialogBody,
     DialogFooter
-} from '../../../../source/Base/NativeDialog';
+} from '../../../../source/Base/Dialog';
 import {
     DialogDemo,
     DialogOverlaysDemo,
@@ -60,7 +60,7 @@ The Invoker Commands API is not supported in all browsers. For guaranteed suppor
     >
         Open dialog
     </Button>
-    <NativeDialog id="invokerDialog" aria-labelledby="invokerDialogTitle">
+    <Dialog id="invokerDialog" aria-labelledby="invokerDialogTitle">
         <DialogHeader>
             <DialogTitle id="invokerDialogTitle">Invoker Commands</DialogTitle>
             <CloseButton
@@ -83,12 +83,12 @@ The Invoker Commands API is not supported in all browsers. For guaranteed suppor
                 Close
             </Button>
         </DialogFooter>
-    </NativeDialog>
+    </Dialog>
 </CodeExample>
 
 ## Dark dialog
 
-To make a dialog dark, pass `theme="dark"` to `NativeDialog`.
+To make a dialog dark, pass `theme="dark"` to `Dialog`.
 
 <CodeExample source="document/component/Document/DialogDemo.tsx">
     <DialogDemo label="Open dark dialog" title="Dark dialog title" saveLabel="Save changes" dark>
@@ -126,7 +126,7 @@ Tooltips, popovers, toasts, and menus all work inside modal dialogs. Modal dialo
 
 ### Instant
 
-By default, dialogs animate with a fade on open and close. To disable animations, pass `animation="instant"` to `NativeDialog`.
+By default, dialogs animate with a fade on open and close. To disable animations, pass `animation="instant"` to `Dialog`.
 
 <CodeExample source="document/component/Document/DialogDemo.tsx">
     <DialogDemo
@@ -141,7 +141,7 @@ By default, dialogs animate with a fade on open and close. To disable animations
 
 ### Slide down
 
-Pass `animation="slide-down"` to `NativeDialog` and it will slide **down** from the top of the viewport when opened.
+Pass `animation="slide-down"` to `Dialog` and it will slide **down** from the top of the viewport when opened.
 
 <CodeExample source="document/component/Document/DialogDemo.tsx">
     <DialogDemo
@@ -156,7 +156,7 @@ Pass `animation="slide-down"` to `NativeDialog` and it will slide **down** from 
 
 ### Slide up
 
-Pass `animation="slide-up"` to `NativeDialog` and it will slide **up** from the bottom of the viewport when opened.
+Pass `animation="slide-up"` to `Dialog` and it will slide **up** from the bottom of the viewport when opened.
 
 <CodeExample source="document/component/Document/DialogDemo.tsx">
     <DialogDemo
@@ -171,7 +171,7 @@ Pass `animation="slide-up"` to `NativeDialog` and it will slide **up** from the 
 
 ## Scrollable
 
-Create a scrollable dialog that scrolls the dialog body while keeping the header and footer fixed. Pass `scrollable` to `NativeDialog`.
+Create a scrollable dialog that scrolls the dialog body while keeping the header and footer fixed. Pass `scrollable` to `Dialog`.
 
 <CodeExample source="document/component/Document/DialogDemo.tsx">
     <DialogDemo
@@ -282,11 +282,11 @@ By default, dialogs open as modals using the browser-native `showModal()` method
     </DialogDemo>
 </CodeExample>
 
-Use `modal={false}` to create a non-modal `NativeDialog`.
+Use `modal={false}` to create a non-modal `Dialog`.
 
 ## Optional sizes
 
-Dialogs have three optional sizes, available via the `size` prop on `NativeDialog`. These sizes kick in at certain breakpoints to avoid horizontal scrollbars on narrower viewports.
+Dialogs have three optional sizes, available via the `size` prop on `Dialog`. These sizes kick in at certain breakpoints to avoid horizontal scrollbars on narrower viewports.
 
 | Size        | Prop        | Dialog max-width |
 | ----------- | ----------- | ---------------- |
@@ -425,7 +425,7 @@ Local CSS custom properties expose the component’s colors, spacing, borders, a
 
 ## JavaScript behavior
 
-Control `NativeDialog` with `open`; update application state from `onClose`. The wrapper handles the browser’s native dialog methods and focus restoration.
+Control `Dialog` with `open`; update application state from `onClose`. The wrapper handles the browser’s native dialog methods and focus restoration.
 
 ### Options
 

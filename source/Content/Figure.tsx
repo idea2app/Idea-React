@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
 import { polymorphic } from '../Helper/Polymorphic';
-import { Image, ImageProps } from './Images';
+import { Image, ImageProps } from './Image';
 
 export type FigureProps = ComponentPropsWithRef<'figure'>;
 

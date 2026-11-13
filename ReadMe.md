@@ -33,7 +33,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 9. [Carousel](source/Base/Carousel)
 10. [Close Button](source/Base/CloseButton.tsx)
 11. [Collapse](source/Base/Collapse.tsx)
-12. [Native Dialog](source/Base/NativeDialog)
+12. [Dialog](source/Base/Dialog)
 13. [Drawer](source/Base/Drawer.tsx)
 14. [List Group](source/Base/ListGroup.tsx)
 15. [Menu](source/Base/Menu.tsx)
@@ -59,7 +59,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 
 ### Content components
 
-1. [Images](source/Content/Images.tsx)
+1. [Images](source/Content/Image.tsx)
 2. [Tables](source/Content/Tables.tsx)
 
 ### Form components
@@ -86,7 +86,7 @@ A **[React][1] advanced components library** based on [TypeScript][2] & [Bootstr
 1. [Click Boundary](source/Extension/ClickBoundary.tsx)
 2. [Code Block](source/Extension/CodeBlock.tsx)
 3. [Countdown](source/Extension/Countdown.tsx)
-4. [Dialog](source/Extension/Dialog.tsx)
+4. [DialogBox](source/Extension/Dialog.tsx)
 5. [Markdown View](source/Extension/MarkdownView.tsx)
 6. [Horizontal Marquee](source/Extension/HorizontalMarquee/)
 7. [Icon](source/Extension/Icon.tsx)
@@ -125,7 +125,7 @@ Open Map component & model, have been migrated to https://github.com/idea2app/Op
 ## Usage
 
 ```sh
-npm install idea-react mobx mobx-react react react-dom react-element-to-jsx-string
+npm install idea-react mobx mobx-react react react-dom react-element-to-jsx-string web-utility
 ```
 
 For the current alpha release, use `idea-react@next` instead of `idea-react`.
@@ -191,48 +191,67 @@ Without `as`, the default markup and props stay unchanged. Class component refs 
 component instance. Behavioral components require compatible root elements; custom roots must forward
 their DOM props and refs. Components that render fragments or multiple roots do not support `as`.
 
-### Dialog
+### DialogBox model
 
 ```tsx
 import { formToJSON } from 'web-utility';
-import { Component } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
-import { Dialog, DialogClose } from 'idea-react';
+import { Component, FormEvent } from 'react';
+import {
+    Button,
+    Dialog,
+    DialogBody,
+    DialogBox,
+    DialogBoxClose,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    Form,
+    FormControl,
+    FormField,
+    FormLabel
+} from 'idea-react';
 
 export class ExamplePage extends Component {
-    inputDialog = new Dialog<Record<'a' | 'b', number>>(({ defer }) => (
-        <Modal show={!!defer} onHide={() => defer?.reject(new DialogClose())}>
-            <Modal.Header>Dialog</Modal.Header>
-            <Modal.Body>
+    inputDialog = new DialogBox<{}, Record<'a' | 'b', number>>(({ defer }) => (
+        <Dialog open={!!defer} onClose={() => defer?.reject(new DialogBoxClose())}>
+            <DialogHeader>
+                <DialogTitle>Dialog</DialogTitle>
+            </DialogHeader>
+            <DialogBody>
                 <Form
+                    className="d-flex flex-column gap-3"
                     id="input-dialog"
-                    onSubmit={event => {
-                        event.preventDefault();
-
-                        defer?.resolve(formToJSON(event.currentTarget));
-                    }}
-                    onReset={() => defer?.reject(new DialogClose())}
+                    onSubmit={this.handleSubmit}
+                    onReset={() => defer?.reject(new DialogBoxClose())}
                 >
-                    <Form.Group>
-                        <Form.Label>A</Form.Label>
-                        <Form.Control type="number" name="a" />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>B</Form.Label>
-                        <Form.Control type="number" name="b" />
-                    </Form.Group>
+                    <FormField>
+                        <FormLabel htmlFor="input-dialog-a">A</FormLabel>
+                        <FormControl id="input-dialog-a" type="number" name="a" />
+                    </FormField>
+                    <FormField>
+                        <FormLabel htmlFor="input-dialog-b">B</FormLabel>
+                        <FormControl id="input-dialog-b" type="number" name="b" />
+                    </FormField>
                 </Form>
-            </Modal.Body>
-            <Modal.Footer className="d-flex justify-content-end gap-3">
-                <Button form="input-dialog" type="submit">
+            </DialogBody>
+            <DialogFooter>
+                <Button form="input-dialog" type="submit" variant="solid" theme="primary">
                     √
                 </Button>
-                <Button form="input-dialog" type="reset" variant="danger">
+                <Button form="input-dialog" type="reset" variant="solid" theme="danger">
                     ×
                 </Button>
-            </Modal.Footer>
-        </Modal>
+            </DialogFooter>
+        </Dialog>
     ));
+
+    handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const data = formToJSON<Record<'a' | 'b', number>>(event.currentTarget);
+
+        this.inputDialog.defer?.resolve(data);
+    };
 
     someLogic = async () => {
         try {
@@ -240,14 +259,14 @@ export class ExamplePage extends Component {
 
             alert(JSON.stringify(data, null, 4));
         } catch (error) {
-            if (error instanceof DialogClose) console.warn(error.message);
+            if (error instanceof DialogBoxClose) console.warn(error.message);
         }
     };
 
     render() {
         return (
             <>
-                <Button onClick={this.someLogic}>open Dialog</Button>
+                <Button onClick={this.someLogic}>Open dialog</Button>
 
                 <this.inputDialog.Component />
             </>

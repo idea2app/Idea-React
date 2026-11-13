@@ -4,8 +4,8 @@ import { Alert } from '../../source/Base/Alert';
 import { Button } from '../../source/Base/Button';
 import { Card } from '../../source/Base/Card';
 import { Carousel } from '../../source/Base/Carousel';
+import { Dialog } from '../../source/Base/Dialog';
 import { ListGroup, ListGroupProps } from '../../source/Base/ListGroup';
-import { NativeDialog } from '../../source/Base/NativeDialog';
 import { NavLink } from '../../source/Base/Nav';
 import { NavbarBrand, NavbarBrandProps } from '../../source/Base/Navbar';
 import { Stack } from '../../source/Base/Stack';
@@ -74,7 +74,7 @@ export const polymorphicTypeExamples = [
     <Toggler as={RouterLink} to="/" value="active" />,
     <Alert as={RouterLink} to="/docs" />,
     <Alert as={RequiredTitle} title="Notice" />,
-    <NativeDialog ref={createRef<NativeDialog>()} as="dialog" />,
+    <Dialog ref={createRef<Dialog>()} as="dialog" />,
     <Button as={NavLink} href="/docs" active />,
     <Stack as={RouterLink} to="/docs" direction="horizontal" />,
     <Card ref={createRef<TargetClass>()} as={TargetClass} destination="/docs" />,

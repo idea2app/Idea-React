@@ -19,7 +19,7 @@ import styles from './style.module.css';
 const transitionMilliseconds = (value: string) =>
     (parseFloat(value) || 0) * (value.trim().endsWith('ms') ? 1 : 1000);
 
-export interface NativeDialogProps extends Omit<DialogHTMLAttributes<HTMLDialogElement>, 'open'> {
+export interface DialogProps extends Omit<DialogHTMLAttributes<HTMLDialogElement>, 'open'> {
     modal?: boolean;
     dialog?: boolean;
     theme?: 'light' | 'dark';
@@ -61,16 +61,16 @@ export const DialogFooter = polymorphic<ComponentPropsWithRef<'div'>>(
 );
 DialogFooter.displayName = 'DialogFooter';
 
-export class NativeDialog<T extends ElementType | undefined = 'dialog'> extends Component<
-    PolymorphicClassProps<T, NativeDialogProps>
+export class Dialog<T extends ElementType | undefined = 'dialog'> extends Component<
+    PolymorphicClassProps<T, DialogProps>
 > {
-    declare readonly props: PolymorphicClassProps<T, NativeDialogProps>;
+    declare readonly props: PolymorphicClassProps<T, DialogProps>;
 
-    protected get componentProps(): Readonly<NativeDialogProps & AsProps> {
+    protected get componentProps(): Readonly<DialogProps & AsProps> {
         return this.props;
     }
 
-    static scrollLocks = new Set<NativeDialog<ElementType>>();
+    static scrollLocks = new Set<Dialog<ElementType>>();
     static bodyOverflow = '';
 
     element = createRef<HTMLDialogElement>();
@@ -86,7 +86,7 @@ export class NativeDialog<T extends ElementType | undefined = 'dialog'> extends 
         if (this.componentProps.open) this.show();
     }
 
-    componentDidUpdate({ open, modal, scroll }: NativeDialogProps) {
+    componentDidUpdate({ open, modal, scroll }: DialogProps) {
         const modeChanged = this.componentProps.modal !== modal;
         const openChanged = this.componentProps.open !== open;
         const wasOpen = this.open;
@@ -121,20 +121,20 @@ export class NativeDialog<T extends ElementType | undefined = 'dialog'> extends 
     };
 
     lockScroll = () => {
-        const { scrollLocks } = NativeDialog;
+        const { scrollLocks } = Dialog;
 
         if (!scrollLocks.size) {
-            NativeDialog.bodyOverflow = document.body.style.overflow;
+            Dialog.bodyOverflow = document.body.style.overflow;
             document.body.style.overflow = 'hidden';
         }
         scrollLocks.add(this);
     };
 
     unlockScroll = () => {
-        const { scrollLocks } = NativeDialog;
+        const { scrollLocks } = Dialog;
 
         if (!scrollLocks.delete(this)) return;
-        if (!scrollLocks.size) document.body.style.overflow = NativeDialog.bodyOverflow;
+        if (!scrollLocks.size) document.body.style.overflow = Dialog.bodyOverflow;
     };
 
     close = () => {

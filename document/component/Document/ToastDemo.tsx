@@ -13,7 +13,7 @@ import {
     ToastItem,
     ToastPosition
 } from '../../../source/Base/Toast';
-import { Image } from '../../../source/Content/Images';
+import { Image } from '../../../source/Content/Image';
 import { FormField, FormLabel, FormSelect } from '../../../source/Form';
 
 export interface StaticToastProps {
@@ -101,6 +101,7 @@ export class StaticToast extends Component<StaticToastProps> {
                 )}
             </ToastItem>
         );
+
         return dark ? <div data-bs-theme="dark">{toast}</div> : toast;
     }
 }

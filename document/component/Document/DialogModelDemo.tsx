@@ -7,32 +7,32 @@ import { formToJSON } from 'web-utility';
 import { Button } from '../../../source/Base/Button';
 import { CloseButton } from '../../../source/Base/CloseButton';
 import {
+    Dialog,
     DialogBody,
     DialogFooter,
     DialogHeader,
-    DialogTitle,
-    NativeDialog
-} from '../../../source/Base/NativeDialog';
-import { Dialog, DialogClose } from '../../../source/Extension/Dialog';
+    DialogTitle
+} from '../../../source/Base/Dialog';
+import { DialogBox, DialogBoxClose } from '../../../source/Extension/Dialog';
 import { FormControl, FormField, FormLabel } from '../../../source/Form';
 
 @observer
 export class DialogModelDemo extends Component {
-    inputDialog = new Dialog<{}, Record<'a' | 'b', number>>(({ defer }) => (
-        <NativeDialog
+    inputDialog = new DialogBox<{}, Record<'a' | 'b', number>>(({ defer }) => (
+        <Dialog
             open={!!defer}
             aria-label="Input dialog"
-            onClose={() => defer?.reject(new DialogClose())}
+            onClose={() => defer?.reject(new DialogBoxClose())}
         >
             <DialogHeader>
                 <DialogTitle>Dialog</DialogTitle>
-                <CloseButton onClick={() => defer?.reject(new DialogClose())} />
+                <CloseButton onClick={() => defer?.reject(new DialogBoxClose())} />
             </DialogHeader>
             <DialogBody>
                 <form
                     id="dialog-model-form"
                     onSubmit={this.handleSubmit}
-                    onReset={() => defer?.reject(new DialogClose())}
+                    onReset={() => defer?.reject(new DialogBoxClose())}
                 >
                     <FormField className="mb-3">
                         <FormLabel htmlFor="dialog-model-a">A</FormLabel>
@@ -52,7 +52,7 @@ export class DialogModelDemo extends Component {
                     ×
                 </Button>
             </DialogFooter>
-        </NativeDialog>
+        </Dialog>
     ));
 
     handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -67,7 +67,7 @@ export class DialogModelDemo extends Component {
 
             alert(JSON.stringify(data, null, 4));
         } catch (error) {
-            if (error instanceof DialogClose) console.warn(error.message);
+            if (error instanceof DialogBoxClose) console.warn(error.message);
         }
     };
 

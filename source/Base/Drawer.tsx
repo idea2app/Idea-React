@@ -8,7 +8,7 @@ import { Component, ComponentPropsWithRef, createRef, ElementType, ReactNode } f
 import { AsProps, polymorphic, PolymorphicClassProps } from '../Helper/Polymorphic';
 import { Breakpoint } from '../Layout/Grid';
 import { CloseButton } from './CloseButton';
-import { NativeDialog, NativeDialogProps } from './NativeDialog';
+import { Dialog, DialogProps } from './Dialog';
 
 export type DrawerPlacement = 'start' | 'end' | 'top' | 'bottom';
 
@@ -41,7 +41,7 @@ export const DrawerFooter = polymorphic<ComponentPropsWithRef<'div'>>(
 DrawerFooter.displayName = 'DrawerFooter';
 
 export interface DrawerProps extends Omit<
-    NativeDialogProps,
+    DialogProps,
     'dialog' | 'onClose' | 'title' | 'animation' | 'fullscreen'
 > {
     title?: ReactNode;
@@ -78,7 +78,7 @@ export class Drawer<T extends ElementType | undefined = 'dialog'> extends Compon
 
     @observable accessor expanded = false;
 
-    dialog = createRef<NativeDialog<ElementType>>();
+    dialog = createRef<Dialog<ElementType>>();
     media?: MediaQueryList;
     dismissed = false;
 
@@ -146,7 +146,7 @@ export class Drawer<T extends ElementType | undefined = 'dialog'> extends Compon
         } = this.componentProps;
 
         return (
-            <NativeDialog
+            <Dialog
                 as={this.componentProps.as}
                 {...props}
                 ref={this.dialog}
@@ -176,7 +176,7 @@ export class Drawer<T extends ElementType | undefined = 'dialog'> extends Compon
                 </DrawerHeader>
                 <DrawerBody className={bodyClassName}>{children}</DrawerBody>
                 {footer && <DrawerFooter>{footer}</DrawerFooter>}
-            </NativeDialog>
+            </Dialog>
         );
     }
 }

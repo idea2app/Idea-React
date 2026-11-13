@@ -28,8 +28,8 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    NativeDialog
-} from '../../../../source/Base/NativeDialog';
+    Dialog
+} from '../../../../source/Base/Dialog';
 import { Nav, NavLink } from '../../../../source/Base/Nav';
 import { Navbar, NavbarBrand, NavbarNav, NavbarToggler } from '../../../../source/Base/Navbar';
 import { PageItem, PageLink, Pagination } from '../../../../source/Base/Pagination';
@@ -1568,7 +1568,7 @@ export const navigationGroups = [
     </Container>
 
     {dialogExamples.map(({ id, title, description, action, backdrop, keyboard }) => (
-        <NativeDialog key={id} id={id} backdrop={backdrop} keyboard={keyboard}>
+        <Dialog key={id} id={id} backdrop={backdrop} keyboard={keyboard}>
             <DialogHeader>
                 <DialogTitle className="fs-lg">{title}</DialogTitle>
                 <CloseButton {...{ commandfor: id, command: 'close' }} aria-label="Close" />
@@ -1584,7 +1584,7 @@ export const navigationGroups = [
                     {action}
                 </Button>
             </DialogFooter>
-        </NativeDialog>
+        </Dialog>
     ))}
 
 </BaseLayout>

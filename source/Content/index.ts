@@ -1,3 +1,3 @@
 export * from './Figure';
-export * from './Images';
+export * from './Image';
 export * from './Tables';

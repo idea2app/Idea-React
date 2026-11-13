@@ -4,9 +4,9 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 
 <DocumentLayout active="dialog-model">
 
-# Dialog model
+# DialogBox model
 
-The [`Dialog` model][1] composes the [NativeDialog wrapper][2] with promise-based dialogs.
+The [`DialogBox` model][1] composes the [Dialog wrapper][2] with promise-based dialogs.
 `open()` returns a promise that resolves or rejects when the dialog closes.
 
 ## Promise-based dialogs
@@ -16,12 +16,12 @@ below resolves with the submitted numbers and rejects when the dialog is dismiss
 
 <CodeExample
     source="document/component/Document/DialogModelDemo.tsx"
-    code={`const inputDialog = new Dialog(({ defer }) => (
-    <NativeDialog open={!!defer} onClose={() => defer?.reject(new DialogClose())}>
+    code={`const inputDialog = new DialogBox(({ defer }) => (
+    <Dialog open={!!defer} onClose={() => defer?.reject(new DialogBoxClose())}>
         <Form onSubmit={submit}>
             <FormControl name="a" type="number" />
         </Form>
-    </NativeDialog>
+    </Dialog>
 ));
 
 const data = await inputDialog.open();`}

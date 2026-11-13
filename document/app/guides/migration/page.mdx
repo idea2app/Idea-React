@@ -90,9 +90,10 @@ the external editor and Editor.js block objects are not Markdown strings.
 
 These are not removed capabilities:
 
-- The old `IdeaPopover` and `IdeaDialog` names became [OverlayBox][9] and
-  [Dialog][10]. The latter is a Promise-based dialog model, not the native dialog
-  element wrapper.
+- `IdeaPopover` and `IdeaDialog` became [OverlayBox][9] and the Promise-based
+  `Dialog` model. In v3, rename the v2 `Dialog`, `DialogClose` and `DialogProps`
+  identifiers to [DialogBox][10], `DialogBoxClose` and `DialogBoxProps`;
+  `open()` remains promise-based.
 - [`Image`][11], [`Table`][12] and grid components remain exported from `idea-react`. Their
   implementations now belong to Content and Layout; shared helpers belong to
   Helper, and [Chip][13] belongs to Form.
