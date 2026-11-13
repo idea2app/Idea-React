@@ -8,45 +8,68 @@ Import public components from `idea-react` rather than internal source paths.
 
 ## v1 to v2
 
-### Removed components
+### Removed APIs
 
-No public component modules were removed in this transition. `Select`, `Editor` and `EditorHTML`
-remain exported in v2; their removal belongs to the v2-to-v3 migration below.
+Data-backed Table, List and Form components moved to [MobX RESTful table][1], while Open Map and its
+model moved to [Open React Map][4]. These are migrations, not drop-in replacements:
+
+| v1 API                 | v2 migration                                                                                    |
+| ---------------------- | ----------------------------------------------------------------------------------------------- |
+| `FilePicker`           | Use file components in [MobX RESTful table][1]; check its current uploader API for prop changes |
+| `FileUploader`         | Use file components in [MobX RESTful table][1]; check its current uploader API for prop changes |
+| `MultipleFileUploader` | Use file components in [MobX RESTful table][1]; check its current uploader API for prop changes |
+| `FilterInput`          | Use searchable input facilities in [MobX RESTful table][1]                                      |
+| `IdeaForm`             | Use [Form][2] and the current REST form APIs in [MobX RESTful table][1]                         |
+| `IdeaInfo`             | Use data-display facilities in [MobX RESTful table][1]                                          |
+| `IdeaTable`            | Use the current REST table APIs in [MobX RESTful table][1]                                      |
+| `PaginationBar`        | Use the pager in [MobX RESTful table][1], or [Pagination][3] for presentation only              |
+| `ScrollBoundary`       | Use the scroll boundary/list components in [MobX RESTful table][1]                              |
+| `AddressPicker`        | Build an application-level location picker with [Open React Map][4]                             |
+| `MapData`              | Rework location data for [Open React Map][4]; the old embedded-map message API is not retained  |
+| `OpenMap`              | Migrate the component and its map, coordinate, marker and location types to [Open React Map][4] |
 
 ### Added components
 
-| v2 component        |
-| ------------------- |
-| `Countdown`         |
-| `HorizontalMarquee` |
-| `LiveTSX`           |
-| `ScrollNav`         |
-| `ShareBox`          |
-| `TextTruncate`      |
-| `Time`              |
-| `Timeline`          |
-| `Toast`             |
-| `UserRank`          |
-| `VerticalMarquee`   |
-| `ZodiacBar`         |
+1. `Countdown`
+2. `HorizontalMarquee`
+3. `LiveTSX`
+4. `ScrollNav`
+5. `ShareBox`
+6. `TextTruncate`
+7. `Time`
+8. `Timeline`
+9. `Toast`
+10. `UserRank`
+11. `VerticalMarquee`
+12. `ZodiacBar`
 
 ### Dialog input
 
 The Promise-based dialog model gained a typed input parameter. Pass optional input to `open(input)`;
-existing calls to `open()` remain valid. In v3, the model is named [DialogBox][1].
+existing calls to `open()` remain valid. In v3, the model is named [DialogBox][5].
 
 ## v2 to v3
 
 ### Removed components
 
-| v2 component | v3 alternative                                                          |
-| ------------ | ----------------------------------------------------------------------- |
-| `Select`     | [Combobox][2], or [FormSelect][3] for a native select                   |
-| `Option`     | `ComboboxOption`                                                        |
-| `Editor`     | Choose an Editor.js integration; v3 does not include a rich-text editor |
-| `EditorHTML` | [MarkdownView][4] only after converting the Editor.js data to Markdown  |
+| v2 component | v3 alternative                                                                        |
+| ------------ | ------------------------------------------------------------------------------------- |
+| `Select`     | [Combobox][6], or [FormSelect][7] for a native select                                 |
+| `Option`     | [ComboboxOption][6]                                                                   |
+| `Editor`     | [React Bootstrap Editor][8] for HTML editing; use an Editor.js integration for blocks |
+| `EditorHTML` | [MarkdownView][9] only after converting the Editor.js data to Markdown                |
 
 `MarkdownView` accepts Markdown text; it does not convert or render Editor.js block data.
+
+The recommended [React Bootstrap Editor][8] edits HTML, not Editor.js block data. Install it
+separately:
+
+```sh
+npm install react-bootstrap-editor
+```
+
+Existing Editor.js documents require explicit conversion or an application-owned Editor.js
+integration.
 
 ### Renamed APIs
 
@@ -55,8 +78,6 @@ existing calls to `open()` remain valid. In v3, the model is named [DialogBox][1
 | `Dialog`      | `DialogBox`      |
 | `DialogClose` | `DialogBoxClose` |
 | `DialogProps` | `DialogBoxProps` |
-
-The Promise-based `open()` workflow and v2's optional input argument remain supported.
 
 ### Bootstrap CSS
 
@@ -111,7 +132,7 @@ only component and prop names that differ; same-named components are omitted.
 
 Idea React uses flat named exports instead of React-Bootstrap's nested component properties. A
 `Modal`'s `show`/`onHide` pair does not transfer directly: control `Dialog` with `open` and update it
-from `onClose`. See the [Dialog][5] and [Form][6] guides for current props and examples.
+from `onClose`. See the [Dialog][10] and [Form][2] guides for current props and examples.
 
 ### Dependencies and stylesheets
 
@@ -137,9 +158,13 @@ If the application uses `Icon`, also load the Bootstrap Icons font stylesheet.
 
 </DocumentLayout>
 
-[1]: ../../extensions/dialog-model/
-[2]: ../../forms/combobox/
-[3]: ../../forms/form-control/
-[4]: ../../extensions/markdown-view/
-[5]: ../../components/dialog/
-[6]: ../../forms/
+[1]: https://github.com/idea2app/MobX-RESTful-table
+[2]: ../../forms/
+[3]: ../../components/pagination/
+[4]: https://github.com/idea2app/OpenReactMap
+[5]: ../../extensions/dialog-model/
+[6]: ../../forms/combobox/
+[7]: ../../forms/form-control/
+[8]: ../ecosystem/
+[9]: ../../extensions/markdown-view/
+[10]: ../../components/dialog/
