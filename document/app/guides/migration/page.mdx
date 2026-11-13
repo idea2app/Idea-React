@@ -9,7 +9,11 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 Replace removed components using the alternatives below. Import public components
 from `idea-react` rather than internal source paths.
 
-## Removed components
+## v1 to v2
+
+### Removed APIs
+
+The following legacy APIs are not part of the v2 public API:
 
 | Removed API                                                  | Replacement                                                                                                                                                   |
 | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -24,15 +28,15 @@ from `idea-react` rather than internal source paths.
 | `AddressPicker`, `MapData`                                   | An application-level location picker using [Open React Map][8]; the old embedded-map message API is not retained                                              |
 | `OpenMap` and its map, coordinate, marker and location types | The separate [Open React Map][8] package                                                                                                                      |
 
-The data components and map integration were extracted into separate packages
-during the 1.0 migration. Their current APIs are not guaranteed to be drop-in
-replacements for the former Idea React components.
+Data components and map integration were extracted into separate packages during the 1.0
+migration. Their current APIs are not guaranteed to be drop-in replacements for the former
+Idea React components.
 
-## Select to Combobox
+### Select to Combobox
 
 Rename `Select` to [`Combobox`][1] and `Option` to [`ComboboxOption`][1]. Give the combobox a
-`name` for its form field. Use `defaultValue` for an uncontrolled selection, or
-`value` and `onChange` for a controlled selection.
+`name` for its form field. Use `defaultValue` for an uncontrolled selection, or `value` and
+`onChange` for a controlled selection.
 
 <CodeExample>
     <Combobox name="framework" defaultValue="react" search={false}>
@@ -50,13 +54,13 @@ import { Combobox, ComboboxOption } from 'idea-react';
 </Combobox>;
 ```
 
-[`Combobox`][1] also supports search, groups and multiple selection. Its `onChange`
-argument is `string | string[]`; narrow the value when your model accepts only a
-string. The old button-specific `theme`, `variant`, `size`, `align` and
-`valueRender` props are not aliases on [`Combobox`][1]: use its documented form styling
-and custom option content instead. For small controls use `controlSize="sm"`.
+[`Combobox`][1] also supports search, groups and multiple selection. Its `onChange` argument is
+`string | string[]`; narrow the value when your model accepts only a string. The old button-specific
+`theme`, `variant`, `size`, `align` and `valueRender` props are not aliases on [`Combobox`][1]: use
+its documented form styling and custom option content instead. For small controls use
+`controlSize="sm"`.
 
-## Editor and EditorHTML
+### Editor and EditorHTML
 
 Rich-text editing is provided by the separate `react-bootstrap-editor` package:
 
@@ -64,11 +68,10 @@ Rich-text editing is provided by the separate `react-bootstrap-editor` package:
 npm install react-bootstrap-editor
 ```
 
-It edits HTML, not Editor.js block data. Existing Editor.js documents require an
-explicit conversion or an application-owned Editor.js integration.
+It edits HTML, not Editor.js block data. Existing Editor.js documents require an explicit conversion
+or an application-owned Editor.js integration.
 
-For Markdown, replace `EditorHTML` and its block-data/parser API with string
-children:
+For Markdown, replace `EditorHTML` and its block-data/parser API with string children:
 
 ```tsx
 import { MarkdownView } from 'idea-react';
@@ -82,23 +85,103 @@ Load its stylesheet in the page head:
 <link rel="stylesheet" href="https://unpkg.com/github-markdown-css@5.9.0/github-markdown.css" />
 ```
 
-[`MarkdownView`][4] synchronously parses Markdown and does not sanitize embedded HTML.
-Pass trusted Markdown or sanitize untrusted content before rendering. HTML from
-the external editor and Editor.js block objects are not Markdown strings.
+[`MarkdownView`][4] synchronously parses Markdown and does not sanitize embedded HTML. Pass trusted
+Markdown or sanitize untrusted content before rendering. HTML from the external editor and Editor.js
+block objects are not Markdown strings.
 
-## Renamed APIs and reorganized modules
+### Renamed and reorganized APIs
 
-These are not removed capabilities:
+- `IdeaPopover` and `IdeaDialog` became [OverlayBox][9] and the Promise-based `Dialog` model;
+  the model is now documented as [DialogBox][10].
+- [`Image`][11], [`Table`][12] and grid components remain exported from `idea-react`, but their
+  implementations moved to Content and Layout; shared helpers belong to Helper, and [Chip][13]
+  belongs to Form.
+- [Nameplate][14] and the other extension components not listed as removed above remain available.
 
-- `IdeaPopover` and `IdeaDialog` became [OverlayBox][9] and the Promise-based
-  `Dialog` model. In v3, rename the v2 `Dialog`, `DialogClose` and `DialogProps`
-  identifiers to [DialogBox][10], `DialogBoxClose` and `DialogBoxProps`;
-  `open()` remains promise-based.
-- [`Image`][11], [`Table`][12] and grid components remain exported from `idea-react`. Their
-  implementations now belong to Content and Layout; shared helpers belong to
-  Helper, and [Chip][13] belongs to Form.
-- [Nameplate][14] and the other extension components not listed as removed above are
-  still available.
+## v2 to v3
+
+### Renamed APIs
+
+The Promise-based `Dialog` model is renamed [DialogBox][10] to distinguish it from the native dialog
+component. Rename its related identifiers as well:
+
+| v2 API        | v3 API           |
+| ------------- | ---------------- |
+| `Dialog`      | `DialogBox`      |
+| `DialogClose` | `DialogBoxClose` |
+| `DialogProps` | `DialogBoxProps` |
+
+The `open()` Promise workflow and resolution/rejection behavior are unchanged.
+
+### Bootstrap CSS
+
+Idea React v2 uses Bootstrap 5; v3 targets Bootstrap 6. Replace the Bootstrap 5 stylesheet with the
+Bootstrap 6 stylesheet used by your application. Idea React components do not bundle third-party
+CSS, so load both Bootstrap and the library stylesheet in the document head:
+
+```html
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+/>
+<link rel="stylesheet" href="https://unpkg.com/idea-react/dist/style.css" />
+```
+
+Bootstrap utility names and component styles may differ between major versions; update custom
+classes and selectors along with the stylesheet.
+
+## React-Bootstrap v2 to Idea React v3
+
+React-Bootstrap v2 targets Bootstrap 5, while Idea React v3 targets Bootstrap 6. Replace
+React-Bootstrap components with Idea React exports rather than keeping both component libraries.
+The mappings below are starting points, not prop-for-prop compatibility guarantees.
+
+### Component mapping
+
+| React-Bootstrap v2                          | Idea React v3                                                           |
+| ------------------------------------------- | ----------------------------------------------------------------------- |
+| `Accordion`, `Alert`, `Badge`, `Breadcrumb` | Same-named components                                                   |
+| `Button`, `ButtonGroup`, `Card`, `Carousel` | Same-named components                                                   |
+| `CloseButton`, `Collapse`, `ListGroup`      | Same-named components                                                   |
+| `Modal`                                     | `Dialog`, composed with `DialogHeader`, `DialogBody` and `DialogFooter` |
+| `Offcanvas`                                 | `Drawer`                                                                |
+| `Dropdown`, `Dropdown.Item`                 | `Menu`, `MenuItem` (and `MenuDivider`/`MenuHeader`)                     |
+| `Form.Control`                              | `FormControl`                                                           |
+| `Form.Select`                               | `FormSelect`                                                            |
+| `Form.Check`                                | `FormCheck`, `Checkbox` or `Radio`, depending on the control            |
+| `Form.Group`, `Form.Label`                  | `FormField`/`FormGroup`, `FormLabel`                                    |
+| `Nav`, `Navbar`, `Pagination`, `Tab`        | Same-named components                                                   |
+| `Popover`, `Tooltip`                        | `OverlayBox`                                                            |
+| `ProgressBar`, `Spinner`, `Toast`           | `Progress`, `Spinner`, `Toast`                                          |
+
+Idea React uses flat named exports instead of React-Bootstrap's nested component properties. For
+example, replace `Form.Control` with `FormControl`, and compose a modal from the separate dialog
+parts. See the [Dialog][15] and [Form][6] guides for the current props and examples.
+
+`Modal`'s `show`/`onHide` pair does not transfer directly: control `Dialog` with `open` and update
+that state from `onClose`.
+
+### Dependencies and stylesheets
+
+Remove React-Bootstrap and install Idea React with its peer dependencies:
+
+```sh
+npm uninstall react-bootstrap
+npm install idea-react mobx mobx-react react react-dom react-element-to-jsx-string
+```
+
+Load Bootstrap 6 and Idea React CSS separately; replace any Bootstrap 5 stylesheet with the
+Bootstrap 6 version:
+
+```html
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+/>
+<link rel="stylesheet" href="https://unpkg.com/idea-react/dist/style.css" />
+```
+
+If the application uses `Icon`, also load the Bootstrap Icons font stylesheet.
 
 </DocumentLayout>
 
@@ -116,3 +199,4 @@ These are not removed capabilities:
 [12]: ../../content/tables/
 [13]: ../../forms/chips/
 [14]: ../../extensions/nameplate/
+[15]: ../../components/dialog/
