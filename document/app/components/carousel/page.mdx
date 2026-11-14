@@ -277,6 +277,14 @@ Set `items` to show several slides at once. Combine it with `itemsGap` for spaci
 
 Set `items={3}` to control the count, or set `--bs-carousel-items` through a CSS module for responsive layouts.
 
+Navigation follows distinct, reachable scroll-snap positions, not every card independently.
+Targets beyond the scroll range share one end position, represented by the first slide that
+reaches it. `activeIndex` and `onChange` identify that slide; active does not mean it is the only
+visible card. Controls, indicators, swipe synchronization, and autoplay use the same positions,
+so there are no extra steps at the end. Selecting another slide that shares the end position
+selects its representative instead. Positions are recalculated when the viewport or slides resize.
+Autoplay uses the representative slide’s interval.
+
 ### Peeking
 
 Set `itemsPeek` to reveal a sliver of the previous and next slides, hinting that there’s more to scroll.
@@ -419,7 +427,7 @@ The `ends` prop controls what happens at the first and last slide. Choose from `
 
 ### Loop (default)
 
-With `ends="loop"` the carousel scrolls seamlessly past the ends: stepping next from the last slide (or previous from the first) continues in the same direction into the destination slide instead of jumping back, for an endless conveyor effect. This is the default, so it applies with or without the prop. Seamless looping applies to single-slide carousels driven by the controls, keyboard, or autoplay; multi-item, peek, centered, and variable-width layouts—as well as users who prefer reduced motion—fall back to the `wrap` jump.
+With `ends="loop"` the carousel scrolls seamlessly past the ends: stepping next from the last slide (or previous from the first) continues in the same direction into the destination slide instead of jumping back, for an endless conveyor effect. This is the default, so it applies with or without the prop. Seamless looping applies to full-width single-slide carousels driven by the controls, keyboard, or autoplay. Multi-item, peek, centered, and variable-width layouts fall back to `wrap`: a smooth scroll back across the content, not a same-direction seamless loop. Reduced motion switches immediately instead.
 
 <CodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
@@ -448,7 +456,7 @@ With `ends="loop"` the carousel scrolls seamlessly past the ends: stepping next 
 
 ### Wrap
 
-With `ends="wrap"` the carousel jumps from the last slide back to the first, and vice versa, so the controls never reach a dead end.
+With `ends="wrap"` the carousel scrolls back from the last reachable position to the first, and vice versa, so the controls never reach a dead end. This scroll has intermediate positions under normal motion preferences and is immediate under reduced motion.
 
 <CodeExample source="document/component/Document/CarouselImage/index.tsx">
     <Carousel
@@ -599,21 +607,21 @@ Load Bootstrap CSS and Bootstrap Icons alongside Idea React. The component manag
 
 ### Options
 
-| Prop                 | Type            | Default     | Description                                                                                                                                                                                                                           |
-| -------------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `autoplay`           | boolean         | `false`     | Automatically cycle through slides on mount.                                                                                                                                                                                          |
-| `ends`               | string          | `"loop"`    | `stop` disables previous/next at the ends. `wrap` jumps to the opposite end. `loop` scrolls seamlessly for single-slide carousels, falling back to `wrap` for multi-item, peek, centered, variable-width, and reduced-motion layouts. |
-| `interval`           | number          | `5000`      | Delay in milliseconds between automatically cycling an item.                                                                                                                                                                          |
-| `keyboard`           | boolean         | `true`      | React to left/right arrow keys outside editable controls.                                                                                                                                                                             |
-| `pause`              | string, boolean | `"hover"`   | Pause temporarily while the pointer or focus is inside the carousel. Pass `false` to disable this pause.                                                                                                                              |
-| `controls`           | boolean         | `true`      | Render previous and next buttons.                                                                                                                                                                                                     |
-| `controlsPlacement`  | string          | `"overlay"` | Choose `top`, `bottom`, or `overlay`.                                                                                                                                                                                                 |
-| `indicators`         | boolean         | `false`     | Render slide indicators.                                                                                                                                                                                                              |
-| `indicatorPlacement` | string          | `"start"`   | Choose `start`, `end`, or `between`.                                                                                                                                                                                                  |
-| `playPause`          | boolean         | `false`     | Provide an explicit autoplay control; also included automatically for `autoplay`.                                                                                                                                                     |
-| `auto`               | boolean         | `false`     | Let slides retain their individual widths.                                                                                                                                                                                            |
-| `center`             | boolean         | `false`     | Snap the active slide to the center of the viewport.                                                                                                                                                                                  |
-| `fade`               | boolean         | `false`     | Crossfade stacked slides instead of scrolling.                                                                                                                                                                                        |
+| Prop                 | Type            | Default     | Description                                                                                                                                                                                                                                                                                |
+| -------------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `autoplay`           | boolean         | `false`     | Automatically cycle through slides on mount.                                                                                                                                                                                                                                               |
+| `ends`               | string          | `"loop"`    | `stop` disables previous/next at the reachable ends. `wrap` smoothly scrolls to the opposite end. `loop` scrolls seamlessly for full-width single-slide carousels, falling back to `wrap` for multi-item, peek, centered, and variable-width layouts. Reduced motion switches immediately. |
+| `interval`           | number          | `5000`      | Delay in milliseconds between automatically cycling an item.                                                                                                                                                                                                                               |
+| `keyboard`           | boolean         | `true`      | React to left/right arrow keys outside editable controls.                                                                                                                                                                                                                                  |
+| `pause`              | string, boolean | `"hover"`   | Pause temporarily while the pointer or focus is inside the carousel. Pass `false` to disable this pause.                                                                                                                                                                                   |
+| `controls`           | boolean         | `true`      | Render previous and next buttons.                                                                                                                                                                                                                                                          |
+| `controlsPlacement`  | string          | `"overlay"` | Choose `top`, `bottom`, or `overlay`.                                                                                                                                                                                                                                                      |
+| `indicators`         | boolean         | `false`     | Render slide indicators.                                                                                                                                                                                                                                                                   |
+| `indicatorPlacement` | string          | `"start"`   | Choose `start`, `end`, or `between`.                                                                                                                                                                                                                                                       |
+| `playPause`          | boolean         | `false`     | Provide an explicit autoplay control; also included automatically for `autoplay`.                                                                                                                                                                                                          |
+| `auto`               | boolean         | `false`     | Let slides retain their individual widths.                                                                                                                                                                                                                                                 |
+| `center`             | boolean         | `false`     | Snap the active slide to the center of the viewport.                                                                                                                                                                                                                                       |
+| `fade`               | boolean         | `false`     | Crossfade stacked slides instead of scrolling.                                                                                                                                                                                                                                             |
 
 The visible slide count, gap, and peek are controlled with CSS custom properties, exposed through `items`, `itemsGap`, and `itemsPeek`—see [Items][2].
 

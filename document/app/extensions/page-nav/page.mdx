@@ -8,7 +8,7 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 # Page nav
 
 [`PageNav`][1] builds an in-page table of contents from the document's headings, highlights the
-section currently in view, and smooth-scrolls on click. The "On this page" panel of this site is
+section currently in view, and links to each heading using native anchors. The "On this page" panel of this site is
 rendered with it.
 
 ## Example
@@ -29,6 +29,10 @@ class and `aria-current="location"`.
 Heading positions are measured relative to the document and refreshed on scrolling and resizing,
 including after layout changes. The final section stays active when scrolled past its heading.
 Long link labels wrap while retaining indentation.
+
+Scrolling follows the page’s CSS rather than a JavaScript animation. This documentation site
+enables `scroll-behavior: smooth` on the root element only under
+`prefers-reduced-motion: no-preference`; reduced motion keeps immediate anchor navigation.
 
 ## Scope and depth
 

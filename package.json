@@ -10,7 +10,7 @@
         "typescript",
         "bootstrap"
     ],
-    "homepage": "https://idea2app.github.io/Idea-React/",
+    "homepage": "https://idea-react.pages.dev/",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/idea2app/Idea-React.git"

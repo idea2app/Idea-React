@@ -127,3 +127,21 @@ it('collects document-wide headings and assigns missing ids by default', () => {
 
     for (const link of links) assert.match(link.getAttribute('href')!, /^#.+/);
 });
+
+it('leaves anchor scrolling to the browser while reporting the selected heading', t => {
+    const onItemClick = t.mock.fn();
+    const scrollTo = t.mock.method(window, 'scrollTo');
+    render(
+        <>
+            <h2 id="native%anchor">Native anchor</h2>
+            <PageNav onItemClick={onItemClick} />
+        </>
+    );
+    const link = screen.getByRole('link', { name: 'Native anchor' });
+
+    const allowed = fireEvent.click(link);
+
+    assert.equal(allowed, true);
+    assert.equal(onItemClick.mock.calls[0].arguments[0].id, 'native%anchor');
+    assert.equal(scrollTo.mock.callCount(), 0);
+});

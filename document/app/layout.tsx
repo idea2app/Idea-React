@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
 import { DocumentFrame } from '../component/Document/Frame';
+import styles from '../component/Document/Frame.module.css';
 import { ErrorHandler } from '../component/ErrorHandler';
 import nextConfig from '../next.config';
 
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
     return (
-        <html lang="en" suppressHydrationWarning>
+        <html lang="en" className={styles.document} suppressHydrationWarning>
             <head>
                 <link
                     rel="stylesheet"

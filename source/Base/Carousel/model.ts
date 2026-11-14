@@ -7,6 +7,18 @@ export class CarouselModel {
 
     @observable accessor playing = false;
 
+    @observable accessor indexes: number[] = [];
+
+    @computed
+    get atStart() {
+        return this.activeIndex === this.indexes[0];
+    }
+
+    @computed
+    get atEnd() {
+        return this.activeIndex === this.indexes.at(-1);
+    }
+
     private timer?: ReturnType<typeof setTimeout>;
 
     @observable private accessor hovering = false;
@@ -25,11 +37,14 @@ export class CarouselModel {
         private count: number,
         private ends: CarouselEnds,
         private interval: (index: number) => number
-    ) {}
+    ) {
+        this.indexes = Array.from({ length: count }, (_, index) => index);
+    }
 
     @action
     setIndex = (index: number, userInitiated = false, direction?: -1 | 1, fromScroll = false) => {
-        const nextIndex = Math.max(0, Math.min(index, this.count - 1));
+        const bounded = Math.max(0, Math.min(index, this.count - 1));
+        const nextIndex = this.indexes.findLast(candidate => candidate <= bounded) ?? 0;
 
         if (nextIndex !== this.activeIndex) {
             const from = this.activeIndex;
@@ -43,12 +58,15 @@ export class CarouselModel {
 
     @action
     next = (userInitiated = false) => {
-        if (this.activeIndex === this.count - 1 && this.ends === 'stop') {
+        if (this.indexes.length < 2) return;
+
+        if (this.atEnd && this.ends === 'stop') {
             if (!userInitiated) this.pause();
+
             return;
         }
         this.setIndex(
-            this.activeIndex === this.count - 1 ? 0 : this.activeIndex + 1,
+            this.atEnd ? this.indexes[0] : this.indexes[this.indexes.indexOf(this.activeIndex) + 1],
             userInitiated,
             1
         );
@@ -56,12 +74,17 @@ export class CarouselModel {
 
     @action
     previous = (userInitiated = false) => {
-        if (this.activeIndex === 0 && this.ends === 'stop') {
+        if (this.indexes.length < 2) return;
+
+        if (this.atStart && this.ends === 'stop') {
             if (!userInitiated) this.pause();
+
             return;
         }
         this.setIndex(
-            this.activeIndex === 0 ? this.count - 1 : this.activeIndex - 1,
+            this.atStart
+                ? this.indexes[this.indexes.length - 1]
+                : this.indexes[this.indexes.indexOf(this.activeIndex) - 1],
             userInitiated,
             -1
         );
@@ -92,12 +115,24 @@ export class CarouselModel {
         this.schedule();
     });
 
-    update = (count: number, ends: CarouselEnds, interval: (index: number) => number) => {
+    @action
+    update = (
+        count: number,
+        ends: CarouselEnds,
+        interval: (index: number) => number,
+        indexes = Array.from({ length: count }, (_, index) => index)
+    ) => {
         this.count = count;
         this.ends = ends;
         this.interval = interval;
+        if (
+            indexes.length !== this.indexes.length ||
+            indexes.some((index, i) => index !== this.indexes[i])
+        )
+            this.indexes = indexes;
 
-        if (this.activeIndex >= count) this.setIndex(Math.max(0, count - 1));
+        if (!this.indexes.includes(this.activeIndex))
+            this.setIndex(this.activeIndex, false, undefined, true);
         else this.schedule();
     };
 
@@ -105,7 +140,7 @@ export class CarouselModel {
 
     private schedule = () => {
         this.clearTimer();
-        if (!this.cycling || this.count < 2) return;
+        if (!this.cycling || this.indexes.length < 2) return;
 
         this.timer = setTimeout(this.next, Math.max(0, this.interval(this.activeIndex)));
     };

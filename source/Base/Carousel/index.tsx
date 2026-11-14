@@ -13,7 +13,9 @@ import {
     isValidElement,
     KeyboardEvent,
     MouseEvent,
-    ReactNode
+    PointerEvent,
+    ReactNode,
+    WheelEvent
 } from 'react';
 
 import { Icon } from '../../Extension/Icon';
@@ -82,15 +84,22 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
     scroller = new CarouselScroll();
 
+    private resizeObserver?: ResizeObserver;
+
+    private observedSlides = new Set<Element>();
+
     componentDidMount() {
         this.updateStore();
         if (this.props.autoplay) this.store.play();
         document.addEventListener('visibilitychange', this.handleVisibilityChange);
         this.track.current?.addEventListener('scroll', this.handleScroll, { passive: true });
+        this.resizeObserver = new window.ResizeObserver(this.handleResize);
+        this.observeLayout();
     }
 
     componentDidUpdate() {
         this.updateStore();
+        this.observeLayout();
 
         const focused = document.activeElement;
         if (
@@ -108,6 +117,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     componentWillUnmount() {
         this.store.dispose();
         this.scroller.dispose();
+        this.resizeObserver?.disconnect();
 
         document.removeEventListener('visibilitychange', this.handleVisibilityChange);
         this.track.current?.removeEventListener('scroll', this.handleScroll);
@@ -126,12 +136,57 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
     private updateStore = () => {
         const slides = this.getSlides();
+        const targets = this.getTargets();
         this.store.onChange = this.props.onChange;
         this.store.onNavigate = this.scrollToActive;
-        this.store.update(slides.length, this.props.ends ?? 'loop', this.getSlideInterval);
+        this.store.update(
+            slides.length,
+            this.props.ends ?? 'loop',
+            this.getSlideInterval,
+            this.scroller.looping ? this.store.indexes : targets?.map(({ index }) => index)
+        );
+    };
+
+    private getTargets = () =>
+        this.track.current && !this.props.fade
+            ? this.scroller.targets(this.track.current, this.props.center)
+            : undefined;
+
+    private observeLayout = () => {
+        const track = this.track.current;
+        if (!track) return;
+
+        this.resizeObserver?.observe(track);
+        const slides = new Set(
+            [...track.children].filter(slide => !slide.hasAttribute('data-carousel-clone'))
+        );
+        for (const slide of this.observedSlides)
+            if (!slides.has(slide)) this.resizeObserver?.unobserve(slide);
+        for (const slide of slides)
+            if (!this.observedSlides.has(slide)) this.resizeObserver?.observe(slide);
+        this.observedSlides = slides;
+    };
+
+    handleResize = () => {
+        this.scroller.dispose();
+        this.updateStore();
+
+        const track = this.track.current;
+        const target = this.getTargets()?.find(({ index }) => index === this.store.activeIndex);
+        if (track && target) this.scroller.navigate(track, target.left, false);
     };
 
     handleVisibilityChange = () => this.store.setVisible(!document.hidden);
+
+    handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
+        this.props.onPointerDown?.(event);
+        if (!event.defaultPrevented) this.scroller.dispose();
+    };
+
+    handleWheel = (event: WheelEvent<HTMLDivElement>) => {
+        this.props.onWheel?.(event);
+        if (!event.defaultPrevented) this.scroller.dispose();
+    };
 
     handleMouseEnter = () => {
         if (this.props.pause !== false) this.store.setHovering(true);
@@ -153,14 +208,15 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
         const track = this.track.current;
         if (!track || this.scroller.looping) return;
 
-        const slides = [...track.children] as HTMLElement[];
-        const index = slides.reduce(
-            (closest, slide, candidate) =>
-                Math.abs(slide.offsetLeft - track.scrollLeft) <
-                Math.abs(slides[closest]?.offsetLeft - track.scrollLeft)
-                    ? candidate
+        const targets = this.getTargets();
+        if (!targets?.length) return;
+
+        const { index } = targets.reduce(
+            (closest, target) =>
+                Math.abs(target.left - track.scrollLeft) < Math.abs(closest.left - track.scrollLeft)
+                    ? target
                     : closest,
-            0
+            targets[0]
         );
         if (index !== this.store.activeIndex) this.store.setIndex(index, true, undefined, true);
     };
@@ -225,8 +281,12 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
         const peek = Number.parseFloat(styles.getPropertyValue('--bs-carousel-items-peek')) || 0;
         const variableWidth = slides.some(slide => slide.style.width || slide.style.flexBasis);
         const crossingEnd =
-            (direction === 1 && index === 0 && from === slides.length - 1) ||
-            (direction === -1 && from === 0 && index === slides.length - 1);
+            (direction === 1 && this.store.atStart) || (direction === -1 && this.store.atEnd);
+        const fullWidth =
+            !track.clientWidth ||
+            slides.every(
+                slide => Math.abs(slide.getBoundingClientRect().width - track.clientWidth) <= 1
+            );
         const canLoop =
             (this.props.ends ?? 'loop') === 'loop' &&
             !this.props.fade &&
@@ -234,11 +294,17 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
             items === 1 &&
             peek === 0 &&
             !this.props.center &&
-            !variableWidth;
+            !variableWidth &&
+            fullWidth;
 
         if (crossingEnd && canLoop)
             this.scroller.loop(track, slides[from], destination, direction === 1);
-        else this.scroller.navigate(track, destination.offsetLeft, !crossingEnd && !reducedMotion);
+        else
+            this.scroller.navigate(
+                track,
+                this.scroller.position(track, destination, this.props.center),
+                !reducedMotion && !this.props.fade
+            );
     };
 
     renderSlide = (slide: ReactNode, index: number) => {
@@ -258,7 +324,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
         if (!controls) return null;
 
         const previous = direction === 'previous';
-        const atEnd = this.store.activeIndex === (previous ? 0 : this.getSlides().length - 1);
+        const atEnd = previous ? this.store.atStart : this.store.atEnd;
         const overlay = (this.props.controlsPlacement ?? 'overlay') === 'overlay';
         const label = previous ? 'Previous' : 'Next';
 
@@ -281,7 +347,10 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     renderIndicators = () =>
         this.props.indicators && this.getSlides().length > 1 ? (
             <div className="carousel-indicators">
-                {this.getSlides().map((_, index) => (
+                {(this.store.indexes.length
+                    ? this.store.indexes
+                    : this.getSlides().map((_, index) => index)
+                ).map(index => (
                     <button
                         key={index}
                         type="button"
@@ -381,6 +450,8 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
             keyboard: _keyboard,
             onChange: _onChange,
             onClick: _onClick,
+            onPointerDown: _onPointerDown,
+            onWheel: _onWheel,
             pause: _pause,
             playPause: _playPause,
             style,
@@ -425,6 +496,8 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
                 onMouseLeave={this.handleMouseLeave}
                 onFocusCapture={this.handleFocusCapture}
                 onBlurCapture={this.handleBlurCapture}
+                onPointerDown={this.handlePointerDown}
+                onWheel={this.handleWheel}
             >
                 {controlsPlacement === 'top' && this.renderControls()}
                 <div

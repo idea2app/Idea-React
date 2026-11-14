@@ -6,6 +6,7 @@ import { createRef, lazy, Suspense } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 import { Carousel, CarouselSlide } from '../../source/Base/Carousel';
+import { CarouselScroll } from '../../source/Base/Carousel/scroll';
 
 it('renders carousel slides, controls, indicators, and accessible slide state', () => {
     render(
@@ -336,7 +337,10 @@ it('loops forward through an inert temporary slide and teleports only after the 
     mock.method(track, 'scrollTo', scrollTo);
 
     fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-    act(() => frame?.(window.performance.now() + 500));
+    act(() => {
+        frame?.(0);
+        frame?.(400);
+    });
     fireEvent.click(screen.getByRole('button', { name: 'Next' }));
 
     const clone = track.querySelector<HTMLElement>('[data-carousel-clone]');
@@ -348,7 +352,10 @@ it('loops forward through an inert temporary slide and teleports only after the 
     assert.equal(screen.getAllByRole('button', { name: /^Slide/ }).length, 2);
     assert.equal(scrollTo.mock.calls.at(-1)?.arguments[0].left, 100);
 
-    act(() => frame?.(window.performance.now() + 500));
+    act(() => {
+        frame?.(500);
+        frame?.(900);
+    });
 
     assert.equal(track.querySelector('[data-carousel-clone]'), null);
     assert.equal(scrollTo.mock.calls.at(-2)?.arguments[0].left, 200);
@@ -423,7 +430,10 @@ it('loops backward through a prepended slide without changing its logical slide 
     assert.equal(track.scrollLeft, 100);
     assert.equal(screen.getAllByRole('button', { name: /^Slide/ }).length, 2);
 
-    act(() => frame?.(window.performance.now() + 500));
+    act(() => {
+        frame?.(0);
+        frame?.(400);
+    });
 
     assert.equal(track.children.length, 2);
     assert.equal(scrollTo.mock.calls.at(-2)?.arguments[0].left, 0);
@@ -461,4 +471,178 @@ it('falls back to an immediate wrap when reduced motion is requested', () => {
     assert.equal(scrollTo.mock.calls.at(-1)?.arguments[0].behavior, 'instant');
     unmount();
     media.mock.restore();
+});
+
+it('uses the first animation frame as its clock and clamps early frames in both directions', () => {
+    let frame: FrameRequestCallback | undefined;
+    const request = mock.method(
+        window,
+        'requestAnimationFrame',
+        (callback: FrameRequestCallback) => {
+            frame = callback;
+
+            return 1;
+        }
+    );
+    const track = document.createElement('div');
+    const positions: number[] = [];
+    mock.method(track, 'scrollTo', ({ left = 0 }: ScrollToOptions) => {
+        positions.push(left);
+        track.scrollLeft = left;
+    });
+    const scroller = new CarouselScroll();
+
+    for (const [start, end] of [
+        [0, 696],
+        [696, 0]
+    ]) {
+        track.scrollLeft = start;
+        track.style.scrollSnapType = 'x mandatory';
+        positions.length = 0;
+        scroller.navigate(track, end, true);
+        frame?.(-100);
+        frame?.(-101);
+        frame?.(100);
+        frame?.(300);
+
+        assert.deepEqual(positions.slice(0, 2), [start, start]);
+        assert.ok(positions[2] > 0 && positions[2] < 696);
+        assert.equal(positions.at(-1), end);
+        assert.equal(track.style.scrollSnapType, 'x mandatory');
+    }
+
+    scroller.navigate(track, 696, true);
+    scroller.dispose();
+
+    assert.equal(scroller.looping, false);
+    assert.equal(track.style.scrollSnapType, 'x mandatory');
+    request.mock.restore();
+});
+
+it('shares reachable wide-card positions across controls, indicators, gestures, autoplay, and wrap', () => {
+    mock.timers.enable({ apis: ['setTimeout'] });
+    let frame: FrameRequestCallback | undefined;
+    const request = mock.method(
+        window,
+        'requestAnimationFrame',
+        (callback: FrameRequestCallback) => {
+            frame = callback;
+
+            return 2;
+        }
+    );
+    const ref = createRef<Carousel>();
+    const { container, rerender, unmount } = render(
+        <Carousel ref={ref} auto ends="stop" indicators interval={1000}>
+            {[0, 1, 2, 3].map(index => (
+                <CarouselSlide key={index}>{index}</CarouselSlide>
+            ))}
+        </Carousel>
+    );
+    const track = container.querySelector('.carousel-inner') as HTMLElement;
+    Object.defineProperties(track, {
+        clientWidth: { configurable: true, value: 936 },
+        scrollWidth: { configurable: true, value: 1632 }
+    });
+    const bounds = track.getBoundingClientRect();
+    let widths = [390, 390, 390, 390];
+    for (const [index, slide] of [...track.children].entries())
+        mock.method(slide, 'getBoundingClientRect', () => ({
+            ...bounds,
+            left:
+                widths.slice(0, index).reduce((sum, width) => sum + width + 24, 0) -
+                track.scrollLeft,
+            width: widths[index]
+        }));
+    const positions: number[] = [];
+    mock.method(track, 'scrollTo', ({ left = 0 }: ScrollToOptions) => {
+        positions.push(left);
+        track.scrollLeft = left;
+    });
+    act(() => ref.current?.handleResize());
+    const finish = () =>
+        act(() => {
+            frame?.(0);
+            frame?.(200);
+            frame?.(400);
+        });
+
+    assert.equal(screen.getAllByRole('button', { name: /^Slide/ }).length, 3);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+    finish();
+
+    assert.equal(track.scrollLeft, 414);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+    finish();
+
+    assert.equal(track.scrollLeft, 696);
+    assert.equal(ref.current?.store.activeIndex, 2);
+    assert.equal(screen.getByRole<HTMLButtonElement>('button', { name: 'Next' }).disabled, true);
+
+    const calls = positions.length;
+    act(() => {
+        ref.current?.store.next(true);
+        ref.current?.store.setIndex(3, true);
+    });
+
+    assert.equal(positions.length, calls);
+    assert.equal(ref.current?.scroller.looping, false);
+
+    track.scrollLeft = 414;
+    fireEvent.scroll(track);
+
+    assert.equal(ref.current?.store.activeIndex, 1);
+
+    act(() => ref.current?.store.play());
+    act(() => mock.timers.tick(1000));
+    finish();
+
+    assert.equal(track.scrollLeft, 696);
+    assert.equal(ref.current?.store.activeIndex, 2);
+
+    act(() => mock.timers.tick(1000));
+
+    assert.equal(ref.current?.store.playing, false);
+    assert.equal(positions.length, calls + 3);
+
+    widths = [280, 390, 310, 580];
+    rerender(
+        <Carousel ref={ref} auto indicators>
+            {[0, 1, 2, 3].map(index => (
+                <CarouselSlide key={index}>{index}</CarouselSlide>
+            ))}
+        </Carousel>
+    );
+    positions.length = 0;
+    fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+    finish();
+
+    assert.ok(positions[1] > 0 && positions[1] < 696);
+    assert.equal(track.scrollLeft, 0);
+    assert.equal(track.querySelector('[data-carousel-clone]'), null);
+    assert.equal(ref.current?.store.activeIndex, 0);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Previous' }));
+    finish();
+
+    assert.equal(track.scrollLeft, 696);
+
+    const matchMedia = window.matchMedia.bind(window);
+    const media = mock.method(window, 'matchMedia', (query: string) => {
+        const result = matchMedia(query);
+        Object.defineProperty(result, 'matches', { value: true });
+
+        return result;
+    });
+    positions.length = 0;
+    fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+
+    assert.deepEqual(positions, [0]);
+    assert.equal(ref.current?.scroller.looping, false);
+    unmount();
+    media.mock.restore();
+    request.mock.restore();
+    mock.timers.reset();
 });
