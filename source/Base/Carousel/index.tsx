@@ -1,6 +1,7 @@
 'use client';
 
 import classNames from 'classnames';
+import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import {
     Children,
@@ -21,7 +22,13 @@ import {
 import { Icon } from '../../Extension/Icon';
 import { polymorphic, PolymorphicClassProps } from '../../Helper/Polymorphic';
 import { Button } from '../Button';
-import { CarouselEnds, CarouselModel } from './model';
+import {
+    CarouselEnds,
+    CarouselModel,
+    CarouselModelOptions,
+    FadeCarouselModel,
+    ScrollCarouselModel
+} from './model';
 import { CarouselScroll } from './scroll';
 import styles from './style.module.css';
 
@@ -80,26 +87,19 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
     track = createRef<HTMLDivElement>();
 
-    store = new CarouselModel(0, 'loop', () => 5000);
+    scroller = new CarouselScroll(() => this.store);
 
-    scroller = new CarouselScroll();
-
-    private resizeObserver?: ResizeObserver;
-
-    private observedSlides = new Set<Element>();
+    @observable accessor store: CarouselModel = this.createStore();
 
     componentDidMount() {
+        document.addEventListener('visibilitychange', this.handleVisibilityChange);
+        this.handleVisibilityChange();
         this.updateStore();
         if (this.props.autoplay) this.store.play();
-        document.addEventListener('visibilitychange', this.handleVisibilityChange);
-        this.track.current?.addEventListener('scroll', this.handleScroll, { passive: true });
-        this.resizeObserver = new window.ResizeObserver(this.handleResize);
-        this.observeLayout();
     }
 
     componentDidUpdate() {
         this.updateStore();
-        this.observeLayout();
 
         const focused = document.activeElement;
         if (
@@ -115,77 +115,57 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     }
 
     componentWillUnmount() {
-        this.store.dispose();
-        this.scroller.dispose();
-        this.resizeObserver?.disconnect();
-
         document.removeEventListener('visibilitychange', this.handleVisibilityChange);
-        this.track.current?.removeEventListener('scroll', this.handleScroll);
+        this.scroller.dispose();
+        this.store.dispose();
     }
 
     private getSlides = () => Children.toArray(this.props.children);
 
-    private getSlideInterval = (index: number) => {
-        const slide = this.getSlides()[index];
-        const itemInterval = isValidElement<CarouselSlideProps>(slide)
-            ? slide.props.interval
-            : undefined;
-
-        return itemInterval ?? this.props.interval ?? 5000;
-    };
-
-    private updateStore = () => {
-        const slides = this.getSlides();
-        const targets = this.getTargets();
-        this.store.onChange = this.props.onChange;
-        this.store.onNavigate = this.scrollToActive;
-        this.store.update(
-            slides.length,
-            this.props.ends ?? 'loop',
-            this.getSlideInterval,
-            this.scroller.looping ? this.store.indexes : targets?.map(({ index }) => index)
+    private get modelOptions(): CarouselModelOptions {
+        const { ends = 'loop', interval = 5000, onChange } = this.props;
+        const intervals = Children.toArray(this.props.children).map(slide =>
+            isValidElement<CarouselSlideProps>(slide)
+                ? (slide.props.interval ?? interval)
+                : interval
         );
-    };
 
-    private getTargets = () =>
-        this.track.current && !this.props.fade
-            ? this.scroller.targets(this.track.current, this.props.center)
-            : undefined;
+        return { intervals, ends, onChange };
+    }
 
-    private observeLayout = () => {
+    private createStore() {
+        return this.props.fade
+            ? new FadeCarouselModel(this.modelOptions)
+            : new ScrollCarouselModel(this.modelOptions, this.scroller);
+    }
+
+    private updateStore = action(() => {
+        if (Boolean(this.props.fade) !== this.store.fade) {
+            const previous = this.store;
+            const next = this.createStore();
+            next.restore(previous);
+            previous.dispose();
+            this.scroller.dispose();
+            this.store = next;
+        } else this.store.update(this.modelOptions);
+
+        const root = this.root.current;
         const track = this.track.current;
-        if (!track) return;
+        if (this.store.fade) this.store.refresh();
+        else if (root && track) this.scroller.mount(root, track, this.props.center);
+        this.store.mount();
+    });
 
-        this.resizeObserver?.observe(track);
-        const slides = new Set(
-            [...track.children].filter(slide => !slide.hasAttribute('data-carousel-clone'))
-        );
-        for (const slide of this.observedSlides)
-            if (!slides.has(slide)) this.resizeObserver?.unobserve(slide);
-        for (const slide of slides)
-            if (!this.observedSlides.has(slide)) this.resizeObserver?.observe(slide);
-        this.observedSlides = slides;
-    };
-
-    handleResize = () => {
-        this.scroller.dispose();
-        this.updateStore();
-
-        const track = this.track.current;
-        const target = this.getTargets()?.find(({ index }) => index === this.store.activeIndex);
-        if (track && target) this.scroller.navigate(track, target.left, false);
-    };
-
-    handleVisibilityChange = () => this.store.setVisible(!document.hidden);
+    private handleVisibilityChange = () => this.store.setVisible(!document.hidden);
 
     handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
         this.props.onPointerDown?.(event);
-        if (!event.defaultPrevented) this.scroller.dispose();
+        if (!event.defaultPrevented) this.store.interrupt();
     };
 
     handleWheel = (event: WheelEvent<HTMLDivElement>) => {
         this.props.onWheel?.(event);
-        if (!event.defaultPrevented) this.scroller.dispose();
+        if (!event.defaultPrevented) this.store.interrupt();
     };
 
     handleMouseEnter = () => {
@@ -204,26 +184,9 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
         this.store.setHovering(false);
     };
 
-    handleScroll = () => {
-        const track = this.track.current;
-        if (!track || this.scroller.looping) return;
-
-        const targets = this.getTargets();
-        if (!targets?.length) return;
-
-        const { index } = targets.reduce(
-            (closest, target) =>
-                Math.abs(target.left - track.scrollLeft) < Math.abs(closest.left - track.scrollLeft)
-                    ? target
-                    : closest,
-            targets[0]
-        );
-        if (index !== this.store.activeIndex) this.store.setIndex(index, true, undefined, true);
-    };
-
     handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
         this.props.onKeyDown?.(event);
-        if (event.defaultPrevented || this.scroller.looping) return;
+        if (event.defaultPrevented) return;
         if (this.props.keyboard === false || event.altKey || event.ctrlKey || event.metaKey) return;
         if (
             event.target instanceof HTMLElement &&
@@ -242,7 +205,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
     handleClick = (event: MouseEvent<HTMLDivElement>) => {
         this.props.onClick?.(event);
-        if (event.defaultPrevented || this.scroller.looping) return;
+        if (event.defaultPrevented) return;
 
         const button =
             event.target instanceof Element
@@ -265,48 +228,6 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
         }
     };
 
-    scrollToActive = (index: number, from: number, direction?: -1 | 1) => {
-        const track = this.track.current;
-        const root = this.root.current;
-        if (!track || !root) return;
-
-        this.scroller.dispose();
-        const slides = [...track.children] as HTMLElement[];
-        const destination = slides[index];
-        if (!destination) return;
-
-        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const styles = getComputedStyle(root);
-        const items = Number.parseFloat(styles.getPropertyValue('--bs-carousel-items')) || 1;
-        const peek = Number.parseFloat(styles.getPropertyValue('--bs-carousel-items-peek')) || 0;
-        const variableWidth = slides.some(slide => slide.style.width || slide.style.flexBasis);
-        const crossingEnd =
-            (direction === 1 && this.store.atStart) || (direction === -1 && this.store.atEnd);
-        const fullWidth =
-            !track.clientWidth ||
-            slides.every(
-                slide => Math.abs(slide.getBoundingClientRect().width - track.clientWidth) <= 1
-            );
-        const canLoop =
-            (this.props.ends ?? 'loop') === 'loop' &&
-            !this.props.fade &&
-            !reducedMotion &&
-            items === 1 &&
-            peek === 0 &&
-            !this.props.center &&
-            !variableWidth &&
-            fullWidth;
-
-        if (crossingEnd && canLoop)
-            this.scroller.loop(track, slides[from], destination, direction === 1);
-        else
-            this.scroller.navigate(
-                track,
-                this.scroller.position(track, destination, this.props.center),
-                !reducedMotion && !this.props.fade
-            );
-    };
-
     renderSlide = (slide: ReactNode, index: number) => {
         const active = this.store.activeIndex === index;
 
@@ -320,11 +241,11 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     };
 
     renderControl = (direction: 'previous' | 'next') => {
-        const { controls = true, ends = 'loop' } = this.props;
+        const { controls = true } = this.props;
         if (!controls) return null;
 
         const previous = direction === 'previous';
-        const atEnd = previous ? this.store.atStart : this.store.atEnd;
+        const disabled = previous ? !this.store.canPrevious : !this.store.canNext;
         const overlay = (this.props.controlsPlacement ?? 'overlay') === 'overlay';
         const label = previous ? 'Previous' : 'Next';
 
@@ -335,7 +256,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
                 size="sm"
                 data-carousel-action={direction}
                 aria-label={label}
-                disabled={ends === 'stop' && atEnd}
+                disabled={disabled}
                 icon
             >
                 <Icon name={previous ? 'chevron-left' : 'chevron-right'} size={1} />
@@ -347,10 +268,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     renderIndicators = () =>
         this.props.indicators && this.getSlides().length > 1 ? (
             <div className="carousel-indicators">
-                {(this.store.indexes.length
-                    ? this.store.indexes
-                    : this.getSlides().map((_, index) => index)
-                ).map(index => (
+                {this.store.indexes.map(index => (
                     <button
                         key={index}
                         type="button"
@@ -464,7 +382,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
             ...(itemsGap !== undefined && { '--bs-carousel-items-gap': itemsGap }),
             ...(itemsPeek !== undefined && { '--bs-carousel-items-peek': itemsPeek }),
             ...(this.store.playing && {
-                '--bs-carousel-interval': `${this.getSlideInterval(this.store.activeIndex)}ms`
+                '--bs-carousel-interval': `${this.store.interval}ms`
             })
         } as CSSProperties;
 
@@ -505,7 +423,6 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
                     className={classNames('carousel-inner', innerClassName)}
                     tabIndex={0}
                     aria-label={this.props['aria-label'] ?? 'Carousel slides'}
-                    onScroll={this.handleScroll}
                 >
                     {slides.map(this.renderSlide)}
                 </div>

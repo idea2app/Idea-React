@@ -629,6 +629,11 @@ The visible slide count, gap, and peek are controlled with CSS custom properties
 
 For imperative controls, attach a React ref to `Carousel` and use its model methods. Methods return before the scrolling or crossfade has visually completed.
 
+Scroll and crossfade modes expose the same model methods and selection/playback state.
+Changing `fade` replaces the mode model while preserving selection and playback intent, so
+read `carousel.current.store` when needed rather than caching the model across mode changes.
+Layout and control updates keep the existing model and do not restart an unchanged autoplay interval.
+
 ```tsx
 import { createRef } from 'react';
 import { Carousel } from 'idea-react';
