@@ -22,7 +22,7 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 - Overrides the default `<input>` appearance with themed colors.
 - Renders the `:checked` and indeterminate icons via a CSS `mask` on the input’s `::before` pseudo-element, so the mark inherits the contrast color and no inline SVG is needed. The appropriate icon is shown based on the input’s state.
 
-For folks looking to replace our provided icons, override the `--bs-check-icon-checked` and `--bs-check-icon-indeterminate` CSS variables (or the `--check-icon-*` Sass tokens) with your own `mask-image` URLs.
+For folks looking to replace our provided icons, override the `--bs-check-icon-checked` and `--bs-check-icon-indeterminate` CSS variables with your own `mask-image` URLs.
 
 Labels and layout are handled with additional HTML and CSS.
 
@@ -188,7 +188,7 @@ Set `size="sm"` or `size="lg"` to make your checkbox appear smaller or larger.
 
 ### Variables
 
-CSS variables for the checkbox component are built on the Sass variables.
+Override the checkbox component's CSS variables for visual customization.
 
 ```css
 .example {

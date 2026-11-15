@@ -4,6 +4,7 @@ import reactElementToJSXString from 'react-element-to-jsx-string';
 import { Card } from '../../../source/Base/Card';
 import { CodeBlock } from '../../../source/Extension/CodeBlock';
 import { LiveRunner } from './LiveRunner';
+import { Mermaid } from './Mermaid';
 
 const CLIENT_REFERENCE_TAG = Symbol.for('react.client.reference');
 const WRAPPED_TAGS = new Set([Symbol.for('react.memo'), Symbol.for('react.forward_ref')]);
@@ -86,7 +87,11 @@ export const DocumentCodeFence: FC<ComponentProps<'pre'>> = ({ children, ...prop
     const { className = '', children: code } = children.props;
     const language = className.replace(/^language-/, '') || 'text';
 
-    return <CodeCard language={language}>{code}</CodeCard>;
+    return language === 'mermaid' ? (
+        <Mermaid>{code}</Mermaid>
+    ) : (
+        <CodeCard language={language}>{code}</CodeCard>
+    );
 };
 
 export const CodeExample: FC<CodeExampleProps> = ({ code, source, children }) => (

@@ -14,6 +14,9 @@ pnpm --filter @idea-react/document dev
 
 The site includes MDX documentation and examples, Bootstrap styling, theme switching, and local page search.
 MDX and TSX pages can directly import page-local CSS/LESS, including CSS Modules.
+MDX `mermaid` fences render diagrams in a small client boundary, with readable source in the
+static HTML before hydration. Mermaid loads only on pages that contain a diagram.
+Flowcharts keep their text size and scroll horizontally on narrow screens.
 Development and production search use the same MDX/TSX source indexer and load `rss.xml`.
 The development server generates it on request; the build writes it to the static output.
 The RSS feed includes every page's title, link, and full plain-text content for search and subscription.

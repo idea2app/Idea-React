@@ -9,7 +9,7 @@ import * as style from '../../../component/Document/style.module.less';
 # Grid system
 
 Use our powerful mobile-first flexbox grid to build layouts of all shapes and sizes thanks to a
-twelve column system, six default responsive tiers, Sass variables and mixins, and dozens of
+twelve column system, six default responsive tiers, CSS custom properties, and dozens of
 predefined classes.
 
 Idea React provides the [`Container`, `Row`, and `Col` wrappers][1] for these examples. Set `fluid`
@@ -63,10 +63,9 @@ Breaking it down, here's how the grid system comes together:
   `className` to adjust horizontal, vertical, or all gutters at each breakpoint, including removing
   gutters entirely.
 
-- **Sass variables, maps, and mixins power the grid.** If you don't want to use the predefined grid
-  classes in Bootstrap, you can use our grid's source Sass to create your own with more semantic
-  markup. We also include some CSS custom properties to consume these Sass variables for even
-  greater flexibility for you.
+- **Customize the grid with Props, utilities, and CSS custom properties.** Use the layout
+  components for semantic markup, responsive Props for column sizes, and gutter utilities for
+  spacing. No preprocessor configuration is required.
 
 Be aware of the limitations and bugs around flexbox, like the inability to use some HTML elements as
 flex containers.
@@ -427,13 +426,9 @@ that you use all 12 available columns).
 
 ## CSS
 
-When using Bootstrap's source Sass files, you have the option of using Sass variables and mixins to
-create custom, semantic, and responsive page layouts. Our predefined grid classes use these same
-variables and mixins to provide a whole suite of ready-to-use classes for fast responsive layouts.
-
-The grid uses `$grid-columns`, `$grid-gutter-x`, `$grid-gutter-y`, and `$grid-row-columns` together
-with the breakpoint and container width maps. See the [upstream grid CSS][2] for the complete Sass
-variable and mixin reference.
+Use `Container`, `Row`, and `Col` Props to select responsive layouts from the compiled stylesheet.
+Adjust spacing with gutter utilities and scope any additional CSS custom property overrides to
+your layout. See the [upstream grid CSS][2] for the underlying layout reference.
 
 </DocumentLayout>
 
