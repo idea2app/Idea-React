@@ -5,137 +5,12 @@ import remarkGfm from 'remark-gfm';
 import swc from 'unplugin-swc';
 import { unrun } from 'unrun';
 import vinext from 'vinext';
-import { defineConfig, ESTree, parseSync, perEnvironmentPlugin, ResolvedConfig } from 'vite';
+import { defineConfig, perEnvironmentPlugin, ResolvedConfig } from 'vite';
 
 import { swcOptions } from '../swc.config.mts';
-
-interface MdastNode {
-    type: string;
-    name?: string | null;
-    lang?: string | null;
-    value?: string;
-    depth?: number;
-    attributes?: MdastNode[];
-    // eslint-disable-next-line no-restricted-syntax -- AST children are not component props.
-    children?: MdastNode[];
-}
-
-const inlineElements = new Set([
-    'a',
-    'p',
-    'h1',
-    'h2',
-    'h3',
-    'h4',
-    'h5',
-    'h6',
-    'AccordionHeader',
-    'AccordionToggle',
-    'AlertLink',
-    'AlertHeading',
-    'Avatar',
-    'Badge',
-    'BreadcrumbLink',
-    'Button',
-    'button',
-    'CardTitle',
-    'CardSubtitle',
-    'CardText',
-    'CarouselImage',
-    'ChipDismiss',
-    'ChipInputLabel',
-    'Chip',
-    'CloseButton',
-    'CollapseToggle',
-    'ComboboxOption',
-    'DatePickerButton',
-    'DialogTitle',
-    'DrawerTitle',
-    'label',
-    'FormLabel',
-    'FormLegend',
-    'FormAdornment',
-    'FormAdornmentText',
-    'FormSwitch',
-    'FormText',
-    'FormFeedback',
-    'InputGroupText',
-    'InputGroupButton',
-    'ListGroupItem',
-    'MenuItem',
-    'MenuItemContent',
-    'NavbarBrand',
-    'NavLink',
-    'PageLink',
-    'PageText',
-    'PlaceholderButton',
-    'Popover',
-    'Progress',
-    'span',
-    'SpinnerButton',
-    'StepperButton',
-    'StepperLink',
-    'ToggleButton',
-    'Toggler',
-    'Tooltip',
-    'th',
-    'td'
-]);
-
-const visit = (node: MdastNode) => {
-    for (const child of node.children || []) {
-        if (child.type === 'mdxJsxFlowElement' && child.children && inlineElements.has(child.name!))
-            child.children = child.children.flatMap(grandChild =>
-                grandChild.type === 'paragraph' ? grandChild.children || [] : [grandChild]
-            );
-        visit(child);
-    }
-};
-const remarkInlineButtonChildren = () => (tree: MdastNode) => visit(tree);
-
-const recmaRscStyles = () => (tree: ESTree.Program) => {
-    const importsStyles = tree.body.some(
-        node =>
-            node.type === 'ImportDeclaration' &&
-            typeof node.source.value === 'string' &&
-            /\.(css|less|sass|scss|styl|stylus|pcss|postcss|sss)(?:$|\?)/.test(node.source.value) &&
-            !/[?&](?:url|inline|raw)(?:$|=|&)/.test(node.source.value)
-    );
-    if (!importsStyles) return;
-
-    const component = tree.body.find(node => node.type === 'ExportDefaultDeclaration');
-    if (
-        component?.type !== 'ExportDefaultDeclaration' ||
-        component.declaration.type !== 'FunctionDeclaration' ||
-        !component.declaration.body
-    )
-        throw new Error('Expected the MDX compiler to export a default function.');
-
-    const result = component.declaration.body.body.find(node => node.type === 'ReturnStatement');
-
-    if (result?.type !== 'ReturnStatement' || !result.argument)
-        throw new Error('Expected the MDX component to return content.');
-
-    const { program: resources, errors } = parseSync(
-        'mdx-styles.js',
-        `
-        import * as __ideaMdxCss from 'react';
-        __ideaMdxCss.createElement(
-            __ideaMdxCss.Fragment, null, import.meta.viteRsc.loadCss(), null
-        );
-    `
-    );
-    if (errors.length) throw new Error(errors.map(({ message }) => message).join('\n'));
-
-    const [, wrapper] = resources.body;
-
-    if (wrapper.type !== 'ExpressionStatement' || wrapper.expression.type !== 'CallExpression')
-        throw new Error('Expected the MDX stylesheet wrapper to be a call.');
-
-    wrapper.expression.arguments[3] = result.argument;
-    result.argument = wrapper.expression;
-    tree.body.unshift(resources.body[0]);
-};
+import { remarkInlineButtonChildren } from './plugin/inline-children.ts';
+import { remarkMermaid } from './plugin/Mermaid.ts';
+import { recmaRscStyles } from './plugin/RSC-style.ts';
 
 export default defineConfig(async () => {
     const path = new URL('./search/index.tsx', import.meta.url);
@@ -172,7 +47,7 @@ export default defineConfig(async () => {
                 const { transform } = mdx({
                     development: config.command === 'serve',
                     providerImportSource: '@document/MDXComponents',
-                    remarkPlugins: [remarkGfm, remarkInlineButtonChildren],
+                    remarkPlugins: [remarkGfm, remarkInlineButtonChildren, remarkMermaid],
                     // RSC's automatic CSS wrapper only recognizes JS/TS module extensions.
                     recmaPlugins: name === 'rsc' ? [recmaRscStyles] : []
                 });
