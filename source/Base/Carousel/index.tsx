@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames';
-import { action, observable } from 'mobx';
+import { action, observable, reaction } from 'mobx';
 import { observer } from 'mobx-react';
 import {
     Children,
@@ -87,11 +87,14 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
     track = createRef<HTMLDivElement>();
 
-    scroller = new CarouselScroll(() => this.store);
+    scroller = new CarouselScroll();
 
     @observable accessor store: CarouselModel = this.createStore();
 
+    private stopMotion?: () => void;
+
     componentDidMount() {
+        this.stopMotion = reaction(() => this.store.motion, this.scroller.apply);
         document.addEventListener('visibilitychange', this.handleVisibilityChange);
         this.handleVisibilityChange();
         this.updateStore();
@@ -115,6 +118,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     }
 
     componentWillUnmount() {
+        this.stopMotion?.();
         document.removeEventListener('visibilitychange', this.handleVisibilityChange);
         this.scroller.dispose();
         this.store.dispose();
@@ -136,7 +140,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     private createStore() {
         return this.props.fade
             ? new FadeCarouselModel(this.modelOptions)
-            : new ScrollCarouselModel(this.modelOptions, this.scroller);
+            : new ScrollCarouselModel(this.modelOptions);
     }
 
     private updateStore = action(() => {
@@ -152,11 +156,27 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
         const root = this.root.current;
         const track = this.track.current;
         if (this.store.fade) this.store.refresh();
-        else if (root && track) this.scroller.mount(root, track, this.props.center);
+        else if (root && track)
+            this.scroller.mount(
+                root,
+                track,
+                {
+                    onLayout: this.store.refresh,
+                    onScroll: this.store.syncScroll,
+                    onComplete: this.store.complete,
+                    onResize: this.handleResize
+                },
+                this.props.center
+            );
         this.store.mount();
     });
 
     private handleVisibilityChange = () => this.store.setVisible(!document.hidden);
+
+    private handleResize = () => {
+        this.store.interrupt();
+        this.scroller.refresh(true);
+    };
 
     handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
         this.props.onPointerDown?.(event);

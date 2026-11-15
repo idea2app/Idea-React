@@ -9,21 +9,34 @@ export interface CarouselModelOptions {
 }
 
 export interface CarouselMotion {
-    readonly navigating: boolean;
-    transition: (index: number, from: number, direction?: -1 | 1) => unknown;
-    interrupt: () => unknown;
+    index: number;
+    from: number;
+    left: number;
+    smooth: boolean;
+    loop?: -1 | 1;
+}
+
+export interface CarouselLayout {
+    positions: number[];
+    widths: number[];
+    viewport: number;
+    maximum: number;
+    rtl: boolean;
+    items: number;
+    peek: number;
+    center: boolean;
+    variableWidth: boolean;
+    reducedMotion: boolean;
 }
 
 export abstract class CarouselModel {
     abstract readonly fade: boolean;
 
     get navigating() {
-        return this.motion?.navigating ?? false;
+        return Boolean(this.motion?.smooth);
     }
 
-    get ends() {
-        return this.options.ends;
-    }
+    @observable accessor motion: CarouselMotion | undefined;
 
     @observable accessor activeIndex = 0;
 
@@ -58,6 +71,10 @@ export abstract class CarouselModel {
 
     @observable protected accessor options: CarouselModelOptions;
 
+    protected layout?: CarouselLayout;
+
+    protected positions: number[] = [];
+
     private timer?: ReturnType<typeof setTimeout>;
 
     private stopPlayback?: () => void;
@@ -70,10 +87,7 @@ export abstract class CarouselModel {
         return this.playing && !this.hovering && this.visible;
     }
 
-    constructor(
-        options: CarouselModelOptions,
-        private readonly motion?: CarouselMotion
-    ) {
+    constructor(options: CarouselModelOptions) {
         this.options = options;
         this.indexes = Array.from({ length: options.intervals.length }, (_, index) => index);
     }
@@ -108,7 +122,7 @@ export abstract class CarouselModel {
                 const from = this.activeIndex;
                 this.activeIndex = nextIndex;
                 this.options.onChange?.(nextIndex);
-                if (!fromScroll) this.motion?.transition(nextIndex, from, direction);
+                if (!fromScroll) this.motion = this.createMotion?.(nextIndex, from, direction);
             }
         }
         if (userInitiated) this.pause();
@@ -138,8 +152,19 @@ export abstract class CarouselModel {
         this.options = options;
     }
 
-    refresh = action((positions?: number[]) => {
-        const indexes = this.readIndexes(positions);
+    refresh = action((layout?: CarouselLayout, align?: boolean) => {
+        const previous = this.positions;
+        this.layout = layout;
+        this.positions =
+            layout?.positions.map(left =>
+                layout.viewport
+                    ? Math.max(
+                          layout.rtl ? -layout.maximum : 0,
+                          Math.min(left, layout.rtl ? 0 : layout.maximum)
+                      )
+                    : left
+            ) ?? [];
+        const indexes = this.readIndexes(layout?.viewport ? this.positions : undefined);
         if (
             indexes.length !== this.indexes.length ||
             indexes.some((index, i) => index !== this.indexes[i])
@@ -147,9 +172,34 @@ export abstract class CarouselModel {
             this.indexes = indexes;
 
         this.setIndex(this.activeIndex, false, undefined, true);
+
+        const changed =
+            previous.length !== this.positions.length ||
+            this.positions.some((left, index) => Math.abs(left - previous[index]) > 1);
+        if ((align ?? changed) && layout && this.positions[this.activeIndex] !== undefined)
+            this.motion = this.createMotion?.(this.activeIndex, this.activeIndex);
     });
 
-    interrupt = () => this.motion?.interrupt();
+    syncScroll = action((left: number) => {
+        if (this.navigating) return;
+
+        const index = this.indexes.reduce<number | undefined>(
+            (closest, index) =>
+                closest === undefined ||
+                Math.abs(this.positions[index] - left) < Math.abs(this.positions[closest] - left)
+                    ? index
+                    : closest,
+            undefined
+        );
+        if (index !== undefined && index !== this.activeIndex)
+            this.setIndex(index, true, undefined, true);
+    });
+
+    complete = action((motion: CarouselMotion) => {
+        if (this.motion === motion) this.motion = undefined;
+    });
+
+    interrupt = action(() => (this.motion = undefined));
 
     dispose() {
         this.stopPlayback?.();
@@ -161,6 +211,12 @@ export abstract class CarouselModel {
     protected readIndexes(positions = this.options.intervals) {
         return [...positions.keys()];
     }
+
+    protected createMotion?: (
+        index: number,
+        from: number,
+        direction?: -1 | 1
+    ) => CarouselMotion | undefined;
 
     private advance = () => {
         const index = this.activeIndex;
@@ -205,6 +261,30 @@ export class ScrollCarouselModel extends CarouselModel {
               )
             : super.readIndexes();
     }
+
+    protected createMotion = (index: number, from: number, direction?: -1 | 1) => {
+        const { layout, positions } = this;
+        if (!layout) return undefined;
+
+        const crossingEnd = (direction === 1 && this.atStart) || (direction === -1 && this.atEnd);
+        const canLoop =
+            this.options.ends === 'loop' &&
+            !layout.reducedMotion &&
+            layout.items === 1 &&
+            layout.peek === 0 &&
+            !layout.center &&
+            !layout.variableWidth &&
+            (!layout.viewport ||
+                layout.widths.every(width => Math.abs(width - layout.viewport) <= 1));
+
+        return {
+            index,
+            from,
+            left: positions[index],
+            smooth: index !== from && !layout.reducedMotion,
+            loop: crossingEnd && canLoop ? direction : undefined
+        };
+    };
 }
 
 export class FadeCarouselModel extends CarouselModel {

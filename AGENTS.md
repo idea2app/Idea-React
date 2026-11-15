@@ -150,14 +150,96 @@ export class MyComponent extends ObservedComponent<MyComponentProps> {
 - 多个同前缀的文件归入同名文件夹，文件使用 `index.tsx`、`model.ts`、
   `style.module.css` 等短名，并同步调整所有引用。
 
-## 状态与回调
+## 复杂组件架构
+
+### 职责与单向流
 
 - 遵循 AOP、单一职责与关注点分离，优先复用现有模型和框架组合机制，避免过度抽象。
+- 按实际需要参考 MVC、MVVM、MVP 范式，以 View Model 作为业务统筹中枢，不为套用范式增加无必要的类或抽象层。
+  少量、仅供单个组件使用的状态可以直接写为类组件实例成员，不必独立状态类。
+
+| 职责                | 负责                                                                       | 不负责                                         |
+| ------------------- | -------------------------------------------------------------------------- | ---------------------------------------------- |
+| View（组件）        | 根据 Props 初始化与同步模型，绘制界面，转发交互和浏览器事件，管理生命周期  | 业务策略、分页或目标选择、异步业务流程         |
+| View Model（Store） | 统筹业务规则、异步流程、数值计算、可观察状态和执行计划，处理完成或中断反馈 | 访问 DOM、测量布局、注册浏览器事件             |
+| DOM 适配器          | 提供数值化布局快照，执行模型状态要求的 DOM 副作用，反馈测量和执行事实      | 反向查询整个模型，替模型决定业务策略或选中状态 |
+
+- 业务行为、异步流程和状态集中在内聚的模型类中，不集中到 React hooks 或零散工具函数里；
+  真正无状态、聚焦的数值转换可以使用纯函数。
+- 组件重绘和命令式 DOM 副作用均由模型的可观察状态驱动：`observer` 消费展示状态，
+  `reaction` 观察执行计划，CSS 响应渲染后的类名或样式，不建立两套业务控制器。
+  执行器通过明确的回调反馈事实，而不是获取整个 Store 再作决策。
+- 测量与 DOM 执行可以共用一个普通类，以接口和方法区分职责，不为每项职责机械增加文件或类。
+  动画帧可由状态触发的执行器或 CSS 完成，不为逐帧数值强制触发 React 重绘。
+
+```mermaid
+flowchart LR
+    Events["用户交互 / Props / 浏览器事件"] --> Model["View Model"]
+    Measure["DOM 测量"] -->|数值快照| Model
+    Model --> State["可观察状态 / 执行计划"]
+    State --> View["View 渲染"]
+    State --> Effects["DOM 执行器 / CSS"]
+    View -->|挂载 / 布局失效| Measure
+    Effects -->|完成 / 中断事实| Model
+    Effects -->|布局失效| Measure
+```
+
+图中的反馈是下一次模型输入，仍遵循“输入 → 模型决策与状态 → 渲染或执行 → 事实反馈”的单向数据或操作流；
+不是 View 与执行器相互调用业务逻辑的双向控制。
+
+### 测量与生命周期
+
+- 测量优先在挂载后、转场前或布局失效时进行并复用快照；必要时先中断动画再重测，避免逐帧交错读写布局。
+- 充分利用类属性初始化状态、恢复 Promise 和订阅 disposer，不将可声明的初始化集中到 `initialize()` 中。
+  DOM 测量、事件监听与其它浏览器副作用只在客户端挂载后启动，卸载时释放观察、监听、计时器和动画资源。
+- 替换模型或切换模式时，清理旧副作用并按需恢复选中状态、播放意图等业务状态；
+  无关 Props 更新不重建模型或重置仍有效的订阅与计时器。
+- 异步恢复或执行完成后，核对实例及当前操作是否仍有效，避免已销毁实例重新绑定监听，或旧结果覆盖新状态。
+- 按职责而非文件数量划分结构，优先删除重复决策与转发；模型规则用数值输入验证，真实布局仍按“测试与验证”章节进行浏览器验证。
+
+### 接线示例
+
+以下用现有 Carousel 类展示最小接线：组件先创建 Store、取得挂载后的 DOM，再建立状态观察与事实反馈；
+JSX 通过 `observer` 消费同一个 Store。示例函数只为展示挂载／卸载两阶段，实际组件可直接放入生命周期方法，不必新增绑定层。
+
+```ts
+import { reaction } from 'mobx';
+
+import { ScrollCarouselModel } from './source/Base/Carousel/model';
+import { CarouselScroll } from './source/Base/Carousel/scroll';
+
+function mountEffects(
+    store: ScrollCarouselModel,
+    scroller: CarouselScroll,
+    root: HTMLElement,
+    track: HTMLElement
+) {
+    const stopMotion = reaction(() => store.motion, scroller.apply);
+    const onResize = () => {
+        store.interrupt();
+
+        scroller.refresh(true);
+    };
+
+    scroller.mount(root, track, {
+        onLayout: store.refresh,
+        onScroll: store.syncScroll,
+        onComplete: store.complete,
+        onResize
+    });
+    store.mount();
+
+    return () => {
+        stopMotion();
+        scroller.dispose();
+        store.dispose();
+    };
+}
+```
+
+## 状态与回调
+
 - 仅依赖 props 的展示组件使用函数组件；需要状态、行为或生命周期时使用类组件与 MobX。
-- 业务行为、异步流程和状态集中在内聚的模型类中；组件负责展示、生命周期和事件转发，
-  不要把这些逻辑集中到 React hooks 或零散工具函数里。
-- 少量、仅供单个组件使用的状态直接写为类组件实例成员，不必独立状态类。
-- 充分利用类属性初始化状态、恢复 Promise 和订阅 disposer，不将可声明的初始化集中到 `initialize()` 中。浏览器副作用应在客户端挂载后启动，卸载时释放订阅，并防止异步恢复完成后给已销毁实例重新绑定监听。
 - 使用 MobX stage-3 装饰器（如 `@observable accessor`、`@computed`、`@action`）。
 - 已有 action 边界（`@action` 或 `action()`）时不要再套 `runInAction()`。异步方法的 `await` 之后不继承 action 边界，后续状态更新应调用独立的 action（`@action` 方法或 `action()` 包装的实例方法），不能直接删除包装后裸写状态。
 - 仅把调用转发给模型 action 的事件方法不再加 `@action`，action 边界由模型方法负责。
