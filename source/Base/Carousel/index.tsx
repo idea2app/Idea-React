@@ -95,8 +95,10 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
     componentDidMount() {
         this.stopMotion = reaction(() => this.store.motion, this.scroller.apply);
+
         document.addEventListener('visibilitychange', this.handleVisibilityChange);
         this.handleVisibilityChange();
+
         this.updateStore();
         if (this.props.autoplay) this.store.play();
     }
@@ -127,8 +129,9 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
     private getSlides = () => Children.toArray(this.props.children);
 
     private get modelOptions(): CarouselModelOptions {
-        const { ends = 'loop', interval = 5000, onChange } = this.props;
-        const intervals = Children.toArray(this.props.children).map(slide =>
+        const { ends = 'loop', interval = 5000, children, onChange } = this.props;
+
+        const intervals = Children.toArray(children).map(slide =>
             isValidElement<CarouselSlideProps>(slide)
                 ? (slide.props.interval ?? interval)
                 : interval
@@ -147,6 +150,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
         if (Boolean(this.props.fade) !== this.store.fade) {
             const previous = this.store;
             const next = this.createStore();
+
             next.restore(previous);
             previous.dispose();
             this.scroller.dispose();
@@ -155,6 +159,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
         const root = this.root.current;
         const track = this.track.current;
+
         if (this.store.fade) this.store.refresh();
         else if (root && track)
             this.scroller.mount(
@@ -180,11 +185,13 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
     handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
         this.props.onPointerDown?.(event);
+
         if (!event.defaultPrevented) this.store.interrupt();
     };
 
     handleWheel = (event: WheelEvent<HTMLDivElement>) => {
         this.props.onWheel?.(event);
+
         if (!event.defaultPrevented) this.store.interrupt();
     };
 
@@ -206,7 +213,9 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
 
     handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
         this.props.onKeyDown?.(event);
+
         if (event.defaultPrevented) return;
+
         if (this.props.keyboard === false || event.altKey || event.ctrlKey || event.metaKey) return;
         if (
             event.target instanceof HTMLElement &&
@@ -441,6 +450,7 @@ export class Carousel<T extends ElementType | undefined = 'div'> extends Compone
                 <div
                     ref={this.track}
                     className={classNames('carousel-inner', innerClassName)}
+                    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
                     tabIndex={0}
                     aria-label={this.props['aria-label'] ?? 'Carousel slides'}
                 >

@@ -33,15 +33,16 @@ it('computes reachable scroll pages and logical fade pages through the same nume
 
     for (const model of [scroll, fade]) {
         model.refresh(wideLayout);
+
         for (let step = 0; step < 4; step++) {
             model.next();
+
             if (model.motion) {
                 destinations.push(model.motion.left);
                 model.complete(model.motion);
             }
         }
     }
-
     assert.deepEqual([...scroll.indexes], [0, 1, 2]);
     assert.deepEqual([...fade.indexes], [0, 1, 2, 3]);
     assert.equal(scroll.activeIndex, 2);
@@ -577,6 +578,7 @@ it('interrupts a running loop and aligns immediately when reduced motion changes
     t.mock.method(window, 'matchMedia', () => media);
     t.mock.method(window, 'requestAnimationFrame', () => 123);
     const cancel = t.mock.method(window, 'cancelAnimationFrame');
+
     const ref = createRef<Carousel>();
     const { container } = render(
         <Carousel ref={ref}>
@@ -630,6 +632,7 @@ it('uses the first animation frame as its clock and clamps early frames in both 
         track.scrollLeft = left;
     });
     fireEvent.scroll(track);
+
     for (const [start, end] of [
         [0, 696],
         [696, 0]
@@ -684,6 +687,7 @@ it('shares reachable wide-card positions across controls, indicators, gestures, 
     });
     const bounds = track.getBoundingClientRect();
     let widths = [390, 390, 390, 390];
+
     for (const [index, slide] of [...track.children].entries())
         mock.method(slide, 'getBoundingClientRect', () => ({
             ...bounds,
@@ -698,13 +702,13 @@ it('shares reachable wide-card positions across controls, indicators, gestures, 
         track.scrollLeft = left;
     });
     act(() => ref.current?.scroller.refresh());
+
     const finish = () =>
         act(() => {
             frame?.(0);
             frame?.(200);
             frame?.(400);
         });
-
     assert.equal(screen.getAllByRole('button', { name: /^Slide/ }).length, 3);
 
     fireEvent.click(screen.getByRole('button', { name: 'Next' }));
@@ -724,7 +728,6 @@ it('shares reachable wide-card positions across controls, indicators, gestures, 
         ref.current?.store.next(true);
         ref.current?.store.setIndex(3, true);
     });
-
     assert.equal(positions.length, calls);
     assert.equal(ref.current?.store.navigating, false);
 
@@ -849,8 +852,10 @@ it('replaces mode models without losing selection or playback intent and release
         </Carousel>
     );
     const track = container.querySelector('.carousel-inner') as HTMLElement;
+
     for (const [index, slide] of [...track.children].entries())
         Object.defineProperty(slide, 'offsetLeft', { configurable: true, value: index * 100 });
+
     track.style.scrollSnapType = 'x mandatory';
     const scrolling = ref.current!.store;
     fireEvent.scroll(track);
@@ -938,7 +943,6 @@ it('normalizes selection once when changing mode and removing the active slide t
             {children.slice(0, 2)}
         </Carousel>
     );
-
     assert.equal(ref.current?.store.activeIndex, 1);
     assert.equal(onChange.mock.callCount(), 2);
     assert.deepEqual(

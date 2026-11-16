@@ -105,8 +105,9 @@ export class PageNav<T extends ElementType | undefined = 'nav'> extends Componen
     }
 
     handleItemClick = ({ currentTarget }: MouseEvent<HTMLAnchorElement>) => {
-        const id = currentTarget.getAttribute('href')?.slice(1);
+        const id = currentTarget.hash.slice(1);
         const meta = this.list.find(item => item.id === id);
+
         if (meta) this.componentProps.onItemClick?.(meta);
     };
 

@@ -56,8 +56,25 @@ export const remarkMermaid =
             });
             if (errors.length) throw new Error(errors.map(({ message }) => message).join('\n'));
 
+            const styleExpression = "({ marginBlock: '1.25rem', overflowX: 'auto' })";
+            const { program: style, errors: styleErrors } = parseSync(
+                'mermaid-style.js',
+                styleExpression,
+                { preserveParens: false }
+            );
+            if (styleErrors.length)
+                throw new Error(styleErrors.map(({ message }) => message).join('\n'));
+
             const attributes: NonNullable<MdastNode['attributes']> = [
-                { type: 'mdxJsxAttribute', name: 'className', value: 'my-6 overflow-x-auto' },
+                {
+                    type: 'mdxJsxAttribute',
+                    name: 'style',
+                    value: {
+                        type: 'mdxJsxAttributeValueExpression',
+                        value: styleExpression,
+                        data: { estree: style }
+                    }
+                },
                 { type: 'mdxJsxAttribute', name: 'role', value: 'img' },
                 { type: 'mdxJsxAttribute', name: 'aria-label', value: title ?? 'Mermaid diagram' },
                 {

@@ -118,10 +118,12 @@ export abstract class CarouselModel {
         if (!this.navigating || fromScroll) {
             const bounded = Math.max(0, Math.min(index, this.options.intervals.length - 1));
             const nextIndex = this.indexes.findLast(candidate => candidate <= bounded) ?? 0;
+
             if (nextIndex !== this.activeIndex) {
                 const from = this.activeIndex;
                 this.activeIndex = nextIndex;
                 this.options.onChange?.(nextIndex);
+
                 if (!fromScroll) this.motion = this.createMotion?.(nextIndex, from, direction);
             }
         }
@@ -176,6 +178,7 @@ export abstract class CarouselModel {
         const changed =
             previous.length !== this.positions.length ||
             this.positions.some((left, index) => Math.abs(left - previous[index]) > 1);
+
         if ((align ?? changed) && layout && this.positions[this.activeIndex] !== undefined)
             this.motion = this.createMotion?.(this.activeIndex, this.activeIndex);
     });
@@ -226,6 +229,7 @@ export abstract class CarouselModel {
 
     private schedule = () => {
         this.clearTimer();
+
         if (this.cycling && this.indexes.length > 1)
             this.timer = setTimeout(this.advance, Math.max(0, this.interval));
     };
@@ -242,6 +246,7 @@ export abstract class CarouselModel {
         }
         const position =
             (indexes.indexOf(this.activeIndex) + direction + indexes.length) % indexes.length;
+
         this.setIndex(indexes[position], userInitiated, direction);
     }
 

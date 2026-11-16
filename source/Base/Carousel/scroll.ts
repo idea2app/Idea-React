@@ -34,6 +34,7 @@ export class CarouselScroll {
 
     mount(root: HTMLElement, track: HTMLElement, events: CarouselScrollEvents, center = false) {
         this.center = center;
+
         if (this.root !== root || this.track !== track) {
             this.dispose();
             this.root = root;
@@ -49,11 +50,13 @@ export class CarouselScroll {
 
     refresh = (align?: boolean) => {
         this.observeLayout();
+
         const { root, track } = this;
         if (!root || !track || this.navigating) return;
 
         const slides = [...track.children] as HTMLElement[];
         const style = getComputedStyle(root);
+
         this.events?.onLayout(
             {
                 positions: slides.map(slide => this.position(track, slide)),
@@ -88,13 +91,12 @@ export class CarouselScroll {
     apply = (motion?: CarouselMotion) => {
         this.interrupt();
         const { track } = this;
-        if (!motion || !track) {
-            this.refresh();
 
-            return;
-        }
+        if (!motion || !track) return this.refresh();
+
         const slides = [...track.children] as HTMLElement[];
         const complete = () => this.events?.onComplete(motion);
+
         if (motion.loop)
             this.loop(track, slides[motion.from], slides[motion.index], motion, complete);
         else this.navigate(track, motion.left, motion.smooth, complete);
@@ -114,6 +116,7 @@ export class CarouselScroll {
         if (!track || !resizeObserver) return;
 
         resizeObserver.observe(track);
+
         const slides = new Set(
             [...track.children].filter(slide => !slide.hasAttribute('data-carousel-clone'))
         );
@@ -161,9 +164,8 @@ export class CarouselScroll {
     ) => {
         if (!smooth || track.scrollLeft === left) {
             track.scrollTo({ left, behavior: 'instant' });
-            complete();
 
-            return;
+            return complete();
         }
         this.snap = track.style.scrollSnapType;
         track.style.scrollSnapType = 'none';
