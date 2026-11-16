@@ -2,10 +2,13 @@ import { license, version } from '../../package.json';
 import type { DocumentLink } from '../component/Document/Header';
 import nextConfig from '../next.config';
 
+const repository = 'https://github.com/idea2app/Idea-React';
+
 export const site = {
     version,
     license,
-    repository: 'https://github.com/idea2app/Idea-React',
+    repository,
+    community: `${repository}/discussions`,
     install: `npm i idea-react${version.includes('-') ? '@next' : ''}`,
     docs: `${nextConfig.basePath || ''}/guides/install/`,
     api: 'https://idea2app.github.io/Idea-React/',
@@ -19,7 +22,7 @@ export const navigation: DocumentLink[] = [
     { label: 'Docs', href: site.docs },
     { label: 'Examples', href: site.examples },
     { label: 'API', href: site.api },
-    { label: 'Community', href: `${site.repository}/issues` }
+    { label: 'Community', href: site.community }
 ];
 
 export const versions: DocumentLink[] = [
@@ -66,7 +69,7 @@ export const footerColumns = [
     {
         title: 'Community',
         links: [
-            { label: 'Issues', href: `${site.repository}/issues` },
+            { label: 'Discussions', href: site.community },
             { label: 'Pull requests', href: `${site.repository}/pulls` },
             { label: 'Contributors', href: `${site.repository}/graphs/contributors` },
             { label: 'NPM', href: 'https://www.npmjs.com/package/idea-react' }

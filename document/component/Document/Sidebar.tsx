@@ -95,6 +95,7 @@ const forms: NavLink[] = [
 ];
 const guides: NavLink[] = [
     { label: 'Install', slug: 'install' },
+    { label: 'Approach', slug: 'approach' },
     { label: 'Migration', slug: 'migration' },
     { label: 'Parcel', slug: 'parcel' },
     { label: 'Vite', slug: 'vite' },

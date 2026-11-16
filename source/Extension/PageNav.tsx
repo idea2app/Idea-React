@@ -3,8 +3,8 @@
 import classNames from 'classnames';
 import { action, computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component, ElementType } from 'react';
-import { scrollTo, uniqueID } from 'web-utility';
+import { Component, ElementType, MouseEvent } from 'react';
+import { uniqueID } from 'web-utility';
 
 import { Nav, NavLink, NavProps } from '../Base/Nav';
 import { AsProps, PolymorphicClassProps } from '../Helper/Polymorphic';
@@ -104,13 +104,14 @@ export class PageNav<T extends ElementType | undefined = 'nav'> extends Componen
         window.removeEventListener('resize', this.updateScrollY);
     }
 
-    scrollTo = (meta: HeadingMeta) => () => {
-        setTimeout(() => scrollTo(`[id="${meta.id}"]`));
+    handleItemClick = ({ currentTarget }: MouseEvent<HTMLAnchorElement>) => {
+        const id = currentTarget.hash.slice(1);
+        const meta = this.list.find(item => item.id === id);
 
-        this.componentProps.onItemClick?.(meta);
+        if (meta) this.componentProps.onItemClick?.(meta);
     };
 
-    renderLink = ({ id, level, text, top }: HeadingMeta) => {
+    renderLink = ({ id, level, text }: HeadingMeta) => {
         const { currentActiveId } = this,
             { depth = Infinity, minDepth = 1 } = this.componentProps;
 
@@ -126,7 +127,7 @@ export class PageNav<T extends ElementType | undefined = 'nav'> extends Componen
                     style={{ paddingInlineStart: `${level - minDepth + 0.75}rem` }}
                     href={`#${id}`}
                     aria-current={currentActiveId === id ? 'location' : undefined}
-                    onClick={this.scrollTo({ id, level, text, top })}
+                    onClick={this.handleItemClick}
                 >
                     {text}
                 </NavLink>
