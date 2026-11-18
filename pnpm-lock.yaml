@@ -14,9 +14,6 @@ importers:
       '@shikijs/themes':
         specifier: ^4.6.0
         version: 4.6.0
-      '@swc/helpers':
-        specifier: ^0.5.24
-        version: 0.5.24
       bootstrap:
         specifier: 6.0.0-alpha.1
         version: 6.0.0-alpha.1(vanilla-calendar-pro@3.4.0)
@@ -72,6 +69,9 @@ importers:
       '@swc/core':
         specifier: ^1.16.22
         version: 1.16.22(@swc/helpers@0.5.24)
+      '@swc/helpers':
+        specifier: ^0.5.24
+        version: 0.5.24
       '@testing-library/dom':
         specifier: ^10.4.2
         version: 10.4.2

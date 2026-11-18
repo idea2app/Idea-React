@@ -313,12 +313,12 @@ export class ChoiceTable extends ObservedComponent<ChoiceTableProps> {
         if (!(target instanceof Element)) return;
 
         const button = target.closest<HTMLButtonElement>('button[data-choice]');
-        const value = button?.dataset.choice;
-        if (!button || !currentTarget.contains(button) || !value) return;
+        const { choice } = button?.dataset || {};
+        if (!choice) return;
 
-        this.props.onSelect?.(value);
+        this.props.onSelect?.(choice);
 
-        this.select(value);
+        this.select(choice);
     };
 
     renderChoice = (value: string) => (

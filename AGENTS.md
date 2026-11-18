@@ -88,49 +88,63 @@ export class MyComponent extends Component {
 ### 依赖事件委托、监听数据变更的组件
 
 ```tsx
+import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { ObservedComponent, on, reaction } from 'mobx-react-helper';
+import { ObservedComponent, reaction } from 'mobx-react-helper';
 import { MouseEvent } from 'react';
+import { Button, Table } from 'idea-react';
 
-export interface MyComponentProps {
-    someKey: string;
+export interface ChoiceTableProps {
+    resetKey: string;
+    onSelect?: (value: string) => unknown;
 }
 
 @observer
-export class MyComponent extends ObservedComponent<MyComponentProps> {
-    static displayName = 'MyComponent';
+export class ChoiceTable extends ObservedComponent<ChoiceTableProps> {
+    static displayName = 'ChoiceTable';
 
-    componentDidMount() {
-        super.componentDidMount();
-        this.init();
+    @observable
+    accessor selected = '';
+
+    @reaction(({ observedProps: { resetKey } }) => resetKey)
+    @action
+    resetSelection() {
+        this.selected = '';
     }
 
-    @reaction(({ observedProps: { someKey } }) => someKey)
-    init() {
-        console.log('someKey changed', this.observedProps.someKey);
-    }
+    @action
+    select = (value: string) => {
+        this.selected = value;
+    };
 
-    @on('click', 'td')
-    handleClick(event: MouseEvent<HTMLTableCellElement>, target: HTMLTableCellElement) {
-        console.log('TD clicked', event, target);
-    }
+    handleClick = ({ target, currentTarget }: MouseEvent<HTMLTableElement>) => {
+        if (!(target instanceof Element)) return;
+
+        const button = target.closest<HTMLButtonElement>('button[data-choice]');
+        const { choice } = button?.dataset || {};
+        if (!choice) return;
+
+        this.props.onSelect?.(choice);
+
+        this.select(choice);
+    };
+
+    renderChoice = (value: string) => (
+        <tr key={value}>
+            <td>
+                <Button data-choice={value} active={this.selected === value}>
+                    {value}
+                </Button>
+            </td>
+        </tr>
+    );
 
     render() {
-        const { someKey } = this.props;
-
         return (
-            <table data-some-key={someKey}>
-                <thead>
-                    <tr>
-                        <th>Header</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cell</td>
-                    </tr>
-                </tbody>
-            </table>
+            <Table onClick={this.handleClick}>
+                <caption>Choose an item</caption>
+                <tbody>{['One', 'Two', 'Three', 'Four'].map(this.renderChoice)}</tbody>
+            </Table>
         );
     }
 }
