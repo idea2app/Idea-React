@@ -21,7 +21,7 @@ Create flexible, responsive navigation bars. Includes support for branding, navi
 
 ## Example
 
-Here’s a navbar that includes most supported sub-components and a responsive right drawer with [our Drawer component][1]. Resize the browser to preview responsive behavior.
+Here’s a navbar that includes most supported sub-components and a responsive right drawer with [our Drawer component][1]. The navbar responds to its container width.
 
 <CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
@@ -33,7 +33,7 @@ Here’s a navbar that includes most supported sub-components and a responsive r
         togglerFirst={false}
         className="bg-1"
     >
-        <NavbarNav className="me-auto">
+        <NavbarNav nav className="me-auto">
             <NavItem>
                 <NavLink active aria-current="page" href="#">
                     {'Home'}
@@ -325,7 +325,7 @@ Input groups work, too. If the navbar is primarily a form, use the [`Form`][9] w
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
-        <Container fluid>
+        <Container as={Form} fluid>
             <InputGroup>
                 <InputGroupText id="basic-addon1">{'@'}</InputGroupText>
 
@@ -345,7 +345,7 @@ Various buttons are supported as part of these navbar forms, too. This is also a
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
-        <Container fluid className="justify-content-start">
+        <Container as={Form} fluid className="justify-content-start">
             <Button variant="outline" theme="success" className="me-2">
                 {'Main button'}
             </Button>
@@ -417,7 +417,7 @@ To make a navbar dark, set `theme="dark"` on `Navbar`.
         togglerFirst={false}
         className="bg-1"
     >
-        <NavbarNav className="me-auto">
+        <NavbarNav nav className="me-auto">
             <NavItem>
                 <NavLink active aria-current="page" href="#">
                     {'Home'}
@@ -463,36 +463,27 @@ To make a navbar dark, set `theme="dark"` on `Navbar`.
 Set `translucent` to blur and saturate the background of a navbar. This works well for navbars positioned over content, such as fixed or sticky navbars.
 
 <CodeExample>
-    <div className="position-relative overflow-hidden rounded bg-primary text-white">
-        <Navbar expand theme="dark" translucent className="position-absolute top-0 start-0 w-100">
-            <Container fluid>
-                <NavbarBrand href="#">{'Navbar'}</NavbarBrand>
+    <Navbar expand="md" theme="dark" translucent>
+        <Container fluid>
+            <NavbarBrand href="#">{'Navbar'}</NavbarBrand>
 
-                <NavbarNav>
-                    <NavItem>
-                        <NavLink active aria-current="page" href="#">
-                            {'Home'}
-                        </NavLink>
-                    </NavItem>
+            <NavbarNav>
+                <NavItem>
+                    <NavLink active aria-current="page" href="#">
+                        {'Home'}
+                    </NavLink>
+                </NavItem>
 
-                    <NavItem>
-                        <NavLink href="#">{'Features'}</NavLink>
-                    </NavItem>
+                <NavItem>
+                    <NavLink href="#">{'Features'}</NavLink>
+                </NavItem>
 
-                    <NavItem>
-                        <NavLink href="#">{'Pricing'}</NavLink>
-                    </NavItem>
-                </NavbarNav>
-            </Container>
-        </Navbar>
-
-        <div className="p-5 pt-5">
-            <h3>{'Content behind the navbar'}</h3>
-            <p className="mb-0">
-                {'The translucent navbar blurs and saturates this background content.'}
-            </p>
-        </div>
-    </div>
+                <NavItem>
+                    <NavLink href="#">{'Pricing'}</NavLink>
+                </NavItem>
+            </NavbarNav>
+        </Container>
+    </Navbar>
 
 </CodeExample>
 
@@ -502,6 +493,7 @@ Navbar themes use Bootstrap's CSS variables. The default is our "light navbar" f
 
 <CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
+        className=""
         expand="md"
         theme="dark"
         brand="Navbar"
@@ -694,7 +686,7 @@ You can customize which side the drawer appears from using its `placement` prop:
 - `"top"` - slides in from the top
 - `"bottom"` - slides in from the bottom
 
-These examples show the drawer below the `md` breakpoint. Click the toggler on a narrow screen to see it slide in from different directions.
+These examples show the drawer when the navbar container is narrower than the `md` breakpoint. Click the toggler to see it slide in from different directions.
 
 <CodeExample source="document/component/Document/NavbarDemo.tsx">
     <NavbarDemo
@@ -766,14 +758,16 @@ To toggle inline content outside the responsive navbar examples, pass its select
 
 <CodeExample>
     <Navbar className="bg-1 fg-2">
-        <NavbarBrand href="#">{'Navbar'}</NavbarBrand>
-        <CollapseToggle
-            target="#navbarContent"
-            navbarToggler
-            variant={false}
-            aria-label="Toggle navigation"
-        />
-        <Collapse id="navbarContent">{'Navbar content'}</Collapse>
+        <Container fluid>
+            <NavbarBrand href="#">{'Navbar'}</NavbarBrand>
+            <CollapseToggle
+                target="#navbarContent"
+                navbarToggler
+                variant={false}
+                aria-label="Toggle navigation"
+            />
+            <Collapse id="navbarContent" className="w-100">{'Navbar content'}</Collapse>
+        </Container>
     </Navbar>
 
 </CodeExample>

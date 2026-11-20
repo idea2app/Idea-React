@@ -126,7 +126,7 @@ const InputGroupMenuView = observer<FC<InputGroupMenuProps & { owner: InputGroup
         toggleProps,
         className,
         children,
-        align = 'end',
+        align = 'start',
         menuClassName
     }) => (
         <>

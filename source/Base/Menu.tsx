@@ -320,7 +320,7 @@ export class Menu<T extends ElementType | undefined = 'div'> extends Component<
         const { placement, align, offset, padding, flip } = props;
 
         const options: FloatingOptions = {
-            placement: this.responsiveDirection ?? placement ?? `bottom-${align ?? 'end'}`,
+            placement: this.responsiveDirection ?? placement ?? `bottom-${align ?? 'start'}`,
             offset,
             padding,
             flip
@@ -463,7 +463,7 @@ export class Menu<T extends ElementType | undefined = 'div'> extends Component<
             as: _as,
             label,
             autoClose: _autoClose,
-            align = 'end',
+            align = 'start',
             placement,
             responsivePlacement: _responsivePlacement,
             theme,

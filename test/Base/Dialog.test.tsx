@@ -50,6 +50,55 @@ it('opens a native modal, closes with Escape and returns focus to its trigger', 
     assert.equal(document.activeElement, trigger);
 });
 
+it('retries modal focus after an initially hidden dialog becomes visible', t => {
+    let callback: FrameRequestCallback | undefined;
+    t.mock.method(window, 'requestAnimationFrame', (handler: FrameRequestCallback) => {
+        callback = handler;
+
+        return 1;
+    });
+    const ref = createRef<Dialog>();
+    const { container } = render(<Dialog ref={ref} tabIndex={-1} />);
+
+    const dialog = container.querySelector('dialog')!;
+    const focus = dialog.focus.bind(dialog);
+    let calls = 0;
+    t.mock.method(dialog, 'focus', () => {
+        if (++calls > 1) focus();
+    });
+    act(() => ref.current?.show());
+
+    assert.notEqual(document.activeElement, dialog);
+
+    act(() => callback?.(0));
+
+    assert.equal(document.activeElement, dialog);
+});
+
+it('does not steal focus if it changes before the retry', t => {
+    let callback: FrameRequestCallback | undefined;
+    t.mock.method(window, 'requestAnimationFrame', (handler: FrameRequestCallback) => {
+        callback = handler;
+
+        return 1;
+    });
+    const ref = createRef<Dialog>();
+    const { container } = render(
+        <Dialog ref={ref} tabIndex={-1}>
+            <button>Continue</button>
+        </Dialog>
+    );
+    const dialog = container.querySelector('dialog')!;
+    t.mock.method(dialog, 'focus', () => {});
+
+    act(() => ref.current?.show());
+    const button = screen.getByRole('button', { name: 'Continue' });
+    button.focus();
+    act(() => callback?.(0));
+
+    assert.equal(document.activeElement, button);
+});
+
 it('preserves imperative show through unrelated content rerenders', () => {
     const ref = createRef<Dialog>();
 

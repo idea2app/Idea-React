@@ -4,11 +4,27 @@ import { DocumentLayout } from '../../../component/Document/Layout';
 
 # Next.js
 
-Create a statically exported Next.js application with Idea React. This guide uses ViNext, a Vite
-implementation of the Next.js application model, and follows the documentation site's SWC
-decorator transform and static-export configuration.
+Create a statically exported Next.js application with Idea React using either official Next.js or
+ViNext, a Vite implementation of the Next.js application model.
 
-## Setup
+## Official Next.js
+
+Add the library packages to `transpilePackages` in `next.config.ts` so Next.js compiles them:
+
+```ts
+import type { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
+    transpilePackages: ['idea-react', 'marked']
+};
+export default nextConfig;
+```
+
+The ecosystem packages are optional unless the application uses the corresponding libraries.
+
+## ViNext
+
+### Setup
 
 Create a project and install Idea React with its React and MobX peers:
 
@@ -22,7 +38,7 @@ pnpm add -D vite unplugin-swc @swc/core typescript @types/react @types/react-dom
 
 Use `idea-react` without `@next` after a stable release.
 
-## Project structure
+### Project structure
 
 Create an App Router route, a shared root layout, and Vite and SWC configuration:
 
@@ -37,7 +53,7 @@ my-project/
 └── vite.config.ts
 ```
 
-## Configure Next.js
+### Configure ViNext
 
 Register ViNext, the Vite implementation used in this guide, and SWC in `vite.config.ts`:
 
@@ -98,7 +114,7 @@ Add development, build, and preview scripts to `package.json`:
 }
 ```
 
-## Create the application
+### Create the application
 
 Load Bootstrap CSS, Bootstrap Icons, and the Idea React stylesheet from the shared layout:
 
@@ -144,7 +160,7 @@ export default function Page() {
 
 The React components handle their own behavior, so Bootstrap's JavaScript bundle is not required.
 
-## Build and deploy
+### Build and deploy
 
 Run the app locally, build it, then preview the generated site:
 

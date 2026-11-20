@@ -1,6 +1,6 @@
 {
     "name": "idea-react",
-    "version": "3.0.0-rc.5",
+    "version": "3.0.0-rc.6",
     "license": "LGPL-3.0-or-later",
     "author": "shiy2008@gmail.com",
     "description": "A React advanced components library based on TypeScript & Bootstrap, built by idea2app remote developers team.",
@@ -40,7 +40,7 @@
         "react-live": "^5.0.1",
         "shiki": "^4.6.0",
         "vanilla-calendar-pro": "3.4.0",
-        "web-utility": "^4.8.2"
+        "web-utility": "^4.8.3"
     },
     "peerDependencies": {
         "mobx": ">=6",
@@ -70,7 +70,6 @@
         "eslint-idea2app-next-js": "^0.1.1",
         "happy-dom": "^21.0.4",
         "husky": "^9.1.7",
-        "jiti": "^2.7.0",
         "koapache": "^3.0.0",
         "less": "^4.9.1",
         "lint-staged": "^17.6.1",

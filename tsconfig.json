@@ -10,7 +10,7 @@
         "lib": ["ES2024", "DOM", "DOM.Iterable"],
         "types": ["node"]
     },
-    "include": ["*.ts", "source/**/*"],
+    "include": ["*.mts", "source/**/*"],
     "typedocOptions": {
         "name": "Idea React",
         "includeVersion": true,

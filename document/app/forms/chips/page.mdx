@@ -44,7 +44,7 @@ Use `Chip` for each chip. It renders a `span` by default; set `as="button"` when
             <ChipIcon name="person-fill" aria-hidden="true" /> With icon
         </Chip>
         <Chip>
-            Dismissible <ChipDismiss type="button" aria-label="Remove" />
+            Dismissible <ChipDismiss aria-label="Remove" />
         </Chip>
     </div>
 </CodeExample>
@@ -149,7 +149,7 @@ Use a form label for better accessibility.
         <FormLabel htmlFor="skillsInputLabel">Skills</FormLabel>
         <ChipInput theme="primary">
             <Chip>
-                React <ChipDismiss type="button" aria-label="Remove" />
+                React <ChipDismiss aria-label="Remove" />
             </Chip>
             <FormGhost type="text" id="skillsInputLabel" placeholder="Add skill..." />
         </ChipInput>
@@ -164,7 +164,7 @@ Disable the ghost input to prevent adding new chips, and disable the dismiss but
 <CodeExample>
     <ChipInput theme="primary">
         <Chip>
-            Read only <ChipDismiss type="button" aria-label="Remove" disabled />
+            Read only <ChipDismiss aria-label="Remove" disabled />
         </Chip>
         <FormGhost type="text" placeholder="Disabled..." disabled />
     </ChipInput>
