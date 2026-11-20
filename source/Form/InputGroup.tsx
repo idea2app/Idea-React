@@ -53,6 +53,7 @@ export const InputGroupButton = polymorphic<InputGroupButtonProps>(
 InputGroupButton.displayName = 'InputGroupButton';
 
 export interface InputGroupIgnoreProps {
+    // eslint-disable-next-line no-restricted-syntax
     children: ReactElement<{ className?: string }>;
 }
 
@@ -156,6 +157,7 @@ const InputGroupMenuView = observer<FC<InputGroupMenuProps & { owner: InputGroup
             <div
                 ref={panel}
                 id={id ? `${id}-menu` : undefined}
+                role="presentation"
                 className={classNames(
                     'menu top-100',
                     align === 'end' ? 'end-0' : 'start-0',

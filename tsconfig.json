@@ -1,16 +1,18 @@
 {
     "compilerOptions": {
+        "checkJs": true,
         "target": "ES6",
         "module": "ES2020",
         "moduleResolution": "bundler",
         "esModuleInterop": true,
+        "rewriteRelativeImportExtensions": true,
         "useDefineForClassFields": true,
         "jsx": "react-jsx",
         "skipLibCheck": true,
         "lib": ["ES2024", "DOM", "DOM.Iterable"],
         "types": ["node"]
     },
-    "include": ["*.mts", "source/**/*"],
+    "include": ["*.js", "*.mts", "source/**/*"],
     "typedocOptions": {
         "name": "Idea React",
         "includeVersion": true,

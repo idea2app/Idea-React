@@ -63,7 +63,7 @@ export class NavbarPlacement extends Component {
 </Navbar>`;
 
         return (
-            <div onClick={this.handleSelect}>
+            <div>
                 <div className="bg-1 p-3 fs-sm rounded-3 mb-3">
                     <FormLabel htmlFor="navbar-placement-toggle" className="fw-semibold mb-1">
                         Placement
@@ -81,6 +81,7 @@ export class NavbarPlacement extends Component {
                                 variant: 'outline',
                                 theme: 'secondary'
                             }}
+                            onClick={this.handleSelect}
                         >
                             {placements.map(this.renderPlacement)}
                         </Menu>

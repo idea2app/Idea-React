@@ -351,6 +351,7 @@ export class Menu<T extends ElementType | undefined = 'div'> extends Component<
 
             const query = window.matchMedia(`(min-width: ${MENU_BREAKPOINT_WIDTHS[breakpoint]}px)`);
             query.addEventListener('change', this.handlePlacement);
+
             return [{ query, placement }];
         });
         this.handlePlacement();
@@ -397,6 +398,7 @@ export class Menu<T extends ElementType | undefined = 'div'> extends Component<
         if (key === 'Escape' && this.open) {
             event.preventDefault();
             this.setOpen(false);
+
             return this.trigger.current?.focus();
         }
         if (key === 'Tab') return this.setOpen(false);
@@ -526,6 +528,7 @@ export class Menu<T extends ElementType | undefined = 'div'> extends Component<
                 <div
                     ref={this.panel}
                     id={id ? `${id}-menu` : undefined}
+                    role="presentation"
                     data-bs-placement={direction ?? `bottom-${align}`}
                     style={{ ...this.position.style }}
                     className={classNames(

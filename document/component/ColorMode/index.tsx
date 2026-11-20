@@ -53,7 +53,7 @@ export class ColorModeToggle extends Component {
 
     render() {
         const { colorScheme = 'auto', ready } = this.context || {};
-        const icon = modes.find(({ value }) => value === colorScheme)!.icon;
+        const { icon } = modes.find(({ value }) => value === colorScheme)!;
 
         return (
             <Menu
