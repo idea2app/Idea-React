@@ -48,6 +48,58 @@ it('lets navigation triggers inherit navigation styles instead of button styling
     assert.equal(screen.getByRole('button', { name: 'Products' }).className, 'nav-link');
 });
 
+it('defaults to start alignment while honoring explicit alignment and placement', t => {
+    const rect = (left: number, top: number, width: number, height: number) => ({
+        left,
+        top,
+        width,
+        height,
+        right: left + width,
+        bottom: top + height,
+        x: left,
+        y: top,
+        toJSON: () => ({})
+    });
+    t.mock.getter(window, 'innerWidth', () => 1000);
+    t.mock.getter(window, 'innerHeight', () => 800);
+    t.mock.method(HTMLElement.prototype, 'getBoundingClientRect', function (this: HTMLElement) {
+        return this.classList.contains('menu')
+            ? rect(0, 0, 120, 80)
+            : this.tagName === 'BUTTON'
+              ? rect(200, 100, 60, 30)
+              : rect(0, 0, 0, 0);
+    });
+    const { container, rerender } = render(
+        <Menu label="Options">
+            <MenuItem>Item</MenuItem>
+        </Menu>
+    );
+    const panel = container.querySelector<HTMLElement>('.menu')!;
+
+    assert.equal(panel.dataset.bsPlacement, 'bottom-start');
+
+    fireEvent.click(screen.getByRole('button', { name: 'Options' }));
+
+    assert.equal(panel.dataset.bsPlacement, 'bottom-start');
+    assert.equal(panel.style.left, '200px');
+
+    rerender(
+        <Menu label="Options" align="end">
+            <MenuItem>Item</MenuItem>
+        </Menu>
+    );
+    assert.equal(panel.dataset.bsPlacement, 'bottom-end');
+    assert.equal(panel.style.left, '140px');
+
+    rerender(
+        <Menu label="Options" align="end" placement="bottom-start">
+            <MenuItem>Item</MenuItem>
+        </Menu>
+    );
+    assert.equal(panel.dataset.bsPlacement, 'bottom-start');
+    assert.equal(panel.style.left, '200px');
+});
+
 it('leaves Enter and Space activation to the native button without double toggling', () => {
     const onOpenChange = mock.fn();
     render(

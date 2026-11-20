@@ -77,6 +77,7 @@ export class Dialog<T extends ElementType | undefined = 'dialog'> extends Compon
     returnFocus?: HTMLElement;
     switchingMode = false;
     closeTimer?: ReturnType<typeof setTimeout>;
+    focusFrame?: number;
 
     get open() {
         return this.element.current?.open ?? false;
@@ -116,7 +117,25 @@ export class Dialog<T extends ElementType | undefined = 'dialog'> extends Compon
         if (!this.switchingMode && document.activeElement instanceof HTMLElement)
             this.returnFocus = document.activeElement;
         if (this.componentProps.modal === false) element.show();
-        else element.showModal();
+        else {
+            element.showModal();
+
+            if (!element.contains(document.activeElement)) {
+                element.focus();
+                const { activeElement } = document;
+
+                if (!element.contains(activeElement))
+                    this.focusFrame = window.requestAnimationFrame(() => {
+                        this.focusFrame = undefined;
+                        if (
+                            this.element.current === element &&
+                            element.open &&
+                            document.activeElement === activeElement
+                        )
+                            element.focus();
+                    });
+            }
+        }
         if (this.componentProps.modal !== false && !this.componentProps.scroll) this.lockScroll();
     };
 
@@ -157,6 +176,7 @@ export class Dialog<T extends ElementType | undefined = 'dialog'> extends Compon
 
     finishClose = () => {
         clearTimeout(this.closeTimer);
+        if (this.focusFrame !== undefined) window.cancelAnimationFrame(this.focusFrame);
         this.element.current?.classList.remove('hiding');
         this.unlockScroll();
 

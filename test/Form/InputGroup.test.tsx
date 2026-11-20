@@ -56,11 +56,27 @@ it('renders direct-child dropdown and segmented menu addons with inherited keybo
 
     fireEvent.click(trigger);
 
-    assert.equal(screen.getByRole('button', { name: 'Item' }).parentElement?.hidden, false);
+    const panel = screen.getByRole('button', { name: 'Item' }).parentElement;
+
+    assert.equal(panel?.hidden, false);
+    assert.ok(panel?.classList.contains('start-0'));
 
     fireEvent.keyDown(trigger, { key: 'Escape' });
 
     assert.equal(trigger.getAttribute('aria-expanded'), 'false');
+});
+
+it('allows input group menus to align to the end explicitly', () => {
+    const { container } = render(
+        <InputGroup>
+            <InputGroupMenu label="More" align="end">
+                <button type="button">Item</button>
+            </InputGroupMenu>
+        </InputGroup>
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'More' }));
+
+    assert.ok(container.querySelector('.menu')?.classList.contains('end-0'));
 });
 
 it('wraps menu buttons and excludes feedback from border-radius calculations', () => {

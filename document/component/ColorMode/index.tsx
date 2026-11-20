@@ -35,7 +35,6 @@ export class ColorModeToggle extends Component {
         return (
             <MenuItem
                 key={value}
-                type="button"
                 className={selected ? 'active' : ''}
                 data-color-scheme={value}
                 aria-pressed={selected}

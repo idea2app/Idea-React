@@ -23,14 +23,14 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({ active, upstreamPath, 
 
     return (
         <BaseLayout>
-            <Container className="py-4 pb-12 lg:pb-4">
+            <Container fluid="2xl" className="p-8">
                 <Row className="g-5">
-                    <Col as="aside" lg={3} className="d-none lg:d-block">
+                    <Col as="aside" lg={2} className="d-none lg:d-block">
                         <Sidebar active={active} />
                     </Col>
-                    <Col xs={12} lg={9}>
+                    <Col xs={12} lg={10}>
                         <Row className="g-5">
-                            <Col as="main" id="content" xs={12} lg={9}>
+                            <Col as="main" id="content" xs={12} lg={10}>
                                 {isValidElement<ComponentProps<'h1'>>(heading) && (
                                     <DocumentHeading
                                         {...heading.props}
@@ -40,7 +40,7 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({ active, upstreamPath, 
                                 )}
                                 {content.filter((_, index) => index !== headingIndex)}
                             </Col>
-                            <Col as="aside" lg={3} className="d-none lg:d-block">
+                            <Col as="aside" lg={2} className="d-none lg:d-block">
                                 <Toc />
                             </Col>
                         </Row>

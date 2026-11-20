@@ -75,7 +75,7 @@ Use [buttons][2] instead of addons for supporting interactive options.
 
 <CodeExample>
     <InputGroup>
-        <InputGroupButton type="button" id="button-addon" theme="secondary" variant="outline">
+        <InputGroupButton id="button-addon" theme="secondary" variant="outline">
             Button
         </InputGroupButton>
         <FormControl
@@ -120,7 +120,7 @@ Input groups adapt to the height of textarea elements.
         <InputGroupText htmlFor="inputGroupSelect02">Options</InputGroupText>
     </InputGroup>
     <InputGroup className="mb-3">
-        <InputGroupButton type="button" theme="secondary" variant="outline">
+        <InputGroupButton theme="secondary" variant="outline">
             Button
         </InputGroupButton>
         <FormSelect
@@ -145,7 +145,7 @@ Input groups adapt to the height of textarea elements.
             <option value="2">Two</option>
             <option value="3">Three</option>
         </FormSelect>
-        <InputGroupButton type="button" theme="secondary" variant="outline">
+        <InputGroupButton theme="secondary" variant="outline">
             Button
         </InputGroupButton>
     </InputGroup>
@@ -164,7 +164,6 @@ Input groups adapt to the height of textarea elements.
     </InputGroup>
     <InputGroup className="mb-3">
         <InputGroupButton
-            type="button"
             id="inputGroupFileAddon03"
             theme="secondary"
             variant="outline"
@@ -186,7 +185,6 @@ Input groups adapt to the height of textarea elements.
             aria-label="Upload"
         />
         <InputGroupButton
-            type="button"
             id="inputGroupFileAddon04"
             theme="secondary"
             variant="outline"
@@ -268,7 +266,7 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
 <CodeExample>
     <Stack gap={3}>
         <InputGroup>
-            <InputGroupButton type="button" id="button-addon1" theme="secondary" variant="outline">
+            <InputGroupButton id="button-addon1" theme="secondary" variant="outline">
                 Button
             </InputGroupButton>
             <FormControl
@@ -285,15 +283,15 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
                 aria-label="Recipient’s username"
                 aria-describedby="button-addon2"
             />
-            <InputGroupButton type="button" id="button-addon2" theme="secondary" variant="outline">
+            <InputGroupButton id="button-addon2" theme="secondary" variant="outline">
                 Button
             </InputGroupButton>
         </InputGroup>
         <InputGroup className="mb-3">
-            <InputGroupButton type="button" theme="secondary" variant="outline">
+            <InputGroupButton theme="secondary" variant="outline">
                 Button
             </InputGroupButton>
-            <InputGroupButton type="button" theme="secondary" variant="outline">
+            <InputGroupButton theme="secondary" variant="outline">
                 Button
             </InputGroupButton>
             <FormControl
@@ -308,10 +306,10 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
                 placeholder="Recipient’s username"
                 aria-label="Recipient’s username with two button addons"
             />
-            <InputGroupButton type="button" theme="secondary" variant="outline">
+            <InputGroupButton theme="secondary" variant="outline">
                 Button
             </InputGroupButton>
-            <InputGroupButton type="button" theme="secondary" variant="outline">
+            <InputGroupButton theme="secondary" variant="outline">
                 Button
             </InputGroupButton>
         </InputGroup>
@@ -385,7 +383,7 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
 
 <CodeExample>
     <InputGroup className="mb-3">
-        <InputGroupButton type="button" theme="secondary" variant="outline">
+        <InputGroupButton theme="secondary" variant="outline">
             Action
         </InputGroupButton>
         <InputGroupMenu
@@ -405,7 +403,7 @@ Multiple add-ons are supported and can be mixed with checkbox and radio input ve
     </InputGroup>
     <InputGroup>
         <FormControl type="text" aria-label="Text input with segmented menu button" />
-        <InputGroupButton type="button" theme="secondary" variant="outline">
+        <InputGroupButton theme="secondary" variant="outline">
             Action
         </InputGroupButton>
         <InputGroupMenu

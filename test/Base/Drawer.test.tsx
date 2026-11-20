@@ -17,6 +17,7 @@ it('renders a Bootstrap 6 drawer without dialog styles and dismisses from its cl
     assert.equal(drawer.className, 'drawer drawer-start');
     assert.equal(drawer.getAttribute('tabindex'), '-1');
     assert.equal((drawer as HTMLDialogElement).open, true);
+    assert.equal(document.activeElement, drawer);
     assert.equal(screen.getByRole('heading', { name: 'Menu' }).className, 'drawer-title');
     assert.equal(screen.getByText('Drawer content').parentElement?.className, 'drawer-body mb-2');
 

@@ -7,12 +7,14 @@ import { Component, MouseEvent } from 'react';
 
 import { Menu, MenuItem } from '../../../../source/Base/Menu';
 import { Navbar, NavbarBrand } from '../../../../source/Base/Navbar';
+import { Icon } from '../../../../source/Extension/Icon';
 import { FormLabel } from '../../../../source/Form';
 import { Container } from '../../../../source/Layout/Grid';
 import { CodeExample } from '../Example';
 import styles from './style.module.css';
 
 const placements = ['', 'fixed-top', 'fixed-bottom', 'sticky-top', 'sticky-bottom'] as const;
+
 type Placement = (typeof placements)[number];
 
 const labels: Record<Placement, string> = {
@@ -48,6 +50,12 @@ export class NavbarPlacement extends Component {
         const { placement } = this;
         const label = labels[placement];
         const className = classNames('bg-1', placement);
+        const sticky = placement === 'sticky-top' || placement === 'sticky-bottom';
+        const scrollContent = (
+            <div className={`p-3 ${styles.scrollContent}`}>
+                Scroll to see the navbar stay in place.
+            </div>
+        );
         const code = `<Navbar className="${className}">
     <Container fluid>
         <NavbarBrand href="#placement">${label}</NavbarBrand>
@@ -62,7 +70,12 @@ export class NavbarPlacement extends Component {
                     </FormLabel>
                     <div>
                         <Menu
-                            label={placement ? label : 'Default (static)'}
+                            label={
+                                <>
+                                    <span>{placement ? label : 'Default (static)'}</span>
+                                    <Icon name="chevron-expand" className="ms-1" size={1} />
+                                </>
+                            }
                             toggleProps={{
                                 id: 'navbar-placement-toggle',
                                 variant: 'outline',
@@ -76,13 +89,28 @@ export class NavbarPlacement extends Component {
 
                 <CodeExample code={code}>
                     <div
-                        className={`position-relative overflow-auto border rounded ${styles.preview}`}
+                        className={classNames(
+                            'position-relative overflow-auto border rounded',
+                            styles.preview,
+                            sticky
+                                ? styles.stickyPreview
+                                : 'd-flex flex-column justify-content-center'
+                        )}
+                        role={sticky ? 'region' : undefined}
+                        aria-label={
+                            sticky ? 'Scroll to preview sticky navbar positioning' : undefined
+                        }
+                        tabIndex={sticky ? 0 : undefined}
                     >
+                        {placement === 'sticky-bottom' && scrollContent}
+
                         <Navbar className={className}>
                             <Container fluid>
                                 <NavbarBrand href="#placement">{label}</NavbarBrand>
                             </Container>
                         </Navbar>
+
+                        {placement === 'sticky-top' && scrollContent}
                     </div>
                 </CodeExample>
             </div>
